@@ -2,7 +2,7 @@
 set -eou pipefail
 
 
-PKG_VERSION=${1:-"0.0.1"}
+PKG_VERSION=${1:-"0.0.2"}
 API_HOST=${2:-"https://api.cloudsmith.io"}
 
 
@@ -23,7 +23,7 @@ openapi-generator generate \
     --input-spec $(swagger_spec $(api_version)) \
     --generator-name go \
     --git-user-id cloudsmith-io \
-    --git-repo-id cloudsmith-go \
+    --git-repo-id cloudsmith-api-go \
     --additional-properties packageName=cloudsmith \
     --additional-properties packageVersion=$PKG_VERSION \
     --enable-post-process-file

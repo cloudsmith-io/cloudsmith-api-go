@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io/docs/terms-and-conditions
   title: Cloudsmith API
-  version: 0.51.30
+  version: 0.51.34
 externalDocs:
   description: Find out more info at the Cloudsmith Help Website
   url: https://help.cloudsmith.io
@@ -1889,6 +1889,9 @@ paths:
                     be flagged as a duplicate.
                   type: boolean
               required:
+              - info_file
+              - manifest_file
+              - metadata_file
               - package_file
               title: PackagesUploadConan
               type: object
@@ -3417,6 +3420,9 @@ paths:
                     be flagged as a duplicate.
                   type: boolean
               required:
+              - info_file
+              - manifest_file
+              - metadata_file
               - package_file
               title: PackagesValidate-uploadConan
               type: object
@@ -6231,6 +6237,9 @@ components:
             as a duplicate.
           type: boolean
       required:
+      - info_file
+      - manifest_file
+      - metadata_file
       - package_file
       title: PackagesUploadConan
       type: object
@@ -7021,7 +7030,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 0.51.30
+        version: 0.51.34
       properties:
         detail:
           description: The message describing the state of the API.
@@ -7029,7 +7038,7 @@ components:
           type: string
         version:
           description: The current version for the Cloudsmith service.
-          example: 0.51.30
+          example: 0.51.34
           type: string
     ReposPartialUpdate:
       example:
@@ -7507,6 +7516,9 @@ components:
             as a duplicate.
           type: boolean
       required:
+      - info_file
+      - manifest_file
+      - metadata_file
       - package_file
       title: PackagesValidate-uploadConan
       type: object
@@ -9652,8 +9664,8 @@ components:
             interval: 5.123456789
             limit: 3600
             remaining: 3595
-            reset: 1591607705
-            reset_iso_8601: 2020-06-08T09:15:05.143075+00:00
+            reset: 1591778241
+            reset_iso_8601: 2020-06-10T08:37:21.463912+00:00
             throttled: false
       properties:
         resources:
@@ -9663,8 +9675,8 @@ components:
               interval: 5.123456789
               limit: 3600
               remaining: 3595
-              reset: 1591607705
-              reset_iso_8601: 2020-06-08T09:15:05.143075+00:00
+              reset: 1591778241
+              reset_iso_8601: 2020-06-10T08:37:21.463912+00:00
               throttled: false
           properties: {}
           type: object

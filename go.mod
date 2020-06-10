@@ -1,4 +1,4 @@
-module github.com/cloudsmith-io/cloudsmith-go
+module github.com/cloudsmith-io/cloudsmith-api-go
 
 require (
 	github.com/antihax/optional v1.0.0
