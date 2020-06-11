@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io/docs/terms-and-conditions
   title: Cloudsmith API
-  version: 0.51.34
+  version: 0.51.38
 externalDocs:
   description: Find out more info at the Cloudsmith Help Website
   url: https://help.cloudsmith.io
@@ -1849,20 +1849,22 @@ paths:
             schema:
               example:
                 republish: true
+                name: conan_package.tgz
                 metadata_file: y1234456789a
                 package_file: x123456789a
-                conan_prefix: y1234456789c
-                conan_channel: y1234456789c
+                conan_prefix: my-repository
+                version: 1.0.0
+                conan_channel: alpha
                 info_file: y1234456789b
                 manifest_file: y1234456789c
               properties:
                 conan_channel:
                   description: Conan channel.
-                  example: y1234456789c
+                  example: alpha
                   type: string
                 conan_prefix:
                   description: Conan prefix (User).
-                  example: y1234456789c
+                  example: my-repository
                   type: string
                 info_file:
                   description: The info file is an python file containing the package
@@ -1879,6 +1881,10 @@ paths:
                     metadata.
                   example: y1234456789a
                   type: string
+                name:
+                  description: The name of this package.
+                  example: conan_package.tgz
+                  type: string
                 package_file:
                   description: The primary file for the package.
                   example: x123456789a
@@ -1888,6 +1894,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                version:
+                  description: The raw version for this package.
+                  example: 1.0.0
+                  type: string
               required:
               - info_file
               - manifest_file
@@ -3012,6 +3022,77 @@ paths:
       tags:
       - packages
       x-codegen-request-body-name: data
+  /packages/{owner}/{repo}/upload/terraform/:
+    post:
+      description: Create a new Terraform package
+      operationId: packages_upload_terraform
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/PackagesUploadTerraform'
+        content:
+          application/json:
+            schema:
+              example:
+                republish: true
+                package_file: z123456789a
+              properties:
+                package_file:
+                  description: The primary file for the package.
+                  example: z123456789a
+                  type: string
+                republish:
+                  description: If true, the uploaded package will overwrite any others
+                    with the same attributes (e.g. same version); otherwise, it will
+                    be flagged as a duplicate.
+                  type: boolean
+              required:
+              - package_file
+              title: PackagesUploadTerraform
+              type: object
+        required: false
+      responses:
+        "201":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Package'
+          description: Upload acknowledged and queued for synchronisation
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Request could not be processed (see detail)
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Namespace (owner) or repository not found
+        "422":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Missing or invalid parameters (see detail)
+      security:
+      - token: []
+      - apikey: []
+      - csrf_token: []
+      summary: Create a new Terraform package
+      tags:
+      - packages
+      x-codegen-request-body-name: data
   /packages/{owner}/{repo}/upload/vagrant/:
     post:
       description: Create a new Vagrant package
@@ -3389,11 +3470,11 @@ paths:
               properties:
                 conan_channel:
                   description: Conan channel.
-                  example: y1234456789c
+                  example: alpha
                   type: string
                 conan_prefix:
                   description: Conan prefix (User).
-                  example: y1234456789c
+                  example: my-repository
                   type: string
                 info_file:
                   description: The info file is an python file containing the package
@@ -3410,6 +3491,10 @@ paths:
                     metadata.
                   example: y1234456789a
                   type: string
+                name:
+                  description: The name of this package.
+                  example: conan_package.tgz
+                  type: string
                 package_file:
                   description: The primary file for the package.
                   example: x123456789a
@@ -3419,6 +3504,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                version:
+                  description: The raw version for this package.
+                  example: 1.0.0
+                  type: string
               required:
               - info_file
               - manifest_file
@@ -4436,6 +4525,71 @@ paths:
       - apikey: []
       - csrf_token: []
       summary: Validate parameters for create Ruby package
+      tags:
+      - packages
+      x-codegen-request-body-name: data
+  /packages/{owner}/{repo}/validate-upload/terraform/:
+    post:
+      description: Validate parameters for create Terraform package
+      operationId: packages_validate-upload_terraform
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/PackagesValidate_uploadTerraform'
+        content:
+          application/json:
+            schema:
+              properties:
+                package_file:
+                  description: The primary file for the package.
+                  example: z123456789a
+                  type: string
+                republish:
+                  description: If true, the uploaded package will overwrite any others
+                    with the same attributes (e.g. same version); otherwise, it will
+                    be flagged as a duplicate.
+                  type: boolean
+              required:
+              - package_file
+              title: PackagesValidate-uploadTerraform
+              type: object
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: Validation was successful, parameters are OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Request could not be processed (see detail)
+        "404":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Namespace (owner) or repository not found
+        "422":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Missing or invalid parameters (see detail)
+      security:
+      - token: []
+      - apikey: []
+      - csrf_token: []
+      summary: Validate parameters for create Terraform package
       tags:
       - packages
       x-codegen-request-body-name: data
@@ -5943,6 +6097,12 @@ components:
           schema:
             $ref: '#/components/schemas/PackagesUploadGo'
       required: false
+    PackagesUploadTerraform:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PackagesUploadTerraform'
+      required: false
     PackagesValidate_uploadDart:
       content:
         application/json:
@@ -6081,6 +6241,12 @@ components:
           schema:
             $ref: '#/components/schemas/PackagesUploadCocoapods'
       required: false
+    PackagesValidate_uploadTerraform:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PackagesValidate_uploadTerraform'
+      required: false
     EntitlementsSync:
       content:
         application/json:
@@ -6200,20 +6366,22 @@ components:
     PackagesUploadConan:
       example:
         republish: true
+        name: conan_package.tgz
         metadata_file: y1234456789a
         package_file: x123456789a
-        conan_prefix: y1234456789c
-        conan_channel: y1234456789c
+        conan_prefix: my-repository
+        version: 1.0.0
+        conan_channel: alpha
         info_file: y1234456789b
         manifest_file: y1234456789c
       properties:
         conan_channel:
           description: Conan channel.
-          example: y1234456789c
+          example: alpha
           type: string
         conan_prefix:
           description: Conan prefix (User).
-          example: y1234456789c
+          example: my-repository
           type: string
         info_file:
           description: The info file is an python file containing the package metadata.
@@ -6227,6 +6395,10 @@ components:
           description: The conan file is an python file containing the package metadata.
           example: y1234456789a
           type: string
+        name:
+          description: The name of this package.
+          example: conan_package.tgz
+          type: string
         package_file:
           description: The primary file for the package.
           example: x123456789a
@@ -6236,6 +6408,10 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        version:
+          description: The raw version for this package.
+          example: 1.0.0
+          type: string
       required:
       - info_file
       - manifest_file
@@ -6525,13 +6701,13 @@ components:
         version_orig: version_orig
         namespace_url: namespace_url
         slug_perm: slug_perm
-        version: version
+        version: 1.0.0
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: uploaded_at
-        name: name
+        name: conan_package.tgz
         sync_finished_at: sync_finished_at
         files:
         - checksum_sha512: checksum_sha512
@@ -6560,9 +6736,9 @@ components:
           is_synchronised: true
           is_downloadable: true
           tag: tag
-        conan_prefix: y1234456789c
+        conan_prefix: my-repository
         num_files: 1
-        conan_channel: y1234456789c
+        conan_channel: alpha
         status: status
         checksum_sha512: checksum_sha512
         distro: '{}'
@@ -6618,11 +6794,11 @@ components:
           type: string
         conan_channel:
           description: Conan channel.
-          example: y1234456789c
+          example: alpha
           type: string
         conan_prefix:
           description: Conan prefix (User).
-          example: y1234456789c
+          example: my-repository
           type: string
         description:
           description: A textual description of this package.
@@ -6685,6 +6861,7 @@ components:
           type: string
         name:
           description: The name of this package.
+          example: conan_package.tgz
           type: string
         namespace:
           description: ""
@@ -6773,6 +6950,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
+          example: 1.0.0
           type: string
         version_orig:
           description: ""
@@ -7030,7 +7208,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 0.51.34
+        version: 0.51.38
       properties:
         detail:
           description: The message describing the state of the API.
@@ -7038,7 +7216,7 @@ components:
           type: string
         version:
           description: The current version for the Cloudsmith service.
-          example: 0.51.34
+          example: 0.51.38
           type: string
     ReposPartialUpdate:
       example:
@@ -7488,11 +7666,11 @@ components:
       properties:
         conan_channel:
           description: Conan channel.
-          example: y1234456789c
+          example: alpha
           type: string
         conan_prefix:
           description: Conan prefix (User).
-          example: y1234456789c
+          example: my-repository
           type: string
         info_file:
           description: The info file is an python file containing the package metadata.
@@ -7506,6 +7684,10 @@ components:
           description: The conan file is an python file containing the package metadata.
           example: y1234456789a
           type: string
+        name:
+          description: The name of this package.
+          example: conan_package.tgz
+          type: string
         package_file:
           description: The primary file for the package.
           example: x123456789a
@@ -7515,6 +7697,10 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        version:
+          description: The raw version for this package.
+          example: 1.0.0
+          type: string
       required:
       - info_file
       - manifest_file
@@ -7562,6 +7748,24 @@ components:
       required:
       - package_file
       title: PackagesUploadGo
+      type: object
+    PackagesUploadTerraform:
+      example:
+        republish: true
+        package_file: z123456789a
+      properties:
+        package_file:
+          description: The primary file for the package.
+          example: z123456789a
+          type: string
+        republish:
+          description: If true, the uploaded package will overwrite any others with
+            the same attributes (e.g. same version); otherwise, it will be flagged
+            as a duplicate.
+          type: boolean
+      required:
+      - package_file
+      title: PackagesUploadTerraform
       type: object
     PackagesValidate_uploadDart:
       properties:
@@ -9664,8 +9868,8 @@ components:
             interval: 5.123456789
             limit: 3600
             remaining: 3595
-            reset: 1591778241
-            reset_iso_8601: 2020-06-10T08:37:21.463912+00:00
+            reset: 1591870721
+            reset_iso_8601: 2020-06-11T10:18:41.403276+00:00
             throttled: false
       properties:
         resources:
@@ -9675,8 +9879,8 @@ components:
               interval: 5.123456789
               limit: 3600
               remaining: 3595
-              reset: 1591778241
-              reset_iso_8601: 2020-06-10T08:37:21.463912+00:00
+              reset: 1591870721
+              reset_iso_8601: 2020-06-11T10:18:41.403276+00:00
               throttled: false
           properties: {}
           type: object
@@ -9929,6 +10133,21 @@ components:
       required:
       - package_file
       title: PackagesUploadCocoapods
+      type: object
+    PackagesValidate_uploadTerraform:
+      properties:
+        package_file:
+          description: The primary file for the package.
+          example: z123456789a
+          type: string
+        republish:
+          description: If true, the uploaded package will overwrite any others with
+            the same attributes (e.g. same version); otherwise, it will be flagged
+            as a duplicate.
+          type: boolean
+      required:
+      - package_file
+      title: PackagesValidate-uploadTerraform
       type: object
     EntitlementsSync:
       example:

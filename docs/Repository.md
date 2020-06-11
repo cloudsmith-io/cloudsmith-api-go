@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **NumDownloads** | **int32** | The number of downloads for packages in the repository. | [optional] 
 **PackageCount** | **int32** | The number of packages in the repository. | [optional] 
 **PackageGroupCount** | **int32** | The number of groups in the repository. | [optional] 
-**RepositoryType** | **string** | The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Open-Source repositories are always visible to everyone and are restricted by licensing, but are free to use and come with generous bandwidth/storage. You can only select Open-Source at repository creation time. | [optional] 
+**RepositoryType** | **int32** | The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Open-Source repositories are always visible to everyone and are restricted by licensing, but are free to use and come with generous bandwidth/storage. You can only select Open-Source at repository creation time. | [optional] 
 **RepositoryTypeStr** | **string** |  | [optional] 
 **SelfHtmlUrl** | **string** |  | [optional] 
 **SelfUrl** | **string** |  | [optional] 

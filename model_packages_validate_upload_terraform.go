@@ -10,10 +10,8 @@
 
 package cloudsmith
 
-// PackagesUploadAlpine struct for PackagesUploadAlpine
-type PackagesUploadAlpine struct {
-	// The distribution to store the package for.
-	Distribution string `json:"distribution"`
+// PackagesValidateUploadTerraform struct for PackagesValidateUploadTerraform
+type PackagesValidateUploadTerraform struct {
 	// The primary file for the package.
 	PackageFile string `json:"package_file"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.

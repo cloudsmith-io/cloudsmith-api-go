@@ -2,7 +2,7 @@
 set -eou pipefail
 
 
-PKG_VERSION=${1:-"0.0.2"}
+PKG_VERSION=${1:-"0.0.3"}
 API_HOST=${2:-"https://api.cloudsmith.io"}
 
 
@@ -33,3 +33,11 @@ openapi-generator generate \
 
 rm -v .travis.yml
 rm -v git_push.sh
+
+# Apply fixes for mis-identified field-types in the Swagger spec
+#
+# This is a temporary measure as a larger API/swagger update is due soon which
+# should resolve this and other issues properly.
+
+sed -i 's/RepositoryType string/RepositoryType int32/g' model_repository.go
+sed -i 's/RepositoryType\*\* | \*\*string/RepositoryType\*\* | \*\*int32/g' docs/Repository.md
