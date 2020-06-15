@@ -6,11 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Description** | **string** | None | [optional] 
 **IndexFiles** | **bool** | If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted. | [optional] 
-**IsOpenSource** | **bool** | None | [optional] 
-**IsPrivate** | **bool** | None | [optional] 
-**IsPublic** | **bool** | None | [optional] 
 **Name** | **string** | A descriptive name for the repository. | [optional] 
-**Namespace** | **string** | None | [optional] 
 **RepositoryTypeStr** | **string** | None | [optional] 
 **Slug** | **string** | None | [optional] 
 

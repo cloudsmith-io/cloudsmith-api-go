@@ -14,16 +14,16 @@ Name | Type | Description | Notes
 **IsPrivate** | **bool** |  | [optional] 
 **IsPublic** | **bool** |  | [optional] 
 **Name** | **string** | A descriptive name for the repository. | 
-**Namespace** | **string** |  | 
+**Namespace** | **string** |  | [optional] 
 **NamespaceUrl** | **string** |  | [optional] 
-**NumDownloads** | **int32** | The number of downloads for packages in the repository. | [optional] 
-**PackageCount** | **int32** | The number of packages in the repository. | [optional] 
-**PackageGroupCount** | **int32** | The number of groups in the repository. | [optional] 
-**RepositoryType** | **int32** | The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Open-Source repositories are always visible to everyone and are restricted by licensing, but are free to use and come with generous bandwidth/storage. You can only select Open-Source at repository creation time. | [optional] 
+**NumDownloads** | **int64** | The number of downloads for packages in the repository. | [optional] 
+**PackageCount** | **int64** | The number of packages in the repository. | [optional] 
+**PackageGroupCount** | **int64** | The number of groups in the repository. | [optional] 
+**RepositoryType** | **int64** | The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Open-Source repositories are always visible to everyone and are restricted by licensing, but are free to use and come with generous bandwidth/storage. You can only select Open-Source at repository creation time. | [optional] 
 **RepositoryTypeStr** | **string** |  | [optional] 
 **SelfHtmlUrl** | **string** |  | [optional] 
 **SelfUrl** | **string** |  | [optional] 
-**Size** | **int32** | The calculated size of the repository. | [optional] 
+**Size** | **int64** | The calculated size of the repository. | [optional] 
 **SizeStr** | **string** |  | [optional] 
 **Slug** | **string** |  | 
 **SlugPerm** | **string** |  | [optional] 

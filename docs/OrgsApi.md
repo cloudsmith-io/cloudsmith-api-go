@@ -32,8 +32,8 @@ Optional parameters are passed through a pointer to a OrgsListOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **optional.Int32**| A page number within the paginated result set. | 
- **pageSize** | **optional.Int32**| Number of results to return per page. | 
+ **page** | **optional.Int64**| A page number within the paginated result set. | 
+ **pageSize** | **optional.Int64**| Number of results to return per page. | 
 
 ### Return type
 

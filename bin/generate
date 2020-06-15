@@ -2,7 +2,7 @@
 set -eou pipefail
 
 
-PKG_VERSION=${1:-"0.0.3"}
+PKG_VERSION=${1:-"0.0.4"}
 API_HOST=${2:-"https://api.cloudsmith.io"}
 
 
@@ -26,6 +26,7 @@ openapi-generator generate \
     --git-repo-id cloudsmith-api-go \
     --additional-properties packageName=cloudsmith \
     --additional-properties packageVersion=$PKG_VERSION \
+    --type-mappings integer=int64,number=float64,float=float64 \
     --enable-post-process-file
 
 
@@ -39,5 +40,5 @@ rm -v git_push.sh
 # This is a temporary measure as a larger API/swagger update is due soon which
 # should resolve this and other issues properly.
 
-sed -i 's/RepositoryType string/RepositoryType int32/g' model_repository.go
-sed -i 's/RepositoryType\*\* | \*\*string/RepositoryType\*\* | \*\*int32/g' docs/Repository.md
+sed -i 's/RepositoryType string/RepositoryType int64/g' model_repository.go
+sed -i 's/RepositoryType\*\* | \*\*string/RepositoryType\*\* | \*\*int64/g' docs/Repository.md

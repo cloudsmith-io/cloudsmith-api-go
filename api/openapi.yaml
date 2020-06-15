@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io/docs/terms-and-conditions
   title: Cloudsmith API
-  version: 0.51.38
+  version: 0.51.44
 externalDocs:
   description: Find out more info at the Cloudsmith Help Website
   url: https://help.cloudsmith.io
@@ -5152,12 +5152,8 @@ paths:
           application/json:
             schema:
               example:
-                is_private: true
                 repository_type_str: repository_type_str
-                is_open_source: true
-                is_public: true
                 name: name
-                namespace: namespace
                 description: description
                 index_files: true
                 slug: slug
@@ -5171,20 +5167,8 @@ paths:
                     Note that it is recommended you keep this enabled unless the synchronisation
                     time is significantly impacted.
                   type: boolean
-                is_open_source:
-                  description: None
-                  type: boolean
-                is_private:
-                  description: None
-                  type: boolean
-                is_public:
-                  description: None
-                  type: boolean
                 name:
                   description: A descriptive name for the repository.
-                  type: string
-                namespace:
-                  description: None
                   type: string
                 repository_type_str:
                   description: None
@@ -5194,7 +5178,6 @@ paths:
                   type: string
               required:
               - name
-              - namespace
               - slug
               title: ReposCreate
               type: object
@@ -5342,12 +5325,8 @@ paths:
           application/json:
             schema:
               example:
-                is_private: true
                 repository_type_str: repository_type_str
-                is_open_source: true
-                is_public: true
                 name: name
-                namespace: namespace
                 description: description
                 index_files: true
                 slug: slug
@@ -5361,20 +5340,8 @@ paths:
                     Note that it is recommended you keep this enabled unless the synchronisation
                     time is significantly impacted.
                   type: boolean
-                is_open_source:
-                  description: None
-                  type: boolean
-                is_private:
-                  description: None
-                  type: boolean
-                is_public:
-                  description: None
-                  type: boolean
                 name:
                   description: A descriptive name for the repository.
-                  type: string
-                namespace:
-                  description: None
                   type: string
                 repository_type_str:
                   description: None
@@ -7208,7 +7175,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 0.51.38
+        version: 0.51.44
       properties:
         detail:
           description: The message describing the state of the API.
@@ -7216,16 +7183,12 @@ components:
           type: string
         version:
           description: The current version for the Cloudsmith service.
-          example: 0.51.38
+          example: 0.51.44
           type: string
     ReposPartialUpdate:
       example:
-        is_private: true
         repository_type_str: repository_type_str
-        is_open_source: true
-        is_public: true
         name: name
-        namespace: namespace
         description: description
         index_files: true
         slug: slug
@@ -7239,20 +7202,8 @@ components:
             is recommended you keep this enabled unless the synchronisation time is
             significantly impacted.
           type: boolean
-        is_open_source:
-          description: None
-          type: boolean
-        is_private:
-          description: None
-          type: boolean
-        is_public:
-          description: None
-          type: boolean
         name:
           description: A descriptive name for the repository.
-          type: string
-        namespace:
-          description: None
           type: string
         repository_type_str:
           description: None
@@ -9868,8 +9819,8 @@ components:
             interval: 5.123456789
             limit: 3600
             remaining: 3595
-            reset: 1591870721
-            reset_iso_8601: 2020-06-11T10:18:41.403276+00:00
+            reset: 1592234181
+            reset_iso_8601: 2020-06-15T15:16:21.670293+00:00
             throttled: false
       properties:
         resources:
@@ -9879,8 +9830,8 @@ components:
               interval: 5.123456789
               limit: 3600
               remaining: 3595
-              reset: 1591870721
-              reset_iso_8601: 2020-06-11T10:18:41.403276+00:00
+              reset: 1592234181
+              reset_iso_8601: 2020-06-15T15:16:21.670293+00:00
               throttled: false
           properties: {}
           type: object
@@ -10757,16 +10708,11 @@ components:
           type: string
       required:
       - name
-      - namespace
       - slug
     ReposCreate:
       example:
-        is_private: true
         repository_type_str: repository_type_str
-        is_open_source: true
-        is_public: true
         name: name
-        namespace: namespace
         description: description
         index_files: true
         slug: slug
@@ -10780,20 +10726,8 @@ components:
             is recommended you keep this enabled unless the synchronisation time is
             significantly impacted.
           type: boolean
-        is_open_source:
-          description: None
-          type: boolean
-        is_private:
-          description: None
-          type: boolean
-        is_public:
-          description: None
-          type: boolean
         name:
           description: A descriptive name for the repository.
-          type: string
-        namespace:
-          description: None
           type: string
         repository_type_str:
           description: None
@@ -10803,7 +10737,6 @@ components:
           type: string
       required:
       - name
-      - namespace
       - slug
       title: ReposCreate
       type: object

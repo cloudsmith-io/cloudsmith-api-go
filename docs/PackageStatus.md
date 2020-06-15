@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **StatusStr** | **string** |  | [optional] 
 **StatusUpdatedAt** | **string** | The datetime the package status was updated at. | [optional] 
 **SyncFinishedAt** | **string** | The datetime the package sync was finished at. | [optional] 
-**SyncProgress** | **int32** | Synchronisation progress (from 0-100) | [optional] 
+**SyncProgress** | **int64** | Synchronisation progress (from 0-100) | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
