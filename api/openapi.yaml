@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io/docs/terms-and-conditions
   title: Cloudsmith API
-  version: 0.51.48
+  version: 0.51.50
 externalDocs:
   description: Find out more info at the Cloudsmith Help Website
   url: https://help.cloudsmith.io
@@ -5160,7 +5160,7 @@ paths:
                 slug: slug
               properties:
                 description:
-                  description: None
+                  description: A description of the repository's purpose/contents.
                   type: string
                 index_files:
                   description: If checked, files contained in packages will be indexed,
@@ -5172,13 +5172,16 @@ paths:
                   description: A descriptive name for the repository.
                   type: string
                 repository_type_str:
-                  description: None
+                  description: The repository type changes how it is accessed and
+                    billed. Private repositories can only be used on paid plans, but
+                    are visible only to you or authorised delegates. Public repositories
+                    are free to use on all plans and visible to all Cloudsmith users.
                   type: string
                 slug:
-                  description: None
+                  description: The slug identifies the repository in URIs.
                   type: string
                 storage_region:
-                  description: None
+                  description: The Cloudsmith region in which package files are stored.
                   type: string
               required:
               - name
@@ -5335,7 +5338,7 @@ paths:
                 slug: slug
               properties:
                 description:
-                  description: None
+                  description: A description of the repository's purpose/contents.
                   type: string
                 index_files:
                   description: If checked, files contained in packages will be indexed,
@@ -5347,10 +5350,13 @@ paths:
                   description: A descriptive name for the repository.
                   type: string
                 repository_type_str:
-                  description: None
+                  description: The repository type changes how it is accessed and
+                    billed. Private repositories can only be used on paid plans, but
+                    are visible only to you or authorised delegates. Public repositories
+                    are free to use on all plans and visible to all Cloudsmith users.
                   type: string
                 slug:
-                  description: None
+                  description: The slug identifies the repository in URIs.
                   type: string
               title: ReposPartialUpdate
               type: object
@@ -7247,7 +7253,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 0.51.48
+        version: 0.51.50
       properties:
         detail:
           description: The message describing the state of the API.
@@ -7255,7 +7261,7 @@ components:
           type: string
         version:
           description: The current version for the Cloudsmith service.
-          example: 0.51.48
+          example: 0.51.50
           type: string
     ReposPartialUpdate:
       example:
@@ -7266,7 +7272,7 @@ components:
         slug: slug
       properties:
         description:
-          description: None
+          description: A description of the repository's purpose/contents.
           type: string
         index_files:
           description: If checked, files contained in packages will be indexed, which
@@ -7278,10 +7284,13 @@ components:
           description: A descriptive name for the repository.
           type: string
         repository_type_str:
-          description: None
+          description: The repository type changes how it is accessed and billed.
+            Private repositories can only be used on paid plans, but are visible only
+            to you or authorised delegates. Public repositories are free to use on
+            all plans and visible to all Cloudsmith users.
           type: string
         slug:
-          description: None
+          description: The slug identifies the repository in URIs.
           type: string
       title: ReposPartialUpdate
       type: object
@@ -9905,8 +9914,8 @@ components:
             interval: 5.123456789
             limit: 3600
             remaining: 3595
-            reset: 1592385714
-            reset_iso_8601: 2020-06-17T09:21:54.792557+00:00
+            reset: 1592410978
+            reset_iso_8601: 2020-06-17T16:22:58.055631+00:00
             throttled: false
       properties:
         resources:
@@ -9916,8 +9925,8 @@ components:
               interval: 5.123456789
               limit: 3600
               remaining: 3595
-              reset: 1592385714
-              reset_iso_8601: 2020-06-17T09:21:54.792557+00:00
+              reset: 1592410978
+              reset_iso_8601: 2020-06-17T16:22:58.055631+00:00
               throttled: false
           properties: {}
           type: object
@@ -10714,7 +10723,7 @@ components:
         slug: slug
       properties:
         cdn_url:
-          description: ""
+          description: Base URL from which packages and other artifacts are downloaded.
           type: string
         created_at:
           description: ""
@@ -10723,7 +10732,7 @@ components:
           description: ""
           type: string
         description:
-          description: ""
+          description: A description of the repository's purpose/contents.
           type: string
         gpg_keys:
           description: ""
@@ -10750,10 +10759,10 @@ components:
           description: A descriptive name for the repository.
           type: string
         namespace:
-          description: ""
+          description: Namespace to which this repository belongs.
           type: string
         namespace_url:
-          description: ""
+          description: API endpoint where data about this namespace can be retrieved.
           type: string
         num_downloads:
           description: The number of downloads for packages in the repository.
@@ -10773,28 +10782,32 @@ components:
             creation time.
           type: string
         repository_type_str:
-          description: ""
+          description: The repository type changes how it is accessed and billed.
+            Private repositories can only be used on paid plans, but are visible only
+            to you or authorised delegates. Public repositories are free to use on
+            all plans and visible to all Cloudsmith users.
           type: string
         self_html_url:
-          description: ""
+          description: Website URL for this repository.
           type: string
         self_url:
-          description: ""
+          description: API endpoint where data about this repository can be retrieved.
           type: string
         size:
           description: The calculated size of the repository.
           type: integer
         size_str:
-          description: ""
+          description: The calculated size of the repository (human readable).
           type: string
         slug:
-          description: ""
+          description: The slug identifies the repository in URIs.
           type: string
         slug_perm:
-          description: ""
+          description: The slug_perm immutably identifies the repository. It will
+            never change once a repository has been created.
           type: string
         storage_region:
-          description: ""
+          description: The Cloudsmith region in which package files are stored.
           type: string
       required:
       - name
@@ -10808,7 +10821,7 @@ components:
         slug: slug
       properties:
         description:
-          description: None
+          description: A description of the repository's purpose/contents.
           type: string
         index_files:
           description: If checked, files contained in packages will be indexed, which
@@ -10820,13 +10833,16 @@ components:
           description: A descriptive name for the repository.
           type: string
         repository_type_str:
-          description: None
+          description: The repository type changes how it is accessed and billed.
+            Private repositories can only be used on paid plans, but are visible only
+            to you or authorised delegates. Public repositories are free to use on
+            all plans and visible to all Cloudsmith users.
           type: string
         slug:
-          description: None
+          description: The slug identifies the repository in URIs.
           type: string
         storage_region:
-          description: None
+          description: The Cloudsmith region in which package files are stored.
           type: string
       required:
       - name
