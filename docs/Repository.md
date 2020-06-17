@@ -25,8 +25,9 @@ Name | Type | Description | Notes
 **SelfUrl** | **string** |  | [optional] 
 **Size** | **int64** | The calculated size of the repository. | [optional] 
 **SizeStr** | **string** |  | [optional] 
-**Slug** | **string** |  | 
+**Slug** | **string** |  | [optional] 
 **SlugPerm** | **string** |  | [optional] 
+**StorageRegion** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

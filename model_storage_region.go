@@ -10,8 +10,10 @@
 
 package cloudsmith
 
-// ResourcesRateCheck struct for ResourcesRateCheck
-type ResourcesRateCheck struct {
-	// Rate limit values per resource
-	Resources map[string]interface{} `json:"resources,omitempty"`
+// StorageRegion struct for StorageRegion
+type StorageRegion struct {
+	// Name of the storage region
+	Label string `json:"label"`
+	// Slug for the storage region
+	Slug string `json:"slug"`
 }

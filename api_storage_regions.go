@@ -12,7 +12,6 @@ package cloudsmith
 
 import (
 	_context "context"
-	"github.com/antihax/optional"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
 	_neturl "net/url"
@@ -24,46 +23,31 @@ var (
 	_ _context.Context
 )
 
-// OrgsApiService OrgsApi service
-type OrgsApiService service
-
-// OrgsListOpts Optional parameters for the method 'OrgsList'
-type OrgsListOpts struct {
-	Page     optional.Int64
-	PageSize optional.Int64
-}
+// StorageRegionsApiService StorageRegionsApi service
+type StorageRegionsApiService service
 
 /*
-OrgsList Get a list of all the organizations you are associated with.
-Get a list of all the organizations you are associated with.
+StorageRegionsList Get a list of all available storage regions.
+Get a list of all available storage regions.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *OrgsListOpts - Optional Parameters:
- * @param "Page" (optional.Int64) -  A page number within the paginated result set.
- * @param "PageSize" (optional.Int64) -  Number of results to return per page.
-@return []Organization
+@return []StorageRegion
 */
-func (a *OrgsApiService) OrgsList(ctx _context.Context, localVarOptionals *OrgsListOpts) ([]Organization, *_nethttp.Response, error) {
+func (a *StorageRegionsApiService) StorageRegionsList(ctx _context.Context) ([]StorageRegion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Organization
+		localVarReturnValue  []StorageRegion
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/orgs/"
+	localVarPath := a.client.cfg.BasePath + "/storage-regions/"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
-		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.PageSize.IsSet() {
-		localVarQueryParams.Add("page_size", parameterToString(localVarOptionals.PageSize.Value(), ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -161,24 +145,24 @@ func (a *OrgsApiService) OrgsList(ctx _context.Context, localVarOptionals *OrgsL
 }
 
 /*
-OrgsRead Views for working with organizations.
-Views for working with organizations.
+StorageRegionsRead Get a specific storage region.
+Get a specific storage region.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param slug
-@return Organization
+@return StorageRegion
 */
-func (a *OrgsApiService) OrgsRead(ctx _context.Context, slug string) (Organization, *_nethttp.Response, error) {
+func (a *StorageRegionsApiService) StorageRegionsRead(ctx _context.Context, slug string) (StorageRegion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Organization
+		localVarReturnValue  StorageRegion
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/orgs/{slug}/"
+	localVarPath := a.client.cfg.BasePath + "/storage-regions/{slug}/"
 	localVarPath = strings.Replace(localVarPath, "{"+"slug"+"}", _neturl.QueryEscape(parameterToString(slug, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)

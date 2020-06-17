@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io/docs/terms-and-conditions
   title: Cloudsmith API
-  version: 0.51.44
+  version: 0.51.48
 externalDocs:
   description: Find out more info at the Cloudsmith Help Website
   url: https://help.cloudsmith.io
@@ -5152,6 +5152,7 @@ paths:
           application/json:
             schema:
               example:
+                storage_region: storage_region
                 repository_type_str: repository_type_str
                 name: name
                 description: description
@@ -5176,9 +5177,11 @@ paths:
                 slug:
                   description: None
                   type: string
+                storage_region:
+                  description: None
+                  type: string
               required:
               - name
-              - slug
               title: ReposCreate
               type: object
         required: false
@@ -5411,6 +5414,75 @@ paths:
       summary: Endpoint to check basic API connectivity.
       tags:
       - status
+  /storage-regions/:
+    get:
+      description: Get a list of all available storage regions.
+      operationId: storage-regions_list
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/StorageRegion'
+                title: StorageRegionList
+                type: array
+          description: Available storage regions retrieved
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Request could not be processed (see detail)
+        "422":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Missing or invalid parameters (see detail)
+      security:
+      - token: []
+      - apikey: []
+      - csrf_token: []
+      summary: Get a list of all available storage regions.
+      tags:
+      - storage-regions
+  /storage-regions/{slug}/:
+    get:
+      description: Get a specific storage region.
+      operationId: storage-regions_read
+      parameters:
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StorageRegion'
+          description: OK
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Request could not be processed (see detail)
+        "422":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Missing or invalid parameters (see detail)
+      security:
+      - token: []
+      - apikey: []
+      - csrf_token: []
+      summary: Get a specific storage region.
+      tags:
+      - storage-regions
   /user/self/:
     get:
       description: Provide a brief for the current user (if any).
@@ -7175,7 +7247,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 0.51.44
+        version: 0.51.48
       properties:
         detail:
           description: The message describing the state of the API.
@@ -7183,7 +7255,7 @@ components:
           type: string
         version:
           description: The current version for the Cloudsmith service.
-          example: 0.51.44
+          example: 0.51.48
           type: string
     ReposPartialUpdate:
       example:
@@ -9609,6 +9681,20 @@ components:
       - templates
       title: WebhooksCreate
       type: object
+    StorageRegion:
+      example:
+        label: label
+        slug: slug
+      properties:
+        label:
+          description: Name of the storage region
+          type: string
+        slug:
+          description: Slug for the storage region
+          type: string
+      required:
+      - label
+      - slug
     PackagesValidate_uploadCran:
       properties:
         package_file:
@@ -9819,8 +9905,8 @@ components:
             interval: 5.123456789
             limit: 3600
             remaining: 3595
-            reset: 1592234181
-            reset_iso_8601: 2020-06-15T15:16:21.670293+00:00
+            reset: 1592385714
+            reset_iso_8601: 2020-06-17T09:21:54.792557+00:00
             throttled: false
       properties:
         resources:
@@ -9830,8 +9916,8 @@ components:
               interval: 5.123456789
               limit: 3600
               remaining: 3595
-              reset: 1592234181
-              reset_iso_8601: 2020-06-15T15:16:21.670293+00:00
+              reset: 1592385714
+              reset_iso_8601: 2020-06-17T09:21:54.792557+00:00
               throttled: false
           properties: {}
           type: object
@@ -10600,6 +10686,7 @@ components:
         repository_type: repository_type
         self_url: self_url
         package_count: 6
+        storage_region: storage_region
         size_str: size_str
         package_group_count: 1
         size: 5
@@ -10706,11 +10793,14 @@ components:
         slug_perm:
           description: ""
           type: string
+        storage_region:
+          description: ""
+          type: string
       required:
       - name
-      - slug
     ReposCreate:
       example:
+        storage_region: storage_region
         repository_type_str: repository_type_str
         name: name
         description: description
@@ -10735,9 +10825,11 @@ components:
         slug:
           description: None
           type: string
+        storage_region:
+          description: None
+          type: string
       required:
       - name
-      - slug
       title: ReposCreate
       type: object
     RepositoryTokenRefresh:
