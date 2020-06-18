@@ -2,7 +2,7 @@
 set -eou pipefail
 
 
-PKG_VERSION=${1:-"0.0.6"}
+PKG_VERSION=${1:-"0.0.7"}
 API_HOST=${2:-"https://api.cloudsmith.io"}
 
 
@@ -40,5 +40,7 @@ rm -v git_push.sh
 # This is a temporary measure as a larger API/swagger update is due soon which
 # should resolve this and other issues properly.
 
+sed -i 's/IndexFiles bool/IndexFiles \*bool/g' model_repos_create.go model_repos_partial_update.go model_repository.go
+sed -i 's/IndexFiles\*\* | \*\*bool/IndexFiles\*\* | \*\*\\\*bool/g' docs/ReposCreate.md docs/ReposPartialUpdate.md docs/Repository.md
 sed -i 's/RepositoryType string/RepositoryType int64/g' model_repository.go
 sed -i 's/RepositoryType\*\* | \*\*string/RepositoryType\*\* | \*\*int64/g' docs/Repository.md

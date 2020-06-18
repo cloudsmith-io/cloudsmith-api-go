@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **DeletedAt** | **string** |  | [optional] 
 **Description** | **string** | A description of the repository&#39;s purpose/contents. | [optional] 
 **GpgKeys** | [**[]ReposGpgKeys**](_repos__gpg_keys.md) |  | [optional] 
-**IndexFiles** | **bool** | If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted. | [optional] 
+**IndexFiles** | **\*bool** | If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted. | [optional] 
 **IsOpenSource** | **bool** |  | [optional] 
 **IsPrivate** | **bool** |  | [optional] 
 **IsPublic** | **bool** |  | [optional] 
