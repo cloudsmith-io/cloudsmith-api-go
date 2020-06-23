@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io/docs/terms-and-conditions
   title: Cloudsmith API
-  version: 0.51.52
+  version: 0.51.65
 externalDocs:
   description: Find out more info at the Cloudsmith Help Website
   url: https://help.cloudsmith.io
@@ -7253,7 +7253,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 0.51.52
+        version: 0.51.65
       properties:
         detail:
           description: The message describing the state of the API.
@@ -7261,7 +7261,7 @@ components:
           type: string
         version:
           description: The current version for the Cloudsmith service.
-          example: 0.51.52
+          example: 0.51.65
           type: string
     ReposPartialUpdate:
       example:
@@ -9914,8 +9914,8 @@ components:
             interval: 5.123456789
             limit: 3600
             remaining: 3595
-            reset: 1592492336
-            reset_iso_8601: 2020-06-18T14:58:56.063092+00:00
+            reset: 1592912811
+            reset_iso_8601: 2020-06-23T11:46:51.815298+00:00
             throttled: false
       properties:
         resources:
@@ -9925,8 +9925,8 @@ components:
               interval: 5.123456789
               limit: 3600
               remaining: 3595
-              reset: 1592492336
-              reset_iso_8601: 2020-06-18T14:58:56.063092+00:00
+              reset: 1592912811
+              reset_iso_8601: 2020-06-23T11:46:51.815298+00:00
               throttled: false
           properties: {}
           type: object

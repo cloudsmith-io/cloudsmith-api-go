@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Default** | **bool** | If selected this is the default token for this repository. | [optional] 
 **HasLimits** | **string** |  | [optional] 
 **Identifier** | **int64** |  | [optional] 
-**IsActive** | **bool** | If enabled, the token will allow downloads based on configured restrictions (if any). | [optional] 
+**IsActive** | **\*bool** | If enabled, the token will allow downloads based on configured restrictions (if any). | [optional] 
 **IsLimited** | **string** |  | [optional] 
 **LimitDateRangeFrom** | **string** | The starting date/time the token is allowed to be used from. | [optional] 
 **LimitDateRangeTo** | **string** | The ending date/time the token is allowed to be used until. | [optional] 

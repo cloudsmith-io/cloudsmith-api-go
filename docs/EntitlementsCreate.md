@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IsActive** | **bool** | If enabled, the token will allow downloads based on configured restrictions (if any). | [optional] 
+**IsActive** | **\*bool** | If enabled, the token will allow downloads based on configured restrictions (if any). | [optional] 
 **LimitDateRangeFrom** | **string** | The starting date/time the token is allowed to be used from. | [optional] 
 **LimitDateRangeTo** | **string** | The ending date/time the token is allowed to be used until. | [optional] 
 **LimitNumClients** | **int64** | The maximum number of unique clients allowed for the token. Please note that since clients are calculated asynchronously (after the download happens), the limit may not be imposed immediately but at a later point. | [optional] 
