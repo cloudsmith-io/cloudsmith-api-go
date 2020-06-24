@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io/docs/terms-and-conditions
   title: Cloudsmith API
-  version: 0.51.65
+  version: 0.51.68
 externalDocs:
   description: Find out more info at the Cloudsmith Help Website
   url: https://help.cloudsmith.io
@@ -7253,7 +7253,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 0.51.65
+        version: 0.51.68
       properties:
         detail:
           description: The message describing the state of the API.
@@ -7261,7 +7261,7 @@ components:
           type: string
         version:
           description: The current version for the Cloudsmith service.
-          example: 0.51.65
+          example: 0.51.68
           type: string
     ReposPartialUpdate:
       example:
@@ -9914,8 +9914,8 @@ components:
             interval: 5.123456789
             limit: 3600
             remaining: 3595
-            reset: 1592912811
-            reset_iso_8601: 2020-06-23T11:46:51.815298+00:00
+            reset: 1592941974
+            reset_iso_8601: 2020-06-23T19:52:54.007365+00:00
             throttled: false
       properties:
         resources:
@@ -9925,8 +9925,8 @@ components:
               interval: 5.123456789
               limit: 3600
               remaining: 3595
-              reset: 1592912811
-              reset_iso_8601: 2020-06-23T11:46:51.815298+00:00
+              reset: 1592941974
+              reset_iso_8601: 2020-06-23T19:52:54.007365+00:00
               throttled: false
           properties: {}
           type: object
@@ -10021,7 +10021,7 @@ components:
         identifier: 0
         is_active: true
         created_by_url: created_by_url
-        is_limited: is_limited
+        is_limited: true
         slug_perm: slug_perm
         created_by: created_by
         self_url: self_url
@@ -10029,7 +10029,7 @@ components:
         updated_by_url: updated_by_url
         name: name
         updated_by: updated_by
-        has_limits: has_limits
+        has_limits: true
         user: user
       properties:
         created_at:
@@ -10046,7 +10046,7 @@ components:
           type: boolean
         has_limits:
           description: ""
-          type: string
+          type: boolean
         identifier:
           description: ""
           type: integer
@@ -10056,7 +10056,7 @@ components:
           type: boolean
         is_limited:
           description: ""
-          type: string
+          type: boolean
         limit_date_range_from:
           description: The starting date/time the token is allowed to be used from.
           type: string
@@ -10348,7 +10348,7 @@ components:
           identifier: 0
           is_active: true
           created_by_url: created_by_url
-          is_limited: is_limited
+          is_limited: true
           slug_perm: slug_perm
           created_by: created_by
           self_url: self_url
@@ -10356,7 +10356,7 @@ components:
           updated_by_url: updated_by_url
           name: name
           updated_by: updated_by
-          has_limits: has_limits
+          has_limits: true
           user: user
         - limit_date_range_to: limit_date_range_to
           metadata: metadata
@@ -10373,7 +10373,7 @@ components:
           identifier: 0
           is_active: true
           created_by_url: created_by_url
-          is_limited: is_limited
+          is_limited: true
           slug_perm: slug_perm
           created_by: created_by
           self_url: self_url
@@ -10381,7 +10381,7 @@ components:
           updated_by_url: updated_by_url
           name: name
           updated_by: updated_by
-          has_limits: has_limits
+          has_limits: true
           user: user
       properties:
         tokens:
@@ -10473,7 +10473,7 @@ components:
         identifier: 0
         is_active: true
         created_by_url: created_by_url
-        is_limited: is_limited
+        is_limited: true
         slug_perm: slug_perm
         created_by: created_by
         self_url: self_url
@@ -10481,7 +10481,7 @@ components:
         updated_by_url: updated_by_url
         name: name
         updated_by: updated_by
-        has_limits: has_limits
+        has_limits: true
         user: user
       properties:
         created_at:
@@ -10498,7 +10498,7 @@ components:
           type: boolean
         has_limits:
           description: ""
-          type: string
+          type: boolean
         identifier:
           description: ""
           type: integer
@@ -10508,7 +10508,7 @@ components:
           type: boolean
         is_limited:
           description: ""
-          type: string
+          type: boolean
         limit_date_range_from:
           description: The starting date/time the token is allowed to be used from.
           type: string
@@ -10865,7 +10865,7 @@ components:
         identifier: 0
         is_active: true
         created_by_url: created_by_url
-        is_limited: is_limited
+        is_limited: true
         slug_perm: slug_perm
         created_by: created_by
         self_url: self_url
@@ -10873,7 +10873,7 @@ components:
         updated_by_url: updated_by_url
         name: name
         updated_by: updated_by
-        has_limits: has_limits
+        has_limits: true
         user: user
       properties:
         created_at:
@@ -10890,7 +10890,7 @@ components:
           type: boolean
         has_limits:
           description: ""
-          type: string
+          type: boolean
         identifier:
           description: ""
           type: integer
@@ -10900,7 +10900,7 @@ components:
           type: boolean
         is_limited:
           description: ""
-          type: string
+          type: boolean
         limit_date_range_from:
           description: The starting date/time the token is allowed to be used from.
           type: string
