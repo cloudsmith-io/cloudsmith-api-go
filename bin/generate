@@ -46,3 +46,5 @@ sed -i 's/IsActive bool/IsActive \*bool/g' model_entitlements_create.go model_en
 sed -i 's/IsActive\*\* | \*\*bool/IsActive\*\* | \*\*\\\*bool/g' docs/EntitlementsCreate.md docs/EntitlementsPartialUpdate.md docs/EntitlementsRefresh.md docs/RepositoryToken.md docs/RepositoryTokenRefresh.md docs/RepositoryToken.md docs/RepositoryTokenSyncTokens.md
 sed -i 's/RepositoryType string/RepositoryType int64/g' model_repository.go
 sed -i 's/RepositoryType\*\* | \*\*string/RepositoryType\*\* | \*\*int64/g' docs/Repository.md
+sed -i 's/Stage string/Stage int64/g' model_package.go
+sed -i 's/Stage\*\* | \*\*string/Stage\*\* | \*\*int64/g' docs/Package.md

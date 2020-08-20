@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io/docs/terms-and-conditions
   title: Cloudsmith API
-  version: 0.51.68
+  version: 0.52.62
 externalDocs:
   description: Find out more info at the Cloudsmith Help Website
   url: https://help.cloudsmith.io
@@ -287,9 +287,7 @@ paths:
                     downloads to. This uses the same syntax as the standard search
                     used for repositories, and also supports boolean logic operators
                     such as OR/AND/NOT and parentheses for grouping. This will still
-                    allow access to non-package files, such as metadata. For package
-                    formats that support dynamic metadata indexes, the contents of
-                    the metadata will also be filtered.
+                    allow access to non-package files, such as metadata.
                   type: string
                 limit_path_query:
                   description: The path-based search query to apply to restrict downloads
@@ -584,9 +582,7 @@ paths:
                     downloads to. This uses the same syntax as the standard search
                     used for repositories, and also supports boolean logic operators
                     such as OR/AND/NOT and parentheses for grouping. This will still
-                    allow access to non-package files, such as metadata. For package
-                    formats that support dynamic metadata indexes, the contents of
-                    the metadata will also be filtered.
+                    allow access to non-package files, such as metadata.
                   type: string
                 limit_path_query:
                   description: The path-based search query to apply to restrict downloads
@@ -797,9 +793,7 @@ paths:
                     downloads to. This uses the same syntax as the standard search
                     used for repositories, and also supports boolean logic operators
                     such as OR/AND/NOT and parentheses for grouping. This will still
-                    allow access to non-package files, such as metadata. For package
-                    formats that support dynamic metadata indexes, the contents of
-                    the metadata will also be filtered.
+                    allow access to non-package files, such as metadata.
                   type: string
                 limit_path_query:
                   description: The path-based search query to apply to restrict downloads
@@ -1561,6 +1555,7 @@ paths:
                 republish: true
                 distribution: alpine/v3.8
                 package_file: a123456789
+                tags: tags
               properties:
                 distribution:
                   description: The distribution to store the package for.
@@ -1575,6 +1570,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - distribution
               - package_file
@@ -1586,7 +1585,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -1637,6 +1636,7 @@ paths:
               example:
                 republish: true
                 package_file: x123456789a
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -1647,6 +1647,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadCargo
@@ -1657,7 +1661,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -1708,6 +1712,7 @@ paths:
               example:
                 republish: true
                 package_file: z123456789
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -1718,6 +1723,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadCocoapods
@@ -1728,7 +1737,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -1779,6 +1788,7 @@ paths:
               example:
                 republish: true
                 package_file: y123456789
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -1789,6 +1799,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadComposer
@@ -1799,7 +1813,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -1857,6 +1871,7 @@ paths:
                 conan_channel: alpha
                 info_file: y1234456789b
                 manifest_file: y1234456789c
+                tags: tags
               properties:
                 conan_channel:
                   description: Conan channel.
@@ -1894,6 +1909,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
                 version:
                   description: The raw version for this package.
                   example: 1.0.0
@@ -1962,6 +1981,7 @@ paths:
               example:
                 republish: true
                 package_file: x123456789a
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -1972,6 +1992,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadCran
@@ -1982,7 +2006,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2033,6 +2057,7 @@ paths:
               example:
                 republish: true
                 package_file: x123456789a
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -2043,6 +2068,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadDart
@@ -2053,7 +2082,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2102,10 +2131,18 @@ paths:
           application/json:
             schema:
               example:
+                sources_file: y123456789
                 republish: true
+                changes_file: y123456789
                 distribution: ubuntu/xenial
                 package_file: y123456789
+                tags: tags
               properties:
+                changes_file:
+                  description: The changes archive containing the changes made to
+                    the source and debian packaging files
+                  example: y123456789
+                  type: string
                 distribution:
                   description: The distribution to store the package for.
                   example: ubuntu/xenial
@@ -2119,6 +2156,15 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                sources_file:
+                  description: The sources archive containing the source code for
+                    the binary
+                  example: y123456789
+                  type: string
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - distribution
               - package_file
@@ -2130,7 +2176,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2181,6 +2227,7 @@ paths:
               example:
                 republish: true
                 package_file: y123456789
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -2191,6 +2238,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadDocker
@@ -2201,7 +2252,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2252,6 +2303,7 @@ paths:
               example:
                 republish: true
                 package_file: x123456789a
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -2262,6 +2314,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadGo
@@ -2272,7 +2328,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2323,6 +2379,7 @@ paths:
               example:
                 republish: true
                 package_file: x123456789a
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -2333,6 +2390,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadHelm
@@ -2343,7 +2404,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2394,6 +2455,7 @@ paths:
               example:
                 republish: true
                 package_file: x123456789a
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -2404,6 +2466,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadLuarocks
@@ -2414,7 +2480,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2473,6 +2539,7 @@ paths:
                 package_file: y1234456789a
                 version: version
                 pom_file: y1234456789b
+                tags: tags
               properties:
                 artifact_id:
                   description: The ID of the artifact.
@@ -2505,6 +2572,10 @@ paths:
                 sources_file:
                   description: Adds bundled Java source code to the Maven package.
                   example: y1234456789d
+                  type: string
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
                   type: string
                 tests_file:
                   description: Adds bundled Java tests to the Maven package.
@@ -2575,6 +2646,7 @@ paths:
                 republish: true
                 npm_dist_tag: latest
                 package_file: y123456789
+                tags: tags
               properties:
                 npm_dist_tag:
                   description: The default npm dist-tag for this package/version -
@@ -2591,6 +2663,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadNpm
@@ -2601,7 +2677,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2653,6 +2729,7 @@ paths:
                 republish: true
                 symbols_file: y1234456789b
                 package_file: y1234456789a
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -2667,6 +2744,10 @@ paths:
                   description: Attaches a symbols file to the package.
                   example: y1234456789b
                   type: string
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadNuget
@@ -2677,7 +2758,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2728,6 +2809,7 @@ paths:
               example:
                 republish: true
                 package_file: y123456789
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -2738,6 +2820,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadPython
@@ -2748,7 +2834,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2804,6 +2890,7 @@ paths:
                 description: Everything about packaging files.
                 package_file: y123456789
                 version: "1.0"
+                tags: tags
               properties:
                 content_type:
                   description: A custom content/media (also known as MIME) type to
@@ -2831,6 +2918,10 @@ paths:
                 summary:
                   description: A one-liner synopsis of this package.
                   example: My Package File
+                  type: string
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
                   type: string
                 version:
                   description: The raw version for this package.
@@ -2898,6 +2989,7 @@ paths:
                 republish: true
                 distribution: el/7
                 package_file: y123456789
+                tags: tags
               properties:
                 distribution:
                   description: The distribution to store the package for.
@@ -2912,6 +3004,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - distribution
               - package_file
@@ -2923,7 +3019,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -2974,6 +3070,7 @@ paths:
               example:
                 republish: true
                 package_file: y123456789
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -2984,6 +3081,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadRuby
@@ -2994,7 +3095,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -3045,6 +3146,7 @@ paths:
               example:
                 republish: true
                 package_file: z123456789a
+                tags: tags
               properties:
                 package_file:
                   description: The primary file for the package.
@@ -3055,6 +3157,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesUploadTerraform
@@ -3065,7 +3171,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation
         "400":
           content:
@@ -3119,6 +3225,7 @@ paths:
                 name: tcl
                 package_file: y123456789x
                 version: "1.0"
+                tags: tags
               properties:
                 name:
                   description: The name of this package.
@@ -3137,6 +3244,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
                 version:
                   description: The raw version for this package.
                   example: "1.0"
@@ -3216,6 +3327,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - distribution
               - package_file
@@ -3282,6 +3397,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadCargo
@@ -3347,6 +3466,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadCocoapods
@@ -3412,6 +3535,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadComposer
@@ -3504,6 +3631,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
                 version:
                   description: The raw version for this package.
                   example: 1.0.0
@@ -3576,6 +3707,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadCran
@@ -3641,6 +3776,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadDart
@@ -3697,6 +3836,11 @@ paths:
           application/json:
             schema:
               properties:
+                changes_file:
+                  description: The changes archive containing the changes made to
+                    the source and debian packaging files
+                  example: y123456789
+                  type: string
                 distribution:
                   description: The distribution to store the package for.
                   example: ubuntu/xenial
@@ -3710,6 +3854,15 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                sources_file:
+                  description: The sources archive containing the source code for
+                    the binary
+                  example: y123456789
+                  type: string
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - distribution
               - package_file
@@ -3776,6 +3929,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadDocker
@@ -3841,6 +3998,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadGo
@@ -3906,6 +4067,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadHelm
@@ -3971,6 +4136,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadLuarocks
@@ -4059,6 +4228,10 @@ paths:
                   description: Adds bundled Java source code to the Maven package.
                   example: y1234456789d
                   type: string
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
                 tests_file:
                   description: Adds bundled Java tests to the Maven package.
                   example: y1234456789e
@@ -4137,6 +4310,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadNpm
@@ -4206,6 +4383,10 @@ paths:
                   description: Attaches a symbols file to the package.
                   example: y1234456789b
                   type: string
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadNuget
@@ -4271,6 +4452,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadPython
@@ -4354,6 +4539,10 @@ paths:
                   description: A one-liner synopsis of this package.
                   example: My Package File
                   type: string
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
                 version:
                   description: The raw version for this package.
                   example: "1.0"
@@ -4427,6 +4616,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - distribution
               - package_file
@@ -4493,6 +4686,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadRuby
@@ -4558,6 +4755,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
               required:
               - package_file
               title: PackagesValidate-uploadTerraform
@@ -4631,6 +4832,10 @@ paths:
                     with the same attributes (e.g. same version); otherwise, it will
                     be flagged as a duplicate.
                   type: boolean
+                tags:
+                  description: A comma-separated values list of tags to add to the
+                    package.
+                  type: string
                 version:
                   description: The raw version for this package.
                   example: "1.0"
@@ -4794,9 +4999,9 @@ paths:
                   description: None
                   type: string
                 republish:
-                  description: If true, the uploaded package will overwrite any others
-                    with the same attributes (e.g. same version); otherwise, it will
-                    be flagged as a duplicate.
+                  description: If true, the package will overwrite any others with
+                    the same attributes (e.g. same version); otherwise, it will be
+                    flagged as a duplicate.
                   type: boolean
               required:
               - destination
@@ -4856,17 +5061,11 @@ paths:
           application/json:
             schema:
               example:
-                republish: true
                 destination: destination
               properties:
                 destination:
                   description: None
                   type: string
-                republish:
-                  description: If true, the uploaded package will overwrite any others
-                    with the same attributes (e.g. same version); otherwise, it will
-                    be flagged as a duplicate.
-                  type: boolean
               required:
               - destination
               title: PackagesMove
@@ -4919,22 +5118,6 @@ paths:
         required: true
         schema:
           type: string
-      requestBody:
-        $ref: '#/components/requestBodies/PackagesResync'
-        content:
-          application/json:
-            schema:
-              example:
-                republish: true
-              properties:
-                republish:
-                  description: If true, the uploaded package will overwrite any others
-                    with the same attributes (e.g. same version); otherwise, it will
-                    be flagged as a duplicate.
-                  type: boolean
-              title: PackagesResync
-              type: object
-        required: false
       responses:
         "200":
           content:
@@ -4961,7 +5144,6 @@ paths:
       summary: Schedule a package for resynchronisation.
       tags:
       - packages
-      x-codegen-request-body-name: data
   /packages/{owner}/{repo}/{identifier}/status/:
     get:
       description: Get the synchronisation status for a package.
@@ -5008,6 +5190,83 @@ paths:
       summary: Get the synchronisation status for a package.
       tags:
       - packages
+  /packages/{owner}/{repo}/{identifier}/tag/:
+    post:
+      description: Add/Replace/Remove tags for a package.
+      operationId: packages_tag
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/PackagesTag'
+        content:
+          application/json:
+            schema:
+              example:
+                is_immutable: true
+                action: action
+                tags:
+                - tags
+                - tags
+              properties:
+                action:
+                  description: None
+                  type: string
+                is_immutable:
+                  description: If true, created tags will be immutable. An immutable
+                    flag is a tag that cannot be removed from a package.
+                  type: boolean
+                tags:
+                  description: A list of tags to apply the action to. Not required
+                    for clears.
+                  items:
+                    description: ""
+                    type: string
+                  title: TagsList
+                  type: array
+              title: PackagesTag
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Package'
+          description: Modified tags for the package
+        "400":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Request could not be processed (see detail)
+        "422":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: Missing or invalid parameters (see detail)
+      security:
+      - token: []
+      - apikey: []
+      - csrf_token: []
+      summary: Add/Replace/Remove tags for a package.
+      tags:
+      - packages
+      x-codegen-request-body-name: data
   /rates/limits/:
     get:
       description: Endpoint to check rate limits for current user.
@@ -5691,6 +5950,7 @@ paths:
           application/json:
             schema:
               example:
+                package_query: package_query
                 request_content_type: request_content_type
                 is_active: true
                 verify_ssl: true
@@ -5720,6 +5980,13 @@ paths:
                   description: If enabled, the webhook will trigger on events and
                     send payloads to the configured target URL.
                   type: boolean
+                package_query:
+                  description: The package-based search query for webhooks to fire.
+                    This uses the same syntax as the standard search used for repositories,
+                    and also supports boolean logic operators such as OR/AND/NOT and
+                    parentheses for grouping. If a package does not match, the webhook
+                    will not fire.
+                  type: string
                 request_body_format:
                   description: The format of the payloads for webhook requests.
                   type: string
@@ -5917,6 +6184,7 @@ paths:
           application/json:
             schema:
               example:
+                package_query: package_query
                 request_content_type: request_content_type
                 is_active: true
                 verify_ssl: true
@@ -5946,6 +6214,13 @@ paths:
                   description: If enabled, the webhook will trigger on events and
                     send payloads to the configured target URL.
                   type: boolean
+                package_query:
+                  description: The package-based search query for webhooks to fire.
+                    This uses the same syntax as the standard search used for repositories,
+                    and also supports boolean logic operators such as OR/AND/NOT and
+                    parentheses for grouping. If a package does not match, the webhook
+                    will not fire.
+                  type: string
                 request_body_format:
                   description: The format of the payloads for webhook requests.
                   type: string
@@ -6154,12 +6429,6 @@ components:
           schema:
             $ref: '#/components/schemas/PackagesValidate_uploadDart'
       required: false
-    PackagesResync:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PackagesResync'
-      required: false
     PackagesUploadRpm:
       content:
         application/json:
@@ -6340,6 +6609,12 @@ components:
           schema:
             $ref: '#/components/schemas/PackagesValidate_uploadCocoapods'
       required: false
+    PackagesTag:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PackagesTag'
+      required: false
     EntitlementsRefresh:
       content:
         application/json:
@@ -6419,6 +6694,7 @@ components:
         conan_channel: alpha
         info_file: y1234456789b
         manifest_file: y1234456789c
+        tags: tags
       properties:
         conan_channel:
           description: Conan channel.
@@ -6453,6 +6729,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
         version:
           description: The raw version for this package.
           example: 1.0.0
@@ -6477,6 +6756,7 @@ components:
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
+        tags_immutable: '{}'
         slug: slug
         indexed: true
         format: format
@@ -6485,6 +6765,7 @@ components:
         namespace_url: namespace_url
         slug_perm: slug_perm
         version: version
+        tags: '{}'
         license: license
         filename: filename
         size: 5
@@ -6708,6 +6989,17 @@ components:
         sync_progress:
           description: Synchronisation progress (from 0-100)
           type: integer
+        tags:
+          description: All tags on the package, grouped by tag type. This includes
+            immutable tags, but doesn't distinguish them from mutable. To see which
+            tags are immutable specifically, see the tags_immutable field.
+          properties: {}
+          type: object
+        tags_immutable:
+          description: All immutable tags on the package, grouped by tag type. Immutable
+            tags cannot be (easily) deleted.
+          properties: {}
+          type: object
         type_display:
           description: ""
           type: string
@@ -6739,6 +7031,7 @@ components:
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
+        tags_immutable: '{}'
         slug: slug
         indexed: true
         format: format
@@ -6981,6 +7274,11 @@ components:
         sync_progress:
           description: Synchronisation progress (from 0-100)
           type: integer
+        tags_immutable:
+          description: All immutable tags on the package, grouped by tag type. Immutable
+            tags cannot be (easily) deleted.
+          properties: {}
+          type: object
         type_display:
           description: ""
           type: string
@@ -7016,6 +7314,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadNpm
@@ -7034,6 +7335,9 @@ components:
         symbols_file:
           description: Attaches a symbols file to the package.
           example: y1234456789b
+          type: string
+        tags:
+          description: A comma-separated values list of tags to add to the package.
           type: string
       required:
       - package_file
@@ -7117,19 +7421,281 @@ components:
       - filename
       title: FilesValidate
       type: object
+    AlpinePackageUpload:
+      example:
+        architectures:
+        - name: name
+          description: description
+        - name: name
+          description: description
+        checksum_sha256: checksum_sha256
+        release: release
+        package_type: package_type
+        repository: repository
+        identifier_perm: identifier_perm
+        stage_updated_at: stage_updated_at
+        tags_immutable: '{}'
+        slug: slug
+        indexed: true
+        format: format
+        status_str: status_str
+        version_orig: version_orig
+        namespace_url: namespace_url
+        slug_perm: slug_perm
+        version: version
+        license: license
+        filename: filename
+        size: 5
+        cdn_url: cdn_url
+        uploaded_at: uploaded_at
+        name: name
+        sync_finished_at: sync_finished_at
+        files:
+        - checksum_sha512: checksum_sha512
+          checksum_sha1: checksum_sha1
+          checksum_sha256: checksum_sha256
+          is_primary: true
+          checksum_md5: checksum_md5
+          slug_perm: slug_perm
+          filename: filename
+          size: 5
+          cdn_url: cdn_url
+          downloads: 1
+          is_synchronised: true
+          is_downloadable: true
+          tag: tag
+        - checksum_sha512: checksum_sha512
+          checksum_sha1: checksum_sha1
+          checksum_sha256: checksum_sha256
+          is_primary: true
+          checksum_md5: checksum_md5
+          slug_perm: slug_perm
+          filename: filename
+          size: 5
+          cdn_url: cdn_url
+          downloads: 1
+          is_synchronised: true
+          is_downloadable: true
+          tag: tag
+        num_files: 1
+        status: status
+        checksum_sha512: checksum_sha512
+        distro: '{}'
+        extension: extension
+        description: description
+        epoch: 6
+        is_sync_completed: true
+        distro_version: '{}'
+        type_display: type_display
+        downloads: 0
+        subtype: subtype
+        uploader: uploader
+        repository_url: repository_url
+        status_reason: status_reason
+        status_updated_at: status_updated_at
+        summary: summary
+        checksum_sha1: checksum_sha1
+        checksum_md5: checksum_md5
+        sync_progress: 5
+        is_sync_awaiting: true
+        uploader_url: uploader_url
+        self_html_url: self_html_url
+        self_url: self_url
+        status_url: status_url
+        is_sync_in_flight: true
+        is_sync_in_progress: true
+        stage_str: stage_str
+        stage: stage
+        format_url: format_url
+        namespace: namespace
+        is_sync_failed: true
+      properties:
+        architectures:
+          description: ""
+          items:
+            $ref: '#/components/schemas/_packages__owner___repo___architectures'
+          title: ArchitecturesList
+          type: array
+        cdn_url:
+          description: ""
+          type: string
+        checksum_md5:
+          description: ""
+          type: string
+        checksum_sha1:
+          description: ""
+          type: string
+        checksum_sha256:
+          description: ""
+          type: string
+        checksum_sha512:
+          description: ""
+          type: string
+        description:
+          description: A textual description of this package.
+          type: string
+        distro:
+          description: ""
+          properties: {}
+          type: object
+        distro_version:
+          description: ""
+          properties: {}
+          type: object
+        downloads:
+          description: ""
+          type: integer
+        epoch:
+          description: The epoch of the package version (if any).
+          type: integer
+        extension:
+          description: ""
+          type: string
+        filename:
+          description: ""
+          type: string
+        files:
+          description: ""
+          items:
+            $ref: '#/components/schemas/_packages__owner___repo___files'
+          title: FilesList
+          type: array
+        format:
+          description: ""
+          type: string
+        format_url:
+          description: ""
+          type: string
+        identifier_perm:
+          description: Unique and permanent identifier for the package.
+          type: string
+        indexed:
+          description: ""
+          type: boolean
+        is_sync_awaiting:
+          description: ""
+          type: boolean
+        is_sync_completed:
+          description: ""
+          type: boolean
+        is_sync_failed:
+          description: ""
+          type: boolean
+        is_sync_in_flight:
+          description: ""
+          type: boolean
+        is_sync_in_progress:
+          description: ""
+          type: boolean
+        license:
+          description: The license of this package.
+          type: string
+        name:
+          description: The name of this package.
+          type: string
+        namespace:
+          description: ""
+          type: string
+        namespace_url:
+          description: ""
+          type: string
+        num_files:
+          description: ""
+          type: integer
+        package_type:
+          description: The type of package contents.
+          type: string
+        release:
+          description: The release of the package version (if any).
+          type: string
+        repository:
+          description: ""
+          type: string
+        repository_url:
+          description: ""
+          type: string
+        self_html_url:
+          description: ""
+          type: string
+        self_url:
+          description: ""
+          type: string
+        size:
+          description: The calculated size of the package.
+          type: integer
+        slug:
+          description: ""
+          type: string
+        slug_perm:
+          description: ""
+          type: string
+        stage:
+          description: The synchronisation (in progress) stage of the package.
+          type: string
+        stage_str:
+          description: ""
+          type: string
+        stage_updated_at:
+          description: The datetime the package stage was updated at.
+          type: string
+        status:
+          description: The synchronisation status of the package.
+          type: string
+        status_reason:
+          description: A textual description for the synchronous status reason (if
+            any
+          type: string
+        status_str:
+          description: ""
+          type: string
+        status_updated_at:
+          description: The datetime the package status was updated at.
+          type: string
+        status_url:
+          description: ""
+          type: string
+        subtype:
+          description: ""
+          type: string
+        summary:
+          description: A one-liner synopsis of this package.
+          type: string
+        sync_finished_at:
+          description: The datetime the package sync was finished at.
+          type: string
+        sync_progress:
+          description: Synchronisation progress (from 0-100)
+          type: integer
+        tags_immutable:
+          description: All immutable tags on the package, grouped by tag type. Immutable
+            tags cannot be (easily) deleted.
+          properties: {}
+          type: object
+        type_display:
+          description: ""
+          type: string
+        uploaded_at:
+          description: The date this package was uploaded.
+          type: string
+        uploader:
+          description: ""
+          type: string
+        uploader_url:
+          description: ""
+          type: string
+        version:
+          description: The raw version for this package.
+          type: string
+        version_orig:
+          description: ""
+          type: string
     PackagesMove:
       example:
-        republish: true
         destination: destination
       properties:
         destination:
           description: None
           type: string
-        republish:
-          description: If true, the uploaded package will overwrite any others with
-            the same attributes (e.g. same version); otherwise, it will be flagged
-            as a duplicate.
-          type: boolean
       required:
       - destination
       title: PackagesMove
@@ -7139,6 +7705,7 @@ components:
         republish: true
         npm_dist_tag: latest
         package_file: y123456789
+        tags: tags
       properties:
         npm_dist_tag:
           description: The default npm dist-tag for this package/version - This will
@@ -7154,6 +7721,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadNpm
@@ -7162,6 +7732,7 @@ components:
       example:
         republish: true
         package_file: y123456789
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -7172,6 +7743,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadRuby
@@ -7191,6 +7765,7 @@ components:
       example:
         republish: true
         package_file: y123456789
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -7201,6 +7776,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadDocker
@@ -7239,6 +7817,9 @@ components:
           description: Adds bundled Java source code to the Maven package.
           example: y1234456789d
           type: string
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
         tests_file:
           description: Adds bundled Java tests to the Maven package.
           example: y1234456789e
@@ -7253,7 +7834,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 0.51.68
+        version: 0.52.62
       properties:
         detail:
           description: The message describing the state of the API.
@@ -7261,7 +7842,7 @@ components:
           type: string
         version:
           description: The current version for the Cloudsmith service.
-          example: 0.51.68
+          example: 0.52.62
           type: string
     ReposPartialUpdate:
       example:
@@ -7298,6 +7879,7 @@ components:
       example:
         republish: true
         package_file: x123456789a
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -7308,6 +7890,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadCran
@@ -7327,6 +7912,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - distribution
       - package_file
@@ -7343,6 +7931,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadLuarocks
@@ -7366,6 +7957,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
         version:
           description: The raw version for this package.
           example: "1.0"
@@ -7397,6 +7991,7 @@ components:
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
+        tags_immutable: '{}'
         slug: slug
         indexed: true
         format: format
@@ -7631,6 +8226,11 @@ components:
         sync_progress:
           description: Synchronisation progress (from 0-100)
           type: integer
+        tags_immutable:
+          description: All immutable tags on the package, grouped by tag type. Immutable
+            tags cannot be (easily) deleted.
+          properties: {}
+          type: object
         type_display:
           description: ""
           type: string
@@ -7654,6 +8254,7 @@ components:
       example:
         republish: true
         package_file: y123456789
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -7664,6 +8265,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadPython
@@ -7680,6 +8284,7 @@ components:
       example:
         republish: true
         package_file: y123456789
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -7690,6 +8295,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadComposer
@@ -7729,6 +8337,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
         version:
           description: The raw version for this package.
           example: 1.0.0
@@ -7767,6 +8378,7 @@ components:
       example:
         republish: true
         package_file: x123456789a
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -7777,6 +8389,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadGo
@@ -7785,6 +8400,7 @@ components:
       example:
         republish: true
         package_file: z123456789a
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -7795,6 +8411,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadTerraform
@@ -7810,26 +8429,19 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadDart
-      type: object
-    PackagesResync:
-      example:
-        republish: true
-      properties:
-        republish:
-          description: If true, the uploaded package will overwrite any others with
-            the same attributes (e.g. same version); otherwise, it will be flagged
-            as a duplicate.
-          type: boolean
-      title: PackagesResync
       type: object
     PackagesUploadRpm:
       example:
         republish: true
         distribution: el/7
         package_file: y123456789
+        tags: tags
       properties:
         distribution:
           description: The distribution to store the package for.
@@ -7844,6 +8456,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - distribution
       - package_file
@@ -7879,6 +8494,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadCargo
@@ -7929,6 +8547,7 @@ components:
       example:
         republish: true
         package_file: x123456789a
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -7939,6 +8558,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadCargo
@@ -7956,6 +8578,7 @@ components:
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
+        tags_immutable: '{}'
         slug: slug
         indexed: true
         format: format
@@ -7964,6 +8587,7 @@ components:
         namespace_url: namespace_url
         slug_perm: slug_perm
         version: version
+        tags: '{}'
         license: license
         filename: filename
         size: 5
@@ -8187,6 +8811,17 @@ components:
         sync_progress:
           description: Synchronisation progress (from 0-100)
           type: integer
+        tags:
+          description: All tags on the package, grouped by tag type. This includes
+            immutable tags, but doesn't distinguish them from mutable. To see which
+            tags are immutable specifically, see the tags_immutable field.
+          properties: {}
+          type: object
+        tags_immutable:
+          description: All immutable tags on the package, grouped by tag type. Immutable
+            tags cannot be (easily) deleted.
+          properties: {}
+          type: object
         type_display:
           description: ""
           type: string
@@ -8256,16 +8891,27 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadPython
       type: object
     PackagesUploadDeb:
       example:
+        sources_file: y123456789
         republish: true
+        changes_file: y123456789
         distribution: ubuntu/xenial
         package_file: y123456789
+        tags: tags
       properties:
+        changes_file:
+          description: The changes archive containing the changes made to the source
+            and debian packaging files
+          example: y123456789
+          type: string
         distribution:
           description: The distribution to store the package for.
           example: ubuntu/xenial
@@ -8279,6 +8925,13 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        sources_file:
+          description: The sources archive containing the source code for the binary
+          example: y123456789
+          type: string
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - distribution
       - package_file
@@ -8288,6 +8941,7 @@ components:
       example:
         republish: true
         package_file: x123456789a
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -8298,6 +8952,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadHelm
@@ -8306,6 +8963,7 @@ components:
       example:
         republish: true
         package_file: x123456789a
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -8316,6 +8974,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadLuarocks
@@ -8333,6 +8994,7 @@ components:
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
+        tags_immutable: '{}'
         slug: slug
         indexed: true
         format: format
@@ -8341,6 +9003,7 @@ components:
         namespace_url: namespace_url
         slug_perm: slug_perm
         version: version
+        tags: '{}'
         license: license
         filename: filename
         size: 2
@@ -8564,6 +9227,17 @@ components:
         sync_progress:
           description: Synchronisation progress (from 0-100)
           type: integer
+        tags:
+          description: All tags on the package, grouped by tag type. This includes
+            immutable tags, but doesn't distinguish them from mutable. To see which
+            tags are immutable specifically, see the tags_immutable field.
+          properties: {}
+          type: object
+        tags_immutable:
+          description: All immutable tags on the package, grouped by tag type. Immutable
+            tags cannot be (easily) deleted.
+          properties: {}
+          type: object
         type_display:
           description: ""
           type: string
@@ -8621,8 +9295,7 @@ components:
             to. This uses the same syntax as the standard search used for repositories,
             and also supports boolean logic operators such as OR/AND/NOT and parentheses
             for grouping. This will still allow access to non-package files, such
-            as metadata. For package formats that support dynamic metadata indexes,
-            the contents of the metadata will also be filtered.
+            as metadata.
           type: string
         limit_path_query:
           description: The path-based search query to apply to restrict downloads
@@ -8668,6 +9341,7 @@ components:
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
+        tags_immutable: '{}'
         slug: slug
         indexed: true
         format: format
@@ -8912,6 +9586,11 @@ components:
         sync_progress:
           description: Synchronisation progress (from 0-100)
           type: integer
+        tags_immutable:
+          description: All immutable tags on the package, grouped by tag type. Immutable
+            tags cannot be (easily) deleted.
+          properties: {}
+          type: object
         type_display:
           description: ""
           type: string
@@ -8981,6 +9660,9 @@ components:
         summary:
           description: A one-liner synopsis of this package.
           example: My Package File
+          type: string
+        tags:
+          description: A comma-separated values list of tags to add to the package.
           type: string
         version:
           description: The raw version for this package.
@@ -9083,6 +9765,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - distribution
       - package_file
@@ -9131,6 +9816,7 @@ components:
         - events
         disable_reason_str: disable_reason_str
         identifier: 0
+        package_query: package_query
         is_active: true
         disable_reason: disable_reason
         created_by_url: created_by_url
@@ -9189,6 +9875,12 @@ components:
         num_sent:
           description: ""
           type: integer
+        package_query:
+          description: The package-based search query for webhooks to fire. This uses
+            the same syntax as the standard search used for repositories, and also
+            supports boolean logic operators such as OR/AND/NOT and parentheses for
+            grouping. If a package does not match, the webhook will not fire.
+          type: string
         request_body_format:
           description: The format of the payloads for webhook requests.
           type: string
@@ -9254,6 +9946,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadRuby
@@ -9271,6 +9966,7 @@ components:
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
+        tags_immutable: '{}'
         slug: slug
         indexed: true
         format: format
@@ -9508,6 +10204,11 @@ components:
         sync_progress:
           description: Synchronisation progress (from 0-100)
           type: integer
+        tags_immutable:
+          description: All immutable tags on the package, grouped by tag type. Immutable
+            tags cannot be (easily) deleted.
+          properties: {}
+          type: object
         type_display:
           description: ""
           type: string
@@ -9540,9 +10241,8 @@ components:
           description: None
           type: string
         republish:
-          description: If true, the uploaded package will overwrite any others with
-            the same attributes (e.g. same version); otherwise, it will be flagged
-            as a duplicate.
+          description: If true, the package will overwrite any others with the same
+            attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
           type: boolean
       required:
       - destination
@@ -9614,6 +10314,7 @@ components:
           type: integer
     WebhooksCreate:
       example:
+        package_query: package_query
         request_content_type: request_content_type
         is_active: true
         verify_ssl: true
@@ -9643,6 +10344,12 @@ components:
           description: If enabled, the webhook will trigger on events and send payloads
             to the configured target URL.
           type: boolean
+        package_query:
+          description: The package-based search query for webhooks to fire. This uses
+            the same syntax as the standard search used for repositories, and also
+            supports boolean logic operators such as OR/AND/NOT and parentheses for
+            grouping. If a package does not match, the webhook will not fire.
+          type: string
         request_body_format:
           description: The format of the payloads for webhook requests.
           type: string
@@ -9715,6 +10422,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadCran
@@ -9788,6 +10498,7 @@ components:
         republish: true
         distribution: alpine/v3.8
         package_file: a123456789
+        tags: tags
       properties:
         distribution:
           description: The distribution to store the package for.
@@ -9802,6 +10513,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - distribution
       - package_file
@@ -9816,6 +10530,7 @@ components:
         description: Everything about packaging files.
         package_file: y123456789
         version: "1.0"
+        tags: tags
       properties:
         content_type:
           description: A custom content/media (also known as MIME) type to be sent
@@ -9843,6 +10558,9 @@ components:
           description: A one-liner synopsis of this package.
           example: My Package File
           type: string
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
         version:
           description: The raw version for this package.
           example: "1.0"
@@ -9863,6 +10581,7 @@ components:
         package_file: y1234456789a
         version: version
         pom_file: y1234456789b
+        tags: tags
       properties:
         artifact_id:
           description: The ID of the artifact.
@@ -9896,6 +10615,9 @@ components:
           description: Adds bundled Java source code to the Maven package.
           example: y1234456789d
           type: string
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
         tests_file:
           description: Adds bundled Java tests to the Maven package.
           example: y1234456789e
@@ -9914,8 +10636,8 @@ components:
             interval: 5.123456789
             limit: 3600
             remaining: 3595
-            reset: 1592941974
-            reset_iso_8601: 2020-06-23T19:52:54.007365+00:00
+            reset: 1597939237
+            reset_iso_8601: 2020-08-20T16:00:37.914582+00:00
             throttled: false
       properties:
         resources:
@@ -9925,13 +10647,14 @@ components:
               interval: 5.123456789
               limit: 3600
               remaining: 3595
-              reset: 1592941974
-              reset_iso_8601: 2020-06-23T19:52:54.007365+00:00
+              reset: 1597939237
+              reset_iso_8601: 2020-08-20T16:00:37.914582+00:00
               throttled: false
           properties: {}
           type: object
     WebhooksPartialUpdate:
       example:
+        package_query: package_query
         request_content_type: request_content_type
         is_active: true
         verify_ssl: true
@@ -9961,6 +10684,12 @@ components:
           description: If enabled, the webhook will trigger on events and send payloads
             to the configured target URL.
           type: boolean
+        package_query:
+          description: The package-based search query for webhooks to fire. This uses
+            the same syntax as the standard search used for repositories, and also
+            supports boolean logic operators such as OR/AND/NOT and parentheses for
+            grouping. If a package does not match, the webhook will not fire.
+          type: string
         request_body_format:
           description: The format of the payloads for webhook requests.
           type: string
@@ -10079,8 +10808,7 @@ components:
             to. This uses the same syntax as the standard search used for repositories,
             and also supports boolean logic operators such as OR/AND/NOT and parentheses
             for grouping. This will still allow access to non-package files, such
-            as metadata. For package formats that support dynamic metadata indexes,
-            the contents of the metadata will also be filtered.
+            as metadata.
           type: string
         limit_path_query:
           description: The path-based search query to apply to restrict downloads
@@ -10166,6 +10894,7 @@ components:
       example:
         republish: true
         package_file: z123456789
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -10176,6 +10905,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadCocoapods
@@ -10191,6 +10923,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadTerraform
@@ -10211,6 +10946,7 @@ components:
         republish: true
         symbols_file: y1234456789b
         package_file: y1234456789a
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -10224,6 +10960,9 @@ components:
         symbols_file:
           description: Attaches a symbols file to the package.
           example: y1234456789b
+          type: string
+        tags:
+          description: A comma-separated values list of tags to add to the package.
           type: string
       required:
       - package_file
@@ -10268,8 +11007,7 @@ components:
             to. This uses the same syntax as the standard search used for repositories,
             and also supports boolean logic operators such as OR/AND/NOT and parentheses
             for grouping. This will still allow access to non-package files, such
-            as metadata. For package formats that support dynamic metadata indexes,
-            the contents of the metadata will also be filtered.
+            as metadata.
           type: string
         limit_path_query:
           description: The path-based search query to apply to restrict downloads
@@ -10326,6 +11064,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadHelm
@@ -10401,6 +11142,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadComposer
@@ -10412,6 +11156,7 @@ components:
         name: tcl
         package_file: y123456789x
         version: "1.0"
+        tags: tags
       properties:
         name:
           description: The name of this package.
@@ -10430,6 +11175,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
         version:
           description: The raw version for this package.
           example: "1.0"
@@ -10452,9 +11200,36 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadCocoapods
+      type: object
+    PackagesTag:
+      example:
+        is_immutable: true
+        action: action
+        tags:
+        - tags
+        - tags
+      properties:
+        action:
+          description: None
+          type: string
+        is_immutable:
+          description: If true, created tags will be immutable. An immutable flag
+            is a tag that cannot be removed from a package.
+          type: boolean
+        tags:
+          description: A list of tags to apply the action to. Not required for clears.
+          items:
+            description: ""
+            type: string
+          title: TagsList
+          type: array
+      title: PackagesTag
       type: object
     RepositoryTokenSync_tokens:
       example:
@@ -10531,8 +11306,7 @@ components:
             to. This uses the same syntax as the standard search used for repositories,
             and also supports boolean logic operators such as OR/AND/NOT and parentheses
             for grouping. This will still allow access to non-package files, such
-            as metadata. For package formats that support dynamic metadata indexes,
-            the contents of the metadata will also be filtered.
+            as metadata.
           type: string
         limit_path_query:
           description: The path-based search query to apply to restrict downloads
@@ -10612,8 +11386,7 @@ components:
             to. This uses the same syntax as the standard search used for repositories,
             and also supports boolean logic operators such as OR/AND/NOT and parentheses
             for grouping. This will still allow access to non-package files, such
-            as metadata. For package formats that support dynamic metadata indexes,
-            the contents of the metadata will also be filtered.
+            as metadata.
           type: string
         limit_path_query:
           description: The path-based search query to apply to restrict downloads
@@ -10633,6 +11406,11 @@ components:
       type: object
     PackagesValidate_uploadDeb:
       properties:
+        changes_file:
+          description: The changes archive containing the changes made to the source
+            and debian packaging files
+          example: y123456789
+          type: string
         distribution:
           description: The distribution to store the package for.
           example: ubuntu/xenial
@@ -10646,6 +11424,13 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        sources_file:
+          description: The sources archive containing the source code for the binary
+          example: y123456789
+          type: string
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - distribution
       - package_file
@@ -10662,6 +11447,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadGo
@@ -10923,8 +11711,7 @@ components:
             to. This uses the same syntax as the standard search used for repositories,
             and also supports boolean logic operators such as OR/AND/NOT and parentheses
             for grouping. This will still allow access to non-package files, such
-            as metadata. For package formats that support dynamic metadata indexes,
-            the contents of the metadata will also be filtered.
+            as metadata.
           type: string
         limit_path_query:
           description: The path-based search query to apply to restrict downloads
@@ -10978,6 +11765,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesValidate-uploadDocker
@@ -10986,6 +11776,7 @@ components:
       example:
         republish: true
         package_file: x123456789a
+        tags: tags
       properties:
         package_file:
           description: The primary file for the package.
@@ -10996,6 +11787,9 @@ components:
             the same attributes (e.g. same version); otherwise, it will be flagged
             as a duplicate.
           type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          type: string
       required:
       - package_file
       title: PackagesUploadDart

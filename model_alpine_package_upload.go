@@ -10,8 +10,8 @@
 
 package cloudsmith
 
-// PackageCopy struct for PackageCopy
-type PackageCopy struct {
+// AlpinePackageUpload struct for AlpinePackageUpload
+type AlpinePackageUpload struct {
 	//
 	Architectures []PackagesOwnerRepoArchitectures `json:"architectures,omitempty"`
 	//
@@ -72,7 +72,7 @@ type PackageCopy struct {
 	PackageType string `json:"package_type,omitempty"`
 	// The release of the package version (if any).
 	Release string `json:"release,omitempty"`
-	// The repository the package will be copied to.
+	//
 	Repository string `json:"repository,omitempty"`
 	//
 	RepositoryUrl string `json:"repository_url,omitempty"`
@@ -110,8 +110,6 @@ type PackageCopy struct {
 	SyncFinishedAt string `json:"sync_finished_at,omitempty"`
 	// Synchronisation progress (from 0-100)
 	SyncProgress int64 `json:"sync_progress,omitempty"`
-	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
-	Tags map[string]interface{} `json:"tags,omitempty"`
 	// All immutable tags on the package, grouped by tag type. Immutable tags cannot be (easily) deleted.
 	TagsImmutable map[string]interface{} `json:"tags_immutable,omitempty"`
 	//

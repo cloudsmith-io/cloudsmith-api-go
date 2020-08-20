@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**PackagesRead**](PackagesApi.md#PackagesRead) | **Get** /packages/{owner}/{repo}/{identifier}/ | Get a specific package in a repository.
 [**PackagesResync**](PackagesApi.md#PackagesResync) | **Post** /packages/{owner}/{repo}/{identifier}/resync/ | Schedule a package for resynchronisation.
 [**PackagesStatus**](PackagesApi.md#PackagesStatus) | **Get** /packages/{owner}/{repo}/{identifier}/status/ | Get the synchronisation status for a package.
+[**PackagesTag**](PackagesApi.md#PackagesTag) | **Post** /packages/{owner}/{repo}/{identifier}/tag/ | Add/Replace/Remove tags for a package.
 [**PackagesUploadAlpine**](PackagesApi.md#PackagesUploadAlpine) | **Post** /packages/{owner}/{repo}/upload/alpine/ | Create a new Alpine package
 [**PackagesUploadCargo**](PackagesApi.md#PackagesUploadCargo) | **Post** /packages/{owner}/{repo}/upload/cargo/ | Create a new Cargo package
 [**PackagesUploadCocoapods**](PackagesApi.md#PackagesUploadCocoapods) | **Post** /packages/{owner}/{repo}/upload/cocoapods/ | Create a new CocoaPods package
@@ -277,7 +278,7 @@ Name | Type | Description  | Notes
 
 ## PackagesResync
 
-> Package PackagesResync(ctx, owner, repo, identifier, optional)
+> Package PackagesResync(ctx, owner, repo, identifier)
 
 Schedule a package for resynchronisation.
 
@@ -292,19 +293,6 @@ Name | Type | Description  | Notes
 **owner** | **string**|  | 
 **repo** | **string**|  | 
 **identifier** | **string**|  | 
- **optional** | ***PackagesResyncOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a PackagesResyncOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **data** | [**optional.Interface of PackagesResync**](PackagesResync.md)|  | 
 
 ### Return type
 
@@ -316,7 +304,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -360,9 +348,58 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PackagesTag
+
+> Package PackagesTag(ctx, owner, repo, identifier, optional)
+
+Add/Replace/Remove tags for a package.
+
+Add/Replace/Remove tags for a package.
+
+### Required Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string**|  | 
+**repo** | **string**|  | 
+**identifier** | **string**|  | 
+ **optional** | ***PackagesTagOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a PackagesTagOpts struct
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**optional.Interface of PackagesTag**](PackagesTag.md)|  | 
+
+### Return type
+
+[**Package**](Package.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PackagesUploadAlpine
 
-> Package PackagesUploadAlpine(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadAlpine(ctx, owner, repo, optional)
 
 Create a new Alpine package
 
@@ -391,7 +428,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -409,7 +446,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCargo
 
-> Package PackagesUploadCargo(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadCargo(ctx, owner, repo, optional)
 
 Create a new Cargo package
 
@@ -438,7 +475,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -456,7 +493,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCocoapods
 
-> Package PackagesUploadCocoapods(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadCocoapods(ctx, owner, repo, optional)
 
 Create a new CocoaPods package
 
@@ -485,7 +522,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -503,7 +540,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadComposer
 
-> Package PackagesUploadComposer(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadComposer(ctx, owner, repo, optional)
 
 Create a new Composer package
 
@@ -532,7 +569,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -597,7 +634,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCran
 
-> Package PackagesUploadCran(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadCran(ctx, owner, repo, optional)
 
 Create a new CRAN package
 
@@ -626,7 +663,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -644,7 +681,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDart
 
-> Package PackagesUploadDart(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadDart(ctx, owner, repo, optional)
 
 Create a new Dart package
 
@@ -673,7 +710,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -691,7 +728,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDeb
 
-> Package PackagesUploadDeb(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadDeb(ctx, owner, repo, optional)
 
 Create a new Debian package
 
@@ -720,7 +757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -738,7 +775,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDocker
 
-> Package PackagesUploadDocker(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadDocker(ctx, owner, repo, optional)
 
 Create a new Docker package
 
@@ -767,7 +804,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -785,7 +822,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadGo
 
-> Package PackagesUploadGo(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadGo(ctx, owner, repo, optional)
 
 Create a new Go package
 
@@ -814,7 +851,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -832,7 +869,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadHelm
 
-> Package PackagesUploadHelm(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadHelm(ctx, owner, repo, optional)
 
 Create a new Helm package
 
@@ -861,7 +898,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -879,7 +916,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadLuarocks
 
-> Package PackagesUploadLuarocks(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadLuarocks(ctx, owner, repo, optional)
 
 Create a new LuaRocks package
 
@@ -908,7 +945,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -973,7 +1010,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadNpm
 
-> Package PackagesUploadNpm(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadNpm(ctx, owner, repo, optional)
 
 Create a new npm package
 
@@ -1002,7 +1039,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -1020,7 +1057,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadNuget
 
-> Package PackagesUploadNuget(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadNuget(ctx, owner, repo, optional)
 
 Create a new NuGet package
 
@@ -1049,7 +1086,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -1067,7 +1104,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadPython
 
-> Package PackagesUploadPython(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadPython(ctx, owner, repo, optional)
 
 Create a new Python package
 
@@ -1096,7 +1133,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -1161,7 +1198,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRpm
 
-> Package PackagesUploadRpm(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadRpm(ctx, owner, repo, optional)
 
 Create a new RedHat package
 
@@ -1190,7 +1227,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -1208,7 +1245,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRuby
 
-> Package PackagesUploadRuby(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadRuby(ctx, owner, repo, optional)
 
 Create a new Ruby package
 
@@ -1237,7 +1274,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -1255,7 +1292,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadTerraform
 
-> Package PackagesUploadTerraform(ctx, owner, repo, optional)
+> AlpinePackageUpload PackagesUploadTerraform(ctx, owner, repo, optional)
 
 Create a new Terraform package
 
@@ -1284,7 +1321,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 

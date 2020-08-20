@@ -1,4 +1,4 @@
-# ConanPackageUpload
+# AlpinePackageUpload
 
 ## Properties
 
@@ -10,8 +10,6 @@ Name | Type | Description | Notes
 **ChecksumSha1** | **string** |  | [optional] 
 **ChecksumSha256** | **string** |  | [optional] 
 **ChecksumSha512** | **string** |  | [optional] 
-**ConanChannel** | **string** | Conan channel. | [optional] 
-**ConanPrefix** | **string** | Conan prefix (User). | [optional] 
 **Description** | **string** | A textual description of this package. | [optional] 
 **Distro** | [**map[string]interface{}**](.md) |  | [optional] 
 **DistroVersion** | [**map[string]interface{}**](.md) |  | [optional] 
