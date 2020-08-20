@@ -44,7 +44,7 @@ Name | Type | Description | Notes
 **Stage** | **int64** | The synchronisation (in progress) stage of the package. | [optional]
 **StageStr** | **string** |  | [optional]
 **StageUpdatedAt** | **string** | The datetime the package stage was updated at. | [optional]
-**Status** | **string** | The synchronisation status of the package. | [optional]
+**Status** | **int64** | The synchronisation status of the package. | [optional]
 **StatusReason** | **string** | A textual description for the synchronous status reason (if any | [optional]
 **StatusStr** | **string** |  | [optional]
 **StatusUpdatedAt** | **string** | The datetime the package status was updated at. | [optional]
