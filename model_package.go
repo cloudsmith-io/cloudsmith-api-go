@@ -87,7 +87,7 @@ type Package struct {
 	//
 	SlugPerm string `json:"slug_perm,omitempty"`
 	// The synchronisation (in progress) stage of the package.
-	Stage string `json:"stage,omitempty"`
+	Stage int64 `json:"stage,omitempty"`
 	//
 	StageStr string `json:"stage_str,omitempty"`
 	// The datetime the package stage was updated at.
