@@ -69,7 +69,7 @@ type Package struct {
 	//
 	NumFiles int64 `json:"num_files,omitempty"`
 	// The type of package contents.
-	PackageType string `json:"package_type,omitempty"`
+	PackageType int64 `json:"package_type,omitempty"`
 	// The release of the package version (if any).
 	Release string `json:"release,omitempty"`
 	//

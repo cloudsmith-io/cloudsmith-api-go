@@ -32,7 +32,7 @@ Name | Type | Description | Notes
 **Namespace** | **string** |  | [optional]
 **NamespaceUrl** | **string** |  | [optional]
 **NumFiles** | **int64** |  | [optional]
-**PackageType** | **string** | The type of package contents. | [optional]
+**PackageType** | **int64** | The type of package contents. | [optional]
 **Release** | **string** | The release of the package version (if any). | [optional]
 **Repository** | **string** |  | [optional]
 **RepositoryUrl** | **string** |  | [optional]
