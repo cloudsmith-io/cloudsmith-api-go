@@ -1,6 +1,6 @@
 # \ReposApi
 
-All URIs are relative to *https://api.cloudsmith.io*
+All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -15,29 +15,53 @@ Method | HTTP request | Description
 
 ## ReposAllList
 
-> []Repository ReposAllList(ctx, optional)
+> []Repository ReposAllList(ctx).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all repositories associated with current user.
 
-Get a list of all repositories associated with current user.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposAllList(context.Background()).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposAllList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposAllList`: []Repository
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposAllList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposAllListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ReposAllListOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a ReposAllListOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **optional.Int64**| A page number within the paginated result set. | 
- **pageSize** | **optional.Int64**| Number of results to return per page. | 
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
 
 ### Return type
 
@@ -45,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -59,38 +83,65 @@ Name | Type | Description  | Notes
 
 ## ReposCreate
 
-> Repository ReposCreate(ctx, owner, optional)
+> RepositoryCreate ReposCreate(ctx, owner).Data(data).Execute()
 
 Create a new repository in a given namespace.
 
-Create a new repository in a given namespace.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    data := *openapiclient.NewReposCreate("Name_example") // ReposCreate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposCreate(context.Background(), owner).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposCreate`: RepositoryCreate
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
- **optional** | ***ReposCreateOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ReposCreateOpts struct
+Other parameters are passed through a pointer to a apiReposCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **data** | [**optional.Interface of ReposCreate**](ReposCreate.md)|  | 
+ **data** | [**ReposCreate**](ReposCreate.md) |  | 
 
 ### Return type
 
-[**Repository**](Repository.md)
+[**RepositoryCreate**](RepositoryCreate.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -104,20 +155,56 @@ Name | Type | Description  | Notes
 
 ## ReposDelete
 
-> ReposDelete(ctx, owner, identifier)
+> ReposDelete(ctx, owner, identifier).Execute()
 
 Delete a repository in a given namespace.
 
-Delete a repository in a given namespace.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposDelete(context.Background(), owner, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -125,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -139,31 +226,59 @@ Name | Type | Description  | Notes
 
 ## ReposList
 
-> []Repository ReposList(ctx, owner, optional)
+> []Repository ReposList(ctx, owner).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all repositories within a namespace.
 
-Get a list of all repositories within a namespace.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposList(context.Background(), owner).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposList`: []Repository
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposList`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
- **optional** | ***ReposListOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ReposListOpts struct
+Other parameters are passed through a pointer to a apiReposListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **page** | **optional.Int64**| A page number within the paginated result set. | 
- **pageSize** | **optional.Int64**| Number of results to return per page. | 
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
 
 ### Return type
 
@@ -171,7 +286,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -185,32 +300,60 @@ Name | Type | Description  | Notes
 
 ## ReposPartialUpdate
 
-> Repository ReposPartialUpdate(ctx, owner, identifier, optional)
+> Repository ReposPartialUpdate(ctx, owner, identifier).Data(data).Execute()
 
 Update details about a repository in a given namespace.
 
-Update details about a repository in a given namespace.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewReposPartialUpdate() // ReposPartialUpdate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposPartialUpdate(context.Background(), owner, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposPartialUpdate`: Repository
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**identifier** | **string**|  | 
- **optional** | ***ReposPartialUpdateOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a ReposPartialUpdateOpts struct
+Other parameters are passed through a pointer to a apiReposPartialUpdateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of ReposPartialUpdate**](ReposPartialUpdate.md)|  | 
+ **data** | [**ReposPartialUpdate**](ReposPartialUpdate.md) |  | 
 
 ### Return type
 
@@ -218,7 +361,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -232,20 +375,58 @@ Name | Type | Description  | Notes
 
 ## ReposRead
 
-> Repository ReposRead(ctx, owner, identifier)
+> Repository ReposRead(ctx, owner, identifier).Execute()
 
 Get a specific repository.
 
-Get a specific repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposRead(context.Background(), owner, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposRead`: Repository
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -253,7 +434,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 

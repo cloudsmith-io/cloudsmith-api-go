@@ -1,6 +1,6 @@
 # \DistrosApi
 
-All URIs are relative to *https://api.cloudsmith.io*
+All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,15 +11,46 @@ Method | HTTP request | Description
 
 ## DistrosList
 
-> []Distribution DistrosList(ctx, )
+> []Distribution DistrosList(ctx).Execute()
 
 Get a list of all supported distributions.
 
-Get a list of all supported distributions.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DistrosApi.DistrosList(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DistrosApi.DistrosList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `DistrosList`: []Distribution
+    fmt.Fprintf(os.Stdout, "Response from `DistrosApi.DistrosList`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDistrosListRequest struct via the builder pattern
+
 
 ### Return type
 
@@ -27,7 +58,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -41,19 +72,55 @@ This endpoint does not need any parameter.
 
 ## DistrosRead
 
-> Distribution DistrosRead(ctx, slug)
+> Distribution DistrosRead(ctx, slug).Execute()
 
 View for viewing/listing distributions.
 
-View for viewing/listing distributions.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    slug := "slug_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DistrosApi.DistrosRead(context.Background(), slug).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DistrosApi.DistrosRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `DistrosRead`: Distribution
+    fmt.Fprintf(os.Stdout, "Response from `DistrosApi.DistrosRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**slug** | **string**|  | 
+**slug** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDistrosReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -61,7 +128,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 

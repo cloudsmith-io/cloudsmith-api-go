@@ -2,7 +2,7 @@
 set -eou pipefail
 
 
-PKG_VERSION=${1:-"0.0.9"}
+PKG_VERSION=${1:-"0.0.14"}
 API_HOST=${2:-"https://api.cloudsmith.io"}
 
 
@@ -12,7 +12,7 @@ function api_version {
 
 function swagger_spec {
     temp_file=$(mktemp)
-    curl -s "$API_HOST/?format=openapi" | jq ".info.version = \"$1\"" > $temp_file
+    curl -Ls "$API_HOST/?format=openapi" | jq ".info.version = \"$1\"" > $temp_file
     echo "$temp_file"
 }
 
@@ -40,9 +40,7 @@ rm -v git_push.sh
 # This is a temporary measure as a larger API/swagger update is due soon which
 # should resolve this and other issues properly.
 
-sed -i 's/IndexFiles bool/IndexFiles \*bool/g' model_repos_create.go model_repos_partial_update.go model_repository.go
-sed -i 's/IndexFiles\*\* | \*\*bool/IndexFiles\*\* | \*\*\\\*bool/g' docs/ReposCreate.md docs/ReposPartialUpdate.md docs/Repository.md
-sed -i 's/IsActive bool/IsActive \*bool/g' model_entitlements_create.go model_entitlements_partial_update.go model_entitlements_refresh.go model_repository_token.go model_repository_token_refresh.go model_repository_token_sync_tokens.go
-sed -i 's/IsActive\*\* | \*\*bool/IsActive\*\* | \*\*\\\*bool/g' docs/EntitlementsCreate.md docs/EntitlementsPartialUpdate.md docs/EntitlementsRefresh.md docs/RepositoryToken.md docs/RepositoryTokenRefresh.md docs/RepositoryToken.md docs/RepositoryTokenSyncTokens.md
-sed -i 's/RepositoryType string/RepositoryType int64/g' model_repository.go
-sed -i 's/RepositoryType\*\* | \*\*string/RepositoryType\*\* | \*\*int64/g' docs/Repository.md
+sed -i 's/PackageType \*string/PackageType \*int64/g' model_package.go
+sed -i 's/PackageType\*\* | Pointer to \*\*string/PackageType\*\* | Pointer to \*\*int64/g' docs/Package.md
+sed -i 's/RepositoryType \*string/RepositoryType \*int64/g' model_repository.go
+sed -i 's/RepositoryType\*\* | Pointer to \*\*string/RepositoryType\*\* | Pointer to \*\*int64/g' docs/Repository.md

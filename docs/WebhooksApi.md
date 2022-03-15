@@ -1,6 +1,6 @@
 # \WebhooksApi
 
-All URIs are relative to *https://api.cloudsmith.io*
+All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,32 +14,60 @@ Method | HTTP request | Description
 
 ## WebhooksCreate
 
-> RepositoryWebhook WebhooksCreate(ctx, owner, repo, optional)
+> RepositoryWebhook WebhooksCreate(ctx, owner, repo).Data(data).Execute()
 
 Create a specific webhook in a repository.
 
-Create a specific webhook in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewWebhooksCreate([]string{"Events_example"}, "TargetUrl_example", []openapiclient.WebhooksOwnerRepoTemplates{*openapiclient.NewWebhooksOwnerRepoTemplates()}) // WebhooksCreate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WebhooksApi.WebhooksCreate(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `WebhooksCreate`: RepositoryWebhook
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***WebhooksCreateOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a WebhooksCreateOpts struct
+Other parameters are passed through a pointer to a apiWebhooksCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of WebhooksCreate**](WebhooksCreate.md)|  | 
+ **data** | [**WebhooksCreate**](WebhooksCreate.md) |  | 
 
 ### Return type
 
@@ -47,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -61,21 +89,59 @@ Name | Type | Description  | Notes
 
 ## WebhooksDelete
 
-> WebhooksDelete(ctx, owner, repo, identifier)
+> WebhooksDelete(ctx, owner, repo, identifier).Execute()
 
 Delete a specific webhook in a repository.
 
-Delete a specific webhook in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WebhooksApi.WebhooksDelete(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhooksDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
 
 ### Return type
 
@@ -83,7 +149,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -97,33 +163,62 @@ Name | Type | Description  | Notes
 
 ## WebhooksList
 
-> []RepositoryWebhook WebhooksList(ctx, owner, repo, optional)
+> []RepositoryWebhook WebhooksList(ctx, owner, repo).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all webhooks in a repository.
 
-Get a list of all webhooks in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WebhooksApi.WebhooksList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `WebhooksList`: []RepositoryWebhook
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksList`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***WebhooksListOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a WebhooksListOpts struct
+Other parameters are passed through a pointer to a apiWebhooksListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **page** | **optional.Int64**| A page number within the paginated result set. | 
- **pageSize** | **optional.Int64**| Number of results to return per page. | 
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
 
 ### Return type
 
@@ -131,7 +226,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -145,26 +240,55 @@ Name | Type | Description  | Notes
 
 ## WebhooksPartialUpdate
 
-> RepositoryWebhook WebhooksPartialUpdate(ctx, owner, repo, identifier, optional)
+> RepositoryWebhook WebhooksPartialUpdate(ctx, owner, repo, identifier).Data(data).Execute()
 
 Update a specific webhook in a repository.
 
-Update a specific webhook in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewWebhooksPartialUpdate() // WebhooksPartialUpdate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WebhooksApi.WebhooksPartialUpdate(context.Background(), owner, repo, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `WebhooksPartialUpdate`: RepositoryWebhook
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
- **optional** | ***WebhooksPartialUpdateOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a WebhooksPartialUpdateOpts struct
+Other parameters are passed through a pointer to a apiWebhooksPartialUpdateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -172,7 +296,7 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**optional.Interface of WebhooksPartialUpdate**](WebhooksPartialUpdate.md)|  | 
+ **data** | [**WebhooksPartialUpdate**](WebhooksPartialUpdate.md) |  | 
 
 ### Return type
 
@@ -180,7 +304,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -194,21 +318,61 @@ Name | Type | Description  | Notes
 
 ## WebhooksRead
 
-> RepositoryWebhook WebhooksRead(ctx, owner, repo, identifier)
+> RepositoryWebhook WebhooksRead(ctx, owner, repo, identifier).Execute()
 
 Views for working with repository webhooks.
 
-Views for working with repository webhooks.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WebhooksApi.WebhooksRead(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `WebhooksRead`: RepositoryWebhook
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhooksReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
 
 ### Return type
 
@@ -216,7 +380,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 

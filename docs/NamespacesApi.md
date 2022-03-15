@@ -1,6 +1,6 @@
 # \NamespacesApi
 
-All URIs are relative to *https://api.cloudsmith.io*
+All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,29 +11,53 @@ Method | HTTP request | Description
 
 ## NamespacesList
 
-> []Namespace NamespacesList(ctx, optional)
+> []Namespace NamespacesList(ctx).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all namespaces the user belongs to.
 
-Get a list of all namespaces the user belongs to.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.NamespacesApi.NamespacesList(context.Background()).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `NamespacesApi.NamespacesList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `NamespacesList`: []Namespace
+    fmt.Fprintf(os.Stdout, "Response from `NamespacesApi.NamespacesList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNamespacesListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***NamespacesListOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a NamespacesListOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **optional.Int64**| A page number within the paginated result set. | 
- **pageSize** | **optional.Int64**| Number of results to return per page. | 
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
 
 ### Return type
 
@@ -41,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -55,19 +79,55 @@ Name | Type | Description  | Notes
 
 ## NamespacesRead
 
-> Namespace NamespacesRead(ctx, slug)
+> Namespace NamespacesRead(ctx, slug).Execute()
 
 Views for working with namespaces.
 
-Views for working with namespaces.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    slug := "slug_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.NamespacesApi.NamespacesRead(context.Background(), slug).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `NamespacesApi.NamespacesRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `NamespacesRead`: Namespace
+    fmt.Fprintf(os.Stdout, "Response from `NamespacesApi.NamespacesRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**slug** | **string**|  | 
+**slug** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNamespacesReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -75,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 

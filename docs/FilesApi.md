@@ -1,6 +1,6 @@
 # \FilesApi
 
-All URIs are relative to *https://api.cloudsmith.io*
+All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,26 +14,53 @@ Method | HTTP request | Description
 
 ## FilesAbort
 
-> FilesAbort(ctx, owner, repo, identifier, optional)
+> FilesAbort(ctx, owner, repo, identifier).Data(data).Execute()
 
 Abort a multipart file upload.
 
-Abort a multipart file upload.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewFilesAbort("Filename_example") // FilesAbort |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FilesApi.FilesAbort(context.Background(), owner, repo, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesAbort``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
- **optional** | ***FilesAbortOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a FilesAbortOpts struct
+Other parameters are passed through a pointer to a apiFilesAbortRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -41,7 +68,7 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**optional.Interface of FilesAbort**](FilesAbort.md)|  | 
+ **data** | [**FilesAbort**](FilesAbort.md) |  | 
 
 ### Return type
 
@@ -49,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -63,26 +90,55 @@ Name | Type | Description  | Notes
 
 ## FilesComplete
 
-> PackageFileUpload FilesComplete(ctx, owner, repo, identifier, optional)
+> PackageFileUpload FilesComplete(ctx, owner, repo, identifier).Data(data).Execute()
 
 Complete a multipart file upload.
 
-Complete a multipart file upload.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewFilesComplete("Filename_example") // FilesComplete |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FilesApi.FilesComplete(context.Background(), owner, repo, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesComplete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `FilesComplete`: PackageFileUpload
+    fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesComplete`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
- **optional** | ***FilesCompleteOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a FilesCompleteOpts struct
+Other parameters are passed through a pointer to a apiFilesCompleteRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -90,7 +146,7 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**optional.Interface of FilesComplete**](FilesComplete.md)|  | 
+ **data** | [**FilesComplete**](FilesComplete.md) |  | 
 
 ### Return type
 
@@ -98,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -112,32 +168,60 @@ Name | Type | Description  | Notes
 
 ## FilesCreate
 
-> PackageFileUpload FilesCreate(ctx, owner, repo, optional)
+> PackageFileUpload FilesCreate(ctx, owner, repo).Data(data).Execute()
 
 Request URL(s) to upload new package file upload(s) to.
 
-Request URL(s) to upload new package file upload(s) to.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewFilesCreate("Filename_example") // FilesCreate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FilesApi.FilesCreate(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `FilesCreate`: PackageFileUpload
+    fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***FilesCreateOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a FilesCreateOpts struct
+Other parameters are passed through a pointer to a apiFilesCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of FilesCreate**](FilesCreate.md)|  | 
+ **data** | [**FilesCreate**](FilesCreate.md) |  | 
 
 ### Return type
 
@@ -145,7 +229,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -159,21 +243,61 @@ Name | Type | Description  | Notes
 
 ## FilesInfo
 
-> PackageFilePartsUpload FilesInfo(ctx, owner, repo, identifier)
+> PackageFilePartsUpload FilesInfo(ctx, owner, repo, identifier).Execute()
 
 Get upload information for a multipart file upload.
 
-Get upload information for a multipart file upload.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FilesApi.FilesInfo(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesInfo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `FilesInfo`: PackageFilePartsUpload
+    fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesInfo`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiFilesInfoRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
 
 ### Return type
 
@@ -181,7 +305,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -195,32 +319,58 @@ Name | Type | Description  | Notes
 
 ## FilesValidate
 
-> FilesValidate(ctx, owner, repo, optional)
+> FilesValidate(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters used for create.
 
-Validate parameters used for create.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewFilesValidate("Filename_example") // FilesValidate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FilesApi.FilesValidate(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesValidate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***FilesValidateOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a FilesValidateOpts struct
+Other parameters are passed through a pointer to a apiFilesValidateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of FilesValidate**](FilesValidate.md)|  | 
+ **data** | [**FilesValidate**](FilesValidate.md) |  | 
 
 ### Return type
 
@@ -228,7 +378,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 

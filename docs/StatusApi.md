@@ -1,6 +1,6 @@
 # \StatusApi
 
-All URIs are relative to *https://api.cloudsmith.io*
+All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,15 +10,46 @@ Method | HTTP request | Description
 
 ## StatusCheckBasic
 
-> StatusBasic StatusCheckBasic(ctx, )
+> StatusBasic StatusCheckBasic(ctx).Execute()
 
 Endpoint to check basic API connectivity.
 
-Endpoint to check basic API connectivity.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.StatusApi.StatusCheckBasic(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StatusApi.StatusCheckBasic``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `StatusCheckBasic`: StatusBasic
+    fmt.Fprintf(os.Stdout, "Response from `StatusApi.StatusCheckBasic`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiStatusCheckBasicRequest struct via the builder pattern
+
 
 ### Return type
 
