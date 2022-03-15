@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **NumDownloads** | Pointer to **int64** | The number of downloads for packages in the repository. | [optional] 
 **PackageCount** | Pointer to **int64** | The number of packages in the repository. | [optional] 
 **PackageGroupCount** | Pointer to **int64** | The number of groups in the repository. | [optional] 
-**RepositoryType** | Pointer to **int64** | The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Open-Source repositories are always visible to everyone and are restricted by licensing, but are free to use and come with generous bandwidth/storage. You can only select Open-Source at repository creation time. | [optional] 
+**RepositoryType** | Pointer to **string** | The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Open-Source repositories are always visible to everyone and are restricted by licensing, but are free to use and come with generous bandwidth/storage. You can only select Open-Source at repository creation time. | [optional] 
 **RepositoryTypeStr** | Pointer to **string** | The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Public repositories are free to use on all plans and visible to all Cloudsmith users. | [optional] 
 **SelfHtmlUrl** | Pointer to **string** | Website URL for this repository. | [optional] 
 **SelfUrl** | Pointer to **string** | API endpoint where data about this repository can be retrieved. | [optional] 

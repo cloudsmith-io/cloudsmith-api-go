@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io/docs/terms-and-conditions
   title: Cloudsmith API
-  version: 1.40.0
+  version: 1.42.1
 externalDocs:
   description: Find out more info at the Cloudsmith Help Website
   url: https://help.cloudsmith.io
@@ -13646,8 +13646,8 @@ components:
             interval: 5.123456789
             limit: 3600
             remaining: 3595
-            reset: 1647349838
-            reset_iso_8601: 2022-03-15T13:10:38.436577+00:00
+            reset: 1647380527
+            reset_iso_8601: 2022-03-15T21:42:07.068304+00:00
             throttled: false
       properties:
         resources:
@@ -13657,8 +13657,8 @@ components:
               interval: 5.123456789
               limit: 3600
               remaining: 3595
-              reset: 1647349838
-              reset_iso_8601: 2022-03-15T13:10:38.436577+00:00
+              reset: 1647380527
+              reset_iso_8601: 2022-03-15T21:42:07.068304+00:00
               throttled: false
           properties: {}
           type: object
@@ -15988,7 +15988,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.40.0
+        version: 1.42.1
       properties:
         detail:
           description: The message describing the state of the API.
@@ -15996,7 +15996,7 @@ components:
           type: string
         version:
           description: The current version for the Cloudsmith service.
-          example: 1.40.0
+          example: 1.42.1
           type: string
       title: StatusBasic
       type: object

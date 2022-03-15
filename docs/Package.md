@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **Namespace** | Pointer to **string** |  | [optional] 
 **NamespaceUrl** | Pointer to **string** |  | [optional] 
 **NumFiles** | Pointer to **int64** |  | [optional] 
-**PackageType** | Pointer to **int64** | The type of package contents. | [optional] 
+**PackageType** | Pointer to **string** | The type of package contents. | [optional] 
 **Release** | Pointer to **string** | The release of the package version (if any). | [optional] 
 **Repository** | Pointer to **string** |  | [optional] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] 

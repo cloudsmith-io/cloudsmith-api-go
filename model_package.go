@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.40.0
+API version: 1.42.1
 Contact: support@cloudsmith.io
 */
 
@@ -78,7 +78,7 @@ type Package struct {
 	//
 	NumFiles *int64 `json:"num_files,omitempty"`
 	// The type of package contents.
-	PackageType *int64 `json:"package_type,omitempty"`
+	PackageType *string `json:"package_type,omitempty"`
 	// The release of the package version (if any).
 	Release *string `json:"release,omitempty"`
 	//
@@ -1127,9 +1127,9 @@ func (o *Package) SetNumFiles(v int64) {
 }
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
-func (o *Package) GetPackageType() int64 {
+func (o *Package) GetPackageType() string {
 	if o == nil || o.PackageType == nil {
-		var ret int64
+		var ret string
 		return ret
 	}
 	return *o.PackageType
@@ -1137,7 +1137,7 @@ func (o *Package) GetPackageType() int64 {
 
 // GetPackageTypeOk returns a tuple with the PackageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Package) GetPackageTypeOk() (*int64, bool) {
+func (o *Package) GetPackageTypeOk() (*string, bool) {
 	if o == nil || o.PackageType == nil {
 		return nil, false
 	}
@@ -1153,8 +1153,8 @@ func (o *Package) HasPackageType() bool {
 	return false
 }
 
-// SetPackageType gets a reference to the given int64 and assigns it to the PackageType field.
-func (o *Package) SetPackageType(v int64) {
+// SetPackageType gets a reference to the given string and assigns it to the PackageType field.
+func (o *Package) SetPackageType(v string) {
 	o.PackageType = &v
 }
 
