@@ -558,9 +558,9 @@ func (o *Repository) SetPackageGroupCount(v int64) {
 }
 
 // GetRepositoryType returns the RepositoryType field value if set, zero value otherwise.
-func (o *Repository) GetRepositoryType() string {
+func (o *Repository) GetRepositoryType() int64 {
 	if o == nil || o.RepositoryType == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.RepositoryType
@@ -568,7 +568,7 @@ func (o *Repository) GetRepositoryType() string {
 
 // GetRepositoryTypeOk returns a tuple with the RepositoryType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Repository) GetRepositoryTypeOk() (*string, bool) {
+func (o *Repository) GetRepositoryTypeOk() (*int64, bool) {
 	if o == nil || o.RepositoryType == nil {
 		return nil, false
 	}
@@ -584,8 +584,8 @@ func (o *Repository) HasRepositoryType() bool {
 	return false
 }
 
-// SetRepositoryType gets a reference to the given string and assigns it to the RepositoryType field.
-func (o *Repository) SetRepositoryType(v string) {
+// SetRepositoryType gets a reference to the given int64 and assigns it to the RepositoryType field.
+func (o *Repository) SetRepositoryType(v int64) {
 	o.RepositoryType = &v
 }
 

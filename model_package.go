@@ -1127,9 +1127,9 @@ func (o *Package) SetNumFiles(v int64) {
 }
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
-func (o *Package) GetPackageType() string {
+func (o *Package) GetPackageType() int64 {
 	if o == nil || o.PackageType == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.PackageType
@@ -1137,7 +1137,7 @@ func (o *Package) GetPackageType() string {
 
 // GetPackageTypeOk returns a tuple with the PackageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Package) GetPackageTypeOk() (*string, bool) {
+func (o *Package) GetPackageTypeOk() (*int64, bool) {
 	if o == nil || o.PackageType == nil {
 		return nil, false
 	}
@@ -1153,8 +1153,8 @@ func (o *Package) HasPackageType() bool {
 	return false
 }
 
-// SetPackageType gets a reference to the given string and assigns it to the PackageType field.
-func (o *Package) SetPackageType(v string) {
+// SetPackageType gets a reference to the given int64 and assigns it to the PackageType field.
+func (o *Package) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
