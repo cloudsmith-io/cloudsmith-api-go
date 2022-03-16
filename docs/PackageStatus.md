@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **IsSyncInFlight** | Pointer to **bool** |  | [optional] 
 **IsSyncInProgress** | Pointer to **bool** |  | [optional] 
 **SelfUrl** | Pointer to **string** |  | [optional] 
-**Stage** | Pointer to **string** | The synchronisation (in progress) stage of the package. | [optional] 
+**Stage** | Pointer to **int64** | The synchronisation (in progress) stage of the package. | [optional] 
 **StageStr** | Pointer to **string** |  | [optional] 
 **StageUpdatedAt** | Pointer to **string** | The datetime the package stage was updated at. | [optional] 
-**Status** | Pointer to **string** | The synchronisation status of the package. | [optional] 
+**Status** | Pointer to **int64** | The synchronisation status of the package. | [optional] 
 **StatusReason** | Pointer to **string** | A textual description for the synchronous status reason (if any | [optional] 
 **StatusStr** | Pointer to **string** |  | [optional] 
 **StatusUpdatedAt** | Pointer to **string** | The datetime the package status was updated at. | [optional] 
@@ -191,20 +191,20 @@ HasSelfUrl returns a boolean if a field has been set.
 
 ### GetStage
 
-`func (o *PackageStatus) GetStage() string`
+`func (o *PackageStatus) GetStage() int64`
 
 GetStage returns the Stage field if non-nil, zero value otherwise.
 
 ### GetStageOk
 
-`func (o *PackageStatus) GetStageOk() (*string, bool)`
+`func (o *PackageStatus) GetStageOk() (*int64, bool)`
 
 GetStageOk returns a tuple with the Stage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStage
 
-`func (o *PackageStatus) SetStage(v string)`
+`func (o *PackageStatus) SetStage(v int64)`
 
 SetStage sets Stage field to given value.
 
@@ -266,20 +266,20 @@ HasStageUpdatedAt returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *PackageStatus) GetStatus() string`
+`func (o *PackageStatus) GetStatus() int64`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *PackageStatus) GetStatusOk() (*string, bool)`
+`func (o *PackageStatus) GetStatusOk() (*int64, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *PackageStatus) SetStatus(v string)`
+`func (o *PackageStatus) SetStatus(v int64)`
 
 SetStatus sets Status field to given value.
 

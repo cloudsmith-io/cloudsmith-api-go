@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.42.1
+API version: 1.42.3
 Contact: support@cloudsmith.io
 */
 
@@ -30,13 +30,13 @@ type PackageStatus struct {
 	//
 	SelfUrl *string `json:"self_url,omitempty"`
 	// The synchronisation (in progress) stage of the package.
-	Stage *string `json:"stage,omitempty"`
+	Stage *int64 `json:"stage,omitempty"`
 	//
 	StageStr *string `json:"stage_str,omitempty"`
 	// The datetime the package stage was updated at.
 	StageUpdatedAt *string `json:"stage_updated_at,omitempty"`
 	// The synchronisation status of the package.
-	Status *string `json:"status,omitempty"`
+	Status *int64 `json:"status,omitempty"`
 	// A textual description for the synchronous status reason (if any
 	StatusReason *string `json:"status_reason,omitempty"`
 	//
@@ -259,9 +259,9 @@ func (o *PackageStatus) SetSelfUrl(v string) {
 }
 
 // GetStage returns the Stage field value if set, zero value otherwise.
-func (o *PackageStatus) GetStage() string {
+func (o *PackageStatus) GetStage() int64 {
 	if o == nil || o.Stage == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.Stage
@@ -269,7 +269,7 @@ func (o *PackageStatus) GetStage() string {
 
 // GetStageOk returns a tuple with the Stage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageStatus) GetStageOk() (*string, bool) {
+func (o *PackageStatus) GetStageOk() (*int64, bool) {
 	if o == nil || o.Stage == nil {
 		return nil, false
 	}
@@ -285,8 +285,8 @@ func (o *PackageStatus) HasStage() bool {
 	return false
 }
 
-// SetStage gets a reference to the given string and assigns it to the Stage field.
-func (o *PackageStatus) SetStage(v string) {
+// SetStage gets a reference to the given int64 and assigns it to the Stage field.
+func (o *PackageStatus) SetStage(v int64) {
 	o.Stage = &v
 }
 
@@ -355,9 +355,9 @@ func (o *PackageStatus) SetStageUpdatedAt(v string) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *PackageStatus) GetStatus() string {
+func (o *PackageStatus) GetStatus() int64 {
 	if o == nil || o.Status == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.Status
@@ -365,7 +365,7 @@ func (o *PackageStatus) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageStatus) GetStatusOk() (*string, bool) {
+func (o *PackageStatus) GetStatusOk() (*int64, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -381,8 +381,8 @@ func (o *PackageStatus) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *PackageStatus) SetStatus(v string) {
+// SetStatus gets a reference to the given int64 and assigns it to the Status field.
+func (o *PackageStatus) SetStatus(v int64) {
 	o.Status = &v
 }
 

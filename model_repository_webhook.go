@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.42.1
+API version: 1.42.3
 Contact: support@cloudsmith.io
 */
 
@@ -24,7 +24,7 @@ type RepositoryWebhook struct {
 	//
 	CreatedByUrl *string `json:"created_by_url,omitempty"`
 	//
-	DisableReason *string `json:"disable_reason,omitempty"`
+	DisableReason *int64 `json:"disable_reason,omitempty"`
 	//
 	DisableReasonStr *string `json:"disable_reason_str,omitempty"`
 	//
@@ -44,11 +44,11 @@ type RepositoryWebhook struct {
 	// The package-based search query for webhooks to fire. This uses the same syntax as the standard search used for repositories, and also supports boolean logic operators such as OR/AND/NOT and parentheses for grouping. If a package does not match, the webhook will not fire.
 	PackageQuery *string `json:"package_query,omitempty"`
 	// The format of the payloads for webhook requests.
-	RequestBodyFormat *string `json:"request_body_format,omitempty"`
+	RequestBodyFormat *int64 `json:"request_body_format,omitempty"`
 	//
 	RequestBodyFormatStr *string `json:"request_body_format_str,omitempty"`
 	// The format of the payloads for webhook requests.
-	RequestBodyTemplateFormat *string `json:"request_body_template_format,omitempty"`
+	RequestBodyTemplateFormat *int64 `json:"request_body_template_format,omitempty"`
 	//
 	RequestBodyTemplateFormatStr *string `json:"request_body_template_format_str,omitempty"`
 	// The value that will be sent for the 'Content Type' header.
@@ -190,9 +190,9 @@ func (o *RepositoryWebhook) SetCreatedByUrl(v string) {
 }
 
 // GetDisableReason returns the DisableReason field value if set, zero value otherwise.
-func (o *RepositoryWebhook) GetDisableReason() string {
+func (o *RepositoryWebhook) GetDisableReason() int64 {
 	if o == nil || o.DisableReason == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.DisableReason
@@ -200,7 +200,7 @@ func (o *RepositoryWebhook) GetDisableReason() string {
 
 // GetDisableReasonOk returns a tuple with the DisableReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RepositoryWebhook) GetDisableReasonOk() (*string, bool) {
+func (o *RepositoryWebhook) GetDisableReasonOk() (*int64, bool) {
 	if o == nil || o.DisableReason == nil {
 		return nil, false
 	}
@@ -216,8 +216,8 @@ func (o *RepositoryWebhook) HasDisableReason() bool {
 	return false
 }
 
-// SetDisableReason gets a reference to the given string and assigns it to the DisableReason field.
-func (o *RepositoryWebhook) SetDisableReason(v string) {
+// SetDisableReason gets a reference to the given int64 and assigns it to the DisableReason field.
+func (o *RepositoryWebhook) SetDisableReason(v int64) {
 	o.DisableReason = &v
 }
 
@@ -502,9 +502,9 @@ func (o *RepositoryWebhook) SetPackageQuery(v string) {
 }
 
 // GetRequestBodyFormat returns the RequestBodyFormat field value if set, zero value otherwise.
-func (o *RepositoryWebhook) GetRequestBodyFormat() string {
+func (o *RepositoryWebhook) GetRequestBodyFormat() int64 {
 	if o == nil || o.RequestBodyFormat == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.RequestBodyFormat
@@ -512,7 +512,7 @@ func (o *RepositoryWebhook) GetRequestBodyFormat() string {
 
 // GetRequestBodyFormatOk returns a tuple with the RequestBodyFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RepositoryWebhook) GetRequestBodyFormatOk() (*string, bool) {
+func (o *RepositoryWebhook) GetRequestBodyFormatOk() (*int64, bool) {
 	if o == nil || o.RequestBodyFormat == nil {
 		return nil, false
 	}
@@ -528,8 +528,8 @@ func (o *RepositoryWebhook) HasRequestBodyFormat() bool {
 	return false
 }
 
-// SetRequestBodyFormat gets a reference to the given string and assigns it to the RequestBodyFormat field.
-func (o *RepositoryWebhook) SetRequestBodyFormat(v string) {
+// SetRequestBodyFormat gets a reference to the given int64 and assigns it to the RequestBodyFormat field.
+func (o *RepositoryWebhook) SetRequestBodyFormat(v int64) {
 	o.RequestBodyFormat = &v
 }
 
@@ -566,9 +566,9 @@ func (o *RepositoryWebhook) SetRequestBodyFormatStr(v string) {
 }
 
 // GetRequestBodyTemplateFormat returns the RequestBodyTemplateFormat field value if set, zero value otherwise.
-func (o *RepositoryWebhook) GetRequestBodyTemplateFormat() string {
+func (o *RepositoryWebhook) GetRequestBodyTemplateFormat() int64 {
 	if o == nil || o.RequestBodyTemplateFormat == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.RequestBodyTemplateFormat
@@ -576,7 +576,7 @@ func (o *RepositoryWebhook) GetRequestBodyTemplateFormat() string {
 
 // GetRequestBodyTemplateFormatOk returns a tuple with the RequestBodyTemplateFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RepositoryWebhook) GetRequestBodyTemplateFormatOk() (*string, bool) {
+func (o *RepositoryWebhook) GetRequestBodyTemplateFormatOk() (*int64, bool) {
 	if o == nil || o.RequestBodyTemplateFormat == nil {
 		return nil, false
 	}
@@ -592,8 +592,8 @@ func (o *RepositoryWebhook) HasRequestBodyTemplateFormat() bool {
 	return false
 }
 
-// SetRequestBodyTemplateFormat gets a reference to the given string and assigns it to the RequestBodyTemplateFormat field.
-func (o *RepositoryWebhook) SetRequestBodyTemplateFormat(v string) {
+// SetRequestBodyTemplateFormat gets a reference to the given int64 and assigns it to the RequestBodyTemplateFormat field.
+func (o *RepositoryWebhook) SetRequestBodyTemplateFormat(v int64) {
 	o.RequestBodyTemplateFormat = &v
 }
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **string** |  | [optional] 
 **CreatedBy** | Pointer to **string** |  | [optional] 
 **CreatedByUrl** | Pointer to **string** |  | [optional] 
-**DisableReason** | Pointer to **string** |  | [optional] 
+**DisableReason** | Pointer to **int64** |  | [optional] 
 **DisableReasonStr** | Pointer to **string** |  | [optional] 
 **Events** | **[]string** |  | 
 **Identifier** | Pointer to **int64** |  | [optional] 
@@ -17,9 +17,9 @@ Name | Type | Description | Notes
 **LastResponseStatusStr** | Pointer to **string** |  | [optional] 
 **NumSent** | Pointer to **int64** |  | [optional] 
 **PackageQuery** | Pointer to **string** | The package-based search query for webhooks to fire. This uses the same syntax as the standard search used for repositories, and also supports boolean logic operators such as OR/AND/NOT and parentheses for grouping. If a package does not match, the webhook will not fire. | [optional] 
-**RequestBodyFormat** | Pointer to **string** | The format of the payloads for webhook requests. | [optional] 
+**RequestBodyFormat** | Pointer to **int64** | The format of the payloads for webhook requests. | [optional] 
 **RequestBodyFormatStr** | Pointer to **string** |  | [optional] 
-**RequestBodyTemplateFormat** | Pointer to **string** | The format of the payloads for webhook requests. | [optional] 
+**RequestBodyTemplateFormat** | Pointer to **int64** | The format of the payloads for webhook requests. | [optional] 
 **RequestBodyTemplateFormatStr** | Pointer to **string** |  | [optional] 
 **RequestContentType** | Pointer to **string** | The value that will be sent for the &#39;Content Type&#39; header.  | [optional] 
 **SecretHeader** | Pointer to **string** | The header to send the predefined secret in. This must be unique from existing headers or it won&#39;t be sent. You can use this as a form of authentication on the endpoint side. | [optional] 
@@ -128,20 +128,20 @@ HasCreatedByUrl returns a boolean if a field has been set.
 
 ### GetDisableReason
 
-`func (o *RepositoryWebhook) GetDisableReason() string`
+`func (o *RepositoryWebhook) GetDisableReason() int64`
 
 GetDisableReason returns the DisableReason field if non-nil, zero value otherwise.
 
 ### GetDisableReasonOk
 
-`func (o *RepositoryWebhook) GetDisableReasonOk() (*string, bool)`
+`func (o *RepositoryWebhook) GetDisableReasonOk() (*int64, bool)`
 
 GetDisableReasonOk returns a tuple with the DisableReason field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDisableReason
 
-`func (o *RepositoryWebhook) SetDisableReason(v string)`
+`func (o *RepositoryWebhook) SetDisableReason(v int64)`
 
 SetDisableReason sets DisableReason field to given value.
 
@@ -373,20 +373,20 @@ HasPackageQuery returns a boolean if a field has been set.
 
 ### GetRequestBodyFormat
 
-`func (o *RepositoryWebhook) GetRequestBodyFormat() string`
+`func (o *RepositoryWebhook) GetRequestBodyFormat() int64`
 
 GetRequestBodyFormat returns the RequestBodyFormat field if non-nil, zero value otherwise.
 
 ### GetRequestBodyFormatOk
 
-`func (o *RepositoryWebhook) GetRequestBodyFormatOk() (*string, bool)`
+`func (o *RepositoryWebhook) GetRequestBodyFormatOk() (*int64, bool)`
 
 GetRequestBodyFormatOk returns a tuple with the RequestBodyFormat field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequestBodyFormat
 
-`func (o *RepositoryWebhook) SetRequestBodyFormat(v string)`
+`func (o *RepositoryWebhook) SetRequestBodyFormat(v int64)`
 
 SetRequestBodyFormat sets RequestBodyFormat field to given value.
 
@@ -423,20 +423,20 @@ HasRequestBodyFormatStr returns a boolean if a field has been set.
 
 ### GetRequestBodyTemplateFormat
 
-`func (o *RepositoryWebhook) GetRequestBodyTemplateFormat() string`
+`func (o *RepositoryWebhook) GetRequestBodyTemplateFormat() int64`
 
 GetRequestBodyTemplateFormat returns the RequestBodyTemplateFormat field if non-nil, zero value otherwise.
 
 ### GetRequestBodyTemplateFormatOk
 
-`func (o *RepositoryWebhook) GetRequestBodyTemplateFormatOk() (*string, bool)`
+`func (o *RepositoryWebhook) GetRequestBodyTemplateFormatOk() (*int64, bool)`
 
 GetRequestBodyTemplateFormatOk returns a tuple with the RequestBodyTemplateFormat field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequestBodyTemplateFormat
 
-`func (o *RepositoryWebhook) SetRequestBodyTemplateFormat(v string)`
+`func (o *RepositoryWebhook) SetRequestBodyTemplateFormat(v int64)`
 
 SetRequestBodyTemplateFormat sets RequestBodyTemplateFormat field to given value.
 

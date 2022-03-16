@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.42.1
+API version: 1.42.3
 Contact: support@cloudsmith.io
 */
 
@@ -82,7 +82,7 @@ type ConanPackageUpload struct {
 	//
 	NumFiles *int64 `json:"num_files,omitempty"`
 	// The type of package contents.
-	PackageType *string `json:"package_type,omitempty"`
+	PackageType *int64 `json:"package_type,omitempty"`
 	// The release of the package version (if any).
 	Release *string `json:"release,omitempty"`
 	//
@@ -110,13 +110,13 @@ type ConanPackageUpload struct {
 	//
 	SlugPerm *string `json:"slug_perm,omitempty"`
 	// The synchronisation (in progress) stage of the package.
-	Stage *string `json:"stage,omitempty"`
+	Stage *int64 `json:"stage,omitempty"`
 	//
 	StageStr *string `json:"stage_str,omitempty"`
 	// The datetime the package stage was updated at.
 	StageUpdatedAt *string `json:"stage_updated_at,omitempty"`
 	// The synchronisation status of the package.
-	Status *string `json:"status,omitempty"`
+	Status *int64 `json:"status,omitempty"`
 	// A textual description for the synchronous status reason (if any
 	StatusReason *string `json:"status_reason,omitempty"`
 	//
@@ -1193,9 +1193,9 @@ func (o *ConanPackageUpload) SetNumFiles(v int64) {
 }
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
-func (o *ConanPackageUpload) GetPackageType() string {
+func (o *ConanPackageUpload) GetPackageType() int64 {
 	if o == nil || o.PackageType == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.PackageType
@@ -1203,7 +1203,7 @@ func (o *ConanPackageUpload) GetPackageType() string {
 
 // GetPackageTypeOk returns a tuple with the PackageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConanPackageUpload) GetPackageTypeOk() (*string, bool) {
+func (o *ConanPackageUpload) GetPackageTypeOk() (*int64, bool) {
 	if o == nil || o.PackageType == nil {
 		return nil, false
 	}
@@ -1219,8 +1219,8 @@ func (o *ConanPackageUpload) HasPackageType() bool {
 	return false
 }
 
-// SetPackageType gets a reference to the given string and assigns it to the PackageType field.
-func (o *ConanPackageUpload) SetPackageType(v string) {
+// SetPackageType gets a reference to the given int64 and assigns it to the PackageType field.
+func (o *ConanPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
@@ -1641,9 +1641,9 @@ func (o *ConanPackageUpload) SetSlugPerm(v string) {
 }
 
 // GetStage returns the Stage field value if set, zero value otherwise.
-func (o *ConanPackageUpload) GetStage() string {
+func (o *ConanPackageUpload) GetStage() int64 {
 	if o == nil || o.Stage == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.Stage
@@ -1651,7 +1651,7 @@ func (o *ConanPackageUpload) GetStage() string {
 
 // GetStageOk returns a tuple with the Stage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConanPackageUpload) GetStageOk() (*string, bool) {
+func (o *ConanPackageUpload) GetStageOk() (*int64, bool) {
 	if o == nil || o.Stage == nil {
 		return nil, false
 	}
@@ -1667,8 +1667,8 @@ func (o *ConanPackageUpload) HasStage() bool {
 	return false
 }
 
-// SetStage gets a reference to the given string and assigns it to the Stage field.
-func (o *ConanPackageUpload) SetStage(v string) {
+// SetStage gets a reference to the given int64 and assigns it to the Stage field.
+func (o *ConanPackageUpload) SetStage(v int64) {
 	o.Stage = &v
 }
 
@@ -1737,9 +1737,9 @@ func (o *ConanPackageUpload) SetStageUpdatedAt(v string) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *ConanPackageUpload) GetStatus() string {
+func (o *ConanPackageUpload) GetStatus() int64 {
 	if o == nil || o.Status == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.Status
@@ -1747,7 +1747,7 @@ func (o *ConanPackageUpload) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConanPackageUpload) GetStatusOk() (*string, bool) {
+func (o *ConanPackageUpload) GetStatusOk() (*int64, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -1763,8 +1763,8 @@ func (o *ConanPackageUpload) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *ConanPackageUpload) SetStatus(v string) {
+// SetStatus gets a reference to the given int64 and assigns it to the Status field.
+func (o *ConanPackageUpload) SetStatus(v int64) {
 	o.Status = &v
 }
 

@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **Events** | **[]string** | None | 
 **IsActive** | Pointer to **bool** | If enabled, the webhook will trigger on events and send payloads to the configured target URL. | [optional] 
 **PackageQuery** | Pointer to **string** | The package-based search query for webhooks to fire. This uses the same syntax as the standard search used for repositories, and also supports boolean logic operators such as OR/AND/NOT and parentheses for grouping. If a package does not match, the webhook will not fire. | [optional] 
-**RequestBodyFormat** | Pointer to **string** | The format of the payloads for webhook requests. | [optional] 
-**RequestBodyTemplateFormat** | Pointer to **string** | The format of the payloads for webhook requests. | [optional] 
+**RequestBodyFormat** | Pointer to **int64** | The format of the payloads for webhook requests. | [optional] 
+**RequestBodyTemplateFormat** | Pointer to **int64** | The format of the payloads for webhook requests. | [optional] 
 **RequestContentType** | Pointer to **string** | The value that will be sent for the &#39;Content Type&#39; header.  | [optional] 
 **SecretHeader** | Pointer to **string** | The header to send the predefined secret in. This must be unique from existing headers or it won&#39;t be sent. You can use this as a form of authentication on the endpoint side. | [optional] 
 **SecretValue** | Pointer to **string** | The value for the predefined secret (note: this is treated as a passphrase and is encrypted when we store it). You can use this as a form of authentication on the endpoint side. | [optional] 
@@ -108,20 +108,20 @@ HasPackageQuery returns a boolean if a field has been set.
 
 ### GetRequestBodyFormat
 
-`func (o *WebhooksCreate) GetRequestBodyFormat() string`
+`func (o *WebhooksCreate) GetRequestBodyFormat() int64`
 
 GetRequestBodyFormat returns the RequestBodyFormat field if non-nil, zero value otherwise.
 
 ### GetRequestBodyFormatOk
 
-`func (o *WebhooksCreate) GetRequestBodyFormatOk() (*string, bool)`
+`func (o *WebhooksCreate) GetRequestBodyFormatOk() (*int64, bool)`
 
 GetRequestBodyFormatOk returns a tuple with the RequestBodyFormat field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequestBodyFormat
 
-`func (o *WebhooksCreate) SetRequestBodyFormat(v string)`
+`func (o *WebhooksCreate) SetRequestBodyFormat(v int64)`
 
 SetRequestBodyFormat sets RequestBodyFormat field to given value.
 
@@ -133,20 +133,20 @@ HasRequestBodyFormat returns a boolean if a field has been set.
 
 ### GetRequestBodyTemplateFormat
 
-`func (o *WebhooksCreate) GetRequestBodyTemplateFormat() string`
+`func (o *WebhooksCreate) GetRequestBodyTemplateFormat() int64`
 
 GetRequestBodyTemplateFormat returns the RequestBodyTemplateFormat field if non-nil, zero value otherwise.
 
 ### GetRequestBodyTemplateFormatOk
 
-`func (o *WebhooksCreate) GetRequestBodyTemplateFormatOk() (*string, bool)`
+`func (o *WebhooksCreate) GetRequestBodyTemplateFormatOk() (*int64, bool)`
 
 GetRequestBodyTemplateFormatOk returns a tuple with the RequestBodyTemplateFormat field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequestBodyTemplateFormat
 
-`func (o *WebhooksCreate) SetRequestBodyTemplateFormat(v string)`
+`func (o *WebhooksCreate) SetRequestBodyTemplateFormat(v int64)`
 
 SetRequestBodyTemplateFormat sets RequestBodyTemplateFormat field to given value.
 

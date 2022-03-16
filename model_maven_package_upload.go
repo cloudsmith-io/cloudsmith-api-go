@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.42.1
+API version: 1.42.3
 Contact: support@cloudsmith.io
 */
 
@@ -82,7 +82,7 @@ type MavenPackageUpload struct {
 	//
 	NumFiles *int64 `json:"num_files,omitempty"`
 	// The type of package contents.
-	PackageType *string `json:"package_type,omitempty"`
+	PackageType *int64 `json:"package_type,omitempty"`
 	// Artifact's Maven packaging type.
 	Packaging *string `json:"packaging,omitempty"`
 	// The release of the package version (if any).
@@ -112,13 +112,13 @@ type MavenPackageUpload struct {
 	//
 	SlugPerm *string `json:"slug_perm,omitempty"`
 	// The synchronisation (in progress) stage of the package.
-	Stage *string `json:"stage,omitempty"`
+	Stage *int64 `json:"stage,omitempty"`
 	//
 	StageStr *string `json:"stage_str,omitempty"`
 	// The datetime the package stage was updated at.
 	StageUpdatedAt *string `json:"stage_updated_at,omitempty"`
 	// The synchronisation status of the package.
-	Status *string `json:"status,omitempty"`
+	Status *int64 `json:"status,omitempty"`
 	// A textual description for the synchronous status reason (if any
 	StatusReason *string `json:"status_reason,omitempty"`
 	//
@@ -1195,9 +1195,9 @@ func (o *MavenPackageUpload) SetNumFiles(v int64) {
 }
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
-func (o *MavenPackageUpload) GetPackageType() string {
+func (o *MavenPackageUpload) GetPackageType() int64 {
 	if o == nil || o.PackageType == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.PackageType
@@ -1205,7 +1205,7 @@ func (o *MavenPackageUpload) GetPackageType() string {
 
 // GetPackageTypeOk returns a tuple with the PackageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MavenPackageUpload) GetPackageTypeOk() (*string, bool) {
+func (o *MavenPackageUpload) GetPackageTypeOk() (*int64, bool) {
 	if o == nil || o.PackageType == nil {
 		return nil, false
 	}
@@ -1221,8 +1221,8 @@ func (o *MavenPackageUpload) HasPackageType() bool {
 	return false
 }
 
-// SetPackageType gets a reference to the given string and assigns it to the PackageType field.
-func (o *MavenPackageUpload) SetPackageType(v string) {
+// SetPackageType gets a reference to the given int64 and assigns it to the PackageType field.
+func (o *MavenPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
@@ -1675,9 +1675,9 @@ func (o *MavenPackageUpload) SetSlugPerm(v string) {
 }
 
 // GetStage returns the Stage field value if set, zero value otherwise.
-func (o *MavenPackageUpload) GetStage() string {
+func (o *MavenPackageUpload) GetStage() int64 {
 	if o == nil || o.Stage == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.Stage
@@ -1685,7 +1685,7 @@ func (o *MavenPackageUpload) GetStage() string {
 
 // GetStageOk returns a tuple with the Stage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MavenPackageUpload) GetStageOk() (*string, bool) {
+func (o *MavenPackageUpload) GetStageOk() (*int64, bool) {
 	if o == nil || o.Stage == nil {
 		return nil, false
 	}
@@ -1701,8 +1701,8 @@ func (o *MavenPackageUpload) HasStage() bool {
 	return false
 }
 
-// SetStage gets a reference to the given string and assigns it to the Stage field.
-func (o *MavenPackageUpload) SetStage(v string) {
+// SetStage gets a reference to the given int64 and assigns it to the Stage field.
+func (o *MavenPackageUpload) SetStage(v int64) {
 	o.Stage = &v
 }
 
@@ -1771,9 +1771,9 @@ func (o *MavenPackageUpload) SetStageUpdatedAt(v string) {
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *MavenPackageUpload) GetStatus() string {
+func (o *MavenPackageUpload) GetStatus() int64 {
 	if o == nil || o.Status == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.Status
@@ -1781,7 +1781,7 @@ func (o *MavenPackageUpload) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MavenPackageUpload) GetStatusOk() (*string, bool) {
+func (o *MavenPackageUpload) GetStatusOk() (*int64, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -1797,8 +1797,8 @@ func (o *MavenPackageUpload) HasStatus() bool {
 	return false
 }
 
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *MavenPackageUpload) SetStatus(v string) {
+// SetStatus gets a reference to the given int64 and assigns it to the Status field.
+func (o *MavenPackageUpload) SetStatus(v int64) {
 	o.Status = &v
 }
 

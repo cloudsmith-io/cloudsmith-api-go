@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io/docs/terms-and-conditions
   title: Cloudsmith API
-  version: 1.42.1
+  version: 1.42.3
 externalDocs:
   description: Find out more info at the Cloudsmith Help Website
   url: https://help.cloudsmith.io
@@ -7166,8 +7166,8 @@ paths:
                   event: event
                 secret_header: secret_header
                 secret_value: secret_value
-                request_body_format: request_body_format
-                request_body_template_format: request_body_template_format
+                request_body_format: 0
+                request_body_template_format: 6
                 events:
                 - events
                 - events
@@ -7192,10 +7192,10 @@ paths:
                   type: string
                 request_body_format:
                   description: The format of the payloads for webhook requests.
-                  type: string
+                  type: integer
                 request_body_template_format:
                   description: The format of the payloads for webhook requests.
-                  type: string
+                  type: integer
                 request_content_type:
                   description: 'The value that will be sent for the ''Content Type''
                     header. '
@@ -7400,8 +7400,8 @@ paths:
                   event: event
                 secret_header: secret_header
                 secret_value: secret_value
-                request_body_format: request_body_format
-                request_body_template_format: request_body_template_format
+                request_body_format: 0
+                request_body_template_format: 6
                 events:
                 - events
                 - events
@@ -7426,10 +7426,10 @@ paths:
                   type: string
                 request_body_format:
                   description: The format of the payloads for webhook requests.
-                  type: string
+                  type: integer
                 request_body_template_format:
                   description: The format of the payloads for webhook requests.
-                  type: string
+                  type: integer
                 request_content_type:
                   description: 'The value that will be sent for the ''Content Type''
                     header. '
@@ -8026,7 +8026,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -8080,7 +8080,7 @@ components:
         conan_prefix: my-repository
         num_files: 1
         conan_channel: alpha
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -8101,7 +8101,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -8111,7 +8111,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -8226,7 +8226,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -8268,7 +8268,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -8277,7 +8277,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -8365,7 +8365,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -8417,7 +8417,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -8438,7 +8438,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -8448,7 +8448,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -8554,7 +8554,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -8596,7 +8596,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -8605,7 +8605,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -8796,7 +8796,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -8848,7 +8848,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -8869,7 +8869,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -8879,7 +8879,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -8985,7 +8985,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -9027,7 +9027,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -9036,7 +9036,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -9123,7 +9123,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -9175,7 +9175,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -9196,7 +9196,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -9206,7 +9206,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -9312,7 +9312,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -9354,7 +9354,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -9363,7 +9363,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -9507,7 +9507,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -9559,7 +9559,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -9580,7 +9580,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -9590,7 +9590,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -9696,7 +9696,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -9738,7 +9738,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -9747,7 +9747,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -9833,7 +9833,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -9885,7 +9885,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -9906,7 +9906,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -9916,7 +9916,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -10022,7 +10022,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -10064,7 +10064,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -10073,7 +10073,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -10257,7 +10257,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -10310,7 +10310,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -10331,7 +10331,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -10341,7 +10341,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -10447,7 +10447,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -10489,7 +10489,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -10498,7 +10498,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -10688,7 +10688,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 2
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -10706,7 +10706,7 @@ components:
         tags: '{}'
         license: license
         filename: filename
-        size: 2
+        size: 7
         cdn_url: cdn_url
         uploaded_at: uploaded_at
         name: name
@@ -10741,7 +10741,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 5
-        status: status
+        status: 3
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -10762,7 +10762,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 7
+        sync_progress: 2
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -10772,7 +10772,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 9
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -10878,7 +10878,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -10920,7 +10920,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -10929,7 +10929,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -10999,7 +10999,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -11051,7 +11051,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -11072,7 +11072,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -11082,7 +11082,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -11188,7 +11188,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -11230,7 +11230,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -11239,7 +11239,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -11498,7 +11498,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -11550,7 +11550,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -11571,7 +11571,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -11581,7 +11581,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -11687,7 +11687,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -11729,7 +11729,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -11738,7 +11738,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -11802,7 +11802,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -11854,7 +11854,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -11875,7 +11875,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -11885,7 +11885,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -11991,7 +11991,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -12033,7 +12033,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -12042,7 +12042,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -12106,7 +12106,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -12158,7 +12158,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -12180,7 +12180,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -12190,7 +12190,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -12297,7 +12297,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         provider:
           description: The virtual machine provider for the box.
           example: virtualbox
@@ -12343,7 +12343,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -12352,7 +12352,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -12414,7 +12414,7 @@ components:
     PackageStatus:
       example:
         status_str: status_str
-        sync_progress: 0
+        sync_progress: 1
         is_sync_awaiting: true
         is_sync_completed: true
         self_url: self_url
@@ -12422,11 +12422,11 @@ components:
         is_sync_in_progress: true
         stage_str: stage_str
         stage_updated_at: stage_updated_at
-        stage: stage
+        stage: 0
         sync_finished_at: sync_finished_at
         is_sync_failed: true
         status_reason: status_reason
-        status: status
+        status: 6
         status_updated_at: status_updated_at
       properties:
         is_sync_awaiting:
@@ -12449,7 +12449,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -12458,7 +12458,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -12487,7 +12487,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -12539,7 +12539,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -12560,7 +12560,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -12570,7 +12570,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -12676,7 +12676,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -12718,7 +12718,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -12727,7 +12727,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -12791,7 +12791,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -12843,7 +12843,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -12864,7 +12864,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -12874,7 +12874,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -12980,7 +12980,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -13022,7 +13022,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -13031,7 +13031,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -13237,7 +13237,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -13289,7 +13289,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -13310,7 +13310,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -13320,7 +13320,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -13426,7 +13426,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -13468,7 +13468,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -13477,7 +13477,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -13646,8 +13646,8 @@ components:
             interval: 5.123456789
             limit: 3600
             remaining: 3595
-            reset: 1647380527
-            reset_iso_8601: 2022-03-15T21:42:07.068304+00:00
+            reset: 1647441094
+            reset_iso_8601: 2022-03-16T14:31:34.962555+00:00
             throttled: false
       properties:
         resources:
@@ -13657,8 +13657,8 @@ components:
               interval: 5.123456789
               limit: 3600
               remaining: 3595
-              reset: 1647380527
-              reset_iso_8601: 2022-03-15T21:42:07.068304+00:00
+              reset: 1647441094
+              reset_iso_8601: 2022-03-16T14:31:34.962555+00:00
               throttled: false
           properties: {}
           type: object
@@ -13740,7 +13740,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -13793,7 +13793,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -13814,7 +13814,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -13824,7 +13824,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -13930,7 +13930,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -13972,7 +13972,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -13981,7 +13981,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -14472,7 +14472,7 @@ components:
         deleted_at: deleted_at
         index_files: true
         num_downloads: 0
-        repository_type: repository_type
+        repository_type: 5
         self_url: self_url
         package_count: 6
         storage_region: storage_region
@@ -14560,7 +14560,7 @@ components:
             to everyone and are restricted by licensing, but are free to use and come
             with generous bandwidth/storage. You can only select Open-Source at repository
             creation time.
-          type: string
+          type: integer
         repository_type_str:
           description: The repository type changes how it is accessed and billed.
             Private repositories can only be used on paid plans, but are visible only
@@ -14733,7 +14733,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -14786,7 +14786,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -14807,7 +14807,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -14817,7 +14817,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -14923,7 +14923,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -14965,7 +14965,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -14974,7 +14974,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -15149,7 +15149,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -15201,7 +15201,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -15222,7 +15222,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -15232,7 +15232,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -15338,7 +15338,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -15380,7 +15380,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -15389,7 +15389,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -15485,7 +15485,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -15537,7 +15537,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -15558,7 +15558,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -15568,7 +15568,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -15674,7 +15674,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -15716,7 +15716,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -15725,7 +15725,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -15846,7 +15846,7 @@ components:
         deleted_at: deleted_at
         index_files: true
         num_downloads: 0
-        repository_type: repository_type
+        repository_type: 5
         self_url: self_url
         package_count: 6
         storage_region: storage_region
@@ -15934,7 +15934,7 @@ components:
             to everyone and are restricted by licensing, but are free to use and come
             with generous bandwidth/storage. You can only select Open-Source at repository
             creation time.
-          type: string
+          type: integer
         repository_type_str:
           description: The repository type changes how it is accessed and billed.
             Private repositories can only be used on paid plans, but are visible only
@@ -15988,7 +15988,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.42.1
+        version: 1.42.3
       properties:
         detail:
           description: The message describing the state of the API.
@@ -15996,7 +15996,7 @@ components:
           type: string
         version:
           description: The current version for the Cloudsmith service.
-          example: 1.42.1
+          example: 1.42.3
           type: string
       title: StatusBasic
       type: object
@@ -16114,7 +16114,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -16166,7 +16166,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -16187,7 +16187,7 @@ components:
         summary: My Package File
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -16197,7 +16197,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -16305,7 +16305,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -16347,7 +16347,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -16356,7 +16356,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -16454,7 +16454,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -16506,7 +16506,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -16527,7 +16527,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -16537,7 +16537,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -16643,7 +16643,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -16685,7 +16685,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -16694,7 +16694,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -16904,7 +16904,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -16956,7 +16956,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -16977,7 +16977,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -16987,7 +16987,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -17093,7 +17093,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -17135,7 +17135,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -17144,7 +17144,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -17226,7 +17226,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -17278,7 +17278,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -17299,7 +17299,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -17309,7 +17309,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -17415,7 +17415,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -17457,7 +17457,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -17466,7 +17466,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -17649,7 +17649,7 @@ components:
         checksum_sha256: checksum_sha256
         release: release
         artifact_id: cloudsmith-example
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -17701,7 +17701,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -17722,7 +17722,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         packaging: packaging
         uploader_url: uploader_url
@@ -17733,7 +17733,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         group_id: io.cloudsmith.example
         dependencies_url: dependencies_url
@@ -17848,7 +17848,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         packaging:
           description: Artifact's Maven packaging type.
           type: string
@@ -17893,7 +17893,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -17902,7 +17902,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -18042,7 +18042,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -18094,7 +18094,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -18115,7 +18115,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -18125,7 +18125,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -18231,7 +18231,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -18273,7 +18273,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -18282,7 +18282,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -18342,28 +18342,28 @@ components:
         last_response_status_str: last_response_status_str
         target_url: target_url
         created_at: created_at
-        last_response_status: 6
+        last_response_status: 1
         request_body_template_format_str: request_body_template_format_str
         request_content_type: request_content_type
         updated_at: updated_at
         request_body_format_str: request_body_format_str
-        num_sent: 1
-        request_body_template_format: request_body_template_format
+        num_sent: 5
+        request_body_template_format: 2
         events:
         - events
         - events
         disable_reason_str: disable_reason_str
-        identifier: 0
+        identifier: 6
         package_query: package_query
         is_active: true
-        disable_reason: disable_reason
+        disable_reason: 0
         created_by_url: created_by_url
         templates:
         - template: template
           event: event
         - template: template
           event: event
-        request_body_format: request_body_format
+        request_body_format: 5
         slug_perm: slug_perm
         created_by: created_by
         self_url: self_url
@@ -18383,7 +18383,7 @@ components:
           type: string
         disable_reason:
           description: ""
-          type: string
+          type: integer
         disable_reason_str:
           description: ""
           type: string
@@ -18421,13 +18421,13 @@ components:
           type: string
         request_body_format:
           description: The format of the payloads for webhook requests.
-          type: string
+          type: integer
         request_body_format_str:
           description: ""
           type: string
         request_body_template_format:
           description: The format of the payloads for webhook requests.
-          type: string
+          type: integer
         request_body_template_format_str:
           description: ""
           type: string
@@ -18524,8 +18524,8 @@ components:
           event: event
         secret_header: secret_header
         secret_value: secret_value
-        request_body_format: request_body_format
-        request_body_template_format: request_body_template_format
+        request_body_format: 0
+        request_body_template_format: 6
         events:
         - events
         - events
@@ -18549,10 +18549,10 @@ components:
           type: string
         request_body_format:
           description: The format of the payloads for webhook requests.
-          type: string
+          type: integer
         request_body_template_format:
           description: The format of the payloads for webhook requests.
-          type: string
+          type: integer
         request_content_type:
           description: 'The value that will be sent for the ''Content Type'' header. '
           type: string
@@ -18749,7 +18749,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -18801,7 +18801,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -18822,7 +18822,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -18832,7 +18832,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -18938,7 +18938,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -18980,7 +18980,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -18989,7 +18989,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
@@ -19058,8 +19058,8 @@ components:
           event: event
         secret_header: secret_header
         secret_value: secret_value
-        request_body_format: request_body_format
-        request_body_template_format: request_body_template_format
+        request_body_format: 0
+        request_body_template_format: 6
         events:
         - events
         - events
@@ -19083,10 +19083,10 @@ components:
           type: string
         request_body_format:
           description: The format of the payloads for webhook requests.
-          type: string
+          type: integer
         request_body_template_format:
           description: The format of the payloads for webhook requests.
-          type: string
+          type: integer
         request_content_type:
           description: 'The value that will be sent for the ''Content Type'' header. '
           type: string
@@ -19587,7 +19587,7 @@ components:
         security_scan_status_updated_at: security_scan_status_updated_at
         checksum_sha256: checksum_sha256
         release: release
-        package_type: package_type
+        package_type: 5
         repository: repository
         identifier_perm: identifier_perm
         stage_updated_at: stage_updated_at
@@ -19639,7 +19639,7 @@ components:
           signature_url: signature_url
           tag: tag
         num_files: 1
-        status: status
+        status: 7
         checksum_sha512: checksum_sha512
         distro: '{}'
         extension: extension
@@ -19660,7 +19660,7 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         checksum_md5: checksum_md5
-        sync_progress: 5
+        sync_progress: 9
         is_sync_awaiting: true
         uploader_url: uploader_url
         self_html_url: self_html_url
@@ -19670,7 +19670,7 @@ components:
         security_scan_completed_at: security_scan_completed_at
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: stage
+        stage: 2
         format_url: format_url
         dependencies_url: dependencies_url
         namespace: namespace
@@ -19776,7 +19776,7 @@ components:
           type: integer
         package_type:
           description: The type of package contents.
-          type: string
+          type: integer
         release:
           description: The release of the package version (if any).
           type: string
@@ -19818,7 +19818,7 @@ components:
           type: string
         stage:
           description: The synchronisation (in progress) stage of the package.
-          type: string
+          type: integer
         stage_str:
           description: ""
           type: string
@@ -19827,7 +19827,7 @@ components:
           type: string
         status:
           description: The synchronisation status of the package.
-          type: string
+          type: integer
         status_reason:
           description: A textual description for the synchronous status reason (if
             any

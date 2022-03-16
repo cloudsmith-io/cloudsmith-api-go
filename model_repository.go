@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.42.1
+API version: 1.42.3
 Contact: support@cloudsmith.io
 */
 
@@ -48,7 +48,7 @@ type Repository struct {
 	// The number of groups in the repository.
 	PackageGroupCount *int64 `json:"package_group_count,omitempty"`
 	// The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Open-Source repositories are always visible to everyone and are restricted by licensing, but are free to use and come with generous bandwidth/storage. You can only select Open-Source at repository creation time.
-	RepositoryType *string `json:"repository_type,omitempty"`
+	RepositoryType *int64 `json:"repository_type,omitempty"`
 	// The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Public repositories are free to use on all plans and visible to all Cloudsmith users.
 	RepositoryTypeStr *string `json:"repository_type_str,omitempty"`
 	// Website URL for this repository.
@@ -558,9 +558,9 @@ func (o *Repository) SetPackageGroupCount(v int64) {
 }
 
 // GetRepositoryType returns the RepositoryType field value if set, zero value otherwise.
-func (o *Repository) GetRepositoryType() string {
+func (o *Repository) GetRepositoryType() int64 {
 	if o == nil || o.RepositoryType == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.RepositoryType
@@ -568,7 +568,7 @@ func (o *Repository) GetRepositoryType() string {
 
 // GetRepositoryTypeOk returns a tuple with the RepositoryType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Repository) GetRepositoryTypeOk() (*string, bool) {
+func (o *Repository) GetRepositoryTypeOk() (*int64, bool) {
 	if o == nil || o.RepositoryType == nil {
 		return nil, false
 	}
@@ -584,8 +584,8 @@ func (o *Repository) HasRepositoryType() bool {
 	return false
 }
 
-// SetRepositoryType gets a reference to the given string and assigns it to the RepositoryType field.
-func (o *Repository) SetRepositoryType(v string) {
+// SetRepositoryType gets a reference to the given int64 and assigns it to the RepositoryType field.
+func (o *Repository) SetRepositoryType(v int64) {
 	o.RepositoryType = &v
 }
 

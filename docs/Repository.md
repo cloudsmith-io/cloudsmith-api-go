@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **NumDownloads** | Pointer to **int64** | The number of downloads for packages in the repository. | [optional] 
 **PackageCount** | Pointer to **int64** | The number of packages in the repository. | [optional] 
 **PackageGroupCount** | Pointer to **int64** | The number of groups in the repository. | [optional] 
-**RepositoryType** | Pointer to **string** | The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Open-Source repositories are always visible to everyone and are restricted by licensing, but are free to use and come with generous bandwidth/storage. You can only select Open-Source at repository creation time. | [optional] 
+**RepositoryType** | Pointer to **int64** | The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Open-Source repositories are always visible to everyone and are restricted by licensing, but are free to use and come with generous bandwidth/storage. You can only select Open-Source at repository creation time. | [optional] 
 **RepositoryTypeStr** | Pointer to **string** | The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Public repositories are free to use on all plans and visible to all Cloudsmith users. | [optional] 
 **SelfHtmlUrl** | Pointer to **string** | Website URL for this repository. | [optional] 
 **SelfUrl** | Pointer to **string** | API endpoint where data about this repository can be retrieved. | [optional] 
@@ -420,20 +420,20 @@ HasPackageGroupCount returns a boolean if a field has been set.
 
 ### GetRepositoryType
 
-`func (o *Repository) GetRepositoryType() string`
+`func (o *Repository) GetRepositoryType() int64`
 
 GetRepositoryType returns the RepositoryType field if non-nil, zero value otherwise.
 
 ### GetRepositoryTypeOk
 
-`func (o *Repository) GetRepositoryTypeOk() (*string, bool)`
+`func (o *Repository) GetRepositoryTypeOk() (*int64, bool)`
 
 GetRepositoryTypeOk returns a tuple with the RepositoryType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRepositoryType
 
-`func (o *Repository) SetRepositoryType(v string)`
+`func (o *Repository) SetRepositoryType(v int64)`
 
 SetRepositoryType sets RepositoryType field to given value.
 

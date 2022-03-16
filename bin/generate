@@ -34,13 +34,3 @@ openapi-generator generate \
 
 rm -v .travis.yml
 rm -v git_push.sh
-
-# Apply fixes for mis-identified field-types in the Swagger spec
-#
-# This is a temporary measure as a larger API/swagger update is due soon which
-# should resolve this and other issues properly.
-
-# sed -i 's/PackageType \*string/PackageType \*int64/g' model_package.go
-# sed -i 's/PackageType\*\* | Pointer to \*\*string/PackageType\*\* | Pointer to \*\*int64/g' docs/Package.md
-# sed -i 's/RepositoryType \*string/RepositoryType \*int64/g' model_repository.go
-# sed -i 's/RepositoryType\*\* | Pointer to \*\*string/RepositoryType\*\* | Pointer to \*\*int64/g' docs/Repository.md

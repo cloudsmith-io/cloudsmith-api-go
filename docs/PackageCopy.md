@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **Namespace** | Pointer to **string** |  | [optional] 
 **NamespaceUrl** | Pointer to **string** |  | [optional] 
 **NumFiles** | Pointer to **int64** |  | [optional] 
-**PackageType** | Pointer to **string** | The type of package contents. | [optional] 
+**PackageType** | Pointer to **int64** | The type of package contents. | [optional] 
 **Release** | Pointer to **string** | The release of the package version (if any). | [optional] 
 **Repository** | Pointer to **string** | The repository the package will be copied to. | [optional] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] 
@@ -48,10 +48,10 @@ Name | Type | Description | Notes
 **Size** | Pointer to **int64** | The calculated size of the package. | [optional] 
 **Slug** | Pointer to **string** | The public unique identifier for the package. | [optional] 
 **SlugPerm** | Pointer to **string** |  | [optional] 
-**Stage** | Pointer to **string** | The synchronisation (in progress) stage of the package. | [optional] 
+**Stage** | Pointer to **int64** | The synchronisation (in progress) stage of the package. | [optional] 
 **StageStr** | Pointer to **string** |  | [optional] 
 **StageUpdatedAt** | Pointer to **string** | The datetime the package stage was updated at. | [optional] 
-**Status** | Pointer to **string** | The synchronisation status of the package. | [optional] 
+**Status** | Pointer to **int64** | The synchronisation status of the package. | [optional] 
 **StatusReason** | Pointer to **string** | A textual description for the synchronous status reason (if any | [optional] 
 **StatusStr** | Pointer to **string** |  | [optional] 
 **StatusUpdatedAt** | Pointer to **string** | The datetime the package status was updated at. | [optional] 
@@ -841,20 +841,20 @@ HasNumFiles returns a boolean if a field has been set.
 
 ### GetPackageType
 
-`func (o *PackageCopy) GetPackageType() string`
+`func (o *PackageCopy) GetPackageType() int64`
 
 GetPackageType returns the PackageType field if non-nil, zero value otherwise.
 
 ### GetPackageTypeOk
 
-`func (o *PackageCopy) GetPackageTypeOk() (*string, bool)`
+`func (o *PackageCopy) GetPackageTypeOk() (*int64, bool)`
 
 GetPackageTypeOk returns a tuple with the PackageType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPackageType
 
-`func (o *PackageCopy) SetPackageType(v string)`
+`func (o *PackageCopy) SetPackageType(v int64)`
 
 SetPackageType sets PackageType field to given value.
 
@@ -1191,20 +1191,20 @@ HasSlugPerm returns a boolean if a field has been set.
 
 ### GetStage
 
-`func (o *PackageCopy) GetStage() string`
+`func (o *PackageCopy) GetStage() int64`
 
 GetStage returns the Stage field if non-nil, zero value otherwise.
 
 ### GetStageOk
 
-`func (o *PackageCopy) GetStageOk() (*string, bool)`
+`func (o *PackageCopy) GetStageOk() (*int64, bool)`
 
 GetStageOk returns a tuple with the Stage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStage
 
-`func (o *PackageCopy) SetStage(v string)`
+`func (o *PackageCopy) SetStage(v int64)`
 
 SetStage sets Stage field to given value.
 
@@ -1266,20 +1266,20 @@ HasStageUpdatedAt returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *PackageCopy) GetStatus() string`
+`func (o *PackageCopy) GetStatus() int64`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *PackageCopy) GetStatusOk() (*string, bool)`
+`func (o *PackageCopy) GetStatusOk() (*int64, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *PackageCopy) SetStatus(v string)`
+`func (o *PackageCopy) SetStatus(v int64)`
 
 SetStatus sets Status field to given value.
 

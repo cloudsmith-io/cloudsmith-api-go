@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.42.1
+API version: 1.42.3
 Contact: support@cloudsmith.io
 */
 
@@ -24,9 +24,9 @@ type WebhooksCreate struct {
 	// The package-based search query for webhooks to fire. This uses the same syntax as the standard search used for repositories, and also supports boolean logic operators such as OR/AND/NOT and parentheses for grouping. If a package does not match, the webhook will not fire.
 	PackageQuery *string `json:"package_query,omitempty"`
 	// The format of the payloads for webhook requests.
-	RequestBodyFormat *string `json:"request_body_format,omitempty"`
+	RequestBodyFormat *int64 `json:"request_body_format,omitempty"`
 	// The format of the payloads for webhook requests.
-	RequestBodyTemplateFormat *string `json:"request_body_template_format,omitempty"`
+	RequestBodyTemplateFormat *int64 `json:"request_body_template_format,omitempty"`
 	// The value that will be sent for the 'Content Type' header.
 	RequestContentType *string `json:"request_content_type,omitempty"`
 	// The header to send the predefined secret in. This must be unique from existing headers or it won't be sent. You can use this as a form of authentication on the endpoint side.
@@ -152,9 +152,9 @@ func (o *WebhooksCreate) SetPackageQuery(v string) {
 }
 
 // GetRequestBodyFormat returns the RequestBodyFormat field value if set, zero value otherwise.
-func (o *WebhooksCreate) GetRequestBodyFormat() string {
+func (o *WebhooksCreate) GetRequestBodyFormat() int64 {
 	if o == nil || o.RequestBodyFormat == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.RequestBodyFormat
@@ -162,7 +162,7 @@ func (o *WebhooksCreate) GetRequestBodyFormat() string {
 
 // GetRequestBodyFormatOk returns a tuple with the RequestBodyFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WebhooksCreate) GetRequestBodyFormatOk() (*string, bool) {
+func (o *WebhooksCreate) GetRequestBodyFormatOk() (*int64, bool) {
 	if o == nil || o.RequestBodyFormat == nil {
 		return nil, false
 	}
@@ -178,15 +178,15 @@ func (o *WebhooksCreate) HasRequestBodyFormat() bool {
 	return false
 }
 
-// SetRequestBodyFormat gets a reference to the given string and assigns it to the RequestBodyFormat field.
-func (o *WebhooksCreate) SetRequestBodyFormat(v string) {
+// SetRequestBodyFormat gets a reference to the given int64 and assigns it to the RequestBodyFormat field.
+func (o *WebhooksCreate) SetRequestBodyFormat(v int64) {
 	o.RequestBodyFormat = &v
 }
 
 // GetRequestBodyTemplateFormat returns the RequestBodyTemplateFormat field value if set, zero value otherwise.
-func (o *WebhooksCreate) GetRequestBodyTemplateFormat() string {
+func (o *WebhooksCreate) GetRequestBodyTemplateFormat() int64 {
 	if o == nil || o.RequestBodyTemplateFormat == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 	return *o.RequestBodyTemplateFormat
@@ -194,7 +194,7 @@ func (o *WebhooksCreate) GetRequestBodyTemplateFormat() string {
 
 // GetRequestBodyTemplateFormatOk returns a tuple with the RequestBodyTemplateFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WebhooksCreate) GetRequestBodyTemplateFormatOk() (*string, bool) {
+func (o *WebhooksCreate) GetRequestBodyTemplateFormatOk() (*int64, bool) {
 	if o == nil || o.RequestBodyTemplateFormat == nil {
 		return nil, false
 	}
@@ -210,8 +210,8 @@ func (o *WebhooksCreate) HasRequestBodyTemplateFormat() bool {
 	return false
 }
 
-// SetRequestBodyTemplateFormat gets a reference to the given string and assigns it to the RequestBodyTemplateFormat field.
-func (o *WebhooksCreate) SetRequestBodyTemplateFormat(v string) {
+// SetRequestBodyTemplateFormat gets a reference to the given int64 and assigns it to the RequestBodyTemplateFormat field.
+func (o *WebhooksCreate) SetRequestBodyTemplateFormat(v int64) {
 	o.RequestBodyTemplateFormat = &v
 }
 
