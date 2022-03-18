@@ -1,6 +1,6 @@
 # \UserApi
 
-All URIs are relative to *https://api.cloudsmith.io*
+All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,15 +11,46 @@ Method | HTTP request | Description
 
 ## UserSelf
 
-> UserBrief UserSelf(ctx, )
+> UserBrief UserSelf(ctx).Execute()
 
 Provide a brief for the current user (if any).
 
-Provide a brief for the current user (if any).
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserApi.UserSelf(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserSelf``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UserSelf`: UserBrief
+    fmt.Fprintf(os.Stdout, "Response from `UserApi.UserSelf`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUserSelfRequest struct via the builder pattern
+
 
 ### Return type
 
@@ -27,7 +58,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -41,28 +72,51 @@ This endpoint does not need any parameter.
 
 ## UserTokenCreate
 
-> UserAuthToken UserTokenCreate(ctx, optional)
+> UserAuthToken UserTokenCreate(ctx).Data(data).Execute()
 
 Retrieve the API key/token for the authenticated user.
 
-Retrieve the API key/token for the authenticated user.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    data := *openapiclient.NewUserTokenCreate() // UserTokenCreate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserApi.UserTokenCreate(context.Background()).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserTokenCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UserTokenCreate`: UserAuthToken
+    fmt.Fprintf(os.Stdout, "Response from `UserApi.UserTokenCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUserTokenCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***UserTokenCreateOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-
-Optional parameters are passed through a pointer to a UserTokenCreateOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **data** | [**optional.Interface of UserTokenCreate**](UserTokenCreate.md)|  | 
+ **data** | [**UserTokenCreate**](UserTokenCreate.md) |  | 
 
 ### Return type
 
@@ -70,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 

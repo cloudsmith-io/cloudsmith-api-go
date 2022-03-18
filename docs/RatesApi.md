@@ -1,6 +1,6 @@
 # \RatesApi
 
-All URIs are relative to *https://api.cloudsmith.io*
+All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,15 +10,46 @@ Method | HTTP request | Description
 
 ## RatesLimitsList
 
-> ResourcesRateCheck RatesLimitsList(ctx, )
+> ResourcesRateCheck RatesLimitsList(ctx).Execute()
 
 Endpoint to check rate limits for current user.
 
-Endpoint to check rate limits for current user.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.RatesApi.RatesLimitsList(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RatesApi.RatesLimitsList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `RatesLimitsList`: ResourcesRateCheck
+    fmt.Fprintf(os.Stdout, "Response from `RatesApi.RatesLimitsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRatesLimitsListRequest struct via the builder pattern
+
 
 ### Return type
 
@@ -26,7 +57,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 

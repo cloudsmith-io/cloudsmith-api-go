@@ -1,21 +1,25 @@
 # \PackagesApi
 
-All URIs are relative to *https://api.cloudsmith.io*
+All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**PackagesCopy**](PackagesApi.md#PackagesCopy) | **Post** /packages/{owner}/{repo}/{identifier}/copy/ | Copy a package to another repository.
 [**PackagesDelete**](PackagesApi.md#PackagesDelete) | **Delete** /packages/{owner}/{repo}/{identifier}/ | Delete a specific package in a repository.
+[**PackagesDependencies**](PackagesApi.md#PackagesDependencies) | **Get** /packages/{owner}/{repo}/{identifier}/dependencies/ | Get the direct (non-transitive) dependencies list for a package.
 [**PackagesList**](PackagesApi.md#PackagesList) | **Get** /packages/{owner}/{repo}/ | Get a list of all packages associated with repository.
 [**PackagesMove**](PackagesApi.md#PackagesMove) | **Post** /packages/{owner}/{repo}/{identifier}/move/ | Move a package to another repository.
 [**PackagesRead**](PackagesApi.md#PackagesRead) | **Get** /packages/{owner}/{repo}/{identifier}/ | Get a specific package in a repository.
 [**PackagesResync**](PackagesApi.md#PackagesResync) | **Post** /packages/{owner}/{repo}/{identifier}/resync/ | Schedule a package for resynchronisation.
+[**PackagesScan**](PackagesApi.md#PackagesScan) | **Post** /packages/{owner}/{repo}/{identifier}/scan/ | Schedule a package for scanning.
 [**PackagesStatus**](PackagesApi.md#PackagesStatus) | **Get** /packages/{owner}/{repo}/{identifier}/status/ | Get the synchronisation status for a package.
+[**PackagesTag**](PackagesApi.md#PackagesTag) | **Post** /packages/{owner}/{repo}/{identifier}/tag/ | Add/Replace/Remove tags for a package.
 [**PackagesUploadAlpine**](PackagesApi.md#PackagesUploadAlpine) | **Post** /packages/{owner}/{repo}/upload/alpine/ | Create a new Alpine package
 [**PackagesUploadCargo**](PackagesApi.md#PackagesUploadCargo) | **Post** /packages/{owner}/{repo}/upload/cargo/ | Create a new Cargo package
 [**PackagesUploadCocoapods**](PackagesApi.md#PackagesUploadCocoapods) | **Post** /packages/{owner}/{repo}/upload/cocoapods/ | Create a new CocoaPods package
 [**PackagesUploadComposer**](PackagesApi.md#PackagesUploadComposer) | **Post** /packages/{owner}/{repo}/upload/composer/ | Create a new Composer package
 [**PackagesUploadConan**](PackagesApi.md#PackagesUploadConan) | **Post** /packages/{owner}/{repo}/upload/conan/ | Create a new Conan package
+[**PackagesUploadConda**](PackagesApi.md#PackagesUploadConda) | **Post** /packages/{owner}/{repo}/upload/conda/ | Create a new Conda package
 [**PackagesUploadCran**](PackagesApi.md#PackagesUploadCran) | **Post** /packages/{owner}/{repo}/upload/cran/ | Create a new CRAN package
 [**PackagesUploadDart**](PackagesApi.md#PackagesUploadDart) | **Post** /packages/{owner}/{repo}/upload/dart/ | Create a new Dart package
 [**PackagesUploadDeb**](PackagesApi.md#PackagesUploadDeb) | **Post** /packages/{owner}/{repo}/upload/deb/ | Create a new Debian package
@@ -26,6 +30,7 @@ Method | HTTP request | Description
 [**PackagesUploadMaven**](PackagesApi.md#PackagesUploadMaven) | **Post** /packages/{owner}/{repo}/upload/maven/ | Create a new Maven package
 [**PackagesUploadNpm**](PackagesApi.md#PackagesUploadNpm) | **Post** /packages/{owner}/{repo}/upload/npm/ | Create a new npm package
 [**PackagesUploadNuget**](PackagesApi.md#PackagesUploadNuget) | **Post** /packages/{owner}/{repo}/upload/nuget/ | Create a new NuGet package
+[**PackagesUploadP2**](PackagesApi.md#PackagesUploadP2) | **Post** /packages/{owner}/{repo}/upload/p2/ | Create a new P2 package
 [**PackagesUploadPython**](PackagesApi.md#PackagesUploadPython) | **Post** /packages/{owner}/{repo}/upload/python/ | Create a new Python package
 [**PackagesUploadRaw**](PackagesApi.md#PackagesUploadRaw) | **Post** /packages/{owner}/{repo}/upload/raw/ | Create a new Raw package
 [**PackagesUploadRpm**](PackagesApi.md#PackagesUploadRpm) | **Post** /packages/{owner}/{repo}/upload/rpm/ | Create a new RedHat package
@@ -37,6 +42,7 @@ Method | HTTP request | Description
 [**PackagesValidateUploadCocoapods**](PackagesApi.md#PackagesValidateUploadCocoapods) | **Post** /packages/{owner}/{repo}/validate-upload/cocoapods/ | Validate parameters for create CocoaPods package
 [**PackagesValidateUploadComposer**](PackagesApi.md#PackagesValidateUploadComposer) | **Post** /packages/{owner}/{repo}/validate-upload/composer/ | Validate parameters for create Composer package
 [**PackagesValidateUploadConan**](PackagesApi.md#PackagesValidateUploadConan) | **Post** /packages/{owner}/{repo}/validate-upload/conan/ | Validate parameters for create Conan package
+[**PackagesValidateUploadConda**](PackagesApi.md#PackagesValidateUploadConda) | **Post** /packages/{owner}/{repo}/validate-upload/conda/ | Validate parameters for create Conda package
 [**PackagesValidateUploadCran**](PackagesApi.md#PackagesValidateUploadCran) | **Post** /packages/{owner}/{repo}/validate-upload/cran/ | Validate parameters for create CRAN package
 [**PackagesValidateUploadDart**](PackagesApi.md#PackagesValidateUploadDart) | **Post** /packages/{owner}/{repo}/validate-upload/dart/ | Validate parameters for create Dart package
 [**PackagesValidateUploadDeb**](PackagesApi.md#PackagesValidateUploadDeb) | **Post** /packages/{owner}/{repo}/validate-upload/deb/ | Validate parameters for create Debian package
@@ -47,6 +53,7 @@ Method | HTTP request | Description
 [**PackagesValidateUploadMaven**](PackagesApi.md#PackagesValidateUploadMaven) | **Post** /packages/{owner}/{repo}/validate-upload/maven/ | Validate parameters for create Maven package
 [**PackagesValidateUploadNpm**](PackagesApi.md#PackagesValidateUploadNpm) | **Post** /packages/{owner}/{repo}/validate-upload/npm/ | Validate parameters for create npm package
 [**PackagesValidateUploadNuget**](PackagesApi.md#PackagesValidateUploadNuget) | **Post** /packages/{owner}/{repo}/validate-upload/nuget/ | Validate parameters for create NuGet package
+[**PackagesValidateUploadP2**](PackagesApi.md#PackagesValidateUploadP2) | **Post** /packages/{owner}/{repo}/validate-upload/p2/ | Validate parameters for create P2 package
 [**PackagesValidateUploadPython**](PackagesApi.md#PackagesValidateUploadPython) | **Post** /packages/{owner}/{repo}/validate-upload/python/ | Validate parameters for create Python package
 [**PackagesValidateUploadRaw**](PackagesApi.md#PackagesValidateUploadRaw) | **Post** /packages/{owner}/{repo}/validate-upload/raw/ | Validate parameters for create Raw package
 [**PackagesValidateUploadRpm**](PackagesApi.md#PackagesValidateUploadRpm) | **Post** /packages/{owner}/{repo}/validate-upload/rpm/ | Validate parameters for create RedHat package
@@ -58,26 +65,55 @@ Method | HTTP request | Description
 
 ## PackagesCopy
 
-> PackageCopy PackagesCopy(ctx, owner, repo, identifier, optional)
+> PackageCopy PackagesCopy(ctx, owner, repo, identifier).Data(data).Execute()
 
 Copy a package to another repository.
 
-Copy a package to another repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewPackagesCopy("Destination_example") // PackagesCopy |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesCopy(context.Background(), owner, repo, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesCopy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesCopy`: PackageCopy
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesCopy`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
- **optional** | ***PackagesCopyOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesCopyOpts struct
+Other parameters are passed through a pointer to a apiPackagesCopyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -85,7 +121,7 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**optional.Interface of PackagesCopy**](PackagesCopy.md)|  | 
+ **data** | [**PackagesCopy**](PackagesCopy.md) |  | 
 
 ### Return type
 
@@ -93,7 +129,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -107,21 +143,59 @@ Name | Type | Description  | Notes
 
 ## PackagesDelete
 
-> PackagesDelete(ctx, owner, repo, identifier)
+> PackagesDelete(ctx, owner, repo, identifier).Execute()
 
 Delete a specific package in a repository.
 
-Delete a specific package in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesDelete(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
 
 ### Return type
 
@@ -129,7 +203,83 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesDependencies
+
+> PackageDependencies PackagesDependencies(ctx, owner, repo, identifier).Execute()
+
+Get the direct (non-transitive) dependencies list for a package.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesDependencies(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesDependencies``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesDependencies`: PackageDependencies
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesDependencies`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesDependenciesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**PackageDependencies**](PackageDependencies.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -143,34 +293,66 @@ Name | Type | Description  | Notes
 
 ## PackagesList
 
-> []Package PackagesList(ctx, owner, repo, optional)
+> []Package PackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
 
 Get a list of all packages associated with repository.
 
-Get a list of all packages associated with repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+    query := "query_example" // string | A search term for querying names, filenames, versions, distributions, architectures, formats or statuses of packages. (optional)
+    sort := "sort_example" // string | A field for sorting objects in ascending or descending order. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesList`: []Package
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesList`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesListOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesListOpts struct
+Other parameters are passed through a pointer to a apiPackagesListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **page** | **optional.Int64**| A page number within the paginated result set. | 
- **pageSize** | **optional.Int64**| Number of results to return per page. | 
- **query** | **optional.String**| A search term for querying names, filenames, versions, distributions, architectures, formats or statuses of packages. | 
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+ **query** | **string** | A search term for querying names, filenames, versions, distributions, architectures, formats or statuses of packages. | 
+ **sort** | **string** | A field for sorting objects in ascending or descending order. | 
 
 ### Return type
 
@@ -178,7 +360,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -192,26 +374,55 @@ Name | Type | Description  | Notes
 
 ## PackagesMove
 
-> PackageMove PackagesMove(ctx, owner, repo, identifier, optional)
+> PackageMove PackagesMove(ctx, owner, repo, identifier).Data(data).Execute()
 
 Move a package to another repository.
 
-Move a package to another repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewPackagesMove("Destination_example") // PackagesMove |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesMove(context.Background(), owner, repo, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesMove``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesMove`: PackageMove
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesMove`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
- **optional** | ***PackagesMoveOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesMoveOpts struct
+Other parameters are passed through a pointer to a apiPackagesMoveRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -219,7 +430,7 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**optional.Interface of PackagesMove**](PackagesMove.md)|  | 
+ **data** | [**PackagesMove**](PackagesMove.md) |  | 
 
 ### Return type
 
@@ -227,7 +438,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -241,21 +452,61 @@ Name | Type | Description  | Notes
 
 ## PackagesRead
 
-> Package PackagesRead(ctx, owner, repo, identifier)
+> Package PackagesRead(ctx, owner, repo, identifier).Execute()
 
 Get a specific package in a repository.
 
-Get a specific package in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesRead(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesRead`: Package
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
 
 ### Return type
 
@@ -263,7 +514,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -277,78 +528,69 @@ Name | Type | Description  | Notes
 
 ## PackagesResync
 
-> Package PackagesResync(ctx, owner, repo, identifier, optional)
+> PackageResync PackagesResync(ctx, owner, repo, identifier).Execute()
 
 Schedule a package for resynchronisation.
 
-Schedule a package for resynchronisation.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesResync(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesResync``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesResync`: PackageResync
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesResync`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
- **optional** | ***PackagesResyncOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesResyncOpts struct
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **data** | [**optional.Interface of PackagesResync**](PackagesResync.md)|  | 
-
-### Return type
-
-[**Package**](Package.md)
-
-### Authorization
-
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: */*
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PackagesStatus
-
-> PackageStatus PackagesStatus(ctx, owner, repo, identifier)
-
-Get the synchronisation status for a package.
-
-Get the synchronisation status for a package.
-
-### Required Parameters
+Other parameters are passed through a pointer to a apiPackagesResyncRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
+
+
+
 
 ### Return type
 
-[**PackageStatus**](PackageStatus.md)
+[**PackageResync**](PackageResync.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -360,34 +602,63 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PackagesUploadAlpine
+## PackagesScan
 
-> Package PackagesUploadAlpine(ctx, owner, repo, optional)
+> Package PackagesScan(ctx, owner, repo, identifier).Execute()
 
-Create a new Alpine package
+Schedule a package for scanning.
 
-Create a new Alpine package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesScan(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesScan``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesScan`: Package
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesScan`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadAlpineOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadAlpineOpts struct
+Other parameters are passed through a pointer to a apiPackagesScanRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadAlpine**](PackagesUploadAlpine.md)|  | 
+
 
 ### Return type
 
@@ -395,7 +666,236 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesStatus
+
+> PackageStatus PackagesStatus(ctx, owner, repo, identifier).Execute()
+
+Get the synchronisation status for a package.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesStatus(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesStatus``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesStatus`: PackageStatus
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**PackageStatus**](PackageStatus.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesTag
+
+> Package PackagesTag(ctx, owner, repo, identifier).Data(data).Execute()
+
+Add/Replace/Remove tags for a package.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewPackagesTag() // PackagesTag |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesTag(context.Background(), owner, repo, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesTag``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesTag`: Package
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesTag`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesTagRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**PackagesTag**](PackagesTag.md) |  | 
+
+### Return type
+
+[**Package**](Package.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesUploadAlpine
+
+> AlpinePackageUpload PackagesUploadAlpine(ctx, owner, repo).Data(data).Execute()
+
+Create a new Alpine package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadAlpine("alpine/v3.8", "a123456789") // PackagesUploadAlpine |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadAlpine(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadAlpine``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadAlpine`: AlpinePackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadAlpine`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesUploadAlpineRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**PackagesUploadAlpine**](PackagesUploadAlpine.md) |  | 
+
+### Return type
+
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -409,40 +909,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCargo
 
-> Package PackagesUploadCargo(ctx, owner, repo, optional)
+> CargoPackageUpload PackagesUploadCargo(ctx, owner, repo).Data(data).Execute()
 
 Create a new Cargo package
 
-Create a new Cargo package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadCargo("x123456789a") // PackagesUploadCargo |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadCargo(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadCargo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadCargo`: CargoPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadCargo`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadCargoOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadCargoOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadCargoRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadCargo**](PackagesUploadCargo.md)|  | 
+ **data** | [**PackagesUploadCargo**](PackagesUploadCargo.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**CargoPackageUpload**](CargoPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -456,40 +984,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCocoapods
 
-> Package PackagesUploadCocoapods(ctx, owner, repo, optional)
+> CocoapodsPackageUpload PackagesUploadCocoapods(ctx, owner, repo).Data(data).Execute()
 
 Create a new CocoaPods package
 
-Create a new CocoaPods package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadCocoapods("z123456789") // PackagesUploadCocoapods |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadCocoapods(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadCocoapods``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadCocoapods`: CocoapodsPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadCocoapods`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadCocoapodsOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadCocoapodsOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadCocoapodsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadCocoapods**](PackagesUploadCocoapods.md)|  | 
+ **data** | [**PackagesUploadCocoapods**](PackagesUploadCocoapods.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**CocoapodsPackageUpload**](CocoapodsPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -503,40 +1059,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadComposer
 
-> Package PackagesUploadComposer(ctx, owner, repo, optional)
+> ComposerPackageUpload PackagesUploadComposer(ctx, owner, repo).Data(data).Execute()
 
 Create a new Composer package
 
-Create a new Composer package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadComposer("y123456789") // PackagesUploadComposer |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadComposer(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadComposer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadComposer`: ComposerPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadComposer`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadComposerOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadComposerOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadComposerRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadComposer**](PackagesUploadComposer.md)|  | 
+ **data** | [**PackagesUploadComposer**](PackagesUploadComposer.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**ComposerPackageUpload**](ComposerPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -550,32 +1134,60 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadConan
 
-> ConanPackageUpload PackagesUploadConan(ctx, owner, repo, optional)
+> ConanPackageUpload PackagesUploadConan(ctx, owner, repo).Data(data).Execute()
 
 Create a new Conan package
 
-Create a new Conan package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadConan("y1234456789b", "y1234456789c", "y1234456789a", "x123456789a") // PackagesUploadConan |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadConan(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadConan``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadConan`: ConanPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadConan`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadConanOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadConanOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadConanRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadConan**](PackagesUploadConan.md)|  | 
+ **data** | [**PackagesUploadConan**](PackagesUploadConan.md) |  | 
 
 ### Return type
 
@@ -583,7 +1195,82 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesUploadConda
+
+> CondaPackageUpload PackagesUploadConda(ctx, owner, repo).Data(data).Execute()
+
+Create a new Conda package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadConda("x123456789a") // PackagesUploadConda |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadConda(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadConda``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadConda`: CondaPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadConda`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesUploadCondaRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**PackagesUploadConda**](PackagesUploadConda.md) |  | 
+
+### Return type
+
+[**CondaPackageUpload**](CondaPackageUpload.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -597,40 +1284,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCran
 
-> Package PackagesUploadCran(ctx, owner, repo, optional)
+> CranPackageUpload PackagesUploadCran(ctx, owner, repo).Data(data).Execute()
 
 Create a new CRAN package
 
-Create a new CRAN package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadCran("x123456789a") // PackagesUploadCran |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadCran(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadCran``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadCran`: CranPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadCran`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadCranOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadCranOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadCranRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadCran**](PackagesUploadCran.md)|  | 
+ **data** | [**PackagesUploadCran**](PackagesUploadCran.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**CranPackageUpload**](CranPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -644,40 +1359,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDart
 
-> Package PackagesUploadDart(ctx, owner, repo, optional)
+> DartPackageUpload PackagesUploadDart(ctx, owner, repo).Data(data).Execute()
 
 Create a new Dart package
 
-Create a new Dart package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadDart("x123456789a") // PackagesUploadDart |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadDart(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadDart``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadDart`: DartPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadDart`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadDartOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadDartOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadDartRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadDart**](PackagesUploadDart.md)|  | 
+ **data** | [**PackagesUploadDart**](PackagesUploadDart.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**DartPackageUpload**](DartPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -691,40 +1434,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDeb
 
-> Package PackagesUploadDeb(ctx, owner, repo, optional)
+> DebPackageUpload PackagesUploadDeb(ctx, owner, repo).Data(data).Execute()
 
 Create a new Debian package
 
-Create a new Debian package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadDeb("ubuntu/xenial", "y123456789") // PackagesUploadDeb |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadDeb(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadDeb``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadDeb`: DebPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadDeb`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadDebOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadDebOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadDebRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadDeb**](PackagesUploadDeb.md)|  | 
+ **data** | [**PackagesUploadDeb**](PackagesUploadDeb.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**DebPackageUpload**](DebPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -738,40 +1509,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDocker
 
-> Package PackagesUploadDocker(ctx, owner, repo, optional)
+> DockerPackageUpload PackagesUploadDocker(ctx, owner, repo).Data(data).Execute()
 
 Create a new Docker package
 
-Create a new Docker package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadDocker("y123456789") // PackagesUploadDocker |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadDocker(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadDocker``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadDocker`: DockerPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadDocker`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadDockerOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadDockerOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadDockerRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadDocker**](PackagesUploadDocker.md)|  | 
+ **data** | [**PackagesUploadDocker**](PackagesUploadDocker.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**DockerPackageUpload**](DockerPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -785,40 +1584,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadGo
 
-> Package PackagesUploadGo(ctx, owner, repo, optional)
+> GoPackageUpload PackagesUploadGo(ctx, owner, repo).Data(data).Execute()
 
 Create a new Go package
 
-Create a new Go package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadGo("x123456789a") // PackagesUploadGo |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadGo(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadGo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadGo`: GoPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadGo`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadGoOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadGoOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadGoRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadGo**](PackagesUploadGo.md)|  | 
+ **data** | [**PackagesUploadGo**](PackagesUploadGo.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**GoPackageUpload**](GoPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -832,40 +1659,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadHelm
 
-> Package PackagesUploadHelm(ctx, owner, repo, optional)
+> HelmPackageUpload PackagesUploadHelm(ctx, owner, repo).Data(data).Execute()
 
 Create a new Helm package
 
-Create a new Helm package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadHelm("x123456789a") // PackagesUploadHelm |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadHelm(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadHelm``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadHelm`: HelmPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadHelm`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadHelmOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadHelmOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadHelmRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadHelm**](PackagesUploadHelm.md)|  | 
+ **data** | [**PackagesUploadHelm**](PackagesUploadHelm.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**HelmPackageUpload**](HelmPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -879,40 +1734,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadLuarocks
 
-> Package PackagesUploadLuarocks(ctx, owner, repo, optional)
+> LuarocksPackageUpload PackagesUploadLuarocks(ctx, owner, repo).Data(data).Execute()
 
 Create a new LuaRocks package
 
-Create a new LuaRocks package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadLuarocks("x123456789a") // PackagesUploadLuarocks |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadLuarocks(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadLuarocks``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadLuarocks`: LuarocksPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadLuarocks`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadLuarocksOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadLuarocksOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadLuarocksRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadLuarocks**](PackagesUploadLuarocks.md)|  | 
+ **data** | [**PackagesUploadLuarocks**](PackagesUploadLuarocks.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**LuarocksPackageUpload**](LuarocksPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -926,32 +1809,60 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadMaven
 
-> MavenPackageUpload PackagesUploadMaven(ctx, owner, repo, optional)
+> MavenPackageUpload PackagesUploadMaven(ctx, owner, repo).Data(data).Execute()
 
 Create a new Maven package
 
-Create a new Maven package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadMaven("y1234456789a") // PackagesUploadMaven |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadMaven(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadMaven``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadMaven`: MavenPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadMaven`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadMavenOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadMavenOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadMavenRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadMaven**](PackagesUploadMaven.md)|  | 
+ **data** | [**PackagesUploadMaven**](PackagesUploadMaven.md) |  | 
 
 ### Return type
 
@@ -959,7 +1870,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -973,40 +1884,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadNpm
 
-> Package PackagesUploadNpm(ctx, owner, repo, optional)
+> NpmPackageUpload PackagesUploadNpm(ctx, owner, repo).Data(data).Execute()
 
 Create a new npm package
 
-Create a new npm package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadNpm("y123456789") // PackagesUploadNpm |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadNpm(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadNpm``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadNpm`: NpmPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadNpm`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadNpmOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadNpmOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadNpmRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadNpm**](PackagesUploadNpm.md)|  | 
+ **data** | [**PackagesUploadNpm**](PackagesUploadNpm.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**NpmPackageUpload**](NpmPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1020,40 +1959,143 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadNuget
 
-> Package PackagesUploadNuget(ctx, owner, repo, optional)
+> NugetPackageUpload PackagesUploadNuget(ctx, owner, repo).Data(data).Execute()
 
 Create a new NuGet package
 
-Create a new NuGet package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadNuget("y1234456789a") // PackagesUploadNuget |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadNuget(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadNuget``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadNuget`: NugetPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadNuget`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadNugetOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadNugetOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadNugetRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadNuget**](PackagesUploadNuget.md)|  | 
+ **data** | [**PackagesUploadNuget**](PackagesUploadNuget.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**NugetPackageUpload**](NugetPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesUploadP2
+
+> P2PackageUpload PackagesUploadP2(ctx, owner, repo).Data(data).Execute()
+
+Create a new P2 package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadP2("PackageFile_example") // PackagesUploadP2 |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadP2(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadP2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadP2`: P2PackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadP2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesUploadP2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**PackagesUploadP2**](PackagesUploadP2.md) |  | 
+
+### Return type
+
+[**P2PackageUpload**](P2PackageUpload.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1067,40 +2109,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadPython
 
-> Package PackagesUploadPython(ctx, owner, repo, optional)
+> PythonPackageUpload PackagesUploadPython(ctx, owner, repo).Data(data).Execute()
 
 Create a new Python package
 
-Create a new Python package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadPython("y123456789") // PackagesUploadPython |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadPython(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadPython``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadPython`: PythonPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadPython`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadPythonOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadPythonOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadPythonRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadPython**](PackagesUploadPython.md)|  | 
+ **data** | [**PackagesUploadPython**](PackagesUploadPython.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**PythonPackageUpload**](PythonPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1114,32 +2184,60 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRaw
 
-> RawPackageUpload PackagesUploadRaw(ctx, owner, repo, optional)
+> RawPackageUpload PackagesUploadRaw(ctx, owner, repo).Data(data).Execute()
 
 Create a new Raw package
 
-Create a new Raw package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadRaw("y123456789") // PackagesUploadRaw |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadRaw(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadRaw``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadRaw`: RawPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadRaw`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadRawOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadRawOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadRawRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadRaw**](PackagesUploadRaw.md)|  | 
+ **data** | [**PackagesUploadRaw**](PackagesUploadRaw.md) |  | 
 
 ### Return type
 
@@ -1147,7 +2245,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1161,40 +2259,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRpm
 
-> Package PackagesUploadRpm(ctx, owner, repo, optional)
+> RpmPackageUpload PackagesUploadRpm(ctx, owner, repo).Data(data).Execute()
 
 Create a new RedHat package
 
-Create a new RedHat package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadRpm("el/7", "y123456789") // PackagesUploadRpm |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadRpm(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadRpm``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadRpm`: RpmPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadRpm`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadRpmOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadRpmOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadRpmRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadRpm**](PackagesUploadRpm.md)|  | 
+ **data** | [**PackagesUploadRpm**](PackagesUploadRpm.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**RpmPackageUpload**](RpmPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1208,40 +2334,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRuby
 
-> Package PackagesUploadRuby(ctx, owner, repo, optional)
+> RubyPackageUpload PackagesUploadRuby(ctx, owner, repo).Data(data).Execute()
 
 Create a new Ruby package
 
-Create a new Ruby package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadRuby("y123456789") // PackagesUploadRuby |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadRuby(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadRuby``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadRuby`: RubyPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadRuby`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadRubyOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadRubyOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadRubyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadRuby**](PackagesUploadRuby.md)|  | 
+ **data** | [**PackagesUploadRuby**](PackagesUploadRuby.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**RubyPackageUpload**](RubyPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1255,40 +2409,68 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadTerraform
 
-> Package PackagesUploadTerraform(ctx, owner, repo, optional)
+> TerraformPackageUpload PackagesUploadTerraform(ctx, owner, repo).Data(data).Execute()
 
 Create a new Terraform package
 
-Create a new Terraform package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadTerraform("z123456789a") // PackagesUploadTerraform |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadTerraform(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadTerraform``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadTerraform`: TerraformPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadTerraform`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadTerraformOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadTerraformOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadTerraformRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadTerraform**](PackagesUploadTerraform.md)|  | 
+ **data** | [**PackagesUploadTerraform**](PackagesUploadTerraform.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**TerraformPackageUpload**](TerraformPackageUpload.md)
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1302,32 +2484,60 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadVagrant
 
-> VagrantPackageUpload PackagesUploadVagrant(ctx, owner, repo, optional)
+> VagrantPackageUpload PackagesUploadVagrant(ctx, owner, repo).Data(data).Execute()
 
 Create a new Vagrant package
 
-Create a new Vagrant package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesUploadVagrant("tcl", "y123456789x", "virtualbox", "1.0") // PackagesUploadVagrant |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadVagrant(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadVagrant``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadVagrant`: VagrantPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadVagrant`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesUploadVagrantOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesUploadVagrantOpts struct
+Other parameters are passed through a pointer to a apiPackagesUploadVagrantRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesUploadVagrant**](PackagesUploadVagrant.md)|  | 
+ **data** | [**PackagesUploadVagrant**](PackagesUploadVagrant.md) |  | 
 
 ### Return type
 
@@ -1335,7 +2545,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1349,32 +2559,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadAlpine
 
-> PackagesValidateUploadAlpine(ctx, owner, repo, optional)
+> PackagesValidateUploadAlpine(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Alpine package
 
-Validate parameters for create Alpine package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadAlpine("alpine/v3.8", "a123456789") // PackagesValidateUploadAlpine |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadAlpine(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadAlpine``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadAlpineOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadAlpineOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadAlpineRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadAlpine**](PackagesValidateUploadAlpine.md)|  | 
+ **data** | [**PackagesValidateUploadAlpine**](PackagesValidateUploadAlpine.md) |  | 
 
 ### Return type
 
@@ -1382,7 +2618,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1396,32 +2632,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadCargo
 
-> PackagesValidateUploadCargo(ctx, owner, repo, optional)
+> PackagesValidateUploadCargo(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Cargo package
 
-Validate parameters for create Cargo package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadCargo("x123456789a") // PackagesValidateUploadCargo |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadCargo(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadCargo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadCargoOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadCargoOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadCargoRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadCargo**](PackagesValidateUploadCargo.md)|  | 
+ **data** | [**PackagesValidateUploadCargo**](PackagesValidateUploadCargo.md) |  | 
 
 ### Return type
 
@@ -1429,7 +2691,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1443,32 +2705,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadCocoapods
 
-> PackagesValidateUploadCocoapods(ctx, owner, repo, optional)
+> PackagesValidateUploadCocoapods(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create CocoaPods package
 
-Validate parameters for create CocoaPods package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadCocoapods("z123456789") // PackagesValidateUploadCocoapods |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadCocoapods(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadCocoapods``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadCocoapodsOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadCocoapodsOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadCocoapodsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadCocoapods**](PackagesValidateUploadCocoapods.md)|  | 
+ **data** | [**PackagesValidateUploadCocoapods**](PackagesValidateUploadCocoapods.md) |  | 
 
 ### Return type
 
@@ -1476,7 +2764,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1490,32 +2778,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadComposer
 
-> PackagesValidateUploadComposer(ctx, owner, repo, optional)
+> PackagesValidateUploadComposer(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Composer package
 
-Validate parameters for create Composer package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadComposer("y123456789") // PackagesValidateUploadComposer |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadComposer(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadComposer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadComposerOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadComposerOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadComposerRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadComposer**](PackagesValidateUploadComposer.md)|  | 
+ **data** | [**PackagesValidateUploadComposer**](PackagesValidateUploadComposer.md) |  | 
 
 ### Return type
 
@@ -1523,7 +2837,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1537,32 +2851,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadConan
 
-> PackagesValidateUploadConan(ctx, owner, repo, optional)
+> PackagesValidateUploadConan(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Conan package
 
-Validate parameters for create Conan package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadConan("y1234456789b", "y1234456789c", "y1234456789a", "x123456789a") // PackagesValidateUploadConan |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadConan(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadConan``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadConanOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadConanOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadConanRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadConan**](PackagesValidateUploadConan.md)|  | 
+ **data** | [**PackagesValidateUploadConan**](PackagesValidateUploadConan.md) |  | 
 
 ### Return type
 
@@ -1570,7 +2910,80 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesValidateUploadConda
+
+> PackagesValidateUploadConda(ctx, owner, repo).Data(data).Execute()
+
+Validate parameters for create Conda package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadConda("x123456789a") // PackagesValidateUploadConda |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadConda(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadConda``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesValidateUploadCondaRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**PackagesValidateUploadConda**](PackagesValidateUploadConda.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1584,32 +2997,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadCran
 
-> PackagesValidateUploadCran(ctx, owner, repo, optional)
+> PackagesValidateUploadCran(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create CRAN package
 
-Validate parameters for create CRAN package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadCran("x123456789a") // PackagesValidateUploadCran |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadCran(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadCran``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadCranOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadCranOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadCranRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadCran**](PackagesValidateUploadCran.md)|  | 
+ **data** | [**PackagesValidateUploadCran**](PackagesValidateUploadCran.md) |  | 
 
 ### Return type
 
@@ -1617,7 +3056,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1631,32 +3070,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadDart
 
-> PackagesValidateUploadDart(ctx, owner, repo, optional)
+> PackagesValidateUploadDart(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Dart package
 
-Validate parameters for create Dart package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadDart("x123456789a") // PackagesValidateUploadDart |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadDart(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadDart``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadDartOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadDartOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadDartRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadDart**](PackagesValidateUploadDart.md)|  | 
+ **data** | [**PackagesValidateUploadDart**](PackagesValidateUploadDart.md) |  | 
 
 ### Return type
 
@@ -1664,7 +3129,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1678,32 +3143,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadDeb
 
-> PackagesValidateUploadDeb(ctx, owner, repo, optional)
+> PackagesValidateUploadDeb(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Debian package
 
-Validate parameters for create Debian package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadDeb("ubuntu/xenial", "y123456789") // PackagesValidateUploadDeb |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadDeb(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadDeb``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadDebOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadDebOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadDebRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadDeb**](PackagesValidateUploadDeb.md)|  | 
+ **data** | [**PackagesValidateUploadDeb**](PackagesValidateUploadDeb.md) |  | 
 
 ### Return type
 
@@ -1711,7 +3202,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1725,32 +3216,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadDocker
 
-> PackagesValidateUploadDocker(ctx, owner, repo, optional)
+> PackagesValidateUploadDocker(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Docker package
 
-Validate parameters for create Docker package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadDocker("y123456789") // PackagesValidateUploadDocker |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadDocker(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadDocker``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadDockerOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadDockerOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadDockerRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadDocker**](PackagesValidateUploadDocker.md)|  | 
+ **data** | [**PackagesValidateUploadDocker**](PackagesValidateUploadDocker.md) |  | 
 
 ### Return type
 
@@ -1758,7 +3275,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1772,32 +3289,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadGo
 
-> PackagesValidateUploadGo(ctx, owner, repo, optional)
+> PackagesValidateUploadGo(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Go package
 
-Validate parameters for create Go package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadGo("x123456789a") // PackagesValidateUploadGo |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadGo(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadGo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadGoOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadGoOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadGoRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadGo**](PackagesValidateUploadGo.md)|  | 
+ **data** | [**PackagesValidateUploadGo**](PackagesValidateUploadGo.md) |  | 
 
 ### Return type
 
@@ -1805,7 +3348,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1819,32 +3362,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadHelm
 
-> PackagesValidateUploadHelm(ctx, owner, repo, optional)
+> PackagesValidateUploadHelm(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Helm package
 
-Validate parameters for create Helm package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadHelm("x123456789a") // PackagesValidateUploadHelm |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadHelm(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadHelm``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadHelmOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadHelmOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadHelmRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadHelm**](PackagesValidateUploadHelm.md)|  | 
+ **data** | [**PackagesValidateUploadHelm**](PackagesValidateUploadHelm.md) |  | 
 
 ### Return type
 
@@ -1852,7 +3421,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1866,32 +3435,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadLuarocks
 
-> PackagesValidateUploadLuarocks(ctx, owner, repo, optional)
+> PackagesValidateUploadLuarocks(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create LuaRocks package
 
-Validate parameters for create LuaRocks package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadLuarocks("x123456789a") // PackagesValidateUploadLuarocks |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadLuarocks(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadLuarocks``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadLuarocksOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadLuarocksOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadLuarocksRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadLuarocks**](PackagesValidateUploadLuarocks.md)|  | 
+ **data** | [**PackagesValidateUploadLuarocks**](PackagesValidateUploadLuarocks.md) |  | 
 
 ### Return type
 
@@ -1899,7 +3494,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1913,32 +3508,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadMaven
 
-> PackagesValidateUploadMaven(ctx, owner, repo, optional)
+> PackagesValidateUploadMaven(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Maven package
 
-Validate parameters for create Maven package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadMaven("y1234456789a") // PackagesValidateUploadMaven |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadMaven(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadMaven``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadMavenOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadMavenOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadMavenRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadMaven**](PackagesValidateUploadMaven.md)|  | 
+ **data** | [**PackagesValidateUploadMaven**](PackagesValidateUploadMaven.md) |  | 
 
 ### Return type
 
@@ -1946,7 +3567,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -1960,32 +3581,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadNpm
 
-> PackagesValidateUploadNpm(ctx, owner, repo, optional)
+> PackagesValidateUploadNpm(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create npm package
 
-Validate parameters for create npm package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadNpm("y123456789") // PackagesValidateUploadNpm |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadNpm(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadNpm``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadNpmOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadNpmOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadNpmRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadNpm**](PackagesValidateUploadNpm.md)|  | 
+ **data** | [**PackagesValidateUploadNpm**](PackagesValidateUploadNpm.md) |  | 
 
 ### Return type
 
@@ -1993,7 +3640,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -2007,32 +3654,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadNuget
 
-> PackagesValidateUploadNuget(ctx, owner, repo, optional)
+> PackagesValidateUploadNuget(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create NuGet package
 
-Validate parameters for create NuGet package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadNuget("y1234456789a") // PackagesValidateUploadNuget |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadNuget(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadNuget``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadNugetOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadNugetOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadNugetRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadNuget**](PackagesValidateUploadNuget.md)|  | 
+ **data** | [**PackagesValidateUploadNuget**](PackagesValidateUploadNuget.md) |  | 
 
 ### Return type
 
@@ -2040,7 +3713,80 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesValidateUploadP2
+
+> PackagesValidateUploadP2(ctx, owner, repo).Data(data).Execute()
+
+Validate parameters for create P2 package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadP2("PackageFile_example") // PackagesValidateUploadP2 |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadP2(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadP2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesValidateUploadP2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**PackagesValidateUploadP2**](PackagesValidateUploadP2.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -2054,32 +3800,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadPython
 
-> PackagesValidateUploadPython(ctx, owner, repo, optional)
+> PackagesValidateUploadPython(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Python package
 
-Validate parameters for create Python package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadPython("y123456789") // PackagesValidateUploadPython |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadPython(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadPython``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadPythonOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadPythonOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadPythonRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadPython**](PackagesValidateUploadPython.md)|  | 
+ **data** | [**PackagesValidateUploadPython**](PackagesValidateUploadPython.md) |  | 
 
 ### Return type
 
@@ -2087,7 +3859,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -2101,32 +3873,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadRaw
 
-> PackagesValidateUploadRaw(ctx, owner, repo, optional)
+> PackagesValidateUploadRaw(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Raw package
 
-Validate parameters for create Raw package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadRaw("y123456789") // PackagesValidateUploadRaw |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadRaw(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadRaw``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadRawOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadRawOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadRawRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadRaw**](PackagesValidateUploadRaw.md)|  | 
+ **data** | [**PackagesValidateUploadRaw**](PackagesValidateUploadRaw.md) |  | 
 
 ### Return type
 
@@ -2134,7 +3932,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -2148,32 +3946,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadRpm
 
-> PackagesValidateUploadRpm(ctx, owner, repo, optional)
+> PackagesValidateUploadRpm(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create RedHat package
 
-Validate parameters for create RedHat package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadRpm("el/7", "y123456789") // PackagesValidateUploadRpm |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadRpm(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadRpm``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadRpmOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadRpmOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadRpmRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadRpm**](PackagesValidateUploadRpm.md)|  | 
+ **data** | [**PackagesValidateUploadRpm**](PackagesValidateUploadRpm.md) |  | 
 
 ### Return type
 
@@ -2181,7 +4005,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -2195,32 +4019,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadRuby
 
-> PackagesValidateUploadRuby(ctx, owner, repo, optional)
+> PackagesValidateUploadRuby(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Ruby package
 
-Validate parameters for create Ruby package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadRuby("y123456789") // PackagesValidateUploadRuby |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadRuby(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadRuby``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadRubyOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadRubyOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadRubyRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadRuby**](PackagesValidateUploadRuby.md)|  | 
+ **data** | [**PackagesValidateUploadRuby**](PackagesValidateUploadRuby.md) |  | 
 
 ### Return type
 
@@ -2228,7 +4078,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -2242,32 +4092,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadTerraform
 
-> PackagesValidateUploadTerraform(ctx, owner, repo, optional)
+> PackagesValidateUploadTerraform(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Terraform package
 
-Validate parameters for create Terraform package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadTerraform("z123456789a") // PackagesValidateUploadTerraform |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadTerraform(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadTerraform``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadTerraformOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadTerraformOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadTerraformRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadTerraform**](PackagesValidateUploadTerraform.md)|  | 
+ **data** | [**PackagesValidateUploadTerraform**](PackagesValidateUploadTerraform.md) |  | 
 
 ### Return type
 
@@ -2275,7 +4151,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -2289,32 +4165,58 @@ Name | Type | Description  | Notes
 
 ## PackagesValidateUploadVagrant
 
-> PackagesValidateUploadVagrant(ctx, owner, repo, optional)
+> PackagesValidateUploadVagrant(ctx, owner, repo).Data(data).Execute()
 
 Validate parameters for create Vagrant package
 
-Validate parameters for create Vagrant package
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewPackagesValidateUploadVagrant("tcl", "y123456789x", "virtualbox", "1.0") // PackagesValidateUploadVagrant |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadVagrant(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadVagrant``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***PackagesValidateUploadVagrantOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a PackagesValidateUploadVagrantOpts struct
+Other parameters are passed through a pointer to a apiPackagesValidateUploadVagrantRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**optional.Interface of PackagesValidateUploadVagrant**](PackagesValidateUploadVagrant.md)|  | 
+ **data** | [**PackagesValidateUploadVagrant**](PackagesValidateUploadVagrant.md) |  | 
 
 ### Return type
 
@@ -2322,7 +4224,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 

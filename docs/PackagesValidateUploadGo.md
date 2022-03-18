@@ -5,7 +5,98 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PackageFile** | **string** | The primary file for the package. | 
-**Republish** | **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
+**Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
+**Tags** | Pointer to **string** | A comma-separated values list of tags to add to the package. | [optional] 
+
+## Methods
+
+### NewPackagesValidateUploadGo
+
+`func NewPackagesValidateUploadGo(packageFile string, ) *PackagesValidateUploadGo`
+
+NewPackagesValidateUploadGo instantiates a new PackagesValidateUploadGo object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewPackagesValidateUploadGoWithDefaults
+
+`func NewPackagesValidateUploadGoWithDefaults() *PackagesValidateUploadGo`
+
+NewPackagesValidateUploadGoWithDefaults instantiates a new PackagesValidateUploadGo object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetPackageFile
+
+`func (o *PackagesValidateUploadGo) GetPackageFile() string`
+
+GetPackageFile returns the PackageFile field if non-nil, zero value otherwise.
+
+### GetPackageFileOk
+
+`func (o *PackagesValidateUploadGo) GetPackageFileOk() (*string, bool)`
+
+GetPackageFileOk returns a tuple with the PackageFile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPackageFile
+
+`func (o *PackagesValidateUploadGo) SetPackageFile(v string)`
+
+SetPackageFile sets PackageFile field to given value.
+
+
+### GetRepublish
+
+`func (o *PackagesValidateUploadGo) GetRepublish() bool`
+
+GetRepublish returns the Republish field if non-nil, zero value otherwise.
+
+### GetRepublishOk
+
+`func (o *PackagesValidateUploadGo) GetRepublishOk() (*bool, bool)`
+
+GetRepublishOk returns a tuple with the Republish field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRepublish
+
+`func (o *PackagesValidateUploadGo) SetRepublish(v bool)`
+
+SetRepublish sets Republish field to given value.
+
+### HasRepublish
+
+`func (o *PackagesValidateUploadGo) HasRepublish() bool`
+
+HasRepublish returns a boolean if a field has been set.
+
+### GetTags
+
+`func (o *PackagesValidateUploadGo) GetTags() string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *PackagesValidateUploadGo) GetTagsOk() (*string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *PackagesValidateUploadGo) SetTags(v string)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *PackagesValidateUploadGo) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

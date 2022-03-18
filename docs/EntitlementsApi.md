@@ -1,6 +1,6 @@
 # \EntitlementsApi
 
-All URIs are relative to *https://api.cloudsmith.io*
+All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -19,33 +19,62 @@ Method | HTTP request | Description
 
 ## EntitlementsCreate
 
-> RepositoryToken EntitlementsCreate(ctx, owner, repo, optional)
+> RepositoryToken EntitlementsCreate(ctx, owner, repo).ShowTokens(showTokens).Data(data).Execute()
 
 Create a specific entitlement in a repository.
 
-Create a specific entitlement in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    showTokens := true // bool | Show entitlement token strings in results (optional)
+    data := *openapiclient.NewEntitlementsCreate("Name_example") // EntitlementsCreate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsCreate(context.Background(), owner, repo).ShowTokens(showTokens).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EntitlementsCreate`: RepositoryToken
+    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***EntitlementsCreateOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a EntitlementsCreateOpts struct
+Other parameters are passed through a pointer to a apiEntitlementsCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **showTokens** | **optional.Bool**| Show entitlement token strings in results | 
- **data** | [**optional.Interface of EntitlementsCreate**](EntitlementsCreate.md)|  | 
+ **showTokens** | **bool** | Show entitlement token strings in results | 
+ **data** | [**EntitlementsCreate**](EntitlementsCreate.md) |  | 
 
 ### Return type
 
@@ -53,7 +82,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -67,21 +96,59 @@ Name | Type | Description  | Notes
 
 ## EntitlementsDelete
 
-> EntitlementsDelete(ctx, owner, repo, identifier)
+> EntitlementsDelete(ctx, owner, repo, identifier).Execute()
 
 Delete a specific entitlement in a repository.
 
-Delete a specific entitlement in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsDelete(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEntitlementsDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
 
 ### Return type
 
@@ -89,7 +156,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -103,21 +170,59 @@ Name | Type | Description  | Notes
 
 ## EntitlementsDisable
 
-> EntitlementsDisable(ctx, owner, repo, identifier)
+> EntitlementsDisable(ctx, owner, repo, identifier).Execute()
 
 Disable an entitlement token in a repository.
 
-Disable an entitlement token in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsDisable(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsDisable``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEntitlementsDisableRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
 
 ### Return type
 
@@ -125,7 +230,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -139,21 +244,59 @@ Name | Type | Description  | Notes
 
 ## EntitlementsEnable
 
-> EntitlementsEnable(ctx, owner, repo, identifier)
+> EntitlementsEnable(ctx, owner, repo, identifier).Execute()
 
 Enable an entitlement token in a repository.
 
-Enable an entitlement token in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsEnable(context.Background(), owner, repo, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsEnable``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEntitlementsEnableRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
 
 ### Return type
 
@@ -161,7 +304,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -175,34 +318,64 @@ Name | Type | Description  | Notes
 
 ## EntitlementsList
 
-> []RepositoryToken EntitlementsList(ctx, owner, repo, optional)
+> []RepositoryToken EntitlementsList(ctx, owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Execute()
 
 Get a list of all entitlements in a repository.
 
-Get a list of all entitlements in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+    showTokens := true // bool | Show entitlement token strings in results (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EntitlementsList`: []RepositoryToken
+    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***EntitlementsListOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a EntitlementsListOpts struct
+Other parameters are passed through a pointer to a apiEntitlementsListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **page** | **optional.Int64**| A page number within the paginated result set. | 
- **pageSize** | **optional.Int64**| Number of results to return per page. | 
- **showTokens** | **optional.Bool**| Show entitlement token strings in results | 
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+ **showTokens** | **bool** | Show entitlement token strings in results | 
 
 ### Return type
 
@@ -210,7 +383,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -224,26 +397,56 @@ Name | Type | Description  | Notes
 
 ## EntitlementsPartialUpdate
 
-> RepositoryToken EntitlementsPartialUpdate(ctx, owner, repo, identifier, optional)
+> RepositoryToken EntitlementsPartialUpdate(ctx, owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
 
 Update a specific entitlement in a repository.
 
-Update a specific entitlement in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+    showTokens := true // bool | Show entitlement token strings in results (optional)
+    data := *openapiclient.NewEntitlementsPartialUpdate() // EntitlementsPartialUpdate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsPartialUpdate(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EntitlementsPartialUpdate`: RepositoryToken
+    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
- **optional** | ***EntitlementsPartialUpdateOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a EntitlementsPartialUpdateOpts struct
+Other parameters are passed through a pointer to a apiEntitlementsPartialUpdateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -251,8 +454,8 @@ Name | Type | Description  | Notes
 
 
 
- **showTokens** | **optional.Bool**| Show entitlement token strings in results | 
- **data** | [**optional.Interface of EntitlementsPartialUpdate**](EntitlementsPartialUpdate.md)|  | 
+ **showTokens** | **bool** | Show entitlement token strings in results | 
+ **data** | [**EntitlementsPartialUpdate**](EntitlementsPartialUpdate.md) |  | 
 
 ### Return type
 
@@ -260,7 +463,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -274,26 +477,55 @@ Name | Type | Description  | Notes
 
 ## EntitlementsRead
 
-> RepositoryToken EntitlementsRead(ctx, owner, repo, identifier, optional)
+> RepositoryToken EntitlementsRead(ctx, owner, repo, identifier).ShowTokens(showTokens).Execute()
 
 Get a specific entitlement in a repository.
 
-Get a specific entitlement in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+    showTokens := true // bool | Show entitlement token strings in results (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsRead(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EntitlementsRead`: RepositoryToken
+    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
- **optional** | ***EntitlementsReadOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a EntitlementsReadOpts struct
+Other parameters are passed through a pointer to a apiEntitlementsReadRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -301,7 +533,7 @@ Name | Type | Description  | Notes
 
 
 
- **showTokens** | **optional.Bool**| Show entitlement token strings in results | 
+ **showTokens** | **bool** | Show entitlement token strings in results | 
 
 ### Return type
 
@@ -309,7 +541,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -323,26 +555,56 @@ Name | Type | Description  | Notes
 
 ## EntitlementsRefresh
 
-> RepositoryTokenRefresh EntitlementsRefresh(ctx, owner, repo, identifier, optional)
+> RepositoryTokenRefresh EntitlementsRefresh(ctx, owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
 
 Refresh an entitlement token in a repository.
 
-Refresh an entitlement token in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+    showTokens := true // bool | Show entitlement token strings in results (optional)
+    data := *openapiclient.NewEntitlementsRefresh() // EntitlementsRefresh |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsRefresh(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsRefresh``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EntitlementsRefresh`: RepositoryTokenRefresh
+    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsRefresh`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
- **optional** | ***EntitlementsRefreshOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a EntitlementsRefreshOpts struct
+Other parameters are passed through a pointer to a apiEntitlementsRefreshRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -350,8 +612,8 @@ Name | Type | Description  | Notes
 
 
 
- **showTokens** | **optional.Bool**| Show entitlement token strings in results | 
- **data** | [**optional.Interface of EntitlementsRefresh**](EntitlementsRefresh.md)|  | 
+ **showTokens** | **bool** | Show entitlement token strings in results | 
+ **data** | [**EntitlementsRefresh**](EntitlementsRefresh.md) |  | 
 
 ### Return type
 
@@ -359,7 +621,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -373,21 +635,61 @@ Name | Type | Description  | Notes
 
 ## EntitlementsReset
 
-> EntitlementsReset(ctx, owner, repo, identifier)
+> EntitlementsReset(ctx, owner, repo, identifier).ShowTokens(showTokens).Execute()
 
 Reset the statistics for an entitlement token in a repository.
 
-Reset the statistics for an entitlement token in a repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    identifier := "identifier_example" // string | 
+    showTokens := true // bool | Show entitlement token strings in results (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsReset(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsReset``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
-**identifier** | **string**|  | 
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiEntitlementsResetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **showTokens** | **bool** | Show entitlement token strings in results | 
 
 ### Return type
 
@@ -395,7 +697,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
@@ -409,33 +711,62 @@ Name | Type | Description  | Notes
 
 ## EntitlementsSync
 
-> RepositoryTokenSync EntitlementsSync(ctx, owner, repo, optional)
+> RepositoryTokenSync EntitlementsSync(ctx, owner, repo).ShowTokens(showTokens).Data(data).Execute()
 
 Synchronise tokens from a source repository.
 
-Synchronise tokens from a source repository.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    showTokens := true // bool | Show entitlement token strings in results (optional)
+    data := *openapiclient.NewEntitlementsSync("Source_example") // EntitlementsSync |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsSync(context.Background(), owner, repo).ShowTokens(showTokens).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsSync``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `EntitlementsSync`: RepositoryTokenSync
+    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsSync`: %v\n", resp)
+}
+```
+
+### Path Parameters
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string**|  | 
-**repo** | **string**|  | 
- **optional** | ***EntitlementsSyncOpts** | optional parameters | nil if no parameters
+**owner** | **string** |  | 
+**repo** | **string** |  | 
 
-### Optional Parameters
+### Other Parameters
 
-Optional parameters are passed through a pointer to a EntitlementsSyncOpts struct
+Other parameters are passed through a pointer to a apiEntitlementsSyncRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **showTokens** | **optional.Bool**| Show entitlement token strings in results | 
- **data** | [**optional.Interface of EntitlementsSync**](EntitlementsSync.md)|  | 
+ **showTokens** | **bool** | Show entitlement token strings in results | 
+ **data** | [**EntitlementsSync**](EntitlementsSync.md) |  | 
 
 ### Return type
 
@@ -443,7 +774,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apikey](../README.md#apikey), [csrf_token](../README.md#csrf_token)
+[apikey](../README.md#apikey)
 
 ### HTTP request headers
 
