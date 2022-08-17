@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.42.3
+API version: 1.121.3
 Contact: support@cloudsmith.io
 */
 
@@ -19,12 +19,26 @@ import (
 type RepositoryCreate struct {
 	// Base URL from which packages and other artifacts are downloaded.
 	CdnUrl *string `json:"cdn_url,omitempty"`
+	// If checked, missing credentials for this repository where basic authentication is required shall present an enriched value in the 'WWW-Authenticate' header containing the namespace and repository. This can be useful for tooling such as SBT where the authentication realm is used to distinguish and disambiguate credentials.
+	ContextualAuthRealm *bool `json:"contextual_auth_realm,omitempty"`
+	// If checked, users can copy any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
+	CopyOwn *bool `json:"copy_own,omitempty"`
+	// This defines the minimum level of privilege required for a user to copy packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific copy setting.
+	CopyPackages *string `json:"copy_packages,omitempty"`
 	//
 	CreatedAt *string `json:"created_at,omitempty"`
+	// This defines the default level of privilege that all of your organization members have for this repository. This does not include collaborators, but applies to any member of the org regardless of their own membership role (i.e. it applies to owners, managers and members). Be careful if setting this to admin, because any member will be able to change settings.
+	DefaultPrivilege *string `json:"default_privilege,omitempty"`
+	// If checked, users can delete any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
+	DeleteOwn *bool `json:"delete_own,omitempty"`
+	// This defines the minimum level of privilege required for a user to delete packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific delete setting.
+	DeletePackages *string `json:"delete_packages,omitempty"`
 	//
 	DeletedAt *string `json:"deleted_at,omitempty"`
 	// A description of the repository's purpose/contents.
 	Description *string `json:"description,omitempty"`
+	// If checked, refresh tokens will be issued in addition to access tokens for Docker authentication. This allows unlimited extension of the lifetime of access tokens.
+	DockerRefreshTokensEnabled *bool `json:"docker_refresh_tokens_enabled,omitempty"`
 	//
 	GpgKeys []ReposGpgKeys `json:"gpg_keys,omitempty"`
 	// If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted.
@@ -35,6 +49,10 @@ type RepositoryCreate struct {
 	IsPrivate *bool `json:"is_private,omitempty"`
 	//
 	IsPublic *bool `json:"is_public,omitempty"`
+	// If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
+	MoveOwn *bool `json:"move_own,omitempty"`
+	// This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting.
+	MovePackages *string `json:"move_packages,omitempty"`
 	// A descriptive name for the repository.
 	Name string `json:"name"`
 	// Namespace to which this repository belongs.
@@ -47,14 +65,36 @@ type RepositoryCreate struct {
 	PackageCount *int64 `json:"package_count,omitempty"`
 	// The number of groups in the repository.
 	PackageGroupCount *int64 `json:"package_group_count,omitempty"`
+	// If checked, Npm packages that are not in the repository when requested by clients will automatically be proxied from the public npmjs.org registry. If there is at least one version for a package, others will not be proxied.
+	ProxyNpmjs *bool `json:"proxy_npmjs,omitempty"`
+	// If checked, Python packages that are not in the repository when requested by clients will automatically be proxied from the public pypi.python.org registry. If there is at least one version for a package, others will not be proxied.
+	ProxyPypi *bool `json:"proxy_pypi,omitempty"`
+	// If checked, HTML and JSON indexes will be generated that list all available raw packages in the repository.
+	RawPackageIndexEnabled *bool `json:"raw_package_index_enabled,omitempty"`
+	// If checked, the HTML and JSON indexes will display raw package GPG signatures alongside the index packages.
+	RawPackageIndexSignaturesEnabled *bool `json:"raw_package_index_signatures_enabled,omitempty"`
+	// This defines the minimum level of privilege required for a user to republish packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific republish setting. Please note that the user still requires the privilege to delete packages that will be replaced by the new package; otherwise the republish will fail.
+	ReplacePackages *string `json:"replace_packages,omitempty"`
+	// If checked, uploaded packages will overwrite/replace any others with the same attributes (e.g. same version) by default. This only applies if the user has the required privilege for the republishing AND has the required privilege to delete existing packages that they don't own.
+	ReplacePackagesByDefault *bool `json:"replace_packages_by_default,omitempty"`
 	// The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Open-Source repositories are always visible to everyone and are restricted by licensing, but are free to use and come with generous bandwidth/storage. You can only select Open-Source at repository creation time.
 	RepositoryType *int64 `json:"repository_type,omitempty"`
 	// The repository type changes how it is accessed and billed. Private repositories can only be used on paid plans, but are visible only to you or authorised delegates. Public repositories are free to use on all plans and visible to all Cloudsmith users.
 	RepositoryTypeStr *string `json:"repository_type_str,omitempty"`
+	// If checked, users can resync any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
+	ResyncOwn *bool `json:"resync_own,omitempty"`
+	// This defines the minimum level of privilege required for a user to resync packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific resync setting.
+	ResyncPackages *string `json:"resync_packages,omitempty"`
+	// If checked, users can scan any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
+	ScanOwn *bool `json:"scan_own,omitempty"`
+	// This defines the minimum level of privilege required for a user to scan packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific scan setting.
+	ScanPackages *string `json:"scan_packages,omitempty"`
 	// Website URL for this repository.
 	SelfHtmlUrl *string `json:"self_html_url,omitempty"`
 	// API endpoint where data about this repository can be retrieved.
 	SelfUrl *string `json:"self_url,omitempty"`
+	// If checked, the Set Me Up help for all formats will always be shown, even if you don't have packages of that type uploaded. Otherwise, help will only be shown for packages that are in the repository. For example, if you have uploaded only NuGet packages, then the Set Me Up help for NuGet packages will be shown only.
+	ShowSetupAll *bool `json:"show_setup_all,omitempty"`
 	// The calculated size of the repository.
 	Size *int64 `json:"size,omitempty"`
 	// The calculated size of the repository (human readable).
@@ -65,6 +105,22 @@ type RepositoryCreate struct {
 	SlugPerm *string `json:"slug_perm,omitempty"`
 	// The Cloudsmith region in which package files are stored.
 	StorageRegion *string `json:"storage_region,omitempty"`
+	// If checked, npm packages will be validated strictly to ensure the package matches specifcation. You can turn this off if you have packages that are old or otherwise mildly off-spec, but we can't guarantee the packages will work with npm-cli or other tooling correctly. Turn off at your own risk!
+	StrictNpmValidation *bool `json:"strict_npm_validation,omitempty"`
+	// If checked, a 'Label' field will be present in Debian-based repositories. It will contain a string that identifies the entitlement token used to authenticate the repository, in the form of 'source=t-<identifier>'; or 'source=none' if no token was used. You can use this to help with pinning.
+	UseDebianLabels *bool `json:"use_debian_labels,omitempty"`
+	// If checked, dependencies of uploaded Cargo crates which do not set an explicit value for \"registry\" will be assumed to be available from crates.io. If unchecked, dependencies with unspecified \"registry\" values will be assumed to be available in the registry being uploaded to. Uncheck this if you want to ensure that dependencies are only ever installed from Cloudsmith unless explicitly specified as belong to another registry.
+	UseDefaultCargoUpstream *bool `json:"use_default_cargo_upstream,omitempty"`
+	// If checked, noarch packages (if supported) are enabled in installations/configurations. A noarch package is one that is not tied to specific system architecture (like i686).
+	UseNoarchPackages *bool `json:"use_noarch_packages,omitempty"`
+	// If checked, source packages (if supported) are enabled in installations/configurations. A source package is one that contains source code rather than built binaries.
+	UseSourcePackages *bool `json:"use_source_packages,omitempty"`
+	// If checked, vulnerability scanning will be enabled for all supported packages within this repository.
+	UseVulnerabilityScanning *bool `json:"use_vulnerability_scanning,omitempty"`
+	// If checked, users can use and manage their own user-specific entitlement token for the repository (if private). Otherwise, user-specific entitlements are disabled for all users.
+	UserEntitlementsEnabled *bool `json:"user_entitlements_enabled,omitempty"`
+	// This defines the minimum level of privilege required for a user to view repository statistics, to include entitlement-based usage, if applciable. If a user does not have the permission, they won't be able to view any statistics, either via the UI, API or CLI.
+	ViewStatistics *string `json:"view_statistics,omitempty"`
 }
 
 // NewRepositoryCreate instantiates a new RepositoryCreate object
@@ -117,6 +173,102 @@ func (o *RepositoryCreate) SetCdnUrl(v string) {
 	o.CdnUrl = &v
 }
 
+// GetContextualAuthRealm returns the ContextualAuthRealm field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetContextualAuthRealm() bool {
+	if o == nil || o.ContextualAuthRealm == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ContextualAuthRealm
+}
+
+// GetContextualAuthRealmOk returns a tuple with the ContextualAuthRealm field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetContextualAuthRealmOk() (*bool, bool) {
+	if o == nil || o.ContextualAuthRealm == nil {
+		return nil, false
+	}
+	return o.ContextualAuthRealm, true
+}
+
+// HasContextualAuthRealm returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasContextualAuthRealm() bool {
+	if o != nil && o.ContextualAuthRealm != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetContextualAuthRealm gets a reference to the given bool and assigns it to the ContextualAuthRealm field.
+func (o *RepositoryCreate) SetContextualAuthRealm(v bool) {
+	o.ContextualAuthRealm = &v
+}
+
+// GetCopyOwn returns the CopyOwn field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetCopyOwn() bool {
+	if o == nil || o.CopyOwn == nil {
+		var ret bool
+		return ret
+	}
+	return *o.CopyOwn
+}
+
+// GetCopyOwnOk returns a tuple with the CopyOwn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetCopyOwnOk() (*bool, bool) {
+	if o == nil || o.CopyOwn == nil {
+		return nil, false
+	}
+	return o.CopyOwn, true
+}
+
+// HasCopyOwn returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasCopyOwn() bool {
+	if o != nil && o.CopyOwn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCopyOwn gets a reference to the given bool and assigns it to the CopyOwn field.
+func (o *RepositoryCreate) SetCopyOwn(v bool) {
+	o.CopyOwn = &v
+}
+
+// GetCopyPackages returns the CopyPackages field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetCopyPackages() string {
+	if o == nil || o.CopyPackages == nil {
+		var ret string
+		return ret
+	}
+	return *o.CopyPackages
+}
+
+// GetCopyPackagesOk returns a tuple with the CopyPackages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetCopyPackagesOk() (*string, bool) {
+	if o == nil || o.CopyPackages == nil {
+		return nil, false
+	}
+	return o.CopyPackages, true
+}
+
+// HasCopyPackages returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasCopyPackages() bool {
+	if o != nil && o.CopyPackages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCopyPackages gets a reference to the given string and assigns it to the CopyPackages field.
+func (o *RepositoryCreate) SetCopyPackages(v string) {
+	o.CopyPackages = &v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetCreatedAt() string {
 	if o == nil || o.CreatedAt == nil {
@@ -147,6 +299,102 @@ func (o *RepositoryCreate) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
 func (o *RepositoryCreate) SetCreatedAt(v string) {
 	o.CreatedAt = &v
+}
+
+// GetDefaultPrivilege returns the DefaultPrivilege field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetDefaultPrivilege() string {
+	if o == nil || o.DefaultPrivilege == nil {
+		var ret string
+		return ret
+	}
+	return *o.DefaultPrivilege
+}
+
+// GetDefaultPrivilegeOk returns a tuple with the DefaultPrivilege field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetDefaultPrivilegeOk() (*string, bool) {
+	if o == nil || o.DefaultPrivilege == nil {
+		return nil, false
+	}
+	return o.DefaultPrivilege, true
+}
+
+// HasDefaultPrivilege returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasDefaultPrivilege() bool {
+	if o != nil && o.DefaultPrivilege != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultPrivilege gets a reference to the given string and assigns it to the DefaultPrivilege field.
+func (o *RepositoryCreate) SetDefaultPrivilege(v string) {
+	o.DefaultPrivilege = &v
+}
+
+// GetDeleteOwn returns the DeleteOwn field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetDeleteOwn() bool {
+	if o == nil || o.DeleteOwn == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DeleteOwn
+}
+
+// GetDeleteOwnOk returns a tuple with the DeleteOwn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetDeleteOwnOk() (*bool, bool) {
+	if o == nil || o.DeleteOwn == nil {
+		return nil, false
+	}
+	return o.DeleteOwn, true
+}
+
+// HasDeleteOwn returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasDeleteOwn() bool {
+	if o != nil && o.DeleteOwn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleteOwn gets a reference to the given bool and assigns it to the DeleteOwn field.
+func (o *RepositoryCreate) SetDeleteOwn(v bool) {
+	o.DeleteOwn = &v
+}
+
+// GetDeletePackages returns the DeletePackages field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetDeletePackages() string {
+	if o == nil || o.DeletePackages == nil {
+		var ret string
+		return ret
+	}
+	return *o.DeletePackages
+}
+
+// GetDeletePackagesOk returns a tuple with the DeletePackages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetDeletePackagesOk() (*string, bool) {
+	if o == nil || o.DeletePackages == nil {
+		return nil, false
+	}
+	return o.DeletePackages, true
+}
+
+// HasDeletePackages returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasDeletePackages() bool {
+	if o != nil && o.DeletePackages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeletePackages gets a reference to the given string and assigns it to the DeletePackages field.
+func (o *RepositoryCreate) SetDeletePackages(v string) {
+	o.DeletePackages = &v
 }
 
 // GetDeletedAt returns the DeletedAt field value if set, zero value otherwise.
@@ -211,6 +459,38 @@ func (o *RepositoryCreate) HasDescription() bool {
 // SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *RepositoryCreate) SetDescription(v string) {
 	o.Description = &v
+}
+
+// GetDockerRefreshTokensEnabled returns the DockerRefreshTokensEnabled field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetDockerRefreshTokensEnabled() bool {
+	if o == nil || o.DockerRefreshTokensEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DockerRefreshTokensEnabled
+}
+
+// GetDockerRefreshTokensEnabledOk returns a tuple with the DockerRefreshTokensEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetDockerRefreshTokensEnabledOk() (*bool, bool) {
+	if o == nil || o.DockerRefreshTokensEnabled == nil {
+		return nil, false
+	}
+	return o.DockerRefreshTokensEnabled, true
+}
+
+// HasDockerRefreshTokensEnabled returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasDockerRefreshTokensEnabled() bool {
+	if o != nil && o.DockerRefreshTokensEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDockerRefreshTokensEnabled gets a reference to the given bool and assigns it to the DockerRefreshTokensEnabled field.
+func (o *RepositoryCreate) SetDockerRefreshTokensEnabled(v bool) {
+	o.DockerRefreshTokensEnabled = &v
 }
 
 // GetGpgKeys returns the GpgKeys field value if set, zero value otherwise.
@@ -371,6 +651,70 @@ func (o *RepositoryCreate) HasIsPublic() bool {
 // SetIsPublic gets a reference to the given bool and assigns it to the IsPublic field.
 func (o *RepositoryCreate) SetIsPublic(v bool) {
 	o.IsPublic = &v
+}
+
+// GetMoveOwn returns the MoveOwn field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetMoveOwn() bool {
+	if o == nil || o.MoveOwn == nil {
+		var ret bool
+		return ret
+	}
+	return *o.MoveOwn
+}
+
+// GetMoveOwnOk returns a tuple with the MoveOwn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetMoveOwnOk() (*bool, bool) {
+	if o == nil || o.MoveOwn == nil {
+		return nil, false
+	}
+	return o.MoveOwn, true
+}
+
+// HasMoveOwn returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasMoveOwn() bool {
+	if o != nil && o.MoveOwn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMoveOwn gets a reference to the given bool and assigns it to the MoveOwn field.
+func (o *RepositoryCreate) SetMoveOwn(v bool) {
+	o.MoveOwn = &v
+}
+
+// GetMovePackages returns the MovePackages field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetMovePackages() string {
+	if o == nil || o.MovePackages == nil {
+		var ret string
+		return ret
+	}
+	return *o.MovePackages
+}
+
+// GetMovePackagesOk returns a tuple with the MovePackages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetMovePackagesOk() (*string, bool) {
+	if o == nil || o.MovePackages == nil {
+		return nil, false
+	}
+	return o.MovePackages, true
+}
+
+// HasMovePackages returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasMovePackages() bool {
+	if o != nil && o.MovePackages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMovePackages gets a reference to the given string and assigns it to the MovePackages field.
+func (o *RepositoryCreate) SetMovePackages(v string) {
+	o.MovePackages = &v
 }
 
 // GetName returns the Name field value
@@ -557,6 +901,198 @@ func (o *RepositoryCreate) SetPackageGroupCount(v int64) {
 	o.PackageGroupCount = &v
 }
 
+// GetProxyNpmjs returns the ProxyNpmjs field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetProxyNpmjs() bool {
+	if o == nil || o.ProxyNpmjs == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ProxyNpmjs
+}
+
+// GetProxyNpmjsOk returns a tuple with the ProxyNpmjs field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetProxyNpmjsOk() (*bool, bool) {
+	if o == nil || o.ProxyNpmjs == nil {
+		return nil, false
+	}
+	return o.ProxyNpmjs, true
+}
+
+// HasProxyNpmjs returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasProxyNpmjs() bool {
+	if o != nil && o.ProxyNpmjs != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProxyNpmjs gets a reference to the given bool and assigns it to the ProxyNpmjs field.
+func (o *RepositoryCreate) SetProxyNpmjs(v bool) {
+	o.ProxyNpmjs = &v
+}
+
+// GetProxyPypi returns the ProxyPypi field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetProxyPypi() bool {
+	if o == nil || o.ProxyPypi == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ProxyPypi
+}
+
+// GetProxyPypiOk returns a tuple with the ProxyPypi field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetProxyPypiOk() (*bool, bool) {
+	if o == nil || o.ProxyPypi == nil {
+		return nil, false
+	}
+	return o.ProxyPypi, true
+}
+
+// HasProxyPypi returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasProxyPypi() bool {
+	if o != nil && o.ProxyPypi != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProxyPypi gets a reference to the given bool and assigns it to the ProxyPypi field.
+func (o *RepositoryCreate) SetProxyPypi(v bool) {
+	o.ProxyPypi = &v
+}
+
+// GetRawPackageIndexEnabled returns the RawPackageIndexEnabled field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetRawPackageIndexEnabled() bool {
+	if o == nil || o.RawPackageIndexEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RawPackageIndexEnabled
+}
+
+// GetRawPackageIndexEnabledOk returns a tuple with the RawPackageIndexEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetRawPackageIndexEnabledOk() (*bool, bool) {
+	if o == nil || o.RawPackageIndexEnabled == nil {
+		return nil, false
+	}
+	return o.RawPackageIndexEnabled, true
+}
+
+// HasRawPackageIndexEnabled returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasRawPackageIndexEnabled() bool {
+	if o != nil && o.RawPackageIndexEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRawPackageIndexEnabled gets a reference to the given bool and assigns it to the RawPackageIndexEnabled field.
+func (o *RepositoryCreate) SetRawPackageIndexEnabled(v bool) {
+	o.RawPackageIndexEnabled = &v
+}
+
+// GetRawPackageIndexSignaturesEnabled returns the RawPackageIndexSignaturesEnabled field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetRawPackageIndexSignaturesEnabled() bool {
+	if o == nil || o.RawPackageIndexSignaturesEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RawPackageIndexSignaturesEnabled
+}
+
+// GetRawPackageIndexSignaturesEnabledOk returns a tuple with the RawPackageIndexSignaturesEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetRawPackageIndexSignaturesEnabledOk() (*bool, bool) {
+	if o == nil || o.RawPackageIndexSignaturesEnabled == nil {
+		return nil, false
+	}
+	return o.RawPackageIndexSignaturesEnabled, true
+}
+
+// HasRawPackageIndexSignaturesEnabled returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasRawPackageIndexSignaturesEnabled() bool {
+	if o != nil && o.RawPackageIndexSignaturesEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRawPackageIndexSignaturesEnabled gets a reference to the given bool and assigns it to the RawPackageIndexSignaturesEnabled field.
+func (o *RepositoryCreate) SetRawPackageIndexSignaturesEnabled(v bool) {
+	o.RawPackageIndexSignaturesEnabled = &v
+}
+
+// GetReplacePackages returns the ReplacePackages field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetReplacePackages() string {
+	if o == nil || o.ReplacePackages == nil {
+		var ret string
+		return ret
+	}
+	return *o.ReplacePackages
+}
+
+// GetReplacePackagesOk returns a tuple with the ReplacePackages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetReplacePackagesOk() (*string, bool) {
+	if o == nil || o.ReplacePackages == nil {
+		return nil, false
+	}
+	return o.ReplacePackages, true
+}
+
+// HasReplacePackages returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasReplacePackages() bool {
+	if o != nil && o.ReplacePackages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReplacePackages gets a reference to the given string and assigns it to the ReplacePackages field.
+func (o *RepositoryCreate) SetReplacePackages(v string) {
+	o.ReplacePackages = &v
+}
+
+// GetReplacePackagesByDefault returns the ReplacePackagesByDefault field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetReplacePackagesByDefault() bool {
+	if o == nil || o.ReplacePackagesByDefault == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ReplacePackagesByDefault
+}
+
+// GetReplacePackagesByDefaultOk returns a tuple with the ReplacePackagesByDefault field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetReplacePackagesByDefaultOk() (*bool, bool) {
+	if o == nil || o.ReplacePackagesByDefault == nil {
+		return nil, false
+	}
+	return o.ReplacePackagesByDefault, true
+}
+
+// HasReplacePackagesByDefault returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasReplacePackagesByDefault() bool {
+	if o != nil && o.ReplacePackagesByDefault != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReplacePackagesByDefault gets a reference to the given bool and assigns it to the ReplacePackagesByDefault field.
+func (o *RepositoryCreate) SetReplacePackagesByDefault(v bool) {
+	o.ReplacePackagesByDefault = &v
+}
+
 // GetRepositoryType returns the RepositoryType field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetRepositoryType() int64 {
 	if o == nil || o.RepositoryType == nil {
@@ -621,6 +1157,134 @@ func (o *RepositoryCreate) SetRepositoryTypeStr(v string) {
 	o.RepositoryTypeStr = &v
 }
 
+// GetResyncOwn returns the ResyncOwn field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetResyncOwn() bool {
+	if o == nil || o.ResyncOwn == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ResyncOwn
+}
+
+// GetResyncOwnOk returns a tuple with the ResyncOwn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetResyncOwnOk() (*bool, bool) {
+	if o == nil || o.ResyncOwn == nil {
+		return nil, false
+	}
+	return o.ResyncOwn, true
+}
+
+// HasResyncOwn returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasResyncOwn() bool {
+	if o != nil && o.ResyncOwn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResyncOwn gets a reference to the given bool and assigns it to the ResyncOwn field.
+func (o *RepositoryCreate) SetResyncOwn(v bool) {
+	o.ResyncOwn = &v
+}
+
+// GetResyncPackages returns the ResyncPackages field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetResyncPackages() string {
+	if o == nil || o.ResyncPackages == nil {
+		var ret string
+		return ret
+	}
+	return *o.ResyncPackages
+}
+
+// GetResyncPackagesOk returns a tuple with the ResyncPackages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetResyncPackagesOk() (*string, bool) {
+	if o == nil || o.ResyncPackages == nil {
+		return nil, false
+	}
+	return o.ResyncPackages, true
+}
+
+// HasResyncPackages returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasResyncPackages() bool {
+	if o != nil && o.ResyncPackages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetResyncPackages gets a reference to the given string and assigns it to the ResyncPackages field.
+func (o *RepositoryCreate) SetResyncPackages(v string) {
+	o.ResyncPackages = &v
+}
+
+// GetScanOwn returns the ScanOwn field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetScanOwn() bool {
+	if o == nil || o.ScanOwn == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ScanOwn
+}
+
+// GetScanOwnOk returns a tuple with the ScanOwn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetScanOwnOk() (*bool, bool) {
+	if o == nil || o.ScanOwn == nil {
+		return nil, false
+	}
+	return o.ScanOwn, true
+}
+
+// HasScanOwn returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasScanOwn() bool {
+	if o != nil && o.ScanOwn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScanOwn gets a reference to the given bool and assigns it to the ScanOwn field.
+func (o *RepositoryCreate) SetScanOwn(v bool) {
+	o.ScanOwn = &v
+}
+
+// GetScanPackages returns the ScanPackages field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetScanPackages() string {
+	if o == nil || o.ScanPackages == nil {
+		var ret string
+		return ret
+	}
+	return *o.ScanPackages
+}
+
+// GetScanPackagesOk returns a tuple with the ScanPackages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetScanPackagesOk() (*string, bool) {
+	if o == nil || o.ScanPackages == nil {
+		return nil, false
+	}
+	return o.ScanPackages, true
+}
+
+// HasScanPackages returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasScanPackages() bool {
+	if o != nil && o.ScanPackages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetScanPackages gets a reference to the given string and assigns it to the ScanPackages field.
+func (o *RepositoryCreate) SetScanPackages(v string) {
+	o.ScanPackages = &v
+}
+
 // GetSelfHtmlUrl returns the SelfHtmlUrl field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetSelfHtmlUrl() string {
 	if o == nil || o.SelfHtmlUrl == nil {
@@ -683,6 +1347,38 @@ func (o *RepositoryCreate) HasSelfUrl() bool {
 // SetSelfUrl gets a reference to the given string and assigns it to the SelfUrl field.
 func (o *RepositoryCreate) SetSelfUrl(v string) {
 	o.SelfUrl = &v
+}
+
+// GetShowSetupAll returns the ShowSetupAll field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetShowSetupAll() bool {
+	if o == nil || o.ShowSetupAll == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ShowSetupAll
+}
+
+// GetShowSetupAllOk returns a tuple with the ShowSetupAll field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetShowSetupAllOk() (*bool, bool) {
+	if o == nil || o.ShowSetupAll == nil {
+		return nil, false
+	}
+	return o.ShowSetupAll, true
+}
+
+// HasShowSetupAll returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasShowSetupAll() bool {
+	if o != nil && o.ShowSetupAll != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetShowSetupAll gets a reference to the given bool and assigns it to the ShowSetupAll field.
+func (o *RepositoryCreate) SetShowSetupAll(v bool) {
+	o.ShowSetupAll = &v
 }
 
 // GetSize returns the Size field value if set, zero value otherwise.
@@ -845,19 +1541,296 @@ func (o *RepositoryCreate) SetStorageRegion(v string) {
 	o.StorageRegion = &v
 }
 
+// GetStrictNpmValidation returns the StrictNpmValidation field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetStrictNpmValidation() bool {
+	if o == nil || o.StrictNpmValidation == nil {
+		var ret bool
+		return ret
+	}
+	return *o.StrictNpmValidation
+}
+
+// GetStrictNpmValidationOk returns a tuple with the StrictNpmValidation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetStrictNpmValidationOk() (*bool, bool) {
+	if o == nil || o.StrictNpmValidation == nil {
+		return nil, false
+	}
+	return o.StrictNpmValidation, true
+}
+
+// HasStrictNpmValidation returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasStrictNpmValidation() bool {
+	if o != nil && o.StrictNpmValidation != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStrictNpmValidation gets a reference to the given bool and assigns it to the StrictNpmValidation field.
+func (o *RepositoryCreate) SetStrictNpmValidation(v bool) {
+	o.StrictNpmValidation = &v
+}
+
+// GetUseDebianLabels returns the UseDebianLabels field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetUseDebianLabels() bool {
+	if o == nil || o.UseDebianLabels == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseDebianLabels
+}
+
+// GetUseDebianLabelsOk returns a tuple with the UseDebianLabels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetUseDebianLabelsOk() (*bool, bool) {
+	if o == nil || o.UseDebianLabels == nil {
+		return nil, false
+	}
+	return o.UseDebianLabels, true
+}
+
+// HasUseDebianLabels returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasUseDebianLabels() bool {
+	if o != nil && o.UseDebianLabels != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseDebianLabels gets a reference to the given bool and assigns it to the UseDebianLabels field.
+func (o *RepositoryCreate) SetUseDebianLabels(v bool) {
+	o.UseDebianLabels = &v
+}
+
+// GetUseDefaultCargoUpstream returns the UseDefaultCargoUpstream field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetUseDefaultCargoUpstream() bool {
+	if o == nil || o.UseDefaultCargoUpstream == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseDefaultCargoUpstream
+}
+
+// GetUseDefaultCargoUpstreamOk returns a tuple with the UseDefaultCargoUpstream field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetUseDefaultCargoUpstreamOk() (*bool, bool) {
+	if o == nil || o.UseDefaultCargoUpstream == nil {
+		return nil, false
+	}
+	return o.UseDefaultCargoUpstream, true
+}
+
+// HasUseDefaultCargoUpstream returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasUseDefaultCargoUpstream() bool {
+	if o != nil && o.UseDefaultCargoUpstream != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseDefaultCargoUpstream gets a reference to the given bool and assigns it to the UseDefaultCargoUpstream field.
+func (o *RepositoryCreate) SetUseDefaultCargoUpstream(v bool) {
+	o.UseDefaultCargoUpstream = &v
+}
+
+// GetUseNoarchPackages returns the UseNoarchPackages field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetUseNoarchPackages() bool {
+	if o == nil || o.UseNoarchPackages == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseNoarchPackages
+}
+
+// GetUseNoarchPackagesOk returns a tuple with the UseNoarchPackages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetUseNoarchPackagesOk() (*bool, bool) {
+	if o == nil || o.UseNoarchPackages == nil {
+		return nil, false
+	}
+	return o.UseNoarchPackages, true
+}
+
+// HasUseNoarchPackages returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasUseNoarchPackages() bool {
+	if o != nil && o.UseNoarchPackages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseNoarchPackages gets a reference to the given bool and assigns it to the UseNoarchPackages field.
+func (o *RepositoryCreate) SetUseNoarchPackages(v bool) {
+	o.UseNoarchPackages = &v
+}
+
+// GetUseSourcePackages returns the UseSourcePackages field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetUseSourcePackages() bool {
+	if o == nil || o.UseSourcePackages == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseSourcePackages
+}
+
+// GetUseSourcePackagesOk returns a tuple with the UseSourcePackages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetUseSourcePackagesOk() (*bool, bool) {
+	if o == nil || o.UseSourcePackages == nil {
+		return nil, false
+	}
+	return o.UseSourcePackages, true
+}
+
+// HasUseSourcePackages returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasUseSourcePackages() bool {
+	if o != nil && o.UseSourcePackages != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseSourcePackages gets a reference to the given bool and assigns it to the UseSourcePackages field.
+func (o *RepositoryCreate) SetUseSourcePackages(v bool) {
+	o.UseSourcePackages = &v
+}
+
+// GetUseVulnerabilityScanning returns the UseVulnerabilityScanning field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetUseVulnerabilityScanning() bool {
+	if o == nil || o.UseVulnerabilityScanning == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseVulnerabilityScanning
+}
+
+// GetUseVulnerabilityScanningOk returns a tuple with the UseVulnerabilityScanning field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetUseVulnerabilityScanningOk() (*bool, bool) {
+	if o == nil || o.UseVulnerabilityScanning == nil {
+		return nil, false
+	}
+	return o.UseVulnerabilityScanning, true
+}
+
+// HasUseVulnerabilityScanning returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasUseVulnerabilityScanning() bool {
+	if o != nil && o.UseVulnerabilityScanning != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseVulnerabilityScanning gets a reference to the given bool and assigns it to the UseVulnerabilityScanning field.
+func (o *RepositoryCreate) SetUseVulnerabilityScanning(v bool) {
+	o.UseVulnerabilityScanning = &v
+}
+
+// GetUserEntitlementsEnabled returns the UserEntitlementsEnabled field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetUserEntitlementsEnabled() bool {
+	if o == nil || o.UserEntitlementsEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UserEntitlementsEnabled
+}
+
+// GetUserEntitlementsEnabledOk returns a tuple with the UserEntitlementsEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetUserEntitlementsEnabledOk() (*bool, bool) {
+	if o == nil || o.UserEntitlementsEnabled == nil {
+		return nil, false
+	}
+	return o.UserEntitlementsEnabled, true
+}
+
+// HasUserEntitlementsEnabled returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasUserEntitlementsEnabled() bool {
+	if o != nil && o.UserEntitlementsEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUserEntitlementsEnabled gets a reference to the given bool and assigns it to the UserEntitlementsEnabled field.
+func (o *RepositoryCreate) SetUserEntitlementsEnabled(v bool) {
+	o.UserEntitlementsEnabled = &v
+}
+
+// GetViewStatistics returns the ViewStatistics field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetViewStatistics() string {
+	if o == nil || o.ViewStatistics == nil {
+		var ret string
+		return ret
+	}
+	return *o.ViewStatistics
+}
+
+// GetViewStatisticsOk returns a tuple with the ViewStatistics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetViewStatisticsOk() (*string, bool) {
+	if o == nil || o.ViewStatistics == nil {
+		return nil, false
+	}
+	return o.ViewStatistics, true
+}
+
+// HasViewStatistics returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasViewStatistics() bool {
+	if o != nil && o.ViewStatistics != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetViewStatistics gets a reference to the given string and assigns it to the ViewStatistics field.
+func (o *RepositoryCreate) SetViewStatistics(v string) {
+	o.ViewStatistics = &v
+}
+
 func (o RepositoryCreate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CdnUrl != nil {
 		toSerialize["cdn_url"] = o.CdnUrl
 	}
+	if o.ContextualAuthRealm != nil {
+		toSerialize["contextual_auth_realm"] = o.ContextualAuthRealm
+	}
+	if o.CopyOwn != nil {
+		toSerialize["copy_own"] = o.CopyOwn
+	}
+	if o.CopyPackages != nil {
+		toSerialize["copy_packages"] = o.CopyPackages
+	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt
+	}
+	if o.DefaultPrivilege != nil {
+		toSerialize["default_privilege"] = o.DefaultPrivilege
+	}
+	if o.DeleteOwn != nil {
+		toSerialize["delete_own"] = o.DeleteOwn
+	}
+	if o.DeletePackages != nil {
+		toSerialize["delete_packages"] = o.DeletePackages
 	}
 	if o.DeletedAt != nil {
 		toSerialize["deleted_at"] = o.DeletedAt
 	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
+	}
+	if o.DockerRefreshTokensEnabled != nil {
+		toSerialize["docker_refresh_tokens_enabled"] = o.DockerRefreshTokensEnabled
 	}
 	if o.GpgKeys != nil {
 		toSerialize["gpg_keys"] = o.GpgKeys
@@ -873,6 +1846,12 @@ func (o RepositoryCreate) MarshalJSON() ([]byte, error) {
 	}
 	if o.IsPublic != nil {
 		toSerialize["is_public"] = o.IsPublic
+	}
+	if o.MoveOwn != nil {
+		toSerialize["move_own"] = o.MoveOwn
+	}
+	if o.MovePackages != nil {
+		toSerialize["move_packages"] = o.MovePackages
 	}
 	if true {
 		toSerialize["name"] = o.Name
@@ -892,17 +1871,50 @@ func (o RepositoryCreate) MarshalJSON() ([]byte, error) {
 	if o.PackageGroupCount != nil {
 		toSerialize["package_group_count"] = o.PackageGroupCount
 	}
+	if o.ProxyNpmjs != nil {
+		toSerialize["proxy_npmjs"] = o.ProxyNpmjs
+	}
+	if o.ProxyPypi != nil {
+		toSerialize["proxy_pypi"] = o.ProxyPypi
+	}
+	if o.RawPackageIndexEnabled != nil {
+		toSerialize["raw_package_index_enabled"] = o.RawPackageIndexEnabled
+	}
+	if o.RawPackageIndexSignaturesEnabled != nil {
+		toSerialize["raw_package_index_signatures_enabled"] = o.RawPackageIndexSignaturesEnabled
+	}
+	if o.ReplacePackages != nil {
+		toSerialize["replace_packages"] = o.ReplacePackages
+	}
+	if o.ReplacePackagesByDefault != nil {
+		toSerialize["replace_packages_by_default"] = o.ReplacePackagesByDefault
+	}
 	if o.RepositoryType != nil {
 		toSerialize["repository_type"] = o.RepositoryType
 	}
 	if o.RepositoryTypeStr != nil {
 		toSerialize["repository_type_str"] = o.RepositoryTypeStr
 	}
+	if o.ResyncOwn != nil {
+		toSerialize["resync_own"] = o.ResyncOwn
+	}
+	if o.ResyncPackages != nil {
+		toSerialize["resync_packages"] = o.ResyncPackages
+	}
+	if o.ScanOwn != nil {
+		toSerialize["scan_own"] = o.ScanOwn
+	}
+	if o.ScanPackages != nil {
+		toSerialize["scan_packages"] = o.ScanPackages
+	}
 	if o.SelfHtmlUrl != nil {
 		toSerialize["self_html_url"] = o.SelfHtmlUrl
 	}
 	if o.SelfUrl != nil {
 		toSerialize["self_url"] = o.SelfUrl
+	}
+	if o.ShowSetupAll != nil {
+		toSerialize["show_setup_all"] = o.ShowSetupAll
 	}
 	if o.Size != nil {
 		toSerialize["size"] = o.Size
@@ -918,6 +1930,30 @@ func (o RepositoryCreate) MarshalJSON() ([]byte, error) {
 	}
 	if o.StorageRegion != nil {
 		toSerialize["storage_region"] = o.StorageRegion
+	}
+	if o.StrictNpmValidation != nil {
+		toSerialize["strict_npm_validation"] = o.StrictNpmValidation
+	}
+	if o.UseDebianLabels != nil {
+		toSerialize["use_debian_labels"] = o.UseDebianLabels
+	}
+	if o.UseDefaultCargoUpstream != nil {
+		toSerialize["use_default_cargo_upstream"] = o.UseDefaultCargoUpstream
+	}
+	if o.UseNoarchPackages != nil {
+		toSerialize["use_noarch_packages"] = o.UseNoarchPackages
+	}
+	if o.UseSourcePackages != nil {
+		toSerialize["use_source_packages"] = o.UseSourcePackages
+	}
+	if o.UseVulnerabilityScanning != nil {
+		toSerialize["use_vulnerability_scanning"] = o.UseVulnerabilityScanning
+	}
+	if o.UserEntitlementsEnabled != nil {
+		toSerialize["user_entitlements_enabled"] = o.UserEntitlementsEnabled
+	}
+	if o.ViewStatistics != nil {
+		toSerialize["view_statistics"] = o.ViewStatistics
 	}
 	return json.Marshal(toSerialize)
 }

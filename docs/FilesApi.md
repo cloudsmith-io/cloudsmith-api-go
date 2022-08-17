@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**FilesAbort**](FilesApi.md#FilesAbort) | **Post** /files/{owner}/{repo}/{identifier}/abort/ | Abort a multipart file upload.
 [**FilesComplete**](FilesApi.md#FilesComplete) | **Post** /files/{owner}/{repo}/{identifier}/complete/ | Complete a multipart file upload.
 [**FilesCreate**](FilesApi.md#FilesCreate) | **Post** /files/{owner}/{repo}/ | Request URL(s) to upload new package file upload(s) to.
-[**FilesInfo**](FilesApi.md#FilesInfo) | **Get** /files/{owner}/{repo}/{identifier}/info/ | Get upload information for a multipart file upload.
+[**FilesInfo**](FilesApi.md#FilesInfo) | **Get** /files/{owner}/{repo}/{identifier}/info/ | Get upload information to perform a multipart file upload.
 [**FilesValidate**](FilesApi.md#FilesValidate) | **Post** /files/{owner}/{repo}/validate/ | Validate parameters used for create.
 
 
@@ -243,9 +243,9 @@ Name | Type | Description  | Notes
 
 ## FilesInfo
 
-> PackageFilePartsUpload FilesInfo(ctx, owner, repo, identifier).Execute()
+> PackageFilePartsUpload FilesInfo(ctx, owner, repo, identifier).Filename(filename).PartNumber(partNumber).Execute()
 
-Get upload information for a multipart file upload.
+Get upload information to perform a multipart file upload.
 
 
 
@@ -265,10 +265,12 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
+    filename := "filename_example" // string | The filename of the file being uploaded
+    partNumber := int64(56) // int64 | The part number to be uploaded next (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FilesApi.FilesInfo(context.Background(), owner, repo, identifier).Execute()
+    resp, r, err := apiClient.FilesApi.FilesInfo(context.Background(), owner, repo, identifier).Filename(filename).PartNumber(partNumber).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -298,6 +300,8 @@ Name | Type | Description  | Notes
 
 
 
+ **filename** | **string** | The filename of the file being uploaded | 
+ **partNumber** | **int64** | The part number to be uploaded next | 
 
 ### Return type
 

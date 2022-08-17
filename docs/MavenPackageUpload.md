@@ -26,6 +26,8 @@ Name | Type | Description | Notes
 **GroupId** | Pointer to **string** | Artifact&#39;s group ID. | [optional] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] 
 **Indexed** | Pointer to **bool** |  | [optional] 
+**IsDownloadable** | Pointer to **bool** |  | [optional] 
+**IsQuarantined** | Pointer to **bool** |  | [optional] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] 
@@ -640,6 +642,56 @@ SetIndexed sets Indexed field to given value.
 `func (o *MavenPackageUpload) HasIndexed() bool`
 
 HasIndexed returns a boolean if a field has been set.
+
+### GetIsDownloadable
+
+`func (o *MavenPackageUpload) GetIsDownloadable() bool`
+
+GetIsDownloadable returns the IsDownloadable field if non-nil, zero value otherwise.
+
+### GetIsDownloadableOk
+
+`func (o *MavenPackageUpload) GetIsDownloadableOk() (*bool, bool)`
+
+GetIsDownloadableOk returns a tuple with the IsDownloadable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDownloadable
+
+`func (o *MavenPackageUpload) SetIsDownloadable(v bool)`
+
+SetIsDownloadable sets IsDownloadable field to given value.
+
+### HasIsDownloadable
+
+`func (o *MavenPackageUpload) HasIsDownloadable() bool`
+
+HasIsDownloadable returns a boolean if a field has been set.
+
+### GetIsQuarantined
+
+`func (o *MavenPackageUpload) GetIsQuarantined() bool`
+
+GetIsQuarantined returns the IsQuarantined field if non-nil, zero value otherwise.
+
+### GetIsQuarantinedOk
+
+`func (o *MavenPackageUpload) GetIsQuarantinedOk() (*bool, bool)`
+
+GetIsQuarantinedOk returns a tuple with the IsQuarantined field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsQuarantined
+
+`func (o *MavenPackageUpload) SetIsQuarantined(v bool)`
+
+SetIsQuarantined sets IsQuarantined field to given value.
+
+### HasIsQuarantined
+
+`func (o *MavenPackageUpload) HasIsQuarantined() bool`
+
+HasIsQuarantined returns a boolean if a field has been set.
 
 ### GetIsSyncAwaiting
 

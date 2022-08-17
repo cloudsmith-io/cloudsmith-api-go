@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.42.3
+API version: 1.121.3
 Contact: support@cloudsmith.io
 */
 
@@ -42,13 +42,15 @@ var (
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
 )
 
-// APIClient manages communication with the Cloudsmith API API v1.42.3
+// APIClient manages communication with the Cloudsmith API API v1.121.3
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
 
 	// API Services
+
+	AuditLogApi *AuditLogApiService
 
 	BadgesApi *BadgesApiService
 
@@ -103,6 +105,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AuditLogApi = (*AuditLogApiService)(&c.common)
 	c.BadgesApi = (*BadgesApiService)(&c.common)
 	c.DistrosApi = (*DistrosApiService)(&c.common)
 	c.EntitlementsApi = (*EntitlementsApiService)(&c.common)

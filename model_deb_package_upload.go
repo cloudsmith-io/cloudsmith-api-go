@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.42.3
+API version: 1.121.3
 Contact: support@cloudsmith.io
 */
 
@@ -57,6 +57,10 @@ type DebPackageUpload struct {
 	IdentifierPerm *string `json:"identifier_perm,omitempty"`
 	//
 	Indexed *bool `json:"indexed,omitempty"`
+	//
+	IsDownloadable *bool `json:"is_downloadable,omitempty"`
+	//
+	IsQuarantined *bool `json:"is_quarantined,omitempty"`
 	//
 	IsSyncAwaiting *bool `json:"is_sync_awaiting,omitempty"`
 	//
@@ -802,6 +806,70 @@ func (o *DebPackageUpload) HasIndexed() bool {
 // SetIndexed gets a reference to the given bool and assigns it to the Indexed field.
 func (o *DebPackageUpload) SetIndexed(v bool) {
 	o.Indexed = &v
+}
+
+// GetIsDownloadable returns the IsDownloadable field value if set, zero value otherwise.
+func (o *DebPackageUpload) GetIsDownloadable() bool {
+	if o == nil || o.IsDownloadable == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsDownloadable
+}
+
+// GetIsDownloadableOk returns a tuple with the IsDownloadable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebPackageUpload) GetIsDownloadableOk() (*bool, bool) {
+	if o == nil || o.IsDownloadable == nil {
+		return nil, false
+	}
+	return o.IsDownloadable, true
+}
+
+// HasIsDownloadable returns a boolean if a field has been set.
+func (o *DebPackageUpload) HasIsDownloadable() bool {
+	if o != nil && o.IsDownloadable != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsDownloadable gets a reference to the given bool and assigns it to the IsDownloadable field.
+func (o *DebPackageUpload) SetIsDownloadable(v bool) {
+	o.IsDownloadable = &v
+}
+
+// GetIsQuarantined returns the IsQuarantined field value if set, zero value otherwise.
+func (o *DebPackageUpload) GetIsQuarantined() bool {
+	if o == nil || o.IsQuarantined == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsQuarantined
+}
+
+// GetIsQuarantinedOk returns a tuple with the IsQuarantined field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebPackageUpload) GetIsQuarantinedOk() (*bool, bool) {
+	if o == nil || o.IsQuarantined == nil {
+		return nil, false
+	}
+	return o.IsQuarantined, true
+}
+
+// HasIsQuarantined returns a boolean if a field has been set.
+func (o *DebPackageUpload) HasIsQuarantined() bool {
+	if o != nil && o.IsQuarantined != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsQuarantined gets a reference to the given bool and assigns it to the IsQuarantined field.
+func (o *DebPackageUpload) SetIsQuarantined(v bool) {
+	o.IsQuarantined = &v
 }
 
 // GetIsSyncAwaiting returns the IsSyncAwaiting field value if set, zero value otherwise.
@@ -2273,6 +2341,12 @@ func (o DebPackageUpload) MarshalJSON() ([]byte, error) {
 	}
 	if o.Indexed != nil {
 		toSerialize["indexed"] = o.Indexed
+	}
+	if o.IsDownloadable != nil {
+		toSerialize["is_downloadable"] = o.IsDownloadable
+	}
+	if o.IsQuarantined != nil {
+		toSerialize["is_quarantined"] = o.IsQuarantined
 	}
 	if o.IsSyncAwaiting != nil {
 		toSerialize["is_sync_awaiting"] = o.IsSyncAwaiting

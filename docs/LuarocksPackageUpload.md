@@ -24,6 +24,8 @@ Name | Type | Description | Notes
 **FormatUrl** | Pointer to **string** |  | [optional] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] 
 **Indexed** | Pointer to **bool** |  | [optional] 
+**IsDownloadable** | Pointer to **bool** |  | [optional] 
+**IsQuarantined** | Pointer to **bool** |  | [optional] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] 
@@ -587,6 +589,56 @@ SetIndexed sets Indexed field to given value.
 `func (o *LuarocksPackageUpload) HasIndexed() bool`
 
 HasIndexed returns a boolean if a field has been set.
+
+### GetIsDownloadable
+
+`func (o *LuarocksPackageUpload) GetIsDownloadable() bool`
+
+GetIsDownloadable returns the IsDownloadable field if non-nil, zero value otherwise.
+
+### GetIsDownloadableOk
+
+`func (o *LuarocksPackageUpload) GetIsDownloadableOk() (*bool, bool)`
+
+GetIsDownloadableOk returns a tuple with the IsDownloadable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDownloadable
+
+`func (o *LuarocksPackageUpload) SetIsDownloadable(v bool)`
+
+SetIsDownloadable sets IsDownloadable field to given value.
+
+### HasIsDownloadable
+
+`func (o *LuarocksPackageUpload) HasIsDownloadable() bool`
+
+HasIsDownloadable returns a boolean if a field has been set.
+
+### GetIsQuarantined
+
+`func (o *LuarocksPackageUpload) GetIsQuarantined() bool`
+
+GetIsQuarantined returns the IsQuarantined field if non-nil, zero value otherwise.
+
+### GetIsQuarantinedOk
+
+`func (o *LuarocksPackageUpload) GetIsQuarantinedOk() (*bool, bool)`
+
+GetIsQuarantinedOk returns a tuple with the IsQuarantined field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsQuarantined
+
+`func (o *LuarocksPackageUpload) SetIsQuarantined(v bool)`
+
+SetIsQuarantined sets IsQuarantined field to given value.
+
+### HasIsQuarantined
+
+`func (o *LuarocksPackageUpload) HasIsQuarantined() bool`
+
+HasIsQuarantined returns a boolean if a field has been set.
 
 ### GetIsSyncAwaiting
 
