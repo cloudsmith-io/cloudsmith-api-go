@@ -3,7 +3,7 @@ Cloudsmith API
 
 The API to the Cloudsmith Service
 
-API version: 1.42.3
+API version: 1.121.3
 Contact: support@cloudsmith.io
 */
 
@@ -505,6 +505,20 @@ type ApiFilesInfoRequest struct {
 	owner      string
 	repo       string
 	identifier string
+	filename   *string
+	partNumber *int64
+}
+
+// The filename of the file being uploaded
+func (r ApiFilesInfoRequest) Filename(filename string) ApiFilesInfoRequest {
+	r.filename = &filename
+	return r
+}
+
+// The part number to be uploaded next
+func (r ApiFilesInfoRequest) PartNumber(partNumber int64) ApiFilesInfoRequest {
+	r.partNumber = &partNumber
+	return r
 }
 
 func (r ApiFilesInfoRequest) Execute() (*PackageFilePartsUpload, *http.Response, error) {
@@ -512,9 +526,9 @@ func (r ApiFilesInfoRequest) Execute() (*PackageFilePartsUpload, *http.Response,
 }
 
 /*
-FilesInfo Get upload information for a multipart file upload.
+FilesInfo Get upload information to perform a multipart file upload.
 
-Get upload information for a multipart file upload.
+Get upload information to perform a multipart file upload.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
@@ -555,7 +569,14 @@ func (a *FilesApiService) FilesInfoExecute(r ApiFilesInfoRequest) (*PackageFileP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.filename == nil {
+		return localVarReturnValue, nil, reportError("filename is required and must be specified")
+	}
 
+	localVarQueryParams.Add("filename", parameterToString(*r.filename, ""))
+	if r.partNumber != nil {
+		localVarQueryParams.Add("part_number", parameterToString(*r.partNumber, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

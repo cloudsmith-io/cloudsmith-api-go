@@ -24,6 +24,8 @@ Name | Type | Description | Notes
 **FormatUrl** | Pointer to **string** |  | [optional] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] 
 **Indexed** | Pointer to **bool** |  | [optional] 
+**IsDownloadable** | Pointer to **bool** |  | [optional] 
+**IsQuarantined** | Pointer to **bool** |  | [optional] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] 
@@ -587,6 +589,56 @@ SetIndexed sets Indexed field to given value.
 `func (o *DockerPackageUpload) HasIndexed() bool`
 
 HasIndexed returns a boolean if a field has been set.
+
+### GetIsDownloadable
+
+`func (o *DockerPackageUpload) GetIsDownloadable() bool`
+
+GetIsDownloadable returns the IsDownloadable field if non-nil, zero value otherwise.
+
+### GetIsDownloadableOk
+
+`func (o *DockerPackageUpload) GetIsDownloadableOk() (*bool, bool)`
+
+GetIsDownloadableOk returns a tuple with the IsDownloadable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDownloadable
+
+`func (o *DockerPackageUpload) SetIsDownloadable(v bool)`
+
+SetIsDownloadable sets IsDownloadable field to given value.
+
+### HasIsDownloadable
+
+`func (o *DockerPackageUpload) HasIsDownloadable() bool`
+
+HasIsDownloadable returns a boolean if a field has been set.
+
+### GetIsQuarantined
+
+`func (o *DockerPackageUpload) GetIsQuarantined() bool`
+
+GetIsQuarantined returns the IsQuarantined field if non-nil, zero value otherwise.
+
+### GetIsQuarantinedOk
+
+`func (o *DockerPackageUpload) GetIsQuarantinedOk() (*bool, bool)`
+
+GetIsQuarantinedOk returns a tuple with the IsQuarantined field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsQuarantined
+
+`func (o *DockerPackageUpload) SetIsQuarantined(v bool)`
+
+SetIsQuarantined sets IsQuarantined field to given value.
+
+### HasIsQuarantined
+
+`func (o *DockerPackageUpload) HasIsQuarantined() bool`
+
+HasIsQuarantined returns a boolean if a field has been set.
 
 ### GetIsSyncAwaiting
 

@@ -12,20 +12,26 @@ function api_version {
 
 function swagger_spec {
     temp_file=$(mktemp)
-    curl -Ls "$API_HOST/?format=openapi" | jq ".info.version = \"$1\"" > $temp_file
+    curl -Ls "$API_HOST/?format=openapi" | jq ".info.version = \"$1\"" > "$temp_file"
     echo "$temp_file"
 }
 
 # Generate client library
+API_VERSION="$(api_version)"
+SWAGGER_SPEC="$(swagger_spec "$API_VERSION")"
+DOCKER_IMAGE="$(docker build -q .)"
 
-export GO_POST_PROCESS_FILE="$(which gofmt) -w"
-openapi-generator generate \
-    --input-spec $(swagger_spec $(api_version)) \
+docker run --rm \
+    -e PKG_VERSION="$PKG_VERSION" \
+    -e GO_POST_PROCESS_FILE="gofmt -w" \
+    -v "$SWAGGER_SPEC":/tmp/swagger_spec \
+    -v "$PWD":/local "$DOCKER_IMAGE" generate \
+    --input-spec /tmp/swagger_spec \
     --generator-name go \
     --git-user-id cloudsmith-io \
     --git-repo-id cloudsmith-api-go \
     --additional-properties packageName=cloudsmith \
-    --additional-properties packageVersion=$PKG_VERSION \
+    --additional-properties packageVersion="$PKG_VERSION" \
     --type-mappings integer=int64,number=float64,float=float64 \
     --enable-post-process-file
 
