@@ -4,15 +4,15 @@ All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**MetricsEntitlementsList**](MetricsApi.md#MetricsEntitlementsList) | **Get** /metrics/entitlements/{owner}/ | View for listing entitlement token metrics, across an account.
-[**MetricsEntitlementsList0**](MetricsApi.md#MetricsEntitlementsList0) | **Get** /metrics/entitlements/{owner}/{repo}/ | View for listing entitlement token metrics, for a repository.
+[**MetricsEntitlementsAccountList**](MetricsApi.md#MetricsEntitlementsAccountList) | **Get** /metrics/entitlements/{owner}/ | View for listing entitlement token metrics, across an account.
+[**MetricsEntitlementsRepoList**](MetricsApi.md#MetricsEntitlementsRepoList) | **Get** /metrics/entitlements/{owner}/{repo}/ | View for listing entitlement token metrics, for a repository.
 [**MetricsPackagesList**](MetricsApi.md#MetricsPackagesList) | **Get** /metrics/packages/{owner}/{repo}/ | View for listing package usage metrics, for a repository.
 
 
 
-## MetricsEntitlementsList
+## MetricsEntitlementsAccountList
 
-> EntitlementUsageMetrics MetricsEntitlementsList(ctx, owner).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
+> EntitlementUsageMetricsResponse MetricsEntitlementsAccountList(ctx, owner).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
 
 View for listing entitlement token metrics, across an account.
 
@@ -40,13 +40,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MetricsApi.MetricsEntitlementsList(context.Background(), owner).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
+    resp, r, err := apiClient.MetricsApi.MetricsEntitlementsAccountList(context.Background(), owner).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsEntitlementsList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsEntitlementsAccountList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `MetricsEntitlementsList`: EntitlementUsageMetrics
-    fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsEntitlementsList`: %v\n", resp)
+    // response from `MetricsEntitlementsAccountList`: EntitlementUsageMetricsResponse
+    fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsEntitlementsAccountList`: %v\n", resp)
 }
 ```
 
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiMetricsEntitlementsListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiMetricsEntitlementsAccountListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EntitlementUsageMetrics**](EntitlementUsageMetrics.md)
+[**EntitlementUsageMetricsResponse**](EntitlementUsageMetricsResponse.md)
 
 ### Authorization
 
@@ -83,16 +83,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## MetricsEntitlementsList0
+## MetricsEntitlementsRepoList
 
-> EntitlementUsageMetrics MetricsEntitlementsList0(ctx, owner, repo).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
+> EntitlementUsageMetricsResponse MetricsEntitlementsRepoList(ctx, owner, repo).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
 
 View for listing entitlement token metrics, for a repository.
 
@@ -121,13 +121,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MetricsApi.MetricsEntitlementsList0(context.Background(), owner, repo).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
+    resp, r, err := apiClient.MetricsApi.MetricsEntitlementsRepoList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsEntitlementsList0``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsEntitlementsRepoList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `MetricsEntitlementsList0`: EntitlementUsageMetrics
-    fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsEntitlementsList0`: %v\n", resp)
+    // response from `MetricsEntitlementsRepoList`: EntitlementUsageMetricsResponse
+    fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsEntitlementsRepoList`: %v\n", resp)
 }
 ```
 
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiMetricsEntitlementsList0Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiMetricsEntitlementsRepoListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EntitlementUsageMetrics**](EntitlementUsageMetrics.md)
+[**EntitlementUsageMetricsResponse**](EntitlementUsageMetricsResponse.md)
 
 ### Authorization
 
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 
 ## MetricsPackagesList
 
-> PackageUsageMetrics MetricsPackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).Finish(finish).Packages(packages).Start(start).Execute()
+> PackageUsageMetricsResponse MetricsPackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).Finish(finish).Packages(packages).Start(start).Execute()
 
 View for listing package usage metrics, for a repository.
 
@@ -209,7 +209,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsPackagesList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `MetricsPackagesList`: PackageUsageMetrics
+    // response from `MetricsPackagesList`: PackageUsageMetricsResponse
     fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsPackagesList`: %v\n", resp)
 }
 ```
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageUsageMetrics**](PackageUsageMetrics.md)
+[**PackageUsageMetricsResponse**](PackageUsageMetricsResponse.md)
 
 ### Authorization
 
@@ -249,7 +249,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

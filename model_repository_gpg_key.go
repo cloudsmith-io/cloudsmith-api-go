@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -13,21 +13,19 @@ package cloudsmith
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // RepositoryGpgKey struct for RepositoryGpgKey
 type RepositoryGpgKey struct {
 	// If selected this is the active key for this repository.
-	Active *bool `json:"active,omitempty"`
-	//
-	Comment string `json:"comment"`
-	//
-	CreatedAt *string `json:"created_at,omitempty"`
+	Active    *bool      `json:"active,omitempty"`
+	Comment   string     `json:"comment"`
+	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// If selected this is the default key for this repository.
 	Default *bool `json:"default,omitempty"`
 	// The long identifier used by GPG for this key.
-	Fingerprint *string `json:"fingerprint,omitempty"`
-	//
+	Fingerprint      *string `json:"fingerprint,omitempty"`
 	FingerprintShort *string `json:"fingerprint_short,omitempty"`
 	// The public key given to repository users.
 	PublicKey *string `json:"public_key,omitempty"`
@@ -53,7 +51,7 @@ func NewRepositoryGpgKeyWithDefaults() *RepositoryGpgKey {
 
 // GetActive returns the Active field value if set, zero value otherwise.
 func (o *RepositoryGpgKey) GetActive() bool {
-	if o == nil || o.Active == nil {
+	if o == nil || isNil(o.Active) {
 		var ret bool
 		return ret
 	}
@@ -63,7 +61,7 @@ func (o *RepositoryGpgKey) GetActive() bool {
 // GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryGpgKey) GetActiveOk() (*bool, bool) {
-	if o == nil || o.Active == nil {
+	if o == nil || isNil(o.Active) {
 		return nil, false
 	}
 	return o.Active, true
@@ -71,7 +69,7 @@ func (o *RepositoryGpgKey) GetActiveOk() (*bool, bool) {
 
 // HasActive returns a boolean if a field has been set.
 func (o *RepositoryGpgKey) HasActive() bool {
-	if o != nil && o.Active != nil {
+	if o != nil && !isNil(o.Active) {
 		return true
 	}
 
@@ -108,9 +106,9 @@ func (o *RepositoryGpgKey) SetComment(v string) {
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *RepositoryGpgKey) GetCreatedAt() string {
-	if o == nil || o.CreatedAt == nil {
-		var ret string
+func (o *RepositoryGpgKey) GetCreatedAt() time.Time {
+	if o == nil || isNil(o.CreatedAt) {
+		var ret time.Time
 		return ret
 	}
 	return *o.CreatedAt
@@ -118,8 +116,8 @@ func (o *RepositoryGpgKey) GetCreatedAt() string {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RepositoryGpgKey) GetCreatedAtOk() (*string, bool) {
-	if o == nil || o.CreatedAt == nil {
+func (o *RepositoryGpgKey) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || isNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -127,21 +125,21 @@ func (o *RepositoryGpgKey) GetCreatedAtOk() (*string, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *RepositoryGpgKey) HasCreatedAt() bool {
-	if o != nil && o.CreatedAt != nil {
+	if o != nil && !isNil(o.CreatedAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
-func (o *RepositoryGpgKey) SetCreatedAt(v string) {
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *RepositoryGpgKey) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
 // GetDefault returns the Default field value if set, zero value otherwise.
 func (o *RepositoryGpgKey) GetDefault() bool {
-	if o == nil || o.Default == nil {
+	if o == nil || isNil(o.Default) {
 		var ret bool
 		return ret
 	}
@@ -151,7 +149,7 @@ func (o *RepositoryGpgKey) GetDefault() bool {
 // GetDefaultOk returns a tuple with the Default field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryGpgKey) GetDefaultOk() (*bool, bool) {
-	if o == nil || o.Default == nil {
+	if o == nil || isNil(o.Default) {
 		return nil, false
 	}
 	return o.Default, true
@@ -159,7 +157,7 @@ func (o *RepositoryGpgKey) GetDefaultOk() (*bool, bool) {
 
 // HasDefault returns a boolean if a field has been set.
 func (o *RepositoryGpgKey) HasDefault() bool {
-	if o != nil && o.Default != nil {
+	if o != nil && !isNil(o.Default) {
 		return true
 	}
 
@@ -173,7 +171,7 @@ func (o *RepositoryGpgKey) SetDefault(v bool) {
 
 // GetFingerprint returns the Fingerprint field value if set, zero value otherwise.
 func (o *RepositoryGpgKey) GetFingerprint() string {
-	if o == nil || o.Fingerprint == nil {
+	if o == nil || isNil(o.Fingerprint) {
 		var ret string
 		return ret
 	}
@@ -183,7 +181,7 @@ func (o *RepositoryGpgKey) GetFingerprint() string {
 // GetFingerprintOk returns a tuple with the Fingerprint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryGpgKey) GetFingerprintOk() (*string, bool) {
-	if o == nil || o.Fingerprint == nil {
+	if o == nil || isNil(o.Fingerprint) {
 		return nil, false
 	}
 	return o.Fingerprint, true
@@ -191,7 +189,7 @@ func (o *RepositoryGpgKey) GetFingerprintOk() (*string, bool) {
 
 // HasFingerprint returns a boolean if a field has been set.
 func (o *RepositoryGpgKey) HasFingerprint() bool {
-	if o != nil && o.Fingerprint != nil {
+	if o != nil && !isNil(o.Fingerprint) {
 		return true
 	}
 
@@ -205,7 +203,7 @@ func (o *RepositoryGpgKey) SetFingerprint(v string) {
 
 // GetFingerprintShort returns the FingerprintShort field value if set, zero value otherwise.
 func (o *RepositoryGpgKey) GetFingerprintShort() string {
-	if o == nil || o.FingerprintShort == nil {
+	if o == nil || isNil(o.FingerprintShort) {
 		var ret string
 		return ret
 	}
@@ -215,7 +213,7 @@ func (o *RepositoryGpgKey) GetFingerprintShort() string {
 // GetFingerprintShortOk returns a tuple with the FingerprintShort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryGpgKey) GetFingerprintShortOk() (*string, bool) {
-	if o == nil || o.FingerprintShort == nil {
+	if o == nil || isNil(o.FingerprintShort) {
 		return nil, false
 	}
 	return o.FingerprintShort, true
@@ -223,7 +221,7 @@ func (o *RepositoryGpgKey) GetFingerprintShortOk() (*string, bool) {
 
 // HasFingerprintShort returns a boolean if a field has been set.
 func (o *RepositoryGpgKey) HasFingerprintShort() bool {
-	if o != nil && o.FingerprintShort != nil {
+	if o != nil && !isNil(o.FingerprintShort) {
 		return true
 	}
 
@@ -237,7 +235,7 @@ func (o *RepositoryGpgKey) SetFingerprintShort(v string) {
 
 // GetPublicKey returns the PublicKey field value if set, zero value otherwise.
 func (o *RepositoryGpgKey) GetPublicKey() string {
-	if o == nil || o.PublicKey == nil {
+	if o == nil || isNil(o.PublicKey) {
 		var ret string
 		return ret
 	}
@@ -247,7 +245,7 @@ func (o *RepositoryGpgKey) GetPublicKey() string {
 // GetPublicKeyOk returns a tuple with the PublicKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryGpgKey) GetPublicKeyOk() (*string, bool) {
-	if o == nil || o.PublicKey == nil {
+	if o == nil || isNil(o.PublicKey) {
 		return nil, false
 	}
 	return o.PublicKey, true
@@ -255,7 +253,7 @@ func (o *RepositoryGpgKey) GetPublicKeyOk() (*string, bool) {
 
 // HasPublicKey returns a boolean if a field has been set.
 func (o *RepositoryGpgKey) HasPublicKey() bool {
-	if o != nil && o.PublicKey != nil {
+	if o != nil && !isNil(o.PublicKey) {
 		return true
 	}
 
@@ -269,25 +267,25 @@ func (o *RepositoryGpgKey) SetPublicKey(v string) {
 
 func (o RepositoryGpgKey) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Active != nil {
+	if !isNil(o.Active) {
 		toSerialize["active"] = o.Active
 	}
 	if true {
 		toSerialize["comment"] = o.Comment
 	}
-	if o.CreatedAt != nil {
+	if !isNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if o.Default != nil {
+	if !isNil(o.Default) {
 		toSerialize["default"] = o.Default
 	}
-	if o.Fingerprint != nil {
+	if !isNil(o.Fingerprint) {
 		toSerialize["fingerprint"] = o.Fingerprint
 	}
-	if o.FingerprintShort != nil {
+	if !isNil(o.FingerprintShort) {
 		toSerialize["fingerprint_short"] = o.FingerprintShort
 	}
-	if o.PublicKey != nil {
+	if !isNil(o.PublicKey) {
 		toSerialize["public_key"] = o.PublicKey
 	}
 	return json.Marshal(toSerialize)

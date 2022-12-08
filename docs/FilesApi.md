@@ -36,7 +36,7 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    data := *openapiclient.NewFilesAbort("Filename_example") // FilesAbort |  (optional)
+    data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**FilesAbort**](FilesAbort.md) |  | 
+ **data** | [**PackageFileUploadRequest**](PackageFileUploadRequest.md) |  | 
 
 ### Return type
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 ## FilesComplete
 
-> PackageFileUpload FilesComplete(ctx, owner, repo, identifier).Data(data).Execute()
+> PackageFileUploadResponse FilesComplete(ctx, owner, repo, identifier).Data(data).Execute()
 
 Complete a multipart file upload.
 
@@ -112,7 +112,7 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    data := *openapiclient.NewFilesComplete("Filename_example") // FilesComplete |  (optional)
+    data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -121,7 +121,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesComplete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FilesComplete`: PackageFileUpload
+    // response from `FilesComplete`: PackageFileUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesComplete`: %v\n", resp)
 }
 ```
@@ -146,11 +146,11 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**FilesComplete**](FilesComplete.md) |  | 
+ **data** | [**PackageFileUploadRequest**](PackageFileUploadRequest.md) |  | 
 
 ### Return type
 
-[**PackageFileUpload**](PackageFileUpload.md)
+[**PackageFileUploadResponse**](PackageFileUploadResponse.md)
 
 ### Authorization
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 ## FilesCreate
 
-> PackageFileUpload FilesCreate(ctx, owner, repo).Data(data).Execute()
+> PackageFileUploadResponse FilesCreate(ctx, owner, repo).Data(data).Execute()
 
 Request URL(s) to upload new package file upload(s) to.
 
@@ -189,7 +189,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewFilesCreate("Filename_example") // FilesCreate |  (optional)
+    data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -198,7 +198,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FilesCreate`: PackageFileUpload
+    // response from `FilesCreate`: PackageFileUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesCreate`: %v\n", resp)
 }
 ```
@@ -221,11 +221,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**FilesCreate**](FilesCreate.md) |  | 
+ **data** | [**PackageFileUploadRequest**](PackageFileUploadRequest.md) |  | 
 
 ### Return type
 
-[**PackageFileUpload**](PackageFileUpload.md)
+[**PackageFileUploadResponse**](PackageFileUploadResponse.md)
 
 ### Authorization
 
@@ -234,7 +234,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -243,7 +243,7 @@ Name | Type | Description  | Notes
 
 ## FilesInfo
 
-> PackageFilePartsUpload FilesInfo(ctx, owner, repo, identifier).Filename(filename).PartNumber(partNumber).Execute()
+> PackageFilePartsUploadResponse FilesInfo(ctx, owner, repo, identifier).Filename(filename).PartNumber(partNumber).Execute()
 
 Get upload information to perform a multipart file upload.
 
@@ -275,7 +275,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FilesInfo`: PackageFilePartsUpload
+    // response from `FilesInfo`: PackageFilePartsUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesInfo`: %v\n", resp)
 }
 ```
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageFilePartsUpload**](PackageFilePartsUpload.md)
+[**PackageFilePartsUploadResponse**](PackageFilePartsUploadResponse.md)
 
 ### Authorization
 
@@ -314,7 +314,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -344,7 +344,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewFilesValidate("Filename_example") // FilesValidate |  (optional)
+    data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**FilesValidate**](FilesValidate.md) |  | 
+ **data** | [**PackageFileUploadRequest**](PackageFileUploadRequest.md) |  | 
 
 ### Return type
 
@@ -387,7 +387,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

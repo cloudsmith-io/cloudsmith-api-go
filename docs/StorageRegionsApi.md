@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## StorageRegionsList
 
-> []StorageRegion StorageRegionsList(ctx).Execute()
+> []StorageRegionResponse StorageRegionsList(ctx).Execute()
 
 Get a list of all available storage regions.
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageRegionsApi.StorageRegionsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `StorageRegionsList`: []StorageRegion
+    // response from `StorageRegionsList`: []StorageRegionResponse
     fmt.Fprintf(os.Stdout, "Response from `StorageRegionsApi.StorageRegionsList`: %v\n", resp)
 }
 ```
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiStorageRegionsListRequest 
 
 ### Return type
 
-[**[]StorageRegion**](StorageRegion.md)
+[**[]StorageRegionResponse**](StorageRegionResponse.md)
 
 ### Authorization
 
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiStorageRegionsListRequest 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiStorageRegionsListRequest 
 
 ## StorageRegionsRead
 
-> StorageRegion StorageRegionsRead(ctx, slug).Execute()
+> StorageRegionResponse StorageRegionsRead(ctx, slug).Execute()
 
 Get a specific storage region.
 
@@ -100,7 +100,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageRegionsApi.StorageRegionsRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `StorageRegionsRead`: StorageRegion
+    // response from `StorageRegionsRead`: StorageRegionResponse
     fmt.Fprintf(os.Stdout, "Response from `StorageRegionsApi.StorageRegionsRead`: %v\n", resp)
 }
 ```
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StorageRegion**](StorageRegion.md)
+[**StorageRegionResponse**](StorageRegionResponse.md)
 
 ### Authorization
 
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,6 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // StorageRegionsApiService StorageRegionsApi service
 type StorageRegionsApiService service
 
@@ -33,7 +28,7 @@ type ApiStorageRegionsListRequest struct {
 	ApiService *StorageRegionsApiService
 }
 
-func (r ApiStorageRegionsListRequest) Execute() ([]StorageRegion, *http.Response, error) {
+func (r ApiStorageRegionsListRequest) Execute() ([]StorageRegionResponse, *http.Response, error) {
 	return r.ApiService.StorageRegionsListExecute(r)
 }
 
@@ -53,13 +48,13 @@ func (a *StorageRegionsApiService) StorageRegionsList(ctx context.Context) ApiSt
 }
 
 // Execute executes the request
-//  @return []StorageRegion
-func (a *StorageRegionsApiService) StorageRegionsListExecute(r ApiStorageRegionsListRequest) ([]StorageRegion, *http.Response, error) {
+//  @return []StorageRegionResponse
+func (a *StorageRegionsApiService) StorageRegionsListExecute(r ApiStorageRegionsListRequest) ([]StorageRegionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []StorageRegion
+		localVarReturnValue []StorageRegionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageRegionsApiService.StorageRegionsList")
@@ -83,7 +78,7 @@ func (a *StorageRegionsApiService) StorageRegionsListExecute(r ApiStorageRegions
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -127,22 +122,24 @@ func (a *StorageRegionsApiService) StorageRegionsListExecute(r ApiStorageRegions
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -166,7 +163,7 @@ type ApiStorageRegionsReadRequest struct {
 	slug       string
 }
 
-func (r ApiStorageRegionsReadRequest) Execute() (*StorageRegion, *http.Response, error) {
+func (r ApiStorageRegionsReadRequest) Execute() (*StorageRegionResponse, *http.Response, error) {
 	return r.ApiService.StorageRegionsReadExecute(r)
 }
 
@@ -188,13 +185,13 @@ func (a *StorageRegionsApiService) StorageRegionsRead(ctx context.Context, slug 
 }
 
 // Execute executes the request
-//  @return StorageRegion
-func (a *StorageRegionsApiService) StorageRegionsReadExecute(r ApiStorageRegionsReadRequest) (*StorageRegion, *http.Response, error) {
+//  @return StorageRegionResponse
+func (a *StorageRegionsApiService) StorageRegionsReadExecute(r ApiStorageRegionsReadRequest) (*StorageRegionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *StorageRegion
+		localVarReturnValue *StorageRegionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageRegionsApiService.StorageRegionsRead")
@@ -219,7 +216,7 @@ func (a *StorageRegionsApiService) StorageRegionsReadExecute(r ApiStorageRegions
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -263,22 +260,24 @@ func (a *StorageRegionsApiService) StorageRegionsReadExecute(r ApiStorageRegions
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

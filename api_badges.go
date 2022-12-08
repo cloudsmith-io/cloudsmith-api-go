@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -18,11 +18,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ context.Context
 )
 
 // BadgesApiService BadgesApi service
@@ -217,7 +212,7 @@ func (a *BadgesApiService) BadgesVersionListExecute(r ApiBadgesVersionListReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -261,22 +256,24 @@ func (a *BadgesApiService) BadgesVersionListExecute(r ApiBadgesVersionListReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

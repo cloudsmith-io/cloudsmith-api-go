@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -18,11 +18,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-)
-
-// Linger please
-var (
-	_ context.Context
 )
 
 // NamespacesApiService NamespacesApi service
@@ -47,7 +42,7 @@ func (r ApiNamespacesListRequest) PageSize(pageSize int64) ApiNamespacesListRequ
 	return r
 }
 
-func (r ApiNamespacesListRequest) Execute() ([]Namespace, *http.Response, error) {
+func (r ApiNamespacesListRequest) Execute() ([]NamespaceResponse, *http.Response, error) {
 	return r.ApiService.NamespacesListExecute(r)
 }
 
@@ -67,13 +62,13 @@ func (a *NamespacesApiService) NamespacesList(ctx context.Context) ApiNamespaces
 }
 
 // Execute executes the request
-//  @return []Namespace
-func (a *NamespacesApiService) NamespacesListExecute(r ApiNamespacesListRequest) ([]Namespace, *http.Response, error) {
+//  @return []NamespaceResponse
+func (a *NamespacesApiService) NamespacesListExecute(r ApiNamespacesListRequest) ([]NamespaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []Namespace
+		localVarReturnValue []NamespaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NamespacesApiService.NamespacesList")
@@ -103,7 +98,7 @@ func (a *NamespacesApiService) NamespacesListExecute(r ApiNamespacesListRequest)
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -147,22 +142,24 @@ func (a *NamespacesApiService) NamespacesListExecute(r ApiNamespacesListRequest)
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -186,7 +183,7 @@ type ApiNamespacesReadRequest struct {
 	slug       string
 }
 
-func (r ApiNamespacesReadRequest) Execute() (*Namespace, *http.Response, error) {
+func (r ApiNamespacesReadRequest) Execute() (*NamespaceResponse, *http.Response, error) {
 	return r.ApiService.NamespacesReadExecute(r)
 }
 
@@ -208,13 +205,13 @@ func (a *NamespacesApiService) NamespacesRead(ctx context.Context, slug string) 
 }
 
 // Execute executes the request
-//  @return Namespace
-func (a *NamespacesApiService) NamespacesReadExecute(r ApiNamespacesReadRequest) (*Namespace, *http.Response, error) {
+//  @return NamespaceResponse
+func (a *NamespacesApiService) NamespacesReadExecute(r ApiNamespacesReadRequest) (*NamespaceResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *Namespace
+		localVarReturnValue *NamespaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NamespacesApiService.NamespacesRead")
@@ -239,7 +236,7 @@ func (a *NamespacesApiService) NamespacesReadExecute(r ApiNamespacesReadRequest)
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -283,22 +280,24 @@ func (a *NamespacesApiService) NamespacesReadExecute(r ApiNamespacesReadRequest)
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

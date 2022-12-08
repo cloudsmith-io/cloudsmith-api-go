@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## FormatsList
 
-> []Format FormatsList(ctx).Execute()
+> []FormatResponse FormatsList(ctx).Execute()
 
 Get a list of all supported package formats.
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FormatsApi.FormatsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FormatsList`: []Format
+    // response from `FormatsList`: []FormatResponse
     fmt.Fprintf(os.Stdout, "Response from `FormatsApi.FormatsList`: %v\n", resp)
 }
 ```
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiFormatsListRequest struct 
 
 ### Return type
 
-[**[]Format**](Format.md)
+[**[]FormatResponse**](FormatResponse.md)
 
 ### Authorization
 
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiFormatsListRequest struct 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiFormatsListRequest struct 
 
 ## FormatsRead
 
-> Format FormatsRead(ctx, slug).Execute()
+> FormatResponse FormatsRead(ctx, slug).Execute()
 
 Get a specific supported package format.
 
@@ -100,7 +100,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FormatsApi.FormatsRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FormatsRead`: Format
+    // response from `FormatsRead`: FormatResponse
     fmt.Fprintf(os.Stdout, "Response from `FormatsApi.FormatsRead`: %v\n", resp)
 }
 ```
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Format**](Format.md)
+[**FormatResponse**](FormatResponse.md)
 
 ### Authorization
 
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

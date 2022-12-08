@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -17,15 +17,15 @@ import (
 
 // OrganizationTeamMembers struct for OrganizationTeamMembers
 type OrganizationTeamMembers struct {
-	//
-	Members []OrganizationTeamMembersMembers `json:"members"`
+	// The team members
+	Members []OrganizationTeamMembership `json:"members"`
 }
 
 // NewOrganizationTeamMembers instantiates a new OrganizationTeamMembers object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationTeamMembers(members []OrganizationTeamMembersMembers) *OrganizationTeamMembers {
+func NewOrganizationTeamMembers(members []OrganizationTeamMembership) *OrganizationTeamMembers {
 	this := OrganizationTeamMembers{}
 	this.Members = members
 	return &this
@@ -40,9 +40,9 @@ func NewOrganizationTeamMembersWithDefaults() *OrganizationTeamMembers {
 }
 
 // GetMembers returns the Members field value
-func (o *OrganizationTeamMembers) GetMembers() []OrganizationTeamMembersMembers {
+func (o *OrganizationTeamMembers) GetMembers() []OrganizationTeamMembership {
 	if o == nil {
-		var ret []OrganizationTeamMembersMembers
+		var ret []OrganizationTeamMembership
 		return ret
 	}
 
@@ -51,7 +51,7 @@ func (o *OrganizationTeamMembers) GetMembers() []OrganizationTeamMembersMembers 
 
 // GetMembersOk returns a tuple with the Members field value
 // and a boolean to check if the value has been set.
-func (o *OrganizationTeamMembers) GetMembersOk() ([]OrganizationTeamMembersMembers, bool) {
+func (o *OrganizationTeamMembers) GetMembersOk() ([]OrganizationTeamMembership, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *OrganizationTeamMembers) GetMembersOk() ([]OrganizationTeamMembersMembe
 }
 
 // SetMembers sets field value
-func (o *OrganizationTeamMembers) SetMembers(v []OrganizationTeamMembersMembers) {
+func (o *OrganizationTeamMembers) SetMembers(v []OrganizationTeamMembership) {
 	o.Members = v
 }
 

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## UserSelf
 
-> UserBrief UserSelf(ctx).Execute()
+> UserBriefResponse UserSelf(ctx).Execute()
 
 Provide a brief for the current user (if any).
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserSelf``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UserSelf`: UserBrief
+    // response from `UserSelf`: UserBriefResponse
     fmt.Fprintf(os.Stdout, "Response from `UserApi.UserSelf`: %v\n", resp)
 }
 ```
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiUserSelfRequest struct via
 
 ### Return type
 
-[**UserBrief**](UserBrief.md)
+[**UserBriefResponse**](UserBriefResponse.md)
 
 ### Authorization
 
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiUserSelfRequest struct via
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiUserSelfRequest struct via
 
 ## UserTokenCreate
 
-> UserAuthToken UserTokenCreate(ctx).Data(data).Execute()
+> UserAuthTokenResponse UserTokenCreate(ctx).Data(data).Execute()
 
 Retrieve the API key/token for the authenticated user.
 
@@ -91,7 +91,7 @@ import (
 )
 
 func main() {
-    data := *openapiclient.NewUserTokenCreate() // UserTokenCreate |  (optional)
+    data := *openapiclient.NewUserAuthTokenRequest() // UserAuthTokenRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -100,7 +100,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserTokenCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UserTokenCreate`: UserAuthToken
+    // response from `UserTokenCreate`: UserAuthTokenResponse
     fmt.Fprintf(os.Stdout, "Response from `UserApi.UserTokenCreate`: %v\n", resp)
 }
 ```
@@ -116,11 +116,11 @@ Other parameters are passed through a pointer to a apiUserTokenCreateRequest str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**UserTokenCreate**](UserTokenCreate.md) |  | 
+ **data** | [**UserAuthTokenRequest**](UserAuthTokenRequest.md) |  | 
 
 ### Return type
 
-[**UserAuthToken**](UserAuthToken.md)
+[**UserAuthTokenResponse**](UserAuthTokenResponse.md)
 
 ### Authorization
 
@@ -129,7 +129,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

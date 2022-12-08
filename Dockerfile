@@ -1,7 +1,7 @@
-FROM openapitools/openapi-generator-cli:v5.4.0
+FROM openapitools/openapi-generator-cli:v6.2.1
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends jq=1.5+dfsg-2+b1 golang=2:1.11~1 \
+ && apt-get install -y --no-install-recommends jq golang \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 

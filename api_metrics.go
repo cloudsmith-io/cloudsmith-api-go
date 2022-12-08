@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,15 +20,10 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // MetricsApiService MetricsApi service
 type MetricsApiService service
 
-type ApiMetricsEntitlementsListRequest struct {
+type ApiMetricsEntitlementsAccountListRequest struct {
 	ctx        context.Context
 	ApiService *MetricsApiService
 	owner      string
@@ -40,50 +35,50 @@ type ApiMetricsEntitlementsListRequest struct {
 }
 
 // A page number within the paginated result set.
-func (r ApiMetricsEntitlementsListRequest) Page(page int64) ApiMetricsEntitlementsListRequest {
+func (r ApiMetricsEntitlementsAccountListRequest) Page(page int64) ApiMetricsEntitlementsAccountListRequest {
 	r.page = &page
 	return r
 }
 
 // Number of results to return per page.
-func (r ApiMetricsEntitlementsListRequest) PageSize(pageSize int64) ApiMetricsEntitlementsListRequest {
+func (r ApiMetricsEntitlementsAccountListRequest) PageSize(pageSize int64) ApiMetricsEntitlementsAccountListRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // Include metrics upto and including this UTC date or UTC datetime. For example &#39;2020-12-31&#39; or &#39;2021-12-13T00:00:00Z&#39;.
-func (r ApiMetricsEntitlementsListRequest) Finish(finish string) ApiMetricsEntitlementsListRequest {
+func (r ApiMetricsEntitlementsAccountListRequest) Finish(finish string) ApiMetricsEntitlementsAccountListRequest {
 	r.finish = &finish
 	return r
 }
 
 // Include metrics from and including this UTC date or UTC datetime. For example &#39;2020-12-31&#39; or &#39;2021-12-13T00:00:00Z&#39;.
-func (r ApiMetricsEntitlementsListRequest) Start(start string) ApiMetricsEntitlementsListRequest {
+func (r ApiMetricsEntitlementsAccountListRequest) Start(start string) ApiMetricsEntitlementsAccountListRequest {
 	r.start = &start
 	return r
 }
 
 // A comma seperated list of tokens (slug perm) to include in the results.
-func (r ApiMetricsEntitlementsListRequest) Tokens(tokens string) ApiMetricsEntitlementsListRequest {
+func (r ApiMetricsEntitlementsAccountListRequest) Tokens(tokens string) ApiMetricsEntitlementsAccountListRequest {
 	r.tokens = &tokens
 	return r
 }
 
-func (r ApiMetricsEntitlementsListRequest) Execute() (*EntitlementUsageMetrics, *http.Response, error) {
-	return r.ApiService.MetricsEntitlementsListExecute(r)
+func (r ApiMetricsEntitlementsAccountListRequest) Execute() (*EntitlementUsageMetricsResponse, *http.Response, error) {
+	return r.ApiService.MetricsEntitlementsAccountListExecute(r)
 }
 
 /*
-MetricsEntitlementsList View for listing entitlement token metrics, across an account.
+MetricsEntitlementsAccountList View for listing entitlement token metrics, across an account.
 
 View for listing entitlement token metrics, across an account.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
- @return ApiMetricsEntitlementsListRequest
+ @return ApiMetricsEntitlementsAccountListRequest
 */
-func (a *MetricsApiService) MetricsEntitlementsList(ctx context.Context, owner string) ApiMetricsEntitlementsListRequest {
-	return ApiMetricsEntitlementsListRequest{
+func (a *MetricsApiService) MetricsEntitlementsAccountList(ctx context.Context, owner string) ApiMetricsEntitlementsAccountListRequest {
+	return ApiMetricsEntitlementsAccountListRequest{
 		ApiService: a,
 		ctx:        ctx,
 		owner:      owner,
@@ -91,16 +86,16 @@ func (a *MetricsApiService) MetricsEntitlementsList(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return EntitlementUsageMetrics
-func (a *MetricsApiService) MetricsEntitlementsListExecute(r ApiMetricsEntitlementsListRequest) (*EntitlementUsageMetrics, *http.Response, error) {
+//  @return EntitlementUsageMetricsResponse
+func (a *MetricsApiService) MetricsEntitlementsAccountListExecute(r ApiMetricsEntitlementsAccountListRequest) (*EntitlementUsageMetricsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EntitlementUsageMetrics
+		localVarReturnValue *EntitlementUsageMetricsResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsApiService.MetricsEntitlementsList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsApiService.MetricsEntitlementsAccountList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -137,7 +132,7 @@ func (a *MetricsApiService) MetricsEntitlementsListExecute(r ApiMetricsEntitleme
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -181,22 +176,24 @@ func (a *MetricsApiService) MetricsEntitlementsListExecute(r ApiMetricsEntitleme
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -214,7 +211,7 @@ func (a *MetricsApiService) MetricsEntitlementsListExecute(r ApiMetricsEntitleme
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiMetricsEntitlementsList0Request struct {
+type ApiMetricsEntitlementsRepoListRequest struct {
 	ctx        context.Context
 	ApiService *MetricsApiService
 	owner      string
@@ -227,51 +224,51 @@ type ApiMetricsEntitlementsList0Request struct {
 }
 
 // A page number within the paginated result set.
-func (r ApiMetricsEntitlementsList0Request) Page(page int64) ApiMetricsEntitlementsList0Request {
+func (r ApiMetricsEntitlementsRepoListRequest) Page(page int64) ApiMetricsEntitlementsRepoListRequest {
 	r.page = &page
 	return r
 }
 
 // Number of results to return per page.
-func (r ApiMetricsEntitlementsList0Request) PageSize(pageSize int64) ApiMetricsEntitlementsList0Request {
+func (r ApiMetricsEntitlementsRepoListRequest) PageSize(pageSize int64) ApiMetricsEntitlementsRepoListRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // Include metrics upto and including this UTC date or UTC datetime. For example &#39;2020-12-31&#39; or &#39;2021-12-13T00:00:00Z&#39;.
-func (r ApiMetricsEntitlementsList0Request) Finish(finish string) ApiMetricsEntitlementsList0Request {
+func (r ApiMetricsEntitlementsRepoListRequest) Finish(finish string) ApiMetricsEntitlementsRepoListRequest {
 	r.finish = &finish
 	return r
 }
 
 // Include metrics from and including this UTC date or UTC datetime. For example &#39;2020-12-31&#39; or &#39;2021-12-13T00:00:00Z&#39;.
-func (r ApiMetricsEntitlementsList0Request) Start(start string) ApiMetricsEntitlementsList0Request {
+func (r ApiMetricsEntitlementsRepoListRequest) Start(start string) ApiMetricsEntitlementsRepoListRequest {
 	r.start = &start
 	return r
 }
 
 // A comma seperated list of tokens (slug perm) to include in the results.
-func (r ApiMetricsEntitlementsList0Request) Tokens(tokens string) ApiMetricsEntitlementsList0Request {
+func (r ApiMetricsEntitlementsRepoListRequest) Tokens(tokens string) ApiMetricsEntitlementsRepoListRequest {
 	r.tokens = &tokens
 	return r
 }
 
-func (r ApiMetricsEntitlementsList0Request) Execute() (*EntitlementUsageMetrics, *http.Response, error) {
-	return r.ApiService.MetricsEntitlementsList0Execute(r)
+func (r ApiMetricsEntitlementsRepoListRequest) Execute() (*EntitlementUsageMetricsResponse, *http.Response, error) {
+	return r.ApiService.MetricsEntitlementsRepoListExecute(r)
 }
 
 /*
-MetricsEntitlementsList0 View for listing entitlement token metrics, for a repository.
+MetricsEntitlementsRepoList View for listing entitlement token metrics, for a repository.
 
 View for listing entitlement token metrics, for a repository.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
  @param repo
- @return ApiMetricsEntitlementsList0Request
+ @return ApiMetricsEntitlementsRepoListRequest
 */
-func (a *MetricsApiService) MetricsEntitlementsList0(ctx context.Context, owner string, repo string) ApiMetricsEntitlementsList0Request {
-	return ApiMetricsEntitlementsList0Request{
+func (a *MetricsApiService) MetricsEntitlementsRepoList(ctx context.Context, owner string, repo string) ApiMetricsEntitlementsRepoListRequest {
+	return ApiMetricsEntitlementsRepoListRequest{
 		ApiService: a,
 		ctx:        ctx,
 		owner:      owner,
@@ -280,16 +277,16 @@ func (a *MetricsApiService) MetricsEntitlementsList0(ctx context.Context, owner 
 }
 
 // Execute executes the request
-//  @return EntitlementUsageMetrics
-func (a *MetricsApiService) MetricsEntitlementsList0Execute(r ApiMetricsEntitlementsList0Request) (*EntitlementUsageMetrics, *http.Response, error) {
+//  @return EntitlementUsageMetricsResponse
+func (a *MetricsApiService) MetricsEntitlementsRepoListExecute(r ApiMetricsEntitlementsRepoListRequest) (*EntitlementUsageMetricsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EntitlementUsageMetrics
+		localVarReturnValue *EntitlementUsageMetricsResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsApiService.MetricsEntitlementsList0")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsApiService.MetricsEntitlementsRepoList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -327,7 +324,7 @@ func (a *MetricsApiService) MetricsEntitlementsList0Execute(r ApiMetricsEntitlem
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -371,22 +368,24 @@ func (a *MetricsApiService) MetricsEntitlementsList0Execute(r ApiMetricsEntitlem
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -446,7 +445,7 @@ func (r ApiMetricsPackagesListRequest) Start(start string) ApiMetricsPackagesLis
 	return r
 }
 
-func (r ApiMetricsPackagesListRequest) Execute() (*PackageUsageMetrics, *http.Response, error) {
+func (r ApiMetricsPackagesListRequest) Execute() (*PackageUsageMetricsResponse, *http.Response, error) {
 	return r.ApiService.MetricsPackagesListExecute(r)
 }
 
@@ -470,13 +469,13 @@ func (a *MetricsApiService) MetricsPackagesList(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return PackageUsageMetrics
-func (a *MetricsApiService) MetricsPackagesListExecute(r ApiMetricsPackagesListRequest) (*PackageUsageMetrics, *http.Response, error) {
+//  @return PackageUsageMetricsResponse
+func (a *MetricsApiService) MetricsPackagesListExecute(r ApiMetricsPackagesListRequest) (*PackageUsageMetricsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageUsageMetrics
+		localVarReturnValue *PackageUsageMetricsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsApiService.MetricsPackagesList")
@@ -517,7 +516,7 @@ func (a *MetricsApiService) MetricsPackagesListExecute(r ApiMetricsPackagesListR
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -561,22 +560,24 @@ func (a *MetricsApiService) MetricsPackagesListExecute(r ApiMetricsPackagesListR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

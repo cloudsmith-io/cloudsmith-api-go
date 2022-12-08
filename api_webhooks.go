@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,6 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // WebhooksApiService WebhooksApi service
 type WebhooksApiService service
 
@@ -33,15 +28,15 @@ type ApiWebhooksCreateRequest struct {
 	ApiService *WebhooksApiService
 	owner      string
 	repo       string
-	data       *WebhooksCreate
+	data       *RepositoryWebhookRequest
 }
 
-func (r ApiWebhooksCreateRequest) Data(data WebhooksCreate) ApiWebhooksCreateRequest {
+func (r ApiWebhooksCreateRequest) Data(data RepositoryWebhookRequest) ApiWebhooksCreateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiWebhooksCreateRequest) Execute() (*RepositoryWebhook, *http.Response, error) {
+func (r ApiWebhooksCreateRequest) Execute() (*RepositoryWebhookResponse, *http.Response, error) {
 	return r.ApiService.WebhooksCreateExecute(r)
 }
 
@@ -65,13 +60,13 @@ func (a *WebhooksApiService) WebhooksCreate(ctx context.Context, owner string, r
 }
 
 // Execute executes the request
-//  @return RepositoryWebhook
-func (a *WebhooksApiService) WebhooksCreateExecute(r ApiWebhooksCreateRequest) (*RepositoryWebhook, *http.Response, error) {
+//  @return RepositoryWebhookResponse
+func (a *WebhooksApiService) WebhooksCreateExecute(r ApiWebhooksCreateRequest) (*RepositoryWebhookResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryWebhook
+		localVarReturnValue *RepositoryWebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhooksCreate")
@@ -97,7 +92,7 @@ func (a *WebhooksApiService) WebhooksCreateExecute(r ApiWebhooksCreateRequest) (
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -142,33 +137,36 @@ func (a *WebhooksApiService) WebhooksCreateExecute(r ApiWebhooksCreateRequest) (
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -251,7 +249,7 @@ func (a *WebhooksApiService) WebhooksDeleteExecute(r ApiWebhooksDeleteRequest) (
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -295,22 +293,24 @@ func (a *WebhooksApiService) WebhooksDeleteExecute(r ApiWebhooksDeleteRequest) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -340,7 +340,7 @@ func (r ApiWebhooksListRequest) PageSize(pageSize int64) ApiWebhooksListRequest 
 	return r
 }
 
-func (r ApiWebhooksListRequest) Execute() ([]RepositoryWebhook, *http.Response, error) {
+func (r ApiWebhooksListRequest) Execute() ([]RepositoryWebhookResponse, *http.Response, error) {
 	return r.ApiService.WebhooksListExecute(r)
 }
 
@@ -364,13 +364,13 @@ func (a *WebhooksApiService) WebhooksList(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return []RepositoryWebhook
-func (a *WebhooksApiService) WebhooksListExecute(r ApiWebhooksListRequest) ([]RepositoryWebhook, *http.Response, error) {
+//  @return []RepositoryWebhookResponse
+func (a *WebhooksApiService) WebhooksListExecute(r ApiWebhooksListRequest) ([]RepositoryWebhookResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []RepositoryWebhook
+		localVarReturnValue []RepositoryWebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhooksList")
@@ -402,7 +402,7 @@ func (a *WebhooksApiService) WebhooksListExecute(r ApiWebhooksListRequest) ([]Re
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -445,33 +445,36 @@ func (a *WebhooksApiService) WebhooksListExecute(r ApiWebhooksListRequest) ([]Re
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -495,15 +498,15 @@ type ApiWebhooksPartialUpdateRequest struct {
 	owner      string
 	repo       string
 	identifier string
-	data       *WebhooksPartialUpdate
+	data       *RepositoryWebhookRequestPatch
 }
 
-func (r ApiWebhooksPartialUpdateRequest) Data(data WebhooksPartialUpdate) ApiWebhooksPartialUpdateRequest {
+func (r ApiWebhooksPartialUpdateRequest) Data(data RepositoryWebhookRequestPatch) ApiWebhooksPartialUpdateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiWebhooksPartialUpdateRequest) Execute() (*RepositoryWebhook, *http.Response, error) {
+func (r ApiWebhooksPartialUpdateRequest) Execute() (*RepositoryWebhookResponse, *http.Response, error) {
 	return r.ApiService.WebhooksPartialUpdateExecute(r)
 }
 
@@ -529,13 +532,13 @@ func (a *WebhooksApiService) WebhooksPartialUpdate(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return RepositoryWebhook
-func (a *WebhooksApiService) WebhooksPartialUpdateExecute(r ApiWebhooksPartialUpdateRequest) (*RepositoryWebhook, *http.Response, error) {
+//  @return RepositoryWebhookResponse
+func (a *WebhooksApiService) WebhooksPartialUpdateExecute(r ApiWebhooksPartialUpdateRequest) (*RepositoryWebhookResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryWebhook
+		localVarReturnValue *RepositoryWebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhooksPartialUpdate")
@@ -562,7 +565,7 @@ func (a *WebhooksApiService) WebhooksPartialUpdateExecute(r ApiWebhooksPartialUp
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -607,33 +610,36 @@ func (a *WebhooksApiService) WebhooksPartialUpdateExecute(r ApiWebhooksPartialUp
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -659,7 +665,7 @@ type ApiWebhooksReadRequest struct {
 	identifier string
 }
 
-func (r ApiWebhooksReadRequest) Execute() (*RepositoryWebhook, *http.Response, error) {
+func (r ApiWebhooksReadRequest) Execute() (*RepositoryWebhookResponse, *http.Response, error) {
 	return r.ApiService.WebhooksReadExecute(r)
 }
 
@@ -685,13 +691,13 @@ func (a *WebhooksApiService) WebhooksRead(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return RepositoryWebhook
-func (a *WebhooksApiService) WebhooksReadExecute(r ApiWebhooksReadRequest) (*RepositoryWebhook, *http.Response, error) {
+//  @return RepositoryWebhookResponse
+func (a *WebhooksApiService) WebhooksReadExecute(r ApiWebhooksReadRequest) (*RepositoryWebhookResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryWebhook
+		localVarReturnValue *RepositoryWebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhooksRead")
@@ -718,7 +724,7 @@ func (a *WebhooksApiService) WebhooksReadExecute(r ApiWebhooksReadRequest) (*Rep
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -762,22 +768,24 @@ func (a *WebhooksApiService) WebhooksReadExecute(r ApiWebhooksReadRequest) (*Rep
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

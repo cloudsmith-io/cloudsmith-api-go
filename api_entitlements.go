@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,6 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // EntitlementsApiService EntitlementsApi service
 type EntitlementsApiService service
 
@@ -34,7 +29,7 @@ type ApiEntitlementsCreateRequest struct {
 	owner      string
 	repo       string
 	showTokens *bool
-	data       *EntitlementsCreate
+	data       *RepositoryTokenRequest
 }
 
 // Show entitlement token strings in results
@@ -42,12 +37,13 @@ func (r ApiEntitlementsCreateRequest) ShowTokens(showTokens bool) ApiEntitlement
 	r.showTokens = &showTokens
 	return r
 }
-func (r ApiEntitlementsCreateRequest) Data(data EntitlementsCreate) ApiEntitlementsCreateRequest {
+
+func (r ApiEntitlementsCreateRequest) Data(data RepositoryTokenRequest) ApiEntitlementsCreateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiEntitlementsCreateRequest) Execute() (*RepositoryToken, *http.Response, error) {
+func (r ApiEntitlementsCreateRequest) Execute() (*RepositoryTokenResponse, *http.Response, error) {
 	return r.ApiService.EntitlementsCreateExecute(r)
 }
 
@@ -71,13 +67,13 @@ func (a *EntitlementsApiService) EntitlementsCreate(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return RepositoryToken
-func (a *EntitlementsApiService) EntitlementsCreateExecute(r ApiEntitlementsCreateRequest) (*RepositoryToken, *http.Response, error) {
+//  @return RepositoryTokenResponse
+func (a *EntitlementsApiService) EntitlementsCreateExecute(r ApiEntitlementsCreateRequest) (*RepositoryTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryToken
+		localVarReturnValue *RepositoryTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsCreate")
@@ -106,7 +102,7 @@ func (a *EntitlementsApiService) EntitlementsCreateExecute(r ApiEntitlementsCrea
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -151,33 +147,36 @@ func (a *EntitlementsApiService) EntitlementsCreateExecute(r ApiEntitlementsCrea
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -260,7 +259,7 @@ func (a *EntitlementsApiService) EntitlementsDeleteExecute(r ApiEntitlementsDele
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -304,22 +303,24 @@ func (a *EntitlementsApiService) EntitlementsDeleteExecute(r ApiEntitlementsDele
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -393,7 +394,7 @@ func (a *EntitlementsApiService) EntitlementsDisableExecute(r ApiEntitlementsDis
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -437,22 +438,24 @@ func (a *EntitlementsApiService) EntitlementsDisableExecute(r ApiEntitlementsDis
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -526,7 +529,7 @@ func (a *EntitlementsApiService) EntitlementsEnableExecute(r ApiEntitlementsEnab
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -570,22 +573,24 @@ func (a *EntitlementsApiService) EntitlementsEnableExecute(r ApiEntitlementsEnab
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -602,6 +607,8 @@ type ApiEntitlementsListRequest struct {
 	page       *int64
 	pageSize   *int64
 	showTokens *bool
+	query      *string
+	active     *bool
 }
 
 // A page number within the paginated result set.
@@ -622,7 +629,19 @@ func (r ApiEntitlementsListRequest) ShowTokens(showTokens bool) ApiEntitlementsL
 	return r
 }
 
-func (r ApiEntitlementsListRequest) Execute() ([]RepositoryToken, *http.Response, error) {
+// A search term for querying names of entitlements.
+func (r ApiEntitlementsListRequest) Query(query string) ApiEntitlementsListRequest {
+	r.query = &query
+	return r
+}
+
+// If true, only include active tokens
+func (r ApiEntitlementsListRequest) Active(active bool) ApiEntitlementsListRequest {
+	r.active = &active
+	return r
+}
+
+func (r ApiEntitlementsListRequest) Execute() ([]RepositoryTokenResponse, *http.Response, error) {
 	return r.ApiService.EntitlementsListExecute(r)
 }
 
@@ -646,13 +665,13 @@ func (a *EntitlementsApiService) EntitlementsList(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return []RepositoryToken
-func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRequest) ([]RepositoryToken, *http.Response, error) {
+//  @return []RepositoryTokenResponse
+func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRequest) ([]RepositoryTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []RepositoryToken
+		localVarReturnValue []RepositoryTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsList")
@@ -677,6 +696,12 @@ func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRe
 	if r.showTokens != nil {
 		localVarQueryParams.Add("show_tokens", parameterToString(*r.showTokens, ""))
 	}
+	if r.query != nil {
+		localVarQueryParams.Add("query", parameterToString(*r.query, ""))
+	}
+	if r.active != nil {
+		localVarQueryParams.Add("active", parameterToString(*r.active, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -687,7 +712,7 @@ func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -730,33 +755,36 @@ func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRe
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -781,7 +809,7 @@ type ApiEntitlementsPartialUpdateRequest struct {
 	repo       string
 	identifier string
 	showTokens *bool
-	data       *EntitlementsPartialUpdate
+	data       *RepositoryTokenRequestPatch
 }
 
 // Show entitlement token strings in results
@@ -789,12 +817,13 @@ func (r ApiEntitlementsPartialUpdateRequest) ShowTokens(showTokens bool) ApiEnti
 	r.showTokens = &showTokens
 	return r
 }
-func (r ApiEntitlementsPartialUpdateRequest) Data(data EntitlementsPartialUpdate) ApiEntitlementsPartialUpdateRequest {
+
+func (r ApiEntitlementsPartialUpdateRequest) Data(data RepositoryTokenRequestPatch) ApiEntitlementsPartialUpdateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiEntitlementsPartialUpdateRequest) Execute() (*RepositoryToken, *http.Response, error) {
+func (r ApiEntitlementsPartialUpdateRequest) Execute() (*RepositoryTokenResponse, *http.Response, error) {
 	return r.ApiService.EntitlementsPartialUpdateExecute(r)
 }
 
@@ -820,13 +849,13 @@ func (a *EntitlementsApiService) EntitlementsPartialUpdate(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return RepositoryToken
-func (a *EntitlementsApiService) EntitlementsPartialUpdateExecute(r ApiEntitlementsPartialUpdateRequest) (*RepositoryToken, *http.Response, error) {
+//  @return RepositoryTokenResponse
+func (a *EntitlementsApiService) EntitlementsPartialUpdateExecute(r ApiEntitlementsPartialUpdateRequest) (*RepositoryTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryToken
+		localVarReturnValue *RepositoryTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsPartialUpdate")
@@ -856,7 +885,7 @@ func (a *EntitlementsApiService) EntitlementsPartialUpdateExecute(r ApiEntitleme
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -902,32 +931,35 @@ func (a *EntitlementsApiService) EntitlementsPartialUpdateExecute(r ApiEntitleme
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -951,7 +983,14 @@ type ApiEntitlementsReadRequest struct {
 	owner      string
 	repo       string
 	identifier string
+	fuzzy      *bool
 	showTokens *bool
+}
+
+// If true, entitlement identifiers including name will be fuzzy matched.
+func (r ApiEntitlementsReadRequest) Fuzzy(fuzzy bool) ApiEntitlementsReadRequest {
+	r.fuzzy = &fuzzy
+	return r
 }
 
 // Show entitlement token strings in results
@@ -960,7 +999,7 @@ func (r ApiEntitlementsReadRequest) ShowTokens(showTokens bool) ApiEntitlementsR
 	return r
 }
 
-func (r ApiEntitlementsReadRequest) Execute() (*RepositoryToken, *http.Response, error) {
+func (r ApiEntitlementsReadRequest) Execute() (*RepositoryTokenResponse, *http.Response, error) {
 	return r.ApiService.EntitlementsReadExecute(r)
 }
 
@@ -986,13 +1025,13 @@ func (a *EntitlementsApiService) EntitlementsRead(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RepositoryToken
-func (a *EntitlementsApiService) EntitlementsReadExecute(r ApiEntitlementsReadRequest) (*RepositoryToken, *http.Response, error) {
+//  @return RepositoryTokenResponse
+func (a *EntitlementsApiService) EntitlementsReadExecute(r ApiEntitlementsReadRequest) (*RepositoryTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryToken
+		localVarReturnValue *RepositoryTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsRead")
@@ -1009,6 +1048,9 @@ func (a *EntitlementsApiService) EntitlementsReadExecute(r ApiEntitlementsReadRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.fuzzy != nil {
+		localVarQueryParams.Add("fuzzy", parameterToString(*r.fuzzy, ""))
+	}
 	if r.showTokens != nil {
 		localVarQueryParams.Add("show_tokens", parameterToString(*r.showTokens, ""))
 	}
@@ -1022,7 +1064,7 @@ func (a *EntitlementsApiService) EntitlementsReadExecute(r ApiEntitlementsReadRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1066,32 +1108,35 @@ func (a *EntitlementsApiService) EntitlementsReadExecute(r ApiEntitlementsReadRe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1116,7 +1161,7 @@ type ApiEntitlementsRefreshRequest struct {
 	repo       string
 	identifier string
 	showTokens *bool
-	data       *EntitlementsRefresh
+	data       *RepositoryTokenRefreshRequest
 }
 
 // Show entitlement token strings in results
@@ -1124,12 +1169,13 @@ func (r ApiEntitlementsRefreshRequest) ShowTokens(showTokens bool) ApiEntitlemen
 	r.showTokens = &showTokens
 	return r
 }
-func (r ApiEntitlementsRefreshRequest) Data(data EntitlementsRefresh) ApiEntitlementsRefreshRequest {
+
+func (r ApiEntitlementsRefreshRequest) Data(data RepositoryTokenRefreshRequest) ApiEntitlementsRefreshRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiEntitlementsRefreshRequest) Execute() (*RepositoryTokenRefresh, *http.Response, error) {
+func (r ApiEntitlementsRefreshRequest) Execute() (*RepositoryTokenRefreshResponse, *http.Response, error) {
 	return r.ApiService.EntitlementsRefreshExecute(r)
 }
 
@@ -1155,13 +1201,13 @@ func (a *EntitlementsApiService) EntitlementsRefresh(ctx context.Context, owner 
 }
 
 // Execute executes the request
-//  @return RepositoryTokenRefresh
-func (a *EntitlementsApiService) EntitlementsRefreshExecute(r ApiEntitlementsRefreshRequest) (*RepositoryTokenRefresh, *http.Response, error) {
+//  @return RepositoryTokenRefreshResponse
+func (a *EntitlementsApiService) EntitlementsRefreshExecute(r ApiEntitlementsRefreshRequest) (*RepositoryTokenRefreshResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryTokenRefresh
+		localVarReturnValue *RepositoryTokenRefreshResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsRefresh")
@@ -1191,7 +1237,7 @@ func (a *EntitlementsApiService) EntitlementsRefreshExecute(r ApiEntitlementsRef
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1237,22 +1283,24 @@ func (a *EntitlementsApiService) EntitlementsRefreshExecute(r ApiEntitlementsRef
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1345,7 +1393,7 @@ func (a *EntitlementsApiService) EntitlementsResetExecute(r ApiEntitlementsReset
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1389,22 +1437,24 @@ func (a *EntitlementsApiService) EntitlementsResetExecute(r ApiEntitlementsReset
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -1419,7 +1469,7 @@ type ApiEntitlementsSyncRequest struct {
 	owner      string
 	repo       string
 	showTokens *bool
-	data       *EntitlementsSync
+	data       *RepositoryTokenSyncRequest
 }
 
 // Show entitlement token strings in results
@@ -1427,12 +1477,13 @@ func (r ApiEntitlementsSyncRequest) ShowTokens(showTokens bool) ApiEntitlementsS
 	r.showTokens = &showTokens
 	return r
 }
-func (r ApiEntitlementsSyncRequest) Data(data EntitlementsSync) ApiEntitlementsSyncRequest {
+
+func (r ApiEntitlementsSyncRequest) Data(data RepositoryTokenSyncRequest) ApiEntitlementsSyncRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiEntitlementsSyncRequest) Execute() (*RepositoryTokenSync, *http.Response, error) {
+func (r ApiEntitlementsSyncRequest) Execute() (*RepositoryTokenSyncResponse, *http.Response, error) {
 	return r.ApiService.EntitlementsSyncExecute(r)
 }
 
@@ -1456,13 +1507,13 @@ func (a *EntitlementsApiService) EntitlementsSync(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RepositoryTokenSync
-func (a *EntitlementsApiService) EntitlementsSyncExecute(r ApiEntitlementsSyncRequest) (*RepositoryTokenSync, *http.Response, error) {
+//  @return RepositoryTokenSyncResponse
+func (a *EntitlementsApiService) EntitlementsSyncExecute(r ApiEntitlementsSyncRequest) (*RepositoryTokenSyncResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryTokenSync
+		localVarReturnValue *RepositoryTokenSyncResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsSync")
@@ -1491,7 +1542,7 @@ func (a *EntitlementsApiService) EntitlementsSyncExecute(r ApiEntitlementsSyncRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1536,33 +1587,36 @@ func (a *EntitlementsApiService) EntitlementsSyncExecute(r ApiEntitlementsSyncRe
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

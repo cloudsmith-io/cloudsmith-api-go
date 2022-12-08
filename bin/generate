@@ -40,3 +40,5 @@ docker run --rm \
 
 rm -v .travis.yml
 rm -v git_push.sh
+# generated tests don't work yet
+rm -rfv test/

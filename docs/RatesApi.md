@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## RatesLimitsList
 
-> ResourcesRateCheck RatesLimitsList(ctx).Execute()
+> ResourcesRateCheckResponse RatesLimitsList(ctx).Execute()
 
 Endpoint to check rate limits for current user.
 
@@ -37,7 +37,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RatesApi.RatesLimitsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `RatesLimitsList`: ResourcesRateCheck
+    // response from `RatesLimitsList`: ResourcesRateCheckResponse
     fmt.Fprintf(os.Stdout, "Response from `RatesApi.RatesLimitsList`: %v\n", resp)
 }
 ```
@@ -53,7 +53,7 @@ Other parameters are passed through a pointer to a apiRatesLimitsListRequest str
 
 ### Return type
 
-[**ResourcesRateCheck**](ResourcesRateCheck.md)
+[**ResourcesRateCheckResponse**](ResourcesRateCheckResponse.md)
 
 ### Authorization
 
@@ -62,7 +62,7 @@ Other parameters are passed through a pointer to a apiRatesLimitsListRequest str
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

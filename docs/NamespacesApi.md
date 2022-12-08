@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## NamespacesList
 
-> []Namespace NamespacesList(ctx).Page(page).PageSize(pageSize).Execute()
+> []NamespaceResponse NamespacesList(ctx).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all namespaces the user belongs to.
 
@@ -40,7 +40,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `NamespacesApi.NamespacesList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `NamespacesList`: []Namespace
+    // response from `NamespacesList`: []NamespaceResponse
     fmt.Fprintf(os.Stdout, "Response from `NamespacesApi.NamespacesList`: %v\n", resp)
 }
 ```
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Namespace**](Namespace.md)
+[**[]NamespaceResponse**](NamespaceResponse.md)
 
 ### Authorization
 
@@ -70,7 +70,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## NamespacesRead
 
-> Namespace NamespacesRead(ctx, slug).Execute()
+> NamespaceResponse NamespacesRead(ctx, slug).Execute()
 
 Views for working with namespaces.
 
@@ -107,7 +107,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `NamespacesApi.NamespacesRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `NamespacesRead`: Namespace
+    // response from `NamespacesRead`: NamespaceResponse
     fmt.Fprintf(os.Stdout, "Response from `NamespacesApi.NamespacesRead`: %v\n", resp)
 }
 ```
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Namespace**](Namespace.md)
+[**NamespaceResponse**](NamespaceResponse.md)
 
 ### Authorization
 
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -19,11 +19,6 @@ import (
 	"net/url"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // RatesApiService RatesApi service
 type RatesApiService service
 
@@ -32,7 +27,7 @@ type ApiRatesLimitsListRequest struct {
 	ApiService *RatesApiService
 }
 
-func (r ApiRatesLimitsListRequest) Execute() (*ResourcesRateCheck, *http.Response, error) {
+func (r ApiRatesLimitsListRequest) Execute() (*ResourcesRateCheckResponse, *http.Response, error) {
 	return r.ApiService.RatesLimitsListExecute(r)
 }
 
@@ -52,13 +47,13 @@ func (a *RatesApiService) RatesLimitsList(ctx context.Context) ApiRatesLimitsLis
 }
 
 // Execute executes the request
-//  @return ResourcesRateCheck
-func (a *RatesApiService) RatesLimitsListExecute(r ApiRatesLimitsListRequest) (*ResourcesRateCheck, *http.Response, error) {
+//  @return ResourcesRateCheckResponse
+func (a *RatesApiService) RatesLimitsListExecute(r ApiRatesLimitsListRequest) (*ResourcesRateCheckResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ResourcesRateCheck
+		localVarReturnValue *ResourcesRateCheckResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RatesApiService.RatesLimitsList")
@@ -82,7 +77,7 @@ func (a *RatesApiService) RatesLimitsListExecute(r ApiRatesLimitsListRequest) (*
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -126,22 +121,24 @@ func (a *RatesApiService) RatesLimitsListExecute(r ApiRatesLimitsListRequest) (*
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

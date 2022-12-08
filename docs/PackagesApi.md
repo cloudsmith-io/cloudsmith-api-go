@@ -66,7 +66,7 @@ Method | HTTP request | Description
 
 ## PackagesCopy
 
-> PackageCopy PackagesCopy(ctx, owner, repo, identifier).Data(data).Execute()
+> PackageCopyResponse PackagesCopy(ctx, owner, repo, identifier).Data(data).Execute()
 
 Copy a package to another repository.
 
@@ -88,7 +88,7 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    data := *openapiclient.NewPackagesCopy("Destination_example") // PackagesCopy |  (optional)
+    data := *openapiclient.NewPackageCopyRequest("Destination_example") // PackageCopyRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -97,7 +97,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesCopy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesCopy`: PackageCopy
+    // response from `PackagesCopy`: PackageCopyResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesCopy`: %v\n", resp)
 }
 ```
@@ -122,11 +122,11 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**PackagesCopy**](PackagesCopy.md) |  | 
+ **data** | [**PackageCopyRequest**](PackageCopyRequest.md) |  | 
 
 ### Return type
 
-[**PackageCopy**](PackageCopy.md)
+[**PackageCopyResponse**](PackageCopyResponse.md)
 
 ### Authorization
 
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## PackagesDependencies
 
-> PackageDependencies PackagesDependencies(ctx, owner, repo, identifier).Execute()
+> PackageDependenciesResponse PackagesDependencies(ctx, owner, repo, identifier).Execute()
 
 Get the direct (non-transitive) dependencies list for a package.
 
@@ -248,7 +248,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesDependencies``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesDependencies`: PackageDependencies
+    // response from `PackagesDependencies`: PackageDependenciesResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesDependencies`: %v\n", resp)
 }
 ```
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageDependencies**](PackageDependencies.md)
+[**PackageDependenciesResponse**](PackageDependenciesResponse.md)
 
 ### Authorization
 
@@ -285,7 +285,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 ## PackagesList
 
-> []Package PackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
+> []PackageResponse PackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
 
 Get a list of all packages associated with repository.
 
@@ -318,7 +318,7 @@ func main() {
     page := int64(56) // int64 | A page number within the paginated result set. (optional)
     pageSize := int64(56) // int64 | Number of results to return per page. (optional)
     query := "query_example" // string | A search term for querying names, filenames, versions, distributions, architectures, formats or statuses of packages. (optional)
-    sort := "sort_example" // string | A field for sorting objects in ascending or descending order. (optional)
+    sort := "sort_example" // string | A field for sorting objects in ascending or descending order. (optional) (default to "-date")
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -327,7 +327,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesList`: []Package
+    // response from `PackagesList`: []PackageResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesList`: %v\n", resp)
 }
 ```
@@ -353,11 +353,11 @@ Name | Type | Description  | Notes
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
  **query** | **string** | A search term for querying names, filenames, versions, distributions, architectures, formats or statuses of packages. | 
- **sort** | **string** | A field for sorting objects in ascending or descending order. | 
+ **sort** | **string** | A field for sorting objects in ascending or descending order. | [default to &quot;-date&quot;]
 
 ### Return type
 
-[**[]Package**](Package.md)
+[**[]PackageResponse**](PackageResponse.md)
 
 ### Authorization
 
@@ -366,7 +366,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -375,7 +375,7 @@ Name | Type | Description  | Notes
 
 ## PackagesMove
 
-> PackageMove PackagesMove(ctx, owner, repo, identifier).Data(data).Execute()
+> PackageMoveResponse PackagesMove(ctx, owner, repo, identifier).Data(data).Execute()
 
 Move a package to another repository.
 
@@ -397,7 +397,7 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    data := *openapiclient.NewPackagesMove("Destination_example") // PackagesMove |  (optional)
+    data := *openapiclient.NewPackageMoveRequest("Destination_example") // PackageMoveRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -406,7 +406,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesMove``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesMove`: PackageMove
+    // response from `PackagesMove`: PackageMoveResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesMove`: %v\n", resp)
 }
 ```
@@ -431,11 +431,11 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**PackagesMove**](PackagesMove.md) |  | 
+ **data** | [**PackageMoveRequest**](PackageMoveRequest.md) |  | 
 
 ### Return type
 
-[**PackageMove**](PackageMove.md)
+[**PackageMoveResponse**](PackageMoveResponse.md)
 
 ### Authorization
 
@@ -444,7 +444,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -453,7 +453,7 @@ Name | Type | Description  | Notes
 
 ## PackagesQuarantine
 
-> PackageQuarantine PackagesQuarantine(ctx, owner, repo, identifier).Data(data).Execute()
+> PackageQuarantineResponse PackagesQuarantine(ctx, owner, repo, identifier).Data(data).Execute()
 
 Quarantine or restore a package.
 
@@ -475,7 +475,7 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    data := *openapiclient.NewPackagesQuarantine() // PackagesQuarantine |  (optional)
+    data := *openapiclient.NewPackageQuarantineRequest() // PackageQuarantineRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -484,7 +484,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesQuarantine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesQuarantine`: PackageQuarantine
+    // response from `PackagesQuarantine`: PackageQuarantineResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesQuarantine`: %v\n", resp)
 }
 ```
@@ -509,11 +509,11 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**PackagesQuarantine**](PackagesQuarantine.md) |  | 
+ **data** | [**PackageQuarantineRequest**](PackageQuarantineRequest.md) |  | 
 
 ### Return type
 
-[**PackageQuarantine**](PackageQuarantine.md)
+[**PackageQuarantineResponse**](PackageQuarantineResponse.md)
 
 ### Authorization
 
@@ -522,7 +522,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -531,7 +531,7 @@ Name | Type | Description  | Notes
 
 ## PackagesRead
 
-> Package PackagesRead(ctx, owner, repo, identifier).Execute()
+> PackageResponse PackagesRead(ctx, owner, repo, identifier).Execute()
 
 Get a specific package in a repository.
 
@@ -561,7 +561,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesRead`: Package
+    // response from `PackagesRead`: PackageResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesRead`: %v\n", resp)
 }
 ```
@@ -589,7 +589,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**PackageResponse**](PackageResponse.md)
 
 ### Authorization
 
@@ -598,7 +598,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -607,7 +607,7 @@ Name | Type | Description  | Notes
 
 ## PackagesResync
 
-> PackageResync PackagesResync(ctx, owner, repo, identifier).Execute()
+> PackageResyncResponse PackagesResync(ctx, owner, repo, identifier).Execute()
 
 Schedule a package for resynchronisation.
 
@@ -637,7 +637,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesResync``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesResync`: PackageResync
+    // response from `PackagesResync`: PackageResyncResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesResync`: %v\n", resp)
 }
 ```
@@ -665,7 +665,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageResync**](PackageResync.md)
+[**PackageResyncResponse**](PackageResyncResponse.md)
 
 ### Authorization
 
@@ -674,7 +674,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -683,7 +683,7 @@ Name | Type | Description  | Notes
 
 ## PackagesScan
 
-> Package PackagesScan(ctx, owner, repo, identifier).Execute()
+> PackageResponse PackagesScan(ctx, owner, repo, identifier).Execute()
 
 Schedule a package for scanning.
 
@@ -713,7 +713,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesScan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesScan`: Package
+    // response from `PackagesScan`: PackageResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesScan`: %v\n", resp)
 }
 ```
@@ -741,7 +741,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**PackageResponse**](PackageResponse.md)
 
 ### Authorization
 
@@ -750,7 +750,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -759,7 +759,7 @@ Name | Type | Description  | Notes
 
 ## PackagesStatus
 
-> PackageStatus PackagesStatus(ctx, owner, repo, identifier).Execute()
+> PackageStatusResponse PackagesStatus(ctx, owner, repo, identifier).Execute()
 
 Get the synchronisation status for a package.
 
@@ -789,7 +789,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesStatus``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesStatus`: PackageStatus
+    // response from `PackagesStatus`: PackageStatusResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesStatus`: %v\n", resp)
 }
 ```
@@ -817,7 +817,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageStatus**](PackageStatus.md)
+[**PackageStatusResponse**](PackageStatusResponse.md)
 
 ### Authorization
 
@@ -826,7 +826,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -835,7 +835,7 @@ Name | Type | Description  | Notes
 
 ## PackagesTag
 
-> Package PackagesTag(ctx, owner, repo, identifier).Data(data).Execute()
+> PackageResponse PackagesTag(ctx, owner, repo, identifier).Data(data).Execute()
 
 Add/Replace/Remove tags for a package.
 
@@ -857,7 +857,7 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    data := *openapiclient.NewPackagesTag() // PackagesTag |  (optional)
+    data := *openapiclient.NewPackageTagRequest() // PackageTagRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -866,7 +866,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesTag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesTag`: Package
+    // response from `PackagesTag`: PackageResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesTag`: %v\n", resp)
 }
 ```
@@ -891,11 +891,11 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**PackagesTag**](PackagesTag.md) |  | 
+ **data** | [**PackageTagRequest**](PackageTagRequest.md) |  | 
 
 ### Return type
 
-[**Package**](Package.md)
+[**PackageResponse**](PackageResponse.md)
 
 ### Authorization
 
@@ -904,7 +904,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -913,7 +913,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadAlpine
 
-> AlpinePackageUpload PackagesUploadAlpine(ctx, owner, repo).Data(data).Execute()
+> AlpinePackageUploadResponse PackagesUploadAlpine(ctx, owner, repo).Data(data).Execute()
 
 Create a new Alpine package
 
@@ -934,7 +934,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadAlpine("alpine/v3.8", "a123456789") // PackagesUploadAlpine |  (optional)
+    data := *openapiclient.NewAlpinePackageUploadRequest("Distribution_example", "PackageFile_example") // AlpinePackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -943,7 +943,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadAlpine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadAlpine`: AlpinePackageUpload
+    // response from `PackagesUploadAlpine`: AlpinePackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadAlpine`: %v\n", resp)
 }
 ```
@@ -966,11 +966,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadAlpine**](PackagesUploadAlpine.md) |  | 
+ **data** | [**AlpinePackageUploadRequest**](AlpinePackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**AlpinePackageUpload**](AlpinePackageUpload.md)
+[**AlpinePackageUploadResponse**](AlpinePackageUploadResponse.md)
 
 ### Authorization
 
@@ -979,7 +979,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -988,7 +988,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCargo
 
-> CargoPackageUpload PackagesUploadCargo(ctx, owner, repo).Data(data).Execute()
+> CargoPackageUploadResponse PackagesUploadCargo(ctx, owner, repo).Data(data).Execute()
 
 Create a new Cargo package
 
@@ -1009,7 +1009,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadCargo("x123456789a") // PackagesUploadCargo |  (optional)
+    data := *openapiclient.NewCargoPackageUploadRequest("PackageFile_example") // CargoPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1018,7 +1018,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadCargo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadCargo`: CargoPackageUpload
+    // response from `PackagesUploadCargo`: CargoPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadCargo`: %v\n", resp)
 }
 ```
@@ -1041,11 +1041,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadCargo**](PackagesUploadCargo.md) |  | 
+ **data** | [**CargoPackageUploadRequest**](CargoPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**CargoPackageUpload**](CargoPackageUpload.md)
+[**CargoPackageUploadResponse**](CargoPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1054,7 +1054,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1063,7 +1063,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCocoapods
 
-> CocoapodsPackageUpload PackagesUploadCocoapods(ctx, owner, repo).Data(data).Execute()
+> CocoapodsPackageUploadResponse PackagesUploadCocoapods(ctx, owner, repo).Data(data).Execute()
 
 Create a new CocoaPods package
 
@@ -1084,7 +1084,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadCocoapods("z123456789") // PackagesUploadCocoapods |  (optional)
+    data := *openapiclient.NewCocoapodsPackageUploadRequest("PackageFile_example") // CocoapodsPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1093,7 +1093,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadCocoapods``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadCocoapods`: CocoapodsPackageUpload
+    // response from `PackagesUploadCocoapods`: CocoapodsPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadCocoapods`: %v\n", resp)
 }
 ```
@@ -1116,11 +1116,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadCocoapods**](PackagesUploadCocoapods.md) |  | 
+ **data** | [**CocoapodsPackageUploadRequest**](CocoapodsPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**CocoapodsPackageUpload**](CocoapodsPackageUpload.md)
+[**CocoapodsPackageUploadResponse**](CocoapodsPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1129,7 +1129,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1138,7 +1138,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadComposer
 
-> ComposerPackageUpload PackagesUploadComposer(ctx, owner, repo).Data(data).Execute()
+> ComposerPackageUploadResponse PackagesUploadComposer(ctx, owner, repo).Data(data).Execute()
 
 Create a new Composer package
 
@@ -1159,7 +1159,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadComposer("y123456789") // PackagesUploadComposer |  (optional)
+    data := *openapiclient.NewComposerPackageUploadRequest("PackageFile_example") // ComposerPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1168,7 +1168,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadComposer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadComposer`: ComposerPackageUpload
+    // response from `PackagesUploadComposer`: ComposerPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadComposer`: %v\n", resp)
 }
 ```
@@ -1191,11 +1191,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadComposer**](PackagesUploadComposer.md) |  | 
+ **data** | [**ComposerPackageUploadRequest**](ComposerPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**ComposerPackageUpload**](ComposerPackageUpload.md)
+[**ComposerPackageUploadResponse**](ComposerPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1204,7 +1204,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1213,7 +1213,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadConan
 
-> ConanPackageUpload PackagesUploadConan(ctx, owner, repo).Data(data).Execute()
+> ConanPackageUploadResponse PackagesUploadConan(ctx, owner, repo).Data(data).Execute()
 
 Create a new Conan package
 
@@ -1234,7 +1234,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadConan("y1234456789b", "y1234456789c", "y1234456789a", "x123456789a") // PackagesUploadConan |  (optional)
+    data := *openapiclient.NewConanPackageUploadRequest("InfoFile_example", "ManifestFile_example", "MetadataFile_example", "PackageFile_example") // ConanPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1243,7 +1243,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadConan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadConan`: ConanPackageUpload
+    // response from `PackagesUploadConan`: ConanPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadConan`: %v\n", resp)
 }
 ```
@@ -1266,11 +1266,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadConan**](PackagesUploadConan.md) |  | 
+ **data** | [**ConanPackageUploadRequest**](ConanPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**ConanPackageUpload**](ConanPackageUpload.md)
+[**ConanPackageUploadResponse**](ConanPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1279,7 +1279,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1288,7 +1288,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadConda
 
-> CondaPackageUpload PackagesUploadConda(ctx, owner, repo).Data(data).Execute()
+> CondaPackageUploadResponse PackagesUploadConda(ctx, owner, repo).Data(data).Execute()
 
 Create a new Conda package
 
@@ -1309,7 +1309,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadConda("x123456789a") // PackagesUploadConda |  (optional)
+    data := *openapiclient.NewCondaPackageUploadRequest("PackageFile_example") // CondaPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1318,7 +1318,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadConda``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadConda`: CondaPackageUpload
+    // response from `PackagesUploadConda`: CondaPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadConda`: %v\n", resp)
 }
 ```
@@ -1341,11 +1341,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadConda**](PackagesUploadConda.md) |  | 
+ **data** | [**CondaPackageUploadRequest**](CondaPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**CondaPackageUpload**](CondaPackageUpload.md)
+[**CondaPackageUploadResponse**](CondaPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1354,7 +1354,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1363,7 +1363,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCran
 
-> CranPackageUpload PackagesUploadCran(ctx, owner, repo).Data(data).Execute()
+> CranPackageUploadResponse PackagesUploadCran(ctx, owner, repo).Data(data).Execute()
 
 Create a new CRAN package
 
@@ -1384,7 +1384,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadCran("x123456789a") // PackagesUploadCran |  (optional)
+    data := *openapiclient.NewCranPackageUploadRequest("PackageFile_example") // CranPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1393,7 +1393,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadCran``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadCran`: CranPackageUpload
+    // response from `PackagesUploadCran`: CranPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadCran`: %v\n", resp)
 }
 ```
@@ -1416,11 +1416,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadCran**](PackagesUploadCran.md) |  | 
+ **data** | [**CranPackageUploadRequest**](CranPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**CranPackageUpload**](CranPackageUpload.md)
+[**CranPackageUploadResponse**](CranPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1429,7 +1429,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1438,7 +1438,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDart
 
-> DartPackageUpload PackagesUploadDart(ctx, owner, repo).Data(data).Execute()
+> DartPackageUploadResponse PackagesUploadDart(ctx, owner, repo).Data(data).Execute()
 
 Create a new Dart package
 
@@ -1459,7 +1459,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadDart("x123456789a") // PackagesUploadDart |  (optional)
+    data := *openapiclient.NewDartPackageUploadRequest("PackageFile_example") // DartPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1468,7 +1468,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadDart``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadDart`: DartPackageUpload
+    // response from `PackagesUploadDart`: DartPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadDart`: %v\n", resp)
 }
 ```
@@ -1491,11 +1491,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadDart**](PackagesUploadDart.md) |  | 
+ **data** | [**DartPackageUploadRequest**](DartPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**DartPackageUpload**](DartPackageUpload.md)
+[**DartPackageUploadResponse**](DartPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1504,7 +1504,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1513,7 +1513,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDeb
 
-> DebPackageUpload PackagesUploadDeb(ctx, owner, repo).Data(data).Execute()
+> DebPackageUploadResponse PackagesUploadDeb(ctx, owner, repo).Data(data).Execute()
 
 Create a new Debian package
 
@@ -1534,7 +1534,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadDeb("ubuntu/xenial", "y123456789") // PackagesUploadDeb |  (optional)
+    data := *openapiclient.NewDebPackageUploadRequest("Distribution_example", "PackageFile_example") // DebPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1543,7 +1543,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadDeb``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadDeb`: DebPackageUpload
+    // response from `PackagesUploadDeb`: DebPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadDeb`: %v\n", resp)
 }
 ```
@@ -1566,11 +1566,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadDeb**](PackagesUploadDeb.md) |  | 
+ **data** | [**DebPackageUploadRequest**](DebPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**DebPackageUpload**](DebPackageUpload.md)
+[**DebPackageUploadResponse**](DebPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1579,7 +1579,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1588,7 +1588,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDocker
 
-> DockerPackageUpload PackagesUploadDocker(ctx, owner, repo).Data(data).Execute()
+> DockerPackageUploadResponse PackagesUploadDocker(ctx, owner, repo).Data(data).Execute()
 
 Create a new Docker package
 
@@ -1609,7 +1609,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadDocker("y123456789") // PackagesUploadDocker |  (optional)
+    data := *openapiclient.NewDockerPackageUploadRequest("PackageFile_example") // DockerPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1618,7 +1618,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadDocker``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadDocker`: DockerPackageUpload
+    // response from `PackagesUploadDocker`: DockerPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadDocker`: %v\n", resp)
 }
 ```
@@ -1641,11 +1641,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadDocker**](PackagesUploadDocker.md) |  | 
+ **data** | [**DockerPackageUploadRequest**](DockerPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**DockerPackageUpload**](DockerPackageUpload.md)
+[**DockerPackageUploadResponse**](DockerPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1654,7 +1654,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1663,7 +1663,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadGo
 
-> GoPackageUpload PackagesUploadGo(ctx, owner, repo).Data(data).Execute()
+> GoPackageUploadResponse PackagesUploadGo(ctx, owner, repo).Data(data).Execute()
 
 Create a new Go package
 
@@ -1684,7 +1684,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadGo("x123456789a") // PackagesUploadGo |  (optional)
+    data := *openapiclient.NewGoPackageUploadRequest("PackageFile_example") // GoPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1693,7 +1693,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadGo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadGo`: GoPackageUpload
+    // response from `PackagesUploadGo`: GoPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadGo`: %v\n", resp)
 }
 ```
@@ -1716,11 +1716,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadGo**](PackagesUploadGo.md) |  | 
+ **data** | [**GoPackageUploadRequest**](GoPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**GoPackageUpload**](GoPackageUpload.md)
+[**GoPackageUploadResponse**](GoPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1729,7 +1729,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1738,7 +1738,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadHelm
 
-> HelmPackageUpload PackagesUploadHelm(ctx, owner, repo).Data(data).Execute()
+> HelmPackageUploadResponse PackagesUploadHelm(ctx, owner, repo).Data(data).Execute()
 
 Create a new Helm package
 
@@ -1759,7 +1759,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadHelm("x123456789a") // PackagesUploadHelm |  (optional)
+    data := *openapiclient.NewHelmPackageUploadRequest("PackageFile_example") // HelmPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1768,7 +1768,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadHelm``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadHelm`: HelmPackageUpload
+    // response from `PackagesUploadHelm`: HelmPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadHelm`: %v\n", resp)
 }
 ```
@@ -1791,11 +1791,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadHelm**](PackagesUploadHelm.md) |  | 
+ **data** | [**HelmPackageUploadRequest**](HelmPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**HelmPackageUpload**](HelmPackageUpload.md)
+[**HelmPackageUploadResponse**](HelmPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1804,7 +1804,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1813,7 +1813,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadLuarocks
 
-> LuarocksPackageUpload PackagesUploadLuarocks(ctx, owner, repo).Data(data).Execute()
+> LuarocksPackageUploadResponse PackagesUploadLuarocks(ctx, owner, repo).Data(data).Execute()
 
 Create a new LuaRocks package
 
@@ -1834,7 +1834,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadLuarocks("x123456789a") // PackagesUploadLuarocks |  (optional)
+    data := *openapiclient.NewLuarocksPackageUploadRequest("PackageFile_example") // LuarocksPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1843,7 +1843,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadLuarocks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadLuarocks`: LuarocksPackageUpload
+    // response from `PackagesUploadLuarocks`: LuarocksPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadLuarocks`: %v\n", resp)
 }
 ```
@@ -1866,11 +1866,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadLuarocks**](PackagesUploadLuarocks.md) |  | 
+ **data** | [**LuarocksPackageUploadRequest**](LuarocksPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**LuarocksPackageUpload**](LuarocksPackageUpload.md)
+[**LuarocksPackageUploadResponse**](LuarocksPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1879,7 +1879,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1888,7 +1888,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadMaven
 
-> MavenPackageUpload PackagesUploadMaven(ctx, owner, repo).Data(data).Execute()
+> MavenPackageUploadResponse PackagesUploadMaven(ctx, owner, repo).Data(data).Execute()
 
 Create a new Maven package
 
@@ -1909,7 +1909,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadMaven("y1234456789a") // PackagesUploadMaven |  (optional)
+    data := *openapiclient.NewMavenPackageUploadRequest("PackageFile_example") // MavenPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1918,7 +1918,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadMaven``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadMaven`: MavenPackageUpload
+    // response from `PackagesUploadMaven`: MavenPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadMaven`: %v\n", resp)
 }
 ```
@@ -1941,11 +1941,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadMaven**](PackagesUploadMaven.md) |  | 
+ **data** | [**MavenPackageUploadRequest**](MavenPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**MavenPackageUpload**](MavenPackageUpload.md)
+[**MavenPackageUploadResponse**](MavenPackageUploadResponse.md)
 
 ### Authorization
 
@@ -1954,7 +1954,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1963,7 +1963,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadNpm
 
-> NpmPackageUpload PackagesUploadNpm(ctx, owner, repo).Data(data).Execute()
+> NpmPackageUploadResponse PackagesUploadNpm(ctx, owner, repo).Data(data).Execute()
 
 Create a new npm package
 
@@ -1984,7 +1984,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadNpm("y123456789") // PackagesUploadNpm |  (optional)
+    data := *openapiclient.NewNpmPackageUploadRequest("PackageFile_example") // NpmPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1993,7 +1993,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadNpm``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadNpm`: NpmPackageUpload
+    // response from `PackagesUploadNpm`: NpmPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadNpm`: %v\n", resp)
 }
 ```
@@ -2016,11 +2016,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadNpm**](PackagesUploadNpm.md) |  | 
+ **data** | [**NpmPackageUploadRequest**](NpmPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**NpmPackageUpload**](NpmPackageUpload.md)
+[**NpmPackageUploadResponse**](NpmPackageUploadResponse.md)
 
 ### Authorization
 
@@ -2029,7 +2029,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2038,7 +2038,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadNuget
 
-> NugetPackageUpload PackagesUploadNuget(ctx, owner, repo).Data(data).Execute()
+> NugetPackageUploadResponse PackagesUploadNuget(ctx, owner, repo).Data(data).Execute()
 
 Create a new NuGet package
 
@@ -2059,7 +2059,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadNuget("y1234456789a") // PackagesUploadNuget |  (optional)
+    data := *openapiclient.NewNugetPackageUploadRequest("PackageFile_example") // NugetPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2068,7 +2068,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadNuget``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadNuget`: NugetPackageUpload
+    // response from `PackagesUploadNuget`: NugetPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadNuget`: %v\n", resp)
 }
 ```
@@ -2091,11 +2091,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadNuget**](PackagesUploadNuget.md) |  | 
+ **data** | [**NugetPackageUploadRequest**](NugetPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**NugetPackageUpload**](NugetPackageUpload.md)
+[**NugetPackageUploadResponse**](NugetPackageUploadResponse.md)
 
 ### Authorization
 
@@ -2104,7 +2104,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2113,7 +2113,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadP2
 
-> P2PackageUpload PackagesUploadP2(ctx, owner, repo).Data(data).Execute()
+> P2PackageUploadResponse PackagesUploadP2(ctx, owner, repo).Data(data).Execute()
 
 Create a new P2 package
 
@@ -2134,7 +2134,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadP2("PackageFile_example") // PackagesUploadP2 |  (optional)
+    data := *openapiclient.NewP2PackageUploadRequest("PackageFile_example") // P2PackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2143,7 +2143,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadP2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadP2`: P2PackageUpload
+    // response from `PackagesUploadP2`: P2PackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadP2`: %v\n", resp)
 }
 ```
@@ -2166,11 +2166,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadP2**](PackagesUploadP2.md) |  | 
+ **data** | [**P2PackageUploadRequest**](P2PackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**P2PackageUpload**](P2PackageUpload.md)
+[**P2PackageUploadResponse**](P2PackageUploadResponse.md)
 
 ### Authorization
 
@@ -2179,7 +2179,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2188,7 +2188,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadPython
 
-> PythonPackageUpload PackagesUploadPython(ctx, owner, repo).Data(data).Execute()
+> PythonPackageUploadResponse PackagesUploadPython(ctx, owner, repo).Data(data).Execute()
 
 Create a new Python package
 
@@ -2209,7 +2209,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadPython("y123456789") // PackagesUploadPython |  (optional)
+    data := *openapiclient.NewPythonPackageUploadRequest("PackageFile_example") // PythonPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2218,7 +2218,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadPython``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadPython`: PythonPackageUpload
+    // response from `PackagesUploadPython`: PythonPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadPython`: %v\n", resp)
 }
 ```
@@ -2241,11 +2241,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadPython**](PackagesUploadPython.md) |  | 
+ **data** | [**PythonPackageUploadRequest**](PythonPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**PythonPackageUpload**](PythonPackageUpload.md)
+[**PythonPackageUploadResponse**](PythonPackageUploadResponse.md)
 
 ### Authorization
 
@@ -2254,7 +2254,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2263,7 +2263,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRaw
 
-> RawPackageUpload PackagesUploadRaw(ctx, owner, repo).Data(data).Execute()
+> RawPackageUploadResponse PackagesUploadRaw(ctx, owner, repo).Data(data).Execute()
 
 Create a new Raw package
 
@@ -2284,7 +2284,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadRaw("y123456789") // PackagesUploadRaw |  (optional)
+    data := *openapiclient.NewRawPackageUploadRequest("PackageFile_example") // RawPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2293,7 +2293,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadRaw``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadRaw`: RawPackageUpload
+    // response from `PackagesUploadRaw`: RawPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadRaw`: %v\n", resp)
 }
 ```
@@ -2316,11 +2316,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadRaw**](PackagesUploadRaw.md) |  | 
+ **data** | [**RawPackageUploadRequest**](RawPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**RawPackageUpload**](RawPackageUpload.md)
+[**RawPackageUploadResponse**](RawPackageUploadResponse.md)
 
 ### Authorization
 
@@ -2329,7 +2329,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2338,7 +2338,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRpm
 
-> RpmPackageUpload PackagesUploadRpm(ctx, owner, repo).Data(data).Execute()
+> RpmPackageUploadResponse PackagesUploadRpm(ctx, owner, repo).Data(data).Execute()
 
 Create a new RedHat package
 
@@ -2359,7 +2359,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadRpm("el/7", "y123456789") // PackagesUploadRpm |  (optional)
+    data := *openapiclient.NewRpmPackageUploadRequest("Distribution_example", "PackageFile_example") // RpmPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2368,7 +2368,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadRpm``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadRpm`: RpmPackageUpload
+    // response from `PackagesUploadRpm`: RpmPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadRpm`: %v\n", resp)
 }
 ```
@@ -2391,11 +2391,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadRpm**](PackagesUploadRpm.md) |  | 
+ **data** | [**RpmPackageUploadRequest**](RpmPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**RpmPackageUpload**](RpmPackageUpload.md)
+[**RpmPackageUploadResponse**](RpmPackageUploadResponse.md)
 
 ### Authorization
 
@@ -2404,7 +2404,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2413,7 +2413,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRuby
 
-> RubyPackageUpload PackagesUploadRuby(ctx, owner, repo).Data(data).Execute()
+> RubyPackageUploadResponse PackagesUploadRuby(ctx, owner, repo).Data(data).Execute()
 
 Create a new Ruby package
 
@@ -2434,7 +2434,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadRuby("y123456789") // PackagesUploadRuby |  (optional)
+    data := *openapiclient.NewRubyPackageUploadRequest("PackageFile_example") // RubyPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2443,7 +2443,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadRuby``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadRuby`: RubyPackageUpload
+    // response from `PackagesUploadRuby`: RubyPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadRuby`: %v\n", resp)
 }
 ```
@@ -2466,11 +2466,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadRuby**](PackagesUploadRuby.md) |  | 
+ **data** | [**RubyPackageUploadRequest**](RubyPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**RubyPackageUpload**](RubyPackageUpload.md)
+[**RubyPackageUploadResponse**](RubyPackageUploadResponse.md)
 
 ### Authorization
 
@@ -2479,7 +2479,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2488,7 +2488,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadTerraform
 
-> TerraformPackageUpload PackagesUploadTerraform(ctx, owner, repo).Data(data).Execute()
+> TerraformPackageUploadResponse PackagesUploadTerraform(ctx, owner, repo).Data(data).Execute()
 
 Create a new Terraform package
 
@@ -2509,7 +2509,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadTerraform("z123456789a") // PackagesUploadTerraform |  (optional)
+    data := *openapiclient.NewTerraformPackageUploadRequest("PackageFile_example") // TerraformPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2518,7 +2518,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadTerraform``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadTerraform`: TerraformPackageUpload
+    // response from `PackagesUploadTerraform`: TerraformPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadTerraform`: %v\n", resp)
 }
 ```
@@ -2541,11 +2541,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadTerraform**](PackagesUploadTerraform.md) |  | 
+ **data** | [**TerraformPackageUploadRequest**](TerraformPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**TerraformPackageUpload**](TerraformPackageUpload.md)
+[**TerraformPackageUploadResponse**](TerraformPackageUploadResponse.md)
 
 ### Authorization
 
@@ -2554,7 +2554,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2563,7 +2563,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadVagrant
 
-> VagrantPackageUpload PackagesUploadVagrant(ctx, owner, repo).Data(data).Execute()
+> VagrantPackageUploadResponse PackagesUploadVagrant(ctx, owner, repo).Data(data).Execute()
 
 Create a new Vagrant package
 
@@ -2584,7 +2584,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesUploadVagrant("tcl", "y123456789x", "virtualbox", "1.0") // PackagesUploadVagrant |  (optional)
+    data := *openapiclient.NewVagrantPackageUploadRequest("Name_example", "PackageFile_example", "Provider_example", "Version_example") // VagrantPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2593,7 +2593,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadVagrant``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadVagrant`: VagrantPackageUpload
+    // response from `PackagesUploadVagrant`: VagrantPackageUploadResponse
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadVagrant`: %v\n", resp)
 }
 ```
@@ -2616,11 +2616,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesUploadVagrant**](PackagesUploadVagrant.md) |  | 
+ **data** | [**VagrantPackageUploadRequest**](VagrantPackageUploadRequest.md) |  | 
 
 ### Return type
 
-[**VagrantPackageUpload**](VagrantPackageUpload.md)
+[**VagrantPackageUploadResponse**](VagrantPackageUploadResponse.md)
 
 ### Authorization
 
@@ -2629,7 +2629,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2659,7 +2659,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadAlpine("alpine/v3.8", "a123456789") // PackagesValidateUploadAlpine |  (optional)
+    data := *openapiclient.NewAlpinePackageUploadRequest("Distribution_example", "PackageFile_example") // AlpinePackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2689,7 +2689,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadAlpine**](PackagesValidateUploadAlpine.md) |  | 
+ **data** | [**AlpinePackageUploadRequest**](AlpinePackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -2702,7 +2702,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2732,7 +2732,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadCargo("x123456789a") // PackagesValidateUploadCargo |  (optional)
+    data := *openapiclient.NewCargoPackageUploadRequest("PackageFile_example") // CargoPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2762,7 +2762,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadCargo**](PackagesValidateUploadCargo.md) |  | 
+ **data** | [**CargoPackageUploadRequest**](CargoPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -2775,7 +2775,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2805,7 +2805,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadCocoapods("z123456789") // PackagesValidateUploadCocoapods |  (optional)
+    data := *openapiclient.NewCocoapodsPackageUploadRequest("PackageFile_example") // CocoapodsPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2835,7 +2835,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadCocoapods**](PackagesValidateUploadCocoapods.md) |  | 
+ **data** | [**CocoapodsPackageUploadRequest**](CocoapodsPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -2848,7 +2848,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2878,7 +2878,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadComposer("y123456789") // PackagesValidateUploadComposer |  (optional)
+    data := *openapiclient.NewComposerPackageUploadRequest("PackageFile_example") // ComposerPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2908,7 +2908,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadComposer**](PackagesValidateUploadComposer.md) |  | 
+ **data** | [**ComposerPackageUploadRequest**](ComposerPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -2921,7 +2921,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -2951,7 +2951,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadConan("y1234456789b", "y1234456789c", "y1234456789a", "x123456789a") // PackagesValidateUploadConan |  (optional)
+    data := *openapiclient.NewConanPackageUploadRequest("InfoFile_example", "ManifestFile_example", "MetadataFile_example", "PackageFile_example") // ConanPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -2981,7 +2981,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadConan**](PackagesValidateUploadConan.md) |  | 
+ **data** | [**ConanPackageUploadRequest**](ConanPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -2994,7 +2994,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3024,7 +3024,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadConda("x123456789a") // PackagesValidateUploadConda |  (optional)
+    data := *openapiclient.NewCondaPackageUploadRequest("PackageFile_example") // CondaPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3054,7 +3054,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadConda**](PackagesValidateUploadConda.md) |  | 
+ **data** | [**CondaPackageUploadRequest**](CondaPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3067,7 +3067,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3097,7 +3097,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadCran("x123456789a") // PackagesValidateUploadCran |  (optional)
+    data := *openapiclient.NewCranPackageUploadRequest("PackageFile_example") // CranPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3127,7 +3127,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadCran**](PackagesValidateUploadCran.md) |  | 
+ **data** | [**CranPackageUploadRequest**](CranPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3140,7 +3140,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3170,7 +3170,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadDart("x123456789a") // PackagesValidateUploadDart |  (optional)
+    data := *openapiclient.NewDartPackageUploadRequest("PackageFile_example") // DartPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3200,7 +3200,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadDart**](PackagesValidateUploadDart.md) |  | 
+ **data** | [**DartPackageUploadRequest**](DartPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3213,7 +3213,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3243,7 +3243,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadDeb("ubuntu/xenial", "y123456789") // PackagesValidateUploadDeb |  (optional)
+    data := *openapiclient.NewDebPackageUploadRequest("Distribution_example", "PackageFile_example") // DebPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3273,7 +3273,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadDeb**](PackagesValidateUploadDeb.md) |  | 
+ **data** | [**DebPackageUploadRequest**](DebPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3286,7 +3286,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3316,7 +3316,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadDocker("y123456789") // PackagesValidateUploadDocker |  (optional)
+    data := *openapiclient.NewDockerPackageUploadRequest("PackageFile_example") // DockerPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3346,7 +3346,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadDocker**](PackagesValidateUploadDocker.md) |  | 
+ **data** | [**DockerPackageUploadRequest**](DockerPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3359,7 +3359,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3389,7 +3389,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadGo("x123456789a") // PackagesValidateUploadGo |  (optional)
+    data := *openapiclient.NewGoPackageUploadRequest("PackageFile_example") // GoPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3419,7 +3419,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadGo**](PackagesValidateUploadGo.md) |  | 
+ **data** | [**GoPackageUploadRequest**](GoPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3432,7 +3432,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3462,7 +3462,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadHelm("x123456789a") // PackagesValidateUploadHelm |  (optional)
+    data := *openapiclient.NewHelmPackageUploadRequest("PackageFile_example") // HelmPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3492,7 +3492,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadHelm**](PackagesValidateUploadHelm.md) |  | 
+ **data** | [**HelmPackageUploadRequest**](HelmPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3505,7 +3505,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3535,7 +3535,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadLuarocks("x123456789a") // PackagesValidateUploadLuarocks |  (optional)
+    data := *openapiclient.NewLuarocksPackageUploadRequest("PackageFile_example") // LuarocksPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3565,7 +3565,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadLuarocks**](PackagesValidateUploadLuarocks.md) |  | 
+ **data** | [**LuarocksPackageUploadRequest**](LuarocksPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3578,7 +3578,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3608,7 +3608,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadMaven("y1234456789a") // PackagesValidateUploadMaven |  (optional)
+    data := *openapiclient.NewMavenPackageUploadRequest("PackageFile_example") // MavenPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3638,7 +3638,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadMaven**](PackagesValidateUploadMaven.md) |  | 
+ **data** | [**MavenPackageUploadRequest**](MavenPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3651,7 +3651,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3681,7 +3681,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadNpm("y123456789") // PackagesValidateUploadNpm |  (optional)
+    data := *openapiclient.NewNpmPackageUploadRequest("PackageFile_example") // NpmPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3711,7 +3711,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadNpm**](PackagesValidateUploadNpm.md) |  | 
+ **data** | [**NpmPackageUploadRequest**](NpmPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3724,7 +3724,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3754,7 +3754,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadNuget("y1234456789a") // PackagesValidateUploadNuget |  (optional)
+    data := *openapiclient.NewNugetPackageUploadRequest("PackageFile_example") // NugetPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3784,7 +3784,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadNuget**](PackagesValidateUploadNuget.md) |  | 
+ **data** | [**NugetPackageUploadRequest**](NugetPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3797,7 +3797,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3827,7 +3827,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadP2("PackageFile_example") // PackagesValidateUploadP2 |  (optional)
+    data := *openapiclient.NewP2PackageUploadRequest("PackageFile_example") // P2PackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3857,7 +3857,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadP2**](PackagesValidateUploadP2.md) |  | 
+ **data** | [**P2PackageUploadRequest**](P2PackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3870,7 +3870,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3900,7 +3900,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadPython("y123456789") // PackagesValidateUploadPython |  (optional)
+    data := *openapiclient.NewPythonPackageUploadRequest("PackageFile_example") // PythonPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -3930,7 +3930,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadPython**](PackagesValidateUploadPython.md) |  | 
+ **data** | [**PythonPackageUploadRequest**](PythonPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -3943,7 +3943,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -3973,7 +3973,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadRaw("y123456789") // PackagesValidateUploadRaw |  (optional)
+    data := *openapiclient.NewRawPackageUploadRequest("PackageFile_example") // RawPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -4003,7 +4003,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadRaw**](PackagesValidateUploadRaw.md) |  | 
+ **data** | [**RawPackageUploadRequest**](RawPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -4016,7 +4016,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -4046,7 +4046,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadRpm("el/7", "y123456789") // PackagesValidateUploadRpm |  (optional)
+    data := *openapiclient.NewRpmPackageUploadRequest("Distribution_example", "PackageFile_example") // RpmPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -4076,7 +4076,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadRpm**](PackagesValidateUploadRpm.md) |  | 
+ **data** | [**RpmPackageUploadRequest**](RpmPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -4089,7 +4089,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -4119,7 +4119,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadRuby("y123456789") // PackagesValidateUploadRuby |  (optional)
+    data := *openapiclient.NewRubyPackageUploadRequest("PackageFile_example") // RubyPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -4149,7 +4149,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadRuby**](PackagesValidateUploadRuby.md) |  | 
+ **data** | [**RubyPackageUploadRequest**](RubyPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -4162,7 +4162,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -4192,7 +4192,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadTerraform("z123456789a") // PackagesValidateUploadTerraform |  (optional)
+    data := *openapiclient.NewTerraformPackageUploadRequest("PackageFile_example") // TerraformPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -4222,7 +4222,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadTerraform**](PackagesValidateUploadTerraform.md) |  | 
+ **data** | [**TerraformPackageUploadRequest**](TerraformPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -4235,7 +4235,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -4265,7 +4265,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewPackagesValidateUploadVagrant("tcl", "y123456789x", "virtualbox", "1.0") // PackagesValidateUploadVagrant |  (optional)
+    data := *openapiclient.NewVagrantPackageUploadRequest("Name_example", "PackageFile_example", "Provider_example", "Version_example") // VagrantPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -4295,7 +4295,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**PackagesValidateUploadVagrant**](PackagesValidateUploadVagrant.md) |  | 
+ **data** | [**VagrantPackageUploadRequest**](VagrantPackageUploadRequest.md) |  | 
 
 ### Return type
 
@@ -4308,7 +4308,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

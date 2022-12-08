@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,6 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // UsersApiService UsersApi service
 type UsersApiService service
 
@@ -34,7 +29,7 @@ type ApiUsersProfileReadRequest struct {
 	slug       string
 }
 
-func (r ApiUsersProfileReadRequest) Execute() (*UserProfile, *http.Response, error) {
+func (r ApiUsersProfileReadRequest) Execute() (*UserProfileResponse, *http.Response, error) {
 	return r.ApiService.UsersProfileReadExecute(r)
 }
 
@@ -56,13 +51,13 @@ func (a *UsersApiService) UsersProfileRead(ctx context.Context, slug string) Api
 }
 
 // Execute executes the request
-//  @return UserProfile
-func (a *UsersApiService) UsersProfileReadExecute(r ApiUsersProfileReadRequest) (*UserProfile, *http.Response, error) {
+//  @return UserProfileResponse
+func (a *UsersApiService) UsersProfileReadExecute(r ApiUsersProfileReadRequest) (*UserProfileResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *UserProfile
+		localVarReturnValue *UserProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.UsersProfileRead")
@@ -87,7 +82,7 @@ func (a *UsersApiService) UsersProfileReadExecute(r ApiUsersProfileReadRequest) 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -131,22 +126,24 @@ func (a *UsersApiService) UsersProfileReadExecute(r ApiUsersProfileReadRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,15 +20,10 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // VulnerabilitiesApiService VulnerabilitiesApi service
 type VulnerabilitiesApiService service
 
-type ApiVulnerabilitiesListRequest struct {
+type ApiVulnerabilitiesNamespaceListRequest struct {
 	ctx        context.Context
 	ApiService *VulnerabilitiesApiService
 	owner      string
@@ -37,32 +32,32 @@ type ApiVulnerabilitiesListRequest struct {
 }
 
 // A page number within the paginated result set.
-func (r ApiVulnerabilitiesListRequest) Page(page int64) ApiVulnerabilitiesListRequest {
+func (r ApiVulnerabilitiesNamespaceListRequest) Page(page int64) ApiVulnerabilitiesNamespaceListRequest {
 	r.page = &page
 	return r
 }
 
 // Number of results to return per page.
-func (r ApiVulnerabilitiesListRequest) PageSize(pageSize int64) ApiVulnerabilitiesListRequest {
+func (r ApiVulnerabilitiesNamespaceListRequest) PageSize(pageSize int64) ApiVulnerabilitiesNamespaceListRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiVulnerabilitiesListRequest) Execute() ([]VulnerabilityScanResultsList, *http.Response, error) {
-	return r.ApiService.VulnerabilitiesListExecute(r)
+func (r ApiVulnerabilitiesNamespaceListRequest) Execute() ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
+	return r.ApiService.VulnerabilitiesNamespaceListExecute(r)
 }
 
 /*
-VulnerabilitiesList Lists scan results for a specific namespace.
+VulnerabilitiesNamespaceList Lists scan results for a specific namespace.
 
 Lists scan results for a specific namespace.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
- @return ApiVulnerabilitiesListRequest
+ @return ApiVulnerabilitiesNamespaceListRequest
 */
-func (a *VulnerabilitiesApiService) VulnerabilitiesList(ctx context.Context, owner string) ApiVulnerabilitiesListRequest {
-	return ApiVulnerabilitiesListRequest{
+func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceList(ctx context.Context, owner string) ApiVulnerabilitiesNamespaceListRequest {
+	return ApiVulnerabilitiesNamespaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
 		owner:      owner,
@@ -70,16 +65,16 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesList(ctx context.Context, own
 }
 
 // Execute executes the request
-//  @return []VulnerabilityScanResultsList
-func (a *VulnerabilitiesApiService) VulnerabilitiesListExecute(r ApiVulnerabilitiesListRequest) ([]VulnerabilityScanResultsList, *http.Response, error) {
+//  @return []VulnerabilityScanResultsListResponse
+func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceListExecute(r ApiVulnerabilitiesNamespaceListRequest) ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []VulnerabilityScanResultsList
+		localVarReturnValue []VulnerabilityScanResultsListResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesNamespaceList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -107,7 +102,7 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesListExecute(r ApiVulnerabilit
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -151,22 +146,24 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesListExecute(r ApiVulnerabilit
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -184,167 +181,7 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesListExecute(r ApiVulnerabilit
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiVulnerabilitiesList0Request struct {
-	ctx        context.Context
-	ApiService *VulnerabilitiesApiService
-	owner      string
-	repo       string
-	page       *int64
-	pageSize   *int64
-}
-
-// A page number within the paginated result set.
-func (r ApiVulnerabilitiesList0Request) Page(page int64) ApiVulnerabilitiesList0Request {
-	r.page = &page
-	return r
-}
-
-// Number of results to return per page.
-func (r ApiVulnerabilitiesList0Request) PageSize(pageSize int64) ApiVulnerabilitiesList0Request {
-	r.pageSize = &pageSize
-	return r
-}
-
-func (r ApiVulnerabilitiesList0Request) Execute() ([]VulnerabilityScanResultsList, *http.Response, error) {
-	return r.ApiService.VulnerabilitiesList0Execute(r)
-}
-
-/*
-VulnerabilitiesList0 Lists scan results for a specific repository.
-
-Lists scan results for a specific repository.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiVulnerabilitiesList0Request
-*/
-func (a *VulnerabilitiesApiService) VulnerabilitiesList0(ctx context.Context, owner string, repo string) ApiVulnerabilitiesList0Request {
-	return ApiVulnerabilitiesList0Request{
-		ApiService: a,
-		ctx:        ctx,
-		owner:      owner,
-		repo:       repo,
-	}
-}
-
-// Execute executes the request
-//  @return []VulnerabilityScanResultsList
-func (a *VulnerabilitiesApiService) VulnerabilitiesList0Execute(r ApiVulnerabilitiesList0Request) ([]VulnerabilityScanResultsList, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []VulnerabilityScanResultsList
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesList0")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/vulnerabilities/{owner}/{repo}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"owner"+"}", url.PathEscape(parameterToString(r.owner, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"repo"+"}", url.PathEscape(parameterToString(r.repo, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
-	}
-	if r.pageSize != nil {
-		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apikey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Api-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiVulnerabilitiesList1Request struct {
+type ApiVulnerabilitiesPackageListRequest struct {
 	ctx        context.Context
 	ApiService *VulnerabilitiesApiService
 	owner      string
@@ -355,23 +192,23 @@ type ApiVulnerabilitiesList1Request struct {
 }
 
 // A page number within the paginated result set.
-func (r ApiVulnerabilitiesList1Request) Page(page int64) ApiVulnerabilitiesList1Request {
+func (r ApiVulnerabilitiesPackageListRequest) Page(page int64) ApiVulnerabilitiesPackageListRequest {
 	r.page = &page
 	return r
 }
 
 // Number of results to return per page.
-func (r ApiVulnerabilitiesList1Request) PageSize(pageSize int64) ApiVulnerabilitiesList1Request {
+func (r ApiVulnerabilitiesPackageListRequest) PageSize(pageSize int64) ApiVulnerabilitiesPackageListRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiVulnerabilitiesList1Request) Execute() ([]VulnerabilityScanResultsList, *http.Response, error) {
-	return r.ApiService.VulnerabilitiesList1Execute(r)
+func (r ApiVulnerabilitiesPackageListRequest) Execute() ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
+	return r.ApiService.VulnerabilitiesPackageListExecute(r)
 }
 
 /*
-VulnerabilitiesList1 Lists scan results for a specific package.
+VulnerabilitiesPackageList Lists scan results for a specific package.
 
 Lists scan results for a specific package.
 
@@ -379,10 +216,10 @@ Lists scan results for a specific package.
  @param owner
  @param repo
  @param package_
- @return ApiVulnerabilitiesList1Request
+ @return ApiVulnerabilitiesPackageListRequest
 */
-func (a *VulnerabilitiesApiService) VulnerabilitiesList1(ctx context.Context, owner string, repo string, package_ string) ApiVulnerabilitiesList1Request {
-	return ApiVulnerabilitiesList1Request{
+func (a *VulnerabilitiesApiService) VulnerabilitiesPackageList(ctx context.Context, owner string, repo string, package_ string) ApiVulnerabilitiesPackageListRequest {
+	return ApiVulnerabilitiesPackageListRequest{
 		ApiService: a,
 		ctx:        ctx,
 		owner:      owner,
@@ -392,16 +229,16 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesList1(ctx context.Context, ow
 }
 
 // Execute executes the request
-//  @return []VulnerabilityScanResultsList
-func (a *VulnerabilitiesApiService) VulnerabilitiesList1Execute(r ApiVulnerabilitiesList1Request) ([]VulnerabilityScanResultsList, *http.Response, error) {
+//  @return []VulnerabilityScanResultsListResponse
+func (a *VulnerabilitiesApiService) VulnerabilitiesPackageListExecute(r ApiVulnerabilitiesPackageListRequest) ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []VulnerabilityScanResultsList
+		localVarReturnValue []VulnerabilityScanResultsListResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesList1")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesPackageList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -431,7 +268,7 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesList1Execute(r ApiVulnerabili
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -475,22 +312,24 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesList1Execute(r ApiVulnerabili
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -517,7 +356,7 @@ type ApiVulnerabilitiesReadRequest struct {
 	scanId     string
 }
 
-func (r ApiVulnerabilitiesReadRequest) Execute() (*VulnerabilityScanResults, *http.Response, error) {
+func (r ApiVulnerabilitiesReadRequest) Execute() (*VulnerabilityScanResultsResponse, *http.Response, error) {
 	return r.ApiService.VulnerabilitiesReadExecute(r)
 }
 
@@ -545,13 +384,13 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesRead(ctx context.Context, own
 }
 
 // Execute executes the request
-//  @return VulnerabilityScanResults
-func (a *VulnerabilitiesApiService) VulnerabilitiesReadExecute(r ApiVulnerabilitiesReadRequest) (*VulnerabilityScanResults, *http.Response, error) {
+//  @return VulnerabilityScanResultsResponse
+func (a *VulnerabilitiesApiService) VulnerabilitiesReadExecute(r ApiVulnerabilitiesReadRequest) (*VulnerabilityScanResultsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *VulnerabilityScanResults
+		localVarReturnValue *VulnerabilityScanResultsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesRead")
@@ -579,7 +418,7 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesReadExecute(r ApiVulnerabilit
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -623,22 +462,186 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesReadExecute(r ApiVulnerabilit
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiVulnerabilitiesRepoListRequest struct {
+	ctx        context.Context
+	ApiService *VulnerabilitiesApiService
+	owner      string
+	repo       string
+	page       *int64
+	pageSize   *int64
+}
+
+// A page number within the paginated result set.
+func (r ApiVulnerabilitiesRepoListRequest) Page(page int64) ApiVulnerabilitiesRepoListRequest {
+	r.page = &page
+	return r
+}
+
+// Number of results to return per page.
+func (r ApiVulnerabilitiesRepoListRequest) PageSize(pageSize int64) ApiVulnerabilitiesRepoListRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiVulnerabilitiesRepoListRequest) Execute() ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
+	return r.ApiService.VulnerabilitiesRepoListExecute(r)
+}
+
+/*
+VulnerabilitiesRepoList Lists scan results for a specific repository.
+
+Lists scan results for a specific repository.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param owner
+ @param repo
+ @return ApiVulnerabilitiesRepoListRequest
+*/
+func (a *VulnerabilitiesApiService) VulnerabilitiesRepoList(ctx context.Context, owner string, repo string) ApiVulnerabilitiesRepoListRequest {
+	return ApiVulnerabilitiesRepoListRequest{
+		ApiService: a,
+		ctx:        ctx,
+		owner:      owner,
+		repo:       repo,
+	}
+}
+
+// Execute executes the request
+//  @return []VulnerabilityScanResultsListResponse
+func (a *VulnerabilitiesApiService) VulnerabilitiesRepoListExecute(r ApiVulnerabilitiesRepoListRequest) ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []VulnerabilityScanResultsListResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesRepoList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/vulnerabilities/{owner}/{repo}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"owner"+"}", url.PathEscape(parameterToString(r.owner, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo"+"}", url.PathEscape(parameterToString(r.repo, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apikey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

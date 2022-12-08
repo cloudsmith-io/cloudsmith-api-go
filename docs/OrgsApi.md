@@ -8,26 +8,37 @@ Method | HTTP request | Description
 [**OrgsInvitesDelete**](OrgsApi.md#OrgsInvitesDelete) | **Delete** /orgs/{org}/invites/{slug_perm}/ | Delete a specific organization invite
 [**OrgsInvitesExtend**](OrgsApi.md#OrgsInvitesExtend) | **Post** /orgs/{org}/invites/{slug_perm}/extend/ | Extend an organization invite.
 [**OrgsInvitesList**](OrgsApi.md#OrgsInvitesList) | **Get** /orgs/{org}/invites/ | Get a list of all invites for an organization.
+[**OrgsInvitesPartialUpdate**](OrgsApi.md#OrgsInvitesPartialUpdate) | **Patch** /orgs/{org}/invites/{slug_perm}/ | Update a specific organization invite.
+[**OrgsInvitesResend**](OrgsApi.md#OrgsInvitesResend) | **Post** /orgs/{org}/invites/{slug_perm}/resend/ | Resend an organization invite.
 [**OrgsList**](OrgsApi.md#OrgsList) | **Get** /orgs/ | Get a list of all the organizations you are associated with.
+[**OrgsMembersDelete**](OrgsApi.md#OrgsMembersDelete) | **Delete** /orgs/{org}/members/{member}/ | Removes a member from the organization.
 [**OrgsMembersList**](OrgsApi.md#OrgsMembersList) | **Get** /orgs/{org}/members/ | Get the details for all organization members.
 [**OrgsMembersRead**](OrgsApi.md#OrgsMembersRead) | **Get** /orgs/{org}/members/{member}/ | Get the details for a specific organization member.
-[**OrgsMembersRemove**](OrgsApi.md#OrgsMembersRemove) | **Get** /orgs/{org}/members/{member}/remove/ | Removes a member from the organization.
+[**OrgsMembersRemove**](OrgsApi.md#OrgsMembersRemove) | **Get** /orgs/{org}/members/{member}/remove/ | Removes a member from the organization (deprecated, use DELETE instead).
 [**OrgsRead**](OrgsApi.md#OrgsRead) | **Get** /orgs/{org}/ | Get the details for the specific organization.
 [**OrgsSamlGroupSyncCreate**](OrgsApi.md#OrgsSamlGroupSyncCreate) | **Post** /orgs/{org}/saml-group-sync/ | Create a new SAML Group Sync mapping within an organization.
 [**OrgsSamlGroupSyncDelete**](OrgsApi.md#OrgsSamlGroupSyncDelete) | **Delete** /orgs/{org}/saml-group-sync/{slug_perm}/ | Delete a SAML Group Sync mapping from an organization.
 [**OrgsSamlGroupSyncList**](OrgsApi.md#OrgsSamlGroupSyncList) | **Get** /orgs/{org}/saml-group-sync/ | Get the details of all SAML Group Sync mapping within an organization.
+[**OrgsServicesCreate**](OrgsApi.md#OrgsServicesCreate) | **Post** /orgs/{org}/services/ | Create a service within an organization.
+[**OrgsServicesDelete**](OrgsApi.md#OrgsServicesDelete) | **Delete** /orgs/{org}/services/{service}/ | Delete a specific service
+[**OrgsServicesList**](OrgsApi.md#OrgsServicesList) | **Get** /orgs/{org}/services/ | Get a list of all services within an organization.
+[**OrgsServicesPartialUpdate**](OrgsApi.md#OrgsServicesPartialUpdate) | **Patch** /orgs/{org}/services/{service}/ | Update a service within an organization.
+[**OrgsServicesRead**](OrgsApi.md#OrgsServicesRead) | **Get** /orgs/{org}/services/{service}/ | Retrieve details of a single service within an organization.
+[**OrgsServicesRefresh**](OrgsApi.md#OrgsServicesRefresh) | **Post** /orgs/{org}/services/{service}/refresh/ | Refresh service API token.
 [**OrgsTeamsCreate**](OrgsApi.md#OrgsTeamsCreate) | **Post** /orgs/{org}/teams/ | Create a team for this organization.
-[**OrgsTeamsDelete**](OrgsApi.md#OrgsTeamsDelete) | **Delete** /orgs/{org}/teams/{slug_perm}/ | Delete a specific team in a organization.
+[**OrgsTeamsDelete**](OrgsApi.md#OrgsTeamsDelete) | **Delete** /orgs/{org}/teams/{team}/ | Delete a specific team in a organization.
 [**OrgsTeamsList**](OrgsApi.md#OrgsTeamsList) | **Get** /orgs/{org}/teams/ | Get the details of all teams within an organization.
+[**OrgsTeamsMembersCreate**](OrgsApi.md#OrgsTeamsMembersCreate) | **Post** /orgs/{org}/teams/{team}/members | Add users to a team.
 [**OrgsTeamsMembersList**](OrgsApi.md#OrgsTeamsMembersList) | **Get** /orgs/{org}/teams/{team}/members | List all members for the team.
-[**OrgsTeamsPartialUpdate**](OrgsApi.md#OrgsTeamsPartialUpdate) | **Patch** /orgs/{org}/teams/{slug_perm}/ | Update a specific team in a organization.
-[**OrgsTeamsRead**](OrgsApi.md#OrgsTeamsRead) | **Get** /orgs/{org}/teams/{slug_perm}/ | Viewset for working with Organization teams.
+[**OrgsTeamsMembersUpdate**](OrgsApi.md#OrgsTeamsMembersUpdate) | **Put** /orgs/{org}/teams/{team}/members | Replace all team members.
+[**OrgsTeamsPartialUpdate**](OrgsApi.md#OrgsTeamsPartialUpdate) | **Patch** /orgs/{org}/teams/{team}/ | Update a specific team in a organization.
+[**OrgsTeamsRead**](OrgsApi.md#OrgsTeamsRead) | **Get** /orgs/{org}/teams/{team}/ | Get the details of a specific team within an organization.
 
 
 
 ## OrgsInvitesCreate
 
-> OrganizationInvite OrgsInvitesCreate(ctx, org).Data(data).Execute()
+> OrganizationInviteResponse OrgsInvitesCreate(ctx, org).Data(data).Execute()
 
 Create an organization invite for a specific user
 
@@ -47,7 +58,7 @@ import (
 
 func main() {
     org := "org_example" // string | 
-    data := *openapiclient.NewOrgsInvitesCreate() // OrgsInvitesCreate |  (optional)
+    data := *openapiclient.NewOrganizationInviteRequest() // OrganizationInviteRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -56,7 +67,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsInvitesCreate`: OrganizationInvite
+    // response from `OrgsInvitesCreate`: OrganizationInviteResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesCreate`: %v\n", resp)
 }
 ```
@@ -77,11 +88,11 @@ Other parameters are passed through a pointer to a apiOrgsInvitesCreateRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **data** | [**OrgsInvitesCreate**](OrgsInvitesCreate.md) |  | 
+ **data** | [**OrganizationInviteRequest**](OrganizationInviteRequest.md) |  | 
 
 ### Return type
 
-[**OrganizationInvite**](OrganizationInvite.md)
+[**OrganizationInviteResponse**](OrganizationInviteResponse.md)
 
 ### Authorization
 
@@ -90,7 +101,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -161,7 +172,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -170,7 +181,7 @@ Name | Type | Description  | Notes
 
 ## OrgsInvitesExtend
 
-> OrganizationInviteExtend OrgsInvitesExtend(ctx, org, slugPerm).Data(data).Execute()
+> OrganizationInviteExtendResponse OrgsInvitesExtend(ctx, org, slugPerm).Execute()
 
 Extend an organization invite.
 
@@ -191,16 +202,15 @@ import (
 func main() {
     org := "org_example" // string | 
     slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewOrgsInvitesExtend() // OrgsInvitesExtend |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsInvitesExtend(context.Background(), org, slugPerm).Data(data).Execute()
+    resp, r, err := apiClient.OrgsApi.OrgsInvitesExtend(context.Background(), org, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesExtend``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsInvitesExtend`: OrganizationInviteExtend
+    // response from `OrgsInvitesExtend`: OrganizationInviteExtendResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesExtend`: %v\n", resp)
 }
 ```
@@ -223,11 +233,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**OrgsInvitesExtend**](OrgsInvitesExtend.md) |  | 
 
 ### Return type
 
-[**OrganizationInviteExtend**](OrganizationInviteExtend.md)
+[**OrganizationInviteExtendResponse**](OrganizationInviteExtendResponse.md)
 
 ### Authorization
 
@@ -235,8 +244,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -245,7 +254,7 @@ Name | Type | Description  | Notes
 
 ## OrgsInvitesList
 
-> []OrganizationInvite OrgsInvitesList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []OrganizationInviteResponse OrgsInvitesList(ctx, org).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all invites for an organization.
 
@@ -275,7 +284,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsInvitesList`: []OrganizationInvite
+    // response from `OrgsInvitesList`: []OrganizationInviteResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesList`: %v\n", resp)
 }
 ```
@@ -301,7 +310,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrganizationInvite**](OrganizationInvite.md)
+[**[]OrganizationInviteResponse**](OrganizationInviteResponse.md)
 
 ### Authorization
 
@@ -310,7 +319,155 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsInvitesPartialUpdate
+
+> OrganizationInviteResponse OrgsInvitesPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Update a specific organization invite.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewOrganizationInviteUpdateRequestPatch() // OrganizationInviteUpdateRequestPatch |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsInvitesPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsInvitesPartialUpdate`: OrganizationInviteResponse
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsInvitesPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**OrganizationInviteUpdateRequestPatch**](OrganizationInviteUpdateRequestPatch.md) |  | 
+
+### Return type
+
+[**OrganizationInviteResponse**](OrganizationInviteResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsInvitesResend
+
+> OrganizationInviteExtendResponse OrgsInvitesResend(ctx, org, slugPerm).Execute()
+
+Resend an organization invite.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsInvitesResend(context.Background(), org, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesResend``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsInvitesResend`: OrganizationInviteExtendResponse
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesResend`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsInvitesResendRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**OrganizationInviteExtendResponse**](OrganizationInviteExtendResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -319,7 +476,7 @@ Name | Type | Description  | Notes
 
 ## OrgsList
 
-> []Organization OrgsList(ctx).Page(page).PageSize(pageSize).Execute()
+> []OrganizationResponse OrgsList(ctx).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all the organizations you are associated with.
 
@@ -348,7 +505,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsList`: []Organization
+    // response from `OrgsList`: []OrganizationResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsList`: %v\n", resp)
 }
 ```
@@ -369,7 +526,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]Organization**](Organization.md)
+[**[]OrganizationResponse**](OrganizationResponse.md)
 
 ### Authorization
 
@@ -378,7 +535,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsMembersDelete
+
+> OrgsMembersDelete(ctx, org, member).Execute()
+
+Removes a member from the organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    member := "member_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsMembersDelete(context.Background(), org, member).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**member** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsMembersDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -387,7 +615,7 @@ Name | Type | Description  | Notes
 
 ## OrgsMembersList
 
-> []OrganizationMembership OrgsMembersList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []OrganizationMembershipResponse OrgsMembersList(ctx, org).Page(page).PageSize(pageSize).Execute()
 
 Get the details for all organization members.
 
@@ -417,7 +645,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsMembersList`: []OrganizationMembership
+    // response from `OrgsMembersList`: []OrganizationMembershipResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersList`: %v\n", resp)
 }
 ```
@@ -443,7 +671,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrganizationMembership**](OrganizationMembership.md)
+[**[]OrganizationMembershipResponse**](OrganizationMembershipResponse.md)
 
 ### Authorization
 
@@ -452,7 +680,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -461,7 +689,7 @@ Name | Type | Description  | Notes
 
 ## OrgsMembersRead
 
-> OrganizationMembership OrgsMembersRead(ctx, org, member).Execute()
+> OrganizationMembershipResponse OrgsMembersRead(ctx, org, member).Execute()
 
 Get the details for a specific organization member.
 
@@ -490,7 +718,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsMembersRead`: OrganizationMembership
+    // response from `OrgsMembersRead`: OrganizationMembershipResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersRead`: %v\n", resp)
 }
 ```
@@ -516,7 +744,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationMembership**](OrganizationMembership.md)
+[**OrganizationMembershipResponse**](OrganizationMembershipResponse.md)
 
 ### Authorization
 
@@ -525,7 +753,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -534,9 +762,9 @@ Name | Type | Description  | Notes
 
 ## OrgsMembersRemove
 
-> OrganizationMembership OrgsMembersRemove(ctx, org, member).Execute()
+> OrgsMembersRemove(ctx, org, member).Execute()
 
-Removes a member from the organization.
+Removes a member from the organization (deprecated, use DELETE instead).
 
 
 
@@ -563,8 +791,6 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersRemove``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsMembersRemove`: OrganizationMembership
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersRemove`: %v\n", resp)
 }
 ```
 
@@ -589,7 +815,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationMembership**](OrganizationMembership.md)
+ (empty response body)
 
 ### Authorization
 
@@ -598,7 +824,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -607,7 +833,7 @@ Name | Type | Description  | Notes
 
 ## OrgsRead
 
-> Organization OrgsRead(ctx, org).Execute()
+> OrganizationResponse OrgsRead(ctx, org).Execute()
 
 Get the details for the specific organization.
 
@@ -635,7 +861,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsRead`: Organization
+    // response from `OrgsRead`: OrganizationResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsRead`: %v\n", resp)
 }
 ```
@@ -659,7 +885,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Organization**](Organization.md)
+[**OrganizationResponse**](OrganizationResponse.md)
 
 ### Authorization
 
@@ -668,7 +894,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -677,7 +903,7 @@ Name | Type | Description  | Notes
 
 ## OrgsSamlGroupSyncCreate
 
-> OrganizationGroupSync OrgsSamlGroupSyncCreate(ctx, org).Data(data).Execute()
+> OrganizationGroupSyncResponse OrgsSamlGroupSyncCreate(ctx, org).Data(data).Execute()
 
 Create a new SAML Group Sync mapping within an organization.
 
@@ -697,7 +923,7 @@ import (
 
 func main() {
     org := "org_example" // string | 
-    data := *openapiclient.NewOrgsSamlGroupSyncCreate("IdpKey_example", "IdpValue_example", "Organization_example", "Team_example") // OrgsSamlGroupSyncCreate |  (optional)
+    data := *openapiclient.NewOrganizationGroupSyncRequest("IdpKey_example", "IdpValue_example", "Organization_example", "Team_example") // OrganizationGroupSyncRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -706,7 +932,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsSamlGroupSyncCreate`: OrganizationGroupSync
+    // response from `OrgsSamlGroupSyncCreate`: OrganizationGroupSyncResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncCreate`: %v\n", resp)
 }
 ```
@@ -727,11 +953,11 @@ Other parameters are passed through a pointer to a apiOrgsSamlGroupSyncCreateReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **data** | [**OrgsSamlGroupSyncCreate**](OrgsSamlGroupSyncCreate.md) |  | 
+ **data** | [**OrganizationGroupSyncRequest**](OrganizationGroupSyncRequest.md) |  | 
 
 ### Return type
 
-[**OrganizationGroupSync**](OrganizationGroupSync.md)
+[**OrganizationGroupSyncResponse**](OrganizationGroupSyncResponse.md)
 
 ### Authorization
 
@@ -740,7 +966,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -811,7 +1037,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -820,7 +1046,7 @@ Name | Type | Description  | Notes
 
 ## OrgsSamlGroupSyncList
 
-> []OrganizationGroupSync OrgsSamlGroupSyncList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []OrganizationGroupSyncResponse OrgsSamlGroupSyncList(ctx, org).Page(page).PageSize(pageSize).Execute()
 
 Get the details of all SAML Group Sync mapping within an organization.
 
@@ -850,7 +1076,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsSamlGroupSyncList`: []OrganizationGroupSync
+    // response from `OrgsSamlGroupSyncList`: []OrganizationGroupSyncResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncList`: %v\n", resp)
 }
 ```
@@ -876,7 +1102,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrganizationGroupSync**](OrganizationGroupSync.md)
+[**[]OrganizationGroupSyncResponse**](OrganizationGroupSyncResponse.md)
 
 ### Authorization
 
@@ -885,7 +1111,445 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsServicesCreate
+
+> ServiceResponse OrgsServicesCreate(ctx, org).Data(data).Execute()
+
+Create a service within an organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    data := *openapiclient.NewServiceRequest("Name_example") // ServiceRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsServicesCreate(context.Background(), org).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsServicesCreate`: ServiceResponse
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsServicesCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **data** | [**ServiceRequest**](ServiceRequest.md) |  | 
+
+### Return type
+
+[**ServiceResponse**](ServiceResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsServicesDelete
+
+> OrgsServicesDelete(ctx, org, service).Execute()
+
+Delete a specific service
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    service := "service_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsServicesDelete(context.Background(), org, service).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**service** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsServicesDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsServicesList
+
+> []ServiceResponse OrgsServicesList(ctx, org).Page(page).PageSize(pageSize).Execute()
+
+Get a list of all services within an organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsServicesList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsServicesList`: []ServiceResponse
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsServicesListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]ServiceResponse**](ServiceResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsServicesPartialUpdate
+
+> ServiceResponse OrgsServicesPartialUpdate(ctx, org, service).Data(data).Execute()
+
+Update a service within an organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    service := "service_example" // string | 
+    data := *openapiclient.NewServiceRequestPatch() // ServiceRequestPatch |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsServicesPartialUpdate(context.Background(), org, service).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsServicesPartialUpdate`: ServiceResponse
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**service** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsServicesPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**ServiceRequestPatch**](ServiceRequestPatch.md) |  | 
+
+### Return type
+
+[**ServiceResponse**](ServiceResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsServicesRead
+
+> ServiceResponse OrgsServicesRead(ctx, org, service).Execute()
+
+Retrieve details of a single service within an organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    service := "service_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsServicesRead(context.Background(), org, service).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsServicesRead`: ServiceResponse
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**service** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsServicesReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ServiceResponse**](ServiceResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsServicesRefresh
+
+> ServiceResponse OrgsServicesRefresh(ctx, org, service).Execute()
+
+Refresh service API token.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    service := "service_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsServicesRefresh(context.Background(), org, service).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesRefresh``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsServicesRefresh`: ServiceResponse
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesRefresh`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**service** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsServicesRefreshRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ServiceResponse**](ServiceResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -894,7 +1558,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsCreate
 
-> OrganizationTeam OrgsTeamsCreate(ctx, org).Data(data).Execute()
+> OrganizationTeamResponse OrgsTeamsCreate(ctx, org).Data(data).Execute()
 
 Create a team for this organization.
 
@@ -914,7 +1578,7 @@ import (
 
 func main() {
     org := "org_example" // string | 
-    data := *openapiclient.NewOrgsTeamsCreate("Name_example") // OrgsTeamsCreate |  (optional)
+    data := *openapiclient.NewOrganizationTeamRequest("Name_example") // OrganizationTeamRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -923,7 +1587,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsCreate`: OrganizationTeam
+    // response from `OrgsTeamsCreate`: OrganizationTeamResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsCreate`: %v\n", resp)
 }
 ```
@@ -944,11 +1608,11 @@ Other parameters are passed through a pointer to a apiOrgsTeamsCreateRequest str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **data** | [**OrgsTeamsCreate**](OrgsTeamsCreate.md) |  | 
+ **data** | [**OrganizationTeamRequest**](OrganizationTeamRequest.md) |  | 
 
 ### Return type
 
-[**OrganizationTeam**](OrganizationTeam.md)
+[**OrganizationTeamResponse**](OrganizationTeamResponse.md)
 
 ### Authorization
 
@@ -957,7 +1621,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -966,7 +1630,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsDelete
 
-> OrgsTeamsDelete(ctx, org, slugPerm).Execute()
+> OrgsTeamsDelete(ctx, org, team).Execute()
 
 Delete a specific team in a organization.
 
@@ -986,11 +1650,11 @@ import (
 
 func main() {
     org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+    team := "team_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsDelete(context.Background(), org, slugPerm).Execute()
+    resp, r, err := apiClient.OrgsApi.OrgsTeamsDelete(context.Background(), org, team).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1005,7 +1669,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **org** | **string** |  | 
-**slugPerm** | **string** |  | 
+**team** | **string** |  | 
 
 ### Other Parameters
 
@@ -1028,7 +1692,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1037,7 +1701,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsList
 
-> []OrganizationTeam OrgsTeamsList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []OrganizationTeamResponse OrgsTeamsList(ctx, org).Page(page).PageSize(pageSize).Execute()
 
 Get the details of all teams within an organization.
 
@@ -1067,7 +1731,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsList`: []OrganizationTeam
+    // response from `OrgsTeamsList`: []OrganizationTeamResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsList`: %v\n", resp)
 }
 ```
@@ -1093,7 +1757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrganizationTeam**](OrganizationTeam.md)
+[**[]OrganizationTeamResponse**](OrganizationTeamResponse.md)
 
 ### Authorization
 
@@ -1102,7 +1766,82 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsTeamsMembersCreate
+
+> OrganizationTeamMembersResponse OrgsTeamsMembersCreate(ctx, org, team).Data(data).Execute()
+
+Add users to a team.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    team := "team_example" // string | 
+    data := *openapiclient.NewOrganizationTeamMembers([]openapiclient.OrganizationTeamMembership{*openapiclient.NewOrganizationTeamMembership("Role_example", "User_example")}) // OrganizationTeamMembers |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersCreate(context.Background(), org, team).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsTeamsMembersCreate`: OrganizationTeamMembersResponse
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**team** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsTeamsMembersCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**OrganizationTeamMembers**](OrganizationTeamMembers.md) |  | 
+
+### Return type
+
+[**OrganizationTeamMembersResponse**](OrganizationTeamMembersResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1111,7 +1850,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsMembersList
 
-> OrganizationTeamMembers OrgsTeamsMembersList(ctx, org, team).Execute()
+> OrganizationTeamMembersResponse OrgsTeamsMembersList(ctx, org, team).Execute()
 
 List all members for the team.
 
@@ -1140,7 +1879,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsMembersList`: OrganizationTeamMembers
+    // response from `OrgsTeamsMembersList`: OrganizationTeamMembersResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersList`: %v\n", resp)
 }
 ```
@@ -1166,7 +1905,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationTeamMembers**](OrganizationTeamMembers.md)
+[**OrganizationTeamMembersResponse**](OrganizationTeamMembersResponse.md)
 
 ### Authorization
 
@@ -1175,7 +1914,80 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsTeamsMembersUpdate
+
+> OrganizationTeamMembersResponse OrgsTeamsMembersUpdate(ctx, org, team).Execute()
+
+Replace all team members.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    team := "team_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersUpdate(context.Background(), org, team).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsTeamsMembersUpdate`: OrganizationTeamMembersResponse
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**team** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsTeamsMembersUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**OrganizationTeamMembersResponse**](OrganizationTeamMembersResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1184,7 +1996,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsPartialUpdate
 
-> OrganizationTeam OrgsTeamsPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
+> OrganizationTeamResponse OrgsTeamsPartialUpdate(ctx, org, team).Data(data).Execute()
 
 Update a specific team in a organization.
 
@@ -1204,17 +2016,17 @@ import (
 
 func main() {
     org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewOrgsTeamsPartialUpdate() // OrgsTeamsPartialUpdate |  (optional)
+    team := "team_example" // string | 
+    data := *openapiclient.NewOrganizationTeamRequestPatch() // OrganizationTeamRequestPatch |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+    resp, r, err := apiClient.OrgsApi.OrgsTeamsPartialUpdate(context.Background(), org, team).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsPartialUpdate`: OrganizationTeam
+    // response from `OrgsTeamsPartialUpdate`: OrganizationTeamResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsPartialUpdate`: %v\n", resp)
 }
 ```
@@ -1226,7 +2038,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **org** | **string** |  | 
-**slugPerm** | **string** |  | 
+**team** | **string** |  | 
 
 ### Other Parameters
 
@@ -1237,11 +2049,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**OrgsTeamsPartialUpdate**](OrgsTeamsPartialUpdate.md) |  | 
+ **data** | [**OrganizationTeamRequestPatch**](OrganizationTeamRequestPatch.md) |  | 
 
 ### Return type
 
-[**OrganizationTeam**](OrganizationTeam.md)
+[**OrganizationTeamResponse**](OrganizationTeamResponse.md)
 
 ### Authorization
 
@@ -1250,7 +2062,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1259,9 +2071,9 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsRead
 
-> OrganizationTeam OrgsTeamsRead(ctx, org, slugPerm).Execute()
+> OrganizationTeamResponse OrgsTeamsRead(ctx, org, team).Execute()
 
-Viewset for working with Organization teams.
+Get the details of a specific team within an organization.
 
 
 
@@ -1279,16 +2091,16 @@ import (
 
 func main() {
     org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+    team := "team_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsRead(context.Background(), org, slugPerm).Execute()
+    resp, r, err := apiClient.OrgsApi.OrgsTeamsRead(context.Background(), org, team).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsRead`: OrganizationTeam
+    // response from `OrgsTeamsRead`: OrganizationTeamResponse
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsRead`: %v\n", resp)
 }
 ```
@@ -1300,7 +2112,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **org** | **string** |  | 
-**slugPerm** | **string** |  | 
+**team** | **string** |  | 
 
 ### Other Parameters
 
@@ -1314,7 +2126,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationTeam**](OrganizationTeam.md)
+[**OrganizationTeamResponse**](OrganizationTeamResponse.md)
 
 ### Authorization
 
@@ -1323,7 +2135,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

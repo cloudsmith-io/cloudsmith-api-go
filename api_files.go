@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,6 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // FilesApiService FilesApi service
 type FilesApiService service
 
@@ -34,10 +29,10 @@ type ApiFilesAbortRequest struct {
 	owner      string
 	repo       string
 	identifier string
-	data       *FilesAbort
+	data       *PackageFileUploadRequest
 }
 
-func (r ApiFilesAbortRequest) Data(data FilesAbort) ApiFilesAbortRequest {
+func (r ApiFilesAbortRequest) Data(data PackageFileUploadRequest) ApiFilesAbortRequest {
 	r.data = &data
 	return r
 }
@@ -99,7 +94,7 @@ func (a *FilesApiService) FilesAbortExecute(r ApiFilesAbortRequest) (*http.Respo
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -145,32 +140,35 @@ func (a *FilesApiService) FilesAbortExecute(r ApiFilesAbortRequest) (*http.Respo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -185,15 +183,15 @@ type ApiFilesCompleteRequest struct {
 	owner      string
 	repo       string
 	identifier string
-	data       *FilesComplete
+	data       *PackageFileUploadRequest
 }
 
-func (r ApiFilesCompleteRequest) Data(data FilesComplete) ApiFilesCompleteRequest {
+func (r ApiFilesCompleteRequest) Data(data PackageFileUploadRequest) ApiFilesCompleteRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiFilesCompleteRequest) Execute() (*PackageFileUpload, *http.Response, error) {
+func (r ApiFilesCompleteRequest) Execute() (*PackageFileUploadResponse, *http.Response, error) {
 	return r.ApiService.FilesCompleteExecute(r)
 }
 
@@ -219,13 +217,13 @@ func (a *FilesApiService) FilesComplete(ctx context.Context, owner string, repo 
 }
 
 // Execute executes the request
-//  @return PackageFileUpload
-func (a *FilesApiService) FilesCompleteExecute(r ApiFilesCompleteRequest) (*PackageFileUpload, *http.Response, error) {
+//  @return PackageFileUploadResponse
+func (a *FilesApiService) FilesCompleteExecute(r ApiFilesCompleteRequest) (*PackageFileUploadResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageFileUpload
+		localVarReturnValue *PackageFileUploadResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesApiService.FilesComplete")
@@ -252,7 +250,7 @@ func (a *FilesApiService) FilesCompleteExecute(r ApiFilesCompleteRequest) (*Pack
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -298,32 +296,35 @@ func (a *FilesApiService) FilesCompleteExecute(r ApiFilesCompleteRequest) (*Pack
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -346,15 +347,15 @@ type ApiFilesCreateRequest struct {
 	ApiService *FilesApiService
 	owner      string
 	repo       string
-	data       *FilesCreate
+	data       *PackageFileUploadRequest
 }
 
-func (r ApiFilesCreateRequest) Data(data FilesCreate) ApiFilesCreateRequest {
+func (r ApiFilesCreateRequest) Data(data PackageFileUploadRequest) ApiFilesCreateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiFilesCreateRequest) Execute() (*PackageFileUpload, *http.Response, error) {
+func (r ApiFilesCreateRequest) Execute() (*PackageFileUploadResponse, *http.Response, error) {
 	return r.ApiService.FilesCreateExecute(r)
 }
 
@@ -378,13 +379,13 @@ func (a *FilesApiService) FilesCreate(ctx context.Context, owner string, repo st
 }
 
 // Execute executes the request
-//  @return PackageFileUpload
-func (a *FilesApiService) FilesCreateExecute(r ApiFilesCreateRequest) (*PackageFileUpload, *http.Response, error) {
+//  @return PackageFileUploadResponse
+func (a *FilesApiService) FilesCreateExecute(r ApiFilesCreateRequest) (*PackageFileUploadResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageFileUpload
+		localVarReturnValue *PackageFileUploadResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesApiService.FilesCreate")
@@ -410,7 +411,7 @@ func (a *FilesApiService) FilesCreateExecute(r ApiFilesCreateRequest) (*PackageF
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -455,33 +456,36 @@ func (a *FilesApiService) FilesCreateExecute(r ApiFilesCreateRequest) (*PackageF
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -521,7 +525,7 @@ func (r ApiFilesInfoRequest) PartNumber(partNumber int64) ApiFilesInfoRequest {
 	return r
 }
 
-func (r ApiFilesInfoRequest) Execute() (*PackageFilePartsUpload, *http.Response, error) {
+func (r ApiFilesInfoRequest) Execute() (*PackageFilePartsUploadResponse, *http.Response, error) {
 	return r.ApiService.FilesInfoExecute(r)
 }
 
@@ -547,13 +551,13 @@ func (a *FilesApiService) FilesInfo(ctx context.Context, owner string, repo stri
 }
 
 // Execute executes the request
-//  @return PackageFilePartsUpload
-func (a *FilesApiService) FilesInfoExecute(r ApiFilesInfoRequest) (*PackageFilePartsUpload, *http.Response, error) {
+//  @return PackageFilePartsUploadResponse
+func (a *FilesApiService) FilesInfoExecute(r ApiFilesInfoRequest) (*PackageFilePartsUploadResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageFilePartsUpload
+		localVarReturnValue *PackageFilePartsUploadResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesApiService.FilesInfo")
@@ -587,7 +591,7 @@ func (a *FilesApiService) FilesInfoExecute(r ApiFilesInfoRequest) (*PackageFileP
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -631,32 +635,35 @@ func (a *FilesApiService) FilesInfoExecute(r ApiFilesInfoRequest) (*PackageFileP
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -679,10 +686,10 @@ type ApiFilesValidateRequest struct {
 	ApiService *FilesApiService
 	owner      string
 	repo       string
-	data       *FilesValidate
+	data       *PackageFileUploadRequest
 }
 
-func (r ApiFilesValidateRequest) Data(data FilesValidate) ApiFilesValidateRequest {
+func (r ApiFilesValidateRequest) Data(data PackageFileUploadRequest) ApiFilesValidateRequest {
 	r.data = &data
 	return r
 }
@@ -741,7 +748,7 @@ func (a *FilesApiService) FilesValidateExecute(r ApiFilesValidateRequest) (*http
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -786,33 +793,36 @@ func (a *FilesApiService) FilesValidateExecute(r ApiFilesValidateRequest) (*http
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr

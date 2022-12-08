@@ -4,13 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Format** | Pointer to **string** |  | [optional] 
-**FormatUrl** | Pointer to **string** |  | [optional] 
 **Name** | **string** |  | 
-**SelfUrl** | Pointer to **string** |  | [optional] 
-**Slug** | Pointer to **string** | The slug identifier for this distribution | [optional] 
-**Variants** | Pointer to **string** |  | [optional] 
-**Versions** | Pointer to [**[]DistrosVersions**](DistrosVersions.md) | A list of the versions for this distribution | [optional] 
+**SelfUrl** | Pointer to **string** |  | [optional] [readonly] 
+**Slug** | Pointer to **string** | The slug identifier for this distribution | [optional] [readonly] 
+**Variants** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -30,56 +27,6 @@ will change when the set of required properties is changed
 NewDistributionWithDefaults instantiates a new Distribution object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetFormat
-
-`func (o *Distribution) GetFormat() string`
-
-GetFormat returns the Format field if non-nil, zero value otherwise.
-
-### GetFormatOk
-
-`func (o *Distribution) GetFormatOk() (*string, bool)`
-
-GetFormatOk returns a tuple with the Format field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFormat
-
-`func (o *Distribution) SetFormat(v string)`
-
-SetFormat sets Format field to given value.
-
-### HasFormat
-
-`func (o *Distribution) HasFormat() bool`
-
-HasFormat returns a boolean if a field has been set.
-
-### GetFormatUrl
-
-`func (o *Distribution) GetFormatUrl() string`
-
-GetFormatUrl returns the FormatUrl field if non-nil, zero value otherwise.
-
-### GetFormatUrlOk
-
-`func (o *Distribution) GetFormatUrlOk() (*string, bool)`
-
-GetFormatUrlOk returns a tuple with the FormatUrl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFormatUrl
-
-`func (o *Distribution) SetFormatUrl(v string)`
-
-SetFormatUrl sets FormatUrl field to given value.
-
-### HasFormatUrl
-
-`func (o *Distribution) HasFormatUrl() bool`
-
-HasFormatUrl returns a boolean if a field has been set.
 
 ### GetName
 
@@ -176,31 +123,16 @@ SetVariants sets Variants field to given value.
 
 HasVariants returns a boolean if a field has been set.
 
-### GetVersions
+### SetVariantsNil
 
-`func (o *Distribution) GetVersions() []DistrosVersions`
+`func (o *Distribution) SetVariantsNil(b bool)`
 
-GetVersions returns the Versions field if non-nil, zero value otherwise.
+ SetVariantsNil sets the value for Variants to be an explicit nil
 
-### GetVersionsOk
+### UnsetVariants
+`func (o *Distribution) UnsetVariants()`
 
-`func (o *Distribution) GetVersionsOk() (*[]DistrosVersions, bool)`
-
-GetVersionsOk returns a tuple with the Versions field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVersions
-
-`func (o *Distribution) SetVersions(v []DistrosVersions)`
-
-SetVersions sets Versions field to given value.
-
-### HasVersions
-
-`func (o *Distribution) HasVersions() bool`
-
-HasVersions returns a boolean if a field has been set.
-
+UnsetVariants ensures that no value is present for Variants, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

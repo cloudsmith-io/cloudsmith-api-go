@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -19,11 +19,6 @@ import (
 	"net/url"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // UserApiService UserApi service
 type UserApiService service
 
@@ -32,7 +27,7 @@ type ApiUserSelfRequest struct {
 	ApiService *UserApiService
 }
 
-func (r ApiUserSelfRequest) Execute() (*UserBrief, *http.Response, error) {
+func (r ApiUserSelfRequest) Execute() (*UserBriefResponse, *http.Response, error) {
 	return r.ApiService.UserSelfExecute(r)
 }
 
@@ -52,13 +47,13 @@ func (a *UserApiService) UserSelf(ctx context.Context) ApiUserSelfRequest {
 }
 
 // Execute executes the request
-//  @return UserBrief
-func (a *UserApiService) UserSelfExecute(r ApiUserSelfRequest) (*UserBrief, *http.Response, error) {
+//  @return UserBriefResponse
+func (a *UserApiService) UserSelfExecute(r ApiUserSelfRequest) (*UserBriefResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *UserBrief
+		localVarReturnValue *UserBriefResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserApiService.UserSelf")
@@ -82,7 +77,7 @@ func (a *UserApiService) UserSelfExecute(r ApiUserSelfRequest) (*UserBrief, *htt
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -126,22 +121,24 @@ func (a *UserApiService) UserSelfExecute(r ApiUserSelfRequest) (*UserBrief, *htt
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -162,15 +159,15 @@ func (a *UserApiService) UserSelfExecute(r ApiUserSelfRequest) (*UserBrief, *htt
 type ApiUserTokenCreateRequest struct {
 	ctx        context.Context
 	ApiService *UserApiService
-	data       *UserTokenCreate
+	data       *UserAuthTokenRequest
 }
 
-func (r ApiUserTokenCreateRequest) Data(data UserTokenCreate) ApiUserTokenCreateRequest {
+func (r ApiUserTokenCreateRequest) Data(data UserAuthTokenRequest) ApiUserTokenCreateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiUserTokenCreateRequest) Execute() (*UserAuthToken, *http.Response, error) {
+func (r ApiUserTokenCreateRequest) Execute() (*UserAuthTokenResponse, *http.Response, error) {
 	return r.ApiService.UserTokenCreateExecute(r)
 }
 
@@ -190,13 +187,13 @@ func (a *UserApiService) UserTokenCreate(ctx context.Context) ApiUserTokenCreate
 }
 
 // Execute executes the request
-//  @return UserAuthToken
-func (a *UserApiService) UserTokenCreateExecute(r ApiUserTokenCreateRequest) (*UserAuthToken, *http.Response, error) {
+//  @return UserAuthTokenResponse
+func (a *UserApiService) UserTokenCreateExecute(r ApiUserTokenCreateRequest) (*UserAuthTokenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *UserAuthToken
+		localVarReturnValue *UserAuthTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserApiService.UserTokenCreate")
@@ -220,7 +217,7 @@ func (a *UserApiService) UserTokenCreateExecute(r ApiUserTokenCreateRequest) (*U
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -266,32 +263,24 @@ func (a *UserApiService) UserTokenCreateExecute(r ApiUserTokenCreateRequest) (*U
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## EntitlementsCreate
 
-> RepositoryToken EntitlementsCreate(ctx, owner, repo).ShowTokens(showTokens).Data(data).Execute()
+> RepositoryTokenResponse EntitlementsCreate(ctx, owner, repo).ShowTokens(showTokens).Data(data).Execute()
 
 Create a specific entitlement in a repository.
 
@@ -40,8 +40,8 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional)
-    data := *openapiclient.NewEntitlementsCreate("Name_example") // EntitlementsCreate |  (optional)
+    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+    data := *openapiclient.NewRepositoryTokenRequest("Name_example") // RepositoryTokenRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -50,7 +50,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsCreate`: RepositoryToken
+    // response from `EntitlementsCreate`: RepositoryTokenResponse
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsCreate`: %v\n", resp)
 }
 ```
@@ -73,12 +73,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **showTokens** | **bool** | Show entitlement token strings in results | 
- **data** | [**EntitlementsCreate**](EntitlementsCreate.md) |  | 
+ **showTokens** | **bool** | Show entitlement token strings in results | [default to false]
+ **data** | [**RepositoryTokenRequest**](RepositoryTokenRequest.md) |  | 
 
 ### Return type
 
-[**RepositoryToken**](RepositoryToken.md)
+[**RepositoryTokenResponse**](RepositoryTokenResponse.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -235,7 +235,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -318,7 +318,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsList
 
-> []RepositoryToken EntitlementsList(ctx, owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Execute()
+> []RepositoryTokenResponse EntitlementsList(ctx, owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Query(query).Active(active).Execute()
 
 Get a list of all entitlements in a repository.
 
@@ -341,16 +341,18 @@ func main() {
     repo := "repo_example" // string | 
     page := int64(56) // int64 | A page number within the paginated result set. (optional)
     pageSize := int64(56) // int64 | Number of results to return per page. (optional)
-    showTokens := true // bool | Show entitlement token strings in results (optional)
+    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+    query := "query_example" // string | A search term for querying names of entitlements. (optional)
+    active := true // bool | If true, only include active tokens (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Execute()
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Query(query).Active(active).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsList`: []RepositoryToken
+    // response from `EntitlementsList`: []RepositoryTokenResponse
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsList`: %v\n", resp)
 }
 ```
@@ -375,11 +377,13 @@ Name | Type | Description  | Notes
 
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
- **showTokens** | **bool** | Show entitlement token strings in results | 
+ **showTokens** | **bool** | Show entitlement token strings in results | [default to false]
+ **query** | **string** | A search term for querying names of entitlements. | 
+ **active** | **bool** | If true, only include active tokens | [default to false]
 
 ### Return type
 
-[**[]RepositoryToken**](RepositoryToken.md)
+[**[]RepositoryTokenResponse**](RepositoryTokenResponse.md)
 
 ### Authorization
 
@@ -388,7 +392,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -397,7 +401,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsPartialUpdate
 
-> RepositoryToken EntitlementsPartialUpdate(ctx, owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
+> RepositoryTokenResponse EntitlementsPartialUpdate(ctx, owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
 
 Update a specific entitlement in a repository.
 
@@ -419,8 +423,8 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional)
-    data := *openapiclient.NewEntitlementsPartialUpdate() // EntitlementsPartialUpdate |  (optional)
+    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+    data := *openapiclient.NewRepositoryTokenRequestPatch() // RepositoryTokenRequestPatch |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -429,7 +433,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsPartialUpdate`: RepositoryToken
+    // response from `EntitlementsPartialUpdate`: RepositoryTokenResponse
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsPartialUpdate`: %v\n", resp)
 }
 ```
@@ -454,12 +458,12 @@ Name | Type | Description  | Notes
 
 
 
- **showTokens** | **bool** | Show entitlement token strings in results | 
- **data** | [**EntitlementsPartialUpdate**](EntitlementsPartialUpdate.md) |  | 
+ **showTokens** | **bool** | Show entitlement token strings in results | [default to false]
+ **data** | [**RepositoryTokenRequestPatch**](RepositoryTokenRequestPatch.md) |  | 
 
 ### Return type
 
-[**RepositoryToken**](RepositoryToken.md)
+[**RepositoryTokenResponse**](RepositoryTokenResponse.md)
 
 ### Authorization
 
@@ -468,7 +472,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -477,7 +481,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsRead
 
-> RepositoryToken EntitlementsRead(ctx, owner, repo, identifier).ShowTokens(showTokens).Execute()
+> RepositoryTokenResponse EntitlementsRead(ctx, owner, repo, identifier).Fuzzy(fuzzy).ShowTokens(showTokens).Execute()
 
 Get a specific entitlement in a repository.
 
@@ -499,16 +503,17 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional)
+    fuzzy := true // bool | If true, entitlement identifiers including name will be fuzzy matched. (optional) (default to false)
+    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsRead(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Execute()
+    resp, r, err := apiClient.EntitlementsApi.EntitlementsRead(context.Background(), owner, repo, identifier).Fuzzy(fuzzy).ShowTokens(showTokens).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsRead`: RepositoryToken
+    // response from `EntitlementsRead`: RepositoryTokenResponse
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsRead`: %v\n", resp)
 }
 ```
@@ -533,11 +538,12 @@ Name | Type | Description  | Notes
 
 
 
- **showTokens** | **bool** | Show entitlement token strings in results | 
+ **fuzzy** | **bool** | If true, entitlement identifiers including name will be fuzzy matched. | [default to false]
+ **showTokens** | **bool** | Show entitlement token strings in results | [default to false]
 
 ### Return type
 
-[**RepositoryToken**](RepositoryToken.md)
+[**RepositoryTokenResponse**](RepositoryTokenResponse.md)
 
 ### Authorization
 
@@ -546,7 +552,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -555,7 +561,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsRefresh
 
-> RepositoryTokenRefresh EntitlementsRefresh(ctx, owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
+> RepositoryTokenRefreshResponse EntitlementsRefresh(ctx, owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
 
 Refresh an entitlement token in a repository.
 
@@ -577,8 +583,8 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional)
-    data := *openapiclient.NewEntitlementsRefresh() // EntitlementsRefresh |  (optional)
+    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+    data := *openapiclient.NewRepositoryTokenRefreshRequest() // RepositoryTokenRefreshRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -587,7 +593,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsRefresh``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsRefresh`: RepositoryTokenRefresh
+    // response from `EntitlementsRefresh`: RepositoryTokenRefreshResponse
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsRefresh`: %v\n", resp)
 }
 ```
@@ -612,12 +618,12 @@ Name | Type | Description  | Notes
 
 
 
- **showTokens** | **bool** | Show entitlement token strings in results | 
- **data** | [**EntitlementsRefresh**](EntitlementsRefresh.md) |  | 
+ **showTokens** | **bool** | Show entitlement token strings in results | [default to false]
+ **data** | [**RepositoryTokenRefreshRequest**](RepositoryTokenRefreshRequest.md) |  | 
 
 ### Return type
 
-[**RepositoryTokenRefresh**](RepositoryTokenRefresh.md)
+[**RepositoryTokenRefreshResponse**](RepositoryTokenRefreshResponse.md)
 
 ### Authorization
 
@@ -626,7 +632,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -657,7 +663,7 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional)
+    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -689,7 +695,7 @@ Name | Type | Description  | Notes
 
 
 
- **showTokens** | **bool** | Show entitlement token strings in results | 
+ **showTokens** | **bool** | Show entitlement token strings in results | [default to false]
 
 ### Return type
 
@@ -702,7 +708,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -711,7 +717,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsSync
 
-> RepositoryTokenSync EntitlementsSync(ctx, owner, repo).ShowTokens(showTokens).Data(data).Execute()
+> RepositoryTokenSyncResponse EntitlementsSync(ctx, owner, repo).ShowTokens(showTokens).Data(data).Execute()
 
 Synchronise tokens from a source repository.
 
@@ -732,8 +738,8 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional)
-    data := *openapiclient.NewEntitlementsSync("Source_example") // EntitlementsSync |  (optional)
+    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+    data := *openapiclient.NewRepositoryTokenSyncRequest("Source_example") // RepositoryTokenSyncRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -742,7 +748,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsSync``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsSync`: RepositoryTokenSync
+    // response from `EntitlementsSync`: RepositoryTokenSyncResponse
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsSync`: %v\n", resp)
 }
 ```
@@ -765,12 +771,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **showTokens** | **bool** | Show entitlement token strings in results | 
- **data** | [**EntitlementsSync**](EntitlementsSync.md) |  | 
+ **showTokens** | **bool** | Show entitlement token strings in results | [default to false]
+ **data** | [**RepositoryTokenSyncRequest**](RepositoryTokenSyncRequest.md) |  | 
 
 ### Return type
 
-[**RepositoryTokenSync**](RepositoryTokenSync.md)
+[**RepositoryTokenSyncResponse**](RepositoryTokenSyncResponse.md)
 
 ### Authorization
 
@@ -779,7 +785,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

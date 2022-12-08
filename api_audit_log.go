@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,15 +20,10 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // AuditLogApiService AuditLogApi service
 type AuditLogApiService service
 
-type ApiAuditLogListRequest struct {
+type ApiAuditLogNamespaceListRequest struct {
 	ctx        context.Context
 	ApiService *AuditLogApiService
 	owner      string
@@ -38,38 +33,38 @@ type ApiAuditLogListRequest struct {
 }
 
 // A page number within the paginated result set.
-func (r ApiAuditLogListRequest) Page(page int64) ApiAuditLogListRequest {
+func (r ApiAuditLogNamespaceListRequest) Page(page int64) ApiAuditLogNamespaceListRequest {
 	r.page = &page
 	return r
 }
 
 // Number of results to return per page.
-func (r ApiAuditLogListRequest) PageSize(pageSize int64) ApiAuditLogListRequest {
+func (r ApiAuditLogNamespaceListRequest) PageSize(pageSize int64) ApiAuditLogNamespaceListRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // A search term for querying events, actors, or timestamps of log records.
-func (r ApiAuditLogListRequest) Query(query string) ApiAuditLogListRequest {
+func (r ApiAuditLogNamespaceListRequest) Query(query string) ApiAuditLogNamespaceListRequest {
 	r.query = &query
 	return r
 }
 
-func (r ApiAuditLogListRequest) Execute() ([]NamespaceAuditLog, *http.Response, error) {
-	return r.ApiService.AuditLogListExecute(r)
+func (r ApiAuditLogNamespaceListRequest) Execute() ([]NamespaceAuditLogResponse, *http.Response, error) {
+	return r.ApiService.AuditLogNamespaceListExecute(r)
 }
 
 /*
-AuditLogList Lists audit log entries for a specific namespace.
+AuditLogNamespaceList Lists audit log entries for a specific namespace.
 
 Lists audit log entries for a specific namespace.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
- @return ApiAuditLogListRequest
+ @return ApiAuditLogNamespaceListRequest
 */
-func (a *AuditLogApiService) AuditLogList(ctx context.Context, owner string) ApiAuditLogListRequest {
-	return ApiAuditLogListRequest{
+func (a *AuditLogApiService) AuditLogNamespaceList(ctx context.Context, owner string) ApiAuditLogNamespaceListRequest {
+	return ApiAuditLogNamespaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
 		owner:      owner,
@@ -77,16 +72,16 @@ func (a *AuditLogApiService) AuditLogList(ctx context.Context, owner string) Api
 }
 
 // Execute executes the request
-//  @return []NamespaceAuditLog
-func (a *AuditLogApiService) AuditLogListExecute(r ApiAuditLogListRequest) ([]NamespaceAuditLog, *http.Response, error) {
+//  @return []NamespaceAuditLogResponse
+func (a *AuditLogApiService) AuditLogNamespaceListExecute(r ApiAuditLogNamespaceListRequest) ([]NamespaceAuditLogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []NamespaceAuditLog
+		localVarReturnValue []NamespaceAuditLogResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogApiService.AuditLogList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogApiService.AuditLogNamespaceList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -117,7 +112,7 @@ func (a *AuditLogApiService) AuditLogListExecute(r ApiAuditLogListRequest) ([]Na
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -160,23 +155,36 @@ func (a *AuditLogApiService) AuditLogListExecute(r ApiAuditLogListRequest) ([]Na
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 402 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -194,7 +202,7 @@ func (a *AuditLogApiService) AuditLogListExecute(r ApiAuditLogListRequest) ([]Na
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAuditLogList0Request struct {
+type ApiAuditLogRepoListRequest struct {
 	ctx        context.Context
 	ApiService *AuditLogApiService
 	owner      string
@@ -205,39 +213,39 @@ type ApiAuditLogList0Request struct {
 }
 
 // A page number within the paginated result set.
-func (r ApiAuditLogList0Request) Page(page int64) ApiAuditLogList0Request {
+func (r ApiAuditLogRepoListRequest) Page(page int64) ApiAuditLogRepoListRequest {
 	r.page = &page
 	return r
 }
 
 // Number of results to return per page.
-func (r ApiAuditLogList0Request) PageSize(pageSize int64) ApiAuditLogList0Request {
+func (r ApiAuditLogRepoListRequest) PageSize(pageSize int64) ApiAuditLogRepoListRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // A search term for querying events, actors, or timestamps of log records.
-func (r ApiAuditLogList0Request) Query(query string) ApiAuditLogList0Request {
+func (r ApiAuditLogRepoListRequest) Query(query string) ApiAuditLogRepoListRequest {
 	r.query = &query
 	return r
 }
 
-func (r ApiAuditLogList0Request) Execute() ([]RepositoryAuditLog, *http.Response, error) {
-	return r.ApiService.AuditLogList0Execute(r)
+func (r ApiAuditLogRepoListRequest) Execute() ([]RepositoryAuditLogResponse, *http.Response, error) {
+	return r.ApiService.AuditLogRepoListExecute(r)
 }
 
 /*
-AuditLogList0 Lists audit log entries for a specific repository.
+AuditLogRepoList Lists audit log entries for a specific repository.
 
 Lists audit log entries for a specific repository.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
  @param repo
- @return ApiAuditLogList0Request
+ @return ApiAuditLogRepoListRequest
 */
-func (a *AuditLogApiService) AuditLogList0(ctx context.Context, owner string, repo string) ApiAuditLogList0Request {
-	return ApiAuditLogList0Request{
+func (a *AuditLogApiService) AuditLogRepoList(ctx context.Context, owner string, repo string) ApiAuditLogRepoListRequest {
+	return ApiAuditLogRepoListRequest{
 		ApiService: a,
 		ctx:        ctx,
 		owner:      owner,
@@ -246,16 +254,16 @@ func (a *AuditLogApiService) AuditLogList0(ctx context.Context, owner string, re
 }
 
 // Execute executes the request
-//  @return []RepositoryAuditLog
-func (a *AuditLogApiService) AuditLogList0Execute(r ApiAuditLogList0Request) ([]RepositoryAuditLog, *http.Response, error) {
+//  @return []RepositoryAuditLogResponse
+func (a *AuditLogApiService) AuditLogRepoListExecute(r ApiAuditLogRepoListRequest) ([]RepositoryAuditLogResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []RepositoryAuditLog
+		localVarReturnValue []RepositoryAuditLogResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogApiService.AuditLogList0")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogApiService.AuditLogRepoList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -287,7 +295,7 @@ func (a *AuditLogApiService) AuditLogList0Execute(r ApiAuditLogList0Request) ([]
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -330,23 +338,36 @@ func (a *AuditLogApiService) AuditLogList0Execute(r ApiAuditLogList0Request) ([]
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 402 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

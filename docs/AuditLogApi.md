@@ -4,14 +4,14 @@ All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AuditLogList**](AuditLogApi.md#AuditLogList) | **Get** /audit-log/{owner}/ | Lists audit log entries for a specific namespace.
-[**AuditLogList0**](AuditLogApi.md#AuditLogList0) | **Get** /audit-log/{owner}/{repo}/ | Lists audit log entries for a specific repository.
+[**AuditLogNamespaceList**](AuditLogApi.md#AuditLogNamespaceList) | **Get** /audit-log/{owner}/ | Lists audit log entries for a specific namespace.
+[**AuditLogRepoList**](AuditLogApi.md#AuditLogRepoList) | **Get** /audit-log/{owner}/{repo}/ | Lists audit log entries for a specific repository.
 
 
 
-## AuditLogList
+## AuditLogNamespaceList
 
-> []NamespaceAuditLog AuditLogList(ctx, owner).Page(page).PageSize(pageSize).Query(query).Execute()
+> []NamespaceAuditLogResponse AuditLogNamespaceList(ctx, owner).Page(page).PageSize(pageSize).Query(query).Execute()
 
 Lists audit log entries for a specific namespace.
 
@@ -37,13 +37,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AuditLogApi.AuditLogList(context.Background(), owner).Page(page).PageSize(pageSize).Query(query).Execute()
+    resp, r, err := apiClient.AuditLogApi.AuditLogNamespaceList(context.Background(), owner).Page(page).PageSize(pageSize).Query(query).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AuditLogApi.AuditLogList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `AuditLogApi.AuditLogNamespaceList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AuditLogList`: []NamespaceAuditLog
-    fmt.Fprintf(os.Stdout, "Response from `AuditLogApi.AuditLogList`: %v\n", resp)
+    // response from `AuditLogNamespaceList`: []NamespaceAuditLogResponse
+    fmt.Fprintf(os.Stdout, "Response from `AuditLogApi.AuditLogNamespaceList`: %v\n", resp)
 }
 ```
 
@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiAuditLogListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiAuditLogNamespaceListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]NamespaceAuditLog**](NamespaceAuditLog.md)
+[**[]NamespaceAuditLogResponse**](NamespaceAuditLogResponse.md)
 
 ### Authorization
 
@@ -78,16 +78,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## AuditLogList0
+## AuditLogRepoList
 
-> []RepositoryAuditLog AuditLogList0(ctx, owner, repo).Page(page).PageSize(pageSize).Query(query).Execute()
+> []RepositoryAuditLogResponse AuditLogRepoList(ctx, owner, repo).Page(page).PageSize(pageSize).Query(query).Execute()
 
 Lists audit log entries for a specific repository.
 
@@ -114,13 +114,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AuditLogApi.AuditLogList0(context.Background(), owner, repo).Page(page).PageSize(pageSize).Query(query).Execute()
+    resp, r, err := apiClient.AuditLogApi.AuditLogRepoList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Query(query).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AuditLogApi.AuditLogList0``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `AuditLogApi.AuditLogRepoList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AuditLogList0`: []RepositoryAuditLog
-    fmt.Fprintf(os.Stdout, "Response from `AuditLogApi.AuditLogList0`: %v\n", resp)
+    // response from `AuditLogRepoList`: []RepositoryAuditLogResponse
+    fmt.Fprintf(os.Stdout, "Response from `AuditLogApi.AuditLogRepoList`: %v\n", resp)
 }
 ```
 
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiAuditLogList0Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiAuditLogRepoListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]RepositoryAuditLog**](RepositoryAuditLog.md)
+[**[]RepositoryAuditLogResponse**](RepositoryAuditLogResponse.md)
 
 ### Authorization
 
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

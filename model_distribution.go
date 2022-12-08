@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -15,22 +15,13 @@ import (
 	"encoding/json"
 )
 
-// Distribution struct for Distribution
+// Distribution The distributions supported by this package format
 type Distribution struct {
-	//
-	Format *string `json:"format,omitempty"`
-	//
-	FormatUrl *string `json:"format_url,omitempty"`
-	//
-	Name string `json:"name"`
-	//
+	Name    string  `json:"name"`
 	SelfUrl *string `json:"self_url,omitempty"`
 	// The slug identifier for this distribution
-	Slug *string `json:"slug,omitempty"`
-	//
-	Variants *string `json:"variants,omitempty"`
-	// A list of the versions for this distribution
-	Versions []DistrosVersions `json:"versions,omitempty"`
+	Slug     *string        `json:"slug,omitempty"`
+	Variants NullableString `json:"variants,omitempty"`
 }
 
 // NewDistribution instantiates a new Distribution object
@@ -49,70 +40,6 @@ func NewDistribution(name string) *Distribution {
 func NewDistributionWithDefaults() *Distribution {
 	this := Distribution{}
 	return &this
-}
-
-// GetFormat returns the Format field value if set, zero value otherwise.
-func (o *Distribution) GetFormat() string {
-	if o == nil || o.Format == nil {
-		var ret string
-		return ret
-	}
-	return *o.Format
-}
-
-// GetFormatOk returns a tuple with the Format field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Distribution) GetFormatOk() (*string, bool) {
-	if o == nil || o.Format == nil {
-		return nil, false
-	}
-	return o.Format, true
-}
-
-// HasFormat returns a boolean if a field has been set.
-func (o *Distribution) HasFormat() bool {
-	if o != nil && o.Format != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFormat gets a reference to the given string and assigns it to the Format field.
-func (o *Distribution) SetFormat(v string) {
-	o.Format = &v
-}
-
-// GetFormatUrl returns the FormatUrl field value if set, zero value otherwise.
-func (o *Distribution) GetFormatUrl() string {
-	if o == nil || o.FormatUrl == nil {
-		var ret string
-		return ret
-	}
-	return *o.FormatUrl
-}
-
-// GetFormatUrlOk returns a tuple with the FormatUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Distribution) GetFormatUrlOk() (*string, bool) {
-	if o == nil || o.FormatUrl == nil {
-		return nil, false
-	}
-	return o.FormatUrl, true
-}
-
-// HasFormatUrl returns a boolean if a field has been set.
-func (o *Distribution) HasFormatUrl() bool {
-	if o != nil && o.FormatUrl != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFormatUrl gets a reference to the given string and assigns it to the FormatUrl field.
-func (o *Distribution) SetFormatUrl(v string) {
-	o.FormatUrl = &v
 }
 
 // GetName returns the Name field value
@@ -141,7 +68,7 @@ func (o *Distribution) SetName(v string) {
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
 func (o *Distribution) GetSelfUrl() string {
-	if o == nil || o.SelfUrl == nil {
+	if o == nil || isNil(o.SelfUrl) {
 		var ret string
 		return ret
 	}
@@ -151,7 +78,7 @@ func (o *Distribution) GetSelfUrl() string {
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Distribution) GetSelfUrlOk() (*string, bool) {
-	if o == nil || o.SelfUrl == nil {
+	if o == nil || isNil(o.SelfUrl) {
 		return nil, false
 	}
 	return o.SelfUrl, true
@@ -159,7 +86,7 @@ func (o *Distribution) GetSelfUrlOk() (*string, bool) {
 
 // HasSelfUrl returns a boolean if a field has been set.
 func (o *Distribution) HasSelfUrl() bool {
-	if o != nil && o.SelfUrl != nil {
+	if o != nil && !isNil(o.SelfUrl) {
 		return true
 	}
 
@@ -173,7 +100,7 @@ func (o *Distribution) SetSelfUrl(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *Distribution) GetSlug() string {
-	if o == nil || o.Slug == nil {
+	if o == nil || isNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -183,7 +110,7 @@ func (o *Distribution) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Distribution) GetSlugOk() (*string, bool) {
-	if o == nil || o.Slug == nil {
+	if o == nil || isNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -191,7 +118,7 @@ func (o *Distribution) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *Distribution) HasSlug() bool {
-	if o != nil && o.Slug != nil {
+	if o != nil && !isNil(o.Slug) {
 		return true
 	}
 
@@ -203,92 +130,62 @@ func (o *Distribution) SetSlug(v string) {
 	o.Slug = &v
 }
 
-// GetVariants returns the Variants field value if set, zero value otherwise.
+// GetVariants returns the Variants field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Distribution) GetVariants() string {
-	if o == nil || o.Variants == nil {
+	if o == nil || isNil(o.Variants.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Variants
+	return *o.Variants.Get()
 }
 
 // GetVariantsOk returns a tuple with the Variants field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Distribution) GetVariantsOk() (*string, bool) {
-	if o == nil || o.Variants == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Variants, true
+	return o.Variants.Get(), o.Variants.IsSet()
 }
 
 // HasVariants returns a boolean if a field has been set.
 func (o *Distribution) HasVariants() bool {
-	if o != nil && o.Variants != nil {
+	if o != nil && o.Variants.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVariants gets a reference to the given string and assigns it to the Variants field.
+// SetVariants gets a reference to the given NullableString and assigns it to the Variants field.
 func (o *Distribution) SetVariants(v string) {
-	o.Variants = &v
+	o.Variants.Set(&v)
 }
 
-// GetVersions returns the Versions field value if set, zero value otherwise.
-func (o *Distribution) GetVersions() []DistrosVersions {
-	if o == nil || o.Versions == nil {
-		var ret []DistrosVersions
-		return ret
-	}
-	return o.Versions
+// SetVariantsNil sets the value for Variants to be an explicit nil
+func (o *Distribution) SetVariantsNil() {
+	o.Variants.Set(nil)
 }
 
-// GetVersionsOk returns a tuple with the Versions field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Distribution) GetVersionsOk() ([]DistrosVersions, bool) {
-	if o == nil || o.Versions == nil {
-		return nil, false
-	}
-	return o.Versions, true
-}
-
-// HasVersions returns a boolean if a field has been set.
-func (o *Distribution) HasVersions() bool {
-	if o != nil && o.Versions != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVersions gets a reference to the given []DistrosVersions and assigns it to the Versions field.
-func (o *Distribution) SetVersions(v []DistrosVersions) {
-	o.Versions = v
+// UnsetVariants ensures that no value is present for Variants, not even an explicit nil
+func (o *Distribution) UnsetVariants() {
+	o.Variants.Unset()
 }
 
 func (o Distribution) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Format != nil {
-		toSerialize["format"] = o.Format
-	}
-	if o.FormatUrl != nil {
-		toSerialize["format_url"] = o.FormatUrl
-	}
 	if true {
 		toSerialize["name"] = o.Name
 	}
-	if o.SelfUrl != nil {
+	if !isNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
-	if o.Slug != nil {
+	if !isNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
-	if o.Variants != nil {
-		toSerialize["variants"] = o.Variants
-	}
-	if o.Versions != nil {
-		toSerialize["versions"] = o.Versions
+	if o.Variants.IsSet() {
+		toSerialize["variants"] = o.Variants.Get()
 	}
 	return json.Marshal(toSerialize)
 }

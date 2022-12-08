@@ -4,45 +4,45 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Clients** | Pointer to **int64** |  | [optional] 
-**CreatedAt** | Pointer to **string** | The datetime the token was updated at. | [optional] 
-**CreatedBy** | Pointer to **string** |  | [optional] 
-**CreatedByUrl** | Pointer to **string** |  | [optional] 
-**Default** | Pointer to **bool** | If selected this is the default token for this repository. | [optional] 
-**DisableUrl** | Pointer to **string** |  | [optional] 
-**Downloads** | Pointer to **int64** |  | [optional] 
-**EnableUrl** | Pointer to **string** |  | [optional] 
-**EulaAccepted** | Pointer to **map[string]interface{}** |  | [optional] 
-**EulaAcceptedAt** | Pointer to **string** | The datetime the EULA was accepted at. | [optional] 
-**EulaAcceptedFrom** | Pointer to **string** |  | [optional] 
+**Clients** | Pointer to **int64** |  | [optional] [readonly] 
+**CreatedAt** | Pointer to **time.Time** | The datetime the token was updated at. | [optional] [readonly] 
+**CreatedBy** | Pointer to **string** |  | [optional] [readonly] 
+**CreatedByUrl** | Pointer to **string** |  | [optional] [readonly] 
+**Default** | Pointer to **bool** | If selected this is the default token for this repository. | [optional] [readonly] 
+**DisableUrl** | Pointer to **string** |  | [optional] [readonly] 
+**Downloads** | Pointer to **int64** |  | [optional] [readonly] 
+**EnableUrl** | Pointer to **string** |  | [optional] [readonly] 
+**EulaAccepted** | Pointer to [**NullableEula**](Eula.md) |  | [optional] 
+**EulaAcceptedAt** | Pointer to **time.Time** | The datetime the EULA was accepted at. | [optional] [readonly] 
+**EulaAcceptedFrom** | Pointer to **NullableString** |  | [optional] [readonly] 
 **EulaRequired** | Pointer to **bool** | If checked, a EULA acceptance is required for this token. | [optional] 
-**HasLimits** | Pointer to **bool** |  | [optional] 
-**Identifier** | Pointer to **int64** |  | [optional] 
+**HasLimits** | Pointer to **bool** |  | [optional] [readonly] 
+**Identifier** | Pointer to **int64** |  | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | If enabled, the token will allow downloads based on configured restrictions (if any). | [optional] 
-**IsLimited** | Pointer to **bool** |  | [optional] 
-**LimitBandwidth** | Pointer to **int64** | The maximum download bandwidth allowed for the token. Values are expressed as the selected unit of bandwidth. Please note that since downloads are calculated asynchronously (after the download happens), the limit may not be imposed immediately but at a later point.  | [optional] 
-**LimitBandwidthUnit** | Pointer to **string** |  | [optional] 
-**LimitDateRangeFrom** | Pointer to **string** | The starting date/time the token is allowed to be used from. | [optional] 
-**LimitDateRangeTo** | Pointer to **string** | The ending date/time the token is allowed to be used until. | [optional] 
-**LimitNumClients** | Pointer to **int64** | The maximum number of unique clients allowed for the token. Please note that since clients are calculated asynchronously (after the download happens), the limit may not be imposed immediately but at a later point. | [optional] 
-**LimitNumDownloads** | Pointer to **int64** | The maximum number of downloads allowed for the token. Please note that since downloads are calculated asynchronously (after the download happens), the limit may not be imposed immediately but at a later point. | [optional] 
-**LimitPackageQuery** | Pointer to **string** | The package-based search query to apply to restrict downloads to. This uses the same syntax as the standard search used for repositories, and also supports boolean logic operators such as OR/AND/NOT and parentheses for grouping. This will still allow access to non-package files, such as metadata. | [optional] 
-**LimitPathQuery** | Pointer to **string** | The path-based search query to apply to restrict downloads to. This supports boolean logic operators such as OR/AND/NOT and parentheses for grouping. The path evaluated does not include the domain name, the namespace, the entitlement code used, the package format, etc. and it always starts with a forward slash. | [optional] 
+**IsLimited** | Pointer to **bool** |  | [optional] [readonly] 
+**LimitBandwidth** | Pointer to **NullableInt64** | The maximum download bandwidth allowed for the token. Values are expressed as the selected unit of bandwidth. Please note that since downloads are calculated asynchronously (after the download happens), the limit may not be imposed immediately but at a later point.  | [optional] 
+**LimitBandwidthUnit** | Pointer to **NullableString** |  | [optional] [default to "Byte"]
+**LimitDateRangeFrom** | Pointer to **NullableTime** | The starting date/time the token is allowed to be used from. | [optional] 
+**LimitDateRangeTo** | Pointer to **NullableTime** | The ending date/time the token is allowed to be used until. | [optional] 
+**LimitNumClients** | Pointer to **NullableInt64** | The maximum number of unique clients allowed for the token. Please note that since clients are calculated asynchronously (after the download happens), the limit may not be imposed immediately but at a later point. | [optional] 
+**LimitNumDownloads** | Pointer to **NullableInt64** | The maximum number of downloads allowed for the token. Please note that since downloads are calculated asynchronously (after the download happens), the limit may not be imposed immediately but at a later point. | [optional] 
+**LimitPackageQuery** | Pointer to **NullableString** | The package-based search query to apply to restrict downloads to. This uses the same syntax as the standard search used for repositories, and also supports boolean logic operators such as OR/AND/NOT and parentheses for grouping. This will still allow access to non-package files, such as metadata. | [optional] 
+**LimitPathQuery** | Pointer to **NullableString** | The path-based search query to apply to restrict downloads to. This supports boolean logic operators such as OR/AND/NOT and parentheses for grouping. The path evaluated does not include the domain name, the namespace, the entitlement code used, the package format, etc. and it always starts with a forward slash. | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 **Name** | **string** |  | 
-**RefreshUrl** | Pointer to **string** |  | [optional] 
-**ResetUrl** | Pointer to **string** |  | [optional] 
-**ScheduledResetAt** | Pointer to **string** | The time at which the scheduled reset period has elapsed and the token limits were automatically reset to zero. | [optional] 
-**ScheduledResetPeriod** | Pointer to **string** |  | [optional] 
-**SelfUrl** | Pointer to **string** |  | [optional] 
-**SlugPerm** | Pointer to **string** |  | [optional] 
+**RefreshUrl** | Pointer to **string** |  | [optional] [readonly] 
+**ResetUrl** | Pointer to **string** |  | [optional] [readonly] 
+**ScheduledResetAt** | Pointer to **NullableTime** | The time at which the scheduled reset period has elapsed and the token limits were automatically reset to zero. | [optional] 
+**ScheduledResetPeriod** | Pointer to **NullableString** |  | [optional] [default to "Never Reset"]
+**SelfUrl** | Pointer to **string** |  | [optional] [readonly] 
+**SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **Token** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **string** | The datetime the token was updated at. | [optional] 
-**UpdatedBy** | Pointer to **string** |  | [optional] 
-**UpdatedByUrl** | Pointer to **string** |  | [optional] 
-**Usage** | Pointer to **string** |  | [optional] 
-**User** | Pointer to **string** |  | [optional] 
-**UserUrl** | Pointer to **string** |  | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | The datetime the token was updated at. | [optional] [readonly] 
+**UpdatedBy** | Pointer to **NullableString** |  | [optional] [readonly] 
+**UpdatedByUrl** | Pointer to **NullableString** |  | [optional] [readonly] 
+**Usage** | Pointer to **string** |  | [optional] [readonly] 
+**User** | Pointer to **NullableString** |  | [optional] [readonly] 
+**UserUrl** | Pointer to **NullableString** |  | [optional] [readonly] 
 
 ## Methods
 
@@ -90,20 +90,20 @@ HasClients returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
-`func (o *RepositoryToken) GetCreatedAt() string`
+`func (o *RepositoryToken) GetCreatedAt() time.Time`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *RepositoryToken) GetCreatedAtOk() (*string, bool)`
+`func (o *RepositoryToken) GetCreatedAtOk() (*time.Time, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *RepositoryToken) SetCreatedAt(v string)`
+`func (o *RepositoryToken) SetCreatedAt(v time.Time)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
@@ -265,20 +265,20 @@ HasEnableUrl returns a boolean if a field has been set.
 
 ### GetEulaAccepted
 
-`func (o *RepositoryToken) GetEulaAccepted() map[string]interface{}`
+`func (o *RepositoryToken) GetEulaAccepted() Eula`
 
 GetEulaAccepted returns the EulaAccepted field if non-nil, zero value otherwise.
 
 ### GetEulaAcceptedOk
 
-`func (o *RepositoryToken) GetEulaAcceptedOk() (*map[string]interface{}, bool)`
+`func (o *RepositoryToken) GetEulaAcceptedOk() (*Eula, bool)`
 
 GetEulaAcceptedOk returns a tuple with the EulaAccepted field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEulaAccepted
 
-`func (o *RepositoryToken) SetEulaAccepted(v map[string]interface{})`
+`func (o *RepositoryToken) SetEulaAccepted(v Eula)`
 
 SetEulaAccepted sets EulaAccepted field to given value.
 
@@ -288,22 +288,32 @@ SetEulaAccepted sets EulaAccepted field to given value.
 
 HasEulaAccepted returns a boolean if a field has been set.
 
+### SetEulaAcceptedNil
+
+`func (o *RepositoryToken) SetEulaAcceptedNil(b bool)`
+
+ SetEulaAcceptedNil sets the value for EulaAccepted to be an explicit nil
+
+### UnsetEulaAccepted
+`func (o *RepositoryToken) UnsetEulaAccepted()`
+
+UnsetEulaAccepted ensures that no value is present for EulaAccepted, not even an explicit nil
 ### GetEulaAcceptedAt
 
-`func (o *RepositoryToken) GetEulaAcceptedAt() string`
+`func (o *RepositoryToken) GetEulaAcceptedAt() time.Time`
 
 GetEulaAcceptedAt returns the EulaAcceptedAt field if non-nil, zero value otherwise.
 
 ### GetEulaAcceptedAtOk
 
-`func (o *RepositoryToken) GetEulaAcceptedAtOk() (*string, bool)`
+`func (o *RepositoryToken) GetEulaAcceptedAtOk() (*time.Time, bool)`
 
 GetEulaAcceptedAtOk returns a tuple with the EulaAcceptedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEulaAcceptedAt
 
-`func (o *RepositoryToken) SetEulaAcceptedAt(v string)`
+`func (o *RepositoryToken) SetEulaAcceptedAt(v time.Time)`
 
 SetEulaAcceptedAt sets EulaAcceptedAt field to given value.
 
@@ -338,6 +348,16 @@ SetEulaAcceptedFrom sets EulaAcceptedFrom field to given value.
 
 HasEulaAcceptedFrom returns a boolean if a field has been set.
 
+### SetEulaAcceptedFromNil
+
+`func (o *RepositoryToken) SetEulaAcceptedFromNil(b bool)`
+
+ SetEulaAcceptedFromNil sets the value for EulaAcceptedFrom to be an explicit nil
+
+### UnsetEulaAcceptedFrom
+`func (o *RepositoryToken) UnsetEulaAcceptedFrom()`
+
+UnsetEulaAcceptedFrom ensures that no value is present for EulaAcceptedFrom, not even an explicit nil
 ### GetEulaRequired
 
 `func (o *RepositoryToken) GetEulaRequired() bool`
@@ -488,6 +508,16 @@ SetLimitBandwidth sets LimitBandwidth field to given value.
 
 HasLimitBandwidth returns a boolean if a field has been set.
 
+### SetLimitBandwidthNil
+
+`func (o *RepositoryToken) SetLimitBandwidthNil(b bool)`
+
+ SetLimitBandwidthNil sets the value for LimitBandwidth to be an explicit nil
+
+### UnsetLimitBandwidth
+`func (o *RepositoryToken) UnsetLimitBandwidth()`
+
+UnsetLimitBandwidth ensures that no value is present for LimitBandwidth, not even an explicit nil
 ### GetLimitBandwidthUnit
 
 `func (o *RepositoryToken) GetLimitBandwidthUnit() string`
@@ -513,22 +543,32 @@ SetLimitBandwidthUnit sets LimitBandwidthUnit field to given value.
 
 HasLimitBandwidthUnit returns a boolean if a field has been set.
 
+### SetLimitBandwidthUnitNil
+
+`func (o *RepositoryToken) SetLimitBandwidthUnitNil(b bool)`
+
+ SetLimitBandwidthUnitNil sets the value for LimitBandwidthUnit to be an explicit nil
+
+### UnsetLimitBandwidthUnit
+`func (o *RepositoryToken) UnsetLimitBandwidthUnit()`
+
+UnsetLimitBandwidthUnit ensures that no value is present for LimitBandwidthUnit, not even an explicit nil
 ### GetLimitDateRangeFrom
 
-`func (o *RepositoryToken) GetLimitDateRangeFrom() string`
+`func (o *RepositoryToken) GetLimitDateRangeFrom() time.Time`
 
 GetLimitDateRangeFrom returns the LimitDateRangeFrom field if non-nil, zero value otherwise.
 
 ### GetLimitDateRangeFromOk
 
-`func (o *RepositoryToken) GetLimitDateRangeFromOk() (*string, bool)`
+`func (o *RepositoryToken) GetLimitDateRangeFromOk() (*time.Time, bool)`
 
 GetLimitDateRangeFromOk returns a tuple with the LimitDateRangeFrom field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLimitDateRangeFrom
 
-`func (o *RepositoryToken) SetLimitDateRangeFrom(v string)`
+`func (o *RepositoryToken) SetLimitDateRangeFrom(v time.Time)`
 
 SetLimitDateRangeFrom sets LimitDateRangeFrom field to given value.
 
@@ -538,22 +578,32 @@ SetLimitDateRangeFrom sets LimitDateRangeFrom field to given value.
 
 HasLimitDateRangeFrom returns a boolean if a field has been set.
 
+### SetLimitDateRangeFromNil
+
+`func (o *RepositoryToken) SetLimitDateRangeFromNil(b bool)`
+
+ SetLimitDateRangeFromNil sets the value for LimitDateRangeFrom to be an explicit nil
+
+### UnsetLimitDateRangeFrom
+`func (o *RepositoryToken) UnsetLimitDateRangeFrom()`
+
+UnsetLimitDateRangeFrom ensures that no value is present for LimitDateRangeFrom, not even an explicit nil
 ### GetLimitDateRangeTo
 
-`func (o *RepositoryToken) GetLimitDateRangeTo() string`
+`func (o *RepositoryToken) GetLimitDateRangeTo() time.Time`
 
 GetLimitDateRangeTo returns the LimitDateRangeTo field if non-nil, zero value otherwise.
 
 ### GetLimitDateRangeToOk
 
-`func (o *RepositoryToken) GetLimitDateRangeToOk() (*string, bool)`
+`func (o *RepositoryToken) GetLimitDateRangeToOk() (*time.Time, bool)`
 
 GetLimitDateRangeToOk returns a tuple with the LimitDateRangeTo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLimitDateRangeTo
 
-`func (o *RepositoryToken) SetLimitDateRangeTo(v string)`
+`func (o *RepositoryToken) SetLimitDateRangeTo(v time.Time)`
 
 SetLimitDateRangeTo sets LimitDateRangeTo field to given value.
 
@@ -563,6 +613,16 @@ SetLimitDateRangeTo sets LimitDateRangeTo field to given value.
 
 HasLimitDateRangeTo returns a boolean if a field has been set.
 
+### SetLimitDateRangeToNil
+
+`func (o *RepositoryToken) SetLimitDateRangeToNil(b bool)`
+
+ SetLimitDateRangeToNil sets the value for LimitDateRangeTo to be an explicit nil
+
+### UnsetLimitDateRangeTo
+`func (o *RepositoryToken) UnsetLimitDateRangeTo()`
+
+UnsetLimitDateRangeTo ensures that no value is present for LimitDateRangeTo, not even an explicit nil
 ### GetLimitNumClients
 
 `func (o *RepositoryToken) GetLimitNumClients() int64`
@@ -588,6 +648,16 @@ SetLimitNumClients sets LimitNumClients field to given value.
 
 HasLimitNumClients returns a boolean if a field has been set.
 
+### SetLimitNumClientsNil
+
+`func (o *RepositoryToken) SetLimitNumClientsNil(b bool)`
+
+ SetLimitNumClientsNil sets the value for LimitNumClients to be an explicit nil
+
+### UnsetLimitNumClients
+`func (o *RepositoryToken) UnsetLimitNumClients()`
+
+UnsetLimitNumClients ensures that no value is present for LimitNumClients, not even an explicit nil
 ### GetLimitNumDownloads
 
 `func (o *RepositoryToken) GetLimitNumDownloads() int64`
@@ -613,6 +683,16 @@ SetLimitNumDownloads sets LimitNumDownloads field to given value.
 
 HasLimitNumDownloads returns a boolean if a field has been set.
 
+### SetLimitNumDownloadsNil
+
+`func (o *RepositoryToken) SetLimitNumDownloadsNil(b bool)`
+
+ SetLimitNumDownloadsNil sets the value for LimitNumDownloads to be an explicit nil
+
+### UnsetLimitNumDownloads
+`func (o *RepositoryToken) UnsetLimitNumDownloads()`
+
+UnsetLimitNumDownloads ensures that no value is present for LimitNumDownloads, not even an explicit nil
 ### GetLimitPackageQuery
 
 `func (o *RepositoryToken) GetLimitPackageQuery() string`
@@ -638,6 +718,16 @@ SetLimitPackageQuery sets LimitPackageQuery field to given value.
 
 HasLimitPackageQuery returns a boolean if a field has been set.
 
+### SetLimitPackageQueryNil
+
+`func (o *RepositoryToken) SetLimitPackageQueryNil(b bool)`
+
+ SetLimitPackageQueryNil sets the value for LimitPackageQuery to be an explicit nil
+
+### UnsetLimitPackageQuery
+`func (o *RepositoryToken) UnsetLimitPackageQuery()`
+
+UnsetLimitPackageQuery ensures that no value is present for LimitPackageQuery, not even an explicit nil
 ### GetLimitPathQuery
 
 `func (o *RepositoryToken) GetLimitPathQuery() string`
@@ -663,6 +753,16 @@ SetLimitPathQuery sets LimitPathQuery field to given value.
 
 HasLimitPathQuery returns a boolean if a field has been set.
 
+### SetLimitPathQueryNil
+
+`func (o *RepositoryToken) SetLimitPathQueryNil(b bool)`
+
+ SetLimitPathQueryNil sets the value for LimitPathQuery to be an explicit nil
+
+### UnsetLimitPathQuery
+`func (o *RepositoryToken) UnsetLimitPathQuery()`
+
+UnsetLimitPathQuery ensures that no value is present for LimitPathQuery, not even an explicit nil
 ### GetMetadata
 
 `func (o *RepositoryToken) GetMetadata() map[string]interface{}`
@@ -688,6 +788,16 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
+### SetMetadataNil
+
+`func (o *RepositoryToken) SetMetadataNil(b bool)`
+
+ SetMetadataNil sets the value for Metadata to be an explicit nil
+
+### UnsetMetadata
+`func (o *RepositoryToken) UnsetMetadata()`
+
+UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
 ### GetName
 
 `func (o *RepositoryToken) GetName() string`
@@ -760,20 +870,20 @@ HasResetUrl returns a boolean if a field has been set.
 
 ### GetScheduledResetAt
 
-`func (o *RepositoryToken) GetScheduledResetAt() string`
+`func (o *RepositoryToken) GetScheduledResetAt() time.Time`
 
 GetScheduledResetAt returns the ScheduledResetAt field if non-nil, zero value otherwise.
 
 ### GetScheduledResetAtOk
 
-`func (o *RepositoryToken) GetScheduledResetAtOk() (*string, bool)`
+`func (o *RepositoryToken) GetScheduledResetAtOk() (*time.Time, bool)`
 
 GetScheduledResetAtOk returns a tuple with the ScheduledResetAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetScheduledResetAt
 
-`func (o *RepositoryToken) SetScheduledResetAt(v string)`
+`func (o *RepositoryToken) SetScheduledResetAt(v time.Time)`
 
 SetScheduledResetAt sets ScheduledResetAt field to given value.
 
@@ -783,6 +893,16 @@ SetScheduledResetAt sets ScheduledResetAt field to given value.
 
 HasScheduledResetAt returns a boolean if a field has been set.
 
+### SetScheduledResetAtNil
+
+`func (o *RepositoryToken) SetScheduledResetAtNil(b bool)`
+
+ SetScheduledResetAtNil sets the value for ScheduledResetAt to be an explicit nil
+
+### UnsetScheduledResetAt
+`func (o *RepositoryToken) UnsetScheduledResetAt()`
+
+UnsetScheduledResetAt ensures that no value is present for ScheduledResetAt, not even an explicit nil
 ### GetScheduledResetPeriod
 
 `func (o *RepositoryToken) GetScheduledResetPeriod() string`
@@ -808,6 +928,16 @@ SetScheduledResetPeriod sets ScheduledResetPeriod field to given value.
 
 HasScheduledResetPeriod returns a boolean if a field has been set.
 
+### SetScheduledResetPeriodNil
+
+`func (o *RepositoryToken) SetScheduledResetPeriodNil(b bool)`
+
+ SetScheduledResetPeriodNil sets the value for ScheduledResetPeriod to be an explicit nil
+
+### UnsetScheduledResetPeriod
+`func (o *RepositoryToken) UnsetScheduledResetPeriod()`
+
+UnsetScheduledResetPeriod ensures that no value is present for ScheduledResetPeriod, not even an explicit nil
 ### GetSelfUrl
 
 `func (o *RepositoryToken) GetSelfUrl() string`
@@ -885,20 +1015,20 @@ HasToken returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 
-`func (o *RepositoryToken) GetUpdatedAt() string`
+`func (o *RepositoryToken) GetUpdatedAt() time.Time`
 
 GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
 
 ### GetUpdatedAtOk
 
-`func (o *RepositoryToken) GetUpdatedAtOk() (*string, bool)`
+`func (o *RepositoryToken) GetUpdatedAtOk() (*time.Time, bool)`
 
 GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdatedAt
 
-`func (o *RepositoryToken) SetUpdatedAt(v string)`
+`func (o *RepositoryToken) SetUpdatedAt(v time.Time)`
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
@@ -933,6 +1063,16 @@ SetUpdatedBy sets UpdatedBy field to given value.
 
 HasUpdatedBy returns a boolean if a field has been set.
 
+### SetUpdatedByNil
+
+`func (o *RepositoryToken) SetUpdatedByNil(b bool)`
+
+ SetUpdatedByNil sets the value for UpdatedBy to be an explicit nil
+
+### UnsetUpdatedBy
+`func (o *RepositoryToken) UnsetUpdatedBy()`
+
+UnsetUpdatedBy ensures that no value is present for UpdatedBy, not even an explicit nil
 ### GetUpdatedByUrl
 
 `func (o *RepositoryToken) GetUpdatedByUrl() string`
@@ -958,6 +1098,16 @@ SetUpdatedByUrl sets UpdatedByUrl field to given value.
 
 HasUpdatedByUrl returns a boolean if a field has been set.
 
+### SetUpdatedByUrlNil
+
+`func (o *RepositoryToken) SetUpdatedByUrlNil(b bool)`
+
+ SetUpdatedByUrlNil sets the value for UpdatedByUrl to be an explicit nil
+
+### UnsetUpdatedByUrl
+`func (o *RepositoryToken) UnsetUpdatedByUrl()`
+
+UnsetUpdatedByUrl ensures that no value is present for UpdatedByUrl, not even an explicit nil
 ### GetUsage
 
 `func (o *RepositoryToken) GetUsage() string`
@@ -1008,6 +1158,16 @@ SetUser sets User field to given value.
 
 HasUser returns a boolean if a field has been set.
 
+### SetUserNil
+
+`func (o *RepositoryToken) SetUserNil(b bool)`
+
+ SetUserNil sets the value for User to be an explicit nil
+
+### UnsetUser
+`func (o *RepositoryToken) UnsetUser()`
+
+UnsetUser ensures that no value is present for User, not even an explicit nil
 ### GetUserUrl
 
 `func (o *RepositoryToken) GetUserUrl() string`
@@ -1033,6 +1193,16 @@ SetUserUrl sets UserUrl field to given value.
 
 HasUserUrl returns a boolean if a field has been set.
 
+### SetUserUrlNil
+
+`func (o *RepositoryToken) SetUserUrlNil(b bool)`
+
+ SetUserUrlNil sets the value for UserUrl to be an explicit nil
+
+### UnsetUserUrl
+`func (o *RepositoryToken) UnsetUserUrl()`
+
+UnsetUserUrl ensures that no value is present for UserUrl, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

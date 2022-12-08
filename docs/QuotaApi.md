@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## QuotaHistoryRead
 
-> QuotaHistory QuotaHistoryRead(ctx, owner).Execute()
+> QuotaHistoryResponse QuotaHistoryRead(ctx, owner).Execute()
 
 Quota history for a given namespace.
 
@@ -41,7 +41,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaHistoryRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QuotaHistoryRead`: QuotaHistory
+    // response from `QuotaHistoryRead`: QuotaHistoryResponse
     fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaHistoryRead`: %v\n", resp)
 }
 ```
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuotaHistory**](QuotaHistory.md)
+[**QuotaHistoryResponse**](QuotaHistoryResponse.md)
 
 ### Authorization
 
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## QuotaOssHistoryRead
 
-> QuotaHistory QuotaOssHistoryRead(ctx, owner).Execute()
+> QuotaHistoryResponse QuotaOssHistoryRead(ctx, owner).Execute()
 
 Open-source Quota history for a given namespace.
 
@@ -111,7 +111,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaOssHistoryRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QuotaOssHistoryRead`: QuotaHistory
+    // response from `QuotaOssHistoryRead`: QuotaHistoryResponse
     fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaOssHistoryRead`: %v\n", resp)
 }
 ```
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuotaHistory**](QuotaHistory.md)
+[**QuotaHistoryResponse**](QuotaHistoryResponse.md)
 
 ### Authorization
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## QuotaOssRead
 
-> Quota QuotaOssRead(ctx, owner).Execute()
+> QuotaResponse QuotaOssRead(ctx, owner).Execute()
 
 Open-source Quota usage for a given namespace.
 
@@ -181,7 +181,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaOssRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QuotaOssRead`: Quota
+    // response from `QuotaOssRead`: QuotaResponse
     fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaOssRead`: %v\n", resp)
 }
 ```
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Quota**](Quota.md)
+[**QuotaResponse**](QuotaResponse.md)
 
 ### Authorization
 
@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## QuotaRead
 
-> Quota QuotaRead(ctx, owner).Execute()
+> QuotaResponse QuotaRead(ctx, owner).Execute()
 
 Quota usage for a given namespace.
 
@@ -251,7 +251,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QuotaRead`: Quota
+    // response from `QuotaRead`: QuotaResponse
     fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaRead`: %v\n", resp)
 }
 ```
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Quota**](Quota.md)
+[**QuotaResponse**](QuotaResponse.md)
 
 ### Authorization
 
@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

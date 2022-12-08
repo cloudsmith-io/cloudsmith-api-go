@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Active** | Pointer to **bool** | If selected this is the active key for this repository. | [optional] 
+**Active** | Pointer to **bool** | If selected this is the active key for this repository. | [optional] [readonly] 
 **Comment** | **string** |  | 
-**CreatedAt** | Pointer to **string** |  | [optional] 
-**Default** | Pointer to **bool** | If selected this is the default key for this repository. | [optional] 
-**Fingerprint** | Pointer to **string** | The long identifier used by GPG for this key. | [optional] 
-**FingerprintShort** | Pointer to **string** |  | [optional] 
-**PublicKey** | Pointer to **string** | The public key given to repository users. | [optional] 
+**CreatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
+**Default** | Pointer to **bool** | If selected this is the default key for this repository. | [optional] [readonly] 
+**Fingerprint** | Pointer to **string** | The long identifier used by GPG for this key. | [optional] [readonly] 
+**FingerprintShort** | Pointer to **string** |  | [optional] [readonly] 
+**PublicKey** | Pointer to **string** | The public key given to repository users. | [optional] [readonly] 
 
 ## Methods
 
@@ -78,20 +78,20 @@ SetComment sets Comment field to given value.
 
 ### GetCreatedAt
 
-`func (o *RepositoryGpgKey) GetCreatedAt() string`
+`func (o *RepositoryGpgKey) GetCreatedAt() time.Time`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *RepositoryGpgKey) GetCreatedAtOk() (*string, bool)`
+`func (o *RepositoryGpgKey) GetCreatedAtOk() (*time.Time, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *RepositoryGpgKey) SetCreatedAt(v string)`
+`func (o *RepositoryGpgKey) SetCreatedAt(v time.Time)`
 
 SetCreatedAt sets CreatedAt field to given value.
 

@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,179 +20,22 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // ReposApiService ReposApi service
 type ReposApiService service
-
-type ApiReposAllListRequest struct {
-	ctx        context.Context
-	ApiService *ReposApiService
-	page       *int64
-	pageSize   *int64
-}
-
-// A page number within the paginated result set.
-func (r ApiReposAllListRequest) Page(page int64) ApiReposAllListRequest {
-	r.page = &page
-	return r
-}
-
-// Number of results to return per page.
-func (r ApiReposAllListRequest) PageSize(pageSize int64) ApiReposAllListRequest {
-	r.pageSize = &pageSize
-	return r
-}
-
-func (r ApiReposAllListRequest) Execute() ([]Repository, *http.Response, error) {
-	return r.ApiService.ReposAllListExecute(r)
-}
-
-/*
-ReposAllList Get a list of all repositories associated with current user.
-
-Get a list of all repositories associated with current user.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiReposAllListRequest
-*/
-func (a *ReposApiService) ReposAllList(ctx context.Context) ApiReposAllListRequest {
-	return ApiReposAllListRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//  @return []Repository
-func (a *ReposApiService) ReposAllListExecute(r ApiReposAllListRequest) ([]Repository, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []Repository
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposAllList")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/repos/"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.page != nil {
-		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
-	}
-	if r.pageSize != nil {
-		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apikey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Api-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
 
 type ApiReposCreateRequest struct {
 	ctx        context.Context
 	ApiService *ReposApiService
 	owner      string
-	data       *ReposCreate
+	data       *RepositoryCreateRequest
 }
 
-func (r ApiReposCreateRequest) Data(data ReposCreate) ApiReposCreateRequest {
+func (r ApiReposCreateRequest) Data(data RepositoryCreateRequest) ApiReposCreateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiReposCreateRequest) Execute() (*RepositoryCreate, *http.Response, error) {
+func (r ApiReposCreateRequest) Execute() (*RepositoryCreateResponse, *http.Response, error) {
 	return r.ApiService.ReposCreateExecute(r)
 }
 
@@ -214,13 +57,13 @@ func (a *ReposApiService) ReposCreate(ctx context.Context, owner string) ApiRepo
 }
 
 // Execute executes the request
-//  @return RepositoryCreate
-func (a *ReposApiService) ReposCreateExecute(r ApiReposCreateRequest) (*RepositoryCreate, *http.Response, error) {
+//  @return RepositoryCreateResponse
+func (a *ReposApiService) ReposCreateExecute(r ApiReposCreateRequest) (*RepositoryCreateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryCreate
+		localVarReturnValue *RepositoryCreateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposCreate")
@@ -245,7 +88,7 @@ func (a *ReposApiService) ReposCreateExecute(r ApiReposCreateRequest) (*Reposito
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -290,33 +133,36 @@ func (a *ReposApiService) ReposCreateExecute(r ApiReposCreateRequest) (*Reposito
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -395,7 +241,7 @@ func (a *ReposApiService) ReposDeleteExecute(r ApiReposDeleteRequest) (*http.Res
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -438,33 +284,36 @@ func (a *ReposApiService) ReposDeleteExecute(r ApiReposDeleteRequest) (*http.Res
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -478,15 +327,15 @@ type ApiReposGpgCreateRequest struct {
 	ApiService *ReposApiService
 	owner      string
 	identifier string
-	data       *ReposGpgCreate
+	data       *RepositoryGpgKeyCreate
 }
 
-func (r ApiReposGpgCreateRequest) Data(data ReposGpgCreate) ApiReposGpgCreateRequest {
+func (r ApiReposGpgCreateRequest) Data(data RepositoryGpgKeyCreate) ApiReposGpgCreateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiReposGpgCreateRequest) Execute() (*RepositoryGpgKey, *http.Response, error) {
+func (r ApiReposGpgCreateRequest) Execute() (*RepositoryGpgKeyResponse, *http.Response, error) {
 	return r.ApiService.ReposGpgCreateExecute(r)
 }
 
@@ -510,13 +359,13 @@ func (a *ReposApiService) ReposGpgCreate(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryGpgKey
-func (a *ReposApiService) ReposGpgCreateExecute(r ApiReposGpgCreateRequest) (*RepositoryGpgKey, *http.Response, error) {
+//  @return RepositoryGpgKeyResponse
+func (a *ReposApiService) ReposGpgCreateExecute(r ApiReposGpgCreateRequest) (*RepositoryGpgKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGpgKey
+		localVarReturnValue *RepositoryGpgKeyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGpgCreate")
@@ -542,7 +391,7 @@ func (a *ReposApiService) ReposGpgCreateExecute(r ApiReposGpgCreateRequest) (*Re
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -588,42 +437,46 @@ func (a *ReposApiService) ReposGpgCreateExecute(r ApiReposGpgCreateRequest) (*Re
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 402 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -648,7 +501,7 @@ type ApiReposGpgListRequest struct {
 	identifier string
 }
 
-func (r ApiReposGpgListRequest) Execute() (*RepositoryGpgKey, *http.Response, error) {
+func (r ApiReposGpgListRequest) Execute() (*RepositoryGpgKeyResponse, *http.Response, error) {
 	return r.ApiService.ReposGpgListExecute(r)
 }
 
@@ -672,13 +525,13 @@ func (a *ReposApiService) ReposGpgList(ctx context.Context, owner string, identi
 }
 
 // Execute executes the request
-//  @return RepositoryGpgKey
-func (a *ReposApiService) ReposGpgListExecute(r ApiReposGpgListRequest) (*RepositoryGpgKey, *http.Response, error) {
+//  @return RepositoryGpgKeyResponse
+func (a *ReposApiService) ReposGpgListExecute(r ApiReposGpgListRequest) (*RepositoryGpgKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGpgKey
+		localVarReturnValue *RepositoryGpgKeyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGpgList")
@@ -704,7 +557,7 @@ func (a *ReposApiService) ReposGpgListExecute(r ApiReposGpgListRequest) (*Reposi
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -747,6 +600,27 @@ func (a *ReposApiService) ReposGpgListExecute(r ApiReposGpgListRequest) (*Reposi
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -769,7 +643,7 @@ type ApiReposGpgRegenerateRequest struct {
 	identifier string
 }
 
-func (r ApiReposGpgRegenerateRequest) Execute() (*RepositoryGpgKey, *http.Response, error) {
+func (r ApiReposGpgRegenerateRequest) Execute() (*RepositoryGpgKeyResponse, *http.Response, error) {
 	return r.ApiService.ReposGpgRegenerateExecute(r)
 }
 
@@ -793,13 +667,13 @@ func (a *ReposApiService) ReposGpgRegenerate(ctx context.Context, owner string, 
 }
 
 // Execute executes the request
-//  @return RepositoryGpgKey
-func (a *ReposApiService) ReposGpgRegenerateExecute(r ApiReposGpgRegenerateRequest) (*RepositoryGpgKey, *http.Response, error) {
+//  @return RepositoryGpgKeyResponse
+func (a *ReposApiService) ReposGpgRegenerateExecute(r ApiReposGpgRegenerateRequest) (*RepositoryGpgKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGpgKey
+		localVarReturnValue *RepositoryGpgKeyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGpgRegenerate")
@@ -825,7 +699,7 @@ func (a *ReposApiService) ReposGpgRegenerateExecute(r ApiReposGpgRegenerateReque
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -868,6 +742,27 @@ func (a *ReposApiService) ReposGpgRegenerateExecute(r ApiReposGpgRegenerateReque
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -883,7 +778,7 @@ func (a *ReposApiService) ReposGpgRegenerateExecute(r ApiReposGpgRegenerateReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiReposListRequest struct {
+type ApiReposNamespaceListRequest struct {
 	ctx        context.Context
 	ApiService *ReposApiService
 	owner      string
@@ -892,32 +787,32 @@ type ApiReposListRequest struct {
 }
 
 // A page number within the paginated result set.
-func (r ApiReposListRequest) Page(page int64) ApiReposListRequest {
+func (r ApiReposNamespaceListRequest) Page(page int64) ApiReposNamespaceListRequest {
 	r.page = &page
 	return r
 }
 
 // Number of results to return per page.
-func (r ApiReposListRequest) PageSize(pageSize int64) ApiReposListRequest {
+func (r ApiReposNamespaceListRequest) PageSize(pageSize int64) ApiReposNamespaceListRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiReposListRequest) Execute() ([]Repository, *http.Response, error) {
-	return r.ApiService.ReposListExecute(r)
+func (r ApiReposNamespaceListRequest) Execute() ([]RepositoryResponse, *http.Response, error) {
+	return r.ApiService.ReposNamespaceListExecute(r)
 }
 
 /*
-ReposList Get a list of all repositories within a namespace.
+ReposNamespaceList Get a list of all repositories within a namespace.
 
 Get a list of all repositories within a namespace.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
- @return ApiReposListRequest
+ @return ApiReposNamespaceListRequest
 */
-func (a *ReposApiService) ReposList(ctx context.Context, owner string) ApiReposListRequest {
-	return ApiReposListRequest{
+func (a *ReposApiService) ReposNamespaceList(ctx context.Context, owner string) ApiReposNamespaceListRequest {
+	return ApiReposNamespaceListRequest{
 		ApiService: a,
 		ctx:        ctx,
 		owner:      owner,
@@ -925,16 +820,16 @@ func (a *ReposApiService) ReposList(ctx context.Context, owner string) ApiReposL
 }
 
 // Execute executes the request
-//  @return []Repository
-func (a *ReposApiService) ReposListExecute(r ApiReposListRequest) ([]Repository, *http.Response, error) {
+//  @return []RepositoryResponse
+func (a *ReposApiService) ReposNamespaceListExecute(r ApiReposNamespaceListRequest) ([]RepositoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []Repository
+		localVarReturnValue []RepositoryResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposNamespaceList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -962,7 +857,7 @@ func (a *ReposApiService) ReposListExecute(r ApiReposListRequest) ([]Repository,
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1005,33 +900,36 @@ func (a *ReposApiService) ReposListExecute(r ApiReposListRequest) ([]Repository,
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1054,15 +952,15 @@ type ApiReposPartialUpdateRequest struct {
 	ApiService *ReposApiService
 	owner      string
 	identifier string
-	data       *ReposPartialUpdate
+	data       *RepositoryRequestPatch
 }
 
-func (r ApiReposPartialUpdateRequest) Data(data ReposPartialUpdate) ApiReposPartialUpdateRequest {
+func (r ApiReposPartialUpdateRequest) Data(data RepositoryRequestPatch) ApiReposPartialUpdateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiReposPartialUpdateRequest) Execute() (*Repository, *http.Response, error) {
+func (r ApiReposPartialUpdateRequest) Execute() (*RepositoryResponse, *http.Response, error) {
 	return r.ApiService.ReposPartialUpdateExecute(r)
 }
 
@@ -1086,13 +984,13 @@ func (a *ReposApiService) ReposPartialUpdate(ctx context.Context, owner string, 
 }
 
 // Execute executes the request
-//  @return Repository
-func (a *ReposApiService) ReposPartialUpdateExecute(r ApiReposPartialUpdateRequest) (*Repository, *http.Response, error) {
+//  @return RepositoryResponse
+func (a *ReposApiService) ReposPartialUpdateExecute(r ApiReposPartialUpdateRequest) (*RepositoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *Repository
+		localVarReturnValue *RepositoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposPartialUpdate")
@@ -1118,7 +1016,7 @@ func (a *ReposApiService) ReposPartialUpdateExecute(r ApiReposPartialUpdateReque
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1163,33 +1061,36 @@ func (a *ReposApiService) ReposPartialUpdateExecute(r ApiReposPartialUpdateReque
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1207,143 +1108,28 @@ func (a *ReposApiService) ReposPartialUpdateExecute(r ApiReposPartialUpdateReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiReposPrivilegesDeleteRequest struct {
-	ctx        context.Context
-	ApiService *ReposApiService
-	owner      string
-	identifier string
-}
-
-func (r ApiReposPrivilegesDeleteRequest) Execute() (*http.Response, error) {
-	return r.ApiService.ReposPrivilegesDeleteExecute(r)
-}
-
-/*
-ReposPrivilegesDelete Remove the specified repository privileges.
-
-Remove the specified repository privileges.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposPrivilegesDeleteRequest
-*/
-func (a *ReposApiService) ReposPrivilegesDelete(ctx context.Context, owner string, identifier string) ApiReposPrivilegesDeleteRequest {
-	return ApiReposPrivilegesDeleteRequest{
-		ApiService: a,
-		ctx:        ctx,
-		owner:      owner,
-		identifier: identifier,
-	}
-}
-
-// Execute executes the request
-func (a *ReposApiService) ReposPrivilegesDeleteExecute(r ApiReposPrivilegesDeleteRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodDelete
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposPrivilegesDelete")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/repos/{owner}/{identifier}/privileges"
-	localVarPath = strings.Replace(localVarPath, "{"+"owner"+"}", url.PathEscape(parameterToString(r.owner, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"identifier"+"}", url.PathEscape(parameterToString(r.identifier, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apikey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Api-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
 type ApiReposPrivilegesListRequest struct {
 	ctx        context.Context
 	ApiService *ReposApiService
 	owner      string
 	identifier string
+	page       *int64
+	pageSize   *int64
 }
 
-func (r ApiReposPrivilegesListRequest) Execute() ([]RepositoryPrivilegeList, *http.Response, error) {
+// A page number within the paginated result set.
+func (r ApiReposPrivilegesListRequest) Page(page int64) ApiReposPrivilegesListRequest {
+	r.page = &page
+	return r
+}
+
+// Number of results to return per page.
+func (r ApiReposPrivilegesListRequest) PageSize(pageSize int64) ApiReposPrivilegesListRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiReposPrivilegesListRequest) Execute() (*RepositoryPrivilegeInputResponse, *http.Response, error) {
 	return r.ApiService.ReposPrivilegesListExecute(r)
 }
 
@@ -1367,13 +1153,13 @@ func (a *ReposApiService) ReposPrivilegesList(ctx context.Context, owner string,
 }
 
 // Execute executes the request
-//  @return []RepositoryPrivilegeList
-func (a *ReposApiService) ReposPrivilegesListExecute(r ApiReposPrivilegesListRequest) ([]RepositoryPrivilegeList, *http.Response, error) {
+//  @return RepositoryPrivilegeInputResponse
+func (a *ReposApiService) ReposPrivilegesListExecute(r ApiReposPrivilegesListRequest) (*RepositoryPrivilegeInputResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []RepositoryPrivilegeList
+		localVarReturnValue *RepositoryPrivilegeInputResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposPrivilegesList")
@@ -1389,6 +1175,12 @@ func (a *ReposApiService) ReposPrivilegesListExecute(r ApiReposPrivilegesListReq
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.page != nil {
+		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1399,7 +1191,7 @@ func (a *ReposApiService) ReposPrivilegesListExecute(r ApiReposPrivilegesListReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1442,33 +1234,36 @@ func (a *ReposApiService) ReposPrivilegesListExecute(r ApiReposPrivilegesListReq
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1491,6 +1286,12 @@ type ApiReposPrivilegesPartialUpdateRequest struct {
 	ApiService *ReposApiService
 	owner      string
 	identifier string
+	data       *RepositoryPrivilegeInputRequestPatch
+}
+
+func (r ApiReposPrivilegesPartialUpdateRequest) Data(data RepositoryPrivilegeInputRequestPatch) ApiReposPrivilegesPartialUpdateRequest {
+	r.data = &data
+	return r
 }
 
 func (r ApiReposPrivilegesPartialUpdateRequest) Execute() (*http.Response, error) {
@@ -1498,9 +1299,9 @@ func (r ApiReposPrivilegesPartialUpdateRequest) Execute() (*http.Response, error
 }
 
 /*
-ReposPrivilegesPartialUpdate Update the specified repository privileges.
+ReposPrivilegesPartialUpdate Modify privileges for the repository.
 
-Update the specified repository privileges.
+Modify privileges for the repository.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
@@ -1538,7 +1339,7 @@ func (a *ReposApiService) ReposPrivilegesPartialUpdateExecute(r ApiReposPrivileg
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1547,13 +1348,15 @@ func (a *ReposApiService) ReposPrivilegesPartialUpdateExecute(r ApiReposPrivileg
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.data
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1590,33 +1393,36 @@ func (a *ReposApiService) ReposPrivilegesPartialUpdateExecute(r ApiReposPrivileg
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
@@ -1630,9 +1436,15 @@ type ApiReposPrivilegesUpdateRequest struct {
 	ApiService *ReposApiService
 	owner      string
 	identifier string
+	data       *RepositoryPrivilegeInputRequest
 }
 
-func (r ApiReposPrivilegesUpdateRequest) Execute() (*RepositoryPrivilegeList, *http.Response, error) {
+func (r ApiReposPrivilegesUpdateRequest) Data(data RepositoryPrivilegeInputRequest) ApiReposPrivilegesUpdateRequest {
+	r.data = &data
+	return r
+}
+
+func (r ApiReposPrivilegesUpdateRequest) Execute() (*http.Response, error) {
 	return r.ApiService.ReposPrivilegesUpdateExecute(r)
 }
 
@@ -1656,18 +1468,16 @@ func (a *ReposApiService) ReposPrivilegesUpdate(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return RepositoryPrivilegeList
-func (a *ReposApiService) ReposPrivilegesUpdateExecute(r ApiReposPrivilegesUpdateRequest) (*RepositoryPrivilegeList, *http.Response, error) {
+func (a *ReposApiService) ReposPrivilegesUpdateExecute(r ApiReposPrivilegesUpdateRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *RepositoryPrivilegeList
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposPrivilegesUpdate")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/repos/{owner}/{identifier}/privileges"
@@ -1679,7 +1489,7 @@ func (a *ReposApiService) ReposPrivilegesUpdateExecute(r ApiReposPrivilegesUpdat
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1688,13 +1498,15 @@ func (a *ReposApiService) ReposPrivilegesUpdateExecute(r ApiReposPrivilegesUpdat
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.data
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1711,19 +1523,19 @@ func (a *ReposApiService) ReposPrivilegesUpdateExecute(r ApiReposPrivilegesUpdat
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1731,48 +1543,42 @@ func (a *ReposApiService) ReposPrivilegesUpdateExecute(r ApiReposPrivilegesUpdat
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
 type ApiReposReadRequest struct {
@@ -1782,7 +1588,7 @@ type ApiReposReadRequest struct {
 	identifier string
 }
 
-func (r ApiReposReadRequest) Execute() (*Repository, *http.Response, error) {
+func (r ApiReposReadRequest) Execute() (*RepositoryResponse, *http.Response, error) {
 	return r.ApiService.ReposReadExecute(r)
 }
 
@@ -1806,13 +1612,13 @@ func (a *ReposApiService) ReposRead(ctx context.Context, owner string, identifie
 }
 
 // Execute executes the request
-//  @return Repository
-func (a *ReposApiService) ReposReadExecute(r ApiReposReadRequest) (*Repository, *http.Response, error) {
+//  @return RepositoryResponse
+func (a *ReposApiService) ReposReadExecute(r ApiReposReadRequest) (*RepositoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *Repository
+		localVarReturnValue *RepositoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposRead")
@@ -1838,7 +1644,7 @@ func (a *ReposApiService) ReposReadExecute(r ApiReposReadRequest) (*Repository, 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1881,33 +1687,36 @@ func (a *ReposApiService) ReposReadExecute(r ApiReposReadRequest) (*Repository, 
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1930,15 +1739,15 @@ type ApiReposRsaCreateRequest struct {
 	ApiService *ReposApiService
 	owner      string
 	identifier string
-	data       *ReposRsaCreate
+	data       *RepositoryRsaKeyCreate
 }
 
-func (r ApiReposRsaCreateRequest) Data(data ReposRsaCreate) ApiReposRsaCreateRequest {
+func (r ApiReposRsaCreateRequest) Data(data RepositoryRsaKeyCreate) ApiReposRsaCreateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiReposRsaCreateRequest) Execute() (*RepositoryRsaKey, *http.Response, error) {
+func (r ApiReposRsaCreateRequest) Execute() (*RepositoryRsaKeyResponse, *http.Response, error) {
 	return r.ApiService.ReposRsaCreateExecute(r)
 }
 
@@ -1962,13 +1771,13 @@ func (a *ReposApiService) ReposRsaCreate(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryRsaKey
-func (a *ReposApiService) ReposRsaCreateExecute(r ApiReposRsaCreateRequest) (*RepositoryRsaKey, *http.Response, error) {
+//  @return RepositoryRsaKeyResponse
+func (a *ReposApiService) ReposRsaCreateExecute(r ApiReposRsaCreateRequest) (*RepositoryRsaKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryRsaKey
+		localVarReturnValue *RepositoryRsaKeyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposRsaCreate")
@@ -1994,7 +1803,7 @@ func (a *ReposApiService) ReposRsaCreateExecute(r ApiReposRsaCreateRequest) (*Re
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2040,42 +1849,46 @@ func (a *ReposApiService) ReposRsaCreateExecute(r ApiReposRsaCreateRequest) (*Re
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 402 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -2100,7 +1913,7 @@ type ApiReposRsaListRequest struct {
 	identifier string
 }
 
-func (r ApiReposRsaListRequest) Execute() (*RepositoryRsaKey, *http.Response, error) {
+func (r ApiReposRsaListRequest) Execute() (*RepositoryRsaKeyResponse, *http.Response, error) {
 	return r.ApiService.ReposRsaListExecute(r)
 }
 
@@ -2124,13 +1937,13 @@ func (a *ReposApiService) ReposRsaList(ctx context.Context, owner string, identi
 }
 
 // Execute executes the request
-//  @return RepositoryRsaKey
-func (a *ReposApiService) ReposRsaListExecute(r ApiReposRsaListRequest) (*RepositoryRsaKey, *http.Response, error) {
+//  @return RepositoryRsaKeyResponse
+func (a *ReposApiService) ReposRsaListExecute(r ApiReposRsaListRequest) (*RepositoryRsaKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryRsaKey
+		localVarReturnValue *RepositoryRsaKeyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposRsaList")
@@ -2156,7 +1969,7 @@ func (a *ReposApiService) ReposRsaListExecute(r ApiReposRsaListRequest) (*Reposi
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2199,6 +2012,27 @@ func (a *ReposApiService) ReposRsaListExecute(r ApiReposRsaListRequest) (*Reposi
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -2221,7 +2055,7 @@ type ApiReposRsaRegenerateRequest struct {
 	identifier string
 }
 
-func (r ApiReposRsaRegenerateRequest) Execute() (*RepositoryRsaKey, *http.Response, error) {
+func (r ApiReposRsaRegenerateRequest) Execute() (*RepositoryRsaKeyResponse, *http.Response, error) {
 	return r.ApiService.ReposRsaRegenerateExecute(r)
 }
 
@@ -2245,13 +2079,13 @@ func (a *ReposApiService) ReposRsaRegenerate(ctx context.Context, owner string, 
 }
 
 // Execute executes the request
-//  @return RepositoryRsaKey
-func (a *ReposApiService) ReposRsaRegenerateExecute(r ApiReposRsaRegenerateRequest) (*RepositoryRsaKey, *http.Response, error) {
+//  @return RepositoryRsaKeyResponse
+func (a *ReposApiService) ReposRsaRegenerateExecute(r ApiReposRsaRegenerateRequest) (*RepositoryRsaKeyResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryRsaKey
+		localVarReturnValue *RepositoryRsaKeyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposRsaRegenerate")
@@ -2277,7 +2111,7 @@ func (a *ReposApiService) ReposRsaRegenerateExecute(r ApiReposRsaRegenerateReque
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -2319,6 +2153,181 @@ func (a *ReposApiService) ReposRsaRegenerateExecute(r ApiReposRsaRegenerateReque
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiReposUserListRequest struct {
+	ctx        context.Context
+	ApiService *ReposApiService
+	page       *int64
+	pageSize   *int64
+}
+
+// A page number within the paginated result set.
+func (r ApiReposUserListRequest) Page(page int64) ApiReposUserListRequest {
+	r.page = &page
+	return r
+}
+
+// Number of results to return per page.
+func (r ApiReposUserListRequest) PageSize(pageSize int64) ApiReposUserListRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiReposUserListRequest) Execute() ([]RepositoryResponse, *http.Response, error) {
+	return r.ApiService.ReposUserListExecute(r)
+}
+
+/*
+ReposUserList Get a list of all repositories associated with current user.
+
+Get a list of all repositories associated with current user.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiReposUserListRequest
+*/
+func (a *ReposApiService) ReposUserList(ctx context.Context) ApiReposUserListRequest {
+	return ApiReposUserListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//  @return []RepositoryResponse
+func (a *ReposApiService) ReposUserListExecute(r ApiReposUserListRequest) ([]RepositoryResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []RepositoryResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposUserList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/repos/"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		localVarQueryParams.Add("page", parameterToString(*r.page, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("page_size", parameterToString(*r.pageSize, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apikey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## WebhooksCreate
 
-> RepositoryWebhook WebhooksCreate(ctx, owner, repo).Data(data).Execute()
+> RepositoryWebhookResponse WebhooksCreate(ctx, owner, repo).Data(data).Execute()
 
 Create a specific webhook in a repository.
 
@@ -35,7 +35,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewWebhooksCreate([]string{"Events_example"}, "TargetUrl_example", []openapiclient.WebhooksOwnerRepoTemplates{*openapiclient.NewWebhooksOwnerRepoTemplates()}) // WebhooksCreate |  (optional)
+    data := *openapiclient.NewRepositoryWebhookRequest([]string{"Events_example"}, "TargetUrl_example", []openapiclient.WebhookTemplate{nil}) // RepositoryWebhookRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -44,7 +44,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhooksCreate`: RepositoryWebhook
+    // response from `WebhooksCreate`: RepositoryWebhookResponse
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksCreate`: %v\n", resp)
 }
 ```
@@ -67,11 +67,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**WebhooksCreate**](WebhooksCreate.md) |  | 
+ **data** | [**RepositoryWebhookRequest**](RepositoryWebhookRequest.md) |  | 
 
 ### Return type
 
-[**RepositoryWebhook**](RepositoryWebhook.md)
+[**RepositoryWebhookResponse**](RepositoryWebhookResponse.md)
 
 ### Authorization
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 
 ## WebhooksList
 
-> []RepositoryWebhook WebhooksList(ctx, owner, repo).Page(page).PageSize(pageSize).Execute()
+> []RepositoryWebhookResponse WebhooksList(ctx, owner, repo).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all webhooks in a repository.
 
@@ -194,7 +194,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhooksList`: []RepositoryWebhook
+    // response from `WebhooksList`: []RepositoryWebhookResponse
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksList`: %v\n", resp)
 }
 ```
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]RepositoryWebhook**](RepositoryWebhook.md)
+[**[]RepositoryWebhookResponse**](RepositoryWebhookResponse.md)
 
 ### Authorization
 
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 
 ## WebhooksPartialUpdate
 
-> RepositoryWebhook WebhooksPartialUpdate(ctx, owner, repo, identifier).Data(data).Execute()
+> RepositoryWebhookResponse WebhooksPartialUpdate(ctx, owner, repo, identifier).Data(data).Execute()
 
 Update a specific webhook in a repository.
 
@@ -262,7 +262,7 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     identifier := "identifier_example" // string | 
-    data := *openapiclient.NewWebhooksPartialUpdate() // WebhooksPartialUpdate |  (optional)
+    data := *openapiclient.NewRepositoryWebhookRequestPatch() // RepositoryWebhookRequestPatch |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -271,7 +271,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhooksPartialUpdate`: RepositoryWebhook
+    // response from `WebhooksPartialUpdate`: RepositoryWebhookResponse
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksPartialUpdate`: %v\n", resp)
 }
 ```
@@ -296,11 +296,11 @@ Name | Type | Description  | Notes
 
 
 
- **data** | [**WebhooksPartialUpdate**](WebhooksPartialUpdate.md) |  | 
+ **data** | [**RepositoryWebhookRequestPatch**](RepositoryWebhookRequestPatch.md) |  | 
 
 ### Return type
 
-[**RepositoryWebhook**](RepositoryWebhook.md)
+[**RepositoryWebhookResponse**](RepositoryWebhookResponse.md)
 
 ### Authorization
 
@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -318,7 +318,7 @@ Name | Type | Description  | Notes
 
 ## WebhooksRead
 
-> RepositoryWebhook WebhooksRead(ctx, owner, repo, identifier).Execute()
+> RepositoryWebhookResponse WebhooksRead(ctx, owner, repo, identifier).Execute()
 
 Views for working with repository webhooks.
 
@@ -348,7 +348,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhooksRead`: RepositoryWebhook
+    // response from `WebhooksRead`: RepositoryWebhookResponse
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksRead`: %v\n", resp)
 }
 ```
@@ -376,7 +376,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryWebhook**](RepositoryWebhook.md)
+[**RepositoryWebhookResponse**](RepositoryWebhookResponse.md)
 
 ### Authorization
 
@@ -385,7 +385,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

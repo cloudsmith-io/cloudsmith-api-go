@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,6 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // FormatsApiService FormatsApi service
 type FormatsApiService service
 
@@ -33,7 +28,7 @@ type ApiFormatsListRequest struct {
 	ApiService *FormatsApiService
 }
 
-func (r ApiFormatsListRequest) Execute() ([]Format, *http.Response, error) {
+func (r ApiFormatsListRequest) Execute() ([]FormatResponse, *http.Response, error) {
 	return r.ApiService.FormatsListExecute(r)
 }
 
@@ -53,13 +48,13 @@ func (a *FormatsApiService) FormatsList(ctx context.Context) ApiFormatsListReque
 }
 
 // Execute executes the request
-//  @return []Format
-func (a *FormatsApiService) FormatsListExecute(r ApiFormatsListRequest) ([]Format, *http.Response, error) {
+//  @return []FormatResponse
+func (a *FormatsApiService) FormatsListExecute(r ApiFormatsListRequest) ([]FormatResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []Format
+		localVarReturnValue []FormatResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FormatsApiService.FormatsList")
@@ -83,7 +78,7 @@ func (a *FormatsApiService) FormatsListExecute(r ApiFormatsListRequest) ([]Forma
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -127,22 +122,24 @@ func (a *FormatsApiService) FormatsListExecute(r ApiFormatsListRequest) ([]Forma
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -166,7 +163,7 @@ type ApiFormatsReadRequest struct {
 	slug       string
 }
 
-func (r ApiFormatsReadRequest) Execute() (*Format, *http.Response, error) {
+func (r ApiFormatsReadRequest) Execute() (*FormatResponse, *http.Response, error) {
 	return r.ApiService.FormatsReadExecute(r)
 }
 
@@ -188,13 +185,13 @@ func (a *FormatsApiService) FormatsRead(ctx context.Context, slug string) ApiFor
 }
 
 // Execute executes the request
-//  @return Format
-func (a *FormatsApiService) FormatsReadExecute(r ApiFormatsReadRequest) (*Format, *http.Response, error) {
+//  @return FormatResponse
+func (a *FormatsApiService) FormatsReadExecute(r ApiFormatsReadRequest) (*FormatResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *Format
+		localVarReturnValue *FormatResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FormatsApiService.FormatsRead")
@@ -219,7 +216,7 @@ func (a *FormatsApiService) FormatsReadExecute(r ApiFormatsReadRequest) (*Format
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -263,22 +260,24 @@ func (a *FormatsApiService) FormatsReadExecute(r ApiFormatsReadRequest) (*Format
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

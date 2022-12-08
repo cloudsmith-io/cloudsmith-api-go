@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## DistrosList
 
-> []Distribution DistrosList(ctx).Execute()
+> []DistributionResponse DistrosList(ctx).Execute()
 
 Get a list of all supported distributions.
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DistrosApi.DistrosList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DistrosList`: []Distribution
+    // response from `DistrosList`: []DistributionResponse
     fmt.Fprintf(os.Stdout, "Response from `DistrosApi.DistrosList`: %v\n", resp)
 }
 ```
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiDistrosListRequest struct 
 
 ### Return type
 
-[**[]Distribution**](Distribution.md)
+[**[]DistributionResponse**](DistributionResponse.md)
 
 ### Authorization
 
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiDistrosListRequest struct 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiDistrosListRequest struct 
 
 ## DistrosRead
 
-> Distribution DistrosRead(ctx, slug).Execute()
+> DistributionResponse DistrosRead(ctx, slug).Execute()
 
 View for viewing/listing distributions.
 
@@ -100,7 +100,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DistrosApi.DistrosRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DistrosRead`: Distribution
+    // response from `DistrosRead`: DistributionResponse
     fmt.Fprintf(os.Stdout, "Response from `DistrosApi.DistrosRead`: %v\n", resp)
 }
 ```
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Distribution**](Distribution.md)
+[**DistributionResponse**](DistributionResponse.md)
 
 ### Authorization
 
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

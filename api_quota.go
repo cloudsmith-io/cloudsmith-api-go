@@ -1,9 +1,9 @@
 /*
-Cloudsmith API
+Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.121.3
+API version: 1.181.6
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,6 @@ import (
 	"strings"
 )
 
-// Linger please
-var (
-	_ context.Context
-)
-
 // QuotaApiService QuotaApi service
 type QuotaApiService service
 
@@ -34,7 +29,7 @@ type ApiQuotaHistoryReadRequest struct {
 	owner      string
 }
 
-func (r ApiQuotaHistoryReadRequest) Execute() (*QuotaHistory, *http.Response, error) {
+func (r ApiQuotaHistoryReadRequest) Execute() (*QuotaHistoryResponse, *http.Response, error) {
 	return r.ApiService.QuotaHistoryReadExecute(r)
 }
 
@@ -56,13 +51,13 @@ func (a *QuotaApiService) QuotaHistoryRead(ctx context.Context, owner string) Ap
 }
 
 // Execute executes the request
-//  @return QuotaHistory
-func (a *QuotaApiService) QuotaHistoryReadExecute(r ApiQuotaHistoryReadRequest) (*QuotaHistory, *http.Response, error) {
+//  @return QuotaHistoryResponse
+func (a *QuotaApiService) QuotaHistoryReadExecute(r ApiQuotaHistoryReadRequest) (*QuotaHistoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *QuotaHistory
+		localVarReturnValue *QuotaHistoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaApiService.QuotaHistoryRead")
@@ -87,7 +82,7 @@ func (a *QuotaApiService) QuotaHistoryReadExecute(r ApiQuotaHistoryReadRequest) 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -131,22 +126,24 @@ func (a *QuotaApiService) QuotaHistoryReadExecute(r ApiQuotaHistoryReadRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -170,7 +167,7 @@ type ApiQuotaOssHistoryReadRequest struct {
 	owner      string
 }
 
-func (r ApiQuotaOssHistoryReadRequest) Execute() (*QuotaHistory, *http.Response, error) {
+func (r ApiQuotaOssHistoryReadRequest) Execute() (*QuotaHistoryResponse, *http.Response, error) {
 	return r.ApiService.QuotaOssHistoryReadExecute(r)
 }
 
@@ -192,13 +189,13 @@ func (a *QuotaApiService) QuotaOssHistoryRead(ctx context.Context, owner string)
 }
 
 // Execute executes the request
-//  @return QuotaHistory
-func (a *QuotaApiService) QuotaOssHistoryReadExecute(r ApiQuotaOssHistoryReadRequest) (*QuotaHistory, *http.Response, error) {
+//  @return QuotaHistoryResponse
+func (a *QuotaApiService) QuotaOssHistoryReadExecute(r ApiQuotaOssHistoryReadRequest) (*QuotaHistoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *QuotaHistory
+		localVarReturnValue *QuotaHistoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaApiService.QuotaOssHistoryRead")
@@ -223,7 +220,7 @@ func (a *QuotaApiService) QuotaOssHistoryReadExecute(r ApiQuotaOssHistoryReadReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -267,22 +264,24 @@ func (a *QuotaApiService) QuotaOssHistoryReadExecute(r ApiQuotaOssHistoryReadReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -306,7 +305,7 @@ type ApiQuotaOssReadRequest struct {
 	owner      string
 }
 
-func (r ApiQuotaOssReadRequest) Execute() (*Quota, *http.Response, error) {
+func (r ApiQuotaOssReadRequest) Execute() (*QuotaResponse, *http.Response, error) {
 	return r.ApiService.QuotaOssReadExecute(r)
 }
 
@@ -328,13 +327,13 @@ func (a *QuotaApiService) QuotaOssRead(ctx context.Context, owner string) ApiQuo
 }
 
 // Execute executes the request
-//  @return Quota
-func (a *QuotaApiService) QuotaOssReadExecute(r ApiQuotaOssReadRequest) (*Quota, *http.Response, error) {
+//  @return QuotaResponse
+func (a *QuotaApiService) QuotaOssReadExecute(r ApiQuotaOssReadRequest) (*QuotaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *Quota
+		localVarReturnValue *QuotaResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaApiService.QuotaOssRead")
@@ -359,7 +358,7 @@ func (a *QuotaApiService) QuotaOssReadExecute(r ApiQuotaOssReadRequest) (*Quota,
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -403,22 +402,24 @@ func (a *QuotaApiService) QuotaOssReadExecute(r ApiQuotaOssReadRequest) (*Quota,
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -442,7 +443,7 @@ type ApiQuotaReadRequest struct {
 	owner      string
 }
 
-func (r ApiQuotaReadRequest) Execute() (*Quota, *http.Response, error) {
+func (r ApiQuotaReadRequest) Execute() (*QuotaResponse, *http.Response, error) {
 	return r.ApiService.QuotaReadExecute(r)
 }
 
@@ -464,13 +465,13 @@ func (a *QuotaApiService) QuotaRead(ctx context.Context, owner string) ApiQuotaR
 }
 
 // Execute executes the request
-//  @return Quota
-func (a *QuotaApiService) QuotaReadExecute(r ApiQuotaReadRequest) (*Quota, *http.Response, error) {
+//  @return QuotaResponse
+func (a *QuotaApiService) QuotaReadExecute(r ApiQuotaReadRequest) (*QuotaResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *Quota
+		localVarReturnValue *QuotaResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaApiService.QuotaRead")
@@ -495,7 +496,7 @@ func (a *QuotaApiService) QuotaReadExecute(r ApiQuotaReadRequest) (*Quota, *http
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -539,22 +540,24 @@ func (a *QuotaApiService) QuotaReadExecute(r ApiQuotaReadRequest) (*Quota, *http
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
-			var v Status
+			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
