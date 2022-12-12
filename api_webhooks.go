@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -36,7 +36,7 @@ func (r ApiWebhooksCreateRequest) Data(data RepositoryWebhookRequest) ApiWebhook
 	return r
 }
 
-func (r ApiWebhooksCreateRequest) Execute() (*RepositoryWebhookResponse, *http.Response, error) {
+func (r ApiWebhooksCreateRequest) Execute() (*RepositoryWebhook, *http.Response, error) {
 	return r.ApiService.WebhooksCreateExecute(r)
 }
 
@@ -60,13 +60,13 @@ func (a *WebhooksApiService) WebhooksCreate(ctx context.Context, owner string, r
 }
 
 // Execute executes the request
-//  @return RepositoryWebhookResponse
-func (a *WebhooksApiService) WebhooksCreateExecute(r ApiWebhooksCreateRequest) (*RepositoryWebhookResponse, *http.Response, error) {
+//  @return RepositoryWebhook
+func (a *WebhooksApiService) WebhooksCreateExecute(r ApiWebhooksCreateRequest) (*RepositoryWebhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryWebhookResponse
+		localVarReturnValue *RepositoryWebhook
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhooksCreate")
@@ -340,7 +340,7 @@ func (r ApiWebhooksListRequest) PageSize(pageSize int64) ApiWebhooksListRequest 
 	return r
 }
 
-func (r ApiWebhooksListRequest) Execute() ([]RepositoryWebhookResponse, *http.Response, error) {
+func (r ApiWebhooksListRequest) Execute() ([]RepositoryWebhook, *http.Response, error) {
 	return r.ApiService.WebhooksListExecute(r)
 }
 
@@ -364,13 +364,13 @@ func (a *WebhooksApiService) WebhooksList(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return []RepositoryWebhookResponse
-func (a *WebhooksApiService) WebhooksListExecute(r ApiWebhooksListRequest) ([]RepositoryWebhookResponse, *http.Response, error) {
+//  @return []RepositoryWebhook
+func (a *WebhooksApiService) WebhooksListExecute(r ApiWebhooksListRequest) ([]RepositoryWebhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []RepositoryWebhookResponse
+		localVarReturnValue []RepositoryWebhook
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhooksList")
@@ -506,7 +506,7 @@ func (r ApiWebhooksPartialUpdateRequest) Data(data RepositoryWebhookRequestPatch
 	return r
 }
 
-func (r ApiWebhooksPartialUpdateRequest) Execute() (*RepositoryWebhookResponse, *http.Response, error) {
+func (r ApiWebhooksPartialUpdateRequest) Execute() (*RepositoryWebhook, *http.Response, error) {
 	return r.ApiService.WebhooksPartialUpdateExecute(r)
 }
 
@@ -532,13 +532,13 @@ func (a *WebhooksApiService) WebhooksPartialUpdate(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return RepositoryWebhookResponse
-func (a *WebhooksApiService) WebhooksPartialUpdateExecute(r ApiWebhooksPartialUpdateRequest) (*RepositoryWebhookResponse, *http.Response, error) {
+//  @return RepositoryWebhook
+func (a *WebhooksApiService) WebhooksPartialUpdateExecute(r ApiWebhooksPartialUpdateRequest) (*RepositoryWebhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryWebhookResponse
+		localVarReturnValue *RepositoryWebhook
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhooksPartialUpdate")
@@ -665,7 +665,7 @@ type ApiWebhooksReadRequest struct {
 	identifier string
 }
 
-func (r ApiWebhooksReadRequest) Execute() (*RepositoryWebhookResponse, *http.Response, error) {
+func (r ApiWebhooksReadRequest) Execute() (*RepositoryWebhook, *http.Response, error) {
 	return r.ApiService.WebhooksReadExecute(r)
 }
 
@@ -691,13 +691,13 @@ func (a *WebhooksApiService) WebhooksRead(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return RepositoryWebhookResponse
-func (a *WebhooksApiService) WebhooksReadExecute(r ApiWebhooksReadRequest) (*RepositoryWebhookResponse, *http.Response, error) {
+//  @return RepositoryWebhook
+func (a *WebhooksApiService) WebhooksReadExecute(r ApiWebhooksReadRequest) (*RepositoryWebhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryWebhookResponse
+		localVarReturnValue *RepositoryWebhook
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.WebhooksRead")

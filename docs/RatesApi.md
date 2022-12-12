@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## RatesLimitsList
 
-> ResourcesRateCheckResponse RatesLimitsList(ctx).Execute()
+> ResourcesRateCheck RatesLimitsList(ctx).Execute()
 
 Endpoint to check rate limits for current user.
 
@@ -37,7 +37,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RatesApi.RatesLimitsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `RatesLimitsList`: ResourcesRateCheckResponse
+    // response from `RatesLimitsList`: ResourcesRateCheck
     fmt.Fprintf(os.Stdout, "Response from `RatesApi.RatesLimitsList`: %v\n", resp)
 }
 ```
@@ -53,7 +53,7 @@ Other parameters are passed through a pointer to a apiRatesLimitsListRequest str
 
 ### Return type
 
-[**ResourcesRateCheckResponse**](ResourcesRateCheckResponse.md)
+[**ResourcesRateCheck**](ResourcesRateCheck.md)
 
 ### Authorization
 

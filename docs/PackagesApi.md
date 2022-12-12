@@ -66,7 +66,7 @@ Method | HTTP request | Description
 
 ## PackagesCopy
 
-> PackageCopyResponse PackagesCopy(ctx, owner, repo, identifier).Data(data).Execute()
+> PackageCopy PackagesCopy(ctx, owner, repo, identifier).Data(data).Execute()
 
 Copy a package to another repository.
 
@@ -97,7 +97,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesCopy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesCopy`: PackageCopyResponse
+    // response from `PackagesCopy`: PackageCopy
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesCopy`: %v\n", resp)
 }
 ```
@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageCopyResponse**](PackageCopyResponse.md)
+[**PackageCopy**](PackageCopy.md)
 
 ### Authorization
 
@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## PackagesDependencies
 
-> PackageDependenciesResponse PackagesDependencies(ctx, owner, repo, identifier).Execute()
+> PackageDependencies PackagesDependencies(ctx, owner, repo, identifier).Execute()
 
 Get the direct (non-transitive) dependencies list for a package.
 
@@ -248,7 +248,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesDependencies``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesDependencies`: PackageDependenciesResponse
+    // response from `PackagesDependencies`: PackageDependencies
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesDependencies`: %v\n", resp)
 }
 ```
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageDependenciesResponse**](PackageDependenciesResponse.md)
+[**PackageDependencies**](PackageDependencies.md)
 
 ### Authorization
 
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 ## PackagesList
 
-> []PackageResponse PackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
+> []Package PackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
 
 Get a list of all packages associated with repository.
 
@@ -327,7 +327,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesList`: []PackageResponse
+    // response from `PackagesList`: []Package
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesList`: %v\n", resp)
 }
 ```
@@ -357,7 +357,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]PackageResponse**](PackageResponse.md)
+[**[]Package**](Package.md)
 
 ### Authorization
 
@@ -375,7 +375,7 @@ Name | Type | Description  | Notes
 
 ## PackagesMove
 
-> PackageMoveResponse PackagesMove(ctx, owner, repo, identifier).Data(data).Execute()
+> PackageMove PackagesMove(ctx, owner, repo, identifier).Data(data).Execute()
 
 Move a package to another repository.
 
@@ -406,7 +406,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesMove``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesMove`: PackageMoveResponse
+    // response from `PackagesMove`: PackageMove
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesMove`: %v\n", resp)
 }
 ```
@@ -435,7 +435,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageMoveResponse**](PackageMoveResponse.md)
+[**PackageMove**](PackageMove.md)
 
 ### Authorization
 
@@ -453,7 +453,7 @@ Name | Type | Description  | Notes
 
 ## PackagesQuarantine
 
-> PackageQuarantineResponse PackagesQuarantine(ctx, owner, repo, identifier).Data(data).Execute()
+> PackageQuarantine PackagesQuarantine(ctx, owner, repo, identifier).Data(data).Execute()
 
 Quarantine or restore a package.
 
@@ -484,7 +484,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesQuarantine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesQuarantine`: PackageQuarantineResponse
+    // response from `PackagesQuarantine`: PackageQuarantine
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesQuarantine`: %v\n", resp)
 }
 ```
@@ -513,7 +513,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageQuarantineResponse**](PackageQuarantineResponse.md)
+[**PackageQuarantine**](PackageQuarantine.md)
 
 ### Authorization
 
@@ -531,7 +531,7 @@ Name | Type | Description  | Notes
 
 ## PackagesRead
 
-> PackageResponse PackagesRead(ctx, owner, repo, identifier).Execute()
+> Package PackagesRead(ctx, owner, repo, identifier).Execute()
 
 Get a specific package in a repository.
 
@@ -561,7 +561,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesRead`: PackageResponse
+    // response from `PackagesRead`: Package
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesRead`: %v\n", resp)
 }
 ```
@@ -589,7 +589,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageResponse**](PackageResponse.md)
+[**Package**](Package.md)
 
 ### Authorization
 
@@ -607,7 +607,7 @@ Name | Type | Description  | Notes
 
 ## PackagesResync
 
-> PackageResyncResponse PackagesResync(ctx, owner, repo, identifier).Execute()
+> PackageResync PackagesResync(ctx, owner, repo, identifier).Execute()
 
 Schedule a package for resynchronisation.
 
@@ -637,7 +637,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesResync``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesResync`: PackageResyncResponse
+    // response from `PackagesResync`: PackageResync
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesResync`: %v\n", resp)
 }
 ```
@@ -665,7 +665,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageResyncResponse**](PackageResyncResponse.md)
+[**PackageResync**](PackageResync.md)
 
 ### Authorization
 
@@ -683,7 +683,7 @@ Name | Type | Description  | Notes
 
 ## PackagesScan
 
-> PackageResponse PackagesScan(ctx, owner, repo, identifier).Execute()
+> Package PackagesScan(ctx, owner, repo, identifier).Execute()
 
 Schedule a package for scanning.
 
@@ -713,7 +713,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesScan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesScan`: PackageResponse
+    // response from `PackagesScan`: Package
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesScan`: %v\n", resp)
 }
 ```
@@ -741,7 +741,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageResponse**](PackageResponse.md)
+[**Package**](Package.md)
 
 ### Authorization
 
@@ -759,7 +759,7 @@ Name | Type | Description  | Notes
 
 ## PackagesStatus
 
-> PackageStatusResponse PackagesStatus(ctx, owner, repo, identifier).Execute()
+> PackageStatus PackagesStatus(ctx, owner, repo, identifier).Execute()
 
 Get the synchronisation status for a package.
 
@@ -789,7 +789,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesStatus``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesStatus`: PackageStatusResponse
+    // response from `PackagesStatus`: PackageStatus
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesStatus`: %v\n", resp)
 }
 ```
@@ -817,7 +817,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageStatusResponse**](PackageStatusResponse.md)
+[**PackageStatus**](PackageStatus.md)
 
 ### Authorization
 
@@ -835,7 +835,7 @@ Name | Type | Description  | Notes
 
 ## PackagesTag
 
-> PackageResponse PackagesTag(ctx, owner, repo, identifier).Data(data).Execute()
+> Package PackagesTag(ctx, owner, repo, identifier).Data(data).Execute()
 
 Add/Replace/Remove tags for a package.
 
@@ -866,7 +866,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesTag``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesTag`: PackageResponse
+    // response from `PackagesTag`: Package
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesTag`: %v\n", resp)
 }
 ```
@@ -895,7 +895,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageResponse**](PackageResponse.md)
+[**Package**](Package.md)
 
 ### Authorization
 
@@ -913,7 +913,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadAlpine
 
-> AlpinePackageUploadResponse PackagesUploadAlpine(ctx, owner, repo).Data(data).Execute()
+> AlpinePackageUpload PackagesUploadAlpine(ctx, owner, repo).Data(data).Execute()
 
 Create a new Alpine package
 
@@ -943,7 +943,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadAlpine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadAlpine`: AlpinePackageUploadResponse
+    // response from `PackagesUploadAlpine`: AlpinePackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadAlpine`: %v\n", resp)
 }
 ```
@@ -970,7 +970,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AlpinePackageUploadResponse**](AlpinePackageUploadResponse.md)
+[**AlpinePackageUpload**](AlpinePackageUpload.md)
 
 ### Authorization
 
@@ -988,7 +988,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCargo
 
-> CargoPackageUploadResponse PackagesUploadCargo(ctx, owner, repo).Data(data).Execute()
+> CargoPackageUpload PackagesUploadCargo(ctx, owner, repo).Data(data).Execute()
 
 Create a new Cargo package
 
@@ -1018,7 +1018,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadCargo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadCargo`: CargoPackageUploadResponse
+    // response from `PackagesUploadCargo`: CargoPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadCargo`: %v\n", resp)
 }
 ```
@@ -1045,7 +1045,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CargoPackageUploadResponse**](CargoPackageUploadResponse.md)
+[**CargoPackageUpload**](CargoPackageUpload.md)
 
 ### Authorization
 
@@ -1063,7 +1063,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCocoapods
 
-> CocoapodsPackageUploadResponse PackagesUploadCocoapods(ctx, owner, repo).Data(data).Execute()
+> CocoapodsPackageUpload PackagesUploadCocoapods(ctx, owner, repo).Data(data).Execute()
 
 Create a new CocoaPods package
 
@@ -1093,7 +1093,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadCocoapods``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadCocoapods`: CocoapodsPackageUploadResponse
+    // response from `PackagesUploadCocoapods`: CocoapodsPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadCocoapods`: %v\n", resp)
 }
 ```
@@ -1120,7 +1120,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CocoapodsPackageUploadResponse**](CocoapodsPackageUploadResponse.md)
+[**CocoapodsPackageUpload**](CocoapodsPackageUpload.md)
 
 ### Authorization
 
@@ -1138,7 +1138,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadComposer
 
-> ComposerPackageUploadResponse PackagesUploadComposer(ctx, owner, repo).Data(data).Execute()
+> ComposerPackageUpload PackagesUploadComposer(ctx, owner, repo).Data(data).Execute()
 
 Create a new Composer package
 
@@ -1168,7 +1168,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadComposer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadComposer`: ComposerPackageUploadResponse
+    // response from `PackagesUploadComposer`: ComposerPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadComposer`: %v\n", resp)
 }
 ```
@@ -1195,7 +1195,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ComposerPackageUploadResponse**](ComposerPackageUploadResponse.md)
+[**ComposerPackageUpload**](ComposerPackageUpload.md)
 
 ### Authorization
 
@@ -1213,7 +1213,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadConan
 
-> ConanPackageUploadResponse PackagesUploadConan(ctx, owner, repo).Data(data).Execute()
+> ConanPackageUpload PackagesUploadConan(ctx, owner, repo).Data(data).Execute()
 
 Create a new Conan package
 
@@ -1243,7 +1243,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadConan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadConan`: ConanPackageUploadResponse
+    // response from `PackagesUploadConan`: ConanPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadConan`: %v\n", resp)
 }
 ```
@@ -1270,7 +1270,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ConanPackageUploadResponse**](ConanPackageUploadResponse.md)
+[**ConanPackageUpload**](ConanPackageUpload.md)
 
 ### Authorization
 
@@ -1288,7 +1288,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadConda
 
-> CondaPackageUploadResponse PackagesUploadConda(ctx, owner, repo).Data(data).Execute()
+> CondaPackageUpload PackagesUploadConda(ctx, owner, repo).Data(data).Execute()
 
 Create a new Conda package
 
@@ -1318,7 +1318,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadConda``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadConda`: CondaPackageUploadResponse
+    // response from `PackagesUploadConda`: CondaPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadConda`: %v\n", resp)
 }
 ```
@@ -1345,7 +1345,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CondaPackageUploadResponse**](CondaPackageUploadResponse.md)
+[**CondaPackageUpload**](CondaPackageUpload.md)
 
 ### Authorization
 
@@ -1363,7 +1363,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadCran
 
-> CranPackageUploadResponse PackagesUploadCran(ctx, owner, repo).Data(data).Execute()
+> CranPackageUpload PackagesUploadCran(ctx, owner, repo).Data(data).Execute()
 
 Create a new CRAN package
 
@@ -1393,7 +1393,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadCran``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadCran`: CranPackageUploadResponse
+    // response from `PackagesUploadCran`: CranPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadCran`: %v\n", resp)
 }
 ```
@@ -1420,7 +1420,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CranPackageUploadResponse**](CranPackageUploadResponse.md)
+[**CranPackageUpload**](CranPackageUpload.md)
 
 ### Authorization
 
@@ -1438,7 +1438,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDart
 
-> DartPackageUploadResponse PackagesUploadDart(ctx, owner, repo).Data(data).Execute()
+> DartPackageUpload PackagesUploadDart(ctx, owner, repo).Data(data).Execute()
 
 Create a new Dart package
 
@@ -1468,7 +1468,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadDart``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadDart`: DartPackageUploadResponse
+    // response from `PackagesUploadDart`: DartPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadDart`: %v\n", resp)
 }
 ```
@@ -1495,7 +1495,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DartPackageUploadResponse**](DartPackageUploadResponse.md)
+[**DartPackageUpload**](DartPackageUpload.md)
 
 ### Authorization
 
@@ -1513,7 +1513,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDeb
 
-> DebPackageUploadResponse PackagesUploadDeb(ctx, owner, repo).Data(data).Execute()
+> DebPackageUpload PackagesUploadDeb(ctx, owner, repo).Data(data).Execute()
 
 Create a new Debian package
 
@@ -1543,7 +1543,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadDeb``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadDeb`: DebPackageUploadResponse
+    // response from `PackagesUploadDeb`: DebPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadDeb`: %v\n", resp)
 }
 ```
@@ -1570,7 +1570,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DebPackageUploadResponse**](DebPackageUploadResponse.md)
+[**DebPackageUpload**](DebPackageUpload.md)
 
 ### Authorization
 
@@ -1588,7 +1588,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadDocker
 
-> DockerPackageUploadResponse PackagesUploadDocker(ctx, owner, repo).Data(data).Execute()
+> DockerPackageUpload PackagesUploadDocker(ctx, owner, repo).Data(data).Execute()
 
 Create a new Docker package
 
@@ -1618,7 +1618,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadDocker``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadDocker`: DockerPackageUploadResponse
+    // response from `PackagesUploadDocker`: DockerPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadDocker`: %v\n", resp)
 }
 ```
@@ -1645,7 +1645,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DockerPackageUploadResponse**](DockerPackageUploadResponse.md)
+[**DockerPackageUpload**](DockerPackageUpload.md)
 
 ### Authorization
 
@@ -1663,7 +1663,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadGo
 
-> GoPackageUploadResponse PackagesUploadGo(ctx, owner, repo).Data(data).Execute()
+> GoPackageUpload PackagesUploadGo(ctx, owner, repo).Data(data).Execute()
 
 Create a new Go package
 
@@ -1693,7 +1693,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadGo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadGo`: GoPackageUploadResponse
+    // response from `PackagesUploadGo`: GoPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadGo`: %v\n", resp)
 }
 ```
@@ -1720,7 +1720,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GoPackageUploadResponse**](GoPackageUploadResponse.md)
+[**GoPackageUpload**](GoPackageUpload.md)
 
 ### Authorization
 
@@ -1738,7 +1738,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadHelm
 
-> HelmPackageUploadResponse PackagesUploadHelm(ctx, owner, repo).Data(data).Execute()
+> HelmPackageUpload PackagesUploadHelm(ctx, owner, repo).Data(data).Execute()
 
 Create a new Helm package
 
@@ -1768,7 +1768,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadHelm``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadHelm`: HelmPackageUploadResponse
+    // response from `PackagesUploadHelm`: HelmPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadHelm`: %v\n", resp)
 }
 ```
@@ -1795,7 +1795,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HelmPackageUploadResponse**](HelmPackageUploadResponse.md)
+[**HelmPackageUpload**](HelmPackageUpload.md)
 
 ### Authorization
 
@@ -1813,7 +1813,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadLuarocks
 
-> LuarocksPackageUploadResponse PackagesUploadLuarocks(ctx, owner, repo).Data(data).Execute()
+> LuarocksPackageUpload PackagesUploadLuarocks(ctx, owner, repo).Data(data).Execute()
 
 Create a new LuaRocks package
 
@@ -1843,7 +1843,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadLuarocks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadLuarocks`: LuarocksPackageUploadResponse
+    // response from `PackagesUploadLuarocks`: LuarocksPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadLuarocks`: %v\n", resp)
 }
 ```
@@ -1870,7 +1870,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LuarocksPackageUploadResponse**](LuarocksPackageUploadResponse.md)
+[**LuarocksPackageUpload**](LuarocksPackageUpload.md)
 
 ### Authorization
 
@@ -1888,7 +1888,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadMaven
 
-> MavenPackageUploadResponse PackagesUploadMaven(ctx, owner, repo).Data(data).Execute()
+> MavenPackageUpload PackagesUploadMaven(ctx, owner, repo).Data(data).Execute()
 
 Create a new Maven package
 
@@ -1918,7 +1918,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadMaven``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadMaven`: MavenPackageUploadResponse
+    // response from `PackagesUploadMaven`: MavenPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadMaven`: %v\n", resp)
 }
 ```
@@ -1945,7 +1945,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MavenPackageUploadResponse**](MavenPackageUploadResponse.md)
+[**MavenPackageUpload**](MavenPackageUpload.md)
 
 ### Authorization
 
@@ -1963,7 +1963,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadNpm
 
-> NpmPackageUploadResponse PackagesUploadNpm(ctx, owner, repo).Data(data).Execute()
+> NpmPackageUpload PackagesUploadNpm(ctx, owner, repo).Data(data).Execute()
 
 Create a new npm package
 
@@ -1993,7 +1993,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadNpm``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadNpm`: NpmPackageUploadResponse
+    // response from `PackagesUploadNpm`: NpmPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadNpm`: %v\n", resp)
 }
 ```
@@ -2020,7 +2020,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NpmPackageUploadResponse**](NpmPackageUploadResponse.md)
+[**NpmPackageUpload**](NpmPackageUpload.md)
 
 ### Authorization
 
@@ -2038,7 +2038,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadNuget
 
-> NugetPackageUploadResponse PackagesUploadNuget(ctx, owner, repo).Data(data).Execute()
+> NugetPackageUpload PackagesUploadNuget(ctx, owner, repo).Data(data).Execute()
 
 Create a new NuGet package
 
@@ -2068,7 +2068,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadNuget``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadNuget`: NugetPackageUploadResponse
+    // response from `PackagesUploadNuget`: NugetPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadNuget`: %v\n", resp)
 }
 ```
@@ -2095,7 +2095,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NugetPackageUploadResponse**](NugetPackageUploadResponse.md)
+[**NugetPackageUpload**](NugetPackageUpload.md)
 
 ### Authorization
 
@@ -2113,7 +2113,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadP2
 
-> P2PackageUploadResponse PackagesUploadP2(ctx, owner, repo).Data(data).Execute()
+> P2PackageUpload PackagesUploadP2(ctx, owner, repo).Data(data).Execute()
 
 Create a new P2 package
 
@@ -2143,7 +2143,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadP2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadP2`: P2PackageUploadResponse
+    // response from `PackagesUploadP2`: P2PackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadP2`: %v\n", resp)
 }
 ```
@@ -2170,7 +2170,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**P2PackageUploadResponse**](P2PackageUploadResponse.md)
+[**P2PackageUpload**](P2PackageUpload.md)
 
 ### Authorization
 
@@ -2188,7 +2188,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadPython
 
-> PythonPackageUploadResponse PackagesUploadPython(ctx, owner, repo).Data(data).Execute()
+> PythonPackageUpload PackagesUploadPython(ctx, owner, repo).Data(data).Execute()
 
 Create a new Python package
 
@@ -2218,7 +2218,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadPython``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadPython`: PythonPackageUploadResponse
+    // response from `PackagesUploadPython`: PythonPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadPython`: %v\n", resp)
 }
 ```
@@ -2245,7 +2245,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PythonPackageUploadResponse**](PythonPackageUploadResponse.md)
+[**PythonPackageUpload**](PythonPackageUpload.md)
 
 ### Authorization
 
@@ -2263,7 +2263,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRaw
 
-> RawPackageUploadResponse PackagesUploadRaw(ctx, owner, repo).Data(data).Execute()
+> RawPackageUpload PackagesUploadRaw(ctx, owner, repo).Data(data).Execute()
 
 Create a new Raw package
 
@@ -2293,7 +2293,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadRaw``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadRaw`: RawPackageUploadResponse
+    // response from `PackagesUploadRaw`: RawPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadRaw`: %v\n", resp)
 }
 ```
@@ -2320,7 +2320,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RawPackageUploadResponse**](RawPackageUploadResponse.md)
+[**RawPackageUpload**](RawPackageUpload.md)
 
 ### Authorization
 
@@ -2338,7 +2338,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRpm
 
-> RpmPackageUploadResponse PackagesUploadRpm(ctx, owner, repo).Data(data).Execute()
+> RpmPackageUpload PackagesUploadRpm(ctx, owner, repo).Data(data).Execute()
 
 Create a new RedHat package
 
@@ -2368,7 +2368,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadRpm``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadRpm`: RpmPackageUploadResponse
+    // response from `PackagesUploadRpm`: RpmPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadRpm`: %v\n", resp)
 }
 ```
@@ -2395,7 +2395,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RpmPackageUploadResponse**](RpmPackageUploadResponse.md)
+[**RpmPackageUpload**](RpmPackageUpload.md)
 
 ### Authorization
 
@@ -2413,7 +2413,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadRuby
 
-> RubyPackageUploadResponse PackagesUploadRuby(ctx, owner, repo).Data(data).Execute()
+> RubyPackageUpload PackagesUploadRuby(ctx, owner, repo).Data(data).Execute()
 
 Create a new Ruby package
 
@@ -2443,7 +2443,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadRuby``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadRuby`: RubyPackageUploadResponse
+    // response from `PackagesUploadRuby`: RubyPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadRuby`: %v\n", resp)
 }
 ```
@@ -2470,7 +2470,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RubyPackageUploadResponse**](RubyPackageUploadResponse.md)
+[**RubyPackageUpload**](RubyPackageUpload.md)
 
 ### Authorization
 
@@ -2488,7 +2488,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadTerraform
 
-> TerraformPackageUploadResponse PackagesUploadTerraform(ctx, owner, repo).Data(data).Execute()
+> TerraformPackageUpload PackagesUploadTerraform(ctx, owner, repo).Data(data).Execute()
 
 Create a new Terraform package
 
@@ -2518,7 +2518,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadTerraform``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadTerraform`: TerraformPackageUploadResponse
+    // response from `PackagesUploadTerraform`: TerraformPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadTerraform`: %v\n", resp)
 }
 ```
@@ -2545,7 +2545,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TerraformPackageUploadResponse**](TerraformPackageUploadResponse.md)
+[**TerraformPackageUpload**](TerraformPackageUpload.md)
 
 ### Authorization
 
@@ -2563,7 +2563,7 @@ Name | Type | Description  | Notes
 
 ## PackagesUploadVagrant
 
-> VagrantPackageUploadResponse PackagesUploadVagrant(ctx, owner, repo).Data(data).Execute()
+> VagrantPackageUpload PackagesUploadVagrant(ctx, owner, repo).Data(data).Execute()
 
 Create a new Vagrant package
 
@@ -2593,7 +2593,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadVagrant``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesUploadVagrant`: VagrantPackageUploadResponse
+    // response from `PackagesUploadVagrant`: VagrantPackageUpload
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadVagrant`: %v\n", resp)
 }
 ```
@@ -2620,7 +2620,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VagrantPackageUploadResponse**](VagrantPackageUploadResponse.md)
+[**VagrantPackageUpload**](VagrantPackageUpload.md)
 
 ### Authorization
 

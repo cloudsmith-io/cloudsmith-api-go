@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,7 +28,7 @@ type ApiFormatsListRequest struct {
 	ApiService *FormatsApiService
 }
 
-func (r ApiFormatsListRequest) Execute() ([]FormatResponse, *http.Response, error) {
+func (r ApiFormatsListRequest) Execute() ([]Format, *http.Response, error) {
 	return r.ApiService.FormatsListExecute(r)
 }
 
@@ -48,13 +48,13 @@ func (a *FormatsApiService) FormatsList(ctx context.Context) ApiFormatsListReque
 }
 
 // Execute executes the request
-//  @return []FormatResponse
-func (a *FormatsApiService) FormatsListExecute(r ApiFormatsListRequest) ([]FormatResponse, *http.Response, error) {
+//  @return []Format
+func (a *FormatsApiService) FormatsListExecute(r ApiFormatsListRequest) ([]Format, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []FormatResponse
+		localVarReturnValue []Format
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FormatsApiService.FormatsList")
@@ -163,7 +163,7 @@ type ApiFormatsReadRequest struct {
 	slug       string
 }
 
-func (r ApiFormatsReadRequest) Execute() (*FormatResponse, *http.Response, error) {
+func (r ApiFormatsReadRequest) Execute() (*Format, *http.Response, error) {
 	return r.ApiService.FormatsReadExecute(r)
 }
 
@@ -185,13 +185,13 @@ func (a *FormatsApiService) FormatsRead(ctx context.Context, slug string) ApiFor
 }
 
 // Execute executes the request
-//  @return FormatResponse
-func (a *FormatsApiService) FormatsReadExecute(r ApiFormatsReadRequest) (*FormatResponse, *http.Response, error) {
+//  @return Format
+func (a *FormatsApiService) FormatsReadExecute(r ApiFormatsReadRequest) (*Format, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FormatResponse
+		localVarReturnValue *Format
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FormatsApiService.FormatsRead")

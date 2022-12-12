@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## AuditLogNamespaceList
 
-> []NamespaceAuditLogResponse AuditLogNamespaceList(ctx, owner).Page(page).PageSize(pageSize).Query(query).Execute()
+> []NamespaceAuditLog AuditLogNamespaceList(ctx, owner).Page(page).PageSize(pageSize).Query(query).Execute()
 
 Lists audit log entries for a specific namespace.
 
@@ -42,7 +42,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AuditLogApi.AuditLogNamespaceList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AuditLogNamespaceList`: []NamespaceAuditLogResponse
+    // response from `AuditLogNamespaceList`: []NamespaceAuditLog
     fmt.Fprintf(os.Stdout, "Response from `AuditLogApi.AuditLogNamespaceList`: %v\n", resp)
 }
 ```
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]NamespaceAuditLogResponse**](NamespaceAuditLogResponse.md)
+[**[]NamespaceAuditLog**](NamespaceAuditLog.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## AuditLogRepoList
 
-> []RepositoryAuditLogResponse AuditLogRepoList(ctx, owner, repo).Page(page).PageSize(pageSize).Query(query).Execute()
+> []RepositoryAuditLog AuditLogRepoList(ctx, owner, repo).Page(page).PageSize(pageSize).Query(query).Execute()
 
 Lists audit log entries for a specific repository.
 
@@ -119,7 +119,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AuditLogApi.AuditLogRepoList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AuditLogRepoList`: []RepositoryAuditLogResponse
+    // response from `AuditLogRepoList`: []RepositoryAuditLog
     fmt.Fprintf(os.Stdout, "Response from `AuditLogApi.AuditLogRepoList`: %v\n", resp)
 }
 ```
@@ -148,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]RepositoryAuditLogResponse**](RepositoryAuditLogResponse.md)
+[**[]RepositoryAuditLog**](RepositoryAuditLog.md)
 
 ### Authorization
 

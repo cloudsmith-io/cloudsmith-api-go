@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.181.6
+  version: 1.182.1
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -49,7 +49,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/NamespaceAuditLogResponse'
+                  $ref: '#/components/schemas/NamespaceAuditLog'
                 type: array
           description: Retrieved the list of audit log entries
         "402":
@@ -112,7 +112,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/RepositoryAuditLogResponse'
+                  $ref: '#/components/schemas/RepositoryAuditLog'
                 type: array
           description: Retrieved the list of audit log entries
         "402":
@@ -243,7 +243,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageVersionBadgeResponse'
+                $ref: '#/components/schemas/PackageVersionBadge'
           description: OK
         "400":
           content:
@@ -272,7 +272,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/DistributionResponse'
+                  $ref: '#/components/schemas/DistributionFull'
                 type: array
           description: Available package formats retrieved
         "400":
@@ -307,7 +307,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DistributionResponse'
+                $ref: '#/components/schemas/DistributionFull'
           description: OK
         "400":
           content:
@@ -374,7 +374,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/RepositoryTokenResponse'
+                  $ref: '#/components/schemas/RepositoryToken'
                 type: array
           description: Retrieved the list of entitlement tokens
         "404":
@@ -431,7 +431,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryTokenResponse'
+                $ref: '#/components/schemas/RepositoryToken'
           description: Created the specified entitlement
         "404":
           content:
@@ -489,7 +489,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryTokenSyncResponse'
+                $ref: '#/components/schemas/RepositoryTokenSync'
           description: The tokens have been synchronised from the source repository.
         "404":
           content:
@@ -593,7 +593,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryTokenResponse'
+                $ref: '#/components/schemas/RepositoryToken'
           description: Retrieved the specified entitlement
         "400":
           content:
@@ -655,7 +655,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryTokenResponse'
+                $ref: '#/components/schemas/RepositoryToken'
           description: Updated the specified entitlement
         "400":
           content:
@@ -800,7 +800,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryTokenRefreshResponse'
+                $ref: '#/components/schemas/RepositoryTokenRefresh'
           description: The entitlement token has been refreshed.
         "400":
           content:
@@ -893,7 +893,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageFileUploadResponse'
+                $ref: '#/components/schemas/PackageFileUpload'
           description: The upload request was accepted
         "404":
           content:
@@ -1053,7 +1053,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageFileUploadResponse'
+                $ref: '#/components/schemas/PackageFileUpload'
           description: The multipart upload was completed successfully.
         "400":
           content:
@@ -1115,7 +1115,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageFilePartsUploadResponse'
+                $ref: '#/components/schemas/PackageFilePartsUpload'
           description: Information for multipart uploaded retrieved successfully.
         "400":
           content:
@@ -1150,7 +1150,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/FormatResponse'
+                  $ref: '#/components/schemas/Format'
                 type: array
           description: Available package formats retrieved
         "400":
@@ -1185,7 +1185,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FormatResponse'
+                $ref: '#/components/schemas/Format'
           description: OK
         "400":
           content:
@@ -1247,7 +1247,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EntitlementUsageMetricsResponse'
+                $ref: '#/components/schemas/EntitlementUsageMetrics'
           description: Retrieved the metrics for entitlements.
         "400":
           content:
@@ -1314,7 +1314,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EntitlementUsageMetricsResponse'
+                $ref: '#/components/schemas/EntitlementUsageMetrics'
           description: Retrieved the metrics for entitlements.
         "400":
           content:
@@ -1381,7 +1381,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageUsageMetricsResponse'
+                $ref: '#/components/schemas/PackageUsageMetrics'
           description: Retrieved the metrics for packages.
         "400":
           content:
@@ -1421,7 +1421,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/NamespaceResponse'
+                  $ref: '#/components/schemas/Namespace'
                 type: array
           description: OK
         "400":
@@ -1456,7 +1456,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NamespaceResponse'
+                $ref: '#/components/schemas/Namespace'
           description: OK
         "400":
           content:
@@ -1496,7 +1496,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/OrganizationResponse'
+                  $ref: '#/components/schemas/Organization'
                 type: array
           description: OK
         "400":
@@ -1531,7 +1531,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationResponse'
+                $ref: '#/components/schemas/Organization'
           description: OK
         "400":
           content:
@@ -1576,7 +1576,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/OrganizationInviteResponse'
+                  $ref: '#/components/schemas/OrganizationInvite'
                 type: array
           description: Retrieved the list of organization invites
         "404":
@@ -1622,7 +1622,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationInviteResponse'
+                $ref: '#/components/schemas/OrganizationInvite'
           description: Invite sent
         "400":
           content:
@@ -1703,7 +1703,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationInviteResponse'
+                $ref: '#/components/schemas/OrganizationInvite'
           description: Invite updated
         "400":
           content:
@@ -1749,7 +1749,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationInviteExtendResponse'
+                $ref: '#/components/schemas/OrganizationInviteExtend'
           description: The invite has been extended
         "404":
           content:
@@ -1794,7 +1794,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationInviteExtendResponse'
+                $ref: '#/components/schemas/OrganizationInviteExtend'
           description: The invite has been resent
         "404":
           content:
@@ -1845,7 +1845,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/OrganizationMembershipResponse'
+                  $ref: '#/components/schemas/OrganizationMembership'
                 type: array
           description: OK
         "400":
@@ -1920,7 +1920,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationMembershipResponse'
+                $ref: '#/components/schemas/OrganizationMembership'
           description: OK
         "400":
           content:
@@ -2002,7 +2002,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/OrganizationGroupSyncResponse'
+                  $ref: '#/components/schemas/OrganizationGroupSync'
                 type: array
           description: Retrived the list of all SAML Group Sync mappings for this
             org
@@ -2049,7 +2049,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationGroupSyncResponse'
+                $ref: '#/components/schemas/OrganizationGroupSync'
           description: The SAML Group Sync mapping was created.
         "404":
           content:
@@ -2137,7 +2137,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ServiceResponse'
+                  $ref: '#/components/schemas/Service'
                 type: array
           description: Retrieved the list of services within the org
         "404":
@@ -2183,7 +2183,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceResponse'
+                $ref: '#/components/schemas/Service'
           description: Created the service within the org
         "404":
           content:
@@ -2264,7 +2264,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceResponse'
+                $ref: '#/components/schemas/Service'
           description: OK
         "400":
           content:
@@ -2308,7 +2308,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceResponse'
+                $ref: '#/components/schemas/Service'
           description: Updated the service within the org
         "404":
           content:
@@ -2354,7 +2354,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceResponse'
+                $ref: '#/components/schemas/Service'
           description: Refreshed the service token successfully.
         "400":
           content:
@@ -2405,7 +2405,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/OrganizationTeamResponse'
+                  $ref: '#/components/schemas/OrganizationTeam'
                 type: array
           description: Retrieved the list of teams within the org
         "404":
@@ -2451,7 +2451,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationTeamResponse'
+                $ref: '#/components/schemas/OrganizationTeam'
           description: Team created
         "400":
           content:
@@ -2532,7 +2532,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationTeamResponse'
+                $ref: '#/components/schemas/OrganizationTeam'
           description: Retrieved the details of the requested team.
         "404":
           content:
@@ -2582,7 +2582,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationTeamResponse'
+                $ref: '#/components/schemas/OrganizationTeam'
           description: Updated the specified team.
         "400":
           content:
@@ -2628,7 +2628,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationTeamMembersResponse'
+                $ref: '#/components/schemas/OrganizationTeamMembers'
           description: Retrieved users for the specified team.
         "404":
           content:
@@ -2678,7 +2678,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationTeamMembersResponse'
+                $ref: '#/components/schemas/OrganizationTeamMembers'
           description: The users were added to the team.
         "404":
           content:
@@ -2723,7 +2723,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationTeamMembersResponse'
+                $ref: '#/components/schemas/OrganizationTeamMembers'
           description: The team members were replaced.
         "404":
           content:
@@ -2791,7 +2791,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/PackageResponse'
+                  $ref: '#/components/schemas/Package'
                 type: array
           description: Retrieved the list of packages
         "400":
@@ -2837,7 +2837,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AlpinePackageUploadResponse'
+                $ref: '#/components/schemas/AlpinePackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -2889,7 +2889,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CargoPackageUploadResponse'
+                $ref: '#/components/schemas/CargoPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -2941,7 +2941,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CocoapodsPackageUploadResponse'
+                $ref: '#/components/schemas/CocoapodsPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -2993,7 +2993,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ComposerPackageUploadResponse'
+                $ref: '#/components/schemas/ComposerPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3045,7 +3045,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConanPackageUploadResponse'
+                $ref: '#/components/schemas/ConanPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3097,7 +3097,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CondaPackageUploadResponse'
+                $ref: '#/components/schemas/CondaPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3149,7 +3149,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CranPackageUploadResponse'
+                $ref: '#/components/schemas/CranPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3201,7 +3201,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DartPackageUploadResponse'
+                $ref: '#/components/schemas/DartPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3253,7 +3253,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DebPackageUploadResponse'
+                $ref: '#/components/schemas/DebPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3305,7 +3305,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DockerPackageUploadResponse'
+                $ref: '#/components/schemas/DockerPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3357,7 +3357,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GoPackageUploadResponse'
+                $ref: '#/components/schemas/GoPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3409,7 +3409,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HelmPackageUploadResponse'
+                $ref: '#/components/schemas/HelmPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3461,7 +3461,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LuarocksPackageUploadResponse'
+                $ref: '#/components/schemas/LuarocksPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3513,7 +3513,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MavenPackageUploadResponse'
+                $ref: '#/components/schemas/MavenPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3565,7 +3565,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NpmPackageUploadResponse'
+                $ref: '#/components/schemas/NpmPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3617,7 +3617,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NugetPackageUploadResponse'
+                $ref: '#/components/schemas/NugetPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3669,7 +3669,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/P2PackageUploadResponse'
+                $ref: '#/components/schemas/P2PackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3721,7 +3721,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PythonPackageUploadResponse'
+                $ref: '#/components/schemas/PythonPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3773,7 +3773,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RawPackageUploadResponse'
+                $ref: '#/components/schemas/RawPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3825,7 +3825,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RpmPackageUploadResponse'
+                $ref: '#/components/schemas/RpmPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3877,7 +3877,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RubyPackageUploadResponse'
+                $ref: '#/components/schemas/RubyPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3929,7 +3929,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TerraformPackageUploadResponse'
+                $ref: '#/components/schemas/TerraformPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -3981,7 +3981,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VagrantPackageUploadResponse'
+                $ref: '#/components/schemas/VagrantPackageUpload'
           description: Upload acknowledged and queued for synchronisation.
         "404":
           content:
@@ -5199,7 +5199,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageResponse'
+                $ref: '#/components/schemas/Package'
           description: Retrieved the specified package successfully.
         "400":
           content:
@@ -5249,7 +5249,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageCopyResponse'
+                $ref: '#/components/schemas/PackageCopy'
           description: Copied specified package to destination repository.
         "400":
           content:
@@ -5294,7 +5294,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageDependenciesResponse'
+                $ref: '#/components/schemas/PackageDependencies'
           description: Retrieved direct dependencies for specified package.
         "400":
           content:
@@ -5344,7 +5344,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageMoveResponse'
+                $ref: '#/components/schemas/PackageMove'
           description: Moved specified package to destination repository.
         "400":
           content:
@@ -5395,7 +5395,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageQuarantineResponse'
+                $ref: '#/components/schemas/PackageQuarantine'
           description: Changed the package's quarantine status.
         "400":
           content:
@@ -5440,7 +5440,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageResyncResponse'
+                $ref: '#/components/schemas/PackageResync'
           description: Scheduled the package for resynchronisation.
         "400":
           content:
@@ -5484,7 +5484,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageResponse'
+                $ref: '#/components/schemas/Package'
           description: Scheduled the package for scanning.
         "400":
           content:
@@ -5528,7 +5528,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageStatusResponse'
+                $ref: '#/components/schemas/PackageStatus'
           description: Retrieved status for specified package.
         "400":
           content:
@@ -5578,7 +5578,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageResponse'
+                $ref: '#/components/schemas/Package'
           description: Modified tags for the package.
         "400":
           content:
@@ -5613,7 +5613,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuotaHistoryResponse'
+                $ref: '#/components/schemas/QuotaHistory'
           description: OK
         "400":
           content:
@@ -5647,7 +5647,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuotaHistoryResponse'
+                $ref: '#/components/schemas/QuotaHistory'
           description: OK
         "400":
           content:
@@ -5681,7 +5681,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuotaResponse'
+                $ref: '#/components/schemas/Quota'
           description: OK
         "400":
           content:
@@ -5715,7 +5715,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuotaResponse'
+                $ref: '#/components/schemas/Quota'
           description: OK
         "400":
           content:
@@ -5743,7 +5743,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourcesRateCheckResponse'
+                $ref: '#/components/schemas/ResourcesRateCheck'
           description: Rate check was successful
         "400":
           content:
@@ -5783,7 +5783,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/RepositoryResponse'
+                  $ref: '#/components/schemas/Repository'
                 type: array
           description: Retrieved the list of repositories
         "400":
@@ -5829,7 +5829,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/RepositoryResponse'
+                  $ref: '#/components/schemas/Repository'
                 type: array
           description: Retrieved the list of repositories
         "404":
@@ -5875,7 +5875,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryCreateResponse'
+                $ref: '#/components/schemas/RepositoryCreate'
           description: The repository was created.
         "404":
           content:
@@ -5962,7 +5962,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryResponse'
+                $ref: '#/components/schemas/Repository'
           description: Retrieved the specified repository
         "404":
           content:
@@ -6012,7 +6012,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryResponse'
+                $ref: '#/components/schemas/Repository'
           description: The repository was updated.
         "404":
           content:
@@ -6058,7 +6058,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryGpgKeyResponse'
+                $ref: '#/components/schemas/RepositoryGpgKey'
           description: Retrieved the active GPG key.
         "400":
           content:
@@ -6102,13 +6102,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryGpgKeyResponse'
+                $ref: '#/components/schemas/RepositoryGpgKey'
           description: The provided GPG key is the same as the current GPG key.
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryGpgKeyResponse'
+                $ref: '#/components/schemas/RepositoryGpgKey'
           description: The provided GPG key was assigned to the Repository.
         "400":
           content:
@@ -6161,7 +6161,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryGpgKeyResponse'
+                $ref: '#/components/schemas/RepositoryGpgKey'
           description: A GPG key was generated for the Repository.
         "400":
           content:
@@ -6210,7 +6210,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryPrivilegeInputResponse'
+                $ref: '#/components/schemas/RepositoryPrivilegeInput'
           description: Retrieved privileges for the specified repository
         "404":
           content:
@@ -6351,7 +6351,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryRsaKeyResponse'
+                $ref: '#/components/schemas/RepositoryRsaKey'
           description: Retrieved the active RSA key.
         "400":
           content:
@@ -6395,13 +6395,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryRsaKeyResponse'
+                $ref: '#/components/schemas/RepositoryRsaKey'
           description: The provided RSA key is the same as the current RSA key.
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryRsaKeyResponse'
+                $ref: '#/components/schemas/RepositoryRsaKey'
           description: The provided RSA key was assigned to the Repository.
         "400":
           content:
@@ -6454,7 +6454,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryRsaKeyResponse'
+                $ref: '#/components/schemas/RepositoryRsaKey'
           description: An RSA key was generated for the Repository.
         "400":
           content:
@@ -6482,7 +6482,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StatusBasicResponse'
+                $ref: '#/components/schemas/StatusBasic'
           description: Status check was successful
         "400":
           content:
@@ -6510,7 +6510,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/StorageRegionResponse'
+                  $ref: '#/components/schemas/StorageRegion'
                 type: array
           description: Available storage regions retrieved
         "400":
@@ -6545,7 +6545,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StorageRegionResponse'
+                $ref: '#/components/schemas/StorageRegion'
           description: OK
         "400":
           content:
@@ -6573,7 +6573,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserBriefResponse'
+                $ref: '#/components/schemas/UserBrief'
           description: Retrieved brief for the current user
         "400":
           content:
@@ -6607,7 +6607,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserAuthTokenResponse'
+                $ref: '#/components/schemas/UserAuthToken'
           description: Created
         "400":
           content:
@@ -6642,7 +6642,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserProfileResponse'
+                $ref: '#/components/schemas/UserProfile'
           description: "Retrieved details for the specified user (or current user,\
             \ if none was specified)"
         "400":
@@ -6688,7 +6688,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/VulnerabilityScanResultsListResponse'
+                  $ref: '#/components/schemas/VulnerabilityScanResultsList'
                 type: array
           description: OK
         "400":
@@ -6739,7 +6739,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/VulnerabilityScanResultsListResponse'
+                  $ref: '#/components/schemas/VulnerabilityScanResultsList'
                 type: array
           description: OK
         "400":
@@ -6795,7 +6795,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/VulnerabilityScanResultsListResponse'
+                  $ref: '#/components/schemas/VulnerabilityScanResultsList'
                 type: array
           description: OK
         "400":
@@ -6845,7 +6845,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VulnerabilityScanResultsResponse'
+                $ref: '#/components/schemas/VulnerabilityScanResults'
           description: OK
         "400":
           content:
@@ -6895,7 +6895,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/RepositoryWebhookResponse'
+                  $ref: '#/components/schemas/RepositoryWebhook'
                 type: array
           description: Retrieved the list of webhooks
         "404":
@@ -6946,7 +6946,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryWebhookResponse'
+                $ref: '#/components/schemas/RepositoryWebhook'
           description: Created the specified webhook
         "404":
           content:
@@ -7037,7 +7037,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryWebhookResponse'
+                $ref: '#/components/schemas/RepositoryWebhook'
           description: OK
         "400":
           content:
@@ -7086,7 +7086,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryWebhookResponse'
+                $ref: '#/components/schemas/RepositoryWebhook'
           description: Updated the specified webhook
         "404":
           content:
@@ -7174,7 +7174,7 @@ components:
       - country
       - postal_code
       type: object
-    NamespaceAuditLogResponse:
+    NamespaceAuditLog:
       example:
         target_slug_perm: target_slug_perm
         actor_kind: actor_kind
@@ -7285,7 +7285,7 @@ components:
       - target
       - target_kind
       type: object
-    RepositoryAuditLogResponse:
+    RepositoryAuditLog:
       example:
         actor_kind: actor_kind
         object_slug_perm: object_slug_perm
@@ -7376,7 +7376,7 @@ components:
       - object_kind
       - object_slug_perm
       type: object
-    PackageVersionBadgeResponse:
+    PackageVersionBadge:
       type: object
     DistributionVersion:
       description: A list of the versions for this distribution
@@ -7396,7 +7396,7 @@ components:
           title: Slug
           type: string
       type: object
-    DistributionResponse:
+    DistributionFull:
       example:
         format_url: https://openapi-generator.tech
         versions:
@@ -7477,7 +7477,7 @@ components:
       - number
       type: object
       x-nullable: true
-    RepositoryTokenResponse:
+    RepositoryToken:
       example:
         limit_date_range_to: 2000-01-23T04:56:07.000+00:00
         metadata: "{}"
@@ -7879,277 +7879,7 @@ components:
       required:
       - source
       type: object
-    RepositoryToken:
-      description: The entitlements that have been synchronised.
-      example:
-        limit_date_range_to: 2000-01-23T04:56:07.000+00:00
-        metadata: "{}"
-        clients: 0
-        limit_bandwidth_unit: Byte
-        scheduled_reset_at: 2000-01-23T04:56:07.000+00:00
-        usage: usage
-        limit_bandwidth: 2147483647
-        created_at: 2000-01-23T04:56:07.000+00:00
-        limit_num_clients: 2147483647
-        eula_accepted_at: 2000-01-23T04:56:07.000+00:00
-        limit_package_query: limit_package_query
-        limit_path_query: limit_path_query
-        default: true
-        updated_at: 2000-01-23T04:56:07.000+00:00
-        downloads: 6
-        user_url: https://openapi-generator.tech
-        limit_date_range_from: 2000-01-23T04:56:07.000+00:00
-        reset_url: https://openapi-generator.tech
-        limit_num_downloads: -2147483648
-        eula_required: true
-        refresh_url: https://openapi-generator.tech
-        scheduled_reset_period: Never Reset
-        identifier: 1
-        is_active: true
-        eula_accepted:
-          identifier: identifier
-          number: 314780940
-        eula_accepted_from: eula_accepted_from
-        created_by_url: https://openapi-generator.tech
-        is_limited: true
-        slug_perm: slug_perm
-        created_by: created_by
-        enable_url: https://openapi-generator.tech
-        self_url: https://openapi-generator.tech
-        token: token
-        updated_by_url: https://openapi-generator.tech
-        disable_url: https://openapi-generator.tech
-        name: name
-        updated_by: updated_by
-        has_limits: true
-        user: user
-      properties:
-        clients:
-          readOnly: true
-          title: Clients
-          type: integer
-        created_at:
-          description: The datetime the token was updated at.
-          format: date-time
-          readOnly: true
-          title: Created at
-          type: string
-        created_by:
-          minLength: 1
-          readOnly: true
-          title: Created by
-          type: string
-        created_by_url:
-          format: uri
-          readOnly: true
-          title: Created by url
-          type: string
-        default:
-          description: If selected this is the default token for this repository.
-          readOnly: true
-          title: Default
-          type: boolean
-        disable_url:
-          format: uri
-          readOnly: true
-          title: Disable url
-          type: string
-        downloads:
-          readOnly: true
-          title: Downloads
-          type: integer
-        enable_url:
-          format: uri
-          readOnly: true
-          title: Enable url
-          type: string
-        eula_accepted:
-          $ref: '#/components/schemas/Eula'
-        eula_accepted_at:
-          description: The datetime the EULA was accepted at.
-          format: date-time
-          readOnly: true
-          title: Eula accepted at
-          type: string
-        eula_accepted_from:
-          minLength: 1
-          nullable: true
-          readOnly: true
-          title: Eula accepted from
-          type: string
-        eula_required:
-          description: "If checked, a EULA acceptance is required for this token."
-          title: Eula required
-          type: boolean
-        has_limits:
-          readOnly: true
-          title: Has limits
-          type: boolean
-        identifier:
-          readOnly: true
-          title: Identifier
-          type: integer
-        is_active:
-          description: "If enabled, the token will allow downloads based on configured\
-            \ restrictions (if any)."
-          title: Token Active
-          type: boolean
-        is_limited:
-          readOnly: true
-          title: Is limited
-          type: boolean
-        limit_bandwidth:
-          description: "The maximum download bandwidth allowed for the token. Values\
-            \ are expressed as the selected unit of bandwidth. Please note that since\
-            \ downloads are calculated asynchronously (after the download happens),\
-            \ the limit may not be imposed immediately but at a later point. "
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
-          nullable: true
-          title: Limit bandwidth
-          type: integer
-        limit_bandwidth_unit:
-          default: Byte
-          nullable: true
-          title: Limit bandwidth unit
-          type: string
-        limit_date_range_from:
-          description: The starting date/time the token is allowed to be used from.
-          format: date-time
-          nullable: true
-          title: Limit date range from
-          type: string
-        limit_date_range_to:
-          description: The ending date/time the token is allowed to be used until.
-          format: date-time
-          nullable: true
-          title: Limit date range to
-          type: string
-        limit_num_clients:
-          description: "The maximum number of unique clients allowed for the token.\
-            \ Please note that since clients are calculated asynchronously (after\
-            \ the download happens), the limit may not be imposed immediately but\
-            \ at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
-          nullable: true
-          title: Limit num clients
-          type: integer
-        limit_num_downloads:
-          description: "The maximum number of downloads allowed for the token. Please\
-            \ note that since downloads are calculated asynchronously (after the download\
-            \ happens), the limit may not be imposed immediately but at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
-          nullable: true
-          title: Limit num downloads
-          type: integer
-        limit_package_query:
-          description: "The package-based search query to apply to restrict downloads\
-            \ to. This uses the same syntax as the standard search used for repositories,\
-            \ and also supports boolean logic operators such as OR/AND/NOT and parentheses\
-            \ for grouping. This will still allow access to non-package files, such\
-            \ as metadata."
-          maxLength: 1024
-          nullable: true
-          title: Limit package query
-          type: string
-        limit_path_query:
-          description: "The path-based search query to apply to restrict downloads\
-            \ to. This supports boolean logic operators such as OR/AND/NOT and parentheses\
-            \ for grouping. The path evaluated does not include the domain name, the\
-            \ namespace, the entitlement code used, the package format, etc. and it\
-            \ always starts with a forward slash."
-          maxLength: 1024
-          nullable: true
-          title: Limit path query
-          type: string
-        metadata:
-          nullable: true
-          properties: {}
-          title: Metadata
-          type: object
-        name:
-          minLength: 1
-          title: Name
-          type: string
-        refresh_url:
-          format: uri
-          readOnly: true
-          title: Refresh url
-          type: string
-        reset_url:
-          format: uri
-          readOnly: true
-          title: Reset url
-          type: string
-        scheduled_reset_at:
-          description: The time at which the scheduled reset period has elapsed and
-            the token limits were automatically reset to zero.
-          format: date-time
-          nullable: true
-          title: Scheduled reset at
-          type: string
-        scheduled_reset_period:
-          default: Never Reset
-          nullable: true
-          title: Scheduled reset period
-          type: string
-        self_url:
-          format: uri
-          readOnly: true
-          title: Self url
-          type: string
-        slug_perm:
-          format: slug
-          minLength: 1
-          pattern: "^[-a-zA-Z0-9_]+$"
-          readOnly: true
-          title: Slug perm
-          type: string
-        token:
-          minLength: 1
-          title: Token
-          type: string
-        updated_at:
-          description: The datetime the token was updated at.
-          format: date-time
-          readOnly: true
-          title: Updated at
-          type: string
-        updated_by:
-          minLength: 1
-          nullable: true
-          readOnly: true
-          title: Updated by
-          type: string
-        updated_by_url:
-          format: uri
-          nullable: true
-          readOnly: true
-          title: Updated by url
-          type: string
-        usage:
-          minLength: 1
-          readOnly: true
-          title: Usage
-          type: string
-        user:
-          minLength: 1
-          nullable: true
-          readOnly: true
-          title: User
-          type: string
-        user_url:
-          format: uri
-          nullable: true
-          readOnly: true
-          title: User url
-          type: string
-      required:
-      - name
-      type: object
-    RepositoryTokenSyncResponse:
+    RepositoryTokenSync:
       example:
         tokens:
         - limit_date_range_to: 2000-01-23T04:56:07.000+00:00
@@ -8160,7 +7890,7 @@ components:
           usage: usage
           limit_bandwidth: 2147483647
           created_at: 2000-01-23T04:56:07.000+00:00
-          limit_num_clients: 2147483647
+          limit_num_clients: -2147483648
           eula_accepted_at: 2000-01-23T04:56:07.000+00:00
           limit_package_query: limit_package_query
           limit_path_query: limit_path_query
@@ -8170,11 +7900,11 @@ components:
           user_url: https://openapi-generator.tech
           limit_date_range_from: 2000-01-23T04:56:07.000+00:00
           reset_url: https://openapi-generator.tech
-          limit_num_downloads: -2147483648
+          limit_num_downloads: 2147483647
           eula_required: true
           refresh_url: https://openapi-generator.tech
           scheduled_reset_period: Never Reset
-          identifier: 1
+          identifier: 5
           is_active: true
           eula_accepted:
             identifier: identifier
@@ -8201,7 +7931,7 @@ components:
           usage: usage
           limit_bandwidth: 2147483647
           created_at: 2000-01-23T04:56:07.000+00:00
-          limit_num_clients: 2147483647
+          limit_num_clients: -2147483648
           eula_accepted_at: 2000-01-23T04:56:07.000+00:00
           limit_package_query: limit_package_query
           limit_path_query: limit_path_query
@@ -8211,11 +7941,11 @@ components:
           user_url: https://openapi-generator.tech
           limit_date_range_from: 2000-01-23T04:56:07.000+00:00
           reset_url: https://openapi-generator.tech
-          limit_num_downloads: -2147483648
+          limit_num_downloads: 2147483647
           eula_required: true
           refresh_url: https://openapi-generator.tech
           scheduled_reset_period: Never Reset
-          identifier: 1
+          identifier: 5
           is_active: true
           eula_accepted:
             identifier: identifier
@@ -8361,7 +8091,7 @@ components:
           title: Token
           type: string
       type: object
-    RepositoryTokenActionResponse:
+    RepositoryTokenAction:
       type: object
     RepositoryTokenRefreshRequest:
       example:
@@ -8477,7 +8207,7 @@ components:
           title: Token
           type: string
       type: object
-    RepositoryTokenRefreshResponse:
+    RepositoryTokenRefresh:
       example:
         limit_date_range_to: 2000-01-23T04:56:07.000+00:00
         metadata: "{}"
@@ -8783,7 +8513,7 @@ components:
       required:
       - filename
       type: object
-    PackageFileUploadResponse:
+    PackageFileUpload:
       example:
         identifier: https://openapi-generator.tech
         upload_fields: "{}"
@@ -8827,7 +8557,7 @@ components:
           title: Upload url
           type: string
       type: object
-    PackageFilePartsUploadResponse:
+    PackageFilePartsUpload:
       example:
         identifier: https://openapi-generator.tech
         upload_querystring: upload_querystring
@@ -8925,7 +8655,7 @@ components:
       - metadata
       - versioning
       type: object
-    FormatResponse:
+    Format:
       example:
         extensions:
         - extensions
@@ -9145,7 +8875,7 @@ components:
       - bandwidth
       - downloads
       type: object
-    EntitlementUsageMetricsResponse:
+    EntitlementUsageMetrics:
       example:
         tokens:
           total: 5
@@ -9183,7 +8913,7 @@ components:
       required:
       - tokens
       type: object
-    PackageUsageMetricsResponse:
+    PackageUsageMetrics:
       example:
         packages:
           total: 5
@@ -9221,7 +8951,7 @@ components:
       required:
       - packages
       type: object
-    NamespaceResponse:
+    Namespace:
       example:
         type_name: type_name
         name: name
@@ -9251,7 +8981,7 @@ components:
           title: Type name
           type: string
       type: object
-    OrganizationResponse:
+    Organization:
       example:
         country: country
         name: name
@@ -9300,7 +9030,7 @@ components:
           title: Tagline
           type: string
       type: object
-    OrganizationInviteResponse:
+    OrganizationInvite:
       example:
         expires_at: 2000-01-23T04:56:07.000+00:00
         role: Member
@@ -9395,7 +9125,7 @@ components:
           title: Role
           type: string
       type: object
-    OrganizationInviteUpdateResponse:
+    OrganizationInviteUpdate:
       properties:
         role:
           default: Member
@@ -9403,7 +9133,7 @@ components:
           title: Role
           type: string
       type: object
-    OrganizationInviteExtendResponse:
+    OrganizationInviteExtend:
       example:
         expires_at: 2000-01-23T04:56:07.000+00:00
         role: Member
@@ -9466,7 +9196,7 @@ components:
           title: User url
           type: string
       type: object
-    OrganizationMembershipResponse:
+    OrganizationMembership:
       example:
         joined_at: 2000-01-23T04:56:07.000+00:00
         last_login_at: 2000-01-23T04:56:07.000+00:00
@@ -9536,7 +9266,7 @@ components:
           title: Visibility
           type: string
       type: object
-    OrganizationGroupSyncResponse:
+    OrganizationGroupSync:
       example:
         role: Member
         team: team
@@ -9649,7 +9379,7 @@ components:
           title: Slug
           type: string
       type: object
-    ServiceResponse:
+    Service:
       example:
         role: Member
         teams:
@@ -9767,7 +9497,7 @@ components:
             $ref: '#/components/schemas/ServiceTeams'
           type: array
       type: object
-    OrganizationTeamResponse:
+    OrganizationTeam:
       example:
         visibility: Visible
         name: name
@@ -9876,22 +9606,6 @@ components:
       required:
       - role
       - user
-      type: object
-    OrganizationTeamMembersResponse:
-      example:
-        members:
-        - role: role
-          user: user
-        - role: role
-          user: user
-      properties:
-        members:
-          description: The team members
-          items:
-            $ref: '#/components/schemas/OrganizationTeamMembership'
-          type: array
-      required:
-      - members
       type: object
     OrganizationTeamMembers:
       example:
@@ -10019,7 +9733,7 @@ components:
         \ tags, but doesn't distinguish them from mutable. To see which tags are immutable\
         \ specifically, see the tags_immutable field."
       type: object
-    PackageResponse:
+    Package:
       example:
         architectures:
         - name: name
@@ -10506,7 +10220,7 @@ components:
       - distribution
       - package_file
       type: object
-    AlpinePackageUploadResponse:
+    AlpinePackageUpload:
       example:
         architectures:
         - name: name
@@ -10980,7 +10694,7 @@ components:
       required:
       - package_file
       type: object
-    CargoPackageUploadResponse:
+    CargoPackageUpload:
       example:
         architectures:
         - name: name
@@ -11454,7 +11168,7 @@ components:
       required:
       - package_file
       type: object
-    CocoapodsPackageUploadResponse:
+    CocoapodsPackageUpload:
       example:
         architectures:
         - name: name
@@ -11928,7 +11642,7 @@ components:
       required:
       - package_file
       type: object
-    ComposerPackageUploadResponse:
+    ComposerPackageUpload:
       example:
         architectures:
         - name: name
@@ -12453,7 +12167,7 @@ components:
       - metadata_file
       - package_file
       type: object
-    ConanPackageUploadResponse:
+    ConanPackageUpload:
       example:
         architectures:
         - name: name
@@ -12943,7 +12657,7 @@ components:
       required:
       - package_file
       type: object
-    CondaPackageUploadResponse:
+    CondaPackageUpload:
       example:
         architectures:
         - name: name
@@ -13417,7 +13131,7 @@ components:
       required:
       - package_file
       type: object
-    CranPackageUploadResponse:
+    CranPackageUpload:
       example:
         architectures:
         - name: name
@@ -13891,7 +13605,7 @@ components:
       required:
       - package_file
       type: object
-    DartPackageUploadResponse:
+    DartPackageUpload:
       example:
         architectures:
         - name: name
@@ -14387,7 +14101,7 @@ components:
       - distribution
       - package_file
       type: object
-    DebPackageUploadResponse:
+    DebPackageUpload:
       example:
         architectures:
         - name: name
@@ -14861,7 +14575,7 @@ components:
       required:
       - package_file
       type: object
-    DockerPackageUploadResponse:
+    DockerPackageUpload:
       example:
         architectures:
         - name: name
@@ -15335,7 +15049,7 @@ components:
       required:
       - package_file
       type: object
-    GoPackageUploadResponse:
+    GoPackageUpload:
       example:
         architectures:
         - name: name
@@ -15809,7 +15523,7 @@ components:
       required:
       - package_file
       type: object
-    HelmPackageUploadResponse:
+    HelmPackageUpload:
       example:
         architectures:
         - name: name
@@ -16283,7 +15997,7 @@ components:
       required:
       - package_file
       type: object
-    LuarocksPackageUploadResponse:
+    LuarocksPackageUpload:
       example:
         architectures:
         - name: name
@@ -16813,7 +16527,7 @@ components:
       required:
       - package_file
       type: object
-    MavenPackageUploadResponse:
+    MavenPackageUpload:
       example:
         architectures:
         - name: name
@@ -17317,7 +17031,7 @@ components:
       required:
       - package_file
       type: object
-    NpmPackageUploadResponse:
+    NpmPackageUpload:
       example:
         architectures:
         - name: name
@@ -17798,7 +17512,7 @@ components:
       required:
       - package_file
       type: object
-    NugetPackageUploadResponse:
+    NugetPackageUpload:
       example:
         architectures:
         - name: name
@@ -18272,7 +17986,7 @@ components:
       required:
       - package_file
       type: object
-    P2PackageUploadResponse:
+    P2PackageUpload:
       example:
         architectures:
         - name: name
@@ -18746,7 +18460,7 @@ components:
       required:
       - package_file
       type: object
-    PythonPackageUploadResponse:
+    PythonPackageUpload:
       example:
         architectures:
         - name: name
@@ -19258,7 +18972,7 @@ components:
       required:
       - package_file
       type: object
-    RawPackageUploadResponse:
+    RawPackageUpload:
       example:
         architectures:
         - name: name
@@ -19739,7 +19453,7 @@ components:
       - distribution
       - package_file
       type: object
-    RpmPackageUploadResponse:
+    RpmPackageUpload:
       example:
         architectures:
         - name: name
@@ -20213,7 +19927,7 @@ components:
       required:
       - package_file
       type: object
-    RubyPackageUploadResponse:
+    RubyPackageUpload:
       example:
         architectures:
         - name: name
@@ -20687,7 +20401,7 @@ components:
       required:
       - package_file
       type: object
-    TerraformPackageUploadResponse:
+    TerraformPackageUpload:
       example:
         architectures:
         - name: name
@@ -21182,7 +20896,7 @@ components:
       - provider
       - version
       type: object
-    VagrantPackageUploadResponse:
+    VagrantPackageUpload:
       example:
         architectures:
         - name: name
@@ -21654,7 +21368,7 @@ components:
       required:
       - destination
       type: object
-    PackageCopyResponse:
+    PackageCopy:
       example:
         architectures:
         - name: name
@@ -22141,7 +21855,7 @@ components:
       required:
       - name
       type: object
-    PackageDependenciesResponse:
+    PackageDependencies:
       example:
         dependencies:
         - dep_type: Depends
@@ -22171,7 +21885,7 @@ components:
       required:
       - destination
       type: object
-    PackageMoveResponse:
+    PackageMove:
       example:
         architectures:
         - name: name
@@ -22634,7 +22348,7 @@ components:
           title: Restore
           type: boolean
       type: object
-    PackageQuarantineResponse:
+    PackageQuarantine:
       example:
         architectures:
         - name: name
@@ -23087,7 +22801,7 @@ components:
           title: Vulnerability scan results url
           type: string
       type: object
-    PackageResyncResponse:
+    PackageResync:
       example:
         architectures:
         - name: name
@@ -23540,7 +23254,7 @@ components:
           title: Vulnerability scan results url
           type: string
       type: object
-    PackageStatusResponse:
+    PackageStatus:
       example:
         status_str: status_str
         sync_progress: 1
@@ -23668,7 +23382,7 @@ components:
           nullable: true
           type: array
       type: object
-    PackageTagResponse:
+    PackageTag:
       properties:
         architectures:
           items:
@@ -24122,7 +23836,7 @@ components:
       - raw
       - start
       type: object
-    QuotaHistoryResponse:
+    QuotaHistory:
       example:
         history:
         - display:
@@ -24275,7 +23989,7 @@ components:
       - display
       - raw
       type: object
-    QuotaResponse:
+    Quota:
       example:
         usage:
           display:
@@ -24353,7 +24067,7 @@ components:
           title: Throttled
           type: boolean
       type: object
-    ResourcesRateCheckResponse:
+    ResourcesRateCheck:
       example:
         resources:
           key:
@@ -24420,7 +24134,7 @@ components:
       required:
       - comment
       type: object
-    RepositoryResponse:
+    Repository:
       example:
         scan_packages: Read
         content_kind: Standard
@@ -25168,7 +24882,7 @@ components:
       required:
       - name
       type: object
-    RepositoryCreateResponse:
+    RepositoryCreate:
       example:
         scan_packages: Read
         content_kind: Standard
@@ -25907,54 +25621,6 @@ components:
           title: View statistics
           type: string
       type: object
-    RepositoryGpgKeyResponse:
-      example:
-        public_key: public_key
-        default: true
-        fingerprint: fingerprint
-        active: true
-        created_at: 2000-01-23T04:56:07.000+00:00
-        comment: comment
-        fingerprint_short: fingerprint_short
-      properties:
-        active:
-          description: If selected this is the active key for this repository.
-          readOnly: true
-          title: Active
-          type: boolean
-        comment:
-          minLength: 1
-          title: Comment
-          type: string
-        created_at:
-          format: date-time
-          readOnly: true
-          title: Created at
-          type: string
-        default:
-          description: If selected this is the default key for this repository.
-          readOnly: true
-          title: Default
-          type: boolean
-        fingerprint:
-          description: The long identifier used by GPG for this key.
-          minLength: 1
-          readOnly: true
-          title: Fingerprint
-          type: string
-        fingerprint_short:
-          readOnly: true
-          title: Fingerprint short
-          type: string
-        public_key:
-          description: The public key given to repository users.
-          minLength: 1
-          readOnly: true
-          title: Public key
-          type: string
-      required:
-      - comment
-      type: object
     RepositoryGpgKeyCreate:
       example:
         gpg_passphrase: gpg_passphrase
@@ -26009,7 +25675,7 @@ components:
       required:
       - privilege
       type: object
-    RepositoryPrivilegeInputResponse:
+    RepositoryPrivilegeInput:
       example:
         privileges:
         - service: service
@@ -26067,7 +25733,7 @@ components:
             $ref: '#/components/schemas/RepositoryPrivilegeDict'
           type: array
       type: object
-    RepositoryRsaKeyResponse:
+    RepositoryRsaKey:
       example:
         public_key: public_key
         default: true
@@ -26126,10 +25792,10 @@ components:
       required:
       - rsa_private_key
       type: object
-    StatusBasicResponse:
+    StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.181.6
+        version: 1.182.1
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -26139,14 +25805,14 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.181.6
+          default: 1.182.1
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
           title: Version
           type: string
       type: object
-    StorageRegionResponse:
+    StorageRegion:
       example:
         label: label
         slug: slug
@@ -26165,7 +25831,7 @@ components:
       - label
       - slug
       type: object
-    UserBriefResponse:
+    UserBrief:
       example:
         authenticated: true
         profile_url: https://openapi-generator.tech
@@ -26235,7 +25901,7 @@ components:
           title: Password
           type: string
       type: object
-    UserAuthTokenResponse:
+    UserAuthToken:
       example:
         token: token
       properties:
@@ -26246,7 +25912,7 @@ components:
           title: Token
           type: string
       type: object
-    UserProfileResponse:
+    UserProfile:
       example:
         joined_at: 2000-01-23T04:56:07.000+00:00
         name: name
@@ -26343,7 +26009,7 @@ components:
       required:
       - identifier
       type: object
-    VulnerabilityScanResultsListResponse:
+    VulnerabilityScanResultsList:
       example:
         identifier: identifier
         max_severity: Unknown
@@ -26574,7 +26240,7 @@ components:
       - target
       - type
       type: object
-    VulnerabilityScanResultsResponse:
+    VulnerabilityScanResults:
       example:
         identifier: identifier
         max_severity: Unknown
@@ -26693,7 +26359,7 @@ components:
       - event
       type: object
       x-nullable: true
-    RepositoryWebhookResponse:
+    RepositoryWebhook:
       example:
         is_last_response_bad: true
         last_response_status_str: last_response_status_str

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## QuotaHistoryRead
 
-> QuotaHistoryResponse QuotaHistoryRead(ctx, owner).Execute()
+> QuotaHistory QuotaHistoryRead(ctx, owner).Execute()
 
 Quota history for a given namespace.
 
@@ -41,7 +41,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaHistoryRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QuotaHistoryRead`: QuotaHistoryResponse
+    // response from `QuotaHistoryRead`: QuotaHistory
     fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaHistoryRead`: %v\n", resp)
 }
 ```
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuotaHistoryResponse**](QuotaHistoryResponse.md)
+[**QuotaHistory**](QuotaHistory.md)
 
 ### Authorization
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 ## QuotaOssHistoryRead
 
-> QuotaHistoryResponse QuotaOssHistoryRead(ctx, owner).Execute()
+> QuotaHistory QuotaOssHistoryRead(ctx, owner).Execute()
 
 Open-source Quota history for a given namespace.
 
@@ -111,7 +111,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaOssHistoryRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QuotaOssHistoryRead`: QuotaHistoryResponse
+    // response from `QuotaOssHistoryRead`: QuotaHistory
     fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaOssHistoryRead`: %v\n", resp)
 }
 ```
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuotaHistoryResponse**](QuotaHistoryResponse.md)
+[**QuotaHistory**](QuotaHistory.md)
 
 ### Authorization
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ## QuotaOssRead
 
-> QuotaResponse QuotaOssRead(ctx, owner).Execute()
+> Quota QuotaOssRead(ctx, owner).Execute()
 
 Open-source Quota usage for a given namespace.
 
@@ -181,7 +181,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaOssRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QuotaOssRead`: QuotaResponse
+    // response from `QuotaOssRead`: Quota
     fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaOssRead`: %v\n", resp)
 }
 ```
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuotaResponse**](QuotaResponse.md)
+[**Quota**](Quota.md)
 
 ### Authorization
 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ## QuotaRead
 
-> QuotaResponse QuotaRead(ctx, owner).Execute()
+> Quota QuotaRead(ctx, owner).Execute()
 
 Quota usage for a given namespace.
 
@@ -251,7 +251,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QuotaRead`: QuotaResponse
+    // response from `QuotaRead`: Quota
     fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaRead`: %v\n", resp)
 }
 ```
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuotaResponse**](QuotaResponse.md)
+[**Quota**](Quota.md)
 
 ### Authorization
 

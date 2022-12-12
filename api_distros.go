@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,7 +28,7 @@ type ApiDistrosListRequest struct {
 	ApiService *DistrosApiService
 }
 
-func (r ApiDistrosListRequest) Execute() ([]DistributionResponse, *http.Response, error) {
+func (r ApiDistrosListRequest) Execute() ([]DistributionFull, *http.Response, error) {
 	return r.ApiService.DistrosListExecute(r)
 }
 
@@ -48,13 +48,13 @@ func (a *DistrosApiService) DistrosList(ctx context.Context) ApiDistrosListReque
 }
 
 // Execute executes the request
-//  @return []DistributionResponse
-func (a *DistrosApiService) DistrosListExecute(r ApiDistrosListRequest) ([]DistributionResponse, *http.Response, error) {
+//  @return []DistributionFull
+func (a *DistrosApiService) DistrosListExecute(r ApiDistrosListRequest) ([]DistributionFull, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []DistributionResponse
+		localVarReturnValue []DistributionFull
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DistrosApiService.DistrosList")
@@ -163,7 +163,7 @@ type ApiDistrosReadRequest struct {
 	slug       string
 }
 
-func (r ApiDistrosReadRequest) Execute() (*DistributionResponse, *http.Response, error) {
+func (r ApiDistrosReadRequest) Execute() (*DistributionFull, *http.Response, error) {
 	return r.ApiService.DistrosReadExecute(r)
 }
 
@@ -185,13 +185,13 @@ func (a *DistrosApiService) DistrosRead(ctx context.Context, slug string) ApiDis
 }
 
 // Execute executes the request
-//  @return DistributionResponse
-func (a *DistrosApiService) DistrosReadExecute(r ApiDistrosReadRequest) (*DistributionResponse, *http.Response, error) {
+//  @return DistributionFull
+func (a *DistrosApiService) DistrosReadExecute(r ApiDistrosReadRequest) (*DistributionFull, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *DistributionResponse
+		localVarReturnValue *DistributionFull
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DistrosApiService.DistrosRead")

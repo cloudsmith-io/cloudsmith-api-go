@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## VulnerabilitiesNamespaceList
 
-> []VulnerabilityScanResultsListResponse VulnerabilitiesNamespaceList(ctx, owner).Page(page).PageSize(pageSize).Execute()
+> []VulnerabilityScanResultsList VulnerabilitiesNamespaceList(ctx, owner).Page(page).PageSize(pageSize).Execute()
 
 Lists scan results for a specific namespace.
 
@@ -43,7 +43,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesNamespaceList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `VulnerabilitiesNamespaceList`: []VulnerabilityScanResultsListResponse
+    // response from `VulnerabilitiesNamespaceList`: []VulnerabilityScanResultsList
     fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesNamespaceList`: %v\n", resp)
 }
 ```
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]VulnerabilityScanResultsListResponse**](VulnerabilityScanResultsListResponse.md)
+[**[]VulnerabilityScanResultsList**](VulnerabilityScanResultsList.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## VulnerabilitiesPackageList
 
-> []VulnerabilityScanResultsListResponse VulnerabilitiesPackageList(ctx, owner, repo, package_).Page(page).PageSize(pageSize).Execute()
+> []VulnerabilityScanResultsList VulnerabilitiesPackageList(ctx, owner, repo, package_).Page(page).PageSize(pageSize).Execute()
 
 Lists scan results for a specific package.
 
@@ -119,7 +119,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesPackageList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `VulnerabilitiesPackageList`: []VulnerabilityScanResultsListResponse
+    // response from `VulnerabilitiesPackageList`: []VulnerabilityScanResultsList
     fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesPackageList`: %v\n", resp)
 }
 ```
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]VulnerabilityScanResultsListResponse**](VulnerabilityScanResultsListResponse.md)
+[**[]VulnerabilityScanResultsList**](VulnerabilityScanResultsList.md)
 
 ### Authorization
 
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 
 ## VulnerabilitiesRead
 
-> VulnerabilityScanResultsResponse VulnerabilitiesRead(ctx, owner, repo, package_, scanId).Execute()
+> VulnerabilityScanResults VulnerabilitiesRead(ctx, owner, repo, package_, scanId).Execute()
 
 Returns a Scan Result.
 
@@ -198,7 +198,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `VulnerabilitiesRead`: VulnerabilityScanResultsResponse
+    // response from `VulnerabilitiesRead`: VulnerabilityScanResults
     fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesRead`: %v\n", resp)
 }
 ```
@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VulnerabilityScanResultsResponse**](VulnerabilityScanResultsResponse.md)
+[**VulnerabilityScanResults**](VulnerabilityScanResults.md)
 
 ### Authorization
 
@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
 
 ## VulnerabilitiesRepoList
 
-> []VulnerabilityScanResultsListResponse VulnerabilitiesRepoList(ctx, owner, repo).Page(page).PageSize(pageSize).Execute()
+> []VulnerabilityScanResultsList VulnerabilitiesRepoList(ctx, owner, repo).Page(page).PageSize(pageSize).Execute()
 
 Lists scan results for a specific repository.
 
@@ -277,7 +277,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesRepoList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `VulnerabilitiesRepoList`: []VulnerabilityScanResultsListResponse
+    // response from `VulnerabilitiesRepoList`: []VulnerabilityScanResultsList
     fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesRepoList`: %v\n", resp)
 }
 ```
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]VulnerabilityScanResultsListResponse**](VulnerabilityScanResultsListResponse.md)
+[**[]VulnerabilityScanResultsList**](VulnerabilityScanResultsList.md)
 
 ### Authorization
 

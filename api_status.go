@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -27,7 +27,7 @@ type ApiStatusCheckBasicRequest struct {
 	ApiService *StatusApiService
 }
 
-func (r ApiStatusCheckBasicRequest) Execute() (*StatusBasicResponse, *http.Response, error) {
+func (r ApiStatusCheckBasicRequest) Execute() (*StatusBasic, *http.Response, error) {
 	return r.ApiService.StatusCheckBasicExecute(r)
 }
 
@@ -47,13 +47,13 @@ func (a *StatusApiService) StatusCheckBasic(ctx context.Context) ApiStatusCheckB
 }
 
 // Execute executes the request
-//  @return StatusBasicResponse
-func (a *StatusApiService) StatusCheckBasicExecute(r ApiStatusCheckBasicRequest) (*StatusBasicResponse, *http.Response, error) {
+//  @return StatusBasic
+func (a *StatusApiService) StatusCheckBasicExecute(r ApiStatusCheckBasicRequest) (*StatusBasic, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *StatusBasicResponse
+		localVarReturnValue *StatusBasic
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StatusApiService.StatusCheckBasic")

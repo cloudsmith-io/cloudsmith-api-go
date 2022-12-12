@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -27,7 +27,7 @@ type ApiRatesLimitsListRequest struct {
 	ApiService *RatesApiService
 }
 
-func (r ApiRatesLimitsListRequest) Execute() (*ResourcesRateCheckResponse, *http.Response, error) {
+func (r ApiRatesLimitsListRequest) Execute() (*ResourcesRateCheck, *http.Response, error) {
 	return r.ApiService.RatesLimitsListExecute(r)
 }
 
@@ -47,13 +47,13 @@ func (a *RatesApiService) RatesLimitsList(ctx context.Context) ApiRatesLimitsLis
 }
 
 // Execute executes the request
-//  @return ResourcesRateCheckResponse
-func (a *RatesApiService) RatesLimitsListExecute(r ApiRatesLimitsListRequest) (*ResourcesRateCheckResponse, *http.Response, error) {
+//  @return ResourcesRateCheck
+func (a *RatesApiService) RatesLimitsListExecute(r ApiRatesLimitsListRequest) (*ResourcesRateCheck, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ResourcesRateCheckResponse
+		localVarReturnValue *ResourcesRateCheck
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RatesApiService.RatesLimitsList")

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -37,7 +37,7 @@ func (r ApiPackagesCopyRequest) Data(data PackageCopyRequest) ApiPackagesCopyReq
 	return r
 }
 
-func (r ApiPackagesCopyRequest) Execute() (*PackageCopyResponse, *http.Response, error) {
+func (r ApiPackagesCopyRequest) Execute() (*PackageCopy, *http.Response, error) {
 	return r.ApiService.PackagesCopyExecute(r)
 }
 
@@ -63,13 +63,13 @@ func (a *PackagesApiService) PackagesCopy(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return PackageCopyResponse
-func (a *PackagesApiService) PackagesCopyExecute(r ApiPackagesCopyRequest) (*PackageCopyResponse, *http.Response, error) {
+//  @return PackageCopy
+func (a *PackagesApiService) PackagesCopyExecute(r ApiPackagesCopyRequest) (*PackageCopy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageCopyResponse
+		localVarReturnValue *PackageCopy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesCopy")
@@ -320,7 +320,7 @@ type ApiPackagesDependenciesRequest struct {
 	identifier string
 }
 
-func (r ApiPackagesDependenciesRequest) Execute() (*PackageDependenciesResponse, *http.Response, error) {
+func (r ApiPackagesDependenciesRequest) Execute() (*PackageDependencies, *http.Response, error) {
 	return r.ApiService.PackagesDependenciesExecute(r)
 }
 
@@ -346,13 +346,13 @@ func (a *PackagesApiService) PackagesDependencies(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return PackageDependenciesResponse
-func (a *PackagesApiService) PackagesDependenciesExecute(r ApiPackagesDependenciesRequest) (*PackageDependenciesResponse, *http.Response, error) {
+//  @return PackageDependencies
+func (a *PackagesApiService) PackagesDependenciesExecute(r ApiPackagesDependenciesRequest) (*PackageDependencies, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageDependenciesResponse
+		localVarReturnValue *PackageDependencies
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesDependencies")
@@ -493,7 +493,7 @@ func (r ApiPackagesListRequest) Sort(sort string) ApiPackagesListRequest {
 	return r
 }
 
-func (r ApiPackagesListRequest) Execute() ([]PackageResponse, *http.Response, error) {
+func (r ApiPackagesListRequest) Execute() ([]Package, *http.Response, error) {
 	return r.ApiService.PackagesListExecute(r)
 }
 
@@ -517,13 +517,13 @@ func (a *PackagesApiService) PackagesList(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return []PackageResponse
-func (a *PackagesApiService) PackagesListExecute(r ApiPackagesListRequest) ([]PackageResponse, *http.Response, error) {
+//  @return []Package
+func (a *PackagesApiService) PackagesListExecute(r ApiPackagesListRequest) ([]Package, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []PackageResponse
+		localVarReturnValue []Package
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesList")
@@ -654,7 +654,7 @@ func (r ApiPackagesMoveRequest) Data(data PackageMoveRequest) ApiPackagesMoveReq
 	return r
 }
 
-func (r ApiPackagesMoveRequest) Execute() (*PackageMoveResponse, *http.Response, error) {
+func (r ApiPackagesMoveRequest) Execute() (*PackageMove, *http.Response, error) {
 	return r.ApiService.PackagesMoveExecute(r)
 }
 
@@ -680,13 +680,13 @@ func (a *PackagesApiService) PackagesMove(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return PackageMoveResponse
-func (a *PackagesApiService) PackagesMoveExecute(r ApiPackagesMoveRequest) (*PackageMoveResponse, *http.Response, error) {
+//  @return PackageMove
+func (a *PackagesApiService) PackagesMoveExecute(r ApiPackagesMoveRequest) (*PackageMove, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageMoveResponse
+		localVarReturnValue *PackageMove
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesMove")
@@ -808,7 +808,7 @@ func (r ApiPackagesQuarantineRequest) Data(data PackageQuarantineRequest) ApiPac
 	return r
 }
 
-func (r ApiPackagesQuarantineRequest) Execute() (*PackageQuarantineResponse, *http.Response, error) {
+func (r ApiPackagesQuarantineRequest) Execute() (*PackageQuarantine, *http.Response, error) {
 	return r.ApiService.PackagesQuarantineExecute(r)
 }
 
@@ -834,13 +834,13 @@ func (a *PackagesApiService) PackagesQuarantine(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return PackageQuarantineResponse
-func (a *PackagesApiService) PackagesQuarantineExecute(r ApiPackagesQuarantineRequest) (*PackageQuarantineResponse, *http.Response, error) {
+//  @return PackageQuarantine
+func (a *PackagesApiService) PackagesQuarantineExecute(r ApiPackagesQuarantineRequest) (*PackageQuarantine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageQuarantineResponse
+		localVarReturnValue *PackageQuarantine
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesQuarantine")
@@ -956,7 +956,7 @@ type ApiPackagesReadRequest struct {
 	identifier string
 }
 
-func (r ApiPackagesReadRequest) Execute() (*PackageResponse, *http.Response, error) {
+func (r ApiPackagesReadRequest) Execute() (*Package, *http.Response, error) {
 	return r.ApiService.PackagesReadExecute(r)
 }
 
@@ -982,13 +982,13 @@ func (a *PackagesApiService) PackagesRead(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return PackageResponse
-func (a *PackagesApiService) PackagesReadExecute(r ApiPackagesReadRequest) (*PackageResponse, *http.Response, error) {
+//  @return Package
+func (a *PackagesApiService) PackagesReadExecute(r ApiPackagesReadRequest) (*Package, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageResponse
+		localVarReturnValue *Package
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesRead")
@@ -1102,7 +1102,7 @@ type ApiPackagesResyncRequest struct {
 	identifier string
 }
 
-func (r ApiPackagesResyncRequest) Execute() (*PackageResyncResponse, *http.Response, error) {
+func (r ApiPackagesResyncRequest) Execute() (*PackageResync, *http.Response, error) {
 	return r.ApiService.PackagesResyncExecute(r)
 }
 
@@ -1128,13 +1128,13 @@ func (a *PackagesApiService) PackagesResync(ctx context.Context, owner string, r
 }
 
 // Execute executes the request
-//  @return PackageResyncResponse
-func (a *PackagesApiService) PackagesResyncExecute(r ApiPackagesResyncRequest) (*PackageResyncResponse, *http.Response, error) {
+//  @return PackageResync
+func (a *PackagesApiService) PackagesResyncExecute(r ApiPackagesResyncRequest) (*PackageResync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageResyncResponse
+		localVarReturnValue *PackageResync
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesResync")
@@ -1248,7 +1248,7 @@ type ApiPackagesScanRequest struct {
 	identifier string
 }
 
-func (r ApiPackagesScanRequest) Execute() (*PackageResponse, *http.Response, error) {
+func (r ApiPackagesScanRequest) Execute() (*Package, *http.Response, error) {
 	return r.ApiService.PackagesScanExecute(r)
 }
 
@@ -1274,13 +1274,13 @@ func (a *PackagesApiService) PackagesScan(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return PackageResponse
-func (a *PackagesApiService) PackagesScanExecute(r ApiPackagesScanRequest) (*PackageResponse, *http.Response, error) {
+//  @return Package
+func (a *PackagesApiService) PackagesScanExecute(r ApiPackagesScanRequest) (*Package, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageResponse
+		localVarReturnValue *Package
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesScan")
@@ -1394,7 +1394,7 @@ type ApiPackagesStatusRequest struct {
 	identifier string
 }
 
-func (r ApiPackagesStatusRequest) Execute() (*PackageStatusResponse, *http.Response, error) {
+func (r ApiPackagesStatusRequest) Execute() (*PackageStatus, *http.Response, error) {
 	return r.ApiService.PackagesStatusExecute(r)
 }
 
@@ -1420,13 +1420,13 @@ func (a *PackagesApiService) PackagesStatus(ctx context.Context, owner string, r
 }
 
 // Execute executes the request
-//  @return PackageStatusResponse
-func (a *PackagesApiService) PackagesStatusExecute(r ApiPackagesStatusRequest) (*PackageStatusResponse, *http.Response, error) {
+//  @return PackageStatus
+func (a *PackagesApiService) PackagesStatusExecute(r ApiPackagesStatusRequest) (*PackageStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageStatusResponse
+		localVarReturnValue *PackageStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesStatus")
@@ -1546,7 +1546,7 @@ func (r ApiPackagesTagRequest) Data(data PackageTagRequest) ApiPackagesTagReques
 	return r
 }
 
-func (r ApiPackagesTagRequest) Execute() (*PackageResponse, *http.Response, error) {
+func (r ApiPackagesTagRequest) Execute() (*Package, *http.Response, error) {
 	return r.ApiService.PackagesTagExecute(r)
 }
 
@@ -1572,13 +1572,13 @@ func (a *PackagesApiService) PackagesTag(ctx context.Context, owner string, repo
 }
 
 // Execute executes the request
-//  @return PackageResponse
-func (a *PackagesApiService) PackagesTagExecute(r ApiPackagesTagRequest) (*PackageResponse, *http.Response, error) {
+//  @return Package
+func (a *PackagesApiService) PackagesTagExecute(r ApiPackagesTagRequest) (*Package, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageResponse
+		localVarReturnValue *Package
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesTag")
@@ -1699,7 +1699,7 @@ func (r ApiPackagesUploadAlpineRequest) Data(data AlpinePackageUploadRequest) Ap
 	return r
 }
 
-func (r ApiPackagesUploadAlpineRequest) Execute() (*AlpinePackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadAlpineRequest) Execute() (*AlpinePackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadAlpineExecute(r)
 }
 
@@ -1723,13 +1723,13 @@ func (a *PackagesApiService) PackagesUploadAlpine(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return AlpinePackageUploadResponse
-func (a *PackagesApiService) PackagesUploadAlpineExecute(r ApiPackagesUploadAlpineRequest) (*AlpinePackageUploadResponse, *http.Response, error) {
+//  @return AlpinePackageUpload
+func (a *PackagesApiService) PackagesUploadAlpineExecute(r ApiPackagesUploadAlpineRequest) (*AlpinePackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *AlpinePackageUploadResponse
+		localVarReturnValue *AlpinePackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadAlpine")
@@ -1860,7 +1860,7 @@ func (r ApiPackagesUploadCargoRequest) Data(data CargoPackageUploadRequest) ApiP
 	return r
 }
 
-func (r ApiPackagesUploadCargoRequest) Execute() (*CargoPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadCargoRequest) Execute() (*CargoPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadCargoExecute(r)
 }
 
@@ -1884,13 +1884,13 @@ func (a *PackagesApiService) PackagesUploadCargo(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return CargoPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadCargoExecute(r ApiPackagesUploadCargoRequest) (*CargoPackageUploadResponse, *http.Response, error) {
+//  @return CargoPackageUpload
+func (a *PackagesApiService) PackagesUploadCargoExecute(r ApiPackagesUploadCargoRequest) (*CargoPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CargoPackageUploadResponse
+		localVarReturnValue *CargoPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadCargo")
@@ -2021,7 +2021,7 @@ func (r ApiPackagesUploadCocoapodsRequest) Data(data CocoapodsPackageUploadReque
 	return r
 }
 
-func (r ApiPackagesUploadCocoapodsRequest) Execute() (*CocoapodsPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadCocoapodsRequest) Execute() (*CocoapodsPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadCocoapodsExecute(r)
 }
 
@@ -2045,13 +2045,13 @@ func (a *PackagesApiService) PackagesUploadCocoapods(ctx context.Context, owner 
 }
 
 // Execute executes the request
-//  @return CocoapodsPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadCocoapodsExecute(r ApiPackagesUploadCocoapodsRequest) (*CocoapodsPackageUploadResponse, *http.Response, error) {
+//  @return CocoapodsPackageUpload
+func (a *PackagesApiService) PackagesUploadCocoapodsExecute(r ApiPackagesUploadCocoapodsRequest) (*CocoapodsPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CocoapodsPackageUploadResponse
+		localVarReturnValue *CocoapodsPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadCocoapods")
@@ -2182,7 +2182,7 @@ func (r ApiPackagesUploadComposerRequest) Data(data ComposerPackageUploadRequest
 	return r
 }
 
-func (r ApiPackagesUploadComposerRequest) Execute() (*ComposerPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadComposerRequest) Execute() (*ComposerPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadComposerExecute(r)
 }
 
@@ -2206,13 +2206,13 @@ func (a *PackagesApiService) PackagesUploadComposer(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return ComposerPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadComposerExecute(r ApiPackagesUploadComposerRequest) (*ComposerPackageUploadResponse, *http.Response, error) {
+//  @return ComposerPackageUpload
+func (a *PackagesApiService) PackagesUploadComposerExecute(r ApiPackagesUploadComposerRequest) (*ComposerPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ComposerPackageUploadResponse
+		localVarReturnValue *ComposerPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadComposer")
@@ -2343,7 +2343,7 @@ func (r ApiPackagesUploadConanRequest) Data(data ConanPackageUploadRequest) ApiP
 	return r
 }
 
-func (r ApiPackagesUploadConanRequest) Execute() (*ConanPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadConanRequest) Execute() (*ConanPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadConanExecute(r)
 }
 
@@ -2367,13 +2367,13 @@ func (a *PackagesApiService) PackagesUploadConan(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return ConanPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadConanExecute(r ApiPackagesUploadConanRequest) (*ConanPackageUploadResponse, *http.Response, error) {
+//  @return ConanPackageUpload
+func (a *PackagesApiService) PackagesUploadConanExecute(r ApiPackagesUploadConanRequest) (*ConanPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ConanPackageUploadResponse
+		localVarReturnValue *ConanPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadConan")
@@ -2504,7 +2504,7 @@ func (r ApiPackagesUploadCondaRequest) Data(data CondaPackageUploadRequest) ApiP
 	return r
 }
 
-func (r ApiPackagesUploadCondaRequest) Execute() (*CondaPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadCondaRequest) Execute() (*CondaPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadCondaExecute(r)
 }
 
@@ -2528,13 +2528,13 @@ func (a *PackagesApiService) PackagesUploadConda(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return CondaPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadCondaExecute(r ApiPackagesUploadCondaRequest) (*CondaPackageUploadResponse, *http.Response, error) {
+//  @return CondaPackageUpload
+func (a *PackagesApiService) PackagesUploadCondaExecute(r ApiPackagesUploadCondaRequest) (*CondaPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CondaPackageUploadResponse
+		localVarReturnValue *CondaPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadConda")
@@ -2665,7 +2665,7 @@ func (r ApiPackagesUploadCranRequest) Data(data CranPackageUploadRequest) ApiPac
 	return r
 }
 
-func (r ApiPackagesUploadCranRequest) Execute() (*CranPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadCranRequest) Execute() (*CranPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadCranExecute(r)
 }
 
@@ -2689,13 +2689,13 @@ func (a *PackagesApiService) PackagesUploadCran(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return CranPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadCranExecute(r ApiPackagesUploadCranRequest) (*CranPackageUploadResponse, *http.Response, error) {
+//  @return CranPackageUpload
+func (a *PackagesApiService) PackagesUploadCranExecute(r ApiPackagesUploadCranRequest) (*CranPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CranPackageUploadResponse
+		localVarReturnValue *CranPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadCran")
@@ -2826,7 +2826,7 @@ func (r ApiPackagesUploadDartRequest) Data(data DartPackageUploadRequest) ApiPac
 	return r
 }
 
-func (r ApiPackagesUploadDartRequest) Execute() (*DartPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadDartRequest) Execute() (*DartPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadDartExecute(r)
 }
 
@@ -2850,13 +2850,13 @@ func (a *PackagesApiService) PackagesUploadDart(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return DartPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadDartExecute(r ApiPackagesUploadDartRequest) (*DartPackageUploadResponse, *http.Response, error) {
+//  @return DartPackageUpload
+func (a *PackagesApiService) PackagesUploadDartExecute(r ApiPackagesUploadDartRequest) (*DartPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *DartPackageUploadResponse
+		localVarReturnValue *DartPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadDart")
@@ -2987,7 +2987,7 @@ func (r ApiPackagesUploadDebRequest) Data(data DebPackageUploadRequest) ApiPacka
 	return r
 }
 
-func (r ApiPackagesUploadDebRequest) Execute() (*DebPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadDebRequest) Execute() (*DebPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadDebExecute(r)
 }
 
@@ -3011,13 +3011,13 @@ func (a *PackagesApiService) PackagesUploadDeb(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return DebPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadDebExecute(r ApiPackagesUploadDebRequest) (*DebPackageUploadResponse, *http.Response, error) {
+//  @return DebPackageUpload
+func (a *PackagesApiService) PackagesUploadDebExecute(r ApiPackagesUploadDebRequest) (*DebPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *DebPackageUploadResponse
+		localVarReturnValue *DebPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadDeb")
@@ -3148,7 +3148,7 @@ func (r ApiPackagesUploadDockerRequest) Data(data DockerPackageUploadRequest) Ap
 	return r
 }
 
-func (r ApiPackagesUploadDockerRequest) Execute() (*DockerPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadDockerRequest) Execute() (*DockerPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadDockerExecute(r)
 }
 
@@ -3172,13 +3172,13 @@ func (a *PackagesApiService) PackagesUploadDocker(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return DockerPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadDockerExecute(r ApiPackagesUploadDockerRequest) (*DockerPackageUploadResponse, *http.Response, error) {
+//  @return DockerPackageUpload
+func (a *PackagesApiService) PackagesUploadDockerExecute(r ApiPackagesUploadDockerRequest) (*DockerPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *DockerPackageUploadResponse
+		localVarReturnValue *DockerPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadDocker")
@@ -3309,7 +3309,7 @@ func (r ApiPackagesUploadGoRequest) Data(data GoPackageUploadRequest) ApiPackage
 	return r
 }
 
-func (r ApiPackagesUploadGoRequest) Execute() (*GoPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadGoRequest) Execute() (*GoPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadGoExecute(r)
 }
 
@@ -3333,13 +3333,13 @@ func (a *PackagesApiService) PackagesUploadGo(ctx context.Context, owner string,
 }
 
 // Execute executes the request
-//  @return GoPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadGoExecute(r ApiPackagesUploadGoRequest) (*GoPackageUploadResponse, *http.Response, error) {
+//  @return GoPackageUpload
+func (a *PackagesApiService) PackagesUploadGoExecute(r ApiPackagesUploadGoRequest) (*GoPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GoPackageUploadResponse
+		localVarReturnValue *GoPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadGo")
@@ -3470,7 +3470,7 @@ func (r ApiPackagesUploadHelmRequest) Data(data HelmPackageUploadRequest) ApiPac
 	return r
 }
 
-func (r ApiPackagesUploadHelmRequest) Execute() (*HelmPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadHelmRequest) Execute() (*HelmPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadHelmExecute(r)
 }
 
@@ -3494,13 +3494,13 @@ func (a *PackagesApiService) PackagesUploadHelm(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return HelmPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadHelmExecute(r ApiPackagesUploadHelmRequest) (*HelmPackageUploadResponse, *http.Response, error) {
+//  @return HelmPackageUpload
+func (a *PackagesApiService) PackagesUploadHelmExecute(r ApiPackagesUploadHelmRequest) (*HelmPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *HelmPackageUploadResponse
+		localVarReturnValue *HelmPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadHelm")
@@ -3631,7 +3631,7 @@ func (r ApiPackagesUploadLuarocksRequest) Data(data LuarocksPackageUploadRequest
 	return r
 }
 
-func (r ApiPackagesUploadLuarocksRequest) Execute() (*LuarocksPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadLuarocksRequest) Execute() (*LuarocksPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadLuarocksExecute(r)
 }
 
@@ -3655,13 +3655,13 @@ func (a *PackagesApiService) PackagesUploadLuarocks(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return LuarocksPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadLuarocksExecute(r ApiPackagesUploadLuarocksRequest) (*LuarocksPackageUploadResponse, *http.Response, error) {
+//  @return LuarocksPackageUpload
+func (a *PackagesApiService) PackagesUploadLuarocksExecute(r ApiPackagesUploadLuarocksRequest) (*LuarocksPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *LuarocksPackageUploadResponse
+		localVarReturnValue *LuarocksPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadLuarocks")
@@ -3792,7 +3792,7 @@ func (r ApiPackagesUploadMavenRequest) Data(data MavenPackageUploadRequest) ApiP
 	return r
 }
 
-func (r ApiPackagesUploadMavenRequest) Execute() (*MavenPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadMavenRequest) Execute() (*MavenPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadMavenExecute(r)
 }
 
@@ -3816,13 +3816,13 @@ func (a *PackagesApiService) PackagesUploadMaven(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return MavenPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadMavenExecute(r ApiPackagesUploadMavenRequest) (*MavenPackageUploadResponse, *http.Response, error) {
+//  @return MavenPackageUpload
+func (a *PackagesApiService) PackagesUploadMavenExecute(r ApiPackagesUploadMavenRequest) (*MavenPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *MavenPackageUploadResponse
+		localVarReturnValue *MavenPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadMaven")
@@ -3953,7 +3953,7 @@ func (r ApiPackagesUploadNpmRequest) Data(data NpmPackageUploadRequest) ApiPacka
 	return r
 }
 
-func (r ApiPackagesUploadNpmRequest) Execute() (*NpmPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadNpmRequest) Execute() (*NpmPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadNpmExecute(r)
 }
 
@@ -3977,13 +3977,13 @@ func (a *PackagesApiService) PackagesUploadNpm(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return NpmPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadNpmExecute(r ApiPackagesUploadNpmRequest) (*NpmPackageUploadResponse, *http.Response, error) {
+//  @return NpmPackageUpload
+func (a *PackagesApiService) PackagesUploadNpmExecute(r ApiPackagesUploadNpmRequest) (*NpmPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NpmPackageUploadResponse
+		localVarReturnValue *NpmPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadNpm")
@@ -4114,7 +4114,7 @@ func (r ApiPackagesUploadNugetRequest) Data(data NugetPackageUploadRequest) ApiP
 	return r
 }
 
-func (r ApiPackagesUploadNugetRequest) Execute() (*NugetPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadNugetRequest) Execute() (*NugetPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadNugetExecute(r)
 }
 
@@ -4138,13 +4138,13 @@ func (a *PackagesApiService) PackagesUploadNuget(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return NugetPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadNugetExecute(r ApiPackagesUploadNugetRequest) (*NugetPackageUploadResponse, *http.Response, error) {
+//  @return NugetPackageUpload
+func (a *PackagesApiService) PackagesUploadNugetExecute(r ApiPackagesUploadNugetRequest) (*NugetPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NugetPackageUploadResponse
+		localVarReturnValue *NugetPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadNuget")
@@ -4275,7 +4275,7 @@ func (r ApiPackagesUploadP2Request) Data(data P2PackageUploadRequest) ApiPackage
 	return r
 }
 
-func (r ApiPackagesUploadP2Request) Execute() (*P2PackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadP2Request) Execute() (*P2PackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadP2Execute(r)
 }
 
@@ -4299,13 +4299,13 @@ func (a *PackagesApiService) PackagesUploadP2(ctx context.Context, owner string,
 }
 
 // Execute executes the request
-//  @return P2PackageUploadResponse
-func (a *PackagesApiService) PackagesUploadP2Execute(r ApiPackagesUploadP2Request) (*P2PackageUploadResponse, *http.Response, error) {
+//  @return P2PackageUpload
+func (a *PackagesApiService) PackagesUploadP2Execute(r ApiPackagesUploadP2Request) (*P2PackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *P2PackageUploadResponse
+		localVarReturnValue *P2PackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadP2")
@@ -4436,7 +4436,7 @@ func (r ApiPackagesUploadPythonRequest) Data(data PythonPackageUploadRequest) Ap
 	return r
 }
 
-func (r ApiPackagesUploadPythonRequest) Execute() (*PythonPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadPythonRequest) Execute() (*PythonPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadPythonExecute(r)
 }
 
@@ -4460,13 +4460,13 @@ func (a *PackagesApiService) PackagesUploadPython(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return PythonPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadPythonExecute(r ApiPackagesUploadPythonRequest) (*PythonPackageUploadResponse, *http.Response, error) {
+//  @return PythonPackageUpload
+func (a *PackagesApiService) PackagesUploadPythonExecute(r ApiPackagesUploadPythonRequest) (*PythonPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PythonPackageUploadResponse
+		localVarReturnValue *PythonPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadPython")
@@ -4597,7 +4597,7 @@ func (r ApiPackagesUploadRawRequest) Data(data RawPackageUploadRequest) ApiPacka
 	return r
 }
 
-func (r ApiPackagesUploadRawRequest) Execute() (*RawPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadRawRequest) Execute() (*RawPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadRawExecute(r)
 }
 
@@ -4621,13 +4621,13 @@ func (a *PackagesApiService) PackagesUploadRaw(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return RawPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadRawExecute(r ApiPackagesUploadRawRequest) (*RawPackageUploadResponse, *http.Response, error) {
+//  @return RawPackageUpload
+func (a *PackagesApiService) PackagesUploadRawExecute(r ApiPackagesUploadRawRequest) (*RawPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RawPackageUploadResponse
+		localVarReturnValue *RawPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadRaw")
@@ -4758,7 +4758,7 @@ func (r ApiPackagesUploadRpmRequest) Data(data RpmPackageUploadRequest) ApiPacka
 	return r
 }
 
-func (r ApiPackagesUploadRpmRequest) Execute() (*RpmPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadRpmRequest) Execute() (*RpmPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadRpmExecute(r)
 }
 
@@ -4782,13 +4782,13 @@ func (a *PackagesApiService) PackagesUploadRpm(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return RpmPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadRpmExecute(r ApiPackagesUploadRpmRequest) (*RpmPackageUploadResponse, *http.Response, error) {
+//  @return RpmPackageUpload
+func (a *PackagesApiService) PackagesUploadRpmExecute(r ApiPackagesUploadRpmRequest) (*RpmPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RpmPackageUploadResponse
+		localVarReturnValue *RpmPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadRpm")
@@ -4919,7 +4919,7 @@ func (r ApiPackagesUploadRubyRequest) Data(data RubyPackageUploadRequest) ApiPac
 	return r
 }
 
-func (r ApiPackagesUploadRubyRequest) Execute() (*RubyPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadRubyRequest) Execute() (*RubyPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadRubyExecute(r)
 }
 
@@ -4943,13 +4943,13 @@ func (a *PackagesApiService) PackagesUploadRuby(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return RubyPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadRubyExecute(r ApiPackagesUploadRubyRequest) (*RubyPackageUploadResponse, *http.Response, error) {
+//  @return RubyPackageUpload
+func (a *PackagesApiService) PackagesUploadRubyExecute(r ApiPackagesUploadRubyRequest) (*RubyPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RubyPackageUploadResponse
+		localVarReturnValue *RubyPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadRuby")
@@ -5080,7 +5080,7 @@ func (r ApiPackagesUploadTerraformRequest) Data(data TerraformPackageUploadReque
 	return r
 }
 
-func (r ApiPackagesUploadTerraformRequest) Execute() (*TerraformPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadTerraformRequest) Execute() (*TerraformPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadTerraformExecute(r)
 }
 
@@ -5104,13 +5104,13 @@ func (a *PackagesApiService) PackagesUploadTerraform(ctx context.Context, owner 
 }
 
 // Execute executes the request
-//  @return TerraformPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadTerraformExecute(r ApiPackagesUploadTerraformRequest) (*TerraformPackageUploadResponse, *http.Response, error) {
+//  @return TerraformPackageUpload
+func (a *PackagesApiService) PackagesUploadTerraformExecute(r ApiPackagesUploadTerraformRequest) (*TerraformPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *TerraformPackageUploadResponse
+		localVarReturnValue *TerraformPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadTerraform")
@@ -5241,7 +5241,7 @@ func (r ApiPackagesUploadVagrantRequest) Data(data VagrantPackageUploadRequest) 
 	return r
 }
 
-func (r ApiPackagesUploadVagrantRequest) Execute() (*VagrantPackageUploadResponse, *http.Response, error) {
+func (r ApiPackagesUploadVagrantRequest) Execute() (*VagrantPackageUpload, *http.Response, error) {
 	return r.ApiService.PackagesUploadVagrantExecute(r)
 }
 
@@ -5265,13 +5265,13 @@ func (a *PackagesApiService) PackagesUploadVagrant(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return VagrantPackageUploadResponse
-func (a *PackagesApiService) PackagesUploadVagrantExecute(r ApiPackagesUploadVagrantRequest) (*VagrantPackageUploadResponse, *http.Response, error) {
+//  @return VagrantPackageUpload
+func (a *PackagesApiService) PackagesUploadVagrantExecute(r ApiPackagesUploadVagrantRequest) (*VagrantPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *VagrantPackageUploadResponse
+		localVarReturnValue *VagrantPackageUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesUploadVagrant")

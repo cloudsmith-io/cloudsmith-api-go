@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -43,7 +43,7 @@ func (r ApiEntitlementsCreateRequest) Data(data RepositoryTokenRequest) ApiEntit
 	return r
 }
 
-func (r ApiEntitlementsCreateRequest) Execute() (*RepositoryTokenResponse, *http.Response, error) {
+func (r ApiEntitlementsCreateRequest) Execute() (*RepositoryToken, *http.Response, error) {
 	return r.ApiService.EntitlementsCreateExecute(r)
 }
 
@@ -67,13 +67,13 @@ func (a *EntitlementsApiService) EntitlementsCreate(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return RepositoryTokenResponse
-func (a *EntitlementsApiService) EntitlementsCreateExecute(r ApiEntitlementsCreateRequest) (*RepositoryTokenResponse, *http.Response, error) {
+//  @return RepositoryToken
+func (a *EntitlementsApiService) EntitlementsCreateExecute(r ApiEntitlementsCreateRequest) (*RepositoryToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryTokenResponse
+		localVarReturnValue *RepositoryToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsCreate")
@@ -641,7 +641,7 @@ func (r ApiEntitlementsListRequest) Active(active bool) ApiEntitlementsListReque
 	return r
 }
 
-func (r ApiEntitlementsListRequest) Execute() ([]RepositoryTokenResponse, *http.Response, error) {
+func (r ApiEntitlementsListRequest) Execute() ([]RepositoryToken, *http.Response, error) {
 	return r.ApiService.EntitlementsListExecute(r)
 }
 
@@ -665,13 +665,13 @@ func (a *EntitlementsApiService) EntitlementsList(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return []RepositoryTokenResponse
-func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRequest) ([]RepositoryTokenResponse, *http.Response, error) {
+//  @return []RepositoryToken
+func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRequest) ([]RepositoryToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []RepositoryTokenResponse
+		localVarReturnValue []RepositoryToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsList")
@@ -823,7 +823,7 @@ func (r ApiEntitlementsPartialUpdateRequest) Data(data RepositoryTokenRequestPat
 	return r
 }
 
-func (r ApiEntitlementsPartialUpdateRequest) Execute() (*RepositoryTokenResponse, *http.Response, error) {
+func (r ApiEntitlementsPartialUpdateRequest) Execute() (*RepositoryToken, *http.Response, error) {
 	return r.ApiService.EntitlementsPartialUpdateExecute(r)
 }
 
@@ -849,13 +849,13 @@ func (a *EntitlementsApiService) EntitlementsPartialUpdate(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return RepositoryTokenResponse
-func (a *EntitlementsApiService) EntitlementsPartialUpdateExecute(r ApiEntitlementsPartialUpdateRequest) (*RepositoryTokenResponse, *http.Response, error) {
+//  @return RepositoryToken
+func (a *EntitlementsApiService) EntitlementsPartialUpdateExecute(r ApiEntitlementsPartialUpdateRequest) (*RepositoryToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryTokenResponse
+		localVarReturnValue *RepositoryToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsPartialUpdate")
@@ -999,7 +999,7 @@ func (r ApiEntitlementsReadRequest) ShowTokens(showTokens bool) ApiEntitlementsR
 	return r
 }
 
-func (r ApiEntitlementsReadRequest) Execute() (*RepositoryTokenResponse, *http.Response, error) {
+func (r ApiEntitlementsReadRequest) Execute() (*RepositoryToken, *http.Response, error) {
 	return r.ApiService.EntitlementsReadExecute(r)
 }
 
@@ -1025,13 +1025,13 @@ func (a *EntitlementsApiService) EntitlementsRead(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RepositoryTokenResponse
-func (a *EntitlementsApiService) EntitlementsReadExecute(r ApiEntitlementsReadRequest) (*RepositoryTokenResponse, *http.Response, error) {
+//  @return RepositoryToken
+func (a *EntitlementsApiService) EntitlementsReadExecute(r ApiEntitlementsReadRequest) (*RepositoryToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryTokenResponse
+		localVarReturnValue *RepositoryToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsRead")
@@ -1175,7 +1175,7 @@ func (r ApiEntitlementsRefreshRequest) Data(data RepositoryTokenRefreshRequest) 
 	return r
 }
 
-func (r ApiEntitlementsRefreshRequest) Execute() (*RepositoryTokenRefreshResponse, *http.Response, error) {
+func (r ApiEntitlementsRefreshRequest) Execute() (*RepositoryTokenRefresh, *http.Response, error) {
 	return r.ApiService.EntitlementsRefreshExecute(r)
 }
 
@@ -1201,13 +1201,13 @@ func (a *EntitlementsApiService) EntitlementsRefresh(ctx context.Context, owner 
 }
 
 // Execute executes the request
-//  @return RepositoryTokenRefreshResponse
-func (a *EntitlementsApiService) EntitlementsRefreshExecute(r ApiEntitlementsRefreshRequest) (*RepositoryTokenRefreshResponse, *http.Response, error) {
+//  @return RepositoryTokenRefresh
+func (a *EntitlementsApiService) EntitlementsRefreshExecute(r ApiEntitlementsRefreshRequest) (*RepositoryTokenRefresh, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryTokenRefreshResponse
+		localVarReturnValue *RepositoryTokenRefresh
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsRefresh")
@@ -1483,7 +1483,7 @@ func (r ApiEntitlementsSyncRequest) Data(data RepositoryTokenSyncRequest) ApiEnt
 	return r
 }
 
-func (r ApiEntitlementsSyncRequest) Execute() (*RepositoryTokenSyncResponse, *http.Response, error) {
+func (r ApiEntitlementsSyncRequest) Execute() (*RepositoryTokenSync, *http.Response, error) {
 	return r.ApiService.EntitlementsSyncExecute(r)
 }
 
@@ -1507,13 +1507,13 @@ func (a *EntitlementsApiService) EntitlementsSync(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RepositoryTokenSyncResponse
-func (a *EntitlementsApiService) EntitlementsSyncExecute(r ApiEntitlementsSyncRequest) (*RepositoryTokenSyncResponse, *http.Response, error) {
+//  @return RepositoryTokenSync
+func (a *EntitlementsApiService) EntitlementsSyncExecute(r ApiEntitlementsSyncRequest) (*RepositoryTokenSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryTokenSyncResponse
+		localVarReturnValue *RepositoryTokenSync
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EntitlementsApiService.EntitlementsSync")

@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 ## FilesComplete
 
-> PackageFileUploadResponse FilesComplete(ctx, owner, repo, identifier).Data(data).Execute()
+> PackageFileUpload FilesComplete(ctx, owner, repo, identifier).Data(data).Execute()
 
 Complete a multipart file upload.
 
@@ -121,7 +121,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesComplete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FilesComplete`: PackageFileUploadResponse
+    // response from `FilesComplete`: PackageFileUpload
     fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesComplete`: %v\n", resp)
 }
 ```
@@ -150,7 +150,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageFileUploadResponse**](PackageFileUploadResponse.md)
+[**PackageFileUpload**](PackageFileUpload.md)
 
 ### Authorization
 
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 ## FilesCreate
 
-> PackageFileUploadResponse FilesCreate(ctx, owner, repo).Data(data).Execute()
+> PackageFileUpload FilesCreate(ctx, owner, repo).Data(data).Execute()
 
 Request URL(s) to upload new package file upload(s) to.
 
@@ -198,7 +198,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FilesCreate`: PackageFileUploadResponse
+    // response from `FilesCreate`: PackageFileUpload
     fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesCreate`: %v\n", resp)
 }
 ```
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageFileUploadResponse**](PackageFileUploadResponse.md)
+[**PackageFileUpload**](PackageFileUpload.md)
 
 ### Authorization
 
@@ -243,7 +243,7 @@ Name | Type | Description  | Notes
 
 ## FilesInfo
 
-> PackageFilePartsUploadResponse FilesInfo(ctx, owner, repo, identifier).Filename(filename).PartNumber(partNumber).Execute()
+> PackageFilePartsUpload FilesInfo(ctx, owner, repo, identifier).Filename(filename).PartNumber(partNumber).Execute()
 
 Get upload information to perform a multipart file upload.
 
@@ -275,7 +275,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FilesInfo`: PackageFilePartsUploadResponse
+    // response from `FilesInfo`: PackageFilePartsUpload
     fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesInfo`: %v\n", resp)
 }
 ```
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageFilePartsUploadResponse**](PackageFilePartsUploadResponse.md)
+[**PackageFilePartsUpload**](PackageFilePartsUpload.md)
 
 ### Authorization
 

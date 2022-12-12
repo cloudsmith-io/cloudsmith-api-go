@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -191,7 +191,7 @@ func (r ApiFilesCompleteRequest) Data(data PackageFileUploadRequest) ApiFilesCom
 	return r
 }
 
-func (r ApiFilesCompleteRequest) Execute() (*PackageFileUploadResponse, *http.Response, error) {
+func (r ApiFilesCompleteRequest) Execute() (*PackageFileUpload, *http.Response, error) {
 	return r.ApiService.FilesCompleteExecute(r)
 }
 
@@ -217,13 +217,13 @@ func (a *FilesApiService) FilesComplete(ctx context.Context, owner string, repo 
 }
 
 // Execute executes the request
-//  @return PackageFileUploadResponse
-func (a *FilesApiService) FilesCompleteExecute(r ApiFilesCompleteRequest) (*PackageFileUploadResponse, *http.Response, error) {
+//  @return PackageFileUpload
+func (a *FilesApiService) FilesCompleteExecute(r ApiFilesCompleteRequest) (*PackageFileUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageFileUploadResponse
+		localVarReturnValue *PackageFileUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesApiService.FilesComplete")
@@ -355,7 +355,7 @@ func (r ApiFilesCreateRequest) Data(data PackageFileUploadRequest) ApiFilesCreat
 	return r
 }
 
-func (r ApiFilesCreateRequest) Execute() (*PackageFileUploadResponse, *http.Response, error) {
+func (r ApiFilesCreateRequest) Execute() (*PackageFileUpload, *http.Response, error) {
 	return r.ApiService.FilesCreateExecute(r)
 }
 
@@ -379,13 +379,13 @@ func (a *FilesApiService) FilesCreate(ctx context.Context, owner string, repo st
 }
 
 // Execute executes the request
-//  @return PackageFileUploadResponse
-func (a *FilesApiService) FilesCreateExecute(r ApiFilesCreateRequest) (*PackageFileUploadResponse, *http.Response, error) {
+//  @return PackageFileUpload
+func (a *FilesApiService) FilesCreateExecute(r ApiFilesCreateRequest) (*PackageFileUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageFileUploadResponse
+		localVarReturnValue *PackageFileUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesApiService.FilesCreate")
@@ -525,7 +525,7 @@ func (r ApiFilesInfoRequest) PartNumber(partNumber int64) ApiFilesInfoRequest {
 	return r
 }
 
-func (r ApiFilesInfoRequest) Execute() (*PackageFilePartsUploadResponse, *http.Response, error) {
+func (r ApiFilesInfoRequest) Execute() (*PackageFilePartsUpload, *http.Response, error) {
 	return r.ApiService.FilesInfoExecute(r)
 }
 
@@ -551,13 +551,13 @@ func (a *FilesApiService) FilesInfo(ctx context.Context, owner string, repo stri
 }
 
 // Execute executes the request
-//  @return PackageFilePartsUploadResponse
-func (a *FilesApiService) FilesInfoExecute(r ApiFilesInfoRequest) (*PackageFilePartsUploadResponse, *http.Response, error) {
+//  @return PackageFilePartsUpload
+func (a *FilesApiService) FilesInfoExecute(r ApiFilesInfoRequest) (*PackageFilePartsUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageFilePartsUploadResponse
+		localVarReturnValue *PackageFilePartsUpload
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FilesApiService.FilesInfo")

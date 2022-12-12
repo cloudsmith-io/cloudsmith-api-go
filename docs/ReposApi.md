@@ -24,7 +24,7 @@ Method | HTTP request | Description
 
 ## ReposCreate
 
-> RepositoryCreateResponse ReposCreate(ctx, owner).Data(data).Execute()
+> RepositoryCreate ReposCreate(ctx, owner).Data(data).Execute()
 
 Create a new repository in a given namespace.
 
@@ -53,7 +53,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposCreate`: RepositoryCreateResponse
+    // response from `ReposCreate`: RepositoryCreate
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposCreate`: %v\n", resp)
 }
 ```
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryCreateResponse**](RepositoryCreateResponse.md)
+[**RepositoryCreate**](RepositoryCreate.md)
 
 ### Authorization
 
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 
 ## ReposGpgCreate
 
-> RepositoryGpgKeyResponse ReposGpgCreate(ctx, owner, identifier).Data(data).Execute()
+> RepositoryGpgKey ReposGpgCreate(ctx, owner, identifier).Data(data).Execute()
 
 Set the active GPG key for the Repository.
 
@@ -197,7 +197,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGpgCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposGpgCreate`: RepositoryGpgKeyResponse
+    // response from `ReposGpgCreate`: RepositoryGpgKey
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGpgCreate`: %v\n", resp)
 }
 ```
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryGpgKeyResponse**](RepositoryGpgKeyResponse.md)
+[**RepositoryGpgKey**](RepositoryGpgKey.md)
 
 ### Authorization
 
@@ -242,7 +242,7 @@ Name | Type | Description  | Notes
 
 ## ReposGpgList
 
-> RepositoryGpgKeyResponse ReposGpgList(ctx, owner, identifier).Execute()
+> RepositoryGpgKey ReposGpgList(ctx, owner, identifier).Execute()
 
 Retrieve the active GPG key for the Repository.
 
@@ -271,7 +271,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGpgList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposGpgList`: RepositoryGpgKeyResponse
+    // response from `ReposGpgList`: RepositoryGpgKey
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGpgList`: %v\n", resp)
 }
 ```
@@ -297,7 +297,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryGpgKeyResponse**](RepositoryGpgKeyResponse.md)
+[**RepositoryGpgKey**](RepositoryGpgKey.md)
 
 ### Authorization
 
@@ -315,7 +315,7 @@ Name | Type | Description  | Notes
 
 ## ReposGpgRegenerate
 
-> RepositoryGpgKeyResponse ReposGpgRegenerate(ctx, owner, identifier).Execute()
+> RepositoryGpgKey ReposGpgRegenerate(ctx, owner, identifier).Execute()
 
 Regenerate GPG Key for the Repository.
 
@@ -344,7 +344,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGpgRegenerate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposGpgRegenerate`: RepositoryGpgKeyResponse
+    // response from `ReposGpgRegenerate`: RepositoryGpgKey
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGpgRegenerate`: %v\n", resp)
 }
 ```
@@ -370,7 +370,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryGpgKeyResponse**](RepositoryGpgKeyResponse.md)
+[**RepositoryGpgKey**](RepositoryGpgKey.md)
 
 ### Authorization
 
@@ -388,7 +388,7 @@ Name | Type | Description  | Notes
 
 ## ReposNamespaceList
 
-> []RepositoryResponse ReposNamespaceList(ctx, owner).Page(page).PageSize(pageSize).Execute()
+> []Repository ReposNamespaceList(ctx, owner).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all repositories within a namespace.
 
@@ -418,7 +418,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposNamespaceList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposNamespaceList`: []RepositoryResponse
+    // response from `ReposNamespaceList`: []Repository
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposNamespaceList`: %v\n", resp)
 }
 ```
@@ -444,7 +444,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]RepositoryResponse**](RepositoryResponse.md)
+[**[]Repository**](Repository.md)
 
 ### Authorization
 
@@ -462,7 +462,7 @@ Name | Type | Description  | Notes
 
 ## ReposPartialUpdate
 
-> RepositoryResponse ReposPartialUpdate(ctx, owner, identifier).Data(data).Execute()
+> Repository ReposPartialUpdate(ctx, owner, identifier).Data(data).Execute()
 
 Update details about a repository in a given namespace.
 
@@ -492,7 +492,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposPartialUpdate`: RepositoryResponse
+    // response from `ReposPartialUpdate`: Repository
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposPartialUpdate`: %v\n", resp)
 }
 ```
@@ -519,7 +519,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryResponse**](RepositoryResponse.md)
+[**Repository**](Repository.md)
 
 ### Authorization
 
@@ -537,7 +537,7 @@ Name | Type | Description  | Notes
 
 ## ReposPrivilegesList
 
-> RepositoryPrivilegeInputResponse ReposPrivilegesList(ctx, owner, identifier).Page(page).PageSize(pageSize).Execute()
+> RepositoryPrivilegeInput ReposPrivilegesList(ctx, owner, identifier).Page(page).PageSize(pageSize).Execute()
 
 List all explicity created privileges for the repository.
 
@@ -568,7 +568,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPrivilegesList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposPrivilegesList`: RepositoryPrivilegeInputResponse
+    // response from `ReposPrivilegesList`: RepositoryPrivilegeInput
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposPrivilegesList`: %v\n", resp)
 }
 ```
@@ -596,7 +596,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryPrivilegeInputResponse**](RepositoryPrivilegeInputResponse.md)
+[**RepositoryPrivilegeInput**](RepositoryPrivilegeInput.md)
 
 ### Authorization
 
@@ -760,7 +760,7 @@ Name | Type | Description  | Notes
 
 ## ReposRead
 
-> RepositoryResponse ReposRead(ctx, owner, identifier).Execute()
+> Repository ReposRead(ctx, owner, identifier).Execute()
 
 Get a specific repository.
 
@@ -789,7 +789,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposRead`: RepositoryResponse
+    // response from `ReposRead`: Repository
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRead`: %v\n", resp)
 }
 ```
@@ -815,7 +815,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryResponse**](RepositoryResponse.md)
+[**Repository**](Repository.md)
 
 ### Authorization
 
@@ -833,7 +833,7 @@ Name | Type | Description  | Notes
 
 ## ReposRsaCreate
 
-> RepositoryRsaKeyResponse ReposRsaCreate(ctx, owner, identifier).Data(data).Execute()
+> RepositoryRsaKey ReposRsaCreate(ctx, owner, identifier).Data(data).Execute()
 
 Set the active RSA key for the Repository.
 
@@ -863,7 +863,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRsaCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposRsaCreate`: RepositoryRsaKeyResponse
+    // response from `ReposRsaCreate`: RepositoryRsaKey
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRsaCreate`: %v\n", resp)
 }
 ```
@@ -890,7 +890,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryRsaKeyResponse**](RepositoryRsaKeyResponse.md)
+[**RepositoryRsaKey**](RepositoryRsaKey.md)
 
 ### Authorization
 
@@ -908,7 +908,7 @@ Name | Type | Description  | Notes
 
 ## ReposRsaList
 
-> RepositoryRsaKeyResponse ReposRsaList(ctx, owner, identifier).Execute()
+> RepositoryRsaKey ReposRsaList(ctx, owner, identifier).Execute()
 
 Retrieve the active RSA key for the Repository.
 
@@ -937,7 +937,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRsaList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposRsaList`: RepositoryRsaKeyResponse
+    // response from `ReposRsaList`: RepositoryRsaKey
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRsaList`: %v\n", resp)
 }
 ```
@@ -963,7 +963,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryRsaKeyResponse**](RepositoryRsaKeyResponse.md)
+[**RepositoryRsaKey**](RepositoryRsaKey.md)
 
 ### Authorization
 
@@ -981,7 +981,7 @@ Name | Type | Description  | Notes
 
 ## ReposRsaRegenerate
 
-> RepositoryRsaKeyResponse ReposRsaRegenerate(ctx, owner, identifier).Execute()
+> RepositoryRsaKey ReposRsaRegenerate(ctx, owner, identifier).Execute()
 
 Regenerate RSA Key for the Repository.
 
@@ -1010,7 +1010,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRsaRegenerate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposRsaRegenerate`: RepositoryRsaKeyResponse
+    // response from `ReposRsaRegenerate`: RepositoryRsaKey
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRsaRegenerate`: %v\n", resp)
 }
 ```
@@ -1036,7 +1036,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryRsaKeyResponse**](RepositoryRsaKeyResponse.md)
+[**RepositoryRsaKey**](RepositoryRsaKey.md)
 
 ### Authorization
 
@@ -1054,7 +1054,7 @@ Name | Type | Description  | Notes
 
 ## ReposUserList
 
-> []RepositoryResponse ReposUserList(ctx).Page(page).PageSize(pageSize).Execute()
+> []Repository ReposUserList(ctx).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all repositories associated with current user.
 
@@ -1083,7 +1083,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUserList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposUserList`: []RepositoryResponse
+    // response from `ReposUserList`: []Repository
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUserList`: %v\n", resp)
 }
 ```
@@ -1104,7 +1104,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]RepositoryResponse**](RepositoryResponse.md)
+[**[]Repository**](Repository.md)
 
 ### Authorization
 

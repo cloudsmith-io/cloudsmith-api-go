@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -43,7 +43,7 @@ func (r ApiVulnerabilitiesNamespaceListRequest) PageSize(pageSize int64) ApiVuln
 	return r
 }
 
-func (r ApiVulnerabilitiesNamespaceListRequest) Execute() ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
+func (r ApiVulnerabilitiesNamespaceListRequest) Execute() ([]VulnerabilityScanResultsList, *http.Response, error) {
 	return r.ApiService.VulnerabilitiesNamespaceListExecute(r)
 }
 
@@ -65,13 +65,13 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return []VulnerabilityScanResultsListResponse
-func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceListExecute(r ApiVulnerabilitiesNamespaceListRequest) ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
+//  @return []VulnerabilityScanResultsList
+func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceListExecute(r ApiVulnerabilitiesNamespaceListRequest) ([]VulnerabilityScanResultsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []VulnerabilityScanResultsListResponse
+		localVarReturnValue []VulnerabilityScanResultsList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesNamespaceList")
@@ -203,7 +203,7 @@ func (r ApiVulnerabilitiesPackageListRequest) PageSize(pageSize int64) ApiVulner
 	return r
 }
 
-func (r ApiVulnerabilitiesPackageListRequest) Execute() ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
+func (r ApiVulnerabilitiesPackageListRequest) Execute() ([]VulnerabilityScanResultsList, *http.Response, error) {
 	return r.ApiService.VulnerabilitiesPackageListExecute(r)
 }
 
@@ -229,13 +229,13 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesPackageList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return []VulnerabilityScanResultsListResponse
-func (a *VulnerabilitiesApiService) VulnerabilitiesPackageListExecute(r ApiVulnerabilitiesPackageListRequest) ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
+//  @return []VulnerabilityScanResultsList
+func (a *VulnerabilitiesApiService) VulnerabilitiesPackageListExecute(r ApiVulnerabilitiesPackageListRequest) ([]VulnerabilityScanResultsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []VulnerabilityScanResultsListResponse
+		localVarReturnValue []VulnerabilityScanResultsList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesPackageList")
@@ -356,7 +356,7 @@ type ApiVulnerabilitiesReadRequest struct {
 	scanId     string
 }
 
-func (r ApiVulnerabilitiesReadRequest) Execute() (*VulnerabilityScanResultsResponse, *http.Response, error) {
+func (r ApiVulnerabilitiesReadRequest) Execute() (*VulnerabilityScanResults, *http.Response, error) {
 	return r.ApiService.VulnerabilitiesReadExecute(r)
 }
 
@@ -384,13 +384,13 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesRead(ctx context.Context, own
 }
 
 // Execute executes the request
-//  @return VulnerabilityScanResultsResponse
-func (a *VulnerabilitiesApiService) VulnerabilitiesReadExecute(r ApiVulnerabilitiesReadRequest) (*VulnerabilityScanResultsResponse, *http.Response, error) {
+//  @return VulnerabilityScanResults
+func (a *VulnerabilitiesApiService) VulnerabilitiesReadExecute(r ApiVulnerabilitiesReadRequest) (*VulnerabilityScanResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *VulnerabilityScanResultsResponse
+		localVarReturnValue *VulnerabilityScanResults
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesRead")
@@ -518,7 +518,7 @@ func (r ApiVulnerabilitiesRepoListRequest) PageSize(pageSize int64) ApiVulnerabi
 	return r
 }
 
-func (r ApiVulnerabilitiesRepoListRequest) Execute() ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
+func (r ApiVulnerabilitiesRepoListRequest) Execute() ([]VulnerabilityScanResultsList, *http.Response, error) {
 	return r.ApiService.VulnerabilitiesRepoListExecute(r)
 }
 
@@ -542,13 +542,13 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesRepoList(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return []VulnerabilityScanResultsListResponse
-func (a *VulnerabilitiesApiService) VulnerabilitiesRepoListExecute(r ApiVulnerabilitiesRepoListRequest) ([]VulnerabilityScanResultsListResponse, *http.Response, error) {
+//  @return []VulnerabilityScanResultsList
+func (a *VulnerabilitiesApiService) VulnerabilitiesRepoListExecute(r ApiVulnerabilitiesRepoListRequest) ([]VulnerabilityScanResultsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []VulnerabilityScanResultsListResponse
+		localVarReturnValue []VulnerabilityScanResultsList
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VulnerabilitiesApiService.VulnerabilitiesRepoList")

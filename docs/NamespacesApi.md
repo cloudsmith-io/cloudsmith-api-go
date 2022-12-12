@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## NamespacesList
 
-> []NamespaceResponse NamespacesList(ctx).Page(page).PageSize(pageSize).Execute()
+> []Namespace NamespacesList(ctx).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all namespaces the user belongs to.
 
@@ -40,7 +40,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `NamespacesApi.NamespacesList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `NamespacesList`: []NamespaceResponse
+    // response from `NamespacesList`: []Namespace
     fmt.Fprintf(os.Stdout, "Response from `NamespacesApi.NamespacesList`: %v\n", resp)
 }
 ```
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]NamespaceResponse**](NamespaceResponse.md)
+[**[]Namespace**](Namespace.md)
 
 ### Authorization
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 
 ## NamespacesRead
 
-> NamespaceResponse NamespacesRead(ctx, slug).Execute()
+> Namespace NamespacesRead(ctx, slug).Execute()
 
 Views for working with namespaces.
 
@@ -107,7 +107,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `NamespacesApi.NamespacesRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `NamespacesRead`: NamespaceResponse
+    // response from `NamespacesRead`: Namespace
     fmt.Fprintf(os.Stdout, "Response from `NamespacesApi.NamespacesRead`: %v\n", resp)
 }
 ```
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NamespaceResponse**](NamespaceResponse.md)
+[**Namespace**](Namespace.md)
 
 ### Authorization
 

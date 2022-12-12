@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## MetricsEntitlementsAccountList
 
-> EntitlementUsageMetricsResponse MetricsEntitlementsAccountList(ctx, owner).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
+> EntitlementUsageMetrics MetricsEntitlementsAccountList(ctx, owner).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
 
 View for listing entitlement token metrics, across an account.
 
@@ -45,7 +45,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsEntitlementsAccountList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `MetricsEntitlementsAccountList`: EntitlementUsageMetricsResponse
+    // response from `MetricsEntitlementsAccountList`: EntitlementUsageMetrics
     fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsEntitlementsAccountList`: %v\n", resp)
 }
 ```
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EntitlementUsageMetricsResponse**](EntitlementUsageMetricsResponse.md)
+[**EntitlementUsageMetrics**](EntitlementUsageMetrics.md)
 
 ### Authorization
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 ## MetricsEntitlementsRepoList
 
-> EntitlementUsageMetricsResponse MetricsEntitlementsRepoList(ctx, owner, repo).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
+> EntitlementUsageMetrics MetricsEntitlementsRepoList(ctx, owner, repo).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
 
 View for listing entitlement token metrics, for a repository.
 
@@ -126,7 +126,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsEntitlementsRepoList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `MetricsEntitlementsRepoList`: EntitlementUsageMetricsResponse
+    // response from `MetricsEntitlementsRepoList`: EntitlementUsageMetrics
     fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsEntitlementsRepoList`: %v\n", resp)
 }
 ```
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EntitlementUsageMetricsResponse**](EntitlementUsageMetricsResponse.md)
+[**EntitlementUsageMetrics**](EntitlementUsageMetrics.md)
 
 ### Authorization
 
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 
 ## MetricsPackagesList
 
-> PackageUsageMetricsResponse MetricsPackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).Finish(finish).Packages(packages).Start(start).Execute()
+> PackageUsageMetrics MetricsPackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).Finish(finish).Packages(packages).Start(start).Execute()
 
 View for listing package usage metrics, for a repository.
 
@@ -209,7 +209,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsPackagesList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `MetricsPackagesList`: PackageUsageMetricsResponse
+    // response from `MetricsPackagesList`: PackageUsageMetrics
     fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsPackagesList`: %v\n", resp)
 }
 ```
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageUsageMetricsResponse**](PackageUsageMetricsResponse.md)
+[**PackageUsageMetrics**](PackageUsageMetrics.md)
 
 ### Authorization
 

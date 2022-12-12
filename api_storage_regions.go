@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,7 +28,7 @@ type ApiStorageRegionsListRequest struct {
 	ApiService *StorageRegionsApiService
 }
 
-func (r ApiStorageRegionsListRequest) Execute() ([]StorageRegionResponse, *http.Response, error) {
+func (r ApiStorageRegionsListRequest) Execute() ([]StorageRegion, *http.Response, error) {
 	return r.ApiService.StorageRegionsListExecute(r)
 }
 
@@ -48,13 +48,13 @@ func (a *StorageRegionsApiService) StorageRegionsList(ctx context.Context) ApiSt
 }
 
 // Execute executes the request
-//  @return []StorageRegionResponse
-func (a *StorageRegionsApiService) StorageRegionsListExecute(r ApiStorageRegionsListRequest) ([]StorageRegionResponse, *http.Response, error) {
+//  @return []StorageRegion
+func (a *StorageRegionsApiService) StorageRegionsListExecute(r ApiStorageRegionsListRequest) ([]StorageRegion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []StorageRegionResponse
+		localVarReturnValue []StorageRegion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageRegionsApiService.StorageRegionsList")
@@ -163,7 +163,7 @@ type ApiStorageRegionsReadRequest struct {
 	slug       string
 }
 
-func (r ApiStorageRegionsReadRequest) Execute() (*StorageRegionResponse, *http.Response, error) {
+func (r ApiStorageRegionsReadRequest) Execute() (*StorageRegion, *http.Response, error) {
 	return r.ApiService.StorageRegionsReadExecute(r)
 }
 
@@ -185,13 +185,13 @@ func (a *StorageRegionsApiService) StorageRegionsRead(ctx context.Context, slug 
 }
 
 // Execute executes the request
-//  @return StorageRegionResponse
-func (a *StorageRegionsApiService) StorageRegionsReadExecute(r ApiStorageRegionsReadRequest) (*StorageRegionResponse, *http.Response, error) {
+//  @return StorageRegion
+func (a *StorageRegionsApiService) StorageRegionsReadExecute(r ApiStorageRegionsReadRequest) (*StorageRegion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *StorageRegionResponse
+		localVarReturnValue *StorageRegion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageRegionsApiService.StorageRegionsRead")

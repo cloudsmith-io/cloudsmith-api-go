@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -35,7 +35,7 @@ func (r ApiOrgsInvitesCreateRequest) Data(data OrganizationInviteRequest) ApiOrg
 	return r
 }
 
-func (r ApiOrgsInvitesCreateRequest) Execute() (*OrganizationInviteResponse, *http.Response, error) {
+func (r ApiOrgsInvitesCreateRequest) Execute() (*OrganizationInvite, *http.Response, error) {
 	return r.ApiService.OrgsInvitesCreateExecute(r)
 }
 
@@ -57,13 +57,13 @@ func (a *OrgsApiService) OrgsInvitesCreate(ctx context.Context, org string) ApiO
 }
 
 // Execute executes the request
-//  @return OrganizationInviteResponse
-func (a *OrgsApiService) OrgsInvitesCreateExecute(r ApiOrgsInvitesCreateRequest) (*OrganizationInviteResponse, *http.Response, error) {
+//  @return OrganizationInvite
+func (a *OrgsApiService) OrgsInvitesCreateExecute(r ApiOrgsInvitesCreateRequest) (*OrganizationInvite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationInviteResponse
+		localVarReturnValue *OrganizationInvite
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsInvitesCreate")
@@ -307,7 +307,7 @@ type ApiOrgsInvitesExtendRequest struct {
 	slugPerm   string
 }
 
-func (r ApiOrgsInvitesExtendRequest) Execute() (*OrganizationInviteExtendResponse, *http.Response, error) {
+func (r ApiOrgsInvitesExtendRequest) Execute() (*OrganizationInviteExtend, *http.Response, error) {
 	return r.ApiService.OrgsInvitesExtendExecute(r)
 }
 
@@ -331,13 +331,13 @@ func (a *OrgsApiService) OrgsInvitesExtend(ctx context.Context, org string, slug
 }
 
 // Execute executes the request
-//  @return OrganizationInviteExtendResponse
-func (a *OrgsApiService) OrgsInvitesExtendExecute(r ApiOrgsInvitesExtendRequest) (*OrganizationInviteExtendResponse, *http.Response, error) {
+//  @return OrganizationInviteExtend
+func (a *OrgsApiService) OrgsInvitesExtendExecute(r ApiOrgsInvitesExtendRequest) (*OrganizationInviteExtend, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationInviteExtendResponse
+		localVarReturnValue *OrganizationInviteExtend
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsInvitesExtend")
@@ -473,7 +473,7 @@ func (r ApiOrgsInvitesListRequest) PageSize(pageSize int64) ApiOrgsInvitesListRe
 	return r
 }
 
-func (r ApiOrgsInvitesListRequest) Execute() ([]OrganizationInviteResponse, *http.Response, error) {
+func (r ApiOrgsInvitesListRequest) Execute() ([]OrganizationInvite, *http.Response, error) {
 	return r.ApiService.OrgsInvitesListExecute(r)
 }
 
@@ -495,13 +495,13 @@ func (a *OrgsApiService) OrgsInvitesList(ctx context.Context, org string) ApiOrg
 }
 
 // Execute executes the request
-//  @return []OrganizationInviteResponse
-func (a *OrgsApiService) OrgsInvitesListExecute(r ApiOrgsInvitesListRequest) ([]OrganizationInviteResponse, *http.Response, error) {
+//  @return []OrganizationInvite
+func (a *OrgsApiService) OrgsInvitesListExecute(r ApiOrgsInvitesListRequest) ([]OrganizationInvite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []OrganizationInviteResponse
+		localVarReturnValue []OrganizationInvite
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsInvitesList")
@@ -635,7 +635,7 @@ func (r ApiOrgsInvitesPartialUpdateRequest) Data(data OrganizationInviteUpdateRe
 	return r
 }
 
-func (r ApiOrgsInvitesPartialUpdateRequest) Execute() (*OrganizationInviteResponse, *http.Response, error) {
+func (r ApiOrgsInvitesPartialUpdateRequest) Execute() (*OrganizationInvite, *http.Response, error) {
 	return r.ApiService.OrgsInvitesPartialUpdateExecute(r)
 }
 
@@ -659,13 +659,13 @@ func (a *OrgsApiService) OrgsInvitesPartialUpdate(ctx context.Context, org strin
 }
 
 // Execute executes the request
-//  @return OrganizationInviteResponse
-func (a *OrgsApiService) OrgsInvitesPartialUpdateExecute(r ApiOrgsInvitesPartialUpdateRequest) (*OrganizationInviteResponse, *http.Response, error) {
+//  @return OrganizationInvite
+func (a *OrgsApiService) OrgsInvitesPartialUpdateExecute(r ApiOrgsInvitesPartialUpdateRequest) (*OrganizationInvite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationInviteResponse
+		localVarReturnValue *OrganizationInvite
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsInvitesPartialUpdate")
@@ -790,7 +790,7 @@ type ApiOrgsInvitesResendRequest struct {
 	slugPerm   string
 }
 
-func (r ApiOrgsInvitesResendRequest) Execute() (*OrganizationInviteExtendResponse, *http.Response, error) {
+func (r ApiOrgsInvitesResendRequest) Execute() (*OrganizationInviteExtend, *http.Response, error) {
 	return r.ApiService.OrgsInvitesResendExecute(r)
 }
 
@@ -814,13 +814,13 @@ func (a *OrgsApiService) OrgsInvitesResend(ctx context.Context, org string, slug
 }
 
 // Execute executes the request
-//  @return OrganizationInviteExtendResponse
-func (a *OrgsApiService) OrgsInvitesResendExecute(r ApiOrgsInvitesResendRequest) (*OrganizationInviteExtendResponse, *http.Response, error) {
+//  @return OrganizationInviteExtend
+func (a *OrgsApiService) OrgsInvitesResendExecute(r ApiOrgsInvitesResendRequest) (*OrganizationInviteExtend, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationInviteExtendResponse
+		localVarReturnValue *OrganizationInviteExtend
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsInvitesResend")
@@ -955,7 +955,7 @@ func (r ApiOrgsListRequest) PageSize(pageSize int64) ApiOrgsListRequest {
 	return r
 }
 
-func (r ApiOrgsListRequest) Execute() ([]OrganizationResponse, *http.Response, error) {
+func (r ApiOrgsListRequest) Execute() ([]Organization, *http.Response, error) {
 	return r.ApiService.OrgsListExecute(r)
 }
 
@@ -975,13 +975,13 @@ func (a *OrgsApiService) OrgsList(ctx context.Context) ApiOrgsListRequest {
 }
 
 // Execute executes the request
-//  @return []OrganizationResponse
-func (a *OrgsApiService) OrgsListExecute(r ApiOrgsListRequest) ([]OrganizationResponse, *http.Response, error) {
+//  @return []Organization
+func (a *OrgsApiService) OrgsListExecute(r ApiOrgsListRequest) ([]Organization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []OrganizationResponse
+		localVarReturnValue []Organization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsList")
@@ -1241,7 +1241,7 @@ func (r ApiOrgsMembersListRequest) PageSize(pageSize int64) ApiOrgsMembersListRe
 	return r
 }
 
-func (r ApiOrgsMembersListRequest) Execute() ([]OrganizationMembershipResponse, *http.Response, error) {
+func (r ApiOrgsMembersListRequest) Execute() ([]OrganizationMembership, *http.Response, error) {
 	return r.ApiService.OrgsMembersListExecute(r)
 }
 
@@ -1263,13 +1263,13 @@ func (a *OrgsApiService) OrgsMembersList(ctx context.Context, org string) ApiOrg
 }
 
 // Execute executes the request
-//  @return []OrganizationMembershipResponse
-func (a *OrgsApiService) OrgsMembersListExecute(r ApiOrgsMembersListRequest) ([]OrganizationMembershipResponse, *http.Response, error) {
+//  @return []OrganizationMembership
+func (a *OrgsApiService) OrgsMembersListExecute(r ApiOrgsMembersListRequest) ([]OrganizationMembership, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []OrganizationMembershipResponse
+		localVarReturnValue []OrganizationMembership
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsMembersList")
@@ -1386,7 +1386,7 @@ type ApiOrgsMembersReadRequest struct {
 	member     string
 }
 
-func (r ApiOrgsMembersReadRequest) Execute() (*OrganizationMembershipResponse, *http.Response, error) {
+func (r ApiOrgsMembersReadRequest) Execute() (*OrganizationMembership, *http.Response, error) {
 	return r.ApiService.OrgsMembersReadExecute(r)
 }
 
@@ -1410,13 +1410,13 @@ func (a *OrgsApiService) OrgsMembersRead(ctx context.Context, org string, member
 }
 
 // Execute executes the request
-//  @return OrganizationMembershipResponse
-func (a *OrgsApiService) OrgsMembersReadExecute(r ApiOrgsMembersReadRequest) (*OrganizationMembershipResponse, *http.Response, error) {
+//  @return OrganizationMembership
+func (a *OrgsApiService) OrgsMembersReadExecute(r ApiOrgsMembersReadRequest) (*OrganizationMembership, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationMembershipResponse
+		localVarReturnValue *OrganizationMembership
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsMembersRead")
@@ -1658,7 +1658,7 @@ type ApiOrgsReadRequest struct {
 	org        string
 }
 
-func (r ApiOrgsReadRequest) Execute() (*OrganizationResponse, *http.Response, error) {
+func (r ApiOrgsReadRequest) Execute() (*Organization, *http.Response, error) {
 	return r.ApiService.OrgsReadExecute(r)
 }
 
@@ -1680,13 +1680,13 @@ func (a *OrgsApiService) OrgsRead(ctx context.Context, org string) ApiOrgsReadRe
 }
 
 // Execute executes the request
-//  @return OrganizationResponse
-func (a *OrgsApiService) OrgsReadExecute(r ApiOrgsReadRequest) (*OrganizationResponse, *http.Response, error) {
+//  @return Organization
+func (a *OrgsApiService) OrgsReadExecute(r ApiOrgsReadRequest) (*Organization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationResponse
+		localVarReturnValue *Organization
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsRead")
@@ -1802,7 +1802,7 @@ func (r ApiOrgsSamlGroupSyncCreateRequest) Data(data OrganizationGroupSyncReques
 	return r
 }
 
-func (r ApiOrgsSamlGroupSyncCreateRequest) Execute() (*OrganizationGroupSyncResponse, *http.Response, error) {
+func (r ApiOrgsSamlGroupSyncCreateRequest) Execute() (*OrganizationGroupSync, *http.Response, error) {
 	return r.ApiService.OrgsSamlGroupSyncCreateExecute(r)
 }
 
@@ -1824,13 +1824,13 @@ func (a *OrgsApiService) OrgsSamlGroupSyncCreate(ctx context.Context, org string
 }
 
 // Execute executes the request
-//  @return OrganizationGroupSyncResponse
-func (a *OrgsApiService) OrgsSamlGroupSyncCreateExecute(r ApiOrgsSamlGroupSyncCreateRequest) (*OrganizationGroupSyncResponse, *http.Response, error) {
+//  @return OrganizationGroupSync
+func (a *OrgsApiService) OrgsSamlGroupSyncCreateExecute(r ApiOrgsSamlGroupSyncCreateRequest) (*OrganizationGroupSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationGroupSyncResponse
+		localVarReturnValue *OrganizationGroupSync
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsSamlGroupSyncCreate")
@@ -2098,7 +2098,7 @@ func (r ApiOrgsSamlGroupSyncListRequest) PageSize(pageSize int64) ApiOrgsSamlGro
 	return r
 }
 
-func (r ApiOrgsSamlGroupSyncListRequest) Execute() ([]OrganizationGroupSyncResponse, *http.Response, error) {
+func (r ApiOrgsSamlGroupSyncListRequest) Execute() ([]OrganizationGroupSync, *http.Response, error) {
 	return r.ApiService.OrgsSamlGroupSyncListExecute(r)
 }
 
@@ -2120,13 +2120,13 @@ func (a *OrgsApiService) OrgsSamlGroupSyncList(ctx context.Context, org string) 
 }
 
 // Execute executes the request
-//  @return []OrganizationGroupSyncResponse
-func (a *OrgsApiService) OrgsSamlGroupSyncListExecute(r ApiOrgsSamlGroupSyncListRequest) ([]OrganizationGroupSyncResponse, *http.Response, error) {
+//  @return []OrganizationGroupSync
+func (a *OrgsApiService) OrgsSamlGroupSyncListExecute(r ApiOrgsSamlGroupSyncListRequest) ([]OrganizationGroupSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []OrganizationGroupSyncResponse
+		localVarReturnValue []OrganizationGroupSync
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsSamlGroupSyncList")
@@ -2259,7 +2259,7 @@ func (r ApiOrgsServicesCreateRequest) Data(data ServiceRequest) ApiOrgsServicesC
 	return r
 }
 
-func (r ApiOrgsServicesCreateRequest) Execute() (*ServiceResponse, *http.Response, error) {
+func (r ApiOrgsServicesCreateRequest) Execute() (*Service, *http.Response, error) {
 	return r.ApiService.OrgsServicesCreateExecute(r)
 }
 
@@ -2281,13 +2281,13 @@ func (a *OrgsApiService) OrgsServicesCreate(ctx context.Context, org string) Api
 }
 
 // Execute executes the request
-//  @return ServiceResponse
-func (a *OrgsApiService) OrgsServicesCreateExecute(r ApiOrgsServicesCreateRequest) (*ServiceResponse, *http.Response, error) {
+//  @return Service
+func (a *OrgsApiService) OrgsServicesCreateExecute(r ApiOrgsServicesCreateRequest) (*Service, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ServiceResponse
+		localVarReturnValue *Service
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsServicesCreate")
@@ -2555,7 +2555,7 @@ func (r ApiOrgsServicesListRequest) PageSize(pageSize int64) ApiOrgsServicesList
 	return r
 }
 
-func (r ApiOrgsServicesListRequest) Execute() ([]ServiceResponse, *http.Response, error) {
+func (r ApiOrgsServicesListRequest) Execute() ([]Service, *http.Response, error) {
 	return r.ApiService.OrgsServicesListExecute(r)
 }
 
@@ -2577,13 +2577,13 @@ func (a *OrgsApiService) OrgsServicesList(ctx context.Context, org string) ApiOr
 }
 
 // Execute executes the request
-//  @return []ServiceResponse
-func (a *OrgsApiService) OrgsServicesListExecute(r ApiOrgsServicesListRequest) ([]ServiceResponse, *http.Response, error) {
+//  @return []Service
+func (a *OrgsApiService) OrgsServicesListExecute(r ApiOrgsServicesListRequest) ([]Service, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []ServiceResponse
+		localVarReturnValue []Service
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsServicesList")
@@ -2717,7 +2717,7 @@ func (r ApiOrgsServicesPartialUpdateRequest) Data(data ServiceRequestPatch) ApiO
 	return r
 }
 
-func (r ApiOrgsServicesPartialUpdateRequest) Execute() (*ServiceResponse, *http.Response, error) {
+func (r ApiOrgsServicesPartialUpdateRequest) Execute() (*Service, *http.Response, error) {
 	return r.ApiService.OrgsServicesPartialUpdateExecute(r)
 }
 
@@ -2741,13 +2741,13 @@ func (a *OrgsApiService) OrgsServicesPartialUpdate(ctx context.Context, org stri
 }
 
 // Execute executes the request
-//  @return ServiceResponse
-func (a *OrgsApiService) OrgsServicesPartialUpdateExecute(r ApiOrgsServicesPartialUpdateRequest) (*ServiceResponse, *http.Response, error) {
+//  @return Service
+func (a *OrgsApiService) OrgsServicesPartialUpdateExecute(r ApiOrgsServicesPartialUpdateRequest) (*Service, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ServiceResponse
+		localVarReturnValue *Service
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsServicesPartialUpdate")
@@ -2872,7 +2872,7 @@ type ApiOrgsServicesReadRequest struct {
 	service    string
 }
 
-func (r ApiOrgsServicesReadRequest) Execute() (*ServiceResponse, *http.Response, error) {
+func (r ApiOrgsServicesReadRequest) Execute() (*Service, *http.Response, error) {
 	return r.ApiService.OrgsServicesReadExecute(r)
 }
 
@@ -2896,13 +2896,13 @@ func (a *OrgsApiService) OrgsServicesRead(ctx context.Context, org string, servi
 }
 
 // Execute executes the request
-//  @return ServiceResponse
-func (a *OrgsApiService) OrgsServicesReadExecute(r ApiOrgsServicesReadRequest) (*ServiceResponse, *http.Response, error) {
+//  @return Service
+func (a *OrgsApiService) OrgsServicesReadExecute(r ApiOrgsServicesReadRequest) (*Service, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ServiceResponse
+		localVarReturnValue *Service
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsServicesRead")
@@ -3014,7 +3014,7 @@ type ApiOrgsServicesRefreshRequest struct {
 	service    string
 }
 
-func (r ApiOrgsServicesRefreshRequest) Execute() (*ServiceResponse, *http.Response, error) {
+func (r ApiOrgsServicesRefreshRequest) Execute() (*Service, *http.Response, error) {
 	return r.ApiService.OrgsServicesRefreshExecute(r)
 }
 
@@ -3038,13 +3038,13 @@ func (a *OrgsApiService) OrgsServicesRefresh(ctx context.Context, org string, se
 }
 
 // Execute executes the request
-//  @return ServiceResponse
-func (a *OrgsApiService) OrgsServicesRefreshExecute(r ApiOrgsServicesRefreshRequest) (*ServiceResponse, *http.Response, error) {
+//  @return Service
+func (a *OrgsApiService) OrgsServicesRefreshExecute(r ApiOrgsServicesRefreshRequest) (*Service, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ServiceResponse
+		localVarReturnValue *Service
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsServicesRefresh")
@@ -3172,7 +3172,7 @@ func (r ApiOrgsTeamsCreateRequest) Data(data OrganizationTeamRequest) ApiOrgsTea
 	return r
 }
 
-func (r ApiOrgsTeamsCreateRequest) Execute() (*OrganizationTeamResponse, *http.Response, error) {
+func (r ApiOrgsTeamsCreateRequest) Execute() (*OrganizationTeam, *http.Response, error) {
 	return r.ApiService.OrgsTeamsCreateExecute(r)
 }
 
@@ -3194,13 +3194,13 @@ func (a *OrgsApiService) OrgsTeamsCreate(ctx context.Context, org string) ApiOrg
 }
 
 // Execute executes the request
-//  @return OrganizationTeamResponse
-func (a *OrgsApiService) OrgsTeamsCreateExecute(r ApiOrgsTeamsCreateRequest) (*OrganizationTeamResponse, *http.Response, error) {
+//  @return OrganizationTeam
+func (a *OrgsApiService) OrgsTeamsCreateExecute(r ApiOrgsTeamsCreateRequest) (*OrganizationTeam, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationTeamResponse
+		localVarReturnValue *OrganizationTeam
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsTeamsCreate")
@@ -3468,7 +3468,7 @@ func (r ApiOrgsTeamsListRequest) PageSize(pageSize int64) ApiOrgsTeamsListReques
 	return r
 }
 
-func (r ApiOrgsTeamsListRequest) Execute() ([]OrganizationTeamResponse, *http.Response, error) {
+func (r ApiOrgsTeamsListRequest) Execute() ([]OrganizationTeam, *http.Response, error) {
 	return r.ApiService.OrgsTeamsListExecute(r)
 }
 
@@ -3490,13 +3490,13 @@ func (a *OrgsApiService) OrgsTeamsList(ctx context.Context, org string) ApiOrgsT
 }
 
 // Execute executes the request
-//  @return []OrganizationTeamResponse
-func (a *OrgsApiService) OrgsTeamsListExecute(r ApiOrgsTeamsListRequest) ([]OrganizationTeamResponse, *http.Response, error) {
+//  @return []OrganizationTeam
+func (a *OrgsApiService) OrgsTeamsListExecute(r ApiOrgsTeamsListRequest) ([]OrganizationTeam, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []OrganizationTeamResponse
+		localVarReturnValue []OrganizationTeam
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsTeamsList")
@@ -3630,7 +3630,7 @@ func (r ApiOrgsTeamsMembersCreateRequest) Data(data OrganizationTeamMembers) Api
 	return r
 }
 
-func (r ApiOrgsTeamsMembersCreateRequest) Execute() (*OrganizationTeamMembersResponse, *http.Response, error) {
+func (r ApiOrgsTeamsMembersCreateRequest) Execute() (*OrganizationTeamMembers, *http.Response, error) {
 	return r.ApiService.OrgsTeamsMembersCreateExecute(r)
 }
 
@@ -3654,13 +3654,13 @@ func (a *OrgsApiService) OrgsTeamsMembersCreate(ctx context.Context, org string,
 }
 
 // Execute executes the request
-//  @return OrganizationTeamMembersResponse
-func (a *OrgsApiService) OrgsTeamsMembersCreateExecute(r ApiOrgsTeamsMembersCreateRequest) (*OrganizationTeamMembersResponse, *http.Response, error) {
+//  @return OrganizationTeamMembers
+func (a *OrgsApiService) OrgsTeamsMembersCreateExecute(r ApiOrgsTeamsMembersCreateRequest) (*OrganizationTeamMembers, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationTeamMembersResponse
+		localVarReturnValue *OrganizationTeamMembers
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsTeamsMembersCreate")
@@ -3785,7 +3785,7 @@ type ApiOrgsTeamsMembersListRequest struct {
 	team       string
 }
 
-func (r ApiOrgsTeamsMembersListRequest) Execute() (*OrganizationTeamMembersResponse, *http.Response, error) {
+func (r ApiOrgsTeamsMembersListRequest) Execute() (*OrganizationTeamMembers, *http.Response, error) {
 	return r.ApiService.OrgsTeamsMembersListExecute(r)
 }
 
@@ -3809,13 +3809,13 @@ func (a *OrgsApiService) OrgsTeamsMembersList(ctx context.Context, org string, t
 }
 
 // Execute executes the request
-//  @return OrganizationTeamMembersResponse
-func (a *OrgsApiService) OrgsTeamsMembersListExecute(r ApiOrgsTeamsMembersListRequest) (*OrganizationTeamMembersResponse, *http.Response, error) {
+//  @return OrganizationTeamMembers
+func (a *OrgsApiService) OrgsTeamsMembersListExecute(r ApiOrgsTeamsMembersListRequest) (*OrganizationTeamMembers, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationTeamMembersResponse
+		localVarReturnValue *OrganizationTeamMembers
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsTeamsMembersList")
@@ -3938,7 +3938,7 @@ type ApiOrgsTeamsMembersUpdateRequest struct {
 	team       string
 }
 
-func (r ApiOrgsTeamsMembersUpdateRequest) Execute() (*OrganizationTeamMembersResponse, *http.Response, error) {
+func (r ApiOrgsTeamsMembersUpdateRequest) Execute() (*OrganizationTeamMembers, *http.Response, error) {
 	return r.ApiService.OrgsTeamsMembersUpdateExecute(r)
 }
 
@@ -3962,13 +3962,13 @@ func (a *OrgsApiService) OrgsTeamsMembersUpdate(ctx context.Context, org string,
 }
 
 // Execute executes the request
-//  @return OrganizationTeamMembersResponse
-func (a *OrgsApiService) OrgsTeamsMembersUpdateExecute(r ApiOrgsTeamsMembersUpdateRequest) (*OrganizationTeamMembersResponse, *http.Response, error) {
+//  @return OrganizationTeamMembers
+func (a *OrgsApiService) OrgsTeamsMembersUpdateExecute(r ApiOrgsTeamsMembersUpdateRequest) (*OrganizationTeamMembers, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationTeamMembersResponse
+		localVarReturnValue *OrganizationTeamMembers
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsTeamsMembersUpdate")
@@ -4097,7 +4097,7 @@ func (r ApiOrgsTeamsPartialUpdateRequest) Data(data OrganizationTeamRequestPatch
 	return r
 }
 
-func (r ApiOrgsTeamsPartialUpdateRequest) Execute() (*OrganizationTeamResponse, *http.Response, error) {
+func (r ApiOrgsTeamsPartialUpdateRequest) Execute() (*OrganizationTeam, *http.Response, error) {
 	return r.ApiService.OrgsTeamsPartialUpdateExecute(r)
 }
 
@@ -4121,13 +4121,13 @@ func (a *OrgsApiService) OrgsTeamsPartialUpdate(ctx context.Context, org string,
 }
 
 // Execute executes the request
-//  @return OrganizationTeamResponse
-func (a *OrgsApiService) OrgsTeamsPartialUpdateExecute(r ApiOrgsTeamsPartialUpdateRequest) (*OrganizationTeamResponse, *http.Response, error) {
+//  @return OrganizationTeam
+func (a *OrgsApiService) OrgsTeamsPartialUpdateExecute(r ApiOrgsTeamsPartialUpdateRequest) (*OrganizationTeam, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationTeamResponse
+		localVarReturnValue *OrganizationTeam
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsTeamsPartialUpdate")
@@ -4252,7 +4252,7 @@ type ApiOrgsTeamsReadRequest struct {
 	team       string
 }
 
-func (r ApiOrgsTeamsReadRequest) Execute() (*OrganizationTeamResponse, *http.Response, error) {
+func (r ApiOrgsTeamsReadRequest) Execute() (*OrganizationTeam, *http.Response, error) {
 	return r.ApiService.OrgsTeamsReadExecute(r)
 }
 
@@ -4276,13 +4276,13 @@ func (a *OrgsApiService) OrgsTeamsRead(ctx context.Context, org string, team str
 }
 
 // Execute executes the request
-//  @return OrganizationTeamResponse
-func (a *OrgsApiService) OrgsTeamsReadExecute(r ApiOrgsTeamsReadRequest) (*OrganizationTeamResponse, *http.Response, error) {
+//  @return OrganizationTeam
+func (a *OrgsApiService) OrgsTeamsReadExecute(r ApiOrgsTeamsReadRequest) (*OrganizationTeam, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrganizationTeamResponse
+		localVarReturnValue *OrganizationTeam
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsTeamsRead")

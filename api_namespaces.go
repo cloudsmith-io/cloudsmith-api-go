@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -42,7 +42,7 @@ func (r ApiNamespacesListRequest) PageSize(pageSize int64) ApiNamespacesListRequ
 	return r
 }
 
-func (r ApiNamespacesListRequest) Execute() ([]NamespaceResponse, *http.Response, error) {
+func (r ApiNamespacesListRequest) Execute() ([]Namespace, *http.Response, error) {
 	return r.ApiService.NamespacesListExecute(r)
 }
 
@@ -62,13 +62,13 @@ func (a *NamespacesApiService) NamespacesList(ctx context.Context) ApiNamespaces
 }
 
 // Execute executes the request
-//  @return []NamespaceResponse
-func (a *NamespacesApiService) NamespacesListExecute(r ApiNamespacesListRequest) ([]NamespaceResponse, *http.Response, error) {
+//  @return []Namespace
+func (a *NamespacesApiService) NamespacesListExecute(r ApiNamespacesListRequest) ([]Namespace, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []NamespaceResponse
+		localVarReturnValue []Namespace
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NamespacesApiService.NamespacesList")
@@ -183,7 +183,7 @@ type ApiNamespacesReadRequest struct {
 	slug       string
 }
 
-func (r ApiNamespacesReadRequest) Execute() (*NamespaceResponse, *http.Response, error) {
+func (r ApiNamespacesReadRequest) Execute() (*Namespace, *http.Response, error) {
 	return r.ApiService.NamespacesReadExecute(r)
 }
 
@@ -205,13 +205,13 @@ func (a *NamespacesApiService) NamespacesRead(ctx context.Context, slug string) 
 }
 
 // Execute executes the request
-//  @return NamespaceResponse
-func (a *NamespacesApiService) NamespacesReadExecute(r ApiNamespacesReadRequest) (*NamespaceResponse, *http.Response, error) {
+//  @return Namespace
+func (a *NamespacesApiService) NamespacesReadExecute(r ApiNamespacesReadRequest) (*Namespace, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *NamespaceResponse
+		localVarReturnValue *Namespace
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NamespacesApiService.NamespacesRead")

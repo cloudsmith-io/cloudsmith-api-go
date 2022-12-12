@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -27,7 +27,7 @@ type ApiUserSelfRequest struct {
 	ApiService *UserApiService
 }
 
-func (r ApiUserSelfRequest) Execute() (*UserBriefResponse, *http.Response, error) {
+func (r ApiUserSelfRequest) Execute() (*UserBrief, *http.Response, error) {
 	return r.ApiService.UserSelfExecute(r)
 }
 
@@ -47,13 +47,13 @@ func (a *UserApiService) UserSelf(ctx context.Context) ApiUserSelfRequest {
 }
 
 // Execute executes the request
-//  @return UserBriefResponse
-func (a *UserApiService) UserSelfExecute(r ApiUserSelfRequest) (*UserBriefResponse, *http.Response, error) {
+//  @return UserBrief
+func (a *UserApiService) UserSelfExecute(r ApiUserSelfRequest) (*UserBrief, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *UserBriefResponse
+		localVarReturnValue *UserBrief
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserApiService.UserSelf")
@@ -167,7 +167,7 @@ func (r ApiUserTokenCreateRequest) Data(data UserAuthTokenRequest) ApiUserTokenC
 	return r
 }
 
-func (r ApiUserTokenCreateRequest) Execute() (*UserAuthTokenResponse, *http.Response, error) {
+func (r ApiUserTokenCreateRequest) Execute() (*UserAuthToken, *http.Response, error) {
 	return r.ApiService.UserTokenCreateExecute(r)
 }
 
@@ -187,13 +187,13 @@ func (a *UserApiService) UserTokenCreate(ctx context.Context) ApiUserTokenCreate
 }
 
 // Execute executes the request
-//  @return UserAuthTokenResponse
-func (a *UserApiService) UserTokenCreateExecute(r ApiUserTokenCreateRequest) (*UserAuthTokenResponse, *http.Response, error) {
+//  @return UserAuthToken
+func (a *UserApiService) UserTokenCreateExecute(r ApiUserTokenCreateRequest) (*UserAuthToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *UserAuthTokenResponse
+		localVarReturnValue *UserAuthToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserApiService.UserTokenCreate")

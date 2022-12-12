@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -29,7 +29,7 @@ type ApiUsersProfileReadRequest struct {
 	slug       string
 }
 
-func (r ApiUsersProfileReadRequest) Execute() (*UserProfileResponse, *http.Response, error) {
+func (r ApiUsersProfileReadRequest) Execute() (*UserProfile, *http.Response, error) {
 	return r.ApiService.UsersProfileReadExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *UsersApiService) UsersProfileRead(ctx context.Context, slug string) Api
 }
 
 // Execute executes the request
-//  @return UserProfileResponse
-func (a *UsersApiService) UsersProfileReadExecute(r ApiUsersProfileReadRequest) (*UserProfileResponse, *http.Response, error) {
+//  @return UserProfile
+func (a *UsersApiService) UsersProfileReadExecute(r ApiUsersProfileReadRequest) (*UserProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *UserProfileResponse
+		localVarReturnValue *UserProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.UsersProfileRead")

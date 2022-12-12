@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## FormatsList
 
-> []FormatResponse FormatsList(ctx).Execute()
+> []Format FormatsList(ctx).Execute()
 
 Get a list of all supported package formats.
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FormatsApi.FormatsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FormatsList`: []FormatResponse
+    // response from `FormatsList`: []Format
     fmt.Fprintf(os.Stdout, "Response from `FormatsApi.FormatsList`: %v\n", resp)
 }
 ```
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiFormatsListRequest struct 
 
 ### Return type
 
-[**[]FormatResponse**](FormatResponse.md)
+[**[]Format**](Format.md)
 
 ### Authorization
 
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiFormatsListRequest struct 
 
 ## FormatsRead
 
-> FormatResponse FormatsRead(ctx, slug).Execute()
+> Format FormatsRead(ctx, slug).Execute()
 
 Get a specific supported package format.
 
@@ -100,7 +100,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `FormatsApi.FormatsRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FormatsRead`: FormatResponse
+    // response from `FormatsRead`: Format
     fmt.Fprintf(os.Stdout, "Response from `FormatsApi.FormatsRead`: %v\n", resp)
 }
 ```
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FormatResponse**](FormatResponse.md)
+[**Format**](Format.md)
 
 ### Authorization
 

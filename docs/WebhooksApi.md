@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## WebhooksCreate
 
-> RepositoryWebhookResponse WebhooksCreate(ctx, owner, repo).Data(data).Execute()
+> RepositoryWebhook WebhooksCreate(ctx, owner, repo).Data(data).Execute()
 
 Create a specific webhook in a repository.
 
@@ -44,7 +44,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhooksCreate`: RepositoryWebhookResponse
+    // response from `WebhooksCreate`: RepositoryWebhook
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksCreate`: %v\n", resp)
 }
 ```
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryWebhookResponse**](RepositoryWebhookResponse.md)
+[**RepositoryWebhook**](RepositoryWebhook.md)
 
 ### Authorization
 
@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 
 ## WebhooksList
 
-> []RepositoryWebhookResponse WebhooksList(ctx, owner, repo).Page(page).PageSize(pageSize).Execute()
+> []RepositoryWebhook WebhooksList(ctx, owner, repo).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all webhooks in a repository.
 
@@ -194,7 +194,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhooksList`: []RepositoryWebhookResponse
+    // response from `WebhooksList`: []RepositoryWebhook
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksList`: %v\n", resp)
 }
 ```
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]RepositoryWebhookResponse**](RepositoryWebhookResponse.md)
+[**[]RepositoryWebhook**](RepositoryWebhook.md)
 
 ### Authorization
 
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 
 ## WebhooksPartialUpdate
 
-> RepositoryWebhookResponse WebhooksPartialUpdate(ctx, owner, repo, identifier).Data(data).Execute()
+> RepositoryWebhook WebhooksPartialUpdate(ctx, owner, repo, identifier).Data(data).Execute()
 
 Update a specific webhook in a repository.
 
@@ -271,7 +271,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhooksPartialUpdate`: RepositoryWebhookResponse
+    // response from `WebhooksPartialUpdate`: RepositoryWebhook
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksPartialUpdate`: %v\n", resp)
 }
 ```
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryWebhookResponse**](RepositoryWebhookResponse.md)
+[**RepositoryWebhook**](RepositoryWebhook.md)
 
 ### Authorization
 
@@ -318,7 +318,7 @@ Name | Type | Description  | Notes
 
 ## WebhooksRead
 
-> RepositoryWebhookResponse WebhooksRead(ctx, owner, repo, identifier).Execute()
+> RepositoryWebhook WebhooksRead(ctx, owner, repo, identifier).Execute()
 
 Views for working with repository webhooks.
 
@@ -348,7 +348,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `WebhooksRead`: RepositoryWebhookResponse
+    // response from `WebhooksRead`: RepositoryWebhook
     fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksRead`: %v\n", resp)
 }
 ```
@@ -376,7 +376,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryWebhookResponse**](RepositoryWebhookResponse.md)
+[**RepositoryWebhook**](RepositoryWebhook.md)
 
 ### Authorization
 

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// RepositoryToken The entitlements that have been synchronised.
+// RepositoryToken struct for RepositoryToken
 type RepositoryToken struct {
 	Clients *int64 `json:"clients,omitempty"`
 	// The datetime the token was updated at.

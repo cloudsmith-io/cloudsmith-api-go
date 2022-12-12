@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## StatusCheckBasic
 
-> StatusBasicResponse StatusCheckBasic(ctx).Execute()
+> StatusBasic StatusCheckBasic(ctx).Execute()
 
 Endpoint to check basic API connectivity.
 
@@ -37,7 +37,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `StatusApi.StatusCheckBasic``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `StatusCheckBasic`: StatusBasicResponse
+    // response from `StatusCheckBasic`: StatusBasic
     fmt.Fprintf(os.Stdout, "Response from `StatusApi.StatusCheckBasic`: %v\n", resp)
 }
 ```
@@ -53,7 +53,7 @@ Other parameters are passed through a pointer to a apiStatusCheckBasicRequest st
 
 ### Return type
 
-[**StatusBasicResponse**](StatusBasicResponse.md)
+[**StatusBasic**](StatusBasic.md)
 
 ### Authorization
 

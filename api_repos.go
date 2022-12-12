@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -35,7 +35,7 @@ func (r ApiReposCreateRequest) Data(data RepositoryCreateRequest) ApiReposCreate
 	return r
 }
 
-func (r ApiReposCreateRequest) Execute() (*RepositoryCreateResponse, *http.Response, error) {
+func (r ApiReposCreateRequest) Execute() (*RepositoryCreate, *http.Response, error) {
 	return r.ApiService.ReposCreateExecute(r)
 }
 
@@ -57,13 +57,13 @@ func (a *ReposApiService) ReposCreate(ctx context.Context, owner string) ApiRepo
 }
 
 // Execute executes the request
-//  @return RepositoryCreateResponse
-func (a *ReposApiService) ReposCreateExecute(r ApiReposCreateRequest) (*RepositoryCreateResponse, *http.Response, error) {
+//  @return RepositoryCreate
+func (a *ReposApiService) ReposCreateExecute(r ApiReposCreateRequest) (*RepositoryCreate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryCreateResponse
+		localVarReturnValue *RepositoryCreate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposCreate")
@@ -335,7 +335,7 @@ func (r ApiReposGpgCreateRequest) Data(data RepositoryGpgKeyCreate) ApiReposGpgC
 	return r
 }
 
-func (r ApiReposGpgCreateRequest) Execute() (*RepositoryGpgKeyResponse, *http.Response, error) {
+func (r ApiReposGpgCreateRequest) Execute() (*RepositoryGpgKey, *http.Response, error) {
 	return r.ApiService.ReposGpgCreateExecute(r)
 }
 
@@ -359,13 +359,13 @@ func (a *ReposApiService) ReposGpgCreate(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryGpgKeyResponse
-func (a *ReposApiService) ReposGpgCreateExecute(r ApiReposGpgCreateRequest) (*RepositoryGpgKeyResponse, *http.Response, error) {
+//  @return RepositoryGpgKey
+func (a *ReposApiService) ReposGpgCreateExecute(r ApiReposGpgCreateRequest) (*RepositoryGpgKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGpgKeyResponse
+		localVarReturnValue *RepositoryGpgKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGpgCreate")
@@ -501,7 +501,7 @@ type ApiReposGpgListRequest struct {
 	identifier string
 }
 
-func (r ApiReposGpgListRequest) Execute() (*RepositoryGpgKeyResponse, *http.Response, error) {
+func (r ApiReposGpgListRequest) Execute() (*RepositoryGpgKey, *http.Response, error) {
 	return r.ApiService.ReposGpgListExecute(r)
 }
 
@@ -525,13 +525,13 @@ func (a *ReposApiService) ReposGpgList(ctx context.Context, owner string, identi
 }
 
 // Execute executes the request
-//  @return RepositoryGpgKeyResponse
-func (a *ReposApiService) ReposGpgListExecute(r ApiReposGpgListRequest) (*RepositoryGpgKeyResponse, *http.Response, error) {
+//  @return RepositoryGpgKey
+func (a *ReposApiService) ReposGpgListExecute(r ApiReposGpgListRequest) (*RepositoryGpgKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGpgKeyResponse
+		localVarReturnValue *RepositoryGpgKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGpgList")
@@ -643,7 +643,7 @@ type ApiReposGpgRegenerateRequest struct {
 	identifier string
 }
 
-func (r ApiReposGpgRegenerateRequest) Execute() (*RepositoryGpgKeyResponse, *http.Response, error) {
+func (r ApiReposGpgRegenerateRequest) Execute() (*RepositoryGpgKey, *http.Response, error) {
 	return r.ApiService.ReposGpgRegenerateExecute(r)
 }
 
@@ -667,13 +667,13 @@ func (a *ReposApiService) ReposGpgRegenerate(ctx context.Context, owner string, 
 }
 
 // Execute executes the request
-//  @return RepositoryGpgKeyResponse
-func (a *ReposApiService) ReposGpgRegenerateExecute(r ApiReposGpgRegenerateRequest) (*RepositoryGpgKeyResponse, *http.Response, error) {
+//  @return RepositoryGpgKey
+func (a *ReposApiService) ReposGpgRegenerateExecute(r ApiReposGpgRegenerateRequest) (*RepositoryGpgKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGpgKeyResponse
+		localVarReturnValue *RepositoryGpgKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGpgRegenerate")
@@ -798,7 +798,7 @@ func (r ApiReposNamespaceListRequest) PageSize(pageSize int64) ApiReposNamespace
 	return r
 }
 
-func (r ApiReposNamespaceListRequest) Execute() ([]RepositoryResponse, *http.Response, error) {
+func (r ApiReposNamespaceListRequest) Execute() ([]Repository, *http.Response, error) {
 	return r.ApiService.ReposNamespaceListExecute(r)
 }
 
@@ -820,13 +820,13 @@ func (a *ReposApiService) ReposNamespaceList(ctx context.Context, owner string) 
 }
 
 // Execute executes the request
-//  @return []RepositoryResponse
-func (a *ReposApiService) ReposNamespaceListExecute(r ApiReposNamespaceListRequest) ([]RepositoryResponse, *http.Response, error) {
+//  @return []Repository
+func (a *ReposApiService) ReposNamespaceListExecute(r ApiReposNamespaceListRequest) ([]Repository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []RepositoryResponse
+		localVarReturnValue []Repository
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposNamespaceList")
@@ -960,7 +960,7 @@ func (r ApiReposPartialUpdateRequest) Data(data RepositoryRequestPatch) ApiRepos
 	return r
 }
 
-func (r ApiReposPartialUpdateRequest) Execute() (*RepositoryResponse, *http.Response, error) {
+func (r ApiReposPartialUpdateRequest) Execute() (*Repository, *http.Response, error) {
 	return r.ApiService.ReposPartialUpdateExecute(r)
 }
 
@@ -984,13 +984,13 @@ func (a *ReposApiService) ReposPartialUpdate(ctx context.Context, owner string, 
 }
 
 // Execute executes the request
-//  @return RepositoryResponse
-func (a *ReposApiService) ReposPartialUpdateExecute(r ApiReposPartialUpdateRequest) (*RepositoryResponse, *http.Response, error) {
+//  @return Repository
+func (a *ReposApiService) ReposPartialUpdateExecute(r ApiReposPartialUpdateRequest) (*Repository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryResponse
+		localVarReturnValue *Repository
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposPartialUpdate")
@@ -1129,7 +1129,7 @@ func (r ApiReposPrivilegesListRequest) PageSize(pageSize int64) ApiReposPrivileg
 	return r
 }
 
-func (r ApiReposPrivilegesListRequest) Execute() (*RepositoryPrivilegeInputResponse, *http.Response, error) {
+func (r ApiReposPrivilegesListRequest) Execute() (*RepositoryPrivilegeInput, *http.Response, error) {
 	return r.ApiService.ReposPrivilegesListExecute(r)
 }
 
@@ -1153,13 +1153,13 @@ func (a *ReposApiService) ReposPrivilegesList(ctx context.Context, owner string,
 }
 
 // Execute executes the request
-//  @return RepositoryPrivilegeInputResponse
-func (a *ReposApiService) ReposPrivilegesListExecute(r ApiReposPrivilegesListRequest) (*RepositoryPrivilegeInputResponse, *http.Response, error) {
+//  @return RepositoryPrivilegeInput
+func (a *ReposApiService) ReposPrivilegesListExecute(r ApiReposPrivilegesListRequest) (*RepositoryPrivilegeInput, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryPrivilegeInputResponse
+		localVarReturnValue *RepositoryPrivilegeInput
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposPrivilegesList")
@@ -1588,7 +1588,7 @@ type ApiReposReadRequest struct {
 	identifier string
 }
 
-func (r ApiReposReadRequest) Execute() (*RepositoryResponse, *http.Response, error) {
+func (r ApiReposReadRequest) Execute() (*Repository, *http.Response, error) {
 	return r.ApiService.ReposReadExecute(r)
 }
 
@@ -1612,13 +1612,13 @@ func (a *ReposApiService) ReposRead(ctx context.Context, owner string, identifie
 }
 
 // Execute executes the request
-//  @return RepositoryResponse
-func (a *ReposApiService) ReposReadExecute(r ApiReposReadRequest) (*RepositoryResponse, *http.Response, error) {
+//  @return Repository
+func (a *ReposApiService) ReposReadExecute(r ApiReposReadRequest) (*Repository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryResponse
+		localVarReturnValue *Repository
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposRead")
@@ -1747,7 +1747,7 @@ func (r ApiReposRsaCreateRequest) Data(data RepositoryRsaKeyCreate) ApiReposRsaC
 	return r
 }
 
-func (r ApiReposRsaCreateRequest) Execute() (*RepositoryRsaKeyResponse, *http.Response, error) {
+func (r ApiReposRsaCreateRequest) Execute() (*RepositoryRsaKey, *http.Response, error) {
 	return r.ApiService.ReposRsaCreateExecute(r)
 }
 
@@ -1771,13 +1771,13 @@ func (a *ReposApiService) ReposRsaCreate(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryRsaKeyResponse
-func (a *ReposApiService) ReposRsaCreateExecute(r ApiReposRsaCreateRequest) (*RepositoryRsaKeyResponse, *http.Response, error) {
+//  @return RepositoryRsaKey
+func (a *ReposApiService) ReposRsaCreateExecute(r ApiReposRsaCreateRequest) (*RepositoryRsaKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryRsaKeyResponse
+		localVarReturnValue *RepositoryRsaKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposRsaCreate")
@@ -1913,7 +1913,7 @@ type ApiReposRsaListRequest struct {
 	identifier string
 }
 
-func (r ApiReposRsaListRequest) Execute() (*RepositoryRsaKeyResponse, *http.Response, error) {
+func (r ApiReposRsaListRequest) Execute() (*RepositoryRsaKey, *http.Response, error) {
 	return r.ApiService.ReposRsaListExecute(r)
 }
 
@@ -1937,13 +1937,13 @@ func (a *ReposApiService) ReposRsaList(ctx context.Context, owner string, identi
 }
 
 // Execute executes the request
-//  @return RepositoryRsaKeyResponse
-func (a *ReposApiService) ReposRsaListExecute(r ApiReposRsaListRequest) (*RepositoryRsaKeyResponse, *http.Response, error) {
+//  @return RepositoryRsaKey
+func (a *ReposApiService) ReposRsaListExecute(r ApiReposRsaListRequest) (*RepositoryRsaKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryRsaKeyResponse
+		localVarReturnValue *RepositoryRsaKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposRsaList")
@@ -2055,7 +2055,7 @@ type ApiReposRsaRegenerateRequest struct {
 	identifier string
 }
 
-func (r ApiReposRsaRegenerateRequest) Execute() (*RepositoryRsaKeyResponse, *http.Response, error) {
+func (r ApiReposRsaRegenerateRequest) Execute() (*RepositoryRsaKey, *http.Response, error) {
 	return r.ApiService.ReposRsaRegenerateExecute(r)
 }
 
@@ -2079,13 +2079,13 @@ func (a *ReposApiService) ReposRsaRegenerate(ctx context.Context, owner string, 
 }
 
 // Execute executes the request
-//  @return RepositoryRsaKeyResponse
-func (a *ReposApiService) ReposRsaRegenerateExecute(r ApiReposRsaRegenerateRequest) (*RepositoryRsaKeyResponse, *http.Response, error) {
+//  @return RepositoryRsaKey
+func (a *ReposApiService) ReposRsaRegenerateExecute(r ApiReposRsaRegenerateRequest) (*RepositoryRsaKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryRsaKeyResponse
+		localVarReturnValue *RepositoryRsaKey
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposRsaRegenerate")
@@ -2209,7 +2209,7 @@ func (r ApiReposUserListRequest) PageSize(pageSize int64) ApiReposUserListReques
 	return r
 }
 
-func (r ApiReposUserListRequest) Execute() ([]RepositoryResponse, *http.Response, error) {
+func (r ApiReposUserListRequest) Execute() ([]Repository, *http.Response, error) {
 	return r.ApiService.ReposUserListExecute(r)
 }
 
@@ -2229,13 +2229,13 @@ func (a *ReposApiService) ReposUserList(ctx context.Context) ApiReposUserListReq
 }
 
 // Execute executes the request
-//  @return []RepositoryResponse
-func (a *ReposApiService) ReposUserListExecute(r ApiReposUserListRequest) ([]RepositoryResponse, *http.Response, error) {
+//  @return []Repository
+func (a *ReposApiService) ReposUserListExecute(r ApiReposUserListRequest) ([]Repository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []RepositoryResponse
+		localVarReturnValue []Repository
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposUserList")

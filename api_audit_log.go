@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -50,7 +50,7 @@ func (r ApiAuditLogNamespaceListRequest) Query(query string) ApiAuditLogNamespac
 	return r
 }
 
-func (r ApiAuditLogNamespaceListRequest) Execute() ([]NamespaceAuditLogResponse, *http.Response, error) {
+func (r ApiAuditLogNamespaceListRequest) Execute() ([]NamespaceAuditLog, *http.Response, error) {
 	return r.ApiService.AuditLogNamespaceListExecute(r)
 }
 
@@ -72,13 +72,13 @@ func (a *AuditLogApiService) AuditLogNamespaceList(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return []NamespaceAuditLogResponse
-func (a *AuditLogApiService) AuditLogNamespaceListExecute(r ApiAuditLogNamespaceListRequest) ([]NamespaceAuditLogResponse, *http.Response, error) {
+//  @return []NamespaceAuditLog
+func (a *AuditLogApiService) AuditLogNamespaceListExecute(r ApiAuditLogNamespaceListRequest) ([]NamespaceAuditLog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []NamespaceAuditLogResponse
+		localVarReturnValue []NamespaceAuditLog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogApiService.AuditLogNamespaceList")
@@ -230,7 +230,7 @@ func (r ApiAuditLogRepoListRequest) Query(query string) ApiAuditLogRepoListReque
 	return r
 }
 
-func (r ApiAuditLogRepoListRequest) Execute() ([]RepositoryAuditLogResponse, *http.Response, error) {
+func (r ApiAuditLogRepoListRequest) Execute() ([]RepositoryAuditLog, *http.Response, error) {
 	return r.ApiService.AuditLogRepoListExecute(r)
 }
 
@@ -254,13 +254,13 @@ func (a *AuditLogApiService) AuditLogRepoList(ctx context.Context, owner string,
 }
 
 // Execute executes the request
-//  @return []RepositoryAuditLogResponse
-func (a *AuditLogApiService) AuditLogRepoListExecute(r ApiAuditLogRepoListRequest) ([]RepositoryAuditLogResponse, *http.Response, error) {
+//  @return []RepositoryAuditLog
+func (a *AuditLogApiService) AuditLogRepoListExecute(r ApiAuditLogRepoListRequest) ([]RepositoryAuditLog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue []RepositoryAuditLogResponse
+		localVarReturnValue []RepositoryAuditLog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogApiService.AuditLogRepoList")

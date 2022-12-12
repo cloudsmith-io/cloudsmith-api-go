@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## UserSelf
 
-> UserBriefResponse UserSelf(ctx).Execute()
+> UserBrief UserSelf(ctx).Execute()
 
 Provide a brief for the current user (if any).
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserSelf``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UserSelf`: UserBriefResponse
+    // response from `UserSelf`: UserBrief
     fmt.Fprintf(os.Stdout, "Response from `UserApi.UserSelf`: %v\n", resp)
 }
 ```
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiUserSelfRequest struct via
 
 ### Return type
 
-[**UserBriefResponse**](UserBriefResponse.md)
+[**UserBrief**](UserBrief.md)
 
 ### Authorization
 
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiUserSelfRequest struct via
 
 ## UserTokenCreate
 
-> UserAuthTokenResponse UserTokenCreate(ctx).Data(data).Execute()
+> UserAuthToken UserTokenCreate(ctx).Data(data).Execute()
 
 Retrieve the API key/token for the authenticated user.
 
@@ -100,7 +100,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserTokenCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UserTokenCreate`: UserAuthTokenResponse
+    // response from `UserTokenCreate`: UserAuthToken
     fmt.Fprintf(os.Stdout, "Response from `UserApi.UserTokenCreate`: %v\n", resp)
 }
 ```
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserAuthTokenResponse**](UserAuthTokenResponse.md)
+[**UserAuthToken**](UserAuthToken.md)
 
 ### Authorization
 

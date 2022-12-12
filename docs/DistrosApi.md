@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## DistrosList
 
-> []DistributionResponse DistrosList(ctx).Execute()
+> []DistributionFull DistrosList(ctx).Execute()
 
 Get a list of all supported distributions.
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DistrosApi.DistrosList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DistrosList`: []DistributionResponse
+    // response from `DistrosList`: []DistributionFull
     fmt.Fprintf(os.Stdout, "Response from `DistrosApi.DistrosList`: %v\n", resp)
 }
 ```
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiDistrosListRequest struct 
 
 ### Return type
 
-[**[]DistributionResponse**](DistributionResponse.md)
+[**[]DistributionFull**](DistributionFull.md)
 
 ### Authorization
 
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiDistrosListRequest struct 
 
 ## DistrosRead
 
-> DistributionResponse DistrosRead(ctx, slug).Execute()
+> DistributionFull DistrosRead(ctx, slug).Execute()
 
 View for viewing/listing distributions.
 
@@ -100,7 +100,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `DistrosApi.DistrosRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `DistrosRead`: DistributionResponse
+    // response from `DistrosRead`: DistributionFull
     fmt.Fprintf(os.Stdout, "Response from `DistrosApi.DistrosRead`: %v\n", resp)
 }
 ```
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DistributionResponse**](DistributionResponse.md)
+[**DistributionFull**](DistributionFull.md)
 
 ### Authorization
 

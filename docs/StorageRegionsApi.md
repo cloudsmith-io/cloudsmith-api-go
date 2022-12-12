@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## StorageRegionsList
 
-> []StorageRegionResponse StorageRegionsList(ctx).Execute()
+> []StorageRegion StorageRegionsList(ctx).Execute()
 
 Get a list of all available storage regions.
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageRegionsApi.StorageRegionsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `StorageRegionsList`: []StorageRegionResponse
+    // response from `StorageRegionsList`: []StorageRegion
     fmt.Fprintf(os.Stdout, "Response from `StorageRegionsApi.StorageRegionsList`: %v\n", resp)
 }
 ```
@@ -54,7 +54,7 @@ Other parameters are passed through a pointer to a apiStorageRegionsListRequest 
 
 ### Return type
 
-[**[]StorageRegionResponse**](StorageRegionResponse.md)
+[**[]StorageRegion**](StorageRegion.md)
 
 ### Authorization
 
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiStorageRegionsListRequest 
 
 ## StorageRegionsRead
 
-> StorageRegionResponse StorageRegionsRead(ctx, slug).Execute()
+> StorageRegion StorageRegionsRead(ctx, slug).Execute()
 
 Get a specific storage region.
 
@@ -100,7 +100,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageRegionsApi.StorageRegionsRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `StorageRegionsRead`: StorageRegionResponse
+    // response from `StorageRegionsRead`: StorageRegion
     fmt.Fprintf(os.Stdout, "Response from `StorageRegionsApi.StorageRegionsRead`: %v\n", resp)
 }
 ```
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**StorageRegionResponse**](StorageRegionResponse.md)
+[**StorageRegion**](StorageRegion.md)
 
 ### Authorization
 

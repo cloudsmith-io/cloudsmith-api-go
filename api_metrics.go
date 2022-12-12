@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -64,7 +64,7 @@ func (r ApiMetricsEntitlementsAccountListRequest) Tokens(tokens string) ApiMetri
 	return r
 }
 
-func (r ApiMetricsEntitlementsAccountListRequest) Execute() (*EntitlementUsageMetricsResponse, *http.Response, error) {
+func (r ApiMetricsEntitlementsAccountListRequest) Execute() (*EntitlementUsageMetrics, *http.Response, error) {
 	return r.ApiService.MetricsEntitlementsAccountListExecute(r)
 }
 
@@ -86,13 +86,13 @@ func (a *MetricsApiService) MetricsEntitlementsAccountList(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return EntitlementUsageMetricsResponse
-func (a *MetricsApiService) MetricsEntitlementsAccountListExecute(r ApiMetricsEntitlementsAccountListRequest) (*EntitlementUsageMetricsResponse, *http.Response, error) {
+//  @return EntitlementUsageMetrics
+func (a *MetricsApiService) MetricsEntitlementsAccountListExecute(r ApiMetricsEntitlementsAccountListRequest) (*EntitlementUsageMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EntitlementUsageMetricsResponse
+		localVarReturnValue *EntitlementUsageMetrics
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsApiService.MetricsEntitlementsAccountList")
@@ -253,7 +253,7 @@ func (r ApiMetricsEntitlementsRepoListRequest) Tokens(tokens string) ApiMetricsE
 	return r
 }
 
-func (r ApiMetricsEntitlementsRepoListRequest) Execute() (*EntitlementUsageMetricsResponse, *http.Response, error) {
+func (r ApiMetricsEntitlementsRepoListRequest) Execute() (*EntitlementUsageMetrics, *http.Response, error) {
 	return r.ApiService.MetricsEntitlementsRepoListExecute(r)
 }
 
@@ -277,13 +277,13 @@ func (a *MetricsApiService) MetricsEntitlementsRepoList(ctx context.Context, own
 }
 
 // Execute executes the request
-//  @return EntitlementUsageMetricsResponse
-func (a *MetricsApiService) MetricsEntitlementsRepoListExecute(r ApiMetricsEntitlementsRepoListRequest) (*EntitlementUsageMetricsResponse, *http.Response, error) {
+//  @return EntitlementUsageMetrics
+func (a *MetricsApiService) MetricsEntitlementsRepoListExecute(r ApiMetricsEntitlementsRepoListRequest) (*EntitlementUsageMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EntitlementUsageMetricsResponse
+		localVarReturnValue *EntitlementUsageMetrics
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsApiService.MetricsEntitlementsRepoList")
@@ -445,7 +445,7 @@ func (r ApiMetricsPackagesListRequest) Start(start string) ApiMetricsPackagesLis
 	return r
 }
 
-func (r ApiMetricsPackagesListRequest) Execute() (*PackageUsageMetricsResponse, *http.Response, error) {
+func (r ApiMetricsPackagesListRequest) Execute() (*PackageUsageMetrics, *http.Response, error) {
 	return r.ApiService.MetricsPackagesListExecute(r)
 }
 
@@ -469,13 +469,13 @@ func (a *MetricsApiService) MetricsPackagesList(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return PackageUsageMetricsResponse
-func (a *MetricsApiService) MetricsPackagesListExecute(r ApiMetricsPackagesListRequest) (*PackageUsageMetricsResponse, *http.Response, error) {
+//  @return PackageUsageMetrics
+func (a *MetricsApiService) MetricsPackagesListExecute(r ApiMetricsPackagesListRequest) (*PackageUsageMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageUsageMetricsResponse
+		localVarReturnValue *PackageUsageMetrics
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MetricsApiService.MetricsPackagesList")

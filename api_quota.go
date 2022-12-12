@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.181.6
+API version: 1.182.1
 Contact: support@cloudsmith.io
 */
 
@@ -29,7 +29,7 @@ type ApiQuotaHistoryReadRequest struct {
 	owner      string
 }
 
-func (r ApiQuotaHistoryReadRequest) Execute() (*QuotaHistoryResponse, *http.Response, error) {
+func (r ApiQuotaHistoryReadRequest) Execute() (*QuotaHistory, *http.Response, error) {
 	return r.ApiService.QuotaHistoryReadExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *QuotaApiService) QuotaHistoryRead(ctx context.Context, owner string) Ap
 }
 
 // Execute executes the request
-//  @return QuotaHistoryResponse
-func (a *QuotaApiService) QuotaHistoryReadExecute(r ApiQuotaHistoryReadRequest) (*QuotaHistoryResponse, *http.Response, error) {
+//  @return QuotaHistory
+func (a *QuotaApiService) QuotaHistoryReadExecute(r ApiQuotaHistoryReadRequest) (*QuotaHistory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *QuotaHistoryResponse
+		localVarReturnValue *QuotaHistory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaApiService.QuotaHistoryRead")
@@ -167,7 +167,7 @@ type ApiQuotaOssHistoryReadRequest struct {
 	owner      string
 }
 
-func (r ApiQuotaOssHistoryReadRequest) Execute() (*QuotaHistoryResponse, *http.Response, error) {
+func (r ApiQuotaOssHistoryReadRequest) Execute() (*QuotaHistory, *http.Response, error) {
 	return r.ApiService.QuotaOssHistoryReadExecute(r)
 }
 
@@ -189,13 +189,13 @@ func (a *QuotaApiService) QuotaOssHistoryRead(ctx context.Context, owner string)
 }
 
 // Execute executes the request
-//  @return QuotaHistoryResponse
-func (a *QuotaApiService) QuotaOssHistoryReadExecute(r ApiQuotaOssHistoryReadRequest) (*QuotaHistoryResponse, *http.Response, error) {
+//  @return QuotaHistory
+func (a *QuotaApiService) QuotaOssHistoryReadExecute(r ApiQuotaOssHistoryReadRequest) (*QuotaHistory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *QuotaHistoryResponse
+		localVarReturnValue *QuotaHistory
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaApiService.QuotaOssHistoryRead")
@@ -305,7 +305,7 @@ type ApiQuotaOssReadRequest struct {
 	owner      string
 }
 
-func (r ApiQuotaOssReadRequest) Execute() (*QuotaResponse, *http.Response, error) {
+func (r ApiQuotaOssReadRequest) Execute() (*Quota, *http.Response, error) {
 	return r.ApiService.QuotaOssReadExecute(r)
 }
 
@@ -327,13 +327,13 @@ func (a *QuotaApiService) QuotaOssRead(ctx context.Context, owner string) ApiQuo
 }
 
 // Execute executes the request
-//  @return QuotaResponse
-func (a *QuotaApiService) QuotaOssReadExecute(r ApiQuotaOssReadRequest) (*QuotaResponse, *http.Response, error) {
+//  @return Quota
+func (a *QuotaApiService) QuotaOssReadExecute(r ApiQuotaOssReadRequest) (*Quota, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *QuotaResponse
+		localVarReturnValue *Quota
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaApiService.QuotaOssRead")
@@ -443,7 +443,7 @@ type ApiQuotaReadRequest struct {
 	owner      string
 }
 
-func (r ApiQuotaReadRequest) Execute() (*QuotaResponse, *http.Response, error) {
+func (r ApiQuotaReadRequest) Execute() (*Quota, *http.Response, error) {
 	return r.ApiService.QuotaReadExecute(r)
 }
 
@@ -465,13 +465,13 @@ func (a *QuotaApiService) QuotaRead(ctx context.Context, owner string) ApiQuotaR
 }
 
 // Execute executes the request
-//  @return QuotaResponse
-func (a *QuotaApiService) QuotaReadExecute(r ApiQuotaReadRequest) (*QuotaResponse, *http.Response, error) {
+//  @return Quota
+func (a *QuotaApiService) QuotaReadExecute(r ApiQuotaReadRequest) (*Quota, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *QuotaResponse
+		localVarReturnValue *Quota
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QuotaApiService.QuotaRead")

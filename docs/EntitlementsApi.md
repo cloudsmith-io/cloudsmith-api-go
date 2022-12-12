@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## EntitlementsCreate
 
-> RepositoryTokenResponse EntitlementsCreate(ctx, owner, repo).ShowTokens(showTokens).Data(data).Execute()
+> RepositoryToken EntitlementsCreate(ctx, owner, repo).ShowTokens(showTokens).Data(data).Execute()
 
 Create a specific entitlement in a repository.
 
@@ -50,7 +50,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsCreate`: RepositoryTokenResponse
+    // response from `EntitlementsCreate`: RepositoryToken
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsCreate`: %v\n", resp)
 }
 ```
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryTokenResponse**](RepositoryTokenResponse.md)
+[**RepositoryToken**](RepositoryToken.md)
 
 ### Authorization
 
@@ -318,7 +318,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsList
 
-> []RepositoryTokenResponse EntitlementsList(ctx, owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Query(query).Active(active).Execute()
+> []RepositoryToken EntitlementsList(ctx, owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Query(query).Active(active).Execute()
 
 Get a list of all entitlements in a repository.
 
@@ -352,7 +352,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsList`: []RepositoryTokenResponse
+    // response from `EntitlementsList`: []RepositoryToken
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsList`: %v\n", resp)
 }
 ```
@@ -383,7 +383,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]RepositoryTokenResponse**](RepositoryTokenResponse.md)
+[**[]RepositoryToken**](RepositoryToken.md)
 
 ### Authorization
 
@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsPartialUpdate
 
-> RepositoryTokenResponse EntitlementsPartialUpdate(ctx, owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
+> RepositoryToken EntitlementsPartialUpdate(ctx, owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
 
 Update a specific entitlement in a repository.
 
@@ -433,7 +433,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsPartialUpdate`: RepositoryTokenResponse
+    // response from `EntitlementsPartialUpdate`: RepositoryToken
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsPartialUpdate`: %v\n", resp)
 }
 ```
@@ -463,7 +463,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryTokenResponse**](RepositoryTokenResponse.md)
+[**RepositoryToken**](RepositoryToken.md)
 
 ### Authorization
 
@@ -481,7 +481,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsRead
 
-> RepositoryTokenResponse EntitlementsRead(ctx, owner, repo, identifier).Fuzzy(fuzzy).ShowTokens(showTokens).Execute()
+> RepositoryToken EntitlementsRead(ctx, owner, repo, identifier).Fuzzy(fuzzy).ShowTokens(showTokens).Execute()
 
 Get a specific entitlement in a repository.
 
@@ -513,7 +513,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsRead`: RepositoryTokenResponse
+    // response from `EntitlementsRead`: RepositoryToken
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsRead`: %v\n", resp)
 }
 ```
@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryTokenResponse**](RepositoryTokenResponse.md)
+[**RepositoryToken**](RepositoryToken.md)
 
 ### Authorization
 
@@ -561,7 +561,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsRefresh
 
-> RepositoryTokenRefreshResponse EntitlementsRefresh(ctx, owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
+> RepositoryTokenRefresh EntitlementsRefresh(ctx, owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
 
 Refresh an entitlement token in a repository.
 
@@ -593,7 +593,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsRefresh``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsRefresh`: RepositoryTokenRefreshResponse
+    // response from `EntitlementsRefresh`: RepositoryTokenRefresh
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsRefresh`: %v\n", resp)
 }
 ```
@@ -623,7 +623,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryTokenRefreshResponse**](RepositoryTokenRefreshResponse.md)
+[**RepositoryTokenRefresh**](RepositoryTokenRefresh.md)
 
 ### Authorization
 
@@ -717,7 +717,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsSync
 
-> RepositoryTokenSyncResponse EntitlementsSync(ctx, owner, repo).ShowTokens(showTokens).Data(data).Execute()
+> RepositoryTokenSync EntitlementsSync(ctx, owner, repo).ShowTokens(showTokens).Data(data).Execute()
 
 Synchronise tokens from a source repository.
 
@@ -748,7 +748,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsSync``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `EntitlementsSync`: RepositoryTokenSyncResponse
+    // response from `EntitlementsSync`: RepositoryTokenSync
     fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsSync`: %v\n", resp)
 }
 ```
@@ -776,7 +776,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryTokenSyncResponse**](RepositoryTokenSyncResponse.md)
+[**RepositoryTokenSync**](RepositoryTokenSync.md)
 
 ### Authorization
 

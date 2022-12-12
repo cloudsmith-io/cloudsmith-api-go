@@ -38,7 +38,7 @@ Method | HTTP request | Description
 
 ## OrgsInvitesCreate
 
-> OrganizationInviteResponse OrgsInvitesCreate(ctx, org).Data(data).Execute()
+> OrganizationInvite OrgsInvitesCreate(ctx, org).Data(data).Execute()
 
 Create an organization invite for a specific user
 
@@ -67,7 +67,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsInvitesCreate`: OrganizationInviteResponse
+    // response from `OrgsInvitesCreate`: OrganizationInvite
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesCreate`: %v\n", resp)
 }
 ```
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationInviteResponse**](OrganizationInviteResponse.md)
+[**OrganizationInvite**](OrganizationInvite.md)
 
 ### Authorization
 
@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 
 ## OrgsInvitesExtend
 
-> OrganizationInviteExtendResponse OrgsInvitesExtend(ctx, org, slugPerm).Execute()
+> OrganizationInviteExtend OrgsInvitesExtend(ctx, org, slugPerm).Execute()
 
 Extend an organization invite.
 
@@ -210,7 +210,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesExtend``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsInvitesExtend`: OrganizationInviteExtendResponse
+    // response from `OrgsInvitesExtend`: OrganizationInviteExtend
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesExtend`: %v\n", resp)
 }
 ```
@@ -236,7 +236,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationInviteExtendResponse**](OrganizationInviteExtendResponse.md)
+[**OrganizationInviteExtend**](OrganizationInviteExtend.md)
 
 ### Authorization
 
@@ -254,7 +254,7 @@ Name | Type | Description  | Notes
 
 ## OrgsInvitesList
 
-> []OrganizationInviteResponse OrgsInvitesList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []OrganizationInvite OrgsInvitesList(ctx, org).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all invites for an organization.
 
@@ -284,7 +284,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsInvitesList`: []OrganizationInviteResponse
+    // response from `OrgsInvitesList`: []OrganizationInvite
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesList`: %v\n", resp)
 }
 ```
@@ -310,7 +310,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrganizationInviteResponse**](OrganizationInviteResponse.md)
+[**[]OrganizationInvite**](OrganizationInvite.md)
 
 ### Authorization
 
@@ -328,7 +328,7 @@ Name | Type | Description  | Notes
 
 ## OrgsInvitesPartialUpdate
 
-> OrganizationInviteResponse OrgsInvitesPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
+> OrganizationInvite OrgsInvitesPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
 
 Update a specific organization invite.
 
@@ -358,7 +358,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsInvitesPartialUpdate`: OrganizationInviteResponse
+    // response from `OrgsInvitesPartialUpdate`: OrganizationInvite
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesPartialUpdate`: %v\n", resp)
 }
 ```
@@ -385,7 +385,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationInviteResponse**](OrganizationInviteResponse.md)
+[**OrganizationInvite**](OrganizationInvite.md)
 
 ### Authorization
 
@@ -403,7 +403,7 @@ Name | Type | Description  | Notes
 
 ## OrgsInvitesResend
 
-> OrganizationInviteExtendResponse OrgsInvitesResend(ctx, org, slugPerm).Execute()
+> OrganizationInviteExtend OrgsInvitesResend(ctx, org, slugPerm).Execute()
 
 Resend an organization invite.
 
@@ -432,7 +432,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesResend``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsInvitesResend`: OrganizationInviteExtendResponse
+    // response from `OrgsInvitesResend`: OrganizationInviteExtend
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesResend`: %v\n", resp)
 }
 ```
@@ -458,7 +458,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationInviteExtendResponse**](OrganizationInviteExtendResponse.md)
+[**OrganizationInviteExtend**](OrganizationInviteExtend.md)
 
 ### Authorization
 
@@ -476,7 +476,7 @@ Name | Type | Description  | Notes
 
 ## OrgsList
 
-> []OrganizationResponse OrgsList(ctx).Page(page).PageSize(pageSize).Execute()
+> []Organization OrgsList(ctx).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all the organizations you are associated with.
 
@@ -505,7 +505,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsList`: []OrganizationResponse
+    // response from `OrgsList`: []Organization
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsList`: %v\n", resp)
 }
 ```
@@ -526,7 +526,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrganizationResponse**](OrganizationResponse.md)
+[**[]Organization**](Organization.md)
 
 ### Authorization
 
@@ -615,7 +615,7 @@ Name | Type | Description  | Notes
 
 ## OrgsMembersList
 
-> []OrganizationMembershipResponse OrgsMembersList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []OrganizationMembership OrgsMembersList(ctx, org).Page(page).PageSize(pageSize).Execute()
 
 Get the details for all organization members.
 
@@ -645,7 +645,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsMembersList`: []OrganizationMembershipResponse
+    // response from `OrgsMembersList`: []OrganizationMembership
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersList`: %v\n", resp)
 }
 ```
@@ -671,7 +671,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrganizationMembershipResponse**](OrganizationMembershipResponse.md)
+[**[]OrganizationMembership**](OrganizationMembership.md)
 
 ### Authorization
 
@@ -689,7 +689,7 @@ Name | Type | Description  | Notes
 
 ## OrgsMembersRead
 
-> OrganizationMembershipResponse OrgsMembersRead(ctx, org, member).Execute()
+> OrganizationMembership OrgsMembersRead(ctx, org, member).Execute()
 
 Get the details for a specific organization member.
 
@@ -718,7 +718,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsMembersRead`: OrganizationMembershipResponse
+    // response from `OrgsMembersRead`: OrganizationMembership
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersRead`: %v\n", resp)
 }
 ```
@@ -744,7 +744,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationMembershipResponse**](OrganizationMembershipResponse.md)
+[**OrganizationMembership**](OrganizationMembership.md)
 
 ### Authorization
 
@@ -833,7 +833,7 @@ Name | Type | Description  | Notes
 
 ## OrgsRead
 
-> OrganizationResponse OrgsRead(ctx, org).Execute()
+> Organization OrgsRead(ctx, org).Execute()
 
 Get the details for the specific organization.
 
@@ -861,7 +861,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsRead`: OrganizationResponse
+    // response from `OrgsRead`: Organization
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsRead`: %v\n", resp)
 }
 ```
@@ -885,7 +885,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationResponse**](OrganizationResponse.md)
+[**Organization**](Organization.md)
 
 ### Authorization
 
@@ -903,7 +903,7 @@ Name | Type | Description  | Notes
 
 ## OrgsSamlGroupSyncCreate
 
-> OrganizationGroupSyncResponse OrgsSamlGroupSyncCreate(ctx, org).Data(data).Execute()
+> OrganizationGroupSync OrgsSamlGroupSyncCreate(ctx, org).Data(data).Execute()
 
 Create a new SAML Group Sync mapping within an organization.
 
@@ -932,7 +932,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsSamlGroupSyncCreate`: OrganizationGroupSyncResponse
+    // response from `OrgsSamlGroupSyncCreate`: OrganizationGroupSync
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncCreate`: %v\n", resp)
 }
 ```
@@ -957,7 +957,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationGroupSyncResponse**](OrganizationGroupSyncResponse.md)
+[**OrganizationGroupSync**](OrganizationGroupSync.md)
 
 ### Authorization
 
@@ -1046,7 +1046,7 @@ Name | Type | Description  | Notes
 
 ## OrgsSamlGroupSyncList
 
-> []OrganizationGroupSyncResponse OrgsSamlGroupSyncList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []OrganizationGroupSync OrgsSamlGroupSyncList(ctx, org).Page(page).PageSize(pageSize).Execute()
 
 Get the details of all SAML Group Sync mapping within an organization.
 
@@ -1076,7 +1076,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsSamlGroupSyncList`: []OrganizationGroupSyncResponse
+    // response from `OrgsSamlGroupSyncList`: []OrganizationGroupSync
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncList`: %v\n", resp)
 }
 ```
@@ -1102,7 +1102,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrganizationGroupSyncResponse**](OrganizationGroupSyncResponse.md)
+[**[]OrganizationGroupSync**](OrganizationGroupSync.md)
 
 ### Authorization
 
@@ -1120,7 +1120,7 @@ Name | Type | Description  | Notes
 
 ## OrgsServicesCreate
 
-> ServiceResponse OrgsServicesCreate(ctx, org).Data(data).Execute()
+> Service OrgsServicesCreate(ctx, org).Data(data).Execute()
 
 Create a service within an organization.
 
@@ -1149,7 +1149,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsServicesCreate`: ServiceResponse
+    // response from `OrgsServicesCreate`: Service
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesCreate`: %v\n", resp)
 }
 ```
@@ -1174,7 +1174,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServiceResponse**](ServiceResponse.md)
+[**Service**](Service.md)
 
 ### Authorization
 
@@ -1263,7 +1263,7 @@ Name | Type | Description  | Notes
 
 ## OrgsServicesList
 
-> []ServiceResponse OrgsServicesList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []Service OrgsServicesList(ctx, org).Page(page).PageSize(pageSize).Execute()
 
 Get a list of all services within an organization.
 
@@ -1293,7 +1293,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsServicesList`: []ServiceResponse
+    // response from `OrgsServicesList`: []Service
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesList`: %v\n", resp)
 }
 ```
@@ -1319,7 +1319,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ServiceResponse**](ServiceResponse.md)
+[**[]Service**](Service.md)
 
 ### Authorization
 
@@ -1337,7 +1337,7 @@ Name | Type | Description  | Notes
 
 ## OrgsServicesPartialUpdate
 
-> ServiceResponse OrgsServicesPartialUpdate(ctx, org, service).Data(data).Execute()
+> Service OrgsServicesPartialUpdate(ctx, org, service).Data(data).Execute()
 
 Update a service within an organization.
 
@@ -1367,7 +1367,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsServicesPartialUpdate`: ServiceResponse
+    // response from `OrgsServicesPartialUpdate`: Service
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesPartialUpdate`: %v\n", resp)
 }
 ```
@@ -1394,7 +1394,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServiceResponse**](ServiceResponse.md)
+[**Service**](Service.md)
 
 ### Authorization
 
@@ -1412,7 +1412,7 @@ Name | Type | Description  | Notes
 
 ## OrgsServicesRead
 
-> ServiceResponse OrgsServicesRead(ctx, org, service).Execute()
+> Service OrgsServicesRead(ctx, org, service).Execute()
 
 Retrieve details of a single service within an organization.
 
@@ -1441,7 +1441,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsServicesRead`: ServiceResponse
+    // response from `OrgsServicesRead`: Service
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesRead`: %v\n", resp)
 }
 ```
@@ -1467,7 +1467,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServiceResponse**](ServiceResponse.md)
+[**Service**](Service.md)
 
 ### Authorization
 
@@ -1485,7 +1485,7 @@ Name | Type | Description  | Notes
 
 ## OrgsServicesRefresh
 
-> ServiceResponse OrgsServicesRefresh(ctx, org, service).Execute()
+> Service OrgsServicesRefresh(ctx, org, service).Execute()
 
 Refresh service API token.
 
@@ -1514,7 +1514,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesRefresh``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsServicesRefresh`: ServiceResponse
+    // response from `OrgsServicesRefresh`: Service
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesRefresh`: %v\n", resp)
 }
 ```
@@ -1540,7 +1540,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServiceResponse**](ServiceResponse.md)
+[**Service**](Service.md)
 
 ### Authorization
 
@@ -1558,7 +1558,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsCreate
 
-> OrganizationTeamResponse OrgsTeamsCreate(ctx, org).Data(data).Execute()
+> OrganizationTeam OrgsTeamsCreate(ctx, org).Data(data).Execute()
 
 Create a team for this organization.
 
@@ -1587,7 +1587,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsCreate`: OrganizationTeamResponse
+    // response from `OrgsTeamsCreate`: OrganizationTeam
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsCreate`: %v\n", resp)
 }
 ```
@@ -1612,7 +1612,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationTeamResponse**](OrganizationTeamResponse.md)
+[**OrganizationTeam**](OrganizationTeam.md)
 
 ### Authorization
 
@@ -1701,7 +1701,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsList
 
-> []OrganizationTeamResponse OrgsTeamsList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []OrganizationTeam OrgsTeamsList(ctx, org).Page(page).PageSize(pageSize).Execute()
 
 Get the details of all teams within an organization.
 
@@ -1731,7 +1731,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsList`: []OrganizationTeamResponse
+    // response from `OrgsTeamsList`: []OrganizationTeam
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsList`: %v\n", resp)
 }
 ```
@@ -1757,7 +1757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OrganizationTeamResponse**](OrganizationTeamResponse.md)
+[**[]OrganizationTeam**](OrganizationTeam.md)
 
 ### Authorization
 
@@ -1775,7 +1775,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsMembersCreate
 
-> OrganizationTeamMembersResponse OrgsTeamsMembersCreate(ctx, org, team).Data(data).Execute()
+> OrganizationTeamMembers OrgsTeamsMembersCreate(ctx, org, team).Data(data).Execute()
 
 Add users to a team.
 
@@ -1805,7 +1805,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsMembersCreate`: OrganizationTeamMembersResponse
+    // response from `OrgsTeamsMembersCreate`: OrganizationTeamMembers
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersCreate`: %v\n", resp)
 }
 ```
@@ -1832,7 +1832,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationTeamMembersResponse**](OrganizationTeamMembersResponse.md)
+[**OrganizationTeamMembers**](OrganizationTeamMembers.md)
 
 ### Authorization
 
@@ -1850,7 +1850,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsMembersList
 
-> OrganizationTeamMembersResponse OrgsTeamsMembersList(ctx, org, team).Execute()
+> OrganizationTeamMembers OrgsTeamsMembersList(ctx, org, team).Execute()
 
 List all members for the team.
 
@@ -1879,7 +1879,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsMembersList`: OrganizationTeamMembersResponse
+    // response from `OrgsTeamsMembersList`: OrganizationTeamMembers
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersList`: %v\n", resp)
 }
 ```
@@ -1905,7 +1905,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationTeamMembersResponse**](OrganizationTeamMembersResponse.md)
+[**OrganizationTeamMembers**](OrganizationTeamMembers.md)
 
 ### Authorization
 
@@ -1923,7 +1923,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsMembersUpdate
 
-> OrganizationTeamMembersResponse OrgsTeamsMembersUpdate(ctx, org, team).Execute()
+> OrganizationTeamMembers OrgsTeamsMembersUpdate(ctx, org, team).Execute()
 
 Replace all team members.
 
@@ -1952,7 +1952,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsMembersUpdate`: OrganizationTeamMembersResponse
+    // response from `OrgsTeamsMembersUpdate`: OrganizationTeamMembers
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersUpdate`: %v\n", resp)
 }
 ```
@@ -1978,7 +1978,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationTeamMembersResponse**](OrganizationTeamMembersResponse.md)
+[**OrganizationTeamMembers**](OrganizationTeamMembers.md)
 
 ### Authorization
 
@@ -1996,7 +1996,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsPartialUpdate
 
-> OrganizationTeamResponse OrgsTeamsPartialUpdate(ctx, org, team).Data(data).Execute()
+> OrganizationTeam OrgsTeamsPartialUpdate(ctx, org, team).Data(data).Execute()
 
 Update a specific team in a organization.
 
@@ -2026,7 +2026,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsPartialUpdate`: OrganizationTeamResponse
+    // response from `OrgsTeamsPartialUpdate`: OrganizationTeam
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsPartialUpdate`: %v\n", resp)
 }
 ```
@@ -2053,7 +2053,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationTeamResponse**](OrganizationTeamResponse.md)
+[**OrganizationTeam**](OrganizationTeam.md)
 
 ### Authorization
 
@@ -2071,7 +2071,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsRead
 
-> OrganizationTeamResponse OrgsTeamsRead(ctx, org, team).Execute()
+> OrganizationTeam OrgsTeamsRead(ctx, org, team).Execute()
 
 Get the details of a specific team within an organization.
 
@@ -2100,7 +2100,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsTeamsRead`: OrganizationTeamResponse
+    // response from `OrgsTeamsRead`: OrganizationTeam
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsRead`: %v\n", resp)
 }
 ```
@@ -2126,7 +2126,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationTeamResponse**](OrganizationTeamResponse.md)
+[**OrganizationTeam**](OrganizationTeam.md)
 
 ### Authorization
 

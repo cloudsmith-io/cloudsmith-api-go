@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## UsersProfileRead
 
-> UserProfileResponse UsersProfileRead(ctx, slug).Execute()
+> UserProfile UsersProfileRead(ctx, slug).Execute()
 
 Provide a brief for the specified user (if any).
 
@@ -38,7 +38,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UsersProfileRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UsersProfileRead`: UserProfileResponse
+    // response from `UsersProfileRead`: UserProfile
     fmt.Fprintf(os.Stdout, "Response from `UsersApi.UsersProfileRead`: %v\n", resp)
 }
 ```
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserProfileResponse**](UserProfileResponse.md)
+[**UserProfile**](UserProfile.md)
 
 ### Authorization
 
