@@ -6,6 +6,12 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ReposCreate**](ReposApi.md#ReposCreate) | **Post** /repos/{owner}/ | Create a new repository in a given namespace.
 [**ReposDelete**](ReposApi.md#ReposDelete) | **Delete** /repos/{owner}/{identifier}/ | Delete a repository in a given namespace.
+[**ReposGeoipDisable**](ReposApi.md#ReposGeoipDisable) | **Post** /repos/{owner}/{identifier}/geoip/disable/ | Disable GeoIP for this repository.
+[**ReposGeoipEnable**](ReposApi.md#ReposGeoipEnable) | **Post** /repos/{owner}/{identifier}/geoip/enable/ | Enable GeoIP for this repository.
+[**ReposGeoipPartialUpdate**](ReposApi.md#ReposGeoipPartialUpdate) | **Patch** /repos/{owner}/{identifier}/geoip | Partially update existing repository geoip rules with those specified
+[**ReposGeoipRead**](ReposApi.md#ReposGeoipRead) | **Get** /repos/{owner}/{identifier}/geoip | List all created GeoIP rules for the repository.
+[**ReposGeoipTest**](ReposApi.md#ReposGeoipTest) | **Post** /repos/{owner}/{identifier}/geoip/test/ | Test a list of IP addresses against the repository&#39;s current GeoIP rules.
+[**ReposGeoipUpdate**](ReposApi.md#ReposGeoipUpdate) | **Put** /repos/{owner}/{identifier}/geoip | Replace all existing repository geoip rules with those specified
 [**ReposGpgCreate**](ReposApi.md#ReposGpgCreate) | **Post** /repos/{owner}/{identifier}/gpg/ | Set the active GPG key for the Repository.
 [**ReposGpgList**](ReposApi.md#ReposGpgList) | **Get** /repos/{owner}/{identifier}/gpg/ | Retrieve the active GPG key for the Repository.
 [**ReposGpgRegenerate**](ReposApi.md#ReposGpgRegenerate) | **Post** /repos/{owner}/{identifier}/gpg/regenerate/ | Regenerate GPG Key for the Repository.
@@ -158,6 +164,448 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposGeoipDisable
+
+> ReposGeoipDisable(ctx, owner, identifier).Data(data).Execute()
+
+Disable GeoIP for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposGeoipDisable(context.Background(), owner, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipDisable``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposGeoipDisableRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | **map[string]interface{}** |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposGeoipEnable
+
+> ReposGeoipEnable(ctx, owner, identifier).Data(data).Execute()
+
+Enable GeoIP for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposGeoipEnable(context.Background(), owner, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipEnable``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposGeoipEnableRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | **map[string]interface{}** |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposGeoipPartialUpdate
+
+> ReposGeoipRead200Response ReposGeoipPartialUpdate(ctx, owner, identifier).Data(data).Execute()
+
+Partially update existing repository geoip rules with those specified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewReposGeoipRead200Response() // ReposGeoipRead200Response |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposGeoipPartialUpdate(context.Background(), owner, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposGeoipPartialUpdate`: ReposGeoipRead200Response
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposGeoipPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**ReposGeoipRead200Response**](ReposGeoipRead200Response.md) |  | 
+
+### Return type
+
+[**ReposGeoipRead200Response**](ReposGeoipRead200Response.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposGeoipRead
+
+> ReposGeoipRead200Response ReposGeoipRead(ctx, owner, identifier).Execute()
+
+List all created GeoIP rules for the repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposGeoipRead(context.Background(), owner, identifier).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposGeoipRead`: ReposGeoipRead200Response
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposGeoipReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ReposGeoipRead200Response**](ReposGeoipRead200Response.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposGeoipTest
+
+> RepositoryGeoIPTestAddressResponse ReposGeoipTest(ctx, owner, identifier).Data(data).Execute()
+
+Test a list of IP addresses against the repository's current GeoIP rules.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewRepositoryGeoIPTestAddress([]string{"Addresses_example"}) // RepositoryGeoIPTestAddress |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposGeoipTest(context.Background(), owner, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipTest``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposGeoipTest`: RepositoryGeoIPTestAddressResponse
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipTest`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposGeoipTestRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**RepositoryGeoIPTestAddress**](RepositoryGeoIPTestAddress.md) |  | 
+
+### Return type
+
+[**RepositoryGeoIPTestAddressResponse**](RepositoryGeoIPTestAddressResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposGeoipUpdate
+
+> ReposGeoipUpdate(ctx, owner, identifier).Data(data).Execute()
+
+Replace all existing repository geoip rules with those specified
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewReposGeoipRead200Response() // ReposGeoipRead200Response |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposGeoipUpdate(context.Background(), owner, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposGeoipUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**ReposGeoipRead200Response**](ReposGeoipRead200Response.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

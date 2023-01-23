@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.182.1
+API version: 1.202.1
 Contact: support@cloudsmith.io
 */
 
@@ -21,13 +21,13 @@ type Organization struct {
 	Country   NullableString `json:"country,omitempty"`
 	CreatedAt *time.Time     `json:"created_at,omitempty"`
 	// The city/town/area your organization is based in.
-	Location *string `json:"location,omitempty"`
+	Location NullableString `json:"location,omitempty"`
 	// A descriptive name for your organization.
 	Name     *string `json:"name,omitempty"`
 	Slug     *string `json:"slug,omitempty"`
 	SlugPerm *string `json:"slug_perm,omitempty"`
 	// A short public descriptive for your organization.
-	Tagline *string `json:"tagline,omitempty"`
+	Tagline NullableString `json:"tagline,omitempty"`
 }
 
 // NewOrganization instantiates a new Organization object
@@ -122,36 +122,47 @@ func (o *Organization) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
-// GetLocation returns the Location field value if set, zero value otherwise.
+// GetLocation returns the Location field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Organization) GetLocation() string {
-	if o == nil || isNil(o.Location) {
+	if o == nil || isNil(o.Location.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Location
+	return *o.Location.Get()
 }
 
 // GetLocationOk returns a tuple with the Location field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Organization) GetLocationOk() (*string, bool) {
-	if o == nil || isNil(o.Location) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Location, true
+	return o.Location.Get(), o.Location.IsSet()
 }
 
 // HasLocation returns a boolean if a field has been set.
 func (o *Organization) HasLocation() bool {
-	if o != nil && !isNil(o.Location) {
+	if o != nil && o.Location.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLocation gets a reference to the given string and assigns it to the Location field.
+// SetLocation gets a reference to the given NullableString and assigns it to the Location field.
 func (o *Organization) SetLocation(v string) {
-	o.Location = &v
+	o.Location.Set(&v)
+}
+
+// SetLocationNil sets the value for Location to be an explicit nil
+func (o *Organization) SetLocationNil() {
+	o.Location.Set(nil)
+}
+
+// UnsetLocation ensures that no value is present for Location, not even an explicit nil
+func (o *Organization) UnsetLocation() {
+	o.Location.Unset()
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -250,36 +261,47 @@ func (o *Organization) SetSlugPerm(v string) {
 	o.SlugPerm = &v
 }
 
-// GetTagline returns the Tagline field value if set, zero value otherwise.
+// GetTagline returns the Tagline field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Organization) GetTagline() string {
-	if o == nil || isNil(o.Tagline) {
+	if o == nil || isNil(o.Tagline.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Tagline
+	return *o.Tagline.Get()
 }
 
 // GetTaglineOk returns a tuple with the Tagline field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Organization) GetTaglineOk() (*string, bool) {
-	if o == nil || isNil(o.Tagline) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tagline, true
+	return o.Tagline.Get(), o.Tagline.IsSet()
 }
 
 // HasTagline returns a boolean if a field has been set.
 func (o *Organization) HasTagline() bool {
-	if o != nil && !isNil(o.Tagline) {
+	if o != nil && o.Tagline.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTagline gets a reference to the given string and assigns it to the Tagline field.
+// SetTagline gets a reference to the given NullableString and assigns it to the Tagline field.
 func (o *Organization) SetTagline(v string) {
-	o.Tagline = &v
+	o.Tagline.Set(&v)
+}
+
+// SetTaglineNil sets the value for Tagline to be an explicit nil
+func (o *Organization) SetTaglineNil() {
+	o.Tagline.Set(nil)
+}
+
+// UnsetTagline ensures that no value is present for Tagline, not even an explicit nil
+func (o *Organization) UnsetTagline() {
+	o.Tagline.Unset()
 }
 
 func (o Organization) MarshalJSON() ([]byte, error) {
@@ -290,8 +312,8 @@ func (o Organization) MarshalJSON() ([]byte, error) {
 	if !isNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if !isNil(o.Location) {
-		toSerialize["location"] = o.Location
+	if o.Location.IsSet() {
+		toSerialize["location"] = o.Location.Get()
 	}
 	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -302,8 +324,8 @@ func (o Organization) MarshalJSON() ([]byte, error) {
 	if !isNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
-	if !isNil(o.Tagline) {
-		toSerialize["tagline"] = o.Tagline
+	if o.Tagline.IsSet() {
+		toSerialize["tagline"] = o.Tagline.Get()
 	}
 	return json.Marshal(toSerialize)
 }

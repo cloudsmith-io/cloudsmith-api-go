@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.182.1
+API version: 1.202.1
 Contact: support@cloudsmith.io
 */
 
@@ -18,10 +18,10 @@ import (
 // PackageFile struct for PackageFile
 type PackageFile struct {
 	CdnUrl         NullableString `json:"cdn_url,omitempty"`
-	ChecksumMd5    *string        `json:"checksum_md5,omitempty"`
-	ChecksumSha1   *string        `json:"checksum_sha1,omitempty"`
-	ChecksumSha256 *string        `json:"checksum_sha256,omitempty"`
-	ChecksumSha512 *string        `json:"checksum_sha512,omitempty"`
+	ChecksumMd5    NullableString `json:"checksum_md5,omitempty"`
+	ChecksumSha1   NullableString `json:"checksum_sha1,omitempty"`
+	ChecksumSha256 NullableString `json:"checksum_sha256,omitempty"`
+	ChecksumSha512 NullableString `json:"checksum_sha512,omitempty"`
 	Downloads      *int64         `json:"downloads,omitempty"`
 	Filename       *string        `json:"filename,omitempty"`
 	IsDownloadable *bool          `json:"is_downloadable,omitempty"`
@@ -32,7 +32,7 @@ type PackageFile struct {
 	Size     *int64  `json:"size,omitempty"`
 	SlugPerm *string `json:"slug_perm,omitempty"`
 	// Freeform descriptor that describes what the file is.
-	Tag *string `json:"tag,omitempty"`
+	Tag NullableString `json:"tag,omitempty"`
 }
 
 // NewPackageFile instantiates a new PackageFile object
@@ -95,132 +95,176 @@ func (o *PackageFile) UnsetCdnUrl() {
 	o.CdnUrl.Unset()
 }
 
-// GetChecksumMd5 returns the ChecksumMd5 field value if set, zero value otherwise.
+// GetChecksumMd5 returns the ChecksumMd5 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetChecksumMd5() string {
-	if o == nil || isNil(o.ChecksumMd5) {
+	if o == nil || isNil(o.ChecksumMd5.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ChecksumMd5
+	return *o.ChecksumMd5.Get()
 }
 
 // GetChecksumMd5Ok returns a tuple with the ChecksumMd5 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageFile) GetChecksumMd5Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumMd5) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ChecksumMd5, true
+	return o.ChecksumMd5.Get(), o.ChecksumMd5.IsSet()
 }
 
 // HasChecksumMd5 returns a boolean if a field has been set.
 func (o *PackageFile) HasChecksumMd5() bool {
-	if o != nil && !isNil(o.ChecksumMd5) {
+	if o != nil && o.ChecksumMd5.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetChecksumMd5 gets a reference to the given string and assigns it to the ChecksumMd5 field.
+// SetChecksumMd5 gets a reference to the given NullableString and assigns it to the ChecksumMd5 field.
 func (o *PackageFile) SetChecksumMd5(v string) {
-	o.ChecksumMd5 = &v
+	o.ChecksumMd5.Set(&v)
 }
 
-// GetChecksumSha1 returns the ChecksumSha1 field value if set, zero value otherwise.
+// SetChecksumMd5Nil sets the value for ChecksumMd5 to be an explicit nil
+func (o *PackageFile) SetChecksumMd5Nil() {
+	o.ChecksumMd5.Set(nil)
+}
+
+// UnsetChecksumMd5 ensures that no value is present for ChecksumMd5, not even an explicit nil
+func (o *PackageFile) UnsetChecksumMd5() {
+	o.ChecksumMd5.Unset()
+}
+
+// GetChecksumSha1 returns the ChecksumSha1 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetChecksumSha1() string {
-	if o == nil || isNil(o.ChecksumSha1) {
+	if o == nil || isNil(o.ChecksumSha1.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ChecksumSha1
+	return *o.ChecksumSha1.Get()
 }
 
 // GetChecksumSha1Ok returns a tuple with the ChecksumSha1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageFile) GetChecksumSha1Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha1) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ChecksumSha1, true
+	return o.ChecksumSha1.Get(), o.ChecksumSha1.IsSet()
 }
 
 // HasChecksumSha1 returns a boolean if a field has been set.
 func (o *PackageFile) HasChecksumSha1() bool {
-	if o != nil && !isNil(o.ChecksumSha1) {
+	if o != nil && o.ChecksumSha1.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetChecksumSha1 gets a reference to the given string and assigns it to the ChecksumSha1 field.
+// SetChecksumSha1 gets a reference to the given NullableString and assigns it to the ChecksumSha1 field.
 func (o *PackageFile) SetChecksumSha1(v string) {
-	o.ChecksumSha1 = &v
+	o.ChecksumSha1.Set(&v)
 }
 
-// GetChecksumSha256 returns the ChecksumSha256 field value if set, zero value otherwise.
+// SetChecksumSha1Nil sets the value for ChecksumSha1 to be an explicit nil
+func (o *PackageFile) SetChecksumSha1Nil() {
+	o.ChecksumSha1.Set(nil)
+}
+
+// UnsetChecksumSha1 ensures that no value is present for ChecksumSha1, not even an explicit nil
+func (o *PackageFile) UnsetChecksumSha1() {
+	o.ChecksumSha1.Unset()
+}
+
+// GetChecksumSha256 returns the ChecksumSha256 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetChecksumSha256() string {
-	if o == nil || isNil(o.ChecksumSha256) {
+	if o == nil || isNil(o.ChecksumSha256.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ChecksumSha256
+	return *o.ChecksumSha256.Get()
 }
 
 // GetChecksumSha256Ok returns a tuple with the ChecksumSha256 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageFile) GetChecksumSha256Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha256) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ChecksumSha256, true
+	return o.ChecksumSha256.Get(), o.ChecksumSha256.IsSet()
 }
 
 // HasChecksumSha256 returns a boolean if a field has been set.
 func (o *PackageFile) HasChecksumSha256() bool {
-	if o != nil && !isNil(o.ChecksumSha256) {
+	if o != nil && o.ChecksumSha256.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetChecksumSha256 gets a reference to the given string and assigns it to the ChecksumSha256 field.
+// SetChecksumSha256 gets a reference to the given NullableString and assigns it to the ChecksumSha256 field.
 func (o *PackageFile) SetChecksumSha256(v string) {
-	o.ChecksumSha256 = &v
+	o.ChecksumSha256.Set(&v)
 }
 
-// GetChecksumSha512 returns the ChecksumSha512 field value if set, zero value otherwise.
+// SetChecksumSha256Nil sets the value for ChecksumSha256 to be an explicit nil
+func (o *PackageFile) SetChecksumSha256Nil() {
+	o.ChecksumSha256.Set(nil)
+}
+
+// UnsetChecksumSha256 ensures that no value is present for ChecksumSha256, not even an explicit nil
+func (o *PackageFile) UnsetChecksumSha256() {
+	o.ChecksumSha256.Unset()
+}
+
+// GetChecksumSha512 returns the ChecksumSha512 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetChecksumSha512() string {
-	if o == nil || isNil(o.ChecksumSha512) {
+	if o == nil || isNil(o.ChecksumSha512.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ChecksumSha512
+	return *o.ChecksumSha512.Get()
 }
 
 // GetChecksumSha512Ok returns a tuple with the ChecksumSha512 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageFile) GetChecksumSha512Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha512) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ChecksumSha512, true
+	return o.ChecksumSha512.Get(), o.ChecksumSha512.IsSet()
 }
 
 // HasChecksumSha512 returns a boolean if a field has been set.
 func (o *PackageFile) HasChecksumSha512() bool {
-	if o != nil && !isNil(o.ChecksumSha512) {
+	if o != nil && o.ChecksumSha512.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetChecksumSha512 gets a reference to the given string and assigns it to the ChecksumSha512 field.
+// SetChecksumSha512 gets a reference to the given NullableString and assigns it to the ChecksumSha512 field.
 func (o *PackageFile) SetChecksumSha512(v string) {
-	o.ChecksumSha512 = &v
+	o.ChecksumSha512.Set(&v)
+}
+
+// SetChecksumSha512Nil sets the value for ChecksumSha512 to be an explicit nil
+func (o *PackageFile) SetChecksumSha512Nil() {
+	o.ChecksumSha512.Set(nil)
+}
+
+// UnsetChecksumSha512 ensures that no value is present for ChecksumSha512, not even an explicit nil
+func (o *PackageFile) UnsetChecksumSha512() {
+	o.ChecksumSha512.Unset()
 }
 
 // GetDownloads returns the Downloads field value if set, zero value otherwise.
@@ -490,36 +534,47 @@ func (o *PackageFile) SetSlugPerm(v string) {
 	o.SlugPerm = &v
 }
 
-// GetTag returns the Tag field value if set, zero value otherwise.
+// GetTag returns the Tag field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetTag() string {
-	if o == nil || isNil(o.Tag) {
+	if o == nil || isNil(o.Tag.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Tag
+	return *o.Tag.Get()
 }
 
 // GetTagOk returns a tuple with the Tag field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageFile) GetTagOk() (*string, bool) {
-	if o == nil || isNil(o.Tag) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Tag, true
+	return o.Tag.Get(), o.Tag.IsSet()
 }
 
 // HasTag returns a boolean if a field has been set.
 func (o *PackageFile) HasTag() bool {
-	if o != nil && !isNil(o.Tag) {
+	if o != nil && o.Tag.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTag gets a reference to the given string and assigns it to the Tag field.
+// SetTag gets a reference to the given NullableString and assigns it to the Tag field.
 func (o *PackageFile) SetTag(v string) {
-	o.Tag = &v
+	o.Tag.Set(&v)
+}
+
+// SetTagNil sets the value for Tag to be an explicit nil
+func (o *PackageFile) SetTagNil() {
+	o.Tag.Set(nil)
+}
+
+// UnsetTag ensures that no value is present for Tag, not even an explicit nil
+func (o *PackageFile) UnsetTag() {
+	o.Tag.Unset()
 }
 
 func (o PackageFile) MarshalJSON() ([]byte, error) {
@@ -527,17 +582,17 @@ func (o PackageFile) MarshalJSON() ([]byte, error) {
 	if o.CdnUrl.IsSet() {
 		toSerialize["cdn_url"] = o.CdnUrl.Get()
 	}
-	if !isNil(o.ChecksumMd5) {
-		toSerialize["checksum_md5"] = o.ChecksumMd5
+	if o.ChecksumMd5.IsSet() {
+		toSerialize["checksum_md5"] = o.ChecksumMd5.Get()
 	}
-	if !isNil(o.ChecksumSha1) {
-		toSerialize["checksum_sha1"] = o.ChecksumSha1
+	if o.ChecksumSha1.IsSet() {
+		toSerialize["checksum_sha1"] = o.ChecksumSha1.Get()
 	}
-	if !isNil(o.ChecksumSha256) {
-		toSerialize["checksum_sha256"] = o.ChecksumSha256
+	if o.ChecksumSha256.IsSet() {
+		toSerialize["checksum_sha256"] = o.ChecksumSha256.Get()
 	}
-	if !isNil(o.ChecksumSha512) {
-		toSerialize["checksum_sha512"] = o.ChecksumSha512
+	if o.ChecksumSha512.IsSet() {
+		toSerialize["checksum_sha512"] = o.ChecksumSha512.Get()
 	}
 	if !isNil(o.Downloads) {
 		toSerialize["downloads"] = o.Downloads
@@ -563,8 +618,8 @@ func (o PackageFile) MarshalJSON() ([]byte, error) {
 	if !isNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
-	if !isNil(o.Tag) {
-		toSerialize["tag"] = o.Tag
+	if o.Tag.IsSet() {
+		toSerialize["tag"] = o.Tag.Get()
 	}
 	return json.Marshal(toSerialize)
 }

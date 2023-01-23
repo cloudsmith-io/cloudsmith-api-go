@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.182.1
+API version: 1.202.1
 Contact: support@cloudsmith.io
 */
 
@@ -25,15 +25,15 @@ type TerraformPackageUpload struct {
 	ChecksumSha256 *string        `json:"checksum_sha256,omitempty"`
 	ChecksumSha512 *string        `json:"checksum_sha512,omitempty"`
 	// A checksum of all of the package's dependencies.
-	DependenciesChecksumMd5 *string `json:"dependencies_checksum_md5,omitempty"`
-	DependenciesUrl         *string `json:"dependencies_url,omitempty"`
+	DependenciesChecksumMd5 NullableString `json:"dependencies_checksum_md5,omitempty"`
+	DependenciesUrl         *string        `json:"dependencies_url,omitempty"`
 	// A textual description of this package.
-	Description   *string              `json:"description,omitempty"`
+	Description   NullableString       `json:"description,omitempty"`
 	Distro        NullableDistribution `json:"distro,omitempty"`
 	DistroVersion *DistributionVersion `json:"distro_version,omitempty"`
 	Downloads     *int64               `json:"downloads,omitempty"`
 	// The epoch of the package version (if any).
-	Epoch     *int64        `json:"epoch,omitempty"`
+	Epoch     NullableInt64 `json:"epoch,omitempty"`
 	Extension *string       `json:"extension,omitempty"`
 	Filename  *string       `json:"filename,omitempty"`
 	Files     []PackageFile `json:"files,omitempty"`
@@ -50,27 +50,27 @@ type TerraformPackageUpload struct {
 	IsSyncInFlight   *bool   `json:"is_sync_in_flight,omitempty"`
 	IsSyncInProgress *bool   `json:"is_sync_in_progress,omitempty"`
 	// The license of this package.
-	License *string `json:"license,omitempty"`
+	License NullableString `json:"license,omitempty"`
 	// The name of this package.
-	Name                *string `json:"name,omitempty"`
-	Namespace           *string `json:"namespace,omitempty"`
-	NamespaceUrl        *string `json:"namespace_url,omitempty"`
-	NumFiles            *int64  `json:"num_files,omitempty"`
-	OriginRepository    *string `json:"origin_repository,omitempty"`
-	OriginRepositoryUrl *string `json:"origin_repository_url,omitempty"`
+	Name                NullableString `json:"name,omitempty"`
+	Namespace           *string        `json:"namespace,omitempty"`
+	NamespaceUrl        *string        `json:"namespace_url,omitempty"`
+	NumFiles            *int64         `json:"num_files,omitempty"`
+	OriginRepository    *string        `json:"origin_repository,omitempty"`
+	OriginRepositoryUrl *string        `json:"origin_repository_url,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
 	// The release of the package version (if any).
-	Release       *string `json:"release,omitempty"`
-	Repository    *string `json:"repository,omitempty"`
-	RepositoryUrl *string `json:"repository_url,omitempty"`
+	Release       NullableString `json:"release,omitempty"`
+	Repository    *string        `json:"repository,omitempty"`
+	RepositoryUrl *string        `json:"repository_url,omitempty"`
 	// The datetime the security scanning was completed.
-	SecurityScanCompletedAt *time.Time `json:"security_scan_completed_at,omitempty"`
+	SecurityScanCompletedAt NullableTime `json:"security_scan_completed_at,omitempty"`
 	// The datetime the security scanning was started.
-	SecurityScanStartedAt *time.Time     `json:"security_scan_started_at,omitempty"`
+	SecurityScanStartedAt NullableTime   `json:"security_scan_started_at,omitempty"`
 	SecurityScanStatus    NullableString `json:"security_scan_status,omitempty"`
 	// The datetime the security scanning status was updated.
-	SecurityScanStatusUpdatedAt *time.Time     `json:"security_scan_status_updated_at,omitempty"`
+	SecurityScanStatusUpdatedAt NullableTime   `json:"security_scan_status_updated_at,omitempty"`
 	SelfHtmlUrl                 *string        `json:"self_html_url,omitempty"`
 	SelfUrl                     *string        `json:"self_url,omitempty"`
 	SignatureUrl                NullableString `json:"signature_url,omitempty"`
@@ -87,16 +87,16 @@ type TerraformPackageUpload struct {
 	// The synchronisation status of the package.
 	Status *int64 `json:"status,omitempty"`
 	// A textual description for the synchronous status reason (if any
-	StatusReason *string `json:"status_reason,omitempty"`
-	StatusStr    *string `json:"status_str,omitempty"`
+	StatusReason NullableString `json:"status_reason,omitempty"`
+	StatusStr    *string        `json:"status_str,omitempty"`
 	// The datetime the package status was updated at.
 	StatusUpdatedAt *time.Time `json:"status_updated_at,omitempty"`
 	StatusUrl       *string    `json:"status_url,omitempty"`
 	Subtype         *string    `json:"subtype,omitempty"`
 	// A one-liner synopsis of this package.
-	Summary *string `json:"summary,omitempty"`
+	Summary NullableString `json:"summary,omitempty"`
 	// The datetime the package sync was finished at.
-	SyncFinishedAt *time.Time `json:"sync_finished_at,omitempty"`
+	SyncFinishedAt NullableTime `json:"sync_finished_at,omitempty"`
 	// Synchronisation progress (from 0-100)
 	SyncProgress *int64 `json:"sync_progress,omitempty"`
 	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
@@ -107,9 +107,9 @@ type TerraformPackageUpload struct {
 	Uploader    *string    `json:"uploader,omitempty"`
 	UploaderUrl *string    `json:"uploader_url,omitempty"`
 	// The raw version for this package.
-	Version                     *string `json:"version,omitempty"`
-	VersionOrig                 *string `json:"version_orig,omitempty"`
-	VulnerabilityScanResultsUrl *string `json:"vulnerability_scan_results_url,omitempty"`
+	Version                     NullableString `json:"version,omitempty"`
+	VersionOrig                 *string        `json:"version_orig,omitempty"`
+	VulnerabilityScanResultsUrl *string        `json:"vulnerability_scan_results_url,omitempty"`
 }
 
 // NewTerraformPackageUpload instantiates a new TerraformPackageUpload object
@@ -332,36 +332,47 @@ func (o *TerraformPackageUpload) SetChecksumSha512(v string) {
 	o.ChecksumSha512 = &v
 }
 
-// GetDependenciesChecksumMd5 returns the DependenciesChecksumMd5 field value if set, zero value otherwise.
+// GetDependenciesChecksumMd5 returns the DependenciesChecksumMd5 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetDependenciesChecksumMd5() string {
-	if o == nil || isNil(o.DependenciesChecksumMd5) {
+	if o == nil || isNil(o.DependenciesChecksumMd5.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.DependenciesChecksumMd5
+	return *o.DependenciesChecksumMd5.Get()
 }
 
 // GetDependenciesChecksumMd5Ok returns a tuple with the DependenciesChecksumMd5 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetDependenciesChecksumMd5Ok() (*string, bool) {
-	if o == nil || isNil(o.DependenciesChecksumMd5) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DependenciesChecksumMd5, true
+	return o.DependenciesChecksumMd5.Get(), o.DependenciesChecksumMd5.IsSet()
 }
 
 // HasDependenciesChecksumMd5 returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasDependenciesChecksumMd5() bool {
-	if o != nil && !isNil(o.DependenciesChecksumMd5) {
+	if o != nil && o.DependenciesChecksumMd5.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDependenciesChecksumMd5 gets a reference to the given string and assigns it to the DependenciesChecksumMd5 field.
+// SetDependenciesChecksumMd5 gets a reference to the given NullableString and assigns it to the DependenciesChecksumMd5 field.
 func (o *TerraformPackageUpload) SetDependenciesChecksumMd5(v string) {
-	o.DependenciesChecksumMd5 = &v
+	o.DependenciesChecksumMd5.Set(&v)
+}
+
+// SetDependenciesChecksumMd5Nil sets the value for DependenciesChecksumMd5 to be an explicit nil
+func (o *TerraformPackageUpload) SetDependenciesChecksumMd5Nil() {
+	o.DependenciesChecksumMd5.Set(nil)
+}
+
+// UnsetDependenciesChecksumMd5 ensures that no value is present for DependenciesChecksumMd5, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetDependenciesChecksumMd5() {
+	o.DependenciesChecksumMd5.Unset()
 }
 
 // GetDependenciesUrl returns the DependenciesUrl field value if set, zero value otherwise.
@@ -396,36 +407,47 @@ func (o *TerraformPackageUpload) SetDependenciesUrl(v string) {
 	o.DependenciesUrl = &v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || isNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Description
+	return *o.Description.Get()
 }
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && o.Description.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
 func (o *TerraformPackageUpload) SetDescription(v string) {
-	o.Description = &v
+	o.Description.Set(&v)
+}
+
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *TerraformPackageUpload) SetDescriptionNil() {
+	o.Description.Set(nil)
+}
+
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetDescription() {
+	o.Description.Unset()
 }
 
 // GetDistro returns the Distro field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -535,36 +557,47 @@ func (o *TerraformPackageUpload) SetDownloads(v int64) {
 	o.Downloads = &v
 }
 
-// GetEpoch returns the Epoch field value if set, zero value otherwise.
+// GetEpoch returns the Epoch field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetEpoch() int64 {
-	if o == nil || isNil(o.Epoch) {
+	if o == nil || isNil(o.Epoch.Get()) {
 		var ret int64
 		return ret
 	}
-	return *o.Epoch
+	return *o.Epoch.Get()
 }
 
 // GetEpochOk returns a tuple with the Epoch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetEpochOk() (*int64, bool) {
-	if o == nil || isNil(o.Epoch) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Epoch, true
+	return o.Epoch.Get(), o.Epoch.IsSet()
 }
 
 // HasEpoch returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasEpoch() bool {
-	if o != nil && !isNil(o.Epoch) {
+	if o != nil && o.Epoch.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEpoch gets a reference to the given int64 and assigns it to the Epoch field.
+// SetEpoch gets a reference to the given NullableInt64 and assigns it to the Epoch field.
 func (o *TerraformPackageUpload) SetEpoch(v int64) {
-	o.Epoch = &v
+	o.Epoch.Set(&v)
+}
+
+// SetEpochNil sets the value for Epoch to be an explicit nil
+func (o *TerraformPackageUpload) SetEpochNil() {
+	o.Epoch.Set(nil)
+}
+
+// UnsetEpoch ensures that no value is present for Epoch, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetEpoch() {
+	o.Epoch.Unset()
 }
 
 // GetExtension returns the Extension field value if set, zero value otherwise.
@@ -1015,68 +1048,90 @@ func (o *TerraformPackageUpload) SetIsSyncInProgress(v bool) {
 	o.IsSyncInProgress = &v
 }
 
-// GetLicense returns the License field value if set, zero value otherwise.
+// GetLicense returns the License field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetLicense() string {
-	if o == nil || isNil(o.License) {
+	if o == nil || isNil(o.License.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.License
+	return *o.License.Get()
 }
 
 // GetLicenseOk returns a tuple with the License field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetLicenseOk() (*string, bool) {
-	if o == nil || isNil(o.License) {
+	if o == nil {
 		return nil, false
 	}
-	return o.License, true
+	return o.License.Get(), o.License.IsSet()
 }
 
 // HasLicense returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasLicense() bool {
-	if o != nil && !isNil(o.License) {
+	if o != nil && o.License.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLicense gets a reference to the given string and assigns it to the License field.
+// SetLicense gets a reference to the given NullableString and assigns it to the License field.
 func (o *TerraformPackageUpload) SetLicense(v string) {
-	o.License = &v
+	o.License.Set(&v)
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// SetLicenseNil sets the value for License to be an explicit nil
+func (o *TerraformPackageUpload) SetLicenseNil() {
+	o.License.Set(nil)
+}
+
+// UnsetLicense ensures that no value is present for License, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetLicense() {
+	o.License.Unset()
+}
+
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || isNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *TerraformPackageUpload) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *TerraformPackageUpload) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
@@ -1271,36 +1326,47 @@ func (o *TerraformPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
-// GetRelease returns the Release field value if set, zero value otherwise.
+// GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetRelease() string {
-	if o == nil || isNil(o.Release) {
+	if o == nil || isNil(o.Release.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Release
+	return *o.Release.Get()
 }
 
 // GetReleaseOk returns a tuple with the Release field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetReleaseOk() (*string, bool) {
-	if o == nil || isNil(o.Release) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Release, true
+	return o.Release.Get(), o.Release.IsSet()
 }
 
 // HasRelease returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasRelease() bool {
-	if o != nil && !isNil(o.Release) {
+	if o != nil && o.Release.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRelease gets a reference to the given string and assigns it to the Release field.
+// SetRelease gets a reference to the given NullableString and assigns it to the Release field.
 func (o *TerraformPackageUpload) SetRelease(v string) {
-	o.Release = &v
+	o.Release.Set(&v)
+}
+
+// SetReleaseNil sets the value for Release to be an explicit nil
+func (o *TerraformPackageUpload) SetReleaseNil() {
+	o.Release.Set(nil)
+}
+
+// UnsetRelease ensures that no value is present for Release, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetRelease() {
+	o.Release.Unset()
 }
 
 // GetRepository returns the Repository field value if set, zero value otherwise.
@@ -1367,68 +1433,90 @@ func (o *TerraformPackageUpload) SetRepositoryUrl(v string) {
 	o.RepositoryUrl = &v
 }
 
-// GetSecurityScanCompletedAt returns the SecurityScanCompletedAt field value if set, zero value otherwise.
+// GetSecurityScanCompletedAt returns the SecurityScanCompletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetSecurityScanCompletedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanCompletedAt) {
+	if o == nil || isNil(o.SecurityScanCompletedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.SecurityScanCompletedAt
+	return *o.SecurityScanCompletedAt.Get()
 }
 
 // GetSecurityScanCompletedAtOk returns a tuple with the SecurityScanCompletedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetSecurityScanCompletedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.SecurityScanCompletedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SecurityScanCompletedAt, true
+	return o.SecurityScanCompletedAt.Get(), o.SecurityScanCompletedAt.IsSet()
 }
 
 // HasSecurityScanCompletedAt returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasSecurityScanCompletedAt() bool {
-	if o != nil && !isNil(o.SecurityScanCompletedAt) {
+	if o != nil && o.SecurityScanCompletedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecurityScanCompletedAt gets a reference to the given time.Time and assigns it to the SecurityScanCompletedAt field.
+// SetSecurityScanCompletedAt gets a reference to the given NullableTime and assigns it to the SecurityScanCompletedAt field.
 func (o *TerraformPackageUpload) SetSecurityScanCompletedAt(v time.Time) {
-	o.SecurityScanCompletedAt = &v
+	o.SecurityScanCompletedAt.Set(&v)
 }
 
-// GetSecurityScanStartedAt returns the SecurityScanStartedAt field value if set, zero value otherwise.
+// SetSecurityScanCompletedAtNil sets the value for SecurityScanCompletedAt to be an explicit nil
+func (o *TerraformPackageUpload) SetSecurityScanCompletedAtNil() {
+	o.SecurityScanCompletedAt.Set(nil)
+}
+
+// UnsetSecurityScanCompletedAt ensures that no value is present for SecurityScanCompletedAt, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetSecurityScanCompletedAt() {
+	o.SecurityScanCompletedAt.Unset()
+}
+
+// GetSecurityScanStartedAt returns the SecurityScanStartedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetSecurityScanStartedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanStartedAt) {
+	if o == nil || isNil(o.SecurityScanStartedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.SecurityScanStartedAt
+	return *o.SecurityScanStartedAt.Get()
 }
 
 // GetSecurityScanStartedAtOk returns a tuple with the SecurityScanStartedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetSecurityScanStartedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.SecurityScanStartedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SecurityScanStartedAt, true
+	return o.SecurityScanStartedAt.Get(), o.SecurityScanStartedAt.IsSet()
 }
 
 // HasSecurityScanStartedAt returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasSecurityScanStartedAt() bool {
-	if o != nil && !isNil(o.SecurityScanStartedAt) {
+	if o != nil && o.SecurityScanStartedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecurityScanStartedAt gets a reference to the given time.Time and assigns it to the SecurityScanStartedAt field.
+// SetSecurityScanStartedAt gets a reference to the given NullableTime and assigns it to the SecurityScanStartedAt field.
 func (o *TerraformPackageUpload) SetSecurityScanStartedAt(v time.Time) {
-	o.SecurityScanStartedAt = &v
+	o.SecurityScanStartedAt.Set(&v)
+}
+
+// SetSecurityScanStartedAtNil sets the value for SecurityScanStartedAt to be an explicit nil
+func (o *TerraformPackageUpload) SetSecurityScanStartedAtNil() {
+	o.SecurityScanStartedAt.Set(nil)
+}
+
+// UnsetSecurityScanStartedAt ensures that no value is present for SecurityScanStartedAt, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetSecurityScanStartedAt() {
+	o.SecurityScanStartedAt.Unset()
 }
 
 // GetSecurityScanStatus returns the SecurityScanStatus field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1474,36 +1562,47 @@ func (o *TerraformPackageUpload) UnsetSecurityScanStatus() {
 	o.SecurityScanStatus.Unset()
 }
 
-// GetSecurityScanStatusUpdatedAt returns the SecurityScanStatusUpdatedAt field value if set, zero value otherwise.
+// GetSecurityScanStatusUpdatedAt returns the SecurityScanStatusUpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetSecurityScanStatusUpdatedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanStatusUpdatedAt) {
+	if o == nil || isNil(o.SecurityScanStatusUpdatedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.SecurityScanStatusUpdatedAt
+	return *o.SecurityScanStatusUpdatedAt.Get()
 }
 
 // GetSecurityScanStatusUpdatedAtOk returns a tuple with the SecurityScanStatusUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetSecurityScanStatusUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.SecurityScanStatusUpdatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SecurityScanStatusUpdatedAt, true
+	return o.SecurityScanStatusUpdatedAt.Get(), o.SecurityScanStatusUpdatedAt.IsSet()
 }
 
 // HasSecurityScanStatusUpdatedAt returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasSecurityScanStatusUpdatedAt() bool {
-	if o != nil && !isNil(o.SecurityScanStatusUpdatedAt) {
+	if o != nil && o.SecurityScanStatusUpdatedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecurityScanStatusUpdatedAt gets a reference to the given time.Time and assigns it to the SecurityScanStatusUpdatedAt field.
+// SetSecurityScanStatusUpdatedAt gets a reference to the given NullableTime and assigns it to the SecurityScanStatusUpdatedAt field.
 func (o *TerraformPackageUpload) SetSecurityScanStatusUpdatedAt(v time.Time) {
-	o.SecurityScanStatusUpdatedAt = &v
+	o.SecurityScanStatusUpdatedAt.Set(&v)
+}
+
+// SetSecurityScanStatusUpdatedAtNil sets the value for SecurityScanStatusUpdatedAt to be an explicit nil
+func (o *TerraformPackageUpload) SetSecurityScanStatusUpdatedAtNil() {
+	o.SecurityScanStatusUpdatedAt.Set(nil)
+}
+
+// UnsetSecurityScanStatusUpdatedAt ensures that no value is present for SecurityScanStatusUpdatedAt, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetSecurityScanStatusUpdatedAt() {
+	o.SecurityScanStatusUpdatedAt.Unset()
 }
 
 // GetSelfHtmlUrl returns the SelfHtmlUrl field value if set, zero value otherwise.
@@ -1837,36 +1936,47 @@ func (o *TerraformPackageUpload) SetStatus(v int64) {
 	o.Status = &v
 }
 
-// GetStatusReason returns the StatusReason field value if set, zero value otherwise.
+// GetStatusReason returns the StatusReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetStatusReason() string {
-	if o == nil || isNil(o.StatusReason) {
+	if o == nil || isNil(o.StatusReason.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.StatusReason
+	return *o.StatusReason.Get()
 }
 
 // GetStatusReasonOk returns a tuple with the StatusReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetStatusReasonOk() (*string, bool) {
-	if o == nil || isNil(o.StatusReason) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StatusReason, true
+	return o.StatusReason.Get(), o.StatusReason.IsSet()
 }
 
 // HasStatusReason returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasStatusReason() bool {
-	if o != nil && !isNil(o.StatusReason) {
+	if o != nil && o.StatusReason.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStatusReason gets a reference to the given string and assigns it to the StatusReason field.
+// SetStatusReason gets a reference to the given NullableString and assigns it to the StatusReason field.
 func (o *TerraformPackageUpload) SetStatusReason(v string) {
-	o.StatusReason = &v
+	o.StatusReason.Set(&v)
+}
+
+// SetStatusReasonNil sets the value for StatusReason to be an explicit nil
+func (o *TerraformPackageUpload) SetStatusReasonNil() {
+	o.StatusReason.Set(nil)
+}
+
+// UnsetStatusReason ensures that no value is present for StatusReason, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetStatusReason() {
+	o.StatusReason.Unset()
 }
 
 // GetStatusStr returns the StatusStr field value if set, zero value otherwise.
@@ -1997,68 +2107,90 @@ func (o *TerraformPackageUpload) SetSubtype(v string) {
 	o.Subtype = &v
 }
 
-// GetSummary returns the Summary field value if set, zero value otherwise.
+// GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetSummary() string {
-	if o == nil || isNil(o.Summary) {
+	if o == nil || isNil(o.Summary.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Summary
+	return *o.Summary.Get()
 }
 
 // GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetSummaryOk() (*string, bool) {
-	if o == nil || isNil(o.Summary) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Summary, true
+	return o.Summary.Get(), o.Summary.IsSet()
 }
 
 // HasSummary returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasSummary() bool {
-	if o != nil && !isNil(o.Summary) {
+	if o != nil && o.Summary.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSummary gets a reference to the given string and assigns it to the Summary field.
+// SetSummary gets a reference to the given NullableString and assigns it to the Summary field.
 func (o *TerraformPackageUpload) SetSummary(v string) {
-	o.Summary = &v
+	o.Summary.Set(&v)
 }
 
-// GetSyncFinishedAt returns the SyncFinishedAt field value if set, zero value otherwise.
+// SetSummaryNil sets the value for Summary to be an explicit nil
+func (o *TerraformPackageUpload) SetSummaryNil() {
+	o.Summary.Set(nil)
+}
+
+// UnsetSummary ensures that no value is present for Summary, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetSummary() {
+	o.Summary.Unset()
+}
+
+// GetSyncFinishedAt returns the SyncFinishedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetSyncFinishedAt() time.Time {
-	if o == nil || isNil(o.SyncFinishedAt) {
+	if o == nil || isNil(o.SyncFinishedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.SyncFinishedAt
+	return *o.SyncFinishedAt.Get()
 }
 
 // GetSyncFinishedAtOk returns a tuple with the SyncFinishedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetSyncFinishedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.SyncFinishedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SyncFinishedAt, true
+	return o.SyncFinishedAt.Get(), o.SyncFinishedAt.IsSet()
 }
 
 // HasSyncFinishedAt returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasSyncFinishedAt() bool {
-	if o != nil && !isNil(o.SyncFinishedAt) {
+	if o != nil && o.SyncFinishedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSyncFinishedAt gets a reference to the given time.Time and assigns it to the SyncFinishedAt field.
+// SetSyncFinishedAt gets a reference to the given NullableTime and assigns it to the SyncFinishedAt field.
 func (o *TerraformPackageUpload) SetSyncFinishedAt(v time.Time) {
-	o.SyncFinishedAt = &v
+	o.SyncFinishedAt.Set(&v)
+}
+
+// SetSyncFinishedAtNil sets the value for SyncFinishedAt to be an explicit nil
+func (o *TerraformPackageUpload) SetSyncFinishedAtNil() {
+	o.SyncFinishedAt.Set(nil)
+}
+
+// UnsetSyncFinishedAt ensures that no value is present for SyncFinishedAt, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetSyncFinishedAt() {
+	o.SyncFinishedAt.Unset()
 }
 
 // GetSyncProgress returns the SyncProgress field value if set, zero value otherwise.
@@ -2253,36 +2385,47 @@ func (o *TerraformPackageUpload) SetUploaderUrl(v string) {
 	o.UploaderUrl = &v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
+// GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TerraformPackageUpload) GetVersion() string {
-	if o == nil || isNil(o.Version) {
+	if o == nil || isNil(o.Version.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Version
+	return *o.Version.Get()
 }
 
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TerraformPackageUpload) GetVersionOk() (*string, bool) {
-	if o == nil || isNil(o.Version) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return o.Version.Get(), o.Version.IsSet()
 }
 
 // HasVersion returns a boolean if a field has been set.
 func (o *TerraformPackageUpload) HasVersion() bool {
-	if o != nil && !isNil(o.Version) {
+	if o != nil && o.Version.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVersion gets a reference to the given string and assigns it to the Version field.
+// SetVersion gets a reference to the given NullableString and assigns it to the Version field.
 func (o *TerraformPackageUpload) SetVersion(v string) {
-	o.Version = &v
+	o.Version.Set(&v)
+}
+
+// SetVersionNil sets the value for Version to be an explicit nil
+func (o *TerraformPackageUpload) SetVersionNil() {
+	o.Version.Set(nil)
+}
+
+// UnsetVersion ensures that no value is present for Version, not even an explicit nil
+func (o *TerraformPackageUpload) UnsetVersion() {
+	o.Version.Unset()
 }
 
 // GetVersionOrig returns the VersionOrig field value if set, zero value otherwise.
@@ -2369,14 +2512,14 @@ func (o TerraformPackageUpload) MarshalJSON() ([]byte, error) {
 	if !isNil(o.ChecksumSha512) {
 		toSerialize["checksum_sha512"] = o.ChecksumSha512
 	}
-	if !isNil(o.DependenciesChecksumMd5) {
-		toSerialize["dependencies_checksum_md5"] = o.DependenciesChecksumMd5
+	if o.DependenciesChecksumMd5.IsSet() {
+		toSerialize["dependencies_checksum_md5"] = o.DependenciesChecksumMd5.Get()
 	}
 	if !isNil(o.DependenciesUrl) {
 		toSerialize["dependencies_url"] = o.DependenciesUrl
 	}
-	if !isNil(o.Description) {
-		toSerialize["description"] = o.Description
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
 	}
 	if o.Distro.IsSet() {
 		toSerialize["distro"] = o.Distro.Get()
@@ -2387,8 +2530,8 @@ func (o TerraformPackageUpload) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Downloads) {
 		toSerialize["downloads"] = o.Downloads
 	}
-	if !isNil(o.Epoch) {
-		toSerialize["epoch"] = o.Epoch
+	if o.Epoch.IsSet() {
+		toSerialize["epoch"] = o.Epoch.Get()
 	}
 	if !isNil(o.Extension) {
 		toSerialize["extension"] = o.Extension
@@ -2432,11 +2575,11 @@ func (o TerraformPackageUpload) MarshalJSON() ([]byte, error) {
 	if !isNil(o.IsSyncInProgress) {
 		toSerialize["is_sync_in_progress"] = o.IsSyncInProgress
 	}
-	if !isNil(o.License) {
-		toSerialize["license"] = o.License
+	if o.License.IsSet() {
+		toSerialize["license"] = o.License.Get()
 	}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	if !isNil(o.Namespace) {
 		toSerialize["namespace"] = o.Namespace
@@ -2456,8 +2599,8 @@ func (o TerraformPackageUpload) MarshalJSON() ([]byte, error) {
 	if !isNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
 	}
-	if !isNil(o.Release) {
-		toSerialize["release"] = o.Release
+	if o.Release.IsSet() {
+		toSerialize["release"] = o.Release.Get()
 	}
 	if !isNil(o.Repository) {
 		toSerialize["repository"] = o.Repository
@@ -2465,17 +2608,17 @@ func (o TerraformPackageUpload) MarshalJSON() ([]byte, error) {
 	if !isNil(o.RepositoryUrl) {
 		toSerialize["repository_url"] = o.RepositoryUrl
 	}
-	if !isNil(o.SecurityScanCompletedAt) {
-		toSerialize["security_scan_completed_at"] = o.SecurityScanCompletedAt
+	if o.SecurityScanCompletedAt.IsSet() {
+		toSerialize["security_scan_completed_at"] = o.SecurityScanCompletedAt.Get()
 	}
-	if !isNil(o.SecurityScanStartedAt) {
-		toSerialize["security_scan_started_at"] = o.SecurityScanStartedAt
+	if o.SecurityScanStartedAt.IsSet() {
+		toSerialize["security_scan_started_at"] = o.SecurityScanStartedAt.Get()
 	}
 	if o.SecurityScanStatus.IsSet() {
 		toSerialize["security_scan_status"] = o.SecurityScanStatus.Get()
 	}
-	if !isNil(o.SecurityScanStatusUpdatedAt) {
-		toSerialize["security_scan_status_updated_at"] = o.SecurityScanStatusUpdatedAt
+	if o.SecurityScanStatusUpdatedAt.IsSet() {
+		toSerialize["security_scan_status_updated_at"] = o.SecurityScanStatusUpdatedAt.Get()
 	}
 	if !isNil(o.SelfHtmlUrl) {
 		toSerialize["self_html_url"] = o.SelfHtmlUrl
@@ -2507,8 +2650,8 @@ func (o TerraformPackageUpload) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if !isNil(o.StatusReason) {
-		toSerialize["status_reason"] = o.StatusReason
+	if o.StatusReason.IsSet() {
+		toSerialize["status_reason"] = o.StatusReason.Get()
 	}
 	if !isNil(o.StatusStr) {
 		toSerialize["status_str"] = o.StatusStr
@@ -2522,11 +2665,11 @@ func (o TerraformPackageUpload) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Subtype) {
 		toSerialize["subtype"] = o.Subtype
 	}
-	if !isNil(o.Summary) {
-		toSerialize["summary"] = o.Summary
+	if o.Summary.IsSet() {
+		toSerialize["summary"] = o.Summary.Get()
 	}
-	if !isNil(o.SyncFinishedAt) {
-		toSerialize["sync_finished_at"] = o.SyncFinishedAt
+	if o.SyncFinishedAt.IsSet() {
+		toSerialize["sync_finished_at"] = o.SyncFinishedAt.Get()
 	}
 	if !isNil(o.SyncProgress) {
 		toSerialize["sync_progress"] = o.SyncProgress
@@ -2546,8 +2689,8 @@ func (o TerraformPackageUpload) MarshalJSON() ([]byte, error) {
 	if !isNil(o.UploaderUrl) {
 		toSerialize["uploader_url"] = o.UploaderUrl
 	}
-	if !isNil(o.Version) {
-		toSerialize["version"] = o.Version
+	if o.Version.IsSet() {
+		toSerialize["version"] = o.Version.Get()
 	}
 	if !isNil(o.VersionOrig) {
 		toSerialize["version_orig"] = o.VersionOrig

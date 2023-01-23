@@ -16,10 +16,10 @@ Name | Type | Description | Notes
 **StageStr** | Pointer to **string** |  | [optional] [readonly] 
 **StageUpdatedAt** | Pointer to **time.Time** | The datetime the package stage was updated at. | [optional] [readonly] 
 **Status** | Pointer to **int64** | The synchronisation status of the package. | [optional] [readonly] 
-**StatusReason** | Pointer to **string** | A textual description for the synchronous status reason (if any | [optional] [readonly] 
+**StatusReason** | Pointer to **NullableString** | A textual description for the synchronous status reason (if any | [optional] [readonly] 
 **StatusStr** | Pointer to **string** |  | [optional] [readonly] 
 **StatusUpdatedAt** | Pointer to **time.Time** | The datetime the package status was updated at. | [optional] [readonly] 
-**SyncFinishedAt** | Pointer to **time.Time** | The datetime the package sync was finished at. | [optional] [readonly] 
+**SyncFinishedAt** | Pointer to **NullableTime** | The datetime the package sync was finished at. | [optional] [readonly] 
 **SyncProgress** | Pointer to **int64** | Synchronisation progress (from 0-100) | [optional] [readonly] 
 
 ## Methods
@@ -366,6 +366,16 @@ SetStatusReason sets StatusReason field to given value.
 
 HasStatusReason returns a boolean if a field has been set.
 
+### SetStatusReasonNil
+
+`func (o *PackageStatus) SetStatusReasonNil(b bool)`
+
+ SetStatusReasonNil sets the value for StatusReason to be an explicit nil
+
+### UnsetStatusReason
+`func (o *PackageStatus) UnsetStatusReason()`
+
+UnsetStatusReason ensures that no value is present for StatusReason, not even an explicit nil
 ### GetStatusStr
 
 `func (o *PackageStatus) GetStatusStr() string`
@@ -441,6 +451,16 @@ SetSyncFinishedAt sets SyncFinishedAt field to given value.
 
 HasSyncFinishedAt returns a boolean if a field has been set.
 
+### SetSyncFinishedAtNil
+
+`func (o *PackageStatus) SetSyncFinishedAtNil(b bool)`
+
+ SetSyncFinishedAtNil sets the value for SyncFinishedAt to be an explicit nil
+
+### UnsetSyncFinishedAt
+`func (o *PackageStatus) UnsetSyncFinishedAt()`
+
+UnsetSyncFinishedAt ensures that no value is present for SyncFinishedAt, not even an explicit nil
 ### GetSyncProgress
 
 `func (o *PackageStatus) GetSyncProgress() int64`
