@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.182.1
+API version: 1.202.1
 Contact: support@cloudsmith.io
 */
 
@@ -34,12 +34,12 @@ type PackageStatus struct {
 	// The synchronisation status of the package.
 	Status *int64 `json:"status,omitempty"`
 	// A textual description for the synchronous status reason (if any
-	StatusReason *string `json:"status_reason,omitempty"`
-	StatusStr    *string `json:"status_str,omitempty"`
+	StatusReason NullableString `json:"status_reason,omitempty"`
+	StatusStr    *string        `json:"status_str,omitempty"`
 	// The datetime the package status was updated at.
 	StatusUpdatedAt *time.Time `json:"status_updated_at,omitempty"`
 	// The datetime the package sync was finished at.
-	SyncFinishedAt *time.Time `json:"sync_finished_at,omitempty"`
+	SyncFinishedAt NullableTime `json:"sync_finished_at,omitempty"`
 	// Synchronisation progress (from 0-100)
 	SyncProgress *int64 `json:"sync_progress,omitempty"`
 }
@@ -445,36 +445,47 @@ func (o *PackageStatus) SetStatus(v int64) {
 	o.Status = &v
 }
 
-// GetStatusReason returns the StatusReason field value if set, zero value otherwise.
+// GetStatusReason returns the StatusReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageStatus) GetStatusReason() string {
-	if o == nil || isNil(o.StatusReason) {
+	if o == nil || isNil(o.StatusReason.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.StatusReason
+	return *o.StatusReason.Get()
 }
 
 // GetStatusReasonOk returns a tuple with the StatusReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageStatus) GetStatusReasonOk() (*string, bool) {
-	if o == nil || isNil(o.StatusReason) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StatusReason, true
+	return o.StatusReason.Get(), o.StatusReason.IsSet()
 }
 
 // HasStatusReason returns a boolean if a field has been set.
 func (o *PackageStatus) HasStatusReason() bool {
-	if o != nil && !isNil(o.StatusReason) {
+	if o != nil && o.StatusReason.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStatusReason gets a reference to the given string and assigns it to the StatusReason field.
+// SetStatusReason gets a reference to the given NullableString and assigns it to the StatusReason field.
 func (o *PackageStatus) SetStatusReason(v string) {
-	o.StatusReason = &v
+	o.StatusReason.Set(&v)
+}
+
+// SetStatusReasonNil sets the value for StatusReason to be an explicit nil
+func (o *PackageStatus) SetStatusReasonNil() {
+	o.StatusReason.Set(nil)
+}
+
+// UnsetStatusReason ensures that no value is present for StatusReason, not even an explicit nil
+func (o *PackageStatus) UnsetStatusReason() {
+	o.StatusReason.Unset()
 }
 
 // GetStatusStr returns the StatusStr field value if set, zero value otherwise.
@@ -541,36 +552,47 @@ func (o *PackageStatus) SetStatusUpdatedAt(v time.Time) {
 	o.StatusUpdatedAt = &v
 }
 
-// GetSyncFinishedAt returns the SyncFinishedAt field value if set, zero value otherwise.
+// GetSyncFinishedAt returns the SyncFinishedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageStatus) GetSyncFinishedAt() time.Time {
-	if o == nil || isNil(o.SyncFinishedAt) {
+	if o == nil || isNil(o.SyncFinishedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.SyncFinishedAt
+	return *o.SyncFinishedAt.Get()
 }
 
 // GetSyncFinishedAtOk returns a tuple with the SyncFinishedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageStatus) GetSyncFinishedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.SyncFinishedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SyncFinishedAt, true
+	return o.SyncFinishedAt.Get(), o.SyncFinishedAt.IsSet()
 }
 
 // HasSyncFinishedAt returns a boolean if a field has been set.
 func (o *PackageStatus) HasSyncFinishedAt() bool {
-	if o != nil && !isNil(o.SyncFinishedAt) {
+	if o != nil && o.SyncFinishedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSyncFinishedAt gets a reference to the given time.Time and assigns it to the SyncFinishedAt field.
+// SetSyncFinishedAt gets a reference to the given NullableTime and assigns it to the SyncFinishedAt field.
 func (o *PackageStatus) SetSyncFinishedAt(v time.Time) {
-	o.SyncFinishedAt = &v
+	o.SyncFinishedAt.Set(&v)
+}
+
+// SetSyncFinishedAtNil sets the value for SyncFinishedAt to be an explicit nil
+func (o *PackageStatus) SetSyncFinishedAtNil() {
+	o.SyncFinishedAt.Set(nil)
+}
+
+// UnsetSyncFinishedAt ensures that no value is present for SyncFinishedAt, not even an explicit nil
+func (o *PackageStatus) UnsetSyncFinishedAt() {
+	o.SyncFinishedAt.Unset()
 }
 
 // GetSyncProgress returns the SyncProgress field value if set, zero value otherwise.
@@ -643,8 +665,8 @@ func (o PackageStatus) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if !isNil(o.StatusReason) {
-		toSerialize["status_reason"] = o.StatusReason
+	if o.StatusReason.IsSet() {
+		toSerialize["status_reason"] = o.StatusReason.Get()
 	}
 	if !isNil(o.StatusStr) {
 		toSerialize["status_str"] = o.StatusStr
@@ -652,8 +674,8 @@ func (o PackageStatus) MarshalJSON() ([]byte, error) {
 	if !isNil(o.StatusUpdatedAt) {
 		toSerialize["status_updated_at"] = o.StatusUpdatedAt
 	}
-	if !isNil(o.SyncFinishedAt) {
-		toSerialize["sync_finished_at"] = o.SyncFinishedAt
+	if o.SyncFinishedAt.IsSet() {
+		toSerialize["sync_finished_at"] = o.SyncFinishedAt.Get()
 	}
 	if !isNil(o.SyncProgress) {
 		toSerialize["sync_progress"] = o.SyncProgress

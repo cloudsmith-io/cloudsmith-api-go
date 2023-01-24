@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **DefaultPrivilege** | Pointer to **string** | This defines the default level of privilege that all of your organization members have for this repository. This does not include collaborators, but applies to any member of the org regardless of their own membership role (i.e. it applies to owners, managers and members). Be careful if setting this to admin, because any member will be able to change settings. | [optional] [default to "None"]
 **DeleteOwn** | Pointer to **bool** | If checked, users can delete any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the &#39;Access Controls&#39; section of the repository, and any inherited from the org. | [optional] 
 **DeletePackages** | Pointer to **string** | This defines the minimum level of privilege required for a user to delete packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific delete setting. | [optional] [default to "Admin"]
-**DeletedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
+**DeletedAt** | Pointer to **NullableTime** |  | [optional] [readonly] 
 **Description** | Pointer to **string** | A description of the repository&#39;s purpose/contents. | [optional] 
 **Distributes** | Pointer to **[]string** | The repositories distributed through this repo. Adding repos here is only valid if the content_kind is DISTRIBUTION. | [optional] 
 **DockerRefreshTokensEnabled** | Pointer to **bool** | If checked, refresh tokens will be issued in addition to access tokens for Docker authentication. This allows unlimited extension of the lifetime of access tokens. | [optional] 
@@ -338,6 +338,16 @@ SetDeletedAt sets DeletedAt field to given value.
 
 HasDeletedAt returns a boolean if a field has been set.
 
+### SetDeletedAtNil
+
+`func (o *RepositoryCreate) SetDeletedAtNil(b bool)`
+
+ SetDeletedAtNil sets the value for DeletedAt to be an explicit nil
+
+### UnsetDeletedAt
+`func (o *RepositoryCreate) UnsetDeletedAt()`
+
+UnsetDeletedAt ensures that no value is present for DeletedAt, not even an explicit nil
 ### GetDescription
 
 `func (o *RepositoryCreate) GetDescription() string`

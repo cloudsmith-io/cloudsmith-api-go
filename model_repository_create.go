@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.182.1
+API version: 1.202.1
 Contact: support@cloudsmith.io
 */
 
@@ -34,8 +34,8 @@ type RepositoryCreate struct {
 	// If checked, users can delete any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
 	DeleteOwn *bool `json:"delete_own,omitempty"`
 	// This defines the minimum level of privilege required for a user to delete packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific delete setting.
-	DeletePackages *string    `json:"delete_packages,omitempty"`
-	DeletedAt      *time.Time `json:"deleted_at,omitempty"`
+	DeletePackages *string      `json:"delete_packages,omitempty"`
+	DeletedAt      NullableTime `json:"deleted_at,omitempty"`
 	// A description of the repository's purpose/contents.
 	Description *string `json:"description,omitempty"`
 	// The repositories distributed through this repo. Adding repos here is only valid if the content_kind is DISTRIBUTION.
@@ -483,36 +483,47 @@ func (o *RepositoryCreate) SetDeletePackages(v string) {
 	o.DeletePackages = &v
 }
 
-// GetDeletedAt returns the DeletedAt field value if set, zero value otherwise.
+// GetDeletedAt returns the DeletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryCreate) GetDeletedAt() time.Time {
-	if o == nil || isNil(o.DeletedAt) {
+	if o == nil || isNil(o.DeletedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.DeletedAt
+	return *o.DeletedAt.Get()
 }
 
 // GetDeletedAtOk returns a tuple with the DeletedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RepositoryCreate) GetDeletedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.DeletedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeletedAt, true
+	return o.DeletedAt.Get(), o.DeletedAt.IsSet()
 }
 
 // HasDeletedAt returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasDeletedAt() bool {
-	if o != nil && !isNil(o.DeletedAt) {
+	if o != nil && o.DeletedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeletedAt gets a reference to the given time.Time and assigns it to the DeletedAt field.
+// SetDeletedAt gets a reference to the given NullableTime and assigns it to the DeletedAt field.
 func (o *RepositoryCreate) SetDeletedAt(v time.Time) {
-	o.DeletedAt = &v
+	o.DeletedAt.Set(&v)
+}
+
+// SetDeletedAtNil sets the value for DeletedAt to be an explicit nil
+func (o *RepositoryCreate) SetDeletedAtNil() {
+	o.DeletedAt.Set(nil)
+}
+
+// UnsetDeletedAt ensures that no value is present for DeletedAt, not even an explicit nil
+func (o *RepositoryCreate) UnsetDeletedAt() {
+	o.DeletedAt.Unset()
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -1944,8 +1955,8 @@ func (o RepositoryCreate) MarshalJSON() ([]byte, error) {
 	if !isNil(o.DeletePackages) {
 		toSerialize["delete_packages"] = o.DeletePackages
 	}
-	if !isNil(o.DeletedAt) {
-		toSerialize["deleted_at"] = o.DeletedAt
+	if o.DeletedAt.IsSet() {
+		toSerialize["deleted_at"] = o.DeletedAt.Get()
 	}
 	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description

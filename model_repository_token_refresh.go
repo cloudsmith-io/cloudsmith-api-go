@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.182.1
+API version: 1.202.1
 Contact: support@cloudsmith.io
 */
 
@@ -30,7 +30,7 @@ type RepositoryTokenRefresh struct {
 	EnableUrl    *string      `json:"enable_url,omitempty"`
 	EulaAccepted NullableEula `json:"eula_accepted,omitempty"`
 	// The datetime the EULA was accepted at.
-	EulaAcceptedAt   *time.Time     `json:"eula_accepted_at,omitempty"`
+	EulaAcceptedAt   NullableTime   `json:"eula_accepted_at,omitempty"`
 	EulaAcceptedFrom NullableString `json:"eula_accepted_from,omitempty"`
 	// If checked, a EULA acceptance is required for this token.
 	EulaRequired *bool  `json:"eula_required,omitempty"`
@@ -65,7 +65,7 @@ type RepositoryTokenRefresh struct {
 	SlugPerm             *string        `json:"slug_perm,omitempty"`
 	Token                *string        `json:"token,omitempty"`
 	// The datetime the token was updated at.
-	UpdatedAt    *time.Time     `json:"updated_at,omitempty"`
+	UpdatedAt    NullableTime   `json:"updated_at,omitempty"`
 	UpdatedBy    NullableString `json:"updated_by,omitempty"`
 	UpdatedByUrl NullableString `json:"updated_by_url,omitempty"`
 	Usage        *string        `json:"usage,omitempty"`
@@ -79,9 +79,9 @@ type RepositoryTokenRefresh struct {
 // will change when the set of required properties is changed
 func NewRepositoryTokenRefresh() *RepositoryTokenRefresh {
 	this := RepositoryTokenRefresh{}
-	var limitBandwidthUnit string = "Byte"
+	var limitBandwidthUnit LIMIT_BANDWIDTH_UNIT = "Byte"
 	this.LimitBandwidthUnit = *NewNullableString(&limitBandwidthUnit)
-	var scheduledResetPeriod string = "Never Reset"
+	var scheduledResetPeriod SCHEDULED_RESET_PERIOD = "Never Reset"
 	this.ScheduledResetPeriod = *NewNullableString(&scheduledResetPeriod)
 	return &this
 }
@@ -91,9 +91,9 @@ func NewRepositoryTokenRefresh() *RepositoryTokenRefresh {
 // but it doesn't guarantee that properties required by API are set
 func NewRepositoryTokenRefreshWithDefaults() *RepositoryTokenRefresh {
 	this := RepositoryTokenRefresh{}
-	var limitBandwidthUnit string = "Byte"
+	var limitBandwidthUnit LIMIT_BANDWIDTH_UNIT = "Byte"
 	this.LimitBandwidthUnit = *NewNullableString(&limitBandwidthUnit)
-	var scheduledResetPeriod string = "Never Reset"
+	var scheduledResetPeriod SCHEDULED_RESET_PERIOD = "Never Reset"
 	this.ScheduledResetPeriod = *NewNullableString(&scheduledResetPeriod)
 	return &this
 }
@@ -397,36 +397,47 @@ func (o *RepositoryTokenRefresh) UnsetEulaAccepted() {
 	o.EulaAccepted.Unset()
 }
 
-// GetEulaAcceptedAt returns the EulaAcceptedAt field value if set, zero value otherwise.
+// GetEulaAcceptedAt returns the EulaAcceptedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRefresh) GetEulaAcceptedAt() time.Time {
-	if o == nil || isNil(o.EulaAcceptedAt) {
+	if o == nil || isNil(o.EulaAcceptedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.EulaAcceptedAt
+	return *o.EulaAcceptedAt.Get()
 }
 
 // GetEulaAcceptedAtOk returns a tuple with the EulaAcceptedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RepositoryTokenRefresh) GetEulaAcceptedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.EulaAcceptedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EulaAcceptedAt, true
+	return o.EulaAcceptedAt.Get(), o.EulaAcceptedAt.IsSet()
 }
 
 // HasEulaAcceptedAt returns a boolean if a field has been set.
 func (o *RepositoryTokenRefresh) HasEulaAcceptedAt() bool {
-	if o != nil && !isNil(o.EulaAcceptedAt) {
+	if o != nil && o.EulaAcceptedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetEulaAcceptedAt gets a reference to the given time.Time and assigns it to the EulaAcceptedAt field.
+// SetEulaAcceptedAt gets a reference to the given NullableTime and assigns it to the EulaAcceptedAt field.
 func (o *RepositoryTokenRefresh) SetEulaAcceptedAt(v time.Time) {
-	o.EulaAcceptedAt = &v
+	o.EulaAcceptedAt.Set(&v)
+}
+
+// SetEulaAcceptedAtNil sets the value for EulaAcceptedAt to be an explicit nil
+func (o *RepositoryTokenRefresh) SetEulaAcceptedAtNil() {
+	o.EulaAcceptedAt.Set(nil)
+}
+
+// UnsetEulaAcceptedAt ensures that no value is present for EulaAcceptedAt, not even an explicit nil
+func (o *RepositoryTokenRefresh) UnsetEulaAcceptedAt() {
+	o.EulaAcceptedAt.Unset()
 }
 
 // GetEulaAcceptedFrom returns the EulaAcceptedFrom field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1287,36 +1298,47 @@ func (o *RepositoryTokenRefresh) SetToken(v string) {
 	o.Token = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRefresh) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || isNil(o.UpdatedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.UpdatedAt
+	return *o.UpdatedAt.Get()
 }
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RepositoryTokenRefresh) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UpdatedAt, true
+	return o.UpdatedAt.Get(), o.UpdatedAt.IsSet()
 }
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *RepositoryTokenRefresh) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
+	if o != nil && o.UpdatedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+// SetUpdatedAt gets a reference to the given NullableTime and assigns it to the UpdatedAt field.
 func (o *RepositoryTokenRefresh) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
+	o.UpdatedAt.Set(&v)
+}
+
+// SetUpdatedAtNil sets the value for UpdatedAt to be an explicit nil
+func (o *RepositoryTokenRefresh) SetUpdatedAtNil() {
+	o.UpdatedAt.Set(nil)
+}
+
+// UnsetUpdatedAt ensures that no value is present for UpdatedAt, not even an explicit nil
+func (o *RepositoryTokenRefresh) UnsetUpdatedAt() {
+	o.UpdatedAt.Unset()
 }
 
 // GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1552,8 +1574,8 @@ func (o RepositoryTokenRefresh) MarshalJSON() ([]byte, error) {
 	if o.EulaAccepted.IsSet() {
 		toSerialize["eula_accepted"] = o.EulaAccepted.Get()
 	}
-	if !isNil(o.EulaAcceptedAt) {
-		toSerialize["eula_accepted_at"] = o.EulaAcceptedAt
+	if o.EulaAcceptedAt.IsSet() {
+		toSerialize["eula_accepted_at"] = o.EulaAcceptedAt.Get()
 	}
 	if o.EulaAcceptedFrom.IsSet() {
 		toSerialize["eula_accepted_from"] = o.EulaAcceptedFrom.Get()
@@ -1624,8 +1646,8 @@ func (o RepositoryTokenRefresh) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Token) {
 		toSerialize["token"] = o.Token
 	}
-	if !isNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
+	if o.UpdatedAt.IsSet() {
+		toSerialize["updated_at"] = o.UpdatedAt.Get()
 	}
 	if o.UpdatedBy.IsSet() {
 		toSerialize["updated_by"] = o.UpdatedBy.Get()

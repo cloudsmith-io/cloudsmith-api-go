@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Country** | Pointer to **NullableString** |  | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
-**Location** | Pointer to **string** | The city/town/area your organization is based in. | [optional] [readonly] 
+**Location** | Pointer to **NullableString** | The city/town/area your organization is based in. | [optional] [readonly] 
 **Name** | Pointer to **string** | A descriptive name for your organization. | [optional] [readonly] 
 **Slug** | Pointer to **string** |  | [optional] [readonly] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
-**Tagline** | Pointer to **string** | A short public descriptive for your organization. | [optional] [readonly] 
+**Tagline** | Pointer to **NullableString** | A short public descriptive for your organization. | [optional] [readonly] 
 
 ## Methods
 
@@ -116,6 +116,16 @@ SetLocation sets Location field to given value.
 
 HasLocation returns a boolean if a field has been set.
 
+### SetLocationNil
+
+`func (o *Organization) SetLocationNil(b bool)`
+
+ SetLocationNil sets the value for Location to be an explicit nil
+
+### UnsetLocation
+`func (o *Organization) UnsetLocation()`
+
+UnsetLocation ensures that no value is present for Location, not even an explicit nil
 ### GetName
 
 `func (o *Organization) GetName() string`
@@ -216,6 +226,16 @@ SetTagline sets Tagline field to given value.
 
 HasTagline returns a boolean if a field has been set.
 
+### SetTaglineNil
+
+`func (o *Organization) SetTaglineNil(b bool)`
+
+ SetTaglineNil sets the value for Tagline to be an explicit nil
+
+### UnsetTagline
+`func (o *Organization) UnsetTagline()`
+
+UnsetTagline ensures that no value is present for Tagline, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

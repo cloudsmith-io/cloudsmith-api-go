@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.182.1
+  version: 1.202.1
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -6038,6 +6038,303 @@ paths:
       tags:
       - repos
       x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/geoip:
+    get:
+      description: List all created GeoIP rules for the repository.
+      operationId: repos_geoip_read
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repos_geoip_read_200_response'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Owner namespace or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: List all created GeoIP rules for the repository.
+      tags:
+      - repos
+    patch:
+      description: Partially update existing repository geoip rules with those specified
+      operationId: repos_geoip_partial_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/repos_geoip_read_200_response'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repos_geoip_read_200_response'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Owner namespace or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Partially update existing repository geoip rules with those specified
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+    put:
+      description: Replace all existing repository geoip rules with those specified
+      operationId: repos_geoip_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/repos_geoip_read_200_response'
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: Repository GeoIP rules have been replaced
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Owner namespace or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Replace all existing repository geoip rules with those specified
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/geoip/disable/:
+    post:
+      description: Disable GeoIP for this repository.
+      operationId: repos_geoip_disable
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespositoryGeoIPEnableDisableRequest'
+        required: false
+      responses:
+        "200":
+          content: {}
+          description: GeoIP has been disabled for this repository.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Owner namespace or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Disable GeoIP for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/geoip/enable/:
+    post:
+      description: Enable GeoIP for this repository.
+      operationId: repos_geoip_enable
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RespositoryGeoIPEnableDisableRequest'
+        required: false
+      responses:
+        "200":
+          content: {}
+          description: GeoIP has been enabled for this repository.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Owner namespace or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Enable GeoIP for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/geoip/test/:
+    post:
+      description: Test a list of IP addresses against the repository's current GeoIP
+        rules.
+      operationId: repos_geoip_test
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepositoryGeoIPTestAddress'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryGeoIPTestAddressResponse'
+          description: Successfuly tested addresses against the repository's GeoIP
+            rules
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Owner namespace or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Test a list of IP addresses against the repository's current GeoIP
+        rules.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
   /repos/{owner}/{identifier}/gpg/:
     get:
       description: Retrieve the active GPG key for the Repository.
@@ -7565,6 +7862,7 @@ components:
         eula_accepted_at:
           description: The datetime the EULA was accepted at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Eula accepted at
           type: string
@@ -7607,6 +7905,16 @@ components:
           type: integer
         limit_bandwidth_unit:
           default: Byte
+          enum:
+          - Byte
+          - Kilobyte
+          - Megabyte
+          - Gigabyte
+          - Terabyte
+          - Petabyte
+          - Exabyte
+          - Zettabyte
+          - Yottabyte
           nullable: true
           title: Limit bandwidth unit
           type: string
@@ -7689,6 +7997,16 @@ components:
           type: string
         scheduled_reset_period:
           default: Never Reset
+          enum:
+          - Never Reset
+          - Daily
+          - Weekly
+          - Fortnightly
+          - Monthly
+          - Bi-Monthly
+          - Quarterly
+          - Every 6 months
+          - Annual
           nullable: true
           title: Scheduled reset period
           type: string
@@ -7711,6 +8029,7 @@ components:
         updated_at:
           description: The datetime the token was updated at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Updated at
           type: string
@@ -7785,6 +8104,16 @@ components:
           type: integer
         limit_bandwidth_unit:
           default: Byte
+          enum:
+          - Byte
+          - Kilobyte
+          - Megabyte
+          - Gigabyte
+          - Terabyte
+          - Petabyte
+          - Exabyte
+          - Zettabyte
+          - Yottabyte
           nullable: true
           title: Limit bandwidth unit
           type: string
@@ -7857,6 +8186,16 @@ components:
           type: string
         scheduled_reset_period:
           default: Never Reset
+          enum:
+          - Never Reset
+          - Daily
+          - Weekly
+          - Fortnightly
+          - Monthly
+          - Bi-Monthly
+          - Quarterly
+          - Every 6 months
+          - Annual
           nullable: true
           title: Scheduled reset period
           type: string
@@ -8011,6 +8350,16 @@ components:
           type: integer
         limit_bandwidth_unit:
           default: Byte
+          enum:
+          - Byte
+          - Kilobyte
+          - Megabyte
+          - Gigabyte
+          - Terabyte
+          - Petabyte
+          - Exabyte
+          - Zettabyte
+          - Yottabyte
           nullable: true
           title: Limit bandwidth unit
           type: string
@@ -8083,6 +8432,16 @@ components:
           type: string
         scheduled_reset_period:
           default: Never Reset
+          enum:
+          - Never Reset
+          - Daily
+          - Weekly
+          - Fortnightly
+          - Monthly
+          - Bi-Monthly
+          - Quarterly
+          - Every 6 months
+          - Annual
           nullable: true
           title: Scheduled reset period
           type: string
@@ -8131,6 +8490,16 @@ components:
           type: integer
         limit_bandwidth_unit:
           default: Byte
+          enum:
+          - Byte
+          - Kilobyte
+          - Megabyte
+          - Gigabyte
+          - Terabyte
+          - Petabyte
+          - Exabyte
+          - Zettabyte
+          - Yottabyte
           nullable: true
           title: Limit bandwidth unit
           type: string
@@ -8199,6 +8568,16 @@ components:
           type: string
         scheduled_reset_period:
           default: Never Reset
+          enum:
+          - Never Reset
+          - Daily
+          - Weekly
+          - Fortnightly
+          - Monthly
+          - Bi-Monthly
+          - Quarterly
+          - Every 6 months
+          - Annual
           nullable: true
           title: Scheduled reset period
           type: string
@@ -8295,6 +8674,7 @@ components:
         eula_accepted_at:
           description: The datetime the EULA was accepted at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Eula accepted at
           type: string
@@ -8337,6 +8717,16 @@ components:
           type: integer
         limit_bandwidth_unit:
           default: Byte
+          enum:
+          - Byte
+          - Kilobyte
+          - Megabyte
+          - Gigabyte
+          - Terabyte
+          - Petabyte
+          - Exabyte
+          - Zettabyte
+          - Yottabyte
           nullable: true
           title: Limit bandwidth unit
           type: string
@@ -8420,6 +8810,16 @@ components:
           type: string
         scheduled_reset_period:
           default: Never Reset
+          enum:
+          - Never Reset
+          - Daily
+          - Weekly
+          - Fortnightly
+          - Monthly
+          - Bi-Monthly
+          - Quarterly
+          - Every 6 months
+          - Annual
           nullable: true
           title: Scheduled reset period
           type: string
@@ -8442,6 +8842,7 @@ components:
         updated_at:
           description: The datetime the token was updated at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Updated at
           type: string
@@ -8964,7 +9365,6 @@ components:
           type: string
         slug:
           format: slug
-          minLength: 1
           pattern: "^[-a-zA-Z0-9_]+$"
           readOnly: true
           title: Slug
@@ -9005,7 +9405,7 @@ components:
           type: string
         location:
           description: The city/town/area your organization is based in.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Location
           type: string
@@ -9025,7 +9425,7 @@ components:
           type: string
         tagline:
           description: A short public descriptive for your organization.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Tagline
           type: string
@@ -9071,6 +9471,11 @@ components:
         role:
           default: Member
           description: The role to be assigned to the invited user.
+          enum:
+          - Owner
+          - Manager
+          - Member
+          - Collaborator
           title: Role
           type: string
         slug_perm:
@@ -9107,6 +9512,11 @@ components:
         role:
           default: Member
           description: The role to be assigned to the invited user.
+          enum:
+          - Owner
+          - Manager
+          - Member
+          - Collaborator
           title: Role
           type: string
         user:
@@ -9122,6 +9532,11 @@ components:
         role:
           default: Member
           description: The role to be assigned to the invited user.
+          enum:
+          - Owner
+          - Manager
+          - Member
+          - Collaborator
           title: Role
           type: string
       type: object
@@ -9130,6 +9545,11 @@ components:
         role:
           default: Member
           description: The role to be assigned to the invited user.
+          enum:
+          - Owner
+          - Manager
+          - Member
+          - Collaborator
           title: Role
           type: string
       type: object
@@ -9174,6 +9594,11 @@ components:
         role:
           default: Member
           description: The role to be assigned to the invited user.
+          enum:
+          - Owner
+          - Manager
+          - Member
+          - Collaborator
           title: Role
           type: string
         slug_perm:
@@ -9232,11 +9657,21 @@ components:
           type: string
         last_login_method:
           default: Unknown
+          enum:
+          - Unknown
+          - Password
+          - Social
+          - SAML
           readOnly: true
           title: Last login method
           type: string
         role:
           default: Owner
+          enum:
+          - Owner
+          - Manager
+          - Member
+          - Collaborator
           readOnly: true
           title: Role
           type: string
@@ -9262,6 +9697,9 @@ components:
           type: string
         visibility:
           default: Public
+          enum:
+          - Public
+          - Private
           readOnly: true
           title: Visibility
           type: string
@@ -9369,6 +9807,9 @@ components:
         role:
           default: Manager
           description: The team role associated with the service
+          enum:
+          - Manager
+          - Member
           title: Role
           type: string
         slug:
@@ -9412,6 +9853,9 @@ components:
         role:
           default: Member
           description: The role of the service.
+          enum:
+          - Manager
+          - Member
           title: Role
           type: string
         slug:
@@ -9455,6 +9899,9 @@ components:
         role:
           default: Member
           description: The role of the service.
+          enum:
+          - Manager
+          - Member
           title: Role
           type: string
         teams:
@@ -9490,6 +9937,9 @@ components:
         role:
           default: Member
           description: The role of the service.
+          enum:
+          - Manager
+          - Member
           title: Role
           type: string
         teams:
@@ -9529,6 +9979,9 @@ components:
           type: string
         visibility:
           default: Visible
+          enum:
+          - Visible
+          - Hidden
           title: Visibility
           type: string
       required:
@@ -9558,6 +10011,9 @@ components:
           type: string
         visibility:
           default: Visible
+          enum:
+          - Visible
+          - Hidden
           title: Visibility
           type: string
       required:
@@ -9587,16 +10043,22 @@ components:
           type: string
         visibility:
           default: Visible
+          enum:
+          - Visible
+          - Hidden
           title: Visibility
           type: string
       type: object
     OrganizationTeamMembership:
       description: The team members
       example:
-        role: role
+        role: Manager
         user: user
       properties:
         role:
+          enum:
+          - Manager
+          - Member
           title: Role
           type: string
         user:
@@ -9610,9 +10072,9 @@ components:
     OrganizationTeamMembers:
       example:
         members:
-        - role: role
+        - role: Manager
           user: user
-        - role: role
+        - role: Manager
           user: user
       properties:
         members:
@@ -9664,22 +10126,22 @@ components:
           title: Cdn url
           type: string
         checksum_md5:
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Checksum md5
           type: string
         checksum_sha1:
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Checksum sha1
           type: string
         checksum_sha256:
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Checksum sha256
           type: string
         checksum_sha512:
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Checksum sha512
           type: string
@@ -9723,7 +10185,7 @@ components:
           type: string
         tag:
           description: Freeform descriptor that describes what the file is.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Tag
           type: string
@@ -9871,7 +10333,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -9882,7 +10344,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -9896,6 +10358,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -9963,13 +10426,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -10004,7 +10467,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -10021,17 +10484,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -10039,6 +10513,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -10100,7 +10575,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -10125,13 +10600,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -10172,7 +10648,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -10357,7 +10833,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -10368,7 +10844,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -10382,6 +10858,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -10449,13 +10926,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -10490,7 +10967,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -10507,17 +10984,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -10525,6 +11013,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -10586,7 +11075,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -10611,13 +11100,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -10653,7 +11143,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -10831,7 +11321,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -10842,7 +11332,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -10856,6 +11346,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -10923,13 +11414,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -10964,7 +11455,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -10981,17 +11472,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -10999,6 +11501,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -11060,7 +11563,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -11085,13 +11588,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -11127,7 +11631,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -11305,7 +11809,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -11316,7 +11820,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -11330,6 +11834,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -11397,13 +11902,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -11438,7 +11943,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -11455,17 +11960,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -11473,6 +11989,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -11534,7 +12051,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -11559,13 +12076,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -11601,7 +12119,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -11779,7 +12297,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -11790,7 +12308,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -11804,6 +12322,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -11871,13 +12390,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -11912,7 +12431,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -11929,17 +12448,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -11947,6 +12477,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -12008,7 +12539,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -12033,13 +12564,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -12075,7 +12607,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -12320,7 +12852,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -12331,7 +12863,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -12345,6 +12877,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -12412,7 +12945,7 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
@@ -12453,7 +12986,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -12470,17 +13003,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -12488,6 +13032,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -12549,7 +13094,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -12574,13 +13119,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -12794,7 +13340,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -12805,7 +13351,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -12819,6 +13365,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -12886,13 +13433,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -12927,7 +13474,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -12944,17 +13491,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -12962,6 +13520,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -13023,7 +13582,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -13048,13 +13607,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -13090,7 +13650,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -13268,7 +13828,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -13279,7 +13839,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -13293,6 +13853,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -13360,13 +13921,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -13401,7 +13962,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -13418,17 +13979,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -13436,6 +14008,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -13497,7 +14070,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -13522,13 +14095,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -13564,7 +14138,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -13742,7 +14316,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -13753,7 +14327,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -13767,6 +14341,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -13834,13 +14409,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -13875,7 +14450,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -13892,17 +14467,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -13910,6 +14496,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -13971,7 +14558,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -13996,13 +14583,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -14038,7 +14626,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -14238,7 +14826,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -14249,7 +14837,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -14263,6 +14851,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -14330,13 +14919,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -14371,7 +14960,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -14388,17 +14977,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -14406,6 +15006,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -14467,7 +15068,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -14492,13 +15093,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -14534,7 +15136,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -14712,7 +15314,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -14723,7 +15325,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -14737,6 +15339,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -14804,13 +15407,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -14845,7 +15448,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -14862,17 +15465,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -14880,6 +15494,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -14941,7 +15556,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -14966,13 +15581,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -15008,7 +15624,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -15186,7 +15802,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -15197,7 +15813,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -15211,6 +15827,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -15278,13 +15895,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -15319,7 +15936,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -15336,17 +15953,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -15354,6 +15982,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -15415,7 +16044,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -15440,13 +16069,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -15482,7 +16112,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -15660,7 +16290,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -15671,7 +16301,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -15685,6 +16315,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -15752,13 +16383,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -15793,7 +16424,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -15810,17 +16441,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -15828,6 +16470,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -15889,7 +16532,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -15914,13 +16557,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -15956,7 +16600,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -16134,7 +16778,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -16145,7 +16789,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -16159,6 +16803,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -16226,13 +16871,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -16267,7 +16912,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -16284,17 +16929,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -16302,6 +16958,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -16363,7 +17020,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -16388,13 +17045,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -16430,7 +17088,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -16673,7 +17331,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -16684,7 +17342,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -16698,6 +17356,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -16771,13 +17430,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -16818,7 +17477,7 @@ components:
           type: string
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -16835,17 +17494,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -16853,6 +17523,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -16914,7 +17585,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -16939,13 +17610,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -17168,7 +17840,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -17179,7 +17851,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -17193,6 +17865,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -17260,13 +17933,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -17301,7 +17974,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -17318,17 +17991,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -17336,6 +18020,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -17397,7 +18082,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -17422,13 +18107,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -17464,7 +18150,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -17649,7 +18335,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -17660,7 +18346,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -17674,6 +18360,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -17741,13 +18428,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -17782,7 +18469,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -17799,17 +18486,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -17817,6 +18515,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -17878,7 +18577,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -17903,13 +18602,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -17945,7 +18645,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -18123,7 +18823,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -18134,7 +18834,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -18148,6 +18848,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -18215,13 +18916,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -18256,7 +18957,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -18273,17 +18974,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -18291,6 +19003,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -18352,7 +19065,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -18377,13 +19090,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -18419,7 +19133,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -18597,7 +19311,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -18608,7 +19322,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -18622,6 +19336,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -18689,13 +19404,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -18730,7 +19445,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -18747,17 +19462,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -18765,6 +19491,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -18826,7 +19553,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -18851,13 +19578,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -18893,7 +19621,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -19109,7 +19837,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -19134,6 +19862,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -19201,7 +19930,7 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
@@ -19242,7 +19971,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -19259,17 +19988,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -19277,6 +20017,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -19338,7 +20079,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -19370,6 +20111,7 @@ components:
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -19590,7 +20332,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -19601,7 +20343,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -19615,6 +20357,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -19682,13 +20425,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -19723,7 +20466,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -19740,17 +20483,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -19758,6 +20512,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -19819,7 +20574,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -19844,13 +20599,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -19886,7 +20642,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -20064,7 +20820,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -20075,7 +20831,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -20089,6 +20845,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -20156,13 +20913,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -20197,7 +20954,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -20214,17 +20971,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -20232,6 +21000,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -20293,7 +21062,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -20318,13 +21087,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -20360,7 +21130,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -20538,7 +21308,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -20549,7 +21319,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -20563,6 +21333,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -20630,13 +21401,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -20671,7 +21442,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -20688,17 +21459,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -20706,6 +21488,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -20767,7 +21550,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -20792,13 +21575,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -20834,7 +21618,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -21034,7 +21818,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -21045,7 +21829,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -21059,6 +21843,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -21126,7 +21911,7 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
@@ -21171,7 +21956,7 @@ components:
           type: string
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -21188,17 +21973,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -21206,6 +22002,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -21267,7 +22064,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -21292,13 +22089,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -21506,7 +22304,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -21517,7 +22315,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -21531,6 +22329,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -21598,13 +22397,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -21639,7 +22438,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -21657,17 +22456,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -21675,6 +22485,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -21736,7 +22547,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -21761,13 +22572,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -21808,7 +22620,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -21831,6 +22643,31 @@ components:
       properties:
         dep_type:
           default: Depends
+          enum:
+          - Depends
+          - Pre-Depends
+          - Recommends
+          - Suggests
+          - Enhances
+          - Replaces
+          - Breaks
+          - Built-Using
+          - Build-Depends
+          - Build-Depends-Indep
+          - Build-Conflicts
+          - Build-Conflicts-Indep
+          - Conflicts
+          - Provides
+          - Obsoletes
+          - Requires
+          - Runtime
+          - Development
+          - Compile
+          - Provided
+          - Test
+          - System
+          - Import
+          - Excluded
           readOnly: true
           title: Dep type
           type: string
@@ -21842,6 +22679,18 @@ components:
           type: string
         operator:
           default: =
+          enum:
+          - =
+          - '!='
+          - <
+          - <<
+          - <=
+          - '>'
+          - '>>'
+          - '>='
+          - "~="
+          - "~>"
+          - matches
           nullable: true
           readOnly: true
           title: Operator
@@ -22023,7 +22872,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -22034,7 +22883,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -22048,6 +22897,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -22115,13 +22965,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -22156,7 +23006,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -22174,17 +23024,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -22192,6 +23053,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -22253,7 +23115,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -22278,13 +23140,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -22325,7 +23188,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -22486,7 +23349,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -22497,7 +23360,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -22511,6 +23374,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -22578,13 +23442,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -22619,7 +23483,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -22636,17 +23500,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -22654,6 +23529,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -22715,7 +23591,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -22740,13 +23616,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -22787,7 +23664,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -22939,7 +23816,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -22950,7 +23827,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -22964,6 +23841,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -23031,13 +23909,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -23072,7 +23950,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -23089,17 +23967,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -23107,6 +23996,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -23168,7 +24058,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -23193,13 +24083,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -23240,7 +24131,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -23330,7 +24221,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -23347,6 +24238,7 @@ components:
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -23412,7 +24304,7 @@ components:
           type: string
         dependencies_checksum_md5:
           description: A checksum of all of the package's dependencies.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Dependencies checksum md5
           type: string
@@ -23423,7 +24315,7 @@ components:
           type: string
         description:
           description: A textual description of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Description
           type: string
@@ -23437,6 +24329,7 @@ components:
           type: integer
         epoch:
           description: The epoch of the package version (if any).
+          nullable: true
           readOnly: true
           title: Epoch
           type: integer
@@ -23510,13 +24403,13 @@ components:
           type: boolean
         license:
           description: The license of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: License
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -23551,7 +24444,7 @@ components:
           type: integer
         release:
           description: The release of the package version (if any).
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Release
           type: string
@@ -23568,17 +24461,28 @@ components:
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
           description: The datetime the security scanning was started.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan started at
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
           nullable: true
           readOnly: true
           title: Security scan status
@@ -23586,6 +24490,7 @@ components:
         security_scan_status_updated_at:
           description: The datetime the security scanning status was updated.
           format: date-time
+          nullable: true
           readOnly: true
           title: Security scan status updated at
           type: string
@@ -23647,7 +24552,7 @@ components:
         status_reason:
           description: A textual description for the synchronous status reason (if
             any
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Status reason
           type: string
@@ -23672,13 +24577,14 @@ components:
           type: string
         summary:
           description: A one-liner synopsis of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Summary
           type: string
         sync_finished_at:
           description: The datetime the package sync was finished at.
           format: date-time
+          nullable: true
           readOnly: true
           title: Sync finished at
           type: string
@@ -23714,7 +24620,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -24219,6 +25125,10 @@ components:
             \ contains packages, or provides a distribution of packages from other\
             \ repositories. You can only select the content kind at repository creation\
             \ time."
+          enum:
+          - Standard
+          - Distribution
+          - Upstream
           title: Content kind
           type: string
         contextual_auth_realm:
@@ -24243,6 +25153,10 @@ components:
             \ user to copy packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific copy\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Copy packages
           type: string
         created_at:
@@ -24258,6 +25172,11 @@ components:
             \ own membership role (i.e. it applies to owners, managers and members).\
             \ Be careful if setting this to admin, because any member will be able\
             \ to change settings."
+          enum:
+          - Admin
+          - Write
+          - Read
+          - None
           title: Default privilege
           type: string
         delete_own:
@@ -24274,10 +25193,14 @@ components:
             \ user to delete packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific delete\
             \ setting."
+          enum:
+          - Admin
+          - Write
           title: Delete packages
           type: string
         deleted_at:
           format: date-time
+          nullable: true
           readOnly: true
           title: Deleted at
           type: string
@@ -24340,6 +25263,10 @@ components:
             \ user to move packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific move\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Move packages
           type: string
         name:
@@ -24409,6 +25336,9 @@ components:
             \ republish setting. Please note that the user still requires the privilege\
             \ to delete packages that will be replaced by the new package; otherwise\
             \ the republish will fail."
+          enum:
+          - Admin
+          - Write
           title: Replace packages
           type: string
         replace_packages_by_default:
@@ -24432,6 +25362,9 @@ components:
           description: The repository type changes how it is accessed and billed.
             Private repositories are visible only to you or authorized delegates.
             Public repositories are visible to all Cloudsmith users.
+          enum:
+          - Public
+          - Private
           title: Repository type str
           type: string
         resync_own:
@@ -24448,6 +25381,9 @@ components:
             \ user to resync packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific resync\
             \ setting."
+          enum:
+          - Admin
+          - Write
           title: Resync packages
           type: string
         scan_own:
@@ -24464,6 +25400,10 @@ components:
             \ user to scan packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific scan\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Scan packages
           type: string
         self_html_url:
@@ -24570,6 +25510,10 @@ components:
             \ user to view repository statistics, to include entitlement-based usage,\
             \ if applicable. If a user does not have the permission, they won't be\
             \ able to view any statistics, either via the UI, API or CLI."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: View statistics
           type: string
       required:
@@ -24622,6 +25566,10 @@ components:
             \ contains packages, or provides a distribution of packages from other\
             \ repositories. You can only select the content kind at repository creation\
             \ time."
+          enum:
+          - Standard
+          - Distribution
+          - Upstream
           title: Content kind
           type: string
         contextual_auth_realm:
@@ -24646,6 +25594,10 @@ components:
             \ user to copy packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific copy\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Copy packages
           type: string
         default_privilege:
@@ -24656,6 +25608,11 @@ components:
             \ own membership role (i.e. it applies to owners, managers and members).\
             \ Be careful if setting this to admin, because any member will be able\
             \ to change settings."
+          enum:
+          - Admin
+          - Write
+          - Read
+          - None
           title: Default privilege
           type: string
         delete_own:
@@ -24672,6 +25629,9 @@ components:
             \ user to delete packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific delete\
             \ setting."
+          enum:
+          - Admin
+          - Write
           title: Delete packages
           type: string
         description:
@@ -24716,6 +25676,10 @@ components:
             \ user to move packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific move\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Move packages
           type: string
         name:
@@ -24757,6 +25721,9 @@ components:
             \ republish setting. Please note that the user still requires the privilege\
             \ to delete packages that will be replaced by the new package; otherwise\
             \ the republish will fail."
+          enum:
+          - Admin
+          - Write
           title: Replace packages
           type: string
         replace_packages_by_default:
@@ -24771,6 +25738,9 @@ components:
           description: The repository type changes how it is accessed and billed.
             Private repositories are visible only to you or authorized delegates.
             Public repositories are visible to all Cloudsmith users.
+          enum:
+          - Public
+          - Private
           title: Repository type str
           type: string
         resync_own:
@@ -24787,6 +25757,9 @@ components:
             \ user to resync packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific resync\
             \ setting."
+          enum:
+          - Admin
+          - Write
           title: Resync packages
           type: string
         scan_own:
@@ -24803,6 +25776,10 @@ components:
             \ user to scan packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific scan\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Scan packages
           type: string
         show_setup_all:
@@ -24877,6 +25854,10 @@ components:
             \ user to view repository statistics, to include entitlement-based usage,\
             \ if applicable. If a user does not have the permission, they won't be\
             \ able to view any statistics, either via the UI, API or CLI."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: View statistics
           type: string
       required:
@@ -24967,6 +25948,10 @@ components:
             \ contains packages, or provides a distribution of packages from other\
             \ repositories. You can only select the content kind at repository creation\
             \ time."
+          enum:
+          - Standard
+          - Distribution
+          - Upstream
           title: Content kind
           type: string
         contextual_auth_realm:
@@ -24991,6 +25976,10 @@ components:
             \ user to copy packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific copy\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Copy packages
           type: string
         created_at:
@@ -25006,6 +25995,11 @@ components:
             \ own membership role (i.e. it applies to owners, managers and members).\
             \ Be careful if setting this to admin, because any member will be able\
             \ to change settings."
+          enum:
+          - Admin
+          - Write
+          - Read
+          - None
           title: Default privilege
           type: string
         delete_own:
@@ -25022,10 +26016,14 @@ components:
             \ user to delete packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific delete\
             \ setting."
+          enum:
+          - Admin
+          - Write
           title: Delete packages
           type: string
         deleted_at:
           format: date-time
+          nullable: true
           readOnly: true
           title: Deleted at
           type: string
@@ -25088,6 +26086,10 @@ components:
             \ user to move packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific move\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Move packages
           type: string
         name:
@@ -25157,6 +26159,9 @@ components:
             \ republish setting. Please note that the user still requires the privilege\
             \ to delete packages that will be replaced by the new package; otherwise\
             \ the republish will fail."
+          enum:
+          - Admin
+          - Write
           title: Replace packages
           type: string
         replace_packages_by_default:
@@ -25180,6 +26185,9 @@ components:
           description: The repository type changes how it is accessed and billed.
             Private repositories are visible only to you or authorized delegates.
             Public repositories are visible to all Cloudsmith users.
+          enum:
+          - Public
+          - Private
           title: Repository type str
           type: string
         resync_own:
@@ -25196,6 +26204,9 @@ components:
             \ user to resync packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific resync\
             \ setting."
+          enum:
+          - Admin
+          - Write
           title: Resync packages
           type: string
         scan_own:
@@ -25212,6 +26223,10 @@ components:
             \ user to scan packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific scan\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Scan packages
           type: string
         self_html_url:
@@ -25317,6 +26332,10 @@ components:
             \ user to view repository statistics, to include entitlement-based usage,\
             \ if applicable. If a user does not have the permission, they won't be\
             \ able to view any statistics, either via the UI, API or CLI."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: View statistics
           type: string
       required:
@@ -25368,6 +26387,10 @@ components:
             \ contains packages, or provides a distribution of packages from other\
             \ repositories. You can only select the content kind at repository creation\
             \ time."
+          enum:
+          - Standard
+          - Distribution
+          - Upstream
           title: Content kind
           type: string
         contextual_auth_realm:
@@ -25392,6 +26415,10 @@ components:
             \ user to copy packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific copy\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Copy packages
           type: string
         default_privilege:
@@ -25402,6 +26429,11 @@ components:
             \ own membership role (i.e. it applies to owners, managers and members).\
             \ Be careful if setting this to admin, because any member will be able\
             \ to change settings."
+          enum:
+          - Admin
+          - Write
+          - Read
+          - None
           title: Default privilege
           type: string
         delete_own:
@@ -25418,6 +26450,9 @@ components:
             \ user to delete packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific delete\
             \ setting."
+          enum:
+          - Admin
+          - Write
           title: Delete packages
           type: string
         description:
@@ -25462,6 +26497,10 @@ components:
             \ user to move packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific move\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Move packages
           type: string
         name:
@@ -25503,6 +26542,9 @@ components:
             \ republish setting. Please note that the user still requires the privilege\
             \ to delete packages that will be replaced by the new package; otherwise\
             \ the republish will fail."
+          enum:
+          - Admin
+          - Write
           title: Replace packages
           type: string
         replace_packages_by_default:
@@ -25517,6 +26559,9 @@ components:
           description: The repository type changes how it is accessed and billed.
             Private repositories are visible only to you or authorized delegates.
             Public repositories are visible to all Cloudsmith users.
+          enum:
+          - Public
+          - Private
           title: Repository type str
           type: string
         resync_own:
@@ -25533,6 +26578,9 @@ components:
             \ user to resync packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific resync\
             \ setting."
+          enum:
+          - Admin
+          - Write
           title: Resync packages
           type: string
         scan_own:
@@ -25549,6 +26597,10 @@ components:
             \ user to scan packages. Unless the package was uploaded by that user,\
             \ in which the permission may be overridden by the user-specific scan\
             \ setting."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Scan packages
           type: string
         show_setup_all:
@@ -25618,8 +26670,97 @@ components:
             \ user to view repository statistics, to include entitlement-based usage,\
             \ if applicable. If a user does not have the permission, they won't be\
             \ able to view any statistics, either via the UI, API or CLI."
+          enum:
+          - Admin
+          - Write
+          - Read
           title: View statistics
           type: string
+      type: object
+    RepositoryGeoIPList:
+      properties:
+        cidr:
+          description: List all CIDR geographic rules within the repository
+          readOnly: true
+          title: Cidr
+          type: string
+        country_code:
+          description: List all GeoIP geographic rules within the repository
+          readOnly: true
+          title: Country code
+          type: string
+      type: object
+    RespositoryGeoIPEnableDisableRequest:
+      type: object
+    RespositoryGeoIPEnableDisable:
+      type: object
+    RepositoryGeoIPTestAddress:
+      example:
+        addresses:
+        - addresses
+        - addresses
+      properties:
+        addresses:
+          description: The IP addresses to test against this repository
+          items:
+            minLength: 1
+            type: string
+          type: array
+      required:
+      - addresses
+      type: object
+    RepositoryGeoIPTestAddressResponseDict:
+      example:
+        country_code: country_code
+        reason: reason
+        allowed: true
+        ip_address: ip_address
+      properties:
+        allowed:
+          description: The result of the IP test
+          title: Allowed
+          type: boolean
+        country_code:
+          description: The country code of the tested IP address
+          minLength: 1
+          nullable: true
+          title: Country code
+          type: string
+        ip_address:
+          description: The IP address that was tested
+          minLength: 1
+          title: Ip address
+          type: string
+        reason:
+          description: The reason for the result
+          minLength: 1
+          title: Reason
+          type: string
+      required:
+      - allowed
+      - country_code
+      - ip_address
+      - reason
+      type: object
+    RepositoryGeoIPTestAddressResponse:
+      example:
+        addresses:
+        - country_code: country_code
+          reason: reason
+          allowed: true
+          ip_address: ip_address
+        - country_code: country_code
+          reason: reason
+          allowed: true
+          ip_address: ip_address
+      properties:
+        addresses:
+          description: The IP address test results ordered by allowed
+          items:
+            $ref: '#/components/schemas/RepositoryGeoIPTestAddressResponseDict'
+          type: array
+      required:
+      - addresses
       type: object
     RepositoryGpgKeyCreate:
       example:
@@ -25642,13 +26783,17 @@ components:
     RepositoryPrivilegeDict:
       example:
         service: service
-        privilege: privilege
+        privilege: Admin
         team: team
         user: user
       properties:
         privilege:
           description: The level of privilege that the user or team should be granted
             to the specified repository.
+          enum:
+          - Admin
+          - Write
+          - Read
           title: Privilege
           type: string
         service:
@@ -25679,11 +26824,11 @@ components:
       example:
         privileges:
         - service: service
-          privilege: privilege
+          privilege: Admin
           team: team
           user: user
         - service: service
-          privilege: privilege
+          privilege: Admin
           team: team
           user: user
       properties:
@@ -25699,11 +26844,11 @@ components:
       example:
         privileges:
         - service: service
-          privilege: privilege
+          privilege: Admin
           team: team
           user: user
         - service: service
-          privilege: privilege
+          privilege: Admin
           team: team
           user: user
       properties:
@@ -25719,11 +26864,11 @@ components:
       example:
         privileges:
         - service: service
-          privilege: privilege
+          privilege: Admin
           team: team
           user: user
         - service: service
-          privilege: privilege
+          privilege: Admin
           team: team
           user: user
       properties:
@@ -25795,7 +26940,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.182.1
+        version: 1.202.1
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -25805,7 +26950,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.182.1
+          default: 1.202.1
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -25991,7 +27136,7 @@ components:
           type: string
         name:
           description: The name of this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -26002,7 +27147,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          minLength: 1
+          nullable: true
           readOnly: true
           title: Version
           type: string
@@ -26040,6 +27185,12 @@ components:
           type: string
         max_severity:
           default: Unknown
+          enum:
+          - Unknown
+          - Low
+          - Medium
+          - High
+          - Critical
           title: Max severity
           type: string
         num_vulnerabilities:
@@ -26144,6 +27295,12 @@ components:
           type: array
         severity:
           default: Unknown
+          enum:
+          - Unknown
+          - Low
+          - Medium
+          - High
+          - Critical
           title: Severity
           type: string
         severity_source:
@@ -26321,6 +27478,12 @@ components:
           type: string
         max_severity:
           default: Unknown
+          enum:
+          - Unknown
+          - Low
+          - Medium
+          - High
+          - Critical
           title: Max severity
           type: string
         num_vulnerabilities:
@@ -26780,6 +27943,46 @@ components:
             \ attacks."
           title: Verify SSL Certificates
           type: boolean
+      type: object
+    repos_geoip_read_200_response_country_code:
+      example:
+        allow:
+        - allow
+        - allow
+        deny:
+        - deny
+        - deny
+      properties:
+        allow:
+          items:
+            type: string
+          type: array
+        deny:
+          items:
+            type: string
+          type: array
+      type: object
+    repos_geoip_read_200_response:
+      example:
+        country_code:
+          allow:
+          - allow
+          - allow
+          deny:
+          - deny
+          - deny
+        cidr:
+          allow:
+          - allow
+          - allow
+          deny:
+          - deny
+          - deny
+      properties:
+        country_code:
+          $ref: '#/components/schemas/repos_geoip_read_200_response_country_code'
+        cidr:
+          $ref: '#/components/schemas/repos_geoip_read_200_response_country_code'
       type: object
   securitySchemes:
     apikey:

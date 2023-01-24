@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CdnUrl** | Pointer to **NullableString** |  | [optional] [readonly] 
-**ChecksumMd5** | Pointer to **string** |  | [optional] [readonly] 
-**ChecksumSha1** | Pointer to **string** |  | [optional] [readonly] 
-**ChecksumSha256** | Pointer to **string** |  | [optional] [readonly] 
-**ChecksumSha512** | Pointer to **string** |  | [optional] [readonly] 
+**ChecksumMd5** | Pointer to **NullableString** |  | [optional] [readonly] 
+**ChecksumSha1** | Pointer to **NullableString** |  | [optional] [readonly] 
+**ChecksumSha256** | Pointer to **NullableString** |  | [optional] [readonly] 
+**ChecksumSha512** | Pointer to **NullableString** |  | [optional] [readonly] 
 **Downloads** | Pointer to **int64** |  | [optional] [readonly] 
 **Filename** | Pointer to **string** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **SignatureUrl** | Pointer to **NullableString** |  | [optional] [readonly] 
 **Size** | Pointer to **int64** | The calculated size of the file. | [optional] [readonly] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
-**Tag** | Pointer to **string** | Freeform descriptor that describes what the file is. | [optional] [readonly] 
+**Tag** | Pointer to **NullableString** | Freeform descriptor that describes what the file is. | [optional] [readonly] 
 
 ## Methods
 
@@ -98,6 +98,16 @@ SetChecksumMd5 sets ChecksumMd5 field to given value.
 
 HasChecksumMd5 returns a boolean if a field has been set.
 
+### SetChecksumMd5Nil
+
+`func (o *PackageFile) SetChecksumMd5Nil(b bool)`
+
+ SetChecksumMd5Nil sets the value for ChecksumMd5 to be an explicit nil
+
+### UnsetChecksumMd5
+`func (o *PackageFile) UnsetChecksumMd5()`
+
+UnsetChecksumMd5 ensures that no value is present for ChecksumMd5, not even an explicit nil
 ### GetChecksumSha1
 
 `func (o *PackageFile) GetChecksumSha1() string`
@@ -123,6 +133,16 @@ SetChecksumSha1 sets ChecksumSha1 field to given value.
 
 HasChecksumSha1 returns a boolean if a field has been set.
 
+### SetChecksumSha1Nil
+
+`func (o *PackageFile) SetChecksumSha1Nil(b bool)`
+
+ SetChecksumSha1Nil sets the value for ChecksumSha1 to be an explicit nil
+
+### UnsetChecksumSha1
+`func (o *PackageFile) UnsetChecksumSha1()`
+
+UnsetChecksumSha1 ensures that no value is present for ChecksumSha1, not even an explicit nil
 ### GetChecksumSha256
 
 `func (o *PackageFile) GetChecksumSha256() string`
@@ -148,6 +168,16 @@ SetChecksumSha256 sets ChecksumSha256 field to given value.
 
 HasChecksumSha256 returns a boolean if a field has been set.
 
+### SetChecksumSha256Nil
+
+`func (o *PackageFile) SetChecksumSha256Nil(b bool)`
+
+ SetChecksumSha256Nil sets the value for ChecksumSha256 to be an explicit nil
+
+### UnsetChecksumSha256
+`func (o *PackageFile) UnsetChecksumSha256()`
+
+UnsetChecksumSha256 ensures that no value is present for ChecksumSha256, not even an explicit nil
 ### GetChecksumSha512
 
 `func (o *PackageFile) GetChecksumSha512() string`
@@ -173,6 +203,16 @@ SetChecksumSha512 sets ChecksumSha512 field to given value.
 
 HasChecksumSha512 returns a boolean if a field has been set.
 
+### SetChecksumSha512Nil
+
+`func (o *PackageFile) SetChecksumSha512Nil(b bool)`
+
+ SetChecksumSha512Nil sets the value for ChecksumSha512 to be an explicit nil
+
+### UnsetChecksumSha512
+`func (o *PackageFile) UnsetChecksumSha512()`
+
+UnsetChecksumSha512 ensures that no value is present for ChecksumSha512, not even an explicit nil
 ### GetDownloads
 
 `func (o *PackageFile) GetDownloads() int64`
@@ -408,6 +448,16 @@ SetTag sets Tag field to given value.
 
 HasTag returns a boolean if a field has been set.
 
+### SetTagNil
+
+`func (o *PackageFile) SetTagNil(b bool)`
+
+ SetTagNil sets the value for Tag to be an explicit nil
+
+### UnsetTag
+`func (o *PackageFile) UnsetTag()`
+
+UnsetTag ensures that no value is present for Tag, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

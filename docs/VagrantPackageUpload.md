@@ -10,13 +10,13 @@ Name | Type | Description | Notes
 **ChecksumSha1** | Pointer to **string** |  | [optional] [readonly] 
 **ChecksumSha256** | Pointer to **string** |  | [optional] [readonly] 
 **ChecksumSha512** | Pointer to **string** |  | [optional] [readonly] 
-**DependenciesChecksumMd5** | Pointer to **string** | A checksum of all of the package&#39;s dependencies. | [optional] [readonly] 
+**DependenciesChecksumMd5** | Pointer to **NullableString** | A checksum of all of the package&#39;s dependencies. | [optional] [readonly] 
 **DependenciesUrl** | Pointer to **string** |  | [optional] [readonly] 
-**Description** | Pointer to **string** | A textual description of this package. | [optional] [readonly] 
+**Description** | Pointer to **NullableString** | A textual description of this package. | [optional] [readonly] 
 **Distro** | Pointer to [**NullableDistribution**](Distribution.md) |  | [optional] 
 **DistroVersion** | Pointer to [**DistributionVersion**](DistributionVersion.md) |  | [optional] 
 **Downloads** | Pointer to **int64** |  | [optional] [readonly] 
-**Epoch** | Pointer to **int64** | The epoch of the package version (if any). | [optional] [readonly] 
+**Epoch** | Pointer to **NullableInt64** | The epoch of the package version (if any). | [optional] [readonly] 
 **Extension** | Pointer to **string** |  | [optional] [readonly] 
 **Filename** | Pointer to **string** |  | [optional] [readonly] 
 **Files** | Pointer to [**[]PackageFile**](PackageFile.md) |  | [optional] [readonly] 
@@ -31,7 +31,7 @@ Name | Type | Description | Notes
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncInFlight** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncInProgress** | Pointer to **bool** |  | [optional] [readonly] 
-**License** | Pointer to **string** | The license of this package. | [optional] [readonly] 
+**License** | Pointer to **NullableString** | The license of this package. | [optional] [readonly] 
 **Name** | **string** | The name of this package. | 
 **Namespace** | Pointer to **string** |  | [optional] [readonly] 
 **NamespaceUrl** | Pointer to **string** |  | [optional] [readonly] 
@@ -40,13 +40,13 @@ Name | Type | Description | Notes
 **OriginRepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
 **PackageType** | Pointer to **int64** | The type of package contents. | [optional] [readonly] 
 **Provider** | **string** | The virtual machine provider for the box. | 
-**Release** | Pointer to **string** | The release of the package version (if any). | [optional] [readonly] 
+**Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
-**SecurityScanCompletedAt** | Pointer to **time.Time** | The datetime the security scanning was completed. | [optional] [readonly] 
-**SecurityScanStartedAt** | Pointer to **time.Time** | The datetime the security scanning was started. | [optional] [readonly] 
+**SecurityScanCompletedAt** | Pointer to **NullableTime** | The datetime the security scanning was completed. | [optional] [readonly] 
+**SecurityScanStartedAt** | Pointer to **NullableTime** | The datetime the security scanning was started. | [optional] [readonly] 
 **SecurityScanStatus** | Pointer to **NullableString** |  | [optional] [readonly] [default to "Awaiting Security Scan"]
-**SecurityScanStatusUpdatedAt** | Pointer to **time.Time** | The datetime the security scanning status was updated. | [optional] [readonly] 
+**SecurityScanStatusUpdatedAt** | Pointer to **NullableTime** | The datetime the security scanning status was updated. | [optional] [readonly] 
 **SelfHtmlUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SelfUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SignatureUrl** | Pointer to **NullableString** |  | [optional] [readonly] 
@@ -57,13 +57,13 @@ Name | Type | Description | Notes
 **StageStr** | Pointer to **string** |  | [optional] [readonly] 
 **StageUpdatedAt** | Pointer to **time.Time** | The datetime the package stage was updated at. | [optional] [readonly] 
 **Status** | Pointer to **int64** | The synchronisation status of the package. | [optional] [readonly] 
-**StatusReason** | Pointer to **string** | A textual description for the synchronous status reason (if any | [optional] [readonly] 
+**StatusReason** | Pointer to **NullableString** | A textual description for the synchronous status reason (if any | [optional] [readonly] 
 **StatusStr** | Pointer to **string** |  | [optional] [readonly] 
 **StatusUpdatedAt** | Pointer to **time.Time** | The datetime the package status was updated at. | [optional] [readonly] 
 **StatusUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Subtype** | Pointer to **string** |  | [optional] [readonly] 
-**Summary** | Pointer to **string** | A one-liner synopsis of this package. | [optional] [readonly] 
-**SyncFinishedAt** | Pointer to **time.Time** | The datetime the package sync was finished at. | [optional] [readonly] 
+**Summary** | Pointer to **NullableString** | A one-liner synopsis of this package. | [optional] [readonly] 
+**SyncFinishedAt** | Pointer to **NullableTime** | The datetime the package sync was finished at. | [optional] [readonly] 
 **SyncProgress** | Pointer to **int64** | Synchronisation progress (from 0-100) | [optional] [readonly] 
 **TagsImmutable** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
 **TypeDisplay** | Pointer to **string** |  | [optional] [readonly] 
@@ -278,6 +278,16 @@ SetDependenciesChecksumMd5 sets DependenciesChecksumMd5 field to given value.
 
 HasDependenciesChecksumMd5 returns a boolean if a field has been set.
 
+### SetDependenciesChecksumMd5Nil
+
+`func (o *VagrantPackageUpload) SetDependenciesChecksumMd5Nil(b bool)`
+
+ SetDependenciesChecksumMd5Nil sets the value for DependenciesChecksumMd5 to be an explicit nil
+
+### UnsetDependenciesChecksumMd5
+`func (o *VagrantPackageUpload) UnsetDependenciesChecksumMd5()`
+
+UnsetDependenciesChecksumMd5 ensures that no value is present for DependenciesChecksumMd5, not even an explicit nil
 ### GetDependenciesUrl
 
 `func (o *VagrantPackageUpload) GetDependenciesUrl() string`
@@ -328,6 +338,16 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### SetDescriptionNil
+
+`func (o *VagrantPackageUpload) SetDescriptionNil(b bool)`
+
+ SetDescriptionNil sets the value for Description to be an explicit nil
+
+### UnsetDescription
+`func (o *VagrantPackageUpload) UnsetDescription()`
+
+UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetDistro
 
 `func (o *VagrantPackageUpload) GetDistro() Distribution`
@@ -438,6 +458,16 @@ SetEpoch sets Epoch field to given value.
 
 HasEpoch returns a boolean if a field has been set.
 
+### SetEpochNil
+
+`func (o *VagrantPackageUpload) SetEpochNil(b bool)`
+
+ SetEpochNil sets the value for Epoch to be an explicit nil
+
+### UnsetEpoch
+`func (o *VagrantPackageUpload) UnsetEpoch()`
+
+UnsetEpoch ensures that no value is present for Epoch, not even an explicit nil
 ### GetExtension
 
 `func (o *VagrantPackageUpload) GetExtension() string`
@@ -813,6 +843,16 @@ SetLicense sets License field to given value.
 
 HasLicense returns a boolean if a field has been set.
 
+### SetLicenseNil
+
+`func (o *VagrantPackageUpload) SetLicenseNil(b bool)`
+
+ SetLicenseNil sets the value for License to be an explicit nil
+
+### UnsetLicense
+`func (o *VagrantPackageUpload) UnsetLicense()`
+
+UnsetLicense ensures that no value is present for License, not even an explicit nil
 ### GetName
 
 `func (o *VagrantPackageUpload) GetName() string`
@@ -1028,6 +1068,16 @@ SetRelease sets Release field to given value.
 
 HasRelease returns a boolean if a field has been set.
 
+### SetReleaseNil
+
+`func (o *VagrantPackageUpload) SetReleaseNil(b bool)`
+
+ SetReleaseNil sets the value for Release to be an explicit nil
+
+### UnsetRelease
+`func (o *VagrantPackageUpload) UnsetRelease()`
+
+UnsetRelease ensures that no value is present for Release, not even an explicit nil
 ### GetRepository
 
 `func (o *VagrantPackageUpload) GetRepository() string`
@@ -1103,6 +1153,16 @@ SetSecurityScanCompletedAt sets SecurityScanCompletedAt field to given value.
 
 HasSecurityScanCompletedAt returns a boolean if a field has been set.
 
+### SetSecurityScanCompletedAtNil
+
+`func (o *VagrantPackageUpload) SetSecurityScanCompletedAtNil(b bool)`
+
+ SetSecurityScanCompletedAtNil sets the value for SecurityScanCompletedAt to be an explicit nil
+
+### UnsetSecurityScanCompletedAt
+`func (o *VagrantPackageUpload) UnsetSecurityScanCompletedAt()`
+
+UnsetSecurityScanCompletedAt ensures that no value is present for SecurityScanCompletedAt, not even an explicit nil
 ### GetSecurityScanStartedAt
 
 `func (o *VagrantPackageUpload) GetSecurityScanStartedAt() time.Time`
@@ -1128,6 +1188,16 @@ SetSecurityScanStartedAt sets SecurityScanStartedAt field to given value.
 
 HasSecurityScanStartedAt returns a boolean if a field has been set.
 
+### SetSecurityScanStartedAtNil
+
+`func (o *VagrantPackageUpload) SetSecurityScanStartedAtNil(b bool)`
+
+ SetSecurityScanStartedAtNil sets the value for SecurityScanStartedAt to be an explicit nil
+
+### UnsetSecurityScanStartedAt
+`func (o *VagrantPackageUpload) UnsetSecurityScanStartedAt()`
+
+UnsetSecurityScanStartedAt ensures that no value is present for SecurityScanStartedAt, not even an explicit nil
 ### GetSecurityScanStatus
 
 `func (o *VagrantPackageUpload) GetSecurityScanStatus() string`
@@ -1188,6 +1258,16 @@ SetSecurityScanStatusUpdatedAt sets SecurityScanStatusUpdatedAt field to given v
 
 HasSecurityScanStatusUpdatedAt returns a boolean if a field has been set.
 
+### SetSecurityScanStatusUpdatedAtNil
+
+`func (o *VagrantPackageUpload) SetSecurityScanStatusUpdatedAtNil(b bool)`
+
+ SetSecurityScanStatusUpdatedAtNil sets the value for SecurityScanStatusUpdatedAt to be an explicit nil
+
+### UnsetSecurityScanStatusUpdatedAt
+`func (o *VagrantPackageUpload) UnsetSecurityScanStatusUpdatedAt()`
+
+UnsetSecurityScanStatusUpdatedAt ensures that no value is present for SecurityScanStatusUpdatedAt, not even an explicit nil
 ### GetSelfHtmlUrl
 
 `func (o *VagrantPackageUpload) GetSelfHtmlUrl() string`
@@ -1473,6 +1553,16 @@ SetStatusReason sets StatusReason field to given value.
 
 HasStatusReason returns a boolean if a field has been set.
 
+### SetStatusReasonNil
+
+`func (o *VagrantPackageUpload) SetStatusReasonNil(b bool)`
+
+ SetStatusReasonNil sets the value for StatusReason to be an explicit nil
+
+### UnsetStatusReason
+`func (o *VagrantPackageUpload) UnsetStatusReason()`
+
+UnsetStatusReason ensures that no value is present for StatusReason, not even an explicit nil
 ### GetStatusStr
 
 `func (o *VagrantPackageUpload) GetStatusStr() string`
@@ -1598,6 +1688,16 @@ SetSummary sets Summary field to given value.
 
 HasSummary returns a boolean if a field has been set.
 
+### SetSummaryNil
+
+`func (o *VagrantPackageUpload) SetSummaryNil(b bool)`
+
+ SetSummaryNil sets the value for Summary to be an explicit nil
+
+### UnsetSummary
+`func (o *VagrantPackageUpload) UnsetSummary()`
+
+UnsetSummary ensures that no value is present for Summary, not even an explicit nil
 ### GetSyncFinishedAt
 
 `func (o *VagrantPackageUpload) GetSyncFinishedAt() time.Time`
@@ -1623,6 +1723,16 @@ SetSyncFinishedAt sets SyncFinishedAt field to given value.
 
 HasSyncFinishedAt returns a boolean if a field has been set.
 
+### SetSyncFinishedAtNil
+
+`func (o *VagrantPackageUpload) SetSyncFinishedAtNil(b bool)`
+
+ SetSyncFinishedAtNil sets the value for SyncFinishedAt to be an explicit nil
+
+### UnsetSyncFinishedAt
+`func (o *VagrantPackageUpload) UnsetSyncFinishedAt()`
+
+UnsetSyncFinishedAt ensures that no value is present for SyncFinishedAt, not even an explicit nil
 ### GetSyncProgress
 
 `func (o *VagrantPackageUpload) GetSyncProgress() int64`

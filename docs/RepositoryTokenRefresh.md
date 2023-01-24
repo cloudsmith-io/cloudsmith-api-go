@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Downloads** | Pointer to **int64** |  | [optional] [readonly] 
 **EnableUrl** | Pointer to **string** |  | [optional] [readonly] 
 **EulaAccepted** | Pointer to [**NullableEula**](Eula.md) |  | [optional] 
-**EulaAcceptedAt** | Pointer to **time.Time** | The datetime the EULA was accepted at. | [optional] [readonly] 
+**EulaAcceptedAt** | Pointer to **NullableTime** | The datetime the EULA was accepted at. | [optional] [readonly] 
 **EulaAcceptedFrom** | Pointer to **NullableString** |  | [optional] [readonly] 
 **EulaRequired** | Pointer to **bool** | If checked, a EULA acceptance is required for this token. | [optional] 
 **HasLimits** | Pointer to **bool** |  | [optional] [readonly] 
@@ -37,7 +37,7 @@ Name | Type | Description | Notes
 **SelfUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **Token** | Pointer to **string** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | The datetime the token was updated at. | [optional] [readonly] 
+**UpdatedAt** | Pointer to **NullableTime** | The datetime the token was updated at. | [optional] [readonly] 
 **UpdatedBy** | Pointer to **NullableString** |  | [optional] [readonly] 
 **UpdatedByUrl** | Pointer to **NullableString** |  | [optional] [readonly] 
 **Usage** | Pointer to **string** |  | [optional] [readonly] 
@@ -323,6 +323,16 @@ SetEulaAcceptedAt sets EulaAcceptedAt field to given value.
 
 HasEulaAcceptedAt returns a boolean if a field has been set.
 
+### SetEulaAcceptedAtNil
+
+`func (o *RepositoryTokenRefresh) SetEulaAcceptedAtNil(b bool)`
+
+ SetEulaAcceptedAtNil sets the value for EulaAcceptedAt to be an explicit nil
+
+### UnsetEulaAcceptedAt
+`func (o *RepositoryTokenRefresh) UnsetEulaAcceptedAt()`
+
+UnsetEulaAcceptedAt ensures that no value is present for EulaAcceptedAt, not even an explicit nil
 ### GetEulaAcceptedFrom
 
 `func (o *RepositoryTokenRefresh) GetEulaAcceptedFrom() string`
@@ -1043,6 +1053,16 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 HasUpdatedAt returns a boolean if a field has been set.
 
+### SetUpdatedAtNil
+
+`func (o *RepositoryTokenRefresh) SetUpdatedAtNil(b bool)`
+
+ SetUpdatedAtNil sets the value for UpdatedAt to be an explicit nil
+
+### UnsetUpdatedAt
+`func (o *RepositoryTokenRefresh) UnsetUpdatedAt()`
+
+UnsetUpdatedAt ensures that no value is present for UpdatedAt, not even an explicit nil
 ### GetUpdatedBy
 
 `func (o *RepositoryTokenRefresh) GetUpdatedBy() string`
