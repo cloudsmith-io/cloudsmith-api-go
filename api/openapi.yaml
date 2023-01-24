@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.202.1
+  version: 1.202.5
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -26940,7 +26940,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.202.1
+        version: 1.202.5
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -26950,7 +26950,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.202.1
+          default: 1.202.5
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
