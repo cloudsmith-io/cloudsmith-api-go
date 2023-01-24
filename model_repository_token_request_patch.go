@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.202.1
+API version: 1.202.5
 Contact: support@cloudsmith.io
 */
 
@@ -51,9 +51,9 @@ type RepositoryTokenRequestPatch struct {
 // will change when the set of required properties is changed
 func NewRepositoryTokenRequestPatch() *RepositoryTokenRequestPatch {
 	this := RepositoryTokenRequestPatch{}
-	var limitBandwidthUnit LIMIT_BANDWIDTH_UNIT = "Byte"
+	var limitBandwidthUnit string = "Byte"
 	this.LimitBandwidthUnit = *NewNullableString(&limitBandwidthUnit)
-	var scheduledResetPeriod SCHEDULED_RESET_PERIOD = "Never Reset"
+	var scheduledResetPeriod string = "Never Reset"
 	this.ScheduledResetPeriod = *NewNullableString(&scheduledResetPeriod)
 	return &this
 }
@@ -63,9 +63,9 @@ func NewRepositoryTokenRequestPatch() *RepositoryTokenRequestPatch {
 // but it doesn't guarantee that properties required by API are set
 func NewRepositoryTokenRequestPatchWithDefaults() *RepositoryTokenRequestPatch {
 	this := RepositoryTokenRequestPatch{}
-	var limitBandwidthUnit LIMIT_BANDWIDTH_UNIT = "Byte"
+	var limitBandwidthUnit string = "Byte"
 	this.LimitBandwidthUnit = *NewNullableString(&limitBandwidthUnit)
-	var scheduledResetPeriod SCHEDULED_RESET_PERIOD = "Never Reset"
+	var scheduledResetPeriod string = "Never Reset"
 	this.ScheduledResetPeriod = *NewNullableString(&scheduledResetPeriod)
 	return &this
 }
