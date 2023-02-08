@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.202.5
+API version: 1.206.0
 Contact: support@cloudsmith.io
 */
 
@@ -17,16 +17,16 @@ import (
 
 // HistoryFieldset struct for HistoryFieldset
 type HistoryFieldset struct {
-	Downloaded  Usage `json:"downloaded"`
-	StorageUsed Usage `json:"storage_used"`
-	Uploaded    Usage `json:"uploaded"`
+	Downloaded  Usage        `json:"downloaded"`
+	StorageUsed StorageUsage `json:"storage_used"`
+	Uploaded    Usage        `json:"uploaded"`
 }
 
 // NewHistoryFieldset instantiates a new HistoryFieldset object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHistoryFieldset(downloaded Usage, storageUsed Usage, uploaded Usage) *HistoryFieldset {
+func NewHistoryFieldset(downloaded Usage, storageUsed StorageUsage, uploaded Usage) *HistoryFieldset {
 	this := HistoryFieldset{}
 	this.Downloaded = downloaded
 	this.StorageUsed = storageUsed
@@ -67,9 +67,9 @@ func (o *HistoryFieldset) SetDownloaded(v Usage) {
 }
 
 // GetStorageUsed returns the StorageUsed field value
-func (o *HistoryFieldset) GetStorageUsed() Usage {
+func (o *HistoryFieldset) GetStorageUsed() StorageUsage {
 	if o == nil {
-		var ret Usage
+		var ret StorageUsage
 		return ret
 	}
 
@@ -78,7 +78,7 @@ func (o *HistoryFieldset) GetStorageUsed() Usage {
 
 // GetStorageUsedOk returns a tuple with the StorageUsed field value
 // and a boolean to check if the value has been set.
-func (o *HistoryFieldset) GetStorageUsedOk() (*Usage, bool) {
+func (o *HistoryFieldset) GetStorageUsedOk() (*StorageUsage, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -86,7 +86,7 @@ func (o *HistoryFieldset) GetStorageUsedOk() (*Usage, bool) {
 }
 
 // SetStorageUsed sets field value
-func (o *HistoryFieldset) SetStorageUsed(v Usage) {
+func (o *HistoryFieldset) SetStorageUsed(v StorageUsage) {
 	o.StorageUsed = v
 }
 

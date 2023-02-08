@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.202.5
+API version: 1.206.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,31 +15,31 @@ import (
 	"encoding/json"
 )
 
-// ReposGeoipRead200ResponseCountryCode struct for ReposGeoipRead200ResponseCountryCode
-type ReposGeoipRead200ResponseCountryCode struct {
+// RepositoryGeoIpCidrRules struct for RepositoryGeoIpCidrRules
+type RepositoryGeoIpCidrRules struct {
 	Allow []string `json:"allow,omitempty"`
 	Deny  []string `json:"deny,omitempty"`
 }
 
-// NewReposGeoipRead200ResponseCountryCode instantiates a new ReposGeoipRead200ResponseCountryCode object
+// NewRepositoryGeoIpCidrRules instantiates a new RepositoryGeoIpCidrRules object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReposGeoipRead200ResponseCountryCode() *ReposGeoipRead200ResponseCountryCode {
-	this := ReposGeoipRead200ResponseCountryCode{}
+func NewRepositoryGeoIpCidrRules() *RepositoryGeoIpCidrRules {
+	this := RepositoryGeoIpCidrRules{}
 	return &this
 }
 
-// NewReposGeoipRead200ResponseCountryCodeWithDefaults instantiates a new ReposGeoipRead200ResponseCountryCode object
+// NewRepositoryGeoIpCidrRulesWithDefaults instantiates a new RepositoryGeoIpCidrRules object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewReposGeoipRead200ResponseCountryCodeWithDefaults() *ReposGeoipRead200ResponseCountryCode {
-	this := ReposGeoipRead200ResponseCountryCode{}
+func NewRepositoryGeoIpCidrRulesWithDefaults() *RepositoryGeoIpCidrRules {
+	this := RepositoryGeoIpCidrRules{}
 	return &this
 }
 
 // GetAllow returns the Allow field value if set, zero value otherwise.
-func (o *ReposGeoipRead200ResponseCountryCode) GetAllow() []string {
+func (o *RepositoryGeoIpCidrRules) GetAllow() []string {
 	if o == nil || isNil(o.Allow) {
 		var ret []string
 		return ret
@@ -49,7 +49,7 @@ func (o *ReposGeoipRead200ResponseCountryCode) GetAllow() []string {
 
 // GetAllowOk returns a tuple with the Allow field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReposGeoipRead200ResponseCountryCode) GetAllowOk() ([]string, bool) {
+func (o *RepositoryGeoIpCidrRules) GetAllowOk() ([]string, bool) {
 	if o == nil || isNil(o.Allow) {
 		return nil, false
 	}
@@ -57,7 +57,7 @@ func (o *ReposGeoipRead200ResponseCountryCode) GetAllowOk() ([]string, bool) {
 }
 
 // HasAllow returns a boolean if a field has been set.
-func (o *ReposGeoipRead200ResponseCountryCode) HasAllow() bool {
+func (o *RepositoryGeoIpCidrRules) HasAllow() bool {
 	if o != nil && !isNil(o.Allow) {
 		return true
 	}
@@ -66,12 +66,12 @@ func (o *ReposGeoipRead200ResponseCountryCode) HasAllow() bool {
 }
 
 // SetAllow gets a reference to the given []string and assigns it to the Allow field.
-func (o *ReposGeoipRead200ResponseCountryCode) SetAllow(v []string) {
+func (o *RepositoryGeoIpCidrRules) SetAllow(v []string) {
 	o.Allow = v
 }
 
 // GetDeny returns the Deny field value if set, zero value otherwise.
-func (o *ReposGeoipRead200ResponseCountryCode) GetDeny() []string {
+func (o *RepositoryGeoIpCidrRules) GetDeny() []string {
 	if o == nil || isNil(o.Deny) {
 		var ret []string
 		return ret
@@ -81,7 +81,7 @@ func (o *ReposGeoipRead200ResponseCountryCode) GetDeny() []string {
 
 // GetDenyOk returns a tuple with the Deny field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReposGeoipRead200ResponseCountryCode) GetDenyOk() ([]string, bool) {
+func (o *RepositoryGeoIpCidrRules) GetDenyOk() ([]string, bool) {
 	if o == nil || isNil(o.Deny) {
 		return nil, false
 	}
@@ -89,7 +89,7 @@ func (o *ReposGeoipRead200ResponseCountryCode) GetDenyOk() ([]string, bool) {
 }
 
 // HasDeny returns a boolean if a field has been set.
-func (o *ReposGeoipRead200ResponseCountryCode) HasDeny() bool {
+func (o *RepositoryGeoIpCidrRules) HasDeny() bool {
 	if o != nil && !isNil(o.Deny) {
 		return true
 	}
@@ -98,11 +98,11 @@ func (o *ReposGeoipRead200ResponseCountryCode) HasDeny() bool {
 }
 
 // SetDeny gets a reference to the given []string and assigns it to the Deny field.
-func (o *ReposGeoipRead200ResponseCountryCode) SetDeny(v []string) {
+func (o *RepositoryGeoIpCidrRules) SetDeny(v []string) {
 	o.Deny = v
 }
 
-func (o ReposGeoipRead200ResponseCountryCode) MarshalJSON() ([]byte, error) {
+func (o RepositoryGeoIpCidrRules) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Allow) {
 		toSerialize["allow"] = o.Allow
@@ -113,38 +113,38 @@ func (o ReposGeoipRead200ResponseCountryCode) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableReposGeoipRead200ResponseCountryCode struct {
-	value *ReposGeoipRead200ResponseCountryCode
+type NullableRepositoryGeoIpCidrRules struct {
+	value *RepositoryGeoIpCidrRules
 	isSet bool
 }
 
-func (v NullableReposGeoipRead200ResponseCountryCode) Get() *ReposGeoipRead200ResponseCountryCode {
+func (v NullableRepositoryGeoIpCidrRules) Get() *RepositoryGeoIpCidrRules {
 	return v.value
 }
 
-func (v *NullableReposGeoipRead200ResponseCountryCode) Set(val *ReposGeoipRead200ResponseCountryCode) {
+func (v *NullableRepositoryGeoIpCidrRules) Set(val *RepositoryGeoIpCidrRules) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableReposGeoipRead200ResponseCountryCode) IsSet() bool {
+func (v NullableRepositoryGeoIpCidrRules) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableReposGeoipRead200ResponseCountryCode) Unset() {
+func (v *NullableRepositoryGeoIpCidrRules) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableReposGeoipRead200ResponseCountryCode(val *ReposGeoipRead200ResponseCountryCode) *NullableReposGeoipRead200ResponseCountryCode {
-	return &NullableReposGeoipRead200ResponseCountryCode{value: val, isSet: true}
+func NewNullableRepositoryGeoIpCidrRules(val *RepositoryGeoIpCidrRules) *NullableRepositoryGeoIpCidrRules {
+	return &NullableRepositoryGeoIpCidrRules{value: val, isSet: true}
 }
 
-func (v NullableReposGeoipRead200ResponseCountryCode) MarshalJSON() ([]byte, error) {
+func (v NullableRepositoryGeoIpCidrRules) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableReposGeoipRead200ResponseCountryCode) UnmarshalJSON(src []byte) error {
+func (v *NullableRepositoryGeoIpCidrRules) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

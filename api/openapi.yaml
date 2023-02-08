@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.202.5
+  version: 1.206.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -6058,8 +6058,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/repos_geoip_read_200_response'
+                $ref: '#/components/schemas/RepositoryGeoIpRules'
           description: OK
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Geo/IP restrictions are not available; upgrade your account!
         "404":
           content:
             application/json:
@@ -6101,15 +6107,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/repos_geoip_read_200_response'
+              $ref: '#/components/schemas/RepositoryGeoIpRules'
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/repos_geoip_read_200_response'
+                $ref: '#/components/schemas/RepositoryGeoIpRules'
           description: OK
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Geo/IP restrictions are not available; upgrade your account!
         "404":
           content:
             application/json:
@@ -6152,12 +6164,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/repos_geoip_read_200_response'
+              $ref: '#/components/schemas/RepositoryGeoIpRules'
         required: false
       responses:
         "204":
           content: {}
           description: Repository GeoIP rules have been replaced
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Geo/IP restrictions are not available; upgrade your account!
         "404":
           content:
             application/json:
@@ -6207,6 +6225,12 @@ paths:
         "200":
           content: {}
           description: GeoIP has been disabled for this repository.
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Geo/IP restrictions are not available; upgrade your account!
         "404":
           content:
             application/json:
@@ -6256,6 +6280,12 @@ paths:
         "200":
           content: {}
           description: GeoIP has been enabled for this repository.
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Geo/IP restrictions are not available; upgrade your account!
         "404":
           content:
             application/json:
@@ -6310,6 +6340,12 @@ paths:
                 $ref: '#/components/schemas/RepositoryGeoIPTestAddressResponse'
           description: Successfuly tested addresses against the repository's GeoIP
             rules
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Geo/IP restrictions are not available; upgrade your account!
         "404":
           content:
             application/json:
@@ -24656,6 +24692,34 @@ components:
           title: Used
           type: string
       type: object
+    StorageUsage:
+      example:
+        percentage: percentage
+        limit: limit
+        peak: peak
+        used: used
+      properties:
+        limit:
+          maxLength: 32
+          minLength: 1
+          title: Limit
+          type: string
+        peak:
+          maxLength: 32
+          minLength: 1
+          title: Peak
+          type: string
+        percentage:
+          maxLength: 10
+          minLength: 1
+          title: Percentage
+          type: string
+        used:
+          maxLength: 32
+          minLength: 1
+          title: Used
+          type: string
+      type: object
     HistoryFieldset:
       example:
         uploaded:
@@ -24669,12 +24733,13 @@ components:
         storage_used:
           percentage: percentage
           limit: limit
+          peak: peak
           used: used
       properties:
         downloaded:
           $ref: '#/components/schemas/Usage'
         storage_used:
-          $ref: '#/components/schemas/Usage'
+          $ref: '#/components/schemas/StorageUsage'
         uploaded:
           $ref: '#/components/schemas/Usage'
       required:
@@ -24696,6 +24761,7 @@ components:
           storage_used:
             percentage: percentage
             limit: limit
+            peak: peak
             used: used
         start: 2000-01-23T04:56:07.000+00:00
         days: 0
@@ -24711,6 +24777,7 @@ components:
           storage_used:
             percentage: percentage
             limit: limit
+            peak: peak
             used: used
         end: 2000-01-23T04:56:07.000+00:00
         plan: plan
@@ -24757,6 +24824,7 @@ components:
             storage_used:
               percentage: percentage
               limit: limit
+              peak: peak
               used: used
           start: 2000-01-23T04:56:07.000+00:00
           days: 0
@@ -24772,6 +24840,7 @@ components:
             storage_used:
               percentage: percentage
               limit: limit
+              peak: peak
               used: used
           end: 2000-01-23T04:56:07.000+00:00
           plan: plan
@@ -24787,6 +24856,7 @@ components:
             storage_used:
               percentage: percentage
               limit: limit
+              peak: peak
               used: used
           start: 2000-01-23T04:56:07.000+00:00
           days: 0
@@ -24802,6 +24872,7 @@ components:
             storage_used:
               percentage: percentage
               limit: limit
+              peak: peak
               used: used
           end: 2000-01-23T04:56:07.000+00:00
           plan: plan
@@ -24841,6 +24912,40 @@ components:
           title: Used
           type: string
       type: object
+    StorageAllocatedLimit:
+      example:
+        configured: configured
+        percentage_used: percentage_used
+        plan_limit: plan_limit
+        peak: peak
+        used: used
+      properties:
+        configured:
+          maxLength: 32
+          minLength: 1
+          title: Configured
+          type: string
+        peak:
+          maxLength: 32
+          minLength: 1
+          title: Peak
+          type: string
+        percentage_used:
+          maxLength: 10
+          minLength: 1
+          title: Percentage used
+          type: string
+        plan_limit:
+          maxLength: 32
+          minLength: 1
+          title: Plan limit
+          type: string
+        used:
+          maxLength: 32
+          minLength: 1
+          title: Used
+          type: string
+      type: object
     UsageLimits:
       example:
         bandwidth:
@@ -24852,12 +24957,13 @@ components:
           configured: configured
           percentage_used: percentage_used
           plan_limit: plan_limit
+          peak: peak
           used: used
       properties:
         bandwidth:
           $ref: '#/components/schemas/AllocatedLimit'
         storage:
-          $ref: '#/components/schemas/AllocatedLimit'
+          $ref: '#/components/schemas/StorageAllocatedLimit'
       required:
       - bandwidth
       - storage
@@ -24874,6 +24980,7 @@ components:
             configured: configured
             percentage_used: percentage_used
             plan_limit: plan_limit
+            peak: peak
             used: used
         raw:
           bandwidth:
@@ -24885,6 +24992,7 @@ components:
             configured: configured
             percentage_used: percentage_used
             plan_limit: plan_limit
+            peak: peak
             used: used
       properties:
         display:
@@ -24908,6 +25016,7 @@ components:
               configured: configured
               percentage_used: percentage_used
               plan_limit: plan_limit
+              peak: peak
               used: used
           raw:
             bandwidth:
@@ -24919,6 +25028,7 @@ components:
               configured: configured
               percentage_used: percentage_used
               plan_limit: plan_limit
+              peak: peak
               used: used
       properties:
         usage:
@@ -26940,7 +27050,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.202.5
+        version: 1.206.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -26950,7 +27060,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.202.5
+          default: 1.206.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -27944,7 +28054,7 @@ components:
           title: Verify SSL Certificates
           type: boolean
       type: object
-    repos_geoip_read_200_response_country_code:
+    RepositoryGeoIpCountryCodeRules:
       example:
         allow:
         - allow
@@ -27961,8 +28071,28 @@ components:
           items:
             type: string
           type: array
+      title: RepositoryGeoIpCountryCodeRules
       type: object
-    repos_geoip_read_200_response:
+    RepositoryGeoIpCidrRules:
+      example:
+        allow:
+        - allow
+        - allow
+        deny:
+        - deny
+        - deny
+      properties:
+        allow:
+          items:
+            type: string
+          type: array
+        deny:
+          items:
+            type: string
+          type: array
+      title: RepositoryGeoIpCidrRules
+      type: object
+    RepositoryGeoIpRules:
       example:
         country_code:
           allow:
@@ -27980,9 +28110,10 @@ components:
           - deny
       properties:
         country_code:
-          $ref: '#/components/schemas/repos_geoip_read_200_response_country_code'
+          $ref: '#/components/schemas/RepositoryGeoIpCountryCodeRules'
         cidr:
-          $ref: '#/components/schemas/repos_geoip_read_200_response_country_code'
+          $ref: '#/components/schemas/RepositoryGeoIpCidrRules'
+      title: RepositoryGeoIpRules
       type: object
   securitySchemes:
     apikey:
