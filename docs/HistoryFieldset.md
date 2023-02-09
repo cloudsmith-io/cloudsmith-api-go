@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Downloaded** | [**Usage**](Usage.md) |  | 
-**StorageUsed** | [**Usage**](Usage.md) |  | 
+**StorageUsed** | [**StorageUsage**](StorageUsage.md) |  | 
 **Uploaded** | [**Usage**](Usage.md) |  | 
 
 ## Methods
 
 ### NewHistoryFieldset
 
-`func NewHistoryFieldset(downloaded Usage, storageUsed Usage, uploaded Usage, ) *HistoryFieldset`
+`func NewHistoryFieldset(downloaded Usage, storageUsed StorageUsage, uploaded Usage, ) *HistoryFieldset`
 
 NewHistoryFieldset instantiates a new HistoryFieldset object
 This constructor will assign default values to properties that have it defined,
@@ -49,20 +49,20 @@ SetDownloaded sets Downloaded field to given value.
 
 ### GetStorageUsed
 
-`func (o *HistoryFieldset) GetStorageUsed() Usage`
+`func (o *HistoryFieldset) GetStorageUsed() StorageUsage`
 
 GetStorageUsed returns the StorageUsed field if non-nil, zero value otherwise.
 
 ### GetStorageUsedOk
 
-`func (o *HistoryFieldset) GetStorageUsedOk() (*Usage, bool)`
+`func (o *HistoryFieldset) GetStorageUsedOk() (*StorageUsage, bool)`
 
 GetStorageUsedOk returns a tuple with the StorageUsed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStorageUsed
 
-`func (o *HistoryFieldset) SetStorageUsed(v Usage)`
+`func (o *HistoryFieldset) SetStorageUsed(v StorageUsage)`
 
 SetStorageUsed sets StorageUsed field to given value.
 

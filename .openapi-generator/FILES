@@ -130,8 +130,6 @@ docs/RatesApi.md
 docs/RawPackageUpload.md
 docs/RawPackageUploadRequest.md
 docs/ReposApi.md
-docs/ReposGeoipRead200Response.md
-docs/ReposGeoipRead200ResponseCountryCode.md
 docs/Repository.md
 docs/RepositoryAuditLog.md
 docs/RepositoryCreate.md
@@ -140,6 +138,9 @@ docs/RepositoryGeoIPList.md
 docs/RepositoryGeoIPTestAddress.md
 docs/RepositoryGeoIPTestAddressResponse.md
 docs/RepositoryGeoIPTestAddressResponseDict.md
+docs/RepositoryGeoIpCidrRules.md
+docs/RepositoryGeoIpCountryCodeRules.md
+docs/RepositoryGeoIpRules.md
 docs/RepositoryGpgKey.md
 docs/RepositoryGpgKeyCreate.md
 docs/RepositoryPrivilegeDict.md
@@ -170,8 +171,10 @@ docs/ServiceRequestPatch.md
 docs/ServiceTeams.md
 docs/StatusApi.md
 docs/StatusBasic.md
+docs/StorageAllocatedLimit.md
 docs/StorageRegion.md
 docs/StorageRegionsApi.md
+docs/StorageUsage.md
 docs/TerraformPackageUpload.md
 docs/TerraformPackageUploadRequest.md
 docs/Usage.md
@@ -290,13 +293,14 @@ model_quota_history.go
 model_rate_check.go
 model_raw_package_upload.go
 model_raw_package_upload_request.go
-model_repos_geoip_read_200_response.go
-model_repos_geoip_read_200_response_country_code.go
 model_repository.go
 model_repository_audit_log.go
 model_repository_create.go
 model_repository_create_request.go
+model_repository_geo_ip_cidr_rules.go
+model_repository_geo_ip_country_code_rules.go
 model_repository_geo_ip_list.go
+model_repository_geo_ip_rules.go
 model_repository_geo_ip_test_address.go
 model_repository_geo_ip_test_address_response.go
 model_repository_geo_ip_test_address_response_dict.go
@@ -329,7 +333,9 @@ model_service_request.go
 model_service_request_patch.go
 model_service_teams.go
 model_status_basic.go
+model_storage_allocated_limit.go
 model_storage_region.go
+model_storage_usage.go
 model_terraform_package_upload.go
 model_terraform_package_upload_request.go
 model_usage.go

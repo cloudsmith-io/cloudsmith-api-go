@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.202.5
+API version: 1.206.0
 Contact: support@cloudsmith.io
 */
 
@@ -17,15 +17,15 @@ import (
 
 // UsageLimits struct for UsageLimits
 type UsageLimits struct {
-	Bandwidth AllocatedLimit `json:"bandwidth"`
-	Storage   AllocatedLimit `json:"storage"`
+	Bandwidth AllocatedLimit        `json:"bandwidth"`
+	Storage   StorageAllocatedLimit `json:"storage"`
 }
 
 // NewUsageLimits instantiates a new UsageLimits object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUsageLimits(bandwidth AllocatedLimit, storage AllocatedLimit) *UsageLimits {
+func NewUsageLimits(bandwidth AllocatedLimit, storage StorageAllocatedLimit) *UsageLimits {
 	this := UsageLimits{}
 	this.Bandwidth = bandwidth
 	this.Storage = storage
@@ -65,9 +65,9 @@ func (o *UsageLimits) SetBandwidth(v AllocatedLimit) {
 }
 
 // GetStorage returns the Storage field value
-func (o *UsageLimits) GetStorage() AllocatedLimit {
+func (o *UsageLimits) GetStorage() StorageAllocatedLimit {
 	if o == nil {
-		var ret AllocatedLimit
+		var ret StorageAllocatedLimit
 		return ret
 	}
 
@@ -76,7 +76,7 @@ func (o *UsageLimits) GetStorage() AllocatedLimit {
 
 // GetStorageOk returns a tuple with the Storage field value
 // and a boolean to check if the value has been set.
-func (o *UsageLimits) GetStorageOk() (*AllocatedLimit, bool) {
+func (o *UsageLimits) GetStorageOk() (*StorageAllocatedLimit, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -84,7 +84,7 @@ func (o *UsageLimits) GetStorageOk() (*AllocatedLimit, bool) {
 }
 
 // SetStorage sets field value
-func (o *UsageLimits) SetStorage(v AllocatedLimit) {
+func (o *UsageLimits) SetStorage(v StorageAllocatedLimit) {
 	o.Storage = v
 }
 

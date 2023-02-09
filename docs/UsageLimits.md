@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Bandwidth** | [**AllocatedLimit**](AllocatedLimit.md) |  | 
-**Storage** | [**AllocatedLimit**](AllocatedLimit.md) |  | 
+**Storage** | [**StorageAllocatedLimit**](StorageAllocatedLimit.md) |  | 
 
 ## Methods
 
 ### NewUsageLimits
 
-`func NewUsageLimits(bandwidth AllocatedLimit, storage AllocatedLimit, ) *UsageLimits`
+`func NewUsageLimits(bandwidth AllocatedLimit, storage StorageAllocatedLimit, ) *UsageLimits`
 
 NewUsageLimits instantiates a new UsageLimits object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetBandwidth sets Bandwidth field to given value.
 
 ### GetStorage
 
-`func (o *UsageLimits) GetStorage() AllocatedLimit`
+`func (o *UsageLimits) GetStorage() StorageAllocatedLimit`
 
 GetStorage returns the Storage field if non-nil, zero value otherwise.
 
 ### GetStorageOk
 
-`func (o *UsageLimits) GetStorageOk() (*AllocatedLimit, bool)`
+`func (o *UsageLimits) GetStorageOk() (*StorageAllocatedLimit, bool)`
 
 GetStorageOk returns a tuple with the Storage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStorage
 
-`func (o *UsageLimits) SetStorage(v AllocatedLimit)`
+`func (o *UsageLimits) SetStorage(v StorageAllocatedLimit)`
 
 SetStorage sets Storage field to given value.
 
