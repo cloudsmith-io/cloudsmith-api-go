@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.206.0
+API version: 1.209.19
 Contact: support@cloudsmith.io
 */
 
@@ -17,7 +17,7 @@ import (
 
 // PackageTagRequest struct for PackageTagRequest
 type PackageTagRequest struct {
-	Action *int64 `json:"action,omitempty"`
+	Action NullableString `json:"action,omitempty"`
 	// If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package.
 	IsImmutable *bool `json:"is_immutable,omitempty"`
 	// A list of tags to apply the action to. Not required for clears.
@@ -30,6 +30,8 @@ type PackageTagRequest struct {
 // will change when the set of required properties is changed
 func NewPackageTagRequest() *PackageTagRequest {
 	this := PackageTagRequest{}
+	var action ACTION = "Add"
+	this.Action = *NewNullableString(&action)
 	var isImmutable bool = false
 	this.IsImmutable = &isImmutable
 	return &this
@@ -40,41 +42,54 @@ func NewPackageTagRequest() *PackageTagRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewPackageTagRequestWithDefaults() *PackageTagRequest {
 	this := PackageTagRequest{}
+	var action ACTION = "Add"
+	this.Action = *NewNullableString(&action)
 	var isImmutable bool = false
 	this.IsImmutable = &isImmutable
 	return &this
 }
 
-// GetAction returns the Action field value if set, zero value otherwise.
-func (o *PackageTagRequest) GetAction() int64 {
-	if o == nil || isNil(o.Action) {
-		var ret int64
+// GetAction returns the Action field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageTagRequest) GetAction() string {
+	if o == nil || isNil(o.Action.Get()) {
+		var ret string
 		return ret
 	}
-	return *o.Action
+	return *o.Action.Get()
 }
 
 // GetActionOk returns a tuple with the Action field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageTagRequest) GetActionOk() (*int64, bool) {
-	if o == nil || isNil(o.Action) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageTagRequest) GetActionOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Action, true
+	return o.Action.Get(), o.Action.IsSet()
 }
 
 // HasAction returns a boolean if a field has been set.
 func (o *PackageTagRequest) HasAction() bool {
-	if o != nil && !isNil(o.Action) {
+	if o != nil && o.Action.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAction gets a reference to the given int64 and assigns it to the Action field.
-func (o *PackageTagRequest) SetAction(v int64) {
-	o.Action = &v
+// SetAction gets a reference to the given NullableString and assigns it to the Action field.
+func (o *PackageTagRequest) SetAction(v string) {
+	o.Action.Set(&v)
+}
+
+// SetActionNil sets the value for Action to be an explicit nil
+func (o *PackageTagRequest) SetActionNil() {
+	o.Action.Set(nil)
+}
+
+// UnsetAction ensures that no value is present for Action, not even an explicit nil
+func (o *PackageTagRequest) UnsetAction() {
+	o.Action.Unset()
 }
 
 // GetIsImmutable returns the IsImmutable field value if set, zero value otherwise.
@@ -144,8 +159,8 @@ func (o *PackageTagRequest) SetTags(v []string) {
 
 func (o PackageTagRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Action) {
-		toSerialize["action"] = o.Action
+	if o.Action.IsSet() {
+		toSerialize["action"] = o.Action.Get()
 	}
 	if !isNil(o.IsImmutable) {
 		toSerialize["is_immutable"] = o.IsImmutable

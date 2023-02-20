@@ -8,14 +8,14 @@ Name | Type | Description | Notes
 **Display** | [**HistoryFieldset**](HistoryFieldset.md) |  | 
 **End** | **time.Time** |  | 
 **Plan** | **string** |  | 
-**Raw** | [**HistoryFieldset**](HistoryFieldset.md) |  | 
+**Raw** | [**HistoryFieldsetRaw**](HistoryFieldsetRaw.md) |  | 
 **Start** | **time.Time** |  | 
 
 ## Methods
 
 ### NewHistory
 
-`func NewHistory(display HistoryFieldset, end time.Time, plan string, raw HistoryFieldset, start time.Time, ) *History`
+`func NewHistory(display HistoryFieldset, end time.Time, plan string, raw HistoryFieldsetRaw, start time.Time, ) *History`
 
 NewHistory instantiates a new History object
 This constructor will assign default values to properties that have it defined,
@@ -117,20 +117,20 @@ SetPlan sets Plan field to given value.
 
 ### GetRaw
 
-`func (o *History) GetRaw() HistoryFieldset`
+`func (o *History) GetRaw() HistoryFieldsetRaw`
 
 GetRaw returns the Raw field if non-nil, zero value otherwise.
 
 ### GetRawOk
 
-`func (o *History) GetRawOk() (*HistoryFieldset, bool)`
+`func (o *History) GetRawOk() (*HistoryFieldsetRaw, bool)`
 
 GetRawOk returns a tuple with the Raw field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRaw
 
-`func (o *History) SetRaw(v HistoryFieldset)`
+`func (o *History) SetRaw(v HistoryFieldsetRaw)`
 
 SetRaw sets Raw field to given value.
 

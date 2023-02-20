@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Role** | Pointer to **string** | The team role associated with the service | [optional] [default to "Manager"]
-**Slug** | Pointer to **string** | The teams associated with the service | [optional] 
+**Slug** | **string** | The teams associated with the service | 
 
 ## Methods
 
 ### NewServiceTeams
 
-`func NewServiceTeams() *ServiceTeams`
+`func NewServiceTeams(slug string, ) *ServiceTeams`
 
 NewServiceTeams instantiates a new ServiceTeams object
 This constructor will assign default values to properties that have it defined,
@@ -70,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetSlug sets Slug field to given value.
 
-### HasSlug
-
-`func (o *ServiceTeams) HasSlug() bool`
-
-HasSlug returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
