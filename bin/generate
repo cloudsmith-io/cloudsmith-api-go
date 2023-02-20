@@ -43,6 +43,9 @@ rm -v git_push.sh
 # generated tests don't work yet
 rm -rfv test/
 
+# tidy modules
+go mod tidy
+
 # Work around openapi-generator (or at least the go generator) not understanding x-nullable enums
 sed -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token.go
 sed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token.go
@@ -54,3 +57,4 @@ sed -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_refresh.go
 sed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_refresh.go
 sed -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_refresh_request.go
 sed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_refresh_request.go
+sed -i 's/ACTION/string/g' model_package_tag_request.go
