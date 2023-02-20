@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Display** | [**UsageLimits**](UsageLimits.md) |  | 
-**Raw** | [**UsageLimits**](UsageLimits.md) |  | 
+**Raw** | [**UsageLimitsRaw**](UsageLimitsRaw.md) |  | 
 
 ## Methods
 
 ### NewUsageFieldset
 
-`func NewUsageFieldset(display UsageLimits, raw UsageLimits, ) *UsageFieldset`
+`func NewUsageFieldset(display UsageLimits, raw UsageLimitsRaw, ) *UsageFieldset`
 
 NewUsageFieldset instantiates a new UsageFieldset object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetDisplay sets Display field to given value.
 
 ### GetRaw
 
-`func (o *UsageFieldset) GetRaw() UsageLimits`
+`func (o *UsageFieldset) GetRaw() UsageLimitsRaw`
 
 GetRaw returns the Raw field if non-nil, zero value otherwise.
 
 ### GetRawOk
 
-`func (o *UsageFieldset) GetRawOk() (*UsageLimits, bool)`
+`func (o *UsageFieldset) GetRawOk() (*UsageLimitsRaw, bool)`
 
 GetRawOk returns a tuple with the Raw field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRaw
 
-`func (o *UsageFieldset) SetRaw(v UsageLimits)`
+`func (o *UsageFieldset) SetRaw(v UsageLimitsRaw)`
 
 SetRaw sets Raw field to given value.
 

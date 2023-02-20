@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.206.0
+API version: 1.209.19
 Contact: support@cloudsmith.io
 */
 
@@ -17,9 +17,8 @@ import (
 
 // OrganizationGroupSync struct for OrganizationGroupSync
 type OrganizationGroupSync struct {
-	IdpKey   string `json:"idp_key"`
-	IdpValue string `json:"idp_value"`
-	//  User role within the team.   A `manager` is capable of adding/removing others to/from the team, and  can set the role of other users and other settings pertaining to the  team.   A 'member' is a normal user that inherits the settings and privileges  assigned to the team.
+	IdpKey   string  `json:"idp_key"`
+	IdpValue string  `json:"idp_value"`
 	Role     *string `json:"role,omitempty"`
 	SlugPerm *string `json:"slug_perm,omitempty"`
 	Team     string  `json:"team"`

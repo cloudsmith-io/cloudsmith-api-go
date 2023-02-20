@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.206.0
+API version: 1.209.19
 Contact: support@cloudsmith.io
 */
 
@@ -18,19 +18,19 @@ import (
 
 // History struct for History
 type History struct {
-	Days    *int64          `json:"days,omitempty"`
-	Display HistoryFieldset `json:"display"`
-	End     time.Time       `json:"end"`
-	Plan    string          `json:"plan"`
-	Raw     HistoryFieldset `json:"raw"`
-	Start   time.Time       `json:"start"`
+	Days    *int64             `json:"days,omitempty"`
+	Display HistoryFieldset    `json:"display"`
+	End     time.Time          `json:"end"`
+	Plan    string             `json:"plan"`
+	Raw     HistoryFieldsetRaw `json:"raw"`
+	Start   time.Time          `json:"start"`
 }
 
 // NewHistory instantiates a new History object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHistory(display HistoryFieldset, end time.Time, plan string, raw HistoryFieldset, start time.Time) *History {
+func NewHistory(display HistoryFieldset, end time.Time, plan string, raw HistoryFieldsetRaw, start time.Time) *History {
 	this := History{}
 	this.Display = display
 	this.End = end
@@ -153,9 +153,9 @@ func (o *History) SetPlan(v string) {
 }
 
 // GetRaw returns the Raw field value
-func (o *History) GetRaw() HistoryFieldset {
+func (o *History) GetRaw() HistoryFieldsetRaw {
 	if o == nil {
-		var ret HistoryFieldset
+		var ret HistoryFieldsetRaw
 		return ret
 	}
 
@@ -164,7 +164,7 @@ func (o *History) GetRaw() HistoryFieldset {
 
 // GetRawOk returns a tuple with the Raw field value
 // and a boolean to check if the value has been set.
-func (o *History) GetRawOk() (*HistoryFieldset, bool) {
+func (o *History) GetRawOk() (*HistoryFieldsetRaw, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -172,7 +172,7 @@ func (o *History) GetRawOk() (*HistoryFieldset, bool) {
 }
 
 // SetRaw sets field value
-func (o *History) SetRaw(v HistoryFieldset) {
+func (o *History) SetRaw(v HistoryFieldsetRaw) {
 	o.Raw = v
 }
 

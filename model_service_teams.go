@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.206.0
+API version: 1.209.19
 Contact: support@cloudsmith.io
 */
 
@@ -20,17 +20,18 @@ type ServiceTeams struct {
 	// The team role associated with the service
 	Role *string `json:"role,omitempty"`
 	// The teams associated with the service
-	Slug *string `json:"slug,omitempty"`
+	Slug string `json:"slug"`
 }
 
 // NewServiceTeams instantiates a new ServiceTeams object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewServiceTeams() *ServiceTeams {
+func NewServiceTeams(slug string) *ServiceTeams {
 	this := ServiceTeams{}
 	var role string = "Manager"
 	this.Role = &role
+	this.Slug = slug
 	return &this
 }
 
@@ -76,36 +77,28 @@ func (o *ServiceTeams) SetRole(v string) {
 	o.Role = &v
 }
 
-// GetSlug returns the Slug field value if set, zero value otherwise.
+// GetSlug returns the Slug field value
 func (o *ServiceTeams) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Slug
+
+	return o.Slug
 }
 
-// GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
+// GetSlugOk returns a tuple with the Slug field value
 // and a boolean to check if the value has been set.
 func (o *ServiceTeams) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Slug, true
+	return &o.Slug, true
 }
 
-// HasSlug returns a boolean if a field has been set.
-func (o *ServiceTeams) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
-		return true
-	}
-
-	return false
-}
-
-// SetSlug gets a reference to the given string and assigns it to the Slug field.
+// SetSlug sets field value
 func (o *ServiceTeams) SetSlug(v string) {
-	o.Slug = &v
+	o.Slug = v
 }
 
 func (o ServiceTeams) MarshalJSON() ([]byte, error) {
@@ -113,7 +106,7 @@ func (o ServiceTeams) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Role) {
 		toSerialize["role"] = o.Role
 	}
-	if !isNil(o.Slug) {
+	if true {
 		toSerialize["slug"] = o.Slug
 	}
 	return json.Marshal(toSerialize)

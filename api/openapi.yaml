@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.206.0
+  version: 1.209.19
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -9760,16 +9760,9 @@ components:
           type: string
         role:
           default: Member
-          description: |2
-
-            User role within the team.
-
-             A `manager` is capable of adding/removing others to/from the team, and
-             can set the role of other users and other settings pertaining to the
-             team.
-
-             A 'member' is a normal user that inherits the settings and privileges
-             assigned to the team.
+          enum:
+          - Manager
+          - Member
           title: Role
           type: string
         slug_perm:
@@ -9812,16 +9805,9 @@ components:
           type: string
         role:
           default: Member
-          description: |2
-
-            User role within the team.
-
-             A `manager` is capable of adding/removing others to/from the team, and
-             can set the role of other users and other settings pertaining to the
-             team.
-
-             A 'member' is a normal user that inherits the settings and privileges
-             assigned to the team.
+          enum:
+          - Manager
+          - Member
           title: Role
           type: string
         team:
@@ -9855,6 +9841,8 @@ components:
           pattern: "^[-a-zA-Z0-9_]+$"
           title: Slug
           type: string
+      required:
+      - slug
       type: object
     Service:
       example:
@@ -24287,14 +24275,21 @@ components:
     PackageTagRequest:
       example:
         is_immutable: false
-        action: 0
+        action: Add
         tags:
         - tags
         - tags
       properties:
         action:
+          default: Add
+          enum:
+          - Add
+          - Clear
+          - Replace
+          - Remove
+          nullable: true
           title: Action
-          type: integer
+          type: string
         is_immutable:
           default: false
           description: "If true, created tags will be immutable. An immutable flag\
@@ -24747,6 +24742,71 @@ components:
       - storage_used
       - uploaded
       type: object
+    UsageRaw:
+      example:
+        percentage: percentage
+        limit: 6
+        used: 1
+      properties:
+        limit:
+          title: Limit
+          type: integer
+        percentage:
+          format: decimal
+          title: Percentage
+          type: string
+        used:
+          title: Used
+          type: integer
+      type: object
+    StorageUsageRaw:
+      example:
+        percentage: percentage
+        limit: 5
+        peak: 5
+        used: 2
+      properties:
+        limit:
+          title: Limit
+          type: integer
+        peak:
+          title: Peak
+          type: integer
+        percentage:
+          format: decimal
+          title: Percentage
+          type: string
+        used:
+          title: Used
+          type: integer
+      type: object
+    HistoryFieldsetRaw:
+      example:
+        uploaded:
+          percentage: percentage
+          limit: 6
+          used: 1
+        downloaded:
+          percentage: percentage
+          limit: 6
+          used: 1
+        storage_used:
+          percentage: percentage
+          limit: 5
+          peak: 5
+          used: 2
+      properties:
+        downloaded:
+          $ref: '#/components/schemas/UsageRaw'
+        storage_used:
+          $ref: '#/components/schemas/StorageUsageRaw'
+        uploaded:
+          $ref: '#/components/schemas/UsageRaw'
+      required:
+      - downloaded
+      - storage_used
+      - uploaded
+      type: object
     History:
       example:
         display:
@@ -24768,17 +24828,17 @@ components:
         raw:
           uploaded:
             percentage: percentage
-            limit: limit
-            used: used
+            limit: 6
+            used: 1
           downloaded:
             percentage: percentage
-            limit: limit
-            used: used
+            limit: 6
+            used: 1
           storage_used:
             percentage: percentage
-            limit: limit
-            peak: peak
-            used: used
+            limit: 5
+            peak: 5
+            used: 2
         end: 2000-01-23T04:56:07.000+00:00
         plan: plan
       properties:
@@ -24797,7 +24857,7 @@ components:
           title: Plan
           type: string
         raw:
-          $ref: '#/components/schemas/HistoryFieldset'
+          $ref: '#/components/schemas/HistoryFieldsetRaw'
         start:
           format: date-time
           title: Start
@@ -24831,17 +24891,17 @@ components:
           raw:
             uploaded:
               percentage: percentage
-              limit: limit
-              used: used
+              limit: 6
+              used: 1
             downloaded:
               percentage: percentage
-              limit: limit
-              used: used
+              limit: 6
+              used: 1
             storage_used:
               percentage: percentage
-              limit: limit
-              peak: peak
-              used: used
+              limit: 5
+              peak: 5
+              used: 2
           end: 2000-01-23T04:56:07.000+00:00
           plan: plan
         - display:
@@ -24863,17 +24923,17 @@ components:
           raw:
             uploaded:
               percentage: percentage
-              limit: limit
-              used: used
+              limit: 6
+              used: 1
             downloaded:
               percentage: percentage
-              limit: limit
-              used: used
+              limit: 6
+              used: 1
             storage_used:
               percentage: percentage
-              limit: limit
-              peak: peak
-              used: used
+              limit: 5
+              peak: 5
+              used: 2
           end: 2000-01-23T04:56:07.000+00:00
           plan: plan
       properties:
@@ -24968,6 +25028,74 @@ components:
       - bandwidth
       - storage
       type: object
+    AllocatedLimitRaw:
+      example:
+        configured: 0
+        percentage_used: percentage_used
+        plan_limit: 6
+        used: 1
+      properties:
+        configured:
+          title: Configured
+          type: integer
+        percentage_used:
+          format: decimal
+          title: Percentage used
+          type: string
+        plan_limit:
+          title: Plan limit
+          type: integer
+        used:
+          title: Used
+          type: integer
+      type: object
+    StorageAllocatedLimitRaw:
+      example:
+        configured: 5
+        percentage_used: percentage_used
+        plan_limit: 2
+        peak: 5
+        used: 7
+      properties:
+        configured:
+          title: Configured
+          type: integer
+        peak:
+          title: Peak
+          type: integer
+        percentage_used:
+          format: decimal
+          title: Percentage used
+          type: string
+        plan_limit:
+          title: Plan limit
+          type: integer
+        used:
+          title: Used
+          type: integer
+      type: object
+    UsageLimitsRaw:
+      example:
+        bandwidth:
+          configured: 0
+          percentage_used: percentage_used
+          plan_limit: 6
+          used: 1
+        storage:
+          configured: 5
+          percentage_used: percentage_used
+          plan_limit: 2
+          peak: 5
+          used: 7
+      properties:
+        bandwidth:
+          $ref: '#/components/schemas/AllocatedLimitRaw'
+        storage:
+          $ref: '#/components/schemas/StorageAllocatedLimitRaw'
+      required:
+      - bandwidth
+      - storage
+      type: object
     UsageFieldset:
       example:
         display:
@@ -24984,21 +25112,21 @@ components:
             used: used
         raw:
           bandwidth:
-            configured: configured
+            configured: 0
             percentage_used: percentage_used
-            plan_limit: plan_limit
-            used: used
+            plan_limit: 6
+            used: 1
           storage:
-            configured: configured
+            configured: 5
             percentage_used: percentage_used
-            plan_limit: plan_limit
-            peak: peak
-            used: used
+            plan_limit: 2
+            peak: 5
+            used: 7
       properties:
         display:
           $ref: '#/components/schemas/UsageLimits'
         raw:
-          $ref: '#/components/schemas/UsageLimits'
+          $ref: '#/components/schemas/UsageLimitsRaw'
       required:
       - display
       - raw
@@ -25020,16 +25148,16 @@ components:
               used: used
           raw:
             bandwidth:
-              configured: configured
+              configured: 0
               percentage_used: percentage_used
-              plan_limit: plan_limit
-              used: used
+              plan_limit: 6
+              used: 1
             storage:
-              configured: configured
+              configured: 5
               percentage_used: percentage_used
-              plan_limit: plan_limit
-              peak: peak
-              used: used
+              plan_limit: 2
+              peak: 5
+              used: 7
       properties:
         usage:
           $ref: '#/components/schemas/UsageFieldset'
@@ -27050,7 +27178,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.206.0
+        version: 1.209.19
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -27060,7 +27188,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.206.0
+          default: 1.209.19
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true

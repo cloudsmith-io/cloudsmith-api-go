@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Action** | Pointer to **int64** |  | [optional] 
+**Action** | Pointer to **NullableString** |  | [optional] [default to "Add"]
 **IsImmutable** | Pointer to **bool** | If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package. | [optional] [default to false]
 **Tags** | Pointer to **[]string** | A list of tags to apply the action to. Not required for clears. | [optional] 
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAction
 
-`func (o *PackageTagRequest) GetAction() int64`
+`func (o *PackageTagRequest) GetAction() string`
 
 GetAction returns the Action field if non-nil, zero value otherwise.
 
 ### GetActionOk
 
-`func (o *PackageTagRequest) GetActionOk() (*int64, bool)`
+`func (o *PackageTagRequest) GetActionOk() (*string, bool)`
 
 GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAction
 
-`func (o *PackageTagRequest) SetAction(v int64)`
+`func (o *PackageTagRequest) SetAction(v string)`
 
 SetAction sets Action field to given value.
 
@@ -52,6 +52,16 @@ SetAction sets Action field to given value.
 
 HasAction returns a boolean if a field has been set.
 
+### SetActionNil
+
+`func (o *PackageTagRequest) SetActionNil(b bool)`
+
+ SetActionNil sets the value for Action to be an explicit nil
+
+### UnsetAction
+`func (o *PackageTagRequest) UnsetAction()`
+
+UnsetAction ensures that no value is present for Action, not even an explicit nil
 ### GetIsImmutable
 
 `func (o *PackageTagRequest) GetIsImmutable() bool`

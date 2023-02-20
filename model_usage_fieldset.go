@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.206.0
+API version: 1.209.19
 Contact: support@cloudsmith.io
 */
 
@@ -17,15 +17,15 @@ import (
 
 // UsageFieldset struct for UsageFieldset
 type UsageFieldset struct {
-	Display UsageLimits `json:"display"`
-	Raw     UsageLimits `json:"raw"`
+	Display UsageLimits    `json:"display"`
+	Raw     UsageLimitsRaw `json:"raw"`
 }
 
 // NewUsageFieldset instantiates a new UsageFieldset object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUsageFieldset(display UsageLimits, raw UsageLimits) *UsageFieldset {
+func NewUsageFieldset(display UsageLimits, raw UsageLimitsRaw) *UsageFieldset {
 	this := UsageFieldset{}
 	this.Display = display
 	this.Raw = raw
@@ -65,9 +65,9 @@ func (o *UsageFieldset) SetDisplay(v UsageLimits) {
 }
 
 // GetRaw returns the Raw field value
-func (o *UsageFieldset) GetRaw() UsageLimits {
+func (o *UsageFieldset) GetRaw() UsageLimitsRaw {
 	if o == nil {
-		var ret UsageLimits
+		var ret UsageLimitsRaw
 		return ret
 	}
 
@@ -76,7 +76,7 @@ func (o *UsageFieldset) GetRaw() UsageLimits {
 
 // GetRawOk returns a tuple with the Raw field value
 // and a boolean to check if the value has been set.
-func (o *UsageFieldset) GetRawOk() (*UsageLimits, bool) {
+func (o *UsageFieldset) GetRawOk() (*UsageLimitsRaw, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -84,7 +84,7 @@ func (o *UsageFieldset) GetRawOk() (*UsageLimits, bool) {
 }
 
 // SetRaw sets field value
-func (o *UsageFieldset) SetRaw(v UsageLimits) {
+func (o *UsageFieldset) SetRaw(v UsageLimitsRaw) {
 	o.Raw = v
 }
 
