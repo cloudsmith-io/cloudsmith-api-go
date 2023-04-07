@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Dependencies** | [**[]PackageDependency**](PackageDependency.md) |  | 
+**Dependencies** | Pointer to **string** |  | [optional] [readonly] 
 
 ## Methods
 
 ### NewPackageDependencies
 
-`func NewPackageDependencies(dependencies []PackageDependency, ) *PackageDependencies`
+`func NewPackageDependencies() *PackageDependencies`
 
 NewPackageDependencies instantiates a new PackageDependencies object
 This constructor will assign default values to properties that have it defined,
@@ -27,23 +27,28 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDependencies
 
-`func (o *PackageDependencies) GetDependencies() []PackageDependency`
+`func (o *PackageDependencies) GetDependencies() string`
 
 GetDependencies returns the Dependencies field if non-nil, zero value otherwise.
 
 ### GetDependenciesOk
 
-`func (o *PackageDependencies) GetDependenciesOk() (*[]PackageDependency, bool)`
+`func (o *PackageDependencies) GetDependenciesOk() (*string, bool)`
 
 GetDependenciesOk returns a tuple with the Dependencies field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDependencies
 
-`func (o *PackageDependencies) SetDependencies(v []PackageDependency)`
+`func (o *PackageDependencies) SetDependencies(v string)`
 
 SetDependencies sets Dependencies field to given value.
 
+### HasDependencies
+
+`func (o *PackageDependencies) HasDependencies() bool`
+
+HasDependencies returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**PackagesCopy**](PackagesApi.md#PackagesCopy) | **Post** /packages/{owner}/{repo}/{identifier}/copy/ | Copy a package to another repository.
 [**PackagesDelete**](PackagesApi.md#PackagesDelete) | **Delete** /packages/{owner}/{repo}/{identifier}/ | Delete a specific package in a repository.
-[**PackagesDependencies**](PackagesApi.md#PackagesDependencies) | **Get** /packages/{owner}/{repo}/{identifier}/dependencies/ | Get the direct (non-transitive) dependencies list for a package.
+[**PackagesDependencies**](PackagesApi.md#PackagesDependencies) | **Get** /packages/{owner}/{repo}/{identifier}/dependencies/ | Get the list of dependencies for a package. Transitive dependencies are included where supported.
 [**PackagesList**](PackagesApi.md#PackagesList) | **Get** /packages/{owner}/{repo}/ | Get a list of all packages associated with repository.
 [**PackagesMove**](PackagesApi.md#PackagesMove) | **Post** /packages/{owner}/{repo}/{identifier}/move/ | Move a package to another repository.
 [**PackagesQuarantine**](PackagesApi.md#PackagesQuarantine) | **Post** /packages/{owner}/{repo}/{identifier}/quarantine/ | Quarantine or restore a package.
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 > PackageDependencies PackagesDependencies(ctx, owner, repo, identifier).Execute()
 
-Get the direct (non-transitive) dependencies list for a package.
+Get the list of dependencies for a package. Transitive dependencies are included where supported.
 
 
 

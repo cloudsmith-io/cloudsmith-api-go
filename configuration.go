@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.209.19
+API version: 1.236.5
 Contact: support@cloudsmith.io
 */
 
@@ -102,7 +102,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "OpenAPI-Generator/0.0.24/go",
+		UserAgent:        "OpenAPI-Generator/0.0.14/go",
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{

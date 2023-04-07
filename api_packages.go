@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.209.19
+API version: 1.236.5
 Contact: support@cloudsmith.io
 */
 
@@ -325,9 +325,9 @@ func (r ApiPackagesDependenciesRequest) Execute() (*PackageDependencies, *http.R
 }
 
 /*
-PackagesDependencies Get the direct (non-transitive) dependencies list for a package.
+PackagesDependencies Get the list of dependencies for a package. Transitive dependencies are included where supported.
 
-Get the direct (non-transitive) dependencies list for a package.
+Get the list of dependencies for a package. Transitive dependencies are included where supported.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
