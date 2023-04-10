@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.209.19
+API version: 1.237.2
 Contact: support@cloudsmith.io
 */
 
@@ -320,14 +320,14 @@ type ApiPackagesDependenciesRequest struct {
 	identifier string
 }
 
-func (r ApiPackagesDependenciesRequest) Execute() (*PackageDependencies, *http.Response, error) {
+func (r ApiPackagesDependenciesRequest) Execute() (*PackageDependenciesSchema, *http.Response, error) {
 	return r.ApiService.PackagesDependenciesExecute(r)
 }
 
 /*
-PackagesDependencies Get the direct (non-transitive) dependencies list for a package.
+PackagesDependencies Get the list of dependencies for a package. Transitive dependencies are included where supported.
 
-Get the direct (non-transitive) dependencies list for a package.
+Get the list of dependencies for a package. Transitive dependencies are included where supported.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
@@ -346,13 +346,13 @@ func (a *PackagesApiService) PackagesDependencies(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return PackageDependencies
-func (a *PackagesApiService) PackagesDependenciesExecute(r ApiPackagesDependenciesRequest) (*PackageDependencies, *http.Response, error) {
+//  @return PackageDependenciesSchema
+func (a *PackagesApiService) PackagesDependenciesExecute(r ApiPackagesDependenciesRequest) (*PackageDependenciesSchema, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageDependencies
+		localVarReturnValue *PackageDependenciesSchema
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesDependencies")

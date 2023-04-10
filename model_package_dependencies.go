@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.209.19
+API version: 1.237.2
 Contact: support@cloudsmith.io
 */
 
@@ -17,16 +17,15 @@ import (
 
 // PackageDependencies struct for PackageDependencies
 type PackageDependencies struct {
-	Dependencies []PackageDependency `json:"dependencies"`
+	Dependencies *string `json:"dependencies,omitempty"`
 }
 
 // NewPackageDependencies instantiates a new PackageDependencies object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPackageDependencies(dependencies []PackageDependency) *PackageDependencies {
+func NewPackageDependencies() *PackageDependencies {
 	this := PackageDependencies{}
-	this.Dependencies = dependencies
 	return &this
 }
 
@@ -38,33 +37,41 @@ func NewPackageDependenciesWithDefaults() *PackageDependencies {
 	return &this
 }
 
-// GetDependencies returns the Dependencies field value
-func (o *PackageDependencies) GetDependencies() []PackageDependency {
-	if o == nil {
-		var ret []PackageDependency
+// GetDependencies returns the Dependencies field value if set, zero value otherwise.
+func (o *PackageDependencies) GetDependencies() string {
+	if o == nil || isNil(o.Dependencies) {
+		var ret string
 		return ret
 	}
-
-	return o.Dependencies
+	return *o.Dependencies
 }
 
-// GetDependenciesOk returns a tuple with the Dependencies field value
+// GetDependenciesOk returns a tuple with the Dependencies field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageDependencies) GetDependenciesOk() ([]PackageDependency, bool) {
-	if o == nil {
+func (o *PackageDependencies) GetDependenciesOk() (*string, bool) {
+	if o == nil || isNil(o.Dependencies) {
 		return nil, false
 	}
 	return o.Dependencies, true
 }
 
-// SetDependencies sets field value
-func (o *PackageDependencies) SetDependencies(v []PackageDependency) {
-	o.Dependencies = v
+// HasDependencies returns a boolean if a field has been set.
+func (o *PackageDependencies) HasDependencies() bool {
+	if o != nil && !isNil(o.Dependencies) {
+		return true
+	}
+
+	return false
+}
+
+// SetDependencies gets a reference to the given string and assigns it to the Dependencies field.
+func (o *PackageDependencies) SetDependencies(v string) {
+	o.Dependencies = &v
 }
 
 func (o PackageDependencies) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if !isNil(o.Dependencies) {
 		toSerialize["dependencies"] = o.Dependencies
 	}
 	return json.Marshal(toSerialize)

@@ -10,6 +10,13 @@ Method | HTTP request | Description
 [**OrgsInvitesList**](OrgsApi.md#OrgsInvitesList) | **Get** /orgs/{org}/invites/ | Get a list of all invites for an organization.
 [**OrgsInvitesPartialUpdate**](OrgsApi.md#OrgsInvitesPartialUpdate) | **Patch** /orgs/{org}/invites/{slug_perm}/ | Update a specific organization invite.
 [**OrgsInvitesResend**](OrgsApi.md#OrgsInvitesResend) | **Post** /orgs/{org}/invites/{slug_perm}/resend/ | Resend an organization invite.
+[**OrgsLicensePolicyCreate**](OrgsApi.md#OrgsLicensePolicyCreate) | **Post** /orgs/{org}/license-policy/ | Create a package license policy.
+[**OrgsLicensePolicyDelete**](OrgsApi.md#OrgsLicensePolicyDelete) | **Delete** /orgs/{org}/license-policy/{slug_perm}/ | Delete a package license policy.
+[**OrgsLicensePolicyList**](OrgsApi.md#OrgsLicensePolicyList) | **Get** /orgs/{org}/license-policy/ | Get a list of all package license policies.
+[**OrgsLicensePolicyPartialUpdate**](OrgsApi.md#OrgsLicensePolicyPartialUpdate) | **Patch** /orgs/{org}/license-policy/{slug_perm}/ | Partially update a package license policy.
+[**OrgsLicensePolicyRead**](OrgsApi.md#OrgsLicensePolicyRead) | **Get** /orgs/{org}/license-policy/{slug_perm}/ | Get a package license policy.
+[**OrgsLicensePolicyUpdate**](OrgsApi.md#OrgsLicensePolicyUpdate) | **Put** /orgs/{org}/license-policy/{slug_perm}/ | Update a package license policy.
+[**OrgsLicensePolicyViolationList**](OrgsApi.md#OrgsLicensePolicyViolationList) | **Get** /orgs/{org}/license-policy-violation/ | List all current license policy violations for this Organization.
 [**OrgsList**](OrgsApi.md#OrgsList) | **Get** /orgs/ | Get a list of all the organizations you are associated with.
 [**OrgsMembersDelete**](OrgsApi.md#OrgsMembersDelete) | **Delete** /orgs/{org}/members/{member}/ | Removes a member from the organization.
 [**OrgsMembersList**](OrgsApi.md#OrgsMembersList) | **Get** /orgs/{org}/members/ | Get the details for all organization members.
@@ -33,6 +40,13 @@ Method | HTTP request | Description
 [**OrgsTeamsMembersUpdate**](OrgsApi.md#OrgsTeamsMembersUpdate) | **Put** /orgs/{org}/teams/{team}/members | Replace all team members.
 [**OrgsTeamsPartialUpdate**](OrgsApi.md#OrgsTeamsPartialUpdate) | **Patch** /orgs/{org}/teams/{team}/ | Update a specific team in a organization.
 [**OrgsTeamsRead**](OrgsApi.md#OrgsTeamsRead) | **Get** /orgs/{org}/teams/{team}/ | Get the details of a specific team within an organization.
+[**OrgsVulnerabilityPolicyCreate**](OrgsApi.md#OrgsVulnerabilityPolicyCreate) | **Post** /orgs/{org}/vulnerability-policy/ | Create a package vulnerability policy.
+[**OrgsVulnerabilityPolicyDelete**](OrgsApi.md#OrgsVulnerabilityPolicyDelete) | **Delete** /orgs/{org}/vulnerability-policy/{slug_perm}/ | Delete a package vulnerability policy.
+[**OrgsVulnerabilityPolicyList**](OrgsApi.md#OrgsVulnerabilityPolicyList) | **Get** /orgs/{org}/vulnerability-policy/ | Get a list of all package vulnerability policies.
+[**OrgsVulnerabilityPolicyPartialUpdate**](OrgsApi.md#OrgsVulnerabilityPolicyPartialUpdate) | **Patch** /orgs/{org}/vulnerability-policy/{slug_perm}/ | Partially update a package vulnerability policy.
+[**OrgsVulnerabilityPolicyRead**](OrgsApi.md#OrgsVulnerabilityPolicyRead) | **Get** /orgs/{org}/vulnerability-policy/{slug_perm}/ | Get a package vulnerability policy.
+[**OrgsVulnerabilityPolicyUpdate**](OrgsApi.md#OrgsVulnerabilityPolicyUpdate) | **Put** /orgs/{org}/vulnerability-policy/{slug_perm}/ | Update a package vulnerability policy.
+[**OrgsVulnerabilityPolicyViolationList**](OrgsApi.md#OrgsVulnerabilityPolicyViolationList) | **Get** /orgs/{org}/vulnerability-policy-violation/ | List all current vulnerability policy violations for this Organization.
 
 
 
@@ -459,6 +473,520 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrganizationInviteExtend**](OrganizationInviteExtend.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsLicensePolicyCreate
+
+> OrganizationPackageLicensePolicy OrgsLicensePolicyCreate(ctx, org).Data(data).Execute()
+
+Create a package license policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    data := *openapiclient.NewOrganizationPackageLicensePolicyRequest("Name_example", []string{"SpdxIdentifiers_example"}) // OrganizationPackageLicensePolicyRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyCreate(context.Background(), org).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsLicensePolicyCreate`: OrganizationPackageLicensePolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsLicensePolicyCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **data** | [**OrganizationPackageLicensePolicyRequest**](OrganizationPackageLicensePolicyRequest.md) |  | 
+
+### Return type
+
+[**OrganizationPackageLicensePolicy**](OrganizationPackageLicensePolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsLicensePolicyDelete
+
+> OrgsLicensePolicyDelete(ctx, org, slugPerm).Execute()
+
+Delete a package license policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyDelete(context.Background(), org, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsLicensePolicyDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsLicensePolicyList
+
+> []OrganizationPackageLicensePolicy OrgsLicensePolicyList(ctx, org).Page(page).PageSize(pageSize).Execute()
+
+Get a list of all package license policies.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsLicensePolicyList`: []OrganizationPackageLicensePolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsLicensePolicyListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]OrganizationPackageLicensePolicy**](OrganizationPackageLicensePolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsLicensePolicyPartialUpdate
+
+> OrganizationPackageLicensePolicy OrgsLicensePolicyPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Partially update a package license policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewOrganizationPackageLicensePolicyRequestPatch() // OrganizationPackageLicensePolicyRequestPatch |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsLicensePolicyPartialUpdate`: OrganizationPackageLicensePolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsLicensePolicyPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**OrganizationPackageLicensePolicyRequestPatch**](OrganizationPackageLicensePolicyRequestPatch.md) |  | 
+
+### Return type
+
+[**OrganizationPackageLicensePolicy**](OrganizationPackageLicensePolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsLicensePolicyRead
+
+> OrganizationPackageLicensePolicy OrgsLicensePolicyRead(ctx, org, slugPerm).Execute()
+
+Get a package license policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyRead(context.Background(), org, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsLicensePolicyRead`: OrganizationPackageLicensePolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsLicensePolicyReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**OrganizationPackageLicensePolicy**](OrganizationPackageLicensePolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsLicensePolicyUpdate
+
+> OrganizationPackageLicensePolicy OrgsLicensePolicyUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Update a package license policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewOrganizationPackageLicensePolicyRequest("Name_example", []string{"SpdxIdentifiers_example"}) // OrganizationPackageLicensePolicyRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsLicensePolicyUpdate`: OrganizationPackageLicensePolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsLicensePolicyUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**OrganizationPackageLicensePolicyRequest**](OrganizationPackageLicensePolicyRequest.md) |  | 
+
+### Return type
+
+[**OrganizationPackageLicensePolicy**](OrganizationPackageLicensePolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsLicensePolicyViolationList
+
+> OrgsLicensePolicyViolationList200Response OrgsLicensePolicyViolationList(ctx, org).Cursor(cursor).PageSize(pageSize).Execute()
+
+List all current license policy violations for this Organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    cursor := "cursor_example" // string | The pagination cursor value. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyViolationList(context.Background(), org).Cursor(cursor).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyViolationList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsLicensePolicyViolationList`: OrgsLicensePolicyViolationList200Response
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyViolationList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsLicensePolicyViolationListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cursor** | **string** | The pagination cursor value. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**OrgsLicensePolicyViolationList200Response**](OrgsLicensePolicyViolationList200Response.md)
 
 ### Authorization
 
@@ -2127,6 +2655,520 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrganizationTeam**](OrganizationTeam.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsVulnerabilityPolicyCreate
+
+> OrganizationPackageVulnerabilityPolicy OrgsVulnerabilityPolicyCreate(ctx, org).Data(data).Execute()
+
+Create a package vulnerability policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    data := *openapiclient.NewOrganizationPackageVulnerabilityPolicyRequest("Name_example") // OrganizationPackageVulnerabilityPolicyRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyCreate(context.Background(), org).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsVulnerabilityPolicyCreate`: OrganizationPackageVulnerabilityPolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsVulnerabilityPolicyCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **data** | [**OrganizationPackageVulnerabilityPolicyRequest**](OrganizationPackageVulnerabilityPolicyRequest.md) |  | 
+
+### Return type
+
+[**OrganizationPackageVulnerabilityPolicy**](OrganizationPackageVulnerabilityPolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsVulnerabilityPolicyDelete
+
+> OrgsVulnerabilityPolicyDelete(ctx, org, slugPerm).Execute()
+
+Delete a package vulnerability policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyDelete(context.Background(), org, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsVulnerabilityPolicyDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsVulnerabilityPolicyList
+
+> []OrganizationPackageVulnerabilityPolicy OrgsVulnerabilityPolicyList(ctx, org).Page(page).PageSize(pageSize).Execute()
+
+Get a list of all package vulnerability policies.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsVulnerabilityPolicyList`: []OrganizationPackageVulnerabilityPolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsVulnerabilityPolicyListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]OrganizationPackageVulnerabilityPolicy**](OrganizationPackageVulnerabilityPolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsVulnerabilityPolicyPartialUpdate
+
+> OrganizationPackageVulnerabilityPolicy OrgsVulnerabilityPolicyPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Partially update a package vulnerability policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewOrganizationPackageVulnerabilityPolicyRequestPatch() // OrganizationPackageVulnerabilityPolicyRequestPatch |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsVulnerabilityPolicyPartialUpdate`: OrganizationPackageVulnerabilityPolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsVulnerabilityPolicyPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**OrganizationPackageVulnerabilityPolicyRequestPatch**](OrganizationPackageVulnerabilityPolicyRequestPatch.md) |  | 
+
+### Return type
+
+[**OrganizationPackageVulnerabilityPolicy**](OrganizationPackageVulnerabilityPolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsVulnerabilityPolicyRead
+
+> OrganizationPackageVulnerabilityPolicy OrgsVulnerabilityPolicyRead(ctx, org, slugPerm).Execute()
+
+Get a package vulnerability policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyRead(context.Background(), org, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsVulnerabilityPolicyRead`: OrganizationPackageVulnerabilityPolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsVulnerabilityPolicyReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**OrganizationPackageVulnerabilityPolicy**](OrganizationPackageVulnerabilityPolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsVulnerabilityPolicyUpdate
+
+> OrganizationPackageVulnerabilityPolicy OrgsVulnerabilityPolicyUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Update a package vulnerability policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewOrganizationPackageVulnerabilityPolicyRequest("Name_example") // OrganizationPackageVulnerabilityPolicyRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsVulnerabilityPolicyUpdate`: OrganizationPackageVulnerabilityPolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsVulnerabilityPolicyUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**OrganizationPackageVulnerabilityPolicyRequest**](OrganizationPackageVulnerabilityPolicyRequest.md) |  | 
+
+### Return type
+
+[**OrganizationPackageVulnerabilityPolicy**](OrganizationPackageVulnerabilityPolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsVulnerabilityPolicyViolationList
+
+> OrgsVulnerabilityPolicyViolationList200Response OrgsVulnerabilityPolicyViolationList(ctx, org).Cursor(cursor).PageSize(pageSize).Execute()
+
+List all current vulnerability policy violations for this Organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    org := "org_example" // string | 
+    cursor := "cursor_example" // string | The pagination cursor value. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyViolationList(context.Background(), org).Cursor(cursor).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyViolationList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsVulnerabilityPolicyViolationList`: OrgsVulnerabilityPolicyViolationList200Response
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyViolationList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsVulnerabilityPolicyViolationListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **cursor** | **string** | The pagination cursor value. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**OrgsVulnerabilityPolicyViolationList200Response**](OrgsVulnerabilityPolicyViolationList200Response.md)
 
 ### Authorization
 

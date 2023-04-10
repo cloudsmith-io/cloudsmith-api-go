@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.209.19
+  version: 1.237.2
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -1819,6 +1819,300 @@ paths:
       summary: Resend an organization invite.
       tags:
       - orgs
+  /orgs/{org}/license-policy-violation/:
+    get:
+      description: List all current license policy violations for this Organization.
+      operationId: orgs_license-policy-violation_list
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - description: The pagination cursor value.
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/orgs_license_policy_violation_list_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: List all current license policy violations for this Organization.
+      tags:
+      - orgs
+  /orgs/{org}/license-policy/:
+    get:
+      description: Get a list of all package license policies.
+      operationId: orgs_license-policy_list
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationPackageLicensePolicy'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Get a list of all package license policies.
+      tags:
+      - orgs
+    post:
+      description: Create a package license policy.
+      operationId: orgs_license-policy_create
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPackageLicensePolicyRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationPackageLicensePolicy'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Create a package license policy.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+  /orgs/{org}/license-policy/{slug_perm}/:
+    delete:
+      description: Delete a package license policy.
+      operationId: orgs_license-policy_delete
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Delete a package license policy.
+      tags:
+      - orgs
+    get:
+      description: Get a package license policy.
+      operationId: orgs_license-policy_read
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationPackageLicensePolicy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Get a package license policy.
+      tags:
+      - orgs
+    patch:
+      description: Partially update a package license policy.
+      operationId: orgs_license-policy_partial_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPackageLicensePolicyRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationPackageLicensePolicy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Partially update a package license policy.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+    put:
+      description: Update a package license policy.
+      operationId: orgs_license-policy_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPackageLicensePolicyRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationPackageLicensePolicy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Update a package license policy.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
   /orgs/{org}/members/:
     get:
       description: Get the details for all organization members.
@@ -2748,6 +3042,300 @@ paths:
       summary: Replace all team members.
       tags:
       - orgs
+  /orgs/{org}/vulnerability-policy-violation/:
+    get:
+      description: List all current vulnerability policy violations for this Organization.
+      operationId: orgs_vulnerability-policy-violation_list
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - description: The pagination cursor value.
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/orgs_vulnerability_policy_violation_list_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: List all current vulnerability policy violations for this Organization.
+      tags:
+      - orgs
+  /orgs/{org}/vulnerability-policy/:
+    get:
+      description: Get a list of all package vulnerability policies.
+      operationId: orgs_vulnerability-policy_list
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationPackageVulnerabilityPolicy'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Get a list of all package vulnerability policies.
+      tags:
+      - orgs
+    post:
+      description: Create a package vulnerability policy.
+      operationId: orgs_vulnerability-policy_create
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPackageVulnerabilityPolicyRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationPackageVulnerabilityPolicy'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Create a package vulnerability policy.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+  /orgs/{org}/vulnerability-policy/{slug_perm}/:
+    delete:
+      description: Delete a package vulnerability policy.
+      operationId: orgs_vulnerability-policy_delete
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Delete a package vulnerability policy.
+      tags:
+      - orgs
+    get:
+      description: Get a package vulnerability policy.
+      operationId: orgs_vulnerability-policy_read
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationPackageVulnerabilityPolicy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Get a package vulnerability policy.
+      tags:
+      - orgs
+    patch:
+      description: Partially update a package vulnerability policy.
+      operationId: orgs_vulnerability-policy_partial_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPackageVulnerabilityPolicyRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationPackageVulnerabilityPolicy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Partially update a package vulnerability policy.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+    put:
+      description: Update a package vulnerability policy.
+      operationId: orgs_vulnerability-policy_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationPackageVulnerabilityPolicyRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationPackageVulnerabilityPolicy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Update a package vulnerability policy.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
   /packages/{owner}/{repo}/:
     get:
       description: Get a list of all packages associated with repository.
@@ -5271,7 +5859,8 @@ paths:
       x-codegen-request-body-name: data
   /packages/{owner}/{repo}/{identifier}/dependencies/:
     get:
-      description: Get the direct (non-transitive) dependencies list for a package.
+      description: Get the list of dependencies for a package. Transitive dependencies
+        are included where supported.
       operationId: packages_dependencies
       parameters:
       - in: path
@@ -5294,8 +5883,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageDependencies'
-          description: Retrieved direct dependencies for specified package.
+                $ref: '#/components/schemas/PackageDependenciesSchema'
+          description: Retrieved stored dependencies for specified package.
         "400":
           content:
             application/json:
@@ -5310,7 +5899,8 @@ paths:
           description: Missing or invalid parameters (see detail).
       security:
       - apikey: []
-      summary: Get the direct (non-transitive) dependencies list for a package.
+      summary: Get the list of dependencies for a package. Transitive dependencies
+        are included where supported.
       tags:
       - packages
   /packages/{owner}/{repo}/{identifier}/move/:
@@ -7996,7 +8586,8 @@ components:
           title: Limit package query
           type: string
         limit_path_query:
-          description: "The path-based search query to apply to restrict downloads\
+          description: "THIS WILL SOON BE DEPRECATED, please use limit_package_query\
+            \ instead. The path-based search query to apply to restrict downloads\
             \ to. This supports boolean logic operators such as OR/AND/NOT and parentheses\
             \ for grouping. The path evaluated does not include the domain name, the\
             \ namespace, the entitlement code used, the package format, etc. and it\
@@ -8195,7 +8786,8 @@ components:
           title: Limit package query
           type: string
         limit_path_query:
-          description: "The path-based search query to apply to restrict downloads\
+          description: "THIS WILL SOON BE DEPRECATED, please use limit_package_query\
+            \ instead. The path-based search query to apply to restrict downloads\
             \ to. This supports boolean logic operators such as OR/AND/NOT and parentheses\
             \ for grouping. The path evaluated does not include the domain name, the\
             \ namespace, the entitlement code used, the package format, etc. and it\
@@ -8441,7 +9033,8 @@ components:
           title: Limit package query
           type: string
         limit_path_query:
-          description: "The path-based search query to apply to restrict downloads\
+          description: "THIS WILL SOON BE DEPRECATED, please use limit_package_query\
+            \ instead. The path-based search query to apply to restrict downloads\
             \ to. This supports boolean logic operators such as OR/AND/NOT and parentheses\
             \ for grouping. The path evaluated does not include the domain name, the\
             \ namespace, the entitlement code used, the package format, etc. and it\
@@ -8581,7 +9174,8 @@ components:
           title: Limit package query
           type: string
         limit_path_query:
-          description: "The path-based search query to apply to restrict downloads\
+          description: "THIS WILL SOON BE DEPRECATED, please use limit_package_query\
+            \ instead. The path-based search query to apply to restrict downloads\
             \ to. This supports boolean logic operators such as OR/AND/NOT and parentheses\
             \ for grouping. The path evaluated does not include the domain name, the\
             \ namespace, the entitlement code used, the package format, etc. and it\
@@ -8808,7 +9402,8 @@ components:
           title: Limit package query
           type: string
         limit_path_query:
-          description: "The path-based search query to apply to restrict downloads\
+          description: "THIS WILL SOON BE DEPRECATED, please use limit_package_query\
+            \ instead. The path-based search query to apply to restrict downloads\
             \ to. This supports boolean logic operators such as OR/AND/NOT and parentheses\
             \ for grouping. The path evaluated does not include the domain name, the\
             \ namespace, the entitlement code used, the package format, etc. and it\
@@ -9657,6 +10252,268 @@ components:
           title: User url
           type: string
       type: object
+    PackageVulnerability:
+      example:
+        identifier: identifier
+        name: name
+        version: version
+        url: https://openapi-generator.tech
+      properties:
+        identifier:
+          minLength: 1
+          title: Identifier
+          type: string
+        name:
+          description: The name of this package.
+          nullable: true
+          readOnly: true
+          title: Name
+          type: string
+        url:
+          format: uri
+          readOnly: true
+          title: Url
+          type: string
+        version:
+          description: The raw version for this package.
+          nullable: true
+          readOnly: true
+          title: Version
+          type: string
+      required:
+      - identifier
+      type: object
+    NestedLicensePolicy:
+      example:
+        spdx_identifiers:
+        - spdx_identifiers
+        - spdx_identifiers
+        allow_unknown_licenses: true
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: description
+        on_violation_quarantine: true
+        slug_perm: slug_perm
+        url: https://openapi-generator.tech
+      properties:
+        allow_unknown_licenses:
+          readOnly: true
+          title: Allow unknown licenses
+          type: boolean
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        description:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Description
+          type: string
+        name:
+          minLength: 1
+          readOnly: true
+          title: Name
+          type: string
+        on_violation_quarantine:
+          readOnly: true
+          title: On violation quarantine
+          type: boolean
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        spdx_identifiers:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+        url:
+          format: uri
+          readOnly: true
+          title: Url
+          type: string
+      required:
+      - spdx_identifiers
+      type: object
+    PackageLicensePolicyViolationLog:
+      example:
+        package:
+          identifier: identifier
+          name: name
+          version: version
+          url: https://openapi-generator.tech
+        reasons:
+        - reasons
+        - reasons
+        event_at: 2000-01-23T04:56:07.000+00:00
+        policy:
+          spdx_identifiers:
+          - spdx_identifiers
+          - spdx_identifiers
+          allow_unknown_licenses: true
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          on_violation_quarantine: true
+          slug_perm: slug_perm
+          url: https://openapi-generator.tech
+      properties:
+        event_at:
+          format: date-time
+          readOnly: true
+          title: Event at
+          type: string
+        package:
+          $ref: '#/components/schemas/PackageVulnerability'
+        policy:
+          $ref: '#/components/schemas/NestedLicensePolicy'
+        reasons:
+          items:
+            minLength: 1
+            type: string
+          type: array
+      required:
+      - package
+      - policy
+      - reasons
+      type: object
+    OrganizationPackageLicensePolicy:
+      example:
+        spdx_identifiers:
+        - spdx_identifiers
+        - spdx_identifiers
+        allow_unknown_licenses: true
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: description
+        on_violation_quarantine: true
+        slug_perm: slug_perm
+      properties:
+        allow_unknown_licenses:
+          title: Allow unknown licenses
+          type: boolean
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        description:
+          maxLength: 250
+          minLength: 1
+          nullable: true
+          title: Description
+          type: string
+        name:
+          maxLength: 100
+          minLength: 1
+          title: Name
+          type: string
+        on_violation_quarantine:
+          title: On violation quarantine
+          type: boolean
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        spdx_identifiers:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+      required:
+      - name
+      - spdx_identifiers
+      type: object
+    OrganizationPackageLicensePolicyRequest:
+      example:
+        spdx_identifiers:
+        - spdx_identifiers
+        - spdx_identifiers
+        allow_unknown_licenses: true
+        name: name
+        description: description
+        on_violation_quarantine: true
+      properties:
+        allow_unknown_licenses:
+          title: Allow unknown licenses
+          type: boolean
+        description:
+          maxLength: 250
+          minLength: 1
+          nullable: true
+          title: Description
+          type: string
+        name:
+          maxLength: 100
+          minLength: 1
+          title: Name
+          type: string
+        on_violation_quarantine:
+          title: On violation quarantine
+          type: boolean
+        spdx_identifiers:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      required:
+      - name
+      - spdx_identifiers
+      type: object
+    OrganizationPackageLicensePolicyRequestPatch:
+      example:
+        spdx_identifiers:
+        - spdx_identifiers
+        - spdx_identifiers
+        allow_unknown_licenses: true
+        name: name
+        description: description
+        on_violation_quarantine: true
+      properties:
+        allow_unknown_licenses:
+          title: Allow unknown licenses
+          type: boolean
+        description:
+          maxLength: 250
+          minLength: 1
+          nullable: true
+          title: Description
+          type: string
+        name:
+          maxLength: 100
+          minLength: 1
+          title: Name
+          type: string
+        on_violation_quarantine:
+          title: On violation quarantine
+          type: boolean
+        spdx_identifiers:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
     OrganizationMembership:
       example:
         joined_at: 2000-01-23T04:56:07.000+00:00
@@ -10108,6 +10965,308 @@ components:
           type: array
       required:
       - members
+      type: object
+    NestedVulnerabilityPolicy:
+      example:
+        allow_unknown_severity: true
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: description
+        on_violation_quarantine: true
+        min_severity: Critical
+        slug_perm: slug_perm
+        url: https://openapi-generator.tech
+      properties:
+        allow_unknown_severity:
+          description: Denotes whether vulnerabilities detected by a security scan
+            with an unknown severity are permitted by this policy.
+          readOnly: true
+          title: Allow unknown severity
+          type: boolean
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        description:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Description
+          type: string
+        min_severity:
+          default: Critical
+          enum:
+          - Low
+          - Medium
+          - High
+          - Critical
+          title: Min severity
+          type: string
+        name:
+          minLength: 1
+          readOnly: true
+          title: Name
+          type: string
+        on_violation_quarantine:
+          readOnly: true
+          title: On violation quarantine
+          type: boolean
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+        url:
+          format: uri
+          readOnly: true
+          title: Url
+          type: string
+      type: object
+    NestedVulnerabilityScanResults:
+      example:
+        identifier: identifier
+        max_severity: Unknown
+        has_vulnerabilities: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        num_vulnerabilities: 0
+        scan_id: 6
+        url: https://openapi-generator.tech
+      properties:
+        created_at:
+          description: The time this scan result was stored.
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        has_vulnerabilities:
+          description: Do the results contain any known vulnerabilities?
+          readOnly: true
+          title: Has vulnerabilities
+          type: boolean
+        identifier:
+          minLength: 1
+          title: Identifier
+          type: string
+        max_severity:
+          default: Unknown
+          enum:
+          - Unknown
+          - Low
+          - Medium
+          - High
+          - Critical
+          title: Max severity
+          type: string
+        num_vulnerabilities:
+          title: Num vulnerabilities
+          type: integer
+        scan_id:
+          title: Scan id
+          type: integer
+        url:
+          format: uri
+          readOnly: true
+          title: Url
+          type: string
+      required:
+      - identifier
+      - scan_id
+      type: object
+    PackageVulnerabilityPolicyViolationLog:
+      example:
+        package:
+          identifier: identifier
+          name: name
+          version: version
+          url: https://openapi-generator.tech
+        reasons:
+        - reasons
+        - reasons
+        event_at: 2000-01-23T04:56:07.000+00:00
+        vulnerability_scan_results:
+          identifier: identifier
+          max_severity: Unknown
+          has_vulnerabilities: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          num_vulnerabilities: 0
+          scan_id: 6
+          url: https://openapi-generator.tech
+        policy:
+          allow_unknown_severity: true
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          name: name
+          created_at: 2000-01-23T04:56:07.000+00:00
+          description: description
+          on_violation_quarantine: true
+          min_severity: Critical
+          slug_perm: slug_perm
+          url: https://openapi-generator.tech
+      properties:
+        event_at:
+          format: date-time
+          readOnly: true
+          title: Event at
+          type: string
+        package:
+          $ref: '#/components/schemas/PackageVulnerability'
+        policy:
+          $ref: '#/components/schemas/NestedVulnerabilityPolicy'
+        reasons:
+          items:
+            minLength: 1
+            type: string
+          type: array
+        vulnerability_scan_results:
+          $ref: '#/components/schemas/NestedVulnerabilityScanResults'
+      required:
+      - package
+      - policy
+      - reasons
+      - vulnerability_scan_results
+      type: object
+    OrganizationPackageVulnerabilityPolicy:
+      example:
+        allow_unknown_severity: true
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: description
+        on_violation_quarantine: true
+        min_severity: Critical
+        slug_perm: slug_perm
+      properties:
+        allow_unknown_severity:
+          description: Denotes whether vulnerabilities detected by a security scan
+            with an unknown severity are permitted by this policy.
+          title: Allow unknown severity
+          type: boolean
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        description:
+          maxLength: 250
+          minLength: 1
+          nullable: true
+          title: Description
+          type: string
+        min_severity:
+          default: Critical
+          enum:
+          - Low
+          - Medium
+          - High
+          - Critical
+          title: Min severity
+          type: string
+        name:
+          maxLength: 100
+          minLength: 1
+          title: Name
+          type: string
+        on_violation_quarantine:
+          title: On violation quarantine
+          type: boolean
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+      required:
+      - name
+      type: object
+    OrganizationPackageVulnerabilityPolicyRequest:
+      example:
+        allow_unknown_severity: true
+        name: name
+        description: description
+        on_violation_quarantine: true
+        min_severity: Critical
+      properties:
+        allow_unknown_severity:
+          description: Denotes whether vulnerabilities detected by a security scan
+            with an unknown severity are permitted by this policy.
+          title: Allow unknown severity
+          type: boolean
+        description:
+          maxLength: 250
+          minLength: 1
+          nullable: true
+          title: Description
+          type: string
+        min_severity:
+          default: Critical
+          enum:
+          - Low
+          - Medium
+          - High
+          - Critical
+          title: Min severity
+          type: string
+        name:
+          maxLength: 100
+          minLength: 1
+          title: Name
+          type: string
+        on_violation_quarantine:
+          title: On violation quarantine
+          type: boolean
+      required:
+      - name
+      type: object
+    OrganizationPackageVulnerabilityPolicyRequestPatch:
+      example:
+        allow_unknown_severity: true
+        name: name
+        description: description
+        on_violation_quarantine: true
+        min_severity: Critical
+      properties:
+        allow_unknown_severity:
+          description: Denotes whether vulnerabilities detected by a security scan
+            with an unknown severity are permitted by this policy.
+          title: Allow unknown severity
+          type: boolean
+        description:
+          maxLength: 250
+          minLength: 1
+          nullable: true
+          title: Description
+          type: string
+        min_severity:
+          default: Critical
+          enum:
+          - Low
+          - Medium
+          - High
+          - Critical
+          title: Min severity
+          type: string
+        name:
+          maxLength: 100
+          minLength: 1
+          title: Name
+          type: string
+        on_violation_quarantine:
+          title: On violation quarantine
+          type: boolean
       type: object
     Architecture:
       example:
@@ -22728,7 +23887,7 @@ components:
       required:
       - name
       type: object
-    PackageDependencies:
+    PackageDependenciesSchema:
       example:
         dependencies:
         - dep_type: Depends
@@ -22746,6 +23905,13 @@ components:
           type: array
       required:
       - dependencies
+      type: object
+    PackageDependencies:
+      properties:
+        dependencies:
+          readOnly: true
+          title: Dependencies
+          type: string
       type: object
     PackageMoveRequest:
       example:
@@ -27178,7 +28344,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.209.19
+        version: 1.237.2
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -27188,7 +28354,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.209.19
+          default: 1.237.2
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -27360,37 +28526,6 @@ components:
       required:
       - first_name
       - last_name
-      type: object
-    PackageVulnerability:
-      example:
-        identifier: identifier
-        name: name
-        version: version
-        url: https://openapi-generator.tech
-      properties:
-        identifier:
-          minLength: 1
-          title: Identifier
-          type: string
-        name:
-          description: The name of this package.
-          nullable: true
-          readOnly: true
-          title: Name
-          type: string
-        url:
-          format: uri
-          readOnly: true
-          title: Url
-          type: string
-        version:
-          description: The raw version for this package.
-          nullable: true
-          readOnly: true
-          title: Version
-          type: string
-      required:
-      - identifier
       type: object
     VulnerabilityScanResultsList:
       example:
@@ -28181,6 +29316,144 @@ components:
             \ attacks."
           title: Verify SSL Certificates
           type: boolean
+      type: object
+    orgs_license_policy_violation_list_200_response:
+      example:
+        next: https://openapi-generator.tech
+        previous: https://openapi-generator.tech
+        results:
+        - package:
+            identifier: identifier
+            name: name
+            version: version
+            url: https://openapi-generator.tech
+          reasons:
+          - reasons
+          - reasons
+          event_at: 2000-01-23T04:56:07.000+00:00
+          policy:
+            spdx_identifiers:
+            - spdx_identifiers
+            - spdx_identifiers
+            allow_unknown_licenses: true
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            on_violation_quarantine: true
+            slug_perm: slug_perm
+            url: https://openapi-generator.tech
+        - package:
+            identifier: identifier
+            name: name
+            version: version
+            url: https://openapi-generator.tech
+          reasons:
+          - reasons
+          - reasons
+          event_at: 2000-01-23T04:56:07.000+00:00
+          policy:
+            spdx_identifiers:
+            - spdx_identifiers
+            - spdx_identifiers
+            allow_unknown_licenses: true
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            on_violation_quarantine: true
+            slug_perm: slug_perm
+            url: https://openapi-generator.tech
+      properties:
+        next:
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PackageLicensePolicyViolationLog'
+          type: array
+      required:
+      - results
+      type: object
+    orgs_vulnerability_policy_violation_list_200_response:
+      example:
+        next: https://openapi-generator.tech
+        previous: https://openapi-generator.tech
+        results:
+        - package:
+            identifier: identifier
+            name: name
+            version: version
+            url: https://openapi-generator.tech
+          reasons:
+          - reasons
+          - reasons
+          event_at: 2000-01-23T04:56:07.000+00:00
+          vulnerability_scan_results:
+            identifier: identifier
+            max_severity: Unknown
+            has_vulnerabilities: true
+            created_at: 2000-01-23T04:56:07.000+00:00
+            num_vulnerabilities: 0
+            scan_id: 6
+            url: https://openapi-generator.tech
+          policy:
+            allow_unknown_severity: true
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            on_violation_quarantine: true
+            min_severity: Critical
+            slug_perm: slug_perm
+            url: https://openapi-generator.tech
+        - package:
+            identifier: identifier
+            name: name
+            version: version
+            url: https://openapi-generator.tech
+          reasons:
+          - reasons
+          - reasons
+          event_at: 2000-01-23T04:56:07.000+00:00
+          vulnerability_scan_results:
+            identifier: identifier
+            max_severity: Unknown
+            has_vulnerabilities: true
+            created_at: 2000-01-23T04:56:07.000+00:00
+            num_vulnerabilities: 0
+            scan_id: 6
+            url: https://openapi-generator.tech
+          policy:
+            allow_unknown_severity: true
+            updated_at: 2000-01-23T04:56:07.000+00:00
+            name: name
+            created_at: 2000-01-23T04:56:07.000+00:00
+            description: description
+            on_violation_quarantine: true
+            min_severity: Critical
+            slug_perm: slug_perm
+            url: https://openapi-generator.tech
+      properties:
+        next:
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PackageVulnerabilityPolicyViolationLog'
+          type: array
+      required:
+      - results
       type: object
     RepositoryGeoIpCountryCodeRules:
       example:
