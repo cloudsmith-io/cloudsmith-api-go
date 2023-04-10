@@ -117,6 +117,8 @@ docs/Package.md
 docs/PackageCopy.md
 docs/PackageCopyRequest.md
 docs/PackageDependencies.md
+docs/PackageDependenciesSchema.md
+docs/PackageDependency.md
 docs/PackageFile.md
 docs/PackageFilePartsUpload.md
 docs/PackageFileUpload.md
@@ -302,6 +304,8 @@ model_package.go
 model_package_copy.go
 model_package_copy_request.go
 model_package_dependencies.go
+model_package_dependencies_schema.go
+model_package_dependency.go
 model_package_file.go
 model_package_file_parts_upload.go
 model_package_file_upload.go

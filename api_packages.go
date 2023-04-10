@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.236.5
+API version: 1.237.2
 Contact: support@cloudsmith.io
 */
 
@@ -320,7 +320,7 @@ type ApiPackagesDependenciesRequest struct {
 	identifier string
 }
 
-func (r ApiPackagesDependenciesRequest) Execute() (*PackageDependencies, *http.Response, error) {
+func (r ApiPackagesDependenciesRequest) Execute() (*PackageDependenciesSchema, *http.Response, error) {
 	return r.ApiService.PackagesDependenciesExecute(r)
 }
 
@@ -346,13 +346,13 @@ func (a *PackagesApiService) PackagesDependencies(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return PackageDependencies
-func (a *PackagesApiService) PackagesDependenciesExecute(r ApiPackagesDependenciesRequest) (*PackageDependencies, *http.Response, error) {
+//  @return PackageDependenciesSchema
+func (a *PackagesApiService) PackagesDependenciesExecute(r ApiPackagesDependenciesRequest) (*PackageDependenciesSchema, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *PackageDependencies
+		localVarReturnValue *PackageDependenciesSchema
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesDependencies")

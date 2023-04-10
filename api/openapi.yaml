@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.236.5
+  version: 1.237.2
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -5883,7 +5883,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageDependencies'
+                $ref: '#/components/schemas/PackageDependenciesSchema'
           description: Retrieved stored dependencies for specified package.
         "400":
           content:
@@ -23817,9 +23817,96 @@ components:
           title: Vulnerability scan results url
           type: string
       type: object
-    PackageDependencies:
+    PackageDependency:
       example:
-        dependencies: dependencies
+        dep_type: Depends
+        name: name
+        version: version
+        operator: =
+      properties:
+        dep_type:
+          default: Depends
+          enum:
+          - Depends
+          - Pre-Depends
+          - Recommends
+          - Suggests
+          - Enhances
+          - Replaces
+          - Breaks
+          - Built-Using
+          - Build-Depends
+          - Build-Depends-Indep
+          - Build-Conflicts
+          - Build-Conflicts-Indep
+          - Conflicts
+          - Provides
+          - Obsoletes
+          - Requires
+          - Runtime
+          - Development
+          - Compile
+          - Provided
+          - Test
+          - System
+          - Import
+          - Excluded
+          readOnly: true
+          title: Dep type
+          type: string
+        name:
+          description: The name of the package dependency.
+          maxLength: 255
+          minLength: 1
+          title: Name
+          type: string
+        operator:
+          default: =
+          enum:
+          - =
+          - '!='
+          - <
+          - <<
+          - <=
+          - '>'
+          - '>>'
+          - '>='
+          - "~="
+          - "~>"
+          - matches
+          nullable: true
+          readOnly: true
+          title: Operator
+          type: string
+        version:
+          description: The raw dependency version (if any).
+          maxLength: 128
+          nullable: true
+          title: Version
+          type: string
+      required:
+      - name
+      type: object
+    PackageDependenciesSchema:
+      example:
+        dependencies:
+        - dep_type: Depends
+          name: name
+          version: version
+          operator: =
+        - dep_type: Depends
+          name: name
+          version: version
+          operator: =
+      properties:
+        dependencies:
+          items:
+            $ref: '#/components/schemas/PackageDependency'
+          type: array
+      required:
+      - dependencies
+      type: object
+    PackageDependencies:
       properties:
         dependencies:
           readOnly: true
@@ -28257,7 +28344,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.236.5
+        version: 1.237.2
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -28267,7 +28354,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.236.5
+          default: 1.237.2
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true

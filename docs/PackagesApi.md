@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 
 ## PackagesDependencies
 
-> PackageDependencies PackagesDependencies(ctx, owner, repo, identifier).Execute()
+> PackageDependenciesSchema PackagesDependencies(ctx, owner, repo, identifier).Execute()
 
 Get the list of dependencies for a package. Transitive dependencies are included where supported.
 
@@ -248,7 +248,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesDependencies``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PackagesDependencies`: PackageDependencies
+    // response from `PackagesDependencies`: PackageDependenciesSchema
     fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesDependencies`: %v\n", resp)
 }
 ```
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PackageDependencies**](PackageDependencies.md)
+[**PackageDependenciesSchema**](PackageDependenciesSchema.md)
 
 ### Authorization
 
