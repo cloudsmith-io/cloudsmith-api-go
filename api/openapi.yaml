@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.237.2
+  version: 1.247.7
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -5883,7 +5883,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageDependenciesSchema'
+                $ref: '#/components/schemas/PackageDependencies'
           description: Retrieved stored dependencies for specified package.
         "400":
           content:
@@ -6630,7 +6630,7 @@ paths:
       x-codegen-request-body-name: data
   /repos/{owner}/{identifier}/geoip:
     get:
-      description: List all created GeoIP rules for the repository.
+      description: List all repository geoip rules.
       operationId: repos_geoip_read
       parameters:
       - in: path
@@ -6648,7 +6648,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryGeoIpRules'
+                $ref: '#/components/schemas/RepositoryGeoIPRules'
           description: OK
         "402":
           content:
@@ -6676,11 +6676,11 @@ paths:
           description: Missing or invalid parameters (see detail).
       security:
       - apikey: []
-      summary: List all created GeoIP rules for the repository.
+      summary: List all repository geoip rules.
       tags:
       - repos
     patch:
-      description: Partially update existing repository geoip rules with those specified
+      description: Partially update repository geoip rules.
       operationId: repos_geoip_partial_update
       parameters:
       - in: path
@@ -6697,14 +6697,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RepositoryGeoIpRules'
+              $ref: '#/components/schemas/RepositoryGeoIPRulesRequestPatch'
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryGeoIpRules'
+                $ref: '#/components/schemas/RepositoryGeoIPRules'
           description: OK
         "402":
           content:
@@ -6732,12 +6732,12 @@ paths:
           description: Missing or invalid parameters (see detail).
       security:
       - apikey: []
-      summary: Partially update existing repository geoip rules with those specified
+      summary: Partially update repository geoip rules.
       tags:
       - repos
       x-codegen-request-body-name: data
     put:
-      description: Replace all existing repository geoip rules with those specified
+      description: Replace repository geoip rules.
       operationId: repos_geoip_update
       parameters:
       - in: path
@@ -6754,12 +6754,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RepositoryGeoIpRules'
+              $ref: '#/components/schemas/RepositoryGeoIPRulesRequest'
         required: false
       responses:
-        "204":
-          content: {}
-          description: Repository GeoIP rules have been replaced
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryGeoIPRules'
+          description: OK
         "402":
           content:
             application/json:
@@ -6786,7 +6789,7 @@ paths:
           description: Missing or invalid parameters (see detail).
       security:
       - apikey: []
-      summary: Replace all existing repository geoip rules with those specified
+      summary: Replace repository geoip rules.
       tags:
       - repos
       x-codegen-request-body-name: data
@@ -23887,7 +23890,7 @@ components:
       required:
       - name
       type: object
-    PackageDependenciesSchema:
+    PackageDependencies:
       example:
         dependencies:
         - dep_type: Depends
@@ -23902,16 +23905,8 @@ components:
         dependencies:
           items:
             $ref: '#/components/schemas/PackageDependency'
-          type: array
-      required:
-      - dependencies
-      type: object
-    PackageDependencies:
-      properties:
-        dependencies:
           readOnly: true
-          title: Dependencies
-          type: string
+          type: array
       type: object
     PackageMoveRequest:
       example:
@@ -26677,7 +26672,7 @@ components:
           description: A descriptive name for the repository.
           maxLength: 50
           minLength: 1
-          pattern: "^\\w[\\w \\-'\\.\\/]+$"
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
           title: Name
           type: string
         namespace:
@@ -27090,7 +27085,7 @@ components:
           description: A descriptive name for the repository.
           maxLength: 50
           minLength: 1
-          pattern: "^\\w[\\w \\-'\\.\\/]+$"
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
           title: Name
           type: string
         proxy_npmjs:
@@ -27500,7 +27495,7 @@ components:
           description: A descriptive name for the repository.
           maxLength: 50
           minLength: 1
-          pattern: "^\\w[\\w \\-'\\.\\/]+$"
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
           title: Name
           type: string
         namespace:
@@ -27911,7 +27906,7 @@ components:
           description: A descriptive name for the repository.
           maxLength: 50
           minLength: 1
-          pattern: "^\\w[\\w \\-'\\.\\/]+$"
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
           title: Name
           type: string
         proxy_npmjs:
@@ -28081,18 +28076,131 @@ components:
           title: View statistics
           type: string
       type: object
-    RepositoryGeoIPList:
+    RepositoryGeoIPCidr:
+      example:
+        allow:
+        - allow
+        - allow
+        deny:
+        - deny
+        - deny
+      properties:
+        allow:
+          description: The allowed CIDRs for this repository
+          items:
+            description: The allowed CIDRs for this repository
+            type: string
+          type: array
+          uniqueItems: true
+        deny:
+          description: The denied CIDRs for this repository
+          items:
+            description: The denied CIDRs for this repository
+            type: string
+          type: array
+          uniqueItems: true
+      required:
+      - allow
+      - deny
+      type: object
+    RepositoryGeoIPCountryCode:
+      example:
+        allow:
+        - allow
+        - allow
+        deny:
+        - deny
+        - deny
+      properties:
+        allow:
+          description: The allowed country codes for this repository
+          items:
+            description: The allowed country codes for this repository
+            type: string
+          type: array
+          uniqueItems: true
+        deny:
+          description: The denied country codes for this repository
+          items:
+            description: The denied country codes for this repository
+            type: string
+          type: array
+          uniqueItems: true
+      required:
+      - allow
+      - deny
+      type: object
+    RepositoryGeoIPRules:
+      example:
+        country_code:
+          allow:
+          - allow
+          - allow
+          deny:
+          - deny
+          - deny
+        cidr:
+          allow:
+          - allow
+          - allow
+          deny:
+          - deny
+          - deny
       properties:
         cidr:
-          description: List all CIDR geographic rules within the repository
-          readOnly: true
-          title: Cidr
-          type: string
+          $ref: '#/components/schemas/RepositoryGeoIPCidr'
         country_code:
-          description: List all GeoIP geographic rules within the repository
-          readOnly: true
-          title: Country code
-          type: string
+          $ref: '#/components/schemas/RepositoryGeoIPCountryCode'
+      required:
+      - cidr
+      - country_code
+      type: object
+    RepositoryGeoIPRulesRequest:
+      example:
+        country_code:
+          allow:
+          - allow
+          - allow
+          deny:
+          - deny
+          - deny
+        cidr:
+          allow:
+          - allow
+          - allow
+          deny:
+          - deny
+          - deny
+      properties:
+        cidr:
+          $ref: '#/components/schemas/RepositoryGeoIPCidr'
+        country_code:
+          $ref: '#/components/schemas/RepositoryGeoIPCountryCode'
+      required:
+      - cidr
+      - country_code
+      type: object
+    RepositoryGeoIPRulesRequestPatch:
+      example:
+        country_code:
+          allow:
+          - allow
+          - allow
+          deny:
+          - deny
+          - deny
+        cidr:
+          allow:
+          - allow
+          - allow
+          deny:
+          - deny
+          - deny
+      properties:
+        cidr:
+          $ref: '#/components/schemas/RepositoryGeoIPCidr'
+        country_code:
+          $ref: '#/components/schemas/RepositoryGeoIPCountryCode'
       type: object
     RespositoryGeoIPEnableDisableRequest:
       type: object
@@ -28344,7 +28452,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.237.2
+        version: 1.247.7
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -28354,7 +28462,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.237.2
+          default: 1.247.7
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -29454,67 +29562,6 @@ components:
           type: array
       required:
       - results
-      type: object
-    RepositoryGeoIpCountryCodeRules:
-      example:
-        allow:
-        - allow
-        - allow
-        deny:
-        - deny
-        - deny
-      properties:
-        allow:
-          items:
-            type: string
-          type: array
-        deny:
-          items:
-            type: string
-          type: array
-      title: RepositoryGeoIpCountryCodeRules
-      type: object
-    RepositoryGeoIpCidrRules:
-      example:
-        allow:
-        - allow
-        - allow
-        deny:
-        - deny
-        - deny
-      properties:
-        allow:
-          items:
-            type: string
-          type: array
-        deny:
-          items:
-            type: string
-          type: array
-      title: RepositoryGeoIpCidrRules
-      type: object
-    RepositoryGeoIpRules:
-      example:
-        country_code:
-          allow:
-          - allow
-          - allow
-          deny:
-          - deny
-          - deny
-        cidr:
-          allow:
-          - allow
-          - allow
-          deny:
-          - deny
-          - deny
-      properties:
-        country_code:
-          $ref: '#/components/schemas/RepositoryGeoIpCountryCodeRules'
-        cidr:
-          $ref: '#/components/schemas/RepositoryGeoIpCidrRules'
-      title: RepositoryGeoIpRules
       type: object
   securitySchemes:
     apikey:

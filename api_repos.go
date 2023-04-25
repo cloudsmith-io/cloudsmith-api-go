@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.237.2
+API version: 1.247.7
 Contact: support@cloudsmith.io
 */
 
@@ -649,22 +649,22 @@ type ApiReposGeoipPartialUpdateRequest struct {
 	ApiService *ReposApiService
 	owner      string
 	identifier string
-	data       *RepositoryGeoIpRules
+	data       *RepositoryGeoIPRulesRequestPatch
 }
 
-func (r ApiReposGeoipPartialUpdateRequest) Data(data RepositoryGeoIpRules) ApiReposGeoipPartialUpdateRequest {
+func (r ApiReposGeoipPartialUpdateRequest) Data(data RepositoryGeoIPRulesRequestPatch) ApiReposGeoipPartialUpdateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiReposGeoipPartialUpdateRequest) Execute() (*RepositoryGeoIpRules, *http.Response, error) {
+func (r ApiReposGeoipPartialUpdateRequest) Execute() (*RepositoryGeoIPRules, *http.Response, error) {
 	return r.ApiService.ReposGeoipPartialUpdateExecute(r)
 }
 
 /*
-ReposGeoipPartialUpdate Partially update existing repository geoip rules with those specified
+ReposGeoipPartialUpdate Partially update repository geoip rules.
 
-Partially update existing repository geoip rules with those specified
+Partially update repository geoip rules.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
@@ -681,13 +681,13 @@ func (a *ReposApiService) ReposGeoipPartialUpdate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIpRules
-func (a *ReposApiService) ReposGeoipPartialUpdateExecute(r ApiReposGeoipPartialUpdateRequest) (*RepositoryGeoIpRules, *http.Response, error) {
+//  @return RepositoryGeoIPRules
+func (a *ReposApiService) ReposGeoipPartialUpdateExecute(r ApiReposGeoipPartialUpdateRequest) (*RepositoryGeoIPRules, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGeoIpRules
+		localVarReturnValue *RepositoryGeoIPRules
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGeoipPartialUpdate")
@@ -823,14 +823,14 @@ type ApiReposGeoipReadRequest struct {
 	identifier string
 }
 
-func (r ApiReposGeoipReadRequest) Execute() (*RepositoryGeoIpRules, *http.Response, error) {
+func (r ApiReposGeoipReadRequest) Execute() (*RepositoryGeoIPRules, *http.Response, error) {
 	return r.ApiService.ReposGeoipReadExecute(r)
 }
 
 /*
-ReposGeoipRead List all created GeoIP rules for the repository.
+ReposGeoipRead List all repository geoip rules.
 
-List all created GeoIP rules for the repository.
+List all repository geoip rules.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
@@ -847,13 +847,13 @@ func (a *ReposApiService) ReposGeoipRead(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIpRules
-func (a *ReposApiService) ReposGeoipReadExecute(r ApiReposGeoipReadRequest) (*RepositoryGeoIpRules, *http.Response, error) {
+//  @return RepositoryGeoIPRules
+func (a *ReposApiService) ReposGeoipReadExecute(r ApiReposGeoipReadRequest) (*RepositoryGeoIPRules, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGeoIpRules
+		localVarReturnValue *RepositoryGeoIPRules
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGeoipRead")
@@ -1157,22 +1157,22 @@ type ApiReposGeoipUpdateRequest struct {
 	ApiService *ReposApiService
 	owner      string
 	identifier string
-	data       *RepositoryGeoIpRules
+	data       *RepositoryGeoIPRulesRequest
 }
 
-func (r ApiReposGeoipUpdateRequest) Data(data RepositoryGeoIpRules) ApiReposGeoipUpdateRequest {
+func (r ApiReposGeoipUpdateRequest) Data(data RepositoryGeoIPRulesRequest) ApiReposGeoipUpdateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiReposGeoipUpdateRequest) Execute() (*http.Response, error) {
+func (r ApiReposGeoipUpdateRequest) Execute() (*RepositoryGeoIPRules, *http.Response, error) {
 	return r.ApiService.ReposGeoipUpdateExecute(r)
 }
 
 /*
-ReposGeoipUpdate Replace all existing repository geoip rules with those specified
+ReposGeoipUpdate Replace repository geoip rules.
 
-Replace all existing repository geoip rules with those specified
+Replace repository geoip rules.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
@@ -1189,16 +1189,18 @@ func (a *ReposApiService) ReposGeoipUpdate(ctx context.Context, owner string, id
 }
 
 // Execute executes the request
-func (a *ReposApiService) ReposGeoipUpdateExecute(r ApiReposGeoipUpdateRequest) (*http.Response, error) {
+//  @return RepositoryGeoIPRules
+func (a *ReposApiService) ReposGeoipUpdateExecute(r ApiReposGeoipUpdateRequest) (*RepositoryGeoIPRules, *http.Response, error) {
 	var (
-		localVarHTTPMethod = http.MethodPut
-		localVarPostBody   interface{}
-		formFiles          []formFile
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RepositoryGeoIPRules
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGeoipUpdate")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/repos/{owner}/{identifier}/geoip"
@@ -1244,19 +1246,19 @@ func (a *ReposApiService) ReposGeoipUpdateExecute(r ApiReposGeoipUpdateRequest) 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1269,48 +1271,57 @@ func (a *ReposApiService) ReposGeoipUpdateExecute(r ApiReposGeoipUpdateRequest) 
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v ErrorDetail
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiReposGpgCreateRequest struct {

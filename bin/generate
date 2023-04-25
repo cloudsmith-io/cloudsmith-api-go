@@ -16,6 +16,12 @@ function swagger_spec {
     echo "$temp_file"
 }
 
+# Delete all .go and .md files.
+# This ensures that stuff which no longer exists in the
+# openapi spec is removed.
+find . -name "*.go" -type f -delete
+find . -name "*.md" -type f -delete
+
 # Generate client library
 API_VERSION="$(api_version)"
 SWAGGER_SPEC="$(swagger_spec "$API_VERSION")"
@@ -58,3 +64,6 @@ sed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_refresh.go
 sed -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_refresh_request.go
 sed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_refresh_request.go
 sed -i 's/ACTION/string/g' model_package_tag_request.go
+
+# Check for compilation errors.
+go build

@@ -8,10 +8,10 @@ Method | HTTP request | Description
 [**ReposDelete**](ReposApi.md#ReposDelete) | **Delete** /repos/{owner}/{identifier}/ | Delete a repository in a given namespace.
 [**ReposGeoipDisable**](ReposApi.md#ReposGeoipDisable) | **Post** /repos/{owner}/{identifier}/geoip/disable/ | Disable GeoIP for this repository.
 [**ReposGeoipEnable**](ReposApi.md#ReposGeoipEnable) | **Post** /repos/{owner}/{identifier}/geoip/enable/ | Enable GeoIP for this repository.
-[**ReposGeoipPartialUpdate**](ReposApi.md#ReposGeoipPartialUpdate) | **Patch** /repos/{owner}/{identifier}/geoip | Partially update existing repository geoip rules with those specified
-[**ReposGeoipRead**](ReposApi.md#ReposGeoipRead) | **Get** /repos/{owner}/{identifier}/geoip | List all created GeoIP rules for the repository.
+[**ReposGeoipPartialUpdate**](ReposApi.md#ReposGeoipPartialUpdate) | **Patch** /repos/{owner}/{identifier}/geoip | Partially update repository geoip rules.
+[**ReposGeoipRead**](ReposApi.md#ReposGeoipRead) | **Get** /repos/{owner}/{identifier}/geoip | List all repository geoip rules.
 [**ReposGeoipTest**](ReposApi.md#ReposGeoipTest) | **Post** /repos/{owner}/{identifier}/geoip/test/ | Test a list of IP addresses against the repository&#39;s current GeoIP rules.
-[**ReposGeoipUpdate**](ReposApi.md#ReposGeoipUpdate) | **Put** /repos/{owner}/{identifier}/geoip | Replace all existing repository geoip rules with those specified
+[**ReposGeoipUpdate**](ReposApi.md#ReposGeoipUpdate) | **Put** /repos/{owner}/{identifier}/geoip | Replace repository geoip rules.
 [**ReposGpgCreate**](ReposApi.md#ReposGpgCreate) | **Post** /repos/{owner}/{identifier}/gpg/ | Set the active GPG key for the Repository.
 [**ReposGpgList**](ReposApi.md#ReposGpgList) | **Get** /repos/{owner}/{identifier}/gpg/ | Retrieve the active GPG key for the Repository.
 [**ReposGpgRegenerate**](ReposApi.md#ReposGpgRegenerate) | **Post** /repos/{owner}/{identifier}/gpg/regenerate/ | Regenerate GPG Key for the Repository.
@@ -319,9 +319,9 @@ Name | Type | Description  | Notes
 
 ## ReposGeoipPartialUpdate
 
-> RepositoryGeoIpRules ReposGeoipPartialUpdate(ctx, owner, identifier).Data(data).Execute()
+> RepositoryGeoIPRules ReposGeoipPartialUpdate(ctx, owner, identifier).Data(data).Execute()
 
-Partially update existing repository geoip rules with those specified
+Partially update repository geoip rules.
 
 
 
@@ -340,7 +340,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryGeoIpRules() // RepositoryGeoIpRules |  (optional)
+    data := *openapiclient.NewRepositoryGeoIPRulesRequestPatch() // RepositoryGeoIPRulesRequestPatch |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -349,7 +349,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposGeoipPartialUpdate`: RepositoryGeoIpRules
+    // response from `ReposGeoipPartialUpdate`: RepositoryGeoIPRules
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipPartialUpdate`: %v\n", resp)
 }
 ```
@@ -372,11 +372,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**RepositoryGeoIpRules**](RepositoryGeoIpRules.md) |  | 
+ **data** | [**RepositoryGeoIPRulesRequestPatch**](RepositoryGeoIPRulesRequestPatch.md) |  | 
 
 ### Return type
 
-[**RepositoryGeoIpRules**](RepositoryGeoIpRules.md)
+[**RepositoryGeoIPRules**](RepositoryGeoIPRules.md)
 
 ### Authorization
 
@@ -394,9 +394,9 @@ Name | Type | Description  | Notes
 
 ## ReposGeoipRead
 
-> RepositoryGeoIpRules ReposGeoipRead(ctx, owner, identifier).Execute()
+> RepositoryGeoIPRules ReposGeoipRead(ctx, owner, identifier).Execute()
 
-List all created GeoIP rules for the repository.
+List all repository geoip rules.
 
 
 
@@ -423,7 +423,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `ReposGeoipRead`: RepositoryGeoIpRules
+    // response from `ReposGeoipRead`: RepositoryGeoIPRules
     fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipRead`: %v\n", resp)
 }
 ```
@@ -449,7 +449,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryGeoIpRules**](RepositoryGeoIpRules.md)
+[**RepositoryGeoIPRules**](RepositoryGeoIPRules.md)
 
 ### Authorization
 
@@ -542,9 +542,9 @@ Name | Type | Description  | Notes
 
 ## ReposGeoipUpdate
 
-> ReposGeoipUpdate(ctx, owner, identifier).Data(data).Execute()
+> RepositoryGeoIPRules ReposGeoipUpdate(ctx, owner, identifier).Data(data).Execute()
 
-Replace all existing repository geoip rules with those specified
+Replace repository geoip rules.
 
 
 
@@ -563,7 +563,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryGeoIpRules() // RepositoryGeoIpRules |  (optional)
+    data := *openapiclient.NewRepositoryGeoIPRulesRequest(*openapiclient.NewRepositoryGeoIPCidr([]string{"Allow_example"}, []string{"Deny_example"}), *openapiclient.NewRepositoryGeoIPCountryCode([]string{"Allow_example"}, []string{"Deny_example"})) // RepositoryGeoIPRulesRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -572,6 +572,8 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
+    // response from `ReposGeoipUpdate`: RepositoryGeoIPRules
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipUpdate`: %v\n", resp)
 }
 ```
 
@@ -593,11 +595,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**RepositoryGeoIpRules**](RepositoryGeoIpRules.md) |  | 
+ **data** | [**RepositoryGeoIPRulesRequest**](RepositoryGeoIPRulesRequest.md) |  | 
 
 ### Return type
 
- (empty response body)
+[**RepositoryGeoIPRules**](RepositoryGeoIPRules.md)
 
 ### Authorization
 

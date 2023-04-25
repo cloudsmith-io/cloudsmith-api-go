@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.237.2
+API version: 1.247.7
 Contact: support@cloudsmith.io
 */
 
@@ -15,136 +15,122 @@ import (
 	"encoding/json"
 )
 
-// RepositoryGeoIpRules struct for RepositoryGeoIpRules
-type RepositoryGeoIpRules struct {
-	CountryCode *RepositoryGeoIpCountryCodeRules `json:"country_code,omitempty"`
-	Cidr        *RepositoryGeoIpCidrRules        `json:"cidr,omitempty"`
+// RepositoryGeoIPRules struct for RepositoryGeoIPRules
+type RepositoryGeoIPRules struct {
+	Cidr        RepositoryGeoIPCidr        `json:"cidr"`
+	CountryCode RepositoryGeoIPCountryCode `json:"country_code"`
 }
 
-// NewRepositoryGeoIpRules instantiates a new RepositoryGeoIpRules object
+// NewRepositoryGeoIPRules instantiates a new RepositoryGeoIPRules object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRepositoryGeoIpRules() *RepositoryGeoIpRules {
-	this := RepositoryGeoIpRules{}
+func NewRepositoryGeoIPRules(cidr RepositoryGeoIPCidr, countryCode RepositoryGeoIPCountryCode) *RepositoryGeoIPRules {
+	this := RepositoryGeoIPRules{}
+	this.Cidr = cidr
+	this.CountryCode = countryCode
 	return &this
 }
 
-// NewRepositoryGeoIpRulesWithDefaults instantiates a new RepositoryGeoIpRules object
+// NewRepositoryGeoIPRulesWithDefaults instantiates a new RepositoryGeoIPRules object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRepositoryGeoIpRulesWithDefaults() *RepositoryGeoIpRules {
-	this := RepositoryGeoIpRules{}
+func NewRepositoryGeoIPRulesWithDefaults() *RepositoryGeoIPRules {
+	this := RepositoryGeoIPRules{}
 	return &this
 }
 
-// GetCountryCode returns the CountryCode field value if set, zero value otherwise.
-func (o *RepositoryGeoIpRules) GetCountryCode() RepositoryGeoIpCountryCodeRules {
-	if o == nil || isNil(o.CountryCode) {
-		var ret RepositoryGeoIpCountryCodeRules
+// GetCidr returns the Cidr field value
+func (o *RepositoryGeoIPRules) GetCidr() RepositoryGeoIPCidr {
+	if o == nil {
+		var ret RepositoryGeoIPCidr
 		return ret
 	}
-	return *o.CountryCode
+
+	return o.Cidr
 }
 
-// GetCountryCodeOk returns a tuple with the CountryCode field value if set, nil otherwise
+// GetCidrOk returns a tuple with the Cidr field value
 // and a boolean to check if the value has been set.
-func (o *RepositoryGeoIpRules) GetCountryCodeOk() (*RepositoryGeoIpCountryCodeRules, bool) {
-	if o == nil || isNil(o.CountryCode) {
+func (o *RepositoryGeoIPRules) GetCidrOk() (*RepositoryGeoIPCidr, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CountryCode, true
+	return &o.Cidr, true
 }
 
-// HasCountryCode returns a boolean if a field has been set.
-func (o *RepositoryGeoIpRules) HasCountryCode() bool {
-	if o != nil && !isNil(o.CountryCode) {
-		return true
-	}
-
-	return false
+// SetCidr sets field value
+func (o *RepositoryGeoIPRules) SetCidr(v RepositoryGeoIPCidr) {
+	o.Cidr = v
 }
 
-// SetCountryCode gets a reference to the given RepositoryGeoIpCountryCodeRules and assigns it to the CountryCode field.
-func (o *RepositoryGeoIpRules) SetCountryCode(v RepositoryGeoIpCountryCodeRules) {
-	o.CountryCode = &v
-}
-
-// GetCidr returns the Cidr field value if set, zero value otherwise.
-func (o *RepositoryGeoIpRules) GetCidr() RepositoryGeoIpCidrRules {
-	if o == nil || isNil(o.Cidr) {
-		var ret RepositoryGeoIpCidrRules
+// GetCountryCode returns the CountryCode field value
+func (o *RepositoryGeoIPRules) GetCountryCode() RepositoryGeoIPCountryCode {
+	if o == nil {
+		var ret RepositoryGeoIPCountryCode
 		return ret
 	}
-	return *o.Cidr
+
+	return o.CountryCode
 }
 
-// GetCidrOk returns a tuple with the Cidr field value if set, nil otherwise
+// GetCountryCodeOk returns a tuple with the CountryCode field value
 // and a boolean to check if the value has been set.
-func (o *RepositoryGeoIpRules) GetCidrOk() (*RepositoryGeoIpCidrRules, bool) {
-	if o == nil || isNil(o.Cidr) {
+func (o *RepositoryGeoIPRules) GetCountryCodeOk() (*RepositoryGeoIPCountryCode, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cidr, true
+	return &o.CountryCode, true
 }
 
-// HasCidr returns a boolean if a field has been set.
-func (o *RepositoryGeoIpRules) HasCidr() bool {
-	if o != nil && !isNil(o.Cidr) {
-		return true
-	}
-
-	return false
+// SetCountryCode sets field value
+func (o *RepositoryGeoIPRules) SetCountryCode(v RepositoryGeoIPCountryCode) {
+	o.CountryCode = v
 }
 
-// SetCidr gets a reference to the given RepositoryGeoIpCidrRules and assigns it to the Cidr field.
-func (o *RepositoryGeoIpRules) SetCidr(v RepositoryGeoIpCidrRules) {
-	o.Cidr = &v
-}
-
-func (o RepositoryGeoIpRules) MarshalJSON() ([]byte, error) {
+func (o RepositoryGeoIPRules) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.CountryCode) {
-		toSerialize["country_code"] = o.CountryCode
-	}
-	if !isNil(o.Cidr) {
+	if true {
 		toSerialize["cidr"] = o.Cidr
+	}
+	if true {
+		toSerialize["country_code"] = o.CountryCode
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableRepositoryGeoIpRules struct {
-	value *RepositoryGeoIpRules
+type NullableRepositoryGeoIPRules struct {
+	value *RepositoryGeoIPRules
 	isSet bool
 }
 
-func (v NullableRepositoryGeoIpRules) Get() *RepositoryGeoIpRules {
+func (v NullableRepositoryGeoIPRules) Get() *RepositoryGeoIPRules {
 	return v.value
 }
 
-func (v *NullableRepositoryGeoIpRules) Set(val *RepositoryGeoIpRules) {
+func (v *NullableRepositoryGeoIPRules) Set(val *RepositoryGeoIPRules) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRepositoryGeoIpRules) IsSet() bool {
+func (v NullableRepositoryGeoIPRules) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRepositoryGeoIpRules) Unset() {
+func (v *NullableRepositoryGeoIPRules) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRepositoryGeoIpRules(val *RepositoryGeoIpRules) *NullableRepositoryGeoIpRules {
-	return &NullableRepositoryGeoIpRules{value: val, isSet: true}
+func NewNullableRepositoryGeoIPRules(val *RepositoryGeoIPRules) *NullableRepositoryGeoIPRules {
+	return &NullableRepositoryGeoIPRules{value: val, isSet: true}
 }
 
-func (v NullableRepositoryGeoIpRules) MarshalJSON() ([]byte, error) {
+func (v NullableRepositoryGeoIPRules) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRepositoryGeoIpRules) UnmarshalJSON(src []byte) error {
+func (v *NullableRepositoryGeoIPRules) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
