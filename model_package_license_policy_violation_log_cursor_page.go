@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.247.7
+API version: 1.249.1
 Contact: support@cloudsmith.io
 */
 
@@ -15,33 +15,33 @@ import (
 	"encoding/json"
 )
 
-// OrgsLicensePolicyViolationList200Response struct for OrgsLicensePolicyViolationList200Response
-type OrgsLicensePolicyViolationList200Response struct {
+// PackageLicensePolicyViolationLogCursorPage struct for PackageLicensePolicyViolationLogCursorPage
+type PackageLicensePolicyViolationLogCursorPage struct {
 	Next     NullableString                     `json:"next,omitempty"`
 	Previous NullableString                     `json:"previous,omitempty"`
 	Results  []PackageLicensePolicyViolationLog `json:"results"`
 }
 
-// NewOrgsLicensePolicyViolationList200Response instantiates a new OrgsLicensePolicyViolationList200Response object
+// NewPackageLicensePolicyViolationLogCursorPage instantiates a new PackageLicensePolicyViolationLogCursorPage object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrgsLicensePolicyViolationList200Response(results []PackageLicensePolicyViolationLog) *OrgsLicensePolicyViolationList200Response {
-	this := OrgsLicensePolicyViolationList200Response{}
+func NewPackageLicensePolicyViolationLogCursorPage(results []PackageLicensePolicyViolationLog) *PackageLicensePolicyViolationLogCursorPage {
+	this := PackageLicensePolicyViolationLogCursorPage{}
 	this.Results = results
 	return &this
 }
 
-// NewOrgsLicensePolicyViolationList200ResponseWithDefaults instantiates a new OrgsLicensePolicyViolationList200Response object
+// NewPackageLicensePolicyViolationLogCursorPageWithDefaults instantiates a new PackageLicensePolicyViolationLogCursorPage object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewOrgsLicensePolicyViolationList200ResponseWithDefaults() *OrgsLicensePolicyViolationList200Response {
-	this := OrgsLicensePolicyViolationList200Response{}
+func NewPackageLicensePolicyViolationLogCursorPageWithDefaults() *PackageLicensePolicyViolationLogCursorPage {
+	this := PackageLicensePolicyViolationLogCursorPage{}
 	return &this
 }
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrgsLicensePolicyViolationList200Response) GetNext() string {
+func (o *PackageLicensePolicyViolationLogCursorPage) GetNext() string {
 	if o == nil || isNil(o.Next.Get()) {
 		var ret string
 		return ret
@@ -52,7 +52,7 @@ func (o *OrgsLicensePolicyViolationList200Response) GetNext() string {
 // GetNextOk returns a tuple with the Next field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrgsLicensePolicyViolationList200Response) GetNextOk() (*string, bool) {
+func (o *PackageLicensePolicyViolationLogCursorPage) GetNextOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -60,7 +60,7 @@ func (o *OrgsLicensePolicyViolationList200Response) GetNextOk() (*string, bool) 
 }
 
 // HasNext returns a boolean if a field has been set.
-func (o *OrgsLicensePolicyViolationList200Response) HasNext() bool {
+func (o *PackageLicensePolicyViolationLogCursorPage) HasNext() bool {
 	if o != nil && o.Next.IsSet() {
 		return true
 	}
@@ -69,22 +69,22 @@ func (o *OrgsLicensePolicyViolationList200Response) HasNext() bool {
 }
 
 // SetNext gets a reference to the given NullableString and assigns it to the Next field.
-func (o *OrgsLicensePolicyViolationList200Response) SetNext(v string) {
+func (o *PackageLicensePolicyViolationLogCursorPage) SetNext(v string) {
 	o.Next.Set(&v)
 }
 
 // SetNextNil sets the value for Next to be an explicit nil
-func (o *OrgsLicensePolicyViolationList200Response) SetNextNil() {
+func (o *PackageLicensePolicyViolationLogCursorPage) SetNextNil() {
 	o.Next.Set(nil)
 }
 
 // UnsetNext ensures that no value is present for Next, not even an explicit nil
-func (o *OrgsLicensePolicyViolationList200Response) UnsetNext() {
+func (o *PackageLicensePolicyViolationLogCursorPage) UnsetNext() {
 	o.Next.Unset()
 }
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OrgsLicensePolicyViolationList200Response) GetPrevious() string {
+func (o *PackageLicensePolicyViolationLogCursorPage) GetPrevious() string {
 	if o == nil || isNil(o.Previous.Get()) {
 		var ret string
 		return ret
@@ -95,7 +95,7 @@ func (o *OrgsLicensePolicyViolationList200Response) GetPrevious() string {
 // GetPreviousOk returns a tuple with the Previous field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OrgsLicensePolicyViolationList200Response) GetPreviousOk() (*string, bool) {
+func (o *PackageLicensePolicyViolationLogCursorPage) GetPreviousOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *OrgsLicensePolicyViolationList200Response) GetPreviousOk() (*string, bo
 }
 
 // HasPrevious returns a boolean if a field has been set.
-func (o *OrgsLicensePolicyViolationList200Response) HasPrevious() bool {
+func (o *PackageLicensePolicyViolationLogCursorPage) HasPrevious() bool {
 	if o != nil && o.Previous.IsSet() {
 		return true
 	}
@@ -112,22 +112,22 @@ func (o *OrgsLicensePolicyViolationList200Response) HasPrevious() bool {
 }
 
 // SetPrevious gets a reference to the given NullableString and assigns it to the Previous field.
-func (o *OrgsLicensePolicyViolationList200Response) SetPrevious(v string) {
+func (o *PackageLicensePolicyViolationLogCursorPage) SetPrevious(v string) {
 	o.Previous.Set(&v)
 }
 
 // SetPreviousNil sets the value for Previous to be an explicit nil
-func (o *OrgsLicensePolicyViolationList200Response) SetPreviousNil() {
+func (o *PackageLicensePolicyViolationLogCursorPage) SetPreviousNil() {
 	o.Previous.Set(nil)
 }
 
 // UnsetPrevious ensures that no value is present for Previous, not even an explicit nil
-func (o *OrgsLicensePolicyViolationList200Response) UnsetPrevious() {
+func (o *PackageLicensePolicyViolationLogCursorPage) UnsetPrevious() {
 	o.Previous.Unset()
 }
 
 // GetResults returns the Results field value
-func (o *OrgsLicensePolicyViolationList200Response) GetResults() []PackageLicensePolicyViolationLog {
+func (o *PackageLicensePolicyViolationLogCursorPage) GetResults() []PackageLicensePolicyViolationLog {
 	if o == nil {
 		var ret []PackageLicensePolicyViolationLog
 		return ret
@@ -138,7 +138,7 @@ func (o *OrgsLicensePolicyViolationList200Response) GetResults() []PackageLicens
 
 // GetResultsOk returns a tuple with the Results field value
 // and a boolean to check if the value has been set.
-func (o *OrgsLicensePolicyViolationList200Response) GetResultsOk() ([]PackageLicensePolicyViolationLog, bool) {
+func (o *PackageLicensePolicyViolationLogCursorPage) GetResultsOk() ([]PackageLicensePolicyViolationLog, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -146,11 +146,11 @@ func (o *OrgsLicensePolicyViolationList200Response) GetResultsOk() ([]PackageLic
 }
 
 // SetResults sets field value
-func (o *OrgsLicensePolicyViolationList200Response) SetResults(v []PackageLicensePolicyViolationLog) {
+func (o *PackageLicensePolicyViolationLogCursorPage) SetResults(v []PackageLicensePolicyViolationLog) {
 	o.Results = v
 }
 
-func (o OrgsLicensePolicyViolationList200Response) MarshalJSON() ([]byte, error) {
+func (o PackageLicensePolicyViolationLogCursorPage) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Next.IsSet() {
 		toSerialize["next"] = o.Next.Get()
@@ -164,38 +164,38 @@ func (o OrgsLicensePolicyViolationList200Response) MarshalJSON() ([]byte, error)
 	return json.Marshal(toSerialize)
 }
 
-type NullableOrgsLicensePolicyViolationList200Response struct {
-	value *OrgsLicensePolicyViolationList200Response
+type NullablePackageLicensePolicyViolationLogCursorPage struct {
+	value *PackageLicensePolicyViolationLogCursorPage
 	isSet bool
 }
 
-func (v NullableOrgsLicensePolicyViolationList200Response) Get() *OrgsLicensePolicyViolationList200Response {
+func (v NullablePackageLicensePolicyViolationLogCursorPage) Get() *PackageLicensePolicyViolationLogCursorPage {
 	return v.value
 }
 
-func (v *NullableOrgsLicensePolicyViolationList200Response) Set(val *OrgsLicensePolicyViolationList200Response) {
+func (v *NullablePackageLicensePolicyViolationLogCursorPage) Set(val *PackageLicensePolicyViolationLogCursorPage) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableOrgsLicensePolicyViolationList200Response) IsSet() bool {
+func (v NullablePackageLicensePolicyViolationLogCursorPage) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableOrgsLicensePolicyViolationList200Response) Unset() {
+func (v *NullablePackageLicensePolicyViolationLogCursorPage) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableOrgsLicensePolicyViolationList200Response(val *OrgsLicensePolicyViolationList200Response) *NullableOrgsLicensePolicyViolationList200Response {
-	return &NullableOrgsLicensePolicyViolationList200Response{value: val, isSet: true}
+func NewNullablePackageLicensePolicyViolationLogCursorPage(val *PackageLicensePolicyViolationLogCursorPage) *NullablePackageLicensePolicyViolationLogCursorPage {
+	return &NullablePackageLicensePolicyViolationLogCursorPage{value: val, isSet: true}
 }
 
-func (v NullableOrgsLicensePolicyViolationList200Response) MarshalJSON() ([]byte, error) {
+func (v NullablePackageLicensePolicyViolationLogCursorPage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableOrgsLicensePolicyViolationList200Response) UnmarshalJSON(src []byte) error {
+func (v *NullablePackageLicensePolicyViolationLogCursorPage) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

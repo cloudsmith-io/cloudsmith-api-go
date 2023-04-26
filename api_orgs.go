@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.247.7
+API version: 1.249.1
 Contact: support@cloudsmith.io
 */
 
@@ -1833,7 +1833,7 @@ func (r ApiOrgsLicensePolicyViolationListRequest) PageSize(pageSize int64) ApiOr
 	return r
 }
 
-func (r ApiOrgsLicensePolicyViolationListRequest) Execute() (*OrgsLicensePolicyViolationList200Response, *http.Response, error) {
+func (r ApiOrgsLicensePolicyViolationListRequest) Execute() (*PackageLicensePolicyViolationLogCursorPage, *http.Response, error) {
 	return r.ApiService.OrgsLicensePolicyViolationListExecute(r)
 }
 
@@ -1855,13 +1855,13 @@ func (a *OrgsApiService) OrgsLicensePolicyViolationList(ctx context.Context, org
 }
 
 // Execute executes the request
-//  @return OrgsLicensePolicyViolationList200Response
-func (a *OrgsApiService) OrgsLicensePolicyViolationListExecute(r ApiOrgsLicensePolicyViolationListRequest) (*OrgsLicensePolicyViolationList200Response, *http.Response, error) {
+//  @return PackageLicensePolicyViolationLogCursorPage
+func (a *OrgsApiService) OrgsLicensePolicyViolationListExecute(r ApiOrgsLicensePolicyViolationListRequest) (*PackageLicensePolicyViolationLogCursorPage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrgsLicensePolicyViolationList200Response
+		localVarReturnValue *PackageLicensePolicyViolationLogCursorPage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsLicensePolicyViolationList")
@@ -6330,7 +6330,7 @@ func (r ApiOrgsVulnerabilityPolicyViolationListRequest) PageSize(pageSize int64)
 	return r
 }
 
-func (r ApiOrgsVulnerabilityPolicyViolationListRequest) Execute() (*OrgsVulnerabilityPolicyViolationList200Response, *http.Response, error) {
+func (r ApiOrgsVulnerabilityPolicyViolationListRequest) Execute() (*PackageVulnerabilityPolicyViolationLogCursorPage, *http.Response, error) {
 	return r.ApiService.OrgsVulnerabilityPolicyViolationListExecute(r)
 }
 
@@ -6352,13 +6352,13 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyViolationList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return OrgsVulnerabilityPolicyViolationList200Response
-func (a *OrgsApiService) OrgsVulnerabilityPolicyViolationListExecute(r ApiOrgsVulnerabilityPolicyViolationListRequest) (*OrgsVulnerabilityPolicyViolationList200Response, *http.Response, error) {
+//  @return PackageVulnerabilityPolicyViolationLogCursorPage
+func (a *OrgsApiService) OrgsVulnerabilityPolicyViolationListExecute(r ApiOrgsVulnerabilityPolicyViolationListRequest) (*PackageVulnerabilityPolicyViolationLogCursorPage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *OrgsVulnerabilityPolicyViolationList200Response
+		localVarReturnValue *PackageVulnerabilityPolicyViolationLogCursorPage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsVulnerabilityPolicyViolationList")

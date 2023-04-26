@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.247.7
+  version: 1.249.1
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -1844,7 +1844,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/orgs_license_policy_violation_list_200_response'
+                $ref: '#/components/schemas/PackageLicensePolicyViolationLogCursorPage'
           description: OK
         "400":
           content:
@@ -3067,7 +3067,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/orgs_vulnerability_policy_violation_list_200_response'
+                $ref: '#/components/schemas/PackageVulnerabilityPolicyViolationLogCursorPage'
           description: OK
         "400":
           content:
@@ -28452,7 +28452,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.247.7
+        version: 1.249.1
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -28462,7 +28462,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.247.7
+          default: 1.249.1
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -29425,7 +29425,7 @@ components:
           title: Verify SSL Certificates
           type: boolean
       type: object
-    orgs_license_policy_violation_list_200_response:
+    PackageLicensePolicyViolationLogCursorPage:
       example:
         next: https://openapi-generator.tech
         previous: https://openapi-generator.tech
@@ -29487,8 +29487,9 @@ components:
           type: array
       required:
       - results
+      title: PackageLicensePolicyViolationLogCursorPage
       type: object
-    orgs_vulnerability_policy_violation_list_200_response:
+    PackageVulnerabilityPolicyViolationLogCursorPage:
       example:
         next: https://openapi-generator.tech
         previous: https://openapi-generator.tech
@@ -29562,6 +29563,7 @@ components:
           type: array
       required:
       - results
+      title: PackageVulnerabilityPolicyViolationLogCursorPage
       type: object
   securitySchemes:
     apikey:

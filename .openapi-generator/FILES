@@ -109,8 +109,6 @@ docs/OrganizationTeamMembership.md
 docs/OrganizationTeamRequest.md
 docs/OrganizationTeamRequestPatch.md
 docs/OrgsApi.md
-docs/OrgsLicensePolicyViolationList200Response.md
-docs/OrgsVulnerabilityPolicyViolationList200Response.md
 docs/P2PackageUpload.md
 docs/P2PackageUploadRequest.md
 docs/Package.md
@@ -123,6 +121,7 @@ docs/PackageFilePartsUpload.md
 docs/PackageFileUpload.md
 docs/PackageFileUploadRequest.md
 docs/PackageLicensePolicyViolationLog.md
+docs/PackageLicensePolicyViolationLogCursorPage.md
 docs/PackageMove.md
 docs/PackageMoveRequest.md
 docs/PackageQuarantine.md
@@ -134,6 +133,7 @@ docs/PackageTagRequest.md
 docs/PackageUsageMetrics.md
 docs/PackageVulnerability.md
 docs/PackageVulnerabilityPolicyViolationLog.md
+docs/PackageVulnerabilityPolicyViolationLogCursorPage.md
 docs/PackagesApi.md
 docs/PythonPackageUpload.md
 docs/PythonPackageUploadRequest.md
@@ -296,8 +296,6 @@ model_organization_team_members.go
 model_organization_team_membership.go
 model_organization_team_request.go
 model_organization_team_request_patch.go
-model_orgs_license_policy_violation_list_200_response.go
-model_orgs_vulnerability_policy_violation_list_200_response.go
 model_p2_package_upload.go
 model_p2_package_upload_request.go
 model_package.go
@@ -310,6 +308,7 @@ model_package_file_parts_upload.go
 model_package_file_upload.go
 model_package_file_upload_request.go
 model_package_license_policy_violation_log.go
+model_package_license_policy_violation_log_cursor_page.go
 model_package_move.go
 model_package_move_request.go
 model_package_quarantine.go
@@ -321,6 +320,7 @@ model_package_tag_request.go
 model_package_usage_metrics.go
 model_package_vulnerability.go
 model_package_vulnerability_policy_violation_log.go
+model_package_vulnerability_policy_violation_log_cursor_page.go
 model_python_package_upload.go
 model_python_package_upload_request.go
 model_quota.go
