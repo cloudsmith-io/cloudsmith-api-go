@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.237.2
+API version: 1.250.8
 Contact: support@cloudsmith.io
 */
 
@@ -17,16 +17,18 @@ import (
 
 // RepositoryGeoIpRules struct for RepositoryGeoIpRules
 type RepositoryGeoIpRules struct {
-	CountryCode *RepositoryGeoIpCountryCodeRules `json:"country_code,omitempty"`
-	Cidr        *RepositoryGeoIpCidrRules        `json:"cidr,omitempty"`
+	Cidr        RepositoryGeoIpCidr        `json:"cidr"`
+	CountryCode RepositoryGeoIpCountryCode `json:"country_code"`
 }
 
 // NewRepositoryGeoIpRules instantiates a new RepositoryGeoIpRules object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRepositoryGeoIpRules() *RepositoryGeoIpRules {
+func NewRepositoryGeoIpRules(cidr RepositoryGeoIpCidr, countryCode RepositoryGeoIpCountryCode) *RepositoryGeoIpRules {
 	this := RepositoryGeoIpRules{}
+	this.Cidr = cidr
+	this.CountryCode = countryCode
 	return &this
 }
 
@@ -38,77 +40,61 @@ func NewRepositoryGeoIpRulesWithDefaults() *RepositoryGeoIpRules {
 	return &this
 }
 
-// GetCountryCode returns the CountryCode field value if set, zero value otherwise.
-func (o *RepositoryGeoIpRules) GetCountryCode() RepositoryGeoIpCountryCodeRules {
-	if o == nil || isNil(o.CountryCode) {
-		var ret RepositoryGeoIpCountryCodeRules
+// GetCidr returns the Cidr field value
+func (o *RepositoryGeoIpRules) GetCidr() RepositoryGeoIpCidr {
+	if o == nil {
+		var ret RepositoryGeoIpCidr
 		return ret
 	}
-	return *o.CountryCode
+
+	return o.Cidr
 }
 
-// GetCountryCodeOk returns a tuple with the CountryCode field value if set, nil otherwise
+// GetCidrOk returns a tuple with the Cidr field value
 // and a boolean to check if the value has been set.
-func (o *RepositoryGeoIpRules) GetCountryCodeOk() (*RepositoryGeoIpCountryCodeRules, bool) {
-	if o == nil || isNil(o.CountryCode) {
+func (o *RepositoryGeoIpRules) GetCidrOk() (*RepositoryGeoIpCidr, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CountryCode, true
+	return &o.Cidr, true
 }
 
-// HasCountryCode returns a boolean if a field has been set.
-func (o *RepositoryGeoIpRules) HasCountryCode() bool {
-	if o != nil && !isNil(o.CountryCode) {
-		return true
-	}
-
-	return false
+// SetCidr sets field value
+func (o *RepositoryGeoIpRules) SetCidr(v RepositoryGeoIpCidr) {
+	o.Cidr = v
 }
 
-// SetCountryCode gets a reference to the given RepositoryGeoIpCountryCodeRules and assigns it to the CountryCode field.
-func (o *RepositoryGeoIpRules) SetCountryCode(v RepositoryGeoIpCountryCodeRules) {
-	o.CountryCode = &v
-}
-
-// GetCidr returns the Cidr field value if set, zero value otherwise.
-func (o *RepositoryGeoIpRules) GetCidr() RepositoryGeoIpCidrRules {
-	if o == nil || isNil(o.Cidr) {
-		var ret RepositoryGeoIpCidrRules
+// GetCountryCode returns the CountryCode field value
+func (o *RepositoryGeoIpRules) GetCountryCode() RepositoryGeoIpCountryCode {
+	if o == nil {
+		var ret RepositoryGeoIpCountryCode
 		return ret
 	}
-	return *o.Cidr
+
+	return o.CountryCode
 }
 
-// GetCidrOk returns a tuple with the Cidr field value if set, nil otherwise
+// GetCountryCodeOk returns a tuple with the CountryCode field value
 // and a boolean to check if the value has been set.
-func (o *RepositoryGeoIpRules) GetCidrOk() (*RepositoryGeoIpCidrRules, bool) {
-	if o == nil || isNil(o.Cidr) {
+func (o *RepositoryGeoIpRules) GetCountryCodeOk() (*RepositoryGeoIpCountryCode, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cidr, true
+	return &o.CountryCode, true
 }
 
-// HasCidr returns a boolean if a field has been set.
-func (o *RepositoryGeoIpRules) HasCidr() bool {
-	if o != nil && !isNil(o.Cidr) {
-		return true
-	}
-
-	return false
-}
-
-// SetCidr gets a reference to the given RepositoryGeoIpCidrRules and assigns it to the Cidr field.
-func (o *RepositoryGeoIpRules) SetCidr(v RepositoryGeoIpCidrRules) {
-	o.Cidr = &v
+// SetCountryCode sets field value
+func (o *RepositoryGeoIpRules) SetCountryCode(v RepositoryGeoIpCountryCode) {
+	o.CountryCode = v
 }
 
 func (o RepositoryGeoIpRules) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.CountryCode) {
-		toSerialize["country_code"] = o.CountryCode
-	}
-	if !isNil(o.Cidr) {
+	if true {
 		toSerialize["cidr"] = o.Cidr
+	}
+	if true {
+		toSerialize["country_code"] = o.CountryCode
 	}
 	return json.Marshal(toSerialize)
 }

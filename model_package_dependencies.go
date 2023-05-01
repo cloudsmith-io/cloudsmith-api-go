@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.237.2
+API version: 1.250.8
 Contact: support@cloudsmith.io
 */
 
@@ -17,7 +17,7 @@ import (
 
 // PackageDependencies struct for PackageDependencies
 type PackageDependencies struct {
-	Dependencies *string `json:"dependencies,omitempty"`
+	Dependencies []PackageDependency `json:"dependencies,omitempty"`
 }
 
 // NewPackageDependencies instantiates a new PackageDependencies object
@@ -38,17 +38,17 @@ func NewPackageDependenciesWithDefaults() *PackageDependencies {
 }
 
 // GetDependencies returns the Dependencies field value if set, zero value otherwise.
-func (o *PackageDependencies) GetDependencies() string {
+func (o *PackageDependencies) GetDependencies() []PackageDependency {
 	if o == nil || isNil(o.Dependencies) {
-		var ret string
+		var ret []PackageDependency
 		return ret
 	}
-	return *o.Dependencies
+	return o.Dependencies
 }
 
 // GetDependenciesOk returns a tuple with the Dependencies field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageDependencies) GetDependenciesOk() (*string, bool) {
+func (o *PackageDependencies) GetDependenciesOk() ([]PackageDependency, bool) {
 	if o == nil || isNil(o.Dependencies) {
 		return nil, false
 	}
@@ -64,9 +64,9 @@ func (o *PackageDependencies) HasDependencies() bool {
 	return false
 }
 
-// SetDependencies gets a reference to the given string and assigns it to the Dependencies field.
-func (o *PackageDependencies) SetDependencies(v string) {
-	o.Dependencies = &v
+// SetDependencies gets a reference to the given []PackageDependency and assigns it to the Dependencies field.
+func (o *PackageDependencies) SetDependencies(v []PackageDependency) {
+	o.Dependencies = v
 }
 
 func (o PackageDependencies) MarshalJSON() ([]byte, error) {

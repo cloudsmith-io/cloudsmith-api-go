@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.237.2
+API version: 1.250.8
 Contact: support@cloudsmith.io
 */
 
@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// RepositoryGeoIPTestAddressResponseDict struct for RepositoryGeoIPTestAddressResponseDict
-type RepositoryGeoIPTestAddressResponseDict struct {
+// RepositoryGeoIpTestAddressResponseDict struct for RepositoryGeoIpTestAddressResponseDict
+type RepositoryGeoIpTestAddressResponseDict struct {
 	// The result of the IP test
 	Allowed bool `json:"allowed"`
 	// The country code of the tested IP address
@@ -27,12 +27,12 @@ type RepositoryGeoIPTestAddressResponseDict struct {
 	Reason string `json:"reason"`
 }
 
-// NewRepositoryGeoIPTestAddressResponseDict instantiates a new RepositoryGeoIPTestAddressResponseDict object
+// NewRepositoryGeoIpTestAddressResponseDict instantiates a new RepositoryGeoIpTestAddressResponseDict object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRepositoryGeoIPTestAddressResponseDict(allowed bool, countryCode NullableString, ipAddress string, reason string) *RepositoryGeoIPTestAddressResponseDict {
-	this := RepositoryGeoIPTestAddressResponseDict{}
+func NewRepositoryGeoIpTestAddressResponseDict(allowed bool, countryCode NullableString, ipAddress string, reason string) *RepositoryGeoIpTestAddressResponseDict {
+	this := RepositoryGeoIpTestAddressResponseDict{}
 	this.Allowed = allowed
 	this.CountryCode = countryCode
 	this.IpAddress = ipAddress
@@ -40,16 +40,16 @@ func NewRepositoryGeoIPTestAddressResponseDict(allowed bool, countryCode Nullabl
 	return &this
 }
 
-// NewRepositoryGeoIPTestAddressResponseDictWithDefaults instantiates a new RepositoryGeoIPTestAddressResponseDict object
+// NewRepositoryGeoIpTestAddressResponseDictWithDefaults instantiates a new RepositoryGeoIpTestAddressResponseDict object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRepositoryGeoIPTestAddressResponseDictWithDefaults() *RepositoryGeoIPTestAddressResponseDict {
-	this := RepositoryGeoIPTestAddressResponseDict{}
+func NewRepositoryGeoIpTestAddressResponseDictWithDefaults() *RepositoryGeoIpTestAddressResponseDict {
+	this := RepositoryGeoIpTestAddressResponseDict{}
 	return &this
 }
 
 // GetAllowed returns the Allowed field value
-func (o *RepositoryGeoIPTestAddressResponseDict) GetAllowed() bool {
+func (o *RepositoryGeoIpTestAddressResponseDict) GetAllowed() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -60,7 +60,7 @@ func (o *RepositoryGeoIPTestAddressResponseDict) GetAllowed() bool {
 
 // GetAllowedOk returns a tuple with the Allowed field value
 // and a boolean to check if the value has been set.
-func (o *RepositoryGeoIPTestAddressResponseDict) GetAllowedOk() (*bool, bool) {
+func (o *RepositoryGeoIpTestAddressResponseDict) GetAllowedOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,13 +68,13 @@ func (o *RepositoryGeoIPTestAddressResponseDict) GetAllowedOk() (*bool, bool) {
 }
 
 // SetAllowed sets field value
-func (o *RepositoryGeoIPTestAddressResponseDict) SetAllowed(v bool) {
+func (o *RepositoryGeoIpTestAddressResponseDict) SetAllowed(v bool) {
 	o.Allowed = v
 }
 
 // GetCountryCode returns the CountryCode field value
 // If the value is explicit nil, the zero value for string will be returned
-func (o *RepositoryGeoIPTestAddressResponseDict) GetCountryCode() string {
+func (o *RepositoryGeoIpTestAddressResponseDict) GetCountryCode() string {
 	if o == nil || o.CountryCode.Get() == nil {
 		var ret string
 		return ret
@@ -86,7 +86,7 @@ func (o *RepositoryGeoIPTestAddressResponseDict) GetCountryCode() string {
 // GetCountryCodeOk returns a tuple with the CountryCode field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *RepositoryGeoIPTestAddressResponseDict) GetCountryCodeOk() (*string, bool) {
+func (o *RepositoryGeoIpTestAddressResponseDict) GetCountryCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,12 +94,12 @@ func (o *RepositoryGeoIPTestAddressResponseDict) GetCountryCodeOk() (*string, bo
 }
 
 // SetCountryCode sets field value
-func (o *RepositoryGeoIPTestAddressResponseDict) SetCountryCode(v string) {
+func (o *RepositoryGeoIpTestAddressResponseDict) SetCountryCode(v string) {
 	o.CountryCode.Set(&v)
 }
 
 // GetIpAddress returns the IpAddress field value
-func (o *RepositoryGeoIPTestAddressResponseDict) GetIpAddress() string {
+func (o *RepositoryGeoIpTestAddressResponseDict) GetIpAddress() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -110,7 +110,7 @@ func (o *RepositoryGeoIPTestAddressResponseDict) GetIpAddress() string {
 
 // GetIpAddressOk returns a tuple with the IpAddress field value
 // and a boolean to check if the value has been set.
-func (o *RepositoryGeoIPTestAddressResponseDict) GetIpAddressOk() (*string, bool) {
+func (o *RepositoryGeoIpTestAddressResponseDict) GetIpAddressOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -118,12 +118,12 @@ func (o *RepositoryGeoIPTestAddressResponseDict) GetIpAddressOk() (*string, bool
 }
 
 // SetIpAddress sets field value
-func (o *RepositoryGeoIPTestAddressResponseDict) SetIpAddress(v string) {
+func (o *RepositoryGeoIpTestAddressResponseDict) SetIpAddress(v string) {
 	o.IpAddress = v
 }
 
 // GetReason returns the Reason field value
-func (o *RepositoryGeoIPTestAddressResponseDict) GetReason() string {
+func (o *RepositoryGeoIpTestAddressResponseDict) GetReason() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -134,7 +134,7 @@ func (o *RepositoryGeoIPTestAddressResponseDict) GetReason() string {
 
 // GetReasonOk returns a tuple with the Reason field value
 // and a boolean to check if the value has been set.
-func (o *RepositoryGeoIPTestAddressResponseDict) GetReasonOk() (*string, bool) {
+func (o *RepositoryGeoIpTestAddressResponseDict) GetReasonOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -142,11 +142,11 @@ func (o *RepositoryGeoIPTestAddressResponseDict) GetReasonOk() (*string, bool) {
 }
 
 // SetReason sets field value
-func (o *RepositoryGeoIPTestAddressResponseDict) SetReason(v string) {
+func (o *RepositoryGeoIpTestAddressResponseDict) SetReason(v string) {
 	o.Reason = v
 }
 
-func (o RepositoryGeoIPTestAddressResponseDict) MarshalJSON() ([]byte, error) {
+func (o RepositoryGeoIpTestAddressResponseDict) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["allowed"] = o.Allowed
@@ -163,38 +163,38 @@ func (o RepositoryGeoIPTestAddressResponseDict) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableRepositoryGeoIPTestAddressResponseDict struct {
-	value *RepositoryGeoIPTestAddressResponseDict
+type NullableRepositoryGeoIpTestAddressResponseDict struct {
+	value *RepositoryGeoIpTestAddressResponseDict
 	isSet bool
 }
 
-func (v NullableRepositoryGeoIPTestAddressResponseDict) Get() *RepositoryGeoIPTestAddressResponseDict {
+func (v NullableRepositoryGeoIpTestAddressResponseDict) Get() *RepositoryGeoIpTestAddressResponseDict {
 	return v.value
 }
 
-func (v *NullableRepositoryGeoIPTestAddressResponseDict) Set(val *RepositoryGeoIPTestAddressResponseDict) {
+func (v *NullableRepositoryGeoIpTestAddressResponseDict) Set(val *RepositoryGeoIpTestAddressResponseDict) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRepositoryGeoIPTestAddressResponseDict) IsSet() bool {
+func (v NullableRepositoryGeoIpTestAddressResponseDict) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRepositoryGeoIPTestAddressResponseDict) Unset() {
+func (v *NullableRepositoryGeoIpTestAddressResponseDict) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRepositoryGeoIPTestAddressResponseDict(val *RepositoryGeoIPTestAddressResponseDict) *NullableRepositoryGeoIPTestAddressResponseDict {
-	return &NullableRepositoryGeoIPTestAddressResponseDict{value: val, isSet: true}
+func NewNullableRepositoryGeoIpTestAddressResponseDict(val *RepositoryGeoIpTestAddressResponseDict) *NullableRepositoryGeoIpTestAddressResponseDict {
+	return &NullableRepositoryGeoIpTestAddressResponseDict{value: val, isSet: true}
 }
 
-func (v NullableRepositoryGeoIPTestAddressResponseDict) MarshalJSON() ([]byte, error) {
+func (v NullableRepositoryGeoIpTestAddressResponseDict) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRepositoryGeoIPTestAddressResponseDict) UnmarshalJSON(src []byte) error {
+func (v *NullableRepositoryGeoIpTestAddressResponseDict) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

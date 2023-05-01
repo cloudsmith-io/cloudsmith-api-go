@@ -930,7 +930,7 @@ Name | Type | Description  | Notes
 
 ## OrgsLicensePolicyViolationList
 
-> OrgsLicensePolicyViolationList200Response OrgsLicensePolicyViolationList(ctx, org).Cursor(cursor).PageSize(pageSize).Execute()
+> PackageLicensePolicyViolationLogCursorPage OrgsLicensePolicyViolationList(ctx, org).Cursor(cursor).PageSize(pageSize).Execute()
 
 List all current license policy violations for this Organization.
 
@@ -960,7 +960,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyViolationList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsLicensePolicyViolationList`: OrgsLicensePolicyViolationList200Response
+    // response from `OrgsLicensePolicyViolationList`: PackageLicensePolicyViolationLogCursorPage
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyViolationList`: %v\n", resp)
 }
 ```
@@ -986,7 +986,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrgsLicensePolicyViolationList200Response**](OrgsLicensePolicyViolationList200Response.md)
+[**PackageLicensePolicyViolationLogCursorPage**](PackageLicensePolicyViolationLogCursorPage.md)
 
 ### Authorization
 
@@ -3112,7 +3112,7 @@ Name | Type | Description  | Notes
 
 ## OrgsVulnerabilityPolicyViolationList
 
-> OrgsVulnerabilityPolicyViolationList200Response OrgsVulnerabilityPolicyViolationList(ctx, org).Cursor(cursor).PageSize(pageSize).Execute()
+> PackageVulnerabilityPolicyViolationLogCursorPage OrgsVulnerabilityPolicyViolationList(ctx, org).Cursor(cursor).PageSize(pageSize).Execute()
 
 List all current vulnerability policy violations for this Organization.
 
@@ -3142,7 +3142,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyViolationList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `OrgsVulnerabilityPolicyViolationList`: OrgsVulnerabilityPolicyViolationList200Response
+    // response from `OrgsVulnerabilityPolicyViolationList`: PackageVulnerabilityPolicyViolationLogCursorPage
     fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyViolationList`: %v\n", resp)
 }
 ```
@@ -3168,7 +3168,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrgsVulnerabilityPolicyViolationList200Response**](OrgsVulnerabilityPolicyViolationList200Response.md)
+[**PackageVulnerabilityPolicyViolationLogCursorPage**](PackageVulnerabilityPolicyViolationLogCursorPage.md)
 
 ### Authorization
 

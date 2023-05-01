@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Dependencies** | Pointer to **string** |  | [optional] [readonly] 
+**Dependencies** | Pointer to [**[]PackageDependency**](PackageDependency.md) |  | [optional] [readonly] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDependencies
 
-`func (o *PackageDependencies) GetDependencies() string`
+`func (o *PackageDependencies) GetDependencies() []PackageDependency`
 
 GetDependencies returns the Dependencies field if non-nil, zero value otherwise.
 
 ### GetDependenciesOk
 
-`func (o *PackageDependencies) GetDependenciesOk() (*string, bool)`
+`func (o *PackageDependencies) GetDependenciesOk() (*[]PackageDependency, bool)`
 
 GetDependenciesOk returns a tuple with the Dependencies field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDependencies
 
-`func (o *PackageDependencies) SetDependencies(v string)`
+`func (o *PackageDependencies) SetDependencies(v []PackageDependency)`
 
 SetDependencies sets Dependencies field to given value.
 
