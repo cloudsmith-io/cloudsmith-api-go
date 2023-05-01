@@ -1,67 +1,67 @@
-# RepositoryGeoIPRules
+# RepositoryGeoIpRules
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Cidr** | [**RepositoryGeoIPCidr**](RepositoryGeoIPCidr.md) |  | 
-**CountryCode** | [**RepositoryGeoIPCountryCode**](RepositoryGeoIPCountryCode.md) |  | 
+**Cidr** | [**RepositoryGeoIpCidr**](RepositoryGeoIpCidr.md) |  | 
+**CountryCode** | [**RepositoryGeoIpCountryCode**](RepositoryGeoIpCountryCode.md) |  | 
 
 ## Methods
 
-### NewRepositoryGeoIPRules
+### NewRepositoryGeoIpRules
 
-`func NewRepositoryGeoIPRules(cidr RepositoryGeoIPCidr, countryCode RepositoryGeoIPCountryCode, ) *RepositoryGeoIPRules`
+`func NewRepositoryGeoIpRules(cidr RepositoryGeoIpCidr, countryCode RepositoryGeoIpCountryCode, ) *RepositoryGeoIpRules`
 
-NewRepositoryGeoIPRules instantiates a new RepositoryGeoIPRules object
+NewRepositoryGeoIpRules instantiates a new RepositoryGeoIpRules object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewRepositoryGeoIPRulesWithDefaults
+### NewRepositoryGeoIpRulesWithDefaults
 
-`func NewRepositoryGeoIPRulesWithDefaults() *RepositoryGeoIPRules`
+`func NewRepositoryGeoIpRulesWithDefaults() *RepositoryGeoIpRules`
 
-NewRepositoryGeoIPRulesWithDefaults instantiates a new RepositoryGeoIPRules object
+NewRepositoryGeoIpRulesWithDefaults instantiates a new RepositoryGeoIpRules object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetCidr
 
-`func (o *RepositoryGeoIPRules) GetCidr() RepositoryGeoIPCidr`
+`func (o *RepositoryGeoIpRules) GetCidr() RepositoryGeoIpCidr`
 
 GetCidr returns the Cidr field if non-nil, zero value otherwise.
 
 ### GetCidrOk
 
-`func (o *RepositoryGeoIPRules) GetCidrOk() (*RepositoryGeoIPCidr, bool)`
+`func (o *RepositoryGeoIpRules) GetCidrOk() (*RepositoryGeoIpCidr, bool)`
 
 GetCidrOk returns a tuple with the Cidr field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCidr
 
-`func (o *RepositoryGeoIPRules) SetCidr(v RepositoryGeoIPCidr)`
+`func (o *RepositoryGeoIpRules) SetCidr(v RepositoryGeoIpCidr)`
 
 SetCidr sets Cidr field to given value.
 
 
 ### GetCountryCode
 
-`func (o *RepositoryGeoIPRules) GetCountryCode() RepositoryGeoIPCountryCode`
+`func (o *RepositoryGeoIpRules) GetCountryCode() RepositoryGeoIpCountryCode`
 
 GetCountryCode returns the CountryCode field if non-nil, zero value otherwise.
 
 ### GetCountryCodeOk
 
-`func (o *RepositoryGeoIPRules) GetCountryCodeOk() (*RepositoryGeoIPCountryCode, bool)`
+`func (o *RepositoryGeoIpRules) GetCountryCodeOk() (*RepositoryGeoIpCountryCode, bool)`
 
 GetCountryCodeOk returns a tuple with the CountryCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCountryCode
 
-`func (o *RepositoryGeoIPRules) SetCountryCode(v RepositoryGeoIPCountryCode)`
+`func (o *RepositoryGeoIpRules) SetCountryCode(v RepositoryGeoIpCountryCode)`
 
 SetCountryCode sets CountryCode field to given value.
 

@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.249.1
+  version: 1.250.8
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -6648,7 +6648,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryGeoIPRules'
+                $ref: '#/components/schemas/RepositoryGeoIpRules'
           description: OK
         "402":
           content:
@@ -6697,14 +6697,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RepositoryGeoIPRulesRequestPatch'
+              $ref: '#/components/schemas/RepositoryGeoIpRulesRequestPatch'
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryGeoIPRules'
+                $ref: '#/components/schemas/RepositoryGeoIpRules'
           description: OK
         "402":
           content:
@@ -6754,14 +6754,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RepositoryGeoIPRulesRequest'
+              $ref: '#/components/schemas/RepositoryGeoIpRulesRequest'
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryGeoIPRules'
+                $ref: '#/components/schemas/RepositoryGeoIpRules'
           description: OK
         "402":
           content:
@@ -6812,7 +6812,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RespositoryGeoIPEnableDisableRequest'
+              $ref: '#/components/schemas/RespositoryGeoIpEnableDisableRequest'
         required: false
       responses:
         "200":
@@ -6867,7 +6867,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RespositoryGeoIPEnableDisableRequest'
+              $ref: '#/components/schemas/RespositoryGeoIpEnableDisableRequest'
         required: false
       responses:
         "200":
@@ -6923,14 +6923,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RepositoryGeoIPTestAddress'
+              $ref: '#/components/schemas/RepositoryGeoIpTestAddress'
         required: false
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryGeoIPTestAddressResponse'
+                $ref: '#/components/schemas/RepositoryGeoIpTestAddressResponse'
           description: Successfuly tested addresses against the repository's GeoIP
             rules
         "402":
@@ -28076,7 +28076,7 @@ components:
           title: View statistics
           type: string
       type: object
-    RepositoryGeoIPCidr:
+    RepositoryGeoIpCidr:
       example:
         allow:
         - allow
@@ -28103,7 +28103,7 @@ components:
       - allow
       - deny
       type: object
-    RepositoryGeoIPCountryCode:
+    RepositoryGeoIpCountryCode:
       example:
         allow:
         - allow
@@ -28130,7 +28130,7 @@ components:
       - allow
       - deny
       type: object
-    RepositoryGeoIPRules:
+    RepositoryGeoIpRules:
       example:
         country_code:
           allow:
@@ -28148,14 +28148,14 @@ components:
           - deny
       properties:
         cidr:
-          $ref: '#/components/schemas/RepositoryGeoIPCidr'
+          $ref: '#/components/schemas/RepositoryGeoIpCidr'
         country_code:
-          $ref: '#/components/schemas/RepositoryGeoIPCountryCode'
+          $ref: '#/components/schemas/RepositoryGeoIpCountryCode'
       required:
       - cidr
       - country_code
       type: object
-    RepositoryGeoIPRulesRequest:
+    RepositoryGeoIpRulesRequest:
       example:
         country_code:
           allow:
@@ -28173,14 +28173,14 @@ components:
           - deny
       properties:
         cidr:
-          $ref: '#/components/schemas/RepositoryGeoIPCidr'
+          $ref: '#/components/schemas/RepositoryGeoIpCidr'
         country_code:
-          $ref: '#/components/schemas/RepositoryGeoIPCountryCode'
+          $ref: '#/components/schemas/RepositoryGeoIpCountryCode'
       required:
       - cidr
       - country_code
       type: object
-    RepositoryGeoIPRulesRequestPatch:
+    RepositoryGeoIpRulesRequestPatch:
       example:
         country_code:
           allow:
@@ -28198,15 +28198,15 @@ components:
           - deny
       properties:
         cidr:
-          $ref: '#/components/schemas/RepositoryGeoIPCidr'
+          $ref: '#/components/schemas/RepositoryGeoIpCidr'
         country_code:
-          $ref: '#/components/schemas/RepositoryGeoIPCountryCode'
+          $ref: '#/components/schemas/RepositoryGeoIpCountryCode'
       type: object
-    RespositoryGeoIPEnableDisableRequest:
+    RespositoryGeoIpEnableDisableRequest:
       type: object
-    RespositoryGeoIPEnableDisable:
+    RespositoryGeoIpEnableDisable:
       type: object
-    RepositoryGeoIPTestAddress:
+    RepositoryGeoIpTestAddress:
       example:
         addresses:
         - addresses
@@ -28221,7 +28221,7 @@ components:
       required:
       - addresses
       type: object
-    RepositoryGeoIPTestAddressResponseDict:
+    RepositoryGeoIpTestAddressResponseDict:
       example:
         country_code: country_code
         reason: reason
@@ -28254,7 +28254,7 @@ components:
       - ip_address
       - reason
       type: object
-    RepositoryGeoIPTestAddressResponse:
+    RepositoryGeoIpTestAddressResponse:
       example:
         addresses:
         - country_code: country_code
@@ -28269,7 +28269,7 @@ components:
         addresses:
           description: The IP address test results ordered by allowed
           items:
-            $ref: '#/components/schemas/RepositoryGeoIPTestAddressResponseDict'
+            $ref: '#/components/schemas/RepositoryGeoIpTestAddressResponseDict'
           type: array
       required:
       - addresses
@@ -28452,7 +28452,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.249.1
+        version: 1.250.8
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -28462,7 +28462,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.249.1
+          default: 1.250.8
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true

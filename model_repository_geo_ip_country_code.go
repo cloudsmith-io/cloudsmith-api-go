@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.249.1
+API version: 1.250.8
 Contact: support@cloudsmith.io
 */
 
@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// RepositoryGeoIPCountryCode struct for RepositoryGeoIPCountryCode
-type RepositoryGeoIPCountryCode struct {
+// RepositoryGeoIpCountryCode struct for RepositoryGeoIpCountryCode
+type RepositoryGeoIpCountryCode struct {
 	// The allowed country codes for this repository
 	Allow []string `json:"allow"`
 	// The denied country codes for this repository
 	Deny []string `json:"deny"`
 }
 
-// NewRepositoryGeoIPCountryCode instantiates a new RepositoryGeoIPCountryCode object
+// NewRepositoryGeoIpCountryCode instantiates a new RepositoryGeoIpCountryCode object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRepositoryGeoIPCountryCode(allow []string, deny []string) *RepositoryGeoIPCountryCode {
-	this := RepositoryGeoIPCountryCode{}
+func NewRepositoryGeoIpCountryCode(allow []string, deny []string) *RepositoryGeoIpCountryCode {
+	this := RepositoryGeoIpCountryCode{}
 	this.Allow = allow
 	this.Deny = deny
 	return &this
 }
 
-// NewRepositoryGeoIPCountryCodeWithDefaults instantiates a new RepositoryGeoIPCountryCode object
+// NewRepositoryGeoIpCountryCodeWithDefaults instantiates a new RepositoryGeoIpCountryCode object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRepositoryGeoIPCountryCodeWithDefaults() *RepositoryGeoIPCountryCode {
-	this := RepositoryGeoIPCountryCode{}
+func NewRepositoryGeoIpCountryCodeWithDefaults() *RepositoryGeoIpCountryCode {
+	this := RepositoryGeoIpCountryCode{}
 	return &this
 }
 
 // GetAllow returns the Allow field value
-func (o *RepositoryGeoIPCountryCode) GetAllow() []string {
+func (o *RepositoryGeoIpCountryCode) GetAllow() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -54,7 +54,7 @@ func (o *RepositoryGeoIPCountryCode) GetAllow() []string {
 
 // GetAllowOk returns a tuple with the Allow field value
 // and a boolean to check if the value has been set.
-func (o *RepositoryGeoIPCountryCode) GetAllowOk() ([]string, bool) {
+func (o *RepositoryGeoIpCountryCode) GetAllowOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -62,12 +62,12 @@ func (o *RepositoryGeoIPCountryCode) GetAllowOk() ([]string, bool) {
 }
 
 // SetAllow sets field value
-func (o *RepositoryGeoIPCountryCode) SetAllow(v []string) {
+func (o *RepositoryGeoIpCountryCode) SetAllow(v []string) {
 	o.Allow = v
 }
 
 // GetDeny returns the Deny field value
-func (o *RepositoryGeoIPCountryCode) GetDeny() []string {
+func (o *RepositoryGeoIpCountryCode) GetDeny() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -78,7 +78,7 @@ func (o *RepositoryGeoIPCountryCode) GetDeny() []string {
 
 // GetDenyOk returns a tuple with the Deny field value
 // and a boolean to check if the value has been set.
-func (o *RepositoryGeoIPCountryCode) GetDenyOk() ([]string, bool) {
+func (o *RepositoryGeoIpCountryCode) GetDenyOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -86,11 +86,11 @@ func (o *RepositoryGeoIPCountryCode) GetDenyOk() ([]string, bool) {
 }
 
 // SetDeny sets field value
-func (o *RepositoryGeoIPCountryCode) SetDeny(v []string) {
+func (o *RepositoryGeoIpCountryCode) SetDeny(v []string) {
 	o.Deny = v
 }
 
-func (o RepositoryGeoIPCountryCode) MarshalJSON() ([]byte, error) {
+func (o RepositoryGeoIpCountryCode) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["allow"] = o.Allow
@@ -101,38 +101,38 @@ func (o RepositoryGeoIPCountryCode) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableRepositoryGeoIPCountryCode struct {
-	value *RepositoryGeoIPCountryCode
+type NullableRepositoryGeoIpCountryCode struct {
+	value *RepositoryGeoIpCountryCode
 	isSet bool
 }
 
-func (v NullableRepositoryGeoIPCountryCode) Get() *RepositoryGeoIPCountryCode {
+func (v NullableRepositoryGeoIpCountryCode) Get() *RepositoryGeoIpCountryCode {
 	return v.value
 }
 
-func (v *NullableRepositoryGeoIPCountryCode) Set(val *RepositoryGeoIPCountryCode) {
+func (v *NullableRepositoryGeoIpCountryCode) Set(val *RepositoryGeoIpCountryCode) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRepositoryGeoIPCountryCode) IsSet() bool {
+func (v NullableRepositoryGeoIpCountryCode) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRepositoryGeoIPCountryCode) Unset() {
+func (v *NullableRepositoryGeoIpCountryCode) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRepositoryGeoIPCountryCode(val *RepositoryGeoIPCountryCode) *NullableRepositoryGeoIPCountryCode {
-	return &NullableRepositoryGeoIPCountryCode{value: val, isSet: true}
+func NewNullableRepositoryGeoIpCountryCode(val *RepositoryGeoIpCountryCode) *NullableRepositoryGeoIpCountryCode {
+	return &NullableRepositoryGeoIpCountryCode{value: val, isSet: true}
 }
 
-func (v NullableRepositoryGeoIPCountryCode) MarshalJSON() ([]byte, error) {
+func (v NullableRepositoryGeoIpCountryCode) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRepositoryGeoIPCountryCode) UnmarshalJSON(src []byte) error {
+func (v *NullableRepositoryGeoIpCountryCode) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

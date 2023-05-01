@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.249.1
+API version: 1.250.8
 Contact: support@cloudsmith.io
 */
 
@@ -649,15 +649,15 @@ type ApiReposGeoipPartialUpdateRequest struct {
 	ApiService *ReposApiService
 	owner      string
 	identifier string
-	data       *RepositoryGeoIPRulesRequestPatch
+	data       *RepositoryGeoIpRulesRequestPatch
 }
 
-func (r ApiReposGeoipPartialUpdateRequest) Data(data RepositoryGeoIPRulesRequestPatch) ApiReposGeoipPartialUpdateRequest {
+func (r ApiReposGeoipPartialUpdateRequest) Data(data RepositoryGeoIpRulesRequestPatch) ApiReposGeoipPartialUpdateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiReposGeoipPartialUpdateRequest) Execute() (*RepositoryGeoIPRules, *http.Response, error) {
+func (r ApiReposGeoipPartialUpdateRequest) Execute() (*RepositoryGeoIpRules, *http.Response, error) {
 	return r.ApiService.ReposGeoipPartialUpdateExecute(r)
 }
 
@@ -681,13 +681,13 @@ func (a *ReposApiService) ReposGeoipPartialUpdate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIPRules
-func (a *ReposApiService) ReposGeoipPartialUpdateExecute(r ApiReposGeoipPartialUpdateRequest) (*RepositoryGeoIPRules, *http.Response, error) {
+//  @return RepositoryGeoIpRules
+func (a *ReposApiService) ReposGeoipPartialUpdateExecute(r ApiReposGeoipPartialUpdateRequest) (*RepositoryGeoIpRules, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGeoIPRules
+		localVarReturnValue *RepositoryGeoIpRules
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGeoipPartialUpdate")
@@ -823,7 +823,7 @@ type ApiReposGeoipReadRequest struct {
 	identifier string
 }
 
-func (r ApiReposGeoipReadRequest) Execute() (*RepositoryGeoIPRules, *http.Response, error) {
+func (r ApiReposGeoipReadRequest) Execute() (*RepositoryGeoIpRules, *http.Response, error) {
 	return r.ApiService.ReposGeoipReadExecute(r)
 }
 
@@ -847,13 +847,13 @@ func (a *ReposApiService) ReposGeoipRead(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIPRules
-func (a *ReposApiService) ReposGeoipReadExecute(r ApiReposGeoipReadRequest) (*RepositoryGeoIPRules, *http.Response, error) {
+//  @return RepositoryGeoIpRules
+func (a *ReposApiService) ReposGeoipReadExecute(r ApiReposGeoipReadRequest) (*RepositoryGeoIpRules, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGeoIPRules
+		localVarReturnValue *RepositoryGeoIpRules
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGeoipRead")
@@ -985,15 +985,15 @@ type ApiReposGeoipTestRequest struct {
 	ApiService *ReposApiService
 	owner      string
 	identifier string
-	data       *RepositoryGeoIPTestAddress
+	data       *RepositoryGeoIpTestAddress
 }
 
-func (r ApiReposGeoipTestRequest) Data(data RepositoryGeoIPTestAddress) ApiReposGeoipTestRequest {
+func (r ApiReposGeoipTestRequest) Data(data RepositoryGeoIpTestAddress) ApiReposGeoipTestRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiReposGeoipTestRequest) Execute() (*RepositoryGeoIPTestAddressResponse, *http.Response, error) {
+func (r ApiReposGeoipTestRequest) Execute() (*RepositoryGeoIpTestAddressResponse, *http.Response, error) {
 	return r.ApiService.ReposGeoipTestExecute(r)
 }
 
@@ -1017,13 +1017,13 @@ func (a *ReposApiService) ReposGeoipTest(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIPTestAddressResponse
-func (a *ReposApiService) ReposGeoipTestExecute(r ApiReposGeoipTestRequest) (*RepositoryGeoIPTestAddressResponse, *http.Response, error) {
+//  @return RepositoryGeoIpTestAddressResponse
+func (a *ReposApiService) ReposGeoipTestExecute(r ApiReposGeoipTestRequest) (*RepositoryGeoIpTestAddressResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGeoIPTestAddressResponse
+		localVarReturnValue *RepositoryGeoIpTestAddressResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGeoipTest")
@@ -1157,15 +1157,15 @@ type ApiReposGeoipUpdateRequest struct {
 	ApiService *ReposApiService
 	owner      string
 	identifier string
-	data       *RepositoryGeoIPRulesRequest
+	data       *RepositoryGeoIpRulesRequest
 }
 
-func (r ApiReposGeoipUpdateRequest) Data(data RepositoryGeoIPRulesRequest) ApiReposGeoipUpdateRequest {
+func (r ApiReposGeoipUpdateRequest) Data(data RepositoryGeoIpRulesRequest) ApiReposGeoipUpdateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiReposGeoipUpdateRequest) Execute() (*RepositoryGeoIPRules, *http.Response, error) {
+func (r ApiReposGeoipUpdateRequest) Execute() (*RepositoryGeoIpRules, *http.Response, error) {
 	return r.ApiService.ReposGeoipUpdateExecute(r)
 }
 
@@ -1189,13 +1189,13 @@ func (a *ReposApiService) ReposGeoipUpdate(ctx context.Context, owner string, id
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIPRules
-func (a *ReposApiService) ReposGeoipUpdateExecute(r ApiReposGeoipUpdateRequest) (*RepositoryGeoIPRules, *http.Response, error) {
+//  @return RepositoryGeoIpRules
+func (a *ReposApiService) ReposGeoipUpdateExecute(r ApiReposGeoipUpdateRequest) (*RepositoryGeoIpRules, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *RepositoryGeoIPRules
+		localVarReturnValue *RepositoryGeoIpRules
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReposApiService.ReposGeoipUpdate")

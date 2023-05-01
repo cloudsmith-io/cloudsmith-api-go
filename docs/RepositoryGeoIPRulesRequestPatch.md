@@ -1,78 +1,78 @@
-# RepositoryGeoIPRulesRequestPatch
+# RepositoryGeoIpRulesRequestPatch
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Cidr** | Pointer to [**RepositoryGeoIPCidr**](RepositoryGeoIPCidr.md) |  | [optional] 
-**CountryCode** | Pointer to [**RepositoryGeoIPCountryCode**](RepositoryGeoIPCountryCode.md) |  | [optional] 
+**Cidr** | Pointer to [**RepositoryGeoIpCidr**](RepositoryGeoIpCidr.md) |  | [optional] 
+**CountryCode** | Pointer to [**RepositoryGeoIpCountryCode**](RepositoryGeoIpCountryCode.md) |  | [optional] 
 
 ## Methods
 
-### NewRepositoryGeoIPRulesRequestPatch
+### NewRepositoryGeoIpRulesRequestPatch
 
-`func NewRepositoryGeoIPRulesRequestPatch() *RepositoryGeoIPRulesRequestPatch`
+`func NewRepositoryGeoIpRulesRequestPatch() *RepositoryGeoIpRulesRequestPatch`
 
-NewRepositoryGeoIPRulesRequestPatch instantiates a new RepositoryGeoIPRulesRequestPatch object
+NewRepositoryGeoIpRulesRequestPatch instantiates a new RepositoryGeoIpRulesRequestPatch object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewRepositoryGeoIPRulesRequestPatchWithDefaults
+### NewRepositoryGeoIpRulesRequestPatchWithDefaults
 
-`func NewRepositoryGeoIPRulesRequestPatchWithDefaults() *RepositoryGeoIPRulesRequestPatch`
+`func NewRepositoryGeoIpRulesRequestPatchWithDefaults() *RepositoryGeoIpRulesRequestPatch`
 
-NewRepositoryGeoIPRulesRequestPatchWithDefaults instantiates a new RepositoryGeoIPRulesRequestPatch object
+NewRepositoryGeoIpRulesRequestPatchWithDefaults instantiates a new RepositoryGeoIpRulesRequestPatch object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetCidr
 
-`func (o *RepositoryGeoIPRulesRequestPatch) GetCidr() RepositoryGeoIPCidr`
+`func (o *RepositoryGeoIpRulesRequestPatch) GetCidr() RepositoryGeoIpCidr`
 
 GetCidr returns the Cidr field if non-nil, zero value otherwise.
 
 ### GetCidrOk
 
-`func (o *RepositoryGeoIPRulesRequestPatch) GetCidrOk() (*RepositoryGeoIPCidr, bool)`
+`func (o *RepositoryGeoIpRulesRequestPatch) GetCidrOk() (*RepositoryGeoIpCidr, bool)`
 
 GetCidrOk returns a tuple with the Cidr field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCidr
 
-`func (o *RepositoryGeoIPRulesRequestPatch) SetCidr(v RepositoryGeoIPCidr)`
+`func (o *RepositoryGeoIpRulesRequestPatch) SetCidr(v RepositoryGeoIpCidr)`
 
 SetCidr sets Cidr field to given value.
 
 ### HasCidr
 
-`func (o *RepositoryGeoIPRulesRequestPatch) HasCidr() bool`
+`func (o *RepositoryGeoIpRulesRequestPatch) HasCidr() bool`
 
 HasCidr returns a boolean if a field has been set.
 
 ### GetCountryCode
 
-`func (o *RepositoryGeoIPRulesRequestPatch) GetCountryCode() RepositoryGeoIPCountryCode`
+`func (o *RepositoryGeoIpRulesRequestPatch) GetCountryCode() RepositoryGeoIpCountryCode`
 
 GetCountryCode returns the CountryCode field if non-nil, zero value otherwise.
 
 ### GetCountryCodeOk
 
-`func (o *RepositoryGeoIPRulesRequestPatch) GetCountryCodeOk() (*RepositoryGeoIPCountryCode, bool)`
+`func (o *RepositoryGeoIpRulesRequestPatch) GetCountryCodeOk() (*RepositoryGeoIpCountryCode, bool)`
 
 GetCountryCodeOk returns a tuple with the CountryCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCountryCode
 
-`func (o *RepositoryGeoIPRulesRequestPatch) SetCountryCode(v RepositoryGeoIPCountryCode)`
+`func (o *RepositoryGeoIpRulesRequestPatch) SetCountryCode(v RepositoryGeoIpCountryCode)`
 
 SetCountryCode sets CountryCode field to given value.
 
 ### HasCountryCode
 
-`func (o *RepositoryGeoIPRulesRequestPatch) HasCountryCode() bool`
+`func (o *RepositoryGeoIpRulesRequestPatch) HasCountryCode() bool`
 
 HasCountryCode returns a boolean if a field has been set.
 

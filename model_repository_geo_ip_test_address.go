@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.249.1
+API version: 1.250.8
 Contact: support@cloudsmith.io
 */
 
@@ -15,32 +15,32 @@ import (
 	"encoding/json"
 )
 
-// RepositoryGeoIPTestAddress struct for RepositoryGeoIPTestAddress
-type RepositoryGeoIPTestAddress struct {
+// RepositoryGeoIpTestAddress struct for RepositoryGeoIpTestAddress
+type RepositoryGeoIpTestAddress struct {
 	// The IP addresses to test against this repository
 	Addresses []string `json:"addresses"`
 }
 
-// NewRepositoryGeoIPTestAddress instantiates a new RepositoryGeoIPTestAddress object
+// NewRepositoryGeoIpTestAddress instantiates a new RepositoryGeoIpTestAddress object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRepositoryGeoIPTestAddress(addresses []string) *RepositoryGeoIPTestAddress {
-	this := RepositoryGeoIPTestAddress{}
+func NewRepositoryGeoIpTestAddress(addresses []string) *RepositoryGeoIpTestAddress {
+	this := RepositoryGeoIpTestAddress{}
 	this.Addresses = addresses
 	return &this
 }
 
-// NewRepositoryGeoIPTestAddressWithDefaults instantiates a new RepositoryGeoIPTestAddress object
+// NewRepositoryGeoIpTestAddressWithDefaults instantiates a new RepositoryGeoIpTestAddress object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRepositoryGeoIPTestAddressWithDefaults() *RepositoryGeoIPTestAddress {
-	this := RepositoryGeoIPTestAddress{}
+func NewRepositoryGeoIpTestAddressWithDefaults() *RepositoryGeoIpTestAddress {
+	this := RepositoryGeoIpTestAddress{}
 	return &this
 }
 
 // GetAddresses returns the Addresses field value
-func (o *RepositoryGeoIPTestAddress) GetAddresses() []string {
+func (o *RepositoryGeoIpTestAddress) GetAddresses() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -51,7 +51,7 @@ func (o *RepositoryGeoIPTestAddress) GetAddresses() []string {
 
 // GetAddressesOk returns a tuple with the Addresses field value
 // and a boolean to check if the value has been set.
-func (o *RepositoryGeoIPTestAddress) GetAddressesOk() ([]string, bool) {
+func (o *RepositoryGeoIpTestAddress) GetAddressesOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -59,11 +59,11 @@ func (o *RepositoryGeoIPTestAddress) GetAddressesOk() ([]string, bool) {
 }
 
 // SetAddresses sets field value
-func (o *RepositoryGeoIPTestAddress) SetAddresses(v []string) {
+func (o *RepositoryGeoIpTestAddress) SetAddresses(v []string) {
 	o.Addresses = v
 }
 
-func (o RepositoryGeoIPTestAddress) MarshalJSON() ([]byte, error) {
+func (o RepositoryGeoIpTestAddress) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["addresses"] = o.Addresses
@@ -71,38 +71,38 @@ func (o RepositoryGeoIPTestAddress) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableRepositoryGeoIPTestAddress struct {
-	value *RepositoryGeoIPTestAddress
+type NullableRepositoryGeoIpTestAddress struct {
+	value *RepositoryGeoIpTestAddress
 	isSet bool
 }
 
-func (v NullableRepositoryGeoIPTestAddress) Get() *RepositoryGeoIPTestAddress {
+func (v NullableRepositoryGeoIpTestAddress) Get() *RepositoryGeoIpTestAddress {
 	return v.value
 }
 
-func (v *NullableRepositoryGeoIPTestAddress) Set(val *RepositoryGeoIPTestAddress) {
+func (v *NullableRepositoryGeoIpTestAddress) Set(val *RepositoryGeoIpTestAddress) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRepositoryGeoIPTestAddress) IsSet() bool {
+func (v NullableRepositoryGeoIpTestAddress) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRepositoryGeoIPTestAddress) Unset() {
+func (v *NullableRepositoryGeoIpTestAddress) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRepositoryGeoIPTestAddress(val *RepositoryGeoIPTestAddress) *NullableRepositoryGeoIPTestAddress {
-	return &NullableRepositoryGeoIPTestAddress{value: val, isSet: true}
+func NewNullableRepositoryGeoIpTestAddress(val *RepositoryGeoIpTestAddress) *NullableRepositoryGeoIpTestAddress {
+	return &NullableRepositoryGeoIpTestAddress{value: val, isSet: true}
 }
 
-func (v NullableRepositoryGeoIPTestAddress) MarshalJSON() ([]byte, error) {
+func (v NullableRepositoryGeoIpTestAddress) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRepositoryGeoIPTestAddress) UnmarshalJSON(src []byte) error {
+func (v *NullableRepositoryGeoIpTestAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
