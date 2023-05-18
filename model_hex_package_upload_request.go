@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// DockerPackageUploadRequest struct for DockerPackageUploadRequest
-type DockerPackageUploadRequest struct {
+// HexPackageUploadRequest struct for HexPackageUploadRequest
+type HexPackageUploadRequest struct {
 	// The primary file for the package.
 	PackageFile string `json:"package_file"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
@@ -25,26 +25,26 @@ type DockerPackageUploadRequest struct {
 	Tags NullableString `json:"tags,omitempty"`
 }
 
-// NewDockerPackageUploadRequest instantiates a new DockerPackageUploadRequest object
+// NewHexPackageUploadRequest instantiates a new HexPackageUploadRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDockerPackageUploadRequest(packageFile string) *DockerPackageUploadRequest {
-	this := DockerPackageUploadRequest{}
+func NewHexPackageUploadRequest(packageFile string) *HexPackageUploadRequest {
+	this := HexPackageUploadRequest{}
 	this.PackageFile = packageFile
 	return &this
 }
 
-// NewDockerPackageUploadRequestWithDefaults instantiates a new DockerPackageUploadRequest object
+// NewHexPackageUploadRequestWithDefaults instantiates a new HexPackageUploadRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDockerPackageUploadRequestWithDefaults() *DockerPackageUploadRequest {
-	this := DockerPackageUploadRequest{}
+func NewHexPackageUploadRequestWithDefaults() *HexPackageUploadRequest {
+	this := HexPackageUploadRequest{}
 	return &this
 }
 
 // GetPackageFile returns the PackageFile field value
-func (o *DockerPackageUploadRequest) GetPackageFile() string {
+func (o *HexPackageUploadRequest) GetPackageFile() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -55,7 +55,7 @@ func (o *DockerPackageUploadRequest) GetPackageFile() string {
 
 // GetPackageFileOk returns a tuple with the PackageFile field value
 // and a boolean to check if the value has been set.
-func (o *DockerPackageUploadRequest) GetPackageFileOk() (*string, bool) {
+func (o *HexPackageUploadRequest) GetPackageFileOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,12 +63,12 @@ func (o *DockerPackageUploadRequest) GetPackageFileOk() (*string, bool) {
 }
 
 // SetPackageFile sets field value
-func (o *DockerPackageUploadRequest) SetPackageFile(v string) {
+func (o *HexPackageUploadRequest) SetPackageFile(v string) {
 	o.PackageFile = v
 }
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
-func (o *DockerPackageUploadRequest) GetRepublish() bool {
+func (o *HexPackageUploadRequest) GetRepublish() bool {
 	if o == nil || isNil(o.Republish) {
 		var ret bool
 		return ret
@@ -78,7 +78,7 @@ func (o *DockerPackageUploadRequest) GetRepublish() bool {
 
 // GetRepublishOk returns a tuple with the Republish field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DockerPackageUploadRequest) GetRepublishOk() (*bool, bool) {
+func (o *HexPackageUploadRequest) GetRepublishOk() (*bool, bool) {
 	if o == nil || isNil(o.Republish) {
 		return nil, false
 	}
@@ -86,7 +86,7 @@ func (o *DockerPackageUploadRequest) GetRepublishOk() (*bool, bool) {
 }
 
 // HasRepublish returns a boolean if a field has been set.
-func (o *DockerPackageUploadRequest) HasRepublish() bool {
+func (o *HexPackageUploadRequest) HasRepublish() bool {
 	if o != nil && !isNil(o.Republish) {
 		return true
 	}
@@ -95,12 +95,12 @@ func (o *DockerPackageUploadRequest) HasRepublish() bool {
 }
 
 // SetRepublish gets a reference to the given bool and assigns it to the Republish field.
-func (o *DockerPackageUploadRequest) SetRepublish(v bool) {
+func (o *HexPackageUploadRequest) SetRepublish(v bool) {
 	o.Republish = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DockerPackageUploadRequest) GetTags() string {
+func (o *HexPackageUploadRequest) GetTags() string {
 	if o == nil || isNil(o.Tags.Get()) {
 		var ret string
 		return ret
@@ -111,7 +111,7 @@ func (o *DockerPackageUploadRequest) GetTags() string {
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DockerPackageUploadRequest) GetTagsOk() (*string, bool) {
+func (o *HexPackageUploadRequest) GetTagsOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -119,7 +119,7 @@ func (o *DockerPackageUploadRequest) GetTagsOk() (*string, bool) {
 }
 
 // HasTags returns a boolean if a field has been set.
-func (o *DockerPackageUploadRequest) HasTags() bool {
+func (o *HexPackageUploadRequest) HasTags() bool {
 	if o != nil && o.Tags.IsSet() {
 		return true
 	}
@@ -128,21 +128,21 @@ func (o *DockerPackageUploadRequest) HasTags() bool {
 }
 
 // SetTags gets a reference to the given NullableString and assigns it to the Tags field.
-func (o *DockerPackageUploadRequest) SetTags(v string) {
+func (o *HexPackageUploadRequest) SetTags(v string) {
 	o.Tags.Set(&v)
 }
 
 // SetTagsNil sets the value for Tags to be an explicit nil
-func (o *DockerPackageUploadRequest) SetTagsNil() {
+func (o *HexPackageUploadRequest) SetTagsNil() {
 	o.Tags.Set(nil)
 }
 
 // UnsetTags ensures that no value is present for Tags, not even an explicit nil
-func (o *DockerPackageUploadRequest) UnsetTags() {
+func (o *HexPackageUploadRequest) UnsetTags() {
 	o.Tags.Unset()
 }
 
-func (o DockerPackageUploadRequest) MarshalJSON() ([]byte, error) {
+func (o HexPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["package_file"] = o.PackageFile
@@ -156,38 +156,38 @@ func (o DockerPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableDockerPackageUploadRequest struct {
-	value *DockerPackageUploadRequest
+type NullableHexPackageUploadRequest struct {
+	value *HexPackageUploadRequest
 	isSet bool
 }
 
-func (v NullableDockerPackageUploadRequest) Get() *DockerPackageUploadRequest {
+func (v NullableHexPackageUploadRequest) Get() *HexPackageUploadRequest {
 	return v.value
 }
 
-func (v *NullableDockerPackageUploadRequest) Set(val *DockerPackageUploadRequest) {
+func (v *NullableHexPackageUploadRequest) Set(val *HexPackageUploadRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDockerPackageUploadRequest) IsSet() bool {
+func (v NullableHexPackageUploadRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDockerPackageUploadRequest) Unset() {
+func (v *NullableHexPackageUploadRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDockerPackageUploadRequest(val *DockerPackageUploadRequest) *NullableDockerPackageUploadRequest {
-	return &NullableDockerPackageUploadRequest{value: val, isSet: true}
+func NewNullableHexPackageUploadRequest(val *HexPackageUploadRequest) *NullableHexPackageUploadRequest {
+	return &NullableHexPackageUploadRequest{value: val, isSet: true}
 }
 
-func (v NullableDockerPackageUploadRequest) MarshalJSON() ([]byte, error) {
+func (v NullableHexPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDockerPackageUploadRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableHexPackageUploadRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

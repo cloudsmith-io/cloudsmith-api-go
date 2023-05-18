@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.250.8
+API version: 1.266.1
 Contact: support@cloudsmith.io
 */
 
@@ -353,7 +353,7 @@ type ApiVulnerabilitiesReadRequest struct {
 	owner      string
 	repo       string
 	package_   string
-	scanId     string
+	identifier string
 }
 
 func (r ApiVulnerabilitiesReadRequest) Execute() (*VulnerabilityScanResults, *http.Response, error) {
@@ -361,25 +361,25 @@ func (r ApiVulnerabilitiesReadRequest) Execute() (*VulnerabilityScanResults, *ht
 }
 
 /*
-VulnerabilitiesRead Returns a Scan Result.
+VulnerabilitiesRead Get a scan result.
 
-Returns a Scan Result.
+Get a scan result.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
  @param repo
  @param package_
- @param scanId
+ @param identifier
  @return ApiVulnerabilitiesReadRequest
 */
-func (a *VulnerabilitiesApiService) VulnerabilitiesRead(ctx context.Context, owner string, repo string, package_ string, scanId string) ApiVulnerabilitiesReadRequest {
+func (a *VulnerabilitiesApiService) VulnerabilitiesRead(ctx context.Context, owner string, repo string, package_ string, identifier string) ApiVulnerabilitiesReadRequest {
 	return ApiVulnerabilitiesReadRequest{
 		ApiService: a,
 		ctx:        ctx,
 		owner:      owner,
 		repo:       repo,
 		package_:   package_,
-		scanId:     scanId,
+		identifier: identifier,
 	}
 }
 
@@ -398,11 +398,11 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesReadExecute(r ApiVulnerabilit
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/vulnerabilities/{owner}/{repo}/{package}/{scan_id}/"
+	localVarPath := localBasePath + "/vulnerabilities/{owner}/{repo}/{package}/{identifier}/"
 	localVarPath = strings.Replace(localVarPath, "{"+"owner"+"}", url.PathEscape(parameterToString(r.owner, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"repo"+"}", url.PathEscape(parameterToString(r.repo, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"package"+"}", url.PathEscape(parameterToString(r.package_, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"scan_id"+"}", url.PathEscape(parameterToString(r.scanId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"identifier"+"}", url.PathEscape(parameterToString(r.identifier, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

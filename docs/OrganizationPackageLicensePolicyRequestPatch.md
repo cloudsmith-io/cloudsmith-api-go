@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **OnViolationQuarantine** | Pointer to **bool** |  | [optional] 
+**PackageQueryString** | Pointer to **NullableString** |  | [optional] 
 **SpdxIdentifiers** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
@@ -139,6 +140,41 @@ SetOnViolationQuarantine sets OnViolationQuarantine field to given value.
 
 HasOnViolationQuarantine returns a boolean if a field has been set.
 
+### GetPackageQueryString
+
+`func (o *OrganizationPackageLicensePolicyRequestPatch) GetPackageQueryString() string`
+
+GetPackageQueryString returns the PackageQueryString field if non-nil, zero value otherwise.
+
+### GetPackageQueryStringOk
+
+`func (o *OrganizationPackageLicensePolicyRequestPatch) GetPackageQueryStringOk() (*string, bool)`
+
+GetPackageQueryStringOk returns a tuple with the PackageQueryString field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPackageQueryString
+
+`func (o *OrganizationPackageLicensePolicyRequestPatch) SetPackageQueryString(v string)`
+
+SetPackageQueryString sets PackageQueryString field to given value.
+
+### HasPackageQueryString
+
+`func (o *OrganizationPackageLicensePolicyRequestPatch) HasPackageQueryString() bool`
+
+HasPackageQueryString returns a boolean if a field has been set.
+
+### SetPackageQueryStringNil
+
+`func (o *OrganizationPackageLicensePolicyRequestPatch) SetPackageQueryStringNil(b bool)`
+
+ SetPackageQueryStringNil sets the value for PackageQueryString to be an explicit nil
+
+### UnsetPackageQueryString
+`func (o *OrganizationPackageLicensePolicyRequestPatch) UnsetPackageQueryString()`
+
+UnsetPackageQueryString ensures that no value is present for PackageQueryString, not even an explicit nil
 ### GetSpdxIdentifiers
 
 `func (o *OrganizationPackageLicensePolicyRequestPatch) GetSpdxIdentifiers() []string`

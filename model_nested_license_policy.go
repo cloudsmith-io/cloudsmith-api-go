@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.250.8
+API version: 1.266.1
 Contact: support@cloudsmith.io
 */
 
@@ -23,6 +23,7 @@ type NestedLicensePolicy struct {
 	Description           NullableString `json:"description,omitempty"`
 	Name                  *string        `json:"name,omitempty"`
 	OnViolationQuarantine *bool          `json:"on_violation_quarantine,omitempty"`
+	PackageQueryString    NullableString `json:"package_query_string,omitempty"`
 	SlugPerm              *string        `json:"slug_perm,omitempty"`
 	SpdxIdentifiers       []string       `json:"spdx_identifiers"`
 	UpdatedAt             *time.Time     `json:"updated_at,omitempty"`
@@ -218,6 +219,49 @@ func (o *NestedLicensePolicy) SetOnViolationQuarantine(v bool) {
 	o.OnViolationQuarantine = &v
 }
 
+// GetPackageQueryString returns the PackageQueryString field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NestedLicensePolicy) GetPackageQueryString() string {
+	if o == nil || isNil(o.PackageQueryString.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PackageQueryString.Get()
+}
+
+// GetPackageQueryStringOk returns a tuple with the PackageQueryString field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NestedLicensePolicy) GetPackageQueryStringOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PackageQueryString.Get(), o.PackageQueryString.IsSet()
+}
+
+// HasPackageQueryString returns a boolean if a field has been set.
+func (o *NestedLicensePolicy) HasPackageQueryString() bool {
+	if o != nil && o.PackageQueryString.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPackageQueryString gets a reference to the given NullableString and assigns it to the PackageQueryString field.
+func (o *NestedLicensePolicy) SetPackageQueryString(v string) {
+	o.PackageQueryString.Set(&v)
+}
+
+// SetPackageQueryStringNil sets the value for PackageQueryString to be an explicit nil
+func (o *NestedLicensePolicy) SetPackageQueryStringNil() {
+	o.PackageQueryString.Set(nil)
+}
+
+// UnsetPackageQueryString ensures that no value is present for PackageQueryString, not even an explicit nil
+func (o *NestedLicensePolicy) UnsetPackageQueryString() {
+	o.PackageQueryString.Unset()
+}
+
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *NestedLicensePolicy) GetSlugPerm() string {
 	if o == nil || isNil(o.SlugPerm) {
@@ -354,6 +398,9 @@ func (o NestedLicensePolicy) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.OnViolationQuarantine) {
 		toSerialize["on_violation_quarantine"] = o.OnViolationQuarantine
+	}
+	if o.PackageQueryString.IsSet() {
+		toSerialize["package_query_string"] = o.PackageQueryString.Get()
 	}
 	if !isNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm

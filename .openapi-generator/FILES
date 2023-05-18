@@ -70,6 +70,8 @@ docs/GoPackageUpload.md
 docs/GoPackageUploadRequest.md
 docs/HelmPackageUpload.md
 docs/HelmPackageUploadRequest.md
+docs/HexPackageUpload.md
+docs/HexPackageUploadRequest.md
 docs/History.md
 docs/HistoryFieldset.md
 docs/HistoryFieldsetRaw.md
@@ -260,6 +262,8 @@ model_go_package_upload.go
 model_go_package_upload_request.go
 model_helm_package_upload.go
 model_helm_package_upload_request.go
+model_hex_package_upload.go
+model_hex_package_upload_request.go
 model_history.go
 model_history_fieldset.go
 model_history_fieldset_raw.go

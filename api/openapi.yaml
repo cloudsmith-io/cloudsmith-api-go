@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.250.8
+  version: 1.266.1
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -4023,6 +4023,58 @@ paths:
       tags:
       - packages
       x-codegen-request-body-name: data
+  /packages/{owner}/{repo}/upload/hex/:
+    post:
+      description: Create a new Hex package
+      operationId: packages_upload_hex
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HexPackageUploadRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HexPackageUpload'
+          description: Upload acknowledged and queued for synchronisation.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Namespace (owner) or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Create a new Hex package
+      tags:
+      - packages
+      x-codegen-request-body-name: data
   /packages/{owner}/{repo}/upload/luarocks/:
     post:
       description: Create a new LuaRocks package
@@ -5180,6 +5232,55 @@ paths:
       security:
       - apikey: []
       summary: Validate parameters for create Helm package
+      tags:
+      - packages
+      x-codegen-request-body-name: data
+  /packages/{owner}/{repo}/validate-upload/hex/:
+    post:
+      description: Validate parameters for create Hex package
+      operationId: packages_validate-upload_hex
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HexPackageUploadRequest'
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: "Validation was successful, parameters are OK."
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Namespace (owner) or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Validate parameters for create Hex package
       tags:
       - packages
       x-codegen-request-body-name: data
@@ -7741,9 +7842,9 @@ paths:
       summary: Lists scan results for a specific package.
       tags:
       - vulnerabilities
-  /vulnerabilities/{owner}/{repo}/{package}/{scan_id}/:
+  /vulnerabilities/{owner}/{repo}/{package}/{identifier}/:
     get:
-      description: Returns a Scan Result.
+      description: Get a scan result.
       operationId: vulnerabilities_read
       parameters:
       - in: path
@@ -7762,7 +7863,7 @@ paths:
         schema:
           type: string
       - in: path
-        name: scan_id
+        name: identifier
         required: true
         schema:
           type: string
@@ -7787,7 +7888,7 @@ paths:
           description: Missing or invalid parameters (see detail).
       security:
       - apikey: []
-      summary: Returns a Scan Result.
+      summary: Get a scan result.
       tags:
       - vulnerabilities
   /webhooks/{owner}/{repo}/:
@@ -8397,10 +8498,9 @@ components:
             commit in a repository.
           maximum: 2147483647
           minimum: 0
+          nullable: true
           title: Number
           type: integer
-      required:
-      - number
       type: object
       x-nullable: true
     RepositoryToken:
@@ -8510,6 +8610,10 @@ components:
           title: Has limits
           type: boolean
         identifier:
+          description: "Deprecated (23-05-15): Please use 'slug_perm' instead. Previously:\
+            \ A monotonically increasing number that identified an entitlement within\
+            \ a repository."
+          nullable: true
           readOnly: true
           title: Identifier
           type: integer
@@ -9326,6 +9430,10 @@ components:
           title: Has limits
           type: boolean
         identifier:
+          description: "Deprecated (23-05-15): Please use 'slug_perm' instead. Previously:\
+            \ A monotonically increasing number that identified an entitlement within\
+            \ a repository."
+          nullable: true
           readOnly: true
           title: Identifier
           type: integer
@@ -10297,6 +10405,7 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         description: description
         on_violation_quarantine: true
+        package_query_string: package_query_string
         slug_perm: slug_perm
         url: https://openapi-generator.tech
       properties:
@@ -10324,6 +10433,12 @@ components:
           readOnly: true
           title: On violation quarantine
           type: boolean
+        package_query_string:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Package query string
+          type: string
         slug_perm:
           format: slug
           minLength: 1
@@ -10370,6 +10485,7 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           description: description
           on_violation_quarantine: true
+          package_query_string: package_query_string
           slug_perm: slug_perm
           url: https://openapi-generator.tech
       properties:
@@ -10403,6 +10519,7 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         description: description
         on_violation_quarantine: true
+        package_query_string: package_query_string
         slug_perm: slug_perm
       properties:
         allow_unknown_licenses:
@@ -10427,6 +10544,11 @@ components:
         on_violation_quarantine:
           title: On violation quarantine
           type: boolean
+        package_query_string:
+          minLength: 1
+          nullable: true
+          title: Package query string
+          type: string
         slug_perm:
           format: slug
           minLength: 1
@@ -10457,6 +10579,7 @@ components:
         name: name
         description: description
         on_violation_quarantine: true
+        package_query_string: package_query_string
       properties:
         allow_unknown_licenses:
           title: Allow unknown licenses
@@ -10475,6 +10598,11 @@ components:
         on_violation_quarantine:
           title: On violation quarantine
           type: boolean
+        package_query_string:
+          minLength: 1
+          nullable: true
+          title: Package query string
+          type: string
         spdx_identifiers:
           items:
             type: string
@@ -10493,6 +10621,7 @@ components:
         name: name
         description: description
         on_violation_quarantine: true
+        package_query_string: package_query_string
       properties:
         allow_unknown_licenses:
           title: Allow unknown licenses
@@ -10511,6 +10640,11 @@ components:
         on_violation_quarantine:
           title: On violation quarantine
           type: boolean
+        package_query_string:
+          minLength: 1
+          nullable: true
+          title: Package query string
+          type: string
         spdx_identifiers:
           items:
             type: string
@@ -10978,6 +11112,7 @@ components:
         description: description
         on_violation_quarantine: true
         min_severity: Critical
+        package_query_string: package_query_string
         slug_perm: slug_perm
         url: https://openapi-generator.tech
       properties:
@@ -11016,6 +11151,12 @@ components:
           readOnly: true
           title: On violation quarantine
           type: boolean
+        package_query_string:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Package query string
+          type: string
         slug_perm:
           format: slug
           minLength: 1
@@ -11073,6 +11214,9 @@ components:
           title: Num vulnerabilities
           type: integer
         scan_id:
+          description: "Deprecated (23-05-15): Please use 'identifier' instead. Previously:\
+            \ A monotonically increasing number that identified a scan within a repository."
+          nullable: true
           title: Scan id
           type: integer
         url:
@@ -11111,6 +11255,7 @@ components:
           description: description
           on_violation_quarantine: true
           min_severity: Critical
+          package_query_string: package_query_string
           slug_perm: slug_perm
           url: https://openapi-generator.tech
       properties:
@@ -11145,6 +11290,7 @@ components:
         description: description
         on_violation_quarantine: true
         min_severity: Critical
+        package_query_string: package_query_string
         slug_perm: slug_perm
       properties:
         allow_unknown_severity:
@@ -11180,6 +11326,11 @@ components:
         on_violation_quarantine:
           title: On violation quarantine
           type: boolean
+        package_query_string:
+          minLength: 1
+          nullable: true
+          title: Package query string
+          type: string
         slug_perm:
           format: slug
           minLength: 1
@@ -11202,6 +11353,7 @@ components:
         description: description
         on_violation_quarantine: true
         min_severity: Critical
+        package_query_string: package_query_string
       properties:
         allow_unknown_severity:
           description: Denotes whether vulnerabilities detected by a security scan
@@ -11231,6 +11383,11 @@ components:
         on_violation_quarantine:
           title: On violation quarantine
           type: boolean
+        package_query_string:
+          minLength: 1
+          nullable: true
+          title: Package query string
+          type: string
       required:
       - name
       type: object
@@ -11241,6 +11398,7 @@ components:
         description: description
         on_violation_quarantine: true
         min_severity: Critical
+        package_query_string: package_query_string
       properties:
         allow_unknown_severity:
           description: Denotes whether vulnerabilities detected by a security scan
@@ -11270,6 +11428,11 @@ components:
         on_violation_quarantine:
           title: On violation quarantine
           type: boolean
+        package_query_string:
+          minLength: 1
+          nullable: true
+          title: Package query string
+          type: string
       type: object
     Architecture:
       example:
@@ -17340,6 +17503,494 @@ components:
       - package_file
       type: object
     HelmPackageUpload:
+      example:
+        architectures:
+        - name: name
+          description: description
+        - name: name
+          description: description
+        security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
+        checksum_sha256: checksum_sha256
+        release: release
+        package_type: 5
+        repository: repository
+        origin_repository: origin_repository
+        identifier_perm: identifier_perm
+        stage_updated_at: 2000-01-23T04:56:07.000+00:00
+        tags_immutable: "{}"
+        is_quarantined: true
+        slug: slug
+        security_scan_started_at: 2000-01-23T04:56:07.000+00:00
+        security_scan_status: Awaiting Security Scan
+        indexed: true
+        format: format
+        status_str: status_str
+        version_orig: version_orig
+        namespace_url: https://openapi-generator.tech
+        slug_perm: slug_perm
+        version: version
+        license: license
+        filename: filename
+        size: 5
+        cdn_url: cdn_url
+        uploaded_at: 2000-01-23T04:56:07.000+00:00
+        is_downloadable: true
+        name: name
+        sync_finished_at: 2000-01-23T04:56:07.000+00:00
+        files:
+        - checksum_sha512: checksum_sha512
+          checksum_sha1: checksum_sha1
+          checksum_sha256: checksum_sha256
+          is_primary: true
+          checksum_md5: checksum_md5
+          slug_perm: slug_perm
+          filename: filename
+          size: 5
+          cdn_url: cdn_url
+          downloads: 1
+          is_synchronised: true
+          is_downloadable: true
+          signature_url: signature_url
+          tag: tag
+        - checksum_sha512: checksum_sha512
+          checksum_sha1: checksum_sha1
+          checksum_sha256: checksum_sha256
+          is_primary: true
+          checksum_md5: checksum_md5
+          slug_perm: slug_perm
+          filename: filename
+          size: 5
+          cdn_url: cdn_url
+          downloads: 1
+          is_synchronised: true
+          is_downloadable: true
+          signature_url: signature_url
+          tag: tag
+        num_files: 1
+        status: 7
+        checksum_sha512: checksum_sha512
+        distro:
+          name: name
+          variants: variants
+          self_url: https://openapi-generator.tech
+          slug: slug
+        extension: extension
+        description: description
+        epoch: 6
+        is_sync_completed: true
+        distro_version:
+          name: name
+          slug: slug
+        type_display: type_display
+        vulnerability_scan_results_url: https://openapi-generator.tech
+        dependencies_checksum_md5: dependencies_checksum_md5
+        downloads: 0
+        subtype: subtype
+        uploader: uploader
+        signature_url: signature_url
+        repository_url: https://openapi-generator.tech
+        status_reason: status_reason
+        status_updated_at: 2000-01-23T04:56:07.000+00:00
+        summary: summary
+        checksum_sha1: checksum_sha1
+        checksum_md5: checksum_md5
+        sync_progress: 9
+        is_sync_awaiting: true
+        uploader_url: https://openapi-generator.tech
+        self_html_url: self_html_url
+        origin_repository_url: https://openapi-generator.tech
+        self_url: https://openapi-generator.tech
+        status_url: https://openapi-generator.tech
+        is_sync_in_flight: true
+        security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
+        is_sync_in_progress: true
+        stage_str: stage_str
+        stage: 2
+        format_url: https://openapi-generator.tech
+        dependencies_url: https://openapi-generator.tech
+        namespace: namespace
+        is_sync_failed: true
+      properties:
+        architectures:
+          items:
+            $ref: '#/components/schemas/Architecture'
+          readOnly: true
+          type: array
+        cdn_url:
+          nullable: true
+          readOnly: true
+          title: Cdn url
+          type: string
+        checksum_md5:
+          readOnly: true
+          title: Checksum md5
+          type: string
+        checksum_sha1:
+          readOnly: true
+          title: Checksum sha1
+          type: string
+        checksum_sha256:
+          readOnly: true
+          title: Checksum sha256
+          type: string
+        checksum_sha512:
+          readOnly: true
+          title: Checksum sha512
+          type: string
+        dependencies_checksum_md5:
+          description: A checksum of all of the package's dependencies.
+          nullable: true
+          readOnly: true
+          title: Dependencies checksum md5
+          type: string
+        dependencies_url:
+          format: uri
+          readOnly: true
+          title: Dependencies url
+          type: string
+        description:
+          description: A textual description of this package.
+          nullable: true
+          readOnly: true
+          title: Description
+          type: string
+        distro:
+          $ref: '#/components/schemas/Distribution'
+        distro_version:
+          $ref: '#/components/schemas/DistributionVersion'
+        downloads:
+          readOnly: true
+          title: Downloads
+          type: integer
+        epoch:
+          description: The epoch of the package version (if any).
+          nullable: true
+          readOnly: true
+          title: Epoch
+          type: integer
+        extension:
+          readOnly: true
+          title: Extension
+          type: string
+        filename:
+          minLength: 1
+          readOnly: true
+          title: Filename
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/PackageFile'
+          readOnly: true
+          type: array
+        format:
+          minLength: 1
+          readOnly: true
+          title: Format
+          type: string
+        format_url:
+          format: uri
+          readOnly: true
+          title: Format url
+          type: string
+        identifier_perm:
+          description: Unique and permanent identifier for the package.
+          minLength: 1
+          readOnly: true
+          title: Identifier perm
+          type: string
+        indexed:
+          readOnly: true
+          title: Indexed
+          type: boolean
+        is_downloadable:
+          readOnly: true
+          title: Is downloadable
+          type: boolean
+        is_quarantined:
+          readOnly: true
+          title: Is quarantined
+          type: boolean
+        is_sync_awaiting:
+          readOnly: true
+          title: Is sync awaiting
+          type: boolean
+        is_sync_completed:
+          readOnly: true
+          title: Is sync completed
+          type: boolean
+        is_sync_failed:
+          readOnly: true
+          title: Is sync failed
+          type: boolean
+        is_sync_in_flight:
+          readOnly: true
+          title: Is sync in flight
+          type: boolean
+        is_sync_in_progress:
+          readOnly: true
+          title: Is sync in progress
+          type: boolean
+        license:
+          description: The license of this package.
+          nullable: true
+          readOnly: true
+          title: License
+          type: string
+        name:
+          description: The name of this package.
+          nullable: true
+          readOnly: true
+          title: Name
+          type: string
+        namespace:
+          minLength: 1
+          readOnly: true
+          title: Namespace
+          type: string
+        namespace_url:
+          format: uri
+          readOnly: true
+          title: Namespace url
+          type: string
+        num_files:
+          readOnly: true
+          title: Num files
+          type: integer
+        origin_repository:
+          minLength: 1
+          readOnly: true
+          title: Origin repository
+          type: string
+        origin_repository_url:
+          format: uri
+          readOnly: true
+          title: Origin repository url
+          type: string
+        package_type:
+          description: The type of package contents.
+          readOnly: true
+          title: Package type
+          type: integer
+        release:
+          description: The release of the package version (if any).
+          nullable: true
+          readOnly: true
+          title: Release
+          type: string
+        repository:
+          minLength: 1
+          readOnly: true
+          title: Repository
+          type: string
+        repository_url:
+          format: uri
+          readOnly: true
+          title: Repository url
+          type: string
+        security_scan_completed_at:
+          description: The datetime the security scanning was completed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan completed at
+          type: string
+        security_scan_started_at:
+          description: The datetime the security scanning was started.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan started at
+          type: string
+        security_scan_status:
+          default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
+          nullable: true
+          readOnly: true
+          title: Security scan status
+          type: string
+        security_scan_status_updated_at:
+          description: The datetime the security scanning status was updated.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan status updated at
+          type: string
+        self_html_url:
+          minLength: 1
+          readOnly: true
+          title: Self html url
+          type: string
+        self_url:
+          format: uri
+          readOnly: true
+          title: Self url
+          type: string
+        signature_url:
+          nullable: true
+          readOnly: true
+          title: Signature url
+          type: string
+        size:
+          description: The calculated size of the package.
+          readOnly: true
+          title: Size
+          type: integer
+        slug:
+          description: The public unique identifier for the package.
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug
+          type: string
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        stage:
+          description: The synchronisation (in progress) stage of the package.
+          readOnly: true
+          title: Stage
+          type: integer
+        stage_str:
+          readOnly: true
+          title: Stage str
+          type: string
+        stage_updated_at:
+          description: The datetime the package stage was updated at.
+          format: date-time
+          readOnly: true
+          title: Stage updated at
+          type: string
+        status:
+          description: The synchronisation status of the package.
+          readOnly: true
+          title: Status
+          type: integer
+        status_reason:
+          description: A textual description for the synchronous status reason (if
+            any
+          nullable: true
+          readOnly: true
+          title: Status reason
+          type: string
+        status_str:
+          readOnly: true
+          title: Status str
+          type: string
+        status_updated_at:
+          description: The datetime the package status was updated at.
+          format: date-time
+          readOnly: true
+          title: Status updated at
+          type: string
+        status_url:
+          format: uri
+          readOnly: true
+          title: Status url
+          type: string
+        subtype:
+          readOnly: true
+          title: Subtype
+          type: string
+        summary:
+          description: A one-liner synopsis of this package.
+          nullable: true
+          readOnly: true
+          title: Summary
+          type: string
+        sync_finished_at:
+          description: The datetime the package sync was finished at.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Sync finished at
+          type: string
+        sync_progress:
+          description: Synchronisation progress (from 0-100)
+          readOnly: true
+          title: Sync progress
+          type: integer
+        tags_immutable:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
+        type_display:
+          readOnly: true
+          title: Type display
+          type: string
+        uploaded_at:
+          description: The date this package was uploaded.
+          format: date-time
+          readOnly: true
+          title: Uploaded at
+          type: string
+        uploader:
+          minLength: 1
+          readOnly: true
+          title: Uploader
+          type: string
+        uploader_url:
+          format: uri
+          readOnly: true
+          title: Uploader url
+          type: string
+        version:
+          description: The raw version for this package.
+          nullable: true
+          readOnly: true
+          title: Version
+          type: string
+        version_orig:
+          readOnly: true
+          title: Version orig
+          type: string
+        vulnerability_scan_results_url:
+          format: uri
+          readOnly: true
+          title: Vulnerability scan results url
+          type: string
+      type: object
+    HexPackageUploadRequest:
+      example:
+        republish: true
+        package_file: package_file
+        tags: tags
+      properties:
+        package_file:
+          description: The primary file for the package.
+          minLength: 1
+          title: Package file
+          type: string
+        republish:
+          description: "If true, the uploaded package will overwrite any others with\
+            \ the same attributes (e.g. same version); otherwise, it will be flagged\
+            \ as a duplicate."
+          title: Republish
+          type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          maxLength: 1024
+          minLength: 1
+          nullable: true
+          title: Tags
+          type: string
+      required:
+      - package_file
+      type: object
+    HexPackageUpload:
       example:
         architectures:
         - name: name
@@ -28452,7 +29103,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.250.8
+        version: 1.266.1
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -28462,7 +29113,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.250.8
+          default: 1.266.1
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -28680,6 +29331,9 @@ components:
         package:
           $ref: '#/components/schemas/PackageVulnerability'
         scan_id:
+          description: "Deprecated (23-05-15): Please use 'identifier' instead. Previously:\
+            \ A monotonically increasing number that identified a scan within a repository."
+          nullable: true
           title: Scan id
           type: integer
       required:
@@ -28975,6 +29629,9 @@ components:
         scan:
           $ref: '#/components/schemas/VulnerabilityScan'
         scan_id:
+          description: "Deprecated (23-05-15): Please use 'identifier' instead. Previously:\
+            \ A monotonically increasing number that identified a scan within a repository."
+          nullable: true
           title: Scan id
           type: integer
       required:
@@ -29079,6 +29736,10 @@ components:
           nullable: true
           type: array
         identifier:
+          description: "Deprecated (23-05-15): Please use 'slug_perm' instead. Previously:\
+            \ A monotonically increasing number that identified a webhook request\
+            \ within a repository."
+          nullable: true
           readOnly: true
           title: Identifier
           type: integer
@@ -29449,6 +30110,7 @@ components:
             created_at: 2000-01-23T04:56:07.000+00:00
             description: description
             on_violation_quarantine: true
+            package_query_string: package_query_string
             slug_perm: slug_perm
             url: https://openapi-generator.tech
         - package:
@@ -29470,6 +30132,7 @@ components:
             created_at: 2000-01-23T04:56:07.000+00:00
             description: description
             on_violation_quarantine: true
+            package_query_string: package_query_string
             slug_perm: slug_perm
             url: https://openapi-generator.tech
       properties:
@@ -29519,6 +30182,7 @@ components:
             description: description
             on_violation_quarantine: true
             min_severity: Critical
+            package_query_string: package_query_string
             slug_perm: slug_perm
             url: https://openapi-generator.tech
         - package:
@@ -29546,6 +30210,7 @@ components:
             description: description
             on_violation_quarantine: true
             min_severity: Critical
+            package_query_string: package_query_string
             slug_perm: slug_perm
             url: https://openapi-generator.tech
       properties:

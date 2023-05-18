@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.250.8
+API version: 1.266.1
 Contact: support@cloudsmith.io
 */
 
@@ -20,16 +20,15 @@ type Eula struct {
 	// A unique identifier that you can use for your own EULA tracking purposes. This might be a date, or a semantic version, etc. The only requirement is that it is unique across multiple EULAs.
 	Identifier NullableString `json:"identifier,omitempty"`
 	// A sequential identifier that increments by one for each new commit in a repository.
-	Number int64 `json:"number"`
+	Number NullableInt64 `json:"number,omitempty"`
 }
 
 // NewEula instantiates a new Eula object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEula(number int64) *Eula {
+func NewEula() *Eula {
 	this := Eula{}
-	this.Number = number
 	return &this
 }
 
@@ -84,28 +83,47 @@ func (o *Eula) UnsetIdentifier() {
 	o.Identifier.Unset()
 }
 
-// GetNumber returns the Number field value
+// GetNumber returns the Number field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Eula) GetNumber() int64 {
-	if o == nil {
+	if o == nil || isNil(o.Number.Get()) {
 		var ret int64
 		return ret
 	}
-
-	return o.Number
+	return *o.Number.Get()
 }
 
-// GetNumberOk returns a tuple with the Number field value
+// GetNumberOk returns a tuple with the Number field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Eula) GetNumberOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Number, true
+	return o.Number.Get(), o.Number.IsSet()
 }
 
-// SetNumber sets field value
+// HasNumber returns a boolean if a field has been set.
+func (o *Eula) HasNumber() bool {
+	if o != nil && o.Number.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNumber gets a reference to the given NullableInt64 and assigns it to the Number field.
 func (o *Eula) SetNumber(v int64) {
-	o.Number = v
+	o.Number.Set(&v)
+}
+
+// SetNumberNil sets the value for Number to be an explicit nil
+func (o *Eula) SetNumberNil() {
+	o.Number.Set(nil)
+}
+
+// UnsetNumber ensures that no value is present for Number, not even an explicit nil
+func (o *Eula) UnsetNumber() {
+	o.Number.Unset()
 }
 
 func (o Eula) MarshalJSON() ([]byte, error) {
@@ -113,8 +131,8 @@ func (o Eula) MarshalJSON() ([]byte, error) {
 	if o.Identifier.IsSet() {
 		toSerialize["identifier"] = o.Identifier.Get()
 	}
-	if true {
-		toSerialize["number"] = o.Number
+	if o.Number.IsSet() {
+		toSerialize["number"] = o.Number.Get()
 	}
 	return json.Marshal(toSerialize)
 }

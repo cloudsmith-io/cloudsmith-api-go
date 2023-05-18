@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.250.8
+API version: 1.266.1
 Contact: support@cloudsmith.io
 */
 
@@ -24,7 +24,8 @@ type RepositoryWebhook struct {
 	DisableReason    *int64     `json:"disable_reason,omitempty"`
 	DisableReasonStr *string    `json:"disable_reason_str,omitempty"`
 	Events           []string   `json:"events"`
-	Identifier       *int64     `json:"identifier,omitempty"`
+	// Deprecated (23-05-15): Please use 'slug_perm' instead. Previously: A monotonically increasing number that identified a webhook request within a repository.
+	Identifier NullableInt64 `json:"identifier,omitempty"`
 	// If enabled, the webhook will trigger on subscribed events and send payloads to the configured target URL.
 	IsActive              *bool   `json:"is_active,omitempty"`
 	IsLastResponseBad     *bool   `json:"is_last_response_bad,omitempty"`
@@ -261,36 +262,47 @@ func (o *RepositoryWebhook) SetEvents(v []string) {
 	o.Events = v
 }
 
-// GetIdentifier returns the Identifier field value if set, zero value otherwise.
+// GetIdentifier returns the Identifier field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryWebhook) GetIdentifier() int64 {
-	if o == nil || isNil(o.Identifier) {
+	if o == nil || isNil(o.Identifier.Get()) {
 		var ret int64
 		return ret
 	}
-	return *o.Identifier
+	return *o.Identifier.Get()
 }
 
 // GetIdentifierOk returns a tuple with the Identifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RepositoryWebhook) GetIdentifierOk() (*int64, bool) {
-	if o == nil || isNil(o.Identifier) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Identifier, true
+	return o.Identifier.Get(), o.Identifier.IsSet()
 }
 
 // HasIdentifier returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasIdentifier() bool {
-	if o != nil && !isNil(o.Identifier) {
+	if o != nil && o.Identifier.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdentifier gets a reference to the given int64 and assigns it to the Identifier field.
+// SetIdentifier gets a reference to the given NullableInt64 and assigns it to the Identifier field.
 func (o *RepositoryWebhook) SetIdentifier(v int64) {
-	o.Identifier = &v
+	o.Identifier.Set(&v)
+}
+
+// SetIdentifierNil sets the value for Identifier to be an explicit nil
+func (o *RepositoryWebhook) SetIdentifierNil() {
+	o.Identifier.Set(nil)
+}
+
+// UnsetIdentifier ensures that no value is present for Identifier, not even an explicit nil
+func (o *RepositoryWebhook) UnsetIdentifier() {
+	o.Identifier.Unset()
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -972,8 +984,8 @@ func (o RepositoryWebhook) MarshalJSON() ([]byte, error) {
 	if o.Events != nil {
 		toSerialize["events"] = o.Events
 	}
-	if !isNil(o.Identifier) {
-		toSerialize["identifier"] = o.Identifier
+	if o.Identifier.IsSet() {
+		toSerialize["identifier"] = o.Identifier.Get()
 	}
 	if !isNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive

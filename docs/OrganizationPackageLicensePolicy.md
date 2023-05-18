@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** |  | [optional] 
 **Name** | **string** |  | 
 **OnViolationQuarantine** | Pointer to **bool** |  | [optional] 
+**PackageQueryString** | Pointer to **NullableString** |  | [optional] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **SpdxIdentifiers** | **[]string** |  | 
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
@@ -162,6 +163,41 @@ SetOnViolationQuarantine sets OnViolationQuarantine field to given value.
 
 HasOnViolationQuarantine returns a boolean if a field has been set.
 
+### GetPackageQueryString
+
+`func (o *OrganizationPackageLicensePolicy) GetPackageQueryString() string`
+
+GetPackageQueryString returns the PackageQueryString field if non-nil, zero value otherwise.
+
+### GetPackageQueryStringOk
+
+`func (o *OrganizationPackageLicensePolicy) GetPackageQueryStringOk() (*string, bool)`
+
+GetPackageQueryStringOk returns a tuple with the PackageQueryString field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPackageQueryString
+
+`func (o *OrganizationPackageLicensePolicy) SetPackageQueryString(v string)`
+
+SetPackageQueryString sets PackageQueryString field to given value.
+
+### HasPackageQueryString
+
+`func (o *OrganizationPackageLicensePolicy) HasPackageQueryString() bool`
+
+HasPackageQueryString returns a boolean if a field has been set.
+
+### SetPackageQueryStringNil
+
+`func (o *OrganizationPackageLicensePolicy) SetPackageQueryStringNil(b bool)`
+
+ SetPackageQueryStringNil sets the value for PackageQueryString to be an explicit nil
+
+### UnsetPackageQueryString
+`func (o *OrganizationPackageLicensePolicy) UnsetPackageQueryString()`
+
+UnsetPackageQueryString ensures that no value is present for PackageQueryString, not even an explicit nil
 ### GetSlugPerm
 
 `func (o *OrganizationPackageLicensePolicy) GetSlugPerm() string`

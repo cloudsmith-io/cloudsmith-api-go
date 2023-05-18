@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**VulnerabilitiesNamespaceList**](VulnerabilitiesApi.md#VulnerabilitiesNamespaceList) | **Get** /vulnerabilities/{owner}/ | Lists scan results for a specific namespace.
 [**VulnerabilitiesPackageList**](VulnerabilitiesApi.md#VulnerabilitiesPackageList) | **Get** /vulnerabilities/{owner}/{repo}/{package}/ | Lists scan results for a specific package.
-[**VulnerabilitiesRead**](VulnerabilitiesApi.md#VulnerabilitiesRead) | **Get** /vulnerabilities/{owner}/{repo}/{package}/{scan_id}/ | Returns a Scan Result.
+[**VulnerabilitiesRead**](VulnerabilitiesApi.md#VulnerabilitiesRead) | **Get** /vulnerabilities/{owner}/{repo}/{package}/{identifier}/ | Get a scan result.
 [**VulnerabilitiesRepoList**](VulnerabilitiesApi.md#VulnerabilitiesRepoList) | **Get** /vulnerabilities/{owner}/{repo}/ | Lists scan results for a specific repository.
 
 
@@ -167,9 +167,9 @@ Name | Type | Description  | Notes
 
 ## VulnerabilitiesRead
 
-> VulnerabilityScanResults VulnerabilitiesRead(ctx, owner, repo, package_, scanId).Execute()
+> VulnerabilityScanResults VulnerabilitiesRead(ctx, owner, repo, package_, identifier).Execute()
 
-Returns a Scan Result.
+Get a scan result.
 
 
 
@@ -189,11 +189,11 @@ func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
     package_ := "package__example" // string | 
-    scanId := "scanId_example" // string | 
+    identifier := "identifier_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.VulnerabilitiesApi.VulnerabilitiesRead(context.Background(), owner, repo, package_, scanId).Execute()
+    resp, r, err := apiClient.VulnerabilitiesApi.VulnerabilitiesRead(context.Background(), owner, repo, package_, identifier).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesRead``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 **owner** | **string** |  | 
 **repo** | **string** |  | 
 **package_** | **string** |  | 
-**scanId** | **string** |  | 
+**identifier** | **string** |  | 
 
 ### Other Parameters
 
