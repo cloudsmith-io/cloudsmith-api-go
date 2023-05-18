@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.250.8
+API version: 1.266.1
 Contact: support@cloudsmith.io
 */
 
@@ -21,6 +21,7 @@ type OrganizationPackageLicensePolicyRequestPatch struct {
 	Description           NullableString `json:"description,omitempty"`
 	Name                  *string        `json:"name,omitempty"`
 	OnViolationQuarantine *bool          `json:"on_violation_quarantine,omitempty"`
+	PackageQueryString    NullableString `json:"package_query_string,omitempty"`
 	SpdxIdentifiers       []string       `json:"spdx_identifiers,omitempty"`
 }
 
@@ -180,6 +181,49 @@ func (o *OrganizationPackageLicensePolicyRequestPatch) SetOnViolationQuarantine(
 	o.OnViolationQuarantine = &v
 }
 
+// GetPackageQueryString returns the PackageQueryString field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OrganizationPackageLicensePolicyRequestPatch) GetPackageQueryString() string {
+	if o == nil || isNil(o.PackageQueryString.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PackageQueryString.Get()
+}
+
+// GetPackageQueryStringOk returns a tuple with the PackageQueryString field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OrganizationPackageLicensePolicyRequestPatch) GetPackageQueryStringOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PackageQueryString.Get(), o.PackageQueryString.IsSet()
+}
+
+// HasPackageQueryString returns a boolean if a field has been set.
+func (o *OrganizationPackageLicensePolicyRequestPatch) HasPackageQueryString() bool {
+	if o != nil && o.PackageQueryString.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPackageQueryString gets a reference to the given NullableString and assigns it to the PackageQueryString field.
+func (o *OrganizationPackageLicensePolicyRequestPatch) SetPackageQueryString(v string) {
+	o.PackageQueryString.Set(&v)
+}
+
+// SetPackageQueryStringNil sets the value for PackageQueryString to be an explicit nil
+func (o *OrganizationPackageLicensePolicyRequestPatch) SetPackageQueryStringNil() {
+	o.PackageQueryString.Set(nil)
+}
+
+// UnsetPackageQueryString ensures that no value is present for PackageQueryString, not even an explicit nil
+func (o *OrganizationPackageLicensePolicyRequestPatch) UnsetPackageQueryString() {
+	o.PackageQueryString.Unset()
+}
+
 // GetSpdxIdentifiers returns the SpdxIdentifiers field value if set, zero value otherwise.
 func (o *OrganizationPackageLicensePolicyRequestPatch) GetSpdxIdentifiers() []string {
 	if o == nil || isNil(o.SpdxIdentifiers) {
@@ -225,6 +269,9 @@ func (o OrganizationPackageLicensePolicyRequestPatch) MarshalJSON() ([]byte, err
 	}
 	if !isNil(o.OnViolationQuarantine) {
 		toSerialize["on_violation_quarantine"] = o.OnViolationQuarantine
+	}
+	if o.PackageQueryString.IsSet() {
+		toSerialize["package_query_string"] = o.PackageQueryString.Get()
 	}
 	if !isNil(o.SpdxIdentifiers) {
 		toSerialize["spdx_identifiers"] = o.SpdxIdentifiers

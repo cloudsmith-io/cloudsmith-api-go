@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Identifier** | Pointer to **NullableString** | A unique identifier that you can use for your own EULA tracking purposes. This might be a date, or a semantic version, etc. The only requirement is that it is unique across multiple EULAs. | [optional] 
-**Number** | **int64** | A sequential identifier that increments by one for each new commit in a repository. | 
+**Number** | Pointer to **NullableInt64** | A sequential identifier that increments by one for each new commit in a repository. | [optional] 
 
 ## Methods
 
 ### NewEula
 
-`func NewEula(number int64, ) *Eula`
+`func NewEula() *Eula`
 
 NewEula instantiates a new Eula object
 This constructor will assign default values to properties that have it defined,
@@ -80,7 +80,22 @@ and a boolean to check if the value has been set.
 
 SetNumber sets Number field to given value.
 
+### HasNumber
 
+`func (o *Eula) HasNumber() bool`
+
+HasNumber returns a boolean if a field has been set.
+
+### SetNumberNil
+
+`func (o *Eula) SetNumberNil(b bool)`
+
+ SetNumberNil sets the value for Number to be an explicit nil
+
+### UnsetNumber
+`func (o *Eula) UnsetNumber()`
+
+UnsetNumber ensures that no value is present for Number, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

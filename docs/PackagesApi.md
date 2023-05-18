@@ -27,6 +27,7 @@ Method | HTTP request | Description
 [**PackagesUploadDocker**](PackagesApi.md#PackagesUploadDocker) | **Post** /packages/{owner}/{repo}/upload/docker/ | Create a new Docker package
 [**PackagesUploadGo**](PackagesApi.md#PackagesUploadGo) | **Post** /packages/{owner}/{repo}/upload/go/ | Create a new Go package
 [**PackagesUploadHelm**](PackagesApi.md#PackagesUploadHelm) | **Post** /packages/{owner}/{repo}/upload/helm/ | Create a new Helm package
+[**PackagesUploadHex**](PackagesApi.md#PackagesUploadHex) | **Post** /packages/{owner}/{repo}/upload/hex/ | Create a new Hex package
 [**PackagesUploadLuarocks**](PackagesApi.md#PackagesUploadLuarocks) | **Post** /packages/{owner}/{repo}/upload/luarocks/ | Create a new LuaRocks package
 [**PackagesUploadMaven**](PackagesApi.md#PackagesUploadMaven) | **Post** /packages/{owner}/{repo}/upload/maven/ | Create a new Maven package
 [**PackagesUploadNpm**](PackagesApi.md#PackagesUploadNpm) | **Post** /packages/{owner}/{repo}/upload/npm/ | Create a new npm package
@@ -50,6 +51,7 @@ Method | HTTP request | Description
 [**PackagesValidateUploadDocker**](PackagesApi.md#PackagesValidateUploadDocker) | **Post** /packages/{owner}/{repo}/validate-upload/docker/ | Validate parameters for create Docker package
 [**PackagesValidateUploadGo**](PackagesApi.md#PackagesValidateUploadGo) | **Post** /packages/{owner}/{repo}/validate-upload/go/ | Validate parameters for create Go package
 [**PackagesValidateUploadHelm**](PackagesApi.md#PackagesValidateUploadHelm) | **Post** /packages/{owner}/{repo}/validate-upload/helm/ | Validate parameters for create Helm package
+[**PackagesValidateUploadHex**](PackagesApi.md#PackagesValidateUploadHex) | **Post** /packages/{owner}/{repo}/validate-upload/hex/ | Validate parameters for create Hex package
 [**PackagesValidateUploadLuarocks**](PackagesApi.md#PackagesValidateUploadLuarocks) | **Post** /packages/{owner}/{repo}/validate-upload/luarocks/ | Validate parameters for create LuaRocks package
 [**PackagesValidateUploadMaven**](PackagesApi.md#PackagesValidateUploadMaven) | **Post** /packages/{owner}/{repo}/validate-upload/maven/ | Validate parameters for create Maven package
 [**PackagesValidateUploadNpm**](PackagesApi.md#PackagesValidateUploadNpm) | **Post** /packages/{owner}/{repo}/validate-upload/npm/ | Validate parameters for create npm package
@@ -1811,6 +1813,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PackagesUploadHex
+
+> HexPackageUpload PackagesUploadHex(ctx, owner, repo).Data(data).Execute()
+
+Create a new Hex package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewHexPackageUploadRequest("PackageFile_example") // HexPackageUploadRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesUploadHex(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadHex``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PackagesUploadHex`: HexPackageUpload
+    fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadHex`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesUploadHexRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**HexPackageUploadRequest**](HexPackageUploadRequest.md) |  | 
+
+### Return type
+
+[**HexPackageUpload**](HexPackageUpload.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PackagesUploadLuarocks
 
 > LuarocksPackageUpload PackagesUploadLuarocks(ctx, owner, repo).Data(data).Execute()
@@ -3493,6 +3570,79 @@ Name | Type | Description  | Notes
 
 
  **data** | [**HelmPackageUploadRequest**](HelmPackageUploadRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesValidateUploadHex
+
+> PackagesValidateUploadHex(ctx, owner, repo).Data(data).Execute()
+
+Validate parameters for create Hex package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewHexPackageUploadRequest("PackageFile_example") // HexPackageUploadRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadHex(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadHex``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesValidateUploadHexRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**HexPackageUploadRequest**](HexPackageUploadRequest.md) |  | 
 
 ### Return type
 

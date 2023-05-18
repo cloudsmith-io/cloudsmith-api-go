@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **EulaAcceptedFrom** | Pointer to **NullableString** |  | [optional] [readonly] 
 **EulaRequired** | Pointer to **bool** | If checked, a EULA acceptance is required for this token. | [optional] 
 **HasLimits** | Pointer to **bool** |  | [optional] [readonly] 
-**Identifier** | Pointer to **int64** |  | [optional] [readonly] 
+**Identifier** | Pointer to **NullableInt64** | Deprecated (23-05-15): Please use &#39;slug_perm&#39; instead. Previously: A monotonically increasing number that identified an entitlement within a repository. | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | If enabled, the token will allow downloads based on configured restrictions (if any). | [optional] 
 **IsLimited** | Pointer to **bool** |  | [optional] [readonly] 
 **LimitBandwidth** | Pointer to **NullableInt64** | The maximum download bandwidth allowed for the token. Values are expressed as the selected unit of bandwidth. Please note that since downloads are calculated asynchronously (after the download happens), the limit may not be imposed immediately but at a later point.  | [optional] 
@@ -443,6 +443,16 @@ SetIdentifier sets Identifier field to given value.
 
 HasIdentifier returns a boolean if a field has been set.
 
+### SetIdentifierNil
+
+`func (o *RepositoryTokenRefresh) SetIdentifierNil(b bool)`
+
+ SetIdentifierNil sets the value for Identifier to be an explicit nil
+
+### UnsetIdentifier
+`func (o *RepositoryTokenRefresh) UnsetIdentifier()`
+
+UnsetIdentifier ensures that no value is present for Identifier, not even an explicit nil
 ### GetIsActive
 
 `func (o *RepositoryTokenRefresh) GetIsActive() bool`

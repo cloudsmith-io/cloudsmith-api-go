@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.250.8
+API version: 1.266.1
 Contact: support@cloudsmith.io
 */
 
@@ -33,9 +33,10 @@ type RepositoryToken struct {
 	EulaAcceptedAt   NullableTime   `json:"eula_accepted_at,omitempty"`
 	EulaAcceptedFrom NullableString `json:"eula_accepted_from,omitempty"`
 	// If checked, a EULA acceptance is required for this token.
-	EulaRequired *bool  `json:"eula_required,omitempty"`
-	HasLimits    *bool  `json:"has_limits,omitempty"`
-	Identifier   *int64 `json:"identifier,omitempty"`
+	EulaRequired *bool `json:"eula_required,omitempty"`
+	HasLimits    *bool `json:"has_limits,omitempty"`
+	// Deprecated (23-05-15): Please use 'slug_perm' instead. Previously: A monotonically increasing number that identified an entitlement within a repository.
+	Identifier NullableInt64 `json:"identifier,omitempty"`
 	// If enabled, the token will allow downloads based on configured restrictions (if any).
 	IsActive  *bool `json:"is_active,omitempty"`
 	IsLimited *bool `json:"is_limited,omitempty"`
@@ -548,36 +549,47 @@ func (o *RepositoryToken) SetHasLimits(v bool) {
 	o.HasLimits = &v
 }
 
-// GetIdentifier returns the Identifier field value if set, zero value otherwise.
+// GetIdentifier returns the Identifier field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryToken) GetIdentifier() int64 {
-	if o == nil || isNil(o.Identifier) {
+	if o == nil || isNil(o.Identifier.Get()) {
 		var ret int64
 		return ret
 	}
-	return *o.Identifier
+	return *o.Identifier.Get()
 }
 
 // GetIdentifierOk returns a tuple with the Identifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RepositoryToken) GetIdentifierOk() (*int64, bool) {
-	if o == nil || isNil(o.Identifier) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Identifier, true
+	return o.Identifier.Get(), o.Identifier.IsSet()
 }
 
 // HasIdentifier returns a boolean if a field has been set.
 func (o *RepositoryToken) HasIdentifier() bool {
-	if o != nil && !isNil(o.Identifier) {
+	if o != nil && o.Identifier.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdentifier gets a reference to the given int64 and assigns it to the Identifier field.
+// SetIdentifier gets a reference to the given NullableInt64 and assigns it to the Identifier field.
 func (o *RepositoryToken) SetIdentifier(v int64) {
-	o.Identifier = &v
+	o.Identifier.Set(&v)
+}
+
+// SetIdentifierNil sets the value for Identifier to be an explicit nil
+func (o *RepositoryToken) SetIdentifierNil() {
+	o.Identifier.Set(nil)
+}
+
+// UnsetIdentifier ensures that no value is present for Identifier, not even an explicit nil
+func (o *RepositoryToken) UnsetIdentifier() {
+	o.Identifier.Unset()
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -1579,8 +1591,8 @@ func (o RepositoryToken) MarshalJSON() ([]byte, error) {
 	if !isNil(o.HasLimits) {
 		toSerialize["has_limits"] = o.HasLimits
 	}
-	if !isNil(o.Identifier) {
-		toSerialize["identifier"] = o.Identifier
+	if o.Identifier.IsSet() {
+		toSerialize["identifier"] = o.Identifier.Get()
 	}
 	if !isNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive

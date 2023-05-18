@@ -16,8 +16,8 @@ import (
 	"time"
 )
 
-// PackageCopy struct for PackageCopy
-type PackageCopy struct {
+// HexPackageUpload struct for HexPackageUpload
+type HexPackageUpload struct {
 	Architectures  []Architecture `json:"architectures,omitempty"`
 	CdnUrl         NullableString `json:"cdn_url,omitempty"`
 	ChecksumMd5    *string        `json:"checksum_md5,omitempty"`
@@ -61,10 +61,9 @@ type PackageCopy struct {
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
 	// The release of the package version (if any).
-	Release NullableString `json:"release,omitempty"`
-	// The repository the package will be copied to.
-	Repository    *string `json:"repository,omitempty"`
-	RepositoryUrl *string `json:"repository_url,omitempty"`
+	Release       NullableString `json:"release,omitempty"`
+	Repository    *string        `json:"repository,omitempty"`
+	RepositoryUrl *string        `json:"repository_url,omitempty"`
 	// The datetime the security scanning was completed.
 	SecurityScanCompletedAt NullableTime `json:"security_scan_completed_at,omitempty"`
 	// The datetime the security scanning was started.
@@ -101,8 +100,6 @@ type PackageCopy struct {
 	// Synchronisation progress (from 0-100)
 	SyncProgress *int64 `json:"sync_progress,omitempty"`
 	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
-	Tags map[string]interface{} `json:"tags,omitempty"`
-	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
 	TagsImmutable map[string]interface{} `json:"tags_immutable,omitempty"`
 	TypeDisplay   *string                `json:"type_display,omitempty"`
 	// The date this package was uploaded.
@@ -115,25 +112,25 @@ type PackageCopy struct {
 	VulnerabilityScanResultsUrl *string        `json:"vulnerability_scan_results_url,omitempty"`
 }
 
-// NewPackageCopy instantiates a new PackageCopy object
+// NewHexPackageUpload instantiates a new HexPackageUpload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPackageCopy() *PackageCopy {
-	this := PackageCopy{}
+func NewHexPackageUpload() *HexPackageUpload {
+	this := HexPackageUpload{}
 	return &this
 }
 
-// NewPackageCopyWithDefaults instantiates a new PackageCopy object
+// NewHexPackageUploadWithDefaults instantiates a new HexPackageUpload object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPackageCopyWithDefaults() *PackageCopy {
-	this := PackageCopy{}
+func NewHexPackageUploadWithDefaults() *HexPackageUpload {
+	this := HexPackageUpload{}
 	return &this
 }
 
 // GetArchitectures returns the Architectures field value if set, zero value otherwise.
-func (o *PackageCopy) GetArchitectures() []Architecture {
+func (o *HexPackageUpload) GetArchitectures() []Architecture {
 	if o == nil || isNil(o.Architectures) {
 		var ret []Architecture
 		return ret
@@ -143,7 +140,7 @@ func (o *PackageCopy) GetArchitectures() []Architecture {
 
 // GetArchitecturesOk returns a tuple with the Architectures field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetArchitecturesOk() ([]Architecture, bool) {
+func (o *HexPackageUpload) GetArchitecturesOk() ([]Architecture, bool) {
 	if o == nil || isNil(o.Architectures) {
 		return nil, false
 	}
@@ -151,7 +148,7 @@ func (o *PackageCopy) GetArchitecturesOk() ([]Architecture, bool) {
 }
 
 // HasArchitectures returns a boolean if a field has been set.
-func (o *PackageCopy) HasArchitectures() bool {
+func (o *HexPackageUpload) HasArchitectures() bool {
 	if o != nil && !isNil(o.Architectures) {
 		return true
 	}
@@ -160,12 +157,12 @@ func (o *PackageCopy) HasArchitectures() bool {
 }
 
 // SetArchitectures gets a reference to the given []Architecture and assigns it to the Architectures field.
-func (o *PackageCopy) SetArchitectures(v []Architecture) {
+func (o *HexPackageUpload) SetArchitectures(v []Architecture) {
 	o.Architectures = v
 }
 
 // GetCdnUrl returns the CdnUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetCdnUrl() string {
+func (o *HexPackageUpload) GetCdnUrl() string {
 	if o == nil || isNil(o.CdnUrl.Get()) {
 		var ret string
 		return ret
@@ -176,7 +173,7 @@ func (o *PackageCopy) GetCdnUrl() string {
 // GetCdnUrlOk returns a tuple with the CdnUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetCdnUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetCdnUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -184,7 +181,7 @@ func (o *PackageCopy) GetCdnUrlOk() (*string, bool) {
 }
 
 // HasCdnUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasCdnUrl() bool {
+func (o *HexPackageUpload) HasCdnUrl() bool {
 	if o != nil && o.CdnUrl.IsSet() {
 		return true
 	}
@@ -193,22 +190,22 @@ func (o *PackageCopy) HasCdnUrl() bool {
 }
 
 // SetCdnUrl gets a reference to the given NullableString and assigns it to the CdnUrl field.
-func (o *PackageCopy) SetCdnUrl(v string) {
+func (o *HexPackageUpload) SetCdnUrl(v string) {
 	o.CdnUrl.Set(&v)
 }
 
 // SetCdnUrlNil sets the value for CdnUrl to be an explicit nil
-func (o *PackageCopy) SetCdnUrlNil() {
+func (o *HexPackageUpload) SetCdnUrlNil() {
 	o.CdnUrl.Set(nil)
 }
 
 // UnsetCdnUrl ensures that no value is present for CdnUrl, not even an explicit nil
-func (o *PackageCopy) UnsetCdnUrl() {
+func (o *HexPackageUpload) UnsetCdnUrl() {
 	o.CdnUrl.Unset()
 }
 
 // GetChecksumMd5 returns the ChecksumMd5 field value if set, zero value otherwise.
-func (o *PackageCopy) GetChecksumMd5() string {
+func (o *HexPackageUpload) GetChecksumMd5() string {
 	if o == nil || isNil(o.ChecksumMd5) {
 		var ret string
 		return ret
@@ -218,7 +215,7 @@ func (o *PackageCopy) GetChecksumMd5() string {
 
 // GetChecksumMd5Ok returns a tuple with the ChecksumMd5 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetChecksumMd5Ok() (*string, bool) {
+func (o *HexPackageUpload) GetChecksumMd5Ok() (*string, bool) {
 	if o == nil || isNil(o.ChecksumMd5) {
 		return nil, false
 	}
@@ -226,7 +223,7 @@ func (o *PackageCopy) GetChecksumMd5Ok() (*string, bool) {
 }
 
 // HasChecksumMd5 returns a boolean if a field has been set.
-func (o *PackageCopy) HasChecksumMd5() bool {
+func (o *HexPackageUpload) HasChecksumMd5() bool {
 	if o != nil && !isNil(o.ChecksumMd5) {
 		return true
 	}
@@ -235,12 +232,12 @@ func (o *PackageCopy) HasChecksumMd5() bool {
 }
 
 // SetChecksumMd5 gets a reference to the given string and assigns it to the ChecksumMd5 field.
-func (o *PackageCopy) SetChecksumMd5(v string) {
+func (o *HexPackageUpload) SetChecksumMd5(v string) {
 	o.ChecksumMd5 = &v
 }
 
 // GetChecksumSha1 returns the ChecksumSha1 field value if set, zero value otherwise.
-func (o *PackageCopy) GetChecksumSha1() string {
+func (o *HexPackageUpload) GetChecksumSha1() string {
 	if o == nil || isNil(o.ChecksumSha1) {
 		var ret string
 		return ret
@@ -250,7 +247,7 @@ func (o *PackageCopy) GetChecksumSha1() string {
 
 // GetChecksumSha1Ok returns a tuple with the ChecksumSha1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetChecksumSha1Ok() (*string, bool) {
+func (o *HexPackageUpload) GetChecksumSha1Ok() (*string, bool) {
 	if o == nil || isNil(o.ChecksumSha1) {
 		return nil, false
 	}
@@ -258,7 +255,7 @@ func (o *PackageCopy) GetChecksumSha1Ok() (*string, bool) {
 }
 
 // HasChecksumSha1 returns a boolean if a field has been set.
-func (o *PackageCopy) HasChecksumSha1() bool {
+func (o *HexPackageUpload) HasChecksumSha1() bool {
 	if o != nil && !isNil(o.ChecksumSha1) {
 		return true
 	}
@@ -267,12 +264,12 @@ func (o *PackageCopy) HasChecksumSha1() bool {
 }
 
 // SetChecksumSha1 gets a reference to the given string and assigns it to the ChecksumSha1 field.
-func (o *PackageCopy) SetChecksumSha1(v string) {
+func (o *HexPackageUpload) SetChecksumSha1(v string) {
 	o.ChecksumSha1 = &v
 }
 
 // GetChecksumSha256 returns the ChecksumSha256 field value if set, zero value otherwise.
-func (o *PackageCopy) GetChecksumSha256() string {
+func (o *HexPackageUpload) GetChecksumSha256() string {
 	if o == nil || isNil(o.ChecksumSha256) {
 		var ret string
 		return ret
@@ -282,7 +279,7 @@ func (o *PackageCopy) GetChecksumSha256() string {
 
 // GetChecksumSha256Ok returns a tuple with the ChecksumSha256 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetChecksumSha256Ok() (*string, bool) {
+func (o *HexPackageUpload) GetChecksumSha256Ok() (*string, bool) {
 	if o == nil || isNil(o.ChecksumSha256) {
 		return nil, false
 	}
@@ -290,7 +287,7 @@ func (o *PackageCopy) GetChecksumSha256Ok() (*string, bool) {
 }
 
 // HasChecksumSha256 returns a boolean if a field has been set.
-func (o *PackageCopy) HasChecksumSha256() bool {
+func (o *HexPackageUpload) HasChecksumSha256() bool {
 	if o != nil && !isNil(o.ChecksumSha256) {
 		return true
 	}
@@ -299,12 +296,12 @@ func (o *PackageCopy) HasChecksumSha256() bool {
 }
 
 // SetChecksumSha256 gets a reference to the given string and assigns it to the ChecksumSha256 field.
-func (o *PackageCopy) SetChecksumSha256(v string) {
+func (o *HexPackageUpload) SetChecksumSha256(v string) {
 	o.ChecksumSha256 = &v
 }
 
 // GetChecksumSha512 returns the ChecksumSha512 field value if set, zero value otherwise.
-func (o *PackageCopy) GetChecksumSha512() string {
+func (o *HexPackageUpload) GetChecksumSha512() string {
 	if o == nil || isNil(o.ChecksumSha512) {
 		var ret string
 		return ret
@@ -314,7 +311,7 @@ func (o *PackageCopy) GetChecksumSha512() string {
 
 // GetChecksumSha512Ok returns a tuple with the ChecksumSha512 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetChecksumSha512Ok() (*string, bool) {
+func (o *HexPackageUpload) GetChecksumSha512Ok() (*string, bool) {
 	if o == nil || isNil(o.ChecksumSha512) {
 		return nil, false
 	}
@@ -322,7 +319,7 @@ func (o *PackageCopy) GetChecksumSha512Ok() (*string, bool) {
 }
 
 // HasChecksumSha512 returns a boolean if a field has been set.
-func (o *PackageCopy) HasChecksumSha512() bool {
+func (o *HexPackageUpload) HasChecksumSha512() bool {
 	if o != nil && !isNil(o.ChecksumSha512) {
 		return true
 	}
@@ -331,12 +328,12 @@ func (o *PackageCopy) HasChecksumSha512() bool {
 }
 
 // SetChecksumSha512 gets a reference to the given string and assigns it to the ChecksumSha512 field.
-func (o *PackageCopy) SetChecksumSha512(v string) {
+func (o *HexPackageUpload) SetChecksumSha512(v string) {
 	o.ChecksumSha512 = &v
 }
 
 // GetDependenciesChecksumMd5 returns the DependenciesChecksumMd5 field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetDependenciesChecksumMd5() string {
+func (o *HexPackageUpload) GetDependenciesChecksumMd5() string {
 	if o == nil || isNil(o.DependenciesChecksumMd5.Get()) {
 		var ret string
 		return ret
@@ -347,7 +344,7 @@ func (o *PackageCopy) GetDependenciesChecksumMd5() string {
 // GetDependenciesChecksumMd5Ok returns a tuple with the DependenciesChecksumMd5 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetDependenciesChecksumMd5Ok() (*string, bool) {
+func (o *HexPackageUpload) GetDependenciesChecksumMd5Ok() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -355,7 +352,7 @@ func (o *PackageCopy) GetDependenciesChecksumMd5Ok() (*string, bool) {
 }
 
 // HasDependenciesChecksumMd5 returns a boolean if a field has been set.
-func (o *PackageCopy) HasDependenciesChecksumMd5() bool {
+func (o *HexPackageUpload) HasDependenciesChecksumMd5() bool {
 	if o != nil && o.DependenciesChecksumMd5.IsSet() {
 		return true
 	}
@@ -364,22 +361,22 @@ func (o *PackageCopy) HasDependenciesChecksumMd5() bool {
 }
 
 // SetDependenciesChecksumMd5 gets a reference to the given NullableString and assigns it to the DependenciesChecksumMd5 field.
-func (o *PackageCopy) SetDependenciesChecksumMd5(v string) {
+func (o *HexPackageUpload) SetDependenciesChecksumMd5(v string) {
 	o.DependenciesChecksumMd5.Set(&v)
 }
 
 // SetDependenciesChecksumMd5Nil sets the value for DependenciesChecksumMd5 to be an explicit nil
-func (o *PackageCopy) SetDependenciesChecksumMd5Nil() {
+func (o *HexPackageUpload) SetDependenciesChecksumMd5Nil() {
 	o.DependenciesChecksumMd5.Set(nil)
 }
 
 // UnsetDependenciesChecksumMd5 ensures that no value is present for DependenciesChecksumMd5, not even an explicit nil
-func (o *PackageCopy) UnsetDependenciesChecksumMd5() {
+func (o *HexPackageUpload) UnsetDependenciesChecksumMd5() {
 	o.DependenciesChecksumMd5.Unset()
 }
 
 // GetDependenciesUrl returns the DependenciesUrl field value if set, zero value otherwise.
-func (o *PackageCopy) GetDependenciesUrl() string {
+func (o *HexPackageUpload) GetDependenciesUrl() string {
 	if o == nil || isNil(o.DependenciesUrl) {
 		var ret string
 		return ret
@@ -389,7 +386,7 @@ func (o *PackageCopy) GetDependenciesUrl() string {
 
 // GetDependenciesUrlOk returns a tuple with the DependenciesUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetDependenciesUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetDependenciesUrlOk() (*string, bool) {
 	if o == nil || isNil(o.DependenciesUrl) {
 		return nil, false
 	}
@@ -397,7 +394,7 @@ func (o *PackageCopy) GetDependenciesUrlOk() (*string, bool) {
 }
 
 // HasDependenciesUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasDependenciesUrl() bool {
+func (o *HexPackageUpload) HasDependenciesUrl() bool {
 	if o != nil && !isNil(o.DependenciesUrl) {
 		return true
 	}
@@ -406,12 +403,12 @@ func (o *PackageCopy) HasDependenciesUrl() bool {
 }
 
 // SetDependenciesUrl gets a reference to the given string and assigns it to the DependenciesUrl field.
-func (o *PackageCopy) SetDependenciesUrl(v string) {
+func (o *HexPackageUpload) SetDependenciesUrl(v string) {
 	o.DependenciesUrl = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetDescription() string {
+func (o *HexPackageUpload) GetDescription() string {
 	if o == nil || isNil(o.Description.Get()) {
 		var ret string
 		return ret
@@ -422,7 +419,7 @@ func (o *PackageCopy) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetDescriptionOk() (*string, bool) {
+func (o *HexPackageUpload) GetDescriptionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -430,7 +427,7 @@ func (o *PackageCopy) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *PackageCopy) HasDescription() bool {
+func (o *HexPackageUpload) HasDescription() bool {
 	if o != nil && o.Description.IsSet() {
 		return true
 	}
@@ -439,22 +436,22 @@ func (o *PackageCopy) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given NullableString and assigns it to the Description field.
-func (o *PackageCopy) SetDescription(v string) {
+func (o *HexPackageUpload) SetDescription(v string) {
 	o.Description.Set(&v)
 }
 
 // SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *PackageCopy) SetDescriptionNil() {
+func (o *HexPackageUpload) SetDescriptionNil() {
 	o.Description.Set(nil)
 }
 
 // UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *PackageCopy) UnsetDescription() {
+func (o *HexPackageUpload) UnsetDescription() {
 	o.Description.Unset()
 }
 
 // GetDistro returns the Distro field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetDistro() Distribution {
+func (o *HexPackageUpload) GetDistro() Distribution {
 	if o == nil || isNil(o.Distro.Get()) {
 		var ret Distribution
 		return ret
@@ -465,7 +462,7 @@ func (o *PackageCopy) GetDistro() Distribution {
 // GetDistroOk returns a tuple with the Distro field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetDistroOk() (*Distribution, bool) {
+func (o *HexPackageUpload) GetDistroOk() (*Distribution, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -473,7 +470,7 @@ func (o *PackageCopy) GetDistroOk() (*Distribution, bool) {
 }
 
 // HasDistro returns a boolean if a field has been set.
-func (o *PackageCopy) HasDistro() bool {
+func (o *HexPackageUpload) HasDistro() bool {
 	if o != nil && o.Distro.IsSet() {
 		return true
 	}
@@ -482,22 +479,22 @@ func (o *PackageCopy) HasDistro() bool {
 }
 
 // SetDistro gets a reference to the given NullableDistribution and assigns it to the Distro field.
-func (o *PackageCopy) SetDistro(v Distribution) {
+func (o *HexPackageUpload) SetDistro(v Distribution) {
 	o.Distro.Set(&v)
 }
 
 // SetDistroNil sets the value for Distro to be an explicit nil
-func (o *PackageCopy) SetDistroNil() {
+func (o *HexPackageUpload) SetDistroNil() {
 	o.Distro.Set(nil)
 }
 
 // UnsetDistro ensures that no value is present for Distro, not even an explicit nil
-func (o *PackageCopy) UnsetDistro() {
+func (o *HexPackageUpload) UnsetDistro() {
 	o.Distro.Unset()
 }
 
 // GetDistroVersion returns the DistroVersion field value if set, zero value otherwise.
-func (o *PackageCopy) GetDistroVersion() DistributionVersion {
+func (o *HexPackageUpload) GetDistroVersion() DistributionVersion {
 	if o == nil || isNil(o.DistroVersion) {
 		var ret DistributionVersion
 		return ret
@@ -507,7 +504,7 @@ func (o *PackageCopy) GetDistroVersion() DistributionVersion {
 
 // GetDistroVersionOk returns a tuple with the DistroVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetDistroVersionOk() (*DistributionVersion, bool) {
+func (o *HexPackageUpload) GetDistroVersionOk() (*DistributionVersion, bool) {
 	if o == nil || isNil(o.DistroVersion) {
 		return nil, false
 	}
@@ -515,7 +512,7 @@ func (o *PackageCopy) GetDistroVersionOk() (*DistributionVersion, bool) {
 }
 
 // HasDistroVersion returns a boolean if a field has been set.
-func (o *PackageCopy) HasDistroVersion() bool {
+func (o *HexPackageUpload) HasDistroVersion() bool {
 	if o != nil && !isNil(o.DistroVersion) {
 		return true
 	}
@@ -524,12 +521,12 @@ func (o *PackageCopy) HasDistroVersion() bool {
 }
 
 // SetDistroVersion gets a reference to the given DistributionVersion and assigns it to the DistroVersion field.
-func (o *PackageCopy) SetDistroVersion(v DistributionVersion) {
+func (o *HexPackageUpload) SetDistroVersion(v DistributionVersion) {
 	o.DistroVersion = &v
 }
 
 // GetDownloads returns the Downloads field value if set, zero value otherwise.
-func (o *PackageCopy) GetDownloads() int64 {
+func (o *HexPackageUpload) GetDownloads() int64 {
 	if o == nil || isNil(o.Downloads) {
 		var ret int64
 		return ret
@@ -539,7 +536,7 @@ func (o *PackageCopy) GetDownloads() int64 {
 
 // GetDownloadsOk returns a tuple with the Downloads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetDownloadsOk() (*int64, bool) {
+func (o *HexPackageUpload) GetDownloadsOk() (*int64, bool) {
 	if o == nil || isNil(o.Downloads) {
 		return nil, false
 	}
@@ -547,7 +544,7 @@ func (o *PackageCopy) GetDownloadsOk() (*int64, bool) {
 }
 
 // HasDownloads returns a boolean if a field has been set.
-func (o *PackageCopy) HasDownloads() bool {
+func (o *HexPackageUpload) HasDownloads() bool {
 	if o != nil && !isNil(o.Downloads) {
 		return true
 	}
@@ -556,12 +553,12 @@ func (o *PackageCopy) HasDownloads() bool {
 }
 
 // SetDownloads gets a reference to the given int64 and assigns it to the Downloads field.
-func (o *PackageCopy) SetDownloads(v int64) {
+func (o *HexPackageUpload) SetDownloads(v int64) {
 	o.Downloads = &v
 }
 
 // GetEpoch returns the Epoch field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetEpoch() int64 {
+func (o *HexPackageUpload) GetEpoch() int64 {
 	if o == nil || isNil(o.Epoch.Get()) {
 		var ret int64
 		return ret
@@ -572,7 +569,7 @@ func (o *PackageCopy) GetEpoch() int64 {
 // GetEpochOk returns a tuple with the Epoch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetEpochOk() (*int64, bool) {
+func (o *HexPackageUpload) GetEpochOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -580,7 +577,7 @@ func (o *PackageCopy) GetEpochOk() (*int64, bool) {
 }
 
 // HasEpoch returns a boolean if a field has been set.
-func (o *PackageCopy) HasEpoch() bool {
+func (o *HexPackageUpload) HasEpoch() bool {
 	if o != nil && o.Epoch.IsSet() {
 		return true
 	}
@@ -589,22 +586,22 @@ func (o *PackageCopy) HasEpoch() bool {
 }
 
 // SetEpoch gets a reference to the given NullableInt64 and assigns it to the Epoch field.
-func (o *PackageCopy) SetEpoch(v int64) {
+func (o *HexPackageUpload) SetEpoch(v int64) {
 	o.Epoch.Set(&v)
 }
 
 // SetEpochNil sets the value for Epoch to be an explicit nil
-func (o *PackageCopy) SetEpochNil() {
+func (o *HexPackageUpload) SetEpochNil() {
 	o.Epoch.Set(nil)
 }
 
 // UnsetEpoch ensures that no value is present for Epoch, not even an explicit nil
-func (o *PackageCopy) UnsetEpoch() {
+func (o *HexPackageUpload) UnsetEpoch() {
 	o.Epoch.Unset()
 }
 
 // GetExtension returns the Extension field value if set, zero value otherwise.
-func (o *PackageCopy) GetExtension() string {
+func (o *HexPackageUpload) GetExtension() string {
 	if o == nil || isNil(o.Extension) {
 		var ret string
 		return ret
@@ -614,7 +611,7 @@ func (o *PackageCopy) GetExtension() string {
 
 // GetExtensionOk returns a tuple with the Extension field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetExtensionOk() (*string, bool) {
+func (o *HexPackageUpload) GetExtensionOk() (*string, bool) {
 	if o == nil || isNil(o.Extension) {
 		return nil, false
 	}
@@ -622,7 +619,7 @@ func (o *PackageCopy) GetExtensionOk() (*string, bool) {
 }
 
 // HasExtension returns a boolean if a field has been set.
-func (o *PackageCopy) HasExtension() bool {
+func (o *HexPackageUpload) HasExtension() bool {
 	if o != nil && !isNil(o.Extension) {
 		return true
 	}
@@ -631,12 +628,12 @@ func (o *PackageCopy) HasExtension() bool {
 }
 
 // SetExtension gets a reference to the given string and assigns it to the Extension field.
-func (o *PackageCopy) SetExtension(v string) {
+func (o *HexPackageUpload) SetExtension(v string) {
 	o.Extension = &v
 }
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
-func (o *PackageCopy) GetFilename() string {
+func (o *HexPackageUpload) GetFilename() string {
 	if o == nil || isNil(o.Filename) {
 		var ret string
 		return ret
@@ -646,7 +643,7 @@ func (o *PackageCopy) GetFilename() string {
 
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetFilenameOk() (*string, bool) {
+func (o *HexPackageUpload) GetFilenameOk() (*string, bool) {
 	if o == nil || isNil(o.Filename) {
 		return nil, false
 	}
@@ -654,7 +651,7 @@ func (o *PackageCopy) GetFilenameOk() (*string, bool) {
 }
 
 // HasFilename returns a boolean if a field has been set.
-func (o *PackageCopy) HasFilename() bool {
+func (o *HexPackageUpload) HasFilename() bool {
 	if o != nil && !isNil(o.Filename) {
 		return true
 	}
@@ -663,12 +660,12 @@ func (o *PackageCopy) HasFilename() bool {
 }
 
 // SetFilename gets a reference to the given string and assigns it to the Filename field.
-func (o *PackageCopy) SetFilename(v string) {
+func (o *HexPackageUpload) SetFilename(v string) {
 	o.Filename = &v
 }
 
 // GetFiles returns the Files field value if set, zero value otherwise.
-func (o *PackageCopy) GetFiles() []PackageFile {
+func (o *HexPackageUpload) GetFiles() []PackageFile {
 	if o == nil || isNil(o.Files) {
 		var ret []PackageFile
 		return ret
@@ -678,7 +675,7 @@ func (o *PackageCopy) GetFiles() []PackageFile {
 
 // GetFilesOk returns a tuple with the Files field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetFilesOk() ([]PackageFile, bool) {
+func (o *HexPackageUpload) GetFilesOk() ([]PackageFile, bool) {
 	if o == nil || isNil(o.Files) {
 		return nil, false
 	}
@@ -686,7 +683,7 @@ func (o *PackageCopy) GetFilesOk() ([]PackageFile, bool) {
 }
 
 // HasFiles returns a boolean if a field has been set.
-func (o *PackageCopy) HasFiles() bool {
+func (o *HexPackageUpload) HasFiles() bool {
 	if o != nil && !isNil(o.Files) {
 		return true
 	}
@@ -695,12 +692,12 @@ func (o *PackageCopy) HasFiles() bool {
 }
 
 // SetFiles gets a reference to the given []PackageFile and assigns it to the Files field.
-func (o *PackageCopy) SetFiles(v []PackageFile) {
+func (o *HexPackageUpload) SetFiles(v []PackageFile) {
 	o.Files = v
 }
 
 // GetFormat returns the Format field value if set, zero value otherwise.
-func (o *PackageCopy) GetFormat() string {
+func (o *HexPackageUpload) GetFormat() string {
 	if o == nil || isNil(o.Format) {
 		var ret string
 		return ret
@@ -710,7 +707,7 @@ func (o *PackageCopy) GetFormat() string {
 
 // GetFormatOk returns a tuple with the Format field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetFormatOk() (*string, bool) {
+func (o *HexPackageUpload) GetFormatOk() (*string, bool) {
 	if o == nil || isNil(o.Format) {
 		return nil, false
 	}
@@ -718,7 +715,7 @@ func (o *PackageCopy) GetFormatOk() (*string, bool) {
 }
 
 // HasFormat returns a boolean if a field has been set.
-func (o *PackageCopy) HasFormat() bool {
+func (o *HexPackageUpload) HasFormat() bool {
 	if o != nil && !isNil(o.Format) {
 		return true
 	}
@@ -727,12 +724,12 @@ func (o *PackageCopy) HasFormat() bool {
 }
 
 // SetFormat gets a reference to the given string and assigns it to the Format field.
-func (o *PackageCopy) SetFormat(v string) {
+func (o *HexPackageUpload) SetFormat(v string) {
 	o.Format = &v
 }
 
 // GetFormatUrl returns the FormatUrl field value if set, zero value otherwise.
-func (o *PackageCopy) GetFormatUrl() string {
+func (o *HexPackageUpload) GetFormatUrl() string {
 	if o == nil || isNil(o.FormatUrl) {
 		var ret string
 		return ret
@@ -742,7 +739,7 @@ func (o *PackageCopy) GetFormatUrl() string {
 
 // GetFormatUrlOk returns a tuple with the FormatUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetFormatUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetFormatUrlOk() (*string, bool) {
 	if o == nil || isNil(o.FormatUrl) {
 		return nil, false
 	}
@@ -750,7 +747,7 @@ func (o *PackageCopy) GetFormatUrlOk() (*string, bool) {
 }
 
 // HasFormatUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasFormatUrl() bool {
+func (o *HexPackageUpload) HasFormatUrl() bool {
 	if o != nil && !isNil(o.FormatUrl) {
 		return true
 	}
@@ -759,12 +756,12 @@ func (o *PackageCopy) HasFormatUrl() bool {
 }
 
 // SetFormatUrl gets a reference to the given string and assigns it to the FormatUrl field.
-func (o *PackageCopy) SetFormatUrl(v string) {
+func (o *HexPackageUpload) SetFormatUrl(v string) {
 	o.FormatUrl = &v
 }
 
 // GetIdentifierPerm returns the IdentifierPerm field value if set, zero value otherwise.
-func (o *PackageCopy) GetIdentifierPerm() string {
+func (o *HexPackageUpload) GetIdentifierPerm() string {
 	if o == nil || isNil(o.IdentifierPerm) {
 		var ret string
 		return ret
@@ -774,7 +771,7 @@ func (o *PackageCopy) GetIdentifierPerm() string {
 
 // GetIdentifierPermOk returns a tuple with the IdentifierPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetIdentifierPermOk() (*string, bool) {
+func (o *HexPackageUpload) GetIdentifierPermOk() (*string, bool) {
 	if o == nil || isNil(o.IdentifierPerm) {
 		return nil, false
 	}
@@ -782,7 +779,7 @@ func (o *PackageCopy) GetIdentifierPermOk() (*string, bool) {
 }
 
 // HasIdentifierPerm returns a boolean if a field has been set.
-func (o *PackageCopy) HasIdentifierPerm() bool {
+func (o *HexPackageUpload) HasIdentifierPerm() bool {
 	if o != nil && !isNil(o.IdentifierPerm) {
 		return true
 	}
@@ -791,12 +788,12 @@ func (o *PackageCopy) HasIdentifierPerm() bool {
 }
 
 // SetIdentifierPerm gets a reference to the given string and assigns it to the IdentifierPerm field.
-func (o *PackageCopy) SetIdentifierPerm(v string) {
+func (o *HexPackageUpload) SetIdentifierPerm(v string) {
 	o.IdentifierPerm = &v
 }
 
 // GetIndexed returns the Indexed field value if set, zero value otherwise.
-func (o *PackageCopy) GetIndexed() bool {
+func (o *HexPackageUpload) GetIndexed() bool {
 	if o == nil || isNil(o.Indexed) {
 		var ret bool
 		return ret
@@ -806,7 +803,7 @@ func (o *PackageCopy) GetIndexed() bool {
 
 // GetIndexedOk returns a tuple with the Indexed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetIndexedOk() (*bool, bool) {
+func (o *HexPackageUpload) GetIndexedOk() (*bool, bool) {
 	if o == nil || isNil(o.Indexed) {
 		return nil, false
 	}
@@ -814,7 +811,7 @@ func (o *PackageCopy) GetIndexedOk() (*bool, bool) {
 }
 
 // HasIndexed returns a boolean if a field has been set.
-func (o *PackageCopy) HasIndexed() bool {
+func (o *HexPackageUpload) HasIndexed() bool {
 	if o != nil && !isNil(o.Indexed) {
 		return true
 	}
@@ -823,12 +820,12 @@ func (o *PackageCopy) HasIndexed() bool {
 }
 
 // SetIndexed gets a reference to the given bool and assigns it to the Indexed field.
-func (o *PackageCopy) SetIndexed(v bool) {
+func (o *HexPackageUpload) SetIndexed(v bool) {
 	o.Indexed = &v
 }
 
 // GetIsDownloadable returns the IsDownloadable field value if set, zero value otherwise.
-func (o *PackageCopy) GetIsDownloadable() bool {
+func (o *HexPackageUpload) GetIsDownloadable() bool {
 	if o == nil || isNil(o.IsDownloadable) {
 		var ret bool
 		return ret
@@ -838,7 +835,7 @@ func (o *PackageCopy) GetIsDownloadable() bool {
 
 // GetIsDownloadableOk returns a tuple with the IsDownloadable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetIsDownloadableOk() (*bool, bool) {
+func (o *HexPackageUpload) GetIsDownloadableOk() (*bool, bool) {
 	if o == nil || isNil(o.IsDownloadable) {
 		return nil, false
 	}
@@ -846,7 +843,7 @@ func (o *PackageCopy) GetIsDownloadableOk() (*bool, bool) {
 }
 
 // HasIsDownloadable returns a boolean if a field has been set.
-func (o *PackageCopy) HasIsDownloadable() bool {
+func (o *HexPackageUpload) HasIsDownloadable() bool {
 	if o != nil && !isNil(o.IsDownloadable) {
 		return true
 	}
@@ -855,12 +852,12 @@ func (o *PackageCopy) HasIsDownloadable() bool {
 }
 
 // SetIsDownloadable gets a reference to the given bool and assigns it to the IsDownloadable field.
-func (o *PackageCopy) SetIsDownloadable(v bool) {
+func (o *HexPackageUpload) SetIsDownloadable(v bool) {
 	o.IsDownloadable = &v
 }
 
 // GetIsQuarantined returns the IsQuarantined field value if set, zero value otherwise.
-func (o *PackageCopy) GetIsQuarantined() bool {
+func (o *HexPackageUpload) GetIsQuarantined() bool {
 	if o == nil || isNil(o.IsQuarantined) {
 		var ret bool
 		return ret
@@ -870,7 +867,7 @@ func (o *PackageCopy) GetIsQuarantined() bool {
 
 // GetIsQuarantinedOk returns a tuple with the IsQuarantined field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetIsQuarantinedOk() (*bool, bool) {
+func (o *HexPackageUpload) GetIsQuarantinedOk() (*bool, bool) {
 	if o == nil || isNil(o.IsQuarantined) {
 		return nil, false
 	}
@@ -878,7 +875,7 @@ func (o *PackageCopy) GetIsQuarantinedOk() (*bool, bool) {
 }
 
 // HasIsQuarantined returns a boolean if a field has been set.
-func (o *PackageCopy) HasIsQuarantined() bool {
+func (o *HexPackageUpload) HasIsQuarantined() bool {
 	if o != nil && !isNil(o.IsQuarantined) {
 		return true
 	}
@@ -887,12 +884,12 @@ func (o *PackageCopy) HasIsQuarantined() bool {
 }
 
 // SetIsQuarantined gets a reference to the given bool and assigns it to the IsQuarantined field.
-func (o *PackageCopy) SetIsQuarantined(v bool) {
+func (o *HexPackageUpload) SetIsQuarantined(v bool) {
 	o.IsQuarantined = &v
 }
 
 // GetIsSyncAwaiting returns the IsSyncAwaiting field value if set, zero value otherwise.
-func (o *PackageCopy) GetIsSyncAwaiting() bool {
+func (o *HexPackageUpload) GetIsSyncAwaiting() bool {
 	if o == nil || isNil(o.IsSyncAwaiting) {
 		var ret bool
 		return ret
@@ -902,7 +899,7 @@ func (o *PackageCopy) GetIsSyncAwaiting() bool {
 
 // GetIsSyncAwaitingOk returns a tuple with the IsSyncAwaiting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetIsSyncAwaitingOk() (*bool, bool) {
+func (o *HexPackageUpload) GetIsSyncAwaitingOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSyncAwaiting) {
 		return nil, false
 	}
@@ -910,7 +907,7 @@ func (o *PackageCopy) GetIsSyncAwaitingOk() (*bool, bool) {
 }
 
 // HasIsSyncAwaiting returns a boolean if a field has been set.
-func (o *PackageCopy) HasIsSyncAwaiting() bool {
+func (o *HexPackageUpload) HasIsSyncAwaiting() bool {
 	if o != nil && !isNil(o.IsSyncAwaiting) {
 		return true
 	}
@@ -919,12 +916,12 @@ func (o *PackageCopy) HasIsSyncAwaiting() bool {
 }
 
 // SetIsSyncAwaiting gets a reference to the given bool and assigns it to the IsSyncAwaiting field.
-func (o *PackageCopy) SetIsSyncAwaiting(v bool) {
+func (o *HexPackageUpload) SetIsSyncAwaiting(v bool) {
 	o.IsSyncAwaiting = &v
 }
 
 // GetIsSyncCompleted returns the IsSyncCompleted field value if set, zero value otherwise.
-func (o *PackageCopy) GetIsSyncCompleted() bool {
+func (o *HexPackageUpload) GetIsSyncCompleted() bool {
 	if o == nil || isNil(o.IsSyncCompleted) {
 		var ret bool
 		return ret
@@ -934,7 +931,7 @@ func (o *PackageCopy) GetIsSyncCompleted() bool {
 
 // GetIsSyncCompletedOk returns a tuple with the IsSyncCompleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetIsSyncCompletedOk() (*bool, bool) {
+func (o *HexPackageUpload) GetIsSyncCompletedOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSyncCompleted) {
 		return nil, false
 	}
@@ -942,7 +939,7 @@ func (o *PackageCopy) GetIsSyncCompletedOk() (*bool, bool) {
 }
 
 // HasIsSyncCompleted returns a boolean if a field has been set.
-func (o *PackageCopy) HasIsSyncCompleted() bool {
+func (o *HexPackageUpload) HasIsSyncCompleted() bool {
 	if o != nil && !isNil(o.IsSyncCompleted) {
 		return true
 	}
@@ -951,12 +948,12 @@ func (o *PackageCopy) HasIsSyncCompleted() bool {
 }
 
 // SetIsSyncCompleted gets a reference to the given bool and assigns it to the IsSyncCompleted field.
-func (o *PackageCopy) SetIsSyncCompleted(v bool) {
+func (o *HexPackageUpload) SetIsSyncCompleted(v bool) {
 	o.IsSyncCompleted = &v
 }
 
 // GetIsSyncFailed returns the IsSyncFailed field value if set, zero value otherwise.
-func (o *PackageCopy) GetIsSyncFailed() bool {
+func (o *HexPackageUpload) GetIsSyncFailed() bool {
 	if o == nil || isNil(o.IsSyncFailed) {
 		var ret bool
 		return ret
@@ -966,7 +963,7 @@ func (o *PackageCopy) GetIsSyncFailed() bool {
 
 // GetIsSyncFailedOk returns a tuple with the IsSyncFailed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetIsSyncFailedOk() (*bool, bool) {
+func (o *HexPackageUpload) GetIsSyncFailedOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSyncFailed) {
 		return nil, false
 	}
@@ -974,7 +971,7 @@ func (o *PackageCopy) GetIsSyncFailedOk() (*bool, bool) {
 }
 
 // HasIsSyncFailed returns a boolean if a field has been set.
-func (o *PackageCopy) HasIsSyncFailed() bool {
+func (o *HexPackageUpload) HasIsSyncFailed() bool {
 	if o != nil && !isNil(o.IsSyncFailed) {
 		return true
 	}
@@ -983,12 +980,12 @@ func (o *PackageCopy) HasIsSyncFailed() bool {
 }
 
 // SetIsSyncFailed gets a reference to the given bool and assigns it to the IsSyncFailed field.
-func (o *PackageCopy) SetIsSyncFailed(v bool) {
+func (o *HexPackageUpload) SetIsSyncFailed(v bool) {
 	o.IsSyncFailed = &v
 }
 
 // GetIsSyncInFlight returns the IsSyncInFlight field value if set, zero value otherwise.
-func (o *PackageCopy) GetIsSyncInFlight() bool {
+func (o *HexPackageUpload) GetIsSyncInFlight() bool {
 	if o == nil || isNil(o.IsSyncInFlight) {
 		var ret bool
 		return ret
@@ -998,7 +995,7 @@ func (o *PackageCopy) GetIsSyncInFlight() bool {
 
 // GetIsSyncInFlightOk returns a tuple with the IsSyncInFlight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetIsSyncInFlightOk() (*bool, bool) {
+func (o *HexPackageUpload) GetIsSyncInFlightOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSyncInFlight) {
 		return nil, false
 	}
@@ -1006,7 +1003,7 @@ func (o *PackageCopy) GetIsSyncInFlightOk() (*bool, bool) {
 }
 
 // HasIsSyncInFlight returns a boolean if a field has been set.
-func (o *PackageCopy) HasIsSyncInFlight() bool {
+func (o *HexPackageUpload) HasIsSyncInFlight() bool {
 	if o != nil && !isNil(o.IsSyncInFlight) {
 		return true
 	}
@@ -1015,12 +1012,12 @@ func (o *PackageCopy) HasIsSyncInFlight() bool {
 }
 
 // SetIsSyncInFlight gets a reference to the given bool and assigns it to the IsSyncInFlight field.
-func (o *PackageCopy) SetIsSyncInFlight(v bool) {
+func (o *HexPackageUpload) SetIsSyncInFlight(v bool) {
 	o.IsSyncInFlight = &v
 }
 
 // GetIsSyncInProgress returns the IsSyncInProgress field value if set, zero value otherwise.
-func (o *PackageCopy) GetIsSyncInProgress() bool {
+func (o *HexPackageUpload) GetIsSyncInProgress() bool {
 	if o == nil || isNil(o.IsSyncInProgress) {
 		var ret bool
 		return ret
@@ -1030,7 +1027,7 @@ func (o *PackageCopy) GetIsSyncInProgress() bool {
 
 // GetIsSyncInProgressOk returns a tuple with the IsSyncInProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetIsSyncInProgressOk() (*bool, bool) {
+func (o *HexPackageUpload) GetIsSyncInProgressOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSyncInProgress) {
 		return nil, false
 	}
@@ -1038,7 +1035,7 @@ func (o *PackageCopy) GetIsSyncInProgressOk() (*bool, bool) {
 }
 
 // HasIsSyncInProgress returns a boolean if a field has been set.
-func (o *PackageCopy) HasIsSyncInProgress() bool {
+func (o *HexPackageUpload) HasIsSyncInProgress() bool {
 	if o != nil && !isNil(o.IsSyncInProgress) {
 		return true
 	}
@@ -1047,12 +1044,12 @@ func (o *PackageCopy) HasIsSyncInProgress() bool {
 }
 
 // SetIsSyncInProgress gets a reference to the given bool and assigns it to the IsSyncInProgress field.
-func (o *PackageCopy) SetIsSyncInProgress(v bool) {
+func (o *HexPackageUpload) SetIsSyncInProgress(v bool) {
 	o.IsSyncInProgress = &v
 }
 
 // GetLicense returns the License field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetLicense() string {
+func (o *HexPackageUpload) GetLicense() string {
 	if o == nil || isNil(o.License.Get()) {
 		var ret string
 		return ret
@@ -1063,7 +1060,7 @@ func (o *PackageCopy) GetLicense() string {
 // GetLicenseOk returns a tuple with the License field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetLicenseOk() (*string, bool) {
+func (o *HexPackageUpload) GetLicenseOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1071,7 +1068,7 @@ func (o *PackageCopy) GetLicenseOk() (*string, bool) {
 }
 
 // HasLicense returns a boolean if a field has been set.
-func (o *PackageCopy) HasLicense() bool {
+func (o *HexPackageUpload) HasLicense() bool {
 	if o != nil && o.License.IsSet() {
 		return true
 	}
@@ -1080,22 +1077,22 @@ func (o *PackageCopy) HasLicense() bool {
 }
 
 // SetLicense gets a reference to the given NullableString and assigns it to the License field.
-func (o *PackageCopy) SetLicense(v string) {
+func (o *HexPackageUpload) SetLicense(v string) {
 	o.License.Set(&v)
 }
 
 // SetLicenseNil sets the value for License to be an explicit nil
-func (o *PackageCopy) SetLicenseNil() {
+func (o *HexPackageUpload) SetLicenseNil() {
 	o.License.Set(nil)
 }
 
 // UnsetLicense ensures that no value is present for License, not even an explicit nil
-func (o *PackageCopy) UnsetLicense() {
+func (o *HexPackageUpload) UnsetLicense() {
 	o.License.Unset()
 }
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetName() string {
+func (o *HexPackageUpload) GetName() string {
 	if o == nil || isNil(o.Name.Get()) {
 		var ret string
 		return ret
@@ -1106,7 +1103,7 @@ func (o *PackageCopy) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetNameOk() (*string, bool) {
+func (o *HexPackageUpload) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1114,7 +1111,7 @@ func (o *PackageCopy) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *PackageCopy) HasName() bool {
+func (o *HexPackageUpload) HasName() bool {
 	if o != nil && o.Name.IsSet() {
 		return true
 	}
@@ -1123,22 +1120,22 @@ func (o *PackageCopy) HasName() bool {
 }
 
 // SetName gets a reference to the given NullableString and assigns it to the Name field.
-func (o *PackageCopy) SetName(v string) {
+func (o *HexPackageUpload) SetName(v string) {
 	o.Name.Set(&v)
 }
 
 // SetNameNil sets the value for Name to be an explicit nil
-func (o *PackageCopy) SetNameNil() {
+func (o *HexPackageUpload) SetNameNil() {
 	o.Name.Set(nil)
 }
 
 // UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *PackageCopy) UnsetName() {
+func (o *HexPackageUpload) UnsetName() {
 	o.Name.Unset()
 }
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
-func (o *PackageCopy) GetNamespace() string {
+func (o *HexPackageUpload) GetNamespace() string {
 	if o == nil || isNil(o.Namespace) {
 		var ret string
 		return ret
@@ -1148,7 +1145,7 @@ func (o *PackageCopy) GetNamespace() string {
 
 // GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetNamespaceOk() (*string, bool) {
+func (o *HexPackageUpload) GetNamespaceOk() (*string, bool) {
 	if o == nil || isNil(o.Namespace) {
 		return nil, false
 	}
@@ -1156,7 +1153,7 @@ func (o *PackageCopy) GetNamespaceOk() (*string, bool) {
 }
 
 // HasNamespace returns a boolean if a field has been set.
-func (o *PackageCopy) HasNamespace() bool {
+func (o *HexPackageUpload) HasNamespace() bool {
 	if o != nil && !isNil(o.Namespace) {
 		return true
 	}
@@ -1165,12 +1162,12 @@ func (o *PackageCopy) HasNamespace() bool {
 }
 
 // SetNamespace gets a reference to the given string and assigns it to the Namespace field.
-func (o *PackageCopy) SetNamespace(v string) {
+func (o *HexPackageUpload) SetNamespace(v string) {
 	o.Namespace = &v
 }
 
 // GetNamespaceUrl returns the NamespaceUrl field value if set, zero value otherwise.
-func (o *PackageCopy) GetNamespaceUrl() string {
+func (o *HexPackageUpload) GetNamespaceUrl() string {
 	if o == nil || isNil(o.NamespaceUrl) {
 		var ret string
 		return ret
@@ -1180,7 +1177,7 @@ func (o *PackageCopy) GetNamespaceUrl() string {
 
 // GetNamespaceUrlOk returns a tuple with the NamespaceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetNamespaceUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetNamespaceUrlOk() (*string, bool) {
 	if o == nil || isNil(o.NamespaceUrl) {
 		return nil, false
 	}
@@ -1188,7 +1185,7 @@ func (o *PackageCopy) GetNamespaceUrlOk() (*string, bool) {
 }
 
 // HasNamespaceUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasNamespaceUrl() bool {
+func (o *HexPackageUpload) HasNamespaceUrl() bool {
 	if o != nil && !isNil(o.NamespaceUrl) {
 		return true
 	}
@@ -1197,12 +1194,12 @@ func (o *PackageCopy) HasNamespaceUrl() bool {
 }
 
 // SetNamespaceUrl gets a reference to the given string and assigns it to the NamespaceUrl field.
-func (o *PackageCopy) SetNamespaceUrl(v string) {
+func (o *HexPackageUpload) SetNamespaceUrl(v string) {
 	o.NamespaceUrl = &v
 }
 
 // GetNumFiles returns the NumFiles field value if set, zero value otherwise.
-func (o *PackageCopy) GetNumFiles() int64 {
+func (o *HexPackageUpload) GetNumFiles() int64 {
 	if o == nil || isNil(o.NumFiles) {
 		var ret int64
 		return ret
@@ -1212,7 +1209,7 @@ func (o *PackageCopy) GetNumFiles() int64 {
 
 // GetNumFilesOk returns a tuple with the NumFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetNumFilesOk() (*int64, bool) {
+func (o *HexPackageUpload) GetNumFilesOk() (*int64, bool) {
 	if o == nil || isNil(o.NumFiles) {
 		return nil, false
 	}
@@ -1220,7 +1217,7 @@ func (o *PackageCopy) GetNumFilesOk() (*int64, bool) {
 }
 
 // HasNumFiles returns a boolean if a field has been set.
-func (o *PackageCopy) HasNumFiles() bool {
+func (o *HexPackageUpload) HasNumFiles() bool {
 	if o != nil && !isNil(o.NumFiles) {
 		return true
 	}
@@ -1229,12 +1226,12 @@ func (o *PackageCopy) HasNumFiles() bool {
 }
 
 // SetNumFiles gets a reference to the given int64 and assigns it to the NumFiles field.
-func (o *PackageCopy) SetNumFiles(v int64) {
+func (o *HexPackageUpload) SetNumFiles(v int64) {
 	o.NumFiles = &v
 }
 
 // GetOriginRepository returns the OriginRepository field value if set, zero value otherwise.
-func (o *PackageCopy) GetOriginRepository() string {
+func (o *HexPackageUpload) GetOriginRepository() string {
 	if o == nil || isNil(o.OriginRepository) {
 		var ret string
 		return ret
@@ -1244,7 +1241,7 @@ func (o *PackageCopy) GetOriginRepository() string {
 
 // GetOriginRepositoryOk returns a tuple with the OriginRepository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetOriginRepositoryOk() (*string, bool) {
+func (o *HexPackageUpload) GetOriginRepositoryOk() (*string, bool) {
 	if o == nil || isNil(o.OriginRepository) {
 		return nil, false
 	}
@@ -1252,7 +1249,7 @@ func (o *PackageCopy) GetOriginRepositoryOk() (*string, bool) {
 }
 
 // HasOriginRepository returns a boolean if a field has been set.
-func (o *PackageCopy) HasOriginRepository() bool {
+func (o *HexPackageUpload) HasOriginRepository() bool {
 	if o != nil && !isNil(o.OriginRepository) {
 		return true
 	}
@@ -1261,12 +1258,12 @@ func (o *PackageCopy) HasOriginRepository() bool {
 }
 
 // SetOriginRepository gets a reference to the given string and assigns it to the OriginRepository field.
-func (o *PackageCopy) SetOriginRepository(v string) {
+func (o *HexPackageUpload) SetOriginRepository(v string) {
 	o.OriginRepository = &v
 }
 
 // GetOriginRepositoryUrl returns the OriginRepositoryUrl field value if set, zero value otherwise.
-func (o *PackageCopy) GetOriginRepositoryUrl() string {
+func (o *HexPackageUpload) GetOriginRepositoryUrl() string {
 	if o == nil || isNil(o.OriginRepositoryUrl) {
 		var ret string
 		return ret
@@ -1276,7 +1273,7 @@ func (o *PackageCopy) GetOriginRepositoryUrl() string {
 
 // GetOriginRepositoryUrlOk returns a tuple with the OriginRepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetOriginRepositoryUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetOriginRepositoryUrlOk() (*string, bool) {
 	if o == nil || isNil(o.OriginRepositoryUrl) {
 		return nil, false
 	}
@@ -1284,7 +1281,7 @@ func (o *PackageCopy) GetOriginRepositoryUrlOk() (*string, bool) {
 }
 
 // HasOriginRepositoryUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasOriginRepositoryUrl() bool {
+func (o *HexPackageUpload) HasOriginRepositoryUrl() bool {
 	if o != nil && !isNil(o.OriginRepositoryUrl) {
 		return true
 	}
@@ -1293,12 +1290,12 @@ func (o *PackageCopy) HasOriginRepositoryUrl() bool {
 }
 
 // SetOriginRepositoryUrl gets a reference to the given string and assigns it to the OriginRepositoryUrl field.
-func (o *PackageCopy) SetOriginRepositoryUrl(v string) {
+func (o *HexPackageUpload) SetOriginRepositoryUrl(v string) {
 	o.OriginRepositoryUrl = &v
 }
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
-func (o *PackageCopy) GetPackageType() int64 {
+func (o *HexPackageUpload) GetPackageType() int64 {
 	if o == nil || isNil(o.PackageType) {
 		var ret int64
 		return ret
@@ -1308,7 +1305,7 @@ func (o *PackageCopy) GetPackageType() int64 {
 
 // GetPackageTypeOk returns a tuple with the PackageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetPackageTypeOk() (*int64, bool) {
+func (o *HexPackageUpload) GetPackageTypeOk() (*int64, bool) {
 	if o == nil || isNil(o.PackageType) {
 		return nil, false
 	}
@@ -1316,7 +1313,7 @@ func (o *PackageCopy) GetPackageTypeOk() (*int64, bool) {
 }
 
 // HasPackageType returns a boolean if a field has been set.
-func (o *PackageCopy) HasPackageType() bool {
+func (o *HexPackageUpload) HasPackageType() bool {
 	if o != nil && !isNil(o.PackageType) {
 		return true
 	}
@@ -1325,12 +1322,12 @@ func (o *PackageCopy) HasPackageType() bool {
 }
 
 // SetPackageType gets a reference to the given int64 and assigns it to the PackageType field.
-func (o *PackageCopy) SetPackageType(v int64) {
+func (o *HexPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
 // GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetRelease() string {
+func (o *HexPackageUpload) GetRelease() string {
 	if o == nil || isNil(o.Release.Get()) {
 		var ret string
 		return ret
@@ -1341,7 +1338,7 @@ func (o *PackageCopy) GetRelease() string {
 // GetReleaseOk returns a tuple with the Release field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetReleaseOk() (*string, bool) {
+func (o *HexPackageUpload) GetReleaseOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1349,7 +1346,7 @@ func (o *PackageCopy) GetReleaseOk() (*string, bool) {
 }
 
 // HasRelease returns a boolean if a field has been set.
-func (o *PackageCopy) HasRelease() bool {
+func (o *HexPackageUpload) HasRelease() bool {
 	if o != nil && o.Release.IsSet() {
 		return true
 	}
@@ -1358,22 +1355,22 @@ func (o *PackageCopy) HasRelease() bool {
 }
 
 // SetRelease gets a reference to the given NullableString and assigns it to the Release field.
-func (o *PackageCopy) SetRelease(v string) {
+func (o *HexPackageUpload) SetRelease(v string) {
 	o.Release.Set(&v)
 }
 
 // SetReleaseNil sets the value for Release to be an explicit nil
-func (o *PackageCopy) SetReleaseNil() {
+func (o *HexPackageUpload) SetReleaseNil() {
 	o.Release.Set(nil)
 }
 
 // UnsetRelease ensures that no value is present for Release, not even an explicit nil
-func (o *PackageCopy) UnsetRelease() {
+func (o *HexPackageUpload) UnsetRelease() {
 	o.Release.Unset()
 }
 
 // GetRepository returns the Repository field value if set, zero value otherwise.
-func (o *PackageCopy) GetRepository() string {
+func (o *HexPackageUpload) GetRepository() string {
 	if o == nil || isNil(o.Repository) {
 		var ret string
 		return ret
@@ -1383,7 +1380,7 @@ func (o *PackageCopy) GetRepository() string {
 
 // GetRepositoryOk returns a tuple with the Repository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetRepositoryOk() (*string, bool) {
+func (o *HexPackageUpload) GetRepositoryOk() (*string, bool) {
 	if o == nil || isNil(o.Repository) {
 		return nil, false
 	}
@@ -1391,7 +1388,7 @@ func (o *PackageCopy) GetRepositoryOk() (*string, bool) {
 }
 
 // HasRepository returns a boolean if a field has been set.
-func (o *PackageCopy) HasRepository() bool {
+func (o *HexPackageUpload) HasRepository() bool {
 	if o != nil && !isNil(o.Repository) {
 		return true
 	}
@@ -1400,12 +1397,12 @@ func (o *PackageCopy) HasRepository() bool {
 }
 
 // SetRepository gets a reference to the given string and assigns it to the Repository field.
-func (o *PackageCopy) SetRepository(v string) {
+func (o *HexPackageUpload) SetRepository(v string) {
 	o.Repository = &v
 }
 
 // GetRepositoryUrl returns the RepositoryUrl field value if set, zero value otherwise.
-func (o *PackageCopy) GetRepositoryUrl() string {
+func (o *HexPackageUpload) GetRepositoryUrl() string {
 	if o == nil || isNil(o.RepositoryUrl) {
 		var ret string
 		return ret
@@ -1415,7 +1412,7 @@ func (o *PackageCopy) GetRepositoryUrl() string {
 
 // GetRepositoryUrlOk returns a tuple with the RepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetRepositoryUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetRepositoryUrlOk() (*string, bool) {
 	if o == nil || isNil(o.RepositoryUrl) {
 		return nil, false
 	}
@@ -1423,7 +1420,7 @@ func (o *PackageCopy) GetRepositoryUrlOk() (*string, bool) {
 }
 
 // HasRepositoryUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasRepositoryUrl() bool {
+func (o *HexPackageUpload) HasRepositoryUrl() bool {
 	if o != nil && !isNil(o.RepositoryUrl) {
 		return true
 	}
@@ -1432,12 +1429,12 @@ func (o *PackageCopy) HasRepositoryUrl() bool {
 }
 
 // SetRepositoryUrl gets a reference to the given string and assigns it to the RepositoryUrl field.
-func (o *PackageCopy) SetRepositoryUrl(v string) {
+func (o *HexPackageUpload) SetRepositoryUrl(v string) {
 	o.RepositoryUrl = &v
 }
 
 // GetSecurityScanCompletedAt returns the SecurityScanCompletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetSecurityScanCompletedAt() time.Time {
+func (o *HexPackageUpload) GetSecurityScanCompletedAt() time.Time {
 	if o == nil || isNil(o.SecurityScanCompletedAt.Get()) {
 		var ret time.Time
 		return ret
@@ -1448,7 +1445,7 @@ func (o *PackageCopy) GetSecurityScanCompletedAt() time.Time {
 // GetSecurityScanCompletedAtOk returns a tuple with the SecurityScanCompletedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetSecurityScanCompletedAtOk() (*time.Time, bool) {
+func (o *HexPackageUpload) GetSecurityScanCompletedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1456,7 +1453,7 @@ func (o *PackageCopy) GetSecurityScanCompletedAtOk() (*time.Time, bool) {
 }
 
 // HasSecurityScanCompletedAt returns a boolean if a field has been set.
-func (o *PackageCopy) HasSecurityScanCompletedAt() bool {
+func (o *HexPackageUpload) HasSecurityScanCompletedAt() bool {
 	if o != nil && o.SecurityScanCompletedAt.IsSet() {
 		return true
 	}
@@ -1465,22 +1462,22 @@ func (o *PackageCopy) HasSecurityScanCompletedAt() bool {
 }
 
 // SetSecurityScanCompletedAt gets a reference to the given NullableTime and assigns it to the SecurityScanCompletedAt field.
-func (o *PackageCopy) SetSecurityScanCompletedAt(v time.Time) {
+func (o *HexPackageUpload) SetSecurityScanCompletedAt(v time.Time) {
 	o.SecurityScanCompletedAt.Set(&v)
 }
 
 // SetSecurityScanCompletedAtNil sets the value for SecurityScanCompletedAt to be an explicit nil
-func (o *PackageCopy) SetSecurityScanCompletedAtNil() {
+func (o *HexPackageUpload) SetSecurityScanCompletedAtNil() {
 	o.SecurityScanCompletedAt.Set(nil)
 }
 
 // UnsetSecurityScanCompletedAt ensures that no value is present for SecurityScanCompletedAt, not even an explicit nil
-func (o *PackageCopy) UnsetSecurityScanCompletedAt() {
+func (o *HexPackageUpload) UnsetSecurityScanCompletedAt() {
 	o.SecurityScanCompletedAt.Unset()
 }
 
 // GetSecurityScanStartedAt returns the SecurityScanStartedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetSecurityScanStartedAt() time.Time {
+func (o *HexPackageUpload) GetSecurityScanStartedAt() time.Time {
 	if o == nil || isNil(o.SecurityScanStartedAt.Get()) {
 		var ret time.Time
 		return ret
@@ -1491,7 +1488,7 @@ func (o *PackageCopy) GetSecurityScanStartedAt() time.Time {
 // GetSecurityScanStartedAtOk returns a tuple with the SecurityScanStartedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetSecurityScanStartedAtOk() (*time.Time, bool) {
+func (o *HexPackageUpload) GetSecurityScanStartedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1499,7 +1496,7 @@ func (o *PackageCopy) GetSecurityScanStartedAtOk() (*time.Time, bool) {
 }
 
 // HasSecurityScanStartedAt returns a boolean if a field has been set.
-func (o *PackageCopy) HasSecurityScanStartedAt() bool {
+func (o *HexPackageUpload) HasSecurityScanStartedAt() bool {
 	if o != nil && o.SecurityScanStartedAt.IsSet() {
 		return true
 	}
@@ -1508,22 +1505,22 @@ func (o *PackageCopy) HasSecurityScanStartedAt() bool {
 }
 
 // SetSecurityScanStartedAt gets a reference to the given NullableTime and assigns it to the SecurityScanStartedAt field.
-func (o *PackageCopy) SetSecurityScanStartedAt(v time.Time) {
+func (o *HexPackageUpload) SetSecurityScanStartedAt(v time.Time) {
 	o.SecurityScanStartedAt.Set(&v)
 }
 
 // SetSecurityScanStartedAtNil sets the value for SecurityScanStartedAt to be an explicit nil
-func (o *PackageCopy) SetSecurityScanStartedAtNil() {
+func (o *HexPackageUpload) SetSecurityScanStartedAtNil() {
 	o.SecurityScanStartedAt.Set(nil)
 }
 
 // UnsetSecurityScanStartedAt ensures that no value is present for SecurityScanStartedAt, not even an explicit nil
-func (o *PackageCopy) UnsetSecurityScanStartedAt() {
+func (o *HexPackageUpload) UnsetSecurityScanStartedAt() {
 	o.SecurityScanStartedAt.Unset()
 }
 
 // GetSecurityScanStatus returns the SecurityScanStatus field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetSecurityScanStatus() string {
+func (o *HexPackageUpload) GetSecurityScanStatus() string {
 	if o == nil || isNil(o.SecurityScanStatus.Get()) {
 		var ret string
 		return ret
@@ -1534,7 +1531,7 @@ func (o *PackageCopy) GetSecurityScanStatus() string {
 // GetSecurityScanStatusOk returns a tuple with the SecurityScanStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetSecurityScanStatusOk() (*string, bool) {
+func (o *HexPackageUpload) GetSecurityScanStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1542,7 +1539,7 @@ func (o *PackageCopy) GetSecurityScanStatusOk() (*string, bool) {
 }
 
 // HasSecurityScanStatus returns a boolean if a field has been set.
-func (o *PackageCopy) HasSecurityScanStatus() bool {
+func (o *HexPackageUpload) HasSecurityScanStatus() bool {
 	if o != nil && o.SecurityScanStatus.IsSet() {
 		return true
 	}
@@ -1551,22 +1548,22 @@ func (o *PackageCopy) HasSecurityScanStatus() bool {
 }
 
 // SetSecurityScanStatus gets a reference to the given NullableString and assigns it to the SecurityScanStatus field.
-func (o *PackageCopy) SetSecurityScanStatus(v string) {
+func (o *HexPackageUpload) SetSecurityScanStatus(v string) {
 	o.SecurityScanStatus.Set(&v)
 }
 
 // SetSecurityScanStatusNil sets the value for SecurityScanStatus to be an explicit nil
-func (o *PackageCopy) SetSecurityScanStatusNil() {
+func (o *HexPackageUpload) SetSecurityScanStatusNil() {
 	o.SecurityScanStatus.Set(nil)
 }
 
 // UnsetSecurityScanStatus ensures that no value is present for SecurityScanStatus, not even an explicit nil
-func (o *PackageCopy) UnsetSecurityScanStatus() {
+func (o *HexPackageUpload) UnsetSecurityScanStatus() {
 	o.SecurityScanStatus.Unset()
 }
 
 // GetSecurityScanStatusUpdatedAt returns the SecurityScanStatusUpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetSecurityScanStatusUpdatedAt() time.Time {
+func (o *HexPackageUpload) GetSecurityScanStatusUpdatedAt() time.Time {
 	if o == nil || isNil(o.SecurityScanStatusUpdatedAt.Get()) {
 		var ret time.Time
 		return ret
@@ -1577,7 +1574,7 @@ func (o *PackageCopy) GetSecurityScanStatusUpdatedAt() time.Time {
 // GetSecurityScanStatusUpdatedAtOk returns a tuple with the SecurityScanStatusUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetSecurityScanStatusUpdatedAtOk() (*time.Time, bool) {
+func (o *HexPackageUpload) GetSecurityScanStatusUpdatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1585,7 +1582,7 @@ func (o *PackageCopy) GetSecurityScanStatusUpdatedAtOk() (*time.Time, bool) {
 }
 
 // HasSecurityScanStatusUpdatedAt returns a boolean if a field has been set.
-func (o *PackageCopy) HasSecurityScanStatusUpdatedAt() bool {
+func (o *HexPackageUpload) HasSecurityScanStatusUpdatedAt() bool {
 	if o != nil && o.SecurityScanStatusUpdatedAt.IsSet() {
 		return true
 	}
@@ -1594,22 +1591,22 @@ func (o *PackageCopy) HasSecurityScanStatusUpdatedAt() bool {
 }
 
 // SetSecurityScanStatusUpdatedAt gets a reference to the given NullableTime and assigns it to the SecurityScanStatusUpdatedAt field.
-func (o *PackageCopy) SetSecurityScanStatusUpdatedAt(v time.Time) {
+func (o *HexPackageUpload) SetSecurityScanStatusUpdatedAt(v time.Time) {
 	o.SecurityScanStatusUpdatedAt.Set(&v)
 }
 
 // SetSecurityScanStatusUpdatedAtNil sets the value for SecurityScanStatusUpdatedAt to be an explicit nil
-func (o *PackageCopy) SetSecurityScanStatusUpdatedAtNil() {
+func (o *HexPackageUpload) SetSecurityScanStatusUpdatedAtNil() {
 	o.SecurityScanStatusUpdatedAt.Set(nil)
 }
 
 // UnsetSecurityScanStatusUpdatedAt ensures that no value is present for SecurityScanStatusUpdatedAt, not even an explicit nil
-func (o *PackageCopy) UnsetSecurityScanStatusUpdatedAt() {
+func (o *HexPackageUpload) UnsetSecurityScanStatusUpdatedAt() {
 	o.SecurityScanStatusUpdatedAt.Unset()
 }
 
 // GetSelfHtmlUrl returns the SelfHtmlUrl field value if set, zero value otherwise.
-func (o *PackageCopy) GetSelfHtmlUrl() string {
+func (o *HexPackageUpload) GetSelfHtmlUrl() string {
 	if o == nil || isNil(o.SelfHtmlUrl) {
 		var ret string
 		return ret
@@ -1619,7 +1616,7 @@ func (o *PackageCopy) GetSelfHtmlUrl() string {
 
 // GetSelfHtmlUrlOk returns a tuple with the SelfHtmlUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetSelfHtmlUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetSelfHtmlUrlOk() (*string, bool) {
 	if o == nil || isNil(o.SelfHtmlUrl) {
 		return nil, false
 	}
@@ -1627,7 +1624,7 @@ func (o *PackageCopy) GetSelfHtmlUrlOk() (*string, bool) {
 }
 
 // HasSelfHtmlUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasSelfHtmlUrl() bool {
+func (o *HexPackageUpload) HasSelfHtmlUrl() bool {
 	if o != nil && !isNil(o.SelfHtmlUrl) {
 		return true
 	}
@@ -1636,12 +1633,12 @@ func (o *PackageCopy) HasSelfHtmlUrl() bool {
 }
 
 // SetSelfHtmlUrl gets a reference to the given string and assigns it to the SelfHtmlUrl field.
-func (o *PackageCopy) SetSelfHtmlUrl(v string) {
+func (o *HexPackageUpload) SetSelfHtmlUrl(v string) {
 	o.SelfHtmlUrl = &v
 }
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
-func (o *PackageCopy) GetSelfUrl() string {
+func (o *HexPackageUpload) GetSelfUrl() string {
 	if o == nil || isNil(o.SelfUrl) {
 		var ret string
 		return ret
@@ -1651,7 +1648,7 @@ func (o *PackageCopy) GetSelfUrl() string {
 
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetSelfUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetSelfUrlOk() (*string, bool) {
 	if o == nil || isNil(o.SelfUrl) {
 		return nil, false
 	}
@@ -1659,7 +1656,7 @@ func (o *PackageCopy) GetSelfUrlOk() (*string, bool) {
 }
 
 // HasSelfUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasSelfUrl() bool {
+func (o *HexPackageUpload) HasSelfUrl() bool {
 	if o != nil && !isNil(o.SelfUrl) {
 		return true
 	}
@@ -1668,12 +1665,12 @@ func (o *PackageCopy) HasSelfUrl() bool {
 }
 
 // SetSelfUrl gets a reference to the given string and assigns it to the SelfUrl field.
-func (o *PackageCopy) SetSelfUrl(v string) {
+func (o *HexPackageUpload) SetSelfUrl(v string) {
 	o.SelfUrl = &v
 }
 
 // GetSignatureUrl returns the SignatureUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetSignatureUrl() string {
+func (o *HexPackageUpload) GetSignatureUrl() string {
 	if o == nil || isNil(o.SignatureUrl.Get()) {
 		var ret string
 		return ret
@@ -1684,7 +1681,7 @@ func (o *PackageCopy) GetSignatureUrl() string {
 // GetSignatureUrlOk returns a tuple with the SignatureUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetSignatureUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetSignatureUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1692,7 +1689,7 @@ func (o *PackageCopy) GetSignatureUrlOk() (*string, bool) {
 }
 
 // HasSignatureUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasSignatureUrl() bool {
+func (o *HexPackageUpload) HasSignatureUrl() bool {
 	if o != nil && o.SignatureUrl.IsSet() {
 		return true
 	}
@@ -1701,22 +1698,22 @@ func (o *PackageCopy) HasSignatureUrl() bool {
 }
 
 // SetSignatureUrl gets a reference to the given NullableString and assigns it to the SignatureUrl field.
-func (o *PackageCopy) SetSignatureUrl(v string) {
+func (o *HexPackageUpload) SetSignatureUrl(v string) {
 	o.SignatureUrl.Set(&v)
 }
 
 // SetSignatureUrlNil sets the value for SignatureUrl to be an explicit nil
-func (o *PackageCopy) SetSignatureUrlNil() {
+func (o *HexPackageUpload) SetSignatureUrlNil() {
 	o.SignatureUrl.Set(nil)
 }
 
 // UnsetSignatureUrl ensures that no value is present for SignatureUrl, not even an explicit nil
-func (o *PackageCopy) UnsetSignatureUrl() {
+func (o *HexPackageUpload) UnsetSignatureUrl() {
 	o.SignatureUrl.Unset()
 }
 
 // GetSize returns the Size field value if set, zero value otherwise.
-func (o *PackageCopy) GetSize() int64 {
+func (o *HexPackageUpload) GetSize() int64 {
 	if o == nil || isNil(o.Size) {
 		var ret int64
 		return ret
@@ -1726,7 +1723,7 @@ func (o *PackageCopy) GetSize() int64 {
 
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetSizeOk() (*int64, bool) {
+func (o *HexPackageUpload) GetSizeOk() (*int64, bool) {
 	if o == nil || isNil(o.Size) {
 		return nil, false
 	}
@@ -1734,7 +1731,7 @@ func (o *PackageCopy) GetSizeOk() (*int64, bool) {
 }
 
 // HasSize returns a boolean if a field has been set.
-func (o *PackageCopy) HasSize() bool {
+func (o *HexPackageUpload) HasSize() bool {
 	if o != nil && !isNil(o.Size) {
 		return true
 	}
@@ -1743,12 +1740,12 @@ func (o *PackageCopy) HasSize() bool {
 }
 
 // SetSize gets a reference to the given int64 and assigns it to the Size field.
-func (o *PackageCopy) SetSize(v int64) {
+func (o *HexPackageUpload) SetSize(v int64) {
 	o.Size = &v
 }
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
-func (o *PackageCopy) GetSlug() string {
+func (o *HexPackageUpload) GetSlug() string {
 	if o == nil || isNil(o.Slug) {
 		var ret string
 		return ret
@@ -1758,7 +1755,7 @@ func (o *PackageCopy) GetSlug() string {
 
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetSlugOk() (*string, bool) {
+func (o *HexPackageUpload) GetSlugOk() (*string, bool) {
 	if o == nil || isNil(o.Slug) {
 		return nil, false
 	}
@@ -1766,7 +1763,7 @@ func (o *PackageCopy) GetSlugOk() (*string, bool) {
 }
 
 // HasSlug returns a boolean if a field has been set.
-func (o *PackageCopy) HasSlug() bool {
+func (o *HexPackageUpload) HasSlug() bool {
 	if o != nil && !isNil(o.Slug) {
 		return true
 	}
@@ -1775,12 +1772,12 @@ func (o *PackageCopy) HasSlug() bool {
 }
 
 // SetSlug gets a reference to the given string and assigns it to the Slug field.
-func (o *PackageCopy) SetSlug(v string) {
+func (o *HexPackageUpload) SetSlug(v string) {
 	o.Slug = &v
 }
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
-func (o *PackageCopy) GetSlugPerm() string {
+func (o *HexPackageUpload) GetSlugPerm() string {
 	if o == nil || isNil(o.SlugPerm) {
 		var ret string
 		return ret
@@ -1790,7 +1787,7 @@ func (o *PackageCopy) GetSlugPerm() string {
 
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetSlugPermOk() (*string, bool) {
+func (o *HexPackageUpload) GetSlugPermOk() (*string, bool) {
 	if o == nil || isNil(o.SlugPerm) {
 		return nil, false
 	}
@@ -1798,7 +1795,7 @@ func (o *PackageCopy) GetSlugPermOk() (*string, bool) {
 }
 
 // HasSlugPerm returns a boolean if a field has been set.
-func (o *PackageCopy) HasSlugPerm() bool {
+func (o *HexPackageUpload) HasSlugPerm() bool {
 	if o != nil && !isNil(o.SlugPerm) {
 		return true
 	}
@@ -1807,12 +1804,12 @@ func (o *PackageCopy) HasSlugPerm() bool {
 }
 
 // SetSlugPerm gets a reference to the given string and assigns it to the SlugPerm field.
-func (o *PackageCopy) SetSlugPerm(v string) {
+func (o *HexPackageUpload) SetSlugPerm(v string) {
 	o.SlugPerm = &v
 }
 
 // GetStage returns the Stage field value if set, zero value otherwise.
-func (o *PackageCopy) GetStage() int64 {
+func (o *HexPackageUpload) GetStage() int64 {
 	if o == nil || isNil(o.Stage) {
 		var ret int64
 		return ret
@@ -1822,7 +1819,7 @@ func (o *PackageCopy) GetStage() int64 {
 
 // GetStageOk returns a tuple with the Stage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetStageOk() (*int64, bool) {
+func (o *HexPackageUpload) GetStageOk() (*int64, bool) {
 	if o == nil || isNil(o.Stage) {
 		return nil, false
 	}
@@ -1830,7 +1827,7 @@ func (o *PackageCopy) GetStageOk() (*int64, bool) {
 }
 
 // HasStage returns a boolean if a field has been set.
-func (o *PackageCopy) HasStage() bool {
+func (o *HexPackageUpload) HasStage() bool {
 	if o != nil && !isNil(o.Stage) {
 		return true
 	}
@@ -1839,12 +1836,12 @@ func (o *PackageCopy) HasStage() bool {
 }
 
 // SetStage gets a reference to the given int64 and assigns it to the Stage field.
-func (o *PackageCopy) SetStage(v int64) {
+func (o *HexPackageUpload) SetStage(v int64) {
 	o.Stage = &v
 }
 
 // GetStageStr returns the StageStr field value if set, zero value otherwise.
-func (o *PackageCopy) GetStageStr() string {
+func (o *HexPackageUpload) GetStageStr() string {
 	if o == nil || isNil(o.StageStr) {
 		var ret string
 		return ret
@@ -1854,7 +1851,7 @@ func (o *PackageCopy) GetStageStr() string {
 
 // GetStageStrOk returns a tuple with the StageStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetStageStrOk() (*string, bool) {
+func (o *HexPackageUpload) GetStageStrOk() (*string, bool) {
 	if o == nil || isNil(o.StageStr) {
 		return nil, false
 	}
@@ -1862,7 +1859,7 @@ func (o *PackageCopy) GetStageStrOk() (*string, bool) {
 }
 
 // HasStageStr returns a boolean if a field has been set.
-func (o *PackageCopy) HasStageStr() bool {
+func (o *HexPackageUpload) HasStageStr() bool {
 	if o != nil && !isNil(o.StageStr) {
 		return true
 	}
@@ -1871,12 +1868,12 @@ func (o *PackageCopy) HasStageStr() bool {
 }
 
 // SetStageStr gets a reference to the given string and assigns it to the StageStr field.
-func (o *PackageCopy) SetStageStr(v string) {
+func (o *HexPackageUpload) SetStageStr(v string) {
 	o.StageStr = &v
 }
 
 // GetStageUpdatedAt returns the StageUpdatedAt field value if set, zero value otherwise.
-func (o *PackageCopy) GetStageUpdatedAt() time.Time {
+func (o *HexPackageUpload) GetStageUpdatedAt() time.Time {
 	if o == nil || isNil(o.StageUpdatedAt) {
 		var ret time.Time
 		return ret
@@ -1886,7 +1883,7 @@ func (o *PackageCopy) GetStageUpdatedAt() time.Time {
 
 // GetStageUpdatedAtOk returns a tuple with the StageUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetStageUpdatedAtOk() (*time.Time, bool) {
+func (o *HexPackageUpload) GetStageUpdatedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.StageUpdatedAt) {
 		return nil, false
 	}
@@ -1894,7 +1891,7 @@ func (o *PackageCopy) GetStageUpdatedAtOk() (*time.Time, bool) {
 }
 
 // HasStageUpdatedAt returns a boolean if a field has been set.
-func (o *PackageCopy) HasStageUpdatedAt() bool {
+func (o *HexPackageUpload) HasStageUpdatedAt() bool {
 	if o != nil && !isNil(o.StageUpdatedAt) {
 		return true
 	}
@@ -1903,12 +1900,12 @@ func (o *PackageCopy) HasStageUpdatedAt() bool {
 }
 
 // SetStageUpdatedAt gets a reference to the given time.Time and assigns it to the StageUpdatedAt field.
-func (o *PackageCopy) SetStageUpdatedAt(v time.Time) {
+func (o *HexPackageUpload) SetStageUpdatedAt(v time.Time) {
 	o.StageUpdatedAt = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *PackageCopy) GetStatus() int64 {
+func (o *HexPackageUpload) GetStatus() int64 {
 	if o == nil || isNil(o.Status) {
 		var ret int64
 		return ret
@@ -1918,7 +1915,7 @@ func (o *PackageCopy) GetStatus() int64 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetStatusOk() (*int64, bool) {
+func (o *HexPackageUpload) GetStatusOk() (*int64, bool) {
 	if o == nil || isNil(o.Status) {
 		return nil, false
 	}
@@ -1926,7 +1923,7 @@ func (o *PackageCopy) GetStatusOk() (*int64, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *PackageCopy) HasStatus() bool {
+func (o *HexPackageUpload) HasStatus() bool {
 	if o != nil && !isNil(o.Status) {
 		return true
 	}
@@ -1935,12 +1932,12 @@ func (o *PackageCopy) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given int64 and assigns it to the Status field.
-func (o *PackageCopy) SetStatus(v int64) {
+func (o *HexPackageUpload) SetStatus(v int64) {
 	o.Status = &v
 }
 
 // GetStatusReason returns the StatusReason field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetStatusReason() string {
+func (o *HexPackageUpload) GetStatusReason() string {
 	if o == nil || isNil(o.StatusReason.Get()) {
 		var ret string
 		return ret
@@ -1951,7 +1948,7 @@ func (o *PackageCopy) GetStatusReason() string {
 // GetStatusReasonOk returns a tuple with the StatusReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetStatusReasonOk() (*string, bool) {
+func (o *HexPackageUpload) GetStatusReasonOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1959,7 +1956,7 @@ func (o *PackageCopy) GetStatusReasonOk() (*string, bool) {
 }
 
 // HasStatusReason returns a boolean if a field has been set.
-func (o *PackageCopy) HasStatusReason() bool {
+func (o *HexPackageUpload) HasStatusReason() bool {
 	if o != nil && o.StatusReason.IsSet() {
 		return true
 	}
@@ -1968,22 +1965,22 @@ func (o *PackageCopy) HasStatusReason() bool {
 }
 
 // SetStatusReason gets a reference to the given NullableString and assigns it to the StatusReason field.
-func (o *PackageCopy) SetStatusReason(v string) {
+func (o *HexPackageUpload) SetStatusReason(v string) {
 	o.StatusReason.Set(&v)
 }
 
 // SetStatusReasonNil sets the value for StatusReason to be an explicit nil
-func (o *PackageCopy) SetStatusReasonNil() {
+func (o *HexPackageUpload) SetStatusReasonNil() {
 	o.StatusReason.Set(nil)
 }
 
 // UnsetStatusReason ensures that no value is present for StatusReason, not even an explicit nil
-func (o *PackageCopy) UnsetStatusReason() {
+func (o *HexPackageUpload) UnsetStatusReason() {
 	o.StatusReason.Unset()
 }
 
 // GetStatusStr returns the StatusStr field value if set, zero value otherwise.
-func (o *PackageCopy) GetStatusStr() string {
+func (o *HexPackageUpload) GetStatusStr() string {
 	if o == nil || isNil(o.StatusStr) {
 		var ret string
 		return ret
@@ -1993,7 +1990,7 @@ func (o *PackageCopy) GetStatusStr() string {
 
 // GetStatusStrOk returns a tuple with the StatusStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetStatusStrOk() (*string, bool) {
+func (o *HexPackageUpload) GetStatusStrOk() (*string, bool) {
 	if o == nil || isNil(o.StatusStr) {
 		return nil, false
 	}
@@ -2001,7 +1998,7 @@ func (o *PackageCopy) GetStatusStrOk() (*string, bool) {
 }
 
 // HasStatusStr returns a boolean if a field has been set.
-func (o *PackageCopy) HasStatusStr() bool {
+func (o *HexPackageUpload) HasStatusStr() bool {
 	if o != nil && !isNil(o.StatusStr) {
 		return true
 	}
@@ -2010,12 +2007,12 @@ func (o *PackageCopy) HasStatusStr() bool {
 }
 
 // SetStatusStr gets a reference to the given string and assigns it to the StatusStr field.
-func (o *PackageCopy) SetStatusStr(v string) {
+func (o *HexPackageUpload) SetStatusStr(v string) {
 	o.StatusStr = &v
 }
 
 // GetStatusUpdatedAt returns the StatusUpdatedAt field value if set, zero value otherwise.
-func (o *PackageCopy) GetStatusUpdatedAt() time.Time {
+func (o *HexPackageUpload) GetStatusUpdatedAt() time.Time {
 	if o == nil || isNil(o.StatusUpdatedAt) {
 		var ret time.Time
 		return ret
@@ -2025,7 +2022,7 @@ func (o *PackageCopy) GetStatusUpdatedAt() time.Time {
 
 // GetStatusUpdatedAtOk returns a tuple with the StatusUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetStatusUpdatedAtOk() (*time.Time, bool) {
+func (o *HexPackageUpload) GetStatusUpdatedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.StatusUpdatedAt) {
 		return nil, false
 	}
@@ -2033,7 +2030,7 @@ func (o *PackageCopy) GetStatusUpdatedAtOk() (*time.Time, bool) {
 }
 
 // HasStatusUpdatedAt returns a boolean if a field has been set.
-func (o *PackageCopy) HasStatusUpdatedAt() bool {
+func (o *HexPackageUpload) HasStatusUpdatedAt() bool {
 	if o != nil && !isNil(o.StatusUpdatedAt) {
 		return true
 	}
@@ -2042,12 +2039,12 @@ func (o *PackageCopy) HasStatusUpdatedAt() bool {
 }
 
 // SetStatusUpdatedAt gets a reference to the given time.Time and assigns it to the StatusUpdatedAt field.
-func (o *PackageCopy) SetStatusUpdatedAt(v time.Time) {
+func (o *HexPackageUpload) SetStatusUpdatedAt(v time.Time) {
 	o.StatusUpdatedAt = &v
 }
 
 // GetStatusUrl returns the StatusUrl field value if set, zero value otherwise.
-func (o *PackageCopy) GetStatusUrl() string {
+func (o *HexPackageUpload) GetStatusUrl() string {
 	if o == nil || isNil(o.StatusUrl) {
 		var ret string
 		return ret
@@ -2057,7 +2054,7 @@ func (o *PackageCopy) GetStatusUrl() string {
 
 // GetStatusUrlOk returns a tuple with the StatusUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetStatusUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetStatusUrlOk() (*string, bool) {
 	if o == nil || isNil(o.StatusUrl) {
 		return nil, false
 	}
@@ -2065,7 +2062,7 @@ func (o *PackageCopy) GetStatusUrlOk() (*string, bool) {
 }
 
 // HasStatusUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasStatusUrl() bool {
+func (o *HexPackageUpload) HasStatusUrl() bool {
 	if o != nil && !isNil(o.StatusUrl) {
 		return true
 	}
@@ -2074,12 +2071,12 @@ func (o *PackageCopy) HasStatusUrl() bool {
 }
 
 // SetStatusUrl gets a reference to the given string and assigns it to the StatusUrl field.
-func (o *PackageCopy) SetStatusUrl(v string) {
+func (o *HexPackageUpload) SetStatusUrl(v string) {
 	o.StatusUrl = &v
 }
 
 // GetSubtype returns the Subtype field value if set, zero value otherwise.
-func (o *PackageCopy) GetSubtype() string {
+func (o *HexPackageUpload) GetSubtype() string {
 	if o == nil || isNil(o.Subtype) {
 		var ret string
 		return ret
@@ -2089,7 +2086,7 @@ func (o *PackageCopy) GetSubtype() string {
 
 // GetSubtypeOk returns a tuple with the Subtype field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetSubtypeOk() (*string, bool) {
+func (o *HexPackageUpload) GetSubtypeOk() (*string, bool) {
 	if o == nil || isNil(o.Subtype) {
 		return nil, false
 	}
@@ -2097,7 +2094,7 @@ func (o *PackageCopy) GetSubtypeOk() (*string, bool) {
 }
 
 // HasSubtype returns a boolean if a field has been set.
-func (o *PackageCopy) HasSubtype() bool {
+func (o *HexPackageUpload) HasSubtype() bool {
 	if o != nil && !isNil(o.Subtype) {
 		return true
 	}
@@ -2106,12 +2103,12 @@ func (o *PackageCopy) HasSubtype() bool {
 }
 
 // SetSubtype gets a reference to the given string and assigns it to the Subtype field.
-func (o *PackageCopy) SetSubtype(v string) {
+func (o *HexPackageUpload) SetSubtype(v string) {
 	o.Subtype = &v
 }
 
 // GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetSummary() string {
+func (o *HexPackageUpload) GetSummary() string {
 	if o == nil || isNil(o.Summary.Get()) {
 		var ret string
 		return ret
@@ -2122,7 +2119,7 @@ func (o *PackageCopy) GetSummary() string {
 // GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetSummaryOk() (*string, bool) {
+func (o *HexPackageUpload) GetSummaryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -2130,7 +2127,7 @@ func (o *PackageCopy) GetSummaryOk() (*string, bool) {
 }
 
 // HasSummary returns a boolean if a field has been set.
-func (o *PackageCopy) HasSummary() bool {
+func (o *HexPackageUpload) HasSummary() bool {
 	if o != nil && o.Summary.IsSet() {
 		return true
 	}
@@ -2139,22 +2136,22 @@ func (o *PackageCopy) HasSummary() bool {
 }
 
 // SetSummary gets a reference to the given NullableString and assigns it to the Summary field.
-func (o *PackageCopy) SetSummary(v string) {
+func (o *HexPackageUpload) SetSummary(v string) {
 	o.Summary.Set(&v)
 }
 
 // SetSummaryNil sets the value for Summary to be an explicit nil
-func (o *PackageCopy) SetSummaryNil() {
+func (o *HexPackageUpload) SetSummaryNil() {
 	o.Summary.Set(nil)
 }
 
 // UnsetSummary ensures that no value is present for Summary, not even an explicit nil
-func (o *PackageCopy) UnsetSummary() {
+func (o *HexPackageUpload) UnsetSummary() {
 	o.Summary.Unset()
 }
 
 // GetSyncFinishedAt returns the SyncFinishedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetSyncFinishedAt() time.Time {
+func (o *HexPackageUpload) GetSyncFinishedAt() time.Time {
 	if o == nil || isNil(o.SyncFinishedAt.Get()) {
 		var ret time.Time
 		return ret
@@ -2165,7 +2162,7 @@ func (o *PackageCopy) GetSyncFinishedAt() time.Time {
 // GetSyncFinishedAtOk returns a tuple with the SyncFinishedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetSyncFinishedAtOk() (*time.Time, bool) {
+func (o *HexPackageUpload) GetSyncFinishedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -2173,7 +2170,7 @@ func (o *PackageCopy) GetSyncFinishedAtOk() (*time.Time, bool) {
 }
 
 // HasSyncFinishedAt returns a boolean if a field has been set.
-func (o *PackageCopy) HasSyncFinishedAt() bool {
+func (o *HexPackageUpload) HasSyncFinishedAt() bool {
 	if o != nil && o.SyncFinishedAt.IsSet() {
 		return true
 	}
@@ -2182,22 +2179,22 @@ func (o *PackageCopy) HasSyncFinishedAt() bool {
 }
 
 // SetSyncFinishedAt gets a reference to the given NullableTime and assigns it to the SyncFinishedAt field.
-func (o *PackageCopy) SetSyncFinishedAt(v time.Time) {
+func (o *HexPackageUpload) SetSyncFinishedAt(v time.Time) {
 	o.SyncFinishedAt.Set(&v)
 }
 
 // SetSyncFinishedAtNil sets the value for SyncFinishedAt to be an explicit nil
-func (o *PackageCopy) SetSyncFinishedAtNil() {
+func (o *HexPackageUpload) SetSyncFinishedAtNil() {
 	o.SyncFinishedAt.Set(nil)
 }
 
 // UnsetSyncFinishedAt ensures that no value is present for SyncFinishedAt, not even an explicit nil
-func (o *PackageCopy) UnsetSyncFinishedAt() {
+func (o *HexPackageUpload) UnsetSyncFinishedAt() {
 	o.SyncFinishedAt.Unset()
 }
 
 // GetSyncProgress returns the SyncProgress field value if set, zero value otherwise.
-func (o *PackageCopy) GetSyncProgress() int64 {
+func (o *HexPackageUpload) GetSyncProgress() int64 {
 	if o == nil || isNil(o.SyncProgress) {
 		var ret int64
 		return ret
@@ -2207,7 +2204,7 @@ func (o *PackageCopy) GetSyncProgress() int64 {
 
 // GetSyncProgressOk returns a tuple with the SyncProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetSyncProgressOk() (*int64, bool) {
+func (o *HexPackageUpload) GetSyncProgressOk() (*int64, bool) {
 	if o == nil || isNil(o.SyncProgress) {
 		return nil, false
 	}
@@ -2215,7 +2212,7 @@ func (o *PackageCopy) GetSyncProgressOk() (*int64, bool) {
 }
 
 // HasSyncProgress returns a boolean if a field has been set.
-func (o *PackageCopy) HasSyncProgress() bool {
+func (o *HexPackageUpload) HasSyncProgress() bool {
 	if o != nil && !isNil(o.SyncProgress) {
 		return true
 	}
@@ -2224,44 +2221,12 @@ func (o *PackageCopy) HasSyncProgress() bool {
 }
 
 // SetSyncProgress gets a reference to the given int64 and assigns it to the SyncProgress field.
-func (o *PackageCopy) SetSyncProgress(v int64) {
+func (o *HexPackageUpload) SetSyncProgress(v int64) {
 	o.SyncProgress = &v
 }
 
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *PackageCopy) GetTags() map[string]interface{} {
-	if o == nil || isNil(o.Tags) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.Tags
-}
-
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PackageCopy) GetTagsOk() (map[string]interface{}, bool) {
-	if o == nil || isNil(o.Tags) {
-		return map[string]interface{}{}, false
-	}
-	return o.Tags, true
-}
-
-// HasTags returns a boolean if a field has been set.
-func (o *PackageCopy) HasTags() bool {
-	if o != nil && !isNil(o.Tags) {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given map[string]interface{} and assigns it to the Tags field.
-func (o *PackageCopy) SetTags(v map[string]interface{}) {
-	o.Tags = v
-}
-
 // GetTagsImmutable returns the TagsImmutable field value if set, zero value otherwise.
-func (o *PackageCopy) GetTagsImmutable() map[string]interface{} {
+func (o *HexPackageUpload) GetTagsImmutable() map[string]interface{} {
 	if o == nil || isNil(o.TagsImmutable) {
 		var ret map[string]interface{}
 		return ret
@@ -2271,7 +2236,7 @@ func (o *PackageCopy) GetTagsImmutable() map[string]interface{} {
 
 // GetTagsImmutableOk returns a tuple with the TagsImmutable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetTagsImmutableOk() (map[string]interface{}, bool) {
+func (o *HexPackageUpload) GetTagsImmutableOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.TagsImmutable) {
 		return map[string]interface{}{}, false
 	}
@@ -2279,7 +2244,7 @@ func (o *PackageCopy) GetTagsImmutableOk() (map[string]interface{}, bool) {
 }
 
 // HasTagsImmutable returns a boolean if a field has been set.
-func (o *PackageCopy) HasTagsImmutable() bool {
+func (o *HexPackageUpload) HasTagsImmutable() bool {
 	if o != nil && !isNil(o.TagsImmutable) {
 		return true
 	}
@@ -2288,12 +2253,12 @@ func (o *PackageCopy) HasTagsImmutable() bool {
 }
 
 // SetTagsImmutable gets a reference to the given map[string]interface{} and assigns it to the TagsImmutable field.
-func (o *PackageCopy) SetTagsImmutable(v map[string]interface{}) {
+func (o *HexPackageUpload) SetTagsImmutable(v map[string]interface{}) {
 	o.TagsImmutable = v
 }
 
 // GetTypeDisplay returns the TypeDisplay field value if set, zero value otherwise.
-func (o *PackageCopy) GetTypeDisplay() string {
+func (o *HexPackageUpload) GetTypeDisplay() string {
 	if o == nil || isNil(o.TypeDisplay) {
 		var ret string
 		return ret
@@ -2303,7 +2268,7 @@ func (o *PackageCopy) GetTypeDisplay() string {
 
 // GetTypeDisplayOk returns a tuple with the TypeDisplay field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetTypeDisplayOk() (*string, bool) {
+func (o *HexPackageUpload) GetTypeDisplayOk() (*string, bool) {
 	if o == nil || isNil(o.TypeDisplay) {
 		return nil, false
 	}
@@ -2311,7 +2276,7 @@ func (o *PackageCopy) GetTypeDisplayOk() (*string, bool) {
 }
 
 // HasTypeDisplay returns a boolean if a field has been set.
-func (o *PackageCopy) HasTypeDisplay() bool {
+func (o *HexPackageUpload) HasTypeDisplay() bool {
 	if o != nil && !isNil(o.TypeDisplay) {
 		return true
 	}
@@ -2320,12 +2285,12 @@ func (o *PackageCopy) HasTypeDisplay() bool {
 }
 
 // SetTypeDisplay gets a reference to the given string and assigns it to the TypeDisplay field.
-func (o *PackageCopy) SetTypeDisplay(v string) {
+func (o *HexPackageUpload) SetTypeDisplay(v string) {
 	o.TypeDisplay = &v
 }
 
 // GetUploadedAt returns the UploadedAt field value if set, zero value otherwise.
-func (o *PackageCopy) GetUploadedAt() time.Time {
+func (o *HexPackageUpload) GetUploadedAt() time.Time {
 	if o == nil || isNil(o.UploadedAt) {
 		var ret time.Time
 		return ret
@@ -2335,7 +2300,7 @@ func (o *PackageCopy) GetUploadedAt() time.Time {
 
 // GetUploadedAtOk returns a tuple with the UploadedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetUploadedAtOk() (*time.Time, bool) {
+func (o *HexPackageUpload) GetUploadedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.UploadedAt) {
 		return nil, false
 	}
@@ -2343,7 +2308,7 @@ func (o *PackageCopy) GetUploadedAtOk() (*time.Time, bool) {
 }
 
 // HasUploadedAt returns a boolean if a field has been set.
-func (o *PackageCopy) HasUploadedAt() bool {
+func (o *HexPackageUpload) HasUploadedAt() bool {
 	if o != nil && !isNil(o.UploadedAt) {
 		return true
 	}
@@ -2352,12 +2317,12 @@ func (o *PackageCopy) HasUploadedAt() bool {
 }
 
 // SetUploadedAt gets a reference to the given time.Time and assigns it to the UploadedAt field.
-func (o *PackageCopy) SetUploadedAt(v time.Time) {
+func (o *HexPackageUpload) SetUploadedAt(v time.Time) {
 	o.UploadedAt = &v
 }
 
 // GetUploader returns the Uploader field value if set, zero value otherwise.
-func (o *PackageCopy) GetUploader() string {
+func (o *HexPackageUpload) GetUploader() string {
 	if o == nil || isNil(o.Uploader) {
 		var ret string
 		return ret
@@ -2367,7 +2332,7 @@ func (o *PackageCopy) GetUploader() string {
 
 // GetUploaderOk returns a tuple with the Uploader field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetUploaderOk() (*string, bool) {
+func (o *HexPackageUpload) GetUploaderOk() (*string, bool) {
 	if o == nil || isNil(o.Uploader) {
 		return nil, false
 	}
@@ -2375,7 +2340,7 @@ func (o *PackageCopy) GetUploaderOk() (*string, bool) {
 }
 
 // HasUploader returns a boolean if a field has been set.
-func (o *PackageCopy) HasUploader() bool {
+func (o *HexPackageUpload) HasUploader() bool {
 	if o != nil && !isNil(o.Uploader) {
 		return true
 	}
@@ -2384,12 +2349,12 @@ func (o *PackageCopy) HasUploader() bool {
 }
 
 // SetUploader gets a reference to the given string and assigns it to the Uploader field.
-func (o *PackageCopy) SetUploader(v string) {
+func (o *HexPackageUpload) SetUploader(v string) {
 	o.Uploader = &v
 }
 
 // GetUploaderUrl returns the UploaderUrl field value if set, zero value otherwise.
-func (o *PackageCopy) GetUploaderUrl() string {
+func (o *HexPackageUpload) GetUploaderUrl() string {
 	if o == nil || isNil(o.UploaderUrl) {
 		var ret string
 		return ret
@@ -2399,7 +2364,7 @@ func (o *PackageCopy) GetUploaderUrl() string {
 
 // GetUploaderUrlOk returns a tuple with the UploaderUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetUploaderUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetUploaderUrlOk() (*string, bool) {
 	if o == nil || isNil(o.UploaderUrl) {
 		return nil, false
 	}
@@ -2407,7 +2372,7 @@ func (o *PackageCopy) GetUploaderUrlOk() (*string, bool) {
 }
 
 // HasUploaderUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasUploaderUrl() bool {
+func (o *HexPackageUpload) HasUploaderUrl() bool {
 	if o != nil && !isNil(o.UploaderUrl) {
 		return true
 	}
@@ -2416,12 +2381,12 @@ func (o *PackageCopy) HasUploaderUrl() bool {
 }
 
 // SetUploaderUrl gets a reference to the given string and assigns it to the UploaderUrl field.
-func (o *PackageCopy) SetUploaderUrl(v string) {
+func (o *HexPackageUpload) SetUploaderUrl(v string) {
 	o.UploaderUrl = &v
 }
 
 // GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageCopy) GetVersion() string {
+func (o *HexPackageUpload) GetVersion() string {
 	if o == nil || isNil(o.Version.Get()) {
 		var ret string
 		return ret
@@ -2432,7 +2397,7 @@ func (o *PackageCopy) GetVersion() string {
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageCopy) GetVersionOk() (*string, bool) {
+func (o *HexPackageUpload) GetVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -2440,7 +2405,7 @@ func (o *PackageCopy) GetVersionOk() (*string, bool) {
 }
 
 // HasVersion returns a boolean if a field has been set.
-func (o *PackageCopy) HasVersion() bool {
+func (o *HexPackageUpload) HasVersion() bool {
 	if o != nil && o.Version.IsSet() {
 		return true
 	}
@@ -2449,22 +2414,22 @@ func (o *PackageCopy) HasVersion() bool {
 }
 
 // SetVersion gets a reference to the given NullableString and assigns it to the Version field.
-func (o *PackageCopy) SetVersion(v string) {
+func (o *HexPackageUpload) SetVersion(v string) {
 	o.Version.Set(&v)
 }
 
 // SetVersionNil sets the value for Version to be an explicit nil
-func (o *PackageCopy) SetVersionNil() {
+func (o *HexPackageUpload) SetVersionNil() {
 	o.Version.Set(nil)
 }
 
 // UnsetVersion ensures that no value is present for Version, not even an explicit nil
-func (o *PackageCopy) UnsetVersion() {
+func (o *HexPackageUpload) UnsetVersion() {
 	o.Version.Unset()
 }
 
 // GetVersionOrig returns the VersionOrig field value if set, zero value otherwise.
-func (o *PackageCopy) GetVersionOrig() string {
+func (o *HexPackageUpload) GetVersionOrig() string {
 	if o == nil || isNil(o.VersionOrig) {
 		var ret string
 		return ret
@@ -2474,7 +2439,7 @@ func (o *PackageCopy) GetVersionOrig() string {
 
 // GetVersionOrigOk returns a tuple with the VersionOrig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetVersionOrigOk() (*string, bool) {
+func (o *HexPackageUpload) GetVersionOrigOk() (*string, bool) {
 	if o == nil || isNil(o.VersionOrig) {
 		return nil, false
 	}
@@ -2482,7 +2447,7 @@ func (o *PackageCopy) GetVersionOrigOk() (*string, bool) {
 }
 
 // HasVersionOrig returns a boolean if a field has been set.
-func (o *PackageCopy) HasVersionOrig() bool {
+func (o *HexPackageUpload) HasVersionOrig() bool {
 	if o != nil && !isNil(o.VersionOrig) {
 		return true
 	}
@@ -2491,12 +2456,12 @@ func (o *PackageCopy) HasVersionOrig() bool {
 }
 
 // SetVersionOrig gets a reference to the given string and assigns it to the VersionOrig field.
-func (o *PackageCopy) SetVersionOrig(v string) {
+func (o *HexPackageUpload) SetVersionOrig(v string) {
 	o.VersionOrig = &v
 }
 
 // GetVulnerabilityScanResultsUrl returns the VulnerabilityScanResultsUrl field value if set, zero value otherwise.
-func (o *PackageCopy) GetVulnerabilityScanResultsUrl() string {
+func (o *HexPackageUpload) GetVulnerabilityScanResultsUrl() string {
 	if o == nil || isNil(o.VulnerabilityScanResultsUrl) {
 		var ret string
 		return ret
@@ -2506,7 +2471,7 @@ func (o *PackageCopy) GetVulnerabilityScanResultsUrl() string {
 
 // GetVulnerabilityScanResultsUrlOk returns a tuple with the VulnerabilityScanResultsUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageCopy) GetVulnerabilityScanResultsUrlOk() (*string, bool) {
+func (o *HexPackageUpload) GetVulnerabilityScanResultsUrlOk() (*string, bool) {
 	if o == nil || isNil(o.VulnerabilityScanResultsUrl) {
 		return nil, false
 	}
@@ -2514,7 +2479,7 @@ func (o *PackageCopy) GetVulnerabilityScanResultsUrlOk() (*string, bool) {
 }
 
 // HasVulnerabilityScanResultsUrl returns a boolean if a field has been set.
-func (o *PackageCopy) HasVulnerabilityScanResultsUrl() bool {
+func (o *HexPackageUpload) HasVulnerabilityScanResultsUrl() bool {
 	if o != nil && !isNil(o.VulnerabilityScanResultsUrl) {
 		return true
 	}
@@ -2523,11 +2488,11 @@ func (o *PackageCopy) HasVulnerabilityScanResultsUrl() bool {
 }
 
 // SetVulnerabilityScanResultsUrl gets a reference to the given string and assigns it to the VulnerabilityScanResultsUrl field.
-func (o *PackageCopy) SetVulnerabilityScanResultsUrl(v string) {
+func (o *HexPackageUpload) SetVulnerabilityScanResultsUrl(v string) {
 	o.VulnerabilityScanResultsUrl = &v
 }
 
-func (o PackageCopy) MarshalJSON() ([]byte, error) {
+func (o HexPackageUpload) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Architectures) {
 		toSerialize["architectures"] = o.Architectures
@@ -2709,9 +2674,6 @@ func (o PackageCopy) MarshalJSON() ([]byte, error) {
 	if !isNil(o.SyncProgress) {
 		toSerialize["sync_progress"] = o.SyncProgress
 	}
-	if !isNil(o.Tags) {
-		toSerialize["tags"] = o.Tags
-	}
 	if !isNil(o.TagsImmutable) {
 		toSerialize["tags_immutable"] = o.TagsImmutable
 	}
@@ -2739,38 +2701,38 @@ func (o PackageCopy) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullablePackageCopy struct {
-	value *PackageCopy
+type NullableHexPackageUpload struct {
+	value *HexPackageUpload
 	isSet bool
 }
 
-func (v NullablePackageCopy) Get() *PackageCopy {
+func (v NullableHexPackageUpload) Get() *HexPackageUpload {
 	return v.value
 }
 
-func (v *NullablePackageCopy) Set(val *PackageCopy) {
+func (v *NullableHexPackageUpload) Set(val *HexPackageUpload) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePackageCopy) IsSet() bool {
+func (v NullableHexPackageUpload) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePackageCopy) Unset() {
+func (v *NullableHexPackageUpload) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePackageCopy(val *PackageCopy) *NullablePackageCopy {
-	return &NullablePackageCopy{value: val, isSet: true}
+func NewNullableHexPackageUpload(val *HexPackageUpload) *NullableHexPackageUpload {
+	return &NullableHexPackageUpload{value: val, isSet: true}
 }
 
-func (v NullablePackageCopy) MarshalJSON() ([]byte, error) {
+func (v NullableHexPackageUpload) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePackageCopy) UnmarshalJSON(src []byte) error {
+func (v *NullableHexPackageUpload) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

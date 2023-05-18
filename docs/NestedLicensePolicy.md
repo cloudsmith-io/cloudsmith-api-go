@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** |  | [optional] [readonly] 
 **Name** | Pointer to **string** |  | [optional] [readonly] 
 **OnViolationQuarantine** | Pointer to **bool** |  | [optional] [readonly] 
+**PackageQueryString** | Pointer to **NullableString** |  | [optional] [readonly] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **SpdxIdentifiers** | **[]string** |  | 
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
@@ -168,6 +169,41 @@ SetOnViolationQuarantine sets OnViolationQuarantine field to given value.
 
 HasOnViolationQuarantine returns a boolean if a field has been set.
 
+### GetPackageQueryString
+
+`func (o *NestedLicensePolicy) GetPackageQueryString() string`
+
+GetPackageQueryString returns the PackageQueryString field if non-nil, zero value otherwise.
+
+### GetPackageQueryStringOk
+
+`func (o *NestedLicensePolicy) GetPackageQueryStringOk() (*string, bool)`
+
+GetPackageQueryStringOk returns a tuple with the PackageQueryString field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPackageQueryString
+
+`func (o *NestedLicensePolicy) SetPackageQueryString(v string)`
+
+SetPackageQueryString sets PackageQueryString field to given value.
+
+### HasPackageQueryString
+
+`func (o *NestedLicensePolicy) HasPackageQueryString() bool`
+
+HasPackageQueryString returns a boolean if a field has been set.
+
+### SetPackageQueryStringNil
+
+`func (o *NestedLicensePolicy) SetPackageQueryStringNil(b bool)`
+
+ SetPackageQueryStringNil sets the value for PackageQueryString to be an explicit nil
+
+### UnsetPackageQueryString
+`func (o *NestedLicensePolicy) UnsetPackageQueryString()`
+
+UnsetPackageQueryString ensures that no value is present for PackageQueryString, not even an explicit nil
 ### GetSlugPerm
 
 `func (o *NestedLicensePolicy) GetSlugPerm() string`

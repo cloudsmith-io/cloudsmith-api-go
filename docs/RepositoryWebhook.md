@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **DisableReason** | Pointer to **int64** |  | [optional] [readonly] 
 **DisableReasonStr** | Pointer to **string** |  | [optional] [readonly] 
 **Events** | **[]string** |  | 
-**Identifier** | Pointer to **int64** |  | [optional] [readonly] 
+**Identifier** | Pointer to **NullableInt64** | Deprecated (23-05-15): Please use &#39;slug_perm&#39; instead. Previously: A monotonically increasing number that identified a webhook request within a repository. | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | If enabled, the webhook will trigger on subscribed events and send payloads to the configured target URL. | [optional] 
 **IsLastResponseBad** | Pointer to **bool** |  | [optional] [readonly] 
 **LastResponseStatus** | Pointer to **int64** |  | [optional] [readonly] 
@@ -231,6 +231,16 @@ SetIdentifier sets Identifier field to given value.
 
 HasIdentifier returns a boolean if a field has been set.
 
+### SetIdentifierNil
+
+`func (o *RepositoryWebhook) SetIdentifierNil(b bool)`
+
+ SetIdentifierNil sets the value for Identifier to be an explicit nil
+
+### UnsetIdentifier
+`func (o *RepositoryWebhook) UnsetIdentifier()`
+
+UnsetIdentifier ensures that no value is present for Identifier, not even an explicit nil
 ### GetIsActive
 
 `func (o *RepositoryWebhook) GetIsActive() bool`
