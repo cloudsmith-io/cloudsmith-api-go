@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.266.1
+API version: 1.273.0
 Contact: support@cloudsmith.io
 */
 
@@ -19,6 +19,8 @@ import (
 type HelmPackageUploadRequest struct {
 	// The primary file for the package.
 	PackageFile string `json:"package_file"`
+	// The provenance file containing the signature for the chart. If one is not provided, it will be generated automatically.
+	ProvenanceFile NullableString `json:"provenance_file,omitempty"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
 	Republish *bool `json:"republish,omitempty"`
 	// A comma-separated values list of tags to add to the package.
@@ -65,6 +67,49 @@ func (o *HelmPackageUploadRequest) GetPackageFileOk() (*string, bool) {
 // SetPackageFile sets field value
 func (o *HelmPackageUploadRequest) SetPackageFile(v string) {
 	o.PackageFile = v
+}
+
+// GetProvenanceFile returns the ProvenanceFile field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HelmPackageUploadRequest) GetProvenanceFile() string {
+	if o == nil || isNil(o.ProvenanceFile.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ProvenanceFile.Get()
+}
+
+// GetProvenanceFileOk returns a tuple with the ProvenanceFile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HelmPackageUploadRequest) GetProvenanceFileOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ProvenanceFile.Get(), o.ProvenanceFile.IsSet()
+}
+
+// HasProvenanceFile returns a boolean if a field has been set.
+func (o *HelmPackageUploadRequest) HasProvenanceFile() bool {
+	if o != nil && o.ProvenanceFile.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetProvenanceFile gets a reference to the given NullableString and assigns it to the ProvenanceFile field.
+func (o *HelmPackageUploadRequest) SetProvenanceFile(v string) {
+	o.ProvenanceFile.Set(&v)
+}
+
+// SetProvenanceFileNil sets the value for ProvenanceFile to be an explicit nil
+func (o *HelmPackageUploadRequest) SetProvenanceFileNil() {
+	o.ProvenanceFile.Set(nil)
+}
+
+// UnsetProvenanceFile ensures that no value is present for ProvenanceFile, not even an explicit nil
+func (o *HelmPackageUploadRequest) UnsetProvenanceFile() {
+	o.ProvenanceFile.Unset()
 }
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
@@ -146,6 +191,9 @@ func (o HelmPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["package_file"] = o.PackageFile
+	}
+	if o.ProvenanceFile.IsSet() {
+		toSerialize["provenance_file"] = o.ProvenanceFile.Get()
 	}
 	if !isNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
