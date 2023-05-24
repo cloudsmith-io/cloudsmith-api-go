@@ -16,8 +16,8 @@ import (
 	"time"
 )
 
-// HelmPackageUpload struct for HelmPackageUpload
-type HelmPackageUpload struct {
+// SwiftPackageUpload struct for SwiftPackageUpload
+type SwiftPackageUpload struct {
 	Architectures  []Architecture `json:"architectures,omitempty"`
 	CdnUrl         NullableString `json:"cdn_url,omitempty"`
 	ChecksumMd5    *string        `json:"checksum_md5,omitempty"`
@@ -107,30 +107,31 @@ type HelmPackageUpload struct {
 	Uploader    *string    `json:"uploader,omitempty"`
 	UploaderUrl *string    `json:"uploader_url,omitempty"`
 	// The raw version for this package.
-	Version                     NullableString `json:"version,omitempty"`
-	VersionOrig                 *string        `json:"version_orig,omitempty"`
-	VulnerabilityScanResultsUrl *string        `json:"vulnerability_scan_results_url,omitempty"`
+	Version                     string  `json:"version"`
+	VersionOrig                 *string `json:"version_orig,omitempty"`
+	VulnerabilityScanResultsUrl *string `json:"vulnerability_scan_results_url,omitempty"`
 }
 
-// NewHelmPackageUpload instantiates a new HelmPackageUpload object
+// NewSwiftPackageUpload instantiates a new SwiftPackageUpload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHelmPackageUpload() *HelmPackageUpload {
-	this := HelmPackageUpload{}
+func NewSwiftPackageUpload(version string) *SwiftPackageUpload {
+	this := SwiftPackageUpload{}
+	this.Version = version
 	return &this
 }
 
-// NewHelmPackageUploadWithDefaults instantiates a new HelmPackageUpload object
+// NewSwiftPackageUploadWithDefaults instantiates a new SwiftPackageUpload object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewHelmPackageUploadWithDefaults() *HelmPackageUpload {
-	this := HelmPackageUpload{}
+func NewSwiftPackageUploadWithDefaults() *SwiftPackageUpload {
+	this := SwiftPackageUpload{}
 	return &this
 }
 
 // GetArchitectures returns the Architectures field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetArchitectures() []Architecture {
+func (o *SwiftPackageUpload) GetArchitectures() []Architecture {
 	if o == nil || isNil(o.Architectures) {
 		var ret []Architecture
 		return ret
@@ -140,7 +141,7 @@ func (o *HelmPackageUpload) GetArchitectures() []Architecture {
 
 // GetArchitecturesOk returns a tuple with the Architectures field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetArchitecturesOk() ([]Architecture, bool) {
+func (o *SwiftPackageUpload) GetArchitecturesOk() ([]Architecture, bool) {
 	if o == nil || isNil(o.Architectures) {
 		return nil, false
 	}
@@ -148,7 +149,7 @@ func (o *HelmPackageUpload) GetArchitecturesOk() ([]Architecture, bool) {
 }
 
 // HasArchitectures returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasArchitectures() bool {
+func (o *SwiftPackageUpload) HasArchitectures() bool {
 	if o != nil && !isNil(o.Architectures) {
 		return true
 	}
@@ -157,12 +158,12 @@ func (o *HelmPackageUpload) HasArchitectures() bool {
 }
 
 // SetArchitectures gets a reference to the given []Architecture and assigns it to the Architectures field.
-func (o *HelmPackageUpload) SetArchitectures(v []Architecture) {
+func (o *SwiftPackageUpload) SetArchitectures(v []Architecture) {
 	o.Architectures = v
 }
 
 // GetCdnUrl returns the CdnUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetCdnUrl() string {
+func (o *SwiftPackageUpload) GetCdnUrl() string {
 	if o == nil || isNil(o.CdnUrl.Get()) {
 		var ret string
 		return ret
@@ -173,7 +174,7 @@ func (o *HelmPackageUpload) GetCdnUrl() string {
 // GetCdnUrlOk returns a tuple with the CdnUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetCdnUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetCdnUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -181,7 +182,7 @@ func (o *HelmPackageUpload) GetCdnUrlOk() (*string, bool) {
 }
 
 // HasCdnUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasCdnUrl() bool {
+func (o *SwiftPackageUpload) HasCdnUrl() bool {
 	if o != nil && o.CdnUrl.IsSet() {
 		return true
 	}
@@ -190,22 +191,22 @@ func (o *HelmPackageUpload) HasCdnUrl() bool {
 }
 
 // SetCdnUrl gets a reference to the given NullableString and assigns it to the CdnUrl field.
-func (o *HelmPackageUpload) SetCdnUrl(v string) {
+func (o *SwiftPackageUpload) SetCdnUrl(v string) {
 	o.CdnUrl.Set(&v)
 }
 
 // SetCdnUrlNil sets the value for CdnUrl to be an explicit nil
-func (o *HelmPackageUpload) SetCdnUrlNil() {
+func (o *SwiftPackageUpload) SetCdnUrlNil() {
 	o.CdnUrl.Set(nil)
 }
 
 // UnsetCdnUrl ensures that no value is present for CdnUrl, not even an explicit nil
-func (o *HelmPackageUpload) UnsetCdnUrl() {
+func (o *SwiftPackageUpload) UnsetCdnUrl() {
 	o.CdnUrl.Unset()
 }
 
 // GetChecksumMd5 returns the ChecksumMd5 field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetChecksumMd5() string {
+func (o *SwiftPackageUpload) GetChecksumMd5() string {
 	if o == nil || isNil(o.ChecksumMd5) {
 		var ret string
 		return ret
@@ -215,7 +216,7 @@ func (o *HelmPackageUpload) GetChecksumMd5() string {
 
 // GetChecksumMd5Ok returns a tuple with the ChecksumMd5 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetChecksumMd5Ok() (*string, bool) {
+func (o *SwiftPackageUpload) GetChecksumMd5Ok() (*string, bool) {
 	if o == nil || isNil(o.ChecksumMd5) {
 		return nil, false
 	}
@@ -223,7 +224,7 @@ func (o *HelmPackageUpload) GetChecksumMd5Ok() (*string, bool) {
 }
 
 // HasChecksumMd5 returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasChecksumMd5() bool {
+func (o *SwiftPackageUpload) HasChecksumMd5() bool {
 	if o != nil && !isNil(o.ChecksumMd5) {
 		return true
 	}
@@ -232,12 +233,12 @@ func (o *HelmPackageUpload) HasChecksumMd5() bool {
 }
 
 // SetChecksumMd5 gets a reference to the given string and assigns it to the ChecksumMd5 field.
-func (o *HelmPackageUpload) SetChecksumMd5(v string) {
+func (o *SwiftPackageUpload) SetChecksumMd5(v string) {
 	o.ChecksumMd5 = &v
 }
 
 // GetChecksumSha1 returns the ChecksumSha1 field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetChecksumSha1() string {
+func (o *SwiftPackageUpload) GetChecksumSha1() string {
 	if o == nil || isNil(o.ChecksumSha1) {
 		var ret string
 		return ret
@@ -247,7 +248,7 @@ func (o *HelmPackageUpload) GetChecksumSha1() string {
 
 // GetChecksumSha1Ok returns a tuple with the ChecksumSha1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetChecksumSha1Ok() (*string, bool) {
+func (o *SwiftPackageUpload) GetChecksumSha1Ok() (*string, bool) {
 	if o == nil || isNil(o.ChecksumSha1) {
 		return nil, false
 	}
@@ -255,7 +256,7 @@ func (o *HelmPackageUpload) GetChecksumSha1Ok() (*string, bool) {
 }
 
 // HasChecksumSha1 returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasChecksumSha1() bool {
+func (o *SwiftPackageUpload) HasChecksumSha1() bool {
 	if o != nil && !isNil(o.ChecksumSha1) {
 		return true
 	}
@@ -264,12 +265,12 @@ func (o *HelmPackageUpload) HasChecksumSha1() bool {
 }
 
 // SetChecksumSha1 gets a reference to the given string and assigns it to the ChecksumSha1 field.
-func (o *HelmPackageUpload) SetChecksumSha1(v string) {
+func (o *SwiftPackageUpload) SetChecksumSha1(v string) {
 	o.ChecksumSha1 = &v
 }
 
 // GetChecksumSha256 returns the ChecksumSha256 field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetChecksumSha256() string {
+func (o *SwiftPackageUpload) GetChecksumSha256() string {
 	if o == nil || isNil(o.ChecksumSha256) {
 		var ret string
 		return ret
@@ -279,7 +280,7 @@ func (o *HelmPackageUpload) GetChecksumSha256() string {
 
 // GetChecksumSha256Ok returns a tuple with the ChecksumSha256 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetChecksumSha256Ok() (*string, bool) {
+func (o *SwiftPackageUpload) GetChecksumSha256Ok() (*string, bool) {
 	if o == nil || isNil(o.ChecksumSha256) {
 		return nil, false
 	}
@@ -287,7 +288,7 @@ func (o *HelmPackageUpload) GetChecksumSha256Ok() (*string, bool) {
 }
 
 // HasChecksumSha256 returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasChecksumSha256() bool {
+func (o *SwiftPackageUpload) HasChecksumSha256() bool {
 	if o != nil && !isNil(o.ChecksumSha256) {
 		return true
 	}
@@ -296,12 +297,12 @@ func (o *HelmPackageUpload) HasChecksumSha256() bool {
 }
 
 // SetChecksumSha256 gets a reference to the given string and assigns it to the ChecksumSha256 field.
-func (o *HelmPackageUpload) SetChecksumSha256(v string) {
+func (o *SwiftPackageUpload) SetChecksumSha256(v string) {
 	o.ChecksumSha256 = &v
 }
 
 // GetChecksumSha512 returns the ChecksumSha512 field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetChecksumSha512() string {
+func (o *SwiftPackageUpload) GetChecksumSha512() string {
 	if o == nil || isNil(o.ChecksumSha512) {
 		var ret string
 		return ret
@@ -311,7 +312,7 @@ func (o *HelmPackageUpload) GetChecksumSha512() string {
 
 // GetChecksumSha512Ok returns a tuple with the ChecksumSha512 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetChecksumSha512Ok() (*string, bool) {
+func (o *SwiftPackageUpload) GetChecksumSha512Ok() (*string, bool) {
 	if o == nil || isNil(o.ChecksumSha512) {
 		return nil, false
 	}
@@ -319,7 +320,7 @@ func (o *HelmPackageUpload) GetChecksumSha512Ok() (*string, bool) {
 }
 
 // HasChecksumSha512 returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasChecksumSha512() bool {
+func (o *SwiftPackageUpload) HasChecksumSha512() bool {
 	if o != nil && !isNil(o.ChecksumSha512) {
 		return true
 	}
@@ -328,12 +329,12 @@ func (o *HelmPackageUpload) HasChecksumSha512() bool {
 }
 
 // SetChecksumSha512 gets a reference to the given string and assigns it to the ChecksumSha512 field.
-func (o *HelmPackageUpload) SetChecksumSha512(v string) {
+func (o *SwiftPackageUpload) SetChecksumSha512(v string) {
 	o.ChecksumSha512 = &v
 }
 
 // GetDependenciesChecksumMd5 returns the DependenciesChecksumMd5 field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetDependenciesChecksumMd5() string {
+func (o *SwiftPackageUpload) GetDependenciesChecksumMd5() string {
 	if o == nil || isNil(o.DependenciesChecksumMd5.Get()) {
 		var ret string
 		return ret
@@ -344,7 +345,7 @@ func (o *HelmPackageUpload) GetDependenciesChecksumMd5() string {
 // GetDependenciesChecksumMd5Ok returns a tuple with the DependenciesChecksumMd5 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetDependenciesChecksumMd5Ok() (*string, bool) {
+func (o *SwiftPackageUpload) GetDependenciesChecksumMd5Ok() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -352,7 +353,7 @@ func (o *HelmPackageUpload) GetDependenciesChecksumMd5Ok() (*string, bool) {
 }
 
 // HasDependenciesChecksumMd5 returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasDependenciesChecksumMd5() bool {
+func (o *SwiftPackageUpload) HasDependenciesChecksumMd5() bool {
 	if o != nil && o.DependenciesChecksumMd5.IsSet() {
 		return true
 	}
@@ -361,22 +362,22 @@ func (o *HelmPackageUpload) HasDependenciesChecksumMd5() bool {
 }
 
 // SetDependenciesChecksumMd5 gets a reference to the given NullableString and assigns it to the DependenciesChecksumMd5 field.
-func (o *HelmPackageUpload) SetDependenciesChecksumMd5(v string) {
+func (o *SwiftPackageUpload) SetDependenciesChecksumMd5(v string) {
 	o.DependenciesChecksumMd5.Set(&v)
 }
 
 // SetDependenciesChecksumMd5Nil sets the value for DependenciesChecksumMd5 to be an explicit nil
-func (o *HelmPackageUpload) SetDependenciesChecksumMd5Nil() {
+func (o *SwiftPackageUpload) SetDependenciesChecksumMd5Nil() {
 	o.DependenciesChecksumMd5.Set(nil)
 }
 
 // UnsetDependenciesChecksumMd5 ensures that no value is present for DependenciesChecksumMd5, not even an explicit nil
-func (o *HelmPackageUpload) UnsetDependenciesChecksumMd5() {
+func (o *SwiftPackageUpload) UnsetDependenciesChecksumMd5() {
 	o.DependenciesChecksumMd5.Unset()
 }
 
 // GetDependenciesUrl returns the DependenciesUrl field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetDependenciesUrl() string {
+func (o *SwiftPackageUpload) GetDependenciesUrl() string {
 	if o == nil || isNil(o.DependenciesUrl) {
 		var ret string
 		return ret
@@ -386,7 +387,7 @@ func (o *HelmPackageUpload) GetDependenciesUrl() string {
 
 // GetDependenciesUrlOk returns a tuple with the DependenciesUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetDependenciesUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetDependenciesUrlOk() (*string, bool) {
 	if o == nil || isNil(o.DependenciesUrl) {
 		return nil, false
 	}
@@ -394,7 +395,7 @@ func (o *HelmPackageUpload) GetDependenciesUrlOk() (*string, bool) {
 }
 
 // HasDependenciesUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasDependenciesUrl() bool {
+func (o *SwiftPackageUpload) HasDependenciesUrl() bool {
 	if o != nil && !isNil(o.DependenciesUrl) {
 		return true
 	}
@@ -403,12 +404,12 @@ func (o *HelmPackageUpload) HasDependenciesUrl() bool {
 }
 
 // SetDependenciesUrl gets a reference to the given string and assigns it to the DependenciesUrl field.
-func (o *HelmPackageUpload) SetDependenciesUrl(v string) {
+func (o *SwiftPackageUpload) SetDependenciesUrl(v string) {
 	o.DependenciesUrl = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetDescription() string {
+func (o *SwiftPackageUpload) GetDescription() string {
 	if o == nil || isNil(o.Description.Get()) {
 		var ret string
 		return ret
@@ -419,7 +420,7 @@ func (o *HelmPackageUpload) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetDescriptionOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetDescriptionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -427,7 +428,7 @@ func (o *HelmPackageUpload) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasDescription() bool {
+func (o *SwiftPackageUpload) HasDescription() bool {
 	if o != nil && o.Description.IsSet() {
 		return true
 	}
@@ -436,22 +437,22 @@ func (o *HelmPackageUpload) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given NullableString and assigns it to the Description field.
-func (o *HelmPackageUpload) SetDescription(v string) {
+func (o *SwiftPackageUpload) SetDescription(v string) {
 	o.Description.Set(&v)
 }
 
 // SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *HelmPackageUpload) SetDescriptionNil() {
+func (o *SwiftPackageUpload) SetDescriptionNil() {
 	o.Description.Set(nil)
 }
 
 // UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *HelmPackageUpload) UnsetDescription() {
+func (o *SwiftPackageUpload) UnsetDescription() {
 	o.Description.Unset()
 }
 
 // GetDistro returns the Distro field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetDistro() Distribution {
+func (o *SwiftPackageUpload) GetDistro() Distribution {
 	if o == nil || isNil(o.Distro.Get()) {
 		var ret Distribution
 		return ret
@@ -462,7 +463,7 @@ func (o *HelmPackageUpload) GetDistro() Distribution {
 // GetDistroOk returns a tuple with the Distro field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetDistroOk() (*Distribution, bool) {
+func (o *SwiftPackageUpload) GetDistroOk() (*Distribution, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -470,7 +471,7 @@ func (o *HelmPackageUpload) GetDistroOk() (*Distribution, bool) {
 }
 
 // HasDistro returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasDistro() bool {
+func (o *SwiftPackageUpload) HasDistro() bool {
 	if o != nil && o.Distro.IsSet() {
 		return true
 	}
@@ -479,22 +480,22 @@ func (o *HelmPackageUpload) HasDistro() bool {
 }
 
 // SetDistro gets a reference to the given NullableDistribution and assigns it to the Distro field.
-func (o *HelmPackageUpload) SetDistro(v Distribution) {
+func (o *SwiftPackageUpload) SetDistro(v Distribution) {
 	o.Distro.Set(&v)
 }
 
 // SetDistroNil sets the value for Distro to be an explicit nil
-func (o *HelmPackageUpload) SetDistroNil() {
+func (o *SwiftPackageUpload) SetDistroNil() {
 	o.Distro.Set(nil)
 }
 
 // UnsetDistro ensures that no value is present for Distro, not even an explicit nil
-func (o *HelmPackageUpload) UnsetDistro() {
+func (o *SwiftPackageUpload) UnsetDistro() {
 	o.Distro.Unset()
 }
 
 // GetDistroVersion returns the DistroVersion field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetDistroVersion() DistributionVersion {
+func (o *SwiftPackageUpload) GetDistroVersion() DistributionVersion {
 	if o == nil || isNil(o.DistroVersion) {
 		var ret DistributionVersion
 		return ret
@@ -504,7 +505,7 @@ func (o *HelmPackageUpload) GetDistroVersion() DistributionVersion {
 
 // GetDistroVersionOk returns a tuple with the DistroVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetDistroVersionOk() (*DistributionVersion, bool) {
+func (o *SwiftPackageUpload) GetDistroVersionOk() (*DistributionVersion, bool) {
 	if o == nil || isNil(o.DistroVersion) {
 		return nil, false
 	}
@@ -512,7 +513,7 @@ func (o *HelmPackageUpload) GetDistroVersionOk() (*DistributionVersion, bool) {
 }
 
 // HasDistroVersion returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasDistroVersion() bool {
+func (o *SwiftPackageUpload) HasDistroVersion() bool {
 	if o != nil && !isNil(o.DistroVersion) {
 		return true
 	}
@@ -521,12 +522,12 @@ func (o *HelmPackageUpload) HasDistroVersion() bool {
 }
 
 // SetDistroVersion gets a reference to the given DistributionVersion and assigns it to the DistroVersion field.
-func (o *HelmPackageUpload) SetDistroVersion(v DistributionVersion) {
+func (o *SwiftPackageUpload) SetDistroVersion(v DistributionVersion) {
 	o.DistroVersion = &v
 }
 
 // GetDownloads returns the Downloads field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetDownloads() int64 {
+func (o *SwiftPackageUpload) GetDownloads() int64 {
 	if o == nil || isNil(o.Downloads) {
 		var ret int64
 		return ret
@@ -536,7 +537,7 @@ func (o *HelmPackageUpload) GetDownloads() int64 {
 
 // GetDownloadsOk returns a tuple with the Downloads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetDownloadsOk() (*int64, bool) {
+func (o *SwiftPackageUpload) GetDownloadsOk() (*int64, bool) {
 	if o == nil || isNil(o.Downloads) {
 		return nil, false
 	}
@@ -544,7 +545,7 @@ func (o *HelmPackageUpload) GetDownloadsOk() (*int64, bool) {
 }
 
 // HasDownloads returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasDownloads() bool {
+func (o *SwiftPackageUpload) HasDownloads() bool {
 	if o != nil && !isNil(o.Downloads) {
 		return true
 	}
@@ -553,12 +554,12 @@ func (o *HelmPackageUpload) HasDownloads() bool {
 }
 
 // SetDownloads gets a reference to the given int64 and assigns it to the Downloads field.
-func (o *HelmPackageUpload) SetDownloads(v int64) {
+func (o *SwiftPackageUpload) SetDownloads(v int64) {
 	o.Downloads = &v
 }
 
 // GetEpoch returns the Epoch field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetEpoch() int64 {
+func (o *SwiftPackageUpload) GetEpoch() int64 {
 	if o == nil || isNil(o.Epoch.Get()) {
 		var ret int64
 		return ret
@@ -569,7 +570,7 @@ func (o *HelmPackageUpload) GetEpoch() int64 {
 // GetEpochOk returns a tuple with the Epoch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetEpochOk() (*int64, bool) {
+func (o *SwiftPackageUpload) GetEpochOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -577,7 +578,7 @@ func (o *HelmPackageUpload) GetEpochOk() (*int64, bool) {
 }
 
 // HasEpoch returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasEpoch() bool {
+func (o *SwiftPackageUpload) HasEpoch() bool {
 	if o != nil && o.Epoch.IsSet() {
 		return true
 	}
@@ -586,22 +587,22 @@ func (o *HelmPackageUpload) HasEpoch() bool {
 }
 
 // SetEpoch gets a reference to the given NullableInt64 and assigns it to the Epoch field.
-func (o *HelmPackageUpload) SetEpoch(v int64) {
+func (o *SwiftPackageUpload) SetEpoch(v int64) {
 	o.Epoch.Set(&v)
 }
 
 // SetEpochNil sets the value for Epoch to be an explicit nil
-func (o *HelmPackageUpload) SetEpochNil() {
+func (o *SwiftPackageUpload) SetEpochNil() {
 	o.Epoch.Set(nil)
 }
 
 // UnsetEpoch ensures that no value is present for Epoch, not even an explicit nil
-func (o *HelmPackageUpload) UnsetEpoch() {
+func (o *SwiftPackageUpload) UnsetEpoch() {
 	o.Epoch.Unset()
 }
 
 // GetExtension returns the Extension field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetExtension() string {
+func (o *SwiftPackageUpload) GetExtension() string {
 	if o == nil || isNil(o.Extension) {
 		var ret string
 		return ret
@@ -611,7 +612,7 @@ func (o *HelmPackageUpload) GetExtension() string {
 
 // GetExtensionOk returns a tuple with the Extension field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetExtensionOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetExtensionOk() (*string, bool) {
 	if o == nil || isNil(o.Extension) {
 		return nil, false
 	}
@@ -619,7 +620,7 @@ func (o *HelmPackageUpload) GetExtensionOk() (*string, bool) {
 }
 
 // HasExtension returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasExtension() bool {
+func (o *SwiftPackageUpload) HasExtension() bool {
 	if o != nil && !isNil(o.Extension) {
 		return true
 	}
@@ -628,12 +629,12 @@ func (o *HelmPackageUpload) HasExtension() bool {
 }
 
 // SetExtension gets a reference to the given string and assigns it to the Extension field.
-func (o *HelmPackageUpload) SetExtension(v string) {
+func (o *SwiftPackageUpload) SetExtension(v string) {
 	o.Extension = &v
 }
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetFilename() string {
+func (o *SwiftPackageUpload) GetFilename() string {
 	if o == nil || isNil(o.Filename) {
 		var ret string
 		return ret
@@ -643,7 +644,7 @@ func (o *HelmPackageUpload) GetFilename() string {
 
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetFilenameOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetFilenameOk() (*string, bool) {
 	if o == nil || isNil(o.Filename) {
 		return nil, false
 	}
@@ -651,7 +652,7 @@ func (o *HelmPackageUpload) GetFilenameOk() (*string, bool) {
 }
 
 // HasFilename returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasFilename() bool {
+func (o *SwiftPackageUpload) HasFilename() bool {
 	if o != nil && !isNil(o.Filename) {
 		return true
 	}
@@ -660,12 +661,12 @@ func (o *HelmPackageUpload) HasFilename() bool {
 }
 
 // SetFilename gets a reference to the given string and assigns it to the Filename field.
-func (o *HelmPackageUpload) SetFilename(v string) {
+func (o *SwiftPackageUpload) SetFilename(v string) {
 	o.Filename = &v
 }
 
 // GetFiles returns the Files field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetFiles() []PackageFile {
+func (o *SwiftPackageUpload) GetFiles() []PackageFile {
 	if o == nil || isNil(o.Files) {
 		var ret []PackageFile
 		return ret
@@ -675,7 +676,7 @@ func (o *HelmPackageUpload) GetFiles() []PackageFile {
 
 // GetFilesOk returns a tuple with the Files field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetFilesOk() ([]PackageFile, bool) {
+func (o *SwiftPackageUpload) GetFilesOk() ([]PackageFile, bool) {
 	if o == nil || isNil(o.Files) {
 		return nil, false
 	}
@@ -683,7 +684,7 @@ func (o *HelmPackageUpload) GetFilesOk() ([]PackageFile, bool) {
 }
 
 // HasFiles returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasFiles() bool {
+func (o *SwiftPackageUpload) HasFiles() bool {
 	if o != nil && !isNil(o.Files) {
 		return true
 	}
@@ -692,12 +693,12 @@ func (o *HelmPackageUpload) HasFiles() bool {
 }
 
 // SetFiles gets a reference to the given []PackageFile and assigns it to the Files field.
-func (o *HelmPackageUpload) SetFiles(v []PackageFile) {
+func (o *SwiftPackageUpload) SetFiles(v []PackageFile) {
 	o.Files = v
 }
 
 // GetFormat returns the Format field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetFormat() string {
+func (o *SwiftPackageUpload) GetFormat() string {
 	if o == nil || isNil(o.Format) {
 		var ret string
 		return ret
@@ -707,7 +708,7 @@ func (o *HelmPackageUpload) GetFormat() string {
 
 // GetFormatOk returns a tuple with the Format field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetFormatOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetFormatOk() (*string, bool) {
 	if o == nil || isNil(o.Format) {
 		return nil, false
 	}
@@ -715,7 +716,7 @@ func (o *HelmPackageUpload) GetFormatOk() (*string, bool) {
 }
 
 // HasFormat returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasFormat() bool {
+func (o *SwiftPackageUpload) HasFormat() bool {
 	if o != nil && !isNil(o.Format) {
 		return true
 	}
@@ -724,12 +725,12 @@ func (o *HelmPackageUpload) HasFormat() bool {
 }
 
 // SetFormat gets a reference to the given string and assigns it to the Format field.
-func (o *HelmPackageUpload) SetFormat(v string) {
+func (o *SwiftPackageUpload) SetFormat(v string) {
 	o.Format = &v
 }
 
 // GetFormatUrl returns the FormatUrl field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetFormatUrl() string {
+func (o *SwiftPackageUpload) GetFormatUrl() string {
 	if o == nil || isNil(o.FormatUrl) {
 		var ret string
 		return ret
@@ -739,7 +740,7 @@ func (o *HelmPackageUpload) GetFormatUrl() string {
 
 // GetFormatUrlOk returns a tuple with the FormatUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetFormatUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetFormatUrlOk() (*string, bool) {
 	if o == nil || isNil(o.FormatUrl) {
 		return nil, false
 	}
@@ -747,7 +748,7 @@ func (o *HelmPackageUpload) GetFormatUrlOk() (*string, bool) {
 }
 
 // HasFormatUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasFormatUrl() bool {
+func (o *SwiftPackageUpload) HasFormatUrl() bool {
 	if o != nil && !isNil(o.FormatUrl) {
 		return true
 	}
@@ -756,12 +757,12 @@ func (o *HelmPackageUpload) HasFormatUrl() bool {
 }
 
 // SetFormatUrl gets a reference to the given string and assigns it to the FormatUrl field.
-func (o *HelmPackageUpload) SetFormatUrl(v string) {
+func (o *SwiftPackageUpload) SetFormatUrl(v string) {
 	o.FormatUrl = &v
 }
 
 // GetIdentifierPerm returns the IdentifierPerm field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetIdentifierPerm() string {
+func (o *SwiftPackageUpload) GetIdentifierPerm() string {
 	if o == nil || isNil(o.IdentifierPerm) {
 		var ret string
 		return ret
@@ -771,7 +772,7 @@ func (o *HelmPackageUpload) GetIdentifierPerm() string {
 
 // GetIdentifierPermOk returns a tuple with the IdentifierPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetIdentifierPermOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetIdentifierPermOk() (*string, bool) {
 	if o == nil || isNil(o.IdentifierPerm) {
 		return nil, false
 	}
@@ -779,7 +780,7 @@ func (o *HelmPackageUpload) GetIdentifierPermOk() (*string, bool) {
 }
 
 // HasIdentifierPerm returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasIdentifierPerm() bool {
+func (o *SwiftPackageUpload) HasIdentifierPerm() bool {
 	if o != nil && !isNil(o.IdentifierPerm) {
 		return true
 	}
@@ -788,12 +789,12 @@ func (o *HelmPackageUpload) HasIdentifierPerm() bool {
 }
 
 // SetIdentifierPerm gets a reference to the given string and assigns it to the IdentifierPerm field.
-func (o *HelmPackageUpload) SetIdentifierPerm(v string) {
+func (o *SwiftPackageUpload) SetIdentifierPerm(v string) {
 	o.IdentifierPerm = &v
 }
 
 // GetIndexed returns the Indexed field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetIndexed() bool {
+func (o *SwiftPackageUpload) GetIndexed() bool {
 	if o == nil || isNil(o.Indexed) {
 		var ret bool
 		return ret
@@ -803,7 +804,7 @@ func (o *HelmPackageUpload) GetIndexed() bool {
 
 // GetIndexedOk returns a tuple with the Indexed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetIndexedOk() (*bool, bool) {
+func (o *SwiftPackageUpload) GetIndexedOk() (*bool, bool) {
 	if o == nil || isNil(o.Indexed) {
 		return nil, false
 	}
@@ -811,7 +812,7 @@ func (o *HelmPackageUpload) GetIndexedOk() (*bool, bool) {
 }
 
 // HasIndexed returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasIndexed() bool {
+func (o *SwiftPackageUpload) HasIndexed() bool {
 	if o != nil && !isNil(o.Indexed) {
 		return true
 	}
@@ -820,12 +821,12 @@ func (o *HelmPackageUpload) HasIndexed() bool {
 }
 
 // SetIndexed gets a reference to the given bool and assigns it to the Indexed field.
-func (o *HelmPackageUpload) SetIndexed(v bool) {
+func (o *SwiftPackageUpload) SetIndexed(v bool) {
 	o.Indexed = &v
 }
 
 // GetIsDownloadable returns the IsDownloadable field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetIsDownloadable() bool {
+func (o *SwiftPackageUpload) GetIsDownloadable() bool {
 	if o == nil || isNil(o.IsDownloadable) {
 		var ret bool
 		return ret
@@ -835,7 +836,7 @@ func (o *HelmPackageUpload) GetIsDownloadable() bool {
 
 // GetIsDownloadableOk returns a tuple with the IsDownloadable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetIsDownloadableOk() (*bool, bool) {
+func (o *SwiftPackageUpload) GetIsDownloadableOk() (*bool, bool) {
 	if o == nil || isNil(o.IsDownloadable) {
 		return nil, false
 	}
@@ -843,7 +844,7 @@ func (o *HelmPackageUpload) GetIsDownloadableOk() (*bool, bool) {
 }
 
 // HasIsDownloadable returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasIsDownloadable() bool {
+func (o *SwiftPackageUpload) HasIsDownloadable() bool {
 	if o != nil && !isNil(o.IsDownloadable) {
 		return true
 	}
@@ -852,12 +853,12 @@ func (o *HelmPackageUpload) HasIsDownloadable() bool {
 }
 
 // SetIsDownloadable gets a reference to the given bool and assigns it to the IsDownloadable field.
-func (o *HelmPackageUpload) SetIsDownloadable(v bool) {
+func (o *SwiftPackageUpload) SetIsDownloadable(v bool) {
 	o.IsDownloadable = &v
 }
 
 // GetIsQuarantined returns the IsQuarantined field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetIsQuarantined() bool {
+func (o *SwiftPackageUpload) GetIsQuarantined() bool {
 	if o == nil || isNil(o.IsQuarantined) {
 		var ret bool
 		return ret
@@ -867,7 +868,7 @@ func (o *HelmPackageUpload) GetIsQuarantined() bool {
 
 // GetIsQuarantinedOk returns a tuple with the IsQuarantined field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetIsQuarantinedOk() (*bool, bool) {
+func (o *SwiftPackageUpload) GetIsQuarantinedOk() (*bool, bool) {
 	if o == nil || isNil(o.IsQuarantined) {
 		return nil, false
 	}
@@ -875,7 +876,7 @@ func (o *HelmPackageUpload) GetIsQuarantinedOk() (*bool, bool) {
 }
 
 // HasIsQuarantined returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasIsQuarantined() bool {
+func (o *SwiftPackageUpload) HasIsQuarantined() bool {
 	if o != nil && !isNil(o.IsQuarantined) {
 		return true
 	}
@@ -884,12 +885,12 @@ func (o *HelmPackageUpload) HasIsQuarantined() bool {
 }
 
 // SetIsQuarantined gets a reference to the given bool and assigns it to the IsQuarantined field.
-func (o *HelmPackageUpload) SetIsQuarantined(v bool) {
+func (o *SwiftPackageUpload) SetIsQuarantined(v bool) {
 	o.IsQuarantined = &v
 }
 
 // GetIsSyncAwaiting returns the IsSyncAwaiting field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetIsSyncAwaiting() bool {
+func (o *SwiftPackageUpload) GetIsSyncAwaiting() bool {
 	if o == nil || isNil(o.IsSyncAwaiting) {
 		var ret bool
 		return ret
@@ -899,7 +900,7 @@ func (o *HelmPackageUpload) GetIsSyncAwaiting() bool {
 
 // GetIsSyncAwaitingOk returns a tuple with the IsSyncAwaiting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetIsSyncAwaitingOk() (*bool, bool) {
+func (o *SwiftPackageUpload) GetIsSyncAwaitingOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSyncAwaiting) {
 		return nil, false
 	}
@@ -907,7 +908,7 @@ func (o *HelmPackageUpload) GetIsSyncAwaitingOk() (*bool, bool) {
 }
 
 // HasIsSyncAwaiting returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasIsSyncAwaiting() bool {
+func (o *SwiftPackageUpload) HasIsSyncAwaiting() bool {
 	if o != nil && !isNil(o.IsSyncAwaiting) {
 		return true
 	}
@@ -916,12 +917,12 @@ func (o *HelmPackageUpload) HasIsSyncAwaiting() bool {
 }
 
 // SetIsSyncAwaiting gets a reference to the given bool and assigns it to the IsSyncAwaiting field.
-func (o *HelmPackageUpload) SetIsSyncAwaiting(v bool) {
+func (o *SwiftPackageUpload) SetIsSyncAwaiting(v bool) {
 	o.IsSyncAwaiting = &v
 }
 
 // GetIsSyncCompleted returns the IsSyncCompleted field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetIsSyncCompleted() bool {
+func (o *SwiftPackageUpload) GetIsSyncCompleted() bool {
 	if o == nil || isNil(o.IsSyncCompleted) {
 		var ret bool
 		return ret
@@ -931,7 +932,7 @@ func (o *HelmPackageUpload) GetIsSyncCompleted() bool {
 
 // GetIsSyncCompletedOk returns a tuple with the IsSyncCompleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetIsSyncCompletedOk() (*bool, bool) {
+func (o *SwiftPackageUpload) GetIsSyncCompletedOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSyncCompleted) {
 		return nil, false
 	}
@@ -939,7 +940,7 @@ func (o *HelmPackageUpload) GetIsSyncCompletedOk() (*bool, bool) {
 }
 
 // HasIsSyncCompleted returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasIsSyncCompleted() bool {
+func (o *SwiftPackageUpload) HasIsSyncCompleted() bool {
 	if o != nil && !isNil(o.IsSyncCompleted) {
 		return true
 	}
@@ -948,12 +949,12 @@ func (o *HelmPackageUpload) HasIsSyncCompleted() bool {
 }
 
 // SetIsSyncCompleted gets a reference to the given bool and assigns it to the IsSyncCompleted field.
-func (o *HelmPackageUpload) SetIsSyncCompleted(v bool) {
+func (o *SwiftPackageUpload) SetIsSyncCompleted(v bool) {
 	o.IsSyncCompleted = &v
 }
 
 // GetIsSyncFailed returns the IsSyncFailed field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetIsSyncFailed() bool {
+func (o *SwiftPackageUpload) GetIsSyncFailed() bool {
 	if o == nil || isNil(o.IsSyncFailed) {
 		var ret bool
 		return ret
@@ -963,7 +964,7 @@ func (o *HelmPackageUpload) GetIsSyncFailed() bool {
 
 // GetIsSyncFailedOk returns a tuple with the IsSyncFailed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetIsSyncFailedOk() (*bool, bool) {
+func (o *SwiftPackageUpload) GetIsSyncFailedOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSyncFailed) {
 		return nil, false
 	}
@@ -971,7 +972,7 @@ func (o *HelmPackageUpload) GetIsSyncFailedOk() (*bool, bool) {
 }
 
 // HasIsSyncFailed returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasIsSyncFailed() bool {
+func (o *SwiftPackageUpload) HasIsSyncFailed() bool {
 	if o != nil && !isNil(o.IsSyncFailed) {
 		return true
 	}
@@ -980,12 +981,12 @@ func (o *HelmPackageUpload) HasIsSyncFailed() bool {
 }
 
 // SetIsSyncFailed gets a reference to the given bool and assigns it to the IsSyncFailed field.
-func (o *HelmPackageUpload) SetIsSyncFailed(v bool) {
+func (o *SwiftPackageUpload) SetIsSyncFailed(v bool) {
 	o.IsSyncFailed = &v
 }
 
 // GetIsSyncInFlight returns the IsSyncInFlight field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetIsSyncInFlight() bool {
+func (o *SwiftPackageUpload) GetIsSyncInFlight() bool {
 	if o == nil || isNil(o.IsSyncInFlight) {
 		var ret bool
 		return ret
@@ -995,7 +996,7 @@ func (o *HelmPackageUpload) GetIsSyncInFlight() bool {
 
 // GetIsSyncInFlightOk returns a tuple with the IsSyncInFlight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetIsSyncInFlightOk() (*bool, bool) {
+func (o *SwiftPackageUpload) GetIsSyncInFlightOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSyncInFlight) {
 		return nil, false
 	}
@@ -1003,7 +1004,7 @@ func (o *HelmPackageUpload) GetIsSyncInFlightOk() (*bool, bool) {
 }
 
 // HasIsSyncInFlight returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasIsSyncInFlight() bool {
+func (o *SwiftPackageUpload) HasIsSyncInFlight() bool {
 	if o != nil && !isNil(o.IsSyncInFlight) {
 		return true
 	}
@@ -1012,12 +1013,12 @@ func (o *HelmPackageUpload) HasIsSyncInFlight() bool {
 }
 
 // SetIsSyncInFlight gets a reference to the given bool and assigns it to the IsSyncInFlight field.
-func (o *HelmPackageUpload) SetIsSyncInFlight(v bool) {
+func (o *SwiftPackageUpload) SetIsSyncInFlight(v bool) {
 	o.IsSyncInFlight = &v
 }
 
 // GetIsSyncInProgress returns the IsSyncInProgress field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetIsSyncInProgress() bool {
+func (o *SwiftPackageUpload) GetIsSyncInProgress() bool {
 	if o == nil || isNil(o.IsSyncInProgress) {
 		var ret bool
 		return ret
@@ -1027,7 +1028,7 @@ func (o *HelmPackageUpload) GetIsSyncInProgress() bool {
 
 // GetIsSyncInProgressOk returns a tuple with the IsSyncInProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetIsSyncInProgressOk() (*bool, bool) {
+func (o *SwiftPackageUpload) GetIsSyncInProgressOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSyncInProgress) {
 		return nil, false
 	}
@@ -1035,7 +1036,7 @@ func (o *HelmPackageUpload) GetIsSyncInProgressOk() (*bool, bool) {
 }
 
 // HasIsSyncInProgress returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasIsSyncInProgress() bool {
+func (o *SwiftPackageUpload) HasIsSyncInProgress() bool {
 	if o != nil && !isNil(o.IsSyncInProgress) {
 		return true
 	}
@@ -1044,12 +1045,12 @@ func (o *HelmPackageUpload) HasIsSyncInProgress() bool {
 }
 
 // SetIsSyncInProgress gets a reference to the given bool and assigns it to the IsSyncInProgress field.
-func (o *HelmPackageUpload) SetIsSyncInProgress(v bool) {
+func (o *SwiftPackageUpload) SetIsSyncInProgress(v bool) {
 	o.IsSyncInProgress = &v
 }
 
 // GetLicense returns the License field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetLicense() string {
+func (o *SwiftPackageUpload) GetLicense() string {
 	if o == nil || isNil(o.License.Get()) {
 		var ret string
 		return ret
@@ -1060,7 +1061,7 @@ func (o *HelmPackageUpload) GetLicense() string {
 // GetLicenseOk returns a tuple with the License field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetLicenseOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetLicenseOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1068,7 +1069,7 @@ func (o *HelmPackageUpload) GetLicenseOk() (*string, bool) {
 }
 
 // HasLicense returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasLicense() bool {
+func (o *SwiftPackageUpload) HasLicense() bool {
 	if o != nil && o.License.IsSet() {
 		return true
 	}
@@ -1077,22 +1078,22 @@ func (o *HelmPackageUpload) HasLicense() bool {
 }
 
 // SetLicense gets a reference to the given NullableString and assigns it to the License field.
-func (o *HelmPackageUpload) SetLicense(v string) {
+func (o *SwiftPackageUpload) SetLicense(v string) {
 	o.License.Set(&v)
 }
 
 // SetLicenseNil sets the value for License to be an explicit nil
-func (o *HelmPackageUpload) SetLicenseNil() {
+func (o *SwiftPackageUpload) SetLicenseNil() {
 	o.License.Set(nil)
 }
 
 // UnsetLicense ensures that no value is present for License, not even an explicit nil
-func (o *HelmPackageUpload) UnsetLicense() {
+func (o *SwiftPackageUpload) UnsetLicense() {
 	o.License.Unset()
 }
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetName() string {
+func (o *SwiftPackageUpload) GetName() string {
 	if o == nil || isNil(o.Name.Get()) {
 		var ret string
 		return ret
@@ -1103,7 +1104,7 @@ func (o *HelmPackageUpload) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetNameOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1111,7 +1112,7 @@ func (o *HelmPackageUpload) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasName() bool {
+func (o *SwiftPackageUpload) HasName() bool {
 	if o != nil && o.Name.IsSet() {
 		return true
 	}
@@ -1120,22 +1121,22 @@ func (o *HelmPackageUpload) HasName() bool {
 }
 
 // SetName gets a reference to the given NullableString and assigns it to the Name field.
-func (o *HelmPackageUpload) SetName(v string) {
+func (o *SwiftPackageUpload) SetName(v string) {
 	o.Name.Set(&v)
 }
 
 // SetNameNil sets the value for Name to be an explicit nil
-func (o *HelmPackageUpload) SetNameNil() {
+func (o *SwiftPackageUpload) SetNameNil() {
 	o.Name.Set(nil)
 }
 
 // UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *HelmPackageUpload) UnsetName() {
+func (o *SwiftPackageUpload) UnsetName() {
 	o.Name.Unset()
 }
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetNamespace() string {
+func (o *SwiftPackageUpload) GetNamespace() string {
 	if o == nil || isNil(o.Namespace) {
 		var ret string
 		return ret
@@ -1145,7 +1146,7 @@ func (o *HelmPackageUpload) GetNamespace() string {
 
 // GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetNamespaceOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetNamespaceOk() (*string, bool) {
 	if o == nil || isNil(o.Namespace) {
 		return nil, false
 	}
@@ -1153,7 +1154,7 @@ func (o *HelmPackageUpload) GetNamespaceOk() (*string, bool) {
 }
 
 // HasNamespace returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasNamespace() bool {
+func (o *SwiftPackageUpload) HasNamespace() bool {
 	if o != nil && !isNil(o.Namespace) {
 		return true
 	}
@@ -1162,12 +1163,12 @@ func (o *HelmPackageUpload) HasNamespace() bool {
 }
 
 // SetNamespace gets a reference to the given string and assigns it to the Namespace field.
-func (o *HelmPackageUpload) SetNamespace(v string) {
+func (o *SwiftPackageUpload) SetNamespace(v string) {
 	o.Namespace = &v
 }
 
 // GetNamespaceUrl returns the NamespaceUrl field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetNamespaceUrl() string {
+func (o *SwiftPackageUpload) GetNamespaceUrl() string {
 	if o == nil || isNil(o.NamespaceUrl) {
 		var ret string
 		return ret
@@ -1177,7 +1178,7 @@ func (o *HelmPackageUpload) GetNamespaceUrl() string {
 
 // GetNamespaceUrlOk returns a tuple with the NamespaceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetNamespaceUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetNamespaceUrlOk() (*string, bool) {
 	if o == nil || isNil(o.NamespaceUrl) {
 		return nil, false
 	}
@@ -1185,7 +1186,7 @@ func (o *HelmPackageUpload) GetNamespaceUrlOk() (*string, bool) {
 }
 
 // HasNamespaceUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasNamespaceUrl() bool {
+func (o *SwiftPackageUpload) HasNamespaceUrl() bool {
 	if o != nil && !isNil(o.NamespaceUrl) {
 		return true
 	}
@@ -1194,12 +1195,12 @@ func (o *HelmPackageUpload) HasNamespaceUrl() bool {
 }
 
 // SetNamespaceUrl gets a reference to the given string and assigns it to the NamespaceUrl field.
-func (o *HelmPackageUpload) SetNamespaceUrl(v string) {
+func (o *SwiftPackageUpload) SetNamespaceUrl(v string) {
 	o.NamespaceUrl = &v
 }
 
 // GetNumFiles returns the NumFiles field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetNumFiles() int64 {
+func (o *SwiftPackageUpload) GetNumFiles() int64 {
 	if o == nil || isNil(o.NumFiles) {
 		var ret int64
 		return ret
@@ -1209,7 +1210,7 @@ func (o *HelmPackageUpload) GetNumFiles() int64 {
 
 // GetNumFilesOk returns a tuple with the NumFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetNumFilesOk() (*int64, bool) {
+func (o *SwiftPackageUpload) GetNumFilesOk() (*int64, bool) {
 	if o == nil || isNil(o.NumFiles) {
 		return nil, false
 	}
@@ -1217,7 +1218,7 @@ func (o *HelmPackageUpload) GetNumFilesOk() (*int64, bool) {
 }
 
 // HasNumFiles returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasNumFiles() bool {
+func (o *SwiftPackageUpload) HasNumFiles() bool {
 	if o != nil && !isNil(o.NumFiles) {
 		return true
 	}
@@ -1226,12 +1227,12 @@ func (o *HelmPackageUpload) HasNumFiles() bool {
 }
 
 // SetNumFiles gets a reference to the given int64 and assigns it to the NumFiles field.
-func (o *HelmPackageUpload) SetNumFiles(v int64) {
+func (o *SwiftPackageUpload) SetNumFiles(v int64) {
 	o.NumFiles = &v
 }
 
 // GetOriginRepository returns the OriginRepository field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetOriginRepository() string {
+func (o *SwiftPackageUpload) GetOriginRepository() string {
 	if o == nil || isNil(o.OriginRepository) {
 		var ret string
 		return ret
@@ -1241,7 +1242,7 @@ func (o *HelmPackageUpload) GetOriginRepository() string {
 
 // GetOriginRepositoryOk returns a tuple with the OriginRepository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetOriginRepositoryOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetOriginRepositoryOk() (*string, bool) {
 	if o == nil || isNil(o.OriginRepository) {
 		return nil, false
 	}
@@ -1249,7 +1250,7 @@ func (o *HelmPackageUpload) GetOriginRepositoryOk() (*string, bool) {
 }
 
 // HasOriginRepository returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasOriginRepository() bool {
+func (o *SwiftPackageUpload) HasOriginRepository() bool {
 	if o != nil && !isNil(o.OriginRepository) {
 		return true
 	}
@@ -1258,12 +1259,12 @@ func (o *HelmPackageUpload) HasOriginRepository() bool {
 }
 
 // SetOriginRepository gets a reference to the given string and assigns it to the OriginRepository field.
-func (o *HelmPackageUpload) SetOriginRepository(v string) {
+func (o *SwiftPackageUpload) SetOriginRepository(v string) {
 	o.OriginRepository = &v
 }
 
 // GetOriginRepositoryUrl returns the OriginRepositoryUrl field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetOriginRepositoryUrl() string {
+func (o *SwiftPackageUpload) GetOriginRepositoryUrl() string {
 	if o == nil || isNil(o.OriginRepositoryUrl) {
 		var ret string
 		return ret
@@ -1273,7 +1274,7 @@ func (o *HelmPackageUpload) GetOriginRepositoryUrl() string {
 
 // GetOriginRepositoryUrlOk returns a tuple with the OriginRepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetOriginRepositoryUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetOriginRepositoryUrlOk() (*string, bool) {
 	if o == nil || isNil(o.OriginRepositoryUrl) {
 		return nil, false
 	}
@@ -1281,7 +1282,7 @@ func (o *HelmPackageUpload) GetOriginRepositoryUrlOk() (*string, bool) {
 }
 
 // HasOriginRepositoryUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasOriginRepositoryUrl() bool {
+func (o *SwiftPackageUpload) HasOriginRepositoryUrl() bool {
 	if o != nil && !isNil(o.OriginRepositoryUrl) {
 		return true
 	}
@@ -1290,12 +1291,12 @@ func (o *HelmPackageUpload) HasOriginRepositoryUrl() bool {
 }
 
 // SetOriginRepositoryUrl gets a reference to the given string and assigns it to the OriginRepositoryUrl field.
-func (o *HelmPackageUpload) SetOriginRepositoryUrl(v string) {
+func (o *SwiftPackageUpload) SetOriginRepositoryUrl(v string) {
 	o.OriginRepositoryUrl = &v
 }
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetPackageType() int64 {
+func (o *SwiftPackageUpload) GetPackageType() int64 {
 	if o == nil || isNil(o.PackageType) {
 		var ret int64
 		return ret
@@ -1305,7 +1306,7 @@ func (o *HelmPackageUpload) GetPackageType() int64 {
 
 // GetPackageTypeOk returns a tuple with the PackageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetPackageTypeOk() (*int64, bool) {
+func (o *SwiftPackageUpload) GetPackageTypeOk() (*int64, bool) {
 	if o == nil || isNil(o.PackageType) {
 		return nil, false
 	}
@@ -1313,7 +1314,7 @@ func (o *HelmPackageUpload) GetPackageTypeOk() (*int64, bool) {
 }
 
 // HasPackageType returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasPackageType() bool {
+func (o *SwiftPackageUpload) HasPackageType() bool {
 	if o != nil && !isNil(o.PackageType) {
 		return true
 	}
@@ -1322,12 +1323,12 @@ func (o *HelmPackageUpload) HasPackageType() bool {
 }
 
 // SetPackageType gets a reference to the given int64 and assigns it to the PackageType field.
-func (o *HelmPackageUpload) SetPackageType(v int64) {
+func (o *SwiftPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
 // GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetRelease() string {
+func (o *SwiftPackageUpload) GetRelease() string {
 	if o == nil || isNil(o.Release.Get()) {
 		var ret string
 		return ret
@@ -1338,7 +1339,7 @@ func (o *HelmPackageUpload) GetRelease() string {
 // GetReleaseOk returns a tuple with the Release field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetReleaseOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetReleaseOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1346,7 +1347,7 @@ func (o *HelmPackageUpload) GetReleaseOk() (*string, bool) {
 }
 
 // HasRelease returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasRelease() bool {
+func (o *SwiftPackageUpload) HasRelease() bool {
 	if o != nil && o.Release.IsSet() {
 		return true
 	}
@@ -1355,22 +1356,22 @@ func (o *HelmPackageUpload) HasRelease() bool {
 }
 
 // SetRelease gets a reference to the given NullableString and assigns it to the Release field.
-func (o *HelmPackageUpload) SetRelease(v string) {
+func (o *SwiftPackageUpload) SetRelease(v string) {
 	o.Release.Set(&v)
 }
 
 // SetReleaseNil sets the value for Release to be an explicit nil
-func (o *HelmPackageUpload) SetReleaseNil() {
+func (o *SwiftPackageUpload) SetReleaseNil() {
 	o.Release.Set(nil)
 }
 
 // UnsetRelease ensures that no value is present for Release, not even an explicit nil
-func (o *HelmPackageUpload) UnsetRelease() {
+func (o *SwiftPackageUpload) UnsetRelease() {
 	o.Release.Unset()
 }
 
 // GetRepository returns the Repository field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetRepository() string {
+func (o *SwiftPackageUpload) GetRepository() string {
 	if o == nil || isNil(o.Repository) {
 		var ret string
 		return ret
@@ -1380,7 +1381,7 @@ func (o *HelmPackageUpload) GetRepository() string {
 
 // GetRepositoryOk returns a tuple with the Repository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetRepositoryOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetRepositoryOk() (*string, bool) {
 	if o == nil || isNil(o.Repository) {
 		return nil, false
 	}
@@ -1388,7 +1389,7 @@ func (o *HelmPackageUpload) GetRepositoryOk() (*string, bool) {
 }
 
 // HasRepository returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasRepository() bool {
+func (o *SwiftPackageUpload) HasRepository() bool {
 	if o != nil && !isNil(o.Repository) {
 		return true
 	}
@@ -1397,12 +1398,12 @@ func (o *HelmPackageUpload) HasRepository() bool {
 }
 
 // SetRepository gets a reference to the given string and assigns it to the Repository field.
-func (o *HelmPackageUpload) SetRepository(v string) {
+func (o *SwiftPackageUpload) SetRepository(v string) {
 	o.Repository = &v
 }
 
 // GetRepositoryUrl returns the RepositoryUrl field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetRepositoryUrl() string {
+func (o *SwiftPackageUpload) GetRepositoryUrl() string {
 	if o == nil || isNil(o.RepositoryUrl) {
 		var ret string
 		return ret
@@ -1412,7 +1413,7 @@ func (o *HelmPackageUpload) GetRepositoryUrl() string {
 
 // GetRepositoryUrlOk returns a tuple with the RepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetRepositoryUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetRepositoryUrlOk() (*string, bool) {
 	if o == nil || isNil(o.RepositoryUrl) {
 		return nil, false
 	}
@@ -1420,7 +1421,7 @@ func (o *HelmPackageUpload) GetRepositoryUrlOk() (*string, bool) {
 }
 
 // HasRepositoryUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasRepositoryUrl() bool {
+func (o *SwiftPackageUpload) HasRepositoryUrl() bool {
 	if o != nil && !isNil(o.RepositoryUrl) {
 		return true
 	}
@@ -1429,12 +1430,12 @@ func (o *HelmPackageUpload) HasRepositoryUrl() bool {
 }
 
 // SetRepositoryUrl gets a reference to the given string and assigns it to the RepositoryUrl field.
-func (o *HelmPackageUpload) SetRepositoryUrl(v string) {
+func (o *SwiftPackageUpload) SetRepositoryUrl(v string) {
 	o.RepositoryUrl = &v
 }
 
 // GetSecurityScanCompletedAt returns the SecurityScanCompletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetSecurityScanCompletedAt() time.Time {
+func (o *SwiftPackageUpload) GetSecurityScanCompletedAt() time.Time {
 	if o == nil || isNil(o.SecurityScanCompletedAt.Get()) {
 		var ret time.Time
 		return ret
@@ -1445,7 +1446,7 @@ func (o *HelmPackageUpload) GetSecurityScanCompletedAt() time.Time {
 // GetSecurityScanCompletedAtOk returns a tuple with the SecurityScanCompletedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetSecurityScanCompletedAtOk() (*time.Time, bool) {
+func (o *SwiftPackageUpload) GetSecurityScanCompletedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1453,7 +1454,7 @@ func (o *HelmPackageUpload) GetSecurityScanCompletedAtOk() (*time.Time, bool) {
 }
 
 // HasSecurityScanCompletedAt returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSecurityScanCompletedAt() bool {
+func (o *SwiftPackageUpload) HasSecurityScanCompletedAt() bool {
 	if o != nil && o.SecurityScanCompletedAt.IsSet() {
 		return true
 	}
@@ -1462,22 +1463,22 @@ func (o *HelmPackageUpload) HasSecurityScanCompletedAt() bool {
 }
 
 // SetSecurityScanCompletedAt gets a reference to the given NullableTime and assigns it to the SecurityScanCompletedAt field.
-func (o *HelmPackageUpload) SetSecurityScanCompletedAt(v time.Time) {
+func (o *SwiftPackageUpload) SetSecurityScanCompletedAt(v time.Time) {
 	o.SecurityScanCompletedAt.Set(&v)
 }
 
 // SetSecurityScanCompletedAtNil sets the value for SecurityScanCompletedAt to be an explicit nil
-func (o *HelmPackageUpload) SetSecurityScanCompletedAtNil() {
+func (o *SwiftPackageUpload) SetSecurityScanCompletedAtNil() {
 	o.SecurityScanCompletedAt.Set(nil)
 }
 
 // UnsetSecurityScanCompletedAt ensures that no value is present for SecurityScanCompletedAt, not even an explicit nil
-func (o *HelmPackageUpload) UnsetSecurityScanCompletedAt() {
+func (o *SwiftPackageUpload) UnsetSecurityScanCompletedAt() {
 	o.SecurityScanCompletedAt.Unset()
 }
 
 // GetSecurityScanStartedAt returns the SecurityScanStartedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetSecurityScanStartedAt() time.Time {
+func (o *SwiftPackageUpload) GetSecurityScanStartedAt() time.Time {
 	if o == nil || isNil(o.SecurityScanStartedAt.Get()) {
 		var ret time.Time
 		return ret
@@ -1488,7 +1489,7 @@ func (o *HelmPackageUpload) GetSecurityScanStartedAt() time.Time {
 // GetSecurityScanStartedAtOk returns a tuple with the SecurityScanStartedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetSecurityScanStartedAtOk() (*time.Time, bool) {
+func (o *SwiftPackageUpload) GetSecurityScanStartedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1496,7 +1497,7 @@ func (o *HelmPackageUpload) GetSecurityScanStartedAtOk() (*time.Time, bool) {
 }
 
 // HasSecurityScanStartedAt returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSecurityScanStartedAt() bool {
+func (o *SwiftPackageUpload) HasSecurityScanStartedAt() bool {
 	if o != nil && o.SecurityScanStartedAt.IsSet() {
 		return true
 	}
@@ -1505,22 +1506,22 @@ func (o *HelmPackageUpload) HasSecurityScanStartedAt() bool {
 }
 
 // SetSecurityScanStartedAt gets a reference to the given NullableTime and assigns it to the SecurityScanStartedAt field.
-func (o *HelmPackageUpload) SetSecurityScanStartedAt(v time.Time) {
+func (o *SwiftPackageUpload) SetSecurityScanStartedAt(v time.Time) {
 	o.SecurityScanStartedAt.Set(&v)
 }
 
 // SetSecurityScanStartedAtNil sets the value for SecurityScanStartedAt to be an explicit nil
-func (o *HelmPackageUpload) SetSecurityScanStartedAtNil() {
+func (o *SwiftPackageUpload) SetSecurityScanStartedAtNil() {
 	o.SecurityScanStartedAt.Set(nil)
 }
 
 // UnsetSecurityScanStartedAt ensures that no value is present for SecurityScanStartedAt, not even an explicit nil
-func (o *HelmPackageUpload) UnsetSecurityScanStartedAt() {
+func (o *SwiftPackageUpload) UnsetSecurityScanStartedAt() {
 	o.SecurityScanStartedAt.Unset()
 }
 
 // GetSecurityScanStatus returns the SecurityScanStatus field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetSecurityScanStatus() string {
+func (o *SwiftPackageUpload) GetSecurityScanStatus() string {
 	if o == nil || isNil(o.SecurityScanStatus.Get()) {
 		var ret string
 		return ret
@@ -1531,7 +1532,7 @@ func (o *HelmPackageUpload) GetSecurityScanStatus() string {
 // GetSecurityScanStatusOk returns a tuple with the SecurityScanStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetSecurityScanStatusOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetSecurityScanStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1539,7 +1540,7 @@ func (o *HelmPackageUpload) GetSecurityScanStatusOk() (*string, bool) {
 }
 
 // HasSecurityScanStatus returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSecurityScanStatus() bool {
+func (o *SwiftPackageUpload) HasSecurityScanStatus() bool {
 	if o != nil && o.SecurityScanStatus.IsSet() {
 		return true
 	}
@@ -1548,22 +1549,22 @@ func (o *HelmPackageUpload) HasSecurityScanStatus() bool {
 }
 
 // SetSecurityScanStatus gets a reference to the given NullableString and assigns it to the SecurityScanStatus field.
-func (o *HelmPackageUpload) SetSecurityScanStatus(v string) {
+func (o *SwiftPackageUpload) SetSecurityScanStatus(v string) {
 	o.SecurityScanStatus.Set(&v)
 }
 
 // SetSecurityScanStatusNil sets the value for SecurityScanStatus to be an explicit nil
-func (o *HelmPackageUpload) SetSecurityScanStatusNil() {
+func (o *SwiftPackageUpload) SetSecurityScanStatusNil() {
 	o.SecurityScanStatus.Set(nil)
 }
 
 // UnsetSecurityScanStatus ensures that no value is present for SecurityScanStatus, not even an explicit nil
-func (o *HelmPackageUpload) UnsetSecurityScanStatus() {
+func (o *SwiftPackageUpload) UnsetSecurityScanStatus() {
 	o.SecurityScanStatus.Unset()
 }
 
 // GetSecurityScanStatusUpdatedAt returns the SecurityScanStatusUpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetSecurityScanStatusUpdatedAt() time.Time {
+func (o *SwiftPackageUpload) GetSecurityScanStatusUpdatedAt() time.Time {
 	if o == nil || isNil(o.SecurityScanStatusUpdatedAt.Get()) {
 		var ret time.Time
 		return ret
@@ -1574,7 +1575,7 @@ func (o *HelmPackageUpload) GetSecurityScanStatusUpdatedAt() time.Time {
 // GetSecurityScanStatusUpdatedAtOk returns a tuple with the SecurityScanStatusUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetSecurityScanStatusUpdatedAtOk() (*time.Time, bool) {
+func (o *SwiftPackageUpload) GetSecurityScanStatusUpdatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1582,7 +1583,7 @@ func (o *HelmPackageUpload) GetSecurityScanStatusUpdatedAtOk() (*time.Time, bool
 }
 
 // HasSecurityScanStatusUpdatedAt returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSecurityScanStatusUpdatedAt() bool {
+func (o *SwiftPackageUpload) HasSecurityScanStatusUpdatedAt() bool {
 	if o != nil && o.SecurityScanStatusUpdatedAt.IsSet() {
 		return true
 	}
@@ -1591,22 +1592,22 @@ func (o *HelmPackageUpload) HasSecurityScanStatusUpdatedAt() bool {
 }
 
 // SetSecurityScanStatusUpdatedAt gets a reference to the given NullableTime and assigns it to the SecurityScanStatusUpdatedAt field.
-func (o *HelmPackageUpload) SetSecurityScanStatusUpdatedAt(v time.Time) {
+func (o *SwiftPackageUpload) SetSecurityScanStatusUpdatedAt(v time.Time) {
 	o.SecurityScanStatusUpdatedAt.Set(&v)
 }
 
 // SetSecurityScanStatusUpdatedAtNil sets the value for SecurityScanStatusUpdatedAt to be an explicit nil
-func (o *HelmPackageUpload) SetSecurityScanStatusUpdatedAtNil() {
+func (o *SwiftPackageUpload) SetSecurityScanStatusUpdatedAtNil() {
 	o.SecurityScanStatusUpdatedAt.Set(nil)
 }
 
 // UnsetSecurityScanStatusUpdatedAt ensures that no value is present for SecurityScanStatusUpdatedAt, not even an explicit nil
-func (o *HelmPackageUpload) UnsetSecurityScanStatusUpdatedAt() {
+func (o *SwiftPackageUpload) UnsetSecurityScanStatusUpdatedAt() {
 	o.SecurityScanStatusUpdatedAt.Unset()
 }
 
 // GetSelfHtmlUrl returns the SelfHtmlUrl field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetSelfHtmlUrl() string {
+func (o *SwiftPackageUpload) GetSelfHtmlUrl() string {
 	if o == nil || isNil(o.SelfHtmlUrl) {
 		var ret string
 		return ret
@@ -1616,7 +1617,7 @@ func (o *HelmPackageUpload) GetSelfHtmlUrl() string {
 
 // GetSelfHtmlUrlOk returns a tuple with the SelfHtmlUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetSelfHtmlUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetSelfHtmlUrlOk() (*string, bool) {
 	if o == nil || isNil(o.SelfHtmlUrl) {
 		return nil, false
 	}
@@ -1624,7 +1625,7 @@ func (o *HelmPackageUpload) GetSelfHtmlUrlOk() (*string, bool) {
 }
 
 // HasSelfHtmlUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSelfHtmlUrl() bool {
+func (o *SwiftPackageUpload) HasSelfHtmlUrl() bool {
 	if o != nil && !isNil(o.SelfHtmlUrl) {
 		return true
 	}
@@ -1633,12 +1634,12 @@ func (o *HelmPackageUpload) HasSelfHtmlUrl() bool {
 }
 
 // SetSelfHtmlUrl gets a reference to the given string and assigns it to the SelfHtmlUrl field.
-func (o *HelmPackageUpload) SetSelfHtmlUrl(v string) {
+func (o *SwiftPackageUpload) SetSelfHtmlUrl(v string) {
 	o.SelfHtmlUrl = &v
 }
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetSelfUrl() string {
+func (o *SwiftPackageUpload) GetSelfUrl() string {
 	if o == nil || isNil(o.SelfUrl) {
 		var ret string
 		return ret
@@ -1648,7 +1649,7 @@ func (o *HelmPackageUpload) GetSelfUrl() string {
 
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetSelfUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetSelfUrlOk() (*string, bool) {
 	if o == nil || isNil(o.SelfUrl) {
 		return nil, false
 	}
@@ -1656,7 +1657,7 @@ func (o *HelmPackageUpload) GetSelfUrlOk() (*string, bool) {
 }
 
 // HasSelfUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSelfUrl() bool {
+func (o *SwiftPackageUpload) HasSelfUrl() bool {
 	if o != nil && !isNil(o.SelfUrl) {
 		return true
 	}
@@ -1665,12 +1666,12 @@ func (o *HelmPackageUpload) HasSelfUrl() bool {
 }
 
 // SetSelfUrl gets a reference to the given string and assigns it to the SelfUrl field.
-func (o *HelmPackageUpload) SetSelfUrl(v string) {
+func (o *SwiftPackageUpload) SetSelfUrl(v string) {
 	o.SelfUrl = &v
 }
 
 // GetSignatureUrl returns the SignatureUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetSignatureUrl() string {
+func (o *SwiftPackageUpload) GetSignatureUrl() string {
 	if o == nil || isNil(o.SignatureUrl.Get()) {
 		var ret string
 		return ret
@@ -1681,7 +1682,7 @@ func (o *HelmPackageUpload) GetSignatureUrl() string {
 // GetSignatureUrlOk returns a tuple with the SignatureUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetSignatureUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetSignatureUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1689,7 +1690,7 @@ func (o *HelmPackageUpload) GetSignatureUrlOk() (*string, bool) {
 }
 
 // HasSignatureUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSignatureUrl() bool {
+func (o *SwiftPackageUpload) HasSignatureUrl() bool {
 	if o != nil && o.SignatureUrl.IsSet() {
 		return true
 	}
@@ -1698,22 +1699,22 @@ func (o *HelmPackageUpload) HasSignatureUrl() bool {
 }
 
 // SetSignatureUrl gets a reference to the given NullableString and assigns it to the SignatureUrl field.
-func (o *HelmPackageUpload) SetSignatureUrl(v string) {
+func (o *SwiftPackageUpload) SetSignatureUrl(v string) {
 	o.SignatureUrl.Set(&v)
 }
 
 // SetSignatureUrlNil sets the value for SignatureUrl to be an explicit nil
-func (o *HelmPackageUpload) SetSignatureUrlNil() {
+func (o *SwiftPackageUpload) SetSignatureUrlNil() {
 	o.SignatureUrl.Set(nil)
 }
 
 // UnsetSignatureUrl ensures that no value is present for SignatureUrl, not even an explicit nil
-func (o *HelmPackageUpload) UnsetSignatureUrl() {
+func (o *SwiftPackageUpload) UnsetSignatureUrl() {
 	o.SignatureUrl.Unset()
 }
 
 // GetSize returns the Size field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetSize() int64 {
+func (o *SwiftPackageUpload) GetSize() int64 {
 	if o == nil || isNil(o.Size) {
 		var ret int64
 		return ret
@@ -1723,7 +1724,7 @@ func (o *HelmPackageUpload) GetSize() int64 {
 
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetSizeOk() (*int64, bool) {
+func (o *SwiftPackageUpload) GetSizeOk() (*int64, bool) {
 	if o == nil || isNil(o.Size) {
 		return nil, false
 	}
@@ -1731,7 +1732,7 @@ func (o *HelmPackageUpload) GetSizeOk() (*int64, bool) {
 }
 
 // HasSize returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSize() bool {
+func (o *SwiftPackageUpload) HasSize() bool {
 	if o != nil && !isNil(o.Size) {
 		return true
 	}
@@ -1740,12 +1741,12 @@ func (o *HelmPackageUpload) HasSize() bool {
 }
 
 // SetSize gets a reference to the given int64 and assigns it to the Size field.
-func (o *HelmPackageUpload) SetSize(v int64) {
+func (o *SwiftPackageUpload) SetSize(v int64) {
 	o.Size = &v
 }
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetSlug() string {
+func (o *SwiftPackageUpload) GetSlug() string {
 	if o == nil || isNil(o.Slug) {
 		var ret string
 		return ret
@@ -1755,7 +1756,7 @@ func (o *HelmPackageUpload) GetSlug() string {
 
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetSlugOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetSlugOk() (*string, bool) {
 	if o == nil || isNil(o.Slug) {
 		return nil, false
 	}
@@ -1763,7 +1764,7 @@ func (o *HelmPackageUpload) GetSlugOk() (*string, bool) {
 }
 
 // HasSlug returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSlug() bool {
+func (o *SwiftPackageUpload) HasSlug() bool {
 	if o != nil && !isNil(o.Slug) {
 		return true
 	}
@@ -1772,12 +1773,12 @@ func (o *HelmPackageUpload) HasSlug() bool {
 }
 
 // SetSlug gets a reference to the given string and assigns it to the Slug field.
-func (o *HelmPackageUpload) SetSlug(v string) {
+func (o *SwiftPackageUpload) SetSlug(v string) {
 	o.Slug = &v
 }
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetSlugPerm() string {
+func (o *SwiftPackageUpload) GetSlugPerm() string {
 	if o == nil || isNil(o.SlugPerm) {
 		var ret string
 		return ret
@@ -1787,7 +1788,7 @@ func (o *HelmPackageUpload) GetSlugPerm() string {
 
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetSlugPermOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetSlugPermOk() (*string, bool) {
 	if o == nil || isNil(o.SlugPerm) {
 		return nil, false
 	}
@@ -1795,7 +1796,7 @@ func (o *HelmPackageUpload) GetSlugPermOk() (*string, bool) {
 }
 
 // HasSlugPerm returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSlugPerm() bool {
+func (o *SwiftPackageUpload) HasSlugPerm() bool {
 	if o != nil && !isNil(o.SlugPerm) {
 		return true
 	}
@@ -1804,12 +1805,12 @@ func (o *HelmPackageUpload) HasSlugPerm() bool {
 }
 
 // SetSlugPerm gets a reference to the given string and assigns it to the SlugPerm field.
-func (o *HelmPackageUpload) SetSlugPerm(v string) {
+func (o *SwiftPackageUpload) SetSlugPerm(v string) {
 	o.SlugPerm = &v
 }
 
 // GetStage returns the Stage field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetStage() int64 {
+func (o *SwiftPackageUpload) GetStage() int64 {
 	if o == nil || isNil(o.Stage) {
 		var ret int64
 		return ret
@@ -1819,7 +1820,7 @@ func (o *HelmPackageUpload) GetStage() int64 {
 
 // GetStageOk returns a tuple with the Stage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetStageOk() (*int64, bool) {
+func (o *SwiftPackageUpload) GetStageOk() (*int64, bool) {
 	if o == nil || isNil(o.Stage) {
 		return nil, false
 	}
@@ -1827,7 +1828,7 @@ func (o *HelmPackageUpload) GetStageOk() (*int64, bool) {
 }
 
 // HasStage returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasStage() bool {
+func (o *SwiftPackageUpload) HasStage() bool {
 	if o != nil && !isNil(o.Stage) {
 		return true
 	}
@@ -1836,12 +1837,12 @@ func (o *HelmPackageUpload) HasStage() bool {
 }
 
 // SetStage gets a reference to the given int64 and assigns it to the Stage field.
-func (o *HelmPackageUpload) SetStage(v int64) {
+func (o *SwiftPackageUpload) SetStage(v int64) {
 	o.Stage = &v
 }
 
 // GetStageStr returns the StageStr field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetStageStr() string {
+func (o *SwiftPackageUpload) GetStageStr() string {
 	if o == nil || isNil(o.StageStr) {
 		var ret string
 		return ret
@@ -1851,7 +1852,7 @@ func (o *HelmPackageUpload) GetStageStr() string {
 
 // GetStageStrOk returns a tuple with the StageStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetStageStrOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetStageStrOk() (*string, bool) {
 	if o == nil || isNil(o.StageStr) {
 		return nil, false
 	}
@@ -1859,7 +1860,7 @@ func (o *HelmPackageUpload) GetStageStrOk() (*string, bool) {
 }
 
 // HasStageStr returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasStageStr() bool {
+func (o *SwiftPackageUpload) HasStageStr() bool {
 	if o != nil && !isNil(o.StageStr) {
 		return true
 	}
@@ -1868,12 +1869,12 @@ func (o *HelmPackageUpload) HasStageStr() bool {
 }
 
 // SetStageStr gets a reference to the given string and assigns it to the StageStr field.
-func (o *HelmPackageUpload) SetStageStr(v string) {
+func (o *SwiftPackageUpload) SetStageStr(v string) {
 	o.StageStr = &v
 }
 
 // GetStageUpdatedAt returns the StageUpdatedAt field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetStageUpdatedAt() time.Time {
+func (o *SwiftPackageUpload) GetStageUpdatedAt() time.Time {
 	if o == nil || isNil(o.StageUpdatedAt) {
 		var ret time.Time
 		return ret
@@ -1883,7 +1884,7 @@ func (o *HelmPackageUpload) GetStageUpdatedAt() time.Time {
 
 // GetStageUpdatedAtOk returns a tuple with the StageUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetStageUpdatedAtOk() (*time.Time, bool) {
+func (o *SwiftPackageUpload) GetStageUpdatedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.StageUpdatedAt) {
 		return nil, false
 	}
@@ -1891,7 +1892,7 @@ func (o *HelmPackageUpload) GetStageUpdatedAtOk() (*time.Time, bool) {
 }
 
 // HasStageUpdatedAt returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasStageUpdatedAt() bool {
+func (o *SwiftPackageUpload) HasStageUpdatedAt() bool {
 	if o != nil && !isNil(o.StageUpdatedAt) {
 		return true
 	}
@@ -1900,12 +1901,12 @@ func (o *HelmPackageUpload) HasStageUpdatedAt() bool {
 }
 
 // SetStageUpdatedAt gets a reference to the given time.Time and assigns it to the StageUpdatedAt field.
-func (o *HelmPackageUpload) SetStageUpdatedAt(v time.Time) {
+func (o *SwiftPackageUpload) SetStageUpdatedAt(v time.Time) {
 	o.StageUpdatedAt = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetStatus() int64 {
+func (o *SwiftPackageUpload) GetStatus() int64 {
 	if o == nil || isNil(o.Status) {
 		var ret int64
 		return ret
@@ -1915,7 +1916,7 @@ func (o *HelmPackageUpload) GetStatus() int64 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetStatusOk() (*int64, bool) {
+func (o *SwiftPackageUpload) GetStatusOk() (*int64, bool) {
 	if o == nil || isNil(o.Status) {
 		return nil, false
 	}
@@ -1923,7 +1924,7 @@ func (o *HelmPackageUpload) GetStatusOk() (*int64, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasStatus() bool {
+func (o *SwiftPackageUpload) HasStatus() bool {
 	if o != nil && !isNil(o.Status) {
 		return true
 	}
@@ -1932,12 +1933,12 @@ func (o *HelmPackageUpload) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given int64 and assigns it to the Status field.
-func (o *HelmPackageUpload) SetStatus(v int64) {
+func (o *SwiftPackageUpload) SetStatus(v int64) {
 	o.Status = &v
 }
 
 // GetStatusReason returns the StatusReason field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetStatusReason() string {
+func (o *SwiftPackageUpload) GetStatusReason() string {
 	if o == nil || isNil(o.StatusReason.Get()) {
 		var ret string
 		return ret
@@ -1948,7 +1949,7 @@ func (o *HelmPackageUpload) GetStatusReason() string {
 // GetStatusReasonOk returns a tuple with the StatusReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetStatusReasonOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetStatusReasonOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1956,7 +1957,7 @@ func (o *HelmPackageUpload) GetStatusReasonOk() (*string, bool) {
 }
 
 // HasStatusReason returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasStatusReason() bool {
+func (o *SwiftPackageUpload) HasStatusReason() bool {
 	if o != nil && o.StatusReason.IsSet() {
 		return true
 	}
@@ -1965,22 +1966,22 @@ func (o *HelmPackageUpload) HasStatusReason() bool {
 }
 
 // SetStatusReason gets a reference to the given NullableString and assigns it to the StatusReason field.
-func (o *HelmPackageUpload) SetStatusReason(v string) {
+func (o *SwiftPackageUpload) SetStatusReason(v string) {
 	o.StatusReason.Set(&v)
 }
 
 // SetStatusReasonNil sets the value for StatusReason to be an explicit nil
-func (o *HelmPackageUpload) SetStatusReasonNil() {
+func (o *SwiftPackageUpload) SetStatusReasonNil() {
 	o.StatusReason.Set(nil)
 }
 
 // UnsetStatusReason ensures that no value is present for StatusReason, not even an explicit nil
-func (o *HelmPackageUpload) UnsetStatusReason() {
+func (o *SwiftPackageUpload) UnsetStatusReason() {
 	o.StatusReason.Unset()
 }
 
 // GetStatusStr returns the StatusStr field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetStatusStr() string {
+func (o *SwiftPackageUpload) GetStatusStr() string {
 	if o == nil || isNil(o.StatusStr) {
 		var ret string
 		return ret
@@ -1990,7 +1991,7 @@ func (o *HelmPackageUpload) GetStatusStr() string {
 
 // GetStatusStrOk returns a tuple with the StatusStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetStatusStrOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetStatusStrOk() (*string, bool) {
 	if o == nil || isNil(o.StatusStr) {
 		return nil, false
 	}
@@ -1998,7 +1999,7 @@ func (o *HelmPackageUpload) GetStatusStrOk() (*string, bool) {
 }
 
 // HasStatusStr returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasStatusStr() bool {
+func (o *SwiftPackageUpload) HasStatusStr() bool {
 	if o != nil && !isNil(o.StatusStr) {
 		return true
 	}
@@ -2007,12 +2008,12 @@ func (o *HelmPackageUpload) HasStatusStr() bool {
 }
 
 // SetStatusStr gets a reference to the given string and assigns it to the StatusStr field.
-func (o *HelmPackageUpload) SetStatusStr(v string) {
+func (o *SwiftPackageUpload) SetStatusStr(v string) {
 	o.StatusStr = &v
 }
 
 // GetStatusUpdatedAt returns the StatusUpdatedAt field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetStatusUpdatedAt() time.Time {
+func (o *SwiftPackageUpload) GetStatusUpdatedAt() time.Time {
 	if o == nil || isNil(o.StatusUpdatedAt) {
 		var ret time.Time
 		return ret
@@ -2022,7 +2023,7 @@ func (o *HelmPackageUpload) GetStatusUpdatedAt() time.Time {
 
 // GetStatusUpdatedAtOk returns a tuple with the StatusUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetStatusUpdatedAtOk() (*time.Time, bool) {
+func (o *SwiftPackageUpload) GetStatusUpdatedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.StatusUpdatedAt) {
 		return nil, false
 	}
@@ -2030,7 +2031,7 @@ func (o *HelmPackageUpload) GetStatusUpdatedAtOk() (*time.Time, bool) {
 }
 
 // HasStatusUpdatedAt returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasStatusUpdatedAt() bool {
+func (o *SwiftPackageUpload) HasStatusUpdatedAt() bool {
 	if o != nil && !isNil(o.StatusUpdatedAt) {
 		return true
 	}
@@ -2039,12 +2040,12 @@ func (o *HelmPackageUpload) HasStatusUpdatedAt() bool {
 }
 
 // SetStatusUpdatedAt gets a reference to the given time.Time and assigns it to the StatusUpdatedAt field.
-func (o *HelmPackageUpload) SetStatusUpdatedAt(v time.Time) {
+func (o *SwiftPackageUpload) SetStatusUpdatedAt(v time.Time) {
 	o.StatusUpdatedAt = &v
 }
 
 // GetStatusUrl returns the StatusUrl field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetStatusUrl() string {
+func (o *SwiftPackageUpload) GetStatusUrl() string {
 	if o == nil || isNil(o.StatusUrl) {
 		var ret string
 		return ret
@@ -2054,7 +2055,7 @@ func (o *HelmPackageUpload) GetStatusUrl() string {
 
 // GetStatusUrlOk returns a tuple with the StatusUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetStatusUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetStatusUrlOk() (*string, bool) {
 	if o == nil || isNil(o.StatusUrl) {
 		return nil, false
 	}
@@ -2062,7 +2063,7 @@ func (o *HelmPackageUpload) GetStatusUrlOk() (*string, bool) {
 }
 
 // HasStatusUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasStatusUrl() bool {
+func (o *SwiftPackageUpload) HasStatusUrl() bool {
 	if o != nil && !isNil(o.StatusUrl) {
 		return true
 	}
@@ -2071,12 +2072,12 @@ func (o *HelmPackageUpload) HasStatusUrl() bool {
 }
 
 // SetStatusUrl gets a reference to the given string and assigns it to the StatusUrl field.
-func (o *HelmPackageUpload) SetStatusUrl(v string) {
+func (o *SwiftPackageUpload) SetStatusUrl(v string) {
 	o.StatusUrl = &v
 }
 
 // GetSubtype returns the Subtype field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetSubtype() string {
+func (o *SwiftPackageUpload) GetSubtype() string {
 	if o == nil || isNil(o.Subtype) {
 		var ret string
 		return ret
@@ -2086,7 +2087,7 @@ func (o *HelmPackageUpload) GetSubtype() string {
 
 // GetSubtypeOk returns a tuple with the Subtype field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetSubtypeOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetSubtypeOk() (*string, bool) {
 	if o == nil || isNil(o.Subtype) {
 		return nil, false
 	}
@@ -2094,7 +2095,7 @@ func (o *HelmPackageUpload) GetSubtypeOk() (*string, bool) {
 }
 
 // HasSubtype returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSubtype() bool {
+func (o *SwiftPackageUpload) HasSubtype() bool {
 	if o != nil && !isNil(o.Subtype) {
 		return true
 	}
@@ -2103,12 +2104,12 @@ func (o *HelmPackageUpload) HasSubtype() bool {
 }
 
 // SetSubtype gets a reference to the given string and assigns it to the Subtype field.
-func (o *HelmPackageUpload) SetSubtype(v string) {
+func (o *SwiftPackageUpload) SetSubtype(v string) {
 	o.Subtype = &v
 }
 
 // GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetSummary() string {
+func (o *SwiftPackageUpload) GetSummary() string {
 	if o == nil || isNil(o.Summary.Get()) {
 		var ret string
 		return ret
@@ -2119,7 +2120,7 @@ func (o *HelmPackageUpload) GetSummary() string {
 // GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetSummaryOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetSummaryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -2127,7 +2128,7 @@ func (o *HelmPackageUpload) GetSummaryOk() (*string, bool) {
 }
 
 // HasSummary returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSummary() bool {
+func (o *SwiftPackageUpload) HasSummary() bool {
 	if o != nil && o.Summary.IsSet() {
 		return true
 	}
@@ -2136,22 +2137,22 @@ func (o *HelmPackageUpload) HasSummary() bool {
 }
 
 // SetSummary gets a reference to the given NullableString and assigns it to the Summary field.
-func (o *HelmPackageUpload) SetSummary(v string) {
+func (o *SwiftPackageUpload) SetSummary(v string) {
 	o.Summary.Set(&v)
 }
 
 // SetSummaryNil sets the value for Summary to be an explicit nil
-func (o *HelmPackageUpload) SetSummaryNil() {
+func (o *SwiftPackageUpload) SetSummaryNil() {
 	o.Summary.Set(nil)
 }
 
 // UnsetSummary ensures that no value is present for Summary, not even an explicit nil
-func (o *HelmPackageUpload) UnsetSummary() {
+func (o *SwiftPackageUpload) UnsetSummary() {
 	o.Summary.Unset()
 }
 
 // GetSyncFinishedAt returns the SyncFinishedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetSyncFinishedAt() time.Time {
+func (o *SwiftPackageUpload) GetSyncFinishedAt() time.Time {
 	if o == nil || isNil(o.SyncFinishedAt.Get()) {
 		var ret time.Time
 		return ret
@@ -2162,7 +2163,7 @@ func (o *HelmPackageUpload) GetSyncFinishedAt() time.Time {
 // GetSyncFinishedAtOk returns a tuple with the SyncFinishedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetSyncFinishedAtOk() (*time.Time, bool) {
+func (o *SwiftPackageUpload) GetSyncFinishedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -2170,7 +2171,7 @@ func (o *HelmPackageUpload) GetSyncFinishedAtOk() (*time.Time, bool) {
 }
 
 // HasSyncFinishedAt returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSyncFinishedAt() bool {
+func (o *SwiftPackageUpload) HasSyncFinishedAt() bool {
 	if o != nil && o.SyncFinishedAt.IsSet() {
 		return true
 	}
@@ -2179,22 +2180,22 @@ func (o *HelmPackageUpload) HasSyncFinishedAt() bool {
 }
 
 // SetSyncFinishedAt gets a reference to the given NullableTime and assigns it to the SyncFinishedAt field.
-func (o *HelmPackageUpload) SetSyncFinishedAt(v time.Time) {
+func (o *SwiftPackageUpload) SetSyncFinishedAt(v time.Time) {
 	o.SyncFinishedAt.Set(&v)
 }
 
 // SetSyncFinishedAtNil sets the value for SyncFinishedAt to be an explicit nil
-func (o *HelmPackageUpload) SetSyncFinishedAtNil() {
+func (o *SwiftPackageUpload) SetSyncFinishedAtNil() {
 	o.SyncFinishedAt.Set(nil)
 }
 
 // UnsetSyncFinishedAt ensures that no value is present for SyncFinishedAt, not even an explicit nil
-func (o *HelmPackageUpload) UnsetSyncFinishedAt() {
+func (o *SwiftPackageUpload) UnsetSyncFinishedAt() {
 	o.SyncFinishedAt.Unset()
 }
 
 // GetSyncProgress returns the SyncProgress field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetSyncProgress() int64 {
+func (o *SwiftPackageUpload) GetSyncProgress() int64 {
 	if o == nil || isNil(o.SyncProgress) {
 		var ret int64
 		return ret
@@ -2204,7 +2205,7 @@ func (o *HelmPackageUpload) GetSyncProgress() int64 {
 
 // GetSyncProgressOk returns a tuple with the SyncProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetSyncProgressOk() (*int64, bool) {
+func (o *SwiftPackageUpload) GetSyncProgressOk() (*int64, bool) {
 	if o == nil || isNil(o.SyncProgress) {
 		return nil, false
 	}
@@ -2212,7 +2213,7 @@ func (o *HelmPackageUpload) GetSyncProgressOk() (*int64, bool) {
 }
 
 // HasSyncProgress returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasSyncProgress() bool {
+func (o *SwiftPackageUpload) HasSyncProgress() bool {
 	if o != nil && !isNil(o.SyncProgress) {
 		return true
 	}
@@ -2221,12 +2222,12 @@ func (o *HelmPackageUpload) HasSyncProgress() bool {
 }
 
 // SetSyncProgress gets a reference to the given int64 and assigns it to the SyncProgress field.
-func (o *HelmPackageUpload) SetSyncProgress(v int64) {
+func (o *SwiftPackageUpload) SetSyncProgress(v int64) {
 	o.SyncProgress = &v
 }
 
 // GetTagsImmutable returns the TagsImmutable field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetTagsImmutable() map[string]interface{} {
+func (o *SwiftPackageUpload) GetTagsImmutable() map[string]interface{} {
 	if o == nil || isNil(o.TagsImmutable) {
 		var ret map[string]interface{}
 		return ret
@@ -2236,7 +2237,7 @@ func (o *HelmPackageUpload) GetTagsImmutable() map[string]interface{} {
 
 // GetTagsImmutableOk returns a tuple with the TagsImmutable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetTagsImmutableOk() (map[string]interface{}, bool) {
+func (o *SwiftPackageUpload) GetTagsImmutableOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.TagsImmutable) {
 		return map[string]interface{}{}, false
 	}
@@ -2244,7 +2245,7 @@ func (o *HelmPackageUpload) GetTagsImmutableOk() (map[string]interface{}, bool) 
 }
 
 // HasTagsImmutable returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasTagsImmutable() bool {
+func (o *SwiftPackageUpload) HasTagsImmutable() bool {
 	if o != nil && !isNil(o.TagsImmutable) {
 		return true
 	}
@@ -2253,12 +2254,12 @@ func (o *HelmPackageUpload) HasTagsImmutable() bool {
 }
 
 // SetTagsImmutable gets a reference to the given map[string]interface{} and assigns it to the TagsImmutable field.
-func (o *HelmPackageUpload) SetTagsImmutable(v map[string]interface{}) {
+func (o *SwiftPackageUpload) SetTagsImmutable(v map[string]interface{}) {
 	o.TagsImmutable = v
 }
 
 // GetTypeDisplay returns the TypeDisplay field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetTypeDisplay() string {
+func (o *SwiftPackageUpload) GetTypeDisplay() string {
 	if o == nil || isNil(o.TypeDisplay) {
 		var ret string
 		return ret
@@ -2268,7 +2269,7 @@ func (o *HelmPackageUpload) GetTypeDisplay() string {
 
 // GetTypeDisplayOk returns a tuple with the TypeDisplay field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetTypeDisplayOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetTypeDisplayOk() (*string, bool) {
 	if o == nil || isNil(o.TypeDisplay) {
 		return nil, false
 	}
@@ -2276,7 +2277,7 @@ func (o *HelmPackageUpload) GetTypeDisplayOk() (*string, bool) {
 }
 
 // HasTypeDisplay returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasTypeDisplay() bool {
+func (o *SwiftPackageUpload) HasTypeDisplay() bool {
 	if o != nil && !isNil(o.TypeDisplay) {
 		return true
 	}
@@ -2285,12 +2286,12 @@ func (o *HelmPackageUpload) HasTypeDisplay() bool {
 }
 
 // SetTypeDisplay gets a reference to the given string and assigns it to the TypeDisplay field.
-func (o *HelmPackageUpload) SetTypeDisplay(v string) {
+func (o *SwiftPackageUpload) SetTypeDisplay(v string) {
 	o.TypeDisplay = &v
 }
 
 // GetUploadedAt returns the UploadedAt field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetUploadedAt() time.Time {
+func (o *SwiftPackageUpload) GetUploadedAt() time.Time {
 	if o == nil || isNil(o.UploadedAt) {
 		var ret time.Time
 		return ret
@@ -2300,7 +2301,7 @@ func (o *HelmPackageUpload) GetUploadedAt() time.Time {
 
 // GetUploadedAtOk returns a tuple with the UploadedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetUploadedAtOk() (*time.Time, bool) {
+func (o *SwiftPackageUpload) GetUploadedAtOk() (*time.Time, bool) {
 	if o == nil || isNil(o.UploadedAt) {
 		return nil, false
 	}
@@ -2308,7 +2309,7 @@ func (o *HelmPackageUpload) GetUploadedAtOk() (*time.Time, bool) {
 }
 
 // HasUploadedAt returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasUploadedAt() bool {
+func (o *SwiftPackageUpload) HasUploadedAt() bool {
 	if o != nil && !isNil(o.UploadedAt) {
 		return true
 	}
@@ -2317,12 +2318,12 @@ func (o *HelmPackageUpload) HasUploadedAt() bool {
 }
 
 // SetUploadedAt gets a reference to the given time.Time and assigns it to the UploadedAt field.
-func (o *HelmPackageUpload) SetUploadedAt(v time.Time) {
+func (o *SwiftPackageUpload) SetUploadedAt(v time.Time) {
 	o.UploadedAt = &v
 }
 
 // GetUploader returns the Uploader field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetUploader() string {
+func (o *SwiftPackageUpload) GetUploader() string {
 	if o == nil || isNil(o.Uploader) {
 		var ret string
 		return ret
@@ -2332,7 +2333,7 @@ func (o *HelmPackageUpload) GetUploader() string {
 
 // GetUploaderOk returns a tuple with the Uploader field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetUploaderOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetUploaderOk() (*string, bool) {
 	if o == nil || isNil(o.Uploader) {
 		return nil, false
 	}
@@ -2340,7 +2341,7 @@ func (o *HelmPackageUpload) GetUploaderOk() (*string, bool) {
 }
 
 // HasUploader returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasUploader() bool {
+func (o *SwiftPackageUpload) HasUploader() bool {
 	if o != nil && !isNil(o.Uploader) {
 		return true
 	}
@@ -2349,12 +2350,12 @@ func (o *HelmPackageUpload) HasUploader() bool {
 }
 
 // SetUploader gets a reference to the given string and assigns it to the Uploader field.
-func (o *HelmPackageUpload) SetUploader(v string) {
+func (o *SwiftPackageUpload) SetUploader(v string) {
 	o.Uploader = &v
 }
 
 // GetUploaderUrl returns the UploaderUrl field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetUploaderUrl() string {
+func (o *SwiftPackageUpload) GetUploaderUrl() string {
 	if o == nil || isNil(o.UploaderUrl) {
 		var ret string
 		return ret
@@ -2364,7 +2365,7 @@ func (o *HelmPackageUpload) GetUploaderUrl() string {
 
 // GetUploaderUrlOk returns a tuple with the UploaderUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetUploaderUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetUploaderUrlOk() (*string, bool) {
 	if o == nil || isNil(o.UploaderUrl) {
 		return nil, false
 	}
@@ -2372,7 +2373,7 @@ func (o *HelmPackageUpload) GetUploaderUrlOk() (*string, bool) {
 }
 
 // HasUploaderUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasUploaderUrl() bool {
+func (o *SwiftPackageUpload) HasUploaderUrl() bool {
 	if o != nil && !isNil(o.UploaderUrl) {
 		return true
 	}
@@ -2381,55 +2382,36 @@ func (o *HelmPackageUpload) HasUploaderUrl() bool {
 }
 
 // SetUploaderUrl gets a reference to the given string and assigns it to the UploaderUrl field.
-func (o *HelmPackageUpload) SetUploaderUrl(v string) {
+func (o *SwiftPackageUpload) SetUploaderUrl(v string) {
 	o.UploaderUrl = &v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HelmPackageUpload) GetVersion() string {
-	if o == nil || isNil(o.Version.Get()) {
+// GetVersion returns the Version field value
+func (o *SwiftPackageUpload) GetVersion() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Version.Get()
+
+	return o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HelmPackageUpload) GetVersionOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Version.Get(), o.Version.IsSet()
+	return &o.Version, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasVersion() bool {
-	if o != nil && o.Version.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetVersion gets a reference to the given NullableString and assigns it to the Version field.
-func (o *HelmPackageUpload) SetVersion(v string) {
-	o.Version.Set(&v)
-}
-
-// SetVersionNil sets the value for Version to be an explicit nil
-func (o *HelmPackageUpload) SetVersionNil() {
-	o.Version.Set(nil)
-}
-
-// UnsetVersion ensures that no value is present for Version, not even an explicit nil
-func (o *HelmPackageUpload) UnsetVersion() {
-	o.Version.Unset()
+// SetVersion sets field value
+func (o *SwiftPackageUpload) SetVersion(v string) {
+	o.Version = v
 }
 
 // GetVersionOrig returns the VersionOrig field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetVersionOrig() string {
+func (o *SwiftPackageUpload) GetVersionOrig() string {
 	if o == nil || isNil(o.VersionOrig) {
 		var ret string
 		return ret
@@ -2439,7 +2421,7 @@ func (o *HelmPackageUpload) GetVersionOrig() string {
 
 // GetVersionOrigOk returns a tuple with the VersionOrig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetVersionOrigOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetVersionOrigOk() (*string, bool) {
 	if o == nil || isNil(o.VersionOrig) {
 		return nil, false
 	}
@@ -2447,7 +2429,7 @@ func (o *HelmPackageUpload) GetVersionOrigOk() (*string, bool) {
 }
 
 // HasVersionOrig returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasVersionOrig() bool {
+func (o *SwiftPackageUpload) HasVersionOrig() bool {
 	if o != nil && !isNil(o.VersionOrig) {
 		return true
 	}
@@ -2456,12 +2438,12 @@ func (o *HelmPackageUpload) HasVersionOrig() bool {
 }
 
 // SetVersionOrig gets a reference to the given string and assigns it to the VersionOrig field.
-func (o *HelmPackageUpload) SetVersionOrig(v string) {
+func (o *SwiftPackageUpload) SetVersionOrig(v string) {
 	o.VersionOrig = &v
 }
 
 // GetVulnerabilityScanResultsUrl returns the VulnerabilityScanResultsUrl field value if set, zero value otherwise.
-func (o *HelmPackageUpload) GetVulnerabilityScanResultsUrl() string {
+func (o *SwiftPackageUpload) GetVulnerabilityScanResultsUrl() string {
 	if o == nil || isNil(o.VulnerabilityScanResultsUrl) {
 		var ret string
 		return ret
@@ -2471,7 +2453,7 @@ func (o *HelmPackageUpload) GetVulnerabilityScanResultsUrl() string {
 
 // GetVulnerabilityScanResultsUrlOk returns a tuple with the VulnerabilityScanResultsUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelmPackageUpload) GetVulnerabilityScanResultsUrlOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetVulnerabilityScanResultsUrlOk() (*string, bool) {
 	if o == nil || isNil(o.VulnerabilityScanResultsUrl) {
 		return nil, false
 	}
@@ -2479,7 +2461,7 @@ func (o *HelmPackageUpload) GetVulnerabilityScanResultsUrlOk() (*string, bool) {
 }
 
 // HasVulnerabilityScanResultsUrl returns a boolean if a field has been set.
-func (o *HelmPackageUpload) HasVulnerabilityScanResultsUrl() bool {
+func (o *SwiftPackageUpload) HasVulnerabilityScanResultsUrl() bool {
 	if o != nil && !isNil(o.VulnerabilityScanResultsUrl) {
 		return true
 	}
@@ -2488,11 +2470,11 @@ func (o *HelmPackageUpload) HasVulnerabilityScanResultsUrl() bool {
 }
 
 // SetVulnerabilityScanResultsUrl gets a reference to the given string and assigns it to the VulnerabilityScanResultsUrl field.
-func (o *HelmPackageUpload) SetVulnerabilityScanResultsUrl(v string) {
+func (o *SwiftPackageUpload) SetVulnerabilityScanResultsUrl(v string) {
 	o.VulnerabilityScanResultsUrl = &v
 }
 
-func (o HelmPackageUpload) MarshalJSON() ([]byte, error) {
+func (o SwiftPackageUpload) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Architectures) {
 		toSerialize["architectures"] = o.Architectures
@@ -2689,8 +2671,8 @@ func (o HelmPackageUpload) MarshalJSON() ([]byte, error) {
 	if !isNil(o.UploaderUrl) {
 		toSerialize["uploader_url"] = o.UploaderUrl
 	}
-	if o.Version.IsSet() {
-		toSerialize["version"] = o.Version.Get()
+	if true {
+		toSerialize["version"] = o.Version
 	}
 	if !isNil(o.VersionOrig) {
 		toSerialize["version_orig"] = o.VersionOrig
@@ -2701,38 +2683,38 @@ func (o HelmPackageUpload) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableHelmPackageUpload struct {
-	value *HelmPackageUpload
+type NullableSwiftPackageUpload struct {
+	value *SwiftPackageUpload
 	isSet bool
 }
 
-func (v NullableHelmPackageUpload) Get() *HelmPackageUpload {
+func (v NullableSwiftPackageUpload) Get() *SwiftPackageUpload {
 	return v.value
 }
 
-func (v *NullableHelmPackageUpload) Set(val *HelmPackageUpload) {
+func (v *NullableSwiftPackageUpload) Set(val *SwiftPackageUpload) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableHelmPackageUpload) IsSet() bool {
+func (v NullableSwiftPackageUpload) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableHelmPackageUpload) Unset() {
+func (v *NullableSwiftPackageUpload) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableHelmPackageUpload(val *HelmPackageUpload) *NullableHelmPackageUpload {
-	return &NullableHelmPackageUpload{value: val, isSet: true}
+func NewNullableSwiftPackageUpload(val *SwiftPackageUpload) *NullableSwiftPackageUpload {
+	return &NullableSwiftPackageUpload{value: val, isSet: true}
 }
 
-func (v NullableHelmPackageUpload) MarshalJSON() ([]byte, error) {
+func (v NullableSwiftPackageUpload) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableHelmPackageUpload) UnmarshalJSON(src []byte) error {
+func (v *NullableSwiftPackageUpload) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

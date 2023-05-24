@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PackageFile** | **string** | The primary file for the package. | 
+**ProvenanceFile** | Pointer to **NullableString** | The provenance file containing the signature for the chart. If one is not provided, it will be generated automatically. | [optional] 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
 
@@ -47,6 +48,41 @@ and a boolean to check if the value has been set.
 SetPackageFile sets PackageFile field to given value.
 
 
+### GetProvenanceFile
+
+`func (o *HelmPackageUploadRequest) GetProvenanceFile() string`
+
+GetProvenanceFile returns the ProvenanceFile field if non-nil, zero value otherwise.
+
+### GetProvenanceFileOk
+
+`func (o *HelmPackageUploadRequest) GetProvenanceFileOk() (*string, bool)`
+
+GetProvenanceFileOk returns a tuple with the ProvenanceFile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProvenanceFile
+
+`func (o *HelmPackageUploadRequest) SetProvenanceFile(v string)`
+
+SetProvenanceFile sets ProvenanceFile field to given value.
+
+### HasProvenanceFile
+
+`func (o *HelmPackageUploadRequest) HasProvenanceFile() bool`
+
+HasProvenanceFile returns a boolean if a field has been set.
+
+### SetProvenanceFileNil
+
+`func (o *HelmPackageUploadRequest) SetProvenanceFileNil(b bool)`
+
+ SetProvenanceFileNil sets the value for ProvenanceFile to be an explicit nil
+
+### UnsetProvenanceFile
+`func (o *HelmPackageUploadRequest) UnsetProvenanceFile()`
+
+UnsetProvenanceFile ensures that no value is present for ProvenanceFile, not even an explicit nil
 ### GetRepublish
 
 `func (o *HelmPackageUploadRequest) GetRepublish() bool`

@@ -195,6 +195,8 @@ docs/StorageRegion.md
 docs/StorageRegionsApi.md
 docs/StorageUsage.md
 docs/StorageUsageRaw.md
+docs/SwiftPackageUpload.md
+docs/SwiftPackageUploadRequest.md
 docs/TerraformPackageUpload.md
 docs/TerraformPackageUploadRequest.md
 docs/Usage.md
@@ -378,6 +380,8 @@ model_storage_allocated_limit_raw.go
 model_storage_region.go
 model_storage_usage.go
 model_storage_usage_raw.go
+model_swift_package_upload.go
+model_swift_package_upload_request.go
 model_terraform_package_upload.go
 model_terraform_package_upload_request.go
 model_usage.go
