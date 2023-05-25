@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.273.0
+  version: 1.275.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -19050,6 +19050,7 @@ components:
       type: object
     MavenPackageUploadRequest:
       example:
+        ivy_file: ivy_file
         sources_file: sources_file
         tests_file: tests_file
         republish: true
@@ -19073,6 +19074,13 @@ components:
           maxLength: 2083
           nullable: true
           title: Group id
+          type: string
+        ivy_file:
+          description: The ivy file is an XML file describing the dependencies of
+            the project.
+          minLength: 1
+          nullable: true
+          title: Ivy file
           type: string
         javadoc_file:
           description: Adds bundled Java documentation to the Maven package
@@ -29708,7 +29716,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.273.0
+        version: 1.275.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -29718,7 +29726,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.273.0
+          default: 1.275.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
