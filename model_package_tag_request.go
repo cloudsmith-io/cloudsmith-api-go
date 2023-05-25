@@ -30,7 +30,7 @@ type PackageTagRequest struct {
 // will change when the set of required properties is changed
 func NewPackageTagRequest() *PackageTagRequest {
 	this := PackageTagRequest{}
-	var action ACTION = "Add"
+	var action string = "Add"
 	this.Action = *NewNullableString(&action)
 	var isImmutable bool = false
 	this.IsImmutable = &isImmutable
@@ -42,7 +42,7 @@ func NewPackageTagRequest() *PackageTagRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewPackageTagRequestWithDefaults() *PackageTagRequest {
 	this := PackageTagRequest{}
-	var action ACTION = "Add"
+	var action string = "Add"
 	this.Action = *NewNullableString(&action)
 	var isImmutable bool = false
 	this.IsImmutable = &isImmutable

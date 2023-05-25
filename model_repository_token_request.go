@@ -51,10 +51,10 @@ type RepositoryTokenRequest struct {
 // will change when the set of required properties is changed
 func NewRepositoryTokenRequest(name string) *RepositoryTokenRequest {
 	this := RepositoryTokenRequest{}
-	var limitBandwidthUnit LIMIT_BANDWIDTH_UNIT = "Byte"
+	var limitBandwidthUnit string = "Byte"
 	this.LimitBandwidthUnit = *NewNullableString(&limitBandwidthUnit)
 	this.Name = name
-	var scheduledResetPeriod SCHEDULED_RESET_PERIOD = "Never Reset"
+	var scheduledResetPeriod string = "Never Reset"
 	this.ScheduledResetPeriod = *NewNullableString(&scheduledResetPeriod)
 	return &this
 }
@@ -64,9 +64,9 @@ func NewRepositoryTokenRequest(name string) *RepositoryTokenRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewRepositoryTokenRequestWithDefaults() *RepositoryTokenRequest {
 	this := RepositoryTokenRequest{}
-	var limitBandwidthUnit LIMIT_BANDWIDTH_UNIT = "Byte"
+	var limitBandwidthUnit string = "Byte"
 	this.LimitBandwidthUnit = *NewNullableString(&limitBandwidthUnit)
-	var scheduledResetPeriod SCHEDULED_RESET_PERIOD = "Never Reset"
+	var scheduledResetPeriod string = "Never Reset"
 	this.ScheduledResetPeriod = *NewNullableString(&scheduledResetPeriod)
 	return &this
 }
