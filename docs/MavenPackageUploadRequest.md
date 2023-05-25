@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ArtifactId** | Pointer to **NullableString** | The ID of the artifact. | [optional] 
 **GroupId** | Pointer to **NullableString** | Artifact&#39;s group ID. | [optional] 
+**IvyFile** | Pointer to **NullableString** | The ivy file is an XML file describing the dependencies of the project. | [optional] 
 **JavadocFile** | Pointer to **NullableString** | Adds bundled Java documentation to the Maven package | [optional] 
 **PackageFile** | **string** | The primary file for the package. | 
 **Packaging** | Pointer to **NullableString** | Artifact&#39;s Maven packaging type. | [optional] 
@@ -105,6 +106,41 @@ HasGroupId returns a boolean if a field has been set.
 `func (o *MavenPackageUploadRequest) UnsetGroupId()`
 
 UnsetGroupId ensures that no value is present for GroupId, not even an explicit nil
+### GetIvyFile
+
+`func (o *MavenPackageUploadRequest) GetIvyFile() string`
+
+GetIvyFile returns the IvyFile field if non-nil, zero value otherwise.
+
+### GetIvyFileOk
+
+`func (o *MavenPackageUploadRequest) GetIvyFileOk() (*string, bool)`
+
+GetIvyFileOk returns a tuple with the IvyFile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIvyFile
+
+`func (o *MavenPackageUploadRequest) SetIvyFile(v string)`
+
+SetIvyFile sets IvyFile field to given value.
+
+### HasIvyFile
+
+`func (o *MavenPackageUploadRequest) HasIvyFile() bool`
+
+HasIvyFile returns a boolean if a field has been set.
+
+### SetIvyFileNil
+
+`func (o *MavenPackageUploadRequest) SetIvyFileNil(b bool)`
+
+ SetIvyFileNil sets the value for IvyFile to be an explicit nil
+
+### UnsetIvyFile
+`func (o *MavenPackageUploadRequest) UnsetIvyFile()`
+
+UnsetIvyFile ensures that no value is present for IvyFile, not even an explicit nil
 ### GetJavadocFile
 
 `func (o *MavenPackageUploadRequest) GetJavadocFile() string`

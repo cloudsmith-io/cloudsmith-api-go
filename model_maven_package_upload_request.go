@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.273.0
+API version: 1.275.0
 Contact: support@cloudsmith.io
 */
 
@@ -21,6 +21,8 @@ type MavenPackageUploadRequest struct {
 	ArtifactId NullableString `json:"artifact_id,omitempty"`
 	// Artifact's group ID.
 	GroupId NullableString `json:"group_id,omitempty"`
+	// The ivy file is an XML file describing the dependencies of the project.
+	IvyFile NullableString `json:"ivy_file,omitempty"`
 	// Adds bundled Java documentation to the Maven package
 	JavadocFile NullableString `json:"javadoc_file,omitempty"`
 	// The primary file for the package.
@@ -143,6 +145,49 @@ func (o *MavenPackageUploadRequest) SetGroupIdNil() {
 // UnsetGroupId ensures that no value is present for GroupId, not even an explicit nil
 func (o *MavenPackageUploadRequest) UnsetGroupId() {
 	o.GroupId.Unset()
+}
+
+// GetIvyFile returns the IvyFile field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MavenPackageUploadRequest) GetIvyFile() string {
+	if o == nil || isNil(o.IvyFile.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.IvyFile.Get()
+}
+
+// GetIvyFileOk returns a tuple with the IvyFile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MavenPackageUploadRequest) GetIvyFileOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IvyFile.Get(), o.IvyFile.IsSet()
+}
+
+// HasIvyFile returns a boolean if a field has been set.
+func (o *MavenPackageUploadRequest) HasIvyFile() bool {
+	if o != nil && o.IvyFile.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIvyFile gets a reference to the given NullableString and assigns it to the IvyFile field.
+func (o *MavenPackageUploadRequest) SetIvyFile(v string) {
+	o.IvyFile.Set(&v)
+}
+
+// SetIvyFileNil sets the value for IvyFile to be an explicit nil
+func (o *MavenPackageUploadRequest) SetIvyFileNil() {
+	o.IvyFile.Set(nil)
+}
+
+// UnsetIvyFile ensures that no value is present for IvyFile, not even an explicit nil
+func (o *MavenPackageUploadRequest) UnsetIvyFile() {
+	o.IvyFile.Unset()
 }
 
 // GetJavadocFile returns the JavadocFile field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -509,6 +554,9 @@ func (o MavenPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.GroupId.IsSet() {
 		toSerialize["group_id"] = o.GroupId.Get()
+	}
+	if o.IvyFile.IsSet() {
+		toSerialize["ivy_file"] = o.IvyFile.Get()
 	}
 	if o.JavadocFile.IsSet() {
 		toSerialize["javadoc_file"] = o.JavadocFile.Get()
