@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **Packaging** | Pointer to **NullableString** | Artifact&#39;s Maven packaging type. | [optional] 
 **PomFile** | Pointer to **NullableString** | The POM file is an XML file containing the Maven coordinates. | [optional] 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
+**SbtVersion** | Pointer to **NullableString** |  | [optional] 
+**ScalaVersion** | Pointer to **NullableString** |  | [optional] 
 **SourcesFile** | Pointer to **NullableString** | Adds bundled Java source code to the Maven package. | [optional] 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
 **TestsFile** | Pointer to **NullableString** | Adds bundled Java tests to the Maven package. | [optional] 
@@ -291,6 +293,76 @@ SetRepublish sets Republish field to given value.
 
 HasRepublish returns a boolean if a field has been set.
 
+### GetSbtVersion
+
+`func (o *MavenPackageUploadRequest) GetSbtVersion() string`
+
+GetSbtVersion returns the SbtVersion field if non-nil, zero value otherwise.
+
+### GetSbtVersionOk
+
+`func (o *MavenPackageUploadRequest) GetSbtVersionOk() (*string, bool)`
+
+GetSbtVersionOk returns a tuple with the SbtVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSbtVersion
+
+`func (o *MavenPackageUploadRequest) SetSbtVersion(v string)`
+
+SetSbtVersion sets SbtVersion field to given value.
+
+### HasSbtVersion
+
+`func (o *MavenPackageUploadRequest) HasSbtVersion() bool`
+
+HasSbtVersion returns a boolean if a field has been set.
+
+### SetSbtVersionNil
+
+`func (o *MavenPackageUploadRequest) SetSbtVersionNil(b bool)`
+
+ SetSbtVersionNil sets the value for SbtVersion to be an explicit nil
+
+### UnsetSbtVersion
+`func (o *MavenPackageUploadRequest) UnsetSbtVersion()`
+
+UnsetSbtVersion ensures that no value is present for SbtVersion, not even an explicit nil
+### GetScalaVersion
+
+`func (o *MavenPackageUploadRequest) GetScalaVersion() string`
+
+GetScalaVersion returns the ScalaVersion field if non-nil, zero value otherwise.
+
+### GetScalaVersionOk
+
+`func (o *MavenPackageUploadRequest) GetScalaVersionOk() (*string, bool)`
+
+GetScalaVersionOk returns a tuple with the ScalaVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScalaVersion
+
+`func (o *MavenPackageUploadRequest) SetScalaVersion(v string)`
+
+SetScalaVersion sets ScalaVersion field to given value.
+
+### HasScalaVersion
+
+`func (o *MavenPackageUploadRequest) HasScalaVersion() bool`
+
+HasScalaVersion returns a boolean if a field has been set.
+
+### SetScalaVersionNil
+
+`func (o *MavenPackageUploadRequest) SetScalaVersionNil(b bool)`
+
+ SetScalaVersionNil sets the value for ScalaVersion to be an explicit nil
+
+### UnsetScalaVersion
+`func (o *MavenPackageUploadRequest) UnsetScalaVersion()`
+
+UnsetScalaVersion ensures that no value is present for ScalaVersion, not even an explicit nil
 ### GetSourcesFile
 
 `func (o *MavenPackageUploadRequest) GetSourcesFile() string`
