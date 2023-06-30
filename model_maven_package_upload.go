@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.275.0
+API version: 1.290.2
 Contact: support@cloudsmith.io
 */
 
@@ -70,6 +70,8 @@ type MavenPackageUpload struct {
 	Release       NullableString `json:"release,omitempty"`
 	Repository    *string        `json:"repository,omitempty"`
 	RepositoryUrl *string        `json:"repository_url,omitempty"`
+	SbtVersion    NullableString `json:"sbt_version,omitempty"`
+	ScalaVersion  NullableString `json:"scala_version,omitempty"`
 	// The datetime the security scanning was completed.
 	SecurityScanCompletedAt NullableTime `json:"security_scan_completed_at,omitempty"`
 	// The datetime the security scanning was started.
@@ -1568,6 +1570,92 @@ func (o *MavenPackageUpload) SetRepositoryUrl(v string) {
 	o.RepositoryUrl = &v
 }
 
+// GetSbtVersion returns the SbtVersion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MavenPackageUpload) GetSbtVersion() string {
+	if o == nil || isNil(o.SbtVersion.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SbtVersion.Get()
+}
+
+// GetSbtVersionOk returns a tuple with the SbtVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MavenPackageUpload) GetSbtVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SbtVersion.Get(), o.SbtVersion.IsSet()
+}
+
+// HasSbtVersion returns a boolean if a field has been set.
+func (o *MavenPackageUpload) HasSbtVersion() bool {
+	if o != nil && o.SbtVersion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSbtVersion gets a reference to the given NullableString and assigns it to the SbtVersion field.
+func (o *MavenPackageUpload) SetSbtVersion(v string) {
+	o.SbtVersion.Set(&v)
+}
+
+// SetSbtVersionNil sets the value for SbtVersion to be an explicit nil
+func (o *MavenPackageUpload) SetSbtVersionNil() {
+	o.SbtVersion.Set(nil)
+}
+
+// UnsetSbtVersion ensures that no value is present for SbtVersion, not even an explicit nil
+func (o *MavenPackageUpload) UnsetSbtVersion() {
+	o.SbtVersion.Unset()
+}
+
+// GetScalaVersion returns the ScalaVersion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MavenPackageUpload) GetScalaVersion() string {
+	if o == nil || isNil(o.ScalaVersion.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ScalaVersion.Get()
+}
+
+// GetScalaVersionOk returns a tuple with the ScalaVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MavenPackageUpload) GetScalaVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ScalaVersion.Get(), o.ScalaVersion.IsSet()
+}
+
+// HasScalaVersion returns a boolean if a field has been set.
+func (o *MavenPackageUpload) HasScalaVersion() bool {
+	if o != nil && o.ScalaVersion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetScalaVersion gets a reference to the given NullableString and assigns it to the ScalaVersion field.
+func (o *MavenPackageUpload) SetScalaVersion(v string) {
+	o.ScalaVersion.Set(&v)
+}
+
+// SetScalaVersionNil sets the value for ScalaVersion to be an explicit nil
+func (o *MavenPackageUpload) SetScalaVersionNil() {
+	o.ScalaVersion.Set(nil)
+}
+
+// UnsetScalaVersion ensures that no value is present for ScalaVersion, not even an explicit nil
+func (o *MavenPackageUpload) UnsetScalaVersion() {
+	o.ScalaVersion.Unset()
+}
+
 // GetSecurityScanCompletedAt returns the SecurityScanCompletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUpload) GetSecurityScanCompletedAt() time.Time {
 	if o == nil || isNil(o.SecurityScanCompletedAt.Get()) {
@@ -2751,6 +2839,12 @@ func (o MavenPackageUpload) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.RepositoryUrl) {
 		toSerialize["repository_url"] = o.RepositoryUrl
+	}
+	if o.SbtVersion.IsSet() {
+		toSerialize["sbt_version"] = o.SbtVersion.Get()
+	}
+	if o.ScalaVersion.IsSet() {
+		toSerialize["scala_version"] = o.ScalaVersion.Get()
 	}
 	if o.SecurityScanCompletedAt.IsSet() {
 		toSerialize["security_scan_completed_at"] = o.SecurityScanCompletedAt.Get()

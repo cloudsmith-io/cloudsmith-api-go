@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.275.0
+API version: 1.290.2
 Contact: support@cloudsmith.io
 */
 
@@ -32,7 +32,9 @@ type MavenPackageUploadRequest struct {
 	// The POM file is an XML file containing the Maven coordinates.
 	PomFile NullableString `json:"pom_file,omitempty"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
-	Republish *bool `json:"republish,omitempty"`
+	Republish    *bool          `json:"republish,omitempty"`
+	SbtVersion   NullableString `json:"sbt_version,omitempty"`
+	ScalaVersion NullableString `json:"scala_version,omitempty"`
 	// Adds bundled Java source code to the Maven package.
 	SourcesFile NullableString `json:"sources_file,omitempty"`
 	// A comma-separated values list of tags to add to the package.
@@ -375,6 +377,92 @@ func (o *MavenPackageUploadRequest) SetRepublish(v bool) {
 	o.Republish = &v
 }
 
+// GetSbtVersion returns the SbtVersion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MavenPackageUploadRequest) GetSbtVersion() string {
+	if o == nil || isNil(o.SbtVersion.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SbtVersion.Get()
+}
+
+// GetSbtVersionOk returns a tuple with the SbtVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MavenPackageUploadRequest) GetSbtVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SbtVersion.Get(), o.SbtVersion.IsSet()
+}
+
+// HasSbtVersion returns a boolean if a field has been set.
+func (o *MavenPackageUploadRequest) HasSbtVersion() bool {
+	if o != nil && o.SbtVersion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSbtVersion gets a reference to the given NullableString and assigns it to the SbtVersion field.
+func (o *MavenPackageUploadRequest) SetSbtVersion(v string) {
+	o.SbtVersion.Set(&v)
+}
+
+// SetSbtVersionNil sets the value for SbtVersion to be an explicit nil
+func (o *MavenPackageUploadRequest) SetSbtVersionNil() {
+	o.SbtVersion.Set(nil)
+}
+
+// UnsetSbtVersion ensures that no value is present for SbtVersion, not even an explicit nil
+func (o *MavenPackageUploadRequest) UnsetSbtVersion() {
+	o.SbtVersion.Unset()
+}
+
+// GetScalaVersion returns the ScalaVersion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MavenPackageUploadRequest) GetScalaVersion() string {
+	if o == nil || isNil(o.ScalaVersion.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ScalaVersion.Get()
+}
+
+// GetScalaVersionOk returns a tuple with the ScalaVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MavenPackageUploadRequest) GetScalaVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ScalaVersion.Get(), o.ScalaVersion.IsSet()
+}
+
+// HasScalaVersion returns a boolean if a field has been set.
+func (o *MavenPackageUploadRequest) HasScalaVersion() bool {
+	if o != nil && o.ScalaVersion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetScalaVersion gets a reference to the given NullableString and assigns it to the ScalaVersion field.
+func (o *MavenPackageUploadRequest) SetScalaVersion(v string) {
+	o.ScalaVersion.Set(&v)
+}
+
+// SetScalaVersionNil sets the value for ScalaVersion to be an explicit nil
+func (o *MavenPackageUploadRequest) SetScalaVersionNil() {
+	o.ScalaVersion.Set(nil)
+}
+
+// UnsetScalaVersion ensures that no value is present for ScalaVersion, not even an explicit nil
+func (o *MavenPackageUploadRequest) UnsetScalaVersion() {
+	o.ScalaVersion.Unset()
+}
+
 // GetSourcesFile returns the SourcesFile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetSourcesFile() string {
 	if o == nil || isNil(o.SourcesFile.Get()) {
@@ -572,6 +660,12 @@ func (o MavenPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
+	}
+	if o.SbtVersion.IsSet() {
+		toSerialize["sbt_version"] = o.SbtVersion.Get()
+	}
+	if o.ScalaVersion.IsSet() {
+		toSerialize["scala_version"] = o.ScalaVersion.Get()
 	}
 	if o.SourcesFile.IsSet() {
 		toSerialize["sources_file"] = o.SourcesFile.Get()

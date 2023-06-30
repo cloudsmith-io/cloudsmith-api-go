@@ -45,6 +45,8 @@ Name | Type | Description | Notes
 **Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
+**SbtVersion** | Pointer to **NullableString** |  | [optional] 
+**ScalaVersion** | Pointer to **NullableString** |  | [optional] 
 **SecurityScanCompletedAt** | Pointer to **NullableTime** | The datetime the security scanning was completed. | [optional] [readonly] 
 **SecurityScanStartedAt** | Pointer to **NullableTime** | The datetime the security scanning was started. | [optional] [readonly] 
 **SecurityScanStatus** | Pointer to **NullableString** |  | [optional] [readonly] [default to "Awaiting Security Scan"]
@@ -1230,6 +1232,76 @@ SetRepositoryUrl sets RepositoryUrl field to given value.
 
 HasRepositoryUrl returns a boolean if a field has been set.
 
+### GetSbtVersion
+
+`func (o *MavenPackageUpload) GetSbtVersion() string`
+
+GetSbtVersion returns the SbtVersion field if non-nil, zero value otherwise.
+
+### GetSbtVersionOk
+
+`func (o *MavenPackageUpload) GetSbtVersionOk() (*string, bool)`
+
+GetSbtVersionOk returns a tuple with the SbtVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSbtVersion
+
+`func (o *MavenPackageUpload) SetSbtVersion(v string)`
+
+SetSbtVersion sets SbtVersion field to given value.
+
+### HasSbtVersion
+
+`func (o *MavenPackageUpload) HasSbtVersion() bool`
+
+HasSbtVersion returns a boolean if a field has been set.
+
+### SetSbtVersionNil
+
+`func (o *MavenPackageUpload) SetSbtVersionNil(b bool)`
+
+ SetSbtVersionNil sets the value for SbtVersion to be an explicit nil
+
+### UnsetSbtVersion
+`func (o *MavenPackageUpload) UnsetSbtVersion()`
+
+UnsetSbtVersion ensures that no value is present for SbtVersion, not even an explicit nil
+### GetScalaVersion
+
+`func (o *MavenPackageUpload) GetScalaVersion() string`
+
+GetScalaVersion returns the ScalaVersion field if non-nil, zero value otherwise.
+
+### GetScalaVersionOk
+
+`func (o *MavenPackageUpload) GetScalaVersionOk() (*string, bool)`
+
+GetScalaVersionOk returns a tuple with the ScalaVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScalaVersion
+
+`func (o *MavenPackageUpload) SetScalaVersion(v string)`
+
+SetScalaVersion sets ScalaVersion field to given value.
+
+### HasScalaVersion
+
+`func (o *MavenPackageUpload) HasScalaVersion() bool`
+
+HasScalaVersion returns a boolean if a field has been set.
+
+### SetScalaVersionNil
+
+`func (o *MavenPackageUpload) SetScalaVersionNil(b bool)`
+
+ SetScalaVersionNil sets the value for ScalaVersion to be an explicit nil
+
+### UnsetScalaVersion
+`func (o *MavenPackageUpload) UnsetScalaVersion()`
+
+UnsetScalaVersion ensures that no value is present for ScalaVersion, not even an explicit nil
 ### GetSecurityScanCompletedAt
 
 `func (o *MavenPackageUpload) GetSecurityScanCompletedAt() time.Time`
