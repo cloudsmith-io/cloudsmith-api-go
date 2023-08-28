@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Fingerprint** | Pointer to **string** | The long identifier used by RSA for this key. | [optional] [readonly] 
 **FingerprintShort** | Pointer to **string** |  | [optional] [readonly] 
 **PublicKey** | Pointer to **string** | The public key given to repository users. | [optional] [readonly] 
+**SshFingerprint** | Pointer to **NullableString** | The SSH fingerprint used by RSA for this key. | [optional] [readonly] 
 
 ## Methods
 
@@ -180,6 +181,41 @@ SetPublicKey sets PublicKey field to given value.
 
 HasPublicKey returns a boolean if a field has been set.
 
+### GetSshFingerprint
+
+`func (o *RepositoryRsaKey) GetSshFingerprint() string`
+
+GetSshFingerprint returns the SshFingerprint field if non-nil, zero value otherwise.
+
+### GetSshFingerprintOk
+
+`func (o *RepositoryRsaKey) GetSshFingerprintOk() (*string, bool)`
+
+GetSshFingerprintOk returns a tuple with the SshFingerprint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSshFingerprint
+
+`func (o *RepositoryRsaKey) SetSshFingerprint(v string)`
+
+SetSshFingerprint sets SshFingerprint field to given value.
+
+### HasSshFingerprint
+
+`func (o *RepositoryRsaKey) HasSshFingerprint() bool`
+
+HasSshFingerprint returns a boolean if a field has been set.
+
+### SetSshFingerprintNil
+
+`func (o *RepositoryRsaKey) SetSshFingerprintNil(b bool)`
+
+ SetSshFingerprintNil sets the value for SshFingerprint to be an explicit nil
+
+### UnsetSshFingerprint
+`func (o *RepositoryRsaKey) UnsetSshFingerprint()`
+
+UnsetSshFingerprint ensures that no value is present for SshFingerprint, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

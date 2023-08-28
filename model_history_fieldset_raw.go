@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the HistoryFieldsetRaw type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HistoryFieldsetRaw{}
 
 // HistoryFieldsetRaw struct for HistoryFieldsetRaw
 type HistoryFieldsetRaw struct {
@@ -115,17 +118,19 @@ func (o *HistoryFieldsetRaw) SetUploaded(v UsageRaw) {
 }
 
 func (o HistoryFieldsetRaw) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["downloaded"] = o.Downloaded
-	}
-	if true {
-		toSerialize["storage_used"] = o.StorageUsed
-	}
-	if true {
-		toSerialize["uploaded"] = o.Uploaded
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o HistoryFieldsetRaw) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["downloaded"] = o.Downloaded
+	toSerialize["storage_used"] = o.StorageUsed
+	toSerialize["uploaded"] = o.Uploaded
+	return toSerialize, nil
 }
 
 type NullableHistoryFieldsetRaw struct {

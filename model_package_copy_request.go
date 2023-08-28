@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the PackageCopyRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageCopyRequest{}
 
 // PackageCopyRequest struct for PackageCopyRequest
 type PackageCopyRequest struct {
@@ -66,7 +69,7 @@ func (o *PackageCopyRequest) SetDestination(v string) {
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
 func (o *PackageCopyRequest) GetRepublish() bool {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		var ret bool
 		return ret
 	}
@@ -76,7 +79,7 @@ func (o *PackageCopyRequest) GetRepublish() bool {
 // GetRepublishOk returns a tuple with the Republish field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageCopyRequest) GetRepublishOk() (*bool, bool) {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		return nil, false
 	}
 	return o.Republish, true
@@ -84,7 +87,7 @@ func (o *PackageCopyRequest) GetRepublishOk() (*bool, bool) {
 
 // HasRepublish returns a boolean if a field has been set.
 func (o *PackageCopyRequest) HasRepublish() bool {
-	if o != nil && !isNil(o.Republish) {
+	if o != nil && !IsNil(o.Republish) {
 		return true
 	}
 
@@ -97,14 +100,20 @@ func (o *PackageCopyRequest) SetRepublish(v bool) {
 }
 
 func (o PackageCopyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["destination"] = o.Destination
-	}
-	if !isNil(o.Republish) {
-		toSerialize["republish"] = o.Republish
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PackageCopyRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["destination"] = o.Destination
+	if !IsNil(o.Republish) {
+		toSerialize["republish"] = o.Republish
+	}
+	return toSerialize, nil
 }
 
 type NullablePackageCopyRequest struct {

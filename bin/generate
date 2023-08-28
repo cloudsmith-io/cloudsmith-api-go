@@ -39,7 +39,8 @@ docker run --rm \
     --additional-properties packageName=cloudsmith \
     --additional-properties packageVersion="$PKG_VERSION" \
     --type-mappings integer=int64,number=float64,float=float64 \
-    --enable-post-process-file
+    --enable-post-process-file \
+    --api-name-suffix "Api"
 
 
 # Clean up unused files post-generation

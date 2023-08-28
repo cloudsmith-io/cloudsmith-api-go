@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the OrganizationInviteExtend type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OrganizationInviteExtend{}
 
 // OrganizationInviteExtend struct for OrganizationInviteExtend
 type OrganizationInviteExtend struct {
@@ -56,7 +59,7 @@ func NewOrganizationInviteExtendWithDefaults() *OrganizationInviteExtend {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *OrganizationInviteExtend) GetEmail() string {
-	if o == nil || isNil(o.Email) {
+	if o == nil || IsNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -66,7 +69,7 @@ func (o *OrganizationInviteExtend) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteExtend) GetEmailOk() (*string, bool) {
-	if o == nil || isNil(o.Email) {
+	if o == nil || IsNil(o.Email) {
 		return nil, false
 	}
 	return o.Email, true
@@ -74,7 +77,7 @@ func (o *OrganizationInviteExtend) GetEmailOk() (*string, bool) {
 
 // HasEmail returns a boolean if a field has been set.
 func (o *OrganizationInviteExtend) HasEmail() bool {
-	if o != nil && !isNil(o.Email) {
+	if o != nil && !IsNil(o.Email) {
 		return true
 	}
 
@@ -88,7 +91,7 @@ func (o *OrganizationInviteExtend) SetEmail(v string) {
 
 // GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
 func (o *OrganizationInviteExtend) GetExpiresAt() time.Time {
-	if o == nil || isNil(o.ExpiresAt) {
+	if o == nil || IsNil(o.ExpiresAt) {
 		var ret time.Time
 		return ret
 	}
@@ -98,7 +101,7 @@ func (o *OrganizationInviteExtend) GetExpiresAt() time.Time {
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteExtend) GetExpiresAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.ExpiresAt) {
+	if o == nil || IsNil(o.ExpiresAt) {
 		return nil, false
 	}
 	return o.ExpiresAt, true
@@ -106,7 +109,7 @@ func (o *OrganizationInviteExtend) GetExpiresAtOk() (*time.Time, bool) {
 
 // HasExpiresAt returns a boolean if a field has been set.
 func (o *OrganizationInviteExtend) HasExpiresAt() bool {
-	if o != nil && !isNil(o.ExpiresAt) {
+	if o != nil && !IsNil(o.ExpiresAt) {
 		return true
 	}
 
@@ -120,7 +123,7 @@ func (o *OrganizationInviteExtend) SetExpiresAt(v time.Time) {
 
 // GetInviter returns the Inviter field value if set, zero value otherwise.
 func (o *OrganizationInviteExtend) GetInviter() string {
-	if o == nil || isNil(o.Inviter) {
+	if o == nil || IsNil(o.Inviter) {
 		var ret string
 		return ret
 	}
@@ -130,7 +133,7 @@ func (o *OrganizationInviteExtend) GetInviter() string {
 // GetInviterOk returns a tuple with the Inviter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteExtend) GetInviterOk() (*string, bool) {
-	if o == nil || isNil(o.Inviter) {
+	if o == nil || IsNil(o.Inviter) {
 		return nil, false
 	}
 	return o.Inviter, true
@@ -138,7 +141,7 @@ func (o *OrganizationInviteExtend) GetInviterOk() (*string, bool) {
 
 // HasInviter returns a boolean if a field has been set.
 func (o *OrganizationInviteExtend) HasInviter() bool {
-	if o != nil && !isNil(o.Inviter) {
+	if o != nil && !IsNil(o.Inviter) {
 		return true
 	}
 
@@ -152,7 +155,7 @@ func (o *OrganizationInviteExtend) SetInviter(v string) {
 
 // GetInviterUrl returns the InviterUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OrganizationInviteExtend) GetInviterUrl() string {
-	if o == nil || isNil(o.InviterUrl.Get()) {
+	if o == nil || IsNil(o.InviterUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -195,7 +198,7 @@ func (o *OrganizationInviteExtend) UnsetInviterUrl() {
 
 // GetOrg returns the Org field value if set, zero value otherwise.
 func (o *OrganizationInviteExtend) GetOrg() string {
-	if o == nil || isNil(o.Org) {
+	if o == nil || IsNil(o.Org) {
 		var ret string
 		return ret
 	}
@@ -205,7 +208,7 @@ func (o *OrganizationInviteExtend) GetOrg() string {
 // GetOrgOk returns a tuple with the Org field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteExtend) GetOrgOk() (*string, bool) {
-	if o == nil || isNil(o.Org) {
+	if o == nil || IsNil(o.Org) {
 		return nil, false
 	}
 	return o.Org, true
@@ -213,7 +216,7 @@ func (o *OrganizationInviteExtend) GetOrgOk() (*string, bool) {
 
 // HasOrg returns a boolean if a field has been set.
 func (o *OrganizationInviteExtend) HasOrg() bool {
-	if o != nil && !isNil(o.Org) {
+	if o != nil && !IsNil(o.Org) {
 		return true
 	}
 
@@ -227,7 +230,7 @@ func (o *OrganizationInviteExtend) SetOrg(v string) {
 
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *OrganizationInviteExtend) GetRole() string {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		var ret string
 		return ret
 	}
@@ -237,7 +240,7 @@ func (o *OrganizationInviteExtend) GetRole() string {
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteExtend) GetRoleOk() (*string, bool) {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		return nil, false
 	}
 	return o.Role, true
@@ -245,7 +248,7 @@ func (o *OrganizationInviteExtend) GetRoleOk() (*string, bool) {
 
 // HasRole returns a boolean if a field has been set.
 func (o *OrganizationInviteExtend) HasRole() bool {
-	if o != nil && !isNil(o.Role) {
+	if o != nil && !IsNil(o.Role) {
 		return true
 	}
 
@@ -259,7 +262,7 @@ func (o *OrganizationInviteExtend) SetRole(v string) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *OrganizationInviteExtend) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -269,7 +272,7 @@ func (o *OrganizationInviteExtend) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteExtend) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -277,7 +280,7 @@ func (o *OrganizationInviteExtend) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *OrganizationInviteExtend) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -291,7 +294,7 @@ func (o *OrganizationInviteExtend) SetSlugPerm(v string) {
 
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *OrganizationInviteExtend) GetUser() string {
-	if o == nil || isNil(o.User) {
+	if o == nil || IsNil(o.User) {
 		var ret string
 		return ret
 	}
@@ -301,7 +304,7 @@ func (o *OrganizationInviteExtend) GetUser() string {
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteExtend) GetUserOk() (*string, bool) {
-	if o == nil || isNil(o.User) {
+	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
 	return o.User, true
@@ -309,7 +312,7 @@ func (o *OrganizationInviteExtend) GetUserOk() (*string, bool) {
 
 // HasUser returns a boolean if a field has been set.
 func (o *OrganizationInviteExtend) HasUser() bool {
-	if o != nil && !isNil(o.User) {
+	if o != nil && !IsNil(o.User) {
 		return true
 	}
 
@@ -323,7 +326,7 @@ func (o *OrganizationInviteExtend) SetUser(v string) {
 
 // GetUserUrl returns the UserUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OrganizationInviteExtend) GetUserUrl() string {
-	if o == nil || isNil(o.UserUrl.Get()) {
+	if o == nil || IsNil(o.UserUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -365,35 +368,43 @@ func (o *OrganizationInviteExtend) UnsetUserUrl() {
 }
 
 func (o OrganizationInviteExtend) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OrganizationInviteExtend) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Email) {
+	if !IsNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
-	if !isNil(o.ExpiresAt) {
+	if !IsNil(o.ExpiresAt) {
 		toSerialize["expires_at"] = o.ExpiresAt
 	}
-	if !isNil(o.Inviter) {
+	if !IsNil(o.Inviter) {
 		toSerialize["inviter"] = o.Inviter
 	}
 	if o.InviterUrl.IsSet() {
 		toSerialize["inviter_url"] = o.InviterUrl.Get()
 	}
-	if !isNil(o.Org) {
+	if !IsNil(o.Org) {
 		toSerialize["org"] = o.Org
 	}
-	if !isNil(o.Role) {
+	if !IsNil(o.Role) {
 		toSerialize["role"] = o.Role
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
-	if !isNil(o.User) {
+	if !IsNil(o.User) {
 		toSerialize["user"] = o.User
 	}
 	if o.UserUrl.IsSet() {
 		toSerialize["user_url"] = o.UserUrl.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableOrganizationInviteExtend struct {

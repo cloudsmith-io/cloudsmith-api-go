@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the RepositoryAuditLog type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryAuditLog{}
 
 // RepositoryAuditLog struct for RepositoryAuditLog
 type RepositoryAuditLog struct {
@@ -114,7 +117,7 @@ func (o *RepositoryAuditLog) SetActorIpAddress(v string) {
 
 // GetActorKind returns the ActorKind field value if set, zero value otherwise.
 func (o *RepositoryAuditLog) GetActorKind() string {
-	if o == nil || isNil(o.ActorKind) {
+	if o == nil || IsNil(o.ActorKind) {
 		var ret string
 		return ret
 	}
@@ -124,7 +127,7 @@ func (o *RepositoryAuditLog) GetActorKind() string {
 // GetActorKindOk returns a tuple with the ActorKind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryAuditLog) GetActorKindOk() (*string, bool) {
-	if o == nil || isNil(o.ActorKind) {
+	if o == nil || IsNil(o.ActorKind) {
 		return nil, false
 	}
 	return o.ActorKind, true
@@ -132,7 +135,7 @@ func (o *RepositoryAuditLog) GetActorKindOk() (*string, bool) {
 
 // HasActorKind returns a boolean if a field has been set.
 func (o *RepositoryAuditLog) HasActorKind() bool {
-	if o != nil && !isNil(o.ActorKind) {
+	if o != nil && !IsNil(o.ActorKind) {
 		return true
 	}
 
@@ -196,7 +199,7 @@ func (o *RepositoryAuditLog) SetActorSlugPerm(v string) {
 
 // GetActorUrl returns the ActorUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryAuditLog) GetActorUrl() string {
-	if o == nil || isNil(o.ActorUrl.Get()) {
+	if o == nil || IsNil(o.ActorUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -383,7 +386,7 @@ func (o *RepositoryAuditLog) SetObjectSlugPerm(v string) {
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
 func (o *RepositoryAuditLog) GetUuid() string {
-	if o == nil || isNil(o.Uuid) {
+	if o == nil || IsNil(o.Uuid) {
 		var ret string
 		return ret
 	}
@@ -393,7 +396,7 @@ func (o *RepositoryAuditLog) GetUuid() string {
 // GetUuidOk returns a tuple with the Uuid field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryAuditLog) GetUuidOk() (*string, bool) {
-	if o == nil || isNil(o.Uuid) {
+	if o == nil || IsNil(o.Uuid) {
 		return nil, false
 	}
 	return o.Uuid, true
@@ -401,7 +404,7 @@ func (o *RepositoryAuditLog) GetUuidOk() (*string, bool) {
 
 // HasUuid returns a boolean if a field has been set.
 func (o *RepositoryAuditLog) HasUuid() bool {
-	if o != nil && !isNil(o.Uuid) {
+	if o != nil && !IsNil(o.Uuid) {
 		return true
 	}
 
@@ -414,47 +417,35 @@ func (o *RepositoryAuditLog) SetUuid(v string) {
 }
 
 func (o RepositoryAuditLog) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryAuditLog) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["actor"] = o.Actor.Get()
-	}
-	if true {
-		toSerialize["actor_ip_address"] = o.ActorIpAddress.Get()
-	}
-	if !isNil(o.ActorKind) {
+	toSerialize["actor"] = o.Actor.Get()
+	toSerialize["actor_ip_address"] = o.ActorIpAddress.Get()
+	if !IsNil(o.ActorKind) {
 		toSerialize["actor_kind"] = o.ActorKind
 	}
-	if true {
-		toSerialize["actor_location"] = o.ActorLocation
-	}
-	if true {
-		toSerialize["actor_slug_perm"] = o.ActorSlugPerm.Get()
-	}
+	toSerialize["actor_location"] = o.ActorLocation
+	toSerialize["actor_slug_perm"] = o.ActorSlugPerm.Get()
 	if o.ActorUrl.IsSet() {
 		toSerialize["actor_url"] = o.ActorUrl.Get()
 	}
-	if true {
-		toSerialize["context"] = o.Context
-	}
-	if true {
-		toSerialize["event"] = o.Event
-	}
-	if true {
-		toSerialize["event_at"] = o.EventAt
-	}
-	if true {
-		toSerialize["object"] = o.Object
-	}
-	if true {
-		toSerialize["object_kind"] = o.ObjectKind
-	}
-	if true {
-		toSerialize["object_slug_perm"] = o.ObjectSlugPerm
-	}
-	if !isNil(o.Uuid) {
+	toSerialize["context"] = o.Context
+	toSerialize["event"] = o.Event
+	toSerialize["event_at"] = o.EventAt
+	toSerialize["object"] = o.Object
+	toSerialize["object_kind"] = o.ObjectKind
+	toSerialize["object_slug_perm"] = o.ObjectSlugPerm
+	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableRepositoryAuditLog struct {

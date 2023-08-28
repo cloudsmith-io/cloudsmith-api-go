@@ -34,7 +34,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -111,7 +111,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -121,7 +121,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsDelete(context.Background(), owner, repo, identifier).Execute()
+    r, err := apiClient.EntitlementsApi.EntitlementsDelete(context.Background(), owner, repo, identifier).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -185,7 +185,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -195,7 +195,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsDisable(context.Background(), owner, repo, identifier).Execute()
+    r, err := apiClient.EntitlementsApi.EntitlementsDisable(context.Background(), owner, repo, identifier).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsDisable``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -259,7 +259,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -269,7 +269,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsEnable(context.Background(), owner, repo, identifier).Execute()
+    r, err := apiClient.EntitlementsApi.EntitlementsEnable(context.Background(), owner, repo, identifier).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsEnable``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -333,7 +333,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -416,7 +416,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -496,7 +496,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -576,7 +576,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -656,7 +656,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -667,7 +667,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsReset(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Execute()
+    r, err := apiClient.EntitlementsApi.EntitlementsReset(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsReset``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -732,7 +732,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {

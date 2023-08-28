@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the Service type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Service{}
 
 // Service struct for Service
 type Service struct {
@@ -54,7 +57,7 @@ func NewServiceWithDefaults() *Service {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *Service) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -64,7 +67,7 @@ func (o *Service) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Service) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -72,7 +75,7 @@ func (o *Service) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *Service) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -86,7 +89,7 @@ func (o *Service) SetDescription(v string) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *Service) GetKey() string {
-	if o == nil || isNil(o.Key) {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -96,7 +99,7 @@ func (o *Service) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Service) GetKeyOk() (*string, bool) {
-	if o == nil || isNil(o.Key) {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -104,7 +107,7 @@ func (o *Service) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *Service) HasKey() bool {
-	if o != nil && !isNil(o.Key) {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -142,7 +145,7 @@ func (o *Service) SetName(v string) {
 
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *Service) GetRole() string {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		var ret string
 		return ret
 	}
@@ -152,7 +155,7 @@ func (o *Service) GetRole() string {
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Service) GetRoleOk() (*string, bool) {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		return nil, false
 	}
 	return o.Role, true
@@ -160,7 +163,7 @@ func (o *Service) GetRoleOk() (*string, bool) {
 
 // HasRole returns a boolean if a field has been set.
 func (o *Service) HasRole() bool {
-	if o != nil && !isNil(o.Role) {
+	if o != nil && !IsNil(o.Role) {
 		return true
 	}
 
@@ -174,7 +177,7 @@ func (o *Service) SetRole(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *Service) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -184,7 +187,7 @@ func (o *Service) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Service) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -192,7 +195,7 @@ func (o *Service) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *Service) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -206,7 +209,7 @@ func (o *Service) SetSlug(v string) {
 
 // GetTeams returns the Teams field value if set, zero value otherwise.
 func (o *Service) GetTeams() []ServiceTeams {
-	if o == nil || isNil(o.Teams) {
+	if o == nil || IsNil(o.Teams) {
 		var ret []ServiceTeams
 		return ret
 	}
@@ -216,7 +219,7 @@ func (o *Service) GetTeams() []ServiceTeams {
 // GetTeamsOk returns a tuple with the Teams field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Service) GetTeamsOk() ([]ServiceTeams, bool) {
-	if o == nil || isNil(o.Teams) {
+	if o == nil || IsNil(o.Teams) {
 		return nil, false
 	}
 	return o.Teams, true
@@ -224,7 +227,7 @@ func (o *Service) GetTeamsOk() ([]ServiceTeams, bool) {
 
 // HasTeams returns a boolean if a field has been set.
 func (o *Service) HasTeams() bool {
-	if o != nil && !isNil(o.Teams) {
+	if o != nil && !IsNil(o.Teams) {
 		return true
 	}
 
@@ -237,26 +240,32 @@ func (o *Service) SetTeams(v []ServiceTeams) {
 }
 
 func (o Service) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !isNil(o.Key) {
-		toSerialize["key"] = o.Key
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Role) {
-		toSerialize["role"] = o.Role
-	}
-	if !isNil(o.Slug) {
-		toSerialize["slug"] = o.Slug
-	}
-	if !isNil(o.Teams) {
-		toSerialize["teams"] = o.Teams
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o Service) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Key) {
+		toSerialize["key"] = o.Key
+	}
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Role) {
+		toSerialize["role"] = o.Role
+	}
+	if !IsNil(o.Slug) {
+		toSerialize["slug"] = o.Slug
+	}
+	if !IsNil(o.Teams) {
+		toSerialize["teams"] = o.Teams
+	}
+	return toSerialize, nil
 }
 
 type NullableService struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the Eula type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Eula{}
 
 // Eula struct for Eula
 type Eula struct {
@@ -42,7 +45,7 @@ func NewEulaWithDefaults() *Eula {
 
 // GetIdentifier returns the Identifier field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Eula) GetIdentifier() string {
-	if o == nil || isNil(o.Identifier.Get()) {
+	if o == nil || IsNil(o.Identifier.Get()) {
 		var ret string
 		return ret
 	}
@@ -85,7 +88,7 @@ func (o *Eula) UnsetIdentifier() {
 
 // GetNumber returns the Number field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Eula) GetNumber() int64 {
-	if o == nil || isNil(o.Number.Get()) {
+	if o == nil || IsNil(o.Number.Get()) {
 		var ret int64
 		return ret
 	}
@@ -127,6 +130,14 @@ func (o *Eula) UnsetNumber() {
 }
 
 func (o Eula) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Eula) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Identifier.IsSet() {
 		toSerialize["identifier"] = o.Identifier.Get()
@@ -134,7 +145,7 @@ func (o Eula) MarshalJSON() ([]byte, error) {
 	if o.Number.IsSet() {
 		toSerialize["number"] = o.Number.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableEula struct {

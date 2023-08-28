@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RepositoryPrivilegeDict type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryPrivilegeDict{}
 
 // RepositoryPrivilegeDict struct for RepositoryPrivilegeDict
 type RepositoryPrivilegeDict struct {
@@ -71,7 +74,7 @@ func (o *RepositoryPrivilegeDict) SetPrivilege(v string) {
 
 // GetService returns the Service field value if set, zero value otherwise.
 func (o *RepositoryPrivilegeDict) GetService() string {
-	if o == nil || isNil(o.Service) {
+	if o == nil || IsNil(o.Service) {
 		var ret string
 		return ret
 	}
@@ -81,7 +84,7 @@ func (o *RepositoryPrivilegeDict) GetService() string {
 // GetServiceOk returns a tuple with the Service field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryPrivilegeDict) GetServiceOk() (*string, bool) {
-	if o == nil || isNil(o.Service) {
+	if o == nil || IsNil(o.Service) {
 		return nil, false
 	}
 	return o.Service, true
@@ -89,7 +92,7 @@ func (o *RepositoryPrivilegeDict) GetServiceOk() (*string, bool) {
 
 // HasService returns a boolean if a field has been set.
 func (o *RepositoryPrivilegeDict) HasService() bool {
-	if o != nil && !isNil(o.Service) {
+	if o != nil && !IsNil(o.Service) {
 		return true
 	}
 
@@ -103,7 +106,7 @@ func (o *RepositoryPrivilegeDict) SetService(v string) {
 
 // GetTeam returns the Team field value if set, zero value otherwise.
 func (o *RepositoryPrivilegeDict) GetTeam() string {
-	if o == nil || isNil(o.Team) {
+	if o == nil || IsNil(o.Team) {
 		var ret string
 		return ret
 	}
@@ -113,7 +116,7 @@ func (o *RepositoryPrivilegeDict) GetTeam() string {
 // GetTeamOk returns a tuple with the Team field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryPrivilegeDict) GetTeamOk() (*string, bool) {
-	if o == nil || isNil(o.Team) {
+	if o == nil || IsNil(o.Team) {
 		return nil, false
 	}
 	return o.Team, true
@@ -121,7 +124,7 @@ func (o *RepositoryPrivilegeDict) GetTeamOk() (*string, bool) {
 
 // HasTeam returns a boolean if a field has been set.
 func (o *RepositoryPrivilegeDict) HasTeam() bool {
-	if o != nil && !isNil(o.Team) {
+	if o != nil && !IsNil(o.Team) {
 		return true
 	}
 
@@ -135,7 +138,7 @@ func (o *RepositoryPrivilegeDict) SetTeam(v string) {
 
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *RepositoryPrivilegeDict) GetUser() string {
-	if o == nil || isNil(o.User) {
+	if o == nil || IsNil(o.User) {
 		var ret string
 		return ret
 	}
@@ -145,7 +148,7 @@ func (o *RepositoryPrivilegeDict) GetUser() string {
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryPrivilegeDict) GetUserOk() (*string, bool) {
-	if o == nil || isNil(o.User) {
+	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
 	return o.User, true
@@ -153,7 +156,7 @@ func (o *RepositoryPrivilegeDict) GetUserOk() (*string, bool) {
 
 // HasUser returns a boolean if a field has been set.
 func (o *RepositoryPrivilegeDict) HasUser() bool {
-	if o != nil && !isNil(o.User) {
+	if o != nil && !IsNil(o.User) {
 		return true
 	}
 
@@ -166,20 +169,26 @@ func (o *RepositoryPrivilegeDict) SetUser(v string) {
 }
 
 func (o RepositoryPrivilegeDict) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["privilege"] = o.Privilege
-	}
-	if !isNil(o.Service) {
-		toSerialize["service"] = o.Service
-	}
-	if !isNil(o.Team) {
-		toSerialize["team"] = o.Team
-	}
-	if !isNil(o.User) {
-		toSerialize["user"] = o.User
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryPrivilegeDict) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["privilege"] = o.Privilege
+	if !IsNil(o.Service) {
+		toSerialize["service"] = o.Service
+	}
+	if !IsNil(o.Team) {
+		toSerialize["team"] = o.Team
+	}
+	if !IsNil(o.User) {
+		toSerialize["user"] = o.User
+	}
+	return toSerialize, nil
 }
 
 type NullableRepositoryPrivilegeDict struct {

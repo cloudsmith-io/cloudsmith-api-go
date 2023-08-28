@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the ConanPackageUploadRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConanPackageUploadRequest{}
 
 // ConanPackageUploadRequest struct for ConanPackageUploadRequest
 type ConanPackageUploadRequest struct {
@@ -62,7 +65,7 @@ func NewConanPackageUploadRequestWithDefaults() *ConanPackageUploadRequest {
 
 // GetConanChannel returns the ConanChannel field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUploadRequest) GetConanChannel() string {
-	if o == nil || isNil(o.ConanChannel.Get()) {
+	if o == nil || IsNil(o.ConanChannel.Get()) {
 		var ret string
 		return ret
 	}
@@ -105,7 +108,7 @@ func (o *ConanPackageUploadRequest) UnsetConanChannel() {
 
 // GetConanPrefix returns the ConanPrefix field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUploadRequest) GetConanPrefix() string {
-	if o == nil || isNil(o.ConanPrefix.Get()) {
+	if o == nil || IsNil(o.ConanPrefix.Get()) {
 		var ret string
 		return ret
 	}
@@ -220,7 +223,7 @@ func (o *ConanPackageUploadRequest) SetMetadataFile(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUploadRequest) GetName() string {
-	if o == nil || isNil(o.Name.Get()) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
@@ -287,7 +290,7 @@ func (o *ConanPackageUploadRequest) SetPackageFile(v string) {
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
 func (o *ConanPackageUploadRequest) GetRepublish() bool {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		var ret bool
 		return ret
 	}
@@ -297,7 +300,7 @@ func (o *ConanPackageUploadRequest) GetRepublish() bool {
 // GetRepublishOk returns a tuple with the Republish field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUploadRequest) GetRepublishOk() (*bool, bool) {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		return nil, false
 	}
 	return o.Republish, true
@@ -305,7 +308,7 @@ func (o *ConanPackageUploadRequest) GetRepublishOk() (*bool, bool) {
 
 // HasRepublish returns a boolean if a field has been set.
 func (o *ConanPackageUploadRequest) HasRepublish() bool {
-	if o != nil && !isNil(o.Republish) {
+	if o != nil && !IsNil(o.Republish) {
 		return true
 	}
 
@@ -319,7 +322,7 @@ func (o *ConanPackageUploadRequest) SetRepublish(v bool) {
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUploadRequest) GetTags() string {
-	if o == nil || isNil(o.Tags.Get()) {
+	if o == nil || IsNil(o.Tags.Get()) {
 		var ret string
 		return ret
 	}
@@ -362,7 +365,7 @@ func (o *ConanPackageUploadRequest) UnsetTags() {
 
 // GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUploadRequest) GetVersion() string {
-	if o == nil || isNil(o.Version.Get()) {
+	if o == nil || IsNil(o.Version.Get()) {
 		var ret string
 		return ret
 	}
@@ -404,6 +407,14 @@ func (o *ConanPackageUploadRequest) UnsetVersion() {
 }
 
 func (o ConanPackageUploadRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConanPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ConanChannel.IsSet() {
 		toSerialize["conan_channel"] = o.ConanChannel.Get()
@@ -411,22 +422,14 @@ func (o ConanPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	if o.ConanPrefix.IsSet() {
 		toSerialize["conan_prefix"] = o.ConanPrefix.Get()
 	}
-	if true {
-		toSerialize["info_file"] = o.InfoFile
-	}
-	if true {
-		toSerialize["manifest_file"] = o.ManifestFile
-	}
-	if true {
-		toSerialize["metadata_file"] = o.MetadataFile
-	}
+	toSerialize["info_file"] = o.InfoFile
+	toSerialize["manifest_file"] = o.ManifestFile
+	toSerialize["metadata_file"] = o.MetadataFile
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
-	if true {
-		toSerialize["package_file"] = o.PackageFile
-	}
-	if !isNil(o.Republish) {
+	toSerialize["package_file"] = o.PackageFile
+	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
 	if o.Tags.IsSet() {
@@ -435,7 +438,7 @@ func (o ConanPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableConanPackageUploadRequest struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the PackageDependencies type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageDependencies{}
 
 // PackageDependencies struct for PackageDependencies
 type PackageDependencies struct {
@@ -39,7 +42,7 @@ func NewPackageDependenciesWithDefaults() *PackageDependencies {
 
 // GetDependencies returns the Dependencies field value if set, zero value otherwise.
 func (o *PackageDependencies) GetDependencies() []PackageDependency {
-	if o == nil || isNil(o.Dependencies) {
+	if o == nil || IsNil(o.Dependencies) {
 		var ret []PackageDependency
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *PackageDependencies) GetDependencies() []PackageDependency {
 // GetDependenciesOk returns a tuple with the Dependencies field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageDependencies) GetDependenciesOk() ([]PackageDependency, bool) {
-	if o == nil || isNil(o.Dependencies) {
+	if o == nil || IsNil(o.Dependencies) {
 		return nil, false
 	}
 	return o.Dependencies, true
@@ -57,7 +60,7 @@ func (o *PackageDependencies) GetDependenciesOk() ([]PackageDependency, bool) {
 
 // HasDependencies returns a boolean if a field has been set.
 func (o *PackageDependencies) HasDependencies() bool {
-	if o != nil && !isNil(o.Dependencies) {
+	if o != nil && !IsNil(o.Dependencies) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *PackageDependencies) SetDependencies(v []PackageDependency) {
 }
 
 func (o PackageDependencies) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Dependencies) {
-		toSerialize["dependencies"] = o.Dependencies
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PackageDependencies) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Dependencies) {
+		toSerialize["dependencies"] = o.Dependencies
+	}
+	return toSerialize, nil
 }
 
 type NullablePackageDependencies struct {

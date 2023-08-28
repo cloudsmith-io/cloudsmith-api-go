@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the StorageRegion type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageRegion{}
 
 // StorageRegion struct for StorageRegion
 type StorageRegion struct {
@@ -91,14 +94,18 @@ func (o *StorageRegion) SetSlug(v string) {
 }
 
 func (o StorageRegion) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["label"] = o.Label
-	}
-	if true {
-		toSerialize["slug"] = o.Slug
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o StorageRegion) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["label"] = o.Label
+	toSerialize["slug"] = o.Slug
+	return toSerialize, nil
 }
 
 type NullableStorageRegion struct {

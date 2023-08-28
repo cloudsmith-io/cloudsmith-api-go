@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the UsageLimits type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UsageLimits{}
 
 // UsageLimits struct for UsageLimits
 type UsageLimits struct {
@@ -89,14 +92,18 @@ func (o *UsageLimits) SetStorage(v StorageAllocatedLimit) {
 }
 
 func (o UsageLimits) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["bandwidth"] = o.Bandwidth
-	}
-	if true {
-		toSerialize["storage"] = o.Storage
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UsageLimits) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["bandwidth"] = o.Bandwidth
+	toSerialize["storage"] = o.Storage
+	return toSerialize, nil
 }
 
 type NullableUsageLimits struct {

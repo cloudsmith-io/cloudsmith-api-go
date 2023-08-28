@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RawPackageUploadRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RawPackageUploadRequest{}
 
 // RawPackageUploadRequest struct for RawPackageUploadRequest
 type RawPackageUploadRequest struct {
@@ -55,7 +58,7 @@ func NewRawPackageUploadRequestWithDefaults() *RawPackageUploadRequest {
 
 // GetContentType returns the ContentType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RawPackageUploadRequest) GetContentType() string {
-	if o == nil || isNil(o.ContentType.Get()) {
+	if o == nil || IsNil(o.ContentType.Get()) {
 		var ret string
 		return ret
 	}
@@ -98,7 +101,7 @@ func (o *RawPackageUploadRequest) UnsetContentType() {
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RawPackageUploadRequest) GetDescription() string {
-	if o == nil || isNil(o.Description.Get()) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
@@ -141,7 +144,7 @@ func (o *RawPackageUploadRequest) UnsetDescription() {
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RawPackageUploadRequest) GetName() string {
-	if o == nil || isNil(o.Name.Get()) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
@@ -208,7 +211,7 @@ func (o *RawPackageUploadRequest) SetPackageFile(v string) {
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
 func (o *RawPackageUploadRequest) GetRepublish() bool {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		var ret bool
 		return ret
 	}
@@ -218,7 +221,7 @@ func (o *RawPackageUploadRequest) GetRepublish() bool {
 // GetRepublishOk returns a tuple with the Republish field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RawPackageUploadRequest) GetRepublishOk() (*bool, bool) {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		return nil, false
 	}
 	return o.Republish, true
@@ -226,7 +229,7 @@ func (o *RawPackageUploadRequest) GetRepublishOk() (*bool, bool) {
 
 // HasRepublish returns a boolean if a field has been set.
 func (o *RawPackageUploadRequest) HasRepublish() bool {
-	if o != nil && !isNil(o.Republish) {
+	if o != nil && !IsNil(o.Republish) {
 		return true
 	}
 
@@ -240,7 +243,7 @@ func (o *RawPackageUploadRequest) SetRepublish(v bool) {
 
 // GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RawPackageUploadRequest) GetSummary() string {
-	if o == nil || isNil(o.Summary.Get()) {
+	if o == nil || IsNil(o.Summary.Get()) {
 		var ret string
 		return ret
 	}
@@ -283,7 +286,7 @@ func (o *RawPackageUploadRequest) UnsetSummary() {
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RawPackageUploadRequest) GetTags() string {
-	if o == nil || isNil(o.Tags.Get()) {
+	if o == nil || IsNil(o.Tags.Get()) {
 		var ret string
 		return ret
 	}
@@ -326,7 +329,7 @@ func (o *RawPackageUploadRequest) UnsetTags() {
 
 // GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RawPackageUploadRequest) GetVersion() string {
-	if o == nil || isNil(o.Version.Get()) {
+	if o == nil || IsNil(o.Version.Get()) {
 		var ret string
 		return ret
 	}
@@ -368,6 +371,14 @@ func (o *RawPackageUploadRequest) UnsetVersion() {
 }
 
 func (o RawPackageUploadRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RawPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ContentType.IsSet() {
 		toSerialize["content_type"] = o.ContentType.Get()
@@ -378,10 +389,8 @@ func (o RawPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
-	if true {
-		toSerialize["package_file"] = o.PackageFile
-	}
-	if !isNil(o.Republish) {
+	toSerialize["package_file"] = o.PackageFile
+	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
 	if o.Summary.IsSet() {
@@ -393,7 +402,7 @@ func (o RawPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableRawPackageUploadRequest struct {

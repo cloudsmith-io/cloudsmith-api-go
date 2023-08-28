@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,7 +14,7 @@ package cloudsmith
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -158,49 +158,49 @@ func (a *BadgesApiService) BadgesVersionListExecute(r ApiBadgesVersionListReques
 	}
 
 	localVarPath := localBasePath + "/badges/version/{owner}/{repo}/{package_format}/{package_name}/{package_version}/{package_identifiers}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"owner"+"}", url.PathEscape(parameterToString(r.owner, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"repo"+"}", url.PathEscape(parameterToString(r.repo, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"package_format"+"}", url.PathEscape(parameterToString(r.packageFormat, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"package_name"+"}", url.PathEscape(parameterToString(r.packageName, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"package_version"+"}", url.PathEscape(parameterToString(r.packageVersion, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"package_identifiers"+"}", url.PathEscape(parameterToString(r.packageIdentifiers, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"owner"+"}", url.PathEscape(parameterValueToString(r.owner, "owner")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo"+"}", url.PathEscape(parameterValueToString(r.repo, "repo")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"package_format"+"}", url.PathEscape(parameterValueToString(r.packageFormat, "packageFormat")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"package_name"+"}", url.PathEscape(parameterValueToString(r.packageName, "packageName")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"package_version"+"}", url.PathEscape(parameterValueToString(r.packageVersion, "packageVersion")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"package_identifiers"+"}", url.PathEscape(parameterValueToString(r.packageIdentifiers, "packageIdentifiers")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
 	if r.badgeToken != nil {
-		localVarQueryParams.Add("badge_token", parameterToString(*r.badgeToken, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "badge_token", r.badgeToken, "")
 	}
 	if r.cacheSeconds != nil {
-		localVarQueryParams.Add("cacheSeconds", parameterToString(*r.cacheSeconds, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cacheSeconds", r.cacheSeconds, "")
 	}
 	if r.color != nil {
-		localVarQueryParams.Add("color", parameterToString(*r.color, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "color", r.color, "")
 	}
 	if r.label != nil {
-		localVarQueryParams.Add("label", parameterToString(*r.label, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "label", r.label, "")
 	}
 	if r.labelColor != nil {
-		localVarQueryParams.Add("labelColor", parameterToString(*r.labelColor, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "labelColor", r.labelColor, "")
 	}
 	if r.logoColor != nil {
-		localVarQueryParams.Add("logoColor", parameterToString(*r.logoColor, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "logoColor", r.logoColor, "")
 	}
 	if r.logoWidth != nil {
-		localVarQueryParams.Add("logoWidth", parameterToString(*r.logoWidth, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "logoWidth", r.logoWidth, "")
 	}
 	if r.render != nil {
-		localVarQueryParams.Add("render", parameterToString(*r.render, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "render", r.render, "")
 	}
 	if r.shields != nil {
-		localVarQueryParams.Add("shields", parameterToString(*r.shields, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "shields", r.shields, "")
 	}
 	if r.showLatest != nil {
-		localVarQueryParams.Add("show_latest", parameterToString(*r.showLatest, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_latest", r.showLatest, "")
 	}
 	if r.style != nil {
-		localVarQueryParams.Add("style", parameterToString(*r.style, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "style", r.style, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -243,9 +243,9 @@ func (a *BadgesApiService) BadgesVersionListExecute(r ApiBadgesVersionListReques
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}

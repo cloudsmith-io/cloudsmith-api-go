@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the OrganizationTeamRequestPatch type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OrganizationTeamRequestPatch{}
 
 // OrganizationTeamRequestPatch struct for OrganizationTeamRequestPatch
 type OrganizationTeamRequestPatch struct {
@@ -46,7 +49,7 @@ func NewOrganizationTeamRequestPatchWithDefaults() *OrganizationTeamRequestPatch
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *OrganizationTeamRequestPatch) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *OrganizationTeamRequestPatch) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationTeamRequestPatch) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -64,7 +67,7 @@ func (o *OrganizationTeamRequestPatch) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *OrganizationTeamRequestPatch) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -78,7 +81,7 @@ func (o *OrganizationTeamRequestPatch) SetDescription(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *OrganizationTeamRequestPatch) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -88,7 +91,7 @@ func (o *OrganizationTeamRequestPatch) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationTeamRequestPatch) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -96,7 +99,7 @@ func (o *OrganizationTeamRequestPatch) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *OrganizationTeamRequestPatch) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -110,7 +113,7 @@ func (o *OrganizationTeamRequestPatch) SetName(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *OrganizationTeamRequestPatch) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -120,7 +123,7 @@ func (o *OrganizationTeamRequestPatch) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationTeamRequestPatch) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -128,7 +131,7 @@ func (o *OrganizationTeamRequestPatch) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *OrganizationTeamRequestPatch) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -142,7 +145,7 @@ func (o *OrganizationTeamRequestPatch) SetSlug(v string) {
 
 // GetVisibility returns the Visibility field value if set, zero value otherwise.
 func (o *OrganizationTeamRequestPatch) GetVisibility() string {
-	if o == nil || isNil(o.Visibility) {
+	if o == nil || IsNil(o.Visibility) {
 		var ret string
 		return ret
 	}
@@ -152,7 +155,7 @@ func (o *OrganizationTeamRequestPatch) GetVisibility() string {
 // GetVisibilityOk returns a tuple with the Visibility field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationTeamRequestPatch) GetVisibilityOk() (*string, bool) {
-	if o == nil || isNil(o.Visibility) {
+	if o == nil || IsNil(o.Visibility) {
 		return nil, false
 	}
 	return o.Visibility, true
@@ -160,7 +163,7 @@ func (o *OrganizationTeamRequestPatch) GetVisibilityOk() (*string, bool) {
 
 // HasVisibility returns a boolean if a field has been set.
 func (o *OrganizationTeamRequestPatch) HasVisibility() bool {
-	if o != nil && !isNil(o.Visibility) {
+	if o != nil && !IsNil(o.Visibility) {
 		return true
 	}
 
@@ -173,20 +176,28 @@ func (o *OrganizationTeamRequestPatch) SetVisibility(v string) {
 }
 
 func (o OrganizationTeamRequestPatch) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Slug) {
-		toSerialize["slug"] = o.Slug
-	}
-	if !isNil(o.Visibility) {
-		toSerialize["visibility"] = o.Visibility
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o OrganizationTeamRequestPatch) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Slug) {
+		toSerialize["slug"] = o.Slug
+	}
+	if !IsNil(o.Visibility) {
+		toSerialize["visibility"] = o.Visibility
+	}
+	return toSerialize, nil
 }
 
 type NullableOrganizationTeamRequestPatch struct {

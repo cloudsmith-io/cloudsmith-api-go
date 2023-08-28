@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the PackageMoveRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageMoveRequest{}
 
 // PackageMoveRequest struct for PackageMoveRequest
 type PackageMoveRequest struct {
@@ -63,11 +66,17 @@ func (o *PackageMoveRequest) SetDestination(v string) {
 }
 
 func (o PackageMoveRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["destination"] = o.Destination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PackageMoveRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["destination"] = o.Destination
+	return toSerialize, nil
 }
 
 type NullablePackageMoveRequest struct {

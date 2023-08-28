@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the DebUpstreamRequestPatch type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DebUpstreamRequestPatch{}
 
 // DebUpstreamRequestPatch struct for DebUpstreamRequestPatch
 type DebUpstreamRequestPatch struct {
@@ -80,7 +83,7 @@ func NewDebUpstreamRequestPatchWithDefaults() *DebUpstreamRequestPatch {
 
 // GetAuthMode returns the AuthMode field value if set, zero value otherwise.
 func (o *DebUpstreamRequestPatch) GetAuthMode() string {
-	if o == nil || isNil(o.AuthMode) {
+	if o == nil || IsNil(o.AuthMode) {
 		var ret string
 		return ret
 	}
@@ -90,7 +93,7 @@ func (o *DebUpstreamRequestPatch) GetAuthMode() string {
 // GetAuthModeOk returns a tuple with the AuthMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstreamRequestPatch) GetAuthModeOk() (*string, bool) {
-	if o == nil || isNil(o.AuthMode) {
+	if o == nil || IsNil(o.AuthMode) {
 		return nil, false
 	}
 	return o.AuthMode, true
@@ -98,7 +101,7 @@ func (o *DebUpstreamRequestPatch) GetAuthModeOk() (*string, bool) {
 
 // HasAuthMode returns a boolean if a field has been set.
 func (o *DebUpstreamRequestPatch) HasAuthMode() bool {
-	if o != nil && !isNil(o.AuthMode) {
+	if o != nil && !IsNil(o.AuthMode) {
 		return true
 	}
 
@@ -112,7 +115,7 @@ func (o *DebUpstreamRequestPatch) SetAuthMode(v string) {
 
 // GetAuthSecret returns the AuthSecret field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstreamRequestPatch) GetAuthSecret() string {
-	if o == nil || isNil(o.AuthSecret.Get()) {
+	if o == nil || IsNil(o.AuthSecret.Get()) {
 		var ret string
 		return ret
 	}
@@ -155,7 +158,7 @@ func (o *DebUpstreamRequestPatch) UnsetAuthSecret() {
 
 // GetAuthUsername returns the AuthUsername field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstreamRequestPatch) GetAuthUsername() string {
-	if o == nil || isNil(o.AuthUsername.Get()) {
+	if o == nil || IsNil(o.AuthUsername.Get()) {
 		var ret string
 		return ret
 	}
@@ -198,7 +201,7 @@ func (o *DebUpstreamRequestPatch) UnsetAuthUsername() {
 
 // GetComponent returns the Component field value if set, zero value otherwise.
 func (o *DebUpstreamRequestPatch) GetComponent() string {
-	if o == nil || isNil(o.Component) {
+	if o == nil || IsNil(o.Component) {
 		var ret string
 		return ret
 	}
@@ -208,7 +211,7 @@ func (o *DebUpstreamRequestPatch) GetComponent() string {
 // GetComponentOk returns a tuple with the Component field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstreamRequestPatch) GetComponentOk() (*string, bool) {
-	if o == nil || isNil(o.Component) {
+	if o == nil || IsNil(o.Component) {
 		return nil, false
 	}
 	return o.Component, true
@@ -216,7 +219,7 @@ func (o *DebUpstreamRequestPatch) GetComponentOk() (*string, bool) {
 
 // HasComponent returns a boolean if a field has been set.
 func (o *DebUpstreamRequestPatch) HasComponent() bool {
-	if o != nil && !isNil(o.Component) {
+	if o != nil && !IsNil(o.Component) {
 		return true
 	}
 
@@ -230,7 +233,7 @@ func (o *DebUpstreamRequestPatch) SetComponent(v string) {
 
 // GetDistroVersions returns the DistroVersions field value if set, zero value otherwise.
 func (o *DebUpstreamRequestPatch) GetDistroVersions() []string {
-	if o == nil || isNil(o.DistroVersions) {
+	if o == nil || IsNil(o.DistroVersions) {
 		var ret []string
 		return ret
 	}
@@ -240,7 +243,7 @@ func (o *DebUpstreamRequestPatch) GetDistroVersions() []string {
 // GetDistroVersionsOk returns a tuple with the DistroVersions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstreamRequestPatch) GetDistroVersionsOk() ([]string, bool) {
-	if o == nil || isNil(o.DistroVersions) {
+	if o == nil || IsNil(o.DistroVersions) {
 		return nil, false
 	}
 	return o.DistroVersions, true
@@ -248,7 +251,7 @@ func (o *DebUpstreamRequestPatch) GetDistroVersionsOk() ([]string, bool) {
 
 // HasDistroVersions returns a boolean if a field has been set.
 func (o *DebUpstreamRequestPatch) HasDistroVersions() bool {
-	if o != nil && !isNil(o.DistroVersions) {
+	if o != nil && !IsNil(o.DistroVersions) {
 		return true
 	}
 
@@ -262,7 +265,7 @@ func (o *DebUpstreamRequestPatch) SetDistroVersions(v []string) {
 
 // GetExtraHeader1 returns the ExtraHeader1 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstreamRequestPatch) GetExtraHeader1() string {
-	if o == nil || isNil(o.ExtraHeader1.Get()) {
+	if o == nil || IsNil(o.ExtraHeader1.Get()) {
 		var ret string
 		return ret
 	}
@@ -305,7 +308,7 @@ func (o *DebUpstreamRequestPatch) UnsetExtraHeader1() {
 
 // GetExtraHeader2 returns the ExtraHeader2 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstreamRequestPatch) GetExtraHeader2() string {
-	if o == nil || isNil(o.ExtraHeader2.Get()) {
+	if o == nil || IsNil(o.ExtraHeader2.Get()) {
 		var ret string
 		return ret
 	}
@@ -348,7 +351,7 @@ func (o *DebUpstreamRequestPatch) UnsetExtraHeader2() {
 
 // GetExtraValue1 returns the ExtraValue1 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstreamRequestPatch) GetExtraValue1() string {
-	if o == nil || isNil(o.ExtraValue1.Get()) {
+	if o == nil || IsNil(o.ExtraValue1.Get()) {
 		var ret string
 		return ret
 	}
@@ -391,7 +394,7 @@ func (o *DebUpstreamRequestPatch) UnsetExtraValue1() {
 
 // GetExtraValue2 returns the ExtraValue2 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstreamRequestPatch) GetExtraValue2() string {
-	if o == nil || isNil(o.ExtraValue2.Get()) {
+	if o == nil || IsNil(o.ExtraValue2.Get()) {
 		var ret string
 		return ret
 	}
@@ -434,7 +437,7 @@ func (o *DebUpstreamRequestPatch) UnsetExtraValue2() {
 
 // GetIncludeSources returns the IncludeSources field value if set, zero value otherwise.
 func (o *DebUpstreamRequestPatch) GetIncludeSources() bool {
-	if o == nil || isNil(o.IncludeSources) {
+	if o == nil || IsNil(o.IncludeSources) {
 		var ret bool
 		return ret
 	}
@@ -444,7 +447,7 @@ func (o *DebUpstreamRequestPatch) GetIncludeSources() bool {
 // GetIncludeSourcesOk returns a tuple with the IncludeSources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstreamRequestPatch) GetIncludeSourcesOk() (*bool, bool) {
-	if o == nil || isNil(o.IncludeSources) {
+	if o == nil || IsNil(o.IncludeSources) {
 		return nil, false
 	}
 	return o.IncludeSources, true
@@ -452,7 +455,7 @@ func (o *DebUpstreamRequestPatch) GetIncludeSourcesOk() (*bool, bool) {
 
 // HasIncludeSources returns a boolean if a field has been set.
 func (o *DebUpstreamRequestPatch) HasIncludeSources() bool {
-	if o != nil && !isNil(o.IncludeSources) {
+	if o != nil && !IsNil(o.IncludeSources) {
 		return true
 	}
 
@@ -466,7 +469,7 @@ func (o *DebUpstreamRequestPatch) SetIncludeSources(v bool) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *DebUpstreamRequestPatch) GetIsActive() bool {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -476,7 +479,7 @@ func (o *DebUpstreamRequestPatch) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstreamRequestPatch) GetIsActiveOk() (*bool, bool) {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		return nil, false
 	}
 	return o.IsActive, true
@@ -484,7 +487,7 @@ func (o *DebUpstreamRequestPatch) GetIsActiveOk() (*bool, bool) {
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *DebUpstreamRequestPatch) HasIsActive() bool {
-	if o != nil && !isNil(o.IsActive) {
+	if o != nil && !IsNil(o.IsActive) {
 		return true
 	}
 
@@ -498,7 +501,7 @@ func (o *DebUpstreamRequestPatch) SetIsActive(v bool) {
 
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *DebUpstreamRequestPatch) GetMode() string {
-	if o == nil || isNil(o.Mode) {
+	if o == nil || IsNil(o.Mode) {
 		var ret string
 		return ret
 	}
@@ -508,7 +511,7 @@ func (o *DebUpstreamRequestPatch) GetMode() string {
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstreamRequestPatch) GetModeOk() (*string, bool) {
-	if o == nil || isNil(o.Mode) {
+	if o == nil || IsNil(o.Mode) {
 		return nil, false
 	}
 	return o.Mode, true
@@ -516,7 +519,7 @@ func (o *DebUpstreamRequestPatch) GetModeOk() (*string, bool) {
 
 // HasMode returns a boolean if a field has been set.
 func (o *DebUpstreamRequestPatch) HasMode() bool {
-	if o != nil && !isNil(o.Mode) {
+	if o != nil && !IsNil(o.Mode) {
 		return true
 	}
 
@@ -530,7 +533,7 @@ func (o *DebUpstreamRequestPatch) SetMode(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *DebUpstreamRequestPatch) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -540,7 +543,7 @@ func (o *DebUpstreamRequestPatch) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstreamRequestPatch) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -548,7 +551,7 @@ func (o *DebUpstreamRequestPatch) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *DebUpstreamRequestPatch) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -562,7 +565,7 @@ func (o *DebUpstreamRequestPatch) SetName(v string) {
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *DebUpstreamRequestPatch) GetPriority() int64 {
-	if o == nil || isNil(o.Priority) {
+	if o == nil || IsNil(o.Priority) {
 		var ret int64
 		return ret
 	}
@@ -572,7 +575,7 @@ func (o *DebUpstreamRequestPatch) GetPriority() int64 {
 // GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstreamRequestPatch) GetPriorityOk() (*int64, bool) {
-	if o == nil || isNil(o.Priority) {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
 	return o.Priority, true
@@ -580,7 +583,7 @@ func (o *DebUpstreamRequestPatch) GetPriorityOk() (*int64, bool) {
 
 // HasPriority returns a boolean if a field has been set.
 func (o *DebUpstreamRequestPatch) HasPriority() bool {
-	if o != nil && !isNil(o.Priority) {
+	if o != nil && !IsNil(o.Priority) {
 		return true
 	}
 
@@ -594,7 +597,7 @@ func (o *DebUpstreamRequestPatch) SetPriority(v int64) {
 
 // GetUpstreamDistribution returns the UpstreamDistribution field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstreamRequestPatch) GetUpstreamDistribution() string {
-	if o == nil || isNil(o.UpstreamDistribution.Get()) {
+	if o == nil || IsNil(o.UpstreamDistribution.Get()) {
 		var ret string
 		return ret
 	}
@@ -637,7 +640,7 @@ func (o *DebUpstreamRequestPatch) UnsetUpstreamDistribution() {
 
 // GetUpstreamUrl returns the UpstreamUrl field value if set, zero value otherwise.
 func (o *DebUpstreamRequestPatch) GetUpstreamUrl() string {
-	if o == nil || isNil(o.UpstreamUrl) {
+	if o == nil || IsNil(o.UpstreamUrl) {
 		var ret string
 		return ret
 	}
@@ -647,7 +650,7 @@ func (o *DebUpstreamRequestPatch) GetUpstreamUrl() string {
 // GetUpstreamUrlOk returns a tuple with the UpstreamUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstreamRequestPatch) GetUpstreamUrlOk() (*string, bool) {
-	if o == nil || isNil(o.UpstreamUrl) {
+	if o == nil || IsNil(o.UpstreamUrl) {
 		return nil, false
 	}
 	return o.UpstreamUrl, true
@@ -655,7 +658,7 @@ func (o *DebUpstreamRequestPatch) GetUpstreamUrlOk() (*string, bool) {
 
 // HasUpstreamUrl returns a boolean if a field has been set.
 func (o *DebUpstreamRequestPatch) HasUpstreamUrl() bool {
-	if o != nil && !isNil(o.UpstreamUrl) {
+	if o != nil && !IsNil(o.UpstreamUrl) {
 		return true
 	}
 
@@ -669,7 +672,7 @@ func (o *DebUpstreamRequestPatch) SetUpstreamUrl(v string) {
 
 // GetVerifySsl returns the VerifySsl field value if set, zero value otherwise.
 func (o *DebUpstreamRequestPatch) GetVerifySsl() bool {
-	if o == nil || isNil(o.VerifySsl) {
+	if o == nil || IsNil(o.VerifySsl) {
 		var ret bool
 		return ret
 	}
@@ -679,7 +682,7 @@ func (o *DebUpstreamRequestPatch) GetVerifySsl() bool {
 // GetVerifySslOk returns a tuple with the VerifySsl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstreamRequestPatch) GetVerifySslOk() (*bool, bool) {
-	if o == nil || isNil(o.VerifySsl) {
+	if o == nil || IsNil(o.VerifySsl) {
 		return nil, false
 	}
 	return o.VerifySsl, true
@@ -687,7 +690,7 @@ func (o *DebUpstreamRequestPatch) GetVerifySslOk() (*bool, bool) {
 
 // HasVerifySsl returns a boolean if a field has been set.
 func (o *DebUpstreamRequestPatch) HasVerifySsl() bool {
-	if o != nil && !isNil(o.VerifySsl) {
+	if o != nil && !IsNil(o.VerifySsl) {
 		return true
 	}
 
@@ -700,8 +703,16 @@ func (o *DebUpstreamRequestPatch) SetVerifySsl(v bool) {
 }
 
 func (o DebUpstreamRequestPatch) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DebUpstreamRequestPatch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.AuthMode) {
+	if !IsNil(o.AuthMode) {
 		toSerialize["auth_mode"] = o.AuthMode
 	}
 	if o.AuthSecret.IsSet() {
@@ -710,10 +721,10 @@ func (o DebUpstreamRequestPatch) MarshalJSON() ([]byte, error) {
 	if o.AuthUsername.IsSet() {
 		toSerialize["auth_username"] = o.AuthUsername.Get()
 	}
-	if !isNil(o.Component) {
+	if !IsNil(o.Component) {
 		toSerialize["component"] = o.Component
 	}
-	if !isNil(o.DistroVersions) {
+	if !IsNil(o.DistroVersions) {
 		toSerialize["distro_versions"] = o.DistroVersions
 	}
 	if o.ExtraHeader1.IsSet() {
@@ -728,31 +739,31 @@ func (o DebUpstreamRequestPatch) MarshalJSON() ([]byte, error) {
 	if o.ExtraValue2.IsSet() {
 		toSerialize["extra_value_2"] = o.ExtraValue2.Get()
 	}
-	if !isNil(o.IncludeSources) {
+	if !IsNil(o.IncludeSources) {
 		toSerialize["include_sources"] = o.IncludeSources
 	}
-	if !isNil(o.IsActive) {
+	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
 	}
-	if !isNil(o.Mode) {
+	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.Priority) {
+	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
 	if o.UpstreamDistribution.IsSet() {
 		toSerialize["upstream_distribution"] = o.UpstreamDistribution.Get()
 	}
-	if !isNil(o.UpstreamUrl) {
+	if !IsNil(o.UpstreamUrl) {
 		toSerialize["upstream_url"] = o.UpstreamUrl
 	}
-	if !isNil(o.VerifySsl) {
+	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableDebUpstreamRequestPatch struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RepositoryGpgKeyCreate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryGpgKeyCreate{}
 
 // RepositoryGpgKeyCreate struct for RepositoryGpgKeyCreate
 type RepositoryGpgKeyCreate struct {
@@ -43,7 +46,7 @@ func NewRepositoryGpgKeyCreateWithDefaults() *RepositoryGpgKeyCreate {
 
 // GetGpgPassphrase returns the GpgPassphrase field value if set, zero value otherwise.
 func (o *RepositoryGpgKeyCreate) GetGpgPassphrase() string {
-	if o == nil || isNil(o.GpgPassphrase) {
+	if o == nil || IsNil(o.GpgPassphrase) {
 		var ret string
 		return ret
 	}
@@ -53,7 +56,7 @@ func (o *RepositoryGpgKeyCreate) GetGpgPassphrase() string {
 // GetGpgPassphraseOk returns a tuple with the GpgPassphrase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryGpgKeyCreate) GetGpgPassphraseOk() (*string, bool) {
-	if o == nil || isNil(o.GpgPassphrase) {
+	if o == nil || IsNil(o.GpgPassphrase) {
 		return nil, false
 	}
 	return o.GpgPassphrase, true
@@ -61,7 +64,7 @@ func (o *RepositoryGpgKeyCreate) GetGpgPassphraseOk() (*string, bool) {
 
 // HasGpgPassphrase returns a boolean if a field has been set.
 func (o *RepositoryGpgKeyCreate) HasGpgPassphrase() bool {
-	if o != nil && !isNil(o.GpgPassphrase) {
+	if o != nil && !IsNil(o.GpgPassphrase) {
 		return true
 	}
 
@@ -98,14 +101,20 @@ func (o *RepositoryGpgKeyCreate) SetGpgPrivateKey(v string) {
 }
 
 func (o RepositoryGpgKeyCreate) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.GpgPassphrase) {
-		toSerialize["gpg_passphrase"] = o.GpgPassphrase
-	}
-	if true {
-		toSerialize["gpg_private_key"] = o.GpgPrivateKey
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryGpgKeyCreate) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.GpgPassphrase) {
+		toSerialize["gpg_passphrase"] = o.GpgPassphrase
+	}
+	toSerialize["gpg_private_key"] = o.GpgPrivateKey
+	return toSerialize, nil
 }
 
 type NullableRepositoryGpgKeyCreate struct {

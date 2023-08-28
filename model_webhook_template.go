@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the WebhookTemplate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WebhookTemplate{}
 
 // WebhookTemplate struct for WebhookTemplate
 type WebhookTemplate struct {
@@ -65,7 +68,7 @@ func (o *WebhookTemplate) SetEvent(v string) {
 
 // GetTemplate returns the Template field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WebhookTemplate) GetTemplate() string {
-	if o == nil || isNil(o.Template.Get()) {
+	if o == nil || IsNil(o.Template.Get()) {
 		var ret string
 		return ret
 	}
@@ -107,14 +110,20 @@ func (o *WebhookTemplate) UnsetTemplate() {
 }
 
 func (o WebhookTemplate) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["event"] = o.Event
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o WebhookTemplate) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["event"] = o.Event
 	if o.Template.IsSet() {
 		toSerialize["template"] = o.Template.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableWebhookTemplate struct {

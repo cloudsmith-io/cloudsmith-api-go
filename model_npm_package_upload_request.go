@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the NpmPackageUploadRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NpmPackageUploadRequest{}
 
 // NpmPackageUploadRequest struct for NpmPackageUploadRequest
 type NpmPackageUploadRequest struct {
@@ -51,7 +54,7 @@ func NewNpmPackageUploadRequestWithDefaults() *NpmPackageUploadRequest {
 
 // GetNpmDistTag returns the NpmDistTag field value if set, zero value otherwise.
 func (o *NpmPackageUploadRequest) GetNpmDistTag() string {
-	if o == nil || isNil(o.NpmDistTag) {
+	if o == nil || IsNil(o.NpmDistTag) {
 		var ret string
 		return ret
 	}
@@ -61,7 +64,7 @@ func (o *NpmPackageUploadRequest) GetNpmDistTag() string {
 // GetNpmDistTagOk returns a tuple with the NpmDistTag field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NpmPackageUploadRequest) GetNpmDistTagOk() (*string, bool) {
-	if o == nil || isNil(o.NpmDistTag) {
+	if o == nil || IsNil(o.NpmDistTag) {
 		return nil, false
 	}
 	return o.NpmDistTag, true
@@ -69,7 +72,7 @@ func (o *NpmPackageUploadRequest) GetNpmDistTagOk() (*string, bool) {
 
 // HasNpmDistTag returns a boolean if a field has been set.
 func (o *NpmPackageUploadRequest) HasNpmDistTag() bool {
-	if o != nil && !isNil(o.NpmDistTag) {
+	if o != nil && !IsNil(o.NpmDistTag) {
 		return true
 	}
 
@@ -107,7 +110,7 @@ func (o *NpmPackageUploadRequest) SetPackageFile(v string) {
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
 func (o *NpmPackageUploadRequest) GetRepublish() bool {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		var ret bool
 		return ret
 	}
@@ -117,7 +120,7 @@ func (o *NpmPackageUploadRequest) GetRepublish() bool {
 // GetRepublishOk returns a tuple with the Republish field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NpmPackageUploadRequest) GetRepublishOk() (*bool, bool) {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		return nil, false
 	}
 	return o.Republish, true
@@ -125,7 +128,7 @@ func (o *NpmPackageUploadRequest) GetRepublishOk() (*bool, bool) {
 
 // HasRepublish returns a boolean if a field has been set.
 func (o *NpmPackageUploadRequest) HasRepublish() bool {
-	if o != nil && !isNil(o.Republish) {
+	if o != nil && !IsNil(o.Republish) {
 		return true
 	}
 
@@ -139,7 +142,7 @@ func (o *NpmPackageUploadRequest) SetRepublish(v bool) {
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NpmPackageUploadRequest) GetTags() string {
-	if o == nil || isNil(o.Tags.Get()) {
+	if o == nil || IsNil(o.Tags.Get()) {
 		var ret string
 		return ret
 	}
@@ -181,20 +184,26 @@ func (o *NpmPackageUploadRequest) UnsetTags() {
 }
 
 func (o NpmPackageUploadRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NpmPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.NpmDistTag) {
+	if !IsNil(o.NpmDistTag) {
 		toSerialize["npm_dist_tag"] = o.NpmDistTag
 	}
-	if true {
-		toSerialize["package_file"] = o.PackageFile
-	}
-	if !isNil(o.Republish) {
+	toSerialize["package_file"] = o.PackageFile
+	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
 	if o.Tags.IsSet() {
 		toSerialize["tags"] = o.Tags.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableNpmPackageUploadRequest struct {

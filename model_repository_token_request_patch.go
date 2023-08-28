@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the RepositoryTokenRequestPatch type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryTokenRequestPatch{}
 
 // RepositoryTokenRequestPatch struct for RepositoryTokenRequestPatch
 type RepositoryTokenRequestPatch struct {
@@ -72,7 +75,7 @@ func NewRepositoryTokenRequestPatchWithDefaults() *RepositoryTokenRequestPatch {
 
 // GetEulaRequired returns the EulaRequired field value if set, zero value otherwise.
 func (o *RepositoryTokenRequestPatch) GetEulaRequired() bool {
-	if o == nil || isNil(o.EulaRequired) {
+	if o == nil || IsNil(o.EulaRequired) {
 		var ret bool
 		return ret
 	}
@@ -82,7 +85,7 @@ func (o *RepositoryTokenRequestPatch) GetEulaRequired() bool {
 // GetEulaRequiredOk returns a tuple with the EulaRequired field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryTokenRequestPatch) GetEulaRequiredOk() (*bool, bool) {
-	if o == nil || isNil(o.EulaRequired) {
+	if o == nil || IsNil(o.EulaRequired) {
 		return nil, false
 	}
 	return o.EulaRequired, true
@@ -90,7 +93,7 @@ func (o *RepositoryTokenRequestPatch) GetEulaRequiredOk() (*bool, bool) {
 
 // HasEulaRequired returns a boolean if a field has been set.
 func (o *RepositoryTokenRequestPatch) HasEulaRequired() bool {
-	if o != nil && !isNil(o.EulaRequired) {
+	if o != nil && !IsNil(o.EulaRequired) {
 		return true
 	}
 
@@ -104,7 +107,7 @@ func (o *RepositoryTokenRequestPatch) SetEulaRequired(v bool) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *RepositoryTokenRequestPatch) GetIsActive() bool {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -114,7 +117,7 @@ func (o *RepositoryTokenRequestPatch) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryTokenRequestPatch) GetIsActiveOk() (*bool, bool) {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		return nil, false
 	}
 	return o.IsActive, true
@@ -122,7 +125,7 @@ func (o *RepositoryTokenRequestPatch) GetIsActiveOk() (*bool, bool) {
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *RepositoryTokenRequestPatch) HasIsActive() bool {
-	if o != nil && !isNil(o.IsActive) {
+	if o != nil && !IsNil(o.IsActive) {
 		return true
 	}
 
@@ -136,7 +139,7 @@ func (o *RepositoryTokenRequestPatch) SetIsActive(v bool) {
 
 // GetLimitBandwidth returns the LimitBandwidth field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRequestPatch) GetLimitBandwidth() int64 {
-	if o == nil || isNil(o.LimitBandwidth.Get()) {
+	if o == nil || IsNil(o.LimitBandwidth.Get()) {
 		var ret int64
 		return ret
 	}
@@ -179,7 +182,7 @@ func (o *RepositoryTokenRequestPatch) UnsetLimitBandwidth() {
 
 // GetLimitBandwidthUnit returns the LimitBandwidthUnit field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRequestPatch) GetLimitBandwidthUnit() string {
-	if o == nil || isNil(o.LimitBandwidthUnit.Get()) {
+	if o == nil || IsNil(o.LimitBandwidthUnit.Get()) {
 		var ret string
 		return ret
 	}
@@ -222,7 +225,7 @@ func (o *RepositoryTokenRequestPatch) UnsetLimitBandwidthUnit() {
 
 // GetLimitDateRangeFrom returns the LimitDateRangeFrom field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRequestPatch) GetLimitDateRangeFrom() time.Time {
-	if o == nil || isNil(o.LimitDateRangeFrom.Get()) {
+	if o == nil || IsNil(o.LimitDateRangeFrom.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -265,7 +268,7 @@ func (o *RepositoryTokenRequestPatch) UnsetLimitDateRangeFrom() {
 
 // GetLimitDateRangeTo returns the LimitDateRangeTo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRequestPatch) GetLimitDateRangeTo() time.Time {
-	if o == nil || isNil(o.LimitDateRangeTo.Get()) {
+	if o == nil || IsNil(o.LimitDateRangeTo.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -308,7 +311,7 @@ func (o *RepositoryTokenRequestPatch) UnsetLimitDateRangeTo() {
 
 // GetLimitNumClients returns the LimitNumClients field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRequestPatch) GetLimitNumClients() int64 {
-	if o == nil || isNil(o.LimitNumClients.Get()) {
+	if o == nil || IsNil(o.LimitNumClients.Get()) {
 		var ret int64
 		return ret
 	}
@@ -351,7 +354,7 @@ func (o *RepositoryTokenRequestPatch) UnsetLimitNumClients() {
 
 // GetLimitNumDownloads returns the LimitNumDownloads field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRequestPatch) GetLimitNumDownloads() int64 {
-	if o == nil || isNil(o.LimitNumDownloads.Get()) {
+	if o == nil || IsNil(o.LimitNumDownloads.Get()) {
 		var ret int64
 		return ret
 	}
@@ -394,7 +397,7 @@ func (o *RepositoryTokenRequestPatch) UnsetLimitNumDownloads() {
 
 // GetLimitPackageQuery returns the LimitPackageQuery field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRequestPatch) GetLimitPackageQuery() string {
-	if o == nil || isNil(o.LimitPackageQuery.Get()) {
+	if o == nil || IsNil(o.LimitPackageQuery.Get()) {
 		var ret string
 		return ret
 	}
@@ -437,7 +440,7 @@ func (o *RepositoryTokenRequestPatch) UnsetLimitPackageQuery() {
 
 // GetLimitPathQuery returns the LimitPathQuery field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRequestPatch) GetLimitPathQuery() string {
-	if o == nil || isNil(o.LimitPathQuery.Get()) {
+	if o == nil || IsNil(o.LimitPathQuery.Get()) {
 		var ret string
 		return ret
 	}
@@ -491,7 +494,7 @@ func (o *RepositoryTokenRequestPatch) GetMetadata() map[string]interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RepositoryTokenRequestPatch) GetMetadataOk() (map[string]interface{}, bool) {
-	if o == nil || isNil(o.Metadata) {
+	if o == nil || IsNil(o.Metadata) {
 		return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
@@ -499,7 +502,7 @@ func (o *RepositoryTokenRequestPatch) GetMetadataOk() (map[string]interface{}, b
 
 // HasMetadata returns a boolean if a field has been set.
 func (o *RepositoryTokenRequestPatch) HasMetadata() bool {
-	if o != nil && isNil(o.Metadata) {
+	if o != nil && IsNil(o.Metadata) {
 		return true
 	}
 
@@ -513,7 +516,7 @@ func (o *RepositoryTokenRequestPatch) SetMetadata(v map[string]interface{}) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *RepositoryTokenRequestPatch) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -523,7 +526,7 @@ func (o *RepositoryTokenRequestPatch) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryTokenRequestPatch) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -531,7 +534,7 @@ func (o *RepositoryTokenRequestPatch) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *RepositoryTokenRequestPatch) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -545,7 +548,7 @@ func (o *RepositoryTokenRequestPatch) SetName(v string) {
 
 // GetScheduledResetAt returns the ScheduledResetAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRequestPatch) GetScheduledResetAt() time.Time {
-	if o == nil || isNil(o.ScheduledResetAt.Get()) {
+	if o == nil || IsNil(o.ScheduledResetAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -588,7 +591,7 @@ func (o *RepositoryTokenRequestPatch) UnsetScheduledResetAt() {
 
 // GetScheduledResetPeriod returns the ScheduledResetPeriod field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryTokenRequestPatch) GetScheduledResetPeriod() string {
-	if o == nil || isNil(o.ScheduledResetPeriod.Get()) {
+	if o == nil || IsNil(o.ScheduledResetPeriod.Get()) {
 		var ret string
 		return ret
 	}
@@ -631,7 +634,7 @@ func (o *RepositoryTokenRequestPatch) UnsetScheduledResetPeriod() {
 
 // GetToken returns the Token field value if set, zero value otherwise.
 func (o *RepositoryTokenRequestPatch) GetToken() string {
-	if o == nil || isNil(o.Token) {
+	if o == nil || IsNil(o.Token) {
 		var ret string
 		return ret
 	}
@@ -641,7 +644,7 @@ func (o *RepositoryTokenRequestPatch) GetToken() string {
 // GetTokenOk returns a tuple with the Token field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryTokenRequestPatch) GetTokenOk() (*string, bool) {
-	if o == nil || isNil(o.Token) {
+	if o == nil || IsNil(o.Token) {
 		return nil, false
 	}
 	return o.Token, true
@@ -649,7 +652,7 @@ func (o *RepositoryTokenRequestPatch) GetTokenOk() (*string, bool) {
 
 // HasToken returns a boolean if a field has been set.
 func (o *RepositoryTokenRequestPatch) HasToken() bool {
-	if o != nil && !isNil(o.Token) {
+	if o != nil && !IsNil(o.Token) {
 		return true
 	}
 
@@ -662,11 +665,19 @@ func (o *RepositoryTokenRequestPatch) SetToken(v string) {
 }
 
 func (o RepositoryTokenRequestPatch) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryTokenRequestPatch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.EulaRequired) {
+	if !IsNil(o.EulaRequired) {
 		toSerialize["eula_required"] = o.EulaRequired
 	}
-	if !isNil(o.IsActive) {
+	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
 	}
 	if o.LimitBandwidth.IsSet() {
@@ -696,7 +707,7 @@ func (o RepositoryTokenRequestPatch) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	if o.ScheduledResetAt.IsSet() {
@@ -705,10 +716,10 @@ func (o RepositoryTokenRequestPatch) MarshalJSON() ([]byte, error) {
 	if o.ScheduledResetPeriod.IsSet() {
 		toSerialize["scheduled_reset_period"] = o.ScheduledResetPeriod.Get()
 	}
-	if !isNil(o.Token) {
+	if !IsNil(o.Token) {
 		toSerialize["token"] = o.Token
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableRepositoryTokenRequestPatch struct {

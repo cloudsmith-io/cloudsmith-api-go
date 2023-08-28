@@ -29,7 +29,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -40,7 +40,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FilesApi.FilesAbort(context.Background(), owner, repo, identifier).Data(data).Execute()
+    r, err := apiClient.FilesApi.FilesAbort(context.Background(), owner, repo, identifier).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesAbort``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -105,7 +105,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -183,7 +183,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -258,7 +258,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -338,7 +338,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -348,7 +348,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FilesApi.FilesValidate(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.FilesApi.FilesValidate(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesValidate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

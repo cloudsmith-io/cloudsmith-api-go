@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the UserBrief type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserBrief{}
 
 // UserBrief struct for UserBrief
 type UserBrief struct {
@@ -49,7 +52,7 @@ func NewUserBriefWithDefaults() *UserBrief {
 
 // GetAuthenticated returns the Authenticated field value if set, zero value otherwise.
 func (o *UserBrief) GetAuthenticated() bool {
-	if o == nil || isNil(o.Authenticated) {
+	if o == nil || IsNil(o.Authenticated) {
 		var ret bool
 		return ret
 	}
@@ -59,7 +62,7 @@ func (o *UserBrief) GetAuthenticated() bool {
 // GetAuthenticatedOk returns a tuple with the Authenticated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserBrief) GetAuthenticatedOk() (*bool, bool) {
-	if o == nil || isNil(o.Authenticated) {
+	if o == nil || IsNil(o.Authenticated) {
 		return nil, false
 	}
 	return o.Authenticated, true
@@ -67,7 +70,7 @@ func (o *UserBrief) GetAuthenticatedOk() (*bool, bool) {
 
 // HasAuthenticated returns a boolean if a field has been set.
 func (o *UserBrief) HasAuthenticated() bool {
-	if o != nil && !isNil(o.Authenticated) {
+	if o != nil && !IsNil(o.Authenticated) {
 		return true
 	}
 
@@ -81,7 +84,7 @@ func (o *UserBrief) SetAuthenticated(v bool) {
 
 // GetEmail returns the Email field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserBrief) GetEmail() string {
-	if o == nil || isNil(o.Email.Get()) {
+	if o == nil || IsNil(o.Email.Get()) {
 		var ret string
 		return ret
 	}
@@ -124,7 +127,7 @@ func (o *UserBrief) UnsetEmail() {
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserBrief) GetName() string {
-	if o == nil || isNil(o.Name.Get()) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
@@ -167,7 +170,7 @@ func (o *UserBrief) UnsetName() {
 
 // GetProfileUrl returns the ProfileUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserBrief) GetProfileUrl() string {
-	if o == nil || isNil(o.ProfileUrl.Get()) {
+	if o == nil || IsNil(o.ProfileUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -210,7 +213,7 @@ func (o *UserBrief) UnsetProfileUrl() {
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
 func (o *UserBrief) GetSelfUrl() string {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		var ret string
 		return ret
 	}
@@ -220,7 +223,7 @@ func (o *UserBrief) GetSelfUrl() string {
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserBrief) GetSelfUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		return nil, false
 	}
 	return o.SelfUrl, true
@@ -228,7 +231,7 @@ func (o *UserBrief) GetSelfUrlOk() (*string, bool) {
 
 // HasSelfUrl returns a boolean if a field has been set.
 func (o *UserBrief) HasSelfUrl() bool {
-	if o != nil && !isNil(o.SelfUrl) {
+	if o != nil && !IsNil(o.SelfUrl) {
 		return true
 	}
 
@@ -242,7 +245,7 @@ func (o *UserBrief) SetSelfUrl(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserBrief) GetSlug() string {
-	if o == nil || isNil(o.Slug.Get()) {
+	if o == nil || IsNil(o.Slug.Get()) {
 		var ret string
 		return ret
 	}
@@ -285,7 +288,7 @@ func (o *UserBrief) UnsetSlug() {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserBrief) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm.Get()) {
+	if o == nil || IsNil(o.SlugPerm.Get()) {
 		var ret string
 		return ret
 	}
@@ -327,8 +330,16 @@ func (o *UserBrief) UnsetSlugPerm() {
 }
 
 func (o UserBrief) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UserBrief) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Authenticated) {
+	if !IsNil(o.Authenticated) {
 		toSerialize["authenticated"] = o.Authenticated
 	}
 	if o.Email.IsSet() {
@@ -340,7 +351,7 @@ func (o UserBrief) MarshalJSON() ([]byte, error) {
 	if o.ProfileUrl.IsSet() {
 		toSerialize["profile_url"] = o.ProfileUrl.Get()
 	}
-	if !isNil(o.SelfUrl) {
+	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
 	if o.Slug.IsSet() {
@@ -349,7 +360,7 @@ func (o UserBrief) MarshalJSON() ([]byte, error) {
 	if o.SlugPerm.IsSet() {
 		toSerialize["slug_perm"] = o.SlugPerm.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableUserBrief struct {

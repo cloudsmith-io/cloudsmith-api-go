@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the EntitlementUsageMetrics type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EntitlementUsageMetrics{}
 
 // EntitlementUsageMetrics struct for EntitlementUsageMetrics
 type EntitlementUsageMetrics struct {
@@ -63,11 +66,17 @@ func (o *EntitlementUsageMetrics) SetTokens(v CommonMetrics) {
 }
 
 func (o EntitlementUsageMetrics) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["tokens"] = o.Tokens
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EntitlementUsageMetrics) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["tokens"] = o.Tokens
+	return toSerialize, nil
 }
 
 type NullableEntitlementUsageMetrics struct {

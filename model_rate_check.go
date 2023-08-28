@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RateCheck type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RateCheck{}
 
 // RateCheck struct for RateCheck
 type RateCheck struct {
@@ -50,7 +53,7 @@ func NewRateCheckWithDefaults() *RateCheck {
 
 // GetInterval returns the Interval field value if set, zero value otherwise.
 func (o *RateCheck) GetInterval() float64 {
-	if o == nil || isNil(o.Interval) {
+	if o == nil || IsNil(o.Interval) {
 		var ret float64
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *RateCheck) GetInterval() float64 {
 // GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RateCheck) GetIntervalOk() (*float64, bool) {
-	if o == nil || isNil(o.Interval) {
+	if o == nil || IsNil(o.Interval) {
 		return nil, false
 	}
 	return o.Interval, true
@@ -68,7 +71,7 @@ func (o *RateCheck) GetIntervalOk() (*float64, bool) {
 
 // HasInterval returns a boolean if a field has been set.
 func (o *RateCheck) HasInterval() bool {
-	if o != nil && !isNil(o.Interval) {
+	if o != nil && !IsNil(o.Interval) {
 		return true
 	}
 
@@ -82,7 +85,7 @@ func (o *RateCheck) SetInterval(v float64) {
 
 // GetLimit returns the Limit field value if set, zero value otherwise.
 func (o *RateCheck) GetLimit() int64 {
-	if o == nil || isNil(o.Limit) {
+	if o == nil || IsNil(o.Limit) {
 		var ret int64
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *RateCheck) GetLimit() int64 {
 // GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RateCheck) GetLimitOk() (*int64, bool) {
-	if o == nil || isNil(o.Limit) {
+	if o == nil || IsNil(o.Limit) {
 		return nil, false
 	}
 	return o.Limit, true
@@ -100,7 +103,7 @@ func (o *RateCheck) GetLimitOk() (*int64, bool) {
 
 // HasLimit returns a boolean if a field has been set.
 func (o *RateCheck) HasLimit() bool {
-	if o != nil && !isNil(o.Limit) {
+	if o != nil && !IsNil(o.Limit) {
 		return true
 	}
 
@@ -114,7 +117,7 @@ func (o *RateCheck) SetLimit(v int64) {
 
 // GetRemaining returns the Remaining field value if set, zero value otherwise.
 func (o *RateCheck) GetRemaining() int64 {
-	if o == nil || isNil(o.Remaining) {
+	if o == nil || IsNil(o.Remaining) {
 		var ret int64
 		return ret
 	}
@@ -124,7 +127,7 @@ func (o *RateCheck) GetRemaining() int64 {
 // GetRemainingOk returns a tuple with the Remaining field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RateCheck) GetRemainingOk() (*int64, bool) {
-	if o == nil || isNil(o.Remaining) {
+	if o == nil || IsNil(o.Remaining) {
 		return nil, false
 	}
 	return o.Remaining, true
@@ -132,7 +135,7 @@ func (o *RateCheck) GetRemainingOk() (*int64, bool) {
 
 // HasRemaining returns a boolean if a field has been set.
 func (o *RateCheck) HasRemaining() bool {
-	if o != nil && !isNil(o.Remaining) {
+	if o != nil && !IsNil(o.Remaining) {
 		return true
 	}
 
@@ -146,7 +149,7 @@ func (o *RateCheck) SetRemaining(v int64) {
 
 // GetReset returns the Reset field value if set, zero value otherwise.
 func (o *RateCheck) GetReset() int64 {
-	if o == nil || isNil(o.Reset) {
+	if o == nil || IsNil(o.Reset) {
 		var ret int64
 		return ret
 	}
@@ -156,7 +159,7 @@ func (o *RateCheck) GetReset() int64 {
 // GetResetOk returns a tuple with the Reset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RateCheck) GetResetOk() (*int64, bool) {
-	if o == nil || isNil(o.Reset) {
+	if o == nil || IsNil(o.Reset) {
 		return nil, false
 	}
 	return o.Reset, true
@@ -164,7 +167,7 @@ func (o *RateCheck) GetResetOk() (*int64, bool) {
 
 // HasReset returns a boolean if a field has been set.
 func (o *RateCheck) HasReset() bool {
-	if o != nil && !isNil(o.Reset) {
+	if o != nil && !IsNil(o.Reset) {
 		return true
 	}
 
@@ -178,7 +181,7 @@ func (o *RateCheck) SetReset(v int64) {
 
 // GetResetIso8601 returns the ResetIso8601 field value if set, zero value otherwise.
 func (o *RateCheck) GetResetIso8601() string {
-	if o == nil || isNil(o.ResetIso8601) {
+	if o == nil || IsNil(o.ResetIso8601) {
 		var ret string
 		return ret
 	}
@@ -188,7 +191,7 @@ func (o *RateCheck) GetResetIso8601() string {
 // GetResetIso8601Ok returns a tuple with the ResetIso8601 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RateCheck) GetResetIso8601Ok() (*string, bool) {
-	if o == nil || isNil(o.ResetIso8601) {
+	if o == nil || IsNil(o.ResetIso8601) {
 		return nil, false
 	}
 	return o.ResetIso8601, true
@@ -196,7 +199,7 @@ func (o *RateCheck) GetResetIso8601Ok() (*string, bool) {
 
 // HasResetIso8601 returns a boolean if a field has been set.
 func (o *RateCheck) HasResetIso8601() bool {
-	if o != nil && !isNil(o.ResetIso8601) {
+	if o != nil && !IsNil(o.ResetIso8601) {
 		return true
 	}
 
@@ -210,7 +213,7 @@ func (o *RateCheck) SetResetIso8601(v string) {
 
 // GetThrottled returns the Throttled field value if set, zero value otherwise.
 func (o *RateCheck) GetThrottled() bool {
-	if o == nil || isNil(o.Throttled) {
+	if o == nil || IsNil(o.Throttled) {
 		var ret bool
 		return ret
 	}
@@ -220,7 +223,7 @@ func (o *RateCheck) GetThrottled() bool {
 // GetThrottledOk returns a tuple with the Throttled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RateCheck) GetThrottledOk() (*bool, bool) {
-	if o == nil || isNil(o.Throttled) {
+	if o == nil || IsNil(o.Throttled) {
 		return nil, false
 	}
 	return o.Throttled, true
@@ -228,7 +231,7 @@ func (o *RateCheck) GetThrottledOk() (*bool, bool) {
 
 // HasThrottled returns a boolean if a field has been set.
 func (o *RateCheck) HasThrottled() bool {
-	if o != nil && !isNil(o.Throttled) {
+	if o != nil && !IsNil(o.Throttled) {
 		return true
 	}
 
@@ -241,26 +244,34 @@ func (o *RateCheck) SetThrottled(v bool) {
 }
 
 func (o RateCheck) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Interval) {
-		toSerialize["interval"] = o.Interval
-	}
-	if !isNil(o.Limit) {
-		toSerialize["limit"] = o.Limit
-	}
-	if !isNil(o.Remaining) {
-		toSerialize["remaining"] = o.Remaining
-	}
-	if !isNil(o.Reset) {
-		toSerialize["reset"] = o.Reset
-	}
-	if !isNil(o.ResetIso8601) {
-		toSerialize["reset_iso_8601"] = o.ResetIso8601
-	}
-	if !isNil(o.Throttled) {
-		toSerialize["throttled"] = o.Throttled
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o RateCheck) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Interval) {
+		toSerialize["interval"] = o.Interval
+	}
+	if !IsNil(o.Limit) {
+		toSerialize["limit"] = o.Limit
+	}
+	if !IsNil(o.Remaining) {
+		toSerialize["remaining"] = o.Remaining
+	}
+	if !IsNil(o.Reset) {
+		toSerialize["reset"] = o.Reset
+	}
+	if !IsNil(o.ResetIso8601) {
+		toSerialize["reset_iso_8601"] = o.ResetIso8601
+	}
+	if !IsNil(o.Throttled) {
+		toSerialize["throttled"] = o.Throttled
+	}
+	return toSerialize, nil
 }
 
 type NullableRateCheck struct {

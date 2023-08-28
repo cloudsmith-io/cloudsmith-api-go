@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the Usage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Usage{}
 
 // Usage struct for Usage
 type Usage struct {
@@ -41,7 +44,7 @@ func NewUsageWithDefaults() *Usage {
 
 // GetLimit returns the Limit field value if set, zero value otherwise.
 func (o *Usage) GetLimit() string {
-	if o == nil || isNil(o.Limit) {
+	if o == nil || IsNil(o.Limit) {
 		var ret string
 		return ret
 	}
@@ -51,7 +54,7 @@ func (o *Usage) GetLimit() string {
 // GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Usage) GetLimitOk() (*string, bool) {
-	if o == nil || isNil(o.Limit) {
+	if o == nil || IsNil(o.Limit) {
 		return nil, false
 	}
 	return o.Limit, true
@@ -59,7 +62,7 @@ func (o *Usage) GetLimitOk() (*string, bool) {
 
 // HasLimit returns a boolean if a field has been set.
 func (o *Usage) HasLimit() bool {
-	if o != nil && !isNil(o.Limit) {
+	if o != nil && !IsNil(o.Limit) {
 		return true
 	}
 
@@ -73,7 +76,7 @@ func (o *Usage) SetLimit(v string) {
 
 // GetPercentage returns the Percentage field value if set, zero value otherwise.
 func (o *Usage) GetPercentage() string {
-	if o == nil || isNil(o.Percentage) {
+	if o == nil || IsNil(o.Percentage) {
 		var ret string
 		return ret
 	}
@@ -83,7 +86,7 @@ func (o *Usage) GetPercentage() string {
 // GetPercentageOk returns a tuple with the Percentage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Usage) GetPercentageOk() (*string, bool) {
-	if o == nil || isNil(o.Percentage) {
+	if o == nil || IsNil(o.Percentage) {
 		return nil, false
 	}
 	return o.Percentage, true
@@ -91,7 +94,7 @@ func (o *Usage) GetPercentageOk() (*string, bool) {
 
 // HasPercentage returns a boolean if a field has been set.
 func (o *Usage) HasPercentage() bool {
-	if o != nil && !isNil(o.Percentage) {
+	if o != nil && !IsNil(o.Percentage) {
 		return true
 	}
 
@@ -105,7 +108,7 @@ func (o *Usage) SetPercentage(v string) {
 
 // GetUsed returns the Used field value if set, zero value otherwise.
 func (o *Usage) GetUsed() string {
-	if o == nil || isNil(o.Used) {
+	if o == nil || IsNil(o.Used) {
 		var ret string
 		return ret
 	}
@@ -115,7 +118,7 @@ func (o *Usage) GetUsed() string {
 // GetUsedOk returns a tuple with the Used field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Usage) GetUsedOk() (*string, bool) {
-	if o == nil || isNil(o.Used) {
+	if o == nil || IsNil(o.Used) {
 		return nil, false
 	}
 	return o.Used, true
@@ -123,7 +126,7 @@ func (o *Usage) GetUsedOk() (*string, bool) {
 
 // HasUsed returns a boolean if a field has been set.
 func (o *Usage) HasUsed() bool {
-	if o != nil && !isNil(o.Used) {
+	if o != nil && !IsNil(o.Used) {
 		return true
 	}
 
@@ -136,17 +139,25 @@ func (o *Usage) SetUsed(v string) {
 }
 
 func (o Usage) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Limit) {
-		toSerialize["limit"] = o.Limit
-	}
-	if !isNil(o.Percentage) {
-		toSerialize["percentage"] = o.Percentage
-	}
-	if !isNil(o.Used) {
-		toSerialize["used"] = o.Used
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o Usage) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Limit) {
+		toSerialize["limit"] = o.Limit
+	}
+	if !IsNil(o.Percentage) {
+		toSerialize["percentage"] = o.Percentage
+	}
+	if !IsNil(o.Used) {
+		toSerialize["used"] = o.Used
+	}
+	return toSerialize, nil
 }
 
 type NullableUsage struct {

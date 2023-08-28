@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RepositoryTokenSync type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryTokenSync{}
 
 // RepositoryTokenSync struct for RepositoryTokenSync
 type RepositoryTokenSync struct {
@@ -40,7 +43,7 @@ func NewRepositoryTokenSyncWithDefaults() *RepositoryTokenSync {
 
 // GetTokens returns the Tokens field value if set, zero value otherwise.
 func (o *RepositoryTokenSync) GetTokens() []RepositoryToken {
-	if o == nil || isNil(o.Tokens) {
+	if o == nil || IsNil(o.Tokens) {
 		var ret []RepositoryToken
 		return ret
 	}
@@ -50,7 +53,7 @@ func (o *RepositoryTokenSync) GetTokens() []RepositoryToken {
 // GetTokensOk returns a tuple with the Tokens field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryTokenSync) GetTokensOk() ([]RepositoryToken, bool) {
-	if o == nil || isNil(o.Tokens) {
+	if o == nil || IsNil(o.Tokens) {
 		return nil, false
 	}
 	return o.Tokens, true
@@ -58,7 +61,7 @@ func (o *RepositoryTokenSync) GetTokensOk() ([]RepositoryToken, bool) {
 
 // HasTokens returns a boolean if a field has been set.
 func (o *RepositoryTokenSync) HasTokens() bool {
-	if o != nil && !isNil(o.Tokens) {
+	if o != nil && !IsNil(o.Tokens) {
 		return true
 	}
 
@@ -71,11 +74,19 @@ func (o *RepositoryTokenSync) SetTokens(v []RepositoryToken) {
 }
 
 func (o RepositoryTokenSync) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Tokens) {
-		toSerialize["tokens"] = o.Tokens
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryTokenSync) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Tokens) {
+		toSerialize["tokens"] = o.Tokens
+	}
+	return toSerialize, nil
 }
 
 type NullableRepositoryTokenSync struct {

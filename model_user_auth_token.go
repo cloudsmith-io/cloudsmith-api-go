@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the UserAuthToken type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserAuthToken{}
 
 // UserAuthToken struct for UserAuthToken
 type UserAuthToken struct {
@@ -40,7 +43,7 @@ func NewUserAuthTokenWithDefaults() *UserAuthToken {
 
 // GetToken returns the Token field value if set, zero value otherwise.
 func (o *UserAuthToken) GetToken() string {
-	if o == nil || isNil(o.Token) {
+	if o == nil || IsNil(o.Token) {
 		var ret string
 		return ret
 	}
@@ -50,7 +53,7 @@ func (o *UserAuthToken) GetToken() string {
 // GetTokenOk returns a tuple with the Token field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserAuthToken) GetTokenOk() (*string, bool) {
-	if o == nil || isNil(o.Token) {
+	if o == nil || IsNil(o.Token) {
 		return nil, false
 	}
 	return o.Token, true
@@ -58,7 +61,7 @@ func (o *UserAuthToken) GetTokenOk() (*string, bool) {
 
 // HasToken returns a boolean if a field has been set.
 func (o *UserAuthToken) HasToken() bool {
-	if o != nil && !isNil(o.Token) {
+	if o != nil && !IsNil(o.Token) {
 		return true
 	}
 
@@ -71,11 +74,19 @@ func (o *UserAuthToken) SetToken(v string) {
 }
 
 func (o UserAuthToken) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Token) {
-		toSerialize["token"] = o.Token
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UserAuthToken) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Token) {
+		toSerialize["token"] = o.Token
+	}
+	return toSerialize, nil
 }
 
 type NullableUserAuthToken struct {

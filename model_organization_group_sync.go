@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the OrganizationGroupSync type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OrganizationGroupSync{}
 
 // OrganizationGroupSync struct for OrganizationGroupSync
 type OrganizationGroupSync struct {
@@ -98,7 +101,7 @@ func (o *OrganizationGroupSync) SetIdpValue(v string) {
 
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *OrganizationGroupSync) GetRole() string {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		var ret string
 		return ret
 	}
@@ -108,7 +111,7 @@ func (o *OrganizationGroupSync) GetRole() string {
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationGroupSync) GetRoleOk() (*string, bool) {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		return nil, false
 	}
 	return o.Role, true
@@ -116,7 +119,7 @@ func (o *OrganizationGroupSync) GetRoleOk() (*string, bool) {
 
 // HasRole returns a boolean if a field has been set.
 func (o *OrganizationGroupSync) HasRole() bool {
-	if o != nil && !isNil(o.Role) {
+	if o != nil && !IsNil(o.Role) {
 		return true
 	}
 
@@ -130,7 +133,7 @@ func (o *OrganizationGroupSync) SetRole(v string) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *OrganizationGroupSync) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -140,7 +143,7 @@ func (o *OrganizationGroupSync) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationGroupSync) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -148,7 +151,7 @@ func (o *OrganizationGroupSync) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *OrganizationGroupSync) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -185,23 +188,25 @@ func (o *OrganizationGroupSync) SetTeam(v string) {
 }
 
 func (o OrganizationGroupSync) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["idp_key"] = o.IdpKey
-	}
-	if true {
-		toSerialize["idp_value"] = o.IdpValue
-	}
-	if !isNil(o.Role) {
-		toSerialize["role"] = o.Role
-	}
-	if !isNil(o.SlugPerm) {
-		toSerialize["slug_perm"] = o.SlugPerm
-	}
-	if true {
-		toSerialize["team"] = o.Team
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o OrganizationGroupSync) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["idp_key"] = o.IdpKey
+	toSerialize["idp_value"] = o.IdpValue
+	if !IsNil(o.Role) {
+		toSerialize["role"] = o.Role
+	}
+	if !IsNil(o.SlugPerm) {
+		toSerialize["slug_perm"] = o.SlugPerm
+	}
+	toSerialize["team"] = o.Team
+	return toSerialize, nil
 }
 
 type NullableOrganizationGroupSync struct {

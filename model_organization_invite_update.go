@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the OrganizationInviteUpdate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OrganizationInviteUpdate{}
 
 // OrganizationInviteUpdate struct for OrganizationInviteUpdate
 type OrganizationInviteUpdate struct {
@@ -44,7 +47,7 @@ func NewOrganizationInviteUpdateWithDefaults() *OrganizationInviteUpdate {
 
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *OrganizationInviteUpdate) GetRole() string {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		var ret string
 		return ret
 	}
@@ -54,7 +57,7 @@ func (o *OrganizationInviteUpdate) GetRole() string {
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteUpdate) GetRoleOk() (*string, bool) {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		return nil, false
 	}
 	return o.Role, true
@@ -62,7 +65,7 @@ func (o *OrganizationInviteUpdate) GetRoleOk() (*string, bool) {
 
 // HasRole returns a boolean if a field has been set.
 func (o *OrganizationInviteUpdate) HasRole() bool {
-	if o != nil && !isNil(o.Role) {
+	if o != nil && !IsNil(o.Role) {
 		return true
 	}
 
@@ -75,11 +78,19 @@ func (o *OrganizationInviteUpdate) SetRole(v string) {
 }
 
 func (o OrganizationInviteUpdate) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Role) {
-		toSerialize["role"] = o.Role
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o OrganizationInviteUpdate) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Role) {
+		toSerialize["role"] = o.Role
+	}
+	return toSerialize, nil
 }
 
 type NullableOrganizationInviteUpdate struct {

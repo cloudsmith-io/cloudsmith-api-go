@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RepositoryWebhookRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryWebhookRequest{}
 
 // RepositoryWebhookRequest struct for RepositoryWebhookRequest
 type RepositoryWebhookRequest struct {
@@ -76,7 +79,7 @@ func (o *RepositoryWebhookRequest) GetEvents() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RepositoryWebhookRequest) GetEventsOk() ([]string, bool) {
-	if o == nil || isNil(o.Events) {
+	if o == nil || IsNil(o.Events) {
 		return nil, false
 	}
 	return o.Events, true
@@ -89,7 +92,7 @@ func (o *RepositoryWebhookRequest) SetEvents(v []string) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *RepositoryWebhookRequest) GetIsActive() bool {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -99,7 +102,7 @@ func (o *RepositoryWebhookRequest) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhookRequest) GetIsActiveOk() (*bool, bool) {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		return nil, false
 	}
 	return o.IsActive, true
@@ -107,7 +110,7 @@ func (o *RepositoryWebhookRequest) GetIsActiveOk() (*bool, bool) {
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *RepositoryWebhookRequest) HasIsActive() bool {
-	if o != nil && !isNil(o.IsActive) {
+	if o != nil && !IsNil(o.IsActive) {
 		return true
 	}
 
@@ -121,7 +124,7 @@ func (o *RepositoryWebhookRequest) SetIsActive(v bool) {
 
 // GetPackageQuery returns the PackageQuery field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryWebhookRequest) GetPackageQuery() string {
-	if o == nil || isNil(o.PackageQuery.Get()) {
+	if o == nil || IsNil(o.PackageQuery.Get()) {
 		var ret string
 		return ret
 	}
@@ -164,7 +167,7 @@ func (o *RepositoryWebhookRequest) UnsetPackageQuery() {
 
 // GetRequestBodyFormat returns the RequestBodyFormat field value if set, zero value otherwise.
 func (o *RepositoryWebhookRequest) GetRequestBodyFormat() int64 {
-	if o == nil || isNil(o.RequestBodyFormat) {
+	if o == nil || IsNil(o.RequestBodyFormat) {
 		var ret int64
 		return ret
 	}
@@ -174,7 +177,7 @@ func (o *RepositoryWebhookRequest) GetRequestBodyFormat() int64 {
 // GetRequestBodyFormatOk returns a tuple with the RequestBodyFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhookRequest) GetRequestBodyFormatOk() (*int64, bool) {
-	if o == nil || isNil(o.RequestBodyFormat) {
+	if o == nil || IsNil(o.RequestBodyFormat) {
 		return nil, false
 	}
 	return o.RequestBodyFormat, true
@@ -182,7 +185,7 @@ func (o *RepositoryWebhookRequest) GetRequestBodyFormatOk() (*int64, bool) {
 
 // HasRequestBodyFormat returns a boolean if a field has been set.
 func (o *RepositoryWebhookRequest) HasRequestBodyFormat() bool {
-	if o != nil && !isNil(o.RequestBodyFormat) {
+	if o != nil && !IsNil(o.RequestBodyFormat) {
 		return true
 	}
 
@@ -196,7 +199,7 @@ func (o *RepositoryWebhookRequest) SetRequestBodyFormat(v int64) {
 
 // GetRequestBodyTemplateFormat returns the RequestBodyTemplateFormat field value if set, zero value otherwise.
 func (o *RepositoryWebhookRequest) GetRequestBodyTemplateFormat() int64 {
-	if o == nil || isNil(o.RequestBodyTemplateFormat) {
+	if o == nil || IsNil(o.RequestBodyTemplateFormat) {
 		var ret int64
 		return ret
 	}
@@ -206,7 +209,7 @@ func (o *RepositoryWebhookRequest) GetRequestBodyTemplateFormat() int64 {
 // GetRequestBodyTemplateFormatOk returns a tuple with the RequestBodyTemplateFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhookRequest) GetRequestBodyTemplateFormatOk() (*int64, bool) {
-	if o == nil || isNil(o.RequestBodyTemplateFormat) {
+	if o == nil || IsNil(o.RequestBodyTemplateFormat) {
 		return nil, false
 	}
 	return o.RequestBodyTemplateFormat, true
@@ -214,7 +217,7 @@ func (o *RepositoryWebhookRequest) GetRequestBodyTemplateFormatOk() (*int64, boo
 
 // HasRequestBodyTemplateFormat returns a boolean if a field has been set.
 func (o *RepositoryWebhookRequest) HasRequestBodyTemplateFormat() bool {
-	if o != nil && !isNil(o.RequestBodyTemplateFormat) {
+	if o != nil && !IsNil(o.RequestBodyTemplateFormat) {
 		return true
 	}
 
@@ -228,7 +231,7 @@ func (o *RepositoryWebhookRequest) SetRequestBodyTemplateFormat(v int64) {
 
 // GetRequestContentType returns the RequestContentType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryWebhookRequest) GetRequestContentType() string {
-	if o == nil || isNil(o.RequestContentType.Get()) {
+	if o == nil || IsNil(o.RequestContentType.Get()) {
 		var ret string
 		return ret
 	}
@@ -271,7 +274,7 @@ func (o *RepositoryWebhookRequest) UnsetRequestContentType() {
 
 // GetSecretHeader returns the SecretHeader field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryWebhookRequest) GetSecretHeader() string {
-	if o == nil || isNil(o.SecretHeader.Get()) {
+	if o == nil || IsNil(o.SecretHeader.Get()) {
 		var ret string
 		return ret
 	}
@@ -314,7 +317,7 @@ func (o *RepositoryWebhookRequest) UnsetSecretHeader() {
 
 // GetSecretValue returns the SecretValue field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryWebhookRequest) GetSecretValue() string {
-	if o == nil || isNil(o.SecretValue.Get()) {
+	if o == nil || IsNil(o.SecretValue.Get()) {
 		var ret string
 		return ret
 	}
@@ -357,7 +360,7 @@ func (o *RepositoryWebhookRequest) UnsetSecretValue() {
 
 // GetSignatureKey returns the SignatureKey field value if set, zero value otherwise.
 func (o *RepositoryWebhookRequest) GetSignatureKey() string {
-	if o == nil || isNil(o.SignatureKey) {
+	if o == nil || IsNil(o.SignatureKey) {
 		var ret string
 		return ret
 	}
@@ -367,7 +370,7 @@ func (o *RepositoryWebhookRequest) GetSignatureKey() string {
 // GetSignatureKeyOk returns a tuple with the SignatureKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhookRequest) GetSignatureKeyOk() (*string, bool) {
-	if o == nil || isNil(o.SignatureKey) {
+	if o == nil || IsNil(o.SignatureKey) {
 		return nil, false
 	}
 	return o.SignatureKey, true
@@ -375,7 +378,7 @@ func (o *RepositoryWebhookRequest) GetSignatureKeyOk() (*string, bool) {
 
 // HasSignatureKey returns a boolean if a field has been set.
 func (o *RepositoryWebhookRequest) HasSignatureKey() bool {
-	if o != nil && !isNil(o.SignatureKey) {
+	if o != nil && !IsNil(o.SignatureKey) {
 		return true
 	}
 
@@ -426,7 +429,7 @@ func (o *RepositoryWebhookRequest) GetTemplates() []WebhookTemplate {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RepositoryWebhookRequest) GetTemplatesOk() ([]WebhookTemplate, bool) {
-	if o == nil || isNil(o.Templates) {
+	if o == nil || IsNil(o.Templates) {
 		return nil, false
 	}
 	return o.Templates, true
@@ -439,7 +442,7 @@ func (o *RepositoryWebhookRequest) SetTemplates(v []WebhookTemplate) {
 
 // GetVerifySsl returns the VerifySsl field value if set, zero value otherwise.
 func (o *RepositoryWebhookRequest) GetVerifySsl() bool {
-	if o == nil || isNil(o.VerifySsl) {
+	if o == nil || IsNil(o.VerifySsl) {
 		var ret bool
 		return ret
 	}
@@ -449,7 +452,7 @@ func (o *RepositoryWebhookRequest) GetVerifySsl() bool {
 // GetVerifySslOk returns a tuple with the VerifySsl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhookRequest) GetVerifySslOk() (*bool, bool) {
-	if o == nil || isNil(o.VerifySsl) {
+	if o == nil || IsNil(o.VerifySsl) {
 		return nil, false
 	}
 	return o.VerifySsl, true
@@ -457,7 +460,7 @@ func (o *RepositoryWebhookRequest) GetVerifySslOk() (*bool, bool) {
 
 // HasVerifySsl returns a boolean if a field has been set.
 func (o *RepositoryWebhookRequest) HasVerifySsl() bool {
-	if o != nil && !isNil(o.VerifySsl) {
+	if o != nil && !IsNil(o.VerifySsl) {
 		return true
 	}
 
@@ -470,20 +473,28 @@ func (o *RepositoryWebhookRequest) SetVerifySsl(v bool) {
 }
 
 func (o RepositoryWebhookRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryWebhookRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Events != nil {
 		toSerialize["events"] = o.Events
 	}
-	if !isNil(o.IsActive) {
+	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
 	}
 	if o.PackageQuery.IsSet() {
 		toSerialize["package_query"] = o.PackageQuery.Get()
 	}
-	if !isNil(o.RequestBodyFormat) {
+	if !IsNil(o.RequestBodyFormat) {
 		toSerialize["request_body_format"] = o.RequestBodyFormat
 	}
-	if !isNil(o.RequestBodyTemplateFormat) {
+	if !IsNil(o.RequestBodyTemplateFormat) {
 		toSerialize["request_body_template_format"] = o.RequestBodyTemplateFormat
 	}
 	if o.RequestContentType.IsSet() {
@@ -495,19 +506,17 @@ func (o RepositoryWebhookRequest) MarshalJSON() ([]byte, error) {
 	if o.SecretValue.IsSet() {
 		toSerialize["secret_value"] = o.SecretValue.Get()
 	}
-	if !isNil(o.SignatureKey) {
+	if !IsNil(o.SignatureKey) {
 		toSerialize["signature_key"] = o.SignatureKey
 	}
-	if true {
-		toSerialize["target_url"] = o.TargetUrl
-	}
+	toSerialize["target_url"] = o.TargetUrl
 	if o.Templates != nil {
 		toSerialize["templates"] = o.Templates
 	}
-	if !isNil(o.VerifySsl) {
+	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableRepositoryWebhookRequest struct {

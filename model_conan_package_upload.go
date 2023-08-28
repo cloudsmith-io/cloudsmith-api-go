@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the ConanPackageUpload type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConanPackageUpload{}
 
 // ConanPackageUpload struct for ConanPackageUpload
 type ConanPackageUpload struct {
@@ -135,7 +138,7 @@ func NewConanPackageUploadWithDefaults() *ConanPackageUpload {
 
 // GetArchitectures returns the Architectures field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetArchitectures() []Architecture {
-	if o == nil || isNil(o.Architectures) {
+	if o == nil || IsNil(o.Architectures) {
 		var ret []Architecture
 		return ret
 	}
@@ -145,7 +148,7 @@ func (o *ConanPackageUpload) GetArchitectures() []Architecture {
 // GetArchitecturesOk returns a tuple with the Architectures field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetArchitecturesOk() ([]Architecture, bool) {
-	if o == nil || isNil(o.Architectures) {
+	if o == nil || IsNil(o.Architectures) {
 		return nil, false
 	}
 	return o.Architectures, true
@@ -153,7 +156,7 @@ func (o *ConanPackageUpload) GetArchitecturesOk() ([]Architecture, bool) {
 
 // HasArchitectures returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasArchitectures() bool {
-	if o != nil && !isNil(o.Architectures) {
+	if o != nil && !IsNil(o.Architectures) {
 		return true
 	}
 
@@ -167,7 +170,7 @@ func (o *ConanPackageUpload) SetArchitectures(v []Architecture) {
 
 // GetCdnUrl returns the CdnUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetCdnUrl() string {
-	if o == nil || isNil(o.CdnUrl.Get()) {
+	if o == nil || IsNil(o.CdnUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -210,7 +213,7 @@ func (o *ConanPackageUpload) UnsetCdnUrl() {
 
 // GetChecksumMd5 returns the ChecksumMd5 field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetChecksumMd5() string {
-	if o == nil || isNil(o.ChecksumMd5) {
+	if o == nil || IsNil(o.ChecksumMd5) {
 		var ret string
 		return ret
 	}
@@ -220,7 +223,7 @@ func (o *ConanPackageUpload) GetChecksumMd5() string {
 // GetChecksumMd5Ok returns a tuple with the ChecksumMd5 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetChecksumMd5Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumMd5) {
+	if o == nil || IsNil(o.ChecksumMd5) {
 		return nil, false
 	}
 	return o.ChecksumMd5, true
@@ -228,7 +231,7 @@ func (o *ConanPackageUpload) GetChecksumMd5Ok() (*string, bool) {
 
 // HasChecksumMd5 returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasChecksumMd5() bool {
-	if o != nil && !isNil(o.ChecksumMd5) {
+	if o != nil && !IsNil(o.ChecksumMd5) {
 		return true
 	}
 
@@ -242,7 +245,7 @@ func (o *ConanPackageUpload) SetChecksumMd5(v string) {
 
 // GetChecksumSha1 returns the ChecksumSha1 field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetChecksumSha1() string {
-	if o == nil || isNil(o.ChecksumSha1) {
+	if o == nil || IsNil(o.ChecksumSha1) {
 		var ret string
 		return ret
 	}
@@ -252,7 +255,7 @@ func (o *ConanPackageUpload) GetChecksumSha1() string {
 // GetChecksumSha1Ok returns a tuple with the ChecksumSha1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetChecksumSha1Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha1) {
+	if o == nil || IsNil(o.ChecksumSha1) {
 		return nil, false
 	}
 	return o.ChecksumSha1, true
@@ -260,7 +263,7 @@ func (o *ConanPackageUpload) GetChecksumSha1Ok() (*string, bool) {
 
 // HasChecksumSha1 returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasChecksumSha1() bool {
-	if o != nil && !isNil(o.ChecksumSha1) {
+	if o != nil && !IsNil(o.ChecksumSha1) {
 		return true
 	}
 
@@ -274,7 +277,7 @@ func (o *ConanPackageUpload) SetChecksumSha1(v string) {
 
 // GetChecksumSha256 returns the ChecksumSha256 field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetChecksumSha256() string {
-	if o == nil || isNil(o.ChecksumSha256) {
+	if o == nil || IsNil(o.ChecksumSha256) {
 		var ret string
 		return ret
 	}
@@ -284,7 +287,7 @@ func (o *ConanPackageUpload) GetChecksumSha256() string {
 // GetChecksumSha256Ok returns a tuple with the ChecksumSha256 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetChecksumSha256Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha256) {
+	if o == nil || IsNil(o.ChecksumSha256) {
 		return nil, false
 	}
 	return o.ChecksumSha256, true
@@ -292,7 +295,7 @@ func (o *ConanPackageUpload) GetChecksumSha256Ok() (*string, bool) {
 
 // HasChecksumSha256 returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasChecksumSha256() bool {
-	if o != nil && !isNil(o.ChecksumSha256) {
+	if o != nil && !IsNil(o.ChecksumSha256) {
 		return true
 	}
 
@@ -306,7 +309,7 @@ func (o *ConanPackageUpload) SetChecksumSha256(v string) {
 
 // GetChecksumSha512 returns the ChecksumSha512 field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetChecksumSha512() string {
-	if o == nil || isNil(o.ChecksumSha512) {
+	if o == nil || IsNil(o.ChecksumSha512) {
 		var ret string
 		return ret
 	}
@@ -316,7 +319,7 @@ func (o *ConanPackageUpload) GetChecksumSha512() string {
 // GetChecksumSha512Ok returns a tuple with the ChecksumSha512 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetChecksumSha512Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha512) {
+	if o == nil || IsNil(o.ChecksumSha512) {
 		return nil, false
 	}
 	return o.ChecksumSha512, true
@@ -324,7 +327,7 @@ func (o *ConanPackageUpload) GetChecksumSha512Ok() (*string, bool) {
 
 // HasChecksumSha512 returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasChecksumSha512() bool {
-	if o != nil && !isNil(o.ChecksumSha512) {
+	if o != nil && !IsNil(o.ChecksumSha512) {
 		return true
 	}
 
@@ -338,7 +341,7 @@ func (o *ConanPackageUpload) SetChecksumSha512(v string) {
 
 // GetConanChannel returns the ConanChannel field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetConanChannel() string {
-	if o == nil || isNil(o.ConanChannel.Get()) {
+	if o == nil || IsNil(o.ConanChannel.Get()) {
 		var ret string
 		return ret
 	}
@@ -381,7 +384,7 @@ func (o *ConanPackageUpload) UnsetConanChannel() {
 
 // GetConanPrefix returns the ConanPrefix field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetConanPrefix() string {
-	if o == nil || isNil(o.ConanPrefix.Get()) {
+	if o == nil || IsNil(o.ConanPrefix.Get()) {
 		var ret string
 		return ret
 	}
@@ -424,7 +427,7 @@ func (o *ConanPackageUpload) UnsetConanPrefix() {
 
 // GetDependenciesChecksumMd5 returns the DependenciesChecksumMd5 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetDependenciesChecksumMd5() string {
-	if o == nil || isNil(o.DependenciesChecksumMd5.Get()) {
+	if o == nil || IsNil(o.DependenciesChecksumMd5.Get()) {
 		var ret string
 		return ret
 	}
@@ -467,7 +470,7 @@ func (o *ConanPackageUpload) UnsetDependenciesChecksumMd5() {
 
 // GetDependenciesUrl returns the DependenciesUrl field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetDependenciesUrl() string {
-	if o == nil || isNil(o.DependenciesUrl) {
+	if o == nil || IsNil(o.DependenciesUrl) {
 		var ret string
 		return ret
 	}
@@ -477,7 +480,7 @@ func (o *ConanPackageUpload) GetDependenciesUrl() string {
 // GetDependenciesUrlOk returns a tuple with the DependenciesUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetDependenciesUrlOk() (*string, bool) {
-	if o == nil || isNil(o.DependenciesUrl) {
+	if o == nil || IsNil(o.DependenciesUrl) {
 		return nil, false
 	}
 	return o.DependenciesUrl, true
@@ -485,7 +488,7 @@ func (o *ConanPackageUpload) GetDependenciesUrlOk() (*string, bool) {
 
 // HasDependenciesUrl returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasDependenciesUrl() bool {
-	if o != nil && !isNil(o.DependenciesUrl) {
+	if o != nil && !IsNil(o.DependenciesUrl) {
 		return true
 	}
 
@@ -499,7 +502,7 @@ func (o *ConanPackageUpload) SetDependenciesUrl(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetDescription() string {
-	if o == nil || isNil(o.Description.Get()) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
@@ -542,7 +545,7 @@ func (o *ConanPackageUpload) UnsetDescription() {
 
 // GetDistro returns the Distro field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetDistro() Distribution {
-	if o == nil || isNil(o.Distro.Get()) {
+	if o == nil || IsNil(o.Distro.Get()) {
 		var ret Distribution
 		return ret
 	}
@@ -585,7 +588,7 @@ func (o *ConanPackageUpload) UnsetDistro() {
 
 // GetDistroVersion returns the DistroVersion field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetDistroVersion() DistributionVersion {
-	if o == nil || isNil(o.DistroVersion) {
+	if o == nil || IsNil(o.DistroVersion) {
 		var ret DistributionVersion
 		return ret
 	}
@@ -595,7 +598,7 @@ func (o *ConanPackageUpload) GetDistroVersion() DistributionVersion {
 // GetDistroVersionOk returns a tuple with the DistroVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetDistroVersionOk() (*DistributionVersion, bool) {
-	if o == nil || isNil(o.DistroVersion) {
+	if o == nil || IsNil(o.DistroVersion) {
 		return nil, false
 	}
 	return o.DistroVersion, true
@@ -603,7 +606,7 @@ func (o *ConanPackageUpload) GetDistroVersionOk() (*DistributionVersion, bool) {
 
 // HasDistroVersion returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasDistroVersion() bool {
-	if o != nil && !isNil(o.DistroVersion) {
+	if o != nil && !IsNil(o.DistroVersion) {
 		return true
 	}
 
@@ -617,7 +620,7 @@ func (o *ConanPackageUpload) SetDistroVersion(v DistributionVersion) {
 
 // GetDownloads returns the Downloads field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetDownloads() int64 {
-	if o == nil || isNil(o.Downloads) {
+	if o == nil || IsNil(o.Downloads) {
 		var ret int64
 		return ret
 	}
@@ -627,7 +630,7 @@ func (o *ConanPackageUpload) GetDownloads() int64 {
 // GetDownloadsOk returns a tuple with the Downloads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetDownloadsOk() (*int64, bool) {
-	if o == nil || isNil(o.Downloads) {
+	if o == nil || IsNil(o.Downloads) {
 		return nil, false
 	}
 	return o.Downloads, true
@@ -635,7 +638,7 @@ func (o *ConanPackageUpload) GetDownloadsOk() (*int64, bool) {
 
 // HasDownloads returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasDownloads() bool {
-	if o != nil && !isNil(o.Downloads) {
+	if o != nil && !IsNil(o.Downloads) {
 		return true
 	}
 
@@ -649,7 +652,7 @@ func (o *ConanPackageUpload) SetDownloads(v int64) {
 
 // GetEpoch returns the Epoch field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetEpoch() int64 {
-	if o == nil || isNil(o.Epoch.Get()) {
+	if o == nil || IsNil(o.Epoch.Get()) {
 		var ret int64
 		return ret
 	}
@@ -692,7 +695,7 @@ func (o *ConanPackageUpload) UnsetEpoch() {
 
 // GetExtension returns the Extension field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetExtension() string {
-	if o == nil || isNil(o.Extension) {
+	if o == nil || IsNil(o.Extension) {
 		var ret string
 		return ret
 	}
@@ -702,7 +705,7 @@ func (o *ConanPackageUpload) GetExtension() string {
 // GetExtensionOk returns a tuple with the Extension field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetExtensionOk() (*string, bool) {
-	if o == nil || isNil(o.Extension) {
+	if o == nil || IsNil(o.Extension) {
 		return nil, false
 	}
 	return o.Extension, true
@@ -710,7 +713,7 @@ func (o *ConanPackageUpload) GetExtensionOk() (*string, bool) {
 
 // HasExtension returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasExtension() bool {
-	if o != nil && !isNil(o.Extension) {
+	if o != nil && !IsNil(o.Extension) {
 		return true
 	}
 
@@ -724,7 +727,7 @@ func (o *ConanPackageUpload) SetExtension(v string) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetFilename() string {
-	if o == nil || isNil(o.Filename) {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -734,7 +737,7 @@ func (o *ConanPackageUpload) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetFilenameOk() (*string, bool) {
-	if o == nil || isNil(o.Filename) {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -742,7 +745,7 @@ func (o *ConanPackageUpload) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasFilename() bool {
-	if o != nil && !isNil(o.Filename) {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -756,7 +759,7 @@ func (o *ConanPackageUpload) SetFilename(v string) {
 
 // GetFiles returns the Files field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetFiles() []PackageFile {
-	if o == nil || isNil(o.Files) {
+	if o == nil || IsNil(o.Files) {
 		var ret []PackageFile
 		return ret
 	}
@@ -766,7 +769,7 @@ func (o *ConanPackageUpload) GetFiles() []PackageFile {
 // GetFilesOk returns a tuple with the Files field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetFilesOk() ([]PackageFile, bool) {
-	if o == nil || isNil(o.Files) {
+	if o == nil || IsNil(o.Files) {
 		return nil, false
 	}
 	return o.Files, true
@@ -774,7 +777,7 @@ func (o *ConanPackageUpload) GetFilesOk() ([]PackageFile, bool) {
 
 // HasFiles returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasFiles() bool {
-	if o != nil && !isNil(o.Files) {
+	if o != nil && !IsNil(o.Files) {
 		return true
 	}
 
@@ -788,7 +791,7 @@ func (o *ConanPackageUpload) SetFiles(v []PackageFile) {
 
 // GetFormat returns the Format field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetFormat() string {
-	if o == nil || isNil(o.Format) {
+	if o == nil || IsNil(o.Format) {
 		var ret string
 		return ret
 	}
@@ -798,7 +801,7 @@ func (o *ConanPackageUpload) GetFormat() string {
 // GetFormatOk returns a tuple with the Format field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetFormatOk() (*string, bool) {
-	if o == nil || isNil(o.Format) {
+	if o == nil || IsNil(o.Format) {
 		return nil, false
 	}
 	return o.Format, true
@@ -806,7 +809,7 @@ func (o *ConanPackageUpload) GetFormatOk() (*string, bool) {
 
 // HasFormat returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasFormat() bool {
-	if o != nil && !isNil(o.Format) {
+	if o != nil && !IsNil(o.Format) {
 		return true
 	}
 
@@ -820,7 +823,7 @@ func (o *ConanPackageUpload) SetFormat(v string) {
 
 // GetFormatUrl returns the FormatUrl field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetFormatUrl() string {
-	if o == nil || isNil(o.FormatUrl) {
+	if o == nil || IsNil(o.FormatUrl) {
 		var ret string
 		return ret
 	}
@@ -830,7 +833,7 @@ func (o *ConanPackageUpload) GetFormatUrl() string {
 // GetFormatUrlOk returns a tuple with the FormatUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetFormatUrlOk() (*string, bool) {
-	if o == nil || isNil(o.FormatUrl) {
+	if o == nil || IsNil(o.FormatUrl) {
 		return nil, false
 	}
 	return o.FormatUrl, true
@@ -838,7 +841,7 @@ func (o *ConanPackageUpload) GetFormatUrlOk() (*string, bool) {
 
 // HasFormatUrl returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasFormatUrl() bool {
-	if o != nil && !isNil(o.FormatUrl) {
+	if o != nil && !IsNil(o.FormatUrl) {
 		return true
 	}
 
@@ -852,7 +855,7 @@ func (o *ConanPackageUpload) SetFormatUrl(v string) {
 
 // GetIdentifierPerm returns the IdentifierPerm field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetIdentifierPerm() string {
-	if o == nil || isNil(o.IdentifierPerm) {
+	if o == nil || IsNil(o.IdentifierPerm) {
 		var ret string
 		return ret
 	}
@@ -862,7 +865,7 @@ func (o *ConanPackageUpload) GetIdentifierPerm() string {
 // GetIdentifierPermOk returns a tuple with the IdentifierPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetIdentifierPermOk() (*string, bool) {
-	if o == nil || isNil(o.IdentifierPerm) {
+	if o == nil || IsNil(o.IdentifierPerm) {
 		return nil, false
 	}
 	return o.IdentifierPerm, true
@@ -870,7 +873,7 @@ func (o *ConanPackageUpload) GetIdentifierPermOk() (*string, bool) {
 
 // HasIdentifierPerm returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasIdentifierPerm() bool {
-	if o != nil && !isNil(o.IdentifierPerm) {
+	if o != nil && !IsNil(o.IdentifierPerm) {
 		return true
 	}
 
@@ -884,7 +887,7 @@ func (o *ConanPackageUpload) SetIdentifierPerm(v string) {
 
 // GetIndexed returns the Indexed field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetIndexed() bool {
-	if o == nil || isNil(o.Indexed) {
+	if o == nil || IsNil(o.Indexed) {
 		var ret bool
 		return ret
 	}
@@ -894,7 +897,7 @@ func (o *ConanPackageUpload) GetIndexed() bool {
 // GetIndexedOk returns a tuple with the Indexed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetIndexedOk() (*bool, bool) {
-	if o == nil || isNil(o.Indexed) {
+	if o == nil || IsNil(o.Indexed) {
 		return nil, false
 	}
 	return o.Indexed, true
@@ -902,7 +905,7 @@ func (o *ConanPackageUpload) GetIndexedOk() (*bool, bool) {
 
 // HasIndexed returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasIndexed() bool {
-	if o != nil && !isNil(o.Indexed) {
+	if o != nil && !IsNil(o.Indexed) {
 		return true
 	}
 
@@ -916,7 +919,7 @@ func (o *ConanPackageUpload) SetIndexed(v bool) {
 
 // GetIsDownloadable returns the IsDownloadable field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetIsDownloadable() bool {
-	if o == nil || isNil(o.IsDownloadable) {
+	if o == nil || IsNil(o.IsDownloadable) {
 		var ret bool
 		return ret
 	}
@@ -926,7 +929,7 @@ func (o *ConanPackageUpload) GetIsDownloadable() bool {
 // GetIsDownloadableOk returns a tuple with the IsDownloadable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetIsDownloadableOk() (*bool, bool) {
-	if o == nil || isNil(o.IsDownloadable) {
+	if o == nil || IsNil(o.IsDownloadable) {
 		return nil, false
 	}
 	return o.IsDownloadable, true
@@ -934,7 +937,7 @@ func (o *ConanPackageUpload) GetIsDownloadableOk() (*bool, bool) {
 
 // HasIsDownloadable returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasIsDownloadable() bool {
-	if o != nil && !isNil(o.IsDownloadable) {
+	if o != nil && !IsNil(o.IsDownloadable) {
 		return true
 	}
 
@@ -948,7 +951,7 @@ func (o *ConanPackageUpload) SetIsDownloadable(v bool) {
 
 // GetIsQuarantined returns the IsQuarantined field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetIsQuarantined() bool {
-	if o == nil || isNil(o.IsQuarantined) {
+	if o == nil || IsNil(o.IsQuarantined) {
 		var ret bool
 		return ret
 	}
@@ -958,7 +961,7 @@ func (o *ConanPackageUpload) GetIsQuarantined() bool {
 // GetIsQuarantinedOk returns a tuple with the IsQuarantined field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetIsQuarantinedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsQuarantined) {
+	if o == nil || IsNil(o.IsQuarantined) {
 		return nil, false
 	}
 	return o.IsQuarantined, true
@@ -966,7 +969,7 @@ func (o *ConanPackageUpload) GetIsQuarantinedOk() (*bool, bool) {
 
 // HasIsQuarantined returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasIsQuarantined() bool {
-	if o != nil && !isNil(o.IsQuarantined) {
+	if o != nil && !IsNil(o.IsQuarantined) {
 		return true
 	}
 
@@ -980,7 +983,7 @@ func (o *ConanPackageUpload) SetIsQuarantined(v bool) {
 
 // GetIsSyncAwaiting returns the IsSyncAwaiting field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetIsSyncAwaiting() bool {
-	if o == nil || isNil(o.IsSyncAwaiting) {
+	if o == nil || IsNil(o.IsSyncAwaiting) {
 		var ret bool
 		return ret
 	}
@@ -990,7 +993,7 @@ func (o *ConanPackageUpload) GetIsSyncAwaiting() bool {
 // GetIsSyncAwaitingOk returns a tuple with the IsSyncAwaiting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetIsSyncAwaitingOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncAwaiting) {
+	if o == nil || IsNil(o.IsSyncAwaiting) {
 		return nil, false
 	}
 	return o.IsSyncAwaiting, true
@@ -998,7 +1001,7 @@ func (o *ConanPackageUpload) GetIsSyncAwaitingOk() (*bool, bool) {
 
 // HasIsSyncAwaiting returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasIsSyncAwaiting() bool {
-	if o != nil && !isNil(o.IsSyncAwaiting) {
+	if o != nil && !IsNil(o.IsSyncAwaiting) {
 		return true
 	}
 
@@ -1012,7 +1015,7 @@ func (o *ConanPackageUpload) SetIsSyncAwaiting(v bool) {
 
 // GetIsSyncCompleted returns the IsSyncCompleted field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetIsSyncCompleted() bool {
-	if o == nil || isNil(o.IsSyncCompleted) {
+	if o == nil || IsNil(o.IsSyncCompleted) {
 		var ret bool
 		return ret
 	}
@@ -1022,7 +1025,7 @@ func (o *ConanPackageUpload) GetIsSyncCompleted() bool {
 // GetIsSyncCompletedOk returns a tuple with the IsSyncCompleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetIsSyncCompletedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncCompleted) {
+	if o == nil || IsNil(o.IsSyncCompleted) {
 		return nil, false
 	}
 	return o.IsSyncCompleted, true
@@ -1030,7 +1033,7 @@ func (o *ConanPackageUpload) GetIsSyncCompletedOk() (*bool, bool) {
 
 // HasIsSyncCompleted returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasIsSyncCompleted() bool {
-	if o != nil && !isNil(o.IsSyncCompleted) {
+	if o != nil && !IsNil(o.IsSyncCompleted) {
 		return true
 	}
 
@@ -1044,7 +1047,7 @@ func (o *ConanPackageUpload) SetIsSyncCompleted(v bool) {
 
 // GetIsSyncFailed returns the IsSyncFailed field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetIsSyncFailed() bool {
-	if o == nil || isNil(o.IsSyncFailed) {
+	if o == nil || IsNil(o.IsSyncFailed) {
 		var ret bool
 		return ret
 	}
@@ -1054,7 +1057,7 @@ func (o *ConanPackageUpload) GetIsSyncFailed() bool {
 // GetIsSyncFailedOk returns a tuple with the IsSyncFailed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetIsSyncFailedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncFailed) {
+	if o == nil || IsNil(o.IsSyncFailed) {
 		return nil, false
 	}
 	return o.IsSyncFailed, true
@@ -1062,7 +1065,7 @@ func (o *ConanPackageUpload) GetIsSyncFailedOk() (*bool, bool) {
 
 // HasIsSyncFailed returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasIsSyncFailed() bool {
-	if o != nil && !isNil(o.IsSyncFailed) {
+	if o != nil && !IsNil(o.IsSyncFailed) {
 		return true
 	}
 
@@ -1076,7 +1079,7 @@ func (o *ConanPackageUpload) SetIsSyncFailed(v bool) {
 
 // GetIsSyncInFlight returns the IsSyncInFlight field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetIsSyncInFlight() bool {
-	if o == nil || isNil(o.IsSyncInFlight) {
+	if o == nil || IsNil(o.IsSyncInFlight) {
 		var ret bool
 		return ret
 	}
@@ -1086,7 +1089,7 @@ func (o *ConanPackageUpload) GetIsSyncInFlight() bool {
 // GetIsSyncInFlightOk returns a tuple with the IsSyncInFlight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetIsSyncInFlightOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncInFlight) {
+	if o == nil || IsNil(o.IsSyncInFlight) {
 		return nil, false
 	}
 	return o.IsSyncInFlight, true
@@ -1094,7 +1097,7 @@ func (o *ConanPackageUpload) GetIsSyncInFlightOk() (*bool, bool) {
 
 // HasIsSyncInFlight returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasIsSyncInFlight() bool {
-	if o != nil && !isNil(o.IsSyncInFlight) {
+	if o != nil && !IsNil(o.IsSyncInFlight) {
 		return true
 	}
 
@@ -1108,7 +1111,7 @@ func (o *ConanPackageUpload) SetIsSyncInFlight(v bool) {
 
 // GetIsSyncInProgress returns the IsSyncInProgress field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetIsSyncInProgress() bool {
-	if o == nil || isNil(o.IsSyncInProgress) {
+	if o == nil || IsNil(o.IsSyncInProgress) {
 		var ret bool
 		return ret
 	}
@@ -1118,7 +1121,7 @@ func (o *ConanPackageUpload) GetIsSyncInProgress() bool {
 // GetIsSyncInProgressOk returns a tuple with the IsSyncInProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetIsSyncInProgressOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncInProgress) {
+	if o == nil || IsNil(o.IsSyncInProgress) {
 		return nil, false
 	}
 	return o.IsSyncInProgress, true
@@ -1126,7 +1129,7 @@ func (o *ConanPackageUpload) GetIsSyncInProgressOk() (*bool, bool) {
 
 // HasIsSyncInProgress returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasIsSyncInProgress() bool {
-	if o != nil && !isNil(o.IsSyncInProgress) {
+	if o != nil && !IsNil(o.IsSyncInProgress) {
 		return true
 	}
 
@@ -1140,7 +1143,7 @@ func (o *ConanPackageUpload) SetIsSyncInProgress(v bool) {
 
 // GetLicense returns the License field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetLicense() string {
-	if o == nil || isNil(o.License.Get()) {
+	if o == nil || IsNil(o.License.Get()) {
 		var ret string
 		return ret
 	}
@@ -1183,7 +1186,7 @@ func (o *ConanPackageUpload) UnsetLicense() {
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetName() string {
-	if o == nil || isNil(o.Name.Get()) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
@@ -1226,7 +1229,7 @@ func (o *ConanPackageUpload) UnsetName() {
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetNamespace() string {
-	if o == nil || isNil(o.Namespace) {
+	if o == nil || IsNil(o.Namespace) {
 		var ret string
 		return ret
 	}
@@ -1236,7 +1239,7 @@ func (o *ConanPackageUpload) GetNamespace() string {
 // GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetNamespaceOk() (*string, bool) {
-	if o == nil || isNil(o.Namespace) {
+	if o == nil || IsNil(o.Namespace) {
 		return nil, false
 	}
 	return o.Namespace, true
@@ -1244,7 +1247,7 @@ func (o *ConanPackageUpload) GetNamespaceOk() (*string, bool) {
 
 // HasNamespace returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasNamespace() bool {
-	if o != nil && !isNil(o.Namespace) {
+	if o != nil && !IsNil(o.Namespace) {
 		return true
 	}
 
@@ -1258,7 +1261,7 @@ func (o *ConanPackageUpload) SetNamespace(v string) {
 
 // GetNamespaceUrl returns the NamespaceUrl field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetNamespaceUrl() string {
-	if o == nil || isNil(o.NamespaceUrl) {
+	if o == nil || IsNil(o.NamespaceUrl) {
 		var ret string
 		return ret
 	}
@@ -1268,7 +1271,7 @@ func (o *ConanPackageUpload) GetNamespaceUrl() string {
 // GetNamespaceUrlOk returns a tuple with the NamespaceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetNamespaceUrlOk() (*string, bool) {
-	if o == nil || isNil(o.NamespaceUrl) {
+	if o == nil || IsNil(o.NamespaceUrl) {
 		return nil, false
 	}
 	return o.NamespaceUrl, true
@@ -1276,7 +1279,7 @@ func (o *ConanPackageUpload) GetNamespaceUrlOk() (*string, bool) {
 
 // HasNamespaceUrl returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasNamespaceUrl() bool {
-	if o != nil && !isNil(o.NamespaceUrl) {
+	if o != nil && !IsNil(o.NamespaceUrl) {
 		return true
 	}
 
@@ -1290,7 +1293,7 @@ func (o *ConanPackageUpload) SetNamespaceUrl(v string) {
 
 // GetNumFiles returns the NumFiles field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetNumFiles() int64 {
-	if o == nil || isNil(o.NumFiles) {
+	if o == nil || IsNil(o.NumFiles) {
 		var ret int64
 		return ret
 	}
@@ -1300,7 +1303,7 @@ func (o *ConanPackageUpload) GetNumFiles() int64 {
 // GetNumFilesOk returns a tuple with the NumFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetNumFilesOk() (*int64, bool) {
-	if o == nil || isNil(o.NumFiles) {
+	if o == nil || IsNil(o.NumFiles) {
 		return nil, false
 	}
 	return o.NumFiles, true
@@ -1308,7 +1311,7 @@ func (o *ConanPackageUpload) GetNumFilesOk() (*int64, bool) {
 
 // HasNumFiles returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasNumFiles() bool {
-	if o != nil && !isNil(o.NumFiles) {
+	if o != nil && !IsNil(o.NumFiles) {
 		return true
 	}
 
@@ -1322,7 +1325,7 @@ func (o *ConanPackageUpload) SetNumFiles(v int64) {
 
 // GetOriginRepository returns the OriginRepository field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetOriginRepository() string {
-	if o == nil || isNil(o.OriginRepository) {
+	if o == nil || IsNil(o.OriginRepository) {
 		var ret string
 		return ret
 	}
@@ -1332,7 +1335,7 @@ func (o *ConanPackageUpload) GetOriginRepository() string {
 // GetOriginRepositoryOk returns a tuple with the OriginRepository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetOriginRepositoryOk() (*string, bool) {
-	if o == nil || isNil(o.OriginRepository) {
+	if o == nil || IsNil(o.OriginRepository) {
 		return nil, false
 	}
 	return o.OriginRepository, true
@@ -1340,7 +1343,7 @@ func (o *ConanPackageUpload) GetOriginRepositoryOk() (*string, bool) {
 
 // HasOriginRepository returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasOriginRepository() bool {
-	if o != nil && !isNil(o.OriginRepository) {
+	if o != nil && !IsNil(o.OriginRepository) {
 		return true
 	}
 
@@ -1354,7 +1357,7 @@ func (o *ConanPackageUpload) SetOriginRepository(v string) {
 
 // GetOriginRepositoryUrl returns the OriginRepositoryUrl field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetOriginRepositoryUrl() string {
-	if o == nil || isNil(o.OriginRepositoryUrl) {
+	if o == nil || IsNil(o.OriginRepositoryUrl) {
 		var ret string
 		return ret
 	}
@@ -1364,7 +1367,7 @@ func (o *ConanPackageUpload) GetOriginRepositoryUrl() string {
 // GetOriginRepositoryUrlOk returns a tuple with the OriginRepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetOriginRepositoryUrlOk() (*string, bool) {
-	if o == nil || isNil(o.OriginRepositoryUrl) {
+	if o == nil || IsNil(o.OriginRepositoryUrl) {
 		return nil, false
 	}
 	return o.OriginRepositoryUrl, true
@@ -1372,7 +1375,7 @@ func (o *ConanPackageUpload) GetOriginRepositoryUrlOk() (*string, bool) {
 
 // HasOriginRepositoryUrl returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasOriginRepositoryUrl() bool {
-	if o != nil && !isNil(o.OriginRepositoryUrl) {
+	if o != nil && !IsNil(o.OriginRepositoryUrl) {
 		return true
 	}
 
@@ -1386,7 +1389,7 @@ func (o *ConanPackageUpload) SetOriginRepositoryUrl(v string) {
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetPackageType() int64 {
-	if o == nil || isNil(o.PackageType) {
+	if o == nil || IsNil(o.PackageType) {
 		var ret int64
 		return ret
 	}
@@ -1396,7 +1399,7 @@ func (o *ConanPackageUpload) GetPackageType() int64 {
 // GetPackageTypeOk returns a tuple with the PackageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetPackageTypeOk() (*int64, bool) {
-	if o == nil || isNil(o.PackageType) {
+	if o == nil || IsNil(o.PackageType) {
 		return nil, false
 	}
 	return o.PackageType, true
@@ -1404,7 +1407,7 @@ func (o *ConanPackageUpload) GetPackageTypeOk() (*int64, bool) {
 
 // HasPackageType returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasPackageType() bool {
-	if o != nil && !isNil(o.PackageType) {
+	if o != nil && !IsNil(o.PackageType) {
 		return true
 	}
 
@@ -1418,7 +1421,7 @@ func (o *ConanPackageUpload) SetPackageType(v int64) {
 
 // GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetRelease() string {
-	if o == nil || isNil(o.Release.Get()) {
+	if o == nil || IsNil(o.Release.Get()) {
 		var ret string
 		return ret
 	}
@@ -1461,7 +1464,7 @@ func (o *ConanPackageUpload) UnsetRelease() {
 
 // GetRepository returns the Repository field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetRepository() string {
-	if o == nil || isNil(o.Repository) {
+	if o == nil || IsNil(o.Repository) {
 		var ret string
 		return ret
 	}
@@ -1471,7 +1474,7 @@ func (o *ConanPackageUpload) GetRepository() string {
 // GetRepositoryOk returns a tuple with the Repository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetRepositoryOk() (*string, bool) {
-	if o == nil || isNil(o.Repository) {
+	if o == nil || IsNil(o.Repository) {
 		return nil, false
 	}
 	return o.Repository, true
@@ -1479,7 +1482,7 @@ func (o *ConanPackageUpload) GetRepositoryOk() (*string, bool) {
 
 // HasRepository returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasRepository() bool {
-	if o != nil && !isNil(o.Repository) {
+	if o != nil && !IsNil(o.Repository) {
 		return true
 	}
 
@@ -1493,7 +1496,7 @@ func (o *ConanPackageUpload) SetRepository(v string) {
 
 // GetRepositoryUrl returns the RepositoryUrl field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetRepositoryUrl() string {
-	if o == nil || isNil(o.RepositoryUrl) {
+	if o == nil || IsNil(o.RepositoryUrl) {
 		var ret string
 		return ret
 	}
@@ -1503,7 +1506,7 @@ func (o *ConanPackageUpload) GetRepositoryUrl() string {
 // GetRepositoryUrlOk returns a tuple with the RepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetRepositoryUrlOk() (*string, bool) {
-	if o == nil || isNil(o.RepositoryUrl) {
+	if o == nil || IsNil(o.RepositoryUrl) {
 		return nil, false
 	}
 	return o.RepositoryUrl, true
@@ -1511,7 +1514,7 @@ func (o *ConanPackageUpload) GetRepositoryUrlOk() (*string, bool) {
 
 // HasRepositoryUrl returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasRepositoryUrl() bool {
-	if o != nil && !isNil(o.RepositoryUrl) {
+	if o != nil && !IsNil(o.RepositoryUrl) {
 		return true
 	}
 
@@ -1525,7 +1528,7 @@ func (o *ConanPackageUpload) SetRepositoryUrl(v string) {
 
 // GetSecurityScanCompletedAt returns the SecurityScanCompletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetSecurityScanCompletedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanCompletedAt.Get()) {
+	if o == nil || IsNil(o.SecurityScanCompletedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -1568,7 +1571,7 @@ func (o *ConanPackageUpload) UnsetSecurityScanCompletedAt() {
 
 // GetSecurityScanStartedAt returns the SecurityScanStartedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetSecurityScanStartedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanStartedAt.Get()) {
+	if o == nil || IsNil(o.SecurityScanStartedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -1611,7 +1614,7 @@ func (o *ConanPackageUpload) UnsetSecurityScanStartedAt() {
 
 // GetSecurityScanStatus returns the SecurityScanStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetSecurityScanStatus() string {
-	if o == nil || isNil(o.SecurityScanStatus.Get()) {
+	if o == nil || IsNil(o.SecurityScanStatus.Get()) {
 		var ret string
 		return ret
 	}
@@ -1654,7 +1657,7 @@ func (o *ConanPackageUpload) UnsetSecurityScanStatus() {
 
 // GetSecurityScanStatusUpdatedAt returns the SecurityScanStatusUpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetSecurityScanStatusUpdatedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanStatusUpdatedAt.Get()) {
+	if o == nil || IsNil(o.SecurityScanStatusUpdatedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -1697,7 +1700,7 @@ func (o *ConanPackageUpload) UnsetSecurityScanStatusUpdatedAt() {
 
 // GetSelfHtmlUrl returns the SelfHtmlUrl field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetSelfHtmlUrl() string {
-	if o == nil || isNil(o.SelfHtmlUrl) {
+	if o == nil || IsNil(o.SelfHtmlUrl) {
 		var ret string
 		return ret
 	}
@@ -1707,7 +1710,7 @@ func (o *ConanPackageUpload) GetSelfHtmlUrl() string {
 // GetSelfHtmlUrlOk returns a tuple with the SelfHtmlUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetSelfHtmlUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfHtmlUrl) {
+	if o == nil || IsNil(o.SelfHtmlUrl) {
 		return nil, false
 	}
 	return o.SelfHtmlUrl, true
@@ -1715,7 +1718,7 @@ func (o *ConanPackageUpload) GetSelfHtmlUrlOk() (*string, bool) {
 
 // HasSelfHtmlUrl returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasSelfHtmlUrl() bool {
-	if o != nil && !isNil(o.SelfHtmlUrl) {
+	if o != nil && !IsNil(o.SelfHtmlUrl) {
 		return true
 	}
 
@@ -1729,7 +1732,7 @@ func (o *ConanPackageUpload) SetSelfHtmlUrl(v string) {
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetSelfUrl() string {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		var ret string
 		return ret
 	}
@@ -1739,7 +1742,7 @@ func (o *ConanPackageUpload) GetSelfUrl() string {
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetSelfUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		return nil, false
 	}
 	return o.SelfUrl, true
@@ -1747,7 +1750,7 @@ func (o *ConanPackageUpload) GetSelfUrlOk() (*string, bool) {
 
 // HasSelfUrl returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasSelfUrl() bool {
-	if o != nil && !isNil(o.SelfUrl) {
+	if o != nil && !IsNil(o.SelfUrl) {
 		return true
 	}
 
@@ -1761,7 +1764,7 @@ func (o *ConanPackageUpload) SetSelfUrl(v string) {
 
 // GetSignatureUrl returns the SignatureUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetSignatureUrl() string {
-	if o == nil || isNil(o.SignatureUrl.Get()) {
+	if o == nil || IsNil(o.SignatureUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -1804,7 +1807,7 @@ func (o *ConanPackageUpload) UnsetSignatureUrl() {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetSize() int64 {
-	if o == nil || isNil(o.Size) {
+	if o == nil || IsNil(o.Size) {
 		var ret int64
 		return ret
 	}
@@ -1814,7 +1817,7 @@ func (o *ConanPackageUpload) GetSize() int64 {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetSizeOk() (*int64, bool) {
-	if o == nil || isNil(o.Size) {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -1822,7 +1825,7 @@ func (o *ConanPackageUpload) GetSizeOk() (*int64, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasSize() bool {
-	if o != nil && !isNil(o.Size) {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -1836,7 +1839,7 @@ func (o *ConanPackageUpload) SetSize(v int64) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -1846,7 +1849,7 @@ func (o *ConanPackageUpload) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -1854,7 +1857,7 @@ func (o *ConanPackageUpload) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -1868,7 +1871,7 @@ func (o *ConanPackageUpload) SetSlug(v string) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -1878,7 +1881,7 @@ func (o *ConanPackageUpload) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -1886,7 +1889,7 @@ func (o *ConanPackageUpload) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -1900,7 +1903,7 @@ func (o *ConanPackageUpload) SetSlugPerm(v string) {
 
 // GetStage returns the Stage field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetStage() int64 {
-	if o == nil || isNil(o.Stage) {
+	if o == nil || IsNil(o.Stage) {
 		var ret int64
 		return ret
 	}
@@ -1910,7 +1913,7 @@ func (o *ConanPackageUpload) GetStage() int64 {
 // GetStageOk returns a tuple with the Stage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetStageOk() (*int64, bool) {
-	if o == nil || isNil(o.Stage) {
+	if o == nil || IsNil(o.Stage) {
 		return nil, false
 	}
 	return o.Stage, true
@@ -1918,7 +1921,7 @@ func (o *ConanPackageUpload) GetStageOk() (*int64, bool) {
 
 // HasStage returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasStage() bool {
-	if o != nil && !isNil(o.Stage) {
+	if o != nil && !IsNil(o.Stage) {
 		return true
 	}
 
@@ -1932,7 +1935,7 @@ func (o *ConanPackageUpload) SetStage(v int64) {
 
 // GetStageStr returns the StageStr field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetStageStr() string {
-	if o == nil || isNil(o.StageStr) {
+	if o == nil || IsNil(o.StageStr) {
 		var ret string
 		return ret
 	}
@@ -1942,7 +1945,7 @@ func (o *ConanPackageUpload) GetStageStr() string {
 // GetStageStrOk returns a tuple with the StageStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetStageStrOk() (*string, bool) {
-	if o == nil || isNil(o.StageStr) {
+	if o == nil || IsNil(o.StageStr) {
 		return nil, false
 	}
 	return o.StageStr, true
@@ -1950,7 +1953,7 @@ func (o *ConanPackageUpload) GetStageStrOk() (*string, bool) {
 
 // HasStageStr returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasStageStr() bool {
-	if o != nil && !isNil(o.StageStr) {
+	if o != nil && !IsNil(o.StageStr) {
 		return true
 	}
 
@@ -1964,7 +1967,7 @@ func (o *ConanPackageUpload) SetStageStr(v string) {
 
 // GetStageUpdatedAt returns the StageUpdatedAt field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetStageUpdatedAt() time.Time {
-	if o == nil || isNil(o.StageUpdatedAt) {
+	if o == nil || IsNil(o.StageUpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -1974,7 +1977,7 @@ func (o *ConanPackageUpload) GetStageUpdatedAt() time.Time {
 // GetStageUpdatedAtOk returns a tuple with the StageUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetStageUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.StageUpdatedAt) {
+	if o == nil || IsNil(o.StageUpdatedAt) {
 		return nil, false
 	}
 	return o.StageUpdatedAt, true
@@ -1982,7 +1985,7 @@ func (o *ConanPackageUpload) GetStageUpdatedAtOk() (*time.Time, bool) {
 
 // HasStageUpdatedAt returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasStageUpdatedAt() bool {
-	if o != nil && !isNil(o.StageUpdatedAt) {
+	if o != nil && !IsNil(o.StageUpdatedAt) {
 		return true
 	}
 
@@ -1996,7 +1999,7 @@ func (o *ConanPackageUpload) SetStageUpdatedAt(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetStatus() int64 {
-	if o == nil || isNil(o.Status) {
+	if o == nil || IsNil(o.Status) {
 		var ret int64
 		return ret
 	}
@@ -2006,7 +2009,7 @@ func (o *ConanPackageUpload) GetStatus() int64 {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetStatusOk() (*int64, bool) {
-	if o == nil || isNil(o.Status) {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -2014,7 +2017,7 @@ func (o *ConanPackageUpload) GetStatusOk() (*int64, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasStatus() bool {
-	if o != nil && !isNil(o.Status) {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -2028,7 +2031,7 @@ func (o *ConanPackageUpload) SetStatus(v int64) {
 
 // GetStatusReason returns the StatusReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetStatusReason() string {
-	if o == nil || isNil(o.StatusReason.Get()) {
+	if o == nil || IsNil(o.StatusReason.Get()) {
 		var ret string
 		return ret
 	}
@@ -2071,7 +2074,7 @@ func (o *ConanPackageUpload) UnsetStatusReason() {
 
 // GetStatusStr returns the StatusStr field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetStatusStr() string {
-	if o == nil || isNil(o.StatusStr) {
+	if o == nil || IsNil(o.StatusStr) {
 		var ret string
 		return ret
 	}
@@ -2081,7 +2084,7 @@ func (o *ConanPackageUpload) GetStatusStr() string {
 // GetStatusStrOk returns a tuple with the StatusStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetStatusStrOk() (*string, bool) {
-	if o == nil || isNil(o.StatusStr) {
+	if o == nil || IsNil(o.StatusStr) {
 		return nil, false
 	}
 	return o.StatusStr, true
@@ -2089,7 +2092,7 @@ func (o *ConanPackageUpload) GetStatusStrOk() (*string, bool) {
 
 // HasStatusStr returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasStatusStr() bool {
-	if o != nil && !isNil(o.StatusStr) {
+	if o != nil && !IsNil(o.StatusStr) {
 		return true
 	}
 
@@ -2103,7 +2106,7 @@ func (o *ConanPackageUpload) SetStatusStr(v string) {
 
 // GetStatusUpdatedAt returns the StatusUpdatedAt field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetStatusUpdatedAt() time.Time {
-	if o == nil || isNil(o.StatusUpdatedAt) {
+	if o == nil || IsNil(o.StatusUpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -2113,7 +2116,7 @@ func (o *ConanPackageUpload) GetStatusUpdatedAt() time.Time {
 // GetStatusUpdatedAtOk returns a tuple with the StatusUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetStatusUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.StatusUpdatedAt) {
+	if o == nil || IsNil(o.StatusUpdatedAt) {
 		return nil, false
 	}
 	return o.StatusUpdatedAt, true
@@ -2121,7 +2124,7 @@ func (o *ConanPackageUpload) GetStatusUpdatedAtOk() (*time.Time, bool) {
 
 // HasStatusUpdatedAt returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasStatusUpdatedAt() bool {
-	if o != nil && !isNil(o.StatusUpdatedAt) {
+	if o != nil && !IsNil(o.StatusUpdatedAt) {
 		return true
 	}
 
@@ -2135,7 +2138,7 @@ func (o *ConanPackageUpload) SetStatusUpdatedAt(v time.Time) {
 
 // GetStatusUrl returns the StatusUrl field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetStatusUrl() string {
-	if o == nil || isNil(o.StatusUrl) {
+	if o == nil || IsNil(o.StatusUrl) {
 		var ret string
 		return ret
 	}
@@ -2145,7 +2148,7 @@ func (o *ConanPackageUpload) GetStatusUrl() string {
 // GetStatusUrlOk returns a tuple with the StatusUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetStatusUrlOk() (*string, bool) {
-	if o == nil || isNil(o.StatusUrl) {
+	if o == nil || IsNil(o.StatusUrl) {
 		return nil, false
 	}
 	return o.StatusUrl, true
@@ -2153,7 +2156,7 @@ func (o *ConanPackageUpload) GetStatusUrlOk() (*string, bool) {
 
 // HasStatusUrl returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasStatusUrl() bool {
-	if o != nil && !isNil(o.StatusUrl) {
+	if o != nil && !IsNil(o.StatusUrl) {
 		return true
 	}
 
@@ -2167,7 +2170,7 @@ func (o *ConanPackageUpload) SetStatusUrl(v string) {
 
 // GetSubtype returns the Subtype field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetSubtype() string {
-	if o == nil || isNil(o.Subtype) {
+	if o == nil || IsNil(o.Subtype) {
 		var ret string
 		return ret
 	}
@@ -2177,7 +2180,7 @@ func (o *ConanPackageUpload) GetSubtype() string {
 // GetSubtypeOk returns a tuple with the Subtype field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetSubtypeOk() (*string, bool) {
-	if o == nil || isNil(o.Subtype) {
+	if o == nil || IsNil(o.Subtype) {
 		return nil, false
 	}
 	return o.Subtype, true
@@ -2185,7 +2188,7 @@ func (o *ConanPackageUpload) GetSubtypeOk() (*string, bool) {
 
 // HasSubtype returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasSubtype() bool {
-	if o != nil && !isNil(o.Subtype) {
+	if o != nil && !IsNil(o.Subtype) {
 		return true
 	}
 
@@ -2199,7 +2202,7 @@ func (o *ConanPackageUpload) SetSubtype(v string) {
 
 // GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetSummary() string {
-	if o == nil || isNil(o.Summary.Get()) {
+	if o == nil || IsNil(o.Summary.Get()) {
 		var ret string
 		return ret
 	}
@@ -2242,7 +2245,7 @@ func (o *ConanPackageUpload) UnsetSummary() {
 
 // GetSyncFinishedAt returns the SyncFinishedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetSyncFinishedAt() time.Time {
-	if o == nil || isNil(o.SyncFinishedAt.Get()) {
+	if o == nil || IsNil(o.SyncFinishedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -2285,7 +2288,7 @@ func (o *ConanPackageUpload) UnsetSyncFinishedAt() {
 
 // GetSyncProgress returns the SyncProgress field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetSyncProgress() int64 {
-	if o == nil || isNil(o.SyncProgress) {
+	if o == nil || IsNil(o.SyncProgress) {
 		var ret int64
 		return ret
 	}
@@ -2295,7 +2298,7 @@ func (o *ConanPackageUpload) GetSyncProgress() int64 {
 // GetSyncProgressOk returns a tuple with the SyncProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetSyncProgressOk() (*int64, bool) {
-	if o == nil || isNil(o.SyncProgress) {
+	if o == nil || IsNil(o.SyncProgress) {
 		return nil, false
 	}
 	return o.SyncProgress, true
@@ -2303,7 +2306,7 @@ func (o *ConanPackageUpload) GetSyncProgressOk() (*int64, bool) {
 
 // HasSyncProgress returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasSyncProgress() bool {
-	if o != nil && !isNil(o.SyncProgress) {
+	if o != nil && !IsNil(o.SyncProgress) {
 		return true
 	}
 
@@ -2317,7 +2320,7 @@ func (o *ConanPackageUpload) SetSyncProgress(v int64) {
 
 // GetTagsImmutable returns the TagsImmutable field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetTagsImmutable() map[string]interface{} {
-	if o == nil || isNil(o.TagsImmutable) {
+	if o == nil || IsNil(o.TagsImmutable) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -2327,7 +2330,7 @@ func (o *ConanPackageUpload) GetTagsImmutable() map[string]interface{} {
 // GetTagsImmutableOk returns a tuple with the TagsImmutable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetTagsImmutableOk() (map[string]interface{}, bool) {
-	if o == nil || isNil(o.TagsImmutable) {
+	if o == nil || IsNil(o.TagsImmutable) {
 		return map[string]interface{}{}, false
 	}
 	return o.TagsImmutable, true
@@ -2335,7 +2338,7 @@ func (o *ConanPackageUpload) GetTagsImmutableOk() (map[string]interface{}, bool)
 
 // HasTagsImmutable returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasTagsImmutable() bool {
-	if o != nil && !isNil(o.TagsImmutable) {
+	if o != nil && !IsNil(o.TagsImmutable) {
 		return true
 	}
 
@@ -2349,7 +2352,7 @@ func (o *ConanPackageUpload) SetTagsImmutable(v map[string]interface{}) {
 
 // GetTypeDisplay returns the TypeDisplay field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetTypeDisplay() string {
-	if o == nil || isNil(o.TypeDisplay) {
+	if o == nil || IsNil(o.TypeDisplay) {
 		var ret string
 		return ret
 	}
@@ -2359,7 +2362,7 @@ func (o *ConanPackageUpload) GetTypeDisplay() string {
 // GetTypeDisplayOk returns a tuple with the TypeDisplay field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetTypeDisplayOk() (*string, bool) {
-	if o == nil || isNil(o.TypeDisplay) {
+	if o == nil || IsNil(o.TypeDisplay) {
 		return nil, false
 	}
 	return o.TypeDisplay, true
@@ -2367,7 +2370,7 @@ func (o *ConanPackageUpload) GetTypeDisplayOk() (*string, bool) {
 
 // HasTypeDisplay returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasTypeDisplay() bool {
-	if o != nil && !isNil(o.TypeDisplay) {
+	if o != nil && !IsNil(o.TypeDisplay) {
 		return true
 	}
 
@@ -2381,7 +2384,7 @@ func (o *ConanPackageUpload) SetTypeDisplay(v string) {
 
 // GetUploadedAt returns the UploadedAt field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetUploadedAt() time.Time {
-	if o == nil || isNil(o.UploadedAt) {
+	if o == nil || IsNil(o.UploadedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -2391,7 +2394,7 @@ func (o *ConanPackageUpload) GetUploadedAt() time.Time {
 // GetUploadedAtOk returns a tuple with the UploadedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetUploadedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UploadedAt) {
+	if o == nil || IsNil(o.UploadedAt) {
 		return nil, false
 	}
 	return o.UploadedAt, true
@@ -2399,7 +2402,7 @@ func (o *ConanPackageUpload) GetUploadedAtOk() (*time.Time, bool) {
 
 // HasUploadedAt returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasUploadedAt() bool {
-	if o != nil && !isNil(o.UploadedAt) {
+	if o != nil && !IsNil(o.UploadedAt) {
 		return true
 	}
 
@@ -2413,7 +2416,7 @@ func (o *ConanPackageUpload) SetUploadedAt(v time.Time) {
 
 // GetUploader returns the Uploader field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetUploader() string {
-	if o == nil || isNil(o.Uploader) {
+	if o == nil || IsNil(o.Uploader) {
 		var ret string
 		return ret
 	}
@@ -2423,7 +2426,7 @@ func (o *ConanPackageUpload) GetUploader() string {
 // GetUploaderOk returns a tuple with the Uploader field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetUploaderOk() (*string, bool) {
-	if o == nil || isNil(o.Uploader) {
+	if o == nil || IsNil(o.Uploader) {
 		return nil, false
 	}
 	return o.Uploader, true
@@ -2431,7 +2434,7 @@ func (o *ConanPackageUpload) GetUploaderOk() (*string, bool) {
 
 // HasUploader returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasUploader() bool {
-	if o != nil && !isNil(o.Uploader) {
+	if o != nil && !IsNil(o.Uploader) {
 		return true
 	}
 
@@ -2445,7 +2448,7 @@ func (o *ConanPackageUpload) SetUploader(v string) {
 
 // GetUploaderUrl returns the UploaderUrl field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetUploaderUrl() string {
-	if o == nil || isNil(o.UploaderUrl) {
+	if o == nil || IsNil(o.UploaderUrl) {
 		var ret string
 		return ret
 	}
@@ -2455,7 +2458,7 @@ func (o *ConanPackageUpload) GetUploaderUrl() string {
 // GetUploaderUrlOk returns a tuple with the UploaderUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetUploaderUrlOk() (*string, bool) {
-	if o == nil || isNil(o.UploaderUrl) {
+	if o == nil || IsNil(o.UploaderUrl) {
 		return nil, false
 	}
 	return o.UploaderUrl, true
@@ -2463,7 +2466,7 @@ func (o *ConanPackageUpload) GetUploaderUrlOk() (*string, bool) {
 
 // HasUploaderUrl returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasUploaderUrl() bool {
-	if o != nil && !isNil(o.UploaderUrl) {
+	if o != nil && !IsNil(o.UploaderUrl) {
 		return true
 	}
 
@@ -2477,7 +2480,7 @@ func (o *ConanPackageUpload) SetUploaderUrl(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConanPackageUpload) GetVersion() string {
-	if o == nil || isNil(o.Version.Get()) {
+	if o == nil || IsNil(o.Version.Get()) {
 		var ret string
 		return ret
 	}
@@ -2520,7 +2523,7 @@ func (o *ConanPackageUpload) UnsetVersion() {
 
 // GetVersionOrig returns the VersionOrig field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetVersionOrig() string {
-	if o == nil || isNil(o.VersionOrig) {
+	if o == nil || IsNil(o.VersionOrig) {
 		var ret string
 		return ret
 	}
@@ -2530,7 +2533,7 @@ func (o *ConanPackageUpload) GetVersionOrig() string {
 // GetVersionOrigOk returns a tuple with the VersionOrig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetVersionOrigOk() (*string, bool) {
-	if o == nil || isNil(o.VersionOrig) {
+	if o == nil || IsNil(o.VersionOrig) {
 		return nil, false
 	}
 	return o.VersionOrig, true
@@ -2538,7 +2541,7 @@ func (o *ConanPackageUpload) GetVersionOrigOk() (*string, bool) {
 
 // HasVersionOrig returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasVersionOrig() bool {
-	if o != nil && !isNil(o.VersionOrig) {
+	if o != nil && !IsNil(o.VersionOrig) {
 		return true
 	}
 
@@ -2552,7 +2555,7 @@ func (o *ConanPackageUpload) SetVersionOrig(v string) {
 
 // GetVulnerabilityScanResultsUrl returns the VulnerabilityScanResultsUrl field value if set, zero value otherwise.
 func (o *ConanPackageUpload) GetVulnerabilityScanResultsUrl() string {
-	if o == nil || isNil(o.VulnerabilityScanResultsUrl) {
+	if o == nil || IsNil(o.VulnerabilityScanResultsUrl) {
 		var ret string
 		return ret
 	}
@@ -2562,7 +2565,7 @@ func (o *ConanPackageUpload) GetVulnerabilityScanResultsUrl() string {
 // GetVulnerabilityScanResultsUrlOk returns a tuple with the VulnerabilityScanResultsUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConanPackageUpload) GetVulnerabilityScanResultsUrlOk() (*string, bool) {
-	if o == nil || isNil(o.VulnerabilityScanResultsUrl) {
+	if o == nil || IsNil(o.VulnerabilityScanResultsUrl) {
 		return nil, false
 	}
 	return o.VulnerabilityScanResultsUrl, true
@@ -2570,7 +2573,7 @@ func (o *ConanPackageUpload) GetVulnerabilityScanResultsUrlOk() (*string, bool) 
 
 // HasVulnerabilityScanResultsUrl returns a boolean if a field has been set.
 func (o *ConanPackageUpload) HasVulnerabilityScanResultsUrl() bool {
-	if o != nil && !isNil(o.VulnerabilityScanResultsUrl) {
+	if o != nil && !IsNil(o.VulnerabilityScanResultsUrl) {
 		return true
 	}
 
@@ -2583,23 +2586,31 @@ func (o *ConanPackageUpload) SetVulnerabilityScanResultsUrl(v string) {
 }
 
 func (o ConanPackageUpload) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ConanPackageUpload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Architectures) {
+	if !IsNil(o.Architectures) {
 		toSerialize["architectures"] = o.Architectures
 	}
 	if o.CdnUrl.IsSet() {
 		toSerialize["cdn_url"] = o.CdnUrl.Get()
 	}
-	if !isNil(o.ChecksumMd5) {
+	if !IsNil(o.ChecksumMd5) {
 		toSerialize["checksum_md5"] = o.ChecksumMd5
 	}
-	if !isNil(o.ChecksumSha1) {
+	if !IsNil(o.ChecksumSha1) {
 		toSerialize["checksum_sha1"] = o.ChecksumSha1
 	}
-	if !isNil(o.ChecksumSha256) {
+	if !IsNil(o.ChecksumSha256) {
 		toSerialize["checksum_sha256"] = o.ChecksumSha256
 	}
-	if !isNil(o.ChecksumSha512) {
+	if !IsNil(o.ChecksumSha512) {
 		toSerialize["checksum_sha512"] = o.ChecksumSha512
 	}
 	if o.ConanChannel.IsSet() {
@@ -2611,7 +2622,7 @@ func (o ConanPackageUpload) MarshalJSON() ([]byte, error) {
 	if o.DependenciesChecksumMd5.IsSet() {
 		toSerialize["dependencies_checksum_md5"] = o.DependenciesChecksumMd5.Get()
 	}
-	if !isNil(o.DependenciesUrl) {
+	if !IsNil(o.DependenciesUrl) {
 		toSerialize["dependencies_url"] = o.DependenciesUrl
 	}
 	if o.Description.IsSet() {
@@ -2620,55 +2631,55 @@ func (o ConanPackageUpload) MarshalJSON() ([]byte, error) {
 	if o.Distro.IsSet() {
 		toSerialize["distro"] = o.Distro.Get()
 	}
-	if !isNil(o.DistroVersion) {
+	if !IsNil(o.DistroVersion) {
 		toSerialize["distro_version"] = o.DistroVersion
 	}
-	if !isNil(o.Downloads) {
+	if !IsNil(o.Downloads) {
 		toSerialize["downloads"] = o.Downloads
 	}
 	if o.Epoch.IsSet() {
 		toSerialize["epoch"] = o.Epoch.Get()
 	}
-	if !isNil(o.Extension) {
+	if !IsNil(o.Extension) {
 		toSerialize["extension"] = o.Extension
 	}
-	if !isNil(o.Filename) {
+	if !IsNil(o.Filename) {
 		toSerialize["filename"] = o.Filename
 	}
-	if !isNil(o.Files) {
+	if !IsNil(o.Files) {
 		toSerialize["files"] = o.Files
 	}
-	if !isNil(o.Format) {
+	if !IsNil(o.Format) {
 		toSerialize["format"] = o.Format
 	}
-	if !isNil(o.FormatUrl) {
+	if !IsNil(o.FormatUrl) {
 		toSerialize["format_url"] = o.FormatUrl
 	}
-	if !isNil(o.IdentifierPerm) {
+	if !IsNil(o.IdentifierPerm) {
 		toSerialize["identifier_perm"] = o.IdentifierPerm
 	}
-	if !isNil(o.Indexed) {
+	if !IsNil(o.Indexed) {
 		toSerialize["indexed"] = o.Indexed
 	}
-	if !isNil(o.IsDownloadable) {
+	if !IsNil(o.IsDownloadable) {
 		toSerialize["is_downloadable"] = o.IsDownloadable
 	}
-	if !isNil(o.IsQuarantined) {
+	if !IsNil(o.IsQuarantined) {
 		toSerialize["is_quarantined"] = o.IsQuarantined
 	}
-	if !isNil(o.IsSyncAwaiting) {
+	if !IsNil(o.IsSyncAwaiting) {
 		toSerialize["is_sync_awaiting"] = o.IsSyncAwaiting
 	}
-	if !isNil(o.IsSyncCompleted) {
+	if !IsNil(o.IsSyncCompleted) {
 		toSerialize["is_sync_completed"] = o.IsSyncCompleted
 	}
-	if !isNil(o.IsSyncFailed) {
+	if !IsNil(o.IsSyncFailed) {
 		toSerialize["is_sync_failed"] = o.IsSyncFailed
 	}
-	if !isNil(o.IsSyncInFlight) {
+	if !IsNil(o.IsSyncInFlight) {
 		toSerialize["is_sync_in_flight"] = o.IsSyncInFlight
 	}
-	if !isNil(o.IsSyncInProgress) {
+	if !IsNil(o.IsSyncInProgress) {
 		toSerialize["is_sync_in_progress"] = o.IsSyncInProgress
 	}
 	if o.License.IsSet() {
@@ -2677,31 +2688,31 @@ func (o ConanPackageUpload) MarshalJSON() ([]byte, error) {
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
-	if !isNil(o.Namespace) {
+	if !IsNil(o.Namespace) {
 		toSerialize["namespace"] = o.Namespace
 	}
-	if !isNil(o.NamespaceUrl) {
+	if !IsNil(o.NamespaceUrl) {
 		toSerialize["namespace_url"] = o.NamespaceUrl
 	}
-	if !isNil(o.NumFiles) {
+	if !IsNil(o.NumFiles) {
 		toSerialize["num_files"] = o.NumFiles
 	}
-	if !isNil(o.OriginRepository) {
+	if !IsNil(o.OriginRepository) {
 		toSerialize["origin_repository"] = o.OriginRepository
 	}
-	if !isNil(o.OriginRepositoryUrl) {
+	if !IsNil(o.OriginRepositoryUrl) {
 		toSerialize["origin_repository_url"] = o.OriginRepositoryUrl
 	}
-	if !isNil(o.PackageType) {
+	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
 	}
 	if o.Release.IsSet() {
 		toSerialize["release"] = o.Release.Get()
 	}
-	if !isNil(o.Repository) {
+	if !IsNil(o.Repository) {
 		toSerialize["repository"] = o.Repository
 	}
-	if !isNil(o.RepositoryUrl) {
+	if !IsNil(o.RepositoryUrl) {
 		toSerialize["repository_url"] = o.RepositoryUrl
 	}
 	if o.SecurityScanCompletedAt.IsSet() {
@@ -2716,49 +2727,49 @@ func (o ConanPackageUpload) MarshalJSON() ([]byte, error) {
 	if o.SecurityScanStatusUpdatedAt.IsSet() {
 		toSerialize["security_scan_status_updated_at"] = o.SecurityScanStatusUpdatedAt.Get()
 	}
-	if !isNil(o.SelfHtmlUrl) {
+	if !IsNil(o.SelfHtmlUrl) {
 		toSerialize["self_html_url"] = o.SelfHtmlUrl
 	}
-	if !isNil(o.SelfUrl) {
+	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
 	if o.SignatureUrl.IsSet() {
 		toSerialize["signature_url"] = o.SignatureUrl.Get()
 	}
-	if !isNil(o.Size) {
+	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
-	if !isNil(o.Slug) {
+	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
-	if !isNil(o.Stage) {
+	if !IsNil(o.Stage) {
 		toSerialize["stage"] = o.Stage
 	}
-	if !isNil(o.StageStr) {
+	if !IsNil(o.StageStr) {
 		toSerialize["stage_str"] = o.StageStr
 	}
-	if !isNil(o.StageUpdatedAt) {
+	if !IsNil(o.StageUpdatedAt) {
 		toSerialize["stage_updated_at"] = o.StageUpdatedAt
 	}
-	if !isNil(o.Status) {
+	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
 	if o.StatusReason.IsSet() {
 		toSerialize["status_reason"] = o.StatusReason.Get()
 	}
-	if !isNil(o.StatusStr) {
+	if !IsNil(o.StatusStr) {
 		toSerialize["status_str"] = o.StatusStr
 	}
-	if !isNil(o.StatusUpdatedAt) {
+	if !IsNil(o.StatusUpdatedAt) {
 		toSerialize["status_updated_at"] = o.StatusUpdatedAt
 	}
-	if !isNil(o.StatusUrl) {
+	if !IsNil(o.StatusUrl) {
 		toSerialize["status_url"] = o.StatusUrl
 	}
-	if !isNil(o.Subtype) {
+	if !IsNil(o.Subtype) {
 		toSerialize["subtype"] = o.Subtype
 	}
 	if o.Summary.IsSet() {
@@ -2767,34 +2778,34 @@ func (o ConanPackageUpload) MarshalJSON() ([]byte, error) {
 	if o.SyncFinishedAt.IsSet() {
 		toSerialize["sync_finished_at"] = o.SyncFinishedAt.Get()
 	}
-	if !isNil(o.SyncProgress) {
+	if !IsNil(o.SyncProgress) {
 		toSerialize["sync_progress"] = o.SyncProgress
 	}
-	if !isNil(o.TagsImmutable) {
+	if !IsNil(o.TagsImmutable) {
 		toSerialize["tags_immutable"] = o.TagsImmutable
 	}
-	if !isNil(o.TypeDisplay) {
+	if !IsNil(o.TypeDisplay) {
 		toSerialize["type_display"] = o.TypeDisplay
 	}
-	if !isNil(o.UploadedAt) {
+	if !IsNil(o.UploadedAt) {
 		toSerialize["uploaded_at"] = o.UploadedAt
 	}
-	if !isNil(o.Uploader) {
+	if !IsNil(o.Uploader) {
 		toSerialize["uploader"] = o.Uploader
 	}
-	if !isNil(o.UploaderUrl) {
+	if !IsNil(o.UploaderUrl) {
 		toSerialize["uploader_url"] = o.UploaderUrl
 	}
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
-	if !isNil(o.VersionOrig) {
+	if !IsNil(o.VersionOrig) {
 		toSerialize["version_orig"] = o.VersionOrig
 	}
-	if !isNil(o.VulnerabilityScanResultsUrl) {
+	if !IsNil(o.VulnerabilityScanResultsUrl) {
 		toSerialize["vulnerability_scan_results_url"] = o.VulnerabilityScanResultsUrl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableConanPackageUpload struct {

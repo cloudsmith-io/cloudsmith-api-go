@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the PackageLicensePolicyViolationLog type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageLicensePolicyViolationLog{}
 
 // PackageLicensePolicyViolationLog struct for PackageLicensePolicyViolationLog
 type PackageLicensePolicyViolationLog struct {
@@ -46,7 +49,7 @@ func NewPackageLicensePolicyViolationLogWithDefaults() *PackageLicensePolicyViol
 
 // GetEventAt returns the EventAt field value if set, zero value otherwise.
 func (o *PackageLicensePolicyViolationLog) GetEventAt() time.Time {
-	if o == nil || isNil(o.EventAt) {
+	if o == nil || IsNil(o.EventAt) {
 		var ret time.Time
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *PackageLicensePolicyViolationLog) GetEventAt() time.Time {
 // GetEventAtOk returns a tuple with the EventAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageLicensePolicyViolationLog) GetEventAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.EventAt) {
+	if o == nil || IsNil(o.EventAt) {
 		return nil, false
 	}
 	return o.EventAt, true
@@ -64,7 +67,7 @@ func (o *PackageLicensePolicyViolationLog) GetEventAtOk() (*time.Time, bool) {
 
 // HasEventAt returns a boolean if a field has been set.
 func (o *PackageLicensePolicyViolationLog) HasEventAt() bool {
-	if o != nil && !isNil(o.EventAt) {
+	if o != nil && !IsNil(o.EventAt) {
 		return true
 	}
 
@@ -149,20 +152,22 @@ func (o *PackageLicensePolicyViolationLog) SetReasons(v []string) {
 }
 
 func (o PackageLicensePolicyViolationLog) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.EventAt) {
-		toSerialize["event_at"] = o.EventAt
-	}
-	if true {
-		toSerialize["package"] = o.Package
-	}
-	if true {
-		toSerialize["policy"] = o.Policy
-	}
-	if true {
-		toSerialize["reasons"] = o.Reasons
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PackageLicensePolicyViolationLog) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.EventAt) {
+		toSerialize["event_at"] = o.EventAt
+	}
+	toSerialize["package"] = o.Package
+	toSerialize["policy"] = o.Policy
+	toSerialize["reasons"] = o.Reasons
+	return toSerialize, nil
 }
 
 type NullablePackageLicensePolicyViolationLog struct {

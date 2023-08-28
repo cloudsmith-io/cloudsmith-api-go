@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the PackageLicensePolicyViolationLogCursorPage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageLicensePolicyViolationLogCursorPage{}
 
 // PackageLicensePolicyViolationLogCursorPage struct for PackageLicensePolicyViolationLogCursorPage
 type PackageLicensePolicyViolationLogCursorPage struct {
@@ -42,7 +45,7 @@ func NewPackageLicensePolicyViolationLogCursorPageWithDefaults() *PackageLicense
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageLicensePolicyViolationLogCursorPage) GetNext() string {
-	if o == nil || isNil(o.Next.Get()) {
+	if o == nil || IsNil(o.Next.Get()) {
 		var ret string
 		return ret
 	}
@@ -85,7 +88,7 @@ func (o *PackageLicensePolicyViolationLogCursorPage) UnsetNext() {
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageLicensePolicyViolationLogCursorPage) GetPrevious() string {
-	if o == nil || isNil(o.Previous.Get()) {
+	if o == nil || IsNil(o.Previous.Get()) {
 		var ret string
 		return ret
 	}
@@ -151,6 +154,14 @@ func (o *PackageLicensePolicyViolationLogCursorPage) SetResults(v []PackageLicen
 }
 
 func (o PackageLicensePolicyViolationLogCursorPage) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PackageLicensePolicyViolationLogCursorPage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Next.IsSet() {
 		toSerialize["next"] = o.Next.Get()
@@ -158,10 +169,8 @@ func (o PackageLicensePolicyViolationLogCursorPage) MarshalJSON() ([]byte, error
 	if o.Previous.IsSet() {
 		toSerialize["previous"] = o.Previous.Get()
 	}
-	if true {
-		toSerialize["results"] = o.Results
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["results"] = o.Results
+	return toSerialize, nil
 }
 
 type NullablePackageLicensePolicyViolationLogCursorPage struct {

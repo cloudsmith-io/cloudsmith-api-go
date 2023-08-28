@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RepositoryPrivilegeInputRequestPatch type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryPrivilegeInputRequestPatch{}
 
 // RepositoryPrivilegeInputRequestPatch struct for RepositoryPrivilegeInputRequestPatch
 type RepositoryPrivilegeInputRequestPatch struct {
@@ -40,7 +43,7 @@ func NewRepositoryPrivilegeInputRequestPatchWithDefaults() *RepositoryPrivilegeI
 
 // GetPrivileges returns the Privileges field value if set, zero value otherwise.
 func (o *RepositoryPrivilegeInputRequestPatch) GetPrivileges() []RepositoryPrivilegeDict {
-	if o == nil || isNil(o.Privileges) {
+	if o == nil || IsNil(o.Privileges) {
 		var ret []RepositoryPrivilegeDict
 		return ret
 	}
@@ -50,7 +53,7 @@ func (o *RepositoryPrivilegeInputRequestPatch) GetPrivileges() []RepositoryPrivi
 // GetPrivilegesOk returns a tuple with the Privileges field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryPrivilegeInputRequestPatch) GetPrivilegesOk() ([]RepositoryPrivilegeDict, bool) {
-	if o == nil || isNil(o.Privileges) {
+	if o == nil || IsNil(o.Privileges) {
 		return nil, false
 	}
 	return o.Privileges, true
@@ -58,7 +61,7 @@ func (o *RepositoryPrivilegeInputRequestPatch) GetPrivilegesOk() ([]RepositoryPr
 
 // HasPrivileges returns a boolean if a field has been set.
 func (o *RepositoryPrivilegeInputRequestPatch) HasPrivileges() bool {
-	if o != nil && !isNil(o.Privileges) {
+	if o != nil && !IsNil(o.Privileges) {
 		return true
 	}
 
@@ -71,11 +74,19 @@ func (o *RepositoryPrivilegeInputRequestPatch) SetPrivileges(v []RepositoryPrivi
 }
 
 func (o RepositoryPrivilegeInputRequestPatch) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Privileges) {
-		toSerialize["privileges"] = o.Privileges
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryPrivilegeInputRequestPatch) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Privileges) {
+		toSerialize["privileges"] = o.Privileges
+	}
+	return toSerialize, nil
 }
 
 type NullableRepositoryPrivilegeInputRequestPatch struct {

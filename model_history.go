@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the History type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &History{}
 
 // History struct for History
 type History struct {
@@ -50,7 +53,7 @@ func NewHistoryWithDefaults() *History {
 
 // GetDays returns the Days field value if set, zero value otherwise.
 func (o *History) GetDays() int64 {
-	if o == nil || isNil(o.Days) {
+	if o == nil || IsNil(o.Days) {
 		var ret int64
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *History) GetDays() int64 {
 // GetDaysOk returns a tuple with the Days field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *History) GetDaysOk() (*int64, bool) {
-	if o == nil || isNil(o.Days) {
+	if o == nil || IsNil(o.Days) {
 		return nil, false
 	}
 	return o.Days, true
@@ -68,7 +71,7 @@ func (o *History) GetDaysOk() (*int64, bool) {
 
 // HasDays returns a boolean if a field has been set.
 func (o *History) HasDays() bool {
-	if o != nil && !isNil(o.Days) {
+	if o != nil && !IsNil(o.Days) {
 		return true
 	}
 
@@ -201,26 +204,24 @@ func (o *History) SetStart(v time.Time) {
 }
 
 func (o History) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Days) {
-		toSerialize["days"] = o.Days
-	}
-	if true {
-		toSerialize["display"] = o.Display
-	}
-	if true {
-		toSerialize["end"] = o.End
-	}
-	if true {
-		toSerialize["plan"] = o.Plan
-	}
-	if true {
-		toSerialize["raw"] = o.Raw
-	}
-	if true {
-		toSerialize["start"] = o.Start
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o History) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Days) {
+		toSerialize["days"] = o.Days
+	}
+	toSerialize["display"] = o.Display
+	toSerialize["end"] = o.End
+	toSerialize["plan"] = o.Plan
+	toSerialize["raw"] = o.Raw
+	toSerialize["start"] = o.Start
+	return toSerialize, nil
 }
 
 type NullableHistory struct {

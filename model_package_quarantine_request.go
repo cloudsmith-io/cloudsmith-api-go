@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the PackageQuarantineRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageQuarantineRequest{}
 
 // PackageQuarantineRequest struct for PackageQuarantineRequest
 type PackageQuarantineRequest struct {
@@ -40,7 +43,7 @@ func NewPackageQuarantineRequestWithDefaults() *PackageQuarantineRequest {
 
 // GetRestore returns the Restore field value if set, zero value otherwise.
 func (o *PackageQuarantineRequest) GetRestore() bool {
-	if o == nil || isNil(o.Restore) {
+	if o == nil || IsNil(o.Restore) {
 		var ret bool
 		return ret
 	}
@@ -50,7 +53,7 @@ func (o *PackageQuarantineRequest) GetRestore() bool {
 // GetRestoreOk returns a tuple with the Restore field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageQuarantineRequest) GetRestoreOk() (*bool, bool) {
-	if o == nil || isNil(o.Restore) {
+	if o == nil || IsNil(o.Restore) {
 		return nil, false
 	}
 	return o.Restore, true
@@ -58,7 +61,7 @@ func (o *PackageQuarantineRequest) GetRestoreOk() (*bool, bool) {
 
 // HasRestore returns a boolean if a field has been set.
 func (o *PackageQuarantineRequest) HasRestore() bool {
-	if o != nil && !isNil(o.Restore) {
+	if o != nil && !IsNil(o.Restore) {
 		return true
 	}
 
@@ -71,11 +74,19 @@ func (o *PackageQuarantineRequest) SetRestore(v bool) {
 }
 
 func (o PackageQuarantineRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Restore) {
-		toSerialize["restore"] = o.Restore
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PackageQuarantineRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Restore) {
+		toSerialize["restore"] = o.Restore
+	}
+	return toSerialize, nil
 }
 
 type NullablePackageQuarantineRequest struct {

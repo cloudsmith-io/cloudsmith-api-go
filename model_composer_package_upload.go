@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the ComposerPackageUpload type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ComposerPackageUpload{}
 
 // ComposerPackageUpload struct for ComposerPackageUpload
 type ComposerPackageUpload struct {
@@ -131,7 +134,7 @@ func NewComposerPackageUploadWithDefaults() *ComposerPackageUpload {
 
 // GetArchitectures returns the Architectures field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetArchitectures() []Architecture {
-	if o == nil || isNil(o.Architectures) {
+	if o == nil || IsNil(o.Architectures) {
 		var ret []Architecture
 		return ret
 	}
@@ -141,7 +144,7 @@ func (o *ComposerPackageUpload) GetArchitectures() []Architecture {
 // GetArchitecturesOk returns a tuple with the Architectures field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetArchitecturesOk() ([]Architecture, bool) {
-	if o == nil || isNil(o.Architectures) {
+	if o == nil || IsNil(o.Architectures) {
 		return nil, false
 	}
 	return o.Architectures, true
@@ -149,7 +152,7 @@ func (o *ComposerPackageUpload) GetArchitecturesOk() ([]Architecture, bool) {
 
 // HasArchitectures returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasArchitectures() bool {
-	if o != nil && !isNil(o.Architectures) {
+	if o != nil && !IsNil(o.Architectures) {
 		return true
 	}
 
@@ -163,7 +166,7 @@ func (o *ComposerPackageUpload) SetArchitectures(v []Architecture) {
 
 // GetCdnUrl returns the CdnUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetCdnUrl() string {
-	if o == nil || isNil(o.CdnUrl.Get()) {
+	if o == nil || IsNil(o.CdnUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -206,7 +209,7 @@ func (o *ComposerPackageUpload) UnsetCdnUrl() {
 
 // GetChecksumMd5 returns the ChecksumMd5 field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetChecksumMd5() string {
-	if o == nil || isNil(o.ChecksumMd5) {
+	if o == nil || IsNil(o.ChecksumMd5) {
 		var ret string
 		return ret
 	}
@@ -216,7 +219,7 @@ func (o *ComposerPackageUpload) GetChecksumMd5() string {
 // GetChecksumMd5Ok returns a tuple with the ChecksumMd5 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetChecksumMd5Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumMd5) {
+	if o == nil || IsNil(o.ChecksumMd5) {
 		return nil, false
 	}
 	return o.ChecksumMd5, true
@@ -224,7 +227,7 @@ func (o *ComposerPackageUpload) GetChecksumMd5Ok() (*string, bool) {
 
 // HasChecksumMd5 returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasChecksumMd5() bool {
-	if o != nil && !isNil(o.ChecksumMd5) {
+	if o != nil && !IsNil(o.ChecksumMd5) {
 		return true
 	}
 
@@ -238,7 +241,7 @@ func (o *ComposerPackageUpload) SetChecksumMd5(v string) {
 
 // GetChecksumSha1 returns the ChecksumSha1 field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetChecksumSha1() string {
-	if o == nil || isNil(o.ChecksumSha1) {
+	if o == nil || IsNil(o.ChecksumSha1) {
 		var ret string
 		return ret
 	}
@@ -248,7 +251,7 @@ func (o *ComposerPackageUpload) GetChecksumSha1() string {
 // GetChecksumSha1Ok returns a tuple with the ChecksumSha1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetChecksumSha1Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha1) {
+	if o == nil || IsNil(o.ChecksumSha1) {
 		return nil, false
 	}
 	return o.ChecksumSha1, true
@@ -256,7 +259,7 @@ func (o *ComposerPackageUpload) GetChecksumSha1Ok() (*string, bool) {
 
 // HasChecksumSha1 returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasChecksumSha1() bool {
-	if o != nil && !isNil(o.ChecksumSha1) {
+	if o != nil && !IsNil(o.ChecksumSha1) {
 		return true
 	}
 
@@ -270,7 +273,7 @@ func (o *ComposerPackageUpload) SetChecksumSha1(v string) {
 
 // GetChecksumSha256 returns the ChecksumSha256 field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetChecksumSha256() string {
-	if o == nil || isNil(o.ChecksumSha256) {
+	if o == nil || IsNil(o.ChecksumSha256) {
 		var ret string
 		return ret
 	}
@@ -280,7 +283,7 @@ func (o *ComposerPackageUpload) GetChecksumSha256() string {
 // GetChecksumSha256Ok returns a tuple with the ChecksumSha256 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetChecksumSha256Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha256) {
+	if o == nil || IsNil(o.ChecksumSha256) {
 		return nil, false
 	}
 	return o.ChecksumSha256, true
@@ -288,7 +291,7 @@ func (o *ComposerPackageUpload) GetChecksumSha256Ok() (*string, bool) {
 
 // HasChecksumSha256 returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasChecksumSha256() bool {
-	if o != nil && !isNil(o.ChecksumSha256) {
+	if o != nil && !IsNil(o.ChecksumSha256) {
 		return true
 	}
 
@@ -302,7 +305,7 @@ func (o *ComposerPackageUpload) SetChecksumSha256(v string) {
 
 // GetChecksumSha512 returns the ChecksumSha512 field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetChecksumSha512() string {
-	if o == nil || isNil(o.ChecksumSha512) {
+	if o == nil || IsNil(o.ChecksumSha512) {
 		var ret string
 		return ret
 	}
@@ -312,7 +315,7 @@ func (o *ComposerPackageUpload) GetChecksumSha512() string {
 // GetChecksumSha512Ok returns a tuple with the ChecksumSha512 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetChecksumSha512Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha512) {
+	if o == nil || IsNil(o.ChecksumSha512) {
 		return nil, false
 	}
 	return o.ChecksumSha512, true
@@ -320,7 +323,7 @@ func (o *ComposerPackageUpload) GetChecksumSha512Ok() (*string, bool) {
 
 // HasChecksumSha512 returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasChecksumSha512() bool {
-	if o != nil && !isNil(o.ChecksumSha512) {
+	if o != nil && !IsNil(o.ChecksumSha512) {
 		return true
 	}
 
@@ -334,7 +337,7 @@ func (o *ComposerPackageUpload) SetChecksumSha512(v string) {
 
 // GetDependenciesChecksumMd5 returns the DependenciesChecksumMd5 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetDependenciesChecksumMd5() string {
-	if o == nil || isNil(o.DependenciesChecksumMd5.Get()) {
+	if o == nil || IsNil(o.DependenciesChecksumMd5.Get()) {
 		var ret string
 		return ret
 	}
@@ -377,7 +380,7 @@ func (o *ComposerPackageUpload) UnsetDependenciesChecksumMd5() {
 
 // GetDependenciesUrl returns the DependenciesUrl field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetDependenciesUrl() string {
-	if o == nil || isNil(o.DependenciesUrl) {
+	if o == nil || IsNil(o.DependenciesUrl) {
 		var ret string
 		return ret
 	}
@@ -387,7 +390,7 @@ func (o *ComposerPackageUpload) GetDependenciesUrl() string {
 // GetDependenciesUrlOk returns a tuple with the DependenciesUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetDependenciesUrlOk() (*string, bool) {
-	if o == nil || isNil(o.DependenciesUrl) {
+	if o == nil || IsNil(o.DependenciesUrl) {
 		return nil, false
 	}
 	return o.DependenciesUrl, true
@@ -395,7 +398,7 @@ func (o *ComposerPackageUpload) GetDependenciesUrlOk() (*string, bool) {
 
 // HasDependenciesUrl returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasDependenciesUrl() bool {
-	if o != nil && !isNil(o.DependenciesUrl) {
+	if o != nil && !IsNil(o.DependenciesUrl) {
 		return true
 	}
 
@@ -409,7 +412,7 @@ func (o *ComposerPackageUpload) SetDependenciesUrl(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetDescription() string {
-	if o == nil || isNil(o.Description.Get()) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
@@ -452,7 +455,7 @@ func (o *ComposerPackageUpload) UnsetDescription() {
 
 // GetDistro returns the Distro field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetDistro() Distribution {
-	if o == nil || isNil(o.Distro.Get()) {
+	if o == nil || IsNil(o.Distro.Get()) {
 		var ret Distribution
 		return ret
 	}
@@ -495,7 +498,7 @@ func (o *ComposerPackageUpload) UnsetDistro() {
 
 // GetDistroVersion returns the DistroVersion field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetDistroVersion() DistributionVersion {
-	if o == nil || isNil(o.DistroVersion) {
+	if o == nil || IsNil(o.DistroVersion) {
 		var ret DistributionVersion
 		return ret
 	}
@@ -505,7 +508,7 @@ func (o *ComposerPackageUpload) GetDistroVersion() DistributionVersion {
 // GetDistroVersionOk returns a tuple with the DistroVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetDistroVersionOk() (*DistributionVersion, bool) {
-	if o == nil || isNil(o.DistroVersion) {
+	if o == nil || IsNil(o.DistroVersion) {
 		return nil, false
 	}
 	return o.DistroVersion, true
@@ -513,7 +516,7 @@ func (o *ComposerPackageUpload) GetDistroVersionOk() (*DistributionVersion, bool
 
 // HasDistroVersion returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasDistroVersion() bool {
-	if o != nil && !isNil(o.DistroVersion) {
+	if o != nil && !IsNil(o.DistroVersion) {
 		return true
 	}
 
@@ -527,7 +530,7 @@ func (o *ComposerPackageUpload) SetDistroVersion(v DistributionVersion) {
 
 // GetDownloads returns the Downloads field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetDownloads() int64 {
-	if o == nil || isNil(o.Downloads) {
+	if o == nil || IsNil(o.Downloads) {
 		var ret int64
 		return ret
 	}
@@ -537,7 +540,7 @@ func (o *ComposerPackageUpload) GetDownloads() int64 {
 // GetDownloadsOk returns a tuple with the Downloads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetDownloadsOk() (*int64, bool) {
-	if o == nil || isNil(o.Downloads) {
+	if o == nil || IsNil(o.Downloads) {
 		return nil, false
 	}
 	return o.Downloads, true
@@ -545,7 +548,7 @@ func (o *ComposerPackageUpload) GetDownloadsOk() (*int64, bool) {
 
 // HasDownloads returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasDownloads() bool {
-	if o != nil && !isNil(o.Downloads) {
+	if o != nil && !IsNil(o.Downloads) {
 		return true
 	}
 
@@ -559,7 +562,7 @@ func (o *ComposerPackageUpload) SetDownloads(v int64) {
 
 // GetEpoch returns the Epoch field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetEpoch() int64 {
-	if o == nil || isNil(o.Epoch.Get()) {
+	if o == nil || IsNil(o.Epoch.Get()) {
 		var ret int64
 		return ret
 	}
@@ -602,7 +605,7 @@ func (o *ComposerPackageUpload) UnsetEpoch() {
 
 // GetExtension returns the Extension field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetExtension() string {
-	if o == nil || isNil(o.Extension) {
+	if o == nil || IsNil(o.Extension) {
 		var ret string
 		return ret
 	}
@@ -612,7 +615,7 @@ func (o *ComposerPackageUpload) GetExtension() string {
 // GetExtensionOk returns a tuple with the Extension field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetExtensionOk() (*string, bool) {
-	if o == nil || isNil(o.Extension) {
+	if o == nil || IsNil(o.Extension) {
 		return nil, false
 	}
 	return o.Extension, true
@@ -620,7 +623,7 @@ func (o *ComposerPackageUpload) GetExtensionOk() (*string, bool) {
 
 // HasExtension returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasExtension() bool {
-	if o != nil && !isNil(o.Extension) {
+	if o != nil && !IsNil(o.Extension) {
 		return true
 	}
 
@@ -634,7 +637,7 @@ func (o *ComposerPackageUpload) SetExtension(v string) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetFilename() string {
-	if o == nil || isNil(o.Filename) {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -644,7 +647,7 @@ func (o *ComposerPackageUpload) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetFilenameOk() (*string, bool) {
-	if o == nil || isNil(o.Filename) {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -652,7 +655,7 @@ func (o *ComposerPackageUpload) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasFilename() bool {
-	if o != nil && !isNil(o.Filename) {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -666,7 +669,7 @@ func (o *ComposerPackageUpload) SetFilename(v string) {
 
 // GetFiles returns the Files field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetFiles() []PackageFile {
-	if o == nil || isNil(o.Files) {
+	if o == nil || IsNil(o.Files) {
 		var ret []PackageFile
 		return ret
 	}
@@ -676,7 +679,7 @@ func (o *ComposerPackageUpload) GetFiles() []PackageFile {
 // GetFilesOk returns a tuple with the Files field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetFilesOk() ([]PackageFile, bool) {
-	if o == nil || isNil(o.Files) {
+	if o == nil || IsNil(o.Files) {
 		return nil, false
 	}
 	return o.Files, true
@@ -684,7 +687,7 @@ func (o *ComposerPackageUpload) GetFilesOk() ([]PackageFile, bool) {
 
 // HasFiles returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasFiles() bool {
-	if o != nil && !isNil(o.Files) {
+	if o != nil && !IsNil(o.Files) {
 		return true
 	}
 
@@ -698,7 +701,7 @@ func (o *ComposerPackageUpload) SetFiles(v []PackageFile) {
 
 // GetFormat returns the Format field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetFormat() string {
-	if o == nil || isNil(o.Format) {
+	if o == nil || IsNil(o.Format) {
 		var ret string
 		return ret
 	}
@@ -708,7 +711,7 @@ func (o *ComposerPackageUpload) GetFormat() string {
 // GetFormatOk returns a tuple with the Format field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetFormatOk() (*string, bool) {
-	if o == nil || isNil(o.Format) {
+	if o == nil || IsNil(o.Format) {
 		return nil, false
 	}
 	return o.Format, true
@@ -716,7 +719,7 @@ func (o *ComposerPackageUpload) GetFormatOk() (*string, bool) {
 
 // HasFormat returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasFormat() bool {
-	if o != nil && !isNil(o.Format) {
+	if o != nil && !IsNil(o.Format) {
 		return true
 	}
 
@@ -730,7 +733,7 @@ func (o *ComposerPackageUpload) SetFormat(v string) {
 
 // GetFormatUrl returns the FormatUrl field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetFormatUrl() string {
-	if o == nil || isNil(o.FormatUrl) {
+	if o == nil || IsNil(o.FormatUrl) {
 		var ret string
 		return ret
 	}
@@ -740,7 +743,7 @@ func (o *ComposerPackageUpload) GetFormatUrl() string {
 // GetFormatUrlOk returns a tuple with the FormatUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetFormatUrlOk() (*string, bool) {
-	if o == nil || isNil(o.FormatUrl) {
+	if o == nil || IsNil(o.FormatUrl) {
 		return nil, false
 	}
 	return o.FormatUrl, true
@@ -748,7 +751,7 @@ func (o *ComposerPackageUpload) GetFormatUrlOk() (*string, bool) {
 
 // HasFormatUrl returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasFormatUrl() bool {
-	if o != nil && !isNil(o.FormatUrl) {
+	if o != nil && !IsNil(o.FormatUrl) {
 		return true
 	}
 
@@ -762,7 +765,7 @@ func (o *ComposerPackageUpload) SetFormatUrl(v string) {
 
 // GetIdentifierPerm returns the IdentifierPerm field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetIdentifierPerm() string {
-	if o == nil || isNil(o.IdentifierPerm) {
+	if o == nil || IsNil(o.IdentifierPerm) {
 		var ret string
 		return ret
 	}
@@ -772,7 +775,7 @@ func (o *ComposerPackageUpload) GetIdentifierPerm() string {
 // GetIdentifierPermOk returns a tuple with the IdentifierPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetIdentifierPermOk() (*string, bool) {
-	if o == nil || isNil(o.IdentifierPerm) {
+	if o == nil || IsNil(o.IdentifierPerm) {
 		return nil, false
 	}
 	return o.IdentifierPerm, true
@@ -780,7 +783,7 @@ func (o *ComposerPackageUpload) GetIdentifierPermOk() (*string, bool) {
 
 // HasIdentifierPerm returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasIdentifierPerm() bool {
-	if o != nil && !isNil(o.IdentifierPerm) {
+	if o != nil && !IsNil(o.IdentifierPerm) {
 		return true
 	}
 
@@ -794,7 +797,7 @@ func (o *ComposerPackageUpload) SetIdentifierPerm(v string) {
 
 // GetIndexed returns the Indexed field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetIndexed() bool {
-	if o == nil || isNil(o.Indexed) {
+	if o == nil || IsNil(o.Indexed) {
 		var ret bool
 		return ret
 	}
@@ -804,7 +807,7 @@ func (o *ComposerPackageUpload) GetIndexed() bool {
 // GetIndexedOk returns a tuple with the Indexed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetIndexedOk() (*bool, bool) {
-	if o == nil || isNil(o.Indexed) {
+	if o == nil || IsNil(o.Indexed) {
 		return nil, false
 	}
 	return o.Indexed, true
@@ -812,7 +815,7 @@ func (o *ComposerPackageUpload) GetIndexedOk() (*bool, bool) {
 
 // HasIndexed returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasIndexed() bool {
-	if o != nil && !isNil(o.Indexed) {
+	if o != nil && !IsNil(o.Indexed) {
 		return true
 	}
 
@@ -826,7 +829,7 @@ func (o *ComposerPackageUpload) SetIndexed(v bool) {
 
 // GetIsDownloadable returns the IsDownloadable field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetIsDownloadable() bool {
-	if o == nil || isNil(o.IsDownloadable) {
+	if o == nil || IsNil(o.IsDownloadable) {
 		var ret bool
 		return ret
 	}
@@ -836,7 +839,7 @@ func (o *ComposerPackageUpload) GetIsDownloadable() bool {
 // GetIsDownloadableOk returns a tuple with the IsDownloadable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetIsDownloadableOk() (*bool, bool) {
-	if o == nil || isNil(o.IsDownloadable) {
+	if o == nil || IsNil(o.IsDownloadable) {
 		return nil, false
 	}
 	return o.IsDownloadable, true
@@ -844,7 +847,7 @@ func (o *ComposerPackageUpload) GetIsDownloadableOk() (*bool, bool) {
 
 // HasIsDownloadable returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasIsDownloadable() bool {
-	if o != nil && !isNil(o.IsDownloadable) {
+	if o != nil && !IsNil(o.IsDownloadable) {
 		return true
 	}
 
@@ -858,7 +861,7 @@ func (o *ComposerPackageUpload) SetIsDownloadable(v bool) {
 
 // GetIsQuarantined returns the IsQuarantined field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetIsQuarantined() bool {
-	if o == nil || isNil(o.IsQuarantined) {
+	if o == nil || IsNil(o.IsQuarantined) {
 		var ret bool
 		return ret
 	}
@@ -868,7 +871,7 @@ func (o *ComposerPackageUpload) GetIsQuarantined() bool {
 // GetIsQuarantinedOk returns a tuple with the IsQuarantined field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetIsQuarantinedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsQuarantined) {
+	if o == nil || IsNil(o.IsQuarantined) {
 		return nil, false
 	}
 	return o.IsQuarantined, true
@@ -876,7 +879,7 @@ func (o *ComposerPackageUpload) GetIsQuarantinedOk() (*bool, bool) {
 
 // HasIsQuarantined returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasIsQuarantined() bool {
-	if o != nil && !isNil(o.IsQuarantined) {
+	if o != nil && !IsNil(o.IsQuarantined) {
 		return true
 	}
 
@@ -890,7 +893,7 @@ func (o *ComposerPackageUpload) SetIsQuarantined(v bool) {
 
 // GetIsSyncAwaiting returns the IsSyncAwaiting field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetIsSyncAwaiting() bool {
-	if o == nil || isNil(o.IsSyncAwaiting) {
+	if o == nil || IsNil(o.IsSyncAwaiting) {
 		var ret bool
 		return ret
 	}
@@ -900,7 +903,7 @@ func (o *ComposerPackageUpload) GetIsSyncAwaiting() bool {
 // GetIsSyncAwaitingOk returns a tuple with the IsSyncAwaiting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetIsSyncAwaitingOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncAwaiting) {
+	if o == nil || IsNil(o.IsSyncAwaiting) {
 		return nil, false
 	}
 	return o.IsSyncAwaiting, true
@@ -908,7 +911,7 @@ func (o *ComposerPackageUpload) GetIsSyncAwaitingOk() (*bool, bool) {
 
 // HasIsSyncAwaiting returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasIsSyncAwaiting() bool {
-	if o != nil && !isNil(o.IsSyncAwaiting) {
+	if o != nil && !IsNil(o.IsSyncAwaiting) {
 		return true
 	}
 
@@ -922,7 +925,7 @@ func (o *ComposerPackageUpload) SetIsSyncAwaiting(v bool) {
 
 // GetIsSyncCompleted returns the IsSyncCompleted field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetIsSyncCompleted() bool {
-	if o == nil || isNil(o.IsSyncCompleted) {
+	if o == nil || IsNil(o.IsSyncCompleted) {
 		var ret bool
 		return ret
 	}
@@ -932,7 +935,7 @@ func (o *ComposerPackageUpload) GetIsSyncCompleted() bool {
 // GetIsSyncCompletedOk returns a tuple with the IsSyncCompleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetIsSyncCompletedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncCompleted) {
+	if o == nil || IsNil(o.IsSyncCompleted) {
 		return nil, false
 	}
 	return o.IsSyncCompleted, true
@@ -940,7 +943,7 @@ func (o *ComposerPackageUpload) GetIsSyncCompletedOk() (*bool, bool) {
 
 // HasIsSyncCompleted returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasIsSyncCompleted() bool {
-	if o != nil && !isNil(o.IsSyncCompleted) {
+	if o != nil && !IsNil(o.IsSyncCompleted) {
 		return true
 	}
 
@@ -954,7 +957,7 @@ func (o *ComposerPackageUpload) SetIsSyncCompleted(v bool) {
 
 // GetIsSyncFailed returns the IsSyncFailed field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetIsSyncFailed() bool {
-	if o == nil || isNil(o.IsSyncFailed) {
+	if o == nil || IsNil(o.IsSyncFailed) {
 		var ret bool
 		return ret
 	}
@@ -964,7 +967,7 @@ func (o *ComposerPackageUpload) GetIsSyncFailed() bool {
 // GetIsSyncFailedOk returns a tuple with the IsSyncFailed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetIsSyncFailedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncFailed) {
+	if o == nil || IsNil(o.IsSyncFailed) {
 		return nil, false
 	}
 	return o.IsSyncFailed, true
@@ -972,7 +975,7 @@ func (o *ComposerPackageUpload) GetIsSyncFailedOk() (*bool, bool) {
 
 // HasIsSyncFailed returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasIsSyncFailed() bool {
-	if o != nil && !isNil(o.IsSyncFailed) {
+	if o != nil && !IsNil(o.IsSyncFailed) {
 		return true
 	}
 
@@ -986,7 +989,7 @@ func (o *ComposerPackageUpload) SetIsSyncFailed(v bool) {
 
 // GetIsSyncInFlight returns the IsSyncInFlight field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetIsSyncInFlight() bool {
-	if o == nil || isNil(o.IsSyncInFlight) {
+	if o == nil || IsNil(o.IsSyncInFlight) {
 		var ret bool
 		return ret
 	}
@@ -996,7 +999,7 @@ func (o *ComposerPackageUpload) GetIsSyncInFlight() bool {
 // GetIsSyncInFlightOk returns a tuple with the IsSyncInFlight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetIsSyncInFlightOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncInFlight) {
+	if o == nil || IsNil(o.IsSyncInFlight) {
 		return nil, false
 	}
 	return o.IsSyncInFlight, true
@@ -1004,7 +1007,7 @@ func (o *ComposerPackageUpload) GetIsSyncInFlightOk() (*bool, bool) {
 
 // HasIsSyncInFlight returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasIsSyncInFlight() bool {
-	if o != nil && !isNil(o.IsSyncInFlight) {
+	if o != nil && !IsNil(o.IsSyncInFlight) {
 		return true
 	}
 
@@ -1018,7 +1021,7 @@ func (o *ComposerPackageUpload) SetIsSyncInFlight(v bool) {
 
 // GetIsSyncInProgress returns the IsSyncInProgress field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetIsSyncInProgress() bool {
-	if o == nil || isNil(o.IsSyncInProgress) {
+	if o == nil || IsNil(o.IsSyncInProgress) {
 		var ret bool
 		return ret
 	}
@@ -1028,7 +1031,7 @@ func (o *ComposerPackageUpload) GetIsSyncInProgress() bool {
 // GetIsSyncInProgressOk returns a tuple with the IsSyncInProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetIsSyncInProgressOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncInProgress) {
+	if o == nil || IsNil(o.IsSyncInProgress) {
 		return nil, false
 	}
 	return o.IsSyncInProgress, true
@@ -1036,7 +1039,7 @@ func (o *ComposerPackageUpload) GetIsSyncInProgressOk() (*bool, bool) {
 
 // HasIsSyncInProgress returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasIsSyncInProgress() bool {
-	if o != nil && !isNil(o.IsSyncInProgress) {
+	if o != nil && !IsNil(o.IsSyncInProgress) {
 		return true
 	}
 
@@ -1050,7 +1053,7 @@ func (o *ComposerPackageUpload) SetIsSyncInProgress(v bool) {
 
 // GetLicense returns the License field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetLicense() string {
-	if o == nil || isNil(o.License.Get()) {
+	if o == nil || IsNil(o.License.Get()) {
 		var ret string
 		return ret
 	}
@@ -1093,7 +1096,7 @@ func (o *ComposerPackageUpload) UnsetLicense() {
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetName() string {
-	if o == nil || isNil(o.Name.Get()) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
@@ -1136,7 +1139,7 @@ func (o *ComposerPackageUpload) UnsetName() {
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetNamespace() string {
-	if o == nil || isNil(o.Namespace) {
+	if o == nil || IsNil(o.Namespace) {
 		var ret string
 		return ret
 	}
@@ -1146,7 +1149,7 @@ func (o *ComposerPackageUpload) GetNamespace() string {
 // GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetNamespaceOk() (*string, bool) {
-	if o == nil || isNil(o.Namespace) {
+	if o == nil || IsNil(o.Namespace) {
 		return nil, false
 	}
 	return o.Namespace, true
@@ -1154,7 +1157,7 @@ func (o *ComposerPackageUpload) GetNamespaceOk() (*string, bool) {
 
 // HasNamespace returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasNamespace() bool {
-	if o != nil && !isNil(o.Namespace) {
+	if o != nil && !IsNil(o.Namespace) {
 		return true
 	}
 
@@ -1168,7 +1171,7 @@ func (o *ComposerPackageUpload) SetNamespace(v string) {
 
 // GetNamespaceUrl returns the NamespaceUrl field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetNamespaceUrl() string {
-	if o == nil || isNil(o.NamespaceUrl) {
+	if o == nil || IsNil(o.NamespaceUrl) {
 		var ret string
 		return ret
 	}
@@ -1178,7 +1181,7 @@ func (o *ComposerPackageUpload) GetNamespaceUrl() string {
 // GetNamespaceUrlOk returns a tuple with the NamespaceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetNamespaceUrlOk() (*string, bool) {
-	if o == nil || isNil(o.NamespaceUrl) {
+	if o == nil || IsNil(o.NamespaceUrl) {
 		return nil, false
 	}
 	return o.NamespaceUrl, true
@@ -1186,7 +1189,7 @@ func (o *ComposerPackageUpload) GetNamespaceUrlOk() (*string, bool) {
 
 // HasNamespaceUrl returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasNamespaceUrl() bool {
-	if o != nil && !isNil(o.NamespaceUrl) {
+	if o != nil && !IsNil(o.NamespaceUrl) {
 		return true
 	}
 
@@ -1200,7 +1203,7 @@ func (o *ComposerPackageUpload) SetNamespaceUrl(v string) {
 
 // GetNumFiles returns the NumFiles field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetNumFiles() int64 {
-	if o == nil || isNil(o.NumFiles) {
+	if o == nil || IsNil(o.NumFiles) {
 		var ret int64
 		return ret
 	}
@@ -1210,7 +1213,7 @@ func (o *ComposerPackageUpload) GetNumFiles() int64 {
 // GetNumFilesOk returns a tuple with the NumFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetNumFilesOk() (*int64, bool) {
-	if o == nil || isNil(o.NumFiles) {
+	if o == nil || IsNil(o.NumFiles) {
 		return nil, false
 	}
 	return o.NumFiles, true
@@ -1218,7 +1221,7 @@ func (o *ComposerPackageUpload) GetNumFilesOk() (*int64, bool) {
 
 // HasNumFiles returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasNumFiles() bool {
-	if o != nil && !isNil(o.NumFiles) {
+	if o != nil && !IsNil(o.NumFiles) {
 		return true
 	}
 
@@ -1232,7 +1235,7 @@ func (o *ComposerPackageUpload) SetNumFiles(v int64) {
 
 // GetOriginRepository returns the OriginRepository field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetOriginRepository() string {
-	if o == nil || isNil(o.OriginRepository) {
+	if o == nil || IsNil(o.OriginRepository) {
 		var ret string
 		return ret
 	}
@@ -1242,7 +1245,7 @@ func (o *ComposerPackageUpload) GetOriginRepository() string {
 // GetOriginRepositoryOk returns a tuple with the OriginRepository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetOriginRepositoryOk() (*string, bool) {
-	if o == nil || isNil(o.OriginRepository) {
+	if o == nil || IsNil(o.OriginRepository) {
 		return nil, false
 	}
 	return o.OriginRepository, true
@@ -1250,7 +1253,7 @@ func (o *ComposerPackageUpload) GetOriginRepositoryOk() (*string, bool) {
 
 // HasOriginRepository returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasOriginRepository() bool {
-	if o != nil && !isNil(o.OriginRepository) {
+	if o != nil && !IsNil(o.OriginRepository) {
 		return true
 	}
 
@@ -1264,7 +1267,7 @@ func (o *ComposerPackageUpload) SetOriginRepository(v string) {
 
 // GetOriginRepositoryUrl returns the OriginRepositoryUrl field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetOriginRepositoryUrl() string {
-	if o == nil || isNil(o.OriginRepositoryUrl) {
+	if o == nil || IsNil(o.OriginRepositoryUrl) {
 		var ret string
 		return ret
 	}
@@ -1274,7 +1277,7 @@ func (o *ComposerPackageUpload) GetOriginRepositoryUrl() string {
 // GetOriginRepositoryUrlOk returns a tuple with the OriginRepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetOriginRepositoryUrlOk() (*string, bool) {
-	if o == nil || isNil(o.OriginRepositoryUrl) {
+	if o == nil || IsNil(o.OriginRepositoryUrl) {
 		return nil, false
 	}
 	return o.OriginRepositoryUrl, true
@@ -1282,7 +1285,7 @@ func (o *ComposerPackageUpload) GetOriginRepositoryUrlOk() (*string, bool) {
 
 // HasOriginRepositoryUrl returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasOriginRepositoryUrl() bool {
-	if o != nil && !isNil(o.OriginRepositoryUrl) {
+	if o != nil && !IsNil(o.OriginRepositoryUrl) {
 		return true
 	}
 
@@ -1296,7 +1299,7 @@ func (o *ComposerPackageUpload) SetOriginRepositoryUrl(v string) {
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetPackageType() int64 {
-	if o == nil || isNil(o.PackageType) {
+	if o == nil || IsNil(o.PackageType) {
 		var ret int64
 		return ret
 	}
@@ -1306,7 +1309,7 @@ func (o *ComposerPackageUpload) GetPackageType() int64 {
 // GetPackageTypeOk returns a tuple with the PackageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetPackageTypeOk() (*int64, bool) {
-	if o == nil || isNil(o.PackageType) {
+	if o == nil || IsNil(o.PackageType) {
 		return nil, false
 	}
 	return o.PackageType, true
@@ -1314,7 +1317,7 @@ func (o *ComposerPackageUpload) GetPackageTypeOk() (*int64, bool) {
 
 // HasPackageType returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasPackageType() bool {
-	if o != nil && !isNil(o.PackageType) {
+	if o != nil && !IsNil(o.PackageType) {
 		return true
 	}
 
@@ -1328,7 +1331,7 @@ func (o *ComposerPackageUpload) SetPackageType(v int64) {
 
 // GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetRelease() string {
-	if o == nil || isNil(o.Release.Get()) {
+	if o == nil || IsNil(o.Release.Get()) {
 		var ret string
 		return ret
 	}
@@ -1371,7 +1374,7 @@ func (o *ComposerPackageUpload) UnsetRelease() {
 
 // GetRepository returns the Repository field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetRepository() string {
-	if o == nil || isNil(o.Repository) {
+	if o == nil || IsNil(o.Repository) {
 		var ret string
 		return ret
 	}
@@ -1381,7 +1384,7 @@ func (o *ComposerPackageUpload) GetRepository() string {
 // GetRepositoryOk returns a tuple with the Repository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetRepositoryOk() (*string, bool) {
-	if o == nil || isNil(o.Repository) {
+	if o == nil || IsNil(o.Repository) {
 		return nil, false
 	}
 	return o.Repository, true
@@ -1389,7 +1392,7 @@ func (o *ComposerPackageUpload) GetRepositoryOk() (*string, bool) {
 
 // HasRepository returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasRepository() bool {
-	if o != nil && !isNil(o.Repository) {
+	if o != nil && !IsNil(o.Repository) {
 		return true
 	}
 
@@ -1403,7 +1406,7 @@ func (o *ComposerPackageUpload) SetRepository(v string) {
 
 // GetRepositoryUrl returns the RepositoryUrl field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetRepositoryUrl() string {
-	if o == nil || isNil(o.RepositoryUrl) {
+	if o == nil || IsNil(o.RepositoryUrl) {
 		var ret string
 		return ret
 	}
@@ -1413,7 +1416,7 @@ func (o *ComposerPackageUpload) GetRepositoryUrl() string {
 // GetRepositoryUrlOk returns a tuple with the RepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetRepositoryUrlOk() (*string, bool) {
-	if o == nil || isNil(o.RepositoryUrl) {
+	if o == nil || IsNil(o.RepositoryUrl) {
 		return nil, false
 	}
 	return o.RepositoryUrl, true
@@ -1421,7 +1424,7 @@ func (o *ComposerPackageUpload) GetRepositoryUrlOk() (*string, bool) {
 
 // HasRepositoryUrl returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasRepositoryUrl() bool {
-	if o != nil && !isNil(o.RepositoryUrl) {
+	if o != nil && !IsNil(o.RepositoryUrl) {
 		return true
 	}
 
@@ -1435,7 +1438,7 @@ func (o *ComposerPackageUpload) SetRepositoryUrl(v string) {
 
 // GetSecurityScanCompletedAt returns the SecurityScanCompletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetSecurityScanCompletedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanCompletedAt.Get()) {
+	if o == nil || IsNil(o.SecurityScanCompletedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -1478,7 +1481,7 @@ func (o *ComposerPackageUpload) UnsetSecurityScanCompletedAt() {
 
 // GetSecurityScanStartedAt returns the SecurityScanStartedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetSecurityScanStartedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanStartedAt.Get()) {
+	if o == nil || IsNil(o.SecurityScanStartedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -1521,7 +1524,7 @@ func (o *ComposerPackageUpload) UnsetSecurityScanStartedAt() {
 
 // GetSecurityScanStatus returns the SecurityScanStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetSecurityScanStatus() string {
-	if o == nil || isNil(o.SecurityScanStatus.Get()) {
+	if o == nil || IsNil(o.SecurityScanStatus.Get()) {
 		var ret string
 		return ret
 	}
@@ -1564,7 +1567,7 @@ func (o *ComposerPackageUpload) UnsetSecurityScanStatus() {
 
 // GetSecurityScanStatusUpdatedAt returns the SecurityScanStatusUpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetSecurityScanStatusUpdatedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanStatusUpdatedAt.Get()) {
+	if o == nil || IsNil(o.SecurityScanStatusUpdatedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -1607,7 +1610,7 @@ func (o *ComposerPackageUpload) UnsetSecurityScanStatusUpdatedAt() {
 
 // GetSelfHtmlUrl returns the SelfHtmlUrl field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetSelfHtmlUrl() string {
-	if o == nil || isNil(o.SelfHtmlUrl) {
+	if o == nil || IsNil(o.SelfHtmlUrl) {
 		var ret string
 		return ret
 	}
@@ -1617,7 +1620,7 @@ func (o *ComposerPackageUpload) GetSelfHtmlUrl() string {
 // GetSelfHtmlUrlOk returns a tuple with the SelfHtmlUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetSelfHtmlUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfHtmlUrl) {
+	if o == nil || IsNil(o.SelfHtmlUrl) {
 		return nil, false
 	}
 	return o.SelfHtmlUrl, true
@@ -1625,7 +1628,7 @@ func (o *ComposerPackageUpload) GetSelfHtmlUrlOk() (*string, bool) {
 
 // HasSelfHtmlUrl returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasSelfHtmlUrl() bool {
-	if o != nil && !isNil(o.SelfHtmlUrl) {
+	if o != nil && !IsNil(o.SelfHtmlUrl) {
 		return true
 	}
 
@@ -1639,7 +1642,7 @@ func (o *ComposerPackageUpload) SetSelfHtmlUrl(v string) {
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetSelfUrl() string {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		var ret string
 		return ret
 	}
@@ -1649,7 +1652,7 @@ func (o *ComposerPackageUpload) GetSelfUrl() string {
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetSelfUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		return nil, false
 	}
 	return o.SelfUrl, true
@@ -1657,7 +1660,7 @@ func (o *ComposerPackageUpload) GetSelfUrlOk() (*string, bool) {
 
 // HasSelfUrl returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasSelfUrl() bool {
-	if o != nil && !isNil(o.SelfUrl) {
+	if o != nil && !IsNil(o.SelfUrl) {
 		return true
 	}
 
@@ -1671,7 +1674,7 @@ func (o *ComposerPackageUpload) SetSelfUrl(v string) {
 
 // GetSignatureUrl returns the SignatureUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetSignatureUrl() string {
-	if o == nil || isNil(o.SignatureUrl.Get()) {
+	if o == nil || IsNil(o.SignatureUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -1714,7 +1717,7 @@ func (o *ComposerPackageUpload) UnsetSignatureUrl() {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetSize() int64 {
-	if o == nil || isNil(o.Size) {
+	if o == nil || IsNil(o.Size) {
 		var ret int64
 		return ret
 	}
@@ -1724,7 +1727,7 @@ func (o *ComposerPackageUpload) GetSize() int64 {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetSizeOk() (*int64, bool) {
-	if o == nil || isNil(o.Size) {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -1732,7 +1735,7 @@ func (o *ComposerPackageUpload) GetSizeOk() (*int64, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasSize() bool {
-	if o != nil && !isNil(o.Size) {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -1746,7 +1749,7 @@ func (o *ComposerPackageUpload) SetSize(v int64) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -1756,7 +1759,7 @@ func (o *ComposerPackageUpload) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -1764,7 +1767,7 @@ func (o *ComposerPackageUpload) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -1778,7 +1781,7 @@ func (o *ComposerPackageUpload) SetSlug(v string) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -1788,7 +1791,7 @@ func (o *ComposerPackageUpload) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -1796,7 +1799,7 @@ func (o *ComposerPackageUpload) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -1810,7 +1813,7 @@ func (o *ComposerPackageUpload) SetSlugPerm(v string) {
 
 // GetStage returns the Stage field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetStage() int64 {
-	if o == nil || isNil(o.Stage) {
+	if o == nil || IsNil(o.Stage) {
 		var ret int64
 		return ret
 	}
@@ -1820,7 +1823,7 @@ func (o *ComposerPackageUpload) GetStage() int64 {
 // GetStageOk returns a tuple with the Stage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetStageOk() (*int64, bool) {
-	if o == nil || isNil(o.Stage) {
+	if o == nil || IsNil(o.Stage) {
 		return nil, false
 	}
 	return o.Stage, true
@@ -1828,7 +1831,7 @@ func (o *ComposerPackageUpload) GetStageOk() (*int64, bool) {
 
 // HasStage returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasStage() bool {
-	if o != nil && !isNil(o.Stage) {
+	if o != nil && !IsNil(o.Stage) {
 		return true
 	}
 
@@ -1842,7 +1845,7 @@ func (o *ComposerPackageUpload) SetStage(v int64) {
 
 // GetStageStr returns the StageStr field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetStageStr() string {
-	if o == nil || isNil(o.StageStr) {
+	if o == nil || IsNil(o.StageStr) {
 		var ret string
 		return ret
 	}
@@ -1852,7 +1855,7 @@ func (o *ComposerPackageUpload) GetStageStr() string {
 // GetStageStrOk returns a tuple with the StageStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetStageStrOk() (*string, bool) {
-	if o == nil || isNil(o.StageStr) {
+	if o == nil || IsNil(o.StageStr) {
 		return nil, false
 	}
 	return o.StageStr, true
@@ -1860,7 +1863,7 @@ func (o *ComposerPackageUpload) GetStageStrOk() (*string, bool) {
 
 // HasStageStr returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasStageStr() bool {
-	if o != nil && !isNil(o.StageStr) {
+	if o != nil && !IsNil(o.StageStr) {
 		return true
 	}
 
@@ -1874,7 +1877,7 @@ func (o *ComposerPackageUpload) SetStageStr(v string) {
 
 // GetStageUpdatedAt returns the StageUpdatedAt field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetStageUpdatedAt() time.Time {
-	if o == nil || isNil(o.StageUpdatedAt) {
+	if o == nil || IsNil(o.StageUpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -1884,7 +1887,7 @@ func (o *ComposerPackageUpload) GetStageUpdatedAt() time.Time {
 // GetStageUpdatedAtOk returns a tuple with the StageUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetStageUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.StageUpdatedAt) {
+	if o == nil || IsNil(o.StageUpdatedAt) {
 		return nil, false
 	}
 	return o.StageUpdatedAt, true
@@ -1892,7 +1895,7 @@ func (o *ComposerPackageUpload) GetStageUpdatedAtOk() (*time.Time, bool) {
 
 // HasStageUpdatedAt returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasStageUpdatedAt() bool {
-	if o != nil && !isNil(o.StageUpdatedAt) {
+	if o != nil && !IsNil(o.StageUpdatedAt) {
 		return true
 	}
 
@@ -1906,7 +1909,7 @@ func (o *ComposerPackageUpload) SetStageUpdatedAt(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetStatus() int64 {
-	if o == nil || isNil(o.Status) {
+	if o == nil || IsNil(o.Status) {
 		var ret int64
 		return ret
 	}
@@ -1916,7 +1919,7 @@ func (o *ComposerPackageUpload) GetStatus() int64 {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetStatusOk() (*int64, bool) {
-	if o == nil || isNil(o.Status) {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -1924,7 +1927,7 @@ func (o *ComposerPackageUpload) GetStatusOk() (*int64, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasStatus() bool {
-	if o != nil && !isNil(o.Status) {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -1938,7 +1941,7 @@ func (o *ComposerPackageUpload) SetStatus(v int64) {
 
 // GetStatusReason returns the StatusReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetStatusReason() string {
-	if o == nil || isNil(o.StatusReason.Get()) {
+	if o == nil || IsNil(o.StatusReason.Get()) {
 		var ret string
 		return ret
 	}
@@ -1981,7 +1984,7 @@ func (o *ComposerPackageUpload) UnsetStatusReason() {
 
 // GetStatusStr returns the StatusStr field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetStatusStr() string {
-	if o == nil || isNil(o.StatusStr) {
+	if o == nil || IsNil(o.StatusStr) {
 		var ret string
 		return ret
 	}
@@ -1991,7 +1994,7 @@ func (o *ComposerPackageUpload) GetStatusStr() string {
 // GetStatusStrOk returns a tuple with the StatusStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetStatusStrOk() (*string, bool) {
-	if o == nil || isNil(o.StatusStr) {
+	if o == nil || IsNil(o.StatusStr) {
 		return nil, false
 	}
 	return o.StatusStr, true
@@ -1999,7 +2002,7 @@ func (o *ComposerPackageUpload) GetStatusStrOk() (*string, bool) {
 
 // HasStatusStr returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasStatusStr() bool {
-	if o != nil && !isNil(o.StatusStr) {
+	if o != nil && !IsNil(o.StatusStr) {
 		return true
 	}
 
@@ -2013,7 +2016,7 @@ func (o *ComposerPackageUpload) SetStatusStr(v string) {
 
 // GetStatusUpdatedAt returns the StatusUpdatedAt field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetStatusUpdatedAt() time.Time {
-	if o == nil || isNil(o.StatusUpdatedAt) {
+	if o == nil || IsNil(o.StatusUpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -2023,7 +2026,7 @@ func (o *ComposerPackageUpload) GetStatusUpdatedAt() time.Time {
 // GetStatusUpdatedAtOk returns a tuple with the StatusUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetStatusUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.StatusUpdatedAt) {
+	if o == nil || IsNil(o.StatusUpdatedAt) {
 		return nil, false
 	}
 	return o.StatusUpdatedAt, true
@@ -2031,7 +2034,7 @@ func (o *ComposerPackageUpload) GetStatusUpdatedAtOk() (*time.Time, bool) {
 
 // HasStatusUpdatedAt returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasStatusUpdatedAt() bool {
-	if o != nil && !isNil(o.StatusUpdatedAt) {
+	if o != nil && !IsNil(o.StatusUpdatedAt) {
 		return true
 	}
 
@@ -2045,7 +2048,7 @@ func (o *ComposerPackageUpload) SetStatusUpdatedAt(v time.Time) {
 
 // GetStatusUrl returns the StatusUrl field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetStatusUrl() string {
-	if o == nil || isNil(o.StatusUrl) {
+	if o == nil || IsNil(o.StatusUrl) {
 		var ret string
 		return ret
 	}
@@ -2055,7 +2058,7 @@ func (o *ComposerPackageUpload) GetStatusUrl() string {
 // GetStatusUrlOk returns a tuple with the StatusUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetStatusUrlOk() (*string, bool) {
-	if o == nil || isNil(o.StatusUrl) {
+	if o == nil || IsNil(o.StatusUrl) {
 		return nil, false
 	}
 	return o.StatusUrl, true
@@ -2063,7 +2066,7 @@ func (o *ComposerPackageUpload) GetStatusUrlOk() (*string, bool) {
 
 // HasStatusUrl returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasStatusUrl() bool {
-	if o != nil && !isNil(o.StatusUrl) {
+	if o != nil && !IsNil(o.StatusUrl) {
 		return true
 	}
 
@@ -2077,7 +2080,7 @@ func (o *ComposerPackageUpload) SetStatusUrl(v string) {
 
 // GetSubtype returns the Subtype field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetSubtype() string {
-	if o == nil || isNil(o.Subtype) {
+	if o == nil || IsNil(o.Subtype) {
 		var ret string
 		return ret
 	}
@@ -2087,7 +2090,7 @@ func (o *ComposerPackageUpload) GetSubtype() string {
 // GetSubtypeOk returns a tuple with the Subtype field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetSubtypeOk() (*string, bool) {
-	if o == nil || isNil(o.Subtype) {
+	if o == nil || IsNil(o.Subtype) {
 		return nil, false
 	}
 	return o.Subtype, true
@@ -2095,7 +2098,7 @@ func (o *ComposerPackageUpload) GetSubtypeOk() (*string, bool) {
 
 // HasSubtype returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasSubtype() bool {
-	if o != nil && !isNil(o.Subtype) {
+	if o != nil && !IsNil(o.Subtype) {
 		return true
 	}
 
@@ -2109,7 +2112,7 @@ func (o *ComposerPackageUpload) SetSubtype(v string) {
 
 // GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetSummary() string {
-	if o == nil || isNil(o.Summary.Get()) {
+	if o == nil || IsNil(o.Summary.Get()) {
 		var ret string
 		return ret
 	}
@@ -2152,7 +2155,7 @@ func (o *ComposerPackageUpload) UnsetSummary() {
 
 // GetSyncFinishedAt returns the SyncFinishedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetSyncFinishedAt() time.Time {
-	if o == nil || isNil(o.SyncFinishedAt.Get()) {
+	if o == nil || IsNil(o.SyncFinishedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -2195,7 +2198,7 @@ func (o *ComposerPackageUpload) UnsetSyncFinishedAt() {
 
 // GetSyncProgress returns the SyncProgress field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetSyncProgress() int64 {
-	if o == nil || isNil(o.SyncProgress) {
+	if o == nil || IsNil(o.SyncProgress) {
 		var ret int64
 		return ret
 	}
@@ -2205,7 +2208,7 @@ func (o *ComposerPackageUpload) GetSyncProgress() int64 {
 // GetSyncProgressOk returns a tuple with the SyncProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetSyncProgressOk() (*int64, bool) {
-	if o == nil || isNil(o.SyncProgress) {
+	if o == nil || IsNil(o.SyncProgress) {
 		return nil, false
 	}
 	return o.SyncProgress, true
@@ -2213,7 +2216,7 @@ func (o *ComposerPackageUpload) GetSyncProgressOk() (*int64, bool) {
 
 // HasSyncProgress returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasSyncProgress() bool {
-	if o != nil && !isNil(o.SyncProgress) {
+	if o != nil && !IsNil(o.SyncProgress) {
 		return true
 	}
 
@@ -2227,7 +2230,7 @@ func (o *ComposerPackageUpload) SetSyncProgress(v int64) {
 
 // GetTagsImmutable returns the TagsImmutable field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetTagsImmutable() map[string]interface{} {
-	if o == nil || isNil(o.TagsImmutable) {
+	if o == nil || IsNil(o.TagsImmutable) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -2237,7 +2240,7 @@ func (o *ComposerPackageUpload) GetTagsImmutable() map[string]interface{} {
 // GetTagsImmutableOk returns a tuple with the TagsImmutable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetTagsImmutableOk() (map[string]interface{}, bool) {
-	if o == nil || isNil(o.TagsImmutable) {
+	if o == nil || IsNil(o.TagsImmutable) {
 		return map[string]interface{}{}, false
 	}
 	return o.TagsImmutable, true
@@ -2245,7 +2248,7 @@ func (o *ComposerPackageUpload) GetTagsImmutableOk() (map[string]interface{}, bo
 
 // HasTagsImmutable returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasTagsImmutable() bool {
-	if o != nil && !isNil(o.TagsImmutable) {
+	if o != nil && !IsNil(o.TagsImmutable) {
 		return true
 	}
 
@@ -2259,7 +2262,7 @@ func (o *ComposerPackageUpload) SetTagsImmutable(v map[string]interface{}) {
 
 // GetTypeDisplay returns the TypeDisplay field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetTypeDisplay() string {
-	if o == nil || isNil(o.TypeDisplay) {
+	if o == nil || IsNil(o.TypeDisplay) {
 		var ret string
 		return ret
 	}
@@ -2269,7 +2272,7 @@ func (o *ComposerPackageUpload) GetTypeDisplay() string {
 // GetTypeDisplayOk returns a tuple with the TypeDisplay field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetTypeDisplayOk() (*string, bool) {
-	if o == nil || isNil(o.TypeDisplay) {
+	if o == nil || IsNil(o.TypeDisplay) {
 		return nil, false
 	}
 	return o.TypeDisplay, true
@@ -2277,7 +2280,7 @@ func (o *ComposerPackageUpload) GetTypeDisplayOk() (*string, bool) {
 
 // HasTypeDisplay returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasTypeDisplay() bool {
-	if o != nil && !isNil(o.TypeDisplay) {
+	if o != nil && !IsNil(o.TypeDisplay) {
 		return true
 	}
 
@@ -2291,7 +2294,7 @@ func (o *ComposerPackageUpload) SetTypeDisplay(v string) {
 
 // GetUploadedAt returns the UploadedAt field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetUploadedAt() time.Time {
-	if o == nil || isNil(o.UploadedAt) {
+	if o == nil || IsNil(o.UploadedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -2301,7 +2304,7 @@ func (o *ComposerPackageUpload) GetUploadedAt() time.Time {
 // GetUploadedAtOk returns a tuple with the UploadedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetUploadedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UploadedAt) {
+	if o == nil || IsNil(o.UploadedAt) {
 		return nil, false
 	}
 	return o.UploadedAt, true
@@ -2309,7 +2312,7 @@ func (o *ComposerPackageUpload) GetUploadedAtOk() (*time.Time, bool) {
 
 // HasUploadedAt returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasUploadedAt() bool {
-	if o != nil && !isNil(o.UploadedAt) {
+	if o != nil && !IsNil(o.UploadedAt) {
 		return true
 	}
 
@@ -2323,7 +2326,7 @@ func (o *ComposerPackageUpload) SetUploadedAt(v time.Time) {
 
 // GetUploader returns the Uploader field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetUploader() string {
-	if o == nil || isNil(o.Uploader) {
+	if o == nil || IsNil(o.Uploader) {
 		var ret string
 		return ret
 	}
@@ -2333,7 +2336,7 @@ func (o *ComposerPackageUpload) GetUploader() string {
 // GetUploaderOk returns a tuple with the Uploader field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetUploaderOk() (*string, bool) {
-	if o == nil || isNil(o.Uploader) {
+	if o == nil || IsNil(o.Uploader) {
 		return nil, false
 	}
 	return o.Uploader, true
@@ -2341,7 +2344,7 @@ func (o *ComposerPackageUpload) GetUploaderOk() (*string, bool) {
 
 // HasUploader returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasUploader() bool {
-	if o != nil && !isNil(o.Uploader) {
+	if o != nil && !IsNil(o.Uploader) {
 		return true
 	}
 
@@ -2355,7 +2358,7 @@ func (o *ComposerPackageUpload) SetUploader(v string) {
 
 // GetUploaderUrl returns the UploaderUrl field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetUploaderUrl() string {
-	if o == nil || isNil(o.UploaderUrl) {
+	if o == nil || IsNil(o.UploaderUrl) {
 		var ret string
 		return ret
 	}
@@ -2365,7 +2368,7 @@ func (o *ComposerPackageUpload) GetUploaderUrl() string {
 // GetUploaderUrlOk returns a tuple with the UploaderUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetUploaderUrlOk() (*string, bool) {
-	if o == nil || isNil(o.UploaderUrl) {
+	if o == nil || IsNil(o.UploaderUrl) {
 		return nil, false
 	}
 	return o.UploaderUrl, true
@@ -2373,7 +2376,7 @@ func (o *ComposerPackageUpload) GetUploaderUrlOk() (*string, bool) {
 
 // HasUploaderUrl returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasUploaderUrl() bool {
-	if o != nil && !isNil(o.UploaderUrl) {
+	if o != nil && !IsNil(o.UploaderUrl) {
 		return true
 	}
 
@@ -2387,7 +2390,7 @@ func (o *ComposerPackageUpload) SetUploaderUrl(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ComposerPackageUpload) GetVersion() string {
-	if o == nil || isNil(o.Version.Get()) {
+	if o == nil || IsNil(o.Version.Get()) {
 		var ret string
 		return ret
 	}
@@ -2430,7 +2433,7 @@ func (o *ComposerPackageUpload) UnsetVersion() {
 
 // GetVersionOrig returns the VersionOrig field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetVersionOrig() string {
-	if o == nil || isNil(o.VersionOrig) {
+	if o == nil || IsNil(o.VersionOrig) {
 		var ret string
 		return ret
 	}
@@ -2440,7 +2443,7 @@ func (o *ComposerPackageUpload) GetVersionOrig() string {
 // GetVersionOrigOk returns a tuple with the VersionOrig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetVersionOrigOk() (*string, bool) {
-	if o == nil || isNil(o.VersionOrig) {
+	if o == nil || IsNil(o.VersionOrig) {
 		return nil, false
 	}
 	return o.VersionOrig, true
@@ -2448,7 +2451,7 @@ func (o *ComposerPackageUpload) GetVersionOrigOk() (*string, bool) {
 
 // HasVersionOrig returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasVersionOrig() bool {
-	if o != nil && !isNil(o.VersionOrig) {
+	if o != nil && !IsNil(o.VersionOrig) {
 		return true
 	}
 
@@ -2462,7 +2465,7 @@ func (o *ComposerPackageUpload) SetVersionOrig(v string) {
 
 // GetVulnerabilityScanResultsUrl returns the VulnerabilityScanResultsUrl field value if set, zero value otherwise.
 func (o *ComposerPackageUpload) GetVulnerabilityScanResultsUrl() string {
-	if o == nil || isNil(o.VulnerabilityScanResultsUrl) {
+	if o == nil || IsNil(o.VulnerabilityScanResultsUrl) {
 		var ret string
 		return ret
 	}
@@ -2472,7 +2475,7 @@ func (o *ComposerPackageUpload) GetVulnerabilityScanResultsUrl() string {
 // GetVulnerabilityScanResultsUrlOk returns a tuple with the VulnerabilityScanResultsUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ComposerPackageUpload) GetVulnerabilityScanResultsUrlOk() (*string, bool) {
-	if o == nil || isNil(o.VulnerabilityScanResultsUrl) {
+	if o == nil || IsNil(o.VulnerabilityScanResultsUrl) {
 		return nil, false
 	}
 	return o.VulnerabilityScanResultsUrl, true
@@ -2480,7 +2483,7 @@ func (o *ComposerPackageUpload) GetVulnerabilityScanResultsUrlOk() (*string, boo
 
 // HasVulnerabilityScanResultsUrl returns a boolean if a field has been set.
 func (o *ComposerPackageUpload) HasVulnerabilityScanResultsUrl() bool {
-	if o != nil && !isNil(o.VulnerabilityScanResultsUrl) {
+	if o != nil && !IsNil(o.VulnerabilityScanResultsUrl) {
 		return true
 	}
 
@@ -2493,29 +2496,37 @@ func (o *ComposerPackageUpload) SetVulnerabilityScanResultsUrl(v string) {
 }
 
 func (o ComposerPackageUpload) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o ComposerPackageUpload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Architectures) {
+	if !IsNil(o.Architectures) {
 		toSerialize["architectures"] = o.Architectures
 	}
 	if o.CdnUrl.IsSet() {
 		toSerialize["cdn_url"] = o.CdnUrl.Get()
 	}
-	if !isNil(o.ChecksumMd5) {
+	if !IsNil(o.ChecksumMd5) {
 		toSerialize["checksum_md5"] = o.ChecksumMd5
 	}
-	if !isNil(o.ChecksumSha1) {
+	if !IsNil(o.ChecksumSha1) {
 		toSerialize["checksum_sha1"] = o.ChecksumSha1
 	}
-	if !isNil(o.ChecksumSha256) {
+	if !IsNil(o.ChecksumSha256) {
 		toSerialize["checksum_sha256"] = o.ChecksumSha256
 	}
-	if !isNil(o.ChecksumSha512) {
+	if !IsNil(o.ChecksumSha512) {
 		toSerialize["checksum_sha512"] = o.ChecksumSha512
 	}
 	if o.DependenciesChecksumMd5.IsSet() {
 		toSerialize["dependencies_checksum_md5"] = o.DependenciesChecksumMd5.Get()
 	}
-	if !isNil(o.DependenciesUrl) {
+	if !IsNil(o.DependenciesUrl) {
 		toSerialize["dependencies_url"] = o.DependenciesUrl
 	}
 	if o.Description.IsSet() {
@@ -2524,55 +2535,55 @@ func (o ComposerPackageUpload) MarshalJSON() ([]byte, error) {
 	if o.Distro.IsSet() {
 		toSerialize["distro"] = o.Distro.Get()
 	}
-	if !isNil(o.DistroVersion) {
+	if !IsNil(o.DistroVersion) {
 		toSerialize["distro_version"] = o.DistroVersion
 	}
-	if !isNil(o.Downloads) {
+	if !IsNil(o.Downloads) {
 		toSerialize["downloads"] = o.Downloads
 	}
 	if o.Epoch.IsSet() {
 		toSerialize["epoch"] = o.Epoch.Get()
 	}
-	if !isNil(o.Extension) {
+	if !IsNil(o.Extension) {
 		toSerialize["extension"] = o.Extension
 	}
-	if !isNil(o.Filename) {
+	if !IsNil(o.Filename) {
 		toSerialize["filename"] = o.Filename
 	}
-	if !isNil(o.Files) {
+	if !IsNil(o.Files) {
 		toSerialize["files"] = o.Files
 	}
-	if !isNil(o.Format) {
+	if !IsNil(o.Format) {
 		toSerialize["format"] = o.Format
 	}
-	if !isNil(o.FormatUrl) {
+	if !IsNil(o.FormatUrl) {
 		toSerialize["format_url"] = o.FormatUrl
 	}
-	if !isNil(o.IdentifierPerm) {
+	if !IsNil(o.IdentifierPerm) {
 		toSerialize["identifier_perm"] = o.IdentifierPerm
 	}
-	if !isNil(o.Indexed) {
+	if !IsNil(o.Indexed) {
 		toSerialize["indexed"] = o.Indexed
 	}
-	if !isNil(o.IsDownloadable) {
+	if !IsNil(o.IsDownloadable) {
 		toSerialize["is_downloadable"] = o.IsDownloadable
 	}
-	if !isNil(o.IsQuarantined) {
+	if !IsNil(o.IsQuarantined) {
 		toSerialize["is_quarantined"] = o.IsQuarantined
 	}
-	if !isNil(o.IsSyncAwaiting) {
+	if !IsNil(o.IsSyncAwaiting) {
 		toSerialize["is_sync_awaiting"] = o.IsSyncAwaiting
 	}
-	if !isNil(o.IsSyncCompleted) {
+	if !IsNil(o.IsSyncCompleted) {
 		toSerialize["is_sync_completed"] = o.IsSyncCompleted
 	}
-	if !isNil(o.IsSyncFailed) {
+	if !IsNil(o.IsSyncFailed) {
 		toSerialize["is_sync_failed"] = o.IsSyncFailed
 	}
-	if !isNil(o.IsSyncInFlight) {
+	if !IsNil(o.IsSyncInFlight) {
 		toSerialize["is_sync_in_flight"] = o.IsSyncInFlight
 	}
-	if !isNil(o.IsSyncInProgress) {
+	if !IsNil(o.IsSyncInProgress) {
 		toSerialize["is_sync_in_progress"] = o.IsSyncInProgress
 	}
 	if o.License.IsSet() {
@@ -2581,31 +2592,31 @@ func (o ComposerPackageUpload) MarshalJSON() ([]byte, error) {
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
-	if !isNil(o.Namespace) {
+	if !IsNil(o.Namespace) {
 		toSerialize["namespace"] = o.Namespace
 	}
-	if !isNil(o.NamespaceUrl) {
+	if !IsNil(o.NamespaceUrl) {
 		toSerialize["namespace_url"] = o.NamespaceUrl
 	}
-	if !isNil(o.NumFiles) {
+	if !IsNil(o.NumFiles) {
 		toSerialize["num_files"] = o.NumFiles
 	}
-	if !isNil(o.OriginRepository) {
+	if !IsNil(o.OriginRepository) {
 		toSerialize["origin_repository"] = o.OriginRepository
 	}
-	if !isNil(o.OriginRepositoryUrl) {
+	if !IsNil(o.OriginRepositoryUrl) {
 		toSerialize["origin_repository_url"] = o.OriginRepositoryUrl
 	}
-	if !isNil(o.PackageType) {
+	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
 	}
 	if o.Release.IsSet() {
 		toSerialize["release"] = o.Release.Get()
 	}
-	if !isNil(o.Repository) {
+	if !IsNil(o.Repository) {
 		toSerialize["repository"] = o.Repository
 	}
-	if !isNil(o.RepositoryUrl) {
+	if !IsNil(o.RepositoryUrl) {
 		toSerialize["repository_url"] = o.RepositoryUrl
 	}
 	if o.SecurityScanCompletedAt.IsSet() {
@@ -2620,49 +2631,49 @@ func (o ComposerPackageUpload) MarshalJSON() ([]byte, error) {
 	if o.SecurityScanStatusUpdatedAt.IsSet() {
 		toSerialize["security_scan_status_updated_at"] = o.SecurityScanStatusUpdatedAt.Get()
 	}
-	if !isNil(o.SelfHtmlUrl) {
+	if !IsNil(o.SelfHtmlUrl) {
 		toSerialize["self_html_url"] = o.SelfHtmlUrl
 	}
-	if !isNil(o.SelfUrl) {
+	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
 	if o.SignatureUrl.IsSet() {
 		toSerialize["signature_url"] = o.SignatureUrl.Get()
 	}
-	if !isNil(o.Size) {
+	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
-	if !isNil(o.Slug) {
+	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
-	if !isNil(o.Stage) {
+	if !IsNil(o.Stage) {
 		toSerialize["stage"] = o.Stage
 	}
-	if !isNil(o.StageStr) {
+	if !IsNil(o.StageStr) {
 		toSerialize["stage_str"] = o.StageStr
 	}
-	if !isNil(o.StageUpdatedAt) {
+	if !IsNil(o.StageUpdatedAt) {
 		toSerialize["stage_updated_at"] = o.StageUpdatedAt
 	}
-	if !isNil(o.Status) {
+	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
 	if o.StatusReason.IsSet() {
 		toSerialize["status_reason"] = o.StatusReason.Get()
 	}
-	if !isNil(o.StatusStr) {
+	if !IsNil(o.StatusStr) {
 		toSerialize["status_str"] = o.StatusStr
 	}
-	if !isNil(o.StatusUpdatedAt) {
+	if !IsNil(o.StatusUpdatedAt) {
 		toSerialize["status_updated_at"] = o.StatusUpdatedAt
 	}
-	if !isNil(o.StatusUrl) {
+	if !IsNil(o.StatusUrl) {
 		toSerialize["status_url"] = o.StatusUrl
 	}
-	if !isNil(o.Subtype) {
+	if !IsNil(o.Subtype) {
 		toSerialize["subtype"] = o.Subtype
 	}
 	if o.Summary.IsSet() {
@@ -2671,34 +2682,34 @@ func (o ComposerPackageUpload) MarshalJSON() ([]byte, error) {
 	if o.SyncFinishedAt.IsSet() {
 		toSerialize["sync_finished_at"] = o.SyncFinishedAt.Get()
 	}
-	if !isNil(o.SyncProgress) {
+	if !IsNil(o.SyncProgress) {
 		toSerialize["sync_progress"] = o.SyncProgress
 	}
-	if !isNil(o.TagsImmutable) {
+	if !IsNil(o.TagsImmutable) {
 		toSerialize["tags_immutable"] = o.TagsImmutable
 	}
-	if !isNil(o.TypeDisplay) {
+	if !IsNil(o.TypeDisplay) {
 		toSerialize["type_display"] = o.TypeDisplay
 	}
-	if !isNil(o.UploadedAt) {
+	if !IsNil(o.UploadedAt) {
 		toSerialize["uploaded_at"] = o.UploadedAt
 	}
-	if !isNil(o.Uploader) {
+	if !IsNil(o.Uploader) {
 		toSerialize["uploader"] = o.Uploader
 	}
-	if !isNil(o.UploaderUrl) {
+	if !IsNil(o.UploaderUrl) {
 		toSerialize["uploader_url"] = o.UploaderUrl
 	}
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
-	if !isNil(o.VersionOrig) {
+	if !IsNil(o.VersionOrig) {
 		toSerialize["version_orig"] = o.VersionOrig
 	}
-	if !isNil(o.VulnerabilityScanResultsUrl) {
+	if !IsNil(o.VulnerabilityScanResultsUrl) {
 		toSerialize["vulnerability_scan_results_url"] = o.VulnerabilityScanResultsUrl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableComposerPackageUpload struct {

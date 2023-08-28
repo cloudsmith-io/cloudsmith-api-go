@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the PackageLicensePolicyEvaluationRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageLicensePolicyEvaluationRequest{}
 
 // PackageLicensePolicyEvaluationRequest struct for PackageLicensePolicyEvaluationRequest
 type PackageLicensePolicyEvaluationRequest struct {
@@ -46,7 +49,7 @@ func NewPackageLicensePolicyEvaluationRequestWithDefaults() *PackageLicensePolic
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *PackageLicensePolicyEvaluationRequest) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageLicensePolicyEvaluationRequest) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -64,7 +67,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetCreatedAtOk() (*time.Time, bo
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *PackageLicensePolicyEvaluationRequest) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -78,7 +81,7 @@ func (o *PackageLicensePolicyEvaluationRequest) SetCreatedAt(v time.Time) {
 
 // GetEvaluationCount returns the EvaluationCount field value if set, zero value otherwise.
 func (o *PackageLicensePolicyEvaluationRequest) GetEvaluationCount() int64 {
-	if o == nil || isNil(o.EvaluationCount) {
+	if o == nil || IsNil(o.EvaluationCount) {
 		var ret int64
 		return ret
 	}
@@ -88,7 +91,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetEvaluationCount() int64 {
 // GetEvaluationCountOk returns a tuple with the EvaluationCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageLicensePolicyEvaluationRequest) GetEvaluationCountOk() (*int64, bool) {
-	if o == nil || isNil(o.EvaluationCount) {
+	if o == nil || IsNil(o.EvaluationCount) {
 		return nil, false
 	}
 	return o.EvaluationCount, true
@@ -96,7 +99,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetEvaluationCountOk() (*int64, 
 
 // HasEvaluationCount returns a boolean if a field has been set.
 func (o *PackageLicensePolicyEvaluationRequest) HasEvaluationCount() bool {
-	if o != nil && !isNil(o.EvaluationCount) {
+	if o != nil && !IsNil(o.EvaluationCount) {
 		return true
 	}
 
@@ -110,7 +113,7 @@ func (o *PackageLicensePolicyEvaluationRequest) SetEvaluationCount(v int64) {
 
 // GetPolicy returns the Policy field value if set, zero value otherwise.
 func (o *PackageLicensePolicyEvaluationRequest) GetPolicy() NestedLicensePolicy {
-	if o == nil || isNil(o.Policy) {
+	if o == nil || IsNil(o.Policy) {
 		var ret NestedLicensePolicy
 		return ret
 	}
@@ -120,7 +123,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetPolicy() NestedLicensePolicy 
 // GetPolicyOk returns a tuple with the Policy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageLicensePolicyEvaluationRequest) GetPolicyOk() (*NestedLicensePolicy, bool) {
-	if o == nil || isNil(o.Policy) {
+	if o == nil || IsNil(o.Policy) {
 		return nil, false
 	}
 	return o.Policy, true
@@ -128,7 +131,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetPolicyOk() (*NestedLicensePol
 
 // HasPolicy returns a boolean if a field has been set.
 func (o *PackageLicensePolicyEvaluationRequest) HasPolicy() bool {
-	if o != nil && !isNil(o.Policy) {
+	if o != nil && !IsNil(o.Policy) {
 		return true
 	}
 
@@ -142,7 +145,7 @@ func (o *PackageLicensePolicyEvaluationRequest) SetPolicy(v NestedLicensePolicy)
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *PackageLicensePolicyEvaluationRequest) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -152,7 +155,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageLicensePolicyEvaluationRequest) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -160,7 +163,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetSlugPermOk() (*string, bool) 
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *PackageLicensePolicyEvaluationRequest) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -174,7 +177,7 @@ func (o *PackageLicensePolicyEvaluationRequest) SetSlugPerm(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *PackageLicensePolicyEvaluationRequest) GetStatus() string {
-	if o == nil || isNil(o.Status) {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -184,7 +187,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageLicensePolicyEvaluationRequest) GetStatusOk() (*string, bool) {
-	if o == nil || isNil(o.Status) {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -192,7 +195,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *PackageLicensePolicyEvaluationRequest) HasStatus() bool {
-	if o != nil && !isNil(o.Status) {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -206,7 +209,7 @@ func (o *PackageLicensePolicyEvaluationRequest) SetStatus(v string) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *PackageLicensePolicyEvaluationRequest) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -216,7 +219,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageLicensePolicyEvaluationRequest) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -224,7 +227,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetUpdatedAtOk() (*time.Time, bo
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *PackageLicensePolicyEvaluationRequest) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
+	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -238,7 +241,7 @@ func (o *PackageLicensePolicyEvaluationRequest) SetUpdatedAt(v time.Time) {
 
 // GetViolationCount returns the ViolationCount field value if set, zero value otherwise.
 func (o *PackageLicensePolicyEvaluationRequest) GetViolationCount() int64 {
-	if o == nil || isNil(o.ViolationCount) {
+	if o == nil || IsNil(o.ViolationCount) {
 		var ret int64
 		return ret
 	}
@@ -248,7 +251,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetViolationCount() int64 {
 // GetViolationCountOk returns a tuple with the ViolationCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageLicensePolicyEvaluationRequest) GetViolationCountOk() (*int64, bool) {
-	if o == nil || isNil(o.ViolationCount) {
+	if o == nil || IsNil(o.ViolationCount) {
 		return nil, false
 	}
 	return o.ViolationCount, true
@@ -256,7 +259,7 @@ func (o *PackageLicensePolicyEvaluationRequest) GetViolationCountOk() (*int64, b
 
 // HasViolationCount returns a boolean if a field has been set.
 func (o *PackageLicensePolicyEvaluationRequest) HasViolationCount() bool {
-	if o != nil && !isNil(o.ViolationCount) {
+	if o != nil && !IsNil(o.ViolationCount) {
 		return true
 	}
 
@@ -269,29 +272,37 @@ func (o *PackageLicensePolicyEvaluationRequest) SetViolationCount(v int64) {
 }
 
 func (o PackageLicensePolicyEvaluationRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !isNil(o.EvaluationCount) {
-		toSerialize["evaluation_count"] = o.EvaluationCount
-	}
-	if !isNil(o.Policy) {
-		toSerialize["policy"] = o.Policy
-	}
-	if !isNil(o.SlugPerm) {
-		toSerialize["slug_perm"] = o.SlugPerm
-	}
-	if !isNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
-	if !isNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
-	}
-	if !isNil(o.ViolationCount) {
-		toSerialize["violation_count"] = o.ViolationCount
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PackageLicensePolicyEvaluationRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["created_at"] = o.CreatedAt
+	}
+	if !IsNil(o.EvaluationCount) {
+		toSerialize["evaluation_count"] = o.EvaluationCount
+	}
+	if !IsNil(o.Policy) {
+		toSerialize["policy"] = o.Policy
+	}
+	if !IsNil(o.SlugPerm) {
+		toSerialize["slug_perm"] = o.SlugPerm
+	}
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.UpdatedAt) {
+		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if !IsNil(o.ViolationCount) {
+		toSerialize["violation_count"] = o.ViolationCount
+	}
+	return toSerialize, nil
 }
 
 type NullablePackageLicensePolicyEvaluationRequest struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the RepositoryRsaKey type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryRsaKey{}
 
 // RepositoryRsaKey struct for RepositoryRsaKey
 type RepositoryRsaKey struct {
@@ -28,6 +31,8 @@ type RepositoryRsaKey struct {
 	FingerprintShort *string `json:"fingerprint_short,omitempty"`
 	// The public key given to repository users.
 	PublicKey *string `json:"public_key,omitempty"`
+	// The SSH fingerprint used by RSA for this key.
+	SshFingerprint NullableString `json:"ssh_fingerprint,omitempty"`
 }
 
 // NewRepositoryRsaKey instantiates a new RepositoryRsaKey object
@@ -49,7 +54,7 @@ func NewRepositoryRsaKeyWithDefaults() *RepositoryRsaKey {
 
 // GetActive returns the Active field value if set, zero value otherwise.
 func (o *RepositoryRsaKey) GetActive() bool {
-	if o == nil || isNil(o.Active) {
+	if o == nil || IsNil(o.Active) {
 		var ret bool
 		return ret
 	}
@@ -59,7 +64,7 @@ func (o *RepositoryRsaKey) GetActive() bool {
 // GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryRsaKey) GetActiveOk() (*bool, bool) {
-	if o == nil || isNil(o.Active) {
+	if o == nil || IsNil(o.Active) {
 		return nil, false
 	}
 	return o.Active, true
@@ -67,7 +72,7 @@ func (o *RepositoryRsaKey) GetActiveOk() (*bool, bool) {
 
 // HasActive returns a boolean if a field has been set.
 func (o *RepositoryRsaKey) HasActive() bool {
-	if o != nil && !isNil(o.Active) {
+	if o != nil && !IsNil(o.Active) {
 		return true
 	}
 
@@ -81,7 +86,7 @@ func (o *RepositoryRsaKey) SetActive(v bool) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *RepositoryRsaKey) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -91,7 +96,7 @@ func (o *RepositoryRsaKey) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryRsaKey) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -99,7 +104,7 @@ func (o *RepositoryRsaKey) GetCreatedAtOk() (*time.Time, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *RepositoryRsaKey) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -113,7 +118,7 @@ func (o *RepositoryRsaKey) SetCreatedAt(v time.Time) {
 
 // GetDefault returns the Default field value if set, zero value otherwise.
 func (o *RepositoryRsaKey) GetDefault() bool {
-	if o == nil || isNil(o.Default) {
+	if o == nil || IsNil(o.Default) {
 		var ret bool
 		return ret
 	}
@@ -123,7 +128,7 @@ func (o *RepositoryRsaKey) GetDefault() bool {
 // GetDefaultOk returns a tuple with the Default field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryRsaKey) GetDefaultOk() (*bool, bool) {
-	if o == nil || isNil(o.Default) {
+	if o == nil || IsNil(o.Default) {
 		return nil, false
 	}
 	return o.Default, true
@@ -131,7 +136,7 @@ func (o *RepositoryRsaKey) GetDefaultOk() (*bool, bool) {
 
 // HasDefault returns a boolean if a field has been set.
 func (o *RepositoryRsaKey) HasDefault() bool {
-	if o != nil && !isNil(o.Default) {
+	if o != nil && !IsNil(o.Default) {
 		return true
 	}
 
@@ -145,7 +150,7 @@ func (o *RepositoryRsaKey) SetDefault(v bool) {
 
 // GetFingerprint returns the Fingerprint field value if set, zero value otherwise.
 func (o *RepositoryRsaKey) GetFingerprint() string {
-	if o == nil || isNil(o.Fingerprint) {
+	if o == nil || IsNil(o.Fingerprint) {
 		var ret string
 		return ret
 	}
@@ -155,7 +160,7 @@ func (o *RepositoryRsaKey) GetFingerprint() string {
 // GetFingerprintOk returns a tuple with the Fingerprint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryRsaKey) GetFingerprintOk() (*string, bool) {
-	if o == nil || isNil(o.Fingerprint) {
+	if o == nil || IsNil(o.Fingerprint) {
 		return nil, false
 	}
 	return o.Fingerprint, true
@@ -163,7 +168,7 @@ func (o *RepositoryRsaKey) GetFingerprintOk() (*string, bool) {
 
 // HasFingerprint returns a boolean if a field has been set.
 func (o *RepositoryRsaKey) HasFingerprint() bool {
-	if o != nil && !isNil(o.Fingerprint) {
+	if o != nil && !IsNil(o.Fingerprint) {
 		return true
 	}
 
@@ -177,7 +182,7 @@ func (o *RepositoryRsaKey) SetFingerprint(v string) {
 
 // GetFingerprintShort returns the FingerprintShort field value if set, zero value otherwise.
 func (o *RepositoryRsaKey) GetFingerprintShort() string {
-	if o == nil || isNil(o.FingerprintShort) {
+	if o == nil || IsNil(o.FingerprintShort) {
 		var ret string
 		return ret
 	}
@@ -187,7 +192,7 @@ func (o *RepositoryRsaKey) GetFingerprintShort() string {
 // GetFingerprintShortOk returns a tuple with the FingerprintShort field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryRsaKey) GetFingerprintShortOk() (*string, bool) {
-	if o == nil || isNil(o.FingerprintShort) {
+	if o == nil || IsNil(o.FingerprintShort) {
 		return nil, false
 	}
 	return o.FingerprintShort, true
@@ -195,7 +200,7 @@ func (o *RepositoryRsaKey) GetFingerprintShortOk() (*string, bool) {
 
 // HasFingerprintShort returns a boolean if a field has been set.
 func (o *RepositoryRsaKey) HasFingerprintShort() bool {
-	if o != nil && !isNil(o.FingerprintShort) {
+	if o != nil && !IsNil(o.FingerprintShort) {
 		return true
 	}
 
@@ -209,7 +214,7 @@ func (o *RepositoryRsaKey) SetFingerprintShort(v string) {
 
 // GetPublicKey returns the PublicKey field value if set, zero value otherwise.
 func (o *RepositoryRsaKey) GetPublicKey() string {
-	if o == nil || isNil(o.PublicKey) {
+	if o == nil || IsNil(o.PublicKey) {
 		var ret string
 		return ret
 	}
@@ -219,7 +224,7 @@ func (o *RepositoryRsaKey) GetPublicKey() string {
 // GetPublicKeyOk returns a tuple with the PublicKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryRsaKey) GetPublicKeyOk() (*string, bool) {
-	if o == nil || isNil(o.PublicKey) {
+	if o == nil || IsNil(o.PublicKey) {
 		return nil, false
 	}
 	return o.PublicKey, true
@@ -227,7 +232,7 @@ func (o *RepositoryRsaKey) GetPublicKeyOk() (*string, bool) {
 
 // HasPublicKey returns a boolean if a field has been set.
 func (o *RepositoryRsaKey) HasPublicKey() bool {
-	if o != nil && !isNil(o.PublicKey) {
+	if o != nil && !IsNil(o.PublicKey) {
 		return true
 	}
 
@@ -239,27 +244,81 @@ func (o *RepositoryRsaKey) SetPublicKey(v string) {
 	o.PublicKey = &v
 }
 
+// GetSshFingerprint returns the SshFingerprint field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RepositoryRsaKey) GetSshFingerprint() string {
+	if o == nil || IsNil(o.SshFingerprint.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SshFingerprint.Get()
+}
+
+// GetSshFingerprintOk returns a tuple with the SshFingerprint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RepositoryRsaKey) GetSshFingerprintOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SshFingerprint.Get(), o.SshFingerprint.IsSet()
+}
+
+// HasSshFingerprint returns a boolean if a field has been set.
+func (o *RepositoryRsaKey) HasSshFingerprint() bool {
+	if o != nil && o.SshFingerprint.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSshFingerprint gets a reference to the given NullableString and assigns it to the SshFingerprint field.
+func (o *RepositoryRsaKey) SetSshFingerprint(v string) {
+	o.SshFingerprint.Set(&v)
+}
+
+// SetSshFingerprintNil sets the value for SshFingerprint to be an explicit nil
+func (o *RepositoryRsaKey) SetSshFingerprintNil() {
+	o.SshFingerprint.Set(nil)
+}
+
+// UnsetSshFingerprint ensures that no value is present for SshFingerprint, not even an explicit nil
+func (o *RepositoryRsaKey) UnsetSshFingerprint() {
+	o.SshFingerprint.Unset()
+}
+
 func (o RepositoryRsaKey) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Active) {
-		toSerialize["active"] = o.Active
-	}
-	if !isNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !isNil(o.Default) {
-		toSerialize["default"] = o.Default
-	}
-	if !isNil(o.Fingerprint) {
-		toSerialize["fingerprint"] = o.Fingerprint
-	}
-	if !isNil(o.FingerprintShort) {
-		toSerialize["fingerprint_short"] = o.FingerprintShort
-	}
-	if !isNil(o.PublicKey) {
-		toSerialize["public_key"] = o.PublicKey
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryRsaKey) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Active) {
+		toSerialize["active"] = o.Active
+	}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["created_at"] = o.CreatedAt
+	}
+	if !IsNil(o.Default) {
+		toSerialize["default"] = o.Default
+	}
+	if !IsNil(o.Fingerprint) {
+		toSerialize["fingerprint"] = o.Fingerprint
+	}
+	if !IsNil(o.FingerprintShort) {
+		toSerialize["fingerprint_short"] = o.FingerprintShort
+	}
+	if !IsNil(o.PublicKey) {
+		toSerialize["public_key"] = o.PublicKey
+	}
+	if o.SshFingerprint.IsSet() {
+		toSerialize["ssh_fingerprint"] = o.SshFingerprint.Get()
+	}
+	return toSerialize, nil
 }
 
 type NullableRepositoryRsaKey struct {

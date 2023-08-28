@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the ErrorDetail type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ErrorDetail{}
 
 // ErrorDetail struct for ErrorDetail
 type ErrorDetail struct {
@@ -64,11 +67,17 @@ func (o *ErrorDetail) SetDetail(v string) {
 }
 
 func (o ErrorDetail) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["detail"] = o.Detail
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ErrorDetail) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["detail"] = o.Detail
+	return toSerialize, nil
 }
 
 type NullableErrorDetail struct {

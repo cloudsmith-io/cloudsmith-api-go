@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the DistributionVersion type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DistributionVersion{}
 
 // DistributionVersion A list of the versions for this distribution
 type DistributionVersion struct {
@@ -42,7 +45,7 @@ func NewDistributionVersionWithDefaults() *DistributionVersion {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *DistributionVersion) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -52,7 +55,7 @@ func (o *DistributionVersion) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DistributionVersion) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -60,7 +63,7 @@ func (o *DistributionVersion) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *DistributionVersion) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -74,7 +77,7 @@ func (o *DistributionVersion) SetName(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *DistributionVersion) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -84,7 +87,7 @@ func (o *DistributionVersion) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DistributionVersion) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -92,7 +95,7 @@ func (o *DistributionVersion) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *DistributionVersion) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -105,14 +108,22 @@ func (o *DistributionVersion) SetSlug(v string) {
 }
 
 func (o DistributionVersion) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Slug) {
-		toSerialize["slug"] = o.Slug
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o DistributionVersion) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Slug) {
+		toSerialize["slug"] = o.Slug
+	}
+	return toSerialize, nil
 }
 
 type NullableDistributionVersion struct {
