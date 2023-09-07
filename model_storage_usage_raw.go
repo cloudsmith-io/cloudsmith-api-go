@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the StorageUsageRaw type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageUsageRaw{}
 
 // StorageUsageRaw struct for StorageUsageRaw
 type StorageUsageRaw struct {
@@ -42,7 +45,7 @@ func NewStorageUsageRawWithDefaults() *StorageUsageRaw {
 
 // GetLimit returns the Limit field value if set, zero value otherwise.
 func (o *StorageUsageRaw) GetLimit() int64 {
-	if o == nil || isNil(o.Limit) {
+	if o == nil || IsNil(o.Limit) {
 		var ret int64
 		return ret
 	}
@@ -52,7 +55,7 @@ func (o *StorageUsageRaw) GetLimit() int64 {
 // GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageUsageRaw) GetLimitOk() (*int64, bool) {
-	if o == nil || isNil(o.Limit) {
+	if o == nil || IsNil(o.Limit) {
 		return nil, false
 	}
 	return o.Limit, true
@@ -60,7 +63,7 @@ func (o *StorageUsageRaw) GetLimitOk() (*int64, bool) {
 
 // HasLimit returns a boolean if a field has been set.
 func (o *StorageUsageRaw) HasLimit() bool {
-	if o != nil && !isNil(o.Limit) {
+	if o != nil && !IsNil(o.Limit) {
 		return true
 	}
 
@@ -74,7 +77,7 @@ func (o *StorageUsageRaw) SetLimit(v int64) {
 
 // GetPeak returns the Peak field value if set, zero value otherwise.
 func (o *StorageUsageRaw) GetPeak() int64 {
-	if o == nil || isNil(o.Peak) {
+	if o == nil || IsNil(o.Peak) {
 		var ret int64
 		return ret
 	}
@@ -84,7 +87,7 @@ func (o *StorageUsageRaw) GetPeak() int64 {
 // GetPeakOk returns a tuple with the Peak field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageUsageRaw) GetPeakOk() (*int64, bool) {
-	if o == nil || isNil(o.Peak) {
+	if o == nil || IsNil(o.Peak) {
 		return nil, false
 	}
 	return o.Peak, true
@@ -92,7 +95,7 @@ func (o *StorageUsageRaw) GetPeakOk() (*int64, bool) {
 
 // HasPeak returns a boolean if a field has been set.
 func (o *StorageUsageRaw) HasPeak() bool {
-	if o != nil && !isNil(o.Peak) {
+	if o != nil && !IsNil(o.Peak) {
 		return true
 	}
 
@@ -106,7 +109,7 @@ func (o *StorageUsageRaw) SetPeak(v int64) {
 
 // GetPercentage returns the Percentage field value if set, zero value otherwise.
 func (o *StorageUsageRaw) GetPercentage() float64 {
-	if o == nil || isNil(o.Percentage) {
+	if o == nil || IsNil(o.Percentage) {
 		var ret float64
 		return ret
 	}
@@ -116,7 +119,7 @@ func (o *StorageUsageRaw) GetPercentage() float64 {
 // GetPercentageOk returns a tuple with the Percentage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageUsageRaw) GetPercentageOk() (*float64, bool) {
-	if o == nil || isNil(o.Percentage) {
+	if o == nil || IsNil(o.Percentage) {
 		return nil, false
 	}
 	return o.Percentage, true
@@ -124,7 +127,7 @@ func (o *StorageUsageRaw) GetPercentageOk() (*float64, bool) {
 
 // HasPercentage returns a boolean if a field has been set.
 func (o *StorageUsageRaw) HasPercentage() bool {
-	if o != nil && !isNil(o.Percentage) {
+	if o != nil && !IsNil(o.Percentage) {
 		return true
 	}
 
@@ -138,7 +141,7 @@ func (o *StorageUsageRaw) SetPercentage(v float64) {
 
 // GetUsed returns the Used field value if set, zero value otherwise.
 func (o *StorageUsageRaw) GetUsed() int64 {
-	if o == nil || isNil(o.Used) {
+	if o == nil || IsNil(o.Used) {
 		var ret int64
 		return ret
 	}
@@ -148,7 +151,7 @@ func (o *StorageUsageRaw) GetUsed() int64 {
 // GetUsedOk returns a tuple with the Used field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageUsageRaw) GetUsedOk() (*int64, bool) {
-	if o == nil || isNil(o.Used) {
+	if o == nil || IsNil(o.Used) {
 		return nil, false
 	}
 	return o.Used, true
@@ -156,7 +159,7 @@ func (o *StorageUsageRaw) GetUsedOk() (*int64, bool) {
 
 // HasUsed returns a boolean if a field has been set.
 func (o *StorageUsageRaw) HasUsed() bool {
-	if o != nil && !isNil(o.Used) {
+	if o != nil && !IsNil(o.Used) {
 		return true
 	}
 
@@ -169,20 +172,28 @@ func (o *StorageUsageRaw) SetUsed(v int64) {
 }
 
 func (o StorageUsageRaw) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Limit) {
-		toSerialize["limit"] = o.Limit
-	}
-	if !isNil(o.Peak) {
-		toSerialize["peak"] = o.Peak
-	}
-	if !isNil(o.Percentage) {
-		toSerialize["percentage"] = o.Percentage
-	}
-	if !isNil(o.Used) {
-		toSerialize["used"] = o.Used
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o StorageUsageRaw) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Limit) {
+		toSerialize["limit"] = o.Limit
+	}
+	if !IsNil(o.Peak) {
+		toSerialize["peak"] = o.Peak
+	}
+	if !IsNil(o.Percentage) {
+		toSerialize["percentage"] = o.Percentage
+	}
+	if !IsNil(o.Used) {
+		toSerialize["used"] = o.Used
+	}
+	return toSerialize, nil
 }
 
 type NullableStorageUsageRaw struct {

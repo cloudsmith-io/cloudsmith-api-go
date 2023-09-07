@@ -105,7 +105,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -177,7 +177,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -186,7 +186,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposDelete(context.Background(), owner, identifier).Execute()
+    r, err := apiClient.ReposApi.ReposDelete(context.Background(), owner, identifier).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -248,7 +248,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -258,7 +258,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposGeoipDisable(context.Background(), owner, identifier).Data(data).Execute()
+    r, err := apiClient.ReposApi.ReposGeoipDisable(context.Background(), owner, identifier).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipDisable``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -321,7 +321,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -331,7 +331,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposGeoipEnable(context.Background(), owner, identifier).Data(data).Execute()
+    r, err := apiClient.ReposApi.ReposGeoipEnable(context.Background(), owner, identifier).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipEnable``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -394,7 +394,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -469,7 +469,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -542,7 +542,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -617,7 +617,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -692,7 +692,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -767,7 +767,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -840,7 +840,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -913,7 +913,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -987,7 +987,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1062,7 +1062,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1139,7 +1139,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1149,7 +1149,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposPrivilegesPartialUpdate(context.Background(), owner, identifier).Data(data).Execute()
+    r, err := apiClient.ReposApi.ReposPrivilegesPartialUpdate(context.Background(), owner, identifier).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPrivilegesPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1212,7 +1212,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1222,7 +1222,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposPrivilegesUpdate(context.Background(), owner, identifier).Data(data).Execute()
+    r, err := apiClient.ReposApi.ReposPrivilegesUpdate(context.Background(), owner, identifier).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPrivilegesUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1285,7 +1285,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1358,7 +1358,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1433,7 +1433,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1506,7 +1506,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1579,7 +1579,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1654,7 +1654,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1664,7 +1664,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDartDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    r, err := apiClient.ReposApi.ReposUpstreamDartDelete(context.Background(), owner, identifier, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1728,7 +1728,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1805,7 +1805,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1883,7 +1883,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1959,7 +1959,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2037,7 +2037,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2112,7 +2112,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2122,7 +2122,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDebDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    r, err := apiClient.ReposApi.ReposUpstreamDebDelete(context.Background(), owner, identifier, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2186,7 +2186,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2263,7 +2263,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2341,7 +2341,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2417,7 +2417,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2495,7 +2495,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2570,7 +2570,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2580,7 +2580,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDockerDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    r, err := apiClient.ReposApi.ReposUpstreamDockerDelete(context.Background(), owner, identifier, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2644,7 +2644,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2721,7 +2721,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2799,7 +2799,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2875,7 +2875,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2953,7 +2953,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3028,7 +3028,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3038,7 +3038,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHelmDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    r, err := apiClient.ReposApi.ReposUpstreamHelmDelete(context.Background(), owner, identifier, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3102,7 +3102,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3179,7 +3179,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3257,7 +3257,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3333,7 +3333,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3411,7 +3411,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3486,7 +3486,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3496,7 +3496,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamMavenDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    r, err := apiClient.ReposApi.ReposUpstreamMavenDelete(context.Background(), owner, identifier, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3560,7 +3560,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3637,7 +3637,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3715,7 +3715,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3791,7 +3791,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3869,7 +3869,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3944,7 +3944,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3954,7 +3954,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNpmDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    r, err := apiClient.ReposApi.ReposUpstreamNpmDelete(context.Background(), owner, identifier, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4018,7 +4018,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4095,7 +4095,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4173,7 +4173,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4249,7 +4249,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4327,7 +4327,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4402,7 +4402,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4412,7 +4412,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNugetDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    r, err := apiClient.ReposApi.ReposUpstreamNugetDelete(context.Background(), owner, identifier, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4476,7 +4476,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4553,7 +4553,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4631,7 +4631,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4707,7 +4707,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4785,7 +4785,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4860,7 +4860,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4870,7 +4870,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamPythonDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    r, err := apiClient.ReposApi.ReposUpstreamPythonDelete(context.Background(), owner, identifier, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4934,7 +4934,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5011,7 +5011,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5089,7 +5089,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5165,7 +5165,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5243,7 +5243,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5318,7 +5318,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5328,7 +5328,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRpmDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    r, err := apiClient.ReposApi.ReposUpstreamRpmDelete(context.Background(), owner, identifier, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5392,7 +5392,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5469,7 +5469,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5547,7 +5547,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5623,7 +5623,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5701,7 +5701,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5776,7 +5776,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5786,7 +5786,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRubyDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    r, err := apiClient.ReposApi.ReposUpstreamRubyDelete(context.Background(), owner, identifier, slugPerm).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5850,7 +5850,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -5927,7 +5927,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -6005,7 +6005,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -6081,7 +6081,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -6159,7 +6159,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {

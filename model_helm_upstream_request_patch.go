@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the HelmUpstreamRequestPatch type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &HelmUpstreamRequestPatch{}
 
 // HelmUpstreamRequestPatch struct for HelmUpstreamRequestPatch
 type HelmUpstreamRequestPatch struct {
@@ -72,7 +75,7 @@ func NewHelmUpstreamRequestPatchWithDefaults() *HelmUpstreamRequestPatch {
 
 // GetAuthMode returns the AuthMode field value if set, zero value otherwise.
 func (o *HelmUpstreamRequestPatch) GetAuthMode() string {
-	if o == nil || isNil(o.AuthMode) {
+	if o == nil || IsNil(o.AuthMode) {
 		var ret string
 		return ret
 	}
@@ -82,7 +85,7 @@ func (o *HelmUpstreamRequestPatch) GetAuthMode() string {
 // GetAuthModeOk returns a tuple with the AuthMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HelmUpstreamRequestPatch) GetAuthModeOk() (*string, bool) {
-	if o == nil || isNil(o.AuthMode) {
+	if o == nil || IsNil(o.AuthMode) {
 		return nil, false
 	}
 	return o.AuthMode, true
@@ -90,7 +93,7 @@ func (o *HelmUpstreamRequestPatch) GetAuthModeOk() (*string, bool) {
 
 // HasAuthMode returns a boolean if a field has been set.
 func (o *HelmUpstreamRequestPatch) HasAuthMode() bool {
-	if o != nil && !isNil(o.AuthMode) {
+	if o != nil && !IsNil(o.AuthMode) {
 		return true
 	}
 
@@ -104,7 +107,7 @@ func (o *HelmUpstreamRequestPatch) SetAuthMode(v string) {
 
 // GetAuthSecret returns the AuthSecret field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HelmUpstreamRequestPatch) GetAuthSecret() string {
-	if o == nil || isNil(o.AuthSecret.Get()) {
+	if o == nil || IsNil(o.AuthSecret.Get()) {
 		var ret string
 		return ret
 	}
@@ -147,7 +150,7 @@ func (o *HelmUpstreamRequestPatch) UnsetAuthSecret() {
 
 // GetAuthUsername returns the AuthUsername field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HelmUpstreamRequestPatch) GetAuthUsername() string {
-	if o == nil || isNil(o.AuthUsername.Get()) {
+	if o == nil || IsNil(o.AuthUsername.Get()) {
 		var ret string
 		return ret
 	}
@@ -190,7 +193,7 @@ func (o *HelmUpstreamRequestPatch) UnsetAuthUsername() {
 
 // GetExtraHeader1 returns the ExtraHeader1 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HelmUpstreamRequestPatch) GetExtraHeader1() string {
-	if o == nil || isNil(o.ExtraHeader1.Get()) {
+	if o == nil || IsNil(o.ExtraHeader1.Get()) {
 		var ret string
 		return ret
 	}
@@ -233,7 +236,7 @@ func (o *HelmUpstreamRequestPatch) UnsetExtraHeader1() {
 
 // GetExtraHeader2 returns the ExtraHeader2 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HelmUpstreamRequestPatch) GetExtraHeader2() string {
-	if o == nil || isNil(o.ExtraHeader2.Get()) {
+	if o == nil || IsNil(o.ExtraHeader2.Get()) {
 		var ret string
 		return ret
 	}
@@ -276,7 +279,7 @@ func (o *HelmUpstreamRequestPatch) UnsetExtraHeader2() {
 
 // GetExtraValue1 returns the ExtraValue1 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HelmUpstreamRequestPatch) GetExtraValue1() string {
-	if o == nil || isNil(o.ExtraValue1.Get()) {
+	if o == nil || IsNil(o.ExtraValue1.Get()) {
 		var ret string
 		return ret
 	}
@@ -319,7 +322,7 @@ func (o *HelmUpstreamRequestPatch) UnsetExtraValue1() {
 
 // GetExtraValue2 returns the ExtraValue2 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HelmUpstreamRequestPatch) GetExtraValue2() string {
-	if o == nil || isNil(o.ExtraValue2.Get()) {
+	if o == nil || IsNil(o.ExtraValue2.Get()) {
 		var ret string
 		return ret
 	}
@@ -362,7 +365,7 @@ func (o *HelmUpstreamRequestPatch) UnsetExtraValue2() {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *HelmUpstreamRequestPatch) GetIsActive() bool {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -372,7 +375,7 @@ func (o *HelmUpstreamRequestPatch) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HelmUpstreamRequestPatch) GetIsActiveOk() (*bool, bool) {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		return nil, false
 	}
 	return o.IsActive, true
@@ -380,7 +383,7 @@ func (o *HelmUpstreamRequestPatch) GetIsActiveOk() (*bool, bool) {
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *HelmUpstreamRequestPatch) HasIsActive() bool {
-	if o != nil && !isNil(o.IsActive) {
+	if o != nil && !IsNil(o.IsActive) {
 		return true
 	}
 
@@ -394,7 +397,7 @@ func (o *HelmUpstreamRequestPatch) SetIsActive(v bool) {
 
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *HelmUpstreamRequestPatch) GetMode() string {
-	if o == nil || isNil(o.Mode) {
+	if o == nil || IsNil(o.Mode) {
 		var ret string
 		return ret
 	}
@@ -404,7 +407,7 @@ func (o *HelmUpstreamRequestPatch) GetMode() string {
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HelmUpstreamRequestPatch) GetModeOk() (*string, bool) {
-	if o == nil || isNil(o.Mode) {
+	if o == nil || IsNil(o.Mode) {
 		return nil, false
 	}
 	return o.Mode, true
@@ -412,7 +415,7 @@ func (o *HelmUpstreamRequestPatch) GetModeOk() (*string, bool) {
 
 // HasMode returns a boolean if a field has been set.
 func (o *HelmUpstreamRequestPatch) HasMode() bool {
-	if o != nil && !isNil(o.Mode) {
+	if o != nil && !IsNil(o.Mode) {
 		return true
 	}
 
@@ -426,7 +429,7 @@ func (o *HelmUpstreamRequestPatch) SetMode(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *HelmUpstreamRequestPatch) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -436,7 +439,7 @@ func (o *HelmUpstreamRequestPatch) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HelmUpstreamRequestPatch) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -444,7 +447,7 @@ func (o *HelmUpstreamRequestPatch) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *HelmUpstreamRequestPatch) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -458,7 +461,7 @@ func (o *HelmUpstreamRequestPatch) SetName(v string) {
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *HelmUpstreamRequestPatch) GetPriority() int64 {
-	if o == nil || isNil(o.Priority) {
+	if o == nil || IsNil(o.Priority) {
 		var ret int64
 		return ret
 	}
@@ -468,7 +471,7 @@ func (o *HelmUpstreamRequestPatch) GetPriority() int64 {
 // GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HelmUpstreamRequestPatch) GetPriorityOk() (*int64, bool) {
-	if o == nil || isNil(o.Priority) {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
 	return o.Priority, true
@@ -476,7 +479,7 @@ func (o *HelmUpstreamRequestPatch) GetPriorityOk() (*int64, bool) {
 
 // HasPriority returns a boolean if a field has been set.
 func (o *HelmUpstreamRequestPatch) HasPriority() bool {
-	if o != nil && !isNil(o.Priority) {
+	if o != nil && !IsNil(o.Priority) {
 		return true
 	}
 
@@ -490,7 +493,7 @@ func (o *HelmUpstreamRequestPatch) SetPriority(v int64) {
 
 // GetUpstreamUrl returns the UpstreamUrl field value if set, zero value otherwise.
 func (o *HelmUpstreamRequestPatch) GetUpstreamUrl() string {
-	if o == nil || isNil(o.UpstreamUrl) {
+	if o == nil || IsNil(o.UpstreamUrl) {
 		var ret string
 		return ret
 	}
@@ -500,7 +503,7 @@ func (o *HelmUpstreamRequestPatch) GetUpstreamUrl() string {
 // GetUpstreamUrlOk returns a tuple with the UpstreamUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HelmUpstreamRequestPatch) GetUpstreamUrlOk() (*string, bool) {
-	if o == nil || isNil(o.UpstreamUrl) {
+	if o == nil || IsNil(o.UpstreamUrl) {
 		return nil, false
 	}
 	return o.UpstreamUrl, true
@@ -508,7 +511,7 @@ func (o *HelmUpstreamRequestPatch) GetUpstreamUrlOk() (*string, bool) {
 
 // HasUpstreamUrl returns a boolean if a field has been set.
 func (o *HelmUpstreamRequestPatch) HasUpstreamUrl() bool {
-	if o != nil && !isNil(o.UpstreamUrl) {
+	if o != nil && !IsNil(o.UpstreamUrl) {
 		return true
 	}
 
@@ -522,7 +525,7 @@ func (o *HelmUpstreamRequestPatch) SetUpstreamUrl(v string) {
 
 // GetVerifySsl returns the VerifySsl field value if set, zero value otherwise.
 func (o *HelmUpstreamRequestPatch) GetVerifySsl() bool {
-	if o == nil || isNil(o.VerifySsl) {
+	if o == nil || IsNil(o.VerifySsl) {
 		var ret bool
 		return ret
 	}
@@ -532,7 +535,7 @@ func (o *HelmUpstreamRequestPatch) GetVerifySsl() bool {
 // GetVerifySslOk returns a tuple with the VerifySsl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *HelmUpstreamRequestPatch) GetVerifySslOk() (*bool, bool) {
-	if o == nil || isNil(o.VerifySsl) {
+	if o == nil || IsNil(o.VerifySsl) {
 		return nil, false
 	}
 	return o.VerifySsl, true
@@ -540,7 +543,7 @@ func (o *HelmUpstreamRequestPatch) GetVerifySslOk() (*bool, bool) {
 
 // HasVerifySsl returns a boolean if a field has been set.
 func (o *HelmUpstreamRequestPatch) HasVerifySsl() bool {
-	if o != nil && !isNil(o.VerifySsl) {
+	if o != nil && !IsNil(o.VerifySsl) {
 		return true
 	}
 
@@ -553,8 +556,16 @@ func (o *HelmUpstreamRequestPatch) SetVerifySsl(v bool) {
 }
 
 func (o HelmUpstreamRequestPatch) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o HelmUpstreamRequestPatch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.AuthMode) {
+	if !IsNil(o.AuthMode) {
 		toSerialize["auth_mode"] = o.AuthMode
 	}
 	if o.AuthSecret.IsSet() {
@@ -575,25 +586,25 @@ func (o HelmUpstreamRequestPatch) MarshalJSON() ([]byte, error) {
 	if o.ExtraValue2.IsSet() {
 		toSerialize["extra_value_2"] = o.ExtraValue2.Get()
 	}
-	if !isNil(o.IsActive) {
+	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
 	}
-	if !isNil(o.Mode) {
+	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.Priority) {
+	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	if !isNil(o.UpstreamUrl) {
+	if !IsNil(o.UpstreamUrl) {
 		toSerialize["upstream_url"] = o.UpstreamUrl
 	}
-	if !isNil(o.VerifySsl) {
+	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableHelmUpstreamRequestPatch struct {

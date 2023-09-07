@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the CommonBandwidthMetricsValue type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CommonBandwidthMetricsValue{}
 
 // CommonBandwidthMetricsValue struct for CommonBandwidthMetricsValue
 type CommonBandwidthMetricsValue struct {
@@ -71,7 +74,7 @@ func (o *CommonBandwidthMetricsValue) SetDisplay(v string) {
 
 // GetUnits returns the Units field value if set, zero value otherwise.
 func (o *CommonBandwidthMetricsValue) GetUnits() string {
-	if o == nil || isNil(o.Units) {
+	if o == nil || IsNil(o.Units) {
 		var ret string
 		return ret
 	}
@@ -81,7 +84,7 @@ func (o *CommonBandwidthMetricsValue) GetUnits() string {
 // GetUnitsOk returns a tuple with the Units field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CommonBandwidthMetricsValue) GetUnitsOk() (*string, bool) {
-	if o == nil || isNil(o.Units) {
+	if o == nil || IsNil(o.Units) {
 		return nil, false
 	}
 	return o.Units, true
@@ -89,7 +92,7 @@ func (o *CommonBandwidthMetricsValue) GetUnitsOk() (*string, bool) {
 
 // HasUnits returns a boolean if a field has been set.
 func (o *CommonBandwidthMetricsValue) HasUnits() bool {
-	if o != nil && !isNil(o.Units) {
+	if o != nil && !IsNil(o.Units) {
 		return true
 	}
 
@@ -126,17 +129,21 @@ func (o *CommonBandwidthMetricsValue) SetValue(v int64) {
 }
 
 func (o CommonBandwidthMetricsValue) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["display"] = o.Display
-	}
-	if !isNil(o.Units) {
-		toSerialize["units"] = o.Units
-	}
-	if true {
-		toSerialize["value"] = o.Value
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CommonBandwidthMetricsValue) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["display"] = o.Display
+	if !IsNil(o.Units) {
+		toSerialize["units"] = o.Units
+	}
+	toSerialize["value"] = o.Value
+	return toSerialize, nil
 }
 
 type NullableCommonBandwidthMetricsValue struct {

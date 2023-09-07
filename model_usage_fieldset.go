@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the UsageFieldset type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UsageFieldset{}
 
 // UsageFieldset struct for UsageFieldset
 type UsageFieldset struct {
@@ -89,14 +92,18 @@ func (o *UsageFieldset) SetRaw(v UsageLimitsRaw) {
 }
 
 func (o UsageFieldset) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["display"] = o.Display
-	}
-	if true {
-		toSerialize["raw"] = o.Raw
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UsageFieldset) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["display"] = o.Display
+	toSerialize["raw"] = o.Raw
+	return toSerialize, nil
 }
 
 type NullableUsageFieldset struct {

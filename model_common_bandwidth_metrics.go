@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the CommonBandwidthMetrics type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CommonBandwidthMetrics{}
 
 // CommonBandwidthMetrics struct for CommonBandwidthMetrics
 type CommonBandwidthMetrics struct {
@@ -141,20 +144,20 @@ func (o *CommonBandwidthMetrics) SetTotal(v CommonBandwidthMetricsValue) {
 }
 
 func (o CommonBandwidthMetrics) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["average"] = o.Average
-	}
-	if true {
-		toSerialize["highest"] = o.Highest
-	}
-	if true {
-		toSerialize["lowest"] = o.Lowest
-	}
-	if true {
-		toSerialize["total"] = o.Total
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CommonBandwidthMetrics) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["average"] = o.Average
+	toSerialize["highest"] = o.Highest
+	toSerialize["lowest"] = o.Lowest
+	toSerialize["total"] = o.Total
+	return toSerialize, nil
 }
 
 type NullableCommonBandwidthMetrics struct {

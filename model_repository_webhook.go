@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the RepositoryWebhook type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryWebhook{}
 
 // RepositoryWebhook struct for RepositoryWebhook
 type RepositoryWebhook struct {
@@ -78,7 +81,7 @@ func NewRepositoryWebhookWithDefaults() *RepositoryWebhook {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -88,7 +91,7 @@ func (o *RepositoryWebhook) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -96,7 +99,7 @@ func (o *RepositoryWebhook) GetCreatedAtOk() (*time.Time, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -110,7 +113,7 @@ func (o *RepositoryWebhook) SetCreatedAt(v time.Time) {
 
 // GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetCreatedBy() string {
-	if o == nil || isNil(o.CreatedBy) {
+	if o == nil || IsNil(o.CreatedBy) {
 		var ret string
 		return ret
 	}
@@ -120,7 +123,7 @@ func (o *RepositoryWebhook) GetCreatedBy() string {
 // GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetCreatedByOk() (*string, bool) {
-	if o == nil || isNil(o.CreatedBy) {
+	if o == nil || IsNil(o.CreatedBy) {
 		return nil, false
 	}
 	return o.CreatedBy, true
@@ -128,7 +131,7 @@ func (o *RepositoryWebhook) GetCreatedByOk() (*string, bool) {
 
 // HasCreatedBy returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasCreatedBy() bool {
-	if o != nil && !isNil(o.CreatedBy) {
+	if o != nil && !IsNil(o.CreatedBy) {
 		return true
 	}
 
@@ -142,7 +145,7 @@ func (o *RepositoryWebhook) SetCreatedBy(v string) {
 
 // GetCreatedByUrl returns the CreatedByUrl field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetCreatedByUrl() string {
-	if o == nil || isNil(o.CreatedByUrl) {
+	if o == nil || IsNil(o.CreatedByUrl) {
 		var ret string
 		return ret
 	}
@@ -152,7 +155,7 @@ func (o *RepositoryWebhook) GetCreatedByUrl() string {
 // GetCreatedByUrlOk returns a tuple with the CreatedByUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetCreatedByUrlOk() (*string, bool) {
-	if o == nil || isNil(o.CreatedByUrl) {
+	if o == nil || IsNil(o.CreatedByUrl) {
 		return nil, false
 	}
 	return o.CreatedByUrl, true
@@ -160,7 +163,7 @@ func (o *RepositoryWebhook) GetCreatedByUrlOk() (*string, bool) {
 
 // HasCreatedByUrl returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasCreatedByUrl() bool {
-	if o != nil && !isNil(o.CreatedByUrl) {
+	if o != nil && !IsNil(o.CreatedByUrl) {
 		return true
 	}
 
@@ -174,7 +177,7 @@ func (o *RepositoryWebhook) SetCreatedByUrl(v string) {
 
 // GetDisableReason returns the DisableReason field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetDisableReason() int64 {
-	if o == nil || isNil(o.DisableReason) {
+	if o == nil || IsNil(o.DisableReason) {
 		var ret int64
 		return ret
 	}
@@ -184,7 +187,7 @@ func (o *RepositoryWebhook) GetDisableReason() int64 {
 // GetDisableReasonOk returns a tuple with the DisableReason field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetDisableReasonOk() (*int64, bool) {
-	if o == nil || isNil(o.DisableReason) {
+	if o == nil || IsNil(o.DisableReason) {
 		return nil, false
 	}
 	return o.DisableReason, true
@@ -192,7 +195,7 @@ func (o *RepositoryWebhook) GetDisableReasonOk() (*int64, bool) {
 
 // HasDisableReason returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasDisableReason() bool {
-	if o != nil && !isNil(o.DisableReason) {
+	if o != nil && !IsNil(o.DisableReason) {
 		return true
 	}
 
@@ -206,7 +209,7 @@ func (o *RepositoryWebhook) SetDisableReason(v int64) {
 
 // GetDisableReasonStr returns the DisableReasonStr field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetDisableReasonStr() string {
-	if o == nil || isNil(o.DisableReasonStr) {
+	if o == nil || IsNil(o.DisableReasonStr) {
 		var ret string
 		return ret
 	}
@@ -216,7 +219,7 @@ func (o *RepositoryWebhook) GetDisableReasonStr() string {
 // GetDisableReasonStrOk returns a tuple with the DisableReasonStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetDisableReasonStrOk() (*string, bool) {
-	if o == nil || isNil(o.DisableReasonStr) {
+	if o == nil || IsNil(o.DisableReasonStr) {
 		return nil, false
 	}
 	return o.DisableReasonStr, true
@@ -224,7 +227,7 @@ func (o *RepositoryWebhook) GetDisableReasonStrOk() (*string, bool) {
 
 // HasDisableReasonStr returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasDisableReasonStr() bool {
-	if o != nil && !isNil(o.DisableReasonStr) {
+	if o != nil && !IsNil(o.DisableReasonStr) {
 		return true
 	}
 
@@ -251,7 +254,7 @@ func (o *RepositoryWebhook) GetEvents() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RepositoryWebhook) GetEventsOk() ([]string, bool) {
-	if o == nil || isNil(o.Events) {
+	if o == nil || IsNil(o.Events) {
 		return nil, false
 	}
 	return o.Events, true
@@ -264,7 +267,7 @@ func (o *RepositoryWebhook) SetEvents(v []string) {
 
 // GetIdentifier returns the Identifier field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryWebhook) GetIdentifier() int64 {
-	if o == nil || isNil(o.Identifier.Get()) {
+	if o == nil || IsNil(o.Identifier.Get()) {
 		var ret int64
 		return ret
 	}
@@ -307,7 +310,7 @@ func (o *RepositoryWebhook) UnsetIdentifier() {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetIsActive() bool {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -317,7 +320,7 @@ func (o *RepositoryWebhook) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetIsActiveOk() (*bool, bool) {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		return nil, false
 	}
 	return o.IsActive, true
@@ -325,7 +328,7 @@ func (o *RepositoryWebhook) GetIsActiveOk() (*bool, bool) {
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasIsActive() bool {
-	if o != nil && !isNil(o.IsActive) {
+	if o != nil && !IsNil(o.IsActive) {
 		return true
 	}
 
@@ -339,7 +342,7 @@ func (o *RepositoryWebhook) SetIsActive(v bool) {
 
 // GetIsLastResponseBad returns the IsLastResponseBad field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetIsLastResponseBad() bool {
-	if o == nil || isNil(o.IsLastResponseBad) {
+	if o == nil || IsNil(o.IsLastResponseBad) {
 		var ret bool
 		return ret
 	}
@@ -349,7 +352,7 @@ func (o *RepositoryWebhook) GetIsLastResponseBad() bool {
 // GetIsLastResponseBadOk returns a tuple with the IsLastResponseBad field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetIsLastResponseBadOk() (*bool, bool) {
-	if o == nil || isNil(o.IsLastResponseBad) {
+	if o == nil || IsNil(o.IsLastResponseBad) {
 		return nil, false
 	}
 	return o.IsLastResponseBad, true
@@ -357,7 +360,7 @@ func (o *RepositoryWebhook) GetIsLastResponseBadOk() (*bool, bool) {
 
 // HasIsLastResponseBad returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasIsLastResponseBad() bool {
-	if o != nil && !isNil(o.IsLastResponseBad) {
+	if o != nil && !IsNil(o.IsLastResponseBad) {
 		return true
 	}
 
@@ -371,7 +374,7 @@ func (o *RepositoryWebhook) SetIsLastResponseBad(v bool) {
 
 // GetLastResponseStatus returns the LastResponseStatus field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetLastResponseStatus() int64 {
-	if o == nil || isNil(o.LastResponseStatus) {
+	if o == nil || IsNil(o.LastResponseStatus) {
 		var ret int64
 		return ret
 	}
@@ -381,7 +384,7 @@ func (o *RepositoryWebhook) GetLastResponseStatus() int64 {
 // GetLastResponseStatusOk returns a tuple with the LastResponseStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetLastResponseStatusOk() (*int64, bool) {
-	if o == nil || isNil(o.LastResponseStatus) {
+	if o == nil || IsNil(o.LastResponseStatus) {
 		return nil, false
 	}
 	return o.LastResponseStatus, true
@@ -389,7 +392,7 @@ func (o *RepositoryWebhook) GetLastResponseStatusOk() (*int64, bool) {
 
 // HasLastResponseStatus returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasLastResponseStatus() bool {
-	if o != nil && !isNil(o.LastResponseStatus) {
+	if o != nil && !IsNil(o.LastResponseStatus) {
 		return true
 	}
 
@@ -403,7 +406,7 @@ func (o *RepositoryWebhook) SetLastResponseStatus(v int64) {
 
 // GetLastResponseStatusStr returns the LastResponseStatusStr field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetLastResponseStatusStr() string {
-	if o == nil || isNil(o.LastResponseStatusStr) {
+	if o == nil || IsNil(o.LastResponseStatusStr) {
 		var ret string
 		return ret
 	}
@@ -413,7 +416,7 @@ func (o *RepositoryWebhook) GetLastResponseStatusStr() string {
 // GetLastResponseStatusStrOk returns a tuple with the LastResponseStatusStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetLastResponseStatusStrOk() (*string, bool) {
-	if o == nil || isNil(o.LastResponseStatusStr) {
+	if o == nil || IsNil(o.LastResponseStatusStr) {
 		return nil, false
 	}
 	return o.LastResponseStatusStr, true
@@ -421,7 +424,7 @@ func (o *RepositoryWebhook) GetLastResponseStatusStrOk() (*string, bool) {
 
 // HasLastResponseStatusStr returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasLastResponseStatusStr() bool {
-	if o != nil && !isNil(o.LastResponseStatusStr) {
+	if o != nil && !IsNil(o.LastResponseStatusStr) {
 		return true
 	}
 
@@ -435,7 +438,7 @@ func (o *RepositoryWebhook) SetLastResponseStatusStr(v string) {
 
 // GetNumSent returns the NumSent field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetNumSent() int64 {
-	if o == nil || isNil(o.NumSent) {
+	if o == nil || IsNil(o.NumSent) {
 		var ret int64
 		return ret
 	}
@@ -445,7 +448,7 @@ func (o *RepositoryWebhook) GetNumSent() int64 {
 // GetNumSentOk returns a tuple with the NumSent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetNumSentOk() (*int64, bool) {
-	if o == nil || isNil(o.NumSent) {
+	if o == nil || IsNil(o.NumSent) {
 		return nil, false
 	}
 	return o.NumSent, true
@@ -453,7 +456,7 @@ func (o *RepositoryWebhook) GetNumSentOk() (*int64, bool) {
 
 // HasNumSent returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasNumSent() bool {
-	if o != nil && !isNil(o.NumSent) {
+	if o != nil && !IsNil(o.NumSent) {
 		return true
 	}
 
@@ -467,7 +470,7 @@ func (o *RepositoryWebhook) SetNumSent(v int64) {
 
 // GetPackageQuery returns the PackageQuery field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryWebhook) GetPackageQuery() string {
-	if o == nil || isNil(o.PackageQuery.Get()) {
+	if o == nil || IsNil(o.PackageQuery.Get()) {
 		var ret string
 		return ret
 	}
@@ -510,7 +513,7 @@ func (o *RepositoryWebhook) UnsetPackageQuery() {
 
 // GetRequestBodyFormat returns the RequestBodyFormat field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetRequestBodyFormat() int64 {
-	if o == nil || isNil(o.RequestBodyFormat) {
+	if o == nil || IsNil(o.RequestBodyFormat) {
 		var ret int64
 		return ret
 	}
@@ -520,7 +523,7 @@ func (o *RepositoryWebhook) GetRequestBodyFormat() int64 {
 // GetRequestBodyFormatOk returns a tuple with the RequestBodyFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetRequestBodyFormatOk() (*int64, bool) {
-	if o == nil || isNil(o.RequestBodyFormat) {
+	if o == nil || IsNil(o.RequestBodyFormat) {
 		return nil, false
 	}
 	return o.RequestBodyFormat, true
@@ -528,7 +531,7 @@ func (o *RepositoryWebhook) GetRequestBodyFormatOk() (*int64, bool) {
 
 // HasRequestBodyFormat returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasRequestBodyFormat() bool {
-	if o != nil && !isNil(o.RequestBodyFormat) {
+	if o != nil && !IsNil(o.RequestBodyFormat) {
 		return true
 	}
 
@@ -542,7 +545,7 @@ func (o *RepositoryWebhook) SetRequestBodyFormat(v int64) {
 
 // GetRequestBodyFormatStr returns the RequestBodyFormatStr field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetRequestBodyFormatStr() string {
-	if o == nil || isNil(o.RequestBodyFormatStr) {
+	if o == nil || IsNil(o.RequestBodyFormatStr) {
 		var ret string
 		return ret
 	}
@@ -552,7 +555,7 @@ func (o *RepositoryWebhook) GetRequestBodyFormatStr() string {
 // GetRequestBodyFormatStrOk returns a tuple with the RequestBodyFormatStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetRequestBodyFormatStrOk() (*string, bool) {
-	if o == nil || isNil(o.RequestBodyFormatStr) {
+	if o == nil || IsNil(o.RequestBodyFormatStr) {
 		return nil, false
 	}
 	return o.RequestBodyFormatStr, true
@@ -560,7 +563,7 @@ func (o *RepositoryWebhook) GetRequestBodyFormatStrOk() (*string, bool) {
 
 // HasRequestBodyFormatStr returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasRequestBodyFormatStr() bool {
-	if o != nil && !isNil(o.RequestBodyFormatStr) {
+	if o != nil && !IsNil(o.RequestBodyFormatStr) {
 		return true
 	}
 
@@ -574,7 +577,7 @@ func (o *RepositoryWebhook) SetRequestBodyFormatStr(v string) {
 
 // GetRequestBodyTemplateFormat returns the RequestBodyTemplateFormat field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetRequestBodyTemplateFormat() int64 {
-	if o == nil || isNil(o.RequestBodyTemplateFormat) {
+	if o == nil || IsNil(o.RequestBodyTemplateFormat) {
 		var ret int64
 		return ret
 	}
@@ -584,7 +587,7 @@ func (o *RepositoryWebhook) GetRequestBodyTemplateFormat() int64 {
 // GetRequestBodyTemplateFormatOk returns a tuple with the RequestBodyTemplateFormat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetRequestBodyTemplateFormatOk() (*int64, bool) {
-	if o == nil || isNil(o.RequestBodyTemplateFormat) {
+	if o == nil || IsNil(o.RequestBodyTemplateFormat) {
 		return nil, false
 	}
 	return o.RequestBodyTemplateFormat, true
@@ -592,7 +595,7 @@ func (o *RepositoryWebhook) GetRequestBodyTemplateFormatOk() (*int64, bool) {
 
 // HasRequestBodyTemplateFormat returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasRequestBodyTemplateFormat() bool {
-	if o != nil && !isNil(o.RequestBodyTemplateFormat) {
+	if o != nil && !IsNil(o.RequestBodyTemplateFormat) {
 		return true
 	}
 
@@ -606,7 +609,7 @@ func (o *RepositoryWebhook) SetRequestBodyTemplateFormat(v int64) {
 
 // GetRequestBodyTemplateFormatStr returns the RequestBodyTemplateFormatStr field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetRequestBodyTemplateFormatStr() string {
-	if o == nil || isNil(o.RequestBodyTemplateFormatStr) {
+	if o == nil || IsNil(o.RequestBodyTemplateFormatStr) {
 		var ret string
 		return ret
 	}
@@ -616,7 +619,7 @@ func (o *RepositoryWebhook) GetRequestBodyTemplateFormatStr() string {
 // GetRequestBodyTemplateFormatStrOk returns a tuple with the RequestBodyTemplateFormatStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetRequestBodyTemplateFormatStrOk() (*string, bool) {
-	if o == nil || isNil(o.RequestBodyTemplateFormatStr) {
+	if o == nil || IsNil(o.RequestBodyTemplateFormatStr) {
 		return nil, false
 	}
 	return o.RequestBodyTemplateFormatStr, true
@@ -624,7 +627,7 @@ func (o *RepositoryWebhook) GetRequestBodyTemplateFormatStrOk() (*string, bool) 
 
 // HasRequestBodyTemplateFormatStr returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasRequestBodyTemplateFormatStr() bool {
-	if o != nil && !isNil(o.RequestBodyTemplateFormatStr) {
+	if o != nil && !IsNil(o.RequestBodyTemplateFormatStr) {
 		return true
 	}
 
@@ -638,7 +641,7 @@ func (o *RepositoryWebhook) SetRequestBodyTemplateFormatStr(v string) {
 
 // GetRequestContentType returns the RequestContentType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryWebhook) GetRequestContentType() string {
-	if o == nil || isNil(o.RequestContentType.Get()) {
+	if o == nil || IsNil(o.RequestContentType.Get()) {
 		var ret string
 		return ret
 	}
@@ -681,7 +684,7 @@ func (o *RepositoryWebhook) UnsetRequestContentType() {
 
 // GetSecretHeader returns the SecretHeader field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryWebhook) GetSecretHeader() string {
-	if o == nil || isNil(o.SecretHeader.Get()) {
+	if o == nil || IsNil(o.SecretHeader.Get()) {
 		var ret string
 		return ret
 	}
@@ -724,7 +727,7 @@ func (o *RepositoryWebhook) UnsetSecretHeader() {
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetSelfUrl() string {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		var ret string
 		return ret
 	}
@@ -734,7 +737,7 @@ func (o *RepositoryWebhook) GetSelfUrl() string {
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetSelfUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		return nil, false
 	}
 	return o.SelfUrl, true
@@ -742,7 +745,7 @@ func (o *RepositoryWebhook) GetSelfUrlOk() (*string, bool) {
 
 // HasSelfUrl returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasSelfUrl() bool {
-	if o != nil && !isNil(o.SelfUrl) {
+	if o != nil && !IsNil(o.SelfUrl) {
 		return true
 	}
 
@@ -756,7 +759,7 @@ func (o *RepositoryWebhook) SetSelfUrl(v string) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -766,7 +769,7 @@ func (o *RepositoryWebhook) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -774,7 +777,7 @@ func (o *RepositoryWebhook) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -825,7 +828,7 @@ func (o *RepositoryWebhook) GetTemplates() []WebhookTemplate {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RepositoryWebhook) GetTemplatesOk() ([]WebhookTemplate, bool) {
-	if o == nil || isNil(o.Templates) {
+	if o == nil || IsNil(o.Templates) {
 		return nil, false
 	}
 	return o.Templates, true
@@ -838,7 +841,7 @@ func (o *RepositoryWebhook) SetTemplates(v []WebhookTemplate) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -848,7 +851,7 @@ func (o *RepositoryWebhook) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -856,7 +859,7 @@ func (o *RepositoryWebhook) GetUpdatedAtOk() (*time.Time, bool) {
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
+	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -870,7 +873,7 @@ func (o *RepositoryWebhook) SetUpdatedAt(v time.Time) {
 
 // GetUpdatedBy returns the UpdatedBy field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetUpdatedBy() string {
-	if o == nil || isNil(o.UpdatedBy) {
+	if o == nil || IsNil(o.UpdatedBy) {
 		var ret string
 		return ret
 	}
@@ -880,7 +883,7 @@ func (o *RepositoryWebhook) GetUpdatedBy() string {
 // GetUpdatedByOk returns a tuple with the UpdatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetUpdatedByOk() (*string, bool) {
-	if o == nil || isNil(o.UpdatedBy) {
+	if o == nil || IsNil(o.UpdatedBy) {
 		return nil, false
 	}
 	return o.UpdatedBy, true
@@ -888,7 +891,7 @@ func (o *RepositoryWebhook) GetUpdatedByOk() (*string, bool) {
 
 // HasUpdatedBy returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasUpdatedBy() bool {
-	if o != nil && !isNil(o.UpdatedBy) {
+	if o != nil && !IsNil(o.UpdatedBy) {
 		return true
 	}
 
@@ -902,7 +905,7 @@ func (o *RepositoryWebhook) SetUpdatedBy(v string) {
 
 // GetUpdatedByUrl returns the UpdatedByUrl field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetUpdatedByUrl() string {
-	if o == nil || isNil(o.UpdatedByUrl) {
+	if o == nil || IsNil(o.UpdatedByUrl) {
 		var ret string
 		return ret
 	}
@@ -912,7 +915,7 @@ func (o *RepositoryWebhook) GetUpdatedByUrl() string {
 // GetUpdatedByUrlOk returns a tuple with the UpdatedByUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetUpdatedByUrlOk() (*string, bool) {
-	if o == nil || isNil(o.UpdatedByUrl) {
+	if o == nil || IsNil(o.UpdatedByUrl) {
 		return nil, false
 	}
 	return o.UpdatedByUrl, true
@@ -920,7 +923,7 @@ func (o *RepositoryWebhook) GetUpdatedByUrlOk() (*string, bool) {
 
 // HasUpdatedByUrl returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasUpdatedByUrl() bool {
-	if o != nil && !isNil(o.UpdatedByUrl) {
+	if o != nil && !IsNil(o.UpdatedByUrl) {
 		return true
 	}
 
@@ -934,7 +937,7 @@ func (o *RepositoryWebhook) SetUpdatedByUrl(v string) {
 
 // GetVerifySsl returns the VerifySsl field value if set, zero value otherwise.
 func (o *RepositoryWebhook) GetVerifySsl() bool {
-	if o == nil || isNil(o.VerifySsl) {
+	if o == nil || IsNil(o.VerifySsl) {
 		var ret bool
 		return ret
 	}
@@ -944,7 +947,7 @@ func (o *RepositoryWebhook) GetVerifySsl() bool {
 // GetVerifySslOk returns a tuple with the VerifySsl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryWebhook) GetVerifySslOk() (*bool, bool) {
-	if o == nil || isNil(o.VerifySsl) {
+	if o == nil || IsNil(o.VerifySsl) {
 		return nil, false
 	}
 	return o.VerifySsl, true
@@ -952,7 +955,7 @@ func (o *RepositoryWebhook) GetVerifySslOk() (*bool, bool) {
 
 // HasVerifySsl returns a boolean if a field has been set.
 func (o *RepositoryWebhook) HasVerifySsl() bool {
-	if o != nil && !isNil(o.VerifySsl) {
+	if o != nil && !IsNil(o.VerifySsl) {
 		return true
 	}
 
@@ -965,20 +968,28 @@ func (o *RepositoryWebhook) SetVerifySsl(v bool) {
 }
 
 func (o RepositoryWebhook) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryWebhook) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.CreatedAt) {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if !isNil(o.CreatedBy) {
+	if !IsNil(o.CreatedBy) {
 		toSerialize["created_by"] = o.CreatedBy
 	}
-	if !isNil(o.CreatedByUrl) {
+	if !IsNil(o.CreatedByUrl) {
 		toSerialize["created_by_url"] = o.CreatedByUrl
 	}
-	if !isNil(o.DisableReason) {
+	if !IsNil(o.DisableReason) {
 		toSerialize["disable_reason"] = o.DisableReason
 	}
-	if !isNil(o.DisableReasonStr) {
+	if !IsNil(o.DisableReasonStr) {
 		toSerialize["disable_reason_str"] = o.DisableReasonStr
 	}
 	if o.Events != nil {
@@ -987,34 +998,34 @@ func (o RepositoryWebhook) MarshalJSON() ([]byte, error) {
 	if o.Identifier.IsSet() {
 		toSerialize["identifier"] = o.Identifier.Get()
 	}
-	if !isNil(o.IsActive) {
+	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
 	}
-	if !isNil(o.IsLastResponseBad) {
+	if !IsNil(o.IsLastResponseBad) {
 		toSerialize["is_last_response_bad"] = o.IsLastResponseBad
 	}
-	if !isNil(o.LastResponseStatus) {
+	if !IsNil(o.LastResponseStatus) {
 		toSerialize["last_response_status"] = o.LastResponseStatus
 	}
-	if !isNil(o.LastResponseStatusStr) {
+	if !IsNil(o.LastResponseStatusStr) {
 		toSerialize["last_response_status_str"] = o.LastResponseStatusStr
 	}
-	if !isNil(o.NumSent) {
+	if !IsNil(o.NumSent) {
 		toSerialize["num_sent"] = o.NumSent
 	}
 	if o.PackageQuery.IsSet() {
 		toSerialize["package_query"] = o.PackageQuery.Get()
 	}
-	if !isNil(o.RequestBodyFormat) {
+	if !IsNil(o.RequestBodyFormat) {
 		toSerialize["request_body_format"] = o.RequestBodyFormat
 	}
-	if !isNil(o.RequestBodyFormatStr) {
+	if !IsNil(o.RequestBodyFormatStr) {
 		toSerialize["request_body_format_str"] = o.RequestBodyFormatStr
 	}
-	if !isNil(o.RequestBodyTemplateFormat) {
+	if !IsNil(o.RequestBodyTemplateFormat) {
 		toSerialize["request_body_template_format"] = o.RequestBodyTemplateFormat
 	}
-	if !isNil(o.RequestBodyTemplateFormatStr) {
+	if !IsNil(o.RequestBodyTemplateFormatStr) {
 		toSerialize["request_body_template_format_str"] = o.RequestBodyTemplateFormatStr
 	}
 	if o.RequestContentType.IsSet() {
@@ -1023,31 +1034,29 @@ func (o RepositoryWebhook) MarshalJSON() ([]byte, error) {
 	if o.SecretHeader.IsSet() {
 		toSerialize["secret_header"] = o.SecretHeader.Get()
 	}
-	if !isNil(o.SelfUrl) {
+	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
-	if true {
-		toSerialize["target_url"] = o.TargetUrl
-	}
+	toSerialize["target_url"] = o.TargetUrl
 	if o.Templates != nil {
 		toSerialize["templates"] = o.Templates
 	}
-	if !isNil(o.UpdatedAt) {
+	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
-	if !isNil(o.UpdatedBy) {
+	if !IsNil(o.UpdatedBy) {
 		toSerialize["updated_by"] = o.UpdatedBy
 	}
-	if !isNil(o.UpdatedByUrl) {
+	if !IsNil(o.UpdatedByUrl) {
 		toSerialize["updated_by_url"] = o.UpdatedByUrl
 	}
-	if !isNil(o.VerifySsl) {
+	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableRepositoryWebhook struct {

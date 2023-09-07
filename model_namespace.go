@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the Namespace type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Namespace{}
 
 // Namespace struct for Namespace
 type Namespace struct {
@@ -42,7 +45,7 @@ func NewNamespaceWithDefaults() *Namespace {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *Namespace) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -52,7 +55,7 @@ func (o *Namespace) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Namespace) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -60,7 +63,7 @@ func (o *Namespace) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *Namespace) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -74,7 +77,7 @@ func (o *Namespace) SetName(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *Namespace) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -84,7 +87,7 @@ func (o *Namespace) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Namespace) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -92,7 +95,7 @@ func (o *Namespace) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *Namespace) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -106,7 +109,7 @@ func (o *Namespace) SetSlug(v string) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *Namespace) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -116,7 +119,7 @@ func (o *Namespace) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Namespace) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -124,7 +127,7 @@ func (o *Namespace) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *Namespace) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -138,7 +141,7 @@ func (o *Namespace) SetSlugPerm(v string) {
 
 // GetTypeName returns the TypeName field value if set, zero value otherwise.
 func (o *Namespace) GetTypeName() string {
-	if o == nil || isNil(o.TypeName) {
+	if o == nil || IsNil(o.TypeName) {
 		var ret string
 		return ret
 	}
@@ -148,7 +151,7 @@ func (o *Namespace) GetTypeName() string {
 // GetTypeNameOk returns a tuple with the TypeName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Namespace) GetTypeNameOk() (*string, bool) {
-	if o == nil || isNil(o.TypeName) {
+	if o == nil || IsNil(o.TypeName) {
 		return nil, false
 	}
 	return o.TypeName, true
@@ -156,7 +159,7 @@ func (o *Namespace) GetTypeNameOk() (*string, bool) {
 
 // HasTypeName returns a boolean if a field has been set.
 func (o *Namespace) HasTypeName() bool {
-	if o != nil && !isNil(o.TypeName) {
+	if o != nil && !IsNil(o.TypeName) {
 		return true
 	}
 
@@ -169,20 +172,28 @@ func (o *Namespace) SetTypeName(v string) {
 }
 
 func (o Namespace) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Slug) {
-		toSerialize["slug"] = o.Slug
-	}
-	if !isNil(o.SlugPerm) {
-		toSerialize["slug_perm"] = o.SlugPerm
-	}
-	if !isNil(o.TypeName) {
-		toSerialize["type_name"] = o.TypeName
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o Namespace) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Slug) {
+		toSerialize["slug"] = o.Slug
+	}
+	if !IsNil(o.SlugPerm) {
+		toSerialize["slug_perm"] = o.SlugPerm
+	}
+	if !IsNil(o.TypeName) {
+		toSerialize["type_name"] = o.TypeName
+	}
+	return toSerialize, nil
 }
 
 type NullableNamespace struct {

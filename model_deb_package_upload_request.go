@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the DebPackageUploadRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DebPackageUploadRequest{}
 
 // DebPackageUploadRequest struct for DebPackageUploadRequest
 type DebPackageUploadRequest struct {
@@ -52,7 +55,7 @@ func NewDebPackageUploadRequestWithDefaults() *DebPackageUploadRequest {
 
 // GetChangesFile returns the ChangesFile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebPackageUploadRequest) GetChangesFile() string {
-	if o == nil || isNil(o.ChangesFile.Get()) {
+	if o == nil || IsNil(o.ChangesFile.Get()) {
 		var ret string
 		return ret
 	}
@@ -143,7 +146,7 @@ func (o *DebPackageUploadRequest) SetPackageFile(v string) {
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
 func (o *DebPackageUploadRequest) GetRepublish() bool {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		var ret bool
 		return ret
 	}
@@ -153,7 +156,7 @@ func (o *DebPackageUploadRequest) GetRepublish() bool {
 // GetRepublishOk returns a tuple with the Republish field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebPackageUploadRequest) GetRepublishOk() (*bool, bool) {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		return nil, false
 	}
 	return o.Republish, true
@@ -161,7 +164,7 @@ func (o *DebPackageUploadRequest) GetRepublishOk() (*bool, bool) {
 
 // HasRepublish returns a boolean if a field has been set.
 func (o *DebPackageUploadRequest) HasRepublish() bool {
-	if o != nil && !isNil(o.Republish) {
+	if o != nil && !IsNil(o.Republish) {
 		return true
 	}
 
@@ -175,7 +178,7 @@ func (o *DebPackageUploadRequest) SetRepublish(v bool) {
 
 // GetSourcesFile returns the SourcesFile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebPackageUploadRequest) GetSourcesFile() string {
-	if o == nil || isNil(o.SourcesFile.Get()) {
+	if o == nil || IsNil(o.SourcesFile.Get()) {
 		var ret string
 		return ret
 	}
@@ -218,7 +221,7 @@ func (o *DebPackageUploadRequest) UnsetSourcesFile() {
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebPackageUploadRequest) GetTags() string {
-	if o == nil || isNil(o.Tags.Get()) {
+	if o == nil || IsNil(o.Tags.Get()) {
 		var ret string
 		return ret
 	}
@@ -260,17 +263,21 @@ func (o *DebPackageUploadRequest) UnsetTags() {
 }
 
 func (o DebPackageUploadRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DebPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ChangesFile.IsSet() {
 		toSerialize["changes_file"] = o.ChangesFile.Get()
 	}
-	if true {
-		toSerialize["distribution"] = o.Distribution
-	}
-	if true {
-		toSerialize["package_file"] = o.PackageFile
-	}
-	if !isNil(o.Republish) {
+	toSerialize["distribution"] = o.Distribution
+	toSerialize["package_file"] = o.PackageFile
+	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
 	if o.SourcesFile.IsSet() {
@@ -279,7 +286,7 @@ func (o DebPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	if o.Tags.IsSet() {
 		toSerialize["tags"] = o.Tags.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableDebPackageUploadRequest struct {

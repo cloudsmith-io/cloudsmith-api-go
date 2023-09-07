@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.290.2
+  version: 1.297.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -32931,6 +32931,7 @@ components:
         fingerprint: fingerprint
         active: true
         created_at: 2000-01-23T04:56:07.000+00:00
+        ssh_fingerprint: ssh_fingerprint
         fingerprint_short: fingerprint_short
       properties:
         active:
@@ -32963,6 +32964,12 @@ components:
           minLength: 1
           readOnly: true
           title: Public key
+          type: string
+        ssh_fingerprint:
+          description: The SSH fingerprint used by RSA for this key.
+          nullable: true
+          readOnly: true
+          title: Ssh fingerprint
           type: string
       type: object
     RepositoryRsaKeyCreate:
@@ -36755,7 +36762,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.290.2
+        version: 1.297.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -36765,7 +36772,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.290.2
+          default: 1.297.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -37025,7 +37032,7 @@ components:
           type: string
         version:
           default: ""
-          maxLength: 128
+          maxLength: 1024
           minLength: 1
           title: Version
           type: string

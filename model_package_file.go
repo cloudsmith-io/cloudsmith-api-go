@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the PackageFile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageFile{}
 
 // PackageFile struct for PackageFile
 type PackageFile struct {
@@ -54,7 +57,7 @@ func NewPackageFileWithDefaults() *PackageFile {
 
 // GetCdnUrl returns the CdnUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetCdnUrl() string {
-	if o == nil || isNil(o.CdnUrl.Get()) {
+	if o == nil || IsNil(o.CdnUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -97,7 +100,7 @@ func (o *PackageFile) UnsetCdnUrl() {
 
 // GetChecksumMd5 returns the ChecksumMd5 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetChecksumMd5() string {
-	if o == nil || isNil(o.ChecksumMd5.Get()) {
+	if o == nil || IsNil(o.ChecksumMd5.Get()) {
 		var ret string
 		return ret
 	}
@@ -140,7 +143,7 @@ func (o *PackageFile) UnsetChecksumMd5() {
 
 // GetChecksumSha1 returns the ChecksumSha1 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetChecksumSha1() string {
-	if o == nil || isNil(o.ChecksumSha1.Get()) {
+	if o == nil || IsNil(o.ChecksumSha1.Get()) {
 		var ret string
 		return ret
 	}
@@ -183,7 +186,7 @@ func (o *PackageFile) UnsetChecksumSha1() {
 
 // GetChecksumSha256 returns the ChecksumSha256 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetChecksumSha256() string {
-	if o == nil || isNil(o.ChecksumSha256.Get()) {
+	if o == nil || IsNil(o.ChecksumSha256.Get()) {
 		var ret string
 		return ret
 	}
@@ -226,7 +229,7 @@ func (o *PackageFile) UnsetChecksumSha256() {
 
 // GetChecksumSha512 returns the ChecksumSha512 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetChecksumSha512() string {
-	if o == nil || isNil(o.ChecksumSha512.Get()) {
+	if o == nil || IsNil(o.ChecksumSha512.Get()) {
 		var ret string
 		return ret
 	}
@@ -269,7 +272,7 @@ func (o *PackageFile) UnsetChecksumSha512() {
 
 // GetDownloads returns the Downloads field value if set, zero value otherwise.
 func (o *PackageFile) GetDownloads() int64 {
-	if o == nil || isNil(o.Downloads) {
+	if o == nil || IsNil(o.Downloads) {
 		var ret int64
 		return ret
 	}
@@ -279,7 +282,7 @@ func (o *PackageFile) GetDownloads() int64 {
 // GetDownloadsOk returns a tuple with the Downloads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFile) GetDownloadsOk() (*int64, bool) {
-	if o == nil || isNil(o.Downloads) {
+	if o == nil || IsNil(o.Downloads) {
 		return nil, false
 	}
 	return o.Downloads, true
@@ -287,7 +290,7 @@ func (o *PackageFile) GetDownloadsOk() (*int64, bool) {
 
 // HasDownloads returns a boolean if a field has been set.
 func (o *PackageFile) HasDownloads() bool {
-	if o != nil && !isNil(o.Downloads) {
+	if o != nil && !IsNil(o.Downloads) {
 		return true
 	}
 
@@ -301,7 +304,7 @@ func (o *PackageFile) SetDownloads(v int64) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *PackageFile) GetFilename() string {
-	if o == nil || isNil(o.Filename) {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -311,7 +314,7 @@ func (o *PackageFile) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFile) GetFilenameOk() (*string, bool) {
-	if o == nil || isNil(o.Filename) {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -319,7 +322,7 @@ func (o *PackageFile) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *PackageFile) HasFilename() bool {
-	if o != nil && !isNil(o.Filename) {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -333,7 +336,7 @@ func (o *PackageFile) SetFilename(v string) {
 
 // GetIsDownloadable returns the IsDownloadable field value if set, zero value otherwise.
 func (o *PackageFile) GetIsDownloadable() bool {
-	if o == nil || isNil(o.IsDownloadable) {
+	if o == nil || IsNil(o.IsDownloadable) {
 		var ret bool
 		return ret
 	}
@@ -343,7 +346,7 @@ func (o *PackageFile) GetIsDownloadable() bool {
 // GetIsDownloadableOk returns a tuple with the IsDownloadable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFile) GetIsDownloadableOk() (*bool, bool) {
-	if o == nil || isNil(o.IsDownloadable) {
+	if o == nil || IsNil(o.IsDownloadable) {
 		return nil, false
 	}
 	return o.IsDownloadable, true
@@ -351,7 +354,7 @@ func (o *PackageFile) GetIsDownloadableOk() (*bool, bool) {
 
 // HasIsDownloadable returns a boolean if a field has been set.
 func (o *PackageFile) HasIsDownloadable() bool {
-	if o != nil && !isNil(o.IsDownloadable) {
+	if o != nil && !IsNil(o.IsDownloadable) {
 		return true
 	}
 
@@ -365,7 +368,7 @@ func (o *PackageFile) SetIsDownloadable(v bool) {
 
 // GetIsPrimary returns the IsPrimary field value if set, zero value otherwise.
 func (o *PackageFile) GetIsPrimary() bool {
-	if o == nil || isNil(o.IsPrimary) {
+	if o == nil || IsNil(o.IsPrimary) {
 		var ret bool
 		return ret
 	}
@@ -375,7 +378,7 @@ func (o *PackageFile) GetIsPrimary() bool {
 // GetIsPrimaryOk returns a tuple with the IsPrimary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFile) GetIsPrimaryOk() (*bool, bool) {
-	if o == nil || isNil(o.IsPrimary) {
+	if o == nil || IsNil(o.IsPrimary) {
 		return nil, false
 	}
 	return o.IsPrimary, true
@@ -383,7 +386,7 @@ func (o *PackageFile) GetIsPrimaryOk() (*bool, bool) {
 
 // HasIsPrimary returns a boolean if a field has been set.
 func (o *PackageFile) HasIsPrimary() bool {
-	if o != nil && !isNil(o.IsPrimary) {
+	if o != nil && !IsNil(o.IsPrimary) {
 		return true
 	}
 
@@ -397,7 +400,7 @@ func (o *PackageFile) SetIsPrimary(v bool) {
 
 // GetIsSynchronised returns the IsSynchronised field value if set, zero value otherwise.
 func (o *PackageFile) GetIsSynchronised() bool {
-	if o == nil || isNil(o.IsSynchronised) {
+	if o == nil || IsNil(o.IsSynchronised) {
 		var ret bool
 		return ret
 	}
@@ -407,7 +410,7 @@ func (o *PackageFile) GetIsSynchronised() bool {
 // GetIsSynchronisedOk returns a tuple with the IsSynchronised field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFile) GetIsSynchronisedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSynchronised) {
+	if o == nil || IsNil(o.IsSynchronised) {
 		return nil, false
 	}
 	return o.IsSynchronised, true
@@ -415,7 +418,7 @@ func (o *PackageFile) GetIsSynchronisedOk() (*bool, bool) {
 
 // HasIsSynchronised returns a boolean if a field has been set.
 func (o *PackageFile) HasIsSynchronised() bool {
-	if o != nil && !isNil(o.IsSynchronised) {
+	if o != nil && !IsNil(o.IsSynchronised) {
 		return true
 	}
 
@@ -429,7 +432,7 @@ func (o *PackageFile) SetIsSynchronised(v bool) {
 
 // GetSignatureUrl returns the SignatureUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetSignatureUrl() string {
-	if o == nil || isNil(o.SignatureUrl.Get()) {
+	if o == nil || IsNil(o.SignatureUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -472,7 +475,7 @@ func (o *PackageFile) UnsetSignatureUrl() {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *PackageFile) GetSize() int64 {
-	if o == nil || isNil(o.Size) {
+	if o == nil || IsNil(o.Size) {
 		var ret int64
 		return ret
 	}
@@ -482,7 +485,7 @@ func (o *PackageFile) GetSize() int64 {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFile) GetSizeOk() (*int64, bool) {
-	if o == nil || isNil(o.Size) {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -490,7 +493,7 @@ func (o *PackageFile) GetSizeOk() (*int64, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *PackageFile) HasSize() bool {
-	if o != nil && !isNil(o.Size) {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -504,7 +507,7 @@ func (o *PackageFile) SetSize(v int64) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *PackageFile) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -514,7 +517,7 @@ func (o *PackageFile) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFile) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -522,7 +525,7 @@ func (o *PackageFile) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *PackageFile) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -536,7 +539,7 @@ func (o *PackageFile) SetSlugPerm(v string) {
 
 // GetTag returns the Tag field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFile) GetTag() string {
-	if o == nil || isNil(o.Tag.Get()) {
+	if o == nil || IsNil(o.Tag.Get()) {
 		var ret string
 		return ret
 	}
@@ -578,6 +581,14 @@ func (o *PackageFile) UnsetTag() {
 }
 
 func (o PackageFile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PackageFile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CdnUrl.IsSet() {
 		toSerialize["cdn_url"] = o.CdnUrl.Get()
@@ -594,34 +605,34 @@ func (o PackageFile) MarshalJSON() ([]byte, error) {
 	if o.ChecksumSha512.IsSet() {
 		toSerialize["checksum_sha512"] = o.ChecksumSha512.Get()
 	}
-	if !isNil(o.Downloads) {
+	if !IsNil(o.Downloads) {
 		toSerialize["downloads"] = o.Downloads
 	}
-	if !isNil(o.Filename) {
+	if !IsNil(o.Filename) {
 		toSerialize["filename"] = o.Filename
 	}
-	if !isNil(o.IsDownloadable) {
+	if !IsNil(o.IsDownloadable) {
 		toSerialize["is_downloadable"] = o.IsDownloadable
 	}
-	if !isNil(o.IsPrimary) {
+	if !IsNil(o.IsPrimary) {
 		toSerialize["is_primary"] = o.IsPrimary
 	}
-	if !isNil(o.IsSynchronised) {
+	if !IsNil(o.IsSynchronised) {
 		toSerialize["is_synchronised"] = o.IsSynchronised
 	}
 	if o.SignatureUrl.IsSet() {
 		toSerialize["signature_url"] = o.SignatureUrl.Get()
 	}
-	if !isNil(o.Size) {
+	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
 	if o.Tag.IsSet() {
 		toSerialize["tag"] = o.Tag.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePackageFile struct {

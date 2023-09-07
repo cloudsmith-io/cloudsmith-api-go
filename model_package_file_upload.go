@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the PackageFileUpload type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageFileUpload{}
 
 // PackageFileUpload struct for PackageFileUpload
 type PackageFileUpload struct {
@@ -48,7 +51,7 @@ func NewPackageFileUploadWithDefaults() *PackageFileUpload {
 
 // GetIdentifier returns the Identifier field value if set, zero value otherwise.
 func (o *PackageFileUpload) GetIdentifier() string {
-	if o == nil || isNil(o.Identifier) {
+	if o == nil || IsNil(o.Identifier) {
 		var ret string
 		return ret
 	}
@@ -58,7 +61,7 @@ func (o *PackageFileUpload) GetIdentifier() string {
 // GetIdentifierOk returns a tuple with the Identifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFileUpload) GetIdentifierOk() (*string, bool) {
-	if o == nil || isNil(o.Identifier) {
+	if o == nil || IsNil(o.Identifier) {
 		return nil, false
 	}
 	return o.Identifier, true
@@ -66,7 +69,7 @@ func (o *PackageFileUpload) GetIdentifierOk() (*string, bool) {
 
 // HasIdentifier returns a boolean if a field has been set.
 func (o *PackageFileUpload) HasIdentifier() bool {
-	if o != nil && !isNil(o.Identifier) {
+	if o != nil && !IsNil(o.Identifier) {
 		return true
 	}
 
@@ -91,7 +94,7 @@ func (o *PackageFileUpload) GetUploadFields() map[string]interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageFileUpload) GetUploadFieldsOk() (map[string]interface{}, bool) {
-	if o == nil || isNil(o.UploadFields) {
+	if o == nil || IsNil(o.UploadFields) {
 		return map[string]interface{}{}, false
 	}
 	return o.UploadFields, true
@@ -99,7 +102,7 @@ func (o *PackageFileUpload) GetUploadFieldsOk() (map[string]interface{}, bool) {
 
 // HasUploadFields returns a boolean if a field has been set.
 func (o *PackageFileUpload) HasUploadFields() bool {
-	if o != nil && isNil(o.UploadFields) {
+	if o != nil && IsNil(o.UploadFields) {
 		return true
 	}
 
@@ -124,7 +127,7 @@ func (o *PackageFileUpload) GetUploadHeaders() map[string]interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageFileUpload) GetUploadHeadersOk() (map[string]interface{}, bool) {
-	if o == nil || isNil(o.UploadHeaders) {
+	if o == nil || IsNil(o.UploadHeaders) {
 		return map[string]interface{}{}, false
 	}
 	return o.UploadHeaders, true
@@ -132,7 +135,7 @@ func (o *PackageFileUpload) GetUploadHeadersOk() (map[string]interface{}, bool) 
 
 // HasUploadHeaders returns a boolean if a field has been set.
 func (o *PackageFileUpload) HasUploadHeaders() bool {
-	if o != nil && isNil(o.UploadHeaders) {
+	if o != nil && IsNil(o.UploadHeaders) {
 		return true
 	}
 
@@ -146,7 +149,7 @@ func (o *PackageFileUpload) SetUploadHeaders(v map[string]interface{}) {
 
 // GetUploadQuerystring returns the UploadQuerystring field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageFileUpload) GetUploadQuerystring() string {
-	if o == nil || isNil(o.UploadQuerystring.Get()) {
+	if o == nil || IsNil(o.UploadQuerystring.Get()) {
 		var ret string
 		return ret
 	}
@@ -189,7 +192,7 @@ func (o *PackageFileUpload) UnsetUploadQuerystring() {
 
 // GetUploadUrl returns the UploadUrl field value if set, zero value otherwise.
 func (o *PackageFileUpload) GetUploadUrl() string {
-	if o == nil || isNil(o.UploadUrl) {
+	if o == nil || IsNil(o.UploadUrl) {
 		var ret string
 		return ret
 	}
@@ -199,7 +202,7 @@ func (o *PackageFileUpload) GetUploadUrl() string {
 // GetUploadUrlOk returns a tuple with the UploadUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFileUpload) GetUploadUrlOk() (*string, bool) {
-	if o == nil || isNil(o.UploadUrl) {
+	if o == nil || IsNil(o.UploadUrl) {
 		return nil, false
 	}
 	return o.UploadUrl, true
@@ -207,7 +210,7 @@ func (o *PackageFileUpload) GetUploadUrlOk() (*string, bool) {
 
 // HasUploadUrl returns a boolean if a field has been set.
 func (o *PackageFileUpload) HasUploadUrl() bool {
-	if o != nil && !isNil(o.UploadUrl) {
+	if o != nil && !IsNil(o.UploadUrl) {
 		return true
 	}
 
@@ -220,8 +223,16 @@ func (o *PackageFileUpload) SetUploadUrl(v string) {
 }
 
 func (o PackageFileUpload) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PackageFileUpload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Identifier) {
+	if !IsNil(o.Identifier) {
 		toSerialize["identifier"] = o.Identifier
 	}
 	if o.UploadFields != nil {
@@ -233,10 +244,10 @@ func (o PackageFileUpload) MarshalJSON() ([]byte, error) {
 	if o.UploadQuerystring.IsSet() {
 		toSerialize["upload_querystring"] = o.UploadQuerystring.Get()
 	}
-	if !isNil(o.UploadUrl) {
+	if !IsNil(o.UploadUrl) {
 		toSerialize["upload_url"] = o.UploadUrl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePackageFileUpload struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the ServiceRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ServiceRequest{}
 
 // ServiceRequest struct for ServiceRequest
 type ServiceRequest struct {
@@ -50,7 +53,7 @@ func NewServiceRequestWithDefaults() *ServiceRequest {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ServiceRequest) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *ServiceRequest) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServiceRequest) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -68,7 +71,7 @@ func (o *ServiceRequest) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ServiceRequest) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -106,7 +109,7 @@ func (o *ServiceRequest) SetName(v string) {
 
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *ServiceRequest) GetRole() string {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		var ret string
 		return ret
 	}
@@ -116,7 +119,7 @@ func (o *ServiceRequest) GetRole() string {
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServiceRequest) GetRoleOk() (*string, bool) {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		return nil, false
 	}
 	return o.Role, true
@@ -124,7 +127,7 @@ func (o *ServiceRequest) GetRoleOk() (*string, bool) {
 
 // HasRole returns a boolean if a field has been set.
 func (o *ServiceRequest) HasRole() bool {
-	if o != nil && !isNil(o.Role) {
+	if o != nil && !IsNil(o.Role) {
 		return true
 	}
 
@@ -138,7 +141,7 @@ func (o *ServiceRequest) SetRole(v string) {
 
 // GetTeams returns the Teams field value if set, zero value otherwise.
 func (o *ServiceRequest) GetTeams() []ServiceTeams {
-	if o == nil || isNil(o.Teams) {
+	if o == nil || IsNil(o.Teams) {
 		var ret []ServiceTeams
 		return ret
 	}
@@ -148,7 +151,7 @@ func (o *ServiceRequest) GetTeams() []ServiceTeams {
 // GetTeamsOk returns a tuple with the Teams field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ServiceRequest) GetTeamsOk() ([]ServiceTeams, bool) {
-	if o == nil || isNil(o.Teams) {
+	if o == nil || IsNil(o.Teams) {
 		return nil, false
 	}
 	return o.Teams, true
@@ -156,7 +159,7 @@ func (o *ServiceRequest) GetTeamsOk() ([]ServiceTeams, bool) {
 
 // HasTeams returns a boolean if a field has been set.
 func (o *ServiceRequest) HasTeams() bool {
-	if o != nil && !isNil(o.Teams) {
+	if o != nil && !IsNil(o.Teams) {
 		return true
 	}
 
@@ -169,20 +172,26 @@ func (o *ServiceRequest) SetTeams(v []ServiceTeams) {
 }
 
 func (o ServiceRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Role) {
-		toSerialize["role"] = o.Role
-	}
-	if !isNil(o.Teams) {
-		toSerialize["teams"] = o.Teams
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ServiceRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Role) {
+		toSerialize["role"] = o.Role
+	}
+	if !IsNil(o.Teams) {
+		toSerialize["teams"] = o.Teams
+	}
+	return toSerialize, nil
 }
 
 type NullableServiceRequest struct {

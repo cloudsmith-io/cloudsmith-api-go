@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the P2PackageUpload type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &P2PackageUpload{}
 
 // P2PackageUpload struct for P2PackageUpload
 type P2PackageUpload struct {
@@ -131,7 +134,7 @@ func NewP2PackageUploadWithDefaults() *P2PackageUpload {
 
 // GetArchitectures returns the Architectures field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetArchitectures() []Architecture {
-	if o == nil || isNil(o.Architectures) {
+	if o == nil || IsNil(o.Architectures) {
 		var ret []Architecture
 		return ret
 	}
@@ -141,7 +144,7 @@ func (o *P2PackageUpload) GetArchitectures() []Architecture {
 // GetArchitecturesOk returns a tuple with the Architectures field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetArchitecturesOk() ([]Architecture, bool) {
-	if o == nil || isNil(o.Architectures) {
+	if o == nil || IsNil(o.Architectures) {
 		return nil, false
 	}
 	return o.Architectures, true
@@ -149,7 +152,7 @@ func (o *P2PackageUpload) GetArchitecturesOk() ([]Architecture, bool) {
 
 // HasArchitectures returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasArchitectures() bool {
-	if o != nil && !isNil(o.Architectures) {
+	if o != nil && !IsNil(o.Architectures) {
 		return true
 	}
 
@@ -163,7 +166,7 @@ func (o *P2PackageUpload) SetArchitectures(v []Architecture) {
 
 // GetCdnUrl returns the CdnUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetCdnUrl() string {
-	if o == nil || isNil(o.CdnUrl.Get()) {
+	if o == nil || IsNil(o.CdnUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -206,7 +209,7 @@ func (o *P2PackageUpload) UnsetCdnUrl() {
 
 // GetChecksumMd5 returns the ChecksumMd5 field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetChecksumMd5() string {
-	if o == nil || isNil(o.ChecksumMd5) {
+	if o == nil || IsNil(o.ChecksumMd5) {
 		var ret string
 		return ret
 	}
@@ -216,7 +219,7 @@ func (o *P2PackageUpload) GetChecksumMd5() string {
 // GetChecksumMd5Ok returns a tuple with the ChecksumMd5 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetChecksumMd5Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumMd5) {
+	if o == nil || IsNil(o.ChecksumMd5) {
 		return nil, false
 	}
 	return o.ChecksumMd5, true
@@ -224,7 +227,7 @@ func (o *P2PackageUpload) GetChecksumMd5Ok() (*string, bool) {
 
 // HasChecksumMd5 returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasChecksumMd5() bool {
-	if o != nil && !isNil(o.ChecksumMd5) {
+	if o != nil && !IsNil(o.ChecksumMd5) {
 		return true
 	}
 
@@ -238,7 +241,7 @@ func (o *P2PackageUpload) SetChecksumMd5(v string) {
 
 // GetChecksumSha1 returns the ChecksumSha1 field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetChecksumSha1() string {
-	if o == nil || isNil(o.ChecksumSha1) {
+	if o == nil || IsNil(o.ChecksumSha1) {
 		var ret string
 		return ret
 	}
@@ -248,7 +251,7 @@ func (o *P2PackageUpload) GetChecksumSha1() string {
 // GetChecksumSha1Ok returns a tuple with the ChecksumSha1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetChecksumSha1Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha1) {
+	if o == nil || IsNil(o.ChecksumSha1) {
 		return nil, false
 	}
 	return o.ChecksumSha1, true
@@ -256,7 +259,7 @@ func (o *P2PackageUpload) GetChecksumSha1Ok() (*string, bool) {
 
 // HasChecksumSha1 returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasChecksumSha1() bool {
-	if o != nil && !isNil(o.ChecksumSha1) {
+	if o != nil && !IsNil(o.ChecksumSha1) {
 		return true
 	}
 
@@ -270,7 +273,7 @@ func (o *P2PackageUpload) SetChecksumSha1(v string) {
 
 // GetChecksumSha256 returns the ChecksumSha256 field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetChecksumSha256() string {
-	if o == nil || isNil(o.ChecksumSha256) {
+	if o == nil || IsNil(o.ChecksumSha256) {
 		var ret string
 		return ret
 	}
@@ -280,7 +283,7 @@ func (o *P2PackageUpload) GetChecksumSha256() string {
 // GetChecksumSha256Ok returns a tuple with the ChecksumSha256 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetChecksumSha256Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha256) {
+	if o == nil || IsNil(o.ChecksumSha256) {
 		return nil, false
 	}
 	return o.ChecksumSha256, true
@@ -288,7 +291,7 @@ func (o *P2PackageUpload) GetChecksumSha256Ok() (*string, bool) {
 
 // HasChecksumSha256 returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasChecksumSha256() bool {
-	if o != nil && !isNil(o.ChecksumSha256) {
+	if o != nil && !IsNil(o.ChecksumSha256) {
 		return true
 	}
 
@@ -302,7 +305,7 @@ func (o *P2PackageUpload) SetChecksumSha256(v string) {
 
 // GetChecksumSha512 returns the ChecksumSha512 field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetChecksumSha512() string {
-	if o == nil || isNil(o.ChecksumSha512) {
+	if o == nil || IsNil(o.ChecksumSha512) {
 		var ret string
 		return ret
 	}
@@ -312,7 +315,7 @@ func (o *P2PackageUpload) GetChecksumSha512() string {
 // GetChecksumSha512Ok returns a tuple with the ChecksumSha512 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetChecksumSha512Ok() (*string, bool) {
-	if o == nil || isNil(o.ChecksumSha512) {
+	if o == nil || IsNil(o.ChecksumSha512) {
 		return nil, false
 	}
 	return o.ChecksumSha512, true
@@ -320,7 +323,7 @@ func (o *P2PackageUpload) GetChecksumSha512Ok() (*string, bool) {
 
 // HasChecksumSha512 returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasChecksumSha512() bool {
-	if o != nil && !isNil(o.ChecksumSha512) {
+	if o != nil && !IsNil(o.ChecksumSha512) {
 		return true
 	}
 
@@ -334,7 +337,7 @@ func (o *P2PackageUpload) SetChecksumSha512(v string) {
 
 // GetDependenciesChecksumMd5 returns the DependenciesChecksumMd5 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetDependenciesChecksumMd5() string {
-	if o == nil || isNil(o.DependenciesChecksumMd5.Get()) {
+	if o == nil || IsNil(o.DependenciesChecksumMd5.Get()) {
 		var ret string
 		return ret
 	}
@@ -377,7 +380,7 @@ func (o *P2PackageUpload) UnsetDependenciesChecksumMd5() {
 
 // GetDependenciesUrl returns the DependenciesUrl field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetDependenciesUrl() string {
-	if o == nil || isNil(o.DependenciesUrl) {
+	if o == nil || IsNil(o.DependenciesUrl) {
 		var ret string
 		return ret
 	}
@@ -387,7 +390,7 @@ func (o *P2PackageUpload) GetDependenciesUrl() string {
 // GetDependenciesUrlOk returns a tuple with the DependenciesUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetDependenciesUrlOk() (*string, bool) {
-	if o == nil || isNil(o.DependenciesUrl) {
+	if o == nil || IsNil(o.DependenciesUrl) {
 		return nil, false
 	}
 	return o.DependenciesUrl, true
@@ -395,7 +398,7 @@ func (o *P2PackageUpload) GetDependenciesUrlOk() (*string, bool) {
 
 // HasDependenciesUrl returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasDependenciesUrl() bool {
-	if o != nil && !isNil(o.DependenciesUrl) {
+	if o != nil && !IsNil(o.DependenciesUrl) {
 		return true
 	}
 
@@ -409,7 +412,7 @@ func (o *P2PackageUpload) SetDependenciesUrl(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetDescription() string {
-	if o == nil || isNil(o.Description.Get()) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
@@ -452,7 +455,7 @@ func (o *P2PackageUpload) UnsetDescription() {
 
 // GetDistro returns the Distro field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetDistro() Distribution {
-	if o == nil || isNil(o.Distro.Get()) {
+	if o == nil || IsNil(o.Distro.Get()) {
 		var ret Distribution
 		return ret
 	}
@@ -495,7 +498,7 @@ func (o *P2PackageUpload) UnsetDistro() {
 
 // GetDistroVersion returns the DistroVersion field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetDistroVersion() DistributionVersion {
-	if o == nil || isNil(o.DistroVersion) {
+	if o == nil || IsNil(o.DistroVersion) {
 		var ret DistributionVersion
 		return ret
 	}
@@ -505,7 +508,7 @@ func (o *P2PackageUpload) GetDistroVersion() DistributionVersion {
 // GetDistroVersionOk returns a tuple with the DistroVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetDistroVersionOk() (*DistributionVersion, bool) {
-	if o == nil || isNil(o.DistroVersion) {
+	if o == nil || IsNil(o.DistroVersion) {
 		return nil, false
 	}
 	return o.DistroVersion, true
@@ -513,7 +516,7 @@ func (o *P2PackageUpload) GetDistroVersionOk() (*DistributionVersion, bool) {
 
 // HasDistroVersion returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasDistroVersion() bool {
-	if o != nil && !isNil(o.DistroVersion) {
+	if o != nil && !IsNil(o.DistroVersion) {
 		return true
 	}
 
@@ -527,7 +530,7 @@ func (o *P2PackageUpload) SetDistroVersion(v DistributionVersion) {
 
 // GetDownloads returns the Downloads field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetDownloads() int64 {
-	if o == nil || isNil(o.Downloads) {
+	if o == nil || IsNil(o.Downloads) {
 		var ret int64
 		return ret
 	}
@@ -537,7 +540,7 @@ func (o *P2PackageUpload) GetDownloads() int64 {
 // GetDownloadsOk returns a tuple with the Downloads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetDownloadsOk() (*int64, bool) {
-	if o == nil || isNil(o.Downloads) {
+	if o == nil || IsNil(o.Downloads) {
 		return nil, false
 	}
 	return o.Downloads, true
@@ -545,7 +548,7 @@ func (o *P2PackageUpload) GetDownloadsOk() (*int64, bool) {
 
 // HasDownloads returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasDownloads() bool {
-	if o != nil && !isNil(o.Downloads) {
+	if o != nil && !IsNil(o.Downloads) {
 		return true
 	}
 
@@ -559,7 +562,7 @@ func (o *P2PackageUpload) SetDownloads(v int64) {
 
 // GetEpoch returns the Epoch field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetEpoch() int64 {
-	if o == nil || isNil(o.Epoch.Get()) {
+	if o == nil || IsNil(o.Epoch.Get()) {
 		var ret int64
 		return ret
 	}
@@ -602,7 +605,7 @@ func (o *P2PackageUpload) UnsetEpoch() {
 
 // GetExtension returns the Extension field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetExtension() string {
-	if o == nil || isNil(o.Extension) {
+	if o == nil || IsNil(o.Extension) {
 		var ret string
 		return ret
 	}
@@ -612,7 +615,7 @@ func (o *P2PackageUpload) GetExtension() string {
 // GetExtensionOk returns a tuple with the Extension field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetExtensionOk() (*string, bool) {
-	if o == nil || isNil(o.Extension) {
+	if o == nil || IsNil(o.Extension) {
 		return nil, false
 	}
 	return o.Extension, true
@@ -620,7 +623,7 @@ func (o *P2PackageUpload) GetExtensionOk() (*string, bool) {
 
 // HasExtension returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasExtension() bool {
-	if o != nil && !isNil(o.Extension) {
+	if o != nil && !IsNil(o.Extension) {
 		return true
 	}
 
@@ -634,7 +637,7 @@ func (o *P2PackageUpload) SetExtension(v string) {
 
 // GetFilename returns the Filename field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetFilename() string {
-	if o == nil || isNil(o.Filename) {
+	if o == nil || IsNil(o.Filename) {
 		var ret string
 		return ret
 	}
@@ -644,7 +647,7 @@ func (o *P2PackageUpload) GetFilename() string {
 // GetFilenameOk returns a tuple with the Filename field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetFilenameOk() (*string, bool) {
-	if o == nil || isNil(o.Filename) {
+	if o == nil || IsNil(o.Filename) {
 		return nil, false
 	}
 	return o.Filename, true
@@ -652,7 +655,7 @@ func (o *P2PackageUpload) GetFilenameOk() (*string, bool) {
 
 // HasFilename returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasFilename() bool {
-	if o != nil && !isNil(o.Filename) {
+	if o != nil && !IsNil(o.Filename) {
 		return true
 	}
 
@@ -666,7 +669,7 @@ func (o *P2PackageUpload) SetFilename(v string) {
 
 // GetFiles returns the Files field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetFiles() []PackageFile {
-	if o == nil || isNil(o.Files) {
+	if o == nil || IsNil(o.Files) {
 		var ret []PackageFile
 		return ret
 	}
@@ -676,7 +679,7 @@ func (o *P2PackageUpload) GetFiles() []PackageFile {
 // GetFilesOk returns a tuple with the Files field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetFilesOk() ([]PackageFile, bool) {
-	if o == nil || isNil(o.Files) {
+	if o == nil || IsNil(o.Files) {
 		return nil, false
 	}
 	return o.Files, true
@@ -684,7 +687,7 @@ func (o *P2PackageUpload) GetFilesOk() ([]PackageFile, bool) {
 
 // HasFiles returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasFiles() bool {
-	if o != nil && !isNil(o.Files) {
+	if o != nil && !IsNil(o.Files) {
 		return true
 	}
 
@@ -698,7 +701,7 @@ func (o *P2PackageUpload) SetFiles(v []PackageFile) {
 
 // GetFormat returns the Format field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetFormat() string {
-	if o == nil || isNil(o.Format) {
+	if o == nil || IsNil(o.Format) {
 		var ret string
 		return ret
 	}
@@ -708,7 +711,7 @@ func (o *P2PackageUpload) GetFormat() string {
 // GetFormatOk returns a tuple with the Format field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetFormatOk() (*string, bool) {
-	if o == nil || isNil(o.Format) {
+	if o == nil || IsNil(o.Format) {
 		return nil, false
 	}
 	return o.Format, true
@@ -716,7 +719,7 @@ func (o *P2PackageUpload) GetFormatOk() (*string, bool) {
 
 // HasFormat returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasFormat() bool {
-	if o != nil && !isNil(o.Format) {
+	if o != nil && !IsNil(o.Format) {
 		return true
 	}
 
@@ -730,7 +733,7 @@ func (o *P2PackageUpload) SetFormat(v string) {
 
 // GetFormatUrl returns the FormatUrl field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetFormatUrl() string {
-	if o == nil || isNil(o.FormatUrl) {
+	if o == nil || IsNil(o.FormatUrl) {
 		var ret string
 		return ret
 	}
@@ -740,7 +743,7 @@ func (o *P2PackageUpload) GetFormatUrl() string {
 // GetFormatUrlOk returns a tuple with the FormatUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetFormatUrlOk() (*string, bool) {
-	if o == nil || isNil(o.FormatUrl) {
+	if o == nil || IsNil(o.FormatUrl) {
 		return nil, false
 	}
 	return o.FormatUrl, true
@@ -748,7 +751,7 @@ func (o *P2PackageUpload) GetFormatUrlOk() (*string, bool) {
 
 // HasFormatUrl returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasFormatUrl() bool {
-	if o != nil && !isNil(o.FormatUrl) {
+	if o != nil && !IsNil(o.FormatUrl) {
 		return true
 	}
 
@@ -762,7 +765,7 @@ func (o *P2PackageUpload) SetFormatUrl(v string) {
 
 // GetIdentifierPerm returns the IdentifierPerm field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetIdentifierPerm() string {
-	if o == nil || isNil(o.IdentifierPerm) {
+	if o == nil || IsNil(o.IdentifierPerm) {
 		var ret string
 		return ret
 	}
@@ -772,7 +775,7 @@ func (o *P2PackageUpload) GetIdentifierPerm() string {
 // GetIdentifierPermOk returns a tuple with the IdentifierPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetIdentifierPermOk() (*string, bool) {
-	if o == nil || isNil(o.IdentifierPerm) {
+	if o == nil || IsNil(o.IdentifierPerm) {
 		return nil, false
 	}
 	return o.IdentifierPerm, true
@@ -780,7 +783,7 @@ func (o *P2PackageUpload) GetIdentifierPermOk() (*string, bool) {
 
 // HasIdentifierPerm returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasIdentifierPerm() bool {
-	if o != nil && !isNil(o.IdentifierPerm) {
+	if o != nil && !IsNil(o.IdentifierPerm) {
 		return true
 	}
 
@@ -794,7 +797,7 @@ func (o *P2PackageUpload) SetIdentifierPerm(v string) {
 
 // GetIndexed returns the Indexed field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetIndexed() bool {
-	if o == nil || isNil(o.Indexed) {
+	if o == nil || IsNil(o.Indexed) {
 		var ret bool
 		return ret
 	}
@@ -804,7 +807,7 @@ func (o *P2PackageUpload) GetIndexed() bool {
 // GetIndexedOk returns a tuple with the Indexed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetIndexedOk() (*bool, bool) {
-	if o == nil || isNil(o.Indexed) {
+	if o == nil || IsNil(o.Indexed) {
 		return nil, false
 	}
 	return o.Indexed, true
@@ -812,7 +815,7 @@ func (o *P2PackageUpload) GetIndexedOk() (*bool, bool) {
 
 // HasIndexed returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasIndexed() bool {
-	if o != nil && !isNil(o.Indexed) {
+	if o != nil && !IsNil(o.Indexed) {
 		return true
 	}
 
@@ -826,7 +829,7 @@ func (o *P2PackageUpload) SetIndexed(v bool) {
 
 // GetIsDownloadable returns the IsDownloadable field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetIsDownloadable() bool {
-	if o == nil || isNil(o.IsDownloadable) {
+	if o == nil || IsNil(o.IsDownloadable) {
 		var ret bool
 		return ret
 	}
@@ -836,7 +839,7 @@ func (o *P2PackageUpload) GetIsDownloadable() bool {
 // GetIsDownloadableOk returns a tuple with the IsDownloadable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetIsDownloadableOk() (*bool, bool) {
-	if o == nil || isNil(o.IsDownloadable) {
+	if o == nil || IsNil(o.IsDownloadable) {
 		return nil, false
 	}
 	return o.IsDownloadable, true
@@ -844,7 +847,7 @@ func (o *P2PackageUpload) GetIsDownloadableOk() (*bool, bool) {
 
 // HasIsDownloadable returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasIsDownloadable() bool {
-	if o != nil && !isNil(o.IsDownloadable) {
+	if o != nil && !IsNil(o.IsDownloadable) {
 		return true
 	}
 
@@ -858,7 +861,7 @@ func (o *P2PackageUpload) SetIsDownloadable(v bool) {
 
 // GetIsQuarantined returns the IsQuarantined field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetIsQuarantined() bool {
-	if o == nil || isNil(o.IsQuarantined) {
+	if o == nil || IsNil(o.IsQuarantined) {
 		var ret bool
 		return ret
 	}
@@ -868,7 +871,7 @@ func (o *P2PackageUpload) GetIsQuarantined() bool {
 // GetIsQuarantinedOk returns a tuple with the IsQuarantined field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetIsQuarantinedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsQuarantined) {
+	if o == nil || IsNil(o.IsQuarantined) {
 		return nil, false
 	}
 	return o.IsQuarantined, true
@@ -876,7 +879,7 @@ func (o *P2PackageUpload) GetIsQuarantinedOk() (*bool, bool) {
 
 // HasIsQuarantined returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasIsQuarantined() bool {
-	if o != nil && !isNil(o.IsQuarantined) {
+	if o != nil && !IsNil(o.IsQuarantined) {
 		return true
 	}
 
@@ -890,7 +893,7 @@ func (o *P2PackageUpload) SetIsQuarantined(v bool) {
 
 // GetIsSyncAwaiting returns the IsSyncAwaiting field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetIsSyncAwaiting() bool {
-	if o == nil || isNil(o.IsSyncAwaiting) {
+	if o == nil || IsNil(o.IsSyncAwaiting) {
 		var ret bool
 		return ret
 	}
@@ -900,7 +903,7 @@ func (o *P2PackageUpload) GetIsSyncAwaiting() bool {
 // GetIsSyncAwaitingOk returns a tuple with the IsSyncAwaiting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetIsSyncAwaitingOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncAwaiting) {
+	if o == nil || IsNil(o.IsSyncAwaiting) {
 		return nil, false
 	}
 	return o.IsSyncAwaiting, true
@@ -908,7 +911,7 @@ func (o *P2PackageUpload) GetIsSyncAwaitingOk() (*bool, bool) {
 
 // HasIsSyncAwaiting returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasIsSyncAwaiting() bool {
-	if o != nil && !isNil(o.IsSyncAwaiting) {
+	if o != nil && !IsNil(o.IsSyncAwaiting) {
 		return true
 	}
 
@@ -922,7 +925,7 @@ func (o *P2PackageUpload) SetIsSyncAwaiting(v bool) {
 
 // GetIsSyncCompleted returns the IsSyncCompleted field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetIsSyncCompleted() bool {
-	if o == nil || isNil(o.IsSyncCompleted) {
+	if o == nil || IsNil(o.IsSyncCompleted) {
 		var ret bool
 		return ret
 	}
@@ -932,7 +935,7 @@ func (o *P2PackageUpload) GetIsSyncCompleted() bool {
 // GetIsSyncCompletedOk returns a tuple with the IsSyncCompleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetIsSyncCompletedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncCompleted) {
+	if o == nil || IsNil(o.IsSyncCompleted) {
 		return nil, false
 	}
 	return o.IsSyncCompleted, true
@@ -940,7 +943,7 @@ func (o *P2PackageUpload) GetIsSyncCompletedOk() (*bool, bool) {
 
 // HasIsSyncCompleted returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasIsSyncCompleted() bool {
-	if o != nil && !isNil(o.IsSyncCompleted) {
+	if o != nil && !IsNil(o.IsSyncCompleted) {
 		return true
 	}
 
@@ -954,7 +957,7 @@ func (o *P2PackageUpload) SetIsSyncCompleted(v bool) {
 
 // GetIsSyncFailed returns the IsSyncFailed field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetIsSyncFailed() bool {
-	if o == nil || isNil(o.IsSyncFailed) {
+	if o == nil || IsNil(o.IsSyncFailed) {
 		var ret bool
 		return ret
 	}
@@ -964,7 +967,7 @@ func (o *P2PackageUpload) GetIsSyncFailed() bool {
 // GetIsSyncFailedOk returns a tuple with the IsSyncFailed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetIsSyncFailedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncFailed) {
+	if o == nil || IsNil(o.IsSyncFailed) {
 		return nil, false
 	}
 	return o.IsSyncFailed, true
@@ -972,7 +975,7 @@ func (o *P2PackageUpload) GetIsSyncFailedOk() (*bool, bool) {
 
 // HasIsSyncFailed returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasIsSyncFailed() bool {
-	if o != nil && !isNil(o.IsSyncFailed) {
+	if o != nil && !IsNil(o.IsSyncFailed) {
 		return true
 	}
 
@@ -986,7 +989,7 @@ func (o *P2PackageUpload) SetIsSyncFailed(v bool) {
 
 // GetIsSyncInFlight returns the IsSyncInFlight field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetIsSyncInFlight() bool {
-	if o == nil || isNil(o.IsSyncInFlight) {
+	if o == nil || IsNil(o.IsSyncInFlight) {
 		var ret bool
 		return ret
 	}
@@ -996,7 +999,7 @@ func (o *P2PackageUpload) GetIsSyncInFlight() bool {
 // GetIsSyncInFlightOk returns a tuple with the IsSyncInFlight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetIsSyncInFlightOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncInFlight) {
+	if o == nil || IsNil(o.IsSyncInFlight) {
 		return nil, false
 	}
 	return o.IsSyncInFlight, true
@@ -1004,7 +1007,7 @@ func (o *P2PackageUpload) GetIsSyncInFlightOk() (*bool, bool) {
 
 // HasIsSyncInFlight returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasIsSyncInFlight() bool {
-	if o != nil && !isNil(o.IsSyncInFlight) {
+	if o != nil && !IsNil(o.IsSyncInFlight) {
 		return true
 	}
 
@@ -1018,7 +1021,7 @@ func (o *P2PackageUpload) SetIsSyncInFlight(v bool) {
 
 // GetIsSyncInProgress returns the IsSyncInProgress field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetIsSyncInProgress() bool {
-	if o == nil || isNil(o.IsSyncInProgress) {
+	if o == nil || IsNil(o.IsSyncInProgress) {
 		var ret bool
 		return ret
 	}
@@ -1028,7 +1031,7 @@ func (o *P2PackageUpload) GetIsSyncInProgress() bool {
 // GetIsSyncInProgressOk returns a tuple with the IsSyncInProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetIsSyncInProgressOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncInProgress) {
+	if o == nil || IsNil(o.IsSyncInProgress) {
 		return nil, false
 	}
 	return o.IsSyncInProgress, true
@@ -1036,7 +1039,7 @@ func (o *P2PackageUpload) GetIsSyncInProgressOk() (*bool, bool) {
 
 // HasIsSyncInProgress returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasIsSyncInProgress() bool {
-	if o != nil && !isNil(o.IsSyncInProgress) {
+	if o != nil && !IsNil(o.IsSyncInProgress) {
 		return true
 	}
 
@@ -1050,7 +1053,7 @@ func (o *P2PackageUpload) SetIsSyncInProgress(v bool) {
 
 // GetLicense returns the License field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetLicense() string {
-	if o == nil || isNil(o.License.Get()) {
+	if o == nil || IsNil(o.License.Get()) {
 		var ret string
 		return ret
 	}
@@ -1093,7 +1096,7 @@ func (o *P2PackageUpload) UnsetLicense() {
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetName() string {
-	if o == nil || isNil(o.Name.Get()) {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
@@ -1136,7 +1139,7 @@ func (o *P2PackageUpload) UnsetName() {
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetNamespace() string {
-	if o == nil || isNil(o.Namespace) {
+	if o == nil || IsNil(o.Namespace) {
 		var ret string
 		return ret
 	}
@@ -1146,7 +1149,7 @@ func (o *P2PackageUpload) GetNamespace() string {
 // GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetNamespaceOk() (*string, bool) {
-	if o == nil || isNil(o.Namespace) {
+	if o == nil || IsNil(o.Namespace) {
 		return nil, false
 	}
 	return o.Namespace, true
@@ -1154,7 +1157,7 @@ func (o *P2PackageUpload) GetNamespaceOk() (*string, bool) {
 
 // HasNamespace returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasNamespace() bool {
-	if o != nil && !isNil(o.Namespace) {
+	if o != nil && !IsNil(o.Namespace) {
 		return true
 	}
 
@@ -1168,7 +1171,7 @@ func (o *P2PackageUpload) SetNamespace(v string) {
 
 // GetNamespaceUrl returns the NamespaceUrl field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetNamespaceUrl() string {
-	if o == nil || isNil(o.NamespaceUrl) {
+	if o == nil || IsNil(o.NamespaceUrl) {
 		var ret string
 		return ret
 	}
@@ -1178,7 +1181,7 @@ func (o *P2PackageUpload) GetNamespaceUrl() string {
 // GetNamespaceUrlOk returns a tuple with the NamespaceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetNamespaceUrlOk() (*string, bool) {
-	if o == nil || isNil(o.NamespaceUrl) {
+	if o == nil || IsNil(o.NamespaceUrl) {
 		return nil, false
 	}
 	return o.NamespaceUrl, true
@@ -1186,7 +1189,7 @@ func (o *P2PackageUpload) GetNamespaceUrlOk() (*string, bool) {
 
 // HasNamespaceUrl returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasNamespaceUrl() bool {
-	if o != nil && !isNil(o.NamespaceUrl) {
+	if o != nil && !IsNil(o.NamespaceUrl) {
 		return true
 	}
 
@@ -1200,7 +1203,7 @@ func (o *P2PackageUpload) SetNamespaceUrl(v string) {
 
 // GetNumFiles returns the NumFiles field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetNumFiles() int64 {
-	if o == nil || isNil(o.NumFiles) {
+	if o == nil || IsNil(o.NumFiles) {
 		var ret int64
 		return ret
 	}
@@ -1210,7 +1213,7 @@ func (o *P2PackageUpload) GetNumFiles() int64 {
 // GetNumFilesOk returns a tuple with the NumFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetNumFilesOk() (*int64, bool) {
-	if o == nil || isNil(o.NumFiles) {
+	if o == nil || IsNil(o.NumFiles) {
 		return nil, false
 	}
 	return o.NumFiles, true
@@ -1218,7 +1221,7 @@ func (o *P2PackageUpload) GetNumFilesOk() (*int64, bool) {
 
 // HasNumFiles returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasNumFiles() bool {
-	if o != nil && !isNil(o.NumFiles) {
+	if o != nil && !IsNil(o.NumFiles) {
 		return true
 	}
 
@@ -1232,7 +1235,7 @@ func (o *P2PackageUpload) SetNumFiles(v int64) {
 
 // GetOriginRepository returns the OriginRepository field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetOriginRepository() string {
-	if o == nil || isNil(o.OriginRepository) {
+	if o == nil || IsNil(o.OriginRepository) {
 		var ret string
 		return ret
 	}
@@ -1242,7 +1245,7 @@ func (o *P2PackageUpload) GetOriginRepository() string {
 // GetOriginRepositoryOk returns a tuple with the OriginRepository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetOriginRepositoryOk() (*string, bool) {
-	if o == nil || isNil(o.OriginRepository) {
+	if o == nil || IsNil(o.OriginRepository) {
 		return nil, false
 	}
 	return o.OriginRepository, true
@@ -1250,7 +1253,7 @@ func (o *P2PackageUpload) GetOriginRepositoryOk() (*string, bool) {
 
 // HasOriginRepository returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasOriginRepository() bool {
-	if o != nil && !isNil(o.OriginRepository) {
+	if o != nil && !IsNil(o.OriginRepository) {
 		return true
 	}
 
@@ -1264,7 +1267,7 @@ func (o *P2PackageUpload) SetOriginRepository(v string) {
 
 // GetOriginRepositoryUrl returns the OriginRepositoryUrl field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetOriginRepositoryUrl() string {
-	if o == nil || isNil(o.OriginRepositoryUrl) {
+	if o == nil || IsNil(o.OriginRepositoryUrl) {
 		var ret string
 		return ret
 	}
@@ -1274,7 +1277,7 @@ func (o *P2PackageUpload) GetOriginRepositoryUrl() string {
 // GetOriginRepositoryUrlOk returns a tuple with the OriginRepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetOriginRepositoryUrlOk() (*string, bool) {
-	if o == nil || isNil(o.OriginRepositoryUrl) {
+	if o == nil || IsNil(o.OriginRepositoryUrl) {
 		return nil, false
 	}
 	return o.OriginRepositoryUrl, true
@@ -1282,7 +1285,7 @@ func (o *P2PackageUpload) GetOriginRepositoryUrlOk() (*string, bool) {
 
 // HasOriginRepositoryUrl returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasOriginRepositoryUrl() bool {
-	if o != nil && !isNil(o.OriginRepositoryUrl) {
+	if o != nil && !IsNil(o.OriginRepositoryUrl) {
 		return true
 	}
 
@@ -1296,7 +1299,7 @@ func (o *P2PackageUpload) SetOriginRepositoryUrl(v string) {
 
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetPackageType() int64 {
-	if o == nil || isNil(o.PackageType) {
+	if o == nil || IsNil(o.PackageType) {
 		var ret int64
 		return ret
 	}
@@ -1306,7 +1309,7 @@ func (o *P2PackageUpload) GetPackageType() int64 {
 // GetPackageTypeOk returns a tuple with the PackageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetPackageTypeOk() (*int64, bool) {
-	if o == nil || isNil(o.PackageType) {
+	if o == nil || IsNil(o.PackageType) {
 		return nil, false
 	}
 	return o.PackageType, true
@@ -1314,7 +1317,7 @@ func (o *P2PackageUpload) GetPackageTypeOk() (*int64, bool) {
 
 // HasPackageType returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasPackageType() bool {
-	if o != nil && !isNil(o.PackageType) {
+	if o != nil && !IsNil(o.PackageType) {
 		return true
 	}
 
@@ -1328,7 +1331,7 @@ func (o *P2PackageUpload) SetPackageType(v int64) {
 
 // GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetRelease() string {
-	if o == nil || isNil(o.Release.Get()) {
+	if o == nil || IsNil(o.Release.Get()) {
 		var ret string
 		return ret
 	}
@@ -1371,7 +1374,7 @@ func (o *P2PackageUpload) UnsetRelease() {
 
 // GetRepository returns the Repository field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetRepository() string {
-	if o == nil || isNil(o.Repository) {
+	if o == nil || IsNil(o.Repository) {
 		var ret string
 		return ret
 	}
@@ -1381,7 +1384,7 @@ func (o *P2PackageUpload) GetRepository() string {
 // GetRepositoryOk returns a tuple with the Repository field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetRepositoryOk() (*string, bool) {
-	if o == nil || isNil(o.Repository) {
+	if o == nil || IsNil(o.Repository) {
 		return nil, false
 	}
 	return o.Repository, true
@@ -1389,7 +1392,7 @@ func (o *P2PackageUpload) GetRepositoryOk() (*string, bool) {
 
 // HasRepository returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasRepository() bool {
-	if o != nil && !isNil(o.Repository) {
+	if o != nil && !IsNil(o.Repository) {
 		return true
 	}
 
@@ -1403,7 +1406,7 @@ func (o *P2PackageUpload) SetRepository(v string) {
 
 // GetRepositoryUrl returns the RepositoryUrl field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetRepositoryUrl() string {
-	if o == nil || isNil(o.RepositoryUrl) {
+	if o == nil || IsNil(o.RepositoryUrl) {
 		var ret string
 		return ret
 	}
@@ -1413,7 +1416,7 @@ func (o *P2PackageUpload) GetRepositoryUrl() string {
 // GetRepositoryUrlOk returns a tuple with the RepositoryUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetRepositoryUrlOk() (*string, bool) {
-	if o == nil || isNil(o.RepositoryUrl) {
+	if o == nil || IsNil(o.RepositoryUrl) {
 		return nil, false
 	}
 	return o.RepositoryUrl, true
@@ -1421,7 +1424,7 @@ func (o *P2PackageUpload) GetRepositoryUrlOk() (*string, bool) {
 
 // HasRepositoryUrl returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasRepositoryUrl() bool {
-	if o != nil && !isNil(o.RepositoryUrl) {
+	if o != nil && !IsNil(o.RepositoryUrl) {
 		return true
 	}
 
@@ -1435,7 +1438,7 @@ func (o *P2PackageUpload) SetRepositoryUrl(v string) {
 
 // GetSecurityScanCompletedAt returns the SecurityScanCompletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetSecurityScanCompletedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanCompletedAt.Get()) {
+	if o == nil || IsNil(o.SecurityScanCompletedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -1478,7 +1481,7 @@ func (o *P2PackageUpload) UnsetSecurityScanCompletedAt() {
 
 // GetSecurityScanStartedAt returns the SecurityScanStartedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetSecurityScanStartedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanStartedAt.Get()) {
+	if o == nil || IsNil(o.SecurityScanStartedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -1521,7 +1524,7 @@ func (o *P2PackageUpload) UnsetSecurityScanStartedAt() {
 
 // GetSecurityScanStatus returns the SecurityScanStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetSecurityScanStatus() string {
-	if o == nil || isNil(o.SecurityScanStatus.Get()) {
+	if o == nil || IsNil(o.SecurityScanStatus.Get()) {
 		var ret string
 		return ret
 	}
@@ -1564,7 +1567,7 @@ func (o *P2PackageUpload) UnsetSecurityScanStatus() {
 
 // GetSecurityScanStatusUpdatedAt returns the SecurityScanStatusUpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetSecurityScanStatusUpdatedAt() time.Time {
-	if o == nil || isNil(o.SecurityScanStatusUpdatedAt.Get()) {
+	if o == nil || IsNil(o.SecurityScanStatusUpdatedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -1607,7 +1610,7 @@ func (o *P2PackageUpload) UnsetSecurityScanStatusUpdatedAt() {
 
 // GetSelfHtmlUrl returns the SelfHtmlUrl field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetSelfHtmlUrl() string {
-	if o == nil || isNil(o.SelfHtmlUrl) {
+	if o == nil || IsNil(o.SelfHtmlUrl) {
 		var ret string
 		return ret
 	}
@@ -1617,7 +1620,7 @@ func (o *P2PackageUpload) GetSelfHtmlUrl() string {
 // GetSelfHtmlUrlOk returns a tuple with the SelfHtmlUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetSelfHtmlUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfHtmlUrl) {
+	if o == nil || IsNil(o.SelfHtmlUrl) {
 		return nil, false
 	}
 	return o.SelfHtmlUrl, true
@@ -1625,7 +1628,7 @@ func (o *P2PackageUpload) GetSelfHtmlUrlOk() (*string, bool) {
 
 // HasSelfHtmlUrl returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasSelfHtmlUrl() bool {
-	if o != nil && !isNil(o.SelfHtmlUrl) {
+	if o != nil && !IsNil(o.SelfHtmlUrl) {
 		return true
 	}
 
@@ -1639,7 +1642,7 @@ func (o *P2PackageUpload) SetSelfHtmlUrl(v string) {
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetSelfUrl() string {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		var ret string
 		return ret
 	}
@@ -1649,7 +1652,7 @@ func (o *P2PackageUpload) GetSelfUrl() string {
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetSelfUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		return nil, false
 	}
 	return o.SelfUrl, true
@@ -1657,7 +1660,7 @@ func (o *P2PackageUpload) GetSelfUrlOk() (*string, bool) {
 
 // HasSelfUrl returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasSelfUrl() bool {
-	if o != nil && !isNil(o.SelfUrl) {
+	if o != nil && !IsNil(o.SelfUrl) {
 		return true
 	}
 
@@ -1671,7 +1674,7 @@ func (o *P2PackageUpload) SetSelfUrl(v string) {
 
 // GetSignatureUrl returns the SignatureUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetSignatureUrl() string {
-	if o == nil || isNil(o.SignatureUrl.Get()) {
+	if o == nil || IsNil(o.SignatureUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -1714,7 +1717,7 @@ func (o *P2PackageUpload) UnsetSignatureUrl() {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetSize() int64 {
-	if o == nil || isNil(o.Size) {
+	if o == nil || IsNil(o.Size) {
 		var ret int64
 		return ret
 	}
@@ -1724,7 +1727,7 @@ func (o *P2PackageUpload) GetSize() int64 {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetSizeOk() (*int64, bool) {
-	if o == nil || isNil(o.Size) {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -1732,7 +1735,7 @@ func (o *P2PackageUpload) GetSizeOk() (*int64, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasSize() bool {
-	if o != nil && !isNil(o.Size) {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -1746,7 +1749,7 @@ func (o *P2PackageUpload) SetSize(v int64) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -1756,7 +1759,7 @@ func (o *P2PackageUpload) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -1764,7 +1767,7 @@ func (o *P2PackageUpload) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -1778,7 +1781,7 @@ func (o *P2PackageUpload) SetSlug(v string) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -1788,7 +1791,7 @@ func (o *P2PackageUpload) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -1796,7 +1799,7 @@ func (o *P2PackageUpload) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -1810,7 +1813,7 @@ func (o *P2PackageUpload) SetSlugPerm(v string) {
 
 // GetStage returns the Stage field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetStage() int64 {
-	if o == nil || isNil(o.Stage) {
+	if o == nil || IsNil(o.Stage) {
 		var ret int64
 		return ret
 	}
@@ -1820,7 +1823,7 @@ func (o *P2PackageUpload) GetStage() int64 {
 // GetStageOk returns a tuple with the Stage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetStageOk() (*int64, bool) {
-	if o == nil || isNil(o.Stage) {
+	if o == nil || IsNil(o.Stage) {
 		return nil, false
 	}
 	return o.Stage, true
@@ -1828,7 +1831,7 @@ func (o *P2PackageUpload) GetStageOk() (*int64, bool) {
 
 // HasStage returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasStage() bool {
-	if o != nil && !isNil(o.Stage) {
+	if o != nil && !IsNil(o.Stage) {
 		return true
 	}
 
@@ -1842,7 +1845,7 @@ func (o *P2PackageUpload) SetStage(v int64) {
 
 // GetStageStr returns the StageStr field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetStageStr() string {
-	if o == nil || isNil(o.StageStr) {
+	if o == nil || IsNil(o.StageStr) {
 		var ret string
 		return ret
 	}
@@ -1852,7 +1855,7 @@ func (o *P2PackageUpload) GetStageStr() string {
 // GetStageStrOk returns a tuple with the StageStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetStageStrOk() (*string, bool) {
-	if o == nil || isNil(o.StageStr) {
+	if o == nil || IsNil(o.StageStr) {
 		return nil, false
 	}
 	return o.StageStr, true
@@ -1860,7 +1863,7 @@ func (o *P2PackageUpload) GetStageStrOk() (*string, bool) {
 
 // HasStageStr returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasStageStr() bool {
-	if o != nil && !isNil(o.StageStr) {
+	if o != nil && !IsNil(o.StageStr) {
 		return true
 	}
 
@@ -1874,7 +1877,7 @@ func (o *P2PackageUpload) SetStageStr(v string) {
 
 // GetStageUpdatedAt returns the StageUpdatedAt field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetStageUpdatedAt() time.Time {
-	if o == nil || isNil(o.StageUpdatedAt) {
+	if o == nil || IsNil(o.StageUpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -1884,7 +1887,7 @@ func (o *P2PackageUpload) GetStageUpdatedAt() time.Time {
 // GetStageUpdatedAtOk returns a tuple with the StageUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetStageUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.StageUpdatedAt) {
+	if o == nil || IsNil(o.StageUpdatedAt) {
 		return nil, false
 	}
 	return o.StageUpdatedAt, true
@@ -1892,7 +1895,7 @@ func (o *P2PackageUpload) GetStageUpdatedAtOk() (*time.Time, bool) {
 
 // HasStageUpdatedAt returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasStageUpdatedAt() bool {
-	if o != nil && !isNil(o.StageUpdatedAt) {
+	if o != nil && !IsNil(o.StageUpdatedAt) {
 		return true
 	}
 
@@ -1906,7 +1909,7 @@ func (o *P2PackageUpload) SetStageUpdatedAt(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetStatus() int64 {
-	if o == nil || isNil(o.Status) {
+	if o == nil || IsNil(o.Status) {
 		var ret int64
 		return ret
 	}
@@ -1916,7 +1919,7 @@ func (o *P2PackageUpload) GetStatus() int64 {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetStatusOk() (*int64, bool) {
-	if o == nil || isNil(o.Status) {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -1924,7 +1927,7 @@ func (o *P2PackageUpload) GetStatusOk() (*int64, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasStatus() bool {
-	if o != nil && !isNil(o.Status) {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -1938,7 +1941,7 @@ func (o *P2PackageUpload) SetStatus(v int64) {
 
 // GetStatusReason returns the StatusReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetStatusReason() string {
-	if o == nil || isNil(o.StatusReason.Get()) {
+	if o == nil || IsNil(o.StatusReason.Get()) {
 		var ret string
 		return ret
 	}
@@ -1981,7 +1984,7 @@ func (o *P2PackageUpload) UnsetStatusReason() {
 
 // GetStatusStr returns the StatusStr field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetStatusStr() string {
-	if o == nil || isNil(o.StatusStr) {
+	if o == nil || IsNil(o.StatusStr) {
 		var ret string
 		return ret
 	}
@@ -1991,7 +1994,7 @@ func (o *P2PackageUpload) GetStatusStr() string {
 // GetStatusStrOk returns a tuple with the StatusStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetStatusStrOk() (*string, bool) {
-	if o == nil || isNil(o.StatusStr) {
+	if o == nil || IsNil(o.StatusStr) {
 		return nil, false
 	}
 	return o.StatusStr, true
@@ -1999,7 +2002,7 @@ func (o *P2PackageUpload) GetStatusStrOk() (*string, bool) {
 
 // HasStatusStr returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasStatusStr() bool {
-	if o != nil && !isNil(o.StatusStr) {
+	if o != nil && !IsNil(o.StatusStr) {
 		return true
 	}
 
@@ -2013,7 +2016,7 @@ func (o *P2PackageUpload) SetStatusStr(v string) {
 
 // GetStatusUpdatedAt returns the StatusUpdatedAt field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetStatusUpdatedAt() time.Time {
-	if o == nil || isNil(o.StatusUpdatedAt) {
+	if o == nil || IsNil(o.StatusUpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -2023,7 +2026,7 @@ func (o *P2PackageUpload) GetStatusUpdatedAt() time.Time {
 // GetStatusUpdatedAtOk returns a tuple with the StatusUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetStatusUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.StatusUpdatedAt) {
+	if o == nil || IsNil(o.StatusUpdatedAt) {
 		return nil, false
 	}
 	return o.StatusUpdatedAt, true
@@ -2031,7 +2034,7 @@ func (o *P2PackageUpload) GetStatusUpdatedAtOk() (*time.Time, bool) {
 
 // HasStatusUpdatedAt returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasStatusUpdatedAt() bool {
-	if o != nil && !isNil(o.StatusUpdatedAt) {
+	if o != nil && !IsNil(o.StatusUpdatedAt) {
 		return true
 	}
 
@@ -2045,7 +2048,7 @@ func (o *P2PackageUpload) SetStatusUpdatedAt(v time.Time) {
 
 // GetStatusUrl returns the StatusUrl field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetStatusUrl() string {
-	if o == nil || isNil(o.StatusUrl) {
+	if o == nil || IsNil(o.StatusUrl) {
 		var ret string
 		return ret
 	}
@@ -2055,7 +2058,7 @@ func (o *P2PackageUpload) GetStatusUrl() string {
 // GetStatusUrlOk returns a tuple with the StatusUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetStatusUrlOk() (*string, bool) {
-	if o == nil || isNil(o.StatusUrl) {
+	if o == nil || IsNil(o.StatusUrl) {
 		return nil, false
 	}
 	return o.StatusUrl, true
@@ -2063,7 +2066,7 @@ func (o *P2PackageUpload) GetStatusUrlOk() (*string, bool) {
 
 // HasStatusUrl returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasStatusUrl() bool {
-	if o != nil && !isNil(o.StatusUrl) {
+	if o != nil && !IsNil(o.StatusUrl) {
 		return true
 	}
 
@@ -2077,7 +2080,7 @@ func (o *P2PackageUpload) SetStatusUrl(v string) {
 
 // GetSubtype returns the Subtype field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetSubtype() string {
-	if o == nil || isNil(o.Subtype) {
+	if o == nil || IsNil(o.Subtype) {
 		var ret string
 		return ret
 	}
@@ -2087,7 +2090,7 @@ func (o *P2PackageUpload) GetSubtype() string {
 // GetSubtypeOk returns a tuple with the Subtype field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetSubtypeOk() (*string, bool) {
-	if o == nil || isNil(o.Subtype) {
+	if o == nil || IsNil(o.Subtype) {
 		return nil, false
 	}
 	return o.Subtype, true
@@ -2095,7 +2098,7 @@ func (o *P2PackageUpload) GetSubtypeOk() (*string, bool) {
 
 // HasSubtype returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasSubtype() bool {
-	if o != nil && !isNil(o.Subtype) {
+	if o != nil && !IsNil(o.Subtype) {
 		return true
 	}
 
@@ -2109,7 +2112,7 @@ func (o *P2PackageUpload) SetSubtype(v string) {
 
 // GetSummary returns the Summary field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetSummary() string {
-	if o == nil || isNil(o.Summary.Get()) {
+	if o == nil || IsNil(o.Summary.Get()) {
 		var ret string
 		return ret
 	}
@@ -2152,7 +2155,7 @@ func (o *P2PackageUpload) UnsetSummary() {
 
 // GetSyncFinishedAt returns the SyncFinishedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetSyncFinishedAt() time.Time {
-	if o == nil || isNil(o.SyncFinishedAt.Get()) {
+	if o == nil || IsNil(o.SyncFinishedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -2195,7 +2198,7 @@ func (o *P2PackageUpload) UnsetSyncFinishedAt() {
 
 // GetSyncProgress returns the SyncProgress field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetSyncProgress() int64 {
-	if o == nil || isNil(o.SyncProgress) {
+	if o == nil || IsNil(o.SyncProgress) {
 		var ret int64
 		return ret
 	}
@@ -2205,7 +2208,7 @@ func (o *P2PackageUpload) GetSyncProgress() int64 {
 // GetSyncProgressOk returns a tuple with the SyncProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetSyncProgressOk() (*int64, bool) {
-	if o == nil || isNil(o.SyncProgress) {
+	if o == nil || IsNil(o.SyncProgress) {
 		return nil, false
 	}
 	return o.SyncProgress, true
@@ -2213,7 +2216,7 @@ func (o *P2PackageUpload) GetSyncProgressOk() (*int64, bool) {
 
 // HasSyncProgress returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasSyncProgress() bool {
-	if o != nil && !isNil(o.SyncProgress) {
+	if o != nil && !IsNil(o.SyncProgress) {
 		return true
 	}
 
@@ -2227,7 +2230,7 @@ func (o *P2PackageUpload) SetSyncProgress(v int64) {
 
 // GetTagsImmutable returns the TagsImmutable field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetTagsImmutable() map[string]interface{} {
-	if o == nil || isNil(o.TagsImmutable) {
+	if o == nil || IsNil(o.TagsImmutable) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -2237,7 +2240,7 @@ func (o *P2PackageUpload) GetTagsImmutable() map[string]interface{} {
 // GetTagsImmutableOk returns a tuple with the TagsImmutable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetTagsImmutableOk() (map[string]interface{}, bool) {
-	if o == nil || isNil(o.TagsImmutable) {
+	if o == nil || IsNil(o.TagsImmutable) {
 		return map[string]interface{}{}, false
 	}
 	return o.TagsImmutable, true
@@ -2245,7 +2248,7 @@ func (o *P2PackageUpload) GetTagsImmutableOk() (map[string]interface{}, bool) {
 
 // HasTagsImmutable returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasTagsImmutable() bool {
-	if o != nil && !isNil(o.TagsImmutable) {
+	if o != nil && !IsNil(o.TagsImmutable) {
 		return true
 	}
 
@@ -2259,7 +2262,7 @@ func (o *P2PackageUpload) SetTagsImmutable(v map[string]interface{}) {
 
 // GetTypeDisplay returns the TypeDisplay field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetTypeDisplay() string {
-	if o == nil || isNil(o.TypeDisplay) {
+	if o == nil || IsNil(o.TypeDisplay) {
 		var ret string
 		return ret
 	}
@@ -2269,7 +2272,7 @@ func (o *P2PackageUpload) GetTypeDisplay() string {
 // GetTypeDisplayOk returns a tuple with the TypeDisplay field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetTypeDisplayOk() (*string, bool) {
-	if o == nil || isNil(o.TypeDisplay) {
+	if o == nil || IsNil(o.TypeDisplay) {
 		return nil, false
 	}
 	return o.TypeDisplay, true
@@ -2277,7 +2280,7 @@ func (o *P2PackageUpload) GetTypeDisplayOk() (*string, bool) {
 
 // HasTypeDisplay returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasTypeDisplay() bool {
-	if o != nil && !isNil(o.TypeDisplay) {
+	if o != nil && !IsNil(o.TypeDisplay) {
 		return true
 	}
 
@@ -2291,7 +2294,7 @@ func (o *P2PackageUpload) SetTypeDisplay(v string) {
 
 // GetUploadedAt returns the UploadedAt field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetUploadedAt() time.Time {
-	if o == nil || isNil(o.UploadedAt) {
+	if o == nil || IsNil(o.UploadedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -2301,7 +2304,7 @@ func (o *P2PackageUpload) GetUploadedAt() time.Time {
 // GetUploadedAtOk returns a tuple with the UploadedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetUploadedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UploadedAt) {
+	if o == nil || IsNil(o.UploadedAt) {
 		return nil, false
 	}
 	return o.UploadedAt, true
@@ -2309,7 +2312,7 @@ func (o *P2PackageUpload) GetUploadedAtOk() (*time.Time, bool) {
 
 // HasUploadedAt returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasUploadedAt() bool {
-	if o != nil && !isNil(o.UploadedAt) {
+	if o != nil && !IsNil(o.UploadedAt) {
 		return true
 	}
 
@@ -2323,7 +2326,7 @@ func (o *P2PackageUpload) SetUploadedAt(v time.Time) {
 
 // GetUploader returns the Uploader field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetUploader() string {
-	if o == nil || isNil(o.Uploader) {
+	if o == nil || IsNil(o.Uploader) {
 		var ret string
 		return ret
 	}
@@ -2333,7 +2336,7 @@ func (o *P2PackageUpload) GetUploader() string {
 // GetUploaderOk returns a tuple with the Uploader field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetUploaderOk() (*string, bool) {
-	if o == nil || isNil(o.Uploader) {
+	if o == nil || IsNil(o.Uploader) {
 		return nil, false
 	}
 	return o.Uploader, true
@@ -2341,7 +2344,7 @@ func (o *P2PackageUpload) GetUploaderOk() (*string, bool) {
 
 // HasUploader returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasUploader() bool {
-	if o != nil && !isNil(o.Uploader) {
+	if o != nil && !IsNil(o.Uploader) {
 		return true
 	}
 
@@ -2355,7 +2358,7 @@ func (o *P2PackageUpload) SetUploader(v string) {
 
 // GetUploaderUrl returns the UploaderUrl field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetUploaderUrl() string {
-	if o == nil || isNil(o.UploaderUrl) {
+	if o == nil || IsNil(o.UploaderUrl) {
 		var ret string
 		return ret
 	}
@@ -2365,7 +2368,7 @@ func (o *P2PackageUpload) GetUploaderUrl() string {
 // GetUploaderUrlOk returns a tuple with the UploaderUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetUploaderUrlOk() (*string, bool) {
-	if o == nil || isNil(o.UploaderUrl) {
+	if o == nil || IsNil(o.UploaderUrl) {
 		return nil, false
 	}
 	return o.UploaderUrl, true
@@ -2373,7 +2376,7 @@ func (o *P2PackageUpload) GetUploaderUrlOk() (*string, bool) {
 
 // HasUploaderUrl returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasUploaderUrl() bool {
-	if o != nil && !isNil(o.UploaderUrl) {
+	if o != nil && !IsNil(o.UploaderUrl) {
 		return true
 	}
 
@@ -2387,7 +2390,7 @@ func (o *P2PackageUpload) SetUploaderUrl(v string) {
 
 // GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *P2PackageUpload) GetVersion() string {
-	if o == nil || isNil(o.Version.Get()) {
+	if o == nil || IsNil(o.Version.Get()) {
 		var ret string
 		return ret
 	}
@@ -2430,7 +2433,7 @@ func (o *P2PackageUpload) UnsetVersion() {
 
 // GetVersionOrig returns the VersionOrig field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetVersionOrig() string {
-	if o == nil || isNil(o.VersionOrig) {
+	if o == nil || IsNil(o.VersionOrig) {
 		var ret string
 		return ret
 	}
@@ -2440,7 +2443,7 @@ func (o *P2PackageUpload) GetVersionOrig() string {
 // GetVersionOrigOk returns a tuple with the VersionOrig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetVersionOrigOk() (*string, bool) {
-	if o == nil || isNil(o.VersionOrig) {
+	if o == nil || IsNil(o.VersionOrig) {
 		return nil, false
 	}
 	return o.VersionOrig, true
@@ -2448,7 +2451,7 @@ func (o *P2PackageUpload) GetVersionOrigOk() (*string, bool) {
 
 // HasVersionOrig returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasVersionOrig() bool {
-	if o != nil && !isNil(o.VersionOrig) {
+	if o != nil && !IsNil(o.VersionOrig) {
 		return true
 	}
 
@@ -2462,7 +2465,7 @@ func (o *P2PackageUpload) SetVersionOrig(v string) {
 
 // GetVulnerabilityScanResultsUrl returns the VulnerabilityScanResultsUrl field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetVulnerabilityScanResultsUrl() string {
-	if o == nil || isNil(o.VulnerabilityScanResultsUrl) {
+	if o == nil || IsNil(o.VulnerabilityScanResultsUrl) {
 		var ret string
 		return ret
 	}
@@ -2472,7 +2475,7 @@ func (o *P2PackageUpload) GetVulnerabilityScanResultsUrl() string {
 // GetVulnerabilityScanResultsUrlOk returns a tuple with the VulnerabilityScanResultsUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *P2PackageUpload) GetVulnerabilityScanResultsUrlOk() (*string, bool) {
-	if o == nil || isNil(o.VulnerabilityScanResultsUrl) {
+	if o == nil || IsNil(o.VulnerabilityScanResultsUrl) {
 		return nil, false
 	}
 	return o.VulnerabilityScanResultsUrl, true
@@ -2480,7 +2483,7 @@ func (o *P2PackageUpload) GetVulnerabilityScanResultsUrlOk() (*string, bool) {
 
 // HasVulnerabilityScanResultsUrl returns a boolean if a field has been set.
 func (o *P2PackageUpload) HasVulnerabilityScanResultsUrl() bool {
-	if o != nil && !isNil(o.VulnerabilityScanResultsUrl) {
+	if o != nil && !IsNil(o.VulnerabilityScanResultsUrl) {
 		return true
 	}
 
@@ -2493,29 +2496,37 @@ func (o *P2PackageUpload) SetVulnerabilityScanResultsUrl(v string) {
 }
 
 func (o P2PackageUpload) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o P2PackageUpload) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Architectures) {
+	if !IsNil(o.Architectures) {
 		toSerialize["architectures"] = o.Architectures
 	}
 	if o.CdnUrl.IsSet() {
 		toSerialize["cdn_url"] = o.CdnUrl.Get()
 	}
-	if !isNil(o.ChecksumMd5) {
+	if !IsNil(o.ChecksumMd5) {
 		toSerialize["checksum_md5"] = o.ChecksumMd5
 	}
-	if !isNil(o.ChecksumSha1) {
+	if !IsNil(o.ChecksumSha1) {
 		toSerialize["checksum_sha1"] = o.ChecksumSha1
 	}
-	if !isNil(o.ChecksumSha256) {
+	if !IsNil(o.ChecksumSha256) {
 		toSerialize["checksum_sha256"] = o.ChecksumSha256
 	}
-	if !isNil(o.ChecksumSha512) {
+	if !IsNil(o.ChecksumSha512) {
 		toSerialize["checksum_sha512"] = o.ChecksumSha512
 	}
 	if o.DependenciesChecksumMd5.IsSet() {
 		toSerialize["dependencies_checksum_md5"] = o.DependenciesChecksumMd5.Get()
 	}
-	if !isNil(o.DependenciesUrl) {
+	if !IsNil(o.DependenciesUrl) {
 		toSerialize["dependencies_url"] = o.DependenciesUrl
 	}
 	if o.Description.IsSet() {
@@ -2524,55 +2535,55 @@ func (o P2PackageUpload) MarshalJSON() ([]byte, error) {
 	if o.Distro.IsSet() {
 		toSerialize["distro"] = o.Distro.Get()
 	}
-	if !isNil(o.DistroVersion) {
+	if !IsNil(o.DistroVersion) {
 		toSerialize["distro_version"] = o.DistroVersion
 	}
-	if !isNil(o.Downloads) {
+	if !IsNil(o.Downloads) {
 		toSerialize["downloads"] = o.Downloads
 	}
 	if o.Epoch.IsSet() {
 		toSerialize["epoch"] = o.Epoch.Get()
 	}
-	if !isNil(o.Extension) {
+	if !IsNil(o.Extension) {
 		toSerialize["extension"] = o.Extension
 	}
-	if !isNil(o.Filename) {
+	if !IsNil(o.Filename) {
 		toSerialize["filename"] = o.Filename
 	}
-	if !isNil(o.Files) {
+	if !IsNil(o.Files) {
 		toSerialize["files"] = o.Files
 	}
-	if !isNil(o.Format) {
+	if !IsNil(o.Format) {
 		toSerialize["format"] = o.Format
 	}
-	if !isNil(o.FormatUrl) {
+	if !IsNil(o.FormatUrl) {
 		toSerialize["format_url"] = o.FormatUrl
 	}
-	if !isNil(o.IdentifierPerm) {
+	if !IsNil(o.IdentifierPerm) {
 		toSerialize["identifier_perm"] = o.IdentifierPerm
 	}
-	if !isNil(o.Indexed) {
+	if !IsNil(o.Indexed) {
 		toSerialize["indexed"] = o.Indexed
 	}
-	if !isNil(o.IsDownloadable) {
+	if !IsNil(o.IsDownloadable) {
 		toSerialize["is_downloadable"] = o.IsDownloadable
 	}
-	if !isNil(o.IsQuarantined) {
+	if !IsNil(o.IsQuarantined) {
 		toSerialize["is_quarantined"] = o.IsQuarantined
 	}
-	if !isNil(o.IsSyncAwaiting) {
+	if !IsNil(o.IsSyncAwaiting) {
 		toSerialize["is_sync_awaiting"] = o.IsSyncAwaiting
 	}
-	if !isNil(o.IsSyncCompleted) {
+	if !IsNil(o.IsSyncCompleted) {
 		toSerialize["is_sync_completed"] = o.IsSyncCompleted
 	}
-	if !isNil(o.IsSyncFailed) {
+	if !IsNil(o.IsSyncFailed) {
 		toSerialize["is_sync_failed"] = o.IsSyncFailed
 	}
-	if !isNil(o.IsSyncInFlight) {
+	if !IsNil(o.IsSyncInFlight) {
 		toSerialize["is_sync_in_flight"] = o.IsSyncInFlight
 	}
-	if !isNil(o.IsSyncInProgress) {
+	if !IsNil(o.IsSyncInProgress) {
 		toSerialize["is_sync_in_progress"] = o.IsSyncInProgress
 	}
 	if o.License.IsSet() {
@@ -2581,31 +2592,31 @@ func (o P2PackageUpload) MarshalJSON() ([]byte, error) {
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
-	if !isNil(o.Namespace) {
+	if !IsNil(o.Namespace) {
 		toSerialize["namespace"] = o.Namespace
 	}
-	if !isNil(o.NamespaceUrl) {
+	if !IsNil(o.NamespaceUrl) {
 		toSerialize["namespace_url"] = o.NamespaceUrl
 	}
-	if !isNil(o.NumFiles) {
+	if !IsNil(o.NumFiles) {
 		toSerialize["num_files"] = o.NumFiles
 	}
-	if !isNil(o.OriginRepository) {
+	if !IsNil(o.OriginRepository) {
 		toSerialize["origin_repository"] = o.OriginRepository
 	}
-	if !isNil(o.OriginRepositoryUrl) {
+	if !IsNil(o.OriginRepositoryUrl) {
 		toSerialize["origin_repository_url"] = o.OriginRepositoryUrl
 	}
-	if !isNil(o.PackageType) {
+	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
 	}
 	if o.Release.IsSet() {
 		toSerialize["release"] = o.Release.Get()
 	}
-	if !isNil(o.Repository) {
+	if !IsNil(o.Repository) {
 		toSerialize["repository"] = o.Repository
 	}
-	if !isNil(o.RepositoryUrl) {
+	if !IsNil(o.RepositoryUrl) {
 		toSerialize["repository_url"] = o.RepositoryUrl
 	}
 	if o.SecurityScanCompletedAt.IsSet() {
@@ -2620,49 +2631,49 @@ func (o P2PackageUpload) MarshalJSON() ([]byte, error) {
 	if o.SecurityScanStatusUpdatedAt.IsSet() {
 		toSerialize["security_scan_status_updated_at"] = o.SecurityScanStatusUpdatedAt.Get()
 	}
-	if !isNil(o.SelfHtmlUrl) {
+	if !IsNil(o.SelfHtmlUrl) {
 		toSerialize["self_html_url"] = o.SelfHtmlUrl
 	}
-	if !isNil(o.SelfUrl) {
+	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
 	if o.SignatureUrl.IsSet() {
 		toSerialize["signature_url"] = o.SignatureUrl.Get()
 	}
-	if !isNil(o.Size) {
+	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
-	if !isNil(o.Slug) {
+	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
-	if !isNil(o.Stage) {
+	if !IsNil(o.Stage) {
 		toSerialize["stage"] = o.Stage
 	}
-	if !isNil(o.StageStr) {
+	if !IsNil(o.StageStr) {
 		toSerialize["stage_str"] = o.StageStr
 	}
-	if !isNil(o.StageUpdatedAt) {
+	if !IsNil(o.StageUpdatedAt) {
 		toSerialize["stage_updated_at"] = o.StageUpdatedAt
 	}
-	if !isNil(o.Status) {
+	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
 	if o.StatusReason.IsSet() {
 		toSerialize["status_reason"] = o.StatusReason.Get()
 	}
-	if !isNil(o.StatusStr) {
+	if !IsNil(o.StatusStr) {
 		toSerialize["status_str"] = o.StatusStr
 	}
-	if !isNil(o.StatusUpdatedAt) {
+	if !IsNil(o.StatusUpdatedAt) {
 		toSerialize["status_updated_at"] = o.StatusUpdatedAt
 	}
-	if !isNil(o.StatusUrl) {
+	if !IsNil(o.StatusUrl) {
 		toSerialize["status_url"] = o.StatusUrl
 	}
-	if !isNil(o.Subtype) {
+	if !IsNil(o.Subtype) {
 		toSerialize["subtype"] = o.Subtype
 	}
 	if o.Summary.IsSet() {
@@ -2671,34 +2682,34 @@ func (o P2PackageUpload) MarshalJSON() ([]byte, error) {
 	if o.SyncFinishedAt.IsSet() {
 		toSerialize["sync_finished_at"] = o.SyncFinishedAt.Get()
 	}
-	if !isNil(o.SyncProgress) {
+	if !IsNil(o.SyncProgress) {
 		toSerialize["sync_progress"] = o.SyncProgress
 	}
-	if !isNil(o.TagsImmutable) {
+	if !IsNil(o.TagsImmutable) {
 		toSerialize["tags_immutable"] = o.TagsImmutable
 	}
-	if !isNil(o.TypeDisplay) {
+	if !IsNil(o.TypeDisplay) {
 		toSerialize["type_display"] = o.TypeDisplay
 	}
-	if !isNil(o.UploadedAt) {
+	if !IsNil(o.UploadedAt) {
 		toSerialize["uploaded_at"] = o.UploadedAt
 	}
-	if !isNil(o.Uploader) {
+	if !IsNil(o.Uploader) {
 		toSerialize["uploader"] = o.Uploader
 	}
-	if !isNil(o.UploaderUrl) {
+	if !IsNil(o.UploaderUrl) {
 		toSerialize["uploader_url"] = o.UploaderUrl
 	}
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
-	if !isNil(o.VersionOrig) {
+	if !IsNil(o.VersionOrig) {
 		toSerialize["version_orig"] = o.VersionOrig
 	}
-	if !isNil(o.VulnerabilityScanResultsUrl) {
+	if !IsNil(o.VulnerabilityScanResultsUrl) {
 		toSerialize["vulnerability_scan_results_url"] = o.VulnerabilityScanResultsUrl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableP2PackageUpload struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the CommonMetrics type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CommonMetrics{}
 
 // CommonMetrics struct for CommonMetrics
 type CommonMetrics struct {
@@ -45,7 +48,7 @@ func NewCommonMetricsWithDefaults() *CommonMetrics {
 
 // GetActive returns the Active field value if set, zero value otherwise.
 func (o *CommonMetrics) GetActive() int64 {
-	if o == nil || isNil(o.Active) {
+	if o == nil || IsNil(o.Active) {
 		var ret int64
 		return ret
 	}
@@ -55,7 +58,7 @@ func (o *CommonMetrics) GetActive() int64 {
 // GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CommonMetrics) GetActiveOk() (*int64, bool) {
-	if o == nil || isNil(o.Active) {
+	if o == nil || IsNil(o.Active) {
 		return nil, false
 	}
 	return o.Active, true
@@ -63,7 +66,7 @@ func (o *CommonMetrics) GetActiveOk() (*int64, bool) {
 
 // HasActive returns a boolean if a field has been set.
 func (o *CommonMetrics) HasActive() bool {
-	if o != nil && !isNil(o.Active) {
+	if o != nil && !IsNil(o.Active) {
 		return true
 	}
 
@@ -125,7 +128,7 @@ func (o *CommonMetrics) SetDownloads(v CommonDownloadsMetrics) {
 
 // GetInactive returns the Inactive field value if set, zero value otherwise.
 func (o *CommonMetrics) GetInactive() int64 {
-	if o == nil || isNil(o.Inactive) {
+	if o == nil || IsNil(o.Inactive) {
 		var ret int64
 		return ret
 	}
@@ -135,7 +138,7 @@ func (o *CommonMetrics) GetInactive() int64 {
 // GetInactiveOk returns a tuple with the Inactive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CommonMetrics) GetInactiveOk() (*int64, bool) {
-	if o == nil || isNil(o.Inactive) {
+	if o == nil || IsNil(o.Inactive) {
 		return nil, false
 	}
 	return o.Inactive, true
@@ -143,7 +146,7 @@ func (o *CommonMetrics) GetInactiveOk() (*int64, bool) {
 
 // HasInactive returns a boolean if a field has been set.
 func (o *CommonMetrics) HasInactive() bool {
-	if o != nil && !isNil(o.Inactive) {
+	if o != nil && !IsNil(o.Inactive) {
 		return true
 	}
 
@@ -157,7 +160,7 @@ func (o *CommonMetrics) SetInactive(v int64) {
 
 // GetTotal returns the Total field value if set, zero value otherwise.
 func (o *CommonMetrics) GetTotal() int64 {
-	if o == nil || isNil(o.Total) {
+	if o == nil || IsNil(o.Total) {
 		var ret int64
 		return ret
 	}
@@ -167,7 +170,7 @@ func (o *CommonMetrics) GetTotal() int64 {
 // GetTotalOk returns a tuple with the Total field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CommonMetrics) GetTotalOk() (*int64, bool) {
-	if o == nil || isNil(o.Total) {
+	if o == nil || IsNil(o.Total) {
 		return nil, false
 	}
 	return o.Total, true
@@ -175,7 +178,7 @@ func (o *CommonMetrics) GetTotalOk() (*int64, bool) {
 
 // HasTotal returns a boolean if a field has been set.
 func (o *CommonMetrics) HasTotal() bool {
-	if o != nil && !isNil(o.Total) {
+	if o != nil && !IsNil(o.Total) {
 		return true
 	}
 
@@ -188,23 +191,27 @@ func (o *CommonMetrics) SetTotal(v int64) {
 }
 
 func (o CommonMetrics) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Active) {
-		toSerialize["active"] = o.Active
-	}
-	if true {
-		toSerialize["bandwidth"] = o.Bandwidth
-	}
-	if true {
-		toSerialize["downloads"] = o.Downloads
-	}
-	if !isNil(o.Inactive) {
-		toSerialize["inactive"] = o.Inactive
-	}
-	if !isNil(o.Total) {
-		toSerialize["total"] = o.Total
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CommonMetrics) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Active) {
+		toSerialize["active"] = o.Active
+	}
+	toSerialize["bandwidth"] = o.Bandwidth
+	toSerialize["downloads"] = o.Downloads
+	if !IsNil(o.Inactive) {
+		toSerialize["inactive"] = o.Inactive
+	}
+	if !IsNil(o.Total) {
+		toSerialize["total"] = o.Total
+	}
+	return toSerialize, nil
 }
 
 type NullableCommonMetrics struct {

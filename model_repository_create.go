@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the RepositoryCreate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryCreate{}
 
 // RepositoryCreate struct for RepositoryCreate
 type RepositoryCreate struct {
@@ -186,7 +189,7 @@ func NewRepositoryCreateWithDefaults() *RepositoryCreate {
 
 // GetCdnUrl returns the CdnUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryCreate) GetCdnUrl() string {
-	if o == nil || isNil(o.CdnUrl.Get()) {
+	if o == nil || IsNil(o.CdnUrl.Get()) {
 		var ret string
 		return ret
 	}
@@ -229,7 +232,7 @@ func (o *RepositoryCreate) UnsetCdnUrl() {
 
 // GetContentKind returns the ContentKind field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetContentKind() string {
-	if o == nil || isNil(o.ContentKind) {
+	if o == nil || IsNil(o.ContentKind) {
 		var ret string
 		return ret
 	}
@@ -239,7 +242,7 @@ func (o *RepositoryCreate) GetContentKind() string {
 // GetContentKindOk returns a tuple with the ContentKind field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetContentKindOk() (*string, bool) {
-	if o == nil || isNil(o.ContentKind) {
+	if o == nil || IsNil(o.ContentKind) {
 		return nil, false
 	}
 	return o.ContentKind, true
@@ -247,7 +250,7 @@ func (o *RepositoryCreate) GetContentKindOk() (*string, bool) {
 
 // HasContentKind returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasContentKind() bool {
-	if o != nil && !isNil(o.ContentKind) {
+	if o != nil && !IsNil(o.ContentKind) {
 		return true
 	}
 
@@ -261,7 +264,7 @@ func (o *RepositoryCreate) SetContentKind(v string) {
 
 // GetContextualAuthRealm returns the ContextualAuthRealm field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetContextualAuthRealm() bool {
-	if o == nil || isNil(o.ContextualAuthRealm) {
+	if o == nil || IsNil(o.ContextualAuthRealm) {
 		var ret bool
 		return ret
 	}
@@ -271,7 +274,7 @@ func (o *RepositoryCreate) GetContextualAuthRealm() bool {
 // GetContextualAuthRealmOk returns a tuple with the ContextualAuthRealm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetContextualAuthRealmOk() (*bool, bool) {
-	if o == nil || isNil(o.ContextualAuthRealm) {
+	if o == nil || IsNil(o.ContextualAuthRealm) {
 		return nil, false
 	}
 	return o.ContextualAuthRealm, true
@@ -279,7 +282,7 @@ func (o *RepositoryCreate) GetContextualAuthRealmOk() (*bool, bool) {
 
 // HasContextualAuthRealm returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasContextualAuthRealm() bool {
-	if o != nil && !isNil(o.ContextualAuthRealm) {
+	if o != nil && !IsNil(o.ContextualAuthRealm) {
 		return true
 	}
 
@@ -293,7 +296,7 @@ func (o *RepositoryCreate) SetContextualAuthRealm(v bool) {
 
 // GetCopyOwn returns the CopyOwn field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetCopyOwn() bool {
-	if o == nil || isNil(o.CopyOwn) {
+	if o == nil || IsNil(o.CopyOwn) {
 		var ret bool
 		return ret
 	}
@@ -303,7 +306,7 @@ func (o *RepositoryCreate) GetCopyOwn() bool {
 // GetCopyOwnOk returns a tuple with the CopyOwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetCopyOwnOk() (*bool, bool) {
-	if o == nil || isNil(o.CopyOwn) {
+	if o == nil || IsNil(o.CopyOwn) {
 		return nil, false
 	}
 	return o.CopyOwn, true
@@ -311,7 +314,7 @@ func (o *RepositoryCreate) GetCopyOwnOk() (*bool, bool) {
 
 // HasCopyOwn returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasCopyOwn() bool {
-	if o != nil && !isNil(o.CopyOwn) {
+	if o != nil && !IsNil(o.CopyOwn) {
 		return true
 	}
 
@@ -325,7 +328,7 @@ func (o *RepositoryCreate) SetCopyOwn(v bool) {
 
 // GetCopyPackages returns the CopyPackages field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetCopyPackages() string {
-	if o == nil || isNil(o.CopyPackages) {
+	if o == nil || IsNil(o.CopyPackages) {
 		var ret string
 		return ret
 	}
@@ -335,7 +338,7 @@ func (o *RepositoryCreate) GetCopyPackages() string {
 // GetCopyPackagesOk returns a tuple with the CopyPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetCopyPackagesOk() (*string, bool) {
-	if o == nil || isNil(o.CopyPackages) {
+	if o == nil || IsNil(o.CopyPackages) {
 		return nil, false
 	}
 	return o.CopyPackages, true
@@ -343,7 +346,7 @@ func (o *RepositoryCreate) GetCopyPackagesOk() (*string, bool) {
 
 // HasCopyPackages returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasCopyPackages() bool {
-	if o != nil && !isNil(o.CopyPackages) {
+	if o != nil && !IsNil(o.CopyPackages) {
 		return true
 	}
 
@@ -357,7 +360,7 @@ func (o *RepositoryCreate) SetCopyPackages(v string) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -367,7 +370,7 @@ func (o *RepositoryCreate) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -375,7 +378,7 @@ func (o *RepositoryCreate) GetCreatedAtOk() (*time.Time, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -389,7 +392,7 @@ func (o *RepositoryCreate) SetCreatedAt(v time.Time) {
 
 // GetDefaultPrivilege returns the DefaultPrivilege field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetDefaultPrivilege() string {
-	if o == nil || isNil(o.DefaultPrivilege) {
+	if o == nil || IsNil(o.DefaultPrivilege) {
 		var ret string
 		return ret
 	}
@@ -399,7 +402,7 @@ func (o *RepositoryCreate) GetDefaultPrivilege() string {
 // GetDefaultPrivilegeOk returns a tuple with the DefaultPrivilege field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetDefaultPrivilegeOk() (*string, bool) {
-	if o == nil || isNil(o.DefaultPrivilege) {
+	if o == nil || IsNil(o.DefaultPrivilege) {
 		return nil, false
 	}
 	return o.DefaultPrivilege, true
@@ -407,7 +410,7 @@ func (o *RepositoryCreate) GetDefaultPrivilegeOk() (*string, bool) {
 
 // HasDefaultPrivilege returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasDefaultPrivilege() bool {
-	if o != nil && !isNil(o.DefaultPrivilege) {
+	if o != nil && !IsNil(o.DefaultPrivilege) {
 		return true
 	}
 
@@ -421,7 +424,7 @@ func (o *RepositoryCreate) SetDefaultPrivilege(v string) {
 
 // GetDeleteOwn returns the DeleteOwn field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetDeleteOwn() bool {
-	if o == nil || isNil(o.DeleteOwn) {
+	if o == nil || IsNil(o.DeleteOwn) {
 		var ret bool
 		return ret
 	}
@@ -431,7 +434,7 @@ func (o *RepositoryCreate) GetDeleteOwn() bool {
 // GetDeleteOwnOk returns a tuple with the DeleteOwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetDeleteOwnOk() (*bool, bool) {
-	if o == nil || isNil(o.DeleteOwn) {
+	if o == nil || IsNil(o.DeleteOwn) {
 		return nil, false
 	}
 	return o.DeleteOwn, true
@@ -439,7 +442,7 @@ func (o *RepositoryCreate) GetDeleteOwnOk() (*bool, bool) {
 
 // HasDeleteOwn returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasDeleteOwn() bool {
-	if o != nil && !isNil(o.DeleteOwn) {
+	if o != nil && !IsNil(o.DeleteOwn) {
 		return true
 	}
 
@@ -453,7 +456,7 @@ func (o *RepositoryCreate) SetDeleteOwn(v bool) {
 
 // GetDeletePackages returns the DeletePackages field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetDeletePackages() string {
-	if o == nil || isNil(o.DeletePackages) {
+	if o == nil || IsNil(o.DeletePackages) {
 		var ret string
 		return ret
 	}
@@ -463,7 +466,7 @@ func (o *RepositoryCreate) GetDeletePackages() string {
 // GetDeletePackagesOk returns a tuple with the DeletePackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetDeletePackagesOk() (*string, bool) {
-	if o == nil || isNil(o.DeletePackages) {
+	if o == nil || IsNil(o.DeletePackages) {
 		return nil, false
 	}
 	return o.DeletePackages, true
@@ -471,7 +474,7 @@ func (o *RepositoryCreate) GetDeletePackagesOk() (*string, bool) {
 
 // HasDeletePackages returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasDeletePackages() bool {
-	if o != nil && !isNil(o.DeletePackages) {
+	if o != nil && !IsNil(o.DeletePackages) {
 		return true
 	}
 
@@ -485,7 +488,7 @@ func (o *RepositoryCreate) SetDeletePackages(v string) {
 
 // GetDeletedAt returns the DeletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RepositoryCreate) GetDeletedAt() time.Time {
-	if o == nil || isNil(o.DeletedAt.Get()) {
+	if o == nil || IsNil(o.DeletedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -528,7 +531,7 @@ func (o *RepositoryCreate) UnsetDeletedAt() {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetDescription() string {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -538,7 +541,7 @@ func (o *RepositoryCreate) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetDescriptionOk() (*string, bool) {
-	if o == nil || isNil(o.Description) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -546,7 +549,7 @@ func (o *RepositoryCreate) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasDescription() bool {
-	if o != nil && !isNil(o.Description) {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -560,7 +563,7 @@ func (o *RepositoryCreate) SetDescription(v string) {
 
 // GetDistributes returns the Distributes field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetDistributes() []string {
-	if o == nil || isNil(o.Distributes) {
+	if o == nil || IsNil(o.Distributes) {
 		var ret []string
 		return ret
 	}
@@ -570,7 +573,7 @@ func (o *RepositoryCreate) GetDistributes() []string {
 // GetDistributesOk returns a tuple with the Distributes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetDistributesOk() ([]string, bool) {
-	if o == nil || isNil(o.Distributes) {
+	if o == nil || IsNil(o.Distributes) {
 		return nil, false
 	}
 	return o.Distributes, true
@@ -578,7 +581,7 @@ func (o *RepositoryCreate) GetDistributesOk() ([]string, bool) {
 
 // HasDistributes returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasDistributes() bool {
-	if o != nil && !isNil(o.Distributes) {
+	if o != nil && !IsNil(o.Distributes) {
 		return true
 	}
 
@@ -592,7 +595,7 @@ func (o *RepositoryCreate) SetDistributes(v []string) {
 
 // GetDockerRefreshTokensEnabled returns the DockerRefreshTokensEnabled field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetDockerRefreshTokensEnabled() bool {
-	if o == nil || isNil(o.DockerRefreshTokensEnabled) {
+	if o == nil || IsNil(o.DockerRefreshTokensEnabled) {
 		var ret bool
 		return ret
 	}
@@ -602,7 +605,7 @@ func (o *RepositoryCreate) GetDockerRefreshTokensEnabled() bool {
 // GetDockerRefreshTokensEnabledOk returns a tuple with the DockerRefreshTokensEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetDockerRefreshTokensEnabledOk() (*bool, bool) {
-	if o == nil || isNil(o.DockerRefreshTokensEnabled) {
+	if o == nil || IsNil(o.DockerRefreshTokensEnabled) {
 		return nil, false
 	}
 	return o.DockerRefreshTokensEnabled, true
@@ -610,7 +613,7 @@ func (o *RepositoryCreate) GetDockerRefreshTokensEnabledOk() (*bool, bool) {
 
 // HasDockerRefreshTokensEnabled returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasDockerRefreshTokensEnabled() bool {
-	if o != nil && !isNil(o.DockerRefreshTokensEnabled) {
+	if o != nil && !IsNil(o.DockerRefreshTokensEnabled) {
 		return true
 	}
 
@@ -624,7 +627,7 @@ func (o *RepositoryCreate) SetDockerRefreshTokensEnabled(v bool) {
 
 // GetGpgKeys returns the GpgKeys field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetGpgKeys() []RepositoryGpgKey {
-	if o == nil || isNil(o.GpgKeys) {
+	if o == nil || IsNil(o.GpgKeys) {
 		var ret []RepositoryGpgKey
 		return ret
 	}
@@ -634,7 +637,7 @@ func (o *RepositoryCreate) GetGpgKeys() []RepositoryGpgKey {
 // GetGpgKeysOk returns a tuple with the GpgKeys field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetGpgKeysOk() ([]RepositoryGpgKey, bool) {
-	if o == nil || isNil(o.GpgKeys) {
+	if o == nil || IsNil(o.GpgKeys) {
 		return nil, false
 	}
 	return o.GpgKeys, true
@@ -642,7 +645,7 @@ func (o *RepositoryCreate) GetGpgKeysOk() ([]RepositoryGpgKey, bool) {
 
 // HasGpgKeys returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasGpgKeys() bool {
-	if o != nil && !isNil(o.GpgKeys) {
+	if o != nil && !IsNil(o.GpgKeys) {
 		return true
 	}
 
@@ -656,7 +659,7 @@ func (o *RepositoryCreate) SetGpgKeys(v []RepositoryGpgKey) {
 
 // GetIndexFiles returns the IndexFiles field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetIndexFiles() bool {
-	if o == nil || isNil(o.IndexFiles) {
+	if o == nil || IsNil(o.IndexFiles) {
 		var ret bool
 		return ret
 	}
@@ -666,7 +669,7 @@ func (o *RepositoryCreate) GetIndexFiles() bool {
 // GetIndexFilesOk returns a tuple with the IndexFiles field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetIndexFilesOk() (*bool, bool) {
-	if o == nil || isNil(o.IndexFiles) {
+	if o == nil || IsNil(o.IndexFiles) {
 		return nil, false
 	}
 	return o.IndexFiles, true
@@ -674,7 +677,7 @@ func (o *RepositoryCreate) GetIndexFilesOk() (*bool, bool) {
 
 // HasIndexFiles returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasIndexFiles() bool {
-	if o != nil && !isNil(o.IndexFiles) {
+	if o != nil && !IsNil(o.IndexFiles) {
 		return true
 	}
 
@@ -688,7 +691,7 @@ func (o *RepositoryCreate) SetIndexFiles(v bool) {
 
 // GetIsOpenSource returns the IsOpenSource field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetIsOpenSource() bool {
-	if o == nil || isNil(o.IsOpenSource) {
+	if o == nil || IsNil(o.IsOpenSource) {
 		var ret bool
 		return ret
 	}
@@ -698,7 +701,7 @@ func (o *RepositoryCreate) GetIsOpenSource() bool {
 // GetIsOpenSourceOk returns a tuple with the IsOpenSource field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetIsOpenSourceOk() (*bool, bool) {
-	if o == nil || isNil(o.IsOpenSource) {
+	if o == nil || IsNil(o.IsOpenSource) {
 		return nil, false
 	}
 	return o.IsOpenSource, true
@@ -706,7 +709,7 @@ func (o *RepositoryCreate) GetIsOpenSourceOk() (*bool, bool) {
 
 // HasIsOpenSource returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasIsOpenSource() bool {
-	if o != nil && !isNil(o.IsOpenSource) {
+	if o != nil && !IsNil(o.IsOpenSource) {
 		return true
 	}
 
@@ -720,7 +723,7 @@ func (o *RepositoryCreate) SetIsOpenSource(v bool) {
 
 // GetIsPrivate returns the IsPrivate field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetIsPrivate() bool {
-	if o == nil || isNil(o.IsPrivate) {
+	if o == nil || IsNil(o.IsPrivate) {
 		var ret bool
 		return ret
 	}
@@ -730,7 +733,7 @@ func (o *RepositoryCreate) GetIsPrivate() bool {
 // GetIsPrivateOk returns a tuple with the IsPrivate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetIsPrivateOk() (*bool, bool) {
-	if o == nil || isNil(o.IsPrivate) {
+	if o == nil || IsNil(o.IsPrivate) {
 		return nil, false
 	}
 	return o.IsPrivate, true
@@ -738,7 +741,7 @@ func (o *RepositoryCreate) GetIsPrivateOk() (*bool, bool) {
 
 // HasIsPrivate returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasIsPrivate() bool {
-	if o != nil && !isNil(o.IsPrivate) {
+	if o != nil && !IsNil(o.IsPrivate) {
 		return true
 	}
 
@@ -752,7 +755,7 @@ func (o *RepositoryCreate) SetIsPrivate(v bool) {
 
 // GetIsPublic returns the IsPublic field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetIsPublic() bool {
-	if o == nil || isNil(o.IsPublic) {
+	if o == nil || IsNil(o.IsPublic) {
 		var ret bool
 		return ret
 	}
@@ -762,7 +765,7 @@ func (o *RepositoryCreate) GetIsPublic() bool {
 // GetIsPublicOk returns a tuple with the IsPublic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetIsPublicOk() (*bool, bool) {
-	if o == nil || isNil(o.IsPublic) {
+	if o == nil || IsNil(o.IsPublic) {
 		return nil, false
 	}
 	return o.IsPublic, true
@@ -770,7 +773,7 @@ func (o *RepositoryCreate) GetIsPublicOk() (*bool, bool) {
 
 // HasIsPublic returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasIsPublic() bool {
-	if o != nil && !isNil(o.IsPublic) {
+	if o != nil && !IsNil(o.IsPublic) {
 		return true
 	}
 
@@ -784,7 +787,7 @@ func (o *RepositoryCreate) SetIsPublic(v bool) {
 
 // GetMoveOwn returns the MoveOwn field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetMoveOwn() bool {
-	if o == nil || isNil(o.MoveOwn) {
+	if o == nil || IsNil(o.MoveOwn) {
 		var ret bool
 		return ret
 	}
@@ -794,7 +797,7 @@ func (o *RepositoryCreate) GetMoveOwn() bool {
 // GetMoveOwnOk returns a tuple with the MoveOwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetMoveOwnOk() (*bool, bool) {
-	if o == nil || isNil(o.MoveOwn) {
+	if o == nil || IsNil(o.MoveOwn) {
 		return nil, false
 	}
 	return o.MoveOwn, true
@@ -802,7 +805,7 @@ func (o *RepositoryCreate) GetMoveOwnOk() (*bool, bool) {
 
 // HasMoveOwn returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasMoveOwn() bool {
-	if o != nil && !isNil(o.MoveOwn) {
+	if o != nil && !IsNil(o.MoveOwn) {
 		return true
 	}
 
@@ -816,7 +819,7 @@ func (o *RepositoryCreate) SetMoveOwn(v bool) {
 
 // GetMovePackages returns the MovePackages field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetMovePackages() string {
-	if o == nil || isNil(o.MovePackages) {
+	if o == nil || IsNil(o.MovePackages) {
 		var ret string
 		return ret
 	}
@@ -826,7 +829,7 @@ func (o *RepositoryCreate) GetMovePackages() string {
 // GetMovePackagesOk returns a tuple with the MovePackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetMovePackagesOk() (*string, bool) {
-	if o == nil || isNil(o.MovePackages) {
+	if o == nil || IsNil(o.MovePackages) {
 		return nil, false
 	}
 	return o.MovePackages, true
@@ -834,7 +837,7 @@ func (o *RepositoryCreate) GetMovePackagesOk() (*string, bool) {
 
 // HasMovePackages returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasMovePackages() bool {
-	if o != nil && !isNil(o.MovePackages) {
+	if o != nil && !IsNil(o.MovePackages) {
 		return true
 	}
 
@@ -872,7 +875,7 @@ func (o *RepositoryCreate) SetName(v string) {
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetNamespace() string {
-	if o == nil || isNil(o.Namespace) {
+	if o == nil || IsNil(o.Namespace) {
 		var ret string
 		return ret
 	}
@@ -882,7 +885,7 @@ func (o *RepositoryCreate) GetNamespace() string {
 // GetNamespaceOk returns a tuple with the Namespace field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetNamespaceOk() (*string, bool) {
-	if o == nil || isNil(o.Namespace) {
+	if o == nil || IsNil(o.Namespace) {
 		return nil, false
 	}
 	return o.Namespace, true
@@ -890,7 +893,7 @@ func (o *RepositoryCreate) GetNamespaceOk() (*string, bool) {
 
 // HasNamespace returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasNamespace() bool {
-	if o != nil && !isNil(o.Namespace) {
+	if o != nil && !IsNil(o.Namespace) {
 		return true
 	}
 
@@ -904,7 +907,7 @@ func (o *RepositoryCreate) SetNamespace(v string) {
 
 // GetNamespaceUrl returns the NamespaceUrl field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetNamespaceUrl() string {
-	if o == nil || isNil(o.NamespaceUrl) {
+	if o == nil || IsNil(o.NamespaceUrl) {
 		var ret string
 		return ret
 	}
@@ -914,7 +917,7 @@ func (o *RepositoryCreate) GetNamespaceUrl() string {
 // GetNamespaceUrlOk returns a tuple with the NamespaceUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetNamespaceUrlOk() (*string, bool) {
-	if o == nil || isNil(o.NamespaceUrl) {
+	if o == nil || IsNil(o.NamespaceUrl) {
 		return nil, false
 	}
 	return o.NamespaceUrl, true
@@ -922,7 +925,7 @@ func (o *RepositoryCreate) GetNamespaceUrlOk() (*string, bool) {
 
 // HasNamespaceUrl returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasNamespaceUrl() bool {
-	if o != nil && !isNil(o.NamespaceUrl) {
+	if o != nil && !IsNil(o.NamespaceUrl) {
 		return true
 	}
 
@@ -936,7 +939,7 @@ func (o *RepositoryCreate) SetNamespaceUrl(v string) {
 
 // GetNumDownloads returns the NumDownloads field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetNumDownloads() int64 {
-	if o == nil || isNil(o.NumDownloads) {
+	if o == nil || IsNil(o.NumDownloads) {
 		var ret int64
 		return ret
 	}
@@ -946,7 +949,7 @@ func (o *RepositoryCreate) GetNumDownloads() int64 {
 // GetNumDownloadsOk returns a tuple with the NumDownloads field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetNumDownloadsOk() (*int64, bool) {
-	if o == nil || isNil(o.NumDownloads) {
+	if o == nil || IsNil(o.NumDownloads) {
 		return nil, false
 	}
 	return o.NumDownloads, true
@@ -954,7 +957,7 @@ func (o *RepositoryCreate) GetNumDownloadsOk() (*int64, bool) {
 
 // HasNumDownloads returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasNumDownloads() bool {
-	if o != nil && !isNil(o.NumDownloads) {
+	if o != nil && !IsNil(o.NumDownloads) {
 		return true
 	}
 
@@ -968,7 +971,7 @@ func (o *RepositoryCreate) SetNumDownloads(v int64) {
 
 // GetPackageCount returns the PackageCount field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetPackageCount() int64 {
-	if o == nil || isNil(o.PackageCount) {
+	if o == nil || IsNil(o.PackageCount) {
 		var ret int64
 		return ret
 	}
@@ -978,7 +981,7 @@ func (o *RepositoryCreate) GetPackageCount() int64 {
 // GetPackageCountOk returns a tuple with the PackageCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetPackageCountOk() (*int64, bool) {
-	if o == nil || isNil(o.PackageCount) {
+	if o == nil || IsNil(o.PackageCount) {
 		return nil, false
 	}
 	return o.PackageCount, true
@@ -986,7 +989,7 @@ func (o *RepositoryCreate) GetPackageCountOk() (*int64, bool) {
 
 // HasPackageCount returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasPackageCount() bool {
-	if o != nil && !isNil(o.PackageCount) {
+	if o != nil && !IsNil(o.PackageCount) {
 		return true
 	}
 
@@ -1000,7 +1003,7 @@ func (o *RepositoryCreate) SetPackageCount(v int64) {
 
 // GetPackageGroupCount returns the PackageGroupCount field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetPackageGroupCount() int64 {
-	if o == nil || isNil(o.PackageGroupCount) {
+	if o == nil || IsNil(o.PackageGroupCount) {
 		var ret int64
 		return ret
 	}
@@ -1010,7 +1013,7 @@ func (o *RepositoryCreate) GetPackageGroupCount() int64 {
 // GetPackageGroupCountOk returns a tuple with the PackageGroupCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetPackageGroupCountOk() (*int64, bool) {
-	if o == nil || isNil(o.PackageGroupCount) {
+	if o == nil || IsNil(o.PackageGroupCount) {
 		return nil, false
 	}
 	return o.PackageGroupCount, true
@@ -1018,7 +1021,7 @@ func (o *RepositoryCreate) GetPackageGroupCountOk() (*int64, bool) {
 
 // HasPackageGroupCount returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasPackageGroupCount() bool {
-	if o != nil && !isNil(o.PackageGroupCount) {
+	if o != nil && !IsNil(o.PackageGroupCount) {
 		return true
 	}
 
@@ -1032,7 +1035,7 @@ func (o *RepositoryCreate) SetPackageGroupCount(v int64) {
 
 // GetProxyNpmjs returns the ProxyNpmjs field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetProxyNpmjs() bool {
-	if o == nil || isNil(o.ProxyNpmjs) {
+	if o == nil || IsNil(o.ProxyNpmjs) {
 		var ret bool
 		return ret
 	}
@@ -1042,7 +1045,7 @@ func (o *RepositoryCreate) GetProxyNpmjs() bool {
 // GetProxyNpmjsOk returns a tuple with the ProxyNpmjs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetProxyNpmjsOk() (*bool, bool) {
-	if o == nil || isNil(o.ProxyNpmjs) {
+	if o == nil || IsNil(o.ProxyNpmjs) {
 		return nil, false
 	}
 	return o.ProxyNpmjs, true
@@ -1050,7 +1053,7 @@ func (o *RepositoryCreate) GetProxyNpmjsOk() (*bool, bool) {
 
 // HasProxyNpmjs returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasProxyNpmjs() bool {
-	if o != nil && !isNil(o.ProxyNpmjs) {
+	if o != nil && !IsNil(o.ProxyNpmjs) {
 		return true
 	}
 
@@ -1064,7 +1067,7 @@ func (o *RepositoryCreate) SetProxyNpmjs(v bool) {
 
 // GetProxyPypi returns the ProxyPypi field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetProxyPypi() bool {
-	if o == nil || isNil(o.ProxyPypi) {
+	if o == nil || IsNil(o.ProxyPypi) {
 		var ret bool
 		return ret
 	}
@@ -1074,7 +1077,7 @@ func (o *RepositoryCreate) GetProxyPypi() bool {
 // GetProxyPypiOk returns a tuple with the ProxyPypi field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetProxyPypiOk() (*bool, bool) {
-	if o == nil || isNil(o.ProxyPypi) {
+	if o == nil || IsNil(o.ProxyPypi) {
 		return nil, false
 	}
 	return o.ProxyPypi, true
@@ -1082,7 +1085,7 @@ func (o *RepositoryCreate) GetProxyPypiOk() (*bool, bool) {
 
 // HasProxyPypi returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasProxyPypi() bool {
-	if o != nil && !isNil(o.ProxyPypi) {
+	if o != nil && !IsNil(o.ProxyPypi) {
 		return true
 	}
 
@@ -1096,7 +1099,7 @@ func (o *RepositoryCreate) SetProxyPypi(v bool) {
 
 // GetRawPackageIndexEnabled returns the RawPackageIndexEnabled field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetRawPackageIndexEnabled() bool {
-	if o == nil || isNil(o.RawPackageIndexEnabled) {
+	if o == nil || IsNil(o.RawPackageIndexEnabled) {
 		var ret bool
 		return ret
 	}
@@ -1106,7 +1109,7 @@ func (o *RepositoryCreate) GetRawPackageIndexEnabled() bool {
 // GetRawPackageIndexEnabledOk returns a tuple with the RawPackageIndexEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetRawPackageIndexEnabledOk() (*bool, bool) {
-	if o == nil || isNil(o.RawPackageIndexEnabled) {
+	if o == nil || IsNil(o.RawPackageIndexEnabled) {
 		return nil, false
 	}
 	return o.RawPackageIndexEnabled, true
@@ -1114,7 +1117,7 @@ func (o *RepositoryCreate) GetRawPackageIndexEnabledOk() (*bool, bool) {
 
 // HasRawPackageIndexEnabled returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasRawPackageIndexEnabled() bool {
-	if o != nil && !isNil(o.RawPackageIndexEnabled) {
+	if o != nil && !IsNil(o.RawPackageIndexEnabled) {
 		return true
 	}
 
@@ -1128,7 +1131,7 @@ func (o *RepositoryCreate) SetRawPackageIndexEnabled(v bool) {
 
 // GetRawPackageIndexSignaturesEnabled returns the RawPackageIndexSignaturesEnabled field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetRawPackageIndexSignaturesEnabled() bool {
-	if o == nil || isNil(o.RawPackageIndexSignaturesEnabled) {
+	if o == nil || IsNil(o.RawPackageIndexSignaturesEnabled) {
 		var ret bool
 		return ret
 	}
@@ -1138,7 +1141,7 @@ func (o *RepositoryCreate) GetRawPackageIndexSignaturesEnabled() bool {
 // GetRawPackageIndexSignaturesEnabledOk returns a tuple with the RawPackageIndexSignaturesEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetRawPackageIndexSignaturesEnabledOk() (*bool, bool) {
-	if o == nil || isNil(o.RawPackageIndexSignaturesEnabled) {
+	if o == nil || IsNil(o.RawPackageIndexSignaturesEnabled) {
 		return nil, false
 	}
 	return o.RawPackageIndexSignaturesEnabled, true
@@ -1146,7 +1149,7 @@ func (o *RepositoryCreate) GetRawPackageIndexSignaturesEnabledOk() (*bool, bool)
 
 // HasRawPackageIndexSignaturesEnabled returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasRawPackageIndexSignaturesEnabled() bool {
-	if o != nil && !isNil(o.RawPackageIndexSignaturesEnabled) {
+	if o != nil && !IsNil(o.RawPackageIndexSignaturesEnabled) {
 		return true
 	}
 
@@ -1160,7 +1163,7 @@ func (o *RepositoryCreate) SetRawPackageIndexSignaturesEnabled(v bool) {
 
 // GetReplacePackages returns the ReplacePackages field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetReplacePackages() string {
-	if o == nil || isNil(o.ReplacePackages) {
+	if o == nil || IsNil(o.ReplacePackages) {
 		var ret string
 		return ret
 	}
@@ -1170,7 +1173,7 @@ func (o *RepositoryCreate) GetReplacePackages() string {
 // GetReplacePackagesOk returns a tuple with the ReplacePackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetReplacePackagesOk() (*string, bool) {
-	if o == nil || isNil(o.ReplacePackages) {
+	if o == nil || IsNil(o.ReplacePackages) {
 		return nil, false
 	}
 	return o.ReplacePackages, true
@@ -1178,7 +1181,7 @@ func (o *RepositoryCreate) GetReplacePackagesOk() (*string, bool) {
 
 // HasReplacePackages returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasReplacePackages() bool {
-	if o != nil && !isNil(o.ReplacePackages) {
+	if o != nil && !IsNil(o.ReplacePackages) {
 		return true
 	}
 
@@ -1192,7 +1195,7 @@ func (o *RepositoryCreate) SetReplacePackages(v string) {
 
 // GetReplacePackagesByDefault returns the ReplacePackagesByDefault field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetReplacePackagesByDefault() bool {
-	if o == nil || isNil(o.ReplacePackagesByDefault) {
+	if o == nil || IsNil(o.ReplacePackagesByDefault) {
 		var ret bool
 		return ret
 	}
@@ -1202,7 +1205,7 @@ func (o *RepositoryCreate) GetReplacePackagesByDefault() bool {
 // GetReplacePackagesByDefaultOk returns a tuple with the ReplacePackagesByDefault field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetReplacePackagesByDefaultOk() (*bool, bool) {
-	if o == nil || isNil(o.ReplacePackagesByDefault) {
+	if o == nil || IsNil(o.ReplacePackagesByDefault) {
 		return nil, false
 	}
 	return o.ReplacePackagesByDefault, true
@@ -1210,7 +1213,7 @@ func (o *RepositoryCreate) GetReplacePackagesByDefaultOk() (*bool, bool) {
 
 // HasReplacePackagesByDefault returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasReplacePackagesByDefault() bool {
-	if o != nil && !isNil(o.ReplacePackagesByDefault) {
+	if o != nil && !IsNil(o.ReplacePackagesByDefault) {
 		return true
 	}
 
@@ -1224,7 +1227,7 @@ func (o *RepositoryCreate) SetReplacePackagesByDefault(v bool) {
 
 // GetRepositoryType returns the RepositoryType field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetRepositoryType() int64 {
-	if o == nil || isNil(o.RepositoryType) {
+	if o == nil || IsNil(o.RepositoryType) {
 		var ret int64
 		return ret
 	}
@@ -1234,7 +1237,7 @@ func (o *RepositoryCreate) GetRepositoryType() int64 {
 // GetRepositoryTypeOk returns a tuple with the RepositoryType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetRepositoryTypeOk() (*int64, bool) {
-	if o == nil || isNil(o.RepositoryType) {
+	if o == nil || IsNil(o.RepositoryType) {
 		return nil, false
 	}
 	return o.RepositoryType, true
@@ -1242,7 +1245,7 @@ func (o *RepositoryCreate) GetRepositoryTypeOk() (*int64, bool) {
 
 // HasRepositoryType returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasRepositoryType() bool {
-	if o != nil && !isNil(o.RepositoryType) {
+	if o != nil && !IsNil(o.RepositoryType) {
 		return true
 	}
 
@@ -1256,7 +1259,7 @@ func (o *RepositoryCreate) SetRepositoryType(v int64) {
 
 // GetRepositoryTypeStr returns the RepositoryTypeStr field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetRepositoryTypeStr() string {
-	if o == nil || isNil(o.RepositoryTypeStr) {
+	if o == nil || IsNil(o.RepositoryTypeStr) {
 		var ret string
 		return ret
 	}
@@ -1266,7 +1269,7 @@ func (o *RepositoryCreate) GetRepositoryTypeStr() string {
 // GetRepositoryTypeStrOk returns a tuple with the RepositoryTypeStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetRepositoryTypeStrOk() (*string, bool) {
-	if o == nil || isNil(o.RepositoryTypeStr) {
+	if o == nil || IsNil(o.RepositoryTypeStr) {
 		return nil, false
 	}
 	return o.RepositoryTypeStr, true
@@ -1274,7 +1277,7 @@ func (o *RepositoryCreate) GetRepositoryTypeStrOk() (*string, bool) {
 
 // HasRepositoryTypeStr returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasRepositoryTypeStr() bool {
-	if o != nil && !isNil(o.RepositoryTypeStr) {
+	if o != nil && !IsNil(o.RepositoryTypeStr) {
 		return true
 	}
 
@@ -1288,7 +1291,7 @@ func (o *RepositoryCreate) SetRepositoryTypeStr(v string) {
 
 // GetResyncOwn returns the ResyncOwn field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetResyncOwn() bool {
-	if o == nil || isNil(o.ResyncOwn) {
+	if o == nil || IsNil(o.ResyncOwn) {
 		var ret bool
 		return ret
 	}
@@ -1298,7 +1301,7 @@ func (o *RepositoryCreate) GetResyncOwn() bool {
 // GetResyncOwnOk returns a tuple with the ResyncOwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetResyncOwnOk() (*bool, bool) {
-	if o == nil || isNil(o.ResyncOwn) {
+	if o == nil || IsNil(o.ResyncOwn) {
 		return nil, false
 	}
 	return o.ResyncOwn, true
@@ -1306,7 +1309,7 @@ func (o *RepositoryCreate) GetResyncOwnOk() (*bool, bool) {
 
 // HasResyncOwn returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasResyncOwn() bool {
-	if o != nil && !isNil(o.ResyncOwn) {
+	if o != nil && !IsNil(o.ResyncOwn) {
 		return true
 	}
 
@@ -1320,7 +1323,7 @@ func (o *RepositoryCreate) SetResyncOwn(v bool) {
 
 // GetResyncPackages returns the ResyncPackages field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetResyncPackages() string {
-	if o == nil || isNil(o.ResyncPackages) {
+	if o == nil || IsNil(o.ResyncPackages) {
 		var ret string
 		return ret
 	}
@@ -1330,7 +1333,7 @@ func (o *RepositoryCreate) GetResyncPackages() string {
 // GetResyncPackagesOk returns a tuple with the ResyncPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetResyncPackagesOk() (*string, bool) {
-	if o == nil || isNil(o.ResyncPackages) {
+	if o == nil || IsNil(o.ResyncPackages) {
 		return nil, false
 	}
 	return o.ResyncPackages, true
@@ -1338,7 +1341,7 @@ func (o *RepositoryCreate) GetResyncPackagesOk() (*string, bool) {
 
 // HasResyncPackages returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasResyncPackages() bool {
-	if o != nil && !isNil(o.ResyncPackages) {
+	if o != nil && !IsNil(o.ResyncPackages) {
 		return true
 	}
 
@@ -1352,7 +1355,7 @@ func (o *RepositoryCreate) SetResyncPackages(v string) {
 
 // GetScanOwn returns the ScanOwn field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetScanOwn() bool {
-	if o == nil || isNil(o.ScanOwn) {
+	if o == nil || IsNil(o.ScanOwn) {
 		var ret bool
 		return ret
 	}
@@ -1362,7 +1365,7 @@ func (o *RepositoryCreate) GetScanOwn() bool {
 // GetScanOwnOk returns a tuple with the ScanOwn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetScanOwnOk() (*bool, bool) {
-	if o == nil || isNil(o.ScanOwn) {
+	if o == nil || IsNil(o.ScanOwn) {
 		return nil, false
 	}
 	return o.ScanOwn, true
@@ -1370,7 +1373,7 @@ func (o *RepositoryCreate) GetScanOwnOk() (*bool, bool) {
 
 // HasScanOwn returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasScanOwn() bool {
-	if o != nil && !isNil(o.ScanOwn) {
+	if o != nil && !IsNil(o.ScanOwn) {
 		return true
 	}
 
@@ -1384,7 +1387,7 @@ func (o *RepositoryCreate) SetScanOwn(v bool) {
 
 // GetScanPackages returns the ScanPackages field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetScanPackages() string {
-	if o == nil || isNil(o.ScanPackages) {
+	if o == nil || IsNil(o.ScanPackages) {
 		var ret string
 		return ret
 	}
@@ -1394,7 +1397,7 @@ func (o *RepositoryCreate) GetScanPackages() string {
 // GetScanPackagesOk returns a tuple with the ScanPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetScanPackagesOk() (*string, bool) {
-	if o == nil || isNil(o.ScanPackages) {
+	if o == nil || IsNil(o.ScanPackages) {
 		return nil, false
 	}
 	return o.ScanPackages, true
@@ -1402,7 +1405,7 @@ func (o *RepositoryCreate) GetScanPackagesOk() (*string, bool) {
 
 // HasScanPackages returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasScanPackages() bool {
-	if o != nil && !isNil(o.ScanPackages) {
+	if o != nil && !IsNil(o.ScanPackages) {
 		return true
 	}
 
@@ -1416,7 +1419,7 @@ func (o *RepositoryCreate) SetScanPackages(v string) {
 
 // GetSelfHtmlUrl returns the SelfHtmlUrl field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetSelfHtmlUrl() string {
-	if o == nil || isNil(o.SelfHtmlUrl) {
+	if o == nil || IsNil(o.SelfHtmlUrl) {
 		var ret string
 		return ret
 	}
@@ -1426,7 +1429,7 @@ func (o *RepositoryCreate) GetSelfHtmlUrl() string {
 // GetSelfHtmlUrlOk returns a tuple with the SelfHtmlUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetSelfHtmlUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfHtmlUrl) {
+	if o == nil || IsNil(o.SelfHtmlUrl) {
 		return nil, false
 	}
 	return o.SelfHtmlUrl, true
@@ -1434,7 +1437,7 @@ func (o *RepositoryCreate) GetSelfHtmlUrlOk() (*string, bool) {
 
 // HasSelfHtmlUrl returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasSelfHtmlUrl() bool {
-	if o != nil && !isNil(o.SelfHtmlUrl) {
+	if o != nil && !IsNil(o.SelfHtmlUrl) {
 		return true
 	}
 
@@ -1448,7 +1451,7 @@ func (o *RepositoryCreate) SetSelfHtmlUrl(v string) {
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetSelfUrl() string {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		var ret string
 		return ret
 	}
@@ -1458,7 +1461,7 @@ func (o *RepositoryCreate) GetSelfUrl() string {
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetSelfUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		return nil, false
 	}
 	return o.SelfUrl, true
@@ -1466,7 +1469,7 @@ func (o *RepositoryCreate) GetSelfUrlOk() (*string, bool) {
 
 // HasSelfUrl returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasSelfUrl() bool {
-	if o != nil && !isNil(o.SelfUrl) {
+	if o != nil && !IsNil(o.SelfUrl) {
 		return true
 	}
 
@@ -1480,7 +1483,7 @@ func (o *RepositoryCreate) SetSelfUrl(v string) {
 
 // GetShowSetupAll returns the ShowSetupAll field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetShowSetupAll() bool {
-	if o == nil || isNil(o.ShowSetupAll) {
+	if o == nil || IsNil(o.ShowSetupAll) {
 		var ret bool
 		return ret
 	}
@@ -1490,7 +1493,7 @@ func (o *RepositoryCreate) GetShowSetupAll() bool {
 // GetShowSetupAllOk returns a tuple with the ShowSetupAll field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetShowSetupAllOk() (*bool, bool) {
-	if o == nil || isNil(o.ShowSetupAll) {
+	if o == nil || IsNil(o.ShowSetupAll) {
 		return nil, false
 	}
 	return o.ShowSetupAll, true
@@ -1498,7 +1501,7 @@ func (o *RepositoryCreate) GetShowSetupAllOk() (*bool, bool) {
 
 // HasShowSetupAll returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasShowSetupAll() bool {
-	if o != nil && !isNil(o.ShowSetupAll) {
+	if o != nil && !IsNil(o.ShowSetupAll) {
 		return true
 	}
 
@@ -1512,7 +1515,7 @@ func (o *RepositoryCreate) SetShowSetupAll(v bool) {
 
 // GetSize returns the Size field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetSize() int64 {
-	if o == nil || isNil(o.Size) {
+	if o == nil || IsNil(o.Size) {
 		var ret int64
 		return ret
 	}
@@ -1522,7 +1525,7 @@ func (o *RepositoryCreate) GetSize() int64 {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetSizeOk() (*int64, bool) {
-	if o == nil || isNil(o.Size) {
+	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
 	return o.Size, true
@@ -1530,7 +1533,7 @@ func (o *RepositoryCreate) GetSizeOk() (*int64, bool) {
 
 // HasSize returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasSize() bool {
-	if o != nil && !isNil(o.Size) {
+	if o != nil && !IsNil(o.Size) {
 		return true
 	}
 
@@ -1544,7 +1547,7 @@ func (o *RepositoryCreate) SetSize(v int64) {
 
 // GetSizeStr returns the SizeStr field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetSizeStr() string {
-	if o == nil || isNil(o.SizeStr) {
+	if o == nil || IsNil(o.SizeStr) {
 		var ret string
 		return ret
 	}
@@ -1554,7 +1557,7 @@ func (o *RepositoryCreate) GetSizeStr() string {
 // GetSizeStrOk returns a tuple with the SizeStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetSizeStrOk() (*string, bool) {
-	if o == nil || isNil(o.SizeStr) {
+	if o == nil || IsNil(o.SizeStr) {
 		return nil, false
 	}
 	return o.SizeStr, true
@@ -1562,7 +1565,7 @@ func (o *RepositoryCreate) GetSizeStrOk() (*string, bool) {
 
 // HasSizeStr returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasSizeStr() bool {
-	if o != nil && !isNil(o.SizeStr) {
+	if o != nil && !IsNil(o.SizeStr) {
 		return true
 	}
 
@@ -1576,7 +1579,7 @@ func (o *RepositoryCreate) SetSizeStr(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -1586,7 +1589,7 @@ func (o *RepositoryCreate) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -1594,7 +1597,7 @@ func (o *RepositoryCreate) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -1608,7 +1611,7 @@ func (o *RepositoryCreate) SetSlug(v string) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -1618,7 +1621,7 @@ func (o *RepositoryCreate) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -1626,7 +1629,7 @@ func (o *RepositoryCreate) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -1640,7 +1643,7 @@ func (o *RepositoryCreate) SetSlugPerm(v string) {
 
 // GetStorageRegion returns the StorageRegion field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetStorageRegion() string {
-	if o == nil || isNil(o.StorageRegion) {
+	if o == nil || IsNil(o.StorageRegion) {
 		var ret string
 		return ret
 	}
@@ -1650,7 +1653,7 @@ func (o *RepositoryCreate) GetStorageRegion() string {
 // GetStorageRegionOk returns a tuple with the StorageRegion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetStorageRegionOk() (*string, bool) {
-	if o == nil || isNil(o.StorageRegion) {
+	if o == nil || IsNil(o.StorageRegion) {
 		return nil, false
 	}
 	return o.StorageRegion, true
@@ -1658,7 +1661,7 @@ func (o *RepositoryCreate) GetStorageRegionOk() (*string, bool) {
 
 // HasStorageRegion returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasStorageRegion() bool {
-	if o != nil && !isNil(o.StorageRegion) {
+	if o != nil && !IsNil(o.StorageRegion) {
 		return true
 	}
 
@@ -1672,7 +1675,7 @@ func (o *RepositoryCreate) SetStorageRegion(v string) {
 
 // GetStrictNpmValidation returns the StrictNpmValidation field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetStrictNpmValidation() bool {
-	if o == nil || isNil(o.StrictNpmValidation) {
+	if o == nil || IsNil(o.StrictNpmValidation) {
 		var ret bool
 		return ret
 	}
@@ -1682,7 +1685,7 @@ func (o *RepositoryCreate) GetStrictNpmValidation() bool {
 // GetStrictNpmValidationOk returns a tuple with the StrictNpmValidation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetStrictNpmValidationOk() (*bool, bool) {
-	if o == nil || isNil(o.StrictNpmValidation) {
+	if o == nil || IsNil(o.StrictNpmValidation) {
 		return nil, false
 	}
 	return o.StrictNpmValidation, true
@@ -1690,7 +1693,7 @@ func (o *RepositoryCreate) GetStrictNpmValidationOk() (*bool, bool) {
 
 // HasStrictNpmValidation returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasStrictNpmValidation() bool {
-	if o != nil && !isNil(o.StrictNpmValidation) {
+	if o != nil && !IsNil(o.StrictNpmValidation) {
 		return true
 	}
 
@@ -1704,7 +1707,7 @@ func (o *RepositoryCreate) SetStrictNpmValidation(v bool) {
 
 // GetUseDebianLabels returns the UseDebianLabels field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetUseDebianLabels() bool {
-	if o == nil || isNil(o.UseDebianLabels) {
+	if o == nil || IsNil(o.UseDebianLabels) {
 		var ret bool
 		return ret
 	}
@@ -1714,7 +1717,7 @@ func (o *RepositoryCreate) GetUseDebianLabels() bool {
 // GetUseDebianLabelsOk returns a tuple with the UseDebianLabels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetUseDebianLabelsOk() (*bool, bool) {
-	if o == nil || isNil(o.UseDebianLabels) {
+	if o == nil || IsNil(o.UseDebianLabels) {
 		return nil, false
 	}
 	return o.UseDebianLabels, true
@@ -1722,7 +1725,7 @@ func (o *RepositoryCreate) GetUseDebianLabelsOk() (*bool, bool) {
 
 // HasUseDebianLabels returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasUseDebianLabels() bool {
-	if o != nil && !isNil(o.UseDebianLabels) {
+	if o != nil && !IsNil(o.UseDebianLabels) {
 		return true
 	}
 
@@ -1736,7 +1739,7 @@ func (o *RepositoryCreate) SetUseDebianLabels(v bool) {
 
 // GetUseDefaultCargoUpstream returns the UseDefaultCargoUpstream field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetUseDefaultCargoUpstream() bool {
-	if o == nil || isNil(o.UseDefaultCargoUpstream) {
+	if o == nil || IsNil(o.UseDefaultCargoUpstream) {
 		var ret bool
 		return ret
 	}
@@ -1746,7 +1749,7 @@ func (o *RepositoryCreate) GetUseDefaultCargoUpstream() bool {
 // GetUseDefaultCargoUpstreamOk returns a tuple with the UseDefaultCargoUpstream field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetUseDefaultCargoUpstreamOk() (*bool, bool) {
-	if o == nil || isNil(o.UseDefaultCargoUpstream) {
+	if o == nil || IsNil(o.UseDefaultCargoUpstream) {
 		return nil, false
 	}
 	return o.UseDefaultCargoUpstream, true
@@ -1754,7 +1757,7 @@ func (o *RepositoryCreate) GetUseDefaultCargoUpstreamOk() (*bool, bool) {
 
 // HasUseDefaultCargoUpstream returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasUseDefaultCargoUpstream() bool {
-	if o != nil && !isNil(o.UseDefaultCargoUpstream) {
+	if o != nil && !IsNil(o.UseDefaultCargoUpstream) {
 		return true
 	}
 
@@ -1768,7 +1771,7 @@ func (o *RepositoryCreate) SetUseDefaultCargoUpstream(v bool) {
 
 // GetUseNoarchPackages returns the UseNoarchPackages field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetUseNoarchPackages() bool {
-	if o == nil || isNil(o.UseNoarchPackages) {
+	if o == nil || IsNil(o.UseNoarchPackages) {
 		var ret bool
 		return ret
 	}
@@ -1778,7 +1781,7 @@ func (o *RepositoryCreate) GetUseNoarchPackages() bool {
 // GetUseNoarchPackagesOk returns a tuple with the UseNoarchPackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetUseNoarchPackagesOk() (*bool, bool) {
-	if o == nil || isNil(o.UseNoarchPackages) {
+	if o == nil || IsNil(o.UseNoarchPackages) {
 		return nil, false
 	}
 	return o.UseNoarchPackages, true
@@ -1786,7 +1789,7 @@ func (o *RepositoryCreate) GetUseNoarchPackagesOk() (*bool, bool) {
 
 // HasUseNoarchPackages returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasUseNoarchPackages() bool {
-	if o != nil && !isNil(o.UseNoarchPackages) {
+	if o != nil && !IsNil(o.UseNoarchPackages) {
 		return true
 	}
 
@@ -1800,7 +1803,7 @@ func (o *RepositoryCreate) SetUseNoarchPackages(v bool) {
 
 // GetUseSourcePackages returns the UseSourcePackages field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetUseSourcePackages() bool {
-	if o == nil || isNil(o.UseSourcePackages) {
+	if o == nil || IsNil(o.UseSourcePackages) {
 		var ret bool
 		return ret
 	}
@@ -1810,7 +1813,7 @@ func (o *RepositoryCreate) GetUseSourcePackages() bool {
 // GetUseSourcePackagesOk returns a tuple with the UseSourcePackages field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetUseSourcePackagesOk() (*bool, bool) {
-	if o == nil || isNil(o.UseSourcePackages) {
+	if o == nil || IsNil(o.UseSourcePackages) {
 		return nil, false
 	}
 	return o.UseSourcePackages, true
@@ -1818,7 +1821,7 @@ func (o *RepositoryCreate) GetUseSourcePackagesOk() (*bool, bool) {
 
 // HasUseSourcePackages returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasUseSourcePackages() bool {
-	if o != nil && !isNil(o.UseSourcePackages) {
+	if o != nil && !IsNil(o.UseSourcePackages) {
 		return true
 	}
 
@@ -1832,7 +1835,7 @@ func (o *RepositoryCreate) SetUseSourcePackages(v bool) {
 
 // GetUseVulnerabilityScanning returns the UseVulnerabilityScanning field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetUseVulnerabilityScanning() bool {
-	if o == nil || isNil(o.UseVulnerabilityScanning) {
+	if o == nil || IsNil(o.UseVulnerabilityScanning) {
 		var ret bool
 		return ret
 	}
@@ -1842,7 +1845,7 @@ func (o *RepositoryCreate) GetUseVulnerabilityScanning() bool {
 // GetUseVulnerabilityScanningOk returns a tuple with the UseVulnerabilityScanning field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetUseVulnerabilityScanningOk() (*bool, bool) {
-	if o == nil || isNil(o.UseVulnerabilityScanning) {
+	if o == nil || IsNil(o.UseVulnerabilityScanning) {
 		return nil, false
 	}
 	return o.UseVulnerabilityScanning, true
@@ -1850,7 +1853,7 @@ func (o *RepositoryCreate) GetUseVulnerabilityScanningOk() (*bool, bool) {
 
 // HasUseVulnerabilityScanning returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasUseVulnerabilityScanning() bool {
-	if o != nil && !isNil(o.UseVulnerabilityScanning) {
+	if o != nil && !IsNil(o.UseVulnerabilityScanning) {
 		return true
 	}
 
@@ -1864,7 +1867,7 @@ func (o *RepositoryCreate) SetUseVulnerabilityScanning(v bool) {
 
 // GetUserEntitlementsEnabled returns the UserEntitlementsEnabled field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetUserEntitlementsEnabled() bool {
-	if o == nil || isNil(o.UserEntitlementsEnabled) {
+	if o == nil || IsNil(o.UserEntitlementsEnabled) {
 		var ret bool
 		return ret
 	}
@@ -1874,7 +1877,7 @@ func (o *RepositoryCreate) GetUserEntitlementsEnabled() bool {
 // GetUserEntitlementsEnabledOk returns a tuple with the UserEntitlementsEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetUserEntitlementsEnabledOk() (*bool, bool) {
-	if o == nil || isNil(o.UserEntitlementsEnabled) {
+	if o == nil || IsNil(o.UserEntitlementsEnabled) {
 		return nil, false
 	}
 	return o.UserEntitlementsEnabled, true
@@ -1882,7 +1885,7 @@ func (o *RepositoryCreate) GetUserEntitlementsEnabledOk() (*bool, bool) {
 
 // HasUserEntitlementsEnabled returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasUserEntitlementsEnabled() bool {
-	if o != nil && !isNil(o.UserEntitlementsEnabled) {
+	if o != nil && !IsNil(o.UserEntitlementsEnabled) {
 		return true
 	}
 
@@ -1896,7 +1899,7 @@ func (o *RepositoryCreate) SetUserEntitlementsEnabled(v bool) {
 
 // GetViewStatistics returns the ViewStatistics field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetViewStatistics() string {
-	if o == nil || isNil(o.ViewStatistics) {
+	if o == nil || IsNil(o.ViewStatistics) {
 		var ret string
 		return ret
 	}
@@ -1906,7 +1909,7 @@ func (o *RepositoryCreate) GetViewStatistics() string {
 // GetViewStatisticsOk returns a tuple with the ViewStatistics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryCreate) GetViewStatisticsOk() (*string, bool) {
-	if o == nil || isNil(o.ViewStatistics) {
+	if o == nil || IsNil(o.ViewStatistics) {
 		return nil, false
 	}
 	return o.ViewStatistics, true
@@ -1914,7 +1917,7 @@ func (o *RepositoryCreate) GetViewStatisticsOk() (*string, bool) {
 
 // HasViewStatistics returns a boolean if a field has been set.
 func (o *RepositoryCreate) HasViewStatistics() bool {
-	if o != nil && !isNil(o.ViewStatistics) {
+	if o != nil && !IsNil(o.ViewStatistics) {
 		return true
 	}
 
@@ -1927,170 +1930,176 @@ func (o *RepositoryCreate) SetViewStatistics(v string) {
 }
 
 func (o RepositoryCreate) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CdnUrl.IsSet() {
 		toSerialize["cdn_url"] = o.CdnUrl.Get()
 	}
-	if !isNil(o.ContentKind) {
+	if !IsNil(o.ContentKind) {
 		toSerialize["content_kind"] = o.ContentKind
 	}
-	if !isNil(o.ContextualAuthRealm) {
+	if !IsNil(o.ContextualAuthRealm) {
 		toSerialize["contextual_auth_realm"] = o.ContextualAuthRealm
 	}
-	if !isNil(o.CopyOwn) {
+	if !IsNil(o.CopyOwn) {
 		toSerialize["copy_own"] = o.CopyOwn
 	}
-	if !isNil(o.CopyPackages) {
+	if !IsNil(o.CopyPackages) {
 		toSerialize["copy_packages"] = o.CopyPackages
 	}
-	if !isNil(o.CreatedAt) {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if !isNil(o.DefaultPrivilege) {
+	if !IsNil(o.DefaultPrivilege) {
 		toSerialize["default_privilege"] = o.DefaultPrivilege
 	}
-	if !isNil(o.DeleteOwn) {
+	if !IsNil(o.DeleteOwn) {
 		toSerialize["delete_own"] = o.DeleteOwn
 	}
-	if !isNil(o.DeletePackages) {
+	if !IsNil(o.DeletePackages) {
 		toSerialize["delete_packages"] = o.DeletePackages
 	}
 	if o.DeletedAt.IsSet() {
 		toSerialize["deleted_at"] = o.DeletedAt.Get()
 	}
-	if !isNil(o.Description) {
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !isNil(o.Distributes) {
+	if !IsNil(o.Distributes) {
 		toSerialize["distributes"] = o.Distributes
 	}
-	if !isNil(o.DockerRefreshTokensEnabled) {
+	if !IsNil(o.DockerRefreshTokensEnabled) {
 		toSerialize["docker_refresh_tokens_enabled"] = o.DockerRefreshTokensEnabled
 	}
-	if !isNil(o.GpgKeys) {
+	if !IsNil(o.GpgKeys) {
 		toSerialize["gpg_keys"] = o.GpgKeys
 	}
-	if !isNil(o.IndexFiles) {
+	if !IsNil(o.IndexFiles) {
 		toSerialize["index_files"] = o.IndexFiles
 	}
-	if !isNil(o.IsOpenSource) {
+	if !IsNil(o.IsOpenSource) {
 		toSerialize["is_open_source"] = o.IsOpenSource
 	}
-	if !isNil(o.IsPrivate) {
+	if !IsNil(o.IsPrivate) {
 		toSerialize["is_private"] = o.IsPrivate
 	}
-	if !isNil(o.IsPublic) {
+	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
-	if !isNil(o.MoveOwn) {
+	if !IsNil(o.MoveOwn) {
 		toSerialize["move_own"] = o.MoveOwn
 	}
-	if !isNil(o.MovePackages) {
+	if !IsNil(o.MovePackages) {
 		toSerialize["move_packages"] = o.MovePackages
 	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Namespace) {
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Namespace) {
 		toSerialize["namespace"] = o.Namespace
 	}
-	if !isNil(o.NamespaceUrl) {
+	if !IsNil(o.NamespaceUrl) {
 		toSerialize["namespace_url"] = o.NamespaceUrl
 	}
-	if !isNil(o.NumDownloads) {
+	if !IsNil(o.NumDownloads) {
 		toSerialize["num_downloads"] = o.NumDownloads
 	}
-	if !isNil(o.PackageCount) {
+	if !IsNil(o.PackageCount) {
 		toSerialize["package_count"] = o.PackageCount
 	}
-	if !isNil(o.PackageGroupCount) {
+	if !IsNil(o.PackageGroupCount) {
 		toSerialize["package_group_count"] = o.PackageGroupCount
 	}
-	if !isNil(o.ProxyNpmjs) {
+	if !IsNil(o.ProxyNpmjs) {
 		toSerialize["proxy_npmjs"] = o.ProxyNpmjs
 	}
-	if !isNil(o.ProxyPypi) {
+	if !IsNil(o.ProxyPypi) {
 		toSerialize["proxy_pypi"] = o.ProxyPypi
 	}
-	if !isNil(o.RawPackageIndexEnabled) {
+	if !IsNil(o.RawPackageIndexEnabled) {
 		toSerialize["raw_package_index_enabled"] = o.RawPackageIndexEnabled
 	}
-	if !isNil(o.RawPackageIndexSignaturesEnabled) {
+	if !IsNil(o.RawPackageIndexSignaturesEnabled) {
 		toSerialize["raw_package_index_signatures_enabled"] = o.RawPackageIndexSignaturesEnabled
 	}
-	if !isNil(o.ReplacePackages) {
+	if !IsNil(o.ReplacePackages) {
 		toSerialize["replace_packages"] = o.ReplacePackages
 	}
-	if !isNil(o.ReplacePackagesByDefault) {
+	if !IsNil(o.ReplacePackagesByDefault) {
 		toSerialize["replace_packages_by_default"] = o.ReplacePackagesByDefault
 	}
-	if !isNil(o.RepositoryType) {
+	if !IsNil(o.RepositoryType) {
 		toSerialize["repository_type"] = o.RepositoryType
 	}
-	if !isNil(o.RepositoryTypeStr) {
+	if !IsNil(o.RepositoryTypeStr) {
 		toSerialize["repository_type_str"] = o.RepositoryTypeStr
 	}
-	if !isNil(o.ResyncOwn) {
+	if !IsNil(o.ResyncOwn) {
 		toSerialize["resync_own"] = o.ResyncOwn
 	}
-	if !isNil(o.ResyncPackages) {
+	if !IsNil(o.ResyncPackages) {
 		toSerialize["resync_packages"] = o.ResyncPackages
 	}
-	if !isNil(o.ScanOwn) {
+	if !IsNil(o.ScanOwn) {
 		toSerialize["scan_own"] = o.ScanOwn
 	}
-	if !isNil(o.ScanPackages) {
+	if !IsNil(o.ScanPackages) {
 		toSerialize["scan_packages"] = o.ScanPackages
 	}
-	if !isNil(o.SelfHtmlUrl) {
+	if !IsNil(o.SelfHtmlUrl) {
 		toSerialize["self_html_url"] = o.SelfHtmlUrl
 	}
-	if !isNil(o.SelfUrl) {
+	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
-	if !isNil(o.ShowSetupAll) {
+	if !IsNil(o.ShowSetupAll) {
 		toSerialize["show_setup_all"] = o.ShowSetupAll
 	}
-	if !isNil(o.Size) {
+	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
-	if !isNil(o.SizeStr) {
+	if !IsNil(o.SizeStr) {
 		toSerialize["size_str"] = o.SizeStr
 	}
-	if !isNil(o.Slug) {
+	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
-	if !isNil(o.StorageRegion) {
+	if !IsNil(o.StorageRegion) {
 		toSerialize["storage_region"] = o.StorageRegion
 	}
-	if !isNil(o.StrictNpmValidation) {
+	if !IsNil(o.StrictNpmValidation) {
 		toSerialize["strict_npm_validation"] = o.StrictNpmValidation
 	}
-	if !isNil(o.UseDebianLabels) {
+	if !IsNil(o.UseDebianLabels) {
 		toSerialize["use_debian_labels"] = o.UseDebianLabels
 	}
-	if !isNil(o.UseDefaultCargoUpstream) {
+	if !IsNil(o.UseDefaultCargoUpstream) {
 		toSerialize["use_default_cargo_upstream"] = o.UseDefaultCargoUpstream
 	}
-	if !isNil(o.UseNoarchPackages) {
+	if !IsNil(o.UseNoarchPackages) {
 		toSerialize["use_noarch_packages"] = o.UseNoarchPackages
 	}
-	if !isNil(o.UseSourcePackages) {
+	if !IsNil(o.UseSourcePackages) {
 		toSerialize["use_source_packages"] = o.UseSourcePackages
 	}
-	if !isNil(o.UseVulnerabilityScanning) {
+	if !IsNil(o.UseVulnerabilityScanning) {
 		toSerialize["use_vulnerability_scanning"] = o.UseVulnerabilityScanning
 	}
-	if !isNil(o.UserEntitlementsEnabled) {
+	if !IsNil(o.UserEntitlementsEnabled) {
 		toSerialize["user_entitlements_enabled"] = o.UserEntitlementsEnabled
 	}
-	if !isNil(o.ViewStatistics) {
+	if !IsNil(o.ViewStatistics) {
 		toSerialize["view_statistics"] = o.ViewStatistics
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableRepositoryCreate struct {

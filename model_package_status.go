@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the PackageStatus type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageStatus{}
 
 // PackageStatus struct for PackageStatus
 type PackageStatus struct {
@@ -63,7 +66,7 @@ func NewPackageStatusWithDefaults() *PackageStatus {
 
 // GetIsDownloadable returns the IsDownloadable field value if set, zero value otherwise.
 func (o *PackageStatus) GetIsDownloadable() bool {
-	if o == nil || isNil(o.IsDownloadable) {
+	if o == nil || IsNil(o.IsDownloadable) {
 		var ret bool
 		return ret
 	}
@@ -73,7 +76,7 @@ func (o *PackageStatus) GetIsDownloadable() bool {
 // GetIsDownloadableOk returns a tuple with the IsDownloadable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetIsDownloadableOk() (*bool, bool) {
-	if o == nil || isNil(o.IsDownloadable) {
+	if o == nil || IsNil(o.IsDownloadable) {
 		return nil, false
 	}
 	return o.IsDownloadable, true
@@ -81,7 +84,7 @@ func (o *PackageStatus) GetIsDownloadableOk() (*bool, bool) {
 
 // HasIsDownloadable returns a boolean if a field has been set.
 func (o *PackageStatus) HasIsDownloadable() bool {
-	if o != nil && !isNil(o.IsDownloadable) {
+	if o != nil && !IsNil(o.IsDownloadable) {
 		return true
 	}
 
@@ -95,7 +98,7 @@ func (o *PackageStatus) SetIsDownloadable(v bool) {
 
 // GetIsQuarantined returns the IsQuarantined field value if set, zero value otherwise.
 func (o *PackageStatus) GetIsQuarantined() bool {
-	if o == nil || isNil(o.IsQuarantined) {
+	if o == nil || IsNil(o.IsQuarantined) {
 		var ret bool
 		return ret
 	}
@@ -105,7 +108,7 @@ func (o *PackageStatus) GetIsQuarantined() bool {
 // GetIsQuarantinedOk returns a tuple with the IsQuarantined field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetIsQuarantinedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsQuarantined) {
+	if o == nil || IsNil(o.IsQuarantined) {
 		return nil, false
 	}
 	return o.IsQuarantined, true
@@ -113,7 +116,7 @@ func (o *PackageStatus) GetIsQuarantinedOk() (*bool, bool) {
 
 // HasIsQuarantined returns a boolean if a field has been set.
 func (o *PackageStatus) HasIsQuarantined() bool {
-	if o != nil && !isNil(o.IsQuarantined) {
+	if o != nil && !IsNil(o.IsQuarantined) {
 		return true
 	}
 
@@ -127,7 +130,7 @@ func (o *PackageStatus) SetIsQuarantined(v bool) {
 
 // GetIsSyncAwaiting returns the IsSyncAwaiting field value if set, zero value otherwise.
 func (o *PackageStatus) GetIsSyncAwaiting() bool {
-	if o == nil || isNil(o.IsSyncAwaiting) {
+	if o == nil || IsNil(o.IsSyncAwaiting) {
 		var ret bool
 		return ret
 	}
@@ -137,7 +140,7 @@ func (o *PackageStatus) GetIsSyncAwaiting() bool {
 // GetIsSyncAwaitingOk returns a tuple with the IsSyncAwaiting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetIsSyncAwaitingOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncAwaiting) {
+	if o == nil || IsNil(o.IsSyncAwaiting) {
 		return nil, false
 	}
 	return o.IsSyncAwaiting, true
@@ -145,7 +148,7 @@ func (o *PackageStatus) GetIsSyncAwaitingOk() (*bool, bool) {
 
 // HasIsSyncAwaiting returns a boolean if a field has been set.
 func (o *PackageStatus) HasIsSyncAwaiting() bool {
-	if o != nil && !isNil(o.IsSyncAwaiting) {
+	if o != nil && !IsNil(o.IsSyncAwaiting) {
 		return true
 	}
 
@@ -159,7 +162,7 @@ func (o *PackageStatus) SetIsSyncAwaiting(v bool) {
 
 // GetIsSyncCompleted returns the IsSyncCompleted field value if set, zero value otherwise.
 func (o *PackageStatus) GetIsSyncCompleted() bool {
-	if o == nil || isNil(o.IsSyncCompleted) {
+	if o == nil || IsNil(o.IsSyncCompleted) {
 		var ret bool
 		return ret
 	}
@@ -169,7 +172,7 @@ func (o *PackageStatus) GetIsSyncCompleted() bool {
 // GetIsSyncCompletedOk returns a tuple with the IsSyncCompleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetIsSyncCompletedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncCompleted) {
+	if o == nil || IsNil(o.IsSyncCompleted) {
 		return nil, false
 	}
 	return o.IsSyncCompleted, true
@@ -177,7 +180,7 @@ func (o *PackageStatus) GetIsSyncCompletedOk() (*bool, bool) {
 
 // HasIsSyncCompleted returns a boolean if a field has been set.
 func (o *PackageStatus) HasIsSyncCompleted() bool {
-	if o != nil && !isNil(o.IsSyncCompleted) {
+	if o != nil && !IsNil(o.IsSyncCompleted) {
 		return true
 	}
 
@@ -191,7 +194,7 @@ func (o *PackageStatus) SetIsSyncCompleted(v bool) {
 
 // GetIsSyncFailed returns the IsSyncFailed field value if set, zero value otherwise.
 func (o *PackageStatus) GetIsSyncFailed() bool {
-	if o == nil || isNil(o.IsSyncFailed) {
+	if o == nil || IsNil(o.IsSyncFailed) {
 		var ret bool
 		return ret
 	}
@@ -201,7 +204,7 @@ func (o *PackageStatus) GetIsSyncFailed() bool {
 // GetIsSyncFailedOk returns a tuple with the IsSyncFailed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetIsSyncFailedOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncFailed) {
+	if o == nil || IsNil(o.IsSyncFailed) {
 		return nil, false
 	}
 	return o.IsSyncFailed, true
@@ -209,7 +212,7 @@ func (o *PackageStatus) GetIsSyncFailedOk() (*bool, bool) {
 
 // HasIsSyncFailed returns a boolean if a field has been set.
 func (o *PackageStatus) HasIsSyncFailed() bool {
-	if o != nil && !isNil(o.IsSyncFailed) {
+	if o != nil && !IsNil(o.IsSyncFailed) {
 		return true
 	}
 
@@ -223,7 +226,7 @@ func (o *PackageStatus) SetIsSyncFailed(v bool) {
 
 // GetIsSyncInFlight returns the IsSyncInFlight field value if set, zero value otherwise.
 func (o *PackageStatus) GetIsSyncInFlight() bool {
-	if o == nil || isNil(o.IsSyncInFlight) {
+	if o == nil || IsNil(o.IsSyncInFlight) {
 		var ret bool
 		return ret
 	}
@@ -233,7 +236,7 @@ func (o *PackageStatus) GetIsSyncInFlight() bool {
 // GetIsSyncInFlightOk returns a tuple with the IsSyncInFlight field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetIsSyncInFlightOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncInFlight) {
+	if o == nil || IsNil(o.IsSyncInFlight) {
 		return nil, false
 	}
 	return o.IsSyncInFlight, true
@@ -241,7 +244,7 @@ func (o *PackageStatus) GetIsSyncInFlightOk() (*bool, bool) {
 
 // HasIsSyncInFlight returns a boolean if a field has been set.
 func (o *PackageStatus) HasIsSyncInFlight() bool {
-	if o != nil && !isNil(o.IsSyncInFlight) {
+	if o != nil && !IsNil(o.IsSyncInFlight) {
 		return true
 	}
 
@@ -255,7 +258,7 @@ func (o *PackageStatus) SetIsSyncInFlight(v bool) {
 
 // GetIsSyncInProgress returns the IsSyncInProgress field value if set, zero value otherwise.
 func (o *PackageStatus) GetIsSyncInProgress() bool {
-	if o == nil || isNil(o.IsSyncInProgress) {
+	if o == nil || IsNil(o.IsSyncInProgress) {
 		var ret bool
 		return ret
 	}
@@ -265,7 +268,7 @@ func (o *PackageStatus) GetIsSyncInProgress() bool {
 // GetIsSyncInProgressOk returns a tuple with the IsSyncInProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetIsSyncInProgressOk() (*bool, bool) {
-	if o == nil || isNil(o.IsSyncInProgress) {
+	if o == nil || IsNil(o.IsSyncInProgress) {
 		return nil, false
 	}
 	return o.IsSyncInProgress, true
@@ -273,7 +276,7 @@ func (o *PackageStatus) GetIsSyncInProgressOk() (*bool, bool) {
 
 // HasIsSyncInProgress returns a boolean if a field has been set.
 func (o *PackageStatus) HasIsSyncInProgress() bool {
-	if o != nil && !isNil(o.IsSyncInProgress) {
+	if o != nil && !IsNil(o.IsSyncInProgress) {
 		return true
 	}
 
@@ -287,7 +290,7 @@ func (o *PackageStatus) SetIsSyncInProgress(v bool) {
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
 func (o *PackageStatus) GetSelfUrl() string {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		var ret string
 		return ret
 	}
@@ -297,7 +300,7 @@ func (o *PackageStatus) GetSelfUrl() string {
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetSelfUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		return nil, false
 	}
 	return o.SelfUrl, true
@@ -305,7 +308,7 @@ func (o *PackageStatus) GetSelfUrlOk() (*string, bool) {
 
 // HasSelfUrl returns a boolean if a field has been set.
 func (o *PackageStatus) HasSelfUrl() bool {
-	if o != nil && !isNil(o.SelfUrl) {
+	if o != nil && !IsNil(o.SelfUrl) {
 		return true
 	}
 
@@ -319,7 +322,7 @@ func (o *PackageStatus) SetSelfUrl(v string) {
 
 // GetStage returns the Stage field value if set, zero value otherwise.
 func (o *PackageStatus) GetStage() int64 {
-	if o == nil || isNil(o.Stage) {
+	if o == nil || IsNil(o.Stage) {
 		var ret int64
 		return ret
 	}
@@ -329,7 +332,7 @@ func (o *PackageStatus) GetStage() int64 {
 // GetStageOk returns a tuple with the Stage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetStageOk() (*int64, bool) {
-	if o == nil || isNil(o.Stage) {
+	if o == nil || IsNil(o.Stage) {
 		return nil, false
 	}
 	return o.Stage, true
@@ -337,7 +340,7 @@ func (o *PackageStatus) GetStageOk() (*int64, bool) {
 
 // HasStage returns a boolean if a field has been set.
 func (o *PackageStatus) HasStage() bool {
-	if o != nil && !isNil(o.Stage) {
+	if o != nil && !IsNil(o.Stage) {
 		return true
 	}
 
@@ -351,7 +354,7 @@ func (o *PackageStatus) SetStage(v int64) {
 
 // GetStageStr returns the StageStr field value if set, zero value otherwise.
 func (o *PackageStatus) GetStageStr() string {
-	if o == nil || isNil(o.StageStr) {
+	if o == nil || IsNil(o.StageStr) {
 		var ret string
 		return ret
 	}
@@ -361,7 +364,7 @@ func (o *PackageStatus) GetStageStr() string {
 // GetStageStrOk returns a tuple with the StageStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetStageStrOk() (*string, bool) {
-	if o == nil || isNil(o.StageStr) {
+	if o == nil || IsNil(o.StageStr) {
 		return nil, false
 	}
 	return o.StageStr, true
@@ -369,7 +372,7 @@ func (o *PackageStatus) GetStageStrOk() (*string, bool) {
 
 // HasStageStr returns a boolean if a field has been set.
 func (o *PackageStatus) HasStageStr() bool {
-	if o != nil && !isNil(o.StageStr) {
+	if o != nil && !IsNil(o.StageStr) {
 		return true
 	}
 
@@ -383,7 +386,7 @@ func (o *PackageStatus) SetStageStr(v string) {
 
 // GetStageUpdatedAt returns the StageUpdatedAt field value if set, zero value otherwise.
 func (o *PackageStatus) GetStageUpdatedAt() time.Time {
-	if o == nil || isNil(o.StageUpdatedAt) {
+	if o == nil || IsNil(o.StageUpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -393,7 +396,7 @@ func (o *PackageStatus) GetStageUpdatedAt() time.Time {
 // GetStageUpdatedAtOk returns a tuple with the StageUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetStageUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.StageUpdatedAt) {
+	if o == nil || IsNil(o.StageUpdatedAt) {
 		return nil, false
 	}
 	return o.StageUpdatedAt, true
@@ -401,7 +404,7 @@ func (o *PackageStatus) GetStageUpdatedAtOk() (*time.Time, bool) {
 
 // HasStageUpdatedAt returns a boolean if a field has been set.
 func (o *PackageStatus) HasStageUpdatedAt() bool {
-	if o != nil && !isNil(o.StageUpdatedAt) {
+	if o != nil && !IsNil(o.StageUpdatedAt) {
 		return true
 	}
 
@@ -415,7 +418,7 @@ func (o *PackageStatus) SetStageUpdatedAt(v time.Time) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *PackageStatus) GetStatus() int64 {
-	if o == nil || isNil(o.Status) {
+	if o == nil || IsNil(o.Status) {
 		var ret int64
 		return ret
 	}
@@ -425,7 +428,7 @@ func (o *PackageStatus) GetStatus() int64 {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetStatusOk() (*int64, bool) {
-	if o == nil || isNil(o.Status) {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -433,7 +436,7 @@ func (o *PackageStatus) GetStatusOk() (*int64, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *PackageStatus) HasStatus() bool {
-	if o != nil && !isNil(o.Status) {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -447,7 +450,7 @@ func (o *PackageStatus) SetStatus(v int64) {
 
 // GetStatusReason returns the StatusReason field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageStatus) GetStatusReason() string {
-	if o == nil || isNil(o.StatusReason.Get()) {
+	if o == nil || IsNil(o.StatusReason.Get()) {
 		var ret string
 		return ret
 	}
@@ -490,7 +493,7 @@ func (o *PackageStatus) UnsetStatusReason() {
 
 // GetStatusStr returns the StatusStr field value if set, zero value otherwise.
 func (o *PackageStatus) GetStatusStr() string {
-	if o == nil || isNil(o.StatusStr) {
+	if o == nil || IsNil(o.StatusStr) {
 		var ret string
 		return ret
 	}
@@ -500,7 +503,7 @@ func (o *PackageStatus) GetStatusStr() string {
 // GetStatusStrOk returns a tuple with the StatusStr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetStatusStrOk() (*string, bool) {
-	if o == nil || isNil(o.StatusStr) {
+	if o == nil || IsNil(o.StatusStr) {
 		return nil, false
 	}
 	return o.StatusStr, true
@@ -508,7 +511,7 @@ func (o *PackageStatus) GetStatusStrOk() (*string, bool) {
 
 // HasStatusStr returns a boolean if a field has been set.
 func (o *PackageStatus) HasStatusStr() bool {
-	if o != nil && !isNil(o.StatusStr) {
+	if o != nil && !IsNil(o.StatusStr) {
 		return true
 	}
 
@@ -522,7 +525,7 @@ func (o *PackageStatus) SetStatusStr(v string) {
 
 // GetStatusUpdatedAt returns the StatusUpdatedAt field value if set, zero value otherwise.
 func (o *PackageStatus) GetStatusUpdatedAt() time.Time {
-	if o == nil || isNil(o.StatusUpdatedAt) {
+	if o == nil || IsNil(o.StatusUpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -532,7 +535,7 @@ func (o *PackageStatus) GetStatusUpdatedAt() time.Time {
 // GetStatusUpdatedAtOk returns a tuple with the StatusUpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetStatusUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.StatusUpdatedAt) {
+	if o == nil || IsNil(o.StatusUpdatedAt) {
 		return nil, false
 	}
 	return o.StatusUpdatedAt, true
@@ -540,7 +543,7 @@ func (o *PackageStatus) GetStatusUpdatedAtOk() (*time.Time, bool) {
 
 // HasStatusUpdatedAt returns a boolean if a field has been set.
 func (o *PackageStatus) HasStatusUpdatedAt() bool {
-	if o != nil && !isNil(o.StatusUpdatedAt) {
+	if o != nil && !IsNil(o.StatusUpdatedAt) {
 		return true
 	}
 
@@ -554,7 +557,7 @@ func (o *PackageStatus) SetStatusUpdatedAt(v time.Time) {
 
 // GetSyncFinishedAt returns the SyncFinishedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageStatus) GetSyncFinishedAt() time.Time {
-	if o == nil || isNil(o.SyncFinishedAt.Get()) {
+	if o == nil || IsNil(o.SyncFinishedAt.Get()) {
 		var ret time.Time
 		return ret
 	}
@@ -597,7 +600,7 @@ func (o *PackageStatus) UnsetSyncFinishedAt() {
 
 // GetSyncProgress returns the SyncProgress field value if set, zero value otherwise.
 func (o *PackageStatus) GetSyncProgress() int64 {
-	if o == nil || isNil(o.SyncProgress) {
+	if o == nil || IsNil(o.SyncProgress) {
 		var ret int64
 		return ret
 	}
@@ -607,7 +610,7 @@ func (o *PackageStatus) GetSyncProgress() int64 {
 // GetSyncProgressOk returns a tuple with the SyncProgress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageStatus) GetSyncProgressOk() (*int64, bool) {
-	if o == nil || isNil(o.SyncProgress) {
+	if o == nil || IsNil(o.SyncProgress) {
 		return nil, false
 	}
 	return o.SyncProgress, true
@@ -615,7 +618,7 @@ func (o *PackageStatus) GetSyncProgressOk() (*int64, bool) {
 
 // HasSyncProgress returns a boolean if a field has been set.
 func (o *PackageStatus) HasSyncProgress() bool {
-	if o != nil && !isNil(o.SyncProgress) {
+	if o != nil && !IsNil(o.SyncProgress) {
 		return true
 	}
 
@@ -628,59 +631,67 @@ func (o *PackageStatus) SetSyncProgress(v int64) {
 }
 
 func (o PackageStatus) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PackageStatus) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.IsDownloadable) {
+	if !IsNil(o.IsDownloadable) {
 		toSerialize["is_downloadable"] = o.IsDownloadable
 	}
-	if !isNil(o.IsQuarantined) {
+	if !IsNil(o.IsQuarantined) {
 		toSerialize["is_quarantined"] = o.IsQuarantined
 	}
-	if !isNil(o.IsSyncAwaiting) {
+	if !IsNil(o.IsSyncAwaiting) {
 		toSerialize["is_sync_awaiting"] = o.IsSyncAwaiting
 	}
-	if !isNil(o.IsSyncCompleted) {
+	if !IsNil(o.IsSyncCompleted) {
 		toSerialize["is_sync_completed"] = o.IsSyncCompleted
 	}
-	if !isNil(o.IsSyncFailed) {
+	if !IsNil(o.IsSyncFailed) {
 		toSerialize["is_sync_failed"] = o.IsSyncFailed
 	}
-	if !isNil(o.IsSyncInFlight) {
+	if !IsNil(o.IsSyncInFlight) {
 		toSerialize["is_sync_in_flight"] = o.IsSyncInFlight
 	}
-	if !isNil(o.IsSyncInProgress) {
+	if !IsNil(o.IsSyncInProgress) {
 		toSerialize["is_sync_in_progress"] = o.IsSyncInProgress
 	}
-	if !isNil(o.SelfUrl) {
+	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
-	if !isNil(o.Stage) {
+	if !IsNil(o.Stage) {
 		toSerialize["stage"] = o.Stage
 	}
-	if !isNil(o.StageStr) {
+	if !IsNil(o.StageStr) {
 		toSerialize["stage_str"] = o.StageStr
 	}
-	if !isNil(o.StageUpdatedAt) {
+	if !IsNil(o.StageUpdatedAt) {
 		toSerialize["stage_updated_at"] = o.StageUpdatedAt
 	}
-	if !isNil(o.Status) {
+	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
 	if o.StatusReason.IsSet() {
 		toSerialize["status_reason"] = o.StatusReason.Get()
 	}
-	if !isNil(o.StatusStr) {
+	if !IsNil(o.StatusStr) {
 		toSerialize["status_str"] = o.StatusStr
 	}
-	if !isNil(o.StatusUpdatedAt) {
+	if !IsNil(o.StatusUpdatedAt) {
 		toSerialize["status_updated_at"] = o.StatusUpdatedAt
 	}
 	if o.SyncFinishedAt.IsSet() {
 		toSerialize["sync_finished_at"] = o.SyncFinishedAt.Get()
 	}
-	if !isNil(o.SyncProgress) {
+	if !IsNil(o.SyncProgress) {
 		toSerialize["sync_progress"] = o.SyncProgress
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePackageStatus struct {

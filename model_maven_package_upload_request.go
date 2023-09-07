@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the MavenPackageUploadRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MavenPackageUploadRequest{}
 
 // MavenPackageUploadRequest struct for MavenPackageUploadRequest
 type MavenPackageUploadRequest struct {
@@ -65,7 +68,7 @@ func NewMavenPackageUploadRequestWithDefaults() *MavenPackageUploadRequest {
 
 // GetArtifactId returns the ArtifactId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetArtifactId() string {
-	if o == nil || isNil(o.ArtifactId.Get()) {
+	if o == nil || IsNil(o.ArtifactId.Get()) {
 		var ret string
 		return ret
 	}
@@ -108,7 +111,7 @@ func (o *MavenPackageUploadRequest) UnsetArtifactId() {
 
 // GetGroupId returns the GroupId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetGroupId() string {
-	if o == nil || isNil(o.GroupId.Get()) {
+	if o == nil || IsNil(o.GroupId.Get()) {
 		var ret string
 		return ret
 	}
@@ -151,7 +154,7 @@ func (o *MavenPackageUploadRequest) UnsetGroupId() {
 
 // GetIvyFile returns the IvyFile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetIvyFile() string {
-	if o == nil || isNil(o.IvyFile.Get()) {
+	if o == nil || IsNil(o.IvyFile.Get()) {
 		var ret string
 		return ret
 	}
@@ -194,7 +197,7 @@ func (o *MavenPackageUploadRequest) UnsetIvyFile() {
 
 // GetJavadocFile returns the JavadocFile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetJavadocFile() string {
-	if o == nil || isNil(o.JavadocFile.Get()) {
+	if o == nil || IsNil(o.JavadocFile.Get()) {
 		var ret string
 		return ret
 	}
@@ -261,7 +264,7 @@ func (o *MavenPackageUploadRequest) SetPackageFile(v string) {
 
 // GetPackaging returns the Packaging field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetPackaging() string {
-	if o == nil || isNil(o.Packaging.Get()) {
+	if o == nil || IsNil(o.Packaging.Get()) {
 		var ret string
 		return ret
 	}
@@ -304,7 +307,7 @@ func (o *MavenPackageUploadRequest) UnsetPackaging() {
 
 // GetPomFile returns the PomFile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetPomFile() string {
-	if o == nil || isNil(o.PomFile.Get()) {
+	if o == nil || IsNil(o.PomFile.Get()) {
 		var ret string
 		return ret
 	}
@@ -347,7 +350,7 @@ func (o *MavenPackageUploadRequest) UnsetPomFile() {
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
 func (o *MavenPackageUploadRequest) GetRepublish() bool {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		var ret bool
 		return ret
 	}
@@ -357,7 +360,7 @@ func (o *MavenPackageUploadRequest) GetRepublish() bool {
 // GetRepublishOk returns a tuple with the Republish field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MavenPackageUploadRequest) GetRepublishOk() (*bool, bool) {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		return nil, false
 	}
 	return o.Republish, true
@@ -365,7 +368,7 @@ func (o *MavenPackageUploadRequest) GetRepublishOk() (*bool, bool) {
 
 // HasRepublish returns a boolean if a field has been set.
 func (o *MavenPackageUploadRequest) HasRepublish() bool {
-	if o != nil && !isNil(o.Republish) {
+	if o != nil && !IsNil(o.Republish) {
 		return true
 	}
 
@@ -379,7 +382,7 @@ func (o *MavenPackageUploadRequest) SetRepublish(v bool) {
 
 // GetSbtVersion returns the SbtVersion field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetSbtVersion() string {
-	if o == nil || isNil(o.SbtVersion.Get()) {
+	if o == nil || IsNil(o.SbtVersion.Get()) {
 		var ret string
 		return ret
 	}
@@ -422,7 +425,7 @@ func (o *MavenPackageUploadRequest) UnsetSbtVersion() {
 
 // GetScalaVersion returns the ScalaVersion field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetScalaVersion() string {
-	if o == nil || isNil(o.ScalaVersion.Get()) {
+	if o == nil || IsNil(o.ScalaVersion.Get()) {
 		var ret string
 		return ret
 	}
@@ -465,7 +468,7 @@ func (o *MavenPackageUploadRequest) UnsetScalaVersion() {
 
 // GetSourcesFile returns the SourcesFile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetSourcesFile() string {
-	if o == nil || isNil(o.SourcesFile.Get()) {
+	if o == nil || IsNil(o.SourcesFile.Get()) {
 		var ret string
 		return ret
 	}
@@ -508,7 +511,7 @@ func (o *MavenPackageUploadRequest) UnsetSourcesFile() {
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetTags() string {
-	if o == nil || isNil(o.Tags.Get()) {
+	if o == nil || IsNil(o.Tags.Get()) {
 		var ret string
 		return ret
 	}
@@ -551,7 +554,7 @@ func (o *MavenPackageUploadRequest) UnsetTags() {
 
 // GetTestsFile returns the TestsFile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetTestsFile() string {
-	if o == nil || isNil(o.TestsFile.Get()) {
+	if o == nil || IsNil(o.TestsFile.Get()) {
 		var ret string
 		return ret
 	}
@@ -594,7 +597,7 @@ func (o *MavenPackageUploadRequest) UnsetTestsFile() {
 
 // GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MavenPackageUploadRequest) GetVersion() string {
-	if o == nil || isNil(o.Version.Get()) {
+	if o == nil || IsNil(o.Version.Get()) {
 		var ret string
 		return ret
 	}
@@ -636,6 +639,14 @@ func (o *MavenPackageUploadRequest) UnsetVersion() {
 }
 
 func (o MavenPackageUploadRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o MavenPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ArtifactId.IsSet() {
 		toSerialize["artifact_id"] = o.ArtifactId.Get()
@@ -649,16 +660,14 @@ func (o MavenPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	if o.JavadocFile.IsSet() {
 		toSerialize["javadoc_file"] = o.JavadocFile.Get()
 	}
-	if true {
-		toSerialize["package_file"] = o.PackageFile
-	}
+	toSerialize["package_file"] = o.PackageFile
 	if o.Packaging.IsSet() {
 		toSerialize["packaging"] = o.Packaging.Get()
 	}
 	if o.PomFile.IsSet() {
 		toSerialize["pom_file"] = o.PomFile.Get()
 	}
-	if !isNil(o.Republish) {
+	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
 	if o.SbtVersion.IsSet() {
@@ -679,7 +688,7 @@ func (o MavenPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableMavenPackageUploadRequest struct {

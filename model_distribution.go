@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the Distribution type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Distribution{}
 
 // Distribution The distributions supported by this package format
 type Distribution struct {
@@ -68,7 +71,7 @@ func (o *Distribution) SetName(v string) {
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
 func (o *Distribution) GetSelfUrl() string {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		var ret string
 		return ret
 	}
@@ -78,7 +81,7 @@ func (o *Distribution) GetSelfUrl() string {
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Distribution) GetSelfUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		return nil, false
 	}
 	return o.SelfUrl, true
@@ -86,7 +89,7 @@ func (o *Distribution) GetSelfUrlOk() (*string, bool) {
 
 // HasSelfUrl returns a boolean if a field has been set.
 func (o *Distribution) HasSelfUrl() bool {
-	if o != nil && !isNil(o.SelfUrl) {
+	if o != nil && !IsNil(o.SelfUrl) {
 		return true
 	}
 
@@ -100,7 +103,7 @@ func (o *Distribution) SetSelfUrl(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *Distribution) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -110,7 +113,7 @@ func (o *Distribution) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Distribution) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -118,7 +121,7 @@ func (o *Distribution) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *Distribution) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -132,7 +135,7 @@ func (o *Distribution) SetSlug(v string) {
 
 // GetVariants returns the Variants field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Distribution) GetVariants() string {
-	if o == nil || isNil(o.Variants.Get()) {
+	if o == nil || IsNil(o.Variants.Get()) {
 		var ret string
 		return ret
 	}
@@ -174,20 +177,26 @@ func (o *Distribution) UnsetVariants() {
 }
 
 func (o Distribution) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["name"] = o.Name
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
-	if !isNil(o.SelfUrl) {
+	return json.Marshal(toSerialize)
+}
+
+func (o Distribution) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["name"] = o.Name
+	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
-	if !isNil(o.Slug) {
+	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
 	if o.Variants.IsSet() {
 		toSerialize["variants"] = o.Variants.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableDistribution struct {

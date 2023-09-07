@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the StorageAllocatedLimit type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &StorageAllocatedLimit{}
 
 // StorageAllocatedLimit struct for StorageAllocatedLimit
 type StorageAllocatedLimit struct {
@@ -43,7 +46,7 @@ func NewStorageAllocatedLimitWithDefaults() *StorageAllocatedLimit {
 
 // GetConfigured returns the Configured field value if set, zero value otherwise.
 func (o *StorageAllocatedLimit) GetConfigured() string {
-	if o == nil || isNil(o.Configured) {
+	if o == nil || IsNil(o.Configured) {
 		var ret string
 		return ret
 	}
@@ -53,7 +56,7 @@ func (o *StorageAllocatedLimit) GetConfigured() string {
 // GetConfiguredOk returns a tuple with the Configured field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAllocatedLimit) GetConfiguredOk() (*string, bool) {
-	if o == nil || isNil(o.Configured) {
+	if o == nil || IsNil(o.Configured) {
 		return nil, false
 	}
 	return o.Configured, true
@@ -61,7 +64,7 @@ func (o *StorageAllocatedLimit) GetConfiguredOk() (*string, bool) {
 
 // HasConfigured returns a boolean if a field has been set.
 func (o *StorageAllocatedLimit) HasConfigured() bool {
-	if o != nil && !isNil(o.Configured) {
+	if o != nil && !IsNil(o.Configured) {
 		return true
 	}
 
@@ -75,7 +78,7 @@ func (o *StorageAllocatedLimit) SetConfigured(v string) {
 
 // GetPeak returns the Peak field value if set, zero value otherwise.
 func (o *StorageAllocatedLimit) GetPeak() string {
-	if o == nil || isNil(o.Peak) {
+	if o == nil || IsNil(o.Peak) {
 		var ret string
 		return ret
 	}
@@ -85,7 +88,7 @@ func (o *StorageAllocatedLimit) GetPeak() string {
 // GetPeakOk returns a tuple with the Peak field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAllocatedLimit) GetPeakOk() (*string, bool) {
-	if o == nil || isNil(o.Peak) {
+	if o == nil || IsNil(o.Peak) {
 		return nil, false
 	}
 	return o.Peak, true
@@ -93,7 +96,7 @@ func (o *StorageAllocatedLimit) GetPeakOk() (*string, bool) {
 
 // HasPeak returns a boolean if a field has been set.
 func (o *StorageAllocatedLimit) HasPeak() bool {
-	if o != nil && !isNil(o.Peak) {
+	if o != nil && !IsNil(o.Peak) {
 		return true
 	}
 
@@ -107,7 +110,7 @@ func (o *StorageAllocatedLimit) SetPeak(v string) {
 
 // GetPercentageUsed returns the PercentageUsed field value if set, zero value otherwise.
 func (o *StorageAllocatedLimit) GetPercentageUsed() string {
-	if o == nil || isNil(o.PercentageUsed) {
+	if o == nil || IsNil(o.PercentageUsed) {
 		var ret string
 		return ret
 	}
@@ -117,7 +120,7 @@ func (o *StorageAllocatedLimit) GetPercentageUsed() string {
 // GetPercentageUsedOk returns a tuple with the PercentageUsed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAllocatedLimit) GetPercentageUsedOk() (*string, bool) {
-	if o == nil || isNil(o.PercentageUsed) {
+	if o == nil || IsNil(o.PercentageUsed) {
 		return nil, false
 	}
 	return o.PercentageUsed, true
@@ -125,7 +128,7 @@ func (o *StorageAllocatedLimit) GetPercentageUsedOk() (*string, bool) {
 
 // HasPercentageUsed returns a boolean if a field has been set.
 func (o *StorageAllocatedLimit) HasPercentageUsed() bool {
-	if o != nil && !isNil(o.PercentageUsed) {
+	if o != nil && !IsNil(o.PercentageUsed) {
 		return true
 	}
 
@@ -139,7 +142,7 @@ func (o *StorageAllocatedLimit) SetPercentageUsed(v string) {
 
 // GetPlanLimit returns the PlanLimit field value if set, zero value otherwise.
 func (o *StorageAllocatedLimit) GetPlanLimit() string {
-	if o == nil || isNil(o.PlanLimit) {
+	if o == nil || IsNil(o.PlanLimit) {
 		var ret string
 		return ret
 	}
@@ -149,7 +152,7 @@ func (o *StorageAllocatedLimit) GetPlanLimit() string {
 // GetPlanLimitOk returns a tuple with the PlanLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAllocatedLimit) GetPlanLimitOk() (*string, bool) {
-	if o == nil || isNil(o.PlanLimit) {
+	if o == nil || IsNil(o.PlanLimit) {
 		return nil, false
 	}
 	return o.PlanLimit, true
@@ -157,7 +160,7 @@ func (o *StorageAllocatedLimit) GetPlanLimitOk() (*string, bool) {
 
 // HasPlanLimit returns a boolean if a field has been set.
 func (o *StorageAllocatedLimit) HasPlanLimit() bool {
-	if o != nil && !isNil(o.PlanLimit) {
+	if o != nil && !IsNil(o.PlanLimit) {
 		return true
 	}
 
@@ -171,7 +174,7 @@ func (o *StorageAllocatedLimit) SetPlanLimit(v string) {
 
 // GetUsed returns the Used field value if set, zero value otherwise.
 func (o *StorageAllocatedLimit) GetUsed() string {
-	if o == nil || isNil(o.Used) {
+	if o == nil || IsNil(o.Used) {
 		var ret string
 		return ret
 	}
@@ -181,7 +184,7 @@ func (o *StorageAllocatedLimit) GetUsed() string {
 // GetUsedOk returns a tuple with the Used field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageAllocatedLimit) GetUsedOk() (*string, bool) {
-	if o == nil || isNil(o.Used) {
+	if o == nil || IsNil(o.Used) {
 		return nil, false
 	}
 	return o.Used, true
@@ -189,7 +192,7 @@ func (o *StorageAllocatedLimit) GetUsedOk() (*string, bool) {
 
 // HasUsed returns a boolean if a field has been set.
 func (o *StorageAllocatedLimit) HasUsed() bool {
-	if o != nil && !isNil(o.Used) {
+	if o != nil && !IsNil(o.Used) {
 		return true
 	}
 
@@ -202,23 +205,31 @@ func (o *StorageAllocatedLimit) SetUsed(v string) {
 }
 
 func (o StorageAllocatedLimit) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Configured) {
-		toSerialize["configured"] = o.Configured
-	}
-	if !isNil(o.Peak) {
-		toSerialize["peak"] = o.Peak
-	}
-	if !isNil(o.PercentageUsed) {
-		toSerialize["percentage_used"] = o.PercentageUsed
-	}
-	if !isNil(o.PlanLimit) {
-		toSerialize["plan_limit"] = o.PlanLimit
-	}
-	if !isNil(o.Used) {
-		toSerialize["used"] = o.Used
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o StorageAllocatedLimit) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Configured) {
+		toSerialize["configured"] = o.Configured
+	}
+	if !IsNil(o.Peak) {
+		toSerialize["peak"] = o.Peak
+	}
+	if !IsNil(o.PercentageUsed) {
+		toSerialize["percentage_used"] = o.PercentageUsed
+	}
+	if !IsNil(o.PlanLimit) {
+		toSerialize["plan_limit"] = o.PlanLimit
+	}
+	if !IsNil(o.Used) {
+		toSerialize["used"] = o.Used
+	}
+	return toSerialize, nil
 }
 
 type NullableStorageAllocatedLimit struct {

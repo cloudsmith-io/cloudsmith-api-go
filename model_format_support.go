@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the FormatSupport type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &FormatSupport{}
 
 // FormatSupport A set of what the package format supports
 type FormatSupport struct {
@@ -172,23 +175,21 @@ func (o *FormatSupport) SetVersioning(v bool) {
 }
 
 func (o FormatSupport) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["dependencies"] = o.Dependencies
-	}
-	if true {
-		toSerialize["distributions"] = o.Distributions
-	}
-	if true {
-		toSerialize["file_lists"] = o.FileLists
-	}
-	if true {
-		toSerialize["metadata"] = o.Metadata
-	}
-	if true {
-		toSerialize["versioning"] = o.Versioning
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o FormatSupport) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["dependencies"] = o.Dependencies
+	toSerialize["distributions"] = o.Distributions
+	toSerialize["file_lists"] = o.FileLists
+	toSerialize["metadata"] = o.Metadata
+	toSerialize["versioning"] = o.Versioning
+	return toSerialize, nil
 }
 
 type NullableFormatSupport struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the AllocatedLimitRaw type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AllocatedLimitRaw{}
 
 // AllocatedLimitRaw struct for AllocatedLimitRaw
 type AllocatedLimitRaw struct {
@@ -42,7 +45,7 @@ func NewAllocatedLimitRawWithDefaults() *AllocatedLimitRaw {
 
 // GetConfigured returns the Configured field value if set, zero value otherwise.
 func (o *AllocatedLimitRaw) GetConfigured() int64 {
-	if o == nil || isNil(o.Configured) {
+	if o == nil || IsNil(o.Configured) {
 		var ret int64
 		return ret
 	}
@@ -52,7 +55,7 @@ func (o *AllocatedLimitRaw) GetConfigured() int64 {
 // GetConfiguredOk returns a tuple with the Configured field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllocatedLimitRaw) GetConfiguredOk() (*int64, bool) {
-	if o == nil || isNil(o.Configured) {
+	if o == nil || IsNil(o.Configured) {
 		return nil, false
 	}
 	return o.Configured, true
@@ -60,7 +63,7 @@ func (o *AllocatedLimitRaw) GetConfiguredOk() (*int64, bool) {
 
 // HasConfigured returns a boolean if a field has been set.
 func (o *AllocatedLimitRaw) HasConfigured() bool {
-	if o != nil && !isNil(o.Configured) {
+	if o != nil && !IsNil(o.Configured) {
 		return true
 	}
 
@@ -74,7 +77,7 @@ func (o *AllocatedLimitRaw) SetConfigured(v int64) {
 
 // GetPercentageUsed returns the PercentageUsed field value if set, zero value otherwise.
 func (o *AllocatedLimitRaw) GetPercentageUsed() float64 {
-	if o == nil || isNil(o.PercentageUsed) {
+	if o == nil || IsNil(o.PercentageUsed) {
 		var ret float64
 		return ret
 	}
@@ -84,7 +87,7 @@ func (o *AllocatedLimitRaw) GetPercentageUsed() float64 {
 // GetPercentageUsedOk returns a tuple with the PercentageUsed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllocatedLimitRaw) GetPercentageUsedOk() (*float64, bool) {
-	if o == nil || isNil(o.PercentageUsed) {
+	if o == nil || IsNil(o.PercentageUsed) {
 		return nil, false
 	}
 	return o.PercentageUsed, true
@@ -92,7 +95,7 @@ func (o *AllocatedLimitRaw) GetPercentageUsedOk() (*float64, bool) {
 
 // HasPercentageUsed returns a boolean if a field has been set.
 func (o *AllocatedLimitRaw) HasPercentageUsed() bool {
-	if o != nil && !isNil(o.PercentageUsed) {
+	if o != nil && !IsNil(o.PercentageUsed) {
 		return true
 	}
 
@@ -106,7 +109,7 @@ func (o *AllocatedLimitRaw) SetPercentageUsed(v float64) {
 
 // GetPlanLimit returns the PlanLimit field value if set, zero value otherwise.
 func (o *AllocatedLimitRaw) GetPlanLimit() int64 {
-	if o == nil || isNil(o.PlanLimit) {
+	if o == nil || IsNil(o.PlanLimit) {
 		var ret int64
 		return ret
 	}
@@ -116,7 +119,7 @@ func (o *AllocatedLimitRaw) GetPlanLimit() int64 {
 // GetPlanLimitOk returns a tuple with the PlanLimit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllocatedLimitRaw) GetPlanLimitOk() (*int64, bool) {
-	if o == nil || isNil(o.PlanLimit) {
+	if o == nil || IsNil(o.PlanLimit) {
 		return nil, false
 	}
 	return o.PlanLimit, true
@@ -124,7 +127,7 @@ func (o *AllocatedLimitRaw) GetPlanLimitOk() (*int64, bool) {
 
 // HasPlanLimit returns a boolean if a field has been set.
 func (o *AllocatedLimitRaw) HasPlanLimit() bool {
-	if o != nil && !isNil(o.PlanLimit) {
+	if o != nil && !IsNil(o.PlanLimit) {
 		return true
 	}
 
@@ -138,7 +141,7 @@ func (o *AllocatedLimitRaw) SetPlanLimit(v int64) {
 
 // GetUsed returns the Used field value if set, zero value otherwise.
 func (o *AllocatedLimitRaw) GetUsed() int64 {
-	if o == nil || isNil(o.Used) {
+	if o == nil || IsNil(o.Used) {
 		var ret int64
 		return ret
 	}
@@ -148,7 +151,7 @@ func (o *AllocatedLimitRaw) GetUsed() int64 {
 // GetUsedOk returns a tuple with the Used field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AllocatedLimitRaw) GetUsedOk() (*int64, bool) {
-	if o == nil || isNil(o.Used) {
+	if o == nil || IsNil(o.Used) {
 		return nil, false
 	}
 	return o.Used, true
@@ -156,7 +159,7 @@ func (o *AllocatedLimitRaw) GetUsedOk() (*int64, bool) {
 
 // HasUsed returns a boolean if a field has been set.
 func (o *AllocatedLimitRaw) HasUsed() bool {
-	if o != nil && !isNil(o.Used) {
+	if o != nil && !IsNil(o.Used) {
 		return true
 	}
 
@@ -169,20 +172,28 @@ func (o *AllocatedLimitRaw) SetUsed(v int64) {
 }
 
 func (o AllocatedLimitRaw) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Configured) {
-		toSerialize["configured"] = o.Configured
-	}
-	if !isNil(o.PercentageUsed) {
-		toSerialize["percentage_used"] = o.PercentageUsed
-	}
-	if !isNil(o.PlanLimit) {
-		toSerialize["plan_limit"] = o.PlanLimit
-	}
-	if !isNil(o.Used) {
-		toSerialize["used"] = o.Used
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AllocatedLimitRaw) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Configured) {
+		toSerialize["configured"] = o.Configured
+	}
+	if !IsNil(o.PercentageUsed) {
+		toSerialize["percentage_used"] = o.PercentageUsed
+	}
+	if !IsNil(o.PlanLimit) {
+		toSerialize["plan_limit"] = o.PlanLimit
+	}
+	if !IsNil(o.Used) {
+		toSerialize["used"] = o.Used
+	}
+	return toSerialize, nil
 }
 
 type NullableAllocatedLimitRaw struct {

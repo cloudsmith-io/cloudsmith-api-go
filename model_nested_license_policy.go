@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the NestedLicensePolicy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NestedLicensePolicy{}
 
 // NestedLicensePolicy struct for NestedLicensePolicy
 type NestedLicensePolicy struct {
@@ -50,7 +53,7 @@ func NewNestedLicensePolicyWithDefaults() *NestedLicensePolicy {
 
 // GetAllowUnknownLicenses returns the AllowUnknownLicenses field value if set, zero value otherwise.
 func (o *NestedLicensePolicy) GetAllowUnknownLicenses() bool {
-	if o == nil || isNil(o.AllowUnknownLicenses) {
+	if o == nil || IsNil(o.AllowUnknownLicenses) {
 		var ret bool
 		return ret
 	}
@@ -60,7 +63,7 @@ func (o *NestedLicensePolicy) GetAllowUnknownLicenses() bool {
 // GetAllowUnknownLicensesOk returns a tuple with the AllowUnknownLicenses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NestedLicensePolicy) GetAllowUnknownLicensesOk() (*bool, bool) {
-	if o == nil || isNil(o.AllowUnknownLicenses) {
+	if o == nil || IsNil(o.AllowUnknownLicenses) {
 		return nil, false
 	}
 	return o.AllowUnknownLicenses, true
@@ -68,7 +71,7 @@ func (o *NestedLicensePolicy) GetAllowUnknownLicensesOk() (*bool, bool) {
 
 // HasAllowUnknownLicenses returns a boolean if a field has been set.
 func (o *NestedLicensePolicy) HasAllowUnknownLicenses() bool {
-	if o != nil && !isNil(o.AllowUnknownLicenses) {
+	if o != nil && !IsNil(o.AllowUnknownLicenses) {
 		return true
 	}
 
@@ -82,7 +85,7 @@ func (o *NestedLicensePolicy) SetAllowUnknownLicenses(v bool) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *NestedLicensePolicy) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *NestedLicensePolicy) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NestedLicensePolicy) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -100,7 +103,7 @@ func (o *NestedLicensePolicy) GetCreatedAtOk() (*time.Time, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *NestedLicensePolicy) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -114,7 +117,7 @@ func (o *NestedLicensePolicy) SetCreatedAt(v time.Time) {
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NestedLicensePolicy) GetDescription() string {
-	if o == nil || isNil(o.Description.Get()) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
@@ -157,7 +160,7 @@ func (o *NestedLicensePolicy) UnsetDescription() {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *NestedLicensePolicy) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -167,7 +170,7 @@ func (o *NestedLicensePolicy) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NestedLicensePolicy) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -175,7 +178,7 @@ func (o *NestedLicensePolicy) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *NestedLicensePolicy) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -189,7 +192,7 @@ func (o *NestedLicensePolicy) SetName(v string) {
 
 // GetOnViolationQuarantine returns the OnViolationQuarantine field value if set, zero value otherwise.
 func (o *NestedLicensePolicy) GetOnViolationQuarantine() bool {
-	if o == nil || isNil(o.OnViolationQuarantine) {
+	if o == nil || IsNil(o.OnViolationQuarantine) {
 		var ret bool
 		return ret
 	}
@@ -199,7 +202,7 @@ func (o *NestedLicensePolicy) GetOnViolationQuarantine() bool {
 // GetOnViolationQuarantineOk returns a tuple with the OnViolationQuarantine field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NestedLicensePolicy) GetOnViolationQuarantineOk() (*bool, bool) {
-	if o == nil || isNil(o.OnViolationQuarantine) {
+	if o == nil || IsNil(o.OnViolationQuarantine) {
 		return nil, false
 	}
 	return o.OnViolationQuarantine, true
@@ -207,7 +210,7 @@ func (o *NestedLicensePolicy) GetOnViolationQuarantineOk() (*bool, bool) {
 
 // HasOnViolationQuarantine returns a boolean if a field has been set.
 func (o *NestedLicensePolicy) HasOnViolationQuarantine() bool {
-	if o != nil && !isNil(o.OnViolationQuarantine) {
+	if o != nil && !IsNil(o.OnViolationQuarantine) {
 		return true
 	}
 
@@ -221,7 +224,7 @@ func (o *NestedLicensePolicy) SetOnViolationQuarantine(v bool) {
 
 // GetPackageQueryString returns the PackageQueryString field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NestedLicensePolicy) GetPackageQueryString() string {
-	if o == nil || isNil(o.PackageQueryString.Get()) {
+	if o == nil || IsNil(o.PackageQueryString.Get()) {
 		var ret string
 		return ret
 	}
@@ -264,7 +267,7 @@ func (o *NestedLicensePolicy) UnsetPackageQueryString() {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *NestedLicensePolicy) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -274,7 +277,7 @@ func (o *NestedLicensePolicy) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NestedLicensePolicy) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -282,7 +285,7 @@ func (o *NestedLicensePolicy) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *NestedLicensePolicy) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -320,7 +323,7 @@ func (o *NestedLicensePolicy) SetSpdxIdentifiers(v []string) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *NestedLicensePolicy) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -330,7 +333,7 @@ func (o *NestedLicensePolicy) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NestedLicensePolicy) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -338,7 +341,7 @@ func (o *NestedLicensePolicy) GetUpdatedAtOk() (*time.Time, bool) {
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *NestedLicensePolicy) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
+	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -352,7 +355,7 @@ func (o *NestedLicensePolicy) SetUpdatedAt(v time.Time) {
 
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *NestedLicensePolicy) GetUrl() string {
-	if o == nil || isNil(o.Url) {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
@@ -362,7 +365,7 @@ func (o *NestedLicensePolicy) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *NestedLicensePolicy) GetUrlOk() (*string, bool) {
-	if o == nil || isNil(o.Url) {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
 	return o.Url, true
@@ -370,7 +373,7 @@ func (o *NestedLicensePolicy) GetUrlOk() (*string, bool) {
 
 // HasUrl returns a boolean if a field has been set.
 func (o *NestedLicensePolicy) HasUrl() bool {
-	if o != nil && !isNil(o.Url) {
+	if o != nil && !IsNil(o.Url) {
 		return true
 	}
 
@@ -383,38 +386,44 @@ func (o *NestedLicensePolicy) SetUrl(v string) {
 }
 
 func (o NestedLicensePolicy) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o NestedLicensePolicy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.AllowUnknownLicenses) {
+	if !IsNil(o.AllowUnknownLicenses) {
 		toSerialize["allow_unknown_licenses"] = o.AllowUnknownLicenses
 	}
-	if !isNil(o.CreatedAt) {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.OnViolationQuarantine) {
+	if !IsNil(o.OnViolationQuarantine) {
 		toSerialize["on_violation_quarantine"] = o.OnViolationQuarantine
 	}
 	if o.PackageQueryString.IsSet() {
 		toSerialize["package_query_string"] = o.PackageQueryString.Get()
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
-	if true {
-		toSerialize["spdx_identifiers"] = o.SpdxIdentifiers
-	}
-	if !isNil(o.UpdatedAt) {
+	toSerialize["spdx_identifiers"] = o.SpdxIdentifiers
+	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
-	if !isNil(o.Url) {
+	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableNestedLicensePolicy struct {

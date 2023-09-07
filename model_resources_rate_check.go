@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the ResourcesRateCheck type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ResourcesRateCheck{}
 
 // ResourcesRateCheck struct for ResourcesRateCheck
 type ResourcesRateCheck struct {
@@ -40,7 +43,7 @@ func NewResourcesRateCheckWithDefaults() *ResourcesRateCheck {
 
 // GetResources returns the Resources field value if set, zero value otherwise.
 func (o *ResourcesRateCheck) GetResources() map[string]RateCheck {
-	if o == nil || isNil(o.Resources) {
+	if o == nil || IsNil(o.Resources) {
 		var ret map[string]RateCheck
 		return ret
 	}
@@ -50,7 +53,7 @@ func (o *ResourcesRateCheck) GetResources() map[string]RateCheck {
 // GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ResourcesRateCheck) GetResourcesOk() (*map[string]RateCheck, bool) {
-	if o == nil || isNil(o.Resources) {
+	if o == nil || IsNil(o.Resources) {
 		return nil, false
 	}
 	return o.Resources, true
@@ -58,7 +61,7 @@ func (o *ResourcesRateCheck) GetResourcesOk() (*map[string]RateCheck, bool) {
 
 // HasResources returns a boolean if a field has been set.
 func (o *ResourcesRateCheck) HasResources() bool {
-	if o != nil && !isNil(o.Resources) {
+	if o != nil && !IsNil(o.Resources) {
 		return true
 	}
 
@@ -71,11 +74,19 @@ func (o *ResourcesRateCheck) SetResources(v map[string]RateCheck) {
 }
 
 func (o ResourcesRateCheck) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Resources) {
-		toSerialize["resources"] = o.Resources
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ResourcesRateCheck) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Resources) {
+		toSerialize["resources"] = o.Resources
+	}
+	return toSerialize, nil
 }
 
 type NullableResourcesRateCheck struct {

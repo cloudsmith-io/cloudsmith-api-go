@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the PackageTagRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageTagRequest{}
 
 // PackageTagRequest struct for PackageTagRequest
 type PackageTagRequest struct {
@@ -51,7 +54,7 @@ func NewPackageTagRequestWithDefaults() *PackageTagRequest {
 
 // GetAction returns the Action field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageTagRequest) GetAction() string {
-	if o == nil || isNil(o.Action.Get()) {
+	if o == nil || IsNil(o.Action.Get()) {
 		var ret string
 		return ret
 	}
@@ -94,7 +97,7 @@ func (o *PackageTagRequest) UnsetAction() {
 
 // GetIsImmutable returns the IsImmutable field value if set, zero value otherwise.
 func (o *PackageTagRequest) GetIsImmutable() bool {
-	if o == nil || isNil(o.IsImmutable) {
+	if o == nil || IsNil(o.IsImmutable) {
 		var ret bool
 		return ret
 	}
@@ -104,7 +107,7 @@ func (o *PackageTagRequest) GetIsImmutable() bool {
 // GetIsImmutableOk returns a tuple with the IsImmutable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageTagRequest) GetIsImmutableOk() (*bool, bool) {
-	if o == nil || isNil(o.IsImmutable) {
+	if o == nil || IsNil(o.IsImmutable) {
 		return nil, false
 	}
 	return o.IsImmutable, true
@@ -112,7 +115,7 @@ func (o *PackageTagRequest) GetIsImmutableOk() (*bool, bool) {
 
 // HasIsImmutable returns a boolean if a field has been set.
 func (o *PackageTagRequest) HasIsImmutable() bool {
-	if o != nil && !isNil(o.IsImmutable) {
+	if o != nil && !IsNil(o.IsImmutable) {
 		return true
 	}
 
@@ -137,7 +140,7 @@ func (o *PackageTagRequest) GetTags() []string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageTagRequest) GetTagsOk() ([]string, bool) {
-	if o == nil || isNil(o.Tags) {
+	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
 	return o.Tags, true
@@ -145,7 +148,7 @@ func (o *PackageTagRequest) GetTagsOk() ([]string, bool) {
 
 // HasTags returns a boolean if a field has been set.
 func (o *PackageTagRequest) HasTags() bool {
-	if o != nil && isNil(o.Tags) {
+	if o != nil && IsNil(o.Tags) {
 		return true
 	}
 
@@ -158,17 +161,25 @@ func (o *PackageTagRequest) SetTags(v []string) {
 }
 
 func (o PackageTagRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PackageTagRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Action.IsSet() {
 		toSerialize["action"] = o.Action.Get()
 	}
-	if !isNil(o.IsImmutable) {
+	if !IsNil(o.IsImmutable) {
 		toSerialize["is_immutable"] = o.IsImmutable
 	}
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePackageTagRequest struct {

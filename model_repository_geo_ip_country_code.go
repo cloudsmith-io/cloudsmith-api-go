@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RepositoryGeoIpCountryCode type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryGeoIpCountryCode{}
 
 // RepositoryGeoIpCountryCode struct for RepositoryGeoIpCountryCode
 type RepositoryGeoIpCountryCode struct {
@@ -91,14 +94,18 @@ func (o *RepositoryGeoIpCountryCode) SetDeny(v []string) {
 }
 
 func (o RepositoryGeoIpCountryCode) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["allow"] = o.Allow
-	}
-	if true {
-		toSerialize["deny"] = o.Deny
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryGeoIpCountryCode) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["allow"] = o.Allow
+	toSerialize["deny"] = o.Deny
+	return toSerialize, nil
 }
 
 type NullableRepositoryGeoIpCountryCode struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the Organization type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Organization{}
 
 // Organization struct for Organization
 type Organization struct {
@@ -49,7 +52,7 @@ func NewOrganizationWithDefaults() *Organization {
 
 // GetCountry returns the Country field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Organization) GetCountry() string {
-	if o == nil || isNil(o.Country.Get()) {
+	if o == nil || IsNil(o.Country.Get()) {
 		var ret string
 		return ret
 	}
@@ -92,7 +95,7 @@ func (o *Organization) UnsetCountry() {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *Organization) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -102,7 +105,7 @@ func (o *Organization) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Organization) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -110,7 +113,7 @@ func (o *Organization) GetCreatedAtOk() (*time.Time, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *Organization) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -124,7 +127,7 @@ func (o *Organization) SetCreatedAt(v time.Time) {
 
 // GetLocation returns the Location field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Organization) GetLocation() string {
-	if o == nil || isNil(o.Location.Get()) {
+	if o == nil || IsNil(o.Location.Get()) {
 		var ret string
 		return ret
 	}
@@ -167,7 +170,7 @@ func (o *Organization) UnsetLocation() {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *Organization) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -177,7 +180,7 @@ func (o *Organization) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Organization) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -185,7 +188,7 @@ func (o *Organization) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *Organization) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -199,7 +202,7 @@ func (o *Organization) SetName(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *Organization) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -209,7 +212,7 @@ func (o *Organization) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Organization) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -217,7 +220,7 @@ func (o *Organization) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *Organization) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -231,7 +234,7 @@ func (o *Organization) SetSlug(v string) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *Organization) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -241,7 +244,7 @@ func (o *Organization) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Organization) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -249,7 +252,7 @@ func (o *Organization) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *Organization) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -263,7 +266,7 @@ func (o *Organization) SetSlugPerm(v string) {
 
 // GetTagline returns the Tagline field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Organization) GetTagline() string {
-	if o == nil || isNil(o.Tagline.Get()) {
+	if o == nil || IsNil(o.Tagline.Get()) {
 		var ret string
 		return ret
 	}
@@ -305,29 +308,37 @@ func (o *Organization) UnsetTagline() {
 }
 
 func (o Organization) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Organization) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Country.IsSet() {
 		toSerialize["country"] = o.Country.Get()
 	}
-	if !isNil(o.CreatedAt) {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
 	if o.Location.IsSet() {
 		toSerialize["location"] = o.Location.Get()
 	}
-	if !isNil(o.Name) {
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.Slug) {
+	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
 	if o.Tagline.IsSet() {
 		toSerialize["tagline"] = o.Tagline.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableOrganization struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the OrganizationPackageLicensePolicyRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OrganizationPackageLicensePolicyRequest{}
 
 // OrganizationPackageLicensePolicyRequest struct for OrganizationPackageLicensePolicyRequest
 type OrganizationPackageLicensePolicyRequest struct {
@@ -46,7 +49,7 @@ func NewOrganizationPackageLicensePolicyRequestWithDefaults() *OrganizationPacka
 
 // GetAllowUnknownLicenses returns the AllowUnknownLicenses field value if set, zero value otherwise.
 func (o *OrganizationPackageLicensePolicyRequest) GetAllowUnknownLicenses() bool {
-	if o == nil || isNil(o.AllowUnknownLicenses) {
+	if o == nil || IsNil(o.AllowUnknownLicenses) {
 		var ret bool
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *OrganizationPackageLicensePolicyRequest) GetAllowUnknownLicenses() bool
 // GetAllowUnknownLicensesOk returns a tuple with the AllowUnknownLicenses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationPackageLicensePolicyRequest) GetAllowUnknownLicensesOk() (*bool, bool) {
-	if o == nil || isNil(o.AllowUnknownLicenses) {
+	if o == nil || IsNil(o.AllowUnknownLicenses) {
 		return nil, false
 	}
 	return o.AllowUnknownLicenses, true
@@ -64,7 +67,7 @@ func (o *OrganizationPackageLicensePolicyRequest) GetAllowUnknownLicensesOk() (*
 
 // HasAllowUnknownLicenses returns a boolean if a field has been set.
 func (o *OrganizationPackageLicensePolicyRequest) HasAllowUnknownLicenses() bool {
-	if o != nil && !isNil(o.AllowUnknownLicenses) {
+	if o != nil && !IsNil(o.AllowUnknownLicenses) {
 		return true
 	}
 
@@ -78,7 +81,7 @@ func (o *OrganizationPackageLicensePolicyRequest) SetAllowUnknownLicenses(v bool
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OrganizationPackageLicensePolicyRequest) GetDescription() string {
-	if o == nil || isNil(o.Description.Get()) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
@@ -145,7 +148,7 @@ func (o *OrganizationPackageLicensePolicyRequest) SetName(v string) {
 
 // GetOnViolationQuarantine returns the OnViolationQuarantine field value if set, zero value otherwise.
 func (o *OrganizationPackageLicensePolicyRequest) GetOnViolationQuarantine() bool {
-	if o == nil || isNil(o.OnViolationQuarantine) {
+	if o == nil || IsNil(o.OnViolationQuarantine) {
 		var ret bool
 		return ret
 	}
@@ -155,7 +158,7 @@ func (o *OrganizationPackageLicensePolicyRequest) GetOnViolationQuarantine() boo
 // GetOnViolationQuarantineOk returns a tuple with the OnViolationQuarantine field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationPackageLicensePolicyRequest) GetOnViolationQuarantineOk() (*bool, bool) {
-	if o == nil || isNil(o.OnViolationQuarantine) {
+	if o == nil || IsNil(o.OnViolationQuarantine) {
 		return nil, false
 	}
 	return o.OnViolationQuarantine, true
@@ -163,7 +166,7 @@ func (o *OrganizationPackageLicensePolicyRequest) GetOnViolationQuarantineOk() (
 
 // HasOnViolationQuarantine returns a boolean if a field has been set.
 func (o *OrganizationPackageLicensePolicyRequest) HasOnViolationQuarantine() bool {
-	if o != nil && !isNil(o.OnViolationQuarantine) {
+	if o != nil && !IsNil(o.OnViolationQuarantine) {
 		return true
 	}
 
@@ -177,7 +180,7 @@ func (o *OrganizationPackageLicensePolicyRequest) SetOnViolationQuarantine(v boo
 
 // GetPackageQueryString returns the PackageQueryString field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OrganizationPackageLicensePolicyRequest) GetPackageQueryString() string {
-	if o == nil || isNil(o.PackageQueryString.Get()) {
+	if o == nil || IsNil(o.PackageQueryString.Get()) {
 		var ret string
 		return ret
 	}
@@ -243,26 +246,30 @@ func (o *OrganizationPackageLicensePolicyRequest) SetSpdxIdentifiers(v []string)
 }
 
 func (o OrganizationPackageLicensePolicyRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o OrganizationPackageLicensePolicyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.AllowUnknownLicenses) {
+	if !IsNil(o.AllowUnknownLicenses) {
 		toSerialize["allow_unknown_licenses"] = o.AllowUnknownLicenses
 	}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.OnViolationQuarantine) {
+	toSerialize["name"] = o.Name
+	if !IsNil(o.OnViolationQuarantine) {
 		toSerialize["on_violation_quarantine"] = o.OnViolationQuarantine
 	}
 	if o.PackageQueryString.IsSet() {
 		toSerialize["package_query_string"] = o.PackageQueryString.Get()
 	}
-	if true {
-		toSerialize["spdx_identifiers"] = o.SpdxIdentifiers
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["spdx_identifiers"] = o.SpdxIdentifiers
+	return toSerialize, nil
 }
 
 type NullableOrganizationPackageLicensePolicyRequest struct {

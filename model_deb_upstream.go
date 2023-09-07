@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the DebUpstream type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DebUpstream{}
 
 // DebUpstream struct for DebUpstream
 type DebUpstream struct {
@@ -88,7 +91,7 @@ func NewDebUpstreamWithDefaults() *DebUpstream {
 
 // GetAuthMode returns the AuthMode field value if set, zero value otherwise.
 func (o *DebUpstream) GetAuthMode() string {
-	if o == nil || isNil(o.AuthMode) {
+	if o == nil || IsNil(o.AuthMode) {
 		var ret string
 		return ret
 	}
@@ -98,7 +101,7 @@ func (o *DebUpstream) GetAuthMode() string {
 // GetAuthModeOk returns a tuple with the AuthMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstream) GetAuthModeOk() (*string, bool) {
-	if o == nil || isNil(o.AuthMode) {
+	if o == nil || IsNil(o.AuthMode) {
 		return nil, false
 	}
 	return o.AuthMode, true
@@ -106,7 +109,7 @@ func (o *DebUpstream) GetAuthModeOk() (*string, bool) {
 
 // HasAuthMode returns a boolean if a field has been set.
 func (o *DebUpstream) HasAuthMode() bool {
-	if o != nil && !isNil(o.AuthMode) {
+	if o != nil && !IsNil(o.AuthMode) {
 		return true
 	}
 
@@ -120,7 +123,7 @@ func (o *DebUpstream) SetAuthMode(v string) {
 
 // GetAuthSecret returns the AuthSecret field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstream) GetAuthSecret() string {
-	if o == nil || isNil(o.AuthSecret.Get()) {
+	if o == nil || IsNil(o.AuthSecret.Get()) {
 		var ret string
 		return ret
 	}
@@ -163,7 +166,7 @@ func (o *DebUpstream) UnsetAuthSecret() {
 
 // GetAuthUsername returns the AuthUsername field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstream) GetAuthUsername() string {
-	if o == nil || isNil(o.AuthUsername.Get()) {
+	if o == nil || IsNil(o.AuthUsername.Get()) {
 		var ret string
 		return ret
 	}
@@ -206,7 +209,7 @@ func (o *DebUpstream) UnsetAuthUsername() {
 
 // GetComponent returns the Component field value if set, zero value otherwise.
 func (o *DebUpstream) GetComponent() string {
-	if o == nil || isNil(o.Component) {
+	if o == nil || IsNil(o.Component) {
 		var ret string
 		return ret
 	}
@@ -216,7 +219,7 @@ func (o *DebUpstream) GetComponent() string {
 // GetComponentOk returns a tuple with the Component field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstream) GetComponentOk() (*string, bool) {
-	if o == nil || isNil(o.Component) {
+	if o == nil || IsNil(o.Component) {
 		return nil, false
 	}
 	return o.Component, true
@@ -224,7 +227,7 @@ func (o *DebUpstream) GetComponentOk() (*string, bool) {
 
 // HasComponent returns a boolean if a field has been set.
 func (o *DebUpstream) HasComponent() bool {
-	if o != nil && !isNil(o.Component) {
+	if o != nil && !IsNil(o.Component) {
 		return true
 	}
 
@@ -238,7 +241,7 @@ func (o *DebUpstream) SetComponent(v string) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *DebUpstream) GetCreatedAt() time.Time {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -248,7 +251,7 @@ func (o *DebUpstream) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstream) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedAt) {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -256,7 +259,7 @@ func (o *DebUpstream) GetCreatedAtOk() (*time.Time, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *DebUpstream) HasCreatedAt() bool {
-	if o != nil && !isNil(o.CreatedAt) {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -294,7 +297,7 @@ func (o *DebUpstream) SetDistroVersions(v []string) {
 
 // GetExtraHeader1 returns the ExtraHeader1 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstream) GetExtraHeader1() string {
-	if o == nil || isNil(o.ExtraHeader1.Get()) {
+	if o == nil || IsNil(o.ExtraHeader1.Get()) {
 		var ret string
 		return ret
 	}
@@ -337,7 +340,7 @@ func (o *DebUpstream) UnsetExtraHeader1() {
 
 // GetExtraHeader2 returns the ExtraHeader2 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstream) GetExtraHeader2() string {
-	if o == nil || isNil(o.ExtraHeader2.Get()) {
+	if o == nil || IsNil(o.ExtraHeader2.Get()) {
 		var ret string
 		return ret
 	}
@@ -380,7 +383,7 @@ func (o *DebUpstream) UnsetExtraHeader2() {
 
 // GetExtraValue1 returns the ExtraValue1 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstream) GetExtraValue1() string {
-	if o == nil || isNil(o.ExtraValue1.Get()) {
+	if o == nil || IsNil(o.ExtraValue1.Get()) {
 		var ret string
 		return ret
 	}
@@ -423,7 +426,7 @@ func (o *DebUpstream) UnsetExtraValue1() {
 
 // GetExtraValue2 returns the ExtraValue2 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstream) GetExtraValue2() string {
-	if o == nil || isNil(o.ExtraValue2.Get()) {
+	if o == nil || IsNil(o.ExtraValue2.Get()) {
 		var ret string
 		return ret
 	}
@@ -466,7 +469,7 @@ func (o *DebUpstream) UnsetExtraValue2() {
 
 // GetIncludeSources returns the IncludeSources field value if set, zero value otherwise.
 func (o *DebUpstream) GetIncludeSources() bool {
-	if o == nil || isNil(o.IncludeSources) {
+	if o == nil || IsNil(o.IncludeSources) {
 		var ret bool
 		return ret
 	}
@@ -476,7 +479,7 @@ func (o *DebUpstream) GetIncludeSources() bool {
 // GetIncludeSourcesOk returns a tuple with the IncludeSources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstream) GetIncludeSourcesOk() (*bool, bool) {
-	if o == nil || isNil(o.IncludeSources) {
+	if o == nil || IsNil(o.IncludeSources) {
 		return nil, false
 	}
 	return o.IncludeSources, true
@@ -484,7 +487,7 @@ func (o *DebUpstream) GetIncludeSourcesOk() (*bool, bool) {
 
 // HasIncludeSources returns a boolean if a field has been set.
 func (o *DebUpstream) HasIncludeSources() bool {
-	if o != nil && !isNil(o.IncludeSources) {
+	if o != nil && !IsNil(o.IncludeSources) {
 		return true
 	}
 
@@ -498,7 +501,7 @@ func (o *DebUpstream) SetIncludeSources(v bool) {
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *DebUpstream) GetIsActive() bool {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		var ret bool
 		return ret
 	}
@@ -508,7 +511,7 @@ func (o *DebUpstream) GetIsActive() bool {
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstream) GetIsActiveOk() (*bool, bool) {
-	if o == nil || isNil(o.IsActive) {
+	if o == nil || IsNil(o.IsActive) {
 		return nil, false
 	}
 	return o.IsActive, true
@@ -516,7 +519,7 @@ func (o *DebUpstream) GetIsActiveOk() (*bool, bool) {
 
 // HasIsActive returns a boolean if a field has been set.
 func (o *DebUpstream) HasIsActive() bool {
-	if o != nil && !isNil(o.IsActive) {
+	if o != nil && !IsNil(o.IsActive) {
 		return true
 	}
 
@@ -530,7 +533,7 @@ func (o *DebUpstream) SetIsActive(v bool) {
 
 // GetMode returns the Mode field value if set, zero value otherwise.
 func (o *DebUpstream) GetMode() string {
-	if o == nil || isNil(o.Mode) {
+	if o == nil || IsNil(o.Mode) {
 		var ret string
 		return ret
 	}
@@ -540,7 +543,7 @@ func (o *DebUpstream) GetMode() string {
 // GetModeOk returns a tuple with the Mode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstream) GetModeOk() (*string, bool) {
-	if o == nil || isNil(o.Mode) {
+	if o == nil || IsNil(o.Mode) {
 		return nil, false
 	}
 	return o.Mode, true
@@ -548,7 +551,7 @@ func (o *DebUpstream) GetModeOk() (*string, bool) {
 
 // HasMode returns a boolean if a field has been set.
 func (o *DebUpstream) HasMode() bool {
-	if o != nil && !isNil(o.Mode) {
+	if o != nil && !IsNil(o.Mode) {
 		return true
 	}
 
@@ -586,7 +589,7 @@ func (o *DebUpstream) SetName(v string) {
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *DebUpstream) GetPriority() int64 {
-	if o == nil || isNil(o.Priority) {
+	if o == nil || IsNil(o.Priority) {
 		var ret int64
 		return ret
 	}
@@ -596,7 +599,7 @@ func (o *DebUpstream) GetPriority() int64 {
 // GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstream) GetPriorityOk() (*int64, bool) {
-	if o == nil || isNil(o.Priority) {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
 	return o.Priority, true
@@ -604,7 +607,7 @@ func (o *DebUpstream) GetPriorityOk() (*int64, bool) {
 
 // HasPriority returns a boolean if a field has been set.
 func (o *DebUpstream) HasPriority() bool {
-	if o != nil && !isNil(o.Priority) {
+	if o != nil && !IsNil(o.Priority) {
 		return true
 	}
 
@@ -618,7 +621,7 @@ func (o *DebUpstream) SetPriority(v int64) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *DebUpstream) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -628,7 +631,7 @@ func (o *DebUpstream) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstream) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -636,7 +639,7 @@ func (o *DebUpstream) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *DebUpstream) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -650,7 +653,7 @@ func (o *DebUpstream) SetSlugPerm(v string) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *DebUpstream) GetUpdatedAt() time.Time {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -660,7 +663,7 @@ func (o *DebUpstream) GetUpdatedAt() time.Time {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstream) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedAt) {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -668,7 +671,7 @@ func (o *DebUpstream) GetUpdatedAtOk() (*time.Time, bool) {
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *DebUpstream) HasUpdatedAt() bool {
-	if o != nil && !isNil(o.UpdatedAt) {
+	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -682,7 +685,7 @@ func (o *DebUpstream) SetUpdatedAt(v time.Time) {
 
 // GetUpstreamDistribution returns the UpstreamDistribution field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstream) GetUpstreamDistribution() string {
-	if o == nil || isNil(o.UpstreamDistribution.Get()) {
+	if o == nil || IsNil(o.UpstreamDistribution.Get()) {
 		var ret string
 		return ret
 	}
@@ -749,7 +752,7 @@ func (o *DebUpstream) SetUpstreamUrl(v string) {
 
 // GetVerifySsl returns the VerifySsl field value if set, zero value otherwise.
 func (o *DebUpstream) GetVerifySsl() bool {
-	if o == nil || isNil(o.VerifySsl) {
+	if o == nil || IsNil(o.VerifySsl) {
 		var ret bool
 		return ret
 	}
@@ -759,7 +762,7 @@ func (o *DebUpstream) GetVerifySsl() bool {
 // GetVerifySslOk returns a tuple with the VerifySsl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DebUpstream) GetVerifySslOk() (*bool, bool) {
-	if o == nil || isNil(o.VerifySsl) {
+	if o == nil || IsNil(o.VerifySsl) {
 		return nil, false
 	}
 	return o.VerifySsl, true
@@ -767,7 +770,7 @@ func (o *DebUpstream) GetVerifySslOk() (*bool, bool) {
 
 // HasVerifySsl returns a boolean if a field has been set.
 func (o *DebUpstream) HasVerifySsl() bool {
-	if o != nil && !isNil(o.VerifySsl) {
+	if o != nil && !IsNil(o.VerifySsl) {
 		return true
 	}
 
@@ -780,8 +783,16 @@ func (o *DebUpstream) SetVerifySsl(v bool) {
 }
 
 func (o DebUpstream) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DebUpstream) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.AuthMode) {
+	if !IsNil(o.AuthMode) {
 		toSerialize["auth_mode"] = o.AuthMode
 	}
 	if o.AuthSecret.IsSet() {
@@ -790,15 +801,13 @@ func (o DebUpstream) MarshalJSON() ([]byte, error) {
 	if o.AuthUsername.IsSet() {
 		toSerialize["auth_username"] = o.AuthUsername.Get()
 	}
-	if !isNil(o.Component) {
+	if !IsNil(o.Component) {
 		toSerialize["component"] = o.Component
 	}
-	if !isNil(o.CreatedAt) {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if true {
-		toSerialize["distro_versions"] = o.DistroVersions
-	}
+	toSerialize["distro_versions"] = o.DistroVersions
 	if o.ExtraHeader1.IsSet() {
 		toSerialize["extra_header_1"] = o.ExtraHeader1.Get()
 	}
@@ -811,37 +820,33 @@ func (o DebUpstream) MarshalJSON() ([]byte, error) {
 	if o.ExtraValue2.IsSet() {
 		toSerialize["extra_value_2"] = o.ExtraValue2.Get()
 	}
-	if !isNil(o.IncludeSources) {
+	if !IsNil(o.IncludeSources) {
 		toSerialize["include_sources"] = o.IncludeSources
 	}
-	if !isNil(o.IsActive) {
+	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
 	}
-	if !isNil(o.Mode) {
+	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.Priority) {
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
-	if !isNil(o.UpdatedAt) {
+	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
 	if o.UpstreamDistribution.IsSet() {
 		toSerialize["upstream_distribution"] = o.UpstreamDistribution.Get()
 	}
-	if true {
-		toSerialize["upstream_url"] = o.UpstreamUrl
-	}
-	if !isNil(o.VerifySsl) {
+	toSerialize["upstream_url"] = o.UpstreamUrl
+	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableDebUpstream struct {

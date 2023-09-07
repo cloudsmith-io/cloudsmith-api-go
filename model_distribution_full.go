@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the DistributionFull type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DistributionFull{}
 
 // DistributionFull struct for DistributionFull
 type DistributionFull struct {
@@ -48,7 +51,7 @@ func NewDistributionFullWithDefaults() *DistributionFull {
 
 // GetFormat returns the Format field value if set, zero value otherwise.
 func (o *DistributionFull) GetFormat() string {
-	if o == nil || isNil(o.Format) {
+	if o == nil || IsNil(o.Format) {
 		var ret string
 		return ret
 	}
@@ -58,7 +61,7 @@ func (o *DistributionFull) GetFormat() string {
 // GetFormatOk returns a tuple with the Format field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DistributionFull) GetFormatOk() (*string, bool) {
-	if o == nil || isNil(o.Format) {
+	if o == nil || IsNil(o.Format) {
 		return nil, false
 	}
 	return o.Format, true
@@ -66,7 +69,7 @@ func (o *DistributionFull) GetFormatOk() (*string, bool) {
 
 // HasFormat returns a boolean if a field has been set.
 func (o *DistributionFull) HasFormat() bool {
-	if o != nil && !isNil(o.Format) {
+	if o != nil && !IsNil(o.Format) {
 		return true
 	}
 
@@ -80,7 +83,7 @@ func (o *DistributionFull) SetFormat(v string) {
 
 // GetFormatUrl returns the FormatUrl field value if set, zero value otherwise.
 func (o *DistributionFull) GetFormatUrl() string {
-	if o == nil || isNil(o.FormatUrl) {
+	if o == nil || IsNil(o.FormatUrl) {
 		var ret string
 		return ret
 	}
@@ -90,7 +93,7 @@ func (o *DistributionFull) GetFormatUrl() string {
 // GetFormatUrlOk returns a tuple with the FormatUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DistributionFull) GetFormatUrlOk() (*string, bool) {
-	if o == nil || isNil(o.FormatUrl) {
+	if o == nil || IsNil(o.FormatUrl) {
 		return nil, false
 	}
 	return o.FormatUrl, true
@@ -98,7 +101,7 @@ func (o *DistributionFull) GetFormatUrlOk() (*string, bool) {
 
 // HasFormatUrl returns a boolean if a field has been set.
 func (o *DistributionFull) HasFormatUrl() bool {
-	if o != nil && !isNil(o.FormatUrl) {
+	if o != nil && !IsNil(o.FormatUrl) {
 		return true
 	}
 
@@ -136,7 +139,7 @@ func (o *DistributionFull) SetName(v string) {
 
 // GetSelfUrl returns the SelfUrl field value if set, zero value otherwise.
 func (o *DistributionFull) GetSelfUrl() string {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		var ret string
 		return ret
 	}
@@ -146,7 +149,7 @@ func (o *DistributionFull) GetSelfUrl() string {
 // GetSelfUrlOk returns a tuple with the SelfUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DistributionFull) GetSelfUrlOk() (*string, bool) {
-	if o == nil || isNil(o.SelfUrl) {
+	if o == nil || IsNil(o.SelfUrl) {
 		return nil, false
 	}
 	return o.SelfUrl, true
@@ -154,7 +157,7 @@ func (o *DistributionFull) GetSelfUrlOk() (*string, bool) {
 
 // HasSelfUrl returns a boolean if a field has been set.
 func (o *DistributionFull) HasSelfUrl() bool {
-	if o != nil && !isNil(o.SelfUrl) {
+	if o != nil && !IsNil(o.SelfUrl) {
 		return true
 	}
 
@@ -168,7 +171,7 @@ func (o *DistributionFull) SetSelfUrl(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *DistributionFull) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -178,7 +181,7 @@ func (o *DistributionFull) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DistributionFull) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -186,7 +189,7 @@ func (o *DistributionFull) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *DistributionFull) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -200,7 +203,7 @@ func (o *DistributionFull) SetSlug(v string) {
 
 // GetVariants returns the Variants field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DistributionFull) GetVariants() string {
-	if o == nil || isNil(o.Variants.Get()) {
+	if o == nil || IsNil(o.Variants.Get()) {
 		var ret string
 		return ret
 	}
@@ -243,7 +246,7 @@ func (o *DistributionFull) UnsetVariants() {
 
 // GetVersions returns the Versions field value if set, zero value otherwise.
 func (o *DistributionFull) GetVersions() []DistributionVersion {
-	if o == nil || isNil(o.Versions) {
+	if o == nil || IsNil(o.Versions) {
 		var ret []DistributionVersion
 		return ret
 	}
@@ -253,7 +256,7 @@ func (o *DistributionFull) GetVersions() []DistributionVersion {
 // GetVersionsOk returns a tuple with the Versions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DistributionFull) GetVersionsOk() ([]DistributionVersion, bool) {
-	if o == nil || isNil(o.Versions) {
+	if o == nil || IsNil(o.Versions) {
 		return nil, false
 	}
 	return o.Versions, true
@@ -261,7 +264,7 @@ func (o *DistributionFull) GetVersionsOk() ([]DistributionVersion, bool) {
 
 // HasVersions returns a boolean if a field has been set.
 func (o *DistributionFull) HasVersions() bool {
-	if o != nil && !isNil(o.Versions) {
+	if o != nil && !IsNil(o.Versions) {
 		return true
 	}
 
@@ -274,29 +277,35 @@ func (o *DistributionFull) SetVersions(v []DistributionVersion) {
 }
 
 func (o DistributionFull) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DistributionFull) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Format) {
+	if !IsNil(o.Format) {
 		toSerialize["format"] = o.Format
 	}
-	if !isNil(o.FormatUrl) {
+	if !IsNil(o.FormatUrl) {
 		toSerialize["format_url"] = o.FormatUrl
 	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if !isNil(o.SelfUrl) {
+	toSerialize["name"] = o.Name
+	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
-	if !isNil(o.Slug) {
+	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
 	if o.Variants.IsSet() {
 		toSerialize["variants"] = o.Variants.Get()
 	}
-	if !isNil(o.Versions) {
+	if !IsNil(o.Versions) {
 		toSerialize["versions"] = o.Versions
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableDistributionFull struct {

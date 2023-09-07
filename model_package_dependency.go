@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the PackageDependency type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageDependency{}
 
 // PackageDependency struct for PackageDependency
 type PackageDependency struct {
@@ -45,7 +48,7 @@ func NewPackageDependencyWithDefaults() *PackageDependency {
 
 // GetDepType returns the DepType field value if set, zero value otherwise.
 func (o *PackageDependency) GetDepType() string {
-	if o == nil || isNil(o.DepType) {
+	if o == nil || IsNil(o.DepType) {
 		var ret string
 		return ret
 	}
@@ -55,7 +58,7 @@ func (o *PackageDependency) GetDepType() string {
 // GetDepTypeOk returns a tuple with the DepType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageDependency) GetDepTypeOk() (*string, bool) {
-	if o == nil || isNil(o.DepType) {
+	if o == nil || IsNil(o.DepType) {
 		return nil, false
 	}
 	return o.DepType, true
@@ -63,7 +66,7 @@ func (o *PackageDependency) GetDepTypeOk() (*string, bool) {
 
 // HasDepType returns a boolean if a field has been set.
 func (o *PackageDependency) HasDepType() bool {
-	if o != nil && !isNil(o.DepType) {
+	if o != nil && !IsNil(o.DepType) {
 		return true
 	}
 
@@ -101,7 +104,7 @@ func (o *PackageDependency) SetName(v string) {
 
 // GetOperator returns the Operator field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageDependency) GetOperator() string {
-	if o == nil || isNil(o.Operator.Get()) {
+	if o == nil || IsNil(o.Operator.Get()) {
 		var ret string
 		return ret
 	}
@@ -144,7 +147,7 @@ func (o *PackageDependency) UnsetOperator() {
 
 // GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageDependency) GetVersion() string {
-	if o == nil || isNil(o.Version.Get()) {
+	if o == nil || IsNil(o.Version.Get()) {
 		var ret string
 		return ret
 	}
@@ -186,20 +189,26 @@ func (o *PackageDependency) UnsetVersion() {
 }
 
 func (o PackageDependency) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o PackageDependency) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.DepType) {
+	if !IsNil(o.DepType) {
 		toSerialize["dep_type"] = o.DepType
 	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if o.Operator.IsSet() {
 		toSerialize["operator"] = o.Operator.Get()
 	}
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullablePackageDependency struct {

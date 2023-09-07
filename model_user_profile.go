@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 	"time"
 )
+
+// checks if the UserProfile type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UserProfile{}
 
 // UserProfile struct for UserProfile
 type UserProfile struct {
@@ -52,7 +55,7 @@ func NewUserProfileWithDefaults() *UserProfile {
 
 // GetCompany returns the Company field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserProfile) GetCompany() string {
-	if o == nil || isNil(o.Company.Get()) {
+	if o == nil || IsNil(o.Company.Get()) {
 		var ret string
 		return ret
 	}
@@ -119,7 +122,7 @@ func (o *UserProfile) SetFirstName(v string) {
 
 // GetJobTitle returns the JobTitle field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserProfile) GetJobTitle() string {
-	if o == nil || isNil(o.JobTitle.Get()) {
+	if o == nil || IsNil(o.JobTitle.Get()) {
 		var ret string
 		return ret
 	}
@@ -162,7 +165,7 @@ func (o *UserProfile) UnsetJobTitle() {
 
 // GetJoinedAt returns the JoinedAt field value if set, zero value otherwise.
 func (o *UserProfile) GetJoinedAt() time.Time {
-	if o == nil || isNil(o.JoinedAt) {
+	if o == nil || IsNil(o.JoinedAt) {
 		var ret time.Time
 		return ret
 	}
@@ -172,7 +175,7 @@ func (o *UserProfile) GetJoinedAt() time.Time {
 // GetJoinedAtOk returns a tuple with the JoinedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserProfile) GetJoinedAtOk() (*time.Time, bool) {
-	if o == nil || isNil(o.JoinedAt) {
+	if o == nil || IsNil(o.JoinedAt) {
 		return nil, false
 	}
 	return o.JoinedAt, true
@@ -180,7 +183,7 @@ func (o *UserProfile) GetJoinedAtOk() (*time.Time, bool) {
 
 // HasJoinedAt returns a boolean if a field has been set.
 func (o *UserProfile) HasJoinedAt() bool {
-	if o != nil && !isNil(o.JoinedAt) {
+	if o != nil && !IsNil(o.JoinedAt) {
 		return true
 	}
 
@@ -218,7 +221,7 @@ func (o *UserProfile) SetLastName(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *UserProfile) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -228,7 +231,7 @@ func (o *UserProfile) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserProfile) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -236,7 +239,7 @@ func (o *UserProfile) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *UserProfile) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -250,7 +253,7 @@ func (o *UserProfile) SetName(v string) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *UserProfile) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -260,7 +263,7 @@ func (o *UserProfile) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserProfile) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -268,7 +271,7 @@ func (o *UserProfile) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *UserProfile) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -282,7 +285,7 @@ func (o *UserProfile) SetSlug(v string) {
 
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *UserProfile) GetSlugPerm() string {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		var ret string
 		return ret
 	}
@@ -292,7 +295,7 @@ func (o *UserProfile) GetSlugPerm() string {
 // GetSlugPermOk returns a tuple with the SlugPerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserProfile) GetSlugPermOk() (*string, bool) {
-	if o == nil || isNil(o.SlugPerm) {
+	if o == nil || IsNil(o.SlugPerm) {
 		return nil, false
 	}
 	return o.SlugPerm, true
@@ -300,7 +303,7 @@ func (o *UserProfile) GetSlugPermOk() (*string, bool) {
 
 // HasSlugPerm returns a boolean if a field has been set.
 func (o *UserProfile) HasSlugPerm() bool {
-	if o != nil && !isNil(o.SlugPerm) {
+	if o != nil && !IsNil(o.SlugPerm) {
 		return true
 	}
 
@@ -314,7 +317,7 @@ func (o *UserProfile) SetSlugPerm(v string) {
 
 // GetTagline returns the Tagline field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UserProfile) GetTagline() string {
-	if o == nil || isNil(o.Tagline.Get()) {
+	if o == nil || IsNil(o.Tagline.Get()) {
 		var ret string
 		return ret
 	}
@@ -357,7 +360,7 @@ func (o *UserProfile) UnsetTagline() {
 
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *UserProfile) GetUrl() string {
-	if o == nil || isNil(o.Url) {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
@@ -367,7 +370,7 @@ func (o *UserProfile) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserProfile) GetUrlOk() (*string, bool) {
-	if o == nil || isNil(o.Url) {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
 	return o.Url, true
@@ -375,7 +378,7 @@ func (o *UserProfile) GetUrlOk() (*string, bool) {
 
 // HasUrl returns a boolean if a field has been set.
 func (o *UserProfile) HasUrl() bool {
-	if o != nil && !isNil(o.Url) {
+	if o != nil && !IsNil(o.Url) {
 		return true
 	}
 
@@ -388,38 +391,42 @@ func (o *UserProfile) SetUrl(v string) {
 }
 
 func (o UserProfile) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UserProfile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Company.IsSet() {
 		toSerialize["company"] = o.Company.Get()
 	}
-	if true {
-		toSerialize["first_name"] = o.FirstName
-	}
+	toSerialize["first_name"] = o.FirstName
 	if o.JobTitle.IsSet() {
 		toSerialize["job_title"] = o.JobTitle.Get()
 	}
-	if !isNil(o.JoinedAt) {
+	if !IsNil(o.JoinedAt) {
 		toSerialize["joined_at"] = o.JoinedAt
 	}
-	if true {
-		toSerialize["last_name"] = o.LastName
-	}
-	if !isNil(o.Name) {
+	toSerialize["last_name"] = o.LastName
+	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !isNil(o.Slug) {
+	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
-	if !isNil(o.SlugPerm) {
+	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
 	if o.Tagline.IsSet() {
 		toSerialize["tagline"] = o.Tagline.Get()
 	}
-	if !isNil(o.Url) {
+	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableUserProfile struct {

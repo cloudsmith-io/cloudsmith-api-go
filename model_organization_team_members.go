@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the OrganizationTeamMembers type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OrganizationTeamMembers{}
 
 // OrganizationTeamMembers struct for OrganizationTeamMembers
 type OrganizationTeamMembers struct {
@@ -64,11 +67,17 @@ func (o *OrganizationTeamMembers) SetMembers(v []OrganizationTeamMembership) {
 }
 
 func (o OrganizationTeamMembers) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["members"] = o.Members
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o OrganizationTeamMembers) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["members"] = o.Members
+	return toSerialize, nil
 }
 
 type NullableOrganizationTeamMembers struct {

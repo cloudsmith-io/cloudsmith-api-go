@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the Format type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Format{}
 
 // Format struct for Format
 type Format struct {
@@ -96,7 +99,7 @@ func (o *Format) GetDistributions() []Distribution {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Format) GetDistributionsOk() ([]Distribution, bool) {
-	if o == nil || isNil(o.Distributions) {
+	if o == nil || IsNil(o.Distributions) {
 		return nil, false
 	}
 	return o.Distributions, true
@@ -104,7 +107,7 @@ func (o *Format) GetDistributionsOk() ([]Distribution, bool) {
 
 // HasDistributions returns a boolean if a field has been set.
 func (o *Format) HasDistributions() bool {
-	if o != nil && isNil(o.Distributions) {
+	if o != nil && IsNil(o.Distributions) {
 		return true
 	}
 
@@ -190,7 +193,7 @@ func (o *Format) SetPremium(v bool) {
 
 // GetPremiumPlanId returns the PremiumPlanId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Format) GetPremiumPlanId() string {
-	if o == nil || isNil(o.PremiumPlanId.Get()) {
+	if o == nil || IsNil(o.PremiumPlanId.Get()) {
 		var ret string
 		return ret
 	}
@@ -233,7 +236,7 @@ func (o *Format) UnsetPremiumPlanId() {
 
 // GetPremiumPlanName returns the PremiumPlanName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Format) GetPremiumPlanName() string {
-	if o == nil || isNil(o.PremiumPlanName.Get()) {
+	if o == nil || IsNil(o.PremiumPlanName.Get()) {
 		var ret string
 		return ret
 	}
@@ -323,35 +326,31 @@ func (o *Format) SetSupports(v FormatSupport) {
 }
 
 func (o Format) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["description"] = o.Description
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Format) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["description"] = o.Description
 	if o.Distributions != nil {
 		toSerialize["distributions"] = o.Distributions
 	}
-	if true {
-		toSerialize["extensions"] = o.Extensions
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["premium"] = o.Premium
-	}
+	toSerialize["extensions"] = o.Extensions
+	toSerialize["name"] = o.Name
+	toSerialize["premium"] = o.Premium
 	if o.PremiumPlanId.IsSet() {
 		toSerialize["premium_plan_id"] = o.PremiumPlanId.Get()
 	}
 	if o.PremiumPlanName.IsSet() {
 		toSerialize["premium_plan_name"] = o.PremiumPlanName.Get()
 	}
-	if true {
-		toSerialize["slug"] = o.Slug
-	}
-	if true {
-		toSerialize["supports"] = o.Supports
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["slug"] = o.Slug
+	toSerialize["supports"] = o.Supports
+	return toSerialize, nil
 }
 
 type NullableFormat struct {

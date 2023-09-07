@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the Quota type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Quota{}
 
 // Quota struct for Quota
 type Quota struct {
@@ -63,11 +66,17 @@ func (o *Quota) SetUsage(v UsageFieldset) {
 }
 
 func (o Quota) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["usage"] = o.Usage
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o Quota) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["usage"] = o.Usage
+	return toSerialize, nil
 }
 
 type NullableQuota struct {

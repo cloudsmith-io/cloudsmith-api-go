@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the GeoIpLocation type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GeoIpLocation{}
 
 // GeoIpLocation struct for GeoIpLocation
 type GeoIpLocation struct {
@@ -127,7 +130,7 @@ func (o *GeoIpLocation) SetCountry(v string) {
 
 // GetCountryCode returns the CountryCode field value if set, zero value otherwise.
 func (o *GeoIpLocation) GetCountryCode() string {
-	if o == nil || isNil(o.CountryCode) {
+	if o == nil || IsNil(o.CountryCode) {
 		var ret string
 		return ret
 	}
@@ -137,7 +140,7 @@ func (o *GeoIpLocation) GetCountryCode() string {
 // GetCountryCodeOk returns a tuple with the CountryCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GeoIpLocation) GetCountryCodeOk() (*string, bool) {
-	if o == nil || isNil(o.CountryCode) {
+	if o == nil || IsNil(o.CountryCode) {
 		return nil, false
 	}
 	return o.CountryCode, true
@@ -145,7 +148,7 @@ func (o *GeoIpLocation) GetCountryCodeOk() (*string, bool) {
 
 // HasCountryCode returns a boolean if a field has been set.
 func (o *GeoIpLocation) HasCountryCode() bool {
-	if o != nil && !isNil(o.CountryCode) {
+	if o != nil && !IsNil(o.CountryCode) {
 		return true
 	}
 
@@ -159,7 +162,7 @@ func (o *GeoIpLocation) SetCountryCode(v string) {
 
 // GetLatitude returns the Latitude field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GeoIpLocation) GetLatitude() float64 {
-	if o == nil || isNil(o.Latitude.Get()) {
+	if o == nil || IsNil(o.Latitude.Get()) {
 		var ret float64
 		return ret
 	}
@@ -202,7 +205,7 @@ func (o *GeoIpLocation) UnsetLatitude() {
 
 // GetLongitude returns the Longitude field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GeoIpLocation) GetLongitude() float64 {
-	if o == nil || isNil(o.Longitude.Get()) {
+	if o == nil || IsNil(o.Longitude.Get()) {
 		var ret float64
 		return ret
 	}
@@ -270,17 +273,19 @@ func (o *GeoIpLocation) SetPostalCode(v string) {
 }
 
 func (o GeoIpLocation) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o GeoIpLocation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["city"] = o.City.Get()
-	}
-	if true {
-		toSerialize["continent"] = o.Continent.Get()
-	}
-	if true {
-		toSerialize["country"] = o.Country.Get()
-	}
-	if !isNil(o.CountryCode) {
+	toSerialize["city"] = o.City.Get()
+	toSerialize["continent"] = o.Continent.Get()
+	toSerialize["country"] = o.Country.Get()
+	if !IsNil(o.CountryCode) {
 		toSerialize["country_code"] = o.CountryCode
 	}
 	if o.Latitude.IsSet() {
@@ -289,10 +294,8 @@ func (o GeoIpLocation) MarshalJSON() ([]byte, error) {
 	if o.Longitude.IsSet() {
 		toSerialize["longitude"] = o.Longitude.Get()
 	}
-	if true {
-		toSerialize["postal_code"] = o.PostalCode.Get()
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["postal_code"] = o.PostalCode.Get()
+	return toSerialize, nil
 }
 
 type NullableGeoIpLocation struct {

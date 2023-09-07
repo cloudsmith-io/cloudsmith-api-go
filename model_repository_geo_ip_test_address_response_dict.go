@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RepositoryGeoIpTestAddressResponseDict type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryGeoIpTestAddressResponseDict{}
 
 // RepositoryGeoIpTestAddressResponseDict struct for RepositoryGeoIpTestAddressResponseDict
 type RepositoryGeoIpTestAddressResponseDict struct {
@@ -147,20 +150,20 @@ func (o *RepositoryGeoIpTestAddressResponseDict) SetReason(v string) {
 }
 
 func (o RepositoryGeoIpTestAddressResponseDict) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["allowed"] = o.Allowed
-	}
-	if true {
-		toSerialize["country_code"] = o.CountryCode.Get()
-	}
-	if true {
-		toSerialize["ip_address"] = o.IpAddress
-	}
-	if true {
-		toSerialize["reason"] = o.Reason
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryGeoIpTestAddressResponseDict) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["allowed"] = o.Allowed
+	toSerialize["country_code"] = o.CountryCode.Get()
+	toSerialize["ip_address"] = o.IpAddress
+	toSerialize["reason"] = o.Reason
+	return toSerialize, nil
 }
 
 type NullableRepositoryGeoIpTestAddressResponseDict struct {

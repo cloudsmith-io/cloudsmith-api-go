@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the VagrantPackageUploadRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VagrantPackageUploadRequest{}
 
 // VagrantPackageUploadRequest struct for VagrantPackageUploadRequest
 type VagrantPackageUploadRequest struct {
@@ -126,7 +129,7 @@ func (o *VagrantPackageUploadRequest) SetProvider(v string) {
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
 func (o *VagrantPackageUploadRequest) GetRepublish() bool {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		var ret bool
 		return ret
 	}
@@ -136,7 +139,7 @@ func (o *VagrantPackageUploadRequest) GetRepublish() bool {
 // GetRepublishOk returns a tuple with the Republish field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VagrantPackageUploadRequest) GetRepublishOk() (*bool, bool) {
-	if o == nil || isNil(o.Republish) {
+	if o == nil || IsNil(o.Republish) {
 		return nil, false
 	}
 	return o.Republish, true
@@ -144,7 +147,7 @@ func (o *VagrantPackageUploadRequest) GetRepublishOk() (*bool, bool) {
 
 // HasRepublish returns a boolean if a field has been set.
 func (o *VagrantPackageUploadRequest) HasRepublish() bool {
-	if o != nil && !isNil(o.Republish) {
+	if o != nil && !IsNil(o.Republish) {
 		return true
 	}
 
@@ -158,7 +161,7 @@ func (o *VagrantPackageUploadRequest) SetRepublish(v bool) {
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VagrantPackageUploadRequest) GetTags() string {
-	if o == nil || isNil(o.Tags.Get()) {
+	if o == nil || IsNil(o.Tags.Get()) {
 		var ret string
 		return ret
 	}
@@ -224,26 +227,26 @@ func (o *VagrantPackageUploadRequest) SetVersion(v string) {
 }
 
 func (o VagrantPackageUploadRequest) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o VagrantPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["package_file"] = o.PackageFile
-	}
-	if true {
-		toSerialize["provider"] = o.Provider
-	}
-	if !isNil(o.Republish) {
+	toSerialize["name"] = o.Name
+	toSerialize["package_file"] = o.PackageFile
+	toSerialize["provider"] = o.Provider
+	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
 	if o.Tags.IsSet() {
 		toSerialize["tags"] = o.Tags.Get()
 	}
-	if true {
-		toSerialize["version"] = o.Version
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["version"] = o.Version
+	return toSerialize, nil
 }
 
 type NullableVagrantPackageUploadRequest struct {

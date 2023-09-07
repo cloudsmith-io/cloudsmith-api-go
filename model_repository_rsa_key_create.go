@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RepositoryRsaKeyCreate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryRsaKeyCreate{}
 
 // RepositoryRsaKeyCreate struct for RepositoryRsaKeyCreate
 type RepositoryRsaKeyCreate struct {
@@ -43,7 +46,7 @@ func NewRepositoryRsaKeyCreateWithDefaults() *RepositoryRsaKeyCreate {
 
 // GetRsaPassphrase returns the RsaPassphrase field value if set, zero value otherwise.
 func (o *RepositoryRsaKeyCreate) GetRsaPassphrase() string {
-	if o == nil || isNil(o.RsaPassphrase) {
+	if o == nil || IsNil(o.RsaPassphrase) {
 		var ret string
 		return ret
 	}
@@ -53,7 +56,7 @@ func (o *RepositoryRsaKeyCreate) GetRsaPassphrase() string {
 // GetRsaPassphraseOk returns a tuple with the RsaPassphrase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryRsaKeyCreate) GetRsaPassphraseOk() (*string, bool) {
-	if o == nil || isNil(o.RsaPassphrase) {
+	if o == nil || IsNil(o.RsaPassphrase) {
 		return nil, false
 	}
 	return o.RsaPassphrase, true
@@ -61,7 +64,7 @@ func (o *RepositoryRsaKeyCreate) GetRsaPassphraseOk() (*string, bool) {
 
 // HasRsaPassphrase returns a boolean if a field has been set.
 func (o *RepositoryRsaKeyCreate) HasRsaPassphrase() bool {
-	if o != nil && !isNil(o.RsaPassphrase) {
+	if o != nil && !IsNil(o.RsaPassphrase) {
 		return true
 	}
 
@@ -98,14 +101,20 @@ func (o *RepositoryRsaKeyCreate) SetRsaPrivateKey(v string) {
 }
 
 func (o RepositoryRsaKeyCreate) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.RsaPassphrase) {
-		toSerialize["rsa_passphrase"] = o.RsaPassphrase
-	}
-	if true {
-		toSerialize["rsa_private_key"] = o.RsaPrivateKey
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryRsaKeyCreate) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.RsaPassphrase) {
+		toSerialize["rsa_passphrase"] = o.RsaPassphrase
+	}
+	toSerialize["rsa_private_key"] = o.RsaPrivateKey
+	return toSerialize, nil
 }
 
 type NullableRepositoryRsaKeyCreate struct {

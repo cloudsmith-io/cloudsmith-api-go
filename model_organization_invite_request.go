@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the OrganizationInviteRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OrganizationInviteRequest{}
 
 // OrganizationInviteRequest struct for OrganizationInviteRequest
 type OrganizationInviteRequest struct {
@@ -48,7 +51,7 @@ func NewOrganizationInviteRequestWithDefaults() *OrganizationInviteRequest {
 
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *OrganizationInviteRequest) GetEmail() string {
-	if o == nil || isNil(o.Email) {
+	if o == nil || IsNil(o.Email) {
 		var ret string
 		return ret
 	}
@@ -58,7 +61,7 @@ func (o *OrganizationInviteRequest) GetEmail() string {
 // GetEmailOk returns a tuple with the Email field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteRequest) GetEmailOk() (*string, bool) {
-	if o == nil || isNil(o.Email) {
+	if o == nil || IsNil(o.Email) {
 		return nil, false
 	}
 	return o.Email, true
@@ -66,7 +69,7 @@ func (o *OrganizationInviteRequest) GetEmailOk() (*string, bool) {
 
 // HasEmail returns a boolean if a field has been set.
 func (o *OrganizationInviteRequest) HasEmail() bool {
-	if o != nil && !isNil(o.Email) {
+	if o != nil && !IsNil(o.Email) {
 		return true
 	}
 
@@ -80,7 +83,7 @@ func (o *OrganizationInviteRequest) SetEmail(v string) {
 
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *OrganizationInviteRequest) GetRole() string {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		var ret string
 		return ret
 	}
@@ -90,7 +93,7 @@ func (o *OrganizationInviteRequest) GetRole() string {
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteRequest) GetRoleOk() (*string, bool) {
-	if o == nil || isNil(o.Role) {
+	if o == nil || IsNil(o.Role) {
 		return nil, false
 	}
 	return o.Role, true
@@ -98,7 +101,7 @@ func (o *OrganizationInviteRequest) GetRoleOk() (*string, bool) {
 
 // HasRole returns a boolean if a field has been set.
 func (o *OrganizationInviteRequest) HasRole() bool {
-	if o != nil && !isNil(o.Role) {
+	if o != nil && !IsNil(o.Role) {
 		return true
 	}
 
@@ -112,7 +115,7 @@ func (o *OrganizationInviteRequest) SetRole(v string) {
 
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *OrganizationInviteRequest) GetUser() string {
-	if o == nil || isNil(o.User) {
+	if o == nil || IsNil(o.User) {
 		var ret string
 		return ret
 	}
@@ -122,7 +125,7 @@ func (o *OrganizationInviteRequest) GetUser() string {
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrganizationInviteRequest) GetUserOk() (*string, bool) {
-	if o == nil || isNil(o.User) {
+	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
 	return o.User, true
@@ -130,7 +133,7 @@ func (o *OrganizationInviteRequest) GetUserOk() (*string, bool) {
 
 // HasUser returns a boolean if a field has been set.
 func (o *OrganizationInviteRequest) HasUser() bool {
-	if o != nil && !isNil(o.User) {
+	if o != nil && !IsNil(o.User) {
 		return true
 	}
 
@@ -143,17 +146,25 @@ func (o *OrganizationInviteRequest) SetUser(v string) {
 }
 
 func (o OrganizationInviteRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Email) {
-		toSerialize["email"] = o.Email
-	}
-	if !isNil(o.Role) {
-		toSerialize["role"] = o.Role
-	}
-	if !isNil(o.User) {
-		toSerialize["user"] = o.User
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o OrganizationInviteRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Email) {
+		toSerialize["email"] = o.Email
+	}
+	if !IsNil(o.Role) {
+		toSerialize["role"] = o.Role
+	}
+	if !IsNil(o.User) {
+		toSerialize["user"] = o.User
+	}
+	return toSerialize, nil
 }
 
 type NullableOrganizationInviteRequest struct {

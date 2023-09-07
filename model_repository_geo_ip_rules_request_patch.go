@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the RepositoryGeoIpRulesRequestPatch type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RepositoryGeoIpRulesRequestPatch{}
 
 // RepositoryGeoIpRulesRequestPatch struct for RepositoryGeoIpRulesRequestPatch
 type RepositoryGeoIpRulesRequestPatch struct {
@@ -40,7 +43,7 @@ func NewRepositoryGeoIpRulesRequestPatchWithDefaults() *RepositoryGeoIpRulesRequ
 
 // GetCidr returns the Cidr field value if set, zero value otherwise.
 func (o *RepositoryGeoIpRulesRequestPatch) GetCidr() RepositoryGeoIpCidr {
-	if o == nil || isNil(o.Cidr) {
+	if o == nil || IsNil(o.Cidr) {
 		var ret RepositoryGeoIpCidr
 		return ret
 	}
@@ -50,7 +53,7 @@ func (o *RepositoryGeoIpRulesRequestPatch) GetCidr() RepositoryGeoIpCidr {
 // GetCidrOk returns a tuple with the Cidr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryGeoIpRulesRequestPatch) GetCidrOk() (*RepositoryGeoIpCidr, bool) {
-	if o == nil || isNil(o.Cidr) {
+	if o == nil || IsNil(o.Cidr) {
 		return nil, false
 	}
 	return o.Cidr, true
@@ -58,7 +61,7 @@ func (o *RepositoryGeoIpRulesRequestPatch) GetCidrOk() (*RepositoryGeoIpCidr, bo
 
 // HasCidr returns a boolean if a field has been set.
 func (o *RepositoryGeoIpRulesRequestPatch) HasCidr() bool {
-	if o != nil && !isNil(o.Cidr) {
+	if o != nil && !IsNil(o.Cidr) {
 		return true
 	}
 
@@ -72,7 +75,7 @@ func (o *RepositoryGeoIpRulesRequestPatch) SetCidr(v RepositoryGeoIpCidr) {
 
 // GetCountryCode returns the CountryCode field value if set, zero value otherwise.
 func (o *RepositoryGeoIpRulesRequestPatch) GetCountryCode() RepositoryGeoIpCountryCode {
-	if o == nil || isNil(o.CountryCode) {
+	if o == nil || IsNil(o.CountryCode) {
 		var ret RepositoryGeoIpCountryCode
 		return ret
 	}
@@ -82,7 +85,7 @@ func (o *RepositoryGeoIpRulesRequestPatch) GetCountryCode() RepositoryGeoIpCount
 // GetCountryCodeOk returns a tuple with the CountryCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RepositoryGeoIpRulesRequestPatch) GetCountryCodeOk() (*RepositoryGeoIpCountryCode, bool) {
-	if o == nil || isNil(o.CountryCode) {
+	if o == nil || IsNil(o.CountryCode) {
 		return nil, false
 	}
 	return o.CountryCode, true
@@ -90,7 +93,7 @@ func (o *RepositoryGeoIpRulesRequestPatch) GetCountryCodeOk() (*RepositoryGeoIpC
 
 // HasCountryCode returns a boolean if a field has been set.
 func (o *RepositoryGeoIpRulesRequestPatch) HasCountryCode() bool {
-	if o != nil && !isNil(o.CountryCode) {
+	if o != nil && !IsNil(o.CountryCode) {
 		return true
 	}
 
@@ -103,14 +106,22 @@ func (o *RepositoryGeoIpRulesRequestPatch) SetCountryCode(v RepositoryGeoIpCount
 }
 
 func (o RepositoryGeoIpRulesRequestPatch) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if !isNil(o.Cidr) {
-		toSerialize["cidr"] = o.Cidr
-	}
-	if !isNil(o.CountryCode) {
-		toSerialize["country_code"] = o.CountryCode
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o RepositoryGeoIpRulesRequestPatch) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Cidr) {
+		toSerialize["cidr"] = o.Cidr
+	}
+	if !IsNil(o.CountryCode) {
+		toSerialize["country_code"] = o.CountryCode
+	}
+	return toSerialize, nil
 }
 
 type NullableRepositoryGeoIpRulesRequestPatch struct {

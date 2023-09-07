@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.290.2
+API version: 1.297.0
 Contact: support@cloudsmith.io
 */
 
@@ -14,6 +14,9 @@ package cloudsmith
 import (
 	"encoding/json"
 )
+
+// checks if the PackageFileUploadRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PackageFileUploadRequest{}
 
 // PackageFileUploadRequest struct for PackageFileUploadRequest
 type PackageFileUploadRequest struct {
@@ -75,7 +78,7 @@ func (o *PackageFileUploadRequest) SetFilename(v string) {
 
 // GetMd5Checksum returns the Md5Checksum field value if set, zero value otherwise.
 func (o *PackageFileUploadRequest) GetMd5Checksum() string {
-	if o == nil || isNil(o.Md5Checksum) {
+	if o == nil || IsNil(o.Md5Checksum) {
 		var ret string
 		return ret
 	}
@@ -85,7 +88,7 @@ func (o *PackageFileUploadRequest) GetMd5Checksum() string {
 // GetMd5ChecksumOk returns a tuple with the Md5Checksum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFileUploadRequest) GetMd5ChecksumOk() (*string, bool) {
-	if o == nil || isNil(o.Md5Checksum) {
+	if o == nil || IsNil(o.Md5Checksum) {
 		return nil, false
 	}
 	return o.Md5Checksum, true
@@ -93,7 +96,7 @@ func (o *PackageFileUploadRequest) GetMd5ChecksumOk() (*string, bool) {
 
 // HasMd5Checksum returns a boolean if a field has been set.
 func (o *PackageFileUploadRequest) HasMd5Checksum() bool {
-	if o != nil && !isNil(o.Md5Checksum) {
+	if o != nil && !IsNil(o.Md5Checksum) {
 		return true
 	}
 
@@ -107,7 +110,7 @@ func (o *PackageFileUploadRequest) SetMd5Checksum(v string) {
 
 // GetMethod returns the Method field value if set, zero value otherwise.
 func (o *PackageFileUploadRequest) GetMethod() string {
-	if o == nil || isNil(o.Method) {
+	if o == nil || IsNil(o.Method) {
 		var ret string
 		return ret
 	}
@@ -117,7 +120,7 @@ func (o *PackageFileUploadRequest) GetMethod() string {
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFileUploadRequest) GetMethodOk() (*string, bool) {
-	if o == nil || isNil(o.Method) {
+	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
 	return o.Method, true
@@ -125,7 +128,7 @@ func (o *PackageFileUploadRequest) GetMethodOk() (*string, bool) {
 
 // HasMethod returns a boolean if a field has been set.
 func (o *PackageFileUploadRequest) HasMethod() bool {
-	if o != nil && !isNil(o.Method) {
+	if o != nil && !IsNil(o.Method) {
 		return true
 	}
 
@@ -139,7 +142,7 @@ func (o *PackageFileUploadRequest) SetMethod(v string) {
 
 // GetSha256Checksum returns the Sha256Checksum field value if set, zero value otherwise.
 func (o *PackageFileUploadRequest) GetSha256Checksum() string {
-	if o == nil || isNil(o.Sha256Checksum) {
+	if o == nil || IsNil(o.Sha256Checksum) {
 		var ret string
 		return ret
 	}
@@ -149,7 +152,7 @@ func (o *PackageFileUploadRequest) GetSha256Checksum() string {
 // GetSha256ChecksumOk returns a tuple with the Sha256Checksum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageFileUploadRequest) GetSha256ChecksumOk() (*string, bool) {
-	if o == nil || isNil(o.Sha256Checksum) {
+	if o == nil || IsNil(o.Sha256Checksum) {
 		return nil, false
 	}
 	return o.Sha256Checksum, true
@@ -157,7 +160,7 @@ func (o *PackageFileUploadRequest) GetSha256ChecksumOk() (*string, bool) {
 
 // HasSha256Checksum returns a boolean if a field has been set.
 func (o *PackageFileUploadRequest) HasSha256Checksum() bool {
-	if o != nil && !isNil(o.Sha256Checksum) {
+	if o != nil && !IsNil(o.Sha256Checksum) {
 		return true
 	}
 
@@ -170,20 +173,26 @@ func (o *PackageFileUploadRequest) SetSha256Checksum(v string) {
 }
 
 func (o PackageFileUploadRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["filename"] = o.Filename
-	}
-	if !isNil(o.Md5Checksum) {
-		toSerialize["md5_checksum"] = o.Md5Checksum
-	}
-	if !isNil(o.Method) {
-		toSerialize["method"] = o.Method
-	}
-	if !isNil(o.Sha256Checksum) {
-		toSerialize["sha256_checksum"] = o.Sha256Checksum
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PackageFileUploadRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["filename"] = o.Filename
+	if !IsNil(o.Md5Checksum) {
+		toSerialize["md5_checksum"] = o.Md5Checksum
+	}
+	if !IsNil(o.Method) {
+		toSerialize["method"] = o.Method
+	}
+	if !IsNil(o.Sha256Checksum) {
+		toSerialize["sha256_checksum"] = o.Sha256Checksum
+	}
+	return toSerialize, nil
 }
 
 type NullablePackageFileUploadRequest struct {

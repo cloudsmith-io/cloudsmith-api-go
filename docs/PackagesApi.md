@@ -85,7 +85,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -163,7 +163,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -173,7 +173,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesDelete(context.Background(), owner, repo, identifier).Execute()
+    r, err := apiClient.PackagesApi.PackagesDelete(context.Background(), owner, repo, identifier).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesDelete``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -237,7 +237,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -313,7 +313,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -394,7 +394,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -472,7 +472,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -550,7 +550,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -626,7 +626,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -702,7 +702,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -778,7 +778,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -854,7 +854,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -932,7 +932,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1007,7 +1007,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1082,7 +1082,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1157,7 +1157,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1232,7 +1232,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1307,7 +1307,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1382,7 +1382,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1457,7 +1457,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1532,7 +1532,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1607,7 +1607,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1682,7 +1682,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1757,7 +1757,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1832,7 +1832,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1907,7 +1907,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -1982,7 +1982,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2057,7 +2057,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2132,7 +2132,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2207,7 +2207,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2282,7 +2282,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2357,7 +2357,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2432,7 +2432,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2507,7 +2507,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2582,7 +2582,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2657,7 +2657,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2732,7 +2732,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2807,7 +2807,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2817,7 +2817,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadAlpine(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadAlpine(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadAlpine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2880,7 +2880,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2890,7 +2890,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadCargo(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadCargo(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadCargo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2953,7 +2953,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -2963,7 +2963,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadCocoapods(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadCocoapods(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadCocoapods``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3026,7 +3026,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3036,7 +3036,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadComposer(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadComposer(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadComposer``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3099,7 +3099,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3109,7 +3109,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadConan(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadConan(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadConan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3172,7 +3172,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3182,7 +3182,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadConda(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadConda(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadConda``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3245,7 +3245,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3255,7 +3255,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadCran(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadCran(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadCran``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3318,7 +3318,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3328,7 +3328,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadDart(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadDart(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadDart``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3391,7 +3391,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3401,7 +3401,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadDeb(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadDeb(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadDeb``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3464,7 +3464,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3474,7 +3474,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadDocker(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadDocker(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadDocker``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3537,7 +3537,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3547,7 +3547,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadGo(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadGo(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadGo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3610,7 +3610,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3620,7 +3620,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadHelm(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadHelm(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadHelm``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3683,7 +3683,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3693,7 +3693,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadHex(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadHex(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadHex``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3756,7 +3756,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3766,7 +3766,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadLuarocks(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadLuarocks(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadLuarocks``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3829,7 +3829,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3839,7 +3839,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadMaven(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadMaven(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadMaven``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3902,7 +3902,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3912,7 +3912,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadNpm(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadNpm(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadNpm``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3975,7 +3975,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -3985,7 +3985,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadNuget(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadNuget(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadNuget``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4048,7 +4048,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4058,7 +4058,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadP2(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadP2(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadP2``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4121,7 +4121,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4131,7 +4131,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadPython(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadPython(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadPython``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4194,7 +4194,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4204,7 +4204,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadRaw(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadRaw(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadRaw``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4267,7 +4267,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4277,7 +4277,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadRpm(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadRpm(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadRpm``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4340,7 +4340,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4350,7 +4350,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadRuby(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadRuby(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadRuby``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4413,7 +4413,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4423,7 +4423,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadSwift(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadSwift(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadSwift``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4486,7 +4486,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4496,7 +4496,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadTerraform(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadTerraform(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadTerraform``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4559,7 +4559,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
@@ -4569,7 +4569,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PackagesApi.PackagesValidateUploadVagrant(context.Background(), owner, repo).Data(data).Execute()
+    r, err := apiClient.PackagesApi.PackagesValidateUploadVagrant(context.Background(), owner, repo).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadVagrant``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
