@@ -4,6 +4,12 @@ All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**OrgsDenyPolicyCreate**](OrgsApi.md#OrgsDenyPolicyCreate) | **Post** /orgs/{org}/deny-policy/ | Create a package deny policy.
+[**OrgsDenyPolicyDelete**](OrgsApi.md#OrgsDenyPolicyDelete) | **Delete** /orgs/{org}/deny-policy/{slug_perm}/ | Delete a package deny policy.
+[**OrgsDenyPolicyList**](OrgsApi.md#OrgsDenyPolicyList) | **Get** /orgs/{org}/deny-policy/ | Get a list of all package deny policies.
+[**OrgsDenyPolicyPartialUpdate**](OrgsApi.md#OrgsDenyPolicyPartialUpdate) | **Patch** /orgs/{org}/deny-policy/{slug_perm}/ | Partially update a package deny policy.
+[**OrgsDenyPolicyRead**](OrgsApi.md#OrgsDenyPolicyRead) | **Get** /orgs/{org}/deny-policy/{slug_perm}/ | Get a package deny policy.
+[**OrgsDenyPolicyUpdate**](OrgsApi.md#OrgsDenyPolicyUpdate) | **Put** /orgs/{org}/deny-policy/{slug_perm}/ | Update a package deny policy.
 [**OrgsInvitesCreate**](OrgsApi.md#OrgsInvitesCreate) | **Post** /orgs/{org}/invites/ | Create an organization invite for a specific user
 [**OrgsInvitesDelete**](OrgsApi.md#OrgsInvitesDelete) | **Delete** /orgs/{org}/invites/{slug_perm}/ | Delete a specific organization invite
 [**OrgsInvitesExtend**](OrgsApi.md#OrgsInvitesExtend) | **Post** /orgs/{org}/invites/{slug_perm}/extend/ | Extend an organization invite.
@@ -55,6 +61,446 @@ Method | HTTP request | Description
 [**OrgsVulnerabilityPolicyUpdate**](OrgsApi.md#OrgsVulnerabilityPolicyUpdate) | **Put** /orgs/{org}/vulnerability-policy/{slug_perm}/ | Update a package vulnerability policy.
 [**OrgsVulnerabilityPolicyViolationList**](OrgsApi.md#OrgsVulnerabilityPolicyViolationList) | **Get** /orgs/{org}/vulnerability-policy-violation/ | List all current vulnerability policy violations for this Organization.
 
+
+
+## OrgsDenyPolicyCreate
+
+> PackageDenyPolicy OrgsDenyPolicyCreate(ctx, org).Data(data).Execute()
+
+Create a package deny policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    data := *openapiclient.NewPackageDenyPolicyRequest() // PackageDenyPolicyRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyCreate(context.Background(), org).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsDenyPolicyCreate`: PackageDenyPolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsDenyPolicyCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **data** | [**PackageDenyPolicyRequest**](PackageDenyPolicyRequest.md) |  | 
+
+### Return type
+
+[**PackageDenyPolicy**](PackageDenyPolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsDenyPolicyDelete
+
+> OrgsDenyPolicyDelete(ctx, org, slugPerm).Execute()
+
+Delete a package deny policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.OrgsApi.OrgsDenyPolicyDelete(context.Background(), org, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsDenyPolicyDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsDenyPolicyList
+
+> []PackageDenyPolicy OrgsDenyPolicyList(ctx, org).Page(page).PageSize(pageSize).Execute()
+
+Get a list of all package deny policies.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsDenyPolicyList`: []PackageDenyPolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsDenyPolicyListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]PackageDenyPolicy**](PackageDenyPolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsDenyPolicyPartialUpdate
+
+> PackageDenyPolicy OrgsDenyPolicyPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Partially update a package deny policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewPackageDenyPolicyRequestPatch() // PackageDenyPolicyRequestPatch |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsDenyPolicyPartialUpdate`: PackageDenyPolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsDenyPolicyPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**PackageDenyPolicyRequestPatch**](PackageDenyPolicyRequestPatch.md) |  | 
+
+### Return type
+
+[**PackageDenyPolicy**](PackageDenyPolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsDenyPolicyRead
+
+> PackageDenyPolicy OrgsDenyPolicyRead(ctx, org, slugPerm).Execute()
+
+Get a package deny policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyRead(context.Background(), org, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsDenyPolicyRead`: PackageDenyPolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsDenyPolicyReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**PackageDenyPolicy**](PackageDenyPolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsDenyPolicyUpdate
+
+> PackageDenyPolicy OrgsDenyPolicyUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Update a package deny policy.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewPackageDenyPolicyRequest() // PackageDenyPolicyRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsDenyPolicyUpdate`: PackageDenyPolicy
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsDenyPolicyUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**PackageDenyPolicyRequest**](PackageDenyPolicyRequest.md) |  | 
+
+### Return type
+
+[**PackageDenyPolicy**](PackageDenyPolicy.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## OrgsInvitesCreate

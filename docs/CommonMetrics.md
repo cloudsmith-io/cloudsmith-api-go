@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Active** | Pointer to **int64** |  | [optional] 
+**Active** | Pointer to **int64** | Number of packages with at least 1 download | [optional] 
 **Bandwidth** | [**CommonBandwidthMetrics**](CommonBandwidthMetrics.md) |  | 
 **Downloads** | [**CommonDownloadsMetrics**](CommonDownloadsMetrics.md) |  | 
-**Inactive** | Pointer to **int64** |  | [optional] 
-**Total** | Pointer to **int64** |  | [optional] 
+**Inactive** | Pointer to **int64** | Packages with zero downloads | [optional] 
+**Total** | Pointer to **int64** | Total number of packages in repo | [optional] 
 
 ## Methods
 

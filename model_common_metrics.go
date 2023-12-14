@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.297.0
+API version: 1.327.0
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,14 @@ var _ MappedNullable = &CommonMetrics{}
 
 // CommonMetrics struct for CommonMetrics
 type CommonMetrics struct {
+	// Number of packages with at least 1 download
 	Active    *int64                 `json:"active,omitempty"`
 	Bandwidth CommonBandwidthMetrics `json:"bandwidth"`
 	Downloads CommonDownloadsMetrics `json:"downloads"`
-	Inactive  *int64                 `json:"inactive,omitempty"`
-	Total     *int64                 `json:"total,omitempty"`
+	// Packages with zero downloads
+	Inactive *int64 `json:"inactive,omitempty"`
+	// Total number of packages in repo
+	Total *int64 `json:"total,omitempty"`
 }
 
 // NewCommonMetrics instantiates a new CommonMetrics object

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.297.0
+API version: 1.327.0
 Contact: support@cloudsmith.io
 */
 
@@ -24,7 +24,7 @@ type NugetPackageUploadRequest struct {
 	PackageFile string `json:"package_file"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
 	Republish *bool `json:"republish,omitempty"`
-	// Attaches a symbols file to the package.
+	// Uploads a symbols file as a separate package
 	SymbolsFile NullableString `json:"symbols_file,omitempty"`
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`

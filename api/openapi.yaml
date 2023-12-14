@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.297.0
+  version: 1.327.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -1550,6 +1550,256 @@ paths:
       summary: Get the details for the specific organization.
       tags:
       - orgs
+  /orgs/{org}/deny-policy/:
+    get:
+      description: Get a list of all package deny policies.
+      operationId: orgs_deny-policy_list
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PackageDenyPolicy'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Get a list of all package deny policies.
+      tags:
+      - orgs
+    post:
+      description: Create a package deny policy.
+      operationId: orgs_deny-policy_create
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackageDenyPolicyRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageDenyPolicy'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Create a package deny policy.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+  /orgs/{org}/deny-policy/{slug_perm}/:
+    delete:
+      description: Delete a package deny policy.
+      operationId: orgs_deny-policy_delete
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Delete a package deny policy.
+      tags:
+      - orgs
+    get:
+      description: Get a package deny policy.
+      operationId: orgs_deny-policy_read
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageDenyPolicy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Get a package deny policy.
+      tags:
+      - orgs
+    patch:
+      description: Partially update a package deny policy.
+      operationId: orgs_deny-policy_partial_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackageDenyPolicyRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageDenyPolicy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Partially update a package deny policy.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+    put:
+      description: Update a package deny policy.
+      operationId: orgs_deny-policy_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackageDenyPolicyRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageDenyPolicy'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Update a package deny policy.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
   /orgs/{org}/invites/:
     get:
       description: Get a list of all invites for an organization.
@@ -3748,7 +3998,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlpinePackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -3800,7 +4050,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CargoPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -3852,7 +4102,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CocoapodsPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -3904,7 +4154,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ComposerPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -3956,7 +4206,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConanPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4008,7 +4258,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CondaPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4060,7 +4310,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CranPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4112,7 +4362,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DartPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4164,7 +4414,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DebPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4216,7 +4466,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DockerPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4268,7 +4518,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GoPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4320,7 +4570,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HelmPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4372,7 +4622,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HexPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4424,7 +4674,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LuarocksPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4476,7 +4726,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MavenPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4528,7 +4778,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NpmPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4580,7 +4830,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NugetPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4632,7 +4882,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/P2PackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4684,7 +4934,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PythonPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4736,7 +4986,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RawPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4788,7 +5038,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RpmPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4840,7 +5090,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RubyPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4892,7 +5142,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SwiftPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4944,7 +5194,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TerraformPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -4996,7 +5246,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VagrantPackageUpload'
-          description: Upload acknowledged and queued for synchronisation.
+          description: Upload acknowledged and queued for synchronization.
         "404":
           content:
             application/json:
@@ -11854,8 +12104,8 @@ components:
             \ are expressed as the selected unit of bandwidth. Please note that since\
             \ downloads are calculated asynchronously (after the download happens),\
             \ the limit may not be imposed immediately but at a later point. "
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit bandwidth
           type: integer
@@ -11891,8 +12141,8 @@ components:
             \ Please note that since clients are calculated asynchronously (after\
             \ the download happens), the limit may not be imposed immediately but\
             \ at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit num clients
           type: integer
@@ -11900,8 +12150,8 @@ components:
           description: "The maximum number of downloads allowed for the token. Please\
             \ note that since downloads are calculated asynchronously (after the download\
             \ happens), the limit may not be imposed immediately but at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit num downloads
           type: integer
@@ -12054,8 +12304,8 @@ components:
             \ are expressed as the selected unit of bandwidth. Please note that since\
             \ downloads are calculated asynchronously (after the download happens),\
             \ the limit may not be imposed immediately but at a later point. "
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit bandwidth
           type: integer
@@ -12091,8 +12341,8 @@ components:
             \ Please note that since clients are calculated asynchronously (after\
             \ the download happens), the limit may not be imposed immediately but\
             \ at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit num clients
           type: integer
@@ -12100,8 +12350,8 @@ components:
           description: "The maximum number of downloads allowed for the token. Please\
             \ note that since downloads are calculated asynchronously (after the download\
             \ happens), the limit may not be imposed immediately but at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit num downloads
           type: integer
@@ -12301,8 +12551,8 @@ components:
             \ are expressed as the selected unit of bandwidth. Please note that since\
             \ downloads are calculated asynchronously (after the download happens),\
             \ the limit may not be imposed immediately but at a later point. "
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit bandwidth
           type: integer
@@ -12338,8 +12588,8 @@ components:
             \ Please note that since clients are calculated asynchronously (after\
             \ the download happens), the limit may not be imposed immediately but\
             \ at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit num clients
           type: integer
@@ -12347,8 +12597,8 @@ components:
           description: "The maximum number of downloads allowed for the token. Please\
             \ note that since downloads are calculated asynchronously (after the download\
             \ happens), the limit may not be imposed immediately but at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit num downloads
           type: integer
@@ -12442,8 +12692,8 @@ components:
             \ are expressed as the selected unit of bandwidth. Please note that since\
             \ downloads are calculated asynchronously (after the download happens),\
             \ the limit may not be imposed immediately but at a later point. "
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit bandwidth
           type: integer
@@ -12479,8 +12729,8 @@ components:
             \ Please note that since clients are calculated asynchronously (after\
             \ the download happens), the limit may not be imposed immediately but\
             \ at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit num clients
           type: integer
@@ -12488,8 +12738,8 @@ components:
           description: "The maximum number of downloads allowed for the token. Please\
             \ note that since downloads are calculated asynchronously (after the download\
             \ happens), the limit may not be imposed immediately but at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit num downloads
           type: integer
@@ -12674,8 +12924,8 @@ components:
             \ are expressed as the selected unit of bandwidth. Please note that since\
             \ downloads are calculated asynchronously (after the download happens),\
             \ the limit may not be imposed immediately but at a later point. "
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit bandwidth
           type: integer
@@ -12711,8 +12961,8 @@ components:
             \ Please note that since clients are calculated asynchronously (after\
             \ the download happens), the limit may not be imposed immediately but\
             \ at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit num clients
           type: integer
@@ -12720,8 +12970,8 @@ components:
           description: "The maximum number of downloads allowed for the token. Please\
             \ note that since downloads are calculated asynchronously (after the download\
             \ happens), the limit may not be imposed immediately but at a later point."
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
           nullable: true
           title: Limit num downloads
           type: integer
@@ -13102,22 +13352,26 @@ components:
       - supports
       type: object
     CommonBandwidthMetricsValue:
+      description: "Average bandwidth usage in the specified period, e.g. a day"
       example:
         display: display
         units: bytes
         value: 6
       properties:
         display:
+          description: Bandwidth usage value
           maxLength: 64
           minLength: 1
           title: Display
           type: string
         units:
           default: bytes
+          description: Unit of measurement e.g. bytes
           minLength: 1
           title: Units
           type: string
         value:
+          description: Human readable version of display value
           title: Value
           type: integer
       required:
@@ -13225,6 +13479,7 @@ components:
         active: 0
       properties:
         active:
+          description: Number of packages with at least 1 download
           title: Active
           type: integer
         bandwidth:
@@ -13232,9 +13487,11 @@ components:
         downloads:
           $ref: '#/components/schemas/CommonDownloadsMetrics'
         inactive:
+          description: Packages with zero downloads
           title: Inactive
           type: integer
         total:
+          description: Total number of packages in repo
           title: Total
           type: integer
       required:
@@ -13393,6 +13650,130 @@ components:
           nullable: true
           readOnly: true
           title: Tagline
+          type: string
+      type: object
+    PackageDenyPolicy:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name: name
+        action: Block downloads
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: description
+        package_query_string: package_query_string
+        slug_perm: slug_perm
+        enabled: true
+        status: In Progress
+      properties:
+        action:
+          default: Block downloads
+          enum:
+          - Block downloads
+          readOnly: true
+          title: Action
+          type: string
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        description:
+          maxLength: 250
+          nullable: true
+          title: Description
+          type: string
+        enabled:
+          description: Whether this rule is enabled or disabled.
+          title: Enabled
+          type: boolean
+        name:
+          maxLength: 100
+          nullable: true
+          title: Name
+          type: string
+        package_query_string:
+          description: Packages that match this query will trigger this deny rule.
+          minLength: 1
+          nullable: true
+          title: Package query string
+          type: string
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        status:
+          default: In Progress
+          enum:
+          - Pending
+          - In Progress
+          - Complete
+          - Cancelled
+          - Errored
+          readOnly: true
+          title: Status
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+      type: object
+    PackageDenyPolicyRequest:
+      example:
+        name: name
+        description: description
+        package_query_string: package_query_string
+        enabled: true
+      properties:
+        description:
+          maxLength: 250
+          nullable: true
+          title: Description
+          type: string
+        enabled:
+          description: Whether this rule is enabled or disabled.
+          title: Enabled
+          type: boolean
+        name:
+          maxLength: 100
+          nullable: true
+          title: Name
+          type: string
+        package_query_string:
+          description: Packages that match this query will trigger this deny rule.
+          minLength: 1
+          nullable: true
+          title: Package query string
+          type: string
+      type: object
+    PackageDenyPolicyRequestPatch:
+      example:
+        name: name
+        description: description
+        package_query_string: package_query_string
+        enabled: true
+      properties:
+        description:
+          maxLength: 250
+          nullable: true
+          title: Description
+          type: string
+        enabled:
+          description: Whether this rule is enabled or disabled.
+          title: Enabled
+          type: boolean
+        name:
+          maxLength: 100
+          nullable: true
+          title: Name
+          type: string
+        package_query_string:
+          description: Packages that match this query will trigger this deny rule.
+          minLength: 1
+          nullable: true
+          title: Package query string
           type: string
       type: object
     OrganizationInvite:
@@ -23407,7 +23788,7 @@ components:
           title: Republish
           type: boolean
         symbols_file:
-          description: Attaches a symbols file to the package.
+          description: Uploads a symbols file as a separate package
           minLength: 1
           nullable: true
           title: Symbols file
@@ -28388,6 +28769,8 @@ components:
           - System
           - Import
           - Excluded
+          - Build-Requires
+          - Python-Requires
           readOnly: true
           title: Dep type
           type: string
@@ -36762,7 +37145,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.297.0
+        version: 1.327.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -36772,7 +37155,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.297.0
+          default: 1.327.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
