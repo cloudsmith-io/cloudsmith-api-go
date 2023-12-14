@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Display** | **string** |  | 
-**Units** | Pointer to **string** |  | [optional] [default to "bytes"]
-**Value** | **int64** |  | 
+**Display** | **string** | Bandwidth usage value | 
+**Units** | Pointer to **string** | Unit of measurement e.g. bytes | [optional] [default to "bytes"]
+**Value** | **int64** | Human readable version of display value | 
 
 ## Methods
 

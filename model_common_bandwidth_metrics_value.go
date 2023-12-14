@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.297.0
+API version: 1.327.0
 Contact: support@cloudsmith.io
 */
 
@@ -18,11 +18,14 @@ import (
 // checks if the CommonBandwidthMetricsValue type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CommonBandwidthMetricsValue{}
 
-// CommonBandwidthMetricsValue struct for CommonBandwidthMetricsValue
+// CommonBandwidthMetricsValue Average bandwidth usage in the specified period, e.g. a day
 type CommonBandwidthMetricsValue struct {
-	Display string  `json:"display"`
-	Units   *string `json:"units,omitempty"`
-	Value   int64   `json:"value"`
+	// Bandwidth usage value
+	Display string `json:"display"`
+	// Unit of measurement e.g. bytes
+	Units *string `json:"units,omitempty"`
+	// Human readable version of display value
+	Value int64 `json:"value"`
 }
 
 // NewCommonBandwidthMetricsValue instantiates a new CommonBandwidthMetricsValue object

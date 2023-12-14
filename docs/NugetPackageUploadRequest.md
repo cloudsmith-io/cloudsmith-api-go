@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PackageFile** | **string** | The primary file for the package. | 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
-**SymbolsFile** | Pointer to **NullableString** | Attaches a symbols file to the package. | [optional] 
+**SymbolsFile** | Pointer to **NullableString** | Uploads a symbols file as a separate package | [optional] 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
 
 ## Methods

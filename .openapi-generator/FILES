@@ -137,6 +137,9 @@ docs/P2PackageUploadRequest.md
 docs/Package.md
 docs/PackageCopy.md
 docs/PackageCopyRequest.md
+docs/PackageDenyPolicy.md
+docs/PackageDenyPolicyRequest.md
+docs/PackageDenyPolicyRequestPatch.md
 docs/PackageDependencies.md
 docs/PackageDependency.md
 docs/PackageFile.md
@@ -360,6 +363,9 @@ model_p2_package_upload_request.go
 model_package.go
 model_package_copy.go
 model_package_copy_request.go
+model_package_deny_policy.go
+model_package_deny_policy_request.go
+model_package_deny_policy_request_patch.go
 model_package_dependencies.go
 model_package_dependency.go
 model_package_file.go
