@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -27,7 +27,8 @@ type FormatSupport struct {
 	// If true the package format supports file lists
 	FileLists bool `json:"file_lists"`
 	// If true the package format supports metadata
-	Metadata bool `json:"metadata"`
+	Metadata  bool                  `json:"metadata"`
+	Upstreams FormatSupportUpstream `json:"upstreams"`
 	// If true the package format supports versioning
 	Versioning bool `json:"versioning"`
 }
@@ -36,12 +37,13 @@ type FormatSupport struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFormatSupport(dependencies bool, distributions bool, fileLists bool, metadata bool, versioning bool) *FormatSupport {
+func NewFormatSupport(dependencies bool, distributions bool, fileLists bool, metadata bool, upstreams FormatSupportUpstream, versioning bool) *FormatSupport {
 	this := FormatSupport{}
 	this.Dependencies = dependencies
 	this.Distributions = distributions
 	this.FileLists = fileLists
 	this.Metadata = metadata
+	this.Upstreams = upstreams
 	this.Versioning = versioning
 	return &this
 }
@@ -150,6 +152,30 @@ func (o *FormatSupport) SetMetadata(v bool) {
 	o.Metadata = v
 }
 
+// GetUpstreams returns the Upstreams field value
+func (o *FormatSupport) GetUpstreams() FormatSupportUpstream {
+	if o == nil {
+		var ret FormatSupportUpstream
+		return ret
+	}
+
+	return o.Upstreams
+}
+
+// GetUpstreamsOk returns a tuple with the Upstreams field value
+// and a boolean to check if the value has been set.
+func (o *FormatSupport) GetUpstreamsOk() (*FormatSupportUpstream, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Upstreams, true
+}
+
+// SetUpstreams sets field value
+func (o *FormatSupport) SetUpstreams(v FormatSupportUpstream) {
+	o.Upstreams = v
+}
+
 // GetVersioning returns the Versioning field value
 func (o *FormatSupport) GetVersioning() bool {
 	if o == nil {
@@ -188,6 +214,7 @@ func (o FormatSupport) ToMap() (map[string]interface{}, error) {
 	toSerialize["distributions"] = o.Distributions
 	toSerialize["file_lists"] = o.FileLists
 	toSerialize["metadata"] = o.Metadata
+	toSerialize["upstreams"] = o.Upstreams
 	toSerialize["versioning"] = o.Versioning
 	return toSerialize, nil
 }

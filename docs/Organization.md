@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Country** | Pointer to **NullableString** |  | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
 **Location** | Pointer to **NullableString** | The city/town/area your organization is based in. | [optional] [readonly] 
-**Name** | Pointer to **string** | A descriptive name for your organization. | [optional] [readonly] 
+**Name** | **string** |  | 
 **Slug** | Pointer to **string** |  | [optional] [readonly] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **Tagline** | Pointer to **NullableString** | A short public descriptive for your organization. | [optional] [readonly] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewOrganization
 
-`func NewOrganization() *Organization`
+`func NewOrganization(name string, ) *Organization`
 
 NewOrganization instantiates a new Organization object
 This constructor will assign default values to properties that have it defined,
@@ -145,11 +145,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *Organization) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetSlug
 

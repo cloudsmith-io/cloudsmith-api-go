@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -23,6 +23,7 @@ var _ MappedNullable = &OrganizationMembership{}
 type OrganizationMembership struct {
 	Email           *string      `json:"email,omitempty"`
 	HasTwoFactor    *bool        `json:"has_two_factor,omitempty"`
+	IsActive        *string      `json:"is_active,omitempty"`
 	JoinedAt        *time.Time   `json:"joined_at,omitempty"`
 	LastLoginAt     NullableTime `json:"last_login_at,omitempty"`
 	LastLoginMethod *string      `json:"last_login_method,omitempty"`
@@ -113,6 +114,38 @@ func (o *OrganizationMembership) HasHasTwoFactor() bool {
 // SetHasTwoFactor gets a reference to the given bool and assigns it to the HasTwoFactor field.
 func (o *OrganizationMembership) SetHasTwoFactor(v bool) {
 	o.HasTwoFactor = &v
+}
+
+// GetIsActive returns the IsActive field value if set, zero value otherwise.
+func (o *OrganizationMembership) GetIsActive() string {
+	if o == nil || IsNil(o.IsActive) {
+		var ret string
+		return ret
+	}
+	return *o.IsActive
+}
+
+// GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrganizationMembership) GetIsActiveOk() (*string, bool) {
+	if o == nil || IsNil(o.IsActive) {
+		return nil, false
+	}
+	return o.IsActive, true
+}
+
+// HasIsActive returns a boolean if a field has been set.
+func (o *OrganizationMembership) HasIsActive() bool {
+	if o != nil && !IsNil(o.IsActive) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsActive gets a reference to the given string and assigns it to the IsActive field.
+func (o *OrganizationMembership) SetIsActive(v string) {
+	o.IsActive = &v
 }
 
 // GetJoinedAt returns the JoinedAt field value if set, zero value otherwise.
@@ -429,6 +462,9 @@ func (o OrganizationMembership) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.HasTwoFactor) {
 		toSerialize["has_two_factor"] = o.HasTwoFactor
+	}
+	if !IsNil(o.IsActive) {
+		toSerialize["is_active"] = o.IsActive
 	}
 	if !IsNil(o.JoinedAt) {
 		toSerialize["joined_at"] = o.JoinedAt

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -22,6 +22,8 @@ var _ MappedNullable = &DebPackageUploadRequest{}
 type DebPackageUploadRequest struct {
 	// The changes archive containing the changes made to the source and debian packaging files
 	ChangesFile NullableString `json:"changes_file,omitempty"`
+	// The component (channel) for the package (e.g. 'main', 'unstable', etc.)
+	Component *string `json:"component,omitempty"`
 	// The distribution to store the package for.
 	Distribution string `json:"distribution"`
 	// The primary file for the package.
@@ -40,6 +42,8 @@ type DebPackageUploadRequest struct {
 // will change when the set of required properties is changed
 func NewDebPackageUploadRequest(distribution string, packageFile string) *DebPackageUploadRequest {
 	this := DebPackageUploadRequest{}
+	var component string = "main"
+	this.Component = &component
 	this.Distribution = distribution
 	this.PackageFile = packageFile
 	return &this
@@ -50,6 +54,8 @@ func NewDebPackageUploadRequest(distribution string, packageFile string) *DebPac
 // but it doesn't guarantee that properties required by API are set
 func NewDebPackageUploadRequestWithDefaults() *DebPackageUploadRequest {
 	this := DebPackageUploadRequest{}
+	var component string = "main"
+	this.Component = &component
 	return &this
 }
 
@@ -94,6 +100,38 @@ func (o *DebPackageUploadRequest) SetChangesFileNil() {
 // UnsetChangesFile ensures that no value is present for ChangesFile, not even an explicit nil
 func (o *DebPackageUploadRequest) UnsetChangesFile() {
 	o.ChangesFile.Unset()
+}
+
+// GetComponent returns the Component field value if set, zero value otherwise.
+func (o *DebPackageUploadRequest) GetComponent() string {
+	if o == nil || IsNil(o.Component) {
+		var ret string
+		return ret
+	}
+	return *o.Component
+}
+
+// GetComponentOk returns a tuple with the Component field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebPackageUploadRequest) GetComponentOk() (*string, bool) {
+	if o == nil || IsNil(o.Component) {
+		return nil, false
+	}
+	return o.Component, true
+}
+
+// HasComponent returns a boolean if a field has been set.
+func (o *DebPackageUploadRequest) HasComponent() bool {
+	if o != nil && !IsNil(o.Component) {
+		return true
+	}
+
+	return false
+}
+
+// SetComponent gets a reference to the given string and assigns it to the Component field.
+func (o *DebPackageUploadRequest) SetComponent(v string) {
+	o.Component = &v
 }
 
 // GetDistribution returns the Distribution field value
@@ -274,6 +312,9 @@ func (o DebPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ChangesFile.IsSet() {
 		toSerialize["changes_file"] = o.ChangesFile.Get()
+	}
+	if !IsNil(o.Component) {
+		toSerialize["component"] = o.Component
 	}
 	toSerialize["distribution"] = o.Distribution
 	toSerialize["package_file"] = o.PackageFile

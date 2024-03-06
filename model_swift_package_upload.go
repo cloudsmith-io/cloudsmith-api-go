@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -67,6 +67,8 @@ type SwiftPackageUpload struct {
 	Release       NullableString `json:"release,omitempty"`
 	Repository    *string        `json:"repository,omitempty"`
 	RepositoryUrl *string        `json:"repository_url,omitempty"`
+	// A scope provides a namespace for related packages within the package registry.
+	Scope string `json:"scope"`
 	// The datetime the security scanning was completed.
 	SecurityScanCompletedAt NullableTime `json:"security_scan_completed_at,omitempty"`
 	// The datetime the security scanning was started.
@@ -119,8 +121,9 @@ type SwiftPackageUpload struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSwiftPackageUpload(version string) *SwiftPackageUpload {
+func NewSwiftPackageUpload(scope string, version string) *SwiftPackageUpload {
 	this := SwiftPackageUpload{}
+	this.Scope = scope
 	this.Version = version
 	return &this
 }
@@ -1437,6 +1440,30 @@ func (o *SwiftPackageUpload) SetRepositoryUrl(v string) {
 	o.RepositoryUrl = &v
 }
 
+// GetScope returns the Scope field value
+func (o *SwiftPackageUpload) GetScope() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetScopeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Scope, true
+}
+
+// SetScope sets field value
+func (o *SwiftPackageUpload) SetScope(v string) {
+	o.Scope = v
+}
+
 // GetSecurityScanCompletedAt returns the SecurityScanCompletedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SwiftPackageUpload) GetSecurityScanCompletedAt() time.Time {
 	if o == nil || IsNil(o.SecurityScanCompletedAt.Get()) {
@@ -2601,6 +2628,7 @@ func (o SwiftPackageUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RepositoryUrl) {
 		toSerialize["repository_url"] = o.RepositoryUrl
 	}
+	toSerialize["scope"] = o.Scope
 	if o.SecurityScanCompletedAt.IsSet() {
 		toSerialize["security_scan_completed_at"] = o.SecurityScanCompletedAt.Get()
 	}

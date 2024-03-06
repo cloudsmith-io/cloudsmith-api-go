@@ -47,6 +47,9 @@ docs/CondaPackageUpload.md
 docs/CondaPackageUploadRequest.md
 docs/CranPackageUpload.md
 docs/CranPackageUploadRequest.md
+docs/CranUpstream.md
+docs/CranUpstreamRequest.md
+docs/CranUpstreamRequestPatch.md
 docs/DartPackageUpload.md
 docs/DartPackageUploadRequest.md
 docs/DartUpstream.md
@@ -73,6 +76,7 @@ docs/Eula.md
 docs/FilesApi.md
 docs/Format.md
 docs/FormatSupport.md
+docs/FormatSupportUpstream.md
 docs/FormatsApi.md
 docs/GeoIpLocation.md
 docs/GoPackageUpload.md
@@ -280,6 +284,9 @@ model_conda_package_upload.go
 model_conda_package_upload_request.go
 model_cran_package_upload.go
 model_cran_package_upload_request.go
+model_cran_upstream.go
+model_cran_upstream_request.go
+model_cran_upstream_request_patch.go
 model_dart_package_upload.go
 model_dart_package_upload_request.go
 model_dart_upstream.go
@@ -303,6 +310,7 @@ model_error_detail.go
 model_eula.go
 model_format.go
 model_format_support.go
+model_format_support_upstream.go
 model_geo_ip_location.go
 model_go_package_upload.go
 model_go_package_upload_request.go

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PackageFile** | **string** | The primary file for the package. | 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
+**Scope** | **string** | A scope provides a namespace for related packages within the package registry. | 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
 **Version** | **string** | The raw version for this package. | 
 
@@ -13,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewSwiftPackageUploadRequest
 
-`func NewSwiftPackageUploadRequest(packageFile string, version string, ) *SwiftPackageUploadRequest`
+`func NewSwiftPackageUploadRequest(packageFile string, scope string, version string, ) *SwiftPackageUploadRequest`
 
 NewSwiftPackageUploadRequest instantiates a new SwiftPackageUploadRequest object
 This constructor will assign default values to properties that have it defined,
@@ -72,6 +73,26 @@ SetRepublish sets Republish field to given value.
 `func (o *SwiftPackageUploadRequest) HasRepublish() bool`
 
 HasRepublish returns a boolean if a field has been set.
+
+### GetScope
+
+`func (o *SwiftPackageUploadRequest) GetScope() string`
+
+GetScope returns the Scope field if non-nil, zero value otherwise.
+
+### GetScopeOk
+
+`func (o *SwiftPackageUploadRequest) GetScopeOk() (*string, bool)`
+
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScope
+
+`func (o *SwiftPackageUploadRequest) SetScope(v string)`
+
+SetScope sets Scope field to given value.
+
 
 ### GetTags
 

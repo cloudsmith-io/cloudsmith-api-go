@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -107,7 +107,7 @@ type RepositoryCreate struct {
 	SlugPerm *string `json:"slug_perm,omitempty"`
 	// The Cloudsmith region in which package files are stored.
 	StorageRegion *string `json:"storage_region,omitempty"`
-	// If checked, npm packages will be validated strictly to ensure the package matches specifcation. You can turn this off if you have packages that are old or otherwise mildly off-spec, but we can't guarantee the packages will work with npm-cli or other tooling correctly. Turn off at your own risk!
+	// If checked, npm packages will be validated strictly to ensure the package matches specifcation. You can turn this on if you want to guarantee that the packages will work with npm-cli and other tools correctly.
 	StrictNpmValidation *bool `json:"strict_npm_validation,omitempty"`
 	// If checked, a 'Label' field will be present in Debian-based repositories. It will contain a string that identifies the entitlement token used to authenticate the repository, in the form of 'source=t-<identifier>'; or 'source=none' if no token was used. You can use this to help with pinning.
 	UseDebianLabels *bool `json:"use_debian_labels,omitempty"`

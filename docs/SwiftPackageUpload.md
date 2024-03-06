@@ -42,6 +42,7 @@ Name | Type | Description | Notes
 **Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
+**Scope** | **string** | A scope provides a namespace for related packages within the package registry. | 
 **SecurityScanCompletedAt** | Pointer to **NullableTime** | The datetime the security scanning was completed. | [optional] [readonly] 
 **SecurityScanStartedAt** | Pointer to **NullableTime** | The datetime the security scanning was started. | [optional] [readonly] 
 **SecurityScanStatus** | Pointer to **NullableString** |  | [optional] [readonly] [default to "Awaiting Security Scan"]
@@ -77,7 +78,7 @@ Name | Type | Description | Notes
 
 ### NewSwiftPackageUpload
 
-`func NewSwiftPackageUpload(version string, ) *SwiftPackageUpload`
+`func NewSwiftPackageUpload(scope string, version string, ) *SwiftPackageUpload`
 
 NewSwiftPackageUpload instantiates a new SwiftPackageUpload object
 This constructor will assign default values to properties that have it defined,
@@ -1121,6 +1122,26 @@ SetRepositoryUrl sets RepositoryUrl field to given value.
 `func (o *SwiftPackageUpload) HasRepositoryUrl() bool`
 
 HasRepositoryUrl returns a boolean if a field has been set.
+
+### GetScope
+
+`func (o *SwiftPackageUpload) GetScope() string`
+
+GetScope returns the Scope field if non-nil, zero value otherwise.
+
+### GetScopeOk
+
+`func (o *SwiftPackageUpload) GetScopeOk() (*string, bool)`
+
+GetScopeOk returns a tuple with the Scope field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScope
+
+`func (o *SwiftPackageUpload) SetScope(v string)`
+
+SetScope sets Scope field to given value.
+
 
 ### GetSecurityScanCompletedAt
 

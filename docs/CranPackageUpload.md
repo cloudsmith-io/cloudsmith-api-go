@@ -39,6 +39,7 @@ Name | Type | Description | Notes
 **OriginRepository** | Pointer to **string** |  | [optional] [readonly] 
 **OriginRepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
 **PackageType** | Pointer to **int64** | The type of package contents. | [optional] [readonly] 
+**RVersion** | Pointer to **NullableString** | Binary package uploads should specify the version of R they were built for. | [optional] 
 **Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
@@ -1037,6 +1038,41 @@ SetPackageType sets PackageType field to given value.
 
 HasPackageType returns a boolean if a field has been set.
 
+### GetRVersion
+
+`func (o *CranPackageUpload) GetRVersion() string`
+
+GetRVersion returns the RVersion field if non-nil, zero value otherwise.
+
+### GetRVersionOk
+
+`func (o *CranPackageUpload) GetRVersionOk() (*string, bool)`
+
+GetRVersionOk returns a tuple with the RVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRVersion
+
+`func (o *CranPackageUpload) SetRVersion(v string)`
+
+SetRVersion sets RVersion field to given value.
+
+### HasRVersion
+
+`func (o *CranPackageUpload) HasRVersion() bool`
+
+HasRVersion returns a boolean if a field has been set.
+
+### SetRVersionNil
+
+`func (o *CranPackageUpload) SetRVersionNil(b bool)`
+
+ SetRVersionNil sets the value for RVersion to be an explicit nil
+
+### UnsetRVersion
+`func (o *CranPackageUpload) UnsetRVersion()`
+
+UnsetRVersion ensures that no value is present for RVersion, not even an explicit nil
 ### GetRelease
 
 `func (o *CranPackageUpload) GetRelease() string`

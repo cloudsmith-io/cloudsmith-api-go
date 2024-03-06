@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -25,7 +25,7 @@ type PackageDenyPolicyRequestPatch struct {
 	Enabled *bool          `json:"enabled,omitempty"`
 	Name    NullableString `json:"name,omitempty"`
 	// Packages that match this query will trigger this deny rule.
-	PackageQueryString NullableString `json:"package_query_string,omitempty"`
+	PackageQueryString *string `json:"package_query_string,omitempty"`
 }
 
 // NewPackageDenyPolicyRequestPatch instantiates a new PackageDenyPolicyRequestPatch object
@@ -163,47 +163,36 @@ func (o *PackageDenyPolicyRequestPatch) UnsetName() {
 	o.Name.Unset()
 }
 
-// GetPackageQueryString returns the PackageQueryString field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPackageQueryString returns the PackageQueryString field value if set, zero value otherwise.
 func (o *PackageDenyPolicyRequestPatch) GetPackageQueryString() string {
-	if o == nil || IsNil(o.PackageQueryString.Get()) {
+	if o == nil || IsNil(o.PackageQueryString) {
 		var ret string
 		return ret
 	}
-	return *o.PackageQueryString.Get()
+	return *o.PackageQueryString
 }
 
 // GetPackageQueryStringOk returns a tuple with the PackageQueryString field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PackageDenyPolicyRequestPatch) GetPackageQueryStringOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.PackageQueryString) {
 		return nil, false
 	}
-	return o.PackageQueryString.Get(), o.PackageQueryString.IsSet()
+	return o.PackageQueryString, true
 }
 
 // HasPackageQueryString returns a boolean if a field has been set.
 func (o *PackageDenyPolicyRequestPatch) HasPackageQueryString() bool {
-	if o != nil && o.PackageQueryString.IsSet() {
+	if o != nil && !IsNil(o.PackageQueryString) {
 		return true
 	}
 
 	return false
 }
 
-// SetPackageQueryString gets a reference to the given NullableString and assigns it to the PackageQueryString field.
+// SetPackageQueryString gets a reference to the given string and assigns it to the PackageQueryString field.
 func (o *PackageDenyPolicyRequestPatch) SetPackageQueryString(v string) {
-	o.PackageQueryString.Set(&v)
-}
-
-// SetPackageQueryStringNil sets the value for PackageQueryString to be an explicit nil
-func (o *PackageDenyPolicyRequestPatch) SetPackageQueryStringNil() {
-	o.PackageQueryString.Set(nil)
-}
-
-// UnsetPackageQueryString ensures that no value is present for PackageQueryString, not even an explicit nil
-func (o *PackageDenyPolicyRequestPatch) UnsetPackageQueryString() {
-	o.PackageQueryString.Unset()
+	o.PackageQueryString = &v
 }
 
 func (o PackageDenyPolicyRequestPatch) MarshalJSON() ([]byte, error) {
@@ -225,8 +214,8 @@ func (o PackageDenyPolicyRequestPatch) ToMap() (map[string]interface{}, error) {
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
-	if o.PackageQueryString.IsSet() {
-		toSerialize["package_query_string"] = o.PackageQueryString.Get()
+	if !IsNil(o.PackageQueryString) {
+		toSerialize["package_query_string"] = o.PackageQueryString
 	}
 	return toSerialize, nil
 }

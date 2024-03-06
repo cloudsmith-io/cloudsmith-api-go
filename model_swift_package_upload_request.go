@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -24,6 +24,8 @@ type SwiftPackageUploadRequest struct {
 	PackageFile string `json:"package_file"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
 	Republish *bool `json:"republish,omitempty"`
+	// A scope provides a namespace for related packages within the package registry.
+	Scope string `json:"scope"`
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`
 	// The raw version for this package.
@@ -34,9 +36,10 @@ type SwiftPackageUploadRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSwiftPackageUploadRequest(packageFile string, version string) *SwiftPackageUploadRequest {
+func NewSwiftPackageUploadRequest(packageFile string, scope string, version string) *SwiftPackageUploadRequest {
 	this := SwiftPackageUploadRequest{}
 	this.PackageFile = packageFile
+	this.Scope = scope
 	this.Version = version
 	return &this
 }
@@ -103,6 +106,30 @@ func (o *SwiftPackageUploadRequest) HasRepublish() bool {
 // SetRepublish gets a reference to the given bool and assigns it to the Republish field.
 func (o *SwiftPackageUploadRequest) SetRepublish(v bool) {
 	o.Republish = &v
+}
+
+// GetScope returns the Scope field value
+func (o *SwiftPackageUploadRequest) GetScope() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Scope
+}
+
+// GetScopeOk returns a tuple with the Scope field value
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUploadRequest) GetScopeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Scope, true
+}
+
+// SetScope sets field value
+func (o *SwiftPackageUploadRequest) SetScope(v string) {
+	o.Scope = v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -186,6 +213,7 @@ func (o SwiftPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
+	toSerialize["scope"] = o.Scope
 	if o.Tags.IsSet() {
 		toSerialize["tags"] = o.Tags.Get()
 	}
