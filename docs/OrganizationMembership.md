@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Email** | Pointer to **string** |  | [optional] [readonly] 
 **HasTwoFactor** | Pointer to **bool** |  | [optional] [readonly] 
+**IsActive** | Pointer to **string** |  | [optional] [readonly] 
 **JoinedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
 **LastLoginAt** | Pointer to **NullableTime** |  | [optional] [readonly] 
 **LastLoginMethod** | Pointer to **string** |  | [optional] [readonly] [default to "Unknown"]
@@ -84,6 +85,31 @@ SetHasTwoFactor sets HasTwoFactor field to given value.
 `func (o *OrganizationMembership) HasHasTwoFactor() bool`
 
 HasHasTwoFactor returns a boolean if a field has been set.
+
+### GetIsActive
+
+`func (o *OrganizationMembership) GetIsActive() string`
+
+GetIsActive returns the IsActive field if non-nil, zero value otherwise.
+
+### GetIsActiveOk
+
+`func (o *OrganizationMembership) GetIsActiveOk() (*string, bool)`
+
+GetIsActiveOk returns a tuple with the IsActive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsActive
+
+`func (o *OrganizationMembership) SetIsActive(v string)`
+
+SetIsActive sets IsActive field to given value.
+
+### HasIsActive
+
+`func (o *OrganizationMembership) HasIsActive() bool`
+
+HasIsActive returns a boolean if a field has been set.
 
 ### GetJoinedAt
 

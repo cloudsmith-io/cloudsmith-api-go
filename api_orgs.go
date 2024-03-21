@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -3597,6 +3597,7 @@ type ApiOrgsMembersListRequest struct {
 	org        string
 	page       *int64
 	pageSize   *int64
+	isActive   *bool
 }
 
 // A page number within the paginated result set.
@@ -3608,6 +3609,12 @@ func (r ApiOrgsMembersListRequest) Page(page int64) ApiOrgsMembersListRequest {
 // Number of results to return per page.
 func (r ApiOrgsMembersListRequest) PageSize(pageSize int64) ApiOrgsMembersListRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// Filter for active/inactive users.
+func (r ApiOrgsMembersListRequest) IsActive(isActive bool) ApiOrgsMembersListRequest {
+	r.isActive = &isActive
 	return r
 }
 
@@ -3659,6 +3666,9 @@ func (a *OrgsApiService) OrgsMembersListExecute(r ApiOrgsMembersListRequest) ([]
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+	}
+	if r.isActive != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_active", r.isActive, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

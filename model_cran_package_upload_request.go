@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -20,8 +20,12 @@ var _ MappedNullable = &CranPackageUploadRequest{}
 
 // CranPackageUploadRequest struct for CranPackageUploadRequest
 type CranPackageUploadRequest struct {
+	// Binary package uploads for macOS should specify the architecture they were built for.
+	Architecture *string `json:"architecture,omitempty"`
 	// The primary file for the package.
 	PackageFile string `json:"package_file"`
+	// Binary package uploads should specify the version of R they were built for.
+	RVersion NullableString `json:"r_version,omitempty"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
 	Republish *bool `json:"republish,omitempty"`
 	// A comma-separated values list of tags to add to the package.
@@ -46,6 +50,38 @@ func NewCranPackageUploadRequestWithDefaults() *CranPackageUploadRequest {
 	return &this
 }
 
+// GetArchitecture returns the Architecture field value if set, zero value otherwise.
+func (o *CranPackageUploadRequest) GetArchitecture() string {
+	if o == nil || IsNil(o.Architecture) {
+		var ret string
+		return ret
+	}
+	return *o.Architecture
+}
+
+// GetArchitectureOk returns a tuple with the Architecture field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CranPackageUploadRequest) GetArchitectureOk() (*string, bool) {
+	if o == nil || IsNil(o.Architecture) {
+		return nil, false
+	}
+	return o.Architecture, true
+}
+
+// HasArchitecture returns a boolean if a field has been set.
+func (o *CranPackageUploadRequest) HasArchitecture() bool {
+	if o != nil && !IsNil(o.Architecture) {
+		return true
+	}
+
+	return false
+}
+
+// SetArchitecture gets a reference to the given string and assigns it to the Architecture field.
+func (o *CranPackageUploadRequest) SetArchitecture(v string) {
+	o.Architecture = &v
+}
+
 // GetPackageFile returns the PackageFile field value
 func (o *CranPackageUploadRequest) GetPackageFile() string {
 	if o == nil {
@@ -68,6 +104,49 @@ func (o *CranPackageUploadRequest) GetPackageFileOk() (*string, bool) {
 // SetPackageFile sets field value
 func (o *CranPackageUploadRequest) SetPackageFile(v string) {
 	o.PackageFile = v
+}
+
+// GetRVersion returns the RVersion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CranPackageUploadRequest) GetRVersion() string {
+	if o == nil || IsNil(o.RVersion.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RVersion.Get()
+}
+
+// GetRVersionOk returns a tuple with the RVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CranPackageUploadRequest) GetRVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RVersion.Get(), o.RVersion.IsSet()
+}
+
+// HasRVersion returns a boolean if a field has been set.
+func (o *CranPackageUploadRequest) HasRVersion() bool {
+	if o != nil && o.RVersion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRVersion gets a reference to the given NullableString and assigns it to the RVersion field.
+func (o *CranPackageUploadRequest) SetRVersion(v string) {
+	o.RVersion.Set(&v)
+}
+
+// SetRVersionNil sets the value for RVersion to be an explicit nil
+func (o *CranPackageUploadRequest) SetRVersionNil() {
+	o.RVersion.Set(nil)
+}
+
+// UnsetRVersion ensures that no value is present for RVersion, not even an explicit nil
+func (o *CranPackageUploadRequest) UnsetRVersion() {
+	o.RVersion.Unset()
 }
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
@@ -155,7 +234,13 @@ func (o CranPackageUploadRequest) MarshalJSON() ([]byte, error) {
 
 func (o CranPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Architecture) {
+		toSerialize["architecture"] = o.Architecture
+	}
 	toSerialize["package_file"] = o.PackageFile
+	if o.RVersion.IsSet() {
+		toSerialize["r_version"] = o.RVersion.Get()
+	}
 	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}

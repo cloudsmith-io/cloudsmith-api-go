@@ -85,7 +85,7 @@ import (
 
 func main() {
     org := "org_example" // string | 
-    data := *openapiclient.NewPackageDenyPolicyRequest() // PackageDenyPolicyRequest |  (optional)
+    data := *openapiclient.NewPackageDenyPolicyRequest("PackageQueryString_example") // PackageDenyPolicyRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -451,7 +451,7 @@ import (
 func main() {
     org := "org_example" // string | 
     slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewPackageDenyPolicyRequest() // PackageDenyPolicyRequest |  (optional)
+    data := *openapiclient.NewPackageDenyPolicyRequest("PackageQueryString_example") // PackageDenyPolicyRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1824,7 +1824,7 @@ Name | Type | Description  | Notes
 
 ## OrgsMembersList
 
-> []OrganizationMembership OrgsMembersList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []OrganizationMembership OrgsMembersList(ctx, org).Page(page).PageSize(pageSize).IsActive(isActive).Execute()
 
 Get the details for all organization members.
 
@@ -1846,10 +1846,11 @@ func main() {
     org := "org_example" // string | 
     page := int64(56) // int64 | A page number within the paginated result set. (optional)
     pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+    isActive := true // bool | Filter for active/inactive users. (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsMembersList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+    resp, r, err := apiClient.OrgsApi.OrgsMembersList(context.Background(), org).Page(page).PageSize(pageSize).IsActive(isActive).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1877,6 +1878,7 @@ Name | Type | Description  | Notes
 
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
+ **isActive** | **bool** | Filter for active/inactive users. | [default to false]
 
 ### Return type
 

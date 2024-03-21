@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** |  | [optional] 
 **Enabled** | Pointer to **bool** | Whether this rule is enabled or disabled. | [optional] 
 **Name** | Pointer to **NullableString** |  | [optional] 
-**PackageQueryString** | Pointer to **NullableString** | Packages that match this query will trigger this deny rule. | [optional] 
+**PackageQueryString** | **string** | Packages that match this query will trigger this deny rule. | 
 
 ## Methods
 
 ### NewPackageDenyPolicyRequest
 
-`func NewPackageDenyPolicyRequest() *PackageDenyPolicyRequest`
+`func NewPackageDenyPolicyRequest(packageQueryString string, ) *PackageDenyPolicyRequest`
 
 NewPackageDenyPolicyRequest instantiates a new PackageDenyPolicyRequest object
 This constructor will assign default values to properties that have it defined,
@@ -142,22 +142,7 @@ and a boolean to check if the value has been set.
 
 SetPackageQueryString sets PackageQueryString field to given value.
 
-### HasPackageQueryString
 
-`func (o *PackageDenyPolicyRequest) HasPackageQueryString() bool`
-
-HasPackageQueryString returns a boolean if a field has been set.
-
-### SetPackageQueryStringNil
-
-`func (o *PackageDenyPolicyRequest) SetPackageQueryStringNil(b bool)`
-
- SetPackageQueryStringNil sets the value for PackageQueryString to be an explicit nil
-
-### UnsetPackageQueryString
-`func (o *PackageDenyPolicyRequest) UnsetPackageQueryString()`
-
-UnsetPackageQueryString ensures that no value is present for PackageQueryString, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

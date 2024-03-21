@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ChangesFile** | Pointer to **NullableString** | The changes archive containing the changes made to the source and debian packaging files | [optional] 
+**Component** | Pointer to **string** | The component (channel) for the package (e.g. &#39;main&#39;, &#39;unstable&#39;, etc.) | [optional] [default to "main"]
 **Distribution** | **string** | The distribution to store the package for. | 
 **PackageFile** | **string** | The primary file for the package. | 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
@@ -65,6 +66,31 @@ HasChangesFile returns a boolean if a field has been set.
 `func (o *DebPackageUploadRequest) UnsetChangesFile()`
 
 UnsetChangesFile ensures that no value is present for ChangesFile, not even an explicit nil
+### GetComponent
+
+`func (o *DebPackageUploadRequest) GetComponent() string`
+
+GetComponent returns the Component field if non-nil, zero value otherwise.
+
+### GetComponentOk
+
+`func (o *DebPackageUploadRequest) GetComponentOk() (*string, bool)`
+
+GetComponentOk returns a tuple with the Component field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComponent
+
+`func (o *DebPackageUploadRequest) SetComponent(v string)`
+
+SetComponent sets Component field to given value.
+
+### HasComponent
+
+`func (o *DebPackageUploadRequest) HasComponent() bool`
+
+HasComponent returns a boolean if a field has been set.
+
 ### GetDistribution
 
 `func (o *DebPackageUploadRequest) GetDistribution() string`

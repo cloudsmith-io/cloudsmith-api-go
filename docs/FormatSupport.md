@@ -8,13 +8,14 @@ Name | Type | Description | Notes
 **Distributions** | **bool** | If true the package format supports distributions | 
 **FileLists** | **bool** | If true the package format supports file lists | 
 **Metadata** | **bool** | If true the package format supports metadata | 
+**Upstreams** | [**FormatSupportUpstream**](FormatSupportUpstream.md) |  | 
 **Versioning** | **bool** | If true the package format supports versioning | 
 
 ## Methods
 
 ### NewFormatSupport
 
-`func NewFormatSupport(dependencies bool, distributions bool, fileLists bool, metadata bool, versioning bool, ) *FormatSupport`
+`func NewFormatSupport(dependencies bool, distributions bool, fileLists bool, metadata bool, upstreams FormatSupportUpstream, versioning bool, ) *FormatSupport`
 
 NewFormatSupport instantiates a new FormatSupport object
 This constructor will assign default values to properties that have it defined,
@@ -107,6 +108,26 @@ and a boolean to check if the value has been set.
 `func (o *FormatSupport) SetMetadata(v bool)`
 
 SetMetadata sets Metadata field to given value.
+
+
+### GetUpstreams
+
+`func (o *FormatSupport) GetUpstreams() FormatSupportUpstream`
+
+GetUpstreams returns the Upstreams field if non-nil, zero value otherwise.
+
+### GetUpstreamsOk
+
+`func (o *FormatSupport) GetUpstreamsOk() (*FormatSupportUpstream, bool)`
+
+GetUpstreamsOk returns a tuple with the Upstreams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpstreams
+
+`func (o *FormatSupport) SetUpstreams(v FormatSupportUpstream)`
+
+SetUpstreams sets Upstreams field to given value.
 
 
 ### GetVersioning

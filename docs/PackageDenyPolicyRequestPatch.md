@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** |  | [optional] 
 **Enabled** | Pointer to **bool** | Whether this rule is enabled or disabled. | [optional] 
 **Name** | Pointer to **NullableString** |  | [optional] 
-**PackageQueryString** | Pointer to **NullableString** | Packages that match this query will trigger this deny rule. | [optional] 
+**PackageQueryString** | Pointer to **string** | Packages that match this query will trigger this deny rule. | [optional] 
 
 ## Methods
 
@@ -148,16 +148,6 @@ SetPackageQueryString sets PackageQueryString field to given value.
 
 HasPackageQueryString returns a boolean if a field has been set.
 
-### SetPackageQueryStringNil
-
-`func (o *PackageDenyPolicyRequestPatch) SetPackageQueryStringNil(b bool)`
-
- SetPackageQueryStringNil sets the value for PackageQueryString to be an explicit nil
-
-### UnsetPackageQueryString
-`func (o *PackageDenyPolicyRequestPatch) UnsetPackageQueryString()`
-
-UnsetPackageQueryString ensures that no value is present for PackageQueryString, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

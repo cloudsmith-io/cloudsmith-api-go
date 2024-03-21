@@ -2588,7 +2588,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewSwiftPackageUploadRequest("PackageFile_example", "Version_example") // SwiftPackageUploadRequest |  (optional)
+    data := *openapiclient.NewSwiftPackageUploadRequest("PackageFile_example", "Scope_example", "Version_example") // SwiftPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -4419,7 +4419,7 @@ import (
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    data := *openapiclient.NewSwiftPackageUploadRequest("PackageFile_example", "Version_example") // SwiftPackageUploadRequest |  (optional)
+    data := *openapiclient.NewSwiftPackageUploadRequest("PackageFile_example", "Scope_example", "Version_example") // SwiftPackageUploadRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.327.0
+  version: 1.372.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -2523,6 +2523,12 @@ paths:
         name: page_size
         schema:
           type: integer
+      - description: Filter for active/inactive users.
+        in: query
+        name: is_active
+        schema:
+          default: false
+          type: boolean
       responses:
         "200":
           content:
@@ -2531,7 +2537,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/OrganizationMembership'
                 type: array
-          description: OK
+          description: Retrieved the list of organization's members
         "400":
           content:
             application/json:
@@ -8173,6 +8179,286 @@ paths:
       summary: Regenerate RSA Key for the Repository.
       tags:
       - repos
+  /repos/{owner}/{identifier}/upstream/cran/:
+    get:
+      description: List CRAN upstream configs for this repository.
+      operationId: repos_upstream_cran_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CranUpstream'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: List CRAN upstream configs for this repository.
+      tags:
+      - repos
+    post:
+      description: Create a CRAN upstream config for this repository.
+      operationId: repos_upstream_cran_create
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CranUpstreamRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CranUpstream'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Create a CRAN upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/upstream/cran/{slug_perm}/:
+    delete:
+      description: Delete a CRAN upstream config for this repository.
+      operationId: repos_upstream_cran_delete
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Delete a CRAN upstream config for this repository.
+      tags:
+      - repos
+    get:
+      description: Retrieve a CRAN upstream config for this repository.
+      operationId: repos_upstream_cran_read
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CranUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Retrieve a CRAN upstream config for this repository.
+      tags:
+      - repos
+    patch:
+      description: Partially update a CRAN upstream config for this repository.
+      operationId: repos_upstream_cran_partial_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CranUpstreamRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CranUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Partially update a CRAN upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+    put:
+      description: Update a CRAN upstream config for this repository.
+      operationId: repos_upstream_cran_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CranUpstreamRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CranUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Update a CRAN upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
   /repos/{owner}/{identifier}/upstream/dart/:
     get:
       description: List Dart upstream configs for this repository.
@@ -13235,11 +13521,78 @@ components:
       - name
       type: object
       x-nullable: true
+    FormatSupportUpstream:
+      description: The upstream support for the package format
+      example:
+        auth_modes:
+        - Username and Password
+        - Username and Password
+        proxying: true
+        indexing: true
+        signature_verification: Unsupported
+        caching: true
+        indexing_behavior: Unsupported
+      properties:
+        auth_modes:
+          description: The authentication modes supported by the upstream format
+          items:
+            default: Username and Password
+            enum:
+            - Username and Password
+            - Token
+            type: string
+          type: array
+        caching:
+          description: If true the upstream format supports caching
+          title: Caching
+          type: boolean
+        indexing:
+          description: If true the upstream format supports indexing
+          title: Indexing
+          type: boolean
+        indexing_behavior:
+          default: Unsupported
+          description: The behavior of the upstream when indexing
+          enum:
+          - Unsupported
+          - Ahead-of-time (static) indexing
+          - Just-in-time (dynamic) indexing
+          title: Indexing behavior
+          type: string
+        proxying:
+          description: If true the upstream format supports proxying
+          title: Proxying
+          type: boolean
+        signature_verification:
+          default: Unsupported
+          description: The signature verification supported by the upstream format
+          enum:
+          - Unsupported
+          - Repository Metadata
+          - Packages
+          - Repository Metadata and Packages
+          title: Signature verification
+          type: string
+      required:
+      - auth_modes
+      - caching
+      - indexing
+      - proxying
+      type: object
     FormatSupport:
       description: A set of what the package format supports
       example:
         metadata: true
         versioning: true
+        upstreams:
+          auth_modes:
+          - Username and Password
+          - Username and Password
+          proxying: true
+          indexing: true
+          signature_verification: Unsupported
+          caching: true
+          indexing_behavior: Unsupported
         file_lists: true
         distributions: true
         dependencies: true
@@ -13260,6 +13613,8 @@ components:
           description: If true the package format supports metadata
           title: Metadata
           type: boolean
+        upstreams:
+          $ref: '#/components/schemas/FormatSupportUpstream'
         versioning:
           description: If true the package format supports versioning
           title: Versioning
@@ -13269,6 +13624,7 @@ components:
       - distributions
       - file_lists
       - metadata
+      - upstreams
       - versioning
       type: object
     Format:
@@ -13282,6 +13638,15 @@ components:
         supports:
           metadata: true
           versioning: true
+          upstreams:
+            auth_modes:
+            - Username and Password
+            - Username and Password
+            proxying: true
+            indexing: true
+            signature_verification: Unsupported
+            caching: true
+            indexing_behavior: Unsupported
           file_lists: true
           distributions: true
           dependencies: true
@@ -13632,9 +13997,7 @@ components:
           title: Location
           type: string
         name:
-          description: A descriptive name for your organization.
           minLength: 1
-          readOnly: true
           title: Name
           type: string
         slug:
@@ -13651,6 +14014,8 @@ components:
           readOnly: true
           title: Tagline
           type: string
+      required:
+      - name
       type: object
     PackageDenyPolicy:
       example:
@@ -13693,7 +14058,6 @@ components:
         package_query_string:
           description: Packages that match this query will trigger this deny rule.
           minLength: 1
-          nullable: true
           title: Package query string
           type: string
         slug_perm:
@@ -13719,6 +14083,8 @@ components:
           readOnly: true
           title: Updated at
           type: string
+      required:
+      - package_query_string
       type: object
     PackageDenyPolicyRequest:
       example:
@@ -13744,9 +14110,10 @@ components:
         package_query_string:
           description: Packages that match this query will trigger this deny rule.
           minLength: 1
-          nullable: true
           title: Package query string
           type: string
+      required:
+      - package_query_string
       type: object
     PackageDenyPolicyRequestPatch:
       example:
@@ -13772,7 +14139,6 @@ components:
         package_query_string:
           description: Packages that match this query will trigger this deny rule.
           minLength: 1
-          nullable: true
           title: Package query string
           type: string
       type: object
@@ -14322,6 +14688,7 @@ components:
       example:
         joined_at: 2000-01-23T04:56:07.000+00:00
         last_login_at: 2000-01-23T04:56:07.000+00:00
+        is_active: is_active
         role: Owner
         visibility: Public
         user_id: user_id
@@ -14341,6 +14708,10 @@ components:
           readOnly: true
           title: Has two factor
           type: boolean
+        is_active:
+          readOnly: true
+          title: Is active
+          type: string
         joined_at:
           format: date-time
           readOnly: true
@@ -18744,13 +19115,29 @@ components:
     CranPackageUploadRequest:
       example:
         republish: true
+        r_version: r_version
         package_file: package_file
+        architecture: architecture
         tags: tags
       properties:
+        architecture:
+          description: Binary package uploads for macOS should specify the architecture
+            they were built for.
+          minLength: 1
+          title: Architecture
+          type: string
         package_file:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        r_version:
+          description: Binary package uploads should specify the version of R they
+            were built for.
+          maxLength: 16
+          minLength: 1
+          nullable: true
+          title: R version
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -18873,6 +19260,7 @@ components:
         stage_str: stage_str
         stage: 2
         format_url: https://openapi-generator.tech
+        r_version: r_version
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
         is_sync_failed: true
@@ -19037,6 +19425,14 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        r_version:
+          description: Binary package uploads should specify the version of R they
+            were built for.
+          maxLength: 16
+          minLength: 1
+          nullable: true
+          title: R version
+          type: string
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -19720,6 +20116,7 @@ components:
     DebPackageUploadRequest:
       example:
         sources_file: sources_file
+        component: main
         republish: true
         changes_file: changes_file
         distribution: distribution
@@ -19732,6 +20129,15 @@ components:
           minLength: 1
           nullable: true
           title: Changes file
+          type: string
+        component:
+          default: main
+          description: "The component (channel) for the package (e.g. 'main', 'unstable',\
+            \ etc.)"
+          maxLength: 64
+          minLength: 1
+          pattern: "^[-_.\\w]+$"
+          title: Component
           type: string
         distribution:
           description: The distribution to store the package for.
@@ -26752,6 +27158,7 @@ components:
     SwiftPackageUploadRequest:
       example:
         republish: true
+        scope: scope
         package_file: package_file
         version: version
         tags: tags
@@ -26767,6 +27174,13 @@ components:
             \ as a duplicate."
           title: Republish
           type: boolean
+        scope:
+          description: A scope provides a namespace for related packages within the
+            package registry.
+          maxLength: 39
+          minLength: 1
+          title: Scope
+          type: string
         tags:
           description: A comma-separated values list of tags to add to the package.
           maxLength: 1024
@@ -26781,6 +27195,7 @@ components:
           type: string
       required:
       - package_file
+      - scope
       - version
       type: object
     SwiftPackageUpload:
@@ -26868,6 +27283,7 @@ components:
         downloads: 0
         subtype: subtype
         uploader: uploader
+        scope: scope
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
         status_reason: status_reason
@@ -27068,6 +27484,13 @@ components:
           readOnly: true
           title: Repository url
           type: string
+        scope:
+          description: A scope provides a namespace for related packages within the
+            package registry.
+          maxLength: 39
+          minLength: 1
+          title: Scope
+          type: string
         security_scan_completed_at:
           description: The datetime the security scanning was completed.
           format: date-time
@@ -27243,6 +27666,7 @@ components:
           title: Vulnerability scan results url
           type: string
       required:
+      - scope
       - version
       type: object
     TerraformPackageUploadRequest:
@@ -31773,10 +32197,8 @@ components:
           type: string
         strict_npm_validation:
           description: "If checked, npm packages will be validated strictly to ensure\
-            \ the package matches specifcation. You can turn this off if you have\
-            \ packages that are old or otherwise mildly off-spec, but we can't guarantee\
-            \ the packages will work with npm-cli or other tooling correctly. Turn\
-            \ off at your own risk!"
+            \ the package matches specifcation. You can turn this on if you want to\
+            \ guarantee that the packages will work with npm-cli and other tools correctly."
           title: Strict Npm Validation?
           type: boolean
         use_debian_labels:
@@ -32117,10 +32539,8 @@ components:
           type: string
         strict_npm_validation:
           description: "If checked, npm packages will be validated strictly to ensure\
-            \ the package matches specifcation. You can turn this off if you have\
-            \ packages that are old or otherwise mildly off-spec, but we can't guarantee\
-            \ the packages will work with npm-cli or other tooling correctly. Turn\
-            \ off at your own risk!"
+            \ the package matches specifcation. You can turn this on if you want to\
+            \ guarantee that the packages will work with npm-cli and other tools correctly."
           title: Strict Npm Validation?
           type: boolean
         use_debian_labels:
@@ -32595,10 +33015,8 @@ components:
           type: string
         strict_npm_validation:
           description: "If checked, npm packages will be validated strictly to ensure\
-            \ the package matches specifcation. You can turn this off if you have\
-            \ packages that are old or otherwise mildly off-spec, but we can't guarantee\
-            \ the packages will work with npm-cli or other tooling correctly. Turn\
-            \ off at your own risk!"
+            \ the package matches specifcation. You can turn this on if you want to\
+            \ guarantee that the packages will work with npm-cli and other tools correctly."
           title: Strict Npm Validation?
           type: boolean
         use_debian_labels:
@@ -32933,10 +33351,8 @@ components:
           type: string
         strict_npm_validation:
           description: "If checked, npm packages will be validated strictly to ensure\
-            \ the package matches specifcation. You can turn this off if you have\
-            \ packages that are old or otherwise mildly off-spec, but we can't guarantee\
-            \ the packages will work with npm-cli or other tooling correctly. Turn\
-            \ off at your own risk!"
+            \ the package matches specifcation. You can turn this on if you want to\
+            \ guarantee that the packages will work with npm-cli and other tools correctly."
           title: Strict Npm Validation?
           type: boolean
         use_debian_labels:
@@ -33372,6 +33788,369 @@ components:
           type: string
       required:
       - rsa_private_key
+      type: object
+    CranUpstream:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        created_at: 2000-01-23T04:56:07.000+00:00
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        slug_perm: slug_perm
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        created_at:
+          description: The datetime the upstream source was created.
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    CranUpstreamRequest:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    CranUpstreamRequestPatch:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
       type: object
     DartUpstream:
       example:
@@ -37145,7 +37924,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.327.0
+        version: 1.372.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -37155,7 +37934,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.327.0
+          default: 1.372.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true

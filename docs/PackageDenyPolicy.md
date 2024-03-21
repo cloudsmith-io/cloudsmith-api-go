@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** |  | [optional] 
 **Enabled** | Pointer to **bool** | Whether this rule is enabled or disabled. | [optional] 
 **Name** | Pointer to **NullableString** |  | [optional] 
-**PackageQueryString** | Pointer to **NullableString** | Packages that match this query will trigger this deny rule. | [optional] 
+**PackageQueryString** | **string** | Packages that match this query will trigger this deny rule. | 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **Status** | Pointer to **string** |  | [optional] [readonly] [default to "In Progress"]
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewPackageDenyPolicy
 
-`func NewPackageDenyPolicy() *PackageDenyPolicy`
+`func NewPackageDenyPolicy(packageQueryString string, ) *PackageDenyPolicy`
 
 NewPackageDenyPolicy instantiates a new PackageDenyPolicy object
 This constructor will assign default values to properties that have it defined,
@@ -197,22 +197,7 @@ and a boolean to check if the value has been set.
 
 SetPackageQueryString sets PackageQueryString field to given value.
 
-### HasPackageQueryString
 
-`func (o *PackageDenyPolicy) HasPackageQueryString() bool`
-
-HasPackageQueryString returns a boolean if a field has been set.
-
-### SetPackageQueryStringNil
-
-`func (o *PackageDenyPolicy) SetPackageQueryStringNil(b bool)`
-
- SetPackageQueryStringNil sets the value for PackageQueryString to be an explicit nil
-
-### UnsetPackageQueryString
-`func (o *PackageDenyPolicy) UnsetPackageQueryString()`
-
-UnsetPackageQueryString ensures that no value is present for PackageQueryString, not even an explicit nil
 ### GetSlugPerm
 
 `func (o *PackageDenyPolicy) GetSlugPerm() string`

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -25,10 +25,9 @@ type Organization struct {
 	CreatedAt *time.Time     `json:"created_at,omitempty"`
 	// The city/town/area your organization is based in.
 	Location NullableString `json:"location,omitempty"`
-	// A descriptive name for your organization.
-	Name     *string `json:"name,omitempty"`
-	Slug     *string `json:"slug,omitempty"`
-	SlugPerm *string `json:"slug_perm,omitempty"`
+	Name     string         `json:"name"`
+	Slug     *string        `json:"slug,omitempty"`
+	SlugPerm *string        `json:"slug_perm,omitempty"`
 	// A short public descriptive for your organization.
 	Tagline NullableString `json:"tagline,omitempty"`
 }
@@ -37,8 +36,9 @@ type Organization struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganization() *Organization {
+func NewOrganization(name string) *Organization {
 	this := Organization{}
+	this.Name = name
 	return &this
 }
 
@@ -168,36 +168,28 @@ func (o *Organization) UnsetLocation() {
 	o.Location.Unset()
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *Organization) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *Organization) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *Organization) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *Organization) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
@@ -326,9 +318,7 @@ func (o Organization) ToMap() (map[string]interface{}, error) {
 	if o.Location.IsSet() {
 		toSerialize["location"] = o.Location.Get()
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}

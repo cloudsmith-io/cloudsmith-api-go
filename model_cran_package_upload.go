@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.327.0
+API version: 1.372.0
 Contact: support@cloudsmith.io
 */
 
@@ -63,6 +63,8 @@ type CranPackageUpload struct {
 	OriginRepositoryUrl *string        `json:"origin_repository_url,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
+	// Binary package uploads should specify the version of R they were built for.
+	RVersion NullableString `json:"r_version,omitempty"`
 	// The release of the package version (if any).
 	Release       NullableString `json:"release,omitempty"`
 	Repository    *string        `json:"repository,omitempty"`
@@ -1327,6 +1329,49 @@ func (o *CranPackageUpload) HasPackageType() bool {
 // SetPackageType gets a reference to the given int64 and assigns it to the PackageType field.
 func (o *CranPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
+}
+
+// GetRVersion returns the RVersion field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CranPackageUpload) GetRVersion() string {
+	if o == nil || IsNil(o.RVersion.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RVersion.Get()
+}
+
+// GetRVersionOk returns a tuple with the RVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CranPackageUpload) GetRVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RVersion.Get(), o.RVersion.IsSet()
+}
+
+// HasRVersion returns a boolean if a field has been set.
+func (o *CranPackageUpload) HasRVersion() bool {
+	if o != nil && o.RVersion.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRVersion gets a reference to the given NullableString and assigns it to the RVersion field.
+func (o *CranPackageUpload) SetRVersion(v string) {
+	o.RVersion.Set(&v)
+}
+
+// SetRVersionNil sets the value for RVersion to be an explicit nil
+func (o *CranPackageUpload) SetRVersionNil() {
+	o.RVersion.Set(nil)
+}
+
+// UnsetRVersion ensures that no value is present for RVersion, not even an explicit nil
+func (o *CranPackageUpload) UnsetRVersion() {
+	o.RVersion.Unset()
 }
 
 // GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -2609,6 +2654,9 @@ func (o CranPackageUpload) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
+	}
+	if o.RVersion.IsSet() {
+		toSerialize["r_version"] = o.RVersion.Get()
 	}
 	if o.Release.IsSet() {
 		toSerialize["release"] = o.Release.Get()
