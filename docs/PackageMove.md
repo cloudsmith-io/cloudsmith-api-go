@@ -24,8 +24,15 @@ Name | Type | Description | Notes
 **FormatUrl** | Pointer to **string** |  | [optional] [readonly] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] [readonly] 
 **Indexed** | Pointer to **bool** |  | [optional] [readonly] 
+**IsCancellable** | Pointer to **string** |  | [optional] [readonly] 
+**IsCopyable** | Pointer to **string** |  | [optional] [readonly] 
+**IsDeleteable** | Pointer to **string** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsMoveable** | Pointer to **string** |  | [optional] [readonly] 
+**IsQuarantinable** | Pointer to **string** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
+**IsResyncable** | Pointer to **string** |  | [optional] [readonly] 
+**IsSecurityScannable** | Pointer to **string** |  | [optional] [readonly] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
@@ -643,6 +650,81 @@ SetIndexed sets Indexed field to given value.
 
 HasIndexed returns a boolean if a field has been set.
 
+### GetIsCancellable
+
+`func (o *PackageMove) GetIsCancellable() string`
+
+GetIsCancellable returns the IsCancellable field if non-nil, zero value otherwise.
+
+### GetIsCancellableOk
+
+`func (o *PackageMove) GetIsCancellableOk() (*string, bool)`
+
+GetIsCancellableOk returns a tuple with the IsCancellable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCancellable
+
+`func (o *PackageMove) SetIsCancellable(v string)`
+
+SetIsCancellable sets IsCancellable field to given value.
+
+### HasIsCancellable
+
+`func (o *PackageMove) HasIsCancellable() bool`
+
+HasIsCancellable returns a boolean if a field has been set.
+
+### GetIsCopyable
+
+`func (o *PackageMove) GetIsCopyable() string`
+
+GetIsCopyable returns the IsCopyable field if non-nil, zero value otherwise.
+
+### GetIsCopyableOk
+
+`func (o *PackageMove) GetIsCopyableOk() (*string, bool)`
+
+GetIsCopyableOk returns a tuple with the IsCopyable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCopyable
+
+`func (o *PackageMove) SetIsCopyable(v string)`
+
+SetIsCopyable sets IsCopyable field to given value.
+
+### HasIsCopyable
+
+`func (o *PackageMove) HasIsCopyable() bool`
+
+HasIsCopyable returns a boolean if a field has been set.
+
+### GetIsDeleteable
+
+`func (o *PackageMove) GetIsDeleteable() string`
+
+GetIsDeleteable returns the IsDeleteable field if non-nil, zero value otherwise.
+
+### GetIsDeleteableOk
+
+`func (o *PackageMove) GetIsDeleteableOk() (*string, bool)`
+
+GetIsDeleteableOk returns a tuple with the IsDeleteable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDeleteable
+
+`func (o *PackageMove) SetIsDeleteable(v string)`
+
+SetIsDeleteable sets IsDeleteable field to given value.
+
+### HasIsDeleteable
+
+`func (o *PackageMove) HasIsDeleteable() bool`
+
+HasIsDeleteable returns a boolean if a field has been set.
+
 ### GetIsDownloadable
 
 `func (o *PackageMove) GetIsDownloadable() bool`
@@ -668,6 +750,56 @@ SetIsDownloadable sets IsDownloadable field to given value.
 
 HasIsDownloadable returns a boolean if a field has been set.
 
+### GetIsMoveable
+
+`func (o *PackageMove) GetIsMoveable() string`
+
+GetIsMoveable returns the IsMoveable field if non-nil, zero value otherwise.
+
+### GetIsMoveableOk
+
+`func (o *PackageMove) GetIsMoveableOk() (*string, bool)`
+
+GetIsMoveableOk returns a tuple with the IsMoveable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMoveable
+
+`func (o *PackageMove) SetIsMoveable(v string)`
+
+SetIsMoveable sets IsMoveable field to given value.
+
+### HasIsMoveable
+
+`func (o *PackageMove) HasIsMoveable() bool`
+
+HasIsMoveable returns a boolean if a field has been set.
+
+### GetIsQuarantinable
+
+`func (o *PackageMove) GetIsQuarantinable() string`
+
+GetIsQuarantinable returns the IsQuarantinable field if non-nil, zero value otherwise.
+
+### GetIsQuarantinableOk
+
+`func (o *PackageMove) GetIsQuarantinableOk() (*string, bool)`
+
+GetIsQuarantinableOk returns a tuple with the IsQuarantinable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsQuarantinable
+
+`func (o *PackageMove) SetIsQuarantinable(v string)`
+
+SetIsQuarantinable sets IsQuarantinable field to given value.
+
+### HasIsQuarantinable
+
+`func (o *PackageMove) HasIsQuarantinable() bool`
+
+HasIsQuarantinable returns a boolean if a field has been set.
+
 ### GetIsQuarantined
 
 `func (o *PackageMove) GetIsQuarantined() bool`
@@ -692,6 +824,56 @@ SetIsQuarantined sets IsQuarantined field to given value.
 `func (o *PackageMove) HasIsQuarantined() bool`
 
 HasIsQuarantined returns a boolean if a field has been set.
+
+### GetIsResyncable
+
+`func (o *PackageMove) GetIsResyncable() string`
+
+GetIsResyncable returns the IsResyncable field if non-nil, zero value otherwise.
+
+### GetIsResyncableOk
+
+`func (o *PackageMove) GetIsResyncableOk() (*string, bool)`
+
+GetIsResyncableOk returns a tuple with the IsResyncable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsResyncable
+
+`func (o *PackageMove) SetIsResyncable(v string)`
+
+SetIsResyncable sets IsResyncable field to given value.
+
+### HasIsResyncable
+
+`func (o *PackageMove) HasIsResyncable() bool`
+
+HasIsResyncable returns a boolean if a field has been set.
+
+### GetIsSecurityScannable
+
+`func (o *PackageMove) GetIsSecurityScannable() string`
+
+GetIsSecurityScannable returns the IsSecurityScannable field if non-nil, zero value otherwise.
+
+### GetIsSecurityScannableOk
+
+`func (o *PackageMove) GetIsSecurityScannableOk() (*string, bool)`
+
+GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSecurityScannable
+
+`func (o *PackageMove) SetIsSecurityScannable(v string)`
+
+SetIsSecurityScannable sets IsSecurityScannable field to given value.
+
+### HasIsSecurityScannable
+
+`func (o *PackageMove) HasIsSecurityScannable() bool`
+
+HasIsSecurityScannable returns a boolean if a field has been set.
 
 ### GetIsSyncAwaiting
 

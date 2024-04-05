@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.372.0
+API version: 1.390.0
 Contact: support@cloudsmith.io
 */
 
@@ -21,7 +21,11 @@ var _ MappedNullable = &SwiftPackageUpload{}
 
 // SwiftPackageUpload struct for SwiftPackageUpload
 type SwiftPackageUpload struct {
-	Architectures  []Architecture `json:"architectures,omitempty"`
+	Architectures []Architecture `json:"architectures,omitempty"`
+	// The name of the author of the package.
+	AuthorName *string `json:"author_name,omitempty"`
+	// The organization of the author.
+	AuthorOrg      *string        `json:"author_org,omitempty"`
 	CdnUrl         NullableString `json:"cdn_url,omitempty"`
 	ChecksumMd5    *string        `json:"checksum_md5,omitempty"`
 	ChecksumSha1   *string        `json:"checksum_sha1,omitempty"`
@@ -43,30 +47,42 @@ type SwiftPackageUpload struct {
 	Format    *string       `json:"format,omitempty"`
 	FormatUrl *string       `json:"format_url,omitempty"`
 	// Unique and permanent identifier for the package.
-	IdentifierPerm   *string `json:"identifier_perm,omitempty"`
-	Indexed          *bool   `json:"indexed,omitempty"`
-	IsDownloadable   *bool   `json:"is_downloadable,omitempty"`
-	IsQuarantined    *bool   `json:"is_quarantined,omitempty"`
-	IsSyncAwaiting   *bool   `json:"is_sync_awaiting,omitempty"`
-	IsSyncCompleted  *bool   `json:"is_sync_completed,omitempty"`
-	IsSyncFailed     *bool   `json:"is_sync_failed,omitempty"`
-	IsSyncInFlight   *bool   `json:"is_sync_in_flight,omitempty"`
-	IsSyncInProgress *bool   `json:"is_sync_in_progress,omitempty"`
+	IdentifierPerm      *string `json:"identifier_perm,omitempty"`
+	Indexed             *bool   `json:"indexed,omitempty"`
+	IsCancellable       *string `json:"is_cancellable,omitempty"`
+	IsCopyable          *string `json:"is_copyable,omitempty"`
+	IsDeleteable        *string `json:"is_deleteable,omitempty"`
+	IsDownloadable      *bool   `json:"is_downloadable,omitempty"`
+	IsMoveable          *string `json:"is_moveable,omitempty"`
+	IsQuarantinable     *string `json:"is_quarantinable,omitempty"`
+	IsQuarantined       *bool   `json:"is_quarantined,omitempty"`
+	IsResyncable        *string `json:"is_resyncable,omitempty"`
+	IsSecurityScannable *string `json:"is_security_scannable,omitempty"`
+	IsSyncAwaiting      *bool   `json:"is_sync_awaiting,omitempty"`
+	IsSyncCompleted     *bool   `json:"is_sync_completed,omitempty"`
+	IsSyncFailed        *bool   `json:"is_sync_failed,omitempty"`
+	IsSyncInFlight      *bool   `json:"is_sync_in_flight,omitempty"`
+	IsSyncInProgress    *bool   `json:"is_sync_in_progress,omitempty"`
 	// The license of this package.
 	License NullableString `json:"license,omitempty"`
+	// The license URL of this package.
+	LicenseUrl NullableString `json:"license_url,omitempty"`
 	// The name of this package.
-	Name                NullableString `json:"name,omitempty"`
-	Namespace           *string        `json:"namespace,omitempty"`
-	NamespaceUrl        *string        `json:"namespace_url,omitempty"`
-	NumFiles            *int64         `json:"num_files,omitempty"`
-	OriginRepository    *string        `json:"origin_repository,omitempty"`
-	OriginRepositoryUrl *string        `json:"origin_repository_url,omitempty"`
+	Name                string  `json:"name"`
+	Namespace           *string `json:"namespace,omitempty"`
+	NamespaceUrl        *string `json:"namespace_url,omitempty"`
+	NumFiles            *int64  `json:"num_files,omitempty"`
+	OriginRepository    *string `json:"origin_repository,omitempty"`
+	OriginRepositoryUrl *string `json:"origin_repository_url,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
+	// The URL of the readme for the package.
+	ReadmeUrl *string `json:"readme_url,omitempty"`
 	// The release of the package version (if any).
-	Release       NullableString `json:"release,omitempty"`
-	Repository    *string        `json:"repository,omitempty"`
-	RepositoryUrl *string        `json:"repository_url,omitempty"`
+	Release    NullableString `json:"release,omitempty"`
+	Repository *string        `json:"repository,omitempty"`
+	// The URL of the SCM repository for the package.
+	RepositoryUrl *string `json:"repository_url,omitempty"`
 	// A scope provides a namespace for related packages within the package registry.
 	Scope string `json:"scope"`
 	// The datetime the security scanning was completed.
@@ -121,8 +137,9 @@ type SwiftPackageUpload struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSwiftPackageUpload(scope string, version string) *SwiftPackageUpload {
+func NewSwiftPackageUpload(name string, scope string, version string) *SwiftPackageUpload {
 	this := SwiftPackageUpload{}
+	this.Name = name
 	this.Scope = scope
 	this.Version = version
 	return &this
@@ -166,6 +183,70 @@ func (o *SwiftPackageUpload) HasArchitectures() bool {
 // SetArchitectures gets a reference to the given []Architecture and assigns it to the Architectures field.
 func (o *SwiftPackageUpload) SetArchitectures(v []Architecture) {
 	o.Architectures = v
+}
+
+// GetAuthorName returns the AuthorName field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetAuthorName() string {
+	if o == nil || IsNil(o.AuthorName) {
+		var ret string
+		return ret
+	}
+	return *o.AuthorName
+}
+
+// GetAuthorNameOk returns a tuple with the AuthorName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetAuthorNameOk() (*string, bool) {
+	if o == nil || IsNil(o.AuthorName) {
+		return nil, false
+	}
+	return o.AuthorName, true
+}
+
+// HasAuthorName returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasAuthorName() bool {
+	if o != nil && !IsNil(o.AuthorName) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthorName gets a reference to the given string and assigns it to the AuthorName field.
+func (o *SwiftPackageUpload) SetAuthorName(v string) {
+	o.AuthorName = &v
+}
+
+// GetAuthorOrg returns the AuthorOrg field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetAuthorOrg() string {
+	if o == nil || IsNil(o.AuthorOrg) {
+		var ret string
+		return ret
+	}
+	return *o.AuthorOrg
+}
+
+// GetAuthorOrgOk returns a tuple with the AuthorOrg field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetAuthorOrgOk() (*string, bool) {
+	if o == nil || IsNil(o.AuthorOrg) {
+		return nil, false
+	}
+	return o.AuthorOrg, true
+}
+
+// HasAuthorOrg returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasAuthorOrg() bool {
+	if o != nil && !IsNil(o.AuthorOrg) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthorOrg gets a reference to the given string and assigns it to the AuthorOrg field.
+func (o *SwiftPackageUpload) SetAuthorOrg(v string) {
+	o.AuthorOrg = &v
 }
 
 // GetCdnUrl returns the CdnUrl field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -831,6 +912,102 @@ func (o *SwiftPackageUpload) SetIndexed(v bool) {
 	o.Indexed = &v
 }
 
+// GetIsCancellable returns the IsCancellable field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetIsCancellable() string {
+	if o == nil || IsNil(o.IsCancellable) {
+		var ret string
+		return ret
+	}
+	return *o.IsCancellable
+}
+
+// GetIsCancellableOk returns a tuple with the IsCancellable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetIsCancellableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsCancellable) {
+		return nil, false
+	}
+	return o.IsCancellable, true
+}
+
+// HasIsCancellable returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasIsCancellable() bool {
+	if o != nil && !IsNil(o.IsCancellable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsCancellable gets a reference to the given string and assigns it to the IsCancellable field.
+func (o *SwiftPackageUpload) SetIsCancellable(v string) {
+	o.IsCancellable = &v
+}
+
+// GetIsCopyable returns the IsCopyable field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetIsCopyable() string {
+	if o == nil || IsNil(o.IsCopyable) {
+		var ret string
+		return ret
+	}
+	return *o.IsCopyable
+}
+
+// GetIsCopyableOk returns a tuple with the IsCopyable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetIsCopyableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsCopyable) {
+		return nil, false
+	}
+	return o.IsCopyable, true
+}
+
+// HasIsCopyable returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasIsCopyable() bool {
+	if o != nil && !IsNil(o.IsCopyable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsCopyable gets a reference to the given string and assigns it to the IsCopyable field.
+func (o *SwiftPackageUpload) SetIsCopyable(v string) {
+	o.IsCopyable = &v
+}
+
+// GetIsDeleteable returns the IsDeleteable field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetIsDeleteable() string {
+	if o == nil || IsNil(o.IsDeleteable) {
+		var ret string
+		return ret
+	}
+	return *o.IsDeleteable
+}
+
+// GetIsDeleteableOk returns a tuple with the IsDeleteable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetIsDeleteableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsDeleteable) {
+		return nil, false
+	}
+	return o.IsDeleteable, true
+}
+
+// HasIsDeleteable returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasIsDeleteable() bool {
+	if o != nil && !IsNil(o.IsDeleteable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsDeleteable gets a reference to the given string and assigns it to the IsDeleteable field.
+func (o *SwiftPackageUpload) SetIsDeleteable(v string) {
+	o.IsDeleteable = &v
+}
+
 // GetIsDownloadable returns the IsDownloadable field value if set, zero value otherwise.
 func (o *SwiftPackageUpload) GetIsDownloadable() bool {
 	if o == nil || IsNil(o.IsDownloadable) {
@@ -863,6 +1040,70 @@ func (o *SwiftPackageUpload) SetIsDownloadable(v bool) {
 	o.IsDownloadable = &v
 }
 
+// GetIsMoveable returns the IsMoveable field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetIsMoveable() string {
+	if o == nil || IsNil(o.IsMoveable) {
+		var ret string
+		return ret
+	}
+	return *o.IsMoveable
+}
+
+// GetIsMoveableOk returns a tuple with the IsMoveable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetIsMoveableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsMoveable) {
+		return nil, false
+	}
+	return o.IsMoveable, true
+}
+
+// HasIsMoveable returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasIsMoveable() bool {
+	if o != nil && !IsNil(o.IsMoveable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMoveable gets a reference to the given string and assigns it to the IsMoveable field.
+func (o *SwiftPackageUpload) SetIsMoveable(v string) {
+	o.IsMoveable = &v
+}
+
+// GetIsQuarantinable returns the IsQuarantinable field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetIsQuarantinable() string {
+	if o == nil || IsNil(o.IsQuarantinable) {
+		var ret string
+		return ret
+	}
+	return *o.IsQuarantinable
+}
+
+// GetIsQuarantinableOk returns a tuple with the IsQuarantinable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetIsQuarantinableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsQuarantinable) {
+		return nil, false
+	}
+	return o.IsQuarantinable, true
+}
+
+// HasIsQuarantinable returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasIsQuarantinable() bool {
+	if o != nil && !IsNil(o.IsQuarantinable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsQuarantinable gets a reference to the given string and assigns it to the IsQuarantinable field.
+func (o *SwiftPackageUpload) SetIsQuarantinable(v string) {
+	o.IsQuarantinable = &v
+}
+
 // GetIsQuarantined returns the IsQuarantined field value if set, zero value otherwise.
 func (o *SwiftPackageUpload) GetIsQuarantined() bool {
 	if o == nil || IsNil(o.IsQuarantined) {
@@ -893,6 +1134,70 @@ func (o *SwiftPackageUpload) HasIsQuarantined() bool {
 // SetIsQuarantined gets a reference to the given bool and assigns it to the IsQuarantined field.
 func (o *SwiftPackageUpload) SetIsQuarantined(v bool) {
 	o.IsQuarantined = &v
+}
+
+// GetIsResyncable returns the IsResyncable field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetIsResyncable() string {
+	if o == nil || IsNil(o.IsResyncable) {
+		var ret string
+		return ret
+	}
+	return *o.IsResyncable
+}
+
+// GetIsResyncableOk returns a tuple with the IsResyncable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetIsResyncableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsResyncable) {
+		return nil, false
+	}
+	return o.IsResyncable, true
+}
+
+// HasIsResyncable returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasIsResyncable() bool {
+	if o != nil && !IsNil(o.IsResyncable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsResyncable gets a reference to the given string and assigns it to the IsResyncable field.
+func (o *SwiftPackageUpload) SetIsResyncable(v string) {
+	o.IsResyncable = &v
+}
+
+// GetIsSecurityScannable returns the IsSecurityScannable field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetIsSecurityScannable() string {
+	if o == nil || IsNil(o.IsSecurityScannable) {
+		var ret string
+		return ret
+	}
+	return *o.IsSecurityScannable
+}
+
+// GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetIsSecurityScannableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsSecurityScannable) {
+		return nil, false
+	}
+	return o.IsSecurityScannable, true
+}
+
+// HasIsSecurityScannable returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasIsSecurityScannable() bool {
+	if o != nil && !IsNil(o.IsSecurityScannable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSecurityScannable gets a reference to the given string and assigns it to the IsSecurityScannable field.
+func (o *SwiftPackageUpload) SetIsSecurityScannable(v string) {
+	o.IsSecurityScannable = &v
 }
 
 // GetIsSyncAwaiting returns the IsSyncAwaiting field value if set, zero value otherwise.
@@ -1098,47 +1403,71 @@ func (o *SwiftPackageUpload) UnsetLicense() {
 	o.License.Unset()
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SwiftPackageUpload) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+// GetLicenseUrl returns the LicenseUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SwiftPackageUpload) GetLicenseUrl() string {
+	if o == nil || IsNil(o.LicenseUrl.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+	return *o.LicenseUrl.Get()
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetLicenseUrlOk returns a tuple with the LicenseUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SwiftPackageUpload) GetNameOk() (*string, bool) {
+func (o *SwiftPackageUpload) GetLicenseUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return o.LicenseUrl.Get(), o.LicenseUrl.IsSet()
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *SwiftPackageUpload) HasName() bool {
-	if o != nil && o.Name.IsSet() {
+// HasLicenseUrl returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasLicenseUrl() bool {
+	if o != nil && o.LicenseUrl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetLicenseUrl gets a reference to the given NullableString and assigns it to the LicenseUrl field.
+func (o *SwiftPackageUpload) SetLicenseUrl(v string) {
+	o.LicenseUrl.Set(&v)
+}
+
+// SetLicenseUrlNil sets the value for LicenseUrl to be an explicit nil
+func (o *SwiftPackageUpload) SetLicenseUrlNil() {
+	o.LicenseUrl.Set(nil)
+}
+
+// UnsetLicenseUrl ensures that no value is present for LicenseUrl, not even an explicit nil
+func (o *SwiftPackageUpload) UnsetLicenseUrl() {
+	o.LicenseUrl.Unset()
+}
+
+// GetName returns the Name field value
+func (o *SwiftPackageUpload) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
 func (o *SwiftPackageUpload) SetName(v string) {
-	o.Name.Set(&v)
-}
-
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *SwiftPackageUpload) SetNameNil() {
-	o.Name.Set(nil)
-}
-
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *SwiftPackageUpload) UnsetName() {
-	o.Name.Unset()
+	o.Name = v
 }
 
 // GetNamespace returns the Namespace field value if set, zero value otherwise.
@@ -1331,6 +1660,38 @@ func (o *SwiftPackageUpload) HasPackageType() bool {
 // SetPackageType gets a reference to the given int64 and assigns it to the PackageType field.
 func (o *SwiftPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
+}
+
+// GetReadmeUrl returns the ReadmeUrl field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetReadmeUrl() string {
+	if o == nil || IsNil(o.ReadmeUrl) {
+		var ret string
+		return ret
+	}
+	return *o.ReadmeUrl
+}
+
+// GetReadmeUrlOk returns a tuple with the ReadmeUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetReadmeUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.ReadmeUrl) {
+		return nil, false
+	}
+	return o.ReadmeUrl, true
+}
+
+// HasReadmeUrl returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasReadmeUrl() bool {
+	if o != nil && !IsNil(o.ReadmeUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetReadmeUrl gets a reference to the given string and assigns it to the ReadmeUrl field.
+func (o *SwiftPackageUpload) SetReadmeUrl(v string) {
+	o.ReadmeUrl = &v
 }
 
 // GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -2517,6 +2878,12 @@ func (o SwiftPackageUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Architectures) {
 		toSerialize["architectures"] = o.Architectures
 	}
+	if !IsNil(o.AuthorName) {
+		toSerialize["author_name"] = o.AuthorName
+	}
+	if !IsNil(o.AuthorOrg) {
+		toSerialize["author_org"] = o.AuthorOrg
+	}
 	if o.CdnUrl.IsSet() {
 		toSerialize["cdn_url"] = o.CdnUrl.Get()
 	}
@@ -2574,11 +2941,32 @@ func (o SwiftPackageUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Indexed) {
 		toSerialize["indexed"] = o.Indexed
 	}
+	if !IsNil(o.IsCancellable) {
+		toSerialize["is_cancellable"] = o.IsCancellable
+	}
+	if !IsNil(o.IsCopyable) {
+		toSerialize["is_copyable"] = o.IsCopyable
+	}
+	if !IsNil(o.IsDeleteable) {
+		toSerialize["is_deleteable"] = o.IsDeleteable
+	}
 	if !IsNil(o.IsDownloadable) {
 		toSerialize["is_downloadable"] = o.IsDownloadable
 	}
+	if !IsNil(o.IsMoveable) {
+		toSerialize["is_moveable"] = o.IsMoveable
+	}
+	if !IsNil(o.IsQuarantinable) {
+		toSerialize["is_quarantinable"] = o.IsQuarantinable
+	}
 	if !IsNil(o.IsQuarantined) {
 		toSerialize["is_quarantined"] = o.IsQuarantined
+	}
+	if !IsNil(o.IsResyncable) {
+		toSerialize["is_resyncable"] = o.IsResyncable
+	}
+	if !IsNil(o.IsSecurityScannable) {
+		toSerialize["is_security_scannable"] = o.IsSecurityScannable
 	}
 	if !IsNil(o.IsSyncAwaiting) {
 		toSerialize["is_sync_awaiting"] = o.IsSyncAwaiting
@@ -2598,9 +2986,10 @@ func (o SwiftPackageUpload) ToMap() (map[string]interface{}, error) {
 	if o.License.IsSet() {
 		toSerialize["license"] = o.License.Get()
 	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
+	if o.LicenseUrl.IsSet() {
+		toSerialize["license_url"] = o.LicenseUrl.Get()
 	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Namespace) {
 		toSerialize["namespace"] = o.Namespace
 	}
@@ -2618,6 +3007,9 @@ func (o SwiftPackageUpload) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
+	}
+	if !IsNil(o.ReadmeUrl) {
+		toSerialize["readme_url"] = o.ReadmeUrl
 	}
 	if o.Release.IsSet() {
 		toSerialize["release"] = o.Release.Get()

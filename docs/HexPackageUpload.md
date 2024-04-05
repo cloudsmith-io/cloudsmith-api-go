@@ -24,8 +24,15 @@ Name | Type | Description | Notes
 **FormatUrl** | Pointer to **string** |  | [optional] [readonly] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] [readonly] 
 **Indexed** | Pointer to **bool** |  | [optional] [readonly] 
+**IsCancellable** | Pointer to **string** |  | [optional] [readonly] 
+**IsCopyable** | Pointer to **string** |  | [optional] [readonly] 
+**IsDeleteable** | Pointer to **string** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsMoveable** | Pointer to **string** |  | [optional] [readonly] 
+**IsQuarantinable** | Pointer to **string** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
+**IsResyncable** | Pointer to **string** |  | [optional] [readonly] 
+**IsSecurityScannable** | Pointer to **string** |  | [optional] [readonly] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
@@ -642,6 +649,81 @@ SetIndexed sets Indexed field to given value.
 
 HasIndexed returns a boolean if a field has been set.
 
+### GetIsCancellable
+
+`func (o *HexPackageUpload) GetIsCancellable() string`
+
+GetIsCancellable returns the IsCancellable field if non-nil, zero value otherwise.
+
+### GetIsCancellableOk
+
+`func (o *HexPackageUpload) GetIsCancellableOk() (*string, bool)`
+
+GetIsCancellableOk returns a tuple with the IsCancellable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCancellable
+
+`func (o *HexPackageUpload) SetIsCancellable(v string)`
+
+SetIsCancellable sets IsCancellable field to given value.
+
+### HasIsCancellable
+
+`func (o *HexPackageUpload) HasIsCancellable() bool`
+
+HasIsCancellable returns a boolean if a field has been set.
+
+### GetIsCopyable
+
+`func (o *HexPackageUpload) GetIsCopyable() string`
+
+GetIsCopyable returns the IsCopyable field if non-nil, zero value otherwise.
+
+### GetIsCopyableOk
+
+`func (o *HexPackageUpload) GetIsCopyableOk() (*string, bool)`
+
+GetIsCopyableOk returns a tuple with the IsCopyable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCopyable
+
+`func (o *HexPackageUpload) SetIsCopyable(v string)`
+
+SetIsCopyable sets IsCopyable field to given value.
+
+### HasIsCopyable
+
+`func (o *HexPackageUpload) HasIsCopyable() bool`
+
+HasIsCopyable returns a boolean if a field has been set.
+
+### GetIsDeleteable
+
+`func (o *HexPackageUpload) GetIsDeleteable() string`
+
+GetIsDeleteable returns the IsDeleteable field if non-nil, zero value otherwise.
+
+### GetIsDeleteableOk
+
+`func (o *HexPackageUpload) GetIsDeleteableOk() (*string, bool)`
+
+GetIsDeleteableOk returns a tuple with the IsDeleteable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDeleteable
+
+`func (o *HexPackageUpload) SetIsDeleteable(v string)`
+
+SetIsDeleteable sets IsDeleteable field to given value.
+
+### HasIsDeleteable
+
+`func (o *HexPackageUpload) HasIsDeleteable() bool`
+
+HasIsDeleteable returns a boolean if a field has been set.
+
 ### GetIsDownloadable
 
 `func (o *HexPackageUpload) GetIsDownloadable() bool`
@@ -667,6 +749,56 @@ SetIsDownloadable sets IsDownloadable field to given value.
 
 HasIsDownloadable returns a boolean if a field has been set.
 
+### GetIsMoveable
+
+`func (o *HexPackageUpload) GetIsMoveable() string`
+
+GetIsMoveable returns the IsMoveable field if non-nil, zero value otherwise.
+
+### GetIsMoveableOk
+
+`func (o *HexPackageUpload) GetIsMoveableOk() (*string, bool)`
+
+GetIsMoveableOk returns a tuple with the IsMoveable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMoveable
+
+`func (o *HexPackageUpload) SetIsMoveable(v string)`
+
+SetIsMoveable sets IsMoveable field to given value.
+
+### HasIsMoveable
+
+`func (o *HexPackageUpload) HasIsMoveable() bool`
+
+HasIsMoveable returns a boolean if a field has been set.
+
+### GetIsQuarantinable
+
+`func (o *HexPackageUpload) GetIsQuarantinable() string`
+
+GetIsQuarantinable returns the IsQuarantinable field if non-nil, zero value otherwise.
+
+### GetIsQuarantinableOk
+
+`func (o *HexPackageUpload) GetIsQuarantinableOk() (*string, bool)`
+
+GetIsQuarantinableOk returns a tuple with the IsQuarantinable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsQuarantinable
+
+`func (o *HexPackageUpload) SetIsQuarantinable(v string)`
+
+SetIsQuarantinable sets IsQuarantinable field to given value.
+
+### HasIsQuarantinable
+
+`func (o *HexPackageUpload) HasIsQuarantinable() bool`
+
+HasIsQuarantinable returns a boolean if a field has been set.
+
 ### GetIsQuarantined
 
 `func (o *HexPackageUpload) GetIsQuarantined() bool`
@@ -691,6 +823,56 @@ SetIsQuarantined sets IsQuarantined field to given value.
 `func (o *HexPackageUpload) HasIsQuarantined() bool`
 
 HasIsQuarantined returns a boolean if a field has been set.
+
+### GetIsResyncable
+
+`func (o *HexPackageUpload) GetIsResyncable() string`
+
+GetIsResyncable returns the IsResyncable field if non-nil, zero value otherwise.
+
+### GetIsResyncableOk
+
+`func (o *HexPackageUpload) GetIsResyncableOk() (*string, bool)`
+
+GetIsResyncableOk returns a tuple with the IsResyncable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsResyncable
+
+`func (o *HexPackageUpload) SetIsResyncable(v string)`
+
+SetIsResyncable sets IsResyncable field to given value.
+
+### HasIsResyncable
+
+`func (o *HexPackageUpload) HasIsResyncable() bool`
+
+HasIsResyncable returns a boolean if a field has been set.
+
+### GetIsSecurityScannable
+
+`func (o *HexPackageUpload) GetIsSecurityScannable() string`
+
+GetIsSecurityScannable returns the IsSecurityScannable field if non-nil, zero value otherwise.
+
+### GetIsSecurityScannableOk
+
+`func (o *HexPackageUpload) GetIsSecurityScannableOk() (*string, bool)`
+
+GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSecurityScannable
+
+`func (o *HexPackageUpload) SetIsSecurityScannable(v string)`
+
+SetIsSecurityScannable sets IsSecurityScannable field to given value.
+
+### HasIsSecurityScannable
+
+`func (o *HexPackageUpload) HasIsSecurityScannable() bool`
+
+HasIsSecurityScannable returns a boolean if a field has been set.
 
 ### GetIsSyncAwaiting
 

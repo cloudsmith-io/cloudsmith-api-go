@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.372.0
+API version: 1.390.0
 Contact: support@cloudsmith.io
 */
 
@@ -20,8 +20,20 @@ var _ MappedNullable = &SwiftPackageUploadRequest{}
 
 // SwiftPackageUploadRequest struct for SwiftPackageUploadRequest
 type SwiftPackageUploadRequest struct {
+	// The name of the author of the package.
+	AuthorName *string `json:"author_name,omitempty"`
+	// The organization of the author.
+	AuthorOrg *string `json:"author_org,omitempty"`
+	// The license URL of this package.
+	LicenseUrl NullableString `json:"license_url,omitempty"`
+	// The name of this package.
+	Name string `json:"name"`
 	// The primary file for the package.
 	PackageFile string `json:"package_file"`
+	// The URL of the readme for the package.
+	ReadmeUrl *string `json:"readme_url,omitempty"`
+	// The URL of the SCM repository for the package.
+	RepositoryUrl *string `json:"repository_url,omitempty"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
 	Republish *bool `json:"republish,omitempty"`
 	// A scope provides a namespace for related packages within the package registry.
@@ -36,8 +48,9 @@ type SwiftPackageUploadRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSwiftPackageUploadRequest(packageFile string, scope string, version string) *SwiftPackageUploadRequest {
+func NewSwiftPackageUploadRequest(name string, packageFile string, scope string, version string) *SwiftPackageUploadRequest {
 	this := SwiftPackageUploadRequest{}
+	this.Name = name
 	this.PackageFile = packageFile
 	this.Scope = scope
 	this.Version = version
@@ -50,6 +63,137 @@ func NewSwiftPackageUploadRequest(packageFile string, scope string, version stri
 func NewSwiftPackageUploadRequestWithDefaults() *SwiftPackageUploadRequest {
 	this := SwiftPackageUploadRequest{}
 	return &this
+}
+
+// GetAuthorName returns the AuthorName field value if set, zero value otherwise.
+func (o *SwiftPackageUploadRequest) GetAuthorName() string {
+	if o == nil || IsNil(o.AuthorName) {
+		var ret string
+		return ret
+	}
+	return *o.AuthorName
+}
+
+// GetAuthorNameOk returns a tuple with the AuthorName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUploadRequest) GetAuthorNameOk() (*string, bool) {
+	if o == nil || IsNil(o.AuthorName) {
+		return nil, false
+	}
+	return o.AuthorName, true
+}
+
+// HasAuthorName returns a boolean if a field has been set.
+func (o *SwiftPackageUploadRequest) HasAuthorName() bool {
+	if o != nil && !IsNil(o.AuthorName) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthorName gets a reference to the given string and assigns it to the AuthorName field.
+func (o *SwiftPackageUploadRequest) SetAuthorName(v string) {
+	o.AuthorName = &v
+}
+
+// GetAuthorOrg returns the AuthorOrg field value if set, zero value otherwise.
+func (o *SwiftPackageUploadRequest) GetAuthorOrg() string {
+	if o == nil || IsNil(o.AuthorOrg) {
+		var ret string
+		return ret
+	}
+	return *o.AuthorOrg
+}
+
+// GetAuthorOrgOk returns a tuple with the AuthorOrg field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUploadRequest) GetAuthorOrgOk() (*string, bool) {
+	if o == nil || IsNil(o.AuthorOrg) {
+		return nil, false
+	}
+	return o.AuthorOrg, true
+}
+
+// HasAuthorOrg returns a boolean if a field has been set.
+func (o *SwiftPackageUploadRequest) HasAuthorOrg() bool {
+	if o != nil && !IsNil(o.AuthorOrg) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthorOrg gets a reference to the given string and assigns it to the AuthorOrg field.
+func (o *SwiftPackageUploadRequest) SetAuthorOrg(v string) {
+	o.AuthorOrg = &v
+}
+
+// GetLicenseUrl returns the LicenseUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SwiftPackageUploadRequest) GetLicenseUrl() string {
+	if o == nil || IsNil(o.LicenseUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LicenseUrl.Get()
+}
+
+// GetLicenseUrlOk returns a tuple with the LicenseUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SwiftPackageUploadRequest) GetLicenseUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LicenseUrl.Get(), o.LicenseUrl.IsSet()
+}
+
+// HasLicenseUrl returns a boolean if a field has been set.
+func (o *SwiftPackageUploadRequest) HasLicenseUrl() bool {
+	if o != nil && o.LicenseUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLicenseUrl gets a reference to the given NullableString and assigns it to the LicenseUrl field.
+func (o *SwiftPackageUploadRequest) SetLicenseUrl(v string) {
+	o.LicenseUrl.Set(&v)
+}
+
+// SetLicenseUrlNil sets the value for LicenseUrl to be an explicit nil
+func (o *SwiftPackageUploadRequest) SetLicenseUrlNil() {
+	o.LicenseUrl.Set(nil)
+}
+
+// UnsetLicenseUrl ensures that no value is present for LicenseUrl, not even an explicit nil
+func (o *SwiftPackageUploadRequest) UnsetLicenseUrl() {
+	o.LicenseUrl.Unset()
+}
+
+// GetName returns the Name field value
+func (o *SwiftPackageUploadRequest) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUploadRequest) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *SwiftPackageUploadRequest) SetName(v string) {
+	o.Name = v
 }
 
 // GetPackageFile returns the PackageFile field value
@@ -74,6 +218,70 @@ func (o *SwiftPackageUploadRequest) GetPackageFileOk() (*string, bool) {
 // SetPackageFile sets field value
 func (o *SwiftPackageUploadRequest) SetPackageFile(v string) {
 	o.PackageFile = v
+}
+
+// GetReadmeUrl returns the ReadmeUrl field value if set, zero value otherwise.
+func (o *SwiftPackageUploadRequest) GetReadmeUrl() string {
+	if o == nil || IsNil(o.ReadmeUrl) {
+		var ret string
+		return ret
+	}
+	return *o.ReadmeUrl
+}
+
+// GetReadmeUrlOk returns a tuple with the ReadmeUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUploadRequest) GetReadmeUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.ReadmeUrl) {
+		return nil, false
+	}
+	return o.ReadmeUrl, true
+}
+
+// HasReadmeUrl returns a boolean if a field has been set.
+func (o *SwiftPackageUploadRequest) HasReadmeUrl() bool {
+	if o != nil && !IsNil(o.ReadmeUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetReadmeUrl gets a reference to the given string and assigns it to the ReadmeUrl field.
+func (o *SwiftPackageUploadRequest) SetReadmeUrl(v string) {
+	o.ReadmeUrl = &v
+}
+
+// GetRepositoryUrl returns the RepositoryUrl field value if set, zero value otherwise.
+func (o *SwiftPackageUploadRequest) GetRepositoryUrl() string {
+	if o == nil || IsNil(o.RepositoryUrl) {
+		var ret string
+		return ret
+	}
+	return *o.RepositoryUrl
+}
+
+// GetRepositoryUrlOk returns a tuple with the RepositoryUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUploadRequest) GetRepositoryUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.RepositoryUrl) {
+		return nil, false
+	}
+	return o.RepositoryUrl, true
+}
+
+// HasRepositoryUrl returns a boolean if a field has been set.
+func (o *SwiftPackageUploadRequest) HasRepositoryUrl() bool {
+	if o != nil && !IsNil(o.RepositoryUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetRepositoryUrl gets a reference to the given string and assigns it to the RepositoryUrl field.
+func (o *SwiftPackageUploadRequest) SetRepositoryUrl(v string) {
+	o.RepositoryUrl = &v
 }
 
 // GetRepublish returns the Republish field value if set, zero value otherwise.
@@ -209,7 +417,23 @@ func (o SwiftPackageUploadRequest) MarshalJSON() ([]byte, error) {
 
 func (o SwiftPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AuthorName) {
+		toSerialize["author_name"] = o.AuthorName
+	}
+	if !IsNil(o.AuthorOrg) {
+		toSerialize["author_org"] = o.AuthorOrg
+	}
+	if o.LicenseUrl.IsSet() {
+		toSerialize["license_url"] = o.LicenseUrl.Get()
+	}
+	toSerialize["name"] = o.Name
 	toSerialize["package_file"] = o.PackageFile
+	if !IsNil(o.ReadmeUrl) {
+		toSerialize["readme_url"] = o.ReadmeUrl
+	}
+	if !IsNil(o.RepositoryUrl) {
+		toSerialize["repository_url"] = o.RepositoryUrl
+	}
 	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
