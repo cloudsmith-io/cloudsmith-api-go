@@ -24,8 +24,15 @@ Name | Type | Description | Notes
 **FormatUrl** | Pointer to **string** |  | [optional] [readonly] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] [readonly] 
 **Indexed** | Pointer to **bool** |  | [optional] [readonly] 
+**IsCancellable** | Pointer to **string** |  | [optional] [readonly] 
+**IsCopyable** | Pointer to **string** |  | [optional] [readonly] 
+**IsDeleteable** | Pointer to **string** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsMoveable** | Pointer to **string** |  | [optional] [readonly] 
+**IsQuarantinable** | Pointer to **string** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
+**IsResyncable** | Pointer to **string** |  | [optional] [readonly] 
+**IsSecurityScannable** | Pointer to **string** |  | [optional] [readonly] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
@@ -643,6 +650,81 @@ SetIndexed sets Indexed field to given value.
 
 HasIndexed returns a boolean if a field has been set.
 
+### GetIsCancellable
+
+`func (o *VagrantPackageUpload) GetIsCancellable() string`
+
+GetIsCancellable returns the IsCancellable field if non-nil, zero value otherwise.
+
+### GetIsCancellableOk
+
+`func (o *VagrantPackageUpload) GetIsCancellableOk() (*string, bool)`
+
+GetIsCancellableOk returns a tuple with the IsCancellable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCancellable
+
+`func (o *VagrantPackageUpload) SetIsCancellable(v string)`
+
+SetIsCancellable sets IsCancellable field to given value.
+
+### HasIsCancellable
+
+`func (o *VagrantPackageUpload) HasIsCancellable() bool`
+
+HasIsCancellable returns a boolean if a field has been set.
+
+### GetIsCopyable
+
+`func (o *VagrantPackageUpload) GetIsCopyable() string`
+
+GetIsCopyable returns the IsCopyable field if non-nil, zero value otherwise.
+
+### GetIsCopyableOk
+
+`func (o *VagrantPackageUpload) GetIsCopyableOk() (*string, bool)`
+
+GetIsCopyableOk returns a tuple with the IsCopyable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCopyable
+
+`func (o *VagrantPackageUpload) SetIsCopyable(v string)`
+
+SetIsCopyable sets IsCopyable field to given value.
+
+### HasIsCopyable
+
+`func (o *VagrantPackageUpload) HasIsCopyable() bool`
+
+HasIsCopyable returns a boolean if a field has been set.
+
+### GetIsDeleteable
+
+`func (o *VagrantPackageUpload) GetIsDeleteable() string`
+
+GetIsDeleteable returns the IsDeleteable field if non-nil, zero value otherwise.
+
+### GetIsDeleteableOk
+
+`func (o *VagrantPackageUpload) GetIsDeleteableOk() (*string, bool)`
+
+GetIsDeleteableOk returns a tuple with the IsDeleteable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDeleteable
+
+`func (o *VagrantPackageUpload) SetIsDeleteable(v string)`
+
+SetIsDeleteable sets IsDeleteable field to given value.
+
+### HasIsDeleteable
+
+`func (o *VagrantPackageUpload) HasIsDeleteable() bool`
+
+HasIsDeleteable returns a boolean if a field has been set.
+
 ### GetIsDownloadable
 
 `func (o *VagrantPackageUpload) GetIsDownloadable() bool`
@@ -668,6 +750,56 @@ SetIsDownloadable sets IsDownloadable field to given value.
 
 HasIsDownloadable returns a boolean if a field has been set.
 
+### GetIsMoveable
+
+`func (o *VagrantPackageUpload) GetIsMoveable() string`
+
+GetIsMoveable returns the IsMoveable field if non-nil, zero value otherwise.
+
+### GetIsMoveableOk
+
+`func (o *VagrantPackageUpload) GetIsMoveableOk() (*string, bool)`
+
+GetIsMoveableOk returns a tuple with the IsMoveable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMoveable
+
+`func (o *VagrantPackageUpload) SetIsMoveable(v string)`
+
+SetIsMoveable sets IsMoveable field to given value.
+
+### HasIsMoveable
+
+`func (o *VagrantPackageUpload) HasIsMoveable() bool`
+
+HasIsMoveable returns a boolean if a field has been set.
+
+### GetIsQuarantinable
+
+`func (o *VagrantPackageUpload) GetIsQuarantinable() string`
+
+GetIsQuarantinable returns the IsQuarantinable field if non-nil, zero value otherwise.
+
+### GetIsQuarantinableOk
+
+`func (o *VagrantPackageUpload) GetIsQuarantinableOk() (*string, bool)`
+
+GetIsQuarantinableOk returns a tuple with the IsQuarantinable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsQuarantinable
+
+`func (o *VagrantPackageUpload) SetIsQuarantinable(v string)`
+
+SetIsQuarantinable sets IsQuarantinable field to given value.
+
+### HasIsQuarantinable
+
+`func (o *VagrantPackageUpload) HasIsQuarantinable() bool`
+
+HasIsQuarantinable returns a boolean if a field has been set.
+
 ### GetIsQuarantined
 
 `func (o *VagrantPackageUpload) GetIsQuarantined() bool`
@@ -692,6 +824,56 @@ SetIsQuarantined sets IsQuarantined field to given value.
 `func (o *VagrantPackageUpload) HasIsQuarantined() bool`
 
 HasIsQuarantined returns a boolean if a field has been set.
+
+### GetIsResyncable
+
+`func (o *VagrantPackageUpload) GetIsResyncable() string`
+
+GetIsResyncable returns the IsResyncable field if non-nil, zero value otherwise.
+
+### GetIsResyncableOk
+
+`func (o *VagrantPackageUpload) GetIsResyncableOk() (*string, bool)`
+
+GetIsResyncableOk returns a tuple with the IsResyncable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsResyncable
+
+`func (o *VagrantPackageUpload) SetIsResyncable(v string)`
+
+SetIsResyncable sets IsResyncable field to given value.
+
+### HasIsResyncable
+
+`func (o *VagrantPackageUpload) HasIsResyncable() bool`
+
+HasIsResyncable returns a boolean if a field has been set.
+
+### GetIsSecurityScannable
+
+`func (o *VagrantPackageUpload) GetIsSecurityScannable() string`
+
+GetIsSecurityScannable returns the IsSecurityScannable field if non-nil, zero value otherwise.
+
+### GetIsSecurityScannableOk
+
+`func (o *VagrantPackageUpload) GetIsSecurityScannableOk() (*string, bool)`
+
+GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSecurityScannable
+
+`func (o *VagrantPackageUpload) SetIsSecurityScannable(v string)`
+
+SetIsSecurityScannable sets IsSecurityScannable field to given value.
+
+### HasIsSecurityScannable
+
+`func (o *VagrantPackageUpload) HasIsSecurityScannable() bool`
+
+HasIsSecurityScannable returns a boolean if a field has been set.
 
 ### GetIsSyncAwaiting
 

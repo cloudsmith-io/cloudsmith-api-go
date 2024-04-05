@@ -24,9 +24,16 @@ Name | Type | Description | Notes
 **FormatUrl** | Pointer to **string** |  | [optional] [readonly] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] [readonly] 
 **Indexed** | Pointer to **bool** |  | [optional] [readonly] 
+**IsCancellable** | Pointer to **string** |  | [optional] [readonly] 
+**IsCopyable** | Pointer to **string** |  | [optional] [readonly] 
+**IsDeleteable** | Pointer to **string** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsImmutable** | Pointer to **bool** | If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package. | [optional] [default to false]
+**IsMoveable** | Pointer to **string** |  | [optional] [readonly] 
+**IsQuarantinable** | Pointer to **string** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
+**IsResyncable** | Pointer to **string** |  | [optional] [readonly] 
+**IsSecurityScannable** | Pointer to **string** |  | [optional] [readonly] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
@@ -643,6 +650,81 @@ SetIndexed sets Indexed field to given value.
 
 HasIndexed returns a boolean if a field has been set.
 
+### GetIsCancellable
+
+`func (o *PackageTag) GetIsCancellable() string`
+
+GetIsCancellable returns the IsCancellable field if non-nil, zero value otherwise.
+
+### GetIsCancellableOk
+
+`func (o *PackageTag) GetIsCancellableOk() (*string, bool)`
+
+GetIsCancellableOk returns a tuple with the IsCancellable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCancellable
+
+`func (o *PackageTag) SetIsCancellable(v string)`
+
+SetIsCancellable sets IsCancellable field to given value.
+
+### HasIsCancellable
+
+`func (o *PackageTag) HasIsCancellable() bool`
+
+HasIsCancellable returns a boolean if a field has been set.
+
+### GetIsCopyable
+
+`func (o *PackageTag) GetIsCopyable() string`
+
+GetIsCopyable returns the IsCopyable field if non-nil, zero value otherwise.
+
+### GetIsCopyableOk
+
+`func (o *PackageTag) GetIsCopyableOk() (*string, bool)`
+
+GetIsCopyableOk returns a tuple with the IsCopyable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCopyable
+
+`func (o *PackageTag) SetIsCopyable(v string)`
+
+SetIsCopyable sets IsCopyable field to given value.
+
+### HasIsCopyable
+
+`func (o *PackageTag) HasIsCopyable() bool`
+
+HasIsCopyable returns a boolean if a field has been set.
+
+### GetIsDeleteable
+
+`func (o *PackageTag) GetIsDeleteable() string`
+
+GetIsDeleteable returns the IsDeleteable field if non-nil, zero value otherwise.
+
+### GetIsDeleteableOk
+
+`func (o *PackageTag) GetIsDeleteableOk() (*string, bool)`
+
+GetIsDeleteableOk returns a tuple with the IsDeleteable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDeleteable
+
+`func (o *PackageTag) SetIsDeleteable(v string)`
+
+SetIsDeleteable sets IsDeleteable field to given value.
+
+### HasIsDeleteable
+
+`func (o *PackageTag) HasIsDeleteable() bool`
+
+HasIsDeleteable returns a boolean if a field has been set.
+
 ### GetIsDownloadable
 
 `func (o *PackageTag) GetIsDownloadable() bool`
@@ -693,6 +775,56 @@ SetIsImmutable sets IsImmutable field to given value.
 
 HasIsImmutable returns a boolean if a field has been set.
 
+### GetIsMoveable
+
+`func (o *PackageTag) GetIsMoveable() string`
+
+GetIsMoveable returns the IsMoveable field if non-nil, zero value otherwise.
+
+### GetIsMoveableOk
+
+`func (o *PackageTag) GetIsMoveableOk() (*string, bool)`
+
+GetIsMoveableOk returns a tuple with the IsMoveable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMoveable
+
+`func (o *PackageTag) SetIsMoveable(v string)`
+
+SetIsMoveable sets IsMoveable field to given value.
+
+### HasIsMoveable
+
+`func (o *PackageTag) HasIsMoveable() bool`
+
+HasIsMoveable returns a boolean if a field has been set.
+
+### GetIsQuarantinable
+
+`func (o *PackageTag) GetIsQuarantinable() string`
+
+GetIsQuarantinable returns the IsQuarantinable field if non-nil, zero value otherwise.
+
+### GetIsQuarantinableOk
+
+`func (o *PackageTag) GetIsQuarantinableOk() (*string, bool)`
+
+GetIsQuarantinableOk returns a tuple with the IsQuarantinable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsQuarantinable
+
+`func (o *PackageTag) SetIsQuarantinable(v string)`
+
+SetIsQuarantinable sets IsQuarantinable field to given value.
+
+### HasIsQuarantinable
+
+`func (o *PackageTag) HasIsQuarantinable() bool`
+
+HasIsQuarantinable returns a boolean if a field has been set.
+
 ### GetIsQuarantined
 
 `func (o *PackageTag) GetIsQuarantined() bool`
@@ -717,6 +849,56 @@ SetIsQuarantined sets IsQuarantined field to given value.
 `func (o *PackageTag) HasIsQuarantined() bool`
 
 HasIsQuarantined returns a boolean if a field has been set.
+
+### GetIsResyncable
+
+`func (o *PackageTag) GetIsResyncable() string`
+
+GetIsResyncable returns the IsResyncable field if non-nil, zero value otherwise.
+
+### GetIsResyncableOk
+
+`func (o *PackageTag) GetIsResyncableOk() (*string, bool)`
+
+GetIsResyncableOk returns a tuple with the IsResyncable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsResyncable
+
+`func (o *PackageTag) SetIsResyncable(v string)`
+
+SetIsResyncable sets IsResyncable field to given value.
+
+### HasIsResyncable
+
+`func (o *PackageTag) HasIsResyncable() bool`
+
+HasIsResyncable returns a boolean if a field has been set.
+
+### GetIsSecurityScannable
+
+`func (o *PackageTag) GetIsSecurityScannable() string`
+
+GetIsSecurityScannable returns the IsSecurityScannable field if non-nil, zero value otherwise.
+
+### GetIsSecurityScannableOk
+
+`func (o *PackageTag) GetIsSecurityScannableOk() (*string, bool)`
+
+GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSecurityScannable
+
+`func (o *PackageTag) SetIsSecurityScannable(v string)`
+
+SetIsSecurityScannable sets IsSecurityScannable field to given value.
+
+### HasIsSecurityScannable
+
+`func (o *PackageTag) HasIsSecurityScannable() bool`
+
+HasIsSecurityScannable returns a boolean if a field has been set.
 
 ### GetIsSyncAwaiting
 

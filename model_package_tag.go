@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.372.0
+API version: 1.390.0
 Contact: support@cloudsmith.io
 */
 
@@ -45,15 +45,22 @@ type PackageTag struct {
 	// Unique and permanent identifier for the package.
 	IdentifierPerm *string `json:"identifier_perm,omitempty"`
 	Indexed        *bool   `json:"indexed,omitempty"`
+	IsCancellable  *string `json:"is_cancellable,omitempty"`
+	IsCopyable     *string `json:"is_copyable,omitempty"`
+	IsDeleteable   *string `json:"is_deleteable,omitempty"`
 	IsDownloadable *bool   `json:"is_downloadable,omitempty"`
 	// If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package.
-	IsImmutable      *bool `json:"is_immutable,omitempty"`
-	IsQuarantined    *bool `json:"is_quarantined,omitempty"`
-	IsSyncAwaiting   *bool `json:"is_sync_awaiting,omitempty"`
-	IsSyncCompleted  *bool `json:"is_sync_completed,omitempty"`
-	IsSyncFailed     *bool `json:"is_sync_failed,omitempty"`
-	IsSyncInFlight   *bool `json:"is_sync_in_flight,omitempty"`
-	IsSyncInProgress *bool `json:"is_sync_in_progress,omitempty"`
+	IsImmutable         *bool   `json:"is_immutable,omitempty"`
+	IsMoveable          *string `json:"is_moveable,omitempty"`
+	IsQuarantinable     *string `json:"is_quarantinable,omitempty"`
+	IsQuarantined       *bool   `json:"is_quarantined,omitempty"`
+	IsResyncable        *string `json:"is_resyncable,omitempty"`
+	IsSecurityScannable *string `json:"is_security_scannable,omitempty"`
+	IsSyncAwaiting      *bool   `json:"is_sync_awaiting,omitempty"`
+	IsSyncCompleted     *bool   `json:"is_sync_completed,omitempty"`
+	IsSyncFailed        *bool   `json:"is_sync_failed,omitempty"`
+	IsSyncInFlight      *bool   `json:"is_sync_in_flight,omitempty"`
+	IsSyncInProgress    *bool   `json:"is_sync_in_progress,omitempty"`
 	// The license of this package.
 	License NullableString `json:"license,omitempty"`
 	// The name of this package.
@@ -833,6 +840,102 @@ func (o *PackageTag) SetIndexed(v bool) {
 	o.Indexed = &v
 }
 
+// GetIsCancellable returns the IsCancellable field value if set, zero value otherwise.
+func (o *PackageTag) GetIsCancellable() string {
+	if o == nil || IsNil(o.IsCancellable) {
+		var ret string
+		return ret
+	}
+	return *o.IsCancellable
+}
+
+// GetIsCancellableOk returns a tuple with the IsCancellable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetIsCancellableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsCancellable) {
+		return nil, false
+	}
+	return o.IsCancellable, true
+}
+
+// HasIsCancellable returns a boolean if a field has been set.
+func (o *PackageTag) HasIsCancellable() bool {
+	if o != nil && !IsNil(o.IsCancellable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsCancellable gets a reference to the given string and assigns it to the IsCancellable field.
+func (o *PackageTag) SetIsCancellable(v string) {
+	o.IsCancellable = &v
+}
+
+// GetIsCopyable returns the IsCopyable field value if set, zero value otherwise.
+func (o *PackageTag) GetIsCopyable() string {
+	if o == nil || IsNil(o.IsCopyable) {
+		var ret string
+		return ret
+	}
+	return *o.IsCopyable
+}
+
+// GetIsCopyableOk returns a tuple with the IsCopyable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetIsCopyableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsCopyable) {
+		return nil, false
+	}
+	return o.IsCopyable, true
+}
+
+// HasIsCopyable returns a boolean if a field has been set.
+func (o *PackageTag) HasIsCopyable() bool {
+	if o != nil && !IsNil(o.IsCopyable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsCopyable gets a reference to the given string and assigns it to the IsCopyable field.
+func (o *PackageTag) SetIsCopyable(v string) {
+	o.IsCopyable = &v
+}
+
+// GetIsDeleteable returns the IsDeleteable field value if set, zero value otherwise.
+func (o *PackageTag) GetIsDeleteable() string {
+	if o == nil || IsNil(o.IsDeleteable) {
+		var ret string
+		return ret
+	}
+	return *o.IsDeleteable
+}
+
+// GetIsDeleteableOk returns a tuple with the IsDeleteable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetIsDeleteableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsDeleteable) {
+		return nil, false
+	}
+	return o.IsDeleteable, true
+}
+
+// HasIsDeleteable returns a boolean if a field has been set.
+func (o *PackageTag) HasIsDeleteable() bool {
+	if o != nil && !IsNil(o.IsDeleteable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsDeleteable gets a reference to the given string and assigns it to the IsDeleteable field.
+func (o *PackageTag) SetIsDeleteable(v string) {
+	o.IsDeleteable = &v
+}
+
 // GetIsDownloadable returns the IsDownloadable field value if set, zero value otherwise.
 func (o *PackageTag) GetIsDownloadable() bool {
 	if o == nil || IsNil(o.IsDownloadable) {
@@ -897,6 +1000,70 @@ func (o *PackageTag) SetIsImmutable(v bool) {
 	o.IsImmutable = &v
 }
 
+// GetIsMoveable returns the IsMoveable field value if set, zero value otherwise.
+func (o *PackageTag) GetIsMoveable() string {
+	if o == nil || IsNil(o.IsMoveable) {
+		var ret string
+		return ret
+	}
+	return *o.IsMoveable
+}
+
+// GetIsMoveableOk returns a tuple with the IsMoveable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetIsMoveableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsMoveable) {
+		return nil, false
+	}
+	return o.IsMoveable, true
+}
+
+// HasIsMoveable returns a boolean if a field has been set.
+func (o *PackageTag) HasIsMoveable() bool {
+	if o != nil && !IsNil(o.IsMoveable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMoveable gets a reference to the given string and assigns it to the IsMoveable field.
+func (o *PackageTag) SetIsMoveable(v string) {
+	o.IsMoveable = &v
+}
+
+// GetIsQuarantinable returns the IsQuarantinable field value if set, zero value otherwise.
+func (o *PackageTag) GetIsQuarantinable() string {
+	if o == nil || IsNil(o.IsQuarantinable) {
+		var ret string
+		return ret
+	}
+	return *o.IsQuarantinable
+}
+
+// GetIsQuarantinableOk returns a tuple with the IsQuarantinable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetIsQuarantinableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsQuarantinable) {
+		return nil, false
+	}
+	return o.IsQuarantinable, true
+}
+
+// HasIsQuarantinable returns a boolean if a field has been set.
+func (o *PackageTag) HasIsQuarantinable() bool {
+	if o != nil && !IsNil(o.IsQuarantinable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsQuarantinable gets a reference to the given string and assigns it to the IsQuarantinable field.
+func (o *PackageTag) SetIsQuarantinable(v string) {
+	o.IsQuarantinable = &v
+}
+
 // GetIsQuarantined returns the IsQuarantined field value if set, zero value otherwise.
 func (o *PackageTag) GetIsQuarantined() bool {
 	if o == nil || IsNil(o.IsQuarantined) {
@@ -927,6 +1094,70 @@ func (o *PackageTag) HasIsQuarantined() bool {
 // SetIsQuarantined gets a reference to the given bool and assigns it to the IsQuarantined field.
 func (o *PackageTag) SetIsQuarantined(v bool) {
 	o.IsQuarantined = &v
+}
+
+// GetIsResyncable returns the IsResyncable field value if set, zero value otherwise.
+func (o *PackageTag) GetIsResyncable() string {
+	if o == nil || IsNil(o.IsResyncable) {
+		var ret string
+		return ret
+	}
+	return *o.IsResyncable
+}
+
+// GetIsResyncableOk returns a tuple with the IsResyncable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetIsResyncableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsResyncable) {
+		return nil, false
+	}
+	return o.IsResyncable, true
+}
+
+// HasIsResyncable returns a boolean if a field has been set.
+func (o *PackageTag) HasIsResyncable() bool {
+	if o != nil && !IsNil(o.IsResyncable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsResyncable gets a reference to the given string and assigns it to the IsResyncable field.
+func (o *PackageTag) SetIsResyncable(v string) {
+	o.IsResyncable = &v
+}
+
+// GetIsSecurityScannable returns the IsSecurityScannable field value if set, zero value otherwise.
+func (o *PackageTag) GetIsSecurityScannable() string {
+	if o == nil || IsNil(o.IsSecurityScannable) {
+		var ret string
+		return ret
+	}
+	return *o.IsSecurityScannable
+}
+
+// GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetIsSecurityScannableOk() (*string, bool) {
+	if o == nil || IsNil(o.IsSecurityScannable) {
+		return nil, false
+	}
+	return o.IsSecurityScannable, true
+}
+
+// HasIsSecurityScannable returns a boolean if a field has been set.
+func (o *PackageTag) HasIsSecurityScannable() bool {
+	if o != nil && !IsNil(o.IsSecurityScannable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSecurityScannable gets a reference to the given string and assigns it to the IsSecurityScannable field.
+func (o *PackageTag) SetIsSecurityScannable(v string) {
+	o.IsSecurityScannable = &v
 }
 
 // GetIsSyncAwaiting returns the IsSyncAwaiting field value if set, zero value otherwise.
@@ -2603,14 +2834,35 @@ func (o PackageTag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Indexed) {
 		toSerialize["indexed"] = o.Indexed
 	}
+	if !IsNil(o.IsCancellable) {
+		toSerialize["is_cancellable"] = o.IsCancellable
+	}
+	if !IsNil(o.IsCopyable) {
+		toSerialize["is_copyable"] = o.IsCopyable
+	}
+	if !IsNil(o.IsDeleteable) {
+		toSerialize["is_deleteable"] = o.IsDeleteable
+	}
 	if !IsNil(o.IsDownloadable) {
 		toSerialize["is_downloadable"] = o.IsDownloadable
 	}
 	if !IsNil(o.IsImmutable) {
 		toSerialize["is_immutable"] = o.IsImmutable
 	}
+	if !IsNil(o.IsMoveable) {
+		toSerialize["is_moveable"] = o.IsMoveable
+	}
+	if !IsNil(o.IsQuarantinable) {
+		toSerialize["is_quarantinable"] = o.IsQuarantinable
+	}
 	if !IsNil(o.IsQuarantined) {
 		toSerialize["is_quarantined"] = o.IsQuarantined
+	}
+	if !IsNil(o.IsResyncable) {
+		toSerialize["is_resyncable"] = o.IsResyncable
+	}
+	if !IsNil(o.IsSecurityScannable) {
+		toSerialize["is_security_scannable"] = o.IsSecurityScannable
 	}
 	if !IsNil(o.IsSyncAwaiting) {
 		toSerialize["is_sync_awaiting"] = o.IsSyncAwaiting

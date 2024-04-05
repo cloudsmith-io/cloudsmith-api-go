@@ -26,8 +26,15 @@ Name | Type | Description | Notes
 **GroupId** | Pointer to **NullableString** | Artifact&#39;s group ID. | [optional] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] [readonly] 
 **Indexed** | Pointer to **bool** |  | [optional] [readonly] 
+**IsCancellable** | Pointer to **string** |  | [optional] [readonly] 
+**IsCopyable** | Pointer to **string** |  | [optional] [readonly] 
+**IsDeleteable** | Pointer to **string** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsMoveable** | Pointer to **string** |  | [optional] [readonly] 
+**IsQuarantinable** | Pointer to **string** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
+**IsResyncable** | Pointer to **string** |  | [optional] [readonly] 
+**IsSecurityScannable** | Pointer to **string** |  | [optional] [readonly] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
@@ -717,6 +724,81 @@ SetIndexed sets Indexed field to given value.
 
 HasIndexed returns a boolean if a field has been set.
 
+### GetIsCancellable
+
+`func (o *MavenPackageUpload) GetIsCancellable() string`
+
+GetIsCancellable returns the IsCancellable field if non-nil, zero value otherwise.
+
+### GetIsCancellableOk
+
+`func (o *MavenPackageUpload) GetIsCancellableOk() (*string, bool)`
+
+GetIsCancellableOk returns a tuple with the IsCancellable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCancellable
+
+`func (o *MavenPackageUpload) SetIsCancellable(v string)`
+
+SetIsCancellable sets IsCancellable field to given value.
+
+### HasIsCancellable
+
+`func (o *MavenPackageUpload) HasIsCancellable() bool`
+
+HasIsCancellable returns a boolean if a field has been set.
+
+### GetIsCopyable
+
+`func (o *MavenPackageUpload) GetIsCopyable() string`
+
+GetIsCopyable returns the IsCopyable field if non-nil, zero value otherwise.
+
+### GetIsCopyableOk
+
+`func (o *MavenPackageUpload) GetIsCopyableOk() (*string, bool)`
+
+GetIsCopyableOk returns a tuple with the IsCopyable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCopyable
+
+`func (o *MavenPackageUpload) SetIsCopyable(v string)`
+
+SetIsCopyable sets IsCopyable field to given value.
+
+### HasIsCopyable
+
+`func (o *MavenPackageUpload) HasIsCopyable() bool`
+
+HasIsCopyable returns a boolean if a field has been set.
+
+### GetIsDeleteable
+
+`func (o *MavenPackageUpload) GetIsDeleteable() string`
+
+GetIsDeleteable returns the IsDeleteable field if non-nil, zero value otherwise.
+
+### GetIsDeleteableOk
+
+`func (o *MavenPackageUpload) GetIsDeleteableOk() (*string, bool)`
+
+GetIsDeleteableOk returns a tuple with the IsDeleteable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDeleteable
+
+`func (o *MavenPackageUpload) SetIsDeleteable(v string)`
+
+SetIsDeleteable sets IsDeleteable field to given value.
+
+### HasIsDeleteable
+
+`func (o *MavenPackageUpload) HasIsDeleteable() bool`
+
+HasIsDeleteable returns a boolean if a field has been set.
+
 ### GetIsDownloadable
 
 `func (o *MavenPackageUpload) GetIsDownloadable() bool`
@@ -742,6 +824,56 @@ SetIsDownloadable sets IsDownloadable field to given value.
 
 HasIsDownloadable returns a boolean if a field has been set.
 
+### GetIsMoveable
+
+`func (o *MavenPackageUpload) GetIsMoveable() string`
+
+GetIsMoveable returns the IsMoveable field if non-nil, zero value otherwise.
+
+### GetIsMoveableOk
+
+`func (o *MavenPackageUpload) GetIsMoveableOk() (*string, bool)`
+
+GetIsMoveableOk returns a tuple with the IsMoveable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMoveable
+
+`func (o *MavenPackageUpload) SetIsMoveable(v string)`
+
+SetIsMoveable sets IsMoveable field to given value.
+
+### HasIsMoveable
+
+`func (o *MavenPackageUpload) HasIsMoveable() bool`
+
+HasIsMoveable returns a boolean if a field has been set.
+
+### GetIsQuarantinable
+
+`func (o *MavenPackageUpload) GetIsQuarantinable() string`
+
+GetIsQuarantinable returns the IsQuarantinable field if non-nil, zero value otherwise.
+
+### GetIsQuarantinableOk
+
+`func (o *MavenPackageUpload) GetIsQuarantinableOk() (*string, bool)`
+
+GetIsQuarantinableOk returns a tuple with the IsQuarantinable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsQuarantinable
+
+`func (o *MavenPackageUpload) SetIsQuarantinable(v string)`
+
+SetIsQuarantinable sets IsQuarantinable field to given value.
+
+### HasIsQuarantinable
+
+`func (o *MavenPackageUpload) HasIsQuarantinable() bool`
+
+HasIsQuarantinable returns a boolean if a field has been set.
+
 ### GetIsQuarantined
 
 `func (o *MavenPackageUpload) GetIsQuarantined() bool`
@@ -766,6 +898,56 @@ SetIsQuarantined sets IsQuarantined field to given value.
 `func (o *MavenPackageUpload) HasIsQuarantined() bool`
 
 HasIsQuarantined returns a boolean if a field has been set.
+
+### GetIsResyncable
+
+`func (o *MavenPackageUpload) GetIsResyncable() string`
+
+GetIsResyncable returns the IsResyncable field if non-nil, zero value otherwise.
+
+### GetIsResyncableOk
+
+`func (o *MavenPackageUpload) GetIsResyncableOk() (*string, bool)`
+
+GetIsResyncableOk returns a tuple with the IsResyncable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsResyncable
+
+`func (o *MavenPackageUpload) SetIsResyncable(v string)`
+
+SetIsResyncable sets IsResyncable field to given value.
+
+### HasIsResyncable
+
+`func (o *MavenPackageUpload) HasIsResyncable() bool`
+
+HasIsResyncable returns a boolean if a field has been set.
+
+### GetIsSecurityScannable
+
+`func (o *MavenPackageUpload) GetIsSecurityScannable() string`
+
+GetIsSecurityScannable returns the IsSecurityScannable field if non-nil, zero value otherwise.
+
+### GetIsSecurityScannableOk
+
+`func (o *MavenPackageUpload) GetIsSecurityScannableOk() (*string, bool)`
+
+GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSecurityScannable
+
+`func (o *MavenPackageUpload) SetIsSecurityScannable(v string)`
+
+SetIsSecurityScannable sets IsSecurityScannable field to given value.
+
+### HasIsSecurityScannable
+
+`func (o *MavenPackageUpload) HasIsSecurityScannable() bool`
+
+HasIsSecurityScannable returns a boolean if a field has been set.
 
 ### GetIsSyncAwaiting
 

@@ -236,6 +236,9 @@ docs/StorageUsage.md
 docs/StorageUsageRaw.md
 docs/SwiftPackageUpload.md
 docs/SwiftPackageUploadRequest.md
+docs/SwiftUpstream.md
+docs/SwiftUpstreamRequest.md
+docs/SwiftUpstreamRequestPatch.md
 docs/TerraformPackageUpload.md
 docs/TerraformPackageUploadRequest.md
 docs/Usage.md
@@ -460,6 +463,9 @@ model_storage_usage.go
 model_storage_usage_raw.go
 model_swift_package_upload.go
 model_swift_package_upload_request.go
+model_swift_upstream.go
+model_swift_upstream_request.go
+model_swift_upstream_request_patch.go
 model_terraform_package_upload.go
 model_terraform_package_upload_request.go
 model_usage.go

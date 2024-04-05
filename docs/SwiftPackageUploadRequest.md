@@ -4,7 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AuthorName** | Pointer to **string** | The name of the author of the package. | [optional] 
+**AuthorOrg** | Pointer to **string** | The organization of the author. | [optional] 
+**LicenseUrl** | Pointer to **NullableString** | The license URL of this package. | [optional] 
+**Name** | **string** | The name of this package. | 
 **PackageFile** | **string** | The primary file for the package. | 
+**ReadmeUrl** | Pointer to **string** | The URL of the readme for the package. | [optional] 
+**RepositoryUrl** | Pointer to **string** | The URL of the SCM repository for the package. | [optional] 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **Scope** | **string** | A scope provides a namespace for related packages within the package registry. | 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
@@ -14,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewSwiftPackageUploadRequest
 
-`func NewSwiftPackageUploadRequest(packageFile string, scope string, version string, ) *SwiftPackageUploadRequest`
+`func NewSwiftPackageUploadRequest(name string, packageFile string, scope string, version string, ) *SwiftPackageUploadRequest`
 
 NewSwiftPackageUploadRequest instantiates a new SwiftPackageUploadRequest object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +34,111 @@ will change when the set of required properties is changed
 NewSwiftPackageUploadRequestWithDefaults instantiates a new SwiftPackageUploadRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAuthorName
+
+`func (o *SwiftPackageUploadRequest) GetAuthorName() string`
+
+GetAuthorName returns the AuthorName field if non-nil, zero value otherwise.
+
+### GetAuthorNameOk
+
+`func (o *SwiftPackageUploadRequest) GetAuthorNameOk() (*string, bool)`
+
+GetAuthorNameOk returns a tuple with the AuthorName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthorName
+
+`func (o *SwiftPackageUploadRequest) SetAuthorName(v string)`
+
+SetAuthorName sets AuthorName field to given value.
+
+### HasAuthorName
+
+`func (o *SwiftPackageUploadRequest) HasAuthorName() bool`
+
+HasAuthorName returns a boolean if a field has been set.
+
+### GetAuthorOrg
+
+`func (o *SwiftPackageUploadRequest) GetAuthorOrg() string`
+
+GetAuthorOrg returns the AuthorOrg field if non-nil, zero value otherwise.
+
+### GetAuthorOrgOk
+
+`func (o *SwiftPackageUploadRequest) GetAuthorOrgOk() (*string, bool)`
+
+GetAuthorOrgOk returns a tuple with the AuthorOrg field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthorOrg
+
+`func (o *SwiftPackageUploadRequest) SetAuthorOrg(v string)`
+
+SetAuthorOrg sets AuthorOrg field to given value.
+
+### HasAuthorOrg
+
+`func (o *SwiftPackageUploadRequest) HasAuthorOrg() bool`
+
+HasAuthorOrg returns a boolean if a field has been set.
+
+### GetLicenseUrl
+
+`func (o *SwiftPackageUploadRequest) GetLicenseUrl() string`
+
+GetLicenseUrl returns the LicenseUrl field if non-nil, zero value otherwise.
+
+### GetLicenseUrlOk
+
+`func (o *SwiftPackageUploadRequest) GetLicenseUrlOk() (*string, bool)`
+
+GetLicenseUrlOk returns a tuple with the LicenseUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicenseUrl
+
+`func (o *SwiftPackageUploadRequest) SetLicenseUrl(v string)`
+
+SetLicenseUrl sets LicenseUrl field to given value.
+
+### HasLicenseUrl
+
+`func (o *SwiftPackageUploadRequest) HasLicenseUrl() bool`
+
+HasLicenseUrl returns a boolean if a field has been set.
+
+### SetLicenseUrlNil
+
+`func (o *SwiftPackageUploadRequest) SetLicenseUrlNil(b bool)`
+
+ SetLicenseUrlNil sets the value for LicenseUrl to be an explicit nil
+
+### UnsetLicenseUrl
+`func (o *SwiftPackageUploadRequest) UnsetLicenseUrl()`
+
+UnsetLicenseUrl ensures that no value is present for LicenseUrl, not even an explicit nil
+### GetName
+
+`func (o *SwiftPackageUploadRequest) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *SwiftPackageUploadRequest) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *SwiftPackageUploadRequest) SetName(v string)`
+
+SetName sets Name field to given value.
+
 
 ### GetPackageFile
 
@@ -48,6 +159,56 @@ and a boolean to check if the value has been set.
 
 SetPackageFile sets PackageFile field to given value.
 
+
+### GetReadmeUrl
+
+`func (o *SwiftPackageUploadRequest) GetReadmeUrl() string`
+
+GetReadmeUrl returns the ReadmeUrl field if non-nil, zero value otherwise.
+
+### GetReadmeUrlOk
+
+`func (o *SwiftPackageUploadRequest) GetReadmeUrlOk() (*string, bool)`
+
+GetReadmeUrlOk returns a tuple with the ReadmeUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReadmeUrl
+
+`func (o *SwiftPackageUploadRequest) SetReadmeUrl(v string)`
+
+SetReadmeUrl sets ReadmeUrl field to given value.
+
+### HasReadmeUrl
+
+`func (o *SwiftPackageUploadRequest) HasReadmeUrl() bool`
+
+HasReadmeUrl returns a boolean if a field has been set.
+
+### GetRepositoryUrl
+
+`func (o *SwiftPackageUploadRequest) GetRepositoryUrl() string`
+
+GetRepositoryUrl returns the RepositoryUrl field if non-nil, zero value otherwise.
+
+### GetRepositoryUrlOk
+
+`func (o *SwiftPackageUploadRequest) GetRepositoryUrlOk() (*string, bool)`
+
+GetRepositoryUrlOk returns a tuple with the RepositoryUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRepositoryUrl
+
+`func (o *SwiftPackageUploadRequest) SetRepositoryUrl(v string)`
+
+SetRepositoryUrl sets RepositoryUrl field to given value.
+
+### HasRepositoryUrl
+
+`func (o *SwiftPackageUploadRequest) HasRepositoryUrl() bool`
+
+HasRepositoryUrl returns a boolean if a field has been set.
 
 ### GetRepublish
 

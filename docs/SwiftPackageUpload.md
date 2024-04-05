@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Architectures** | Pointer to [**[]Architecture**](Architecture.md) |  | [optional] [readonly] 
+**AuthorName** | Pointer to **string** | The name of the author of the package. | [optional] 
+**AuthorOrg** | Pointer to **string** | The organization of the author. | [optional] 
 **CdnUrl** | Pointer to **NullableString** |  | [optional] [readonly] 
 **ChecksumMd5** | Pointer to **string** |  | [optional] [readonly] 
 **ChecksumSha1** | Pointer to **string** |  | [optional] [readonly] 
@@ -24,24 +26,33 @@ Name | Type | Description | Notes
 **FormatUrl** | Pointer to **string** |  | [optional] [readonly] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] [readonly] 
 **Indexed** | Pointer to **bool** |  | [optional] [readonly] 
+**IsCancellable** | Pointer to **string** |  | [optional] [readonly] 
+**IsCopyable** | Pointer to **string** |  | [optional] [readonly] 
+**IsDeleteable** | Pointer to **string** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsMoveable** | Pointer to **string** |  | [optional] [readonly] 
+**IsQuarantinable** | Pointer to **string** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
+**IsResyncable** | Pointer to **string** |  | [optional] [readonly] 
+**IsSecurityScannable** | Pointer to **string** |  | [optional] [readonly] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncInFlight** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncInProgress** | Pointer to **bool** |  | [optional] [readonly] 
 **License** | Pointer to **NullableString** | The license of this package. | [optional] [readonly] 
-**Name** | Pointer to **NullableString** | The name of this package. | [optional] [readonly] 
+**LicenseUrl** | Pointer to **NullableString** | The license URL of this package. | [optional] 
+**Name** | **string** | The name of this package. | 
 **Namespace** | Pointer to **string** |  | [optional] [readonly] 
 **NamespaceUrl** | Pointer to **string** |  | [optional] [readonly] 
 **NumFiles** | Pointer to **int64** |  | [optional] [readonly] 
 **OriginRepository** | Pointer to **string** |  | [optional] [readonly] 
 **OriginRepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
 **PackageType** | Pointer to **int64** | The type of package contents. | [optional] [readonly] 
+**ReadmeUrl** | Pointer to **string** | The URL of the readme for the package. | [optional] 
 **Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
-**RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
+**RepositoryUrl** | Pointer to **string** | The URL of the SCM repository for the package. | [optional] 
 **Scope** | **string** | A scope provides a namespace for related packages within the package registry. | 
 **SecurityScanCompletedAt** | Pointer to **NullableTime** | The datetime the security scanning was completed. | [optional] [readonly] 
 **SecurityScanStartedAt** | Pointer to **NullableTime** | The datetime the security scanning was started. | [optional] [readonly] 
@@ -78,7 +89,7 @@ Name | Type | Description | Notes
 
 ### NewSwiftPackageUpload
 
-`func NewSwiftPackageUpload(scope string, version string, ) *SwiftPackageUpload`
+`func NewSwiftPackageUpload(name string, scope string, version string, ) *SwiftPackageUpload`
 
 NewSwiftPackageUpload instantiates a new SwiftPackageUpload object
 This constructor will assign default values to properties that have it defined,
@@ -117,6 +128,56 @@ SetArchitectures sets Architectures field to given value.
 `func (o *SwiftPackageUpload) HasArchitectures() bool`
 
 HasArchitectures returns a boolean if a field has been set.
+
+### GetAuthorName
+
+`func (o *SwiftPackageUpload) GetAuthorName() string`
+
+GetAuthorName returns the AuthorName field if non-nil, zero value otherwise.
+
+### GetAuthorNameOk
+
+`func (o *SwiftPackageUpload) GetAuthorNameOk() (*string, bool)`
+
+GetAuthorNameOk returns a tuple with the AuthorName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthorName
+
+`func (o *SwiftPackageUpload) SetAuthorName(v string)`
+
+SetAuthorName sets AuthorName field to given value.
+
+### HasAuthorName
+
+`func (o *SwiftPackageUpload) HasAuthorName() bool`
+
+HasAuthorName returns a boolean if a field has been set.
+
+### GetAuthorOrg
+
+`func (o *SwiftPackageUpload) GetAuthorOrg() string`
+
+GetAuthorOrg returns the AuthorOrg field if non-nil, zero value otherwise.
+
+### GetAuthorOrgOk
+
+`func (o *SwiftPackageUpload) GetAuthorOrgOk() (*string, bool)`
+
+GetAuthorOrgOk returns a tuple with the AuthorOrg field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthorOrg
+
+`func (o *SwiftPackageUpload) SetAuthorOrg(v string)`
+
+SetAuthorOrg sets AuthorOrg field to given value.
+
+### HasAuthorOrg
+
+`func (o *SwiftPackageUpload) HasAuthorOrg() bool`
+
+HasAuthorOrg returns a boolean if a field has been set.
 
 ### GetCdnUrl
 
@@ -643,6 +704,81 @@ SetIndexed sets Indexed field to given value.
 
 HasIndexed returns a boolean if a field has been set.
 
+### GetIsCancellable
+
+`func (o *SwiftPackageUpload) GetIsCancellable() string`
+
+GetIsCancellable returns the IsCancellable field if non-nil, zero value otherwise.
+
+### GetIsCancellableOk
+
+`func (o *SwiftPackageUpload) GetIsCancellableOk() (*string, bool)`
+
+GetIsCancellableOk returns a tuple with the IsCancellable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCancellable
+
+`func (o *SwiftPackageUpload) SetIsCancellable(v string)`
+
+SetIsCancellable sets IsCancellable field to given value.
+
+### HasIsCancellable
+
+`func (o *SwiftPackageUpload) HasIsCancellable() bool`
+
+HasIsCancellable returns a boolean if a field has been set.
+
+### GetIsCopyable
+
+`func (o *SwiftPackageUpload) GetIsCopyable() string`
+
+GetIsCopyable returns the IsCopyable field if non-nil, zero value otherwise.
+
+### GetIsCopyableOk
+
+`func (o *SwiftPackageUpload) GetIsCopyableOk() (*string, bool)`
+
+GetIsCopyableOk returns a tuple with the IsCopyable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsCopyable
+
+`func (o *SwiftPackageUpload) SetIsCopyable(v string)`
+
+SetIsCopyable sets IsCopyable field to given value.
+
+### HasIsCopyable
+
+`func (o *SwiftPackageUpload) HasIsCopyable() bool`
+
+HasIsCopyable returns a boolean if a field has been set.
+
+### GetIsDeleteable
+
+`func (o *SwiftPackageUpload) GetIsDeleteable() string`
+
+GetIsDeleteable returns the IsDeleteable field if non-nil, zero value otherwise.
+
+### GetIsDeleteableOk
+
+`func (o *SwiftPackageUpload) GetIsDeleteableOk() (*string, bool)`
+
+GetIsDeleteableOk returns a tuple with the IsDeleteable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsDeleteable
+
+`func (o *SwiftPackageUpload) SetIsDeleteable(v string)`
+
+SetIsDeleteable sets IsDeleteable field to given value.
+
+### HasIsDeleteable
+
+`func (o *SwiftPackageUpload) HasIsDeleteable() bool`
+
+HasIsDeleteable returns a boolean if a field has been set.
+
 ### GetIsDownloadable
 
 `func (o *SwiftPackageUpload) GetIsDownloadable() bool`
@@ -668,6 +804,56 @@ SetIsDownloadable sets IsDownloadable field to given value.
 
 HasIsDownloadable returns a boolean if a field has been set.
 
+### GetIsMoveable
+
+`func (o *SwiftPackageUpload) GetIsMoveable() string`
+
+GetIsMoveable returns the IsMoveable field if non-nil, zero value otherwise.
+
+### GetIsMoveableOk
+
+`func (o *SwiftPackageUpload) GetIsMoveableOk() (*string, bool)`
+
+GetIsMoveableOk returns a tuple with the IsMoveable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMoveable
+
+`func (o *SwiftPackageUpload) SetIsMoveable(v string)`
+
+SetIsMoveable sets IsMoveable field to given value.
+
+### HasIsMoveable
+
+`func (o *SwiftPackageUpload) HasIsMoveable() bool`
+
+HasIsMoveable returns a boolean if a field has been set.
+
+### GetIsQuarantinable
+
+`func (o *SwiftPackageUpload) GetIsQuarantinable() string`
+
+GetIsQuarantinable returns the IsQuarantinable field if non-nil, zero value otherwise.
+
+### GetIsQuarantinableOk
+
+`func (o *SwiftPackageUpload) GetIsQuarantinableOk() (*string, bool)`
+
+GetIsQuarantinableOk returns a tuple with the IsQuarantinable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsQuarantinable
+
+`func (o *SwiftPackageUpload) SetIsQuarantinable(v string)`
+
+SetIsQuarantinable sets IsQuarantinable field to given value.
+
+### HasIsQuarantinable
+
+`func (o *SwiftPackageUpload) HasIsQuarantinable() bool`
+
+HasIsQuarantinable returns a boolean if a field has been set.
+
 ### GetIsQuarantined
 
 `func (o *SwiftPackageUpload) GetIsQuarantined() bool`
@@ -692,6 +878,56 @@ SetIsQuarantined sets IsQuarantined field to given value.
 `func (o *SwiftPackageUpload) HasIsQuarantined() bool`
 
 HasIsQuarantined returns a boolean if a field has been set.
+
+### GetIsResyncable
+
+`func (o *SwiftPackageUpload) GetIsResyncable() string`
+
+GetIsResyncable returns the IsResyncable field if non-nil, zero value otherwise.
+
+### GetIsResyncableOk
+
+`func (o *SwiftPackageUpload) GetIsResyncableOk() (*string, bool)`
+
+GetIsResyncableOk returns a tuple with the IsResyncable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsResyncable
+
+`func (o *SwiftPackageUpload) SetIsResyncable(v string)`
+
+SetIsResyncable sets IsResyncable field to given value.
+
+### HasIsResyncable
+
+`func (o *SwiftPackageUpload) HasIsResyncable() bool`
+
+HasIsResyncable returns a boolean if a field has been set.
+
+### GetIsSecurityScannable
+
+`func (o *SwiftPackageUpload) GetIsSecurityScannable() string`
+
+GetIsSecurityScannable returns the IsSecurityScannable field if non-nil, zero value otherwise.
+
+### GetIsSecurityScannableOk
+
+`func (o *SwiftPackageUpload) GetIsSecurityScannableOk() (*string, bool)`
+
+GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSecurityScannable
+
+`func (o *SwiftPackageUpload) SetIsSecurityScannable(v string)`
+
+SetIsSecurityScannable sets IsSecurityScannable field to given value.
+
+### HasIsSecurityScannable
+
+`func (o *SwiftPackageUpload) HasIsSecurityScannable() bool`
+
+HasIsSecurityScannable returns a boolean if a field has been set.
 
 ### GetIsSyncAwaiting
 
@@ -853,6 +1089,41 @@ HasLicense returns a boolean if a field has been set.
 `func (o *SwiftPackageUpload) UnsetLicense()`
 
 UnsetLicense ensures that no value is present for License, not even an explicit nil
+### GetLicenseUrl
+
+`func (o *SwiftPackageUpload) GetLicenseUrl() string`
+
+GetLicenseUrl returns the LicenseUrl field if non-nil, zero value otherwise.
+
+### GetLicenseUrlOk
+
+`func (o *SwiftPackageUpload) GetLicenseUrlOk() (*string, bool)`
+
+GetLicenseUrlOk returns a tuple with the LicenseUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLicenseUrl
+
+`func (o *SwiftPackageUpload) SetLicenseUrl(v string)`
+
+SetLicenseUrl sets LicenseUrl field to given value.
+
+### HasLicenseUrl
+
+`func (o *SwiftPackageUpload) HasLicenseUrl() bool`
+
+HasLicenseUrl returns a boolean if a field has been set.
+
+### SetLicenseUrlNil
+
+`func (o *SwiftPackageUpload) SetLicenseUrlNil(b bool)`
+
+ SetLicenseUrlNil sets the value for LicenseUrl to be an explicit nil
+
+### UnsetLicenseUrl
+`func (o *SwiftPackageUpload) UnsetLicenseUrl()`
+
+UnsetLicenseUrl ensures that no value is present for LicenseUrl, not even an explicit nil
 ### GetName
 
 `func (o *SwiftPackageUpload) GetName() string`
@@ -872,22 +1143,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *SwiftPackageUpload) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *SwiftPackageUpload) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *SwiftPackageUpload) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetNamespace
 
 `func (o *SwiftPackageUpload) GetNamespace() string`
@@ -1037,6 +1293,31 @@ SetPackageType sets PackageType field to given value.
 `func (o *SwiftPackageUpload) HasPackageType() bool`
 
 HasPackageType returns a boolean if a field has been set.
+
+### GetReadmeUrl
+
+`func (o *SwiftPackageUpload) GetReadmeUrl() string`
+
+GetReadmeUrl returns the ReadmeUrl field if non-nil, zero value otherwise.
+
+### GetReadmeUrlOk
+
+`func (o *SwiftPackageUpload) GetReadmeUrlOk() (*string, bool)`
+
+GetReadmeUrlOk returns a tuple with the ReadmeUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReadmeUrl
+
+`func (o *SwiftPackageUpload) SetReadmeUrl(v string)`
+
+SetReadmeUrl sets ReadmeUrl field to given value.
+
+### HasReadmeUrl
+
+`func (o *SwiftPackageUpload) HasReadmeUrl() bool`
+
+HasReadmeUrl returns a boolean if a field has been set.
 
 ### GetRelease
 

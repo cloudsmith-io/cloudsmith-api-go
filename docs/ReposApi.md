@@ -90,6 +90,12 @@ Method | HTTP request | Description
 [**ReposUpstreamRubyPartialUpdate**](ReposApi.md#ReposUpstreamRubyPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/ruby/{slug_perm}/ | Partially update a Ruby upstream config for this repository.
 [**ReposUpstreamRubyRead**](ReposApi.md#ReposUpstreamRubyRead) | **Get** /repos/{owner}/{identifier}/upstream/ruby/{slug_perm}/ | Retrieve a Ruby upstream config for this repository.
 [**ReposUpstreamRubyUpdate**](ReposApi.md#ReposUpstreamRubyUpdate) | **Put** /repos/{owner}/{identifier}/upstream/ruby/{slug_perm}/ | Update a Ruby upstream config for this repository.
+[**ReposUpstreamSwiftCreate**](ReposApi.md#ReposUpstreamSwiftCreate) | **Post** /repos/{owner}/{identifier}/upstream/swift/ | Create a Swift upstream config for this repository.
+[**ReposUpstreamSwiftDelete**](ReposApi.md#ReposUpstreamSwiftDelete) | **Delete** /repos/{owner}/{identifier}/upstream/swift/{slug_perm}/ | Delete a Swift upstream config for this repository.
+[**ReposUpstreamSwiftList**](ReposApi.md#ReposUpstreamSwiftList) | **Get** /repos/{owner}/{identifier}/upstream/swift/ | List Swift upstream configs for this repository.
+[**ReposUpstreamSwiftPartialUpdate**](ReposApi.md#ReposUpstreamSwiftPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/swift/{slug_perm}/ | Partially update a Swift upstream config for this repository.
+[**ReposUpstreamSwiftRead**](ReposApi.md#ReposUpstreamSwiftRead) | **Get** /repos/{owner}/{identifier}/upstream/swift/{slug_perm}/ | Retrieve a Swift upstream config for this repository.
+[**ReposUpstreamSwiftUpdate**](ReposApi.md#ReposUpstreamSwiftUpdate) | **Put** /repos/{owner}/{identifier}/upstream/swift/{slug_perm}/ | Update a Swift upstream config for this repository.
 [**ReposUserList**](ReposApi.md#ReposUserList) | **Get** /repos/ | Get a list of all repositories associated with current user.
 
 
@@ -6591,6 +6597,464 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RubyUpstream**](RubyUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSwiftCreate
+
+> SwiftUpstream ReposUpstreamSwiftCreate(ctx, owner, identifier).Data(data).Execute()
+
+Create a Swift upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewSwiftUpstreamRequest("Name_example", "UpstreamUrl_example") // SwiftUpstreamRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftCreate(context.Background(), owner, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposUpstreamSwiftCreate`: SwiftUpstream
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSwiftCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**SwiftUpstreamRequest**](SwiftUpstreamRequest.md) |  | 
+
+### Return type
+
+[**SwiftUpstream**](SwiftUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSwiftDelete
+
+> ReposUpstreamSwiftDelete(ctx, owner, identifier, slugPerm).Execute()
+
+Delete a Swift upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.ReposApi.ReposUpstreamSwiftDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSwiftDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSwiftList
+
+> []SwiftUpstream ReposUpstreamSwiftList(ctx, owner, identifier).Page(page).PageSize(pageSize).Execute()
+
+List Swift upstream configs for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposUpstreamSwiftList`: []SwiftUpstream
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSwiftListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]SwiftUpstream**](SwiftUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSwiftPartialUpdate
+
+> SwiftUpstream ReposUpstreamSwiftPartialUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Partially update a Swift upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewSwiftUpstreamRequestPatch() // SwiftUpstreamRequestPatch |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposUpstreamSwiftPartialUpdate`: SwiftUpstream
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSwiftPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**SwiftUpstreamRequestPatch**](SwiftUpstreamRequestPatch.md) |  | 
+
+### Return type
+
+[**SwiftUpstream**](SwiftUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSwiftRead
+
+> SwiftUpstream ReposUpstreamSwiftRead(ctx, owner, identifier, slugPerm).Execute()
+
+Retrieve a Swift upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftRead(context.Background(), owner, identifier, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposUpstreamSwiftRead`: SwiftUpstream
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSwiftReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**SwiftUpstream**](SwiftUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSwiftUpdate
+
+> SwiftUpstream ReposUpstreamSwiftUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Update a Swift upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewSwiftUpstreamRequest("Name_example", "UpstreamUrl_example") // SwiftUpstreamRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposUpstreamSwiftUpdate`: SwiftUpstream
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSwiftUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**SwiftUpstreamRequest**](SwiftUpstreamRequest.md) |  | 
+
+### Return type
+
+[**SwiftUpstream**](SwiftUpstream.md)
 
 ### Authorization
 
