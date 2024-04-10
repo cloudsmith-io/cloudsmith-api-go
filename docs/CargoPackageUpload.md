@@ -24,15 +24,15 @@ Name | Type | Description | Notes
 **FormatUrl** | Pointer to **string** |  | [optional] [readonly] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] [readonly] 
 **Indexed** | Pointer to **bool** |  | [optional] [readonly] 
-**IsCancellable** | Pointer to **string** |  | [optional] [readonly] 
-**IsCopyable** | Pointer to **string** |  | [optional] [readonly] 
-**IsDeleteable** | Pointer to **string** |  | [optional] [readonly] 
+**IsCancellable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsCopyable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsDeleteable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
-**IsMoveable** | Pointer to **string** |  | [optional] [readonly] 
-**IsQuarantinable** | Pointer to **string** |  | [optional] [readonly] 
+**IsMoveable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsQuarantinable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
-**IsResyncable** | Pointer to **string** |  | [optional] [readonly] 
-**IsSecurityScannable** | Pointer to **string** |  | [optional] [readonly] 
+**IsResyncable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsSecurityScannable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
@@ -651,20 +651,20 @@ HasIndexed returns a boolean if a field has been set.
 
 ### GetIsCancellable
 
-`func (o *CargoPackageUpload) GetIsCancellable() string`
+`func (o *CargoPackageUpload) GetIsCancellable() bool`
 
 GetIsCancellable returns the IsCancellable field if non-nil, zero value otherwise.
 
 ### GetIsCancellableOk
 
-`func (o *CargoPackageUpload) GetIsCancellableOk() (*string, bool)`
+`func (o *CargoPackageUpload) GetIsCancellableOk() (*bool, bool)`
 
 GetIsCancellableOk returns a tuple with the IsCancellable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsCancellable
 
-`func (o *CargoPackageUpload) SetIsCancellable(v string)`
+`func (o *CargoPackageUpload) SetIsCancellable(v bool)`
 
 SetIsCancellable sets IsCancellable field to given value.
 
@@ -676,20 +676,20 @@ HasIsCancellable returns a boolean if a field has been set.
 
 ### GetIsCopyable
 
-`func (o *CargoPackageUpload) GetIsCopyable() string`
+`func (o *CargoPackageUpload) GetIsCopyable() bool`
 
 GetIsCopyable returns the IsCopyable field if non-nil, zero value otherwise.
 
 ### GetIsCopyableOk
 
-`func (o *CargoPackageUpload) GetIsCopyableOk() (*string, bool)`
+`func (o *CargoPackageUpload) GetIsCopyableOk() (*bool, bool)`
 
 GetIsCopyableOk returns a tuple with the IsCopyable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsCopyable
 
-`func (o *CargoPackageUpload) SetIsCopyable(v string)`
+`func (o *CargoPackageUpload) SetIsCopyable(v bool)`
 
 SetIsCopyable sets IsCopyable field to given value.
 
@@ -701,20 +701,20 @@ HasIsCopyable returns a boolean if a field has been set.
 
 ### GetIsDeleteable
 
-`func (o *CargoPackageUpload) GetIsDeleteable() string`
+`func (o *CargoPackageUpload) GetIsDeleteable() bool`
 
 GetIsDeleteable returns the IsDeleteable field if non-nil, zero value otherwise.
 
 ### GetIsDeleteableOk
 
-`func (o *CargoPackageUpload) GetIsDeleteableOk() (*string, bool)`
+`func (o *CargoPackageUpload) GetIsDeleteableOk() (*bool, bool)`
 
 GetIsDeleteableOk returns a tuple with the IsDeleteable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsDeleteable
 
-`func (o *CargoPackageUpload) SetIsDeleteable(v string)`
+`func (o *CargoPackageUpload) SetIsDeleteable(v bool)`
 
 SetIsDeleteable sets IsDeleteable field to given value.
 
@@ -751,20 +751,20 @@ HasIsDownloadable returns a boolean if a field has been set.
 
 ### GetIsMoveable
 
-`func (o *CargoPackageUpload) GetIsMoveable() string`
+`func (o *CargoPackageUpload) GetIsMoveable() bool`
 
 GetIsMoveable returns the IsMoveable field if non-nil, zero value otherwise.
 
 ### GetIsMoveableOk
 
-`func (o *CargoPackageUpload) GetIsMoveableOk() (*string, bool)`
+`func (o *CargoPackageUpload) GetIsMoveableOk() (*bool, bool)`
 
 GetIsMoveableOk returns a tuple with the IsMoveable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsMoveable
 
-`func (o *CargoPackageUpload) SetIsMoveable(v string)`
+`func (o *CargoPackageUpload) SetIsMoveable(v bool)`
 
 SetIsMoveable sets IsMoveable field to given value.
 
@@ -776,20 +776,20 @@ HasIsMoveable returns a boolean if a field has been set.
 
 ### GetIsQuarantinable
 
-`func (o *CargoPackageUpload) GetIsQuarantinable() string`
+`func (o *CargoPackageUpload) GetIsQuarantinable() bool`
 
 GetIsQuarantinable returns the IsQuarantinable field if non-nil, zero value otherwise.
 
 ### GetIsQuarantinableOk
 
-`func (o *CargoPackageUpload) GetIsQuarantinableOk() (*string, bool)`
+`func (o *CargoPackageUpload) GetIsQuarantinableOk() (*bool, bool)`
 
 GetIsQuarantinableOk returns a tuple with the IsQuarantinable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsQuarantinable
 
-`func (o *CargoPackageUpload) SetIsQuarantinable(v string)`
+`func (o *CargoPackageUpload) SetIsQuarantinable(v bool)`
 
 SetIsQuarantinable sets IsQuarantinable field to given value.
 
@@ -826,20 +826,20 @@ HasIsQuarantined returns a boolean if a field has been set.
 
 ### GetIsResyncable
 
-`func (o *CargoPackageUpload) GetIsResyncable() string`
+`func (o *CargoPackageUpload) GetIsResyncable() bool`
 
 GetIsResyncable returns the IsResyncable field if non-nil, zero value otherwise.
 
 ### GetIsResyncableOk
 
-`func (o *CargoPackageUpload) GetIsResyncableOk() (*string, bool)`
+`func (o *CargoPackageUpload) GetIsResyncableOk() (*bool, bool)`
 
 GetIsResyncableOk returns a tuple with the IsResyncable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsResyncable
 
-`func (o *CargoPackageUpload) SetIsResyncable(v string)`
+`func (o *CargoPackageUpload) SetIsResyncable(v bool)`
 
 SetIsResyncable sets IsResyncable field to given value.
 
@@ -851,20 +851,20 @@ HasIsResyncable returns a boolean if a field has been set.
 
 ### GetIsSecurityScannable
 
-`func (o *CargoPackageUpload) GetIsSecurityScannable() string`
+`func (o *CargoPackageUpload) GetIsSecurityScannable() bool`
 
 GetIsSecurityScannable returns the IsSecurityScannable field if non-nil, zero value otherwise.
 
 ### GetIsSecurityScannableOk
 
-`func (o *CargoPackageUpload) GetIsSecurityScannableOk() (*string, bool)`
+`func (o *CargoPackageUpload) GetIsSecurityScannableOk() (*bool, bool)`
 
 GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsSecurityScannable
 
-`func (o *CargoPackageUpload) SetIsSecurityScannable(v string)`
+`func (o *CargoPackageUpload) SetIsSecurityScannable(v bool)`
 
 SetIsSecurityScannable sets IsSecurityScannable field to given value.
 

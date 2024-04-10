@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.390.0
+API version: 1.392.0
 Contact: support@cloudsmith.io
 */
 
@@ -1399,9 +1399,9 @@ func (r ApiPackagesStatusRequest) Execute() (*PackageStatus, *http.Response, err
 }
 
 /*
-PackagesStatus Get the synchronisation status for a package.
+PackagesStatus Get the synchronization status for a package.
 
-Get the synchronisation status for a package.
+Get the synchronization status for a package.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner

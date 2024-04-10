@@ -24,15 +24,15 @@ Name | Type | Description | Notes
 **FormatUrl** | Pointer to **string** |  | [optional] [readonly] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] [readonly] 
 **Indexed** | Pointer to **bool** |  | [optional] [readonly] 
-**IsCancellable** | Pointer to **string** |  | [optional] [readonly] 
-**IsCopyable** | Pointer to **string** |  | [optional] [readonly] 
-**IsDeleteable** | Pointer to **string** |  | [optional] [readonly] 
+**IsCancellable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsCopyable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsDeleteable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
-**IsMoveable** | Pointer to **string** |  | [optional] [readonly] 
-**IsQuarantinable** | Pointer to **string** |  | [optional] [readonly] 
+**IsMoveable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsQuarantinable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
-**IsResyncable** | Pointer to **string** |  | [optional] [readonly] 
-**IsSecurityScannable** | Pointer to **string** |  | [optional] [readonly] 
+**IsResyncable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsSecurityScannable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
@@ -651,20 +651,20 @@ HasIndexed returns a boolean if a field has been set.
 
 ### GetIsCancellable
 
-`func (o *HelmPackageUpload) GetIsCancellable() string`
+`func (o *HelmPackageUpload) GetIsCancellable() bool`
 
 GetIsCancellable returns the IsCancellable field if non-nil, zero value otherwise.
 
 ### GetIsCancellableOk
 
-`func (o *HelmPackageUpload) GetIsCancellableOk() (*string, bool)`
+`func (o *HelmPackageUpload) GetIsCancellableOk() (*bool, bool)`
 
 GetIsCancellableOk returns a tuple with the IsCancellable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsCancellable
 
-`func (o *HelmPackageUpload) SetIsCancellable(v string)`
+`func (o *HelmPackageUpload) SetIsCancellable(v bool)`
 
 SetIsCancellable sets IsCancellable field to given value.
 
@@ -676,20 +676,20 @@ HasIsCancellable returns a boolean if a field has been set.
 
 ### GetIsCopyable
 
-`func (o *HelmPackageUpload) GetIsCopyable() string`
+`func (o *HelmPackageUpload) GetIsCopyable() bool`
 
 GetIsCopyable returns the IsCopyable field if non-nil, zero value otherwise.
 
 ### GetIsCopyableOk
 
-`func (o *HelmPackageUpload) GetIsCopyableOk() (*string, bool)`
+`func (o *HelmPackageUpload) GetIsCopyableOk() (*bool, bool)`
 
 GetIsCopyableOk returns a tuple with the IsCopyable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsCopyable
 
-`func (o *HelmPackageUpload) SetIsCopyable(v string)`
+`func (o *HelmPackageUpload) SetIsCopyable(v bool)`
 
 SetIsCopyable sets IsCopyable field to given value.
 
@@ -701,20 +701,20 @@ HasIsCopyable returns a boolean if a field has been set.
 
 ### GetIsDeleteable
 
-`func (o *HelmPackageUpload) GetIsDeleteable() string`
+`func (o *HelmPackageUpload) GetIsDeleteable() bool`
 
 GetIsDeleteable returns the IsDeleteable field if non-nil, zero value otherwise.
 
 ### GetIsDeleteableOk
 
-`func (o *HelmPackageUpload) GetIsDeleteableOk() (*string, bool)`
+`func (o *HelmPackageUpload) GetIsDeleteableOk() (*bool, bool)`
 
 GetIsDeleteableOk returns a tuple with the IsDeleteable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsDeleteable
 
-`func (o *HelmPackageUpload) SetIsDeleteable(v string)`
+`func (o *HelmPackageUpload) SetIsDeleteable(v bool)`
 
 SetIsDeleteable sets IsDeleteable field to given value.
 
@@ -751,20 +751,20 @@ HasIsDownloadable returns a boolean if a field has been set.
 
 ### GetIsMoveable
 
-`func (o *HelmPackageUpload) GetIsMoveable() string`
+`func (o *HelmPackageUpload) GetIsMoveable() bool`
 
 GetIsMoveable returns the IsMoveable field if non-nil, zero value otherwise.
 
 ### GetIsMoveableOk
 
-`func (o *HelmPackageUpload) GetIsMoveableOk() (*string, bool)`
+`func (o *HelmPackageUpload) GetIsMoveableOk() (*bool, bool)`
 
 GetIsMoveableOk returns a tuple with the IsMoveable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsMoveable
 
-`func (o *HelmPackageUpload) SetIsMoveable(v string)`
+`func (o *HelmPackageUpload) SetIsMoveable(v bool)`
 
 SetIsMoveable sets IsMoveable field to given value.
 
@@ -776,20 +776,20 @@ HasIsMoveable returns a boolean if a field has been set.
 
 ### GetIsQuarantinable
 
-`func (o *HelmPackageUpload) GetIsQuarantinable() string`
+`func (o *HelmPackageUpload) GetIsQuarantinable() bool`
 
 GetIsQuarantinable returns the IsQuarantinable field if non-nil, zero value otherwise.
 
 ### GetIsQuarantinableOk
 
-`func (o *HelmPackageUpload) GetIsQuarantinableOk() (*string, bool)`
+`func (o *HelmPackageUpload) GetIsQuarantinableOk() (*bool, bool)`
 
 GetIsQuarantinableOk returns a tuple with the IsQuarantinable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsQuarantinable
 
-`func (o *HelmPackageUpload) SetIsQuarantinable(v string)`
+`func (o *HelmPackageUpload) SetIsQuarantinable(v bool)`
 
 SetIsQuarantinable sets IsQuarantinable field to given value.
 
@@ -826,20 +826,20 @@ HasIsQuarantined returns a boolean if a field has been set.
 
 ### GetIsResyncable
 
-`func (o *HelmPackageUpload) GetIsResyncable() string`
+`func (o *HelmPackageUpload) GetIsResyncable() bool`
 
 GetIsResyncable returns the IsResyncable field if non-nil, zero value otherwise.
 
 ### GetIsResyncableOk
 
-`func (o *HelmPackageUpload) GetIsResyncableOk() (*string, bool)`
+`func (o *HelmPackageUpload) GetIsResyncableOk() (*bool, bool)`
 
 GetIsResyncableOk returns a tuple with the IsResyncable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsResyncable
 
-`func (o *HelmPackageUpload) SetIsResyncable(v string)`
+`func (o *HelmPackageUpload) SetIsResyncable(v bool)`
 
 SetIsResyncable sets IsResyncable field to given value.
 
@@ -851,20 +851,20 @@ HasIsResyncable returns a boolean if a field has been set.
 
 ### GetIsSecurityScannable
 
-`func (o *HelmPackageUpload) GetIsSecurityScannable() string`
+`func (o *HelmPackageUpload) GetIsSecurityScannable() bool`
 
 GetIsSecurityScannable returns the IsSecurityScannable field if non-nil, zero value otherwise.
 
 ### GetIsSecurityScannableOk
 
-`func (o *HelmPackageUpload) GetIsSecurityScannableOk() (*string, bool)`
+`func (o *HelmPackageUpload) GetIsSecurityScannableOk() (*bool, bool)`
 
 GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIsSecurityScannable
 
-`func (o *HelmPackageUpload) SetIsSecurityScannable(v string)`
+`func (o *HelmPackageUpload) SetIsSecurityScannable(v bool)`
 
 SetIsSecurityScannable sets IsSecurityScannable field to given value.
 

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**PackagesRead**](PackagesApi.md#PackagesRead) | **Get** /packages/{owner}/{repo}/{identifier}/ | Get a specific package in a repository.
 [**PackagesResync**](PackagesApi.md#PackagesResync) | **Post** /packages/{owner}/{repo}/{identifier}/resync/ | Schedule a package for resynchronisation.
 [**PackagesScan**](PackagesApi.md#PackagesScan) | **Post** /packages/{owner}/{repo}/{identifier}/scan/ | Schedule a package for scanning.
-[**PackagesStatus**](PackagesApi.md#PackagesStatus) | **Get** /packages/{owner}/{repo}/{identifier}/status/ | Get the synchronisation status for a package.
+[**PackagesStatus**](PackagesApi.md#PackagesStatus) | **Get** /packages/{owner}/{repo}/{identifier}/status/ | Get the synchronization status for a package.
 [**PackagesTag**](PackagesApi.md#PackagesTag) | **Post** /packages/{owner}/{repo}/{identifier}/tag/ | Add/Replace/Remove tags for a package.
 [**PackagesUploadAlpine**](PackagesApi.md#PackagesUploadAlpine) | **Post** /packages/{owner}/{repo}/upload/alpine/ | Create a new Alpine package
 [**PackagesUploadCargo**](PackagesApi.md#PackagesUploadCargo) | **Post** /packages/{owner}/{repo}/upload/cargo/ | Create a new Cargo package
@@ -765,7 +765,7 @@ Name | Type | Description  | Notes
 
 > PackageStatus PackagesStatus(ctx, owner, repo, identifier).Execute()
 
-Get the synchronisation status for a package.
+Get the synchronization status for a package.
 
 
 
