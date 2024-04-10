@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.390.0
+  version: 1.392.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -2708,6 +2708,280 @@ paths:
       summary: "Removes a member from the organization (deprecated, use DELETE instead)."
       tags:
       - orgs
+  /orgs/{org}/openid-connect/:
+    get:
+      description: Retrieve the list of OpenID Connect provider settings for the org.
+      operationId: orgs_openid-connect_list
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProviderSettings'
+                type: array
+          description: Retrieved the list of OpenID Connect provider settings for
+            the org
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Organization not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Retrieve the list of OpenID Connect provider settings for the org.
+      tags:
+      - orgs
+    post:
+      description: Create the OpenID Connect provider settings for the org.
+      operationId: orgs_openid-connect_create
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderSettingsRequest'
+        required: false
+      responses:
+        "200":
+          content: {}
+          description: Created the OpenID Connect provider settings for the org
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Organization not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Create the OpenID Connect provider settings for the org.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+  /orgs/{org}/openid-connect/{slug_perm}/:
+    delete:
+      description: Delete a specific OpenID Connect provider setting for the org.
+      operationId: orgs_openid-connect_delete
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: Deleted the specified OpenID Connect provider setting successfully.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: The specified OpenID Connect provider setting cannot be deleted.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Delete a specific OpenID Connect provider setting for the org.
+      tags:
+      - orgs
+    get:
+      description: Retrieve a specific OpenID Connect provider setting for the org.
+      operationId: orgs_openid-connect_read
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderSettings'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Retrieve a specific OpenID Connect provider setting for the org.
+      tags:
+      - orgs
+    patch:
+      description: Update a specific OpenID Connect provider setting for the org.
+      operationId: orgs_openid-connect_partial_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderSettingsRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderSettings'
+          description: Updated the specified OpenID Connect provider setting for the
+            org
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Organization not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Update a specific OpenID Connect provider setting for the org.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+    put:
+      description: Update a specific OpenID Connect provider setting for the org.
+      operationId: orgs_openid-connect_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProviderSettingsRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderSettings'
+          description: Updated the specified OpenID Connect provider setting for the
+            org
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Organization not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Update a specific OpenID Connect provider setting for the org.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
   /orgs/{org}/saml-group-sync/:
     get:
       description: Get the details of all SAML Group Sync mapping within an organization.
@@ -6875,7 +7149,7 @@ paths:
       - packages
   /packages/{owner}/{repo}/{identifier}/status/:
     get:
-      description: Get the synchronisation status for a package.
+      description: Get the synchronization status for a package.
       operationId: packages_status
       parameters:
       - in: path
@@ -6914,7 +7188,7 @@ paths:
           description: Missing or invalid parameters (see detail).
       security:
       - apikey: []
-      summary: Get the synchronisation status for a package.
+      summary: Get the synchronization status for a package.
       tags:
       - packages
   /packages/{owner}/{repo}/{identifier}/tag/:
@@ -14968,7 +15242,7 @@ components:
       example:
         joined_at: 2000-01-23T04:56:07.000+00:00
         last_login_at: 2000-01-23T04:56:07.000+00:00
-        is_active: is_active
+        is_active: true
         role: Owner
         visibility: Public
         user_id: user_id
@@ -14991,7 +15265,7 @@ components:
         is_active:
           readOnly: true
           title: Is active
-          type: string
+          type: boolean
         joined_at:
           format: date-time
           readOnly: true
@@ -15051,6 +15325,162 @@ components:
           readOnly: true
           title: Visibility
           type: string
+      type: object
+    ProviderSettings:
+      example:
+        claims: "{}"
+        name: name
+        service_accounts:
+        - service_accounts
+        - service_accounts
+        provider_url: https://openapi-generator.tech
+        slug_perm: slug_perm
+        enabled: true
+        slug: slug
+      properties:
+        claims:
+          description: The set of claims that any received tokens from the provider
+            must contain to authenticate as the configured service account.
+          properties: {}
+          title: Claims
+          type: object
+        enabled:
+          description: Whether the provider settings should be used for incoming OIDC
+            requests.
+          title: Enabled
+          type: boolean
+        name:
+          description: The name of the provider settings are being configured for
+          minLength: 1
+          title: Name
+          type: string
+        provider_url:
+          description: |-
+            The URL from the provider that serves as the base for the OpenID configuration.
+            For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
+          format: uri
+          minLength: 1
+          title: Provider url
+          type: string
+        service_accounts:
+          description: The service accounts associated with these provider settings
+          items:
+            description: The service accounts associated with these provider settings
+            type: string
+          type: array
+          uniqueItems: true
+        slug:
+          description: The slug of the provider settings
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug
+          type: string
+        slug_perm:
+          description: "The unique, immutable identifier of the provider settings."
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+      required:
+      - claims
+      - enabled
+      - name
+      - provider_url
+      - service_accounts
+      type: object
+    ProviderSettingsRequest:
+      example:
+        claims: "{}"
+        name: name
+        service_accounts:
+        - service_accounts
+        - service_accounts
+        provider_url: https://openapi-generator.tech
+        enabled: true
+      properties:
+        claims:
+          description: The set of claims that any received tokens from the provider
+            must contain to authenticate as the configured service account.
+          properties: {}
+          title: Claims
+          type: object
+        enabled:
+          description: Whether the provider settings should be used for incoming OIDC
+            requests.
+          title: Enabled
+          type: boolean
+        name:
+          description: The name of the provider settings are being configured for
+          minLength: 1
+          title: Name
+          type: string
+        provider_url:
+          description: |-
+            The URL from the provider that serves as the base for the OpenID configuration.
+            For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
+          format: uri
+          minLength: 1
+          title: Provider url
+          type: string
+        service_accounts:
+          description: The service accounts associated with these provider settings
+          items:
+            description: The service accounts associated with these provider settings
+            type: string
+          type: array
+          uniqueItems: true
+      required:
+      - claims
+      - enabled
+      - name
+      - provider_url
+      - service_accounts
+      type: object
+    ProviderSettingsRequestPatch:
+      example:
+        claims: "{}"
+        name: name
+        service_accounts:
+        - service_accounts
+        - service_accounts
+        provider_url: https://openapi-generator.tech
+        enabled: true
+      properties:
+        claims:
+          description: The set of claims that any received tokens from the provider
+            must contain to authenticate as the configured service account.
+          properties: {}
+          title: Claims
+          type: object
+        enabled:
+          description: Whether the provider settings should be used for incoming OIDC
+            requests.
+          title: Enabled
+          type: boolean
+        name:
+          description: The name of the provider settings are being configured for
+          minLength: 1
+          title: Name
+          type: string
+        provider_url:
+          description: |-
+            The URL from the provider that serves as the base for the OpenID configuration.
+            For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
+          format: uri
+          minLength: 1
+          title: Provider url
+          type: string
+        service_accounts:
+          description: The service accounts associated with these provider settings
+          items:
+            description: The service accounts associated with these provider settings
+            type: string
+          type: array
+          uniqueItems: true
       type: object
     OrganizationGroupSync:
       example:
@@ -15941,11 +16371,11 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
@@ -15953,13 +16383,13 @@ components:
         slug_perm: slug_perm
         version: version
         tags: "{}"
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 7
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -16002,7 +16432,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -16016,12 +16446,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 2
         is_sync_awaiting: true
@@ -16134,15 +16564,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -16150,11 +16580,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -16162,11 +16592,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -16477,24 +16907,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -16537,7 +16967,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -16551,12 +16981,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -16669,15 +17099,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -16685,11 +17115,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -16697,11 +17127,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -17000,24 +17430,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -17060,7 +17490,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -17074,12 +17504,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -17192,15 +17622,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -17208,11 +17638,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -17220,11 +17650,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -17523,24 +17953,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -17583,7 +18013,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -17597,12 +18027,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -17715,15 +18145,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -17731,11 +18161,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -17743,11 +18173,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -18046,24 +18476,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -18106,7 +18536,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -18120,12 +18550,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -18238,15 +18668,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -18254,11 +18684,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -18266,11 +18696,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -18620,24 +19050,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -18682,7 +19112,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -18696,12 +19126,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -18828,15 +19258,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -18844,11 +19274,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -18856,11 +19286,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -19159,24 +19589,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -19219,7 +19649,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -19233,12 +19663,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -19351,15 +19781,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -19367,11 +19797,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -19379,11 +19809,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -19698,24 +20128,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -19758,7 +20188,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -19772,12 +20202,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -19891,15 +20321,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -19907,11 +20337,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -19919,11 +20349,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -20230,24 +20660,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -20290,7 +20720,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -20304,12 +20734,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -20422,15 +20852,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -20438,11 +20868,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -20450,11 +20880,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -20785,24 +21215,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -20845,7 +21275,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -20859,12 +21289,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -20977,15 +21407,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -20993,11 +21423,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -21005,11 +21435,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -21308,24 +21738,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -21368,7 +21798,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -21382,12 +21812,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -21500,15 +21930,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -21516,11 +21946,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -21528,11 +21958,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -21831,24 +22261,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -21891,7 +22321,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -21905,12 +22335,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -22023,15 +22453,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -22039,11 +22469,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -22051,11 +22481,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -22362,24 +22792,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -22422,7 +22852,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -22436,12 +22866,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -22554,15 +22984,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -22570,11 +23000,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -22582,11 +23012,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -22885,24 +23315,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -22945,7 +23375,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -22959,12 +23389,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -23077,15 +23507,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -23093,11 +23523,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -23105,11 +23535,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -23408,24 +23838,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -23468,7 +23898,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -23482,12 +23912,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -23600,15 +24030,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -23616,11 +24046,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -23628,11 +24058,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -24008,24 +24438,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -24068,7 +24498,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -24082,12 +24512,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -24216,15 +24646,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -24232,11 +24662,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -24244,11 +24674,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -24572,24 +25002,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -24632,7 +25062,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -24646,12 +25076,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -24764,15 +25194,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -24780,11 +25210,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -24792,11 +25222,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -25102,24 +25532,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -25162,7 +25592,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -25176,12 +25606,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -25294,15 +25724,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -25310,11 +25740,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -25322,11 +25752,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -25625,24 +26055,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -25685,7 +26115,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -25699,12 +26129,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -25817,15 +26247,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -25833,11 +26263,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -25845,11 +26275,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -26148,24 +26578,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -26208,7 +26638,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -26222,12 +26652,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -26340,15 +26770,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -26356,11 +26786,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -26368,11 +26798,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -26709,24 +27139,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -26769,7 +27199,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -26783,12 +27213,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -26901,15 +27331,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -26917,11 +27347,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -26929,11 +27359,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -27239,24 +27669,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -27299,7 +27729,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -27313,12 +27743,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -27431,15 +27861,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -27447,11 +27877,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -27459,11 +27889,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -27762,24 +28192,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -27822,7 +28252,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -27836,12 +28266,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -27954,15 +28384,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -27970,11 +28400,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -27982,11 +28412,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -28342,24 +28772,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         author_org: author_org
         name: name
@@ -28405,7 +28835,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -28420,12 +28850,12 @@ components:
         scope: scope
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -28549,15 +28979,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -28565,11 +28995,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -28577,11 +29007,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -28903,24 +29333,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -28963,7 +29393,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -28977,12 +29407,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -29095,15 +29525,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -29111,11 +29541,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -29123,11 +29553,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -29447,24 +29877,24 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         version: version
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -29507,7 +29937,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -29522,12 +29952,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -29640,15 +30070,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -29656,11 +30086,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -29668,11 +30098,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -29968,11 +30398,11 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
@@ -29980,13 +30410,13 @@ components:
         slug_perm: slug_perm
         version: version
         tags: "{}"
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -30029,7 +30459,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -30043,12 +30473,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -30161,15 +30591,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -30177,11 +30607,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -30189,11 +30619,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -30572,11 +31002,11 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
@@ -30584,13 +31014,13 @@ components:
         slug_perm: slug_perm
         version: version
         tags: "{}"
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -30633,7 +31063,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -30647,12 +31077,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -30765,15 +31195,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -30781,11 +31211,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -30793,11 +31223,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -31084,11 +31514,11 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
@@ -31096,13 +31526,13 @@ components:
         slug_perm: slug_perm
         version: version
         tags: "{}"
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -31145,7 +31575,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -31159,12 +31589,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -31277,15 +31707,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -31293,11 +31723,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -31305,11 +31735,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -31586,11 +32016,11 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
-        is_security_scannable: is_security_scannable
+        is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
         indexed: true
-        is_deleteable: is_deleteable
+        is_deleteable: true
         format: format
         status_str: status_str
         version_orig: version_orig
@@ -31598,13 +32028,13 @@ components:
         slug_perm: slug_perm
         version: version
         tags: "{}"
-        is_resyncable: is_resyncable
+        is_resyncable: true
         license: license
         filename: filename
         size: 5
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -31647,7 +32077,7 @@ components:
           slug: slug
         extension: extension
         description: description
-        is_copyable: is_copyable
+        is_copyable: true
         epoch: 6
         is_sync_completed: true
         distro_version:
@@ -31661,12 +32091,12 @@ components:
         uploader: uploader
         signature_url: signature_url
         repository_url: https://openapi-generator.tech
-        is_moveable: is_moveable
+        is_moveable: true
         status_reason: status_reason
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
-        is_quarantinable: is_quarantinable
+        is_quarantinable: true
         checksum_md5: checksum_md5
         sync_progress: 9
         is_sync_awaiting: true
@@ -31779,15 +32209,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -31795,11 +32225,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -31807,11 +32237,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -32072,26 +32502,26 @@ components:
       type: object
     PackageStatus:
       example:
-        is_security_scannable: is_security_scannable
-        is_quarantinable: is_quarantinable
-        is_deleteable: is_deleteable
-        is_copyable: is_copyable
+        is_security_scannable: true
+        is_quarantinable: true
+        is_deleteable: true
+        is_copyable: true
         status_str: status_str
         sync_progress: 1
         is_sync_awaiting: true
         is_sync_completed: true
         self_url: https://openapi-generator.tech
-        is_resyncable: is_resyncable
+        is_resyncable: true
         is_sync_in_flight: true
         is_sync_in_progress: true
         stage_str: stage_str
         stage_updated_at: 2000-01-23T04:56:07.000+00:00
         stage: 0
-        is_cancellable: is_cancellable
+        is_cancellable: true
         is_downloadable: true
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
         is_sync_failed: true
-        is_moveable: is_moveable
+        is_moveable: true
         is_quarantined: true
         status_reason: status_reason
         status: 6
@@ -32100,15 +32530,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -32116,11 +32546,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -32128,11 +32558,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -32337,15 +32767,15 @@ components:
         is_cancellable:
           readOnly: true
           title: Is cancellable
-          type: string
+          type: boolean
         is_copyable:
           readOnly: true
           title: Is copyable
-          type: string
+          type: boolean
         is_deleteable:
           readOnly: true
           title: Is deleteable
-          type: string
+          type: boolean
         is_downloadable:
           readOnly: true
           title: Is downloadable
@@ -32359,11 +32789,11 @@ components:
         is_moveable:
           readOnly: true
           title: Is moveable
-          type: string
+          type: boolean
         is_quarantinable:
           readOnly: true
           title: Is quarantinable
-          type: string
+          type: boolean
         is_quarantined:
           readOnly: true
           title: Is quarantined
@@ -32371,11 +32801,11 @@ components:
         is_resyncable:
           readOnly: true
           title: Is resyncable
-          type: string
+          type: boolean
         is_security_scannable:
           readOnly: true
           title: Is security scannable
-          type: string
+          type: boolean
         is_sync_awaiting:
           readOnly: true
           title: Is sync awaiting
@@ -39746,7 +40176,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.390.0
+        version: 1.392.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -39756,7 +40186,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.390.0
+          default: 1.392.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true

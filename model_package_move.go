@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.390.0
+API version: 1.392.0
 Contact: support@cloudsmith.io
 */
 
@@ -45,15 +45,15 @@ type PackageMove struct {
 	// Unique and permanent identifier for the package.
 	IdentifierPerm      *string `json:"identifier_perm,omitempty"`
 	Indexed             *bool   `json:"indexed,omitempty"`
-	IsCancellable       *string `json:"is_cancellable,omitempty"`
-	IsCopyable          *string `json:"is_copyable,omitempty"`
-	IsDeleteable        *string `json:"is_deleteable,omitempty"`
+	IsCancellable       *bool   `json:"is_cancellable,omitempty"`
+	IsCopyable          *bool   `json:"is_copyable,omitempty"`
+	IsDeleteable        *bool   `json:"is_deleteable,omitempty"`
 	IsDownloadable      *bool   `json:"is_downloadable,omitempty"`
-	IsMoveable          *string `json:"is_moveable,omitempty"`
-	IsQuarantinable     *string `json:"is_quarantinable,omitempty"`
+	IsMoveable          *bool   `json:"is_moveable,omitempty"`
+	IsQuarantinable     *bool   `json:"is_quarantinable,omitempty"`
 	IsQuarantined       *bool   `json:"is_quarantined,omitempty"`
-	IsResyncable        *string `json:"is_resyncable,omitempty"`
-	IsSecurityScannable *string `json:"is_security_scannable,omitempty"`
+	IsResyncable        *bool   `json:"is_resyncable,omitempty"`
+	IsSecurityScannable *bool   `json:"is_security_scannable,omitempty"`
 	IsSyncAwaiting      *bool   `json:"is_sync_awaiting,omitempty"`
 	IsSyncCompleted     *bool   `json:"is_sync_completed,omitempty"`
 	IsSyncFailed        *bool   `json:"is_sync_failed,omitempty"`
@@ -838,9 +838,9 @@ func (o *PackageMove) SetIndexed(v bool) {
 }
 
 // GetIsCancellable returns the IsCancellable field value if set, zero value otherwise.
-func (o *PackageMove) GetIsCancellable() string {
+func (o *PackageMove) GetIsCancellable() bool {
 	if o == nil || IsNil(o.IsCancellable) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.IsCancellable
@@ -848,7 +848,7 @@ func (o *PackageMove) GetIsCancellable() string {
 
 // GetIsCancellableOk returns a tuple with the IsCancellable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageMove) GetIsCancellableOk() (*string, bool) {
+func (o *PackageMove) GetIsCancellableOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsCancellable) {
 		return nil, false
 	}
@@ -864,15 +864,15 @@ func (o *PackageMove) HasIsCancellable() bool {
 	return false
 }
 
-// SetIsCancellable gets a reference to the given string and assigns it to the IsCancellable field.
-func (o *PackageMove) SetIsCancellable(v string) {
+// SetIsCancellable gets a reference to the given bool and assigns it to the IsCancellable field.
+func (o *PackageMove) SetIsCancellable(v bool) {
 	o.IsCancellable = &v
 }
 
 // GetIsCopyable returns the IsCopyable field value if set, zero value otherwise.
-func (o *PackageMove) GetIsCopyable() string {
+func (o *PackageMove) GetIsCopyable() bool {
 	if o == nil || IsNil(o.IsCopyable) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.IsCopyable
@@ -880,7 +880,7 @@ func (o *PackageMove) GetIsCopyable() string {
 
 // GetIsCopyableOk returns a tuple with the IsCopyable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageMove) GetIsCopyableOk() (*string, bool) {
+func (o *PackageMove) GetIsCopyableOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsCopyable) {
 		return nil, false
 	}
@@ -896,15 +896,15 @@ func (o *PackageMove) HasIsCopyable() bool {
 	return false
 }
 
-// SetIsCopyable gets a reference to the given string and assigns it to the IsCopyable field.
-func (o *PackageMove) SetIsCopyable(v string) {
+// SetIsCopyable gets a reference to the given bool and assigns it to the IsCopyable field.
+func (o *PackageMove) SetIsCopyable(v bool) {
 	o.IsCopyable = &v
 }
 
 // GetIsDeleteable returns the IsDeleteable field value if set, zero value otherwise.
-func (o *PackageMove) GetIsDeleteable() string {
+func (o *PackageMove) GetIsDeleteable() bool {
 	if o == nil || IsNil(o.IsDeleteable) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.IsDeleteable
@@ -912,7 +912,7 @@ func (o *PackageMove) GetIsDeleteable() string {
 
 // GetIsDeleteableOk returns a tuple with the IsDeleteable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageMove) GetIsDeleteableOk() (*string, bool) {
+func (o *PackageMove) GetIsDeleteableOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsDeleteable) {
 		return nil, false
 	}
@@ -928,8 +928,8 @@ func (o *PackageMove) HasIsDeleteable() bool {
 	return false
 }
 
-// SetIsDeleteable gets a reference to the given string and assigns it to the IsDeleteable field.
-func (o *PackageMove) SetIsDeleteable(v string) {
+// SetIsDeleteable gets a reference to the given bool and assigns it to the IsDeleteable field.
+func (o *PackageMove) SetIsDeleteable(v bool) {
 	o.IsDeleteable = &v
 }
 
@@ -966,9 +966,9 @@ func (o *PackageMove) SetIsDownloadable(v bool) {
 }
 
 // GetIsMoveable returns the IsMoveable field value if set, zero value otherwise.
-func (o *PackageMove) GetIsMoveable() string {
+func (o *PackageMove) GetIsMoveable() bool {
 	if o == nil || IsNil(o.IsMoveable) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.IsMoveable
@@ -976,7 +976,7 @@ func (o *PackageMove) GetIsMoveable() string {
 
 // GetIsMoveableOk returns a tuple with the IsMoveable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageMove) GetIsMoveableOk() (*string, bool) {
+func (o *PackageMove) GetIsMoveableOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsMoveable) {
 		return nil, false
 	}
@@ -992,15 +992,15 @@ func (o *PackageMove) HasIsMoveable() bool {
 	return false
 }
 
-// SetIsMoveable gets a reference to the given string and assigns it to the IsMoveable field.
-func (o *PackageMove) SetIsMoveable(v string) {
+// SetIsMoveable gets a reference to the given bool and assigns it to the IsMoveable field.
+func (o *PackageMove) SetIsMoveable(v bool) {
 	o.IsMoveable = &v
 }
 
 // GetIsQuarantinable returns the IsQuarantinable field value if set, zero value otherwise.
-func (o *PackageMove) GetIsQuarantinable() string {
+func (o *PackageMove) GetIsQuarantinable() bool {
 	if o == nil || IsNil(o.IsQuarantinable) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.IsQuarantinable
@@ -1008,7 +1008,7 @@ func (o *PackageMove) GetIsQuarantinable() string {
 
 // GetIsQuarantinableOk returns a tuple with the IsQuarantinable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageMove) GetIsQuarantinableOk() (*string, bool) {
+func (o *PackageMove) GetIsQuarantinableOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsQuarantinable) {
 		return nil, false
 	}
@@ -1024,8 +1024,8 @@ func (o *PackageMove) HasIsQuarantinable() bool {
 	return false
 }
 
-// SetIsQuarantinable gets a reference to the given string and assigns it to the IsQuarantinable field.
-func (o *PackageMove) SetIsQuarantinable(v string) {
+// SetIsQuarantinable gets a reference to the given bool and assigns it to the IsQuarantinable field.
+func (o *PackageMove) SetIsQuarantinable(v bool) {
 	o.IsQuarantinable = &v
 }
 
@@ -1062,9 +1062,9 @@ func (o *PackageMove) SetIsQuarantined(v bool) {
 }
 
 // GetIsResyncable returns the IsResyncable field value if set, zero value otherwise.
-func (o *PackageMove) GetIsResyncable() string {
+func (o *PackageMove) GetIsResyncable() bool {
 	if o == nil || IsNil(o.IsResyncable) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.IsResyncable
@@ -1072,7 +1072,7 @@ func (o *PackageMove) GetIsResyncable() string {
 
 // GetIsResyncableOk returns a tuple with the IsResyncable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageMove) GetIsResyncableOk() (*string, bool) {
+func (o *PackageMove) GetIsResyncableOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsResyncable) {
 		return nil, false
 	}
@@ -1088,15 +1088,15 @@ func (o *PackageMove) HasIsResyncable() bool {
 	return false
 }
 
-// SetIsResyncable gets a reference to the given string and assigns it to the IsResyncable field.
-func (o *PackageMove) SetIsResyncable(v string) {
+// SetIsResyncable gets a reference to the given bool and assigns it to the IsResyncable field.
+func (o *PackageMove) SetIsResyncable(v bool) {
 	o.IsResyncable = &v
 }
 
 // GetIsSecurityScannable returns the IsSecurityScannable field value if set, zero value otherwise.
-func (o *PackageMove) GetIsSecurityScannable() string {
+func (o *PackageMove) GetIsSecurityScannable() bool {
 	if o == nil || IsNil(o.IsSecurityScannable) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.IsSecurityScannable
@@ -1104,7 +1104,7 @@ func (o *PackageMove) GetIsSecurityScannable() string {
 
 // GetIsSecurityScannableOk returns a tuple with the IsSecurityScannable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PackageMove) GetIsSecurityScannableOk() (*string, bool) {
+func (o *PackageMove) GetIsSecurityScannableOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsSecurityScannable) {
 		return nil, false
 	}
@@ -1120,8 +1120,8 @@ func (o *PackageMove) HasIsSecurityScannable() bool {
 	return false
 }
 
-// SetIsSecurityScannable gets a reference to the given string and assigns it to the IsSecurityScannable field.
-func (o *PackageMove) SetIsSecurityScannable(v string) {
+// SetIsSecurityScannable gets a reference to the given bool and assigns it to the IsSecurityScannable field.
+func (o *PackageMove) SetIsSecurityScannable(v bool) {
 	o.IsSecurityScannable = &v
 }
 

@@ -167,6 +167,9 @@ docs/PackageVulnerabilityPolicyEvaluationRequest.md
 docs/PackageVulnerabilityPolicyViolationLog.md
 docs/PackageVulnerabilityPolicyViolationLogCursorPage.md
 docs/PackagesApi.md
+docs/ProviderSettings.md
+docs/ProviderSettingsRequest.md
+docs/ProviderSettingsRequestPatch.md
 docs/PythonPackageUpload.md
 docs/PythonPackageUploadRequest.md
 docs/PythonUpstream.md
@@ -399,6 +402,9 @@ model_package_vulnerability.go
 model_package_vulnerability_policy_evaluation_request.go
 model_package_vulnerability_policy_violation_log.go
 model_package_vulnerability_policy_violation_log_cursor_page.go
+model_provider_settings.go
+model_provider_settings_request.go
+model_provider_settings_request_patch.go
 model_python_package_upload.go
 model_python_package_upload_request.go
 model_python_upstream.go

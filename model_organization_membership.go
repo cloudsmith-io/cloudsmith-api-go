@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.390.0
+API version: 1.392.0
 Contact: support@cloudsmith.io
 */
 
@@ -23,7 +23,7 @@ var _ MappedNullable = &OrganizationMembership{}
 type OrganizationMembership struct {
 	Email           *string      `json:"email,omitempty"`
 	HasTwoFactor    *bool        `json:"has_two_factor,omitempty"`
-	IsActive        *string      `json:"is_active,omitempty"`
+	IsActive        *bool        `json:"is_active,omitempty"`
 	JoinedAt        *time.Time   `json:"joined_at,omitempty"`
 	LastLoginAt     NullableTime `json:"last_login_at,omitempty"`
 	LastLoginMethod *string      `json:"last_login_method,omitempty"`
@@ -117,9 +117,9 @@ func (o *OrganizationMembership) SetHasTwoFactor(v bool) {
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
-func (o *OrganizationMembership) GetIsActive() string {
+func (o *OrganizationMembership) GetIsActive() bool {
 	if o == nil || IsNil(o.IsActive) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.IsActive
@@ -127,7 +127,7 @@ func (o *OrganizationMembership) GetIsActive() string {
 
 // GetIsActiveOk returns a tuple with the IsActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrganizationMembership) GetIsActiveOk() (*string, bool) {
+func (o *OrganizationMembership) GetIsActiveOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsActive) {
 		return nil, false
 	}
@@ -143,8 +143,8 @@ func (o *OrganizationMembership) HasIsActive() bool {
 	return false
 }
 
-// SetIsActive gets a reference to the given string and assigns it to the IsActive field.
-func (o *OrganizationMembership) SetIsActive(v string) {
+// SetIsActive gets a reference to the given bool and assigns it to the IsActive field.
+func (o *OrganizationMembership) SetIsActive(v bool) {
 	o.IsActive = &v
 }
 

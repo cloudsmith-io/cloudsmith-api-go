@@ -32,6 +32,12 @@ Method | HTTP request | Description
 [**OrgsMembersRead**](OrgsApi.md#OrgsMembersRead) | **Get** /orgs/{org}/members/{member}/ | Get the details for a specific organization member.
 [**OrgsMembersRefresh**](OrgsApi.md#OrgsMembersRefresh) | **Post** /orgs/{org}/members/{member}/refresh/ | Refresh a member of the organization&#39;s API key.
 [**OrgsMembersRemove**](OrgsApi.md#OrgsMembersRemove) | **Get** /orgs/{org}/members/{member}/remove/ | Removes a member from the organization (deprecated, use DELETE instead).
+[**OrgsOpenidConnectCreate**](OrgsApi.md#OrgsOpenidConnectCreate) | **Post** /orgs/{org}/openid-connect/ | Create the OpenID Connect provider settings for the org.
+[**OrgsOpenidConnectDelete**](OrgsApi.md#OrgsOpenidConnectDelete) | **Delete** /orgs/{org}/openid-connect/{slug_perm}/ | Delete a specific OpenID Connect provider setting for the org.
+[**OrgsOpenidConnectList**](OrgsApi.md#OrgsOpenidConnectList) | **Get** /orgs/{org}/openid-connect/ | Retrieve the list of OpenID Connect provider settings for the org.
+[**OrgsOpenidConnectPartialUpdate**](OrgsApi.md#OrgsOpenidConnectPartialUpdate) | **Patch** /orgs/{org}/openid-connect/{slug_perm}/ | Update a specific OpenID Connect provider setting for the org.
+[**OrgsOpenidConnectRead**](OrgsApi.md#OrgsOpenidConnectRead) | **Get** /orgs/{org}/openid-connect/{slug_perm}/ | Retrieve a specific OpenID Connect provider setting for the org.
+[**OrgsOpenidConnectUpdate**](OrgsApi.md#OrgsOpenidConnectUpdate) | **Put** /orgs/{org}/openid-connect/{slug_perm}/ | Update a specific OpenID Connect provider setting for the org.
 [**OrgsRead**](OrgsApi.md#OrgsRead) | **Get** /orgs/{org}/ | Get the details for the specific organization.
 [**OrgsSamlGroupSyncCreate**](OrgsApi.md#OrgsSamlGroupSyncCreate) | **Post** /orgs/{org}/saml-group-sync/ | Create a new SAML Group Sync mapping within an organization.
 [**OrgsSamlGroupSyncDelete**](OrgsApi.md#OrgsSamlGroupSyncDelete) | **Delete** /orgs/{org}/saml-group-sync/{slug_perm}/ | Delete a SAML Group Sync mapping from an organization.
@@ -2106,6 +2112,444 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsOpenidConnectCreate
+
+> OrgsOpenidConnectCreate(ctx, org).Data(data).Execute()
+
+Create the OpenID Connect provider settings for the org.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    data := *openapiclient.NewProviderSettingsRequest(map[string]interface{}(123), false, "Name_example", "ProviderUrl_example", []string{"ServiceAccounts_example"}) // ProviderSettingsRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.OrgsApi.OrgsOpenidConnectCreate(context.Background(), org).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsOpenidConnectCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **data** | [**ProviderSettingsRequest**](ProviderSettingsRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsOpenidConnectDelete
+
+> OrgsOpenidConnectDelete(ctx, org, slugPerm).Execute()
+
+Delete a specific OpenID Connect provider setting for the org.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.OrgsApi.OrgsOpenidConnectDelete(context.Background(), org, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsOpenidConnectDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsOpenidConnectList
+
+> []ProviderSettings OrgsOpenidConnectList(ctx, org).Page(page).PageSize(pageSize).Execute()
+
+Retrieve the list of OpenID Connect provider settings for the org.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsOpenidConnectList`: []ProviderSettings
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsOpenidConnectListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]ProviderSettings**](ProviderSettings.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsOpenidConnectPartialUpdate
+
+> ProviderSettings OrgsOpenidConnectPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Update a specific OpenID Connect provider setting for the org.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewProviderSettingsRequestPatch() // ProviderSettingsRequestPatch |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsOpenidConnectPartialUpdate`: ProviderSettings
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsOpenidConnectPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**ProviderSettingsRequestPatch**](ProviderSettingsRequestPatch.md) |  | 
+
+### Return type
+
+[**ProviderSettings**](ProviderSettings.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsOpenidConnectRead
+
+> ProviderSettings OrgsOpenidConnectRead(ctx, org, slugPerm).Execute()
+
+Retrieve a specific OpenID Connect provider setting for the org.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectRead(context.Background(), org, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsOpenidConnectRead`: ProviderSettings
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsOpenidConnectReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ProviderSettings**](ProviderSettings.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsOpenidConnectUpdate
+
+> ProviderSettings OrgsOpenidConnectUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Update a specific OpenID Connect provider setting for the org.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewProviderSettingsRequest(map[string]interface{}(123), false, "Name_example", "ProviderUrl_example", []string{"ServiceAccounts_example"}) // ProviderSettingsRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsOpenidConnectUpdate`: ProviderSettings
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsOpenidConnectUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**ProviderSettingsRequest**](ProviderSettingsRequest.md) |  | 
+
+### Return type
+
+[**ProviderSettings**](ProviderSettings.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
