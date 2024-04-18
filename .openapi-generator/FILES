@@ -118,6 +118,7 @@ docs/NugetUpstreamRequestPatch.md
 docs/Organization.md
 docs/OrganizationGroupSync.md
 docs/OrganizationGroupSyncRequest.md
+docs/OrganizationGroupSyncStatus.md
 docs/OrganizationInvite.md
 docs/OrganizationInviteExtend.md
 docs/OrganizationInviteRequest.md
@@ -355,6 +356,7 @@ model_nuget_upstream_request_patch.go
 model_organization.go
 model_organization_group_sync.go
 model_organization_group_sync_request.go
+model_organization_group_sync_status.go
 model_organization_invite.go
 model_organization_invite_extend.go
 model_organization_invite_request.go

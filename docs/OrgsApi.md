@@ -41,7 +41,10 @@ Method | HTTP request | Description
 [**OrgsRead**](OrgsApi.md#OrgsRead) | **Get** /orgs/{org}/ | Get the details for the specific organization.
 [**OrgsSamlGroupSyncCreate**](OrgsApi.md#OrgsSamlGroupSyncCreate) | **Post** /orgs/{org}/saml-group-sync/ | Create a new SAML Group Sync mapping within an organization.
 [**OrgsSamlGroupSyncDelete**](OrgsApi.md#OrgsSamlGroupSyncDelete) | **Delete** /orgs/{org}/saml-group-sync/{slug_perm}/ | Delete a SAML Group Sync mapping from an organization.
+[**OrgsSamlGroupSyncDisable**](OrgsApi.md#OrgsSamlGroupSyncDisable) | **Post** /orgs/{org}/saml-group-sync/disable/ | Disable SAML Group Sync for this organization.
+[**OrgsSamlGroupSyncEnable**](OrgsApi.md#OrgsSamlGroupSyncEnable) | **Post** /orgs/{org}/saml-group-sync/enable/ | Enable SAML Group Sync for this organization.
 [**OrgsSamlGroupSyncList**](OrgsApi.md#OrgsSamlGroupSyncList) | **Get** /orgs/{org}/saml-group-sync/ | Get the details of all SAML Group Sync mapping within an organization.
+[**OrgsSamlGroupSyncStatus**](OrgsApi.md#OrgsSamlGroupSyncStatus) | **Get** /orgs/{org}/saml-group-sync/status/ | Retrieve the SAML Group Sync status for this organization.
 [**OrgsServicesCreate**](OrgsApi.md#OrgsServicesCreate) | **Post** /orgs/{org}/services/ | Create a service within an organization.
 [**OrgsServicesDelete**](OrgsApi.md#OrgsServicesDelete) | **Delete** /orgs/{org}/services/{service}/ | Delete a specific service
 [**OrgsServicesList**](OrgsApi.md#OrgsServicesList) | **Get** /orgs/{org}/services/ | Get a list of all services within an organization.
@@ -2121,7 +2124,7 @@ Name | Type | Description  | Notes
 
 ## OrgsOpenidConnectCreate
 
-> OrgsOpenidConnectCreate(ctx, org).Data(data).Execute()
+> ProviderSettings OrgsOpenidConnectCreate(ctx, org).Data(data).Execute()
 
 Create the OpenID Connect provider settings for the org.
 
@@ -2145,11 +2148,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsOpenidConnectCreate(context.Background(), org).Data(data).Execute()
+    resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectCreate(context.Background(), org).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectCreate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
+    // response from `OrgsOpenidConnectCreate`: ProviderSettings
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectCreate`: %v\n", resp)
 }
 ```
 
@@ -2173,7 +2178,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**ProviderSettings**](ProviderSettings.md)
 
 ### Authorization
 
@@ -2770,6 +2775,142 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## OrgsSamlGroupSyncDisable
+
+> OrgsSamlGroupSyncDisable(ctx, org).Execute()
+
+Disable SAML Group Sync for this organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.OrgsApi.OrgsSamlGroupSyncDisable(context.Background(), org).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncDisable``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsSamlGroupSyncDisableRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsSamlGroupSyncEnable
+
+> OrgsSamlGroupSyncEnable(ctx, org).Execute()
+
+Enable SAML Group Sync for this organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.OrgsApi.OrgsSamlGroupSyncEnable(context.Background(), org).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncEnable``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsSamlGroupSyncEnableRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## OrgsSamlGroupSyncList
 
 > []OrganizationGroupSync OrgsSamlGroupSyncList(ctx, org).Page(page).PageSize(pageSize).Execute()
@@ -2829,6 +2970,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]OrganizationGroupSync**](OrganizationGroupSync.md)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsSamlGroupSyncStatus
+
+> OrganizationGroupSyncStatus OrgsSamlGroupSyncStatus(ctx, org).Execute()
+
+Retrieve the SAML Group Sync status for this organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.OrgsApi.OrgsSamlGroupSyncStatus(context.Background(), org).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncStatus``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `OrgsSamlGroupSyncStatus`: OrganizationGroupSyncStatus
+    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsSamlGroupSyncStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OrganizationGroupSyncStatus**](OrganizationGroupSyncStatus.md)
 
 ### Authorization
 
