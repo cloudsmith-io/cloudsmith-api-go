@@ -2,7 +2,7 @@
 set -eou pipefail
 
 
-PKG_VERSION=${1:-"0.0.34"}
+PKG_VERSION=${1:-"0.0.35"}
 API_HOST=${2:-"https://api.cloudsmith.io"}
 
 
