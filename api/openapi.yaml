@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.392.0
+  version: 1.401.1
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -2777,8 +2777,11 @@ paths:
               $ref: '#/components/schemas/ProviderSettingsRequest'
         required: false
       responses:
-        "200":
-          content: {}
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderSettings'
           description: Created the OpenID Connect provider settings for the org
         "404":
           content:
@@ -3010,7 +3013,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/OrganizationGroupSync'
                 type: array
-          description: Retrived the list of all SAML Group Sync mappings for this
+          description: Retrieved the list of all SAML Group Sync mappings for this
             org
         "404":
           content:
@@ -3081,6 +3084,120 @@ paths:
       tags:
       - orgs
       x-codegen-request-body-name: data
+  /orgs/{org}/saml-group-sync/disable/:
+    post:
+      description: Disable SAML Group Sync for this organization.
+      operationId: orgs_saml-group-sync_disable
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: SAML Group Sync has been disabled for this organization.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Org namespace not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Disable SAML Group Sync for this organization.
+      tags:
+      - orgs
+  /orgs/{org}/saml-group-sync/enable/:
+    post:
+      description: Enable SAML Group Sync for this organization.
+      operationId: orgs_saml-group-sync_enable
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: SAML Group Sync has been enabled for this organization.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Org namespace not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Enable SAML Group Sync for this organization.
+      tags:
+      - orgs
+  /orgs/{org}/saml-group-sync/status/:
+    get:
+      description: Retrieve the SAML Group Sync status for this organization.
+      operationId: orgs_saml-group-sync_status
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationGroupSyncStatus'
+          description: Retrieved the SAML Group Sync status for this organization.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Org namespace not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Retrieve the SAML Group Sync status for this organization.
+      tags:
+      - orgs
   /orgs/{org}/saml-group-sync/{slug_perm}/:
     delete:
       description: Delete a SAML Group Sync mapping from an organization.
@@ -15562,6 +15679,15 @@ components:
       - idp_value
       - organization
       - team
+      type: object
+    OrganizationGroupSyncStatus:
+      example:
+        saml_group_sync_status: true
+      properties:
+        saml_group_sync_status:
+          readOnly: true
+          title: Saml group sync status
+          type: boolean
       type: object
     ServiceTeams:
       example:
@@ -40176,7 +40302,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.392.0
+        version: 1.401.1
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -40186,7 +40312,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.392.0
+          default: 1.401.1
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
