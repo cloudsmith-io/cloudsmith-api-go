@@ -4,6 +4,7 @@ All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**OrgsDelete**](OrgsApi.md#OrgsDelete) | **Delete** /orgs/{org}/ | Delete the specified organization.
 [**OrgsDenyPolicyCreate**](OrgsApi.md#OrgsDenyPolicyCreate) | **Post** /orgs/{org}/deny-policy/ | Create a package deny policy.
 [**OrgsDenyPolicyDelete**](OrgsApi.md#OrgsDenyPolicyDelete) | **Delete** /orgs/{org}/deny-policy/{slug_perm}/ | Delete a package deny policy.
 [**OrgsDenyPolicyList**](OrgsApi.md#OrgsDenyPolicyList) | **Get** /orgs/{org}/deny-policy/ | Get a list of all package deny policies.
@@ -70,6 +71,74 @@ Method | HTTP request | Description
 [**OrgsVulnerabilityPolicyUpdate**](OrgsApi.md#OrgsVulnerabilityPolicyUpdate) | **Put** /orgs/{org}/vulnerability-policy/{slug_perm}/ | Update a package vulnerability policy.
 [**OrgsVulnerabilityPolicyViolationList**](OrgsApi.md#OrgsVulnerabilityPolicyViolationList) | **Get** /orgs/{org}/vulnerability-policy-violation/ | List all current vulnerability policy violations for this Organization.
 
+
+
+## OrgsDelete
+
+> OrgsDelete(ctx, org).Execute()
+
+Delete the specified organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    org := "org_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.OrgsApi.OrgsDelete(context.Background(), org).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## OrgsDenyPolicyCreate
@@ -3860,7 +3929,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsMembersUpdate
 
-> OrganizationTeamMembers OrgsTeamsMembersUpdate(ctx, org, team).Execute()
+> OrganizationTeamMembers OrgsTeamsMembersUpdate(ctx, org, team).Data(data).Execute()
 
 Replace all team members.
 
@@ -3881,10 +3950,11 @@ import (
 func main() {
     org := "org_example" // string | 
     team := "team_example" // string | 
+    data := *openapiclient.NewOrganizationTeamMembers([]openapiclient.OrganizationTeamMembership{*openapiclient.NewOrganizationTeamMembership("Role_example", "User_example")}) // OrganizationTeamMembers |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersUpdate(context.Background(), org, team).Execute()
+    resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersUpdate(context.Background(), org, team).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3912,6 +3982,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **data** | [**OrganizationTeamMembers**](OrganizationTeamMembers.md) |  | 
 
 ### Return type
 
@@ -3923,7 +3994,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

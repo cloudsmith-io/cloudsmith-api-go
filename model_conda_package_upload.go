@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.401.1
+API version: 1.417.0
 Contact: support@cloudsmith.io
 */
 
@@ -32,6 +32,7 @@ type CondaPackageUpload struct {
 	DependenciesUrl         *string        `json:"dependencies_url,omitempty"`
 	// A textual description of this package.
 	Description   NullableString       `json:"description,omitempty"`
+	DisplayName   *string              `json:"display_name,omitempty"`
 	Distro        NullableDistribution `json:"distro,omitempty"`
 	DistroVersion *DistributionVersion `json:"distro_version,omitempty"`
 	Downloads     *int64               `json:"downloads,omitempty"`
@@ -458,6 +459,38 @@ func (o *CondaPackageUpload) SetDescriptionNil() {
 // UnsetDescription ensures that no value is present for Description, not even an explicit nil
 func (o *CondaPackageUpload) UnsetDescription() {
 	o.Description.Unset()
+}
+
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+func (o *CondaPackageUpload) GetDisplayName() string {
+	if o == nil || IsNil(o.DisplayName) {
+		var ret string
+		return ret
+	}
+	return *o.DisplayName
+}
+
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CondaPackageUpload) GetDisplayNameOk() (*string, bool) {
+	if o == nil || IsNil(o.DisplayName) {
+		return nil, false
+	}
+	return o.DisplayName, true
+}
+
+// HasDisplayName returns a boolean if a field has been set.
+func (o *CondaPackageUpload) HasDisplayName() bool {
+	if o != nil && !IsNil(o.DisplayName) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+func (o *CondaPackageUpload) SetDisplayName(v string) {
+	o.DisplayName = &v
 }
 
 // GetDistro returns the Distro field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -2762,6 +2795,9 @@ func (o CondaPackageUpload) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
+	}
+	if !IsNil(o.DisplayName) {
+		toSerialize["display_name"] = o.DisplayName
 	}
 	if o.Distro.IsSet() {
 		toSerialize["distro"] = o.Distro.Get()
