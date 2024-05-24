@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.401.1
+API version: 1.417.0
 Contact: support@cloudsmith.io
 */
 
@@ -37,8 +37,9 @@ type Repository struct {
 	// If checked, users can delete any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
 	DeleteOwn *bool `json:"delete_own,omitempty"`
 	// This defines the minimum level of privilege required for a user to delete packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific delete setting.
-	DeletePackages *string      `json:"delete_packages,omitempty"`
-	DeletedAt      NullableTime `json:"deleted_at,omitempty"`
+	DeletePackages *string `json:"delete_packages,omitempty"`
+	// The datetime the repository was manually deleted at.
+	DeletedAt NullableTime `json:"deleted_at,omitempty"`
 	// A description of the repository's purpose/contents.
 	Description *string `json:"description,omitempty"`
 	// The repositories distributed through this repo. Adding repos here is only valid if the content_kind is DISTRIBUTION.

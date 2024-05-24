@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **DependenciesChecksumMd5** | Pointer to **NullableString** | A checksum of all of the package&#39;s dependencies. | [optional] [readonly] 
 **DependenciesUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Description** | Pointer to **NullableString** | A textual description of this package. | [optional] [readonly] 
+**DisplayName** | Pointer to **string** |  | [optional] [readonly] 
 **Distro** | Pointer to [**NullableDistribution**](Distribution.md) |  | [optional] 
 **DistroVersion** | Pointer to [**DistributionVersion**](DistributionVersion.md) |  | [optional] 
 **Downloads** | Pointer to **int64** |  | [optional] [readonly] 
@@ -355,6 +356,31 @@ HasDescription returns a boolean if a field has been set.
 `func (o *PackageMove) UnsetDescription()`
 
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
+### GetDisplayName
+
+`func (o *PackageMove) GetDisplayName() string`
+
+GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+
+### GetDisplayNameOk
+
+`func (o *PackageMove) GetDisplayNameOk() (*string, bool)`
+
+GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplayName
+
+`func (o *PackageMove) SetDisplayName(v string)`
+
+SetDisplayName sets DisplayName field to given value.
+
+### HasDisplayName
+
+`func (o *PackageMove) HasDisplayName() bool`
+
+HasDisplayName returns a boolean if a field has been set.
+
 ### GetDistro
 
 `func (o *PackageMove) GetDistro() Distribution`

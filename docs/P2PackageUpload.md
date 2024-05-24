@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **DependenciesChecksumMd5** | Pointer to **NullableString** | A checksum of all of the package&#39;s dependencies. | [optional] [readonly] 
 **DependenciesUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Description** | Pointer to **NullableString** | A textual description of this package. | [optional] [readonly] 
+**DisplayName** | Pointer to **string** |  | [optional] [readonly] 
 **Distro** | Pointer to [**NullableDistribution**](Distribution.md) |  | [optional] 
 **DistroVersion** | Pointer to [**DistributionVersion**](DistributionVersion.md) |  | [optional] 
 **Downloads** | Pointer to **int64** |  | [optional] [readonly] 
@@ -354,6 +355,31 @@ HasDescription returns a boolean if a field has been set.
 `func (o *P2PackageUpload) UnsetDescription()`
 
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
+### GetDisplayName
+
+`func (o *P2PackageUpload) GetDisplayName() string`
+
+GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+
+### GetDisplayNameOk
+
+`func (o *P2PackageUpload) GetDisplayNameOk() (*string, bool)`
+
+GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplayName
+
+`func (o *P2PackageUpload) SetDisplayName(v string)`
+
+SetDisplayName sets DisplayName field to given value.
+
+### HasDisplayName
+
+`func (o *P2PackageUpload) HasDisplayName() bool`
+
+HasDisplayName returns a boolean if a field has been set.
+
 ### GetDistro
 
 `func (o *P2PackageUpload) GetDistro() Distribution`

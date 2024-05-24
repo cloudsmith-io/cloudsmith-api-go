@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.401.1
+  version: 1.417.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -1517,6 +1517,36 @@ paths:
       tags:
       - orgs
   /orgs/{org}/:
+    delete:
+      description: Delete the specified organization.
+      operationId: orgs_delete
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      security:
+      - apikey: []
+      summary: Delete the specified organization.
+      tags:
+      - orgs
     get:
       description: Get the details for the specific organization.
       operationId: orgs_read
@@ -3841,6 +3871,12 @@ paths:
         required: true
         schema:
           type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationTeamMembers'
+        required: false
       responses:
         "204":
           content:
@@ -3871,6 +3907,7 @@ paths:
       summary: Replace all team members.
       tags:
       - orgs
+      x-codegen-request-body-name: data
   /orgs/{org}/vulnerability-policy-violation/:
     get:
       description: List all current vulnerability policy violations for this Organization.
@@ -16506,6 +16543,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         tags: "{}"
@@ -16638,6 +16676,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -17042,6 +17084,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -17173,6 +17216,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -17565,6 +17612,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -17696,6 +17744,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -18088,6 +18140,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -18219,6 +18272,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -18611,6 +18668,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -18742,6 +18800,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -19185,6 +19247,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -19332,6 +19395,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -19724,6 +19791,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -19855,6 +19923,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -20263,6 +20335,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -20395,6 +20468,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -20795,6 +20872,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -20926,6 +21004,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -21350,6 +21432,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -21481,6 +21564,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -21873,6 +21960,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -22004,6 +22092,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -22396,6 +22488,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -22527,6 +22620,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -22927,6 +23024,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -23058,6 +23156,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -23450,6 +23552,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -23581,6 +23684,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -23973,6 +24080,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -24104,6 +24212,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -24573,6 +24685,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -24714,6 +24827,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -25137,6 +25254,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -25268,6 +25386,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -25667,6 +25789,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -25798,6 +25921,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -26190,6 +26317,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -26321,6 +26449,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -26713,6 +26845,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -26844,6 +26977,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -27274,6 +27411,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -27405,6 +27543,10 @@ components:
           maxLength: 12288
           nullable: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -27804,6 +27946,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -27935,6 +28078,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -28327,6 +28474,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -28458,6 +28606,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -28907,6 +29059,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -29053,6 +29206,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -29468,6 +29625,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -29599,6 +29757,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -30012,6 +30174,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         is_resyncable: true
@@ -30144,6 +30307,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -30533,6 +30700,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         tags: "{}"
@@ -30665,6 +30833,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -31137,6 +31309,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         tags: "{}"
@@ -31269,6 +31442,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -31649,6 +31826,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         tags: "{}"
@@ -31781,6 +31959,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -32151,6 +32333,7 @@ components:
         status_str: status_str
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
+        display_name: display_name
         slug_perm: slug_perm
         version: version
         tags: "{}"
@@ -32283,6 +32466,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -32841,6 +33028,10 @@ components:
           nullable: true
           readOnly: true
           title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -33957,6 +34148,7 @@ components:
           title: Delete packages
           type: string
         deleted_at:
+          description: The datetime the repository was manually deleted at.
           format: date-time
           nullable: true
           readOnly: true
@@ -34776,6 +34968,7 @@ components:
           title: Delete packages
           type: string
         deleted_at:
+          description: The datetime the repository was manually deleted at.
           format: date-time
           nullable: true
           readOnly: true
@@ -40025,6 +40218,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -40151,6 +40345,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -40265,6 +40460,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -40302,7 +40498,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.401.1
+        version: 1.417.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -40312,7 +40508,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.401.1
+          default: 1.417.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
