@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.417.0
+API version: 1.477.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,7 +28,8 @@ type DartUpstream struct {
 	// Username to provide with requests to upstream.
 	AuthUsername NullableString `json:"auth_username,omitempty"`
 	// The datetime the upstream source was created.
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+	CreatedAt     *time.Time `json:"created_at,omitempty"`
+	DisableReason *string    `json:"disable_reason,omitempty"`
 	// The key for extra header #1 to send to upstream.
 	ExtraHeader1 NullableString `json:"extra_header_1,omitempty"`
 	// The key for extra header #2 to send to upstream.
@@ -43,6 +44,8 @@ type DartUpstream struct {
 	Mode *string `json:"mode,omitempty"`
 	// A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream.
 	Name string `json:"name"`
+	// When true, this upstream source is pending validation.
+	PendingValidation *bool `json:"pending_validation,omitempty"`
 	// Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date.
 	Priority  *int64     `json:"priority,omitempty"`
 	SlugPerm  *string    `json:"slug_perm,omitempty"`
@@ -228,6 +231,38 @@ func (o *DartUpstream) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
 func (o *DartUpstream) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
+}
+
+// GetDisableReason returns the DisableReason field value if set, zero value otherwise.
+func (o *DartUpstream) GetDisableReason() string {
+	if o == nil || IsNil(o.DisableReason) {
+		var ret string
+		return ret
+	}
+	return *o.DisableReason
+}
+
+// GetDisableReasonOk returns a tuple with the DisableReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DartUpstream) GetDisableReasonOk() (*string, bool) {
+	if o == nil || IsNil(o.DisableReason) {
+		return nil, false
+	}
+	return o.DisableReason, true
+}
+
+// HasDisableReason returns a boolean if a field has been set.
+func (o *DartUpstream) HasDisableReason() bool {
+	if o != nil && !IsNil(o.DisableReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableReason gets a reference to the given string and assigns it to the DisableReason field.
+func (o *DartUpstream) SetDisableReason(v string) {
+	o.DisableReason = &v
 }
 
 // GetExtraHeader1 returns the ExtraHeader1 field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -490,6 +525,38 @@ func (o *DartUpstream) SetName(v string) {
 	o.Name = v
 }
 
+// GetPendingValidation returns the PendingValidation field value if set, zero value otherwise.
+func (o *DartUpstream) GetPendingValidation() bool {
+	if o == nil || IsNil(o.PendingValidation) {
+		var ret bool
+		return ret
+	}
+	return *o.PendingValidation
+}
+
+// GetPendingValidationOk returns a tuple with the PendingValidation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DartUpstream) GetPendingValidationOk() (*bool, bool) {
+	if o == nil || IsNil(o.PendingValidation) {
+		return nil, false
+	}
+	return o.PendingValidation, true
+}
+
+// HasPendingValidation returns a boolean if a field has been set.
+func (o *DartUpstream) HasPendingValidation() bool {
+	if o != nil && !IsNil(o.PendingValidation) {
+		return true
+	}
+
+	return false
+}
+
+// SetPendingValidation gets a reference to the given bool and assigns it to the PendingValidation field.
+func (o *DartUpstream) SetPendingValidation(v bool) {
+	o.PendingValidation = &v
+}
+
 // GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *DartUpstream) GetPriority() int64 {
 	if o == nil || IsNil(o.Priority) {
@@ -664,6 +731,9 @@ func (o DartUpstream) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
+	if !IsNil(o.DisableReason) {
+		toSerialize["disable_reason"] = o.DisableReason
+	}
 	if o.ExtraHeader1.IsSet() {
 		toSerialize["extra_header_1"] = o.ExtraHeader1.Get()
 	}
@@ -683,6 +753,9 @@ func (o DartUpstream) ToMap() (map[string]interface{}, error) {
 		toSerialize["mode"] = o.Mode
 	}
 	toSerialize["name"] = o.Name
+	if !IsNil(o.PendingValidation) {
+		toSerialize["pending_validation"] = o.PendingValidation
+	}
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}

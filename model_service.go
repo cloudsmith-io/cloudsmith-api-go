@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.417.0
+API version: 1.477.1
 Contact: support@cloudsmith.io
 */
 
@@ -13,6 +13,7 @@ package cloudsmith
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // checks if the Service type satisfies the MappedNullable interface at compile time
@@ -20,6 +21,9 @@ var _ MappedNullable = &Service{}
 
 // Service struct for Service
 type Service struct {
+	CreatedAt    *time.Time `json:"created_at,omitempty"`
+	CreatedBy    *string    `json:"created_by,omitempty"`
+	CreatedByUrl *string    `json:"created_by_url,omitempty"`
 	// The description of the service
 	Description *string `json:"description,omitempty"`
 	// The API key of the service
@@ -53,6 +57,102 @@ func NewServiceWithDefaults() *Service {
 	var role string = "Member"
 	this.Role = &role
 	return &this
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *Service) GetCreatedAt() time.Time {
+	if o == nil || IsNil(o.CreatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Service) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CreatedAt) {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *Service) HasCreatedAt() bool {
+	if o != nil && !IsNil(o.CreatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+func (o *Service) SetCreatedAt(v time.Time) {
+	o.CreatedAt = &v
+}
+
+// GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
+func (o *Service) GetCreatedBy() string {
+	if o == nil || IsNil(o.CreatedBy) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedBy
+}
+
+// GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Service) GetCreatedByOk() (*string, bool) {
+	if o == nil || IsNil(o.CreatedBy) {
+		return nil, false
+	}
+	return o.CreatedBy, true
+}
+
+// HasCreatedBy returns a boolean if a field has been set.
+func (o *Service) HasCreatedBy() bool {
+	if o != nil && !IsNil(o.CreatedBy) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedBy gets a reference to the given string and assigns it to the CreatedBy field.
+func (o *Service) SetCreatedBy(v string) {
+	o.CreatedBy = &v
+}
+
+// GetCreatedByUrl returns the CreatedByUrl field value if set, zero value otherwise.
+func (o *Service) GetCreatedByUrl() string {
+	if o == nil || IsNil(o.CreatedByUrl) {
+		var ret string
+		return ret
+	}
+	return *o.CreatedByUrl
+}
+
+// GetCreatedByUrlOk returns a tuple with the CreatedByUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Service) GetCreatedByUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.CreatedByUrl) {
+		return nil, false
+	}
+	return o.CreatedByUrl, true
+}
+
+// HasCreatedByUrl returns a boolean if a field has been set.
+func (o *Service) HasCreatedByUrl() bool {
+	if o != nil && !IsNil(o.CreatedByUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedByUrl gets a reference to the given string and assigns it to the CreatedByUrl field.
+func (o *Service) SetCreatedByUrl(v string) {
+	o.CreatedByUrl = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -249,6 +349,15 @@ func (o Service) MarshalJSON() ([]byte, error) {
 
 func (o Service) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["created_at"] = o.CreatedAt
+	}
+	if !IsNil(o.CreatedBy) {
+		toSerialize["created_by"] = o.CreatedBy
+	}
+	if !IsNil(o.CreatedByUrl) {
+		toSerialize["created_by_url"] = o.CreatedByUrl
+	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Email** | Pointer to **string** | The email of the user to be invited. | [optional] 
 **Role** | Pointer to **string** | The role to be assigned to the invited user. | [optional] [default to "Member"]
+**Teams** | Pointer to [**[]OrganizationTeamInvite**](OrganizationTeamInvite.md) |  | [optional] 
 **User** | Pointer to **string** | The slug of the user to be invited. | [optional] 
 
 ## Methods
@@ -76,6 +77,31 @@ SetRole sets Role field to given value.
 `func (o *OrganizationInviteRequest) HasRole() bool`
 
 HasRole returns a boolean if a field has been set.
+
+### GetTeams
+
+`func (o *OrganizationInviteRequest) GetTeams() []OrganizationTeamInvite`
+
+GetTeams returns the Teams field if non-nil, zero value otherwise.
+
+### GetTeamsOk
+
+`func (o *OrganizationInviteRequest) GetTeamsOk() (*[]OrganizationTeamInvite, bool)`
+
+GetTeamsOk returns a tuple with the Teams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeams
+
+`func (o *OrganizationInviteRequest) SetTeams(v []OrganizationTeamInvite)`
+
+SetTeams sets Teams field to given value.
+
+### HasTeams
+
+`func (o *OrganizationInviteRequest) HasTeams() bool`
+
+HasTeams returns a boolean if a field has been set.
 
 ### GetUser
 

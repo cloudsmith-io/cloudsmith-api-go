@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Restore** | Pointer to **bool** | If true, the package be restored from quarantine. | [optional] 
+**Release** | Pointer to **bool** | If true, the package is released from quarantine. | [optional] 
+**Restore** | Pointer to **bool** | If true, the package is released from quarantine. Note: This field is deprecated, please use &#39;release&#39; instead. | [optional] 
 
 ## Methods
 
@@ -24,6 +25,31 @@ will change when the set of required properties is changed
 NewPackageQuarantineRequestWithDefaults instantiates a new PackageQuarantineRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetRelease
+
+`func (o *PackageQuarantineRequest) GetRelease() bool`
+
+GetRelease returns the Release field if non-nil, zero value otherwise.
+
+### GetReleaseOk
+
+`func (o *PackageQuarantineRequest) GetReleaseOk() (*bool, bool)`
+
+GetReleaseOk returns a tuple with the Release field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRelease
+
+`func (o *PackageQuarantineRequest) SetRelease(v bool)`
+
+SetRelease sets Release field to given value.
+
+### HasRelease
+
+`func (o *PackageQuarantineRequest) HasRelease() bool`
+
+HasRelease returns a boolean if a field has been set.
 
 ### GetRestore
 

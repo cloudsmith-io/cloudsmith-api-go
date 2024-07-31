@@ -47,7 +47,6 @@ Name | Type | Description | Notes
 **OriginRepository** | Pointer to **string** |  | [optional] [readonly] 
 **OriginRepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
 **PackageType** | Pointer to **int64** | The type of package contents. | [optional] [readonly] 
-**Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SecurityScanCompletedAt** | Pointer to **NullableTime** | The datetime the security scanning was completed. | [optional] [readonly] 
@@ -1246,41 +1245,6 @@ SetPackageType sets PackageType field to given value.
 
 HasPackageType returns a boolean if a field has been set.
 
-### GetRelease
-
-`func (o *PackageQuarantine) GetRelease() string`
-
-GetRelease returns the Release field if non-nil, zero value otherwise.
-
-### GetReleaseOk
-
-`func (o *PackageQuarantine) GetReleaseOk() (*string, bool)`
-
-GetReleaseOk returns a tuple with the Release field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRelease
-
-`func (o *PackageQuarantine) SetRelease(v string)`
-
-SetRelease sets Release field to given value.
-
-### HasRelease
-
-`func (o *PackageQuarantine) HasRelease() bool`
-
-HasRelease returns a boolean if a field has been set.
-
-### SetReleaseNil
-
-`func (o *PackageQuarantine) SetReleaseNil(b bool)`
-
- SetReleaseNil sets the value for Release to be an explicit nil
-
-### UnsetRelease
-`func (o *PackageQuarantine) UnsetRelease()`
-
-UnsetRelease ensures that no value is present for Release, not even an explicit nil
 ### GetRepository
 
 `func (o *PackageQuarantine) GetRepository() string`

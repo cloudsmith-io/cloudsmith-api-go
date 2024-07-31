@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.417.0
+API version: 1.477.1
 Contact: support@cloudsmith.io
 */
 
@@ -70,11 +70,9 @@ type PackageQuarantine struct {
 	OriginRepository    *string        `json:"origin_repository,omitempty"`
 	OriginRepositoryUrl *string        `json:"origin_repository_url,omitempty"`
 	// The type of package contents.
-	PackageType *int64 `json:"package_type,omitempty"`
-	// The release of the package version (if any).
-	Release       NullableString `json:"release,omitempty"`
-	Repository    *string        `json:"repository,omitempty"`
-	RepositoryUrl *string        `json:"repository_url,omitempty"`
+	PackageType   *int64  `json:"package_type,omitempty"`
+	Repository    *string `json:"repository,omitempty"`
+	RepositoryUrl *string `json:"repository_url,omitempty"`
 	// The datetime the security scanning was completed.
 	SecurityScanCompletedAt NullableTime `json:"security_scan_completed_at,omitempty"`
 	// The datetime the security scanning was started.
@@ -1595,49 +1593,6 @@ func (o *PackageQuarantine) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
-// GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageQuarantine) GetRelease() string {
-	if o == nil || IsNil(o.Release.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Release.Get()
-}
-
-// GetReleaseOk returns a tuple with the Release field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageQuarantine) GetReleaseOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Release.Get(), o.Release.IsSet()
-}
-
-// HasRelease returns a boolean if a field has been set.
-func (o *PackageQuarantine) HasRelease() bool {
-	if o != nil && o.Release.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetRelease gets a reference to the given NullableString and assigns it to the Release field.
-func (o *PackageQuarantine) SetRelease(v string) {
-	o.Release.Set(&v)
-}
-
-// SetReleaseNil sets the value for Release to be an explicit nil
-func (o *PackageQuarantine) SetReleaseNil() {
-	o.Release.Set(nil)
-}
-
-// UnsetRelease ensures that no value is present for Release, not even an explicit nil
-func (o *PackageQuarantine) UnsetRelease() {
-	o.Release.Unset()
-}
-
 // GetRepository returns the Repository field value if set, zero value otherwise.
 func (o *PackageQuarantine) GetRepository() string {
 	if o == nil || IsNil(o.Repository) {
@@ -2931,9 +2886,6 @@ func (o PackageQuarantine) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
-	}
-	if o.Release.IsSet() {
-		toSerialize["release"] = o.Release.Get()
 	}
 	if !IsNil(o.Repository) {
 		toSerialize["repository"] = o.Repository
