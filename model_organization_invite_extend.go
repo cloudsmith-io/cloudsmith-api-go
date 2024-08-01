@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.417.0
+API version: 1.477.1
 Contact: support@cloudsmith.io
 */
 
@@ -30,7 +30,8 @@ type OrganizationInviteExtend struct {
 	// The role to be assigned to the invited user.
 	Role *string `json:"role,omitempty"`
 	// The slug_perm of the invite to be extended.
-	SlugPerm *string `json:"slug_perm,omitempty"`
+	SlugPerm *string                  `json:"slug_perm,omitempty"`
+	Teams    []OrganizationTeamInvite `json:"teams,omitempty"`
 	// The slug of the user to be invited.
 	User    *string        `json:"user,omitempty"`
 	UserUrl NullableString `json:"user_url,omitempty"`
@@ -292,6 +293,38 @@ func (o *OrganizationInviteExtend) SetSlugPerm(v string) {
 	o.SlugPerm = &v
 }
 
+// GetTeams returns the Teams field value if set, zero value otherwise.
+func (o *OrganizationInviteExtend) GetTeams() []OrganizationTeamInvite {
+	if o == nil || IsNil(o.Teams) {
+		var ret []OrganizationTeamInvite
+		return ret
+	}
+	return o.Teams
+}
+
+// GetTeamsOk returns a tuple with the Teams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrganizationInviteExtend) GetTeamsOk() ([]OrganizationTeamInvite, bool) {
+	if o == nil || IsNil(o.Teams) {
+		return nil, false
+	}
+	return o.Teams, true
+}
+
+// HasTeams returns a boolean if a field has been set.
+func (o *OrganizationInviteExtend) HasTeams() bool {
+	if o != nil && !IsNil(o.Teams) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeams gets a reference to the given []OrganizationTeamInvite and assigns it to the Teams field.
+func (o *OrganizationInviteExtend) SetTeams(v []OrganizationTeamInvite) {
+	o.Teams = v
+}
+
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *OrganizationInviteExtend) GetUser() string {
 	if o == nil || IsNil(o.User) {
@@ -397,6 +430,9 @@ func (o OrganizationInviteExtend) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
+	}
+	if !IsNil(o.Teams) {
+		toSerialize["teams"] = o.Teams
 	}
 	if !IsNil(o.User) {
 		toSerialize["user"] = o.User

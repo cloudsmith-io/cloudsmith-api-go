@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.417.0
+API version: 1.477.1
 Contact: support@cloudsmith.io
 */
 
@@ -34,6 +34,12 @@ type MavenUpstreamRequest struct {
 	ExtraValue1 NullableString `json:"extra_value_1,omitempty"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
 	ExtraValue2 NullableString `json:"extra_value_2,omitempty"`
+	// A public GPG key to associate with packages found on this upstream. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
+	GpgKeyInline NullableString `json:"gpg_key_inline,omitempty"`
+	// When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
+	GpgKeyUrl NullableString `json:"gpg_key_url,omitempty"`
+	// The GPG signature verification mode for this upstream.
+	GpgVerification *string `json:"gpg_verification,omitempty"`
 	// Whether or not this upstream is active and ready for requests.
 	IsActive *bool `json:"is_active,omitempty"`
 	// The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode.
@@ -56,6 +62,8 @@ func NewMavenUpstreamRequest(name string, upstreamUrl string) *MavenUpstreamRequ
 	this := MavenUpstreamRequest{}
 	var authMode string = "None"
 	this.AuthMode = &authMode
+	var gpgVerification string = "Allow All"
+	this.GpgVerification = &gpgVerification
 	var mode string = "Proxy Only"
 	this.Mode = &mode
 	this.Name = name
@@ -70,6 +78,8 @@ func NewMavenUpstreamRequestWithDefaults() *MavenUpstreamRequest {
 	this := MavenUpstreamRequest{}
 	var authMode string = "None"
 	this.AuthMode = &authMode
+	var gpgVerification string = "Allow All"
+	this.GpgVerification = &gpgVerification
 	var mode string = "Proxy Only"
 	this.Mode = &mode
 	return &this
@@ -365,6 +375,124 @@ func (o *MavenUpstreamRequest) UnsetExtraValue2() {
 	o.ExtraValue2.Unset()
 }
 
+// GetGpgKeyInline returns the GpgKeyInline field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MavenUpstreamRequest) GetGpgKeyInline() string {
+	if o == nil || IsNil(o.GpgKeyInline.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.GpgKeyInline.Get()
+}
+
+// GetGpgKeyInlineOk returns a tuple with the GpgKeyInline field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MavenUpstreamRequest) GetGpgKeyInlineOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GpgKeyInline.Get(), o.GpgKeyInline.IsSet()
+}
+
+// HasGpgKeyInline returns a boolean if a field has been set.
+func (o *MavenUpstreamRequest) HasGpgKeyInline() bool {
+	if o != nil && o.GpgKeyInline.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGpgKeyInline gets a reference to the given NullableString and assigns it to the GpgKeyInline field.
+func (o *MavenUpstreamRequest) SetGpgKeyInline(v string) {
+	o.GpgKeyInline.Set(&v)
+}
+
+// SetGpgKeyInlineNil sets the value for GpgKeyInline to be an explicit nil
+func (o *MavenUpstreamRequest) SetGpgKeyInlineNil() {
+	o.GpgKeyInline.Set(nil)
+}
+
+// UnsetGpgKeyInline ensures that no value is present for GpgKeyInline, not even an explicit nil
+func (o *MavenUpstreamRequest) UnsetGpgKeyInline() {
+	o.GpgKeyInline.Unset()
+}
+
+// GetGpgKeyUrl returns the GpgKeyUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MavenUpstreamRequest) GetGpgKeyUrl() string {
+	if o == nil || IsNil(o.GpgKeyUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.GpgKeyUrl.Get()
+}
+
+// GetGpgKeyUrlOk returns a tuple with the GpgKeyUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MavenUpstreamRequest) GetGpgKeyUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GpgKeyUrl.Get(), o.GpgKeyUrl.IsSet()
+}
+
+// HasGpgKeyUrl returns a boolean if a field has been set.
+func (o *MavenUpstreamRequest) HasGpgKeyUrl() bool {
+	if o != nil && o.GpgKeyUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGpgKeyUrl gets a reference to the given NullableString and assigns it to the GpgKeyUrl field.
+func (o *MavenUpstreamRequest) SetGpgKeyUrl(v string) {
+	o.GpgKeyUrl.Set(&v)
+}
+
+// SetGpgKeyUrlNil sets the value for GpgKeyUrl to be an explicit nil
+func (o *MavenUpstreamRequest) SetGpgKeyUrlNil() {
+	o.GpgKeyUrl.Set(nil)
+}
+
+// UnsetGpgKeyUrl ensures that no value is present for GpgKeyUrl, not even an explicit nil
+func (o *MavenUpstreamRequest) UnsetGpgKeyUrl() {
+	o.GpgKeyUrl.Unset()
+}
+
+// GetGpgVerification returns the GpgVerification field value if set, zero value otherwise.
+func (o *MavenUpstreamRequest) GetGpgVerification() string {
+	if o == nil || IsNil(o.GpgVerification) {
+		var ret string
+		return ret
+	}
+	return *o.GpgVerification
+}
+
+// GetGpgVerificationOk returns a tuple with the GpgVerification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MavenUpstreamRequest) GetGpgVerificationOk() (*string, bool) {
+	if o == nil || IsNil(o.GpgVerification) {
+		return nil, false
+	}
+	return o.GpgVerification, true
+}
+
+// HasGpgVerification returns a boolean if a field has been set.
+func (o *MavenUpstreamRequest) HasGpgVerification() bool {
+	if o != nil && !IsNil(o.GpgVerification) {
+		return true
+	}
+
+	return false
+}
+
+// SetGpgVerification gets a reference to the given string and assigns it to the GpgVerification field.
+func (o *MavenUpstreamRequest) SetGpgVerification(v string) {
+	o.GpgVerification = &v
+}
+
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *MavenUpstreamRequest) GetIsActive() bool {
 	if o == nil || IsNil(o.IsActive) {
@@ -571,6 +699,15 @@ func (o MavenUpstreamRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ExtraValue2.IsSet() {
 		toSerialize["extra_value_2"] = o.ExtraValue2.Get()
+	}
+	if o.GpgKeyInline.IsSet() {
+		toSerialize["gpg_key_inline"] = o.GpgKeyInline.Get()
+	}
+	if o.GpgKeyUrl.IsSet() {
+		toSerialize["gpg_key_url"] = o.GpgKeyUrl.Get()
+	}
+	if !IsNil(o.GpgVerification) {
+		toSerialize["gpg_verification"] = o.GpgVerification
 	}
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive

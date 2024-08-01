@@ -57,7 +57,7 @@ Other parameters are passed through a pointer to a apiRatesLimitsListRequest str
 
 ### Authorization
 
-[apikey](../README.md#apikey)
+[apikey](../README.md#apikey), [basic](../README.md#basic)
 
 ### HTTP request headers
 

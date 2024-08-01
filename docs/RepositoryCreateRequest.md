@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A description of the repository&#39;s purpose/contents. | [optional] 
 **Distributes** | Pointer to **[]string** | The repositories distributed through this repo. Adding repos here is only valid if the content_kind is DISTRIBUTION. | [optional] 
 **DockerRefreshTokensEnabled** | Pointer to **bool** | If checked, refresh tokens will be issued in addition to access tokens for Docker authentication. This allows unlimited extension of the lifetime of access tokens. | [optional] 
+**EnforceEula** | Pointer to **bool** | If checked, downloads will explicitly require acceptance of an EULA. | [optional] 
 **IndexFiles** | Pointer to **bool** | If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted. | [optional] 
 **MoveOwn** | Pointer to **bool** | If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the &#39;Access Controls&#39; section of the repository, and any inherited from the org. | [optional] 
 **MovePackages** | Pointer to **string** | This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting. | [optional] [default to "Admin"]
@@ -33,6 +34,7 @@ Name | Type | Description | Notes
 **Slug** | Pointer to **string** | The slug identifies the repository in URIs. | [optional] 
 **StorageRegion** | Pointer to **string** | The Cloudsmith region in which package files are stored. | [optional] [default to "default"]
 **StrictNpmValidation** | Pointer to **bool** | If checked, npm packages will be validated strictly to ensure the package matches specifcation. You can turn this on if you want to guarantee that the packages will work with npm-cli and other tools correctly. | [optional] 
+**TagPreReleasesAsLatest** | Pointer to **bool** | If checked, packages pushed with a pre-release component on that version will be marked with the &#39;latest&#39; tag. Note that if unchecked, a repository containing ONLY pre-release versions, will have no version marked latest which may cause incompatibility with native tools  | [optional] 
 **UseDebianLabels** | Pointer to **bool** | If checked, a &#39;Label&#39; field will be present in Debian-based repositories. It will contain a string that identifies the entitlement token used to authenticate the repository, in the form of &#39;source&#x3D;t-&lt;identifier&gt;&#39;; or &#39;source&#x3D;none&#39; if no token was used. You can use this to help with pinning. | [optional] 
 **UseDefaultCargoUpstream** | Pointer to **bool** | If checked, dependencies of uploaded Cargo crates which do not set an explicit value for \&quot;registry\&quot; will be assumed to be available from crates.io. If unchecked, dependencies with unspecified \&quot;registry\&quot; values will be assumed to be available in the registry being uploaded to. Uncheck this if you want to ensure that dependencies are only ever installed from Cloudsmith unless explicitly specified as belong to another registry. | [optional] 
 **UseNoarchPackages** | Pointer to **bool** | If checked, noarch packages (if supported) are enabled in installations/configurations. A noarch package is one that is not tied to specific system architecture (like i686). | [optional] 
@@ -309,6 +311,31 @@ SetDockerRefreshTokensEnabled sets DockerRefreshTokensEnabled field to given val
 `func (o *RepositoryCreateRequest) HasDockerRefreshTokensEnabled() bool`
 
 HasDockerRefreshTokensEnabled returns a boolean if a field has been set.
+
+### GetEnforceEula
+
+`func (o *RepositoryCreateRequest) GetEnforceEula() bool`
+
+GetEnforceEula returns the EnforceEula field if non-nil, zero value otherwise.
+
+### GetEnforceEulaOk
+
+`func (o *RepositoryCreateRequest) GetEnforceEulaOk() (*bool, bool)`
+
+GetEnforceEulaOk returns a tuple with the EnforceEula field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnforceEula
+
+`func (o *RepositoryCreateRequest) SetEnforceEula(v bool)`
+
+SetEnforceEula sets EnforceEula field to given value.
+
+### HasEnforceEula
+
+`func (o *RepositoryCreateRequest) HasEnforceEula() bool`
+
+HasEnforceEula returns a boolean if a field has been set.
 
 ### GetIndexFiles
 
@@ -779,6 +806,31 @@ SetStrictNpmValidation sets StrictNpmValidation field to given value.
 `func (o *RepositoryCreateRequest) HasStrictNpmValidation() bool`
 
 HasStrictNpmValidation returns a boolean if a field has been set.
+
+### GetTagPreReleasesAsLatest
+
+`func (o *RepositoryCreateRequest) GetTagPreReleasesAsLatest() bool`
+
+GetTagPreReleasesAsLatest returns the TagPreReleasesAsLatest field if non-nil, zero value otherwise.
+
+### GetTagPreReleasesAsLatestOk
+
+`func (o *RepositoryCreateRequest) GetTagPreReleasesAsLatestOk() (*bool, bool)`
+
+GetTagPreReleasesAsLatestOk returns a tuple with the TagPreReleasesAsLatest field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTagPreReleasesAsLatest
+
+`func (o *RepositoryCreateRequest) SetTagPreReleasesAsLatest(v bool)`
+
+SetTagPreReleasesAsLatest sets TagPreReleasesAsLatest field to given value.
+
+### HasTagPreReleasesAsLatest
+
+`func (o *RepositoryCreateRequest) HasTagPreReleasesAsLatest() bool`
+
+HasTagPreReleasesAsLatest returns a boolean if a field has been set.
 
 ### GetUseDebianLabels
 

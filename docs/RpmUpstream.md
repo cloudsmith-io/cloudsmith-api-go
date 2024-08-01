@@ -8,19 +8,25 @@ Name | Type | Description | Notes
 **AuthSecret** | Pointer to **NullableString** | Secret to provide with requests to upstream. | [optional] 
 **AuthUsername** | Pointer to **NullableString** | Username to provide with requests to upstream. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The datetime the upstream source was created. | [optional] [readonly] 
+**DisableReason** | Pointer to **string** |  | [optional] [readonly] [default to "N/A"]
 **DistroVersion** | **string** | The distribution version that packages found on this upstream will be associated with. | 
 **ExtraHeader1** | Pointer to **NullableString** | The key for extra header #1 to send to upstream. | [optional] 
 **ExtraHeader2** | Pointer to **NullableString** | The key for extra header #2 to send to upstream. | [optional] 
 **ExtraValue1** | Pointer to **NullableString** | The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
 **ExtraValue2** | Pointer to **NullableString** | The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
+**GpgKeyInline** | Pointer to **NullableString** | A public GPG key to associate with packages found on this upstream. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install. | [optional] 
+**GpgKeyUrl** | Pointer to **NullableString** | When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install. | [optional] 
+**GpgVerification** | Pointer to **string** | The GPG signature verification mode for this upstream. | [optional] [default to "Allow All"]
 **IncludeSources** | Pointer to **bool** | When checked, source packages will be available from this upstream. | [optional] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
 **Name** | **string** | A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream. | 
+**PendingValidation** | Pointer to **bool** | When true, this upstream source is pending validation. | [optional] [readonly] 
 **Priority** | Pointer to **int64** | Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date. | [optional] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
 **UpstreamUrl** | **string** | The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.  | 
+**VerificationStatus** | Pointer to **string** | The signature verification status for this upstream. | [optional] [readonly] [default to "Unknown"]
 **VerifySsl** | Pointer to **bool** | If enabled, SSL certificates are verified when requests are made to this upstream. It&#39;s recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams. | [optional] 
 
 ## Methods
@@ -161,6 +167,31 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *RpmUpstream) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetDisableReason
+
+`func (o *RpmUpstream) GetDisableReason() string`
+
+GetDisableReason returns the DisableReason field if non-nil, zero value otherwise.
+
+### GetDisableReasonOk
+
+`func (o *RpmUpstream) GetDisableReasonOk() (*string, bool)`
+
+GetDisableReasonOk returns a tuple with the DisableReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableReason
+
+`func (o *RpmUpstream) SetDisableReason(v string)`
+
+SetDisableReason sets DisableReason field to given value.
+
+### HasDisableReason
+
+`func (o *RpmUpstream) HasDisableReason() bool`
+
+HasDisableReason returns a boolean if a field has been set.
 
 ### GetDistroVersion
 
@@ -322,6 +353,101 @@ HasExtraValue2 returns a boolean if a field has been set.
 `func (o *RpmUpstream) UnsetExtraValue2()`
 
 UnsetExtraValue2 ensures that no value is present for ExtraValue2, not even an explicit nil
+### GetGpgKeyInline
+
+`func (o *RpmUpstream) GetGpgKeyInline() string`
+
+GetGpgKeyInline returns the GpgKeyInline field if non-nil, zero value otherwise.
+
+### GetGpgKeyInlineOk
+
+`func (o *RpmUpstream) GetGpgKeyInlineOk() (*string, bool)`
+
+GetGpgKeyInlineOk returns a tuple with the GpgKeyInline field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpgKeyInline
+
+`func (o *RpmUpstream) SetGpgKeyInline(v string)`
+
+SetGpgKeyInline sets GpgKeyInline field to given value.
+
+### HasGpgKeyInline
+
+`func (o *RpmUpstream) HasGpgKeyInline() bool`
+
+HasGpgKeyInline returns a boolean if a field has been set.
+
+### SetGpgKeyInlineNil
+
+`func (o *RpmUpstream) SetGpgKeyInlineNil(b bool)`
+
+ SetGpgKeyInlineNil sets the value for GpgKeyInline to be an explicit nil
+
+### UnsetGpgKeyInline
+`func (o *RpmUpstream) UnsetGpgKeyInline()`
+
+UnsetGpgKeyInline ensures that no value is present for GpgKeyInline, not even an explicit nil
+### GetGpgKeyUrl
+
+`func (o *RpmUpstream) GetGpgKeyUrl() string`
+
+GetGpgKeyUrl returns the GpgKeyUrl field if non-nil, zero value otherwise.
+
+### GetGpgKeyUrlOk
+
+`func (o *RpmUpstream) GetGpgKeyUrlOk() (*string, bool)`
+
+GetGpgKeyUrlOk returns a tuple with the GpgKeyUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpgKeyUrl
+
+`func (o *RpmUpstream) SetGpgKeyUrl(v string)`
+
+SetGpgKeyUrl sets GpgKeyUrl field to given value.
+
+### HasGpgKeyUrl
+
+`func (o *RpmUpstream) HasGpgKeyUrl() bool`
+
+HasGpgKeyUrl returns a boolean if a field has been set.
+
+### SetGpgKeyUrlNil
+
+`func (o *RpmUpstream) SetGpgKeyUrlNil(b bool)`
+
+ SetGpgKeyUrlNil sets the value for GpgKeyUrl to be an explicit nil
+
+### UnsetGpgKeyUrl
+`func (o *RpmUpstream) UnsetGpgKeyUrl()`
+
+UnsetGpgKeyUrl ensures that no value is present for GpgKeyUrl, not even an explicit nil
+### GetGpgVerification
+
+`func (o *RpmUpstream) GetGpgVerification() string`
+
+GetGpgVerification returns the GpgVerification field if non-nil, zero value otherwise.
+
+### GetGpgVerificationOk
+
+`func (o *RpmUpstream) GetGpgVerificationOk() (*string, bool)`
+
+GetGpgVerificationOk returns a tuple with the GpgVerification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpgVerification
+
+`func (o *RpmUpstream) SetGpgVerification(v string)`
+
+SetGpgVerification sets GpgVerification field to given value.
+
+### HasGpgVerification
+
+`func (o *RpmUpstream) HasGpgVerification() bool`
+
+HasGpgVerification returns a boolean if a field has been set.
+
 ### GetIncludeSources
 
 `func (o *RpmUpstream) GetIncludeSources() bool`
@@ -417,6 +543,31 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
+### GetPendingValidation
+
+`func (o *RpmUpstream) GetPendingValidation() bool`
+
+GetPendingValidation returns the PendingValidation field if non-nil, zero value otherwise.
+
+### GetPendingValidationOk
+
+`func (o *RpmUpstream) GetPendingValidationOk() (*bool, bool)`
+
+GetPendingValidationOk returns a tuple with the PendingValidation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPendingValidation
+
+`func (o *RpmUpstream) SetPendingValidation(v bool)`
+
+SetPendingValidation sets PendingValidation field to given value.
+
+### HasPendingValidation
+
+`func (o *RpmUpstream) HasPendingValidation() bool`
+
+HasPendingValidation returns a boolean if a field has been set.
+
 ### GetPriority
 
 `func (o *RpmUpstream) GetPriority() int64`
@@ -511,6 +662,31 @@ and a boolean to check if the value has been set.
 
 SetUpstreamUrl sets UpstreamUrl field to given value.
 
+
+### GetVerificationStatus
+
+`func (o *RpmUpstream) GetVerificationStatus() string`
+
+GetVerificationStatus returns the VerificationStatus field if non-nil, zero value otherwise.
+
+### GetVerificationStatusOk
+
+`func (o *RpmUpstream) GetVerificationStatusOk() (*string, bool)`
+
+GetVerificationStatusOk returns a tuple with the VerificationStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVerificationStatus
+
+`func (o *RpmUpstream) SetVerificationStatus(v string)`
+
+SetVerificationStatus sets VerificationStatus field to given value.
+
+### HasVerificationStatus
+
+`func (o *RpmUpstream) HasVerificationStatus() bool`
+
+HasVerificationStatus returns a boolean if a field has been set.
 
 ### GetVerifySsl
 

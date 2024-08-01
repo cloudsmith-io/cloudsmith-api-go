@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **ExtraHeader2** | Pointer to **NullableString** | The key for extra header #2 to send to upstream. | [optional] 
 **ExtraValue1** | Pointer to **NullableString** | The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
 **ExtraValue2** | Pointer to **NullableString** | The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
+**GpgKeyInline** | Pointer to **NullableString** | A public GPG key to associate with packages found on this upstream. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install. | [optional] 
+**GpgKeyUrl** | Pointer to **NullableString** | When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install. | [optional] 
+**GpgVerification** | Pointer to **string** | The GPG signature verification mode for this upstream. | [optional] [default to "Allow All"]
 **IncludeSources** | Pointer to **bool** | When true, source packages will be available from this upstream. | [optional] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
@@ -326,6 +329,101 @@ HasExtraValue2 returns a boolean if a field has been set.
 `func (o *DebUpstreamRequestPatch) UnsetExtraValue2()`
 
 UnsetExtraValue2 ensures that no value is present for ExtraValue2, not even an explicit nil
+### GetGpgKeyInline
+
+`func (o *DebUpstreamRequestPatch) GetGpgKeyInline() string`
+
+GetGpgKeyInline returns the GpgKeyInline field if non-nil, zero value otherwise.
+
+### GetGpgKeyInlineOk
+
+`func (o *DebUpstreamRequestPatch) GetGpgKeyInlineOk() (*string, bool)`
+
+GetGpgKeyInlineOk returns a tuple with the GpgKeyInline field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpgKeyInline
+
+`func (o *DebUpstreamRequestPatch) SetGpgKeyInline(v string)`
+
+SetGpgKeyInline sets GpgKeyInline field to given value.
+
+### HasGpgKeyInline
+
+`func (o *DebUpstreamRequestPatch) HasGpgKeyInline() bool`
+
+HasGpgKeyInline returns a boolean if a field has been set.
+
+### SetGpgKeyInlineNil
+
+`func (o *DebUpstreamRequestPatch) SetGpgKeyInlineNil(b bool)`
+
+ SetGpgKeyInlineNil sets the value for GpgKeyInline to be an explicit nil
+
+### UnsetGpgKeyInline
+`func (o *DebUpstreamRequestPatch) UnsetGpgKeyInline()`
+
+UnsetGpgKeyInline ensures that no value is present for GpgKeyInline, not even an explicit nil
+### GetGpgKeyUrl
+
+`func (o *DebUpstreamRequestPatch) GetGpgKeyUrl() string`
+
+GetGpgKeyUrl returns the GpgKeyUrl field if non-nil, zero value otherwise.
+
+### GetGpgKeyUrlOk
+
+`func (o *DebUpstreamRequestPatch) GetGpgKeyUrlOk() (*string, bool)`
+
+GetGpgKeyUrlOk returns a tuple with the GpgKeyUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpgKeyUrl
+
+`func (o *DebUpstreamRequestPatch) SetGpgKeyUrl(v string)`
+
+SetGpgKeyUrl sets GpgKeyUrl field to given value.
+
+### HasGpgKeyUrl
+
+`func (o *DebUpstreamRequestPatch) HasGpgKeyUrl() bool`
+
+HasGpgKeyUrl returns a boolean if a field has been set.
+
+### SetGpgKeyUrlNil
+
+`func (o *DebUpstreamRequestPatch) SetGpgKeyUrlNil(b bool)`
+
+ SetGpgKeyUrlNil sets the value for GpgKeyUrl to be an explicit nil
+
+### UnsetGpgKeyUrl
+`func (o *DebUpstreamRequestPatch) UnsetGpgKeyUrl()`
+
+UnsetGpgKeyUrl ensures that no value is present for GpgKeyUrl, not even an explicit nil
+### GetGpgVerification
+
+`func (o *DebUpstreamRequestPatch) GetGpgVerification() string`
+
+GetGpgVerification returns the GpgVerification field if non-nil, zero value otherwise.
+
+### GetGpgVerificationOk
+
+`func (o *DebUpstreamRequestPatch) GetGpgVerificationOk() (*string, bool)`
+
+GetGpgVerificationOk returns a tuple with the GpgVerification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpgVerification
+
+`func (o *DebUpstreamRequestPatch) SetGpgVerification(v string)`
+
+SetGpgVerification sets GpgVerification field to given value.
+
+### HasGpgVerification
+
+`func (o *DebUpstreamRequestPatch) HasGpgVerification() bool`
+
+HasGpgVerification returns a boolean if a field has been set.
+
 ### GetIncludeSources
 
 `func (o *DebUpstreamRequestPatch) GetIncludeSources() bool`

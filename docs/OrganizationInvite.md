@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Org** | Pointer to **string** |  | [optional] [readonly] 
 **Role** | Pointer to **string** | The role to be assigned to the invited user. | [optional] [default to "Member"]
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
+**Teams** | Pointer to [**[]OrganizationTeamInvite**](OrganizationTeamInvite.md) |  | [optional] 
 **User** | Pointer to **string** | The slug of the user to be invited. | [optional] 
 **UserUrl** | Pointer to **NullableString** |  | [optional] [readonly] 
 
@@ -217,6 +218,31 @@ SetSlugPerm sets SlugPerm field to given value.
 `func (o *OrganizationInvite) HasSlugPerm() bool`
 
 HasSlugPerm returns a boolean if a field has been set.
+
+### GetTeams
+
+`func (o *OrganizationInvite) GetTeams() []OrganizationTeamInvite`
+
+GetTeams returns the Teams field if non-nil, zero value otherwise.
+
+### GetTeamsOk
+
+`func (o *OrganizationInvite) GetTeamsOk() (*[]OrganizationTeamInvite, bool)`
+
+GetTeamsOk returns a tuple with the Teams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeams
+
+`func (o *OrganizationInvite) SetTeams(v []OrganizationTeamInvite)`
+
+SetTeams sets Teams field to given value.
+
+### HasTeams
+
+`func (o *OrganizationInvite) HasTeams() bool`
+
+HasTeams returns a boolean if a field has been set.
 
 ### GetUser
 

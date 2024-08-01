@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.417.0
+API version: 1.477.1
 Contact: support@cloudsmith.io
 */
 
@@ -813,9 +813,9 @@ func (r ApiPackagesQuarantineRequest) Execute() (*PackageQuarantine, *http.Respo
 }
 
 /*
-PackagesQuarantine Quarantine or restore a package.
+PackagesQuarantine Quarantine or release a package.
 
-Quarantine or restore a package.
+Quarantine or release a package.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner

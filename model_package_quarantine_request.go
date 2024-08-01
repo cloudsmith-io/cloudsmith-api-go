@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.417.0
+API version: 1.477.1
 Contact: support@cloudsmith.io
 */
 
@@ -20,7 +20,9 @@ var _ MappedNullable = &PackageQuarantineRequest{}
 
 // PackageQuarantineRequest struct for PackageQuarantineRequest
 type PackageQuarantineRequest struct {
-	// If true, the package be restored from quarantine.
+	// If true, the package is released from quarantine.
+	Release *bool `json:"release,omitempty"`
+	// If true, the package is released from quarantine. Note: This field is deprecated, please use 'release' instead.
 	Restore *bool `json:"restore,omitempty"`
 }
 
@@ -39,6 +41,38 @@ func NewPackageQuarantineRequest() *PackageQuarantineRequest {
 func NewPackageQuarantineRequestWithDefaults() *PackageQuarantineRequest {
 	this := PackageQuarantineRequest{}
 	return &this
+}
+
+// GetRelease returns the Release field value if set, zero value otherwise.
+func (o *PackageQuarantineRequest) GetRelease() bool {
+	if o == nil || IsNil(o.Release) {
+		var ret bool
+		return ret
+	}
+	return *o.Release
+}
+
+// GetReleaseOk returns a tuple with the Release field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageQuarantineRequest) GetReleaseOk() (*bool, bool) {
+	if o == nil || IsNil(o.Release) {
+		return nil, false
+	}
+	return o.Release, true
+}
+
+// HasRelease returns a boolean if a field has been set.
+func (o *PackageQuarantineRequest) HasRelease() bool {
+	if o != nil && !IsNil(o.Release) {
+		return true
+	}
+
+	return false
+}
+
+// SetRelease gets a reference to the given bool and assigns it to the Release field.
+func (o *PackageQuarantineRequest) SetRelease(v bool) {
+	o.Release = &v
 }
 
 // GetRestore returns the Restore field value if set, zero value otherwise.
@@ -83,6 +117,9 @@ func (o PackageQuarantineRequest) MarshalJSON() ([]byte, error) {
 
 func (o PackageQuarantineRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Release) {
+		toSerialize["release"] = o.Release
+	}
 	if !IsNil(o.Restore) {
 		toSerialize["restore"] = o.Restore
 	}

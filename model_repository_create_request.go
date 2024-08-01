@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.417.0
+API version: 1.477.1
 Contact: support@cloudsmith.io
 */
 
@@ -40,6 +40,8 @@ type RepositoryCreateRequest struct {
 	Distributes []string `json:"distributes,omitempty"`
 	// If checked, refresh tokens will be issued in addition to access tokens for Docker authentication. This allows unlimited extension of the lifetime of access tokens.
 	DockerRefreshTokensEnabled *bool `json:"docker_refresh_tokens_enabled,omitempty"`
+	// If checked, downloads will explicitly require acceptance of an EULA.
+	EnforceEula *bool `json:"enforce_eula,omitempty"`
 	// If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted.
 	IndexFiles *bool `json:"index_files,omitempty"`
 	// If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
@@ -78,6 +80,8 @@ type RepositoryCreateRequest struct {
 	StorageRegion *string `json:"storage_region,omitempty"`
 	// If checked, npm packages will be validated strictly to ensure the package matches specifcation. You can turn this on if you want to guarantee that the packages will work with npm-cli and other tools correctly.
 	StrictNpmValidation *bool `json:"strict_npm_validation,omitempty"`
+	// If checked, packages pushed with a pre-release component on that version will be marked with the 'latest' tag. Note that if unchecked, a repository containing ONLY pre-release versions, will have no version marked latest which may cause incompatibility with native tools
+	TagPreReleasesAsLatest *bool `json:"tag_pre_releases_as_latest,omitempty"`
 	// If checked, a 'Label' field will be present in Debian-based repositories. It will contain a string that identifies the entitlement token used to authenticate the repository, in the form of 'source=t-<identifier>'; or 'source=none' if no token was used. You can use this to help with pinning.
 	UseDebianLabels *bool `json:"use_debian_labels,omitempty"`
 	// If checked, dependencies of uploaded Cargo crates which do not set an explicit value for \"registry\" will be assumed to be available from crates.io. If unchecked, dependencies with unspecified \"registry\" values will be assumed to be available in the registry being uploaded to. Uncheck this if you want to ensure that dependencies are only ever installed from Cloudsmith unless explicitly specified as belong to another registry.
@@ -474,6 +478,38 @@ func (o *RepositoryCreateRequest) HasDockerRefreshTokensEnabled() bool {
 // SetDockerRefreshTokensEnabled gets a reference to the given bool and assigns it to the DockerRefreshTokensEnabled field.
 func (o *RepositoryCreateRequest) SetDockerRefreshTokensEnabled(v bool) {
 	o.DockerRefreshTokensEnabled = &v
+}
+
+// GetEnforceEula returns the EnforceEula field value if set, zero value otherwise.
+func (o *RepositoryCreateRequest) GetEnforceEula() bool {
+	if o == nil || IsNil(o.EnforceEula) {
+		var ret bool
+		return ret
+	}
+	return *o.EnforceEula
+}
+
+// GetEnforceEulaOk returns a tuple with the EnforceEula field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreateRequest) GetEnforceEulaOk() (*bool, bool) {
+	if o == nil || IsNil(o.EnforceEula) {
+		return nil, false
+	}
+	return o.EnforceEula, true
+}
+
+// HasEnforceEula returns a boolean if a field has been set.
+func (o *RepositoryCreateRequest) HasEnforceEula() bool {
+	if o != nil && !IsNil(o.EnforceEula) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnforceEula gets a reference to the given bool and assigns it to the EnforceEula field.
+func (o *RepositoryCreateRequest) SetEnforceEula(v bool) {
+	o.EnforceEula = &v
 }
 
 // GetIndexFiles returns the IndexFiles field value if set, zero value otherwise.
@@ -1076,6 +1112,38 @@ func (o *RepositoryCreateRequest) SetStrictNpmValidation(v bool) {
 	o.StrictNpmValidation = &v
 }
 
+// GetTagPreReleasesAsLatest returns the TagPreReleasesAsLatest field value if set, zero value otherwise.
+func (o *RepositoryCreateRequest) GetTagPreReleasesAsLatest() bool {
+	if o == nil || IsNil(o.TagPreReleasesAsLatest) {
+		var ret bool
+		return ret
+	}
+	return *o.TagPreReleasesAsLatest
+}
+
+// GetTagPreReleasesAsLatestOk returns a tuple with the TagPreReleasesAsLatest field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreateRequest) GetTagPreReleasesAsLatestOk() (*bool, bool) {
+	if o == nil || IsNil(o.TagPreReleasesAsLatest) {
+		return nil, false
+	}
+	return o.TagPreReleasesAsLatest, true
+}
+
+// HasTagPreReleasesAsLatest returns a boolean if a field has been set.
+func (o *RepositoryCreateRequest) HasTagPreReleasesAsLatest() bool {
+	if o != nil && !IsNil(o.TagPreReleasesAsLatest) {
+		return true
+	}
+
+	return false
+}
+
+// SetTagPreReleasesAsLatest gets a reference to the given bool and assigns it to the TagPreReleasesAsLatest field.
+func (o *RepositoryCreateRequest) SetTagPreReleasesAsLatest(v bool) {
+	o.TagPreReleasesAsLatest = &v
+}
+
 // GetUseDebianLabels returns the UseDebianLabels field value if set, zero value otherwise.
 func (o *RepositoryCreateRequest) GetUseDebianLabels() bool {
 	if o == nil || IsNil(o.UseDebianLabels) {
@@ -1340,6 +1408,9 @@ func (o RepositoryCreateRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DockerRefreshTokensEnabled) {
 		toSerialize["docker_refresh_tokens_enabled"] = o.DockerRefreshTokensEnabled
 	}
+	if !IsNil(o.EnforceEula) {
+		toSerialize["enforce_eula"] = o.EnforceEula
+	}
 	if !IsNil(o.IndexFiles) {
 		toSerialize["index_files"] = o.IndexFiles
 	}
@@ -1394,6 +1465,9 @@ func (o RepositoryCreateRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.StrictNpmValidation) {
 		toSerialize["strict_npm_validation"] = o.StrictNpmValidation
+	}
+	if !IsNil(o.TagPreReleasesAsLatest) {
+		toSerialize["tag_pre_releases_as_latest"] = o.TagPreReleasesAsLatest
 	}
 	if !IsNil(o.UseDebianLabels) {
 		toSerialize["use_debian_labels"] = o.UseDebianLabels

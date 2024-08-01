@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.417.0
+API version: 1.477.1
 Contact: support@cloudsmith.io
 */
 
@@ -30,7 +30,8 @@ type DebUpstream struct {
 	// The component to fetch from the upstream
 	Component *string `json:"component,omitempty"`
 	// The datetime the upstream source was created.
-	CreatedAt *time.Time `json:"created_at,omitempty"`
+	CreatedAt     *time.Time `json:"created_at,omitempty"`
+	DisableReason *string    `json:"disable_reason,omitempty"`
 	// The distribution version that packages found on this upstream could be associated with.
 	DistroVersions []string `json:"distro_versions"`
 	// The key for extra header #1 to send to upstream.
@@ -41,6 +42,12 @@ type DebUpstream struct {
 	ExtraValue1 NullableString `json:"extra_value_1,omitempty"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
 	ExtraValue2 NullableString `json:"extra_value_2,omitempty"`
+	// A public GPG key to associate with packages found on this upstream. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
+	GpgKeyInline NullableString `json:"gpg_key_inline,omitempty"`
+	// When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
+	GpgKeyUrl NullableString `json:"gpg_key_url,omitempty"`
+	// The GPG signature verification mode for this upstream.
+	GpgVerification *string `json:"gpg_verification,omitempty"`
 	// When true, source packages will be available from this upstream.
 	IncludeSources *bool `json:"include_sources,omitempty"`
 	// Whether or not this upstream is active and ready for requests.
@@ -49,6 +56,8 @@ type DebUpstream struct {
 	Mode *string `json:"mode,omitempty"`
 	// A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream.
 	Name string `json:"name"`
+	// When true, this upstream source is pending validation.
+	PendingValidation *bool `json:"pending_validation,omitempty"`
 	// Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date.
 	Priority  *int64     `json:"priority,omitempty"`
 	SlugPerm  *string    `json:"slug_perm,omitempty"`
@@ -57,6 +66,8 @@ type DebUpstream struct {
 	UpstreamDistribution NullableString `json:"upstream_distribution,omitempty"`
 	// The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.
 	UpstreamUrl string `json:"upstream_url"`
+	// The signature verification status for this upstream.
+	VerificationStatus *string `json:"verification_status,omitempty"`
 	// If enabled, SSL certificates are verified when requests are made to this upstream. It's recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams.
 	VerifySsl *bool `json:"verify_ssl,omitempty"`
 }
@@ -70,6 +81,8 @@ func NewDebUpstream(distroVersions []string, name string, upstreamUrl string) *D
 	var authMode string = "None"
 	this.AuthMode = &authMode
 	this.DistroVersions = distroVersions
+	var gpgVerification string = "Allow All"
+	this.GpgVerification = &gpgVerification
 	var mode string = "Proxy Only"
 	this.Mode = &mode
 	this.Name = name
@@ -84,6 +97,8 @@ func NewDebUpstreamWithDefaults() *DebUpstream {
 	this := DebUpstream{}
 	var authMode string = "None"
 	this.AuthMode = &authMode
+	var gpgVerification string = "Allow All"
+	this.GpgVerification = &gpgVerification
 	var mode string = "Proxy Only"
 	this.Mode = &mode
 	return &this
@@ -269,6 +284,38 @@ func (o *DebUpstream) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
 func (o *DebUpstream) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
+}
+
+// GetDisableReason returns the DisableReason field value if set, zero value otherwise.
+func (o *DebUpstream) GetDisableReason() string {
+	if o == nil || IsNil(o.DisableReason) {
+		var ret string
+		return ret
+	}
+	return *o.DisableReason
+}
+
+// GetDisableReasonOk returns a tuple with the DisableReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetDisableReasonOk() (*string, bool) {
+	if o == nil || IsNil(o.DisableReason) {
+		return nil, false
+	}
+	return o.DisableReason, true
+}
+
+// HasDisableReason returns a boolean if a field has been set.
+func (o *DebUpstream) HasDisableReason() bool {
+	if o != nil && !IsNil(o.DisableReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableReason gets a reference to the given string and assigns it to the DisableReason field.
+func (o *DebUpstream) SetDisableReason(v string) {
+	o.DisableReason = &v
 }
 
 // GetDistroVersions returns the DistroVersions field value
@@ -467,6 +514,124 @@ func (o *DebUpstream) UnsetExtraValue2() {
 	o.ExtraValue2.Unset()
 }
 
+// GetGpgKeyInline returns the GpgKeyInline field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DebUpstream) GetGpgKeyInline() string {
+	if o == nil || IsNil(o.GpgKeyInline.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.GpgKeyInline.Get()
+}
+
+// GetGpgKeyInlineOk returns a tuple with the GpgKeyInline field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DebUpstream) GetGpgKeyInlineOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GpgKeyInline.Get(), o.GpgKeyInline.IsSet()
+}
+
+// HasGpgKeyInline returns a boolean if a field has been set.
+func (o *DebUpstream) HasGpgKeyInline() bool {
+	if o != nil && o.GpgKeyInline.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGpgKeyInline gets a reference to the given NullableString and assigns it to the GpgKeyInline field.
+func (o *DebUpstream) SetGpgKeyInline(v string) {
+	o.GpgKeyInline.Set(&v)
+}
+
+// SetGpgKeyInlineNil sets the value for GpgKeyInline to be an explicit nil
+func (o *DebUpstream) SetGpgKeyInlineNil() {
+	o.GpgKeyInline.Set(nil)
+}
+
+// UnsetGpgKeyInline ensures that no value is present for GpgKeyInline, not even an explicit nil
+func (o *DebUpstream) UnsetGpgKeyInline() {
+	o.GpgKeyInline.Unset()
+}
+
+// GetGpgKeyUrl returns the GpgKeyUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DebUpstream) GetGpgKeyUrl() string {
+	if o == nil || IsNil(o.GpgKeyUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.GpgKeyUrl.Get()
+}
+
+// GetGpgKeyUrlOk returns a tuple with the GpgKeyUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DebUpstream) GetGpgKeyUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GpgKeyUrl.Get(), o.GpgKeyUrl.IsSet()
+}
+
+// HasGpgKeyUrl returns a boolean if a field has been set.
+func (o *DebUpstream) HasGpgKeyUrl() bool {
+	if o != nil && o.GpgKeyUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGpgKeyUrl gets a reference to the given NullableString and assigns it to the GpgKeyUrl field.
+func (o *DebUpstream) SetGpgKeyUrl(v string) {
+	o.GpgKeyUrl.Set(&v)
+}
+
+// SetGpgKeyUrlNil sets the value for GpgKeyUrl to be an explicit nil
+func (o *DebUpstream) SetGpgKeyUrlNil() {
+	o.GpgKeyUrl.Set(nil)
+}
+
+// UnsetGpgKeyUrl ensures that no value is present for GpgKeyUrl, not even an explicit nil
+func (o *DebUpstream) UnsetGpgKeyUrl() {
+	o.GpgKeyUrl.Unset()
+}
+
+// GetGpgVerification returns the GpgVerification field value if set, zero value otherwise.
+func (o *DebUpstream) GetGpgVerification() string {
+	if o == nil || IsNil(o.GpgVerification) {
+		var ret string
+		return ret
+	}
+	return *o.GpgVerification
+}
+
+// GetGpgVerificationOk returns a tuple with the GpgVerification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetGpgVerificationOk() (*string, bool) {
+	if o == nil || IsNil(o.GpgVerification) {
+		return nil, false
+	}
+	return o.GpgVerification, true
+}
+
+// HasGpgVerification returns a boolean if a field has been set.
+func (o *DebUpstream) HasGpgVerification() bool {
+	if o != nil && !IsNil(o.GpgVerification) {
+		return true
+	}
+
+	return false
+}
+
+// SetGpgVerification gets a reference to the given string and assigns it to the GpgVerification field.
+func (o *DebUpstream) SetGpgVerification(v string) {
+	o.GpgVerification = &v
+}
+
 // GetIncludeSources returns the IncludeSources field value if set, zero value otherwise.
 func (o *DebUpstream) GetIncludeSources() bool {
 	if o == nil || IsNil(o.IncludeSources) {
@@ -585,6 +750,38 @@ func (o *DebUpstream) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *DebUpstream) SetName(v string) {
 	o.Name = v
+}
+
+// GetPendingValidation returns the PendingValidation field value if set, zero value otherwise.
+func (o *DebUpstream) GetPendingValidation() bool {
+	if o == nil || IsNil(o.PendingValidation) {
+		var ret bool
+		return ret
+	}
+	return *o.PendingValidation
+}
+
+// GetPendingValidationOk returns a tuple with the PendingValidation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetPendingValidationOk() (*bool, bool) {
+	if o == nil || IsNil(o.PendingValidation) {
+		return nil, false
+	}
+	return o.PendingValidation, true
+}
+
+// HasPendingValidation returns a boolean if a field has been set.
+func (o *DebUpstream) HasPendingValidation() bool {
+	if o != nil && !IsNil(o.PendingValidation) {
+		return true
+	}
+
+	return false
+}
+
+// SetPendingValidation gets a reference to the given bool and assigns it to the PendingValidation field.
+func (o *DebUpstream) SetPendingValidation(v bool) {
+	o.PendingValidation = &v
 }
 
 // GetPriority returns the Priority field value if set, zero value otherwise.
@@ -750,6 +947,38 @@ func (o *DebUpstream) SetUpstreamUrl(v string) {
 	o.UpstreamUrl = v
 }
 
+// GetVerificationStatus returns the VerificationStatus field value if set, zero value otherwise.
+func (o *DebUpstream) GetVerificationStatus() string {
+	if o == nil || IsNil(o.VerificationStatus) {
+		var ret string
+		return ret
+	}
+	return *o.VerificationStatus
+}
+
+// GetVerificationStatusOk returns a tuple with the VerificationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetVerificationStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.VerificationStatus) {
+		return nil, false
+	}
+	return o.VerificationStatus, true
+}
+
+// HasVerificationStatus returns a boolean if a field has been set.
+func (o *DebUpstream) HasVerificationStatus() bool {
+	if o != nil && !IsNil(o.VerificationStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetVerificationStatus gets a reference to the given string and assigns it to the VerificationStatus field.
+func (o *DebUpstream) SetVerificationStatus(v string) {
+	o.VerificationStatus = &v
+}
+
 // GetVerifySsl returns the VerifySsl field value if set, zero value otherwise.
 func (o *DebUpstream) GetVerifySsl() bool {
 	if o == nil || IsNil(o.VerifySsl) {
@@ -807,6 +1036,9 @@ func (o DebUpstream) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
+	if !IsNil(o.DisableReason) {
+		toSerialize["disable_reason"] = o.DisableReason
+	}
 	toSerialize["distro_versions"] = o.DistroVersions
 	if o.ExtraHeader1.IsSet() {
 		toSerialize["extra_header_1"] = o.ExtraHeader1.Get()
@@ -820,6 +1052,15 @@ func (o DebUpstream) ToMap() (map[string]interface{}, error) {
 	if o.ExtraValue2.IsSet() {
 		toSerialize["extra_value_2"] = o.ExtraValue2.Get()
 	}
+	if o.GpgKeyInline.IsSet() {
+		toSerialize["gpg_key_inline"] = o.GpgKeyInline.Get()
+	}
+	if o.GpgKeyUrl.IsSet() {
+		toSerialize["gpg_key_url"] = o.GpgKeyUrl.Get()
+	}
+	if !IsNil(o.GpgVerification) {
+		toSerialize["gpg_verification"] = o.GpgVerification
+	}
 	if !IsNil(o.IncludeSources) {
 		toSerialize["include_sources"] = o.IncludeSources
 	}
@@ -830,6 +1071,9 @@ func (o DebUpstream) ToMap() (map[string]interface{}, error) {
 		toSerialize["mode"] = o.Mode
 	}
 	toSerialize["name"] = o.Name
+	if !IsNil(o.PendingValidation) {
+		toSerialize["pending_validation"] = o.PendingValidation
+	}
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
@@ -843,6 +1087,9 @@ func (o DebUpstream) ToMap() (map[string]interface{}, error) {
 		toSerialize["upstream_distribution"] = o.UpstreamDistribution.Get()
 	}
 	toSerialize["upstream_url"] = o.UpstreamUrl
+	if !IsNil(o.VerificationStatus) {
+		toSerialize["verification_status"] = o.VerificationStatus
+	}
 	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}

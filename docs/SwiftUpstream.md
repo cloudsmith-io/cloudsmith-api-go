@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **AuthSecret** | Pointer to **NullableString** | Secret to provide with requests to upstream. | [optional] 
 **AuthUsername** | Pointer to **NullableString** | Username to provide with requests to upstream. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The datetime the upstream source was created. | [optional] [readonly] 
+**DisableReason** | Pointer to **string** |  | [optional] [readonly] [default to "N/A"]
 **ExtraHeader1** | Pointer to **NullableString** | The key for extra header #1 to send to upstream. | [optional] 
 **ExtraHeader2** | Pointer to **NullableString** | The key for extra header #2 to send to upstream. | [optional] 
 **ExtraValue1** | Pointer to **NullableString** | The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
 **Name** | **string** | A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream. | 
+**PendingValidation** | Pointer to **bool** | When true, this upstream source is pending validation. | [optional] [readonly] 
 **Priority** | Pointer to **int64** | Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date. | [optional] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
@@ -159,6 +161,31 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *SwiftUpstream) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetDisableReason
+
+`func (o *SwiftUpstream) GetDisableReason() string`
+
+GetDisableReason returns the DisableReason field if non-nil, zero value otherwise.
+
+### GetDisableReasonOk
+
+`func (o *SwiftUpstream) GetDisableReasonOk() (*string, bool)`
+
+GetDisableReasonOk returns a tuple with the DisableReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableReason
+
+`func (o *SwiftUpstream) SetDisableReason(v string)`
+
+SetDisableReason sets DisableReason field to given value.
+
+### HasDisableReason
+
+`func (o *SwiftUpstream) HasDisableReason() bool`
+
+HasDisableReason returns a boolean if a field has been set.
 
 ### GetExtraHeader1
 
@@ -369,6 +396,31 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+
+### GetPendingValidation
+
+`func (o *SwiftUpstream) GetPendingValidation() bool`
+
+GetPendingValidation returns the PendingValidation field if non-nil, zero value otherwise.
+
+### GetPendingValidationOk
+
+`func (o *SwiftUpstream) GetPendingValidationOk() (*bool, bool)`
+
+GetPendingValidationOk returns a tuple with the PendingValidation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPendingValidation
+
+`func (o *SwiftUpstream) SetPendingValidation(v bool)`
+
+SetPendingValidation sets PendingValidation field to given value.
+
+### HasPendingValidation
+
+`func (o *SwiftUpstream) HasPendingValidation() bool`
+
+HasPendingValidation returns a boolean if a field has been set.
 
 ### GetPriority
 

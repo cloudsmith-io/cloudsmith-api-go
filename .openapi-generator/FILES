@@ -69,6 +69,8 @@ docs/DockerPackageUploadRequest.md
 docs/DockerUpstream.md
 docs/DockerUpstreamRequest.md
 docs/DockerUpstreamRequestPatch.md
+docs/EmailAddress.md
+docs/EmailAddressRequestPatch.md
 docs/EntitlementUsageMetrics.md
 docs/EntitlementsApi.md
 docs/ErrorDetail.md
@@ -132,6 +134,7 @@ docs/OrganizationPackageVulnerabilityPolicy.md
 docs/OrganizationPackageVulnerabilityPolicyRequest.md
 docs/OrganizationPackageVulnerabilityPolicyRequestPatch.md
 docs/OrganizationTeam.md
+docs/OrganizationTeamInvite.md
 docs/OrganizationTeamMembers.md
 docs/OrganizationTeamMembership.md
 docs/OrganizationTeamRequest.md
@@ -193,6 +196,7 @@ docs/RepositoryGeoIpCountryCode.md
 docs/RepositoryGeoIpRules.md
 docs/RepositoryGeoIpRulesRequest.md
 docs/RepositoryGeoIpRulesRequestPatch.md
+docs/RepositoryGeoIpStatus.md
 docs/RepositoryGeoIpTestAddress.md
 docs/RepositoryGeoIpTestAddressResponse.md
 docs/RepositoryGeoIpTestAddressResponseDict.md
@@ -254,6 +258,7 @@ docs/UserApi.md
 docs/UserAuthToken.md
 docs/UserAuthTokenRequest.md
 docs/UserBrief.md
+docs/UserPasswordRequest.md
 docs/UserProfile.md
 docs/UsersApi.md
 docs/VagrantPackageUpload.md
@@ -312,6 +317,8 @@ model_docker_package_upload_request.go
 model_docker_upstream.go
 model_docker_upstream_request.go
 model_docker_upstream_request_patch.go
+model_email_address.go
+model_email_address_request_patch.go
 model_entitlement_usage_metrics.go
 model_error_detail.go
 model_eula.go
@@ -370,6 +377,7 @@ model_organization_package_vulnerability_policy.go
 model_organization_package_vulnerability_policy_request.go
 model_organization_package_vulnerability_policy_request_patch.go
 model_organization_team.go
+model_organization_team_invite.go
 model_organization_team_members.go
 model_organization_team_membership.go
 model_organization_team_request.go
@@ -426,6 +434,7 @@ model_repository_geo_ip_country_code.go
 model_repository_geo_ip_rules.go
 model_repository_geo_ip_rules_request.go
 model_repository_geo_ip_rules_request_patch.go
+model_repository_geo_ip_status.go
 model_repository_geo_ip_test_address.go
 model_repository_geo_ip_test_address_response.go
 model_repository_geo_ip_test_address_response_dict.go
@@ -484,6 +493,7 @@ model_usage_raw.go
 model_user_auth_token.go
 model_user_auth_token_request.go
 model_user_brief.go
+model_user_password_request.go
 model_user_profile.go
 model_vagrant_package_upload.go
 model_vagrant_package_upload_request.go

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.417.0
+API version: 1.477.1
 Contact: support@cloudsmith.io
 */
 
@@ -36,6 +36,12 @@ type RpmUpstreamRequest struct {
 	ExtraValue1 NullableString `json:"extra_value_1,omitempty"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
 	ExtraValue2 NullableString `json:"extra_value_2,omitempty"`
+	// A public GPG key to associate with packages found on this upstream. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
+	GpgKeyInline NullableString `json:"gpg_key_inline,omitempty"`
+	// When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
+	GpgKeyUrl NullableString `json:"gpg_key_url,omitempty"`
+	// The GPG signature verification mode for this upstream.
+	GpgVerification *string `json:"gpg_verification,omitempty"`
 	// When checked, source packages will be available from this upstream.
 	IncludeSources *bool `json:"include_sources,omitempty"`
 	// Whether or not this upstream is active and ready for requests.
@@ -61,6 +67,8 @@ func NewRpmUpstreamRequest(distroVersion string, name string, upstreamUrl string
 	var authMode string = "None"
 	this.AuthMode = &authMode
 	this.DistroVersion = distroVersion
+	var gpgVerification string = "Allow All"
+	this.GpgVerification = &gpgVerification
 	var mode string = "Proxy Only"
 	this.Mode = &mode
 	this.Name = name
@@ -75,6 +83,8 @@ func NewRpmUpstreamRequestWithDefaults() *RpmUpstreamRequest {
 	this := RpmUpstreamRequest{}
 	var authMode string = "None"
 	this.AuthMode = &authMode
+	var gpgVerification string = "Allow All"
+	this.GpgVerification = &gpgVerification
 	var mode string = "Proxy Only"
 	this.Mode = &mode
 	return &this
@@ -394,6 +404,124 @@ func (o *RpmUpstreamRequest) UnsetExtraValue2() {
 	o.ExtraValue2.Unset()
 }
 
+// GetGpgKeyInline returns the GpgKeyInline field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RpmUpstreamRequest) GetGpgKeyInline() string {
+	if o == nil || IsNil(o.GpgKeyInline.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.GpgKeyInline.Get()
+}
+
+// GetGpgKeyInlineOk returns a tuple with the GpgKeyInline field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RpmUpstreamRequest) GetGpgKeyInlineOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GpgKeyInline.Get(), o.GpgKeyInline.IsSet()
+}
+
+// HasGpgKeyInline returns a boolean if a field has been set.
+func (o *RpmUpstreamRequest) HasGpgKeyInline() bool {
+	if o != nil && o.GpgKeyInline.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGpgKeyInline gets a reference to the given NullableString and assigns it to the GpgKeyInline field.
+func (o *RpmUpstreamRequest) SetGpgKeyInline(v string) {
+	o.GpgKeyInline.Set(&v)
+}
+
+// SetGpgKeyInlineNil sets the value for GpgKeyInline to be an explicit nil
+func (o *RpmUpstreamRequest) SetGpgKeyInlineNil() {
+	o.GpgKeyInline.Set(nil)
+}
+
+// UnsetGpgKeyInline ensures that no value is present for GpgKeyInline, not even an explicit nil
+func (o *RpmUpstreamRequest) UnsetGpgKeyInline() {
+	o.GpgKeyInline.Unset()
+}
+
+// GetGpgKeyUrl returns the GpgKeyUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RpmUpstreamRequest) GetGpgKeyUrl() string {
+	if o == nil || IsNil(o.GpgKeyUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.GpgKeyUrl.Get()
+}
+
+// GetGpgKeyUrlOk returns a tuple with the GpgKeyUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RpmUpstreamRequest) GetGpgKeyUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.GpgKeyUrl.Get(), o.GpgKeyUrl.IsSet()
+}
+
+// HasGpgKeyUrl returns a boolean if a field has been set.
+func (o *RpmUpstreamRequest) HasGpgKeyUrl() bool {
+	if o != nil && o.GpgKeyUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGpgKeyUrl gets a reference to the given NullableString and assigns it to the GpgKeyUrl field.
+func (o *RpmUpstreamRequest) SetGpgKeyUrl(v string) {
+	o.GpgKeyUrl.Set(&v)
+}
+
+// SetGpgKeyUrlNil sets the value for GpgKeyUrl to be an explicit nil
+func (o *RpmUpstreamRequest) SetGpgKeyUrlNil() {
+	o.GpgKeyUrl.Set(nil)
+}
+
+// UnsetGpgKeyUrl ensures that no value is present for GpgKeyUrl, not even an explicit nil
+func (o *RpmUpstreamRequest) UnsetGpgKeyUrl() {
+	o.GpgKeyUrl.Unset()
+}
+
+// GetGpgVerification returns the GpgVerification field value if set, zero value otherwise.
+func (o *RpmUpstreamRequest) GetGpgVerification() string {
+	if o == nil || IsNil(o.GpgVerification) {
+		var ret string
+		return ret
+	}
+	return *o.GpgVerification
+}
+
+// GetGpgVerificationOk returns a tuple with the GpgVerification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RpmUpstreamRequest) GetGpgVerificationOk() (*string, bool) {
+	if o == nil || IsNil(o.GpgVerification) {
+		return nil, false
+	}
+	return o.GpgVerification, true
+}
+
+// HasGpgVerification returns a boolean if a field has been set.
+func (o *RpmUpstreamRequest) HasGpgVerification() bool {
+	if o != nil && !IsNil(o.GpgVerification) {
+		return true
+	}
+
+	return false
+}
+
+// SetGpgVerification gets a reference to the given string and assigns it to the GpgVerification field.
+func (o *RpmUpstreamRequest) SetGpgVerification(v string) {
+	o.GpgVerification = &v
+}
+
 // GetIncludeSources returns the IncludeSources field value if set, zero value otherwise.
 func (o *RpmUpstreamRequest) GetIncludeSources() bool {
 	if o == nil || IsNil(o.IncludeSources) {
@@ -633,6 +761,15 @@ func (o RpmUpstreamRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ExtraValue2.IsSet() {
 		toSerialize["extra_value_2"] = o.ExtraValue2.Get()
+	}
+	if o.GpgKeyInline.IsSet() {
+		toSerialize["gpg_key_inline"] = o.GpgKeyInline.Get()
+	}
+	if o.GpgKeyUrl.IsSet() {
+		toSerialize["gpg_key_url"] = o.GpgKeyUrl.Get()
+	}
+	if !IsNil(o.GpgVerification) {
+		toSerialize["gpg_verification"] = o.GpgVerification
 	}
 	if !IsNil(o.IncludeSources) {
 		toSerialize["include_sources"] = o.IncludeSources
