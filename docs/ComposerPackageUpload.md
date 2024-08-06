@@ -77,7 +77,7 @@ Name | Type | Description | Notes
 **UploadedAt** | Pointer to **time.Time** | The date this package was uploaded. | [optional] [readonly] 
 **Uploader** | Pointer to **string** |  | [optional] [readonly] 
 **UploaderUrl** | Pointer to **string** |  | [optional] [readonly] 
-**Version** | Pointer to **NullableString** | The raw version for this package. | [optional] [readonly] 
+**Version** | Pointer to **NullableString** | The raw version for this package. | [optional] 
 **VersionOrig** | Pointer to **string** |  | [optional] [readonly] 
 **VulnerabilityScanResultsUrl** | Pointer to **string** |  | [optional] [readonly] 
 

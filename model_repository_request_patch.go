@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.477.1
+API version: 1.478.2
 Contact: support@cloudsmith.io
 */
 
@@ -44,6 +44,8 @@ type RepositoryRequestPatch struct {
 	EnforceEula *bool `json:"enforce_eula,omitempty"`
 	// If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted.
 	IndexFiles *bool `json:"index_files,omitempty"`
+	// This defines the minimum level of privilege required for a user to manage entitlement tokens with private repositories. Management is the ability to create, alter, enable, disable or delete all tokens without a repository.
+	ManageEntitlementsPrivilege *string `json:"manage_entitlements_privilege,omitempty"`
 	// If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
 	MoveOwn *bool `json:"move_own,omitempty"`
 	// This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting.
@@ -84,6 +86,8 @@ type RepositoryRequestPatch struct {
 	UseDebianLabels *bool `json:"use_debian_labels,omitempty"`
 	// If checked, dependencies of uploaded Cargo crates which do not set an explicit value for \"registry\" will be assumed to be available from crates.io. If unchecked, dependencies with unspecified \"registry\" values will be assumed to be available in the registry being uploaded to. Uncheck this if you want to ensure that dependencies are only ever installed from Cloudsmith unless explicitly specified as belong to another registry.
 	UseDefaultCargoUpstream *bool `json:"use_default_cargo_upstream,omitempty"`
+	// This defines the minimum level of privilege required for a user to see/use entitlement tokens with private repositories. If a user does not have the permission, they will only be able to download packages using other credentials, such as email/password via basic authentication. Use this if you want to force users to only use their user-based token, which is tied to their access (if removed, they can't use it).
+	UseEntitlementsPrivilege *string `json:"use_entitlements_privilege,omitempty"`
 	// If checked, noarch packages (if supported) are enabled in installations/configurations. A noarch package is one that is not tied to specific system architecture (like i686).
 	UseNoarchPackages *bool `json:"use_noarch_packages,omitempty"`
 	// If checked, source packages (if supported) are enabled in installations/configurations. A source package is one that contains source code rather than built binaries.
@@ -110,6 +114,8 @@ func NewRepositoryRequestPatch() *RepositoryRequestPatch {
 	this.DefaultPrivilege = &defaultPrivilege
 	var deletePackages string = "Admin"
 	this.DeletePackages = &deletePackages
+	var manageEntitlementsPrivilege string = "Admin"
+	this.ManageEntitlementsPrivilege = &manageEntitlementsPrivilege
 	var movePackages string = "Admin"
 	this.MovePackages = &movePackages
 	var replacePackages string = "Write"
@@ -120,6 +126,8 @@ func NewRepositoryRequestPatch() *RepositoryRequestPatch {
 	this.ResyncPackages = &resyncPackages
 	var scanPackages string = "Read"
 	this.ScanPackages = &scanPackages
+	var useEntitlementsPrivilege string = "Read"
+	this.UseEntitlementsPrivilege = &useEntitlementsPrivilege
 	var viewStatistics string = "Read"
 	this.ViewStatistics = &viewStatistics
 	return &this
@@ -138,6 +146,8 @@ func NewRepositoryRequestPatchWithDefaults() *RepositoryRequestPatch {
 	this.DefaultPrivilege = &defaultPrivilege
 	var deletePackages string = "Admin"
 	this.DeletePackages = &deletePackages
+	var manageEntitlementsPrivilege string = "Admin"
+	this.ManageEntitlementsPrivilege = &manageEntitlementsPrivilege
 	var movePackages string = "Admin"
 	this.MovePackages = &movePackages
 	var replacePackages string = "Write"
@@ -148,6 +158,8 @@ func NewRepositoryRequestPatchWithDefaults() *RepositoryRequestPatch {
 	this.ResyncPackages = &resyncPackages
 	var scanPackages string = "Read"
 	this.ScanPackages = &scanPackages
+	var useEntitlementsPrivilege string = "Read"
+	this.UseEntitlementsPrivilege = &useEntitlementsPrivilege
 	var viewStatistics string = "Read"
 	this.ViewStatistics = &viewStatistics
 	return &this
@@ -535,6 +547,38 @@ func (o *RepositoryRequestPatch) HasIndexFiles() bool {
 // SetIndexFiles gets a reference to the given bool and assigns it to the IndexFiles field.
 func (o *RepositoryRequestPatch) SetIndexFiles(v bool) {
 	o.IndexFiles = &v
+}
+
+// GetManageEntitlementsPrivilege returns the ManageEntitlementsPrivilege field value if set, zero value otherwise.
+func (o *RepositoryRequestPatch) GetManageEntitlementsPrivilege() string {
+	if o == nil || IsNil(o.ManageEntitlementsPrivilege) {
+		var ret string
+		return ret
+	}
+	return *o.ManageEntitlementsPrivilege
+}
+
+// GetManageEntitlementsPrivilegeOk returns a tuple with the ManageEntitlementsPrivilege field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryRequestPatch) GetManageEntitlementsPrivilegeOk() (*string, bool) {
+	if o == nil || IsNil(o.ManageEntitlementsPrivilege) {
+		return nil, false
+	}
+	return o.ManageEntitlementsPrivilege, true
+}
+
+// HasManageEntitlementsPrivilege returns a boolean if a field has been set.
+func (o *RepositoryRequestPatch) HasManageEntitlementsPrivilege() bool {
+	if o != nil && !IsNil(o.ManageEntitlementsPrivilege) {
+		return true
+	}
+
+	return false
+}
+
+// SetManageEntitlementsPrivilege gets a reference to the given string and assigns it to the ManageEntitlementsPrivilege field.
+func (o *RepositoryRequestPatch) SetManageEntitlementsPrivilege(v string) {
+	o.ManageEntitlementsPrivilege = &v
 }
 
 // GetMoveOwn returns the MoveOwn field value if set, zero value otherwise.
@@ -1177,6 +1221,38 @@ func (o *RepositoryRequestPatch) SetUseDefaultCargoUpstream(v bool) {
 	o.UseDefaultCargoUpstream = &v
 }
 
+// GetUseEntitlementsPrivilege returns the UseEntitlementsPrivilege field value if set, zero value otherwise.
+func (o *RepositoryRequestPatch) GetUseEntitlementsPrivilege() string {
+	if o == nil || IsNil(o.UseEntitlementsPrivilege) {
+		var ret string
+		return ret
+	}
+	return *o.UseEntitlementsPrivilege
+}
+
+// GetUseEntitlementsPrivilegeOk returns a tuple with the UseEntitlementsPrivilege field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryRequestPatch) GetUseEntitlementsPrivilegeOk() (*string, bool) {
+	if o == nil || IsNil(o.UseEntitlementsPrivilege) {
+		return nil, false
+	}
+	return o.UseEntitlementsPrivilege, true
+}
+
+// HasUseEntitlementsPrivilege returns a boolean if a field has been set.
+func (o *RepositoryRequestPatch) HasUseEntitlementsPrivilege() bool {
+	if o != nil && !IsNil(o.UseEntitlementsPrivilege) {
+		return true
+	}
+
+	return false
+}
+
+// SetUseEntitlementsPrivilege gets a reference to the given string and assigns it to the UseEntitlementsPrivilege field.
+func (o *RepositoryRequestPatch) SetUseEntitlementsPrivilege(v string) {
+	o.UseEntitlementsPrivilege = &v
+}
+
 // GetUseNoarchPackages returns the UseNoarchPackages field value if set, zero value otherwise.
 func (o *RepositoryRequestPatch) GetUseNoarchPackages() bool {
 	if o == nil || IsNil(o.UseNoarchPackages) {
@@ -1383,6 +1459,9 @@ func (o RepositoryRequestPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IndexFiles) {
 		toSerialize["index_files"] = o.IndexFiles
 	}
+	if !IsNil(o.ManageEntitlementsPrivilege) {
+		toSerialize["manage_entitlements_privilege"] = o.ManageEntitlementsPrivilege
+	}
 	if !IsNil(o.MoveOwn) {
 		toSerialize["move_own"] = o.MoveOwn
 	}
@@ -1442,6 +1521,9 @@ func (o RepositoryRequestPatch) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.UseDefaultCargoUpstream) {
 		toSerialize["use_default_cargo_upstream"] = o.UseDefaultCargoUpstream
+	}
+	if !IsNil(o.UseEntitlementsPrivilege) {
+		toSerialize["use_entitlements_privilege"] = o.UseEntitlementsPrivilege
 	}
 	if !IsNil(o.UseNoarchPackages) {
 		toSerialize["use_noarch_packages"] = o.UseNoarchPackages

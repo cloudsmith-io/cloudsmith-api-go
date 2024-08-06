@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.477.1
+  version: 1.478.2
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -1391,7 +1391,7 @@ paths:
       - namespaces
   /namespaces/{slug}/:
     get:
-      description: Views for working with namespaces.
+      description: Get a specific namespace that the user belongs to.
       operationId: namespaces_read
       parameters:
       - in: path
@@ -1418,7 +1418,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
-      summary: Views for working with namespaces.
+      summary: Get a specific namespace that the user belongs to.
       tags:
       - namespaces
   /orgs/:
@@ -11708,19 +11708,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserAuthToken'
-          description: Created
+          description: Retrieved/created user API token/key.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Locked out.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Failed to authenticate.
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Request could not be processed (see detail).
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDetail'
-          description: Missing or invalid parameters (see detail).
       security:
       - basic: []
       summary: Retrieve/Create API key/token for the authenticated user.
@@ -18272,6 +18278,7 @@ components:
       example:
         republish: true
         package_file: package_file
+        version: version
         tags: tags
       properties:
         package_file:
@@ -18291,6 +18298,12 @@ components:
           minLength: 1
           nullable: true
           title: Tags
+          type: string
+        version:
+          description: The raw version for this package.
+          maxLength: 128
+          nullable: true
+          title: Version
           type: string
       required:
       - package_file
@@ -18782,8 +18795,8 @@ components:
           type: string
         version:
           description: The raw version for this package.
+          maxLength: 128
           nullable: true
-          readOnly: true
           title: Version
           type: string
         version_orig:
@@ -33672,6 +33685,7 @@ components:
         - distributes
         name: name
         replace_packages_by_default: true
+        manage_entitlements_privilege: Admin
         default_privilege: None
         enforce_eula: true
         delete_own: true
@@ -33693,6 +33707,7 @@ components:
         copy_packages: Read
         self_html_url: self_html_url
         self_url: https://openapi-generator.tech
+        use_entitlements_privilege: Read
         use_noarch_packages: true
         storage_region: default
         size_str: size_str
@@ -33859,6 +33874,18 @@ components:
           readOnly: true
           title: Is public
           type: boolean
+        manage_entitlements_privilege:
+          default: Admin
+          description: "This defines the minimum level of privilege required for a\
+            \ user to manage entitlement tokens with private repositories. Management\
+            \ is the ability to create, alter, enable, disable or delete all tokens\
+            \ without a repository."
+          enum:
+          - Admin
+          - Write
+          - Read
+          title: Manage entitlements privilege
+          type: string
         move_own:
           description: "If checked, users can move any of their own packages that\
             \ they have uploaded, assuming that they still have write privilege for\
@@ -34096,6 +34123,20 @@ components:
             \ registry."
           title: Use crates.io as default Cargo upstream?
           type: boolean
+        use_entitlements_privilege:
+          default: Read
+          description: "This defines the minimum level of privilege required for a\
+            \ user to see/use entitlement tokens with private repositories. If a user\
+            \ does not have the permission, they will only be able to download packages\
+            \ using other credentials, such as email/password via basic authentication.\
+            \ Use this if you want to force users to only use their user-based token,\
+            \ which is tied to their access (if removed, they can't use it)."
+          enum:
+          - Admin
+          - Write
+          - Read
+          title: Use entitlements privilege
+          type: string
         use_noarch_packages:
           description: "If checked, noarch packages (if supported) are enabled in\
             \ installations/configurations. A noarch package is one that is not tied\
@@ -34162,6 +34203,7 @@ components:
         copy_packages: Read
         replace_packages: Write
         user_entitlements_enabled: true
+        use_entitlements_privilege: Read
         use_noarch_packages: true
         use_default_cargo_upstream: true
         storage_region: default
@@ -34172,6 +34214,7 @@ components:
         name: name
         use_debian_labels: true
         replace_packages_by_default: true
+        manage_entitlements_privilege: Admin
         strict_npm_validation: true
         default_privilege: None
         enforce_eula: true
@@ -34284,6 +34327,18 @@ components:
             \ is significantly impacted."
           title: Index Files?
           type: boolean
+        manage_entitlements_privilege:
+          default: Admin
+          description: "This defines the minimum level of privilege required for a\
+            \ user to manage entitlement tokens with private repositories. Management\
+            \ is the ability to create, alter, enable, disable or delete all tokens\
+            \ without a repository."
+          enum:
+          - Admin
+          - Write
+          - Read
+          title: Manage entitlements privilege
+          type: string
         move_own:
           description: "If checked, users can move any of their own packages that\
             \ they have uploaded, assuming that they still have write privilege for\
@@ -34452,6 +34507,20 @@ components:
             \ registry."
           title: Use crates.io as default Cargo upstream?
           type: boolean
+        use_entitlements_privilege:
+          default: Read
+          description: "This defines the minimum level of privilege required for a\
+            \ user to see/use entitlement tokens with private repositories. If a user\
+            \ does not have the permission, they will only be able to download packages\
+            \ using other credentials, such as email/password via basic authentication.\
+            \ Use this if you want to force users to only use their user-based token,\
+            \ which is tied to their access (if removed, they can't use it)."
+          enum:
+          - Admin
+          - Write
+          - Read
+          title: Use entitlements privilege
+          type: string
         use_noarch_packages:
           description: "If checked, noarch packages (if supported) are enabled in\
             \ installations/configurations. A noarch package is one that is not tied\
@@ -34520,6 +34589,7 @@ components:
         - distributes
         name: name
         replace_packages_by_default: true
+        manage_entitlements_privilege: Admin
         default_privilege: None
         enforce_eula: true
         delete_own: true
@@ -34541,6 +34611,7 @@ components:
         copy_packages: Read
         self_html_url: self_html_url
         self_url: https://openapi-generator.tech
+        use_entitlements_privilege: Read
         use_noarch_packages: true
         storage_region: default
         size_str: size_str
@@ -34707,6 +34778,18 @@ components:
           readOnly: true
           title: Is public
           type: boolean
+        manage_entitlements_privilege:
+          default: Admin
+          description: "This defines the minimum level of privilege required for a\
+            \ user to manage entitlement tokens with private repositories. Management\
+            \ is the ability to create, alter, enable, disable or delete all tokens\
+            \ without a repository."
+          enum:
+          - Admin
+          - Write
+          - Read
+          title: Manage entitlements privilege
+          type: string
         move_own:
           description: "If checked, users can move any of their own packages that\
             \ they have uploaded, assuming that they still have write privilege for\
@@ -34943,6 +35026,20 @@ components:
             \ registry."
           title: Use crates.io as default Cargo upstream?
           type: boolean
+        use_entitlements_privilege:
+          default: Read
+          description: "This defines the minimum level of privilege required for a\
+            \ user to see/use entitlement tokens with private repositories. If a user\
+            \ does not have the permission, they will only be able to download packages\
+            \ using other credentials, such as email/password via basic authentication.\
+            \ Use this if you want to force users to only use their user-based token,\
+            \ which is tied to their access (if removed, they can't use it)."
+          enum:
+          - Admin
+          - Write
+          - Read
+          title: Use entitlements privilege
+          type: string
         use_noarch_packages:
           description: "If checked, noarch packages (if supported) are enabled in\
             \ installations/configurations. A noarch package is one that is not tied\
@@ -35009,6 +35106,7 @@ components:
         copy_packages: Read
         replace_packages: Write
         user_entitlements_enabled: true
+        use_entitlements_privilege: Read
         use_noarch_packages: true
         use_default_cargo_upstream: true
         scan_own: true
@@ -35018,6 +35116,7 @@ components:
         name: name
         use_debian_labels: true
         replace_packages_by_default: true
+        manage_entitlements_privilege: Admin
         strict_npm_validation: true
         default_privilege: None
         enforce_eula: true
@@ -35130,6 +35229,18 @@ components:
             \ is significantly impacted."
           title: Index Files?
           type: boolean
+        manage_entitlements_privilege:
+          default: Admin
+          description: "This defines the minimum level of privilege required for a\
+            \ user to manage entitlement tokens with private repositories. Management\
+            \ is the ability to create, alter, enable, disable or delete all tokens\
+            \ without a repository."
+          enum:
+          - Admin
+          - Write
+          - Read
+          title: Manage entitlements privilege
+          type: string
         move_own:
           description: "If checked, users can move any of their own packages that\
             \ they have uploaded, assuming that they still have write privilege for\
@@ -35293,6 +35404,20 @@ components:
             \ registry."
           title: Use crates.io as default Cargo upstream?
           type: boolean
+        use_entitlements_privilege:
+          default: Read
+          description: "This defines the minimum level of privilege required for a\
+            \ user to see/use entitlement tokens with private repositories. If a user\
+            \ does not have the permission, they will only be able to download packages\
+            \ using other credentials, such as email/password via basic authentication.\
+            \ Use this if you want to force users to only use their user-based token,\
+            \ which is tied to their access (if removed, they can't use it)."
+          enum:
+          - Admin
+          - Write
+          - Read
+          title: Use entitlements privilege
+          type: string
         use_noarch_packages:
           description: "If checked, noarch packages (if supported) are enabled in\
             \ installations/configurations. A noarch package is one that is not tied\
@@ -40717,7 +40842,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.477.1
+        version: 1.478.2
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -40727,7 +40852,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.477.1
+          default: 1.478.2
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true

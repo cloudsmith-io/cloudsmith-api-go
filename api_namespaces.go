@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.477.1
+API version: 1.478.2
 Contact: support@cloudsmith.io
 */
 
@@ -188,9 +188,9 @@ func (r ApiNamespacesReadRequest) Execute() (*Namespace, *http.Response, error) 
 }
 
 /*
-NamespacesRead Views for working with namespaces.
+NamespacesRead Get a specific namespace that the user belongs to.
 
-Views for working with namespaces.
+Get a specific namespace that the user belongs to.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param slug
