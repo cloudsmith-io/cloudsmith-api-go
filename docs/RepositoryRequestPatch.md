@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **DockerRefreshTokensEnabled** | Pointer to **bool** | If checked, refresh tokens will be issued in addition to access tokens for Docker authentication. This allows unlimited extension of the lifetime of access tokens. | [optional] 
 **EnforceEula** | Pointer to **bool** | If checked, downloads will explicitly require acceptance of an EULA. | [optional] 
 **IndexFiles** | Pointer to **bool** | If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted. | [optional] 
+**ManageEntitlementsPrivilege** | Pointer to **string** | This defines the minimum level of privilege required for a user to manage entitlement tokens with private repositories. Management is the ability to create, alter, enable, disable or delete all tokens without a repository. | [optional] [default to "Admin"]
 **MoveOwn** | Pointer to **bool** | If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the &#39;Access Controls&#39; section of the repository, and any inherited from the org. | [optional] 
 **MovePackages** | Pointer to **string** | This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting. | [optional] [default to "Admin"]
 **Name** | Pointer to **string** | A descriptive name for the repository. | [optional] 
@@ -36,6 +37,7 @@ Name | Type | Description | Notes
 **TagPreReleasesAsLatest** | Pointer to **bool** | If checked, packages pushed with a pre-release component on that version will be marked with the &#39;latest&#39; tag. Note that if unchecked, a repository containing ONLY pre-release versions, will have no version marked latest which may cause incompatibility with native tools  | [optional] 
 **UseDebianLabels** | Pointer to **bool** | If checked, a &#39;Label&#39; field will be present in Debian-based repositories. It will contain a string that identifies the entitlement token used to authenticate the repository, in the form of &#39;source&#x3D;t-&lt;identifier&gt;&#39;; or &#39;source&#x3D;none&#39; if no token was used. You can use this to help with pinning. | [optional] 
 **UseDefaultCargoUpstream** | Pointer to **bool** | If checked, dependencies of uploaded Cargo crates which do not set an explicit value for \&quot;registry\&quot; will be assumed to be available from crates.io. If unchecked, dependencies with unspecified \&quot;registry\&quot; values will be assumed to be available in the registry being uploaded to. Uncheck this if you want to ensure that dependencies are only ever installed from Cloudsmith unless explicitly specified as belong to another registry. | [optional] 
+**UseEntitlementsPrivilege** | Pointer to **string** | This defines the minimum level of privilege required for a user to see/use entitlement tokens with private repositories. If a user does not have the permission, they will only be able to download packages using other credentials, such as email/password via basic authentication. Use this if you want to force users to only use their user-based token, which is tied to their access (if removed, they can&#39;t use it). | [optional] [default to "Read"]
 **UseNoarchPackages** | Pointer to **bool** | If checked, noarch packages (if supported) are enabled in installations/configurations. A noarch package is one that is not tied to specific system architecture (like i686). | [optional] 
 **UseSourcePackages** | Pointer to **bool** | If checked, source packages (if supported) are enabled in installations/configurations. A source package is one that contains source code rather than built binaries. | [optional] 
 **UseVulnerabilityScanning** | Pointer to **bool** | If checked, vulnerability scanning will be enabled for all supported packages within this repository. | [optional] 
@@ -360,6 +362,31 @@ SetIndexFiles sets IndexFiles field to given value.
 `func (o *RepositoryRequestPatch) HasIndexFiles() bool`
 
 HasIndexFiles returns a boolean if a field has been set.
+
+### GetManageEntitlementsPrivilege
+
+`func (o *RepositoryRequestPatch) GetManageEntitlementsPrivilege() string`
+
+GetManageEntitlementsPrivilege returns the ManageEntitlementsPrivilege field if non-nil, zero value otherwise.
+
+### GetManageEntitlementsPrivilegeOk
+
+`func (o *RepositoryRequestPatch) GetManageEntitlementsPrivilegeOk() (*string, bool)`
+
+GetManageEntitlementsPrivilegeOk returns a tuple with the ManageEntitlementsPrivilege field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManageEntitlementsPrivilege
+
+`func (o *RepositoryRequestPatch) SetManageEntitlementsPrivilege(v string)`
+
+SetManageEntitlementsPrivilege sets ManageEntitlementsPrivilege field to given value.
+
+### HasManageEntitlementsPrivilege
+
+`func (o *RepositoryRequestPatch) HasManageEntitlementsPrivilege() bool`
+
+HasManageEntitlementsPrivilege returns a boolean if a field has been set.
 
 ### GetMoveOwn
 
@@ -860,6 +887,31 @@ SetUseDefaultCargoUpstream sets UseDefaultCargoUpstream field to given value.
 `func (o *RepositoryRequestPatch) HasUseDefaultCargoUpstream() bool`
 
 HasUseDefaultCargoUpstream returns a boolean if a field has been set.
+
+### GetUseEntitlementsPrivilege
+
+`func (o *RepositoryRequestPatch) GetUseEntitlementsPrivilege() string`
+
+GetUseEntitlementsPrivilege returns the UseEntitlementsPrivilege field if non-nil, zero value otherwise.
+
+### GetUseEntitlementsPrivilegeOk
+
+`func (o *RepositoryRequestPatch) GetUseEntitlementsPrivilegeOk() (*string, bool)`
+
+GetUseEntitlementsPrivilegeOk returns a tuple with the UseEntitlementsPrivilege field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseEntitlementsPrivilege
+
+`func (o *RepositoryRequestPatch) SetUseEntitlementsPrivilege(v string)`
+
+SetUseEntitlementsPrivilege sets UseEntitlementsPrivilege field to given value.
+
+### HasUseEntitlementsPrivilege
+
+`func (o *RepositoryRequestPatch) HasUseEntitlementsPrivilege() bool`
+
+HasUseEntitlementsPrivilege returns a boolean if a field has been set.
 
 ### GetUseNoarchPackages
 

@@ -5,7 +5,7 @@ All URIs are relative to *https://api.cloudsmith.io/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**NamespacesList**](NamespacesApi.md#NamespacesList) | **Get** /namespaces/ | Get a list of all namespaces the user belongs to.
-[**NamespacesRead**](NamespacesApi.md#NamespacesRead) | **Get** /namespaces/{slug}/ | Views for working with namespaces.
+[**NamespacesRead**](NamespacesApi.md#NamespacesRead) | **Get** /namespaces/{slug}/ | Get a specific namespace that the user belongs to.
 
 
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 > Namespace NamespacesRead(ctx, slug).Execute()
 
-Views for working with namespaces.
+Get a specific namespace that the user belongs to.
 
 
 

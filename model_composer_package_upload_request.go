@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.477.1
+API version: 1.478.2
 Contact: support@cloudsmith.io
 */
 
@@ -26,6 +26,8 @@ type ComposerPackageUploadRequest struct {
 	Republish *bool `json:"republish,omitempty"`
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`
+	// The raw version for this package.
+	Version NullableString `json:"version,omitempty"`
 }
 
 // NewComposerPackageUploadRequest instantiates a new ComposerPackageUploadRequest object
@@ -145,6 +147,49 @@ func (o *ComposerPackageUploadRequest) UnsetTags() {
 	o.Tags.Unset()
 }
 
+// GetVersion returns the Version field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComposerPackageUploadRequest) GetVersion() string {
+	if o == nil || IsNil(o.Version.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Version.Get()
+}
+
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComposerPackageUploadRequest) GetVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Version.Get(), o.Version.IsSet()
+}
+
+// HasVersion returns a boolean if a field has been set.
+func (o *ComposerPackageUploadRequest) HasVersion() bool {
+	if o != nil && o.Version.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given NullableString and assigns it to the Version field.
+func (o *ComposerPackageUploadRequest) SetVersion(v string) {
+	o.Version.Set(&v)
+}
+
+// SetVersionNil sets the value for Version to be an explicit nil
+func (o *ComposerPackageUploadRequest) SetVersionNil() {
+	o.Version.Set(nil)
+}
+
+// UnsetVersion ensures that no value is present for Version, not even an explicit nil
+func (o *ComposerPackageUploadRequest) UnsetVersion() {
+	o.Version.Unset()
+}
+
 func (o ComposerPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -161,6 +206,9 @@ func (o ComposerPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Tags.IsSet() {
 		toSerialize["tags"] = o.Tags.Get()
+	}
+	if o.Version.IsSet() {
+		toSerialize["version"] = o.Version.Get()
 	}
 	return toSerialize, nil
 }
