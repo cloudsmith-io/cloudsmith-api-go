@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.478.2
+  version: 1.498.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -7506,6 +7506,142 @@ paths:
       tags:
       - repos
       x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/ecdsa/:
+    get:
+      description: Retrieve the active ECDSA key for the Repository.
+      operationId: repos_ecdsa_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryEcdsaKey'
+          description: Retrieved the active ECDSA key.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve the active ECDSA key for the Repository.
+      tags:
+      - repos
+    post:
+      description: Set the active ECDSA key for the Repository.
+      operationId: repos_ecdsa_create
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepositoryEcdsaKeyCreate'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryEcdsaKey'
+          description: The provided ECDSA key is the same as the current ECDSA key.
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryEcdsaKey'
+          description: The provided ECDSA key was assigned to the Repository.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: The provided ECDSA key is not valid
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Custom ECDSA keys are not active; upgrade your account!
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: "Organization/Repository does not exist, or you do not have\
+            \ permissions."
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Set the active ECDSA key for the Repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/ecdsa/regenerate/:
+    post:
+      description: Regenerate ECDSA Key for the Repository.
+      operationId: repos_ecdsa_regenerate
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryEcdsaKey'
+          description: An ECDSA key was generated for the Repository.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Regenerate ECDSA Key for the Repository.
+      tags:
+      - repos
   /repos/{owner}/{identifier}/geoip:
     get:
       description: List all repository geoip rules.
@@ -8296,6 +8432,274 @@ paths:
       summary: Regenerate RSA Key for the Repository.
       tags:
       - repos
+  /repos/{owner}/{identifier}/upstream/composer/:
+    get:
+      description: List Composer upstream configs for this repository.
+      operationId: repos_upstream_composer_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ComposerUpstream'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: List Composer upstream configs for this repository.
+      tags:
+      - repos
+    post:
+      description: Create a Composer upstream config for this repository.
+      operationId: repos_upstream_composer_create
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComposerUpstreamRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComposerUpstream'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Create a Composer upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/upstream/composer/{slug_perm}/:
+    delete:
+      description: Delete a Composer upstream config for this repository.
+      operationId: repos_upstream_composer_delete
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Delete a Composer upstream config for this repository.
+      tags:
+      - repos
+    get:
+      description: Retrieve a Composer upstream config for this repository.
+      operationId: repos_upstream_composer_read
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComposerUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve a Composer upstream config for this repository.
+      tags:
+      - repos
+    patch:
+      description: Partially update a Composer upstream config for this repository.
+      operationId: repos_upstream_composer_partial_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComposerUpstreamRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComposerUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Partially update a Composer upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+    put:
+      description: Update a Composer upstream config for this repository.
+      operationId: repos_upstream_composer_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComposerUpstreamRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComposerUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update a Composer upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
   /repos/{owner}/{identifier}/upstream/cran/:
     get:
       description: List CRAN upstream configs for this repository.
@@ -11512,6 +11916,98 @@ paths:
       tags:
       - repos
       x-codegen-request-body-name: data
+  /repos/{owner}/{repo}/retention/:
+    get:
+      description: Retrieve the retention rules for the repository.
+      operationId: repo_retention_read
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryRetentionRules'
+          description: Retrieved the retention rules for the repository.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Owner namespace or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve the retention rules for the repository.
+      tags:
+      - repos
+    patch:
+      description: Update the retention rules for the repository.
+      operationId: repo_retention_partial_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepositoryRetentionRulesRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryRetentionRules'
+          description: Updated the retention rules for the repository.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Owner namespace or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update the retention rules for the repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
   /status/check/basic/:
     get:
       description: Endpoint to check basic API connectivity.
@@ -11599,12 +12095,12 @@ paths:
       summary: Get a specific storage region.
       tags:
       - storage-regions
-  /user/emails/{identifier}/:
+  /user/emails/{email}/:
     patch:
       operationId: user_emails_partial_update
       parameters:
       - in: path
-        name: identifier
+        name: email
         required: true
         schema:
           type: string
@@ -11633,36 +12129,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
-      tags:
-      - user
-      x-codegen-request-body-name: data
-  /user/password/:
-    put:
-      description: Views for the current user.
-      operationId: user_password
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserPasswordRequest'
-        required: false
-      responses:
-        "204":
-          content: {}
-          description: Password updated successfully.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDetail'
-          description: Password was not updated.
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDetail'
-          description: Missing or invalid parameters (see detail).
-      summary: Views for the current user.
       tags:
       - user
       x-codegen-request-body-name: data
@@ -15424,7 +15890,7 @@ components:
           type: string
         description:
           description: The description of the service
-          maxLength: 140
+          maxLength: 1024
           minLength: 1
           title: Description
           type: string
@@ -15435,7 +15901,7 @@ components:
           type: string
         name:
           description: The name of the service
-          maxLength: 40
+          maxLength: 120
           minLength: 1
           title: Name
           type: string
@@ -15475,13 +15941,13 @@ components:
       properties:
         description:
           description: The description of the service
-          maxLength: 140
+          maxLength: 1024
           minLength: 1
           title: Description
           type: string
         name:
           description: The name of the service
-          maxLength: 40
+          maxLength: 120
           minLength: 1
           title: Name
           type: string
@@ -15513,13 +15979,13 @@ components:
       properties:
         description:
           description: The description of the service
-          maxLength: 140
+          maxLength: 1024
           minLength: 1
           title: Description
           type: string
         name:
           description: The name of the service
-          maxLength: 40
+          maxLength: 120
           minLength: 1
           title: Name
           type: string
@@ -33607,6 +34073,54 @@ components:
           title: Resources
           type: object
       type: object
+    RepositoryEcdsaKey:
+      example:
+        public_key: public_key
+        default: true
+        fingerprint: fingerprint
+        active: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        ssh_fingerprint: ssh_fingerprint
+        fingerprint_short: fingerprint_short
+      properties:
+        active:
+          description: If selected this is the active key for this repository.
+          readOnly: true
+          title: Active
+          type: boolean
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        default:
+          description: If selected this is the default key for this repository.
+          readOnly: true
+          title: Default
+          type: boolean
+        fingerprint:
+          description: The long identifier used by ECDSA for this key.
+          minLength: 1
+          readOnly: true
+          title: Fingerprint
+          type: string
+        fingerprint_short:
+          readOnly: true
+          title: Fingerprint short
+          type: string
+        public_key:
+          description: The public key given to repository users.
+          minLength: 1
+          readOnly: true
+          title: Public key
+          type: string
+        ssh_fingerprint:
+          description: The SSH fingerprint used by ECDSA for this key.
+          nullable: true
+          readOnly: true
+          title: Ssh fingerprint
+          type: string
+      type: object
     RepositoryGpgKey:
       example:
         public_key: public_key
@@ -33657,13 +34171,14 @@ components:
       type: object
     Repository:
       example:
+        num_policy_violated_packages: 6
         scan_packages: Read
         content_kind: Standard
         tag_pre_releases_as_latest: true
         index_files: true
-        repository_type: 5
+        repository_type: 2
         use_source_packages: true
-        package_group_count: 1
+        package_group_count: 5
         repository_type_str: Public
         use_vulnerability_scanning: true
         resync_own: true
@@ -33675,15 +34190,30 @@ components:
         replace_packages: Write
         user_entitlements_enabled: true
         num_downloads: 0
-        package_count: 6
+        package_count: 5
         use_default_cargo_upstream: true
-        size: 5
+        size: 7
         cdn_url: cdn_url
         scan_own: true
         distributes:
         - distributes
         - distributes
         name: name
+        ecdsa_keys:
+        - public_key: public_key
+          default: true
+          fingerprint: fingerprint
+          active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          ssh_fingerprint: ssh_fingerprint
+          fingerprint_short: fingerprint_short
+        - public_key: public_key
+          default: true
+          fingerprint: fingerprint
+          active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          ssh_fingerprint: ssh_fingerprint
+          fingerprint_short: fingerprint_short
         replace_packages_by_default: true
         manage_entitlements_privilege: Admin
         default_privilege: None
@@ -33699,6 +34229,7 @@ components:
         move_own: true
         delete_packages: Admin
         is_open_source: true
+        num_quarantined_packages: 1
         copy_own: true
         proxy_pypi: true
         contextual_auth_realm: true
@@ -33845,6 +34376,11 @@ components:
             \ the lifetime of access tokens."
           title: Docker Auth Refresh Enabled?
           type: boolean
+        ecdsa_keys:
+          items:
+            $ref: '#/components/schemas/RepositoryEcdsaKey'
+          readOnly: true
+          type: array
         enforce_eula:
           description: "If checked, downloads will explicitly require acceptance of\
             \ an EULA."
@@ -33930,6 +34466,16 @@ components:
           description: The number of downloads for packages in the repository.
           readOnly: true
           title: Num downloads
+          type: integer
+        num_policy_violated_packages:
+          description: Number of packages with policy violations in a repository.
+          readOnly: true
+          title: Num policy violated packages
+          type: integer
+        num_quarantined_packages:
+          description: Number of quarantined packages in a repository.
+          readOnly: true
+          title: Num quarantined packages
           type: integer
         package_count:
           description: The number of packages in the repository.
@@ -34561,13 +35107,14 @@ components:
       type: object
     RepositoryCreate:
       example:
+        num_policy_violated_packages: 6
         scan_packages: Read
         content_kind: Standard
         tag_pre_releases_as_latest: true
         index_files: true
-        repository_type: 5
+        repository_type: 2
         use_source_packages: true
-        package_group_count: 1
+        package_group_count: 5
         repository_type_str: Public
         use_vulnerability_scanning: true
         resync_own: true
@@ -34579,15 +35126,30 @@ components:
         replace_packages: Write
         user_entitlements_enabled: true
         num_downloads: 0
-        package_count: 6
+        package_count: 5
         use_default_cargo_upstream: true
-        size: 5
+        size: 7
         cdn_url: cdn_url
         scan_own: true
         distributes:
         - distributes
         - distributes
         name: name
+        ecdsa_keys:
+        - public_key: public_key
+          default: true
+          fingerprint: fingerprint
+          active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          ssh_fingerprint: ssh_fingerprint
+          fingerprint_short: fingerprint_short
+        - public_key: public_key
+          default: true
+          fingerprint: fingerprint
+          active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          ssh_fingerprint: ssh_fingerprint
+          fingerprint_short: fingerprint_short
         replace_packages_by_default: true
         manage_entitlements_privilege: Admin
         default_privilege: None
@@ -34603,6 +35165,7 @@ components:
         move_own: true
         delete_packages: Admin
         is_open_source: true
+        num_quarantined_packages: 1
         copy_own: true
         proxy_pypi: true
         contextual_auth_realm: true
@@ -34749,6 +35312,11 @@ components:
             \ the lifetime of access tokens."
           title: Docker Auth Refresh Enabled?
           type: boolean
+        ecdsa_keys:
+          items:
+            $ref: '#/components/schemas/RepositoryEcdsaKey'
+          readOnly: true
+          type: array
         enforce_eula:
           description: "If checked, downloads will explicitly require acceptance of\
             \ an EULA."
@@ -34834,6 +35402,16 @@ components:
           description: The number of downloads for packages in the repository.
           readOnly: true
           title: Num downloads
+          type: integer
+        num_policy_violated_packages:
+          description: Number of packages with policy violations in a repository.
+          readOnly: true
+          title: Num policy violated packages
+          type: integer
+        num_quarantined_packages:
+          description: Number of quarantined packages in a repository.
+          readOnly: true
+          title: Num quarantined packages
           type: integer
         package_count:
           description: The number of packages in the repository.
@@ -35454,6 +36032,24 @@ components:
           title: View statistics
           type: string
       type: object
+    RepositoryEcdsaKeyCreate:
+      example:
+        ecdsa_passphrase: ecdsa_passphrase
+        ecdsa_private_key: ecdsa_private_key
+      properties:
+        ecdsa_passphrase:
+          description: The ECDSA passphrase used for signing.
+          minLength: 1
+          title: Ecdsa passphrase
+          type: string
+        ecdsa_private_key:
+          description: The ECDSA private key.
+          minLength: 1
+          title: Ecdsa private key
+          type: string
+      required:
+      - ecdsa_private_key
+      type: object
     RepositoryGeoIpCidr:
       example:
         allow:
@@ -35845,6 +36441,385 @@ components:
           type: string
       required:
       - rsa_private_key
+      type: object
+    ComposerUpstream:
+      example:
+        is_active: true
+        disable_reason: N/A
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        created_at: 2000-01-23T04:56:07.000+00:00
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        slug_perm: slug_perm
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+        pending_validation: true
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        created_at:
+          description: The datetime the upstream source was created.
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        disable_reason:
+          default: N/A
+          enum:
+          - N/A
+          - Upstream points to its own repository
+          - Missing upstream source
+          readOnly: true
+          title: Disable reason
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        pending_validation:
+          description: "When true, this upstream source is pending validation."
+          readOnly: true
+          title: Pending validation
+          type: boolean
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    ComposerUpstreamRequest:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    ComposerUpstreamRequestPatch:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
       type: object
     CranUpstream:
       example:
@@ -40839,10 +41814,126 @@ components:
           title: Verify SSL Certificates
           type: boolean
       type: object
+    RepositoryRetentionRules:
+      example:
+        retention_days_limit: 108
+        retention_enabled: true
+        retention_group_by_package_type: true
+        retention_group_by_format: true
+        retention_group_by_name: true
+        retention_count_limit: 800
+        retention_size_limit: 2147483647
+      properties:
+        retention_count_limit:
+          description: The maximum X number of packages to retain.
+          maximum: 10000
+          minimum: 0
+          title: Retention count limit
+          type: integer
+        retention_days_limit:
+          description: The X number of days of packages to retain.
+          maximum: 180
+          minimum: 0
+          title: Retention days limit
+          type: integer
+        retention_enabled:
+          description: "If checked, the retention lifecycle rules will be activated\
+            \ for the repository. Any packages that don't match will be deleted automatically,\
+            \ and the rest are retained."
+          title: Retention Enabled?
+          type: boolean
+        retention_group_by_format:
+          description: "If checked, retention will apply to packages by package formats\
+            \ rather than across all package formats.For example, when retaining by\
+            \ a limit of 1 and you upload PythonPkg 1.0 and RubyPkg 1.0, no packages\
+            \ are deleted because they are different formats."
+          title: Retention group by format
+          type: boolean
+        retention_group_by_name:
+          description: "If checked, retention will apply to groups of packages by\
+            \ name rather than all packages.<br>For example, when retaining by a limit\
+            \ of 1 and you upload PkgA 1.0, PkgB 1.0 and PkgB 1.1; only PkgB 1.0 is\
+            \ deleted because there are two (2) PkgBs and one (1) PkgA."
+          title: Retention Group By Name?
+          type: boolean
+        retention_group_by_package_type:
+          description: "If checked, retention will apply to packages by package type\
+            \ (e.g. by binary, by source, etc.), rather than across all package types\
+            \ for one or more formats. <br>For example, when retaining by a limit\
+            \ of 1 and you upload DebPackage 1.0 and DebSourcePackage 1.0, no packages\
+            \ are deleted because they are different package types, binary and source\
+            \ respectively."
+          title: Retention Group By Package Type?
+          type: boolean
+        retention_size_limit:
+          description: The maximum X total size (in bytes) of packages to retain.
+          maximum: 21474836480
+          minimum: 0
+          title: Retention size limit
+          type: integer
+      type: object
+    RepositoryRetentionRulesRequestPatch:
+      example:
+        retention_days_limit: 108
+        retention_enabled: true
+        retention_group_by_package_type: true
+        retention_group_by_format: true
+        retention_group_by_name: true
+        retention_count_limit: 800
+        retention_size_limit: 2147483647
+      properties:
+        retention_count_limit:
+          description: The maximum X number of packages to retain.
+          maximum: 10000
+          minimum: 0
+          title: Retention count limit
+          type: integer
+        retention_days_limit:
+          description: The X number of days of packages to retain.
+          maximum: 180
+          minimum: 0
+          title: Retention days limit
+          type: integer
+        retention_enabled:
+          description: "If checked, the retention lifecycle rules will be activated\
+            \ for the repository. Any packages that don't match will be deleted automatically,\
+            \ and the rest are retained."
+          title: Retention Enabled?
+          type: boolean
+        retention_group_by_format:
+          description: "If checked, retention will apply to packages by package formats\
+            \ rather than across all package formats.For example, when retaining by\
+            \ a limit of 1 and you upload PythonPkg 1.0 and RubyPkg 1.0, no packages\
+            \ are deleted because they are different formats."
+          title: Retention group by format
+          type: boolean
+        retention_group_by_name:
+          description: "If checked, retention will apply to groups of packages by\
+            \ name rather than all packages.<br>For example, when retaining by a limit\
+            \ of 1 and you upload PkgA 1.0, PkgB 1.0 and PkgB 1.1; only PkgB 1.0 is\
+            \ deleted because there are two (2) PkgBs and one (1) PkgA."
+          title: Retention Group By Name?
+          type: boolean
+        retention_group_by_package_type:
+          description: "If checked, retention will apply to packages by package type\
+            \ (e.g. by binary, by source, etc.), rather than across all package types\
+            \ for one or more formats. <br>For example, when retaining by a limit\
+            \ of 1 and you upload DebPackage 1.0 and DebSourcePackage 1.0, no packages\
+            \ are deleted because they are different package types, binary and source\
+            \ respectively."
+          title: Retention Group By Package Type?
+          type: boolean
+        retention_size_limit:
+          description: The maximum X total size (in bytes) of packages to retain.
+          maximum: 21474836480
+          minimum: 0
+          title: Retention size limit
+          type: integer
+      type: object
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.478.2
+        version: 1.498.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -40852,7 +41943,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.478.2
+          default: 1.498.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -40922,20 +42013,6 @@ components:
           type: boolean
       required:
       - email
-      type: object
-    UserPasswordRequest:
-      example:
-        password: password
-      properties:
-        password:
-          maxLength: 128
-          minLength: 1
-          title: Password
-          type: string
-      required:
-      - password
-      type: object
-    UserPassword:
       type: object
     UserBrief:
       example:
@@ -41037,7 +42114,7 @@ components:
           title: Company
           type: string
         first_name:
-          maxLength: 40
+          maxLength: 120
           minLength: 1
           title: First name
           type: string
@@ -41071,7 +42148,7 @@ components:
         tagline:
           description: "Your tagline is a sentence about you. Make it funny. Make\
             \ it professional. Either way, it's public and it represents who you are."
-          maxLength: 80
+          maxLength: 1024
           nullable: true
           title: Tagline
           type: string

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.478.2
+API version: 1.498.0
 Contact: support@cloudsmith.io
 */
 
@@ -26,7 +26,7 @@ type UserApiService service
 type ApiUserEmailsPartialUpdateRequest struct {
 	ctx        context.Context
 	ApiService *UserApiService
-	identifier string
+	email      string
 	data       *EmailAddressRequestPatch
 }
 
@@ -43,14 +43,14 @@ func (r ApiUserEmailsPartialUpdateRequest) Execute() (*EmailAddress, *http.Respo
 UserEmailsPartialUpdate Method for UserEmailsPartialUpdate
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param identifier
+ @param email
  @return ApiUserEmailsPartialUpdateRequest
 */
-func (a *UserApiService) UserEmailsPartialUpdate(ctx context.Context, identifier string) ApiUserEmailsPartialUpdateRequest {
+func (a *UserApiService) UserEmailsPartialUpdate(ctx context.Context, email string) ApiUserEmailsPartialUpdateRequest {
 	return ApiUserEmailsPartialUpdateRequest{
 		ApiService: a,
 		ctx:        ctx,
-		identifier: identifier,
+		email:      email,
 	}
 }
 
@@ -69,8 +69,8 @@ func (a *UserApiService) UserEmailsPartialUpdateExecute(r ApiUserEmailsPartialUp
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/user/emails/{identifier}/"
-	localVarPath = strings.Replace(localVarPath, "{"+"identifier"+"}", url.PathEscape(parameterValueToString(r.identifier, "identifier")), -1)
+	localVarPath := localBasePath + "/user/emails/{email}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"email"+"}", url.PathEscape(parameterValueToString(r.email, "email")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -165,137 +165,6 @@ func (a *UserApiService) UserEmailsPartialUpdateExecute(r ApiUserEmailsPartialUp
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiUserPasswordRequest struct {
-	ctx        context.Context
-	ApiService *UserApiService
-	data       *UserPasswordRequest
-}
-
-func (r ApiUserPasswordRequest) Data(data UserPasswordRequest) ApiUserPasswordRequest {
-	r.data = &data
-	return r
-}
-
-func (r ApiUserPasswordRequest) Execute() (*http.Response, error) {
-	return r.ApiService.UserPasswordExecute(r)
-}
-
-/*
-UserPassword Views for the current user.
-
-Views for the current user.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUserPasswordRequest
-*/
-func (a *UserApiService) UserPassword(ctx context.Context) ApiUserPasswordRequest {
-	return ApiUserPasswordRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-func (a *UserApiService) UserPasswordExecute(r ApiUserPasswordRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod = http.MethodPut
-		localVarPostBody   interface{}
-		formFiles          []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserApiService.UserPassword")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/user/password/"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.data
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["apikey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-Api-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorDetail
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ErrorDetail
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
 }
 
 type ApiUserSelfRequest struct {

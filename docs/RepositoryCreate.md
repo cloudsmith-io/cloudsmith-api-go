@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A description of the repository&#39;s purpose/contents. | [optional] 
 **Distributes** | Pointer to **[]string** | The repositories distributed through this repo. Adding repos here is only valid if the content_kind is DISTRIBUTION. | [optional] 
 **DockerRefreshTokensEnabled** | Pointer to **bool** | If checked, refresh tokens will be issued in addition to access tokens for Docker authentication. This allows unlimited extension of the lifetime of access tokens. | [optional] 
+**EcdsaKeys** | Pointer to [**[]RepositoryEcdsaKey**](RepositoryEcdsaKey.md) |  | [optional] [readonly] 
 **EnforceEula** | Pointer to **bool** | If checked, downloads will explicitly require acceptance of an EULA. | [optional] 
 **GpgKeys** | Pointer to [**[]RepositoryGpgKey**](RepositoryGpgKey.md) |  | [optional] [readonly] 
 **IndexFiles** | Pointer to **bool** | If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted. | [optional] 
@@ -30,6 +31,8 @@ Name | Type | Description | Notes
 **Namespace** | Pointer to **string** | Namespace to which this repository belongs. | [optional] [readonly] 
 **NamespaceUrl** | Pointer to **string** | API endpoint where data about this namespace can be retrieved. | [optional] [readonly] 
 **NumDownloads** | Pointer to **int64** | The number of downloads for packages in the repository. | [optional] [readonly] 
+**NumPolicyViolatedPackages** | Pointer to **int64** | Number of packages with policy violations in a repository. | [optional] [readonly] 
+**NumQuarantinedPackages** | Pointer to **int64** | Number of quarantined packages in a repository. | [optional] [readonly] 
 **PackageCount** | Pointer to **int64** | The number of packages in the repository. | [optional] [readonly] 
 **PackageGroupCount** | Pointer to **int64** | The number of groups in the repository. | [optional] [readonly] 
 **ProxyNpmjs** | Pointer to **bool** | If checked, Npm packages that are not in the repository when requested by clients will automatically be proxied from the public npmjs.org registry. If there is at least one version for a package, others will not be proxied. | [optional] 
@@ -427,6 +430,31 @@ SetDockerRefreshTokensEnabled sets DockerRefreshTokensEnabled field to given val
 
 HasDockerRefreshTokensEnabled returns a boolean if a field has been set.
 
+### GetEcdsaKeys
+
+`func (o *RepositoryCreate) GetEcdsaKeys() []RepositoryEcdsaKey`
+
+GetEcdsaKeys returns the EcdsaKeys field if non-nil, zero value otherwise.
+
+### GetEcdsaKeysOk
+
+`func (o *RepositoryCreate) GetEcdsaKeysOk() (*[]RepositoryEcdsaKey, bool)`
+
+GetEcdsaKeysOk returns a tuple with the EcdsaKeys field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEcdsaKeys
+
+`func (o *RepositoryCreate) SetEcdsaKeys(v []RepositoryEcdsaKey)`
+
+SetEcdsaKeys sets EcdsaKeys field to given value.
+
+### HasEcdsaKeys
+
+`func (o *RepositoryCreate) HasEcdsaKeys() bool`
+
+HasEcdsaKeys returns a boolean if a field has been set.
+
 ### GetEnforceEula
 
 `func (o *RepositoryCreate) GetEnforceEula() bool`
@@ -746,6 +774,56 @@ SetNumDownloads sets NumDownloads field to given value.
 `func (o *RepositoryCreate) HasNumDownloads() bool`
 
 HasNumDownloads returns a boolean if a field has been set.
+
+### GetNumPolicyViolatedPackages
+
+`func (o *RepositoryCreate) GetNumPolicyViolatedPackages() int64`
+
+GetNumPolicyViolatedPackages returns the NumPolicyViolatedPackages field if non-nil, zero value otherwise.
+
+### GetNumPolicyViolatedPackagesOk
+
+`func (o *RepositoryCreate) GetNumPolicyViolatedPackagesOk() (*int64, bool)`
+
+GetNumPolicyViolatedPackagesOk returns a tuple with the NumPolicyViolatedPackages field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumPolicyViolatedPackages
+
+`func (o *RepositoryCreate) SetNumPolicyViolatedPackages(v int64)`
+
+SetNumPolicyViolatedPackages sets NumPolicyViolatedPackages field to given value.
+
+### HasNumPolicyViolatedPackages
+
+`func (o *RepositoryCreate) HasNumPolicyViolatedPackages() bool`
+
+HasNumPolicyViolatedPackages returns a boolean if a field has been set.
+
+### GetNumQuarantinedPackages
+
+`func (o *RepositoryCreate) GetNumQuarantinedPackages() int64`
+
+GetNumQuarantinedPackages returns the NumQuarantinedPackages field if non-nil, zero value otherwise.
+
+### GetNumQuarantinedPackagesOk
+
+`func (o *RepositoryCreate) GetNumQuarantinedPackagesOk() (*int64, bool)`
+
+GetNumQuarantinedPackagesOk returns a tuple with the NumQuarantinedPackages field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNumQuarantinedPackages
+
+`func (o *RepositoryCreate) SetNumQuarantinedPackages(v int64)`
+
+SetNumQuarantinedPackages sets NumQuarantinedPackages field to given value.
+
+### HasNumQuarantinedPackages
+
+`func (o *RepositoryCreate) HasNumQuarantinedPackages() bool`
+
+HasNumQuarantinedPackages returns a boolean if a field has been set.
 
 ### GetPackageCount
 

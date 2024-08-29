@@ -4,8 +4,7 @@ All URIs are relative to *https://api.cloudsmith.io/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**UserEmailsPartialUpdate**](UserApi.md#UserEmailsPartialUpdate) | **Patch** /user/emails/{identifier}/ | 
-[**UserPassword**](UserApi.md#UserPassword) | **Put** /user/password/ | Views for the current user.
+[**UserEmailsPartialUpdate**](UserApi.md#UserEmailsPartialUpdate) | **Patch** /user/emails/{email}/ | 
 [**UserSelf**](UserApi.md#UserSelf) | **Get** /user/self/ | Provide a brief for the current user (if any).
 [**UserTokenCreate**](UserApi.md#UserTokenCreate) | **Post** /user/token/ | Retrieve/Create API key/token for the authenticated user.
 
@@ -13,7 +12,7 @@ Method | HTTP request | Description
 
 ## UserEmailsPartialUpdate
 
-> EmailAddress UserEmailsPartialUpdate(ctx, identifier).Data(data).Execute()
+> EmailAddress UserEmailsPartialUpdate(ctx, email).Data(data).Execute()
 
 
 
@@ -30,12 +29,12 @@ import (
 )
 
 func main() {
-    identifier := "identifier_example" // string | 
+    email := "email_example" // string | 
     data := *openapiclient.NewEmailAddressRequestPatch() // EmailAddressRequestPatch |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserApi.UserEmailsPartialUpdate(context.Background(), identifier).Data(data).Execute()
+    resp, r, err := apiClient.UserApi.UserEmailsPartialUpdate(context.Background(), email).Data(data).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserEmailsPartialUpdate``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -51,7 +50,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**identifier** | **string** |  | 
+**email** | **string** |  | 
 
 ### Other Parameters
 
@@ -66,70 +65,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EmailAddress**](EmailAddress.md)
-
-### Authorization
-
-[apikey](../README.md#apikey), [basic](../README.md#basic)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UserPassword
-
-> UserPassword(ctx).Data(data).Execute()
-
-Views for the current user.
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
-)
-
-func main() {
-    data := *openapiclient.NewUserPasswordRequest("Password_example") // UserPasswordRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.UserApi.UserPassword(context.Background()).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserPassword``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUserPasswordRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **data** | [**UserPasswordRequest**](UserPasswordRequest.md) |  | 
-
-### Return type
-
- (empty response body)
 
 ### Authorization
 
