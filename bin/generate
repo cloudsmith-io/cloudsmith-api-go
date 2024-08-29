@@ -20,7 +20,7 @@ function swagger_spec {
 # This ensures that stuff which no longer exists in the
 # openapi spec is removed.
 find . -name "*.go" -type f -delete
-find . -name "*.md" -type f -delete
+find . -name "*.md" ! -name "CONTRIBUTING.md" -type f -delete
 
 # Generate client library
 API_VERSION="$(api_version)"
