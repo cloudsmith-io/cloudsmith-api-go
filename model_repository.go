@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.478.2
+API version: 1.498.0
 Contact: support@cloudsmith.io
 */
 
@@ -45,7 +45,8 @@ type Repository struct {
 	// The repositories distributed through this repo. Adding repos here is only valid if the content_kind is DISTRIBUTION.
 	Distributes []string `json:"distributes,omitempty"`
 	// If checked, refresh tokens will be issued in addition to access tokens for Docker authentication. This allows unlimited extension of the lifetime of access tokens.
-	DockerRefreshTokensEnabled *bool `json:"docker_refresh_tokens_enabled,omitempty"`
+	DockerRefreshTokensEnabled *bool                `json:"docker_refresh_tokens_enabled,omitempty"`
+	EcdsaKeys                  []RepositoryEcdsaKey `json:"ecdsa_keys,omitempty"`
 	// If checked, downloads will explicitly require acceptance of an EULA.
 	EnforceEula *bool              `json:"enforce_eula,omitempty"`
 	GpgKeys     []RepositoryGpgKey `json:"gpg_keys,omitempty"`
@@ -68,6 +69,10 @@ type Repository struct {
 	NamespaceUrl *string `json:"namespace_url,omitempty"`
 	// The number of downloads for packages in the repository.
 	NumDownloads *int64 `json:"num_downloads,omitempty"`
+	// Number of packages with policy violations in a repository.
+	NumPolicyViolatedPackages *int64 `json:"num_policy_violated_packages,omitempty"`
+	// Number of quarantined packages in a repository.
+	NumQuarantinedPackages *int64 `json:"num_quarantined_packages,omitempty"`
 	// The number of packages in the repository.
 	PackageCount *int64 `json:"package_count,omitempty"`
 	// The number of groups in the repository.
@@ -638,6 +643,38 @@ func (o *Repository) SetDockerRefreshTokensEnabled(v bool) {
 	o.DockerRefreshTokensEnabled = &v
 }
 
+// GetEcdsaKeys returns the EcdsaKeys field value if set, zero value otherwise.
+func (o *Repository) GetEcdsaKeys() []RepositoryEcdsaKey {
+	if o == nil || IsNil(o.EcdsaKeys) {
+		var ret []RepositoryEcdsaKey
+		return ret
+	}
+	return o.EcdsaKeys
+}
+
+// GetEcdsaKeysOk returns a tuple with the EcdsaKeys field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Repository) GetEcdsaKeysOk() ([]RepositoryEcdsaKey, bool) {
+	if o == nil || IsNil(o.EcdsaKeys) {
+		return nil, false
+	}
+	return o.EcdsaKeys, true
+}
+
+// HasEcdsaKeys returns a boolean if a field has been set.
+func (o *Repository) HasEcdsaKeys() bool {
+	if o != nil && !IsNil(o.EcdsaKeys) {
+		return true
+	}
+
+	return false
+}
+
+// SetEcdsaKeys gets a reference to the given []RepositoryEcdsaKey and assigns it to the EcdsaKeys field.
+func (o *Repository) SetEcdsaKeys(v []RepositoryEcdsaKey) {
+	o.EcdsaKeys = v
+}
+
 // GetEnforceEula returns the EnforceEula field value if set, zero value otherwise.
 func (o *Repository) GetEnforceEula() bool {
 	if o == nil || IsNil(o.EnforceEula) {
@@ -1044,6 +1081,70 @@ func (o *Repository) HasNumDownloads() bool {
 // SetNumDownloads gets a reference to the given int64 and assigns it to the NumDownloads field.
 func (o *Repository) SetNumDownloads(v int64) {
 	o.NumDownloads = &v
+}
+
+// GetNumPolicyViolatedPackages returns the NumPolicyViolatedPackages field value if set, zero value otherwise.
+func (o *Repository) GetNumPolicyViolatedPackages() int64 {
+	if o == nil || IsNil(o.NumPolicyViolatedPackages) {
+		var ret int64
+		return ret
+	}
+	return *o.NumPolicyViolatedPackages
+}
+
+// GetNumPolicyViolatedPackagesOk returns a tuple with the NumPolicyViolatedPackages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Repository) GetNumPolicyViolatedPackagesOk() (*int64, bool) {
+	if o == nil || IsNil(o.NumPolicyViolatedPackages) {
+		return nil, false
+	}
+	return o.NumPolicyViolatedPackages, true
+}
+
+// HasNumPolicyViolatedPackages returns a boolean if a field has been set.
+func (o *Repository) HasNumPolicyViolatedPackages() bool {
+	if o != nil && !IsNil(o.NumPolicyViolatedPackages) {
+		return true
+	}
+
+	return false
+}
+
+// SetNumPolicyViolatedPackages gets a reference to the given int64 and assigns it to the NumPolicyViolatedPackages field.
+func (o *Repository) SetNumPolicyViolatedPackages(v int64) {
+	o.NumPolicyViolatedPackages = &v
+}
+
+// GetNumQuarantinedPackages returns the NumQuarantinedPackages field value if set, zero value otherwise.
+func (o *Repository) GetNumQuarantinedPackages() int64 {
+	if o == nil || IsNil(o.NumQuarantinedPackages) {
+		var ret int64
+		return ret
+	}
+	return *o.NumQuarantinedPackages
+}
+
+// GetNumQuarantinedPackagesOk returns a tuple with the NumQuarantinedPackages field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Repository) GetNumQuarantinedPackagesOk() (*int64, bool) {
+	if o == nil || IsNil(o.NumQuarantinedPackages) {
+		return nil, false
+	}
+	return o.NumQuarantinedPackages, true
+}
+
+// HasNumQuarantinedPackages returns a boolean if a field has been set.
+func (o *Repository) HasNumQuarantinedPackages() bool {
+	if o != nil && !IsNil(o.NumQuarantinedPackages) {
+		return true
+	}
+
+	return false
+}
+
+// SetNumQuarantinedPackages gets a reference to the given int64 and assigns it to the NumQuarantinedPackages field.
+func (o *Repository) SetNumQuarantinedPackages(v int64) {
+	o.NumQuarantinedPackages = &v
 }
 
 // GetPackageCount returns the PackageCount field value if set, zero value otherwise.
@@ -2119,6 +2220,9 @@ func (o Repository) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DockerRefreshTokensEnabled) {
 		toSerialize["docker_refresh_tokens_enabled"] = o.DockerRefreshTokensEnabled
 	}
+	if !IsNil(o.EcdsaKeys) {
+		toSerialize["ecdsa_keys"] = o.EcdsaKeys
+	}
 	if !IsNil(o.EnforceEula) {
 		toSerialize["enforce_eula"] = o.EnforceEula
 	}
@@ -2155,6 +2259,12 @@ func (o Repository) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NumDownloads) {
 		toSerialize["num_downloads"] = o.NumDownloads
+	}
+	if !IsNil(o.NumPolicyViolatedPackages) {
+		toSerialize["num_policy_violated_packages"] = o.NumPolicyViolatedPackages
+	}
+	if !IsNil(o.NumQuarantinedPackages) {
+		toSerialize["num_quarantined_packages"] = o.NumQuarantinedPackages
 	}
 	if !IsNil(o.PackageCount) {
 		toSerialize["package_count"] = o.PackageCount

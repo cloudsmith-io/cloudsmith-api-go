@@ -41,6 +41,9 @@ docs/CommonDownloadsMetricsValue.md
 docs/CommonMetrics.md
 docs/ComposerPackageUpload.md
 docs/ComposerPackageUploadRequest.md
+docs/ComposerUpstream.md
+docs/ComposerUpstreamRequest.md
+docs/ComposerUpstreamRequestPatch.md
 docs/ConanPackageUpload.md
 docs/ConanPackageUploadRequest.md
 docs/CondaPackageUpload.md
@@ -191,6 +194,8 @@ docs/Repository.md
 docs/RepositoryAuditLog.md
 docs/RepositoryCreate.md
 docs/RepositoryCreateRequest.md
+docs/RepositoryEcdsaKey.md
+docs/RepositoryEcdsaKeyCreate.md
 docs/RepositoryGeoIpCidr.md
 docs/RepositoryGeoIpCountryCode.md
 docs/RepositoryGeoIpRules.md
@@ -207,6 +212,8 @@ docs/RepositoryPrivilegeInput.md
 docs/RepositoryPrivilegeInputRequest.md
 docs/RepositoryPrivilegeInputRequestPatch.md
 docs/RepositoryRequestPatch.md
+docs/RepositoryRetentionRules.md
+docs/RepositoryRetentionRulesRequestPatch.md
 docs/RepositoryRsaKey.md
 docs/RepositoryRsaKeyCreate.md
 docs/RepositoryToken.md
@@ -258,7 +265,6 @@ docs/UserApi.md
 docs/UserAuthToken.md
 docs/UserAuthTokenRequest.md
 docs/UserBrief.md
-docs/UserPasswordRequest.md
 docs/UserProfile.md
 docs/UsersApi.md
 docs/VagrantPackageUpload.md
@@ -290,6 +296,9 @@ model_common_downloads_metrics_value.go
 model_common_metrics.go
 model_composer_package_upload.go
 model_composer_package_upload_request.go
+model_composer_upstream.go
+model_composer_upstream_request.go
+model_composer_upstream_request_patch.go
 model_conan_package_upload.go
 model_conan_package_upload_request.go
 model_conda_package_upload.go
@@ -429,6 +438,8 @@ model_repository.go
 model_repository_audit_log.go
 model_repository_create.go
 model_repository_create_request.go
+model_repository_ecdsa_key.go
+model_repository_ecdsa_key_create.go
 model_repository_geo_ip_cidr.go
 model_repository_geo_ip_country_code.go
 model_repository_geo_ip_rules.go
@@ -445,6 +456,8 @@ model_repository_privilege_input.go
 model_repository_privilege_input_request.go
 model_repository_privilege_input_request_patch.go
 model_repository_request_patch.go
+model_repository_retention_rules.go
+model_repository_retention_rules_request_patch.go
 model_repository_rsa_key.go
 model_repository_rsa_key_create.go
 model_repository_token.go
@@ -493,7 +506,6 @@ model_usage_raw.go
 model_user_auth_token.go
 model_user_auth_token_request.go
 model_user_brief.go
-model_user_password_request.go
 model_user_profile.go
 model_vagrant_package_upload.go
 model_vagrant_package_upload_request.go
