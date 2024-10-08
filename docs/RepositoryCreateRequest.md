@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **MoveOwn** | Pointer to **bool** | If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the &#39;Access Controls&#39; section of the repository, and any inherited from the org. | [optional] 
 **MovePackages** | Pointer to **string** | This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting. | [optional] [default to "Admin"]
 **Name** | **string** | A descriptive name for the repository. | 
+**OpenSourceLicense** | Pointer to **NullableString** | The SPDX identifier of the open source license. | [optional] 
+**OpenSourceProjectUrl** | Pointer to **NullableString** | The URL to the Open-Source project, used for validating that the project meets the requirements for Open-Source. | [optional] 
 **ProxyNpmjs** | Pointer to **bool** | If checked, Npm packages that are not in the repository when requested by clients will automatically be proxied from the public npmjs.org registry. If there is at least one version for a package, others will not be proxied. | [optional] 
 **ProxyPypi** | Pointer to **bool** | If checked, Python packages that are not in the repository when requested by clients will automatically be proxied from the public pypi.python.org registry. If there is at least one version for a package, others will not be proxied. | [optional] 
 **RawPackageIndexEnabled** | Pointer to **bool** | If checked, HTML and JSON indexes will be generated that list all available raw packages in the repository. | [optional] 
@@ -459,6 +461,76 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
+### GetOpenSourceLicense
+
+`func (o *RepositoryCreateRequest) GetOpenSourceLicense() string`
+
+GetOpenSourceLicense returns the OpenSourceLicense field if non-nil, zero value otherwise.
+
+### GetOpenSourceLicenseOk
+
+`func (o *RepositoryCreateRequest) GetOpenSourceLicenseOk() (*string, bool)`
+
+GetOpenSourceLicenseOk returns a tuple with the OpenSourceLicense field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenSourceLicense
+
+`func (o *RepositoryCreateRequest) SetOpenSourceLicense(v string)`
+
+SetOpenSourceLicense sets OpenSourceLicense field to given value.
+
+### HasOpenSourceLicense
+
+`func (o *RepositoryCreateRequest) HasOpenSourceLicense() bool`
+
+HasOpenSourceLicense returns a boolean if a field has been set.
+
+### SetOpenSourceLicenseNil
+
+`func (o *RepositoryCreateRequest) SetOpenSourceLicenseNil(b bool)`
+
+ SetOpenSourceLicenseNil sets the value for OpenSourceLicense to be an explicit nil
+
+### UnsetOpenSourceLicense
+`func (o *RepositoryCreateRequest) UnsetOpenSourceLicense()`
+
+UnsetOpenSourceLicense ensures that no value is present for OpenSourceLicense, not even an explicit nil
+### GetOpenSourceProjectUrl
+
+`func (o *RepositoryCreateRequest) GetOpenSourceProjectUrl() string`
+
+GetOpenSourceProjectUrl returns the OpenSourceProjectUrl field if non-nil, zero value otherwise.
+
+### GetOpenSourceProjectUrlOk
+
+`func (o *RepositoryCreateRequest) GetOpenSourceProjectUrlOk() (*string, bool)`
+
+GetOpenSourceProjectUrlOk returns a tuple with the OpenSourceProjectUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenSourceProjectUrl
+
+`func (o *RepositoryCreateRequest) SetOpenSourceProjectUrl(v string)`
+
+SetOpenSourceProjectUrl sets OpenSourceProjectUrl field to given value.
+
+### HasOpenSourceProjectUrl
+
+`func (o *RepositoryCreateRequest) HasOpenSourceProjectUrl() bool`
+
+HasOpenSourceProjectUrl returns a boolean if a field has been set.
+
+### SetOpenSourceProjectUrlNil
+
+`func (o *RepositoryCreateRequest) SetOpenSourceProjectUrlNil(b bool)`
+
+ SetOpenSourceProjectUrlNil sets the value for OpenSourceProjectUrl to be an explicit nil
+
+### UnsetOpenSourceProjectUrl
+`func (o *RepositoryCreateRequest) UnsetOpenSourceProjectUrl()`
+
+UnsetOpenSourceProjectUrl ensures that no value is present for OpenSourceProjectUrl, not even an explicit nil
 ### GetProxyNpmjs
 
 `func (o *RepositoryCreateRequest) GetProxyNpmjs() bool`

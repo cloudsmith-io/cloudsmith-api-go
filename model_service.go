@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.498.0
+API version: 1.533.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,6 +28,8 @@ type Service struct {
 	Description *string `json:"description,omitempty"`
 	// The API key of the service
 	Key *string `json:"key,omitempty"`
+	// The time at which the API key will expire. This will only be populated if the Organization has an active API Key Policy.
+	KeyExpiresAt NullableTime `json:"key_expires_at,omitempty"`
 	// The name of the service
 	Name string `json:"name"`
 	// The role of the service.
@@ -219,6 +221,49 @@ func (o *Service) SetKey(v string) {
 	o.Key = &v
 }
 
+// GetKeyExpiresAt returns the KeyExpiresAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Service) GetKeyExpiresAt() time.Time {
+	if o == nil || IsNil(o.KeyExpiresAt.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.KeyExpiresAt.Get()
+}
+
+// GetKeyExpiresAtOk returns a tuple with the KeyExpiresAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Service) GetKeyExpiresAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.KeyExpiresAt.Get(), o.KeyExpiresAt.IsSet()
+}
+
+// HasKeyExpiresAt returns a boolean if a field has been set.
+func (o *Service) HasKeyExpiresAt() bool {
+	if o != nil && o.KeyExpiresAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetKeyExpiresAt gets a reference to the given NullableTime and assigns it to the KeyExpiresAt field.
+func (o *Service) SetKeyExpiresAt(v time.Time) {
+	o.KeyExpiresAt.Set(&v)
+}
+
+// SetKeyExpiresAtNil sets the value for KeyExpiresAt to be an explicit nil
+func (o *Service) SetKeyExpiresAtNil() {
+	o.KeyExpiresAt.Set(nil)
+}
+
+// UnsetKeyExpiresAt ensures that no value is present for KeyExpiresAt, not even an explicit nil
+func (o *Service) UnsetKeyExpiresAt() {
+	o.KeyExpiresAt.Unset()
+}
+
 // GetName returns the Name field value
 func (o *Service) GetName() string {
 	if o == nil {
@@ -363,6 +408,9 @@ func (o Service) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
+	}
+	if o.KeyExpiresAt.IsSet() {
+		toSerialize["key_expires_at"] = o.KeyExpiresAt.Get()
 	}
 	toSerialize["name"] = o.Name
 	if !IsNil(o.Role) {

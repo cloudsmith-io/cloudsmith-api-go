@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.498.0
+API version: 1.533.1
 Contact: support@cloudsmith.io
 */
 
@@ -52,6 +52,10 @@ type RepositoryCreateRequest struct {
 	MovePackages *string `json:"move_packages,omitempty"`
 	// A descriptive name for the repository.
 	Name string `json:"name"`
+	// The SPDX identifier of the open source license.
+	OpenSourceLicense NullableString `json:"open_source_license,omitempty"`
+	// The URL to the Open-Source project, used for validating that the project meets the requirements for Open-Source.
+	OpenSourceProjectUrl NullableString `json:"open_source_project_url,omitempty"`
 	// If checked, Npm packages that are not in the repository when requested by clients will automatically be proxied from the public npmjs.org registry. If there is at least one version for a package, others will not be proxied.
 	ProxyNpmjs *bool `json:"proxy_npmjs,omitempty"`
 	// If checked, Python packages that are not in the repository when requested by clients will automatically be proxied from the public pypi.python.org registry. If there is at least one version for a package, others will not be proxied.
@@ -674,6 +678,92 @@ func (o *RepositoryCreateRequest) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *RepositoryCreateRequest) SetName(v string) {
 	o.Name = v
+}
+
+// GetOpenSourceLicense returns the OpenSourceLicense field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RepositoryCreateRequest) GetOpenSourceLicense() string {
+	if o == nil || IsNil(o.OpenSourceLicense.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OpenSourceLicense.Get()
+}
+
+// GetOpenSourceLicenseOk returns a tuple with the OpenSourceLicense field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RepositoryCreateRequest) GetOpenSourceLicenseOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OpenSourceLicense.Get(), o.OpenSourceLicense.IsSet()
+}
+
+// HasOpenSourceLicense returns a boolean if a field has been set.
+func (o *RepositoryCreateRequest) HasOpenSourceLicense() bool {
+	if o != nil && o.OpenSourceLicense.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenSourceLicense gets a reference to the given NullableString and assigns it to the OpenSourceLicense field.
+func (o *RepositoryCreateRequest) SetOpenSourceLicense(v string) {
+	o.OpenSourceLicense.Set(&v)
+}
+
+// SetOpenSourceLicenseNil sets the value for OpenSourceLicense to be an explicit nil
+func (o *RepositoryCreateRequest) SetOpenSourceLicenseNil() {
+	o.OpenSourceLicense.Set(nil)
+}
+
+// UnsetOpenSourceLicense ensures that no value is present for OpenSourceLicense, not even an explicit nil
+func (o *RepositoryCreateRequest) UnsetOpenSourceLicense() {
+	o.OpenSourceLicense.Unset()
+}
+
+// GetOpenSourceProjectUrl returns the OpenSourceProjectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RepositoryCreateRequest) GetOpenSourceProjectUrl() string {
+	if o == nil || IsNil(o.OpenSourceProjectUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OpenSourceProjectUrl.Get()
+}
+
+// GetOpenSourceProjectUrlOk returns a tuple with the OpenSourceProjectUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RepositoryCreateRequest) GetOpenSourceProjectUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OpenSourceProjectUrl.Get(), o.OpenSourceProjectUrl.IsSet()
+}
+
+// HasOpenSourceProjectUrl returns a boolean if a field has been set.
+func (o *RepositoryCreateRequest) HasOpenSourceProjectUrl() bool {
+	if o != nil && o.OpenSourceProjectUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenSourceProjectUrl gets a reference to the given NullableString and assigns it to the OpenSourceProjectUrl field.
+func (o *RepositoryCreateRequest) SetOpenSourceProjectUrl(v string) {
+	o.OpenSourceProjectUrl.Set(&v)
+}
+
+// SetOpenSourceProjectUrlNil sets the value for OpenSourceProjectUrl to be an explicit nil
+func (o *RepositoryCreateRequest) SetOpenSourceProjectUrlNil() {
+	o.OpenSourceProjectUrl.Set(nil)
+}
+
+// UnsetOpenSourceProjectUrl ensures that no value is present for OpenSourceProjectUrl, not even an explicit nil
+func (o *RepositoryCreateRequest) UnsetOpenSourceProjectUrl() {
+	o.OpenSourceProjectUrl.Unset()
 }
 
 // GetProxyNpmjs returns the ProxyNpmjs field value if set, zero value otherwise.
@@ -1500,6 +1590,12 @@ func (o RepositoryCreateRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["move_packages"] = o.MovePackages
 	}
 	toSerialize["name"] = o.Name
+	if o.OpenSourceLicense.IsSet() {
+		toSerialize["open_source_license"] = o.OpenSourceLicense.Get()
+	}
+	if o.OpenSourceProjectUrl.IsSet() {
+		toSerialize["open_source_project_url"] = o.OpenSourceProjectUrl.Get()
+	}
 	if !IsNil(o.ProxyNpmjs) {
 		toSerialize["proxy_npmjs"] = o.ProxyNpmjs
 	}

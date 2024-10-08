@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **Events** | **[]string** |  | 
 **IsActive** | Pointer to **bool** | If enabled, the webhook will trigger on subscribed events and send payloads to the configured target URL. | [optional] 
 **PackageQuery** | Pointer to **NullableString** | The package-based search query for webhooks to fire. This uses the same syntax as the standard search used for repositories, and also supports boolean logic operators such as OR/AND/NOT and parentheses for grouping. If a package does not match, the webhook will not fire. | [optional] 
-**RequestBodyFormat** | Pointer to **int64** | The format of the payloads for webhook requests. | [optional] 
-**RequestBodyTemplateFormat** | Pointer to **int64** | The format of the payloads for webhook requests. | [optional] 
+**RequestBodyFormat** | Pointer to **int64** | The format of the payloads for webhook requests. Valid options are: (0) JSON, (1) JSON array, (2) form encoded JSON and (3) Handlebars template. | [optional] 
+**RequestBodyTemplateFormat** | Pointer to **int64** | The format of the payloads for webhook requests. Valid options are: (0) Generic/user defined, (1) JSON and (2) XML. | [optional] 
 **RequestContentType** | Pointer to **NullableString** | The value that will be sent for the &#39;Content Type&#39; header.  | [optional] 
 **SecretHeader** | Pointer to **NullableString** | The header to send the predefined secret in. This must be unique from existing headers or it won&#39;t be sent. You can use this as a form of authentication on the endpoint side. | [optional] 
 **SecretValue** | Pointer to **NullableString** | The value for the predefined secret (note: this is treated as a passphrase and is encrypted when we store it). You can use this as a form of authentication on the endpoint side. | [optional] 

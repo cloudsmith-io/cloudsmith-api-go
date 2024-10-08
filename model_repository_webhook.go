@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.498.0
+API version: 1.533.1
 Contact: support@cloudsmith.io
 */
 
@@ -37,10 +37,10 @@ type RepositoryWebhook struct {
 	NumSent               *int64  `json:"num_sent,omitempty"`
 	// The package-based search query for webhooks to fire. This uses the same syntax as the standard search used for repositories, and also supports boolean logic operators such as OR/AND/NOT and parentheses for grouping. If a package does not match, the webhook will not fire.
 	PackageQuery NullableString `json:"package_query,omitempty"`
-	// The format of the payloads for webhook requests.
+	// The format of the payloads for webhook requests. Valid options are: (0) JSON, (1) JSON array, (2) form encoded JSON and (3) Handlebars template.
 	RequestBodyFormat    *int64  `json:"request_body_format,omitempty"`
 	RequestBodyFormatStr *string `json:"request_body_format_str,omitempty"`
-	// The format of the payloads for webhook requests.
+	// The format of the payloads for webhook requests. Valid options are: (0) Generic/user defined, (1) JSON and (2) XML.
 	RequestBodyTemplateFormat    *int64  `json:"request_body_template_format,omitempty"`
 	RequestBodyTemplateFormatStr *string `json:"request_body_template_format_str,omitempty"`
 	// The value that will be sent for the 'Content Type' header.
