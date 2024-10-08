@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.498.0
+API version: 1.533.1
 Contact: support@cloudsmith.io
 */
 
@@ -73,6 +73,10 @@ type RepositoryCreate struct {
 	NumPolicyViolatedPackages *int64 `json:"num_policy_violated_packages,omitempty"`
 	// Number of quarantined packages in a repository.
 	NumQuarantinedPackages *int64 `json:"num_quarantined_packages,omitempty"`
+	// The SPDX identifier of the open source license.
+	OpenSourceLicense NullableString `json:"open_source_license,omitempty"`
+	// The URL to the Open-Source project, used for validating that the project meets the requirements for Open-Source.
+	OpenSourceProjectUrl NullableString `json:"open_source_project_url,omitempty"`
 	// The number of packages in the repository.
 	PackageCount *int64 `json:"package_count,omitempty"`
 	// The number of groups in the repository.
@@ -1149,6 +1153,92 @@ func (o *RepositoryCreate) HasNumQuarantinedPackages() bool {
 // SetNumQuarantinedPackages gets a reference to the given int64 and assigns it to the NumQuarantinedPackages field.
 func (o *RepositoryCreate) SetNumQuarantinedPackages(v int64) {
 	o.NumQuarantinedPackages = &v
+}
+
+// GetOpenSourceLicense returns the OpenSourceLicense field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RepositoryCreate) GetOpenSourceLicense() string {
+	if o == nil || IsNil(o.OpenSourceLicense.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OpenSourceLicense.Get()
+}
+
+// GetOpenSourceLicenseOk returns a tuple with the OpenSourceLicense field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RepositoryCreate) GetOpenSourceLicenseOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OpenSourceLicense.Get(), o.OpenSourceLicense.IsSet()
+}
+
+// HasOpenSourceLicense returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasOpenSourceLicense() bool {
+	if o != nil && o.OpenSourceLicense.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenSourceLicense gets a reference to the given NullableString and assigns it to the OpenSourceLicense field.
+func (o *RepositoryCreate) SetOpenSourceLicense(v string) {
+	o.OpenSourceLicense.Set(&v)
+}
+
+// SetOpenSourceLicenseNil sets the value for OpenSourceLicense to be an explicit nil
+func (o *RepositoryCreate) SetOpenSourceLicenseNil() {
+	o.OpenSourceLicense.Set(nil)
+}
+
+// UnsetOpenSourceLicense ensures that no value is present for OpenSourceLicense, not even an explicit nil
+func (o *RepositoryCreate) UnsetOpenSourceLicense() {
+	o.OpenSourceLicense.Unset()
+}
+
+// GetOpenSourceProjectUrl returns the OpenSourceProjectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RepositoryCreate) GetOpenSourceProjectUrl() string {
+	if o == nil || IsNil(o.OpenSourceProjectUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OpenSourceProjectUrl.Get()
+}
+
+// GetOpenSourceProjectUrlOk returns a tuple with the OpenSourceProjectUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RepositoryCreate) GetOpenSourceProjectUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.OpenSourceProjectUrl.Get(), o.OpenSourceProjectUrl.IsSet()
+}
+
+// HasOpenSourceProjectUrl returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasOpenSourceProjectUrl() bool {
+	if o != nil && o.OpenSourceProjectUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenSourceProjectUrl gets a reference to the given NullableString and assigns it to the OpenSourceProjectUrl field.
+func (o *RepositoryCreate) SetOpenSourceProjectUrl(v string) {
+	o.OpenSourceProjectUrl.Set(&v)
+}
+
+// SetOpenSourceProjectUrlNil sets the value for OpenSourceProjectUrl to be an explicit nil
+func (o *RepositoryCreate) SetOpenSourceProjectUrlNil() {
+	o.OpenSourceProjectUrl.Set(nil)
+}
+
+// UnsetOpenSourceProjectUrl ensures that no value is present for OpenSourceProjectUrl, not even an explicit nil
+func (o *RepositoryCreate) UnsetOpenSourceProjectUrl() {
+	o.OpenSourceProjectUrl.Unset()
 }
 
 // GetPackageCount returns the PackageCount field value if set, zero value otherwise.
@@ -2269,6 +2359,12 @@ func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NumQuarantinedPackages) {
 		toSerialize["num_quarantined_packages"] = o.NumQuarantinedPackages
+	}
+	if o.OpenSourceLicense.IsSet() {
+		toSerialize["open_source_license"] = o.OpenSourceLicense.Get()
+	}
+	if o.OpenSourceProjectUrl.IsSet() {
+		toSerialize["open_source_project_url"] = o.OpenSourceProjectUrl.Get()
 	}
 	if !IsNil(o.PackageCount) {
 		toSerialize["package_count"] = o.PackageCount

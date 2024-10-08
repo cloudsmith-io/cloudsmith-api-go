@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Dependencies** | Pointer to [**[]PackageDependency**](PackageDependency.md) |  | [optional] [readonly] 
+**Dependencies** | [**[]PackageDependency**](PackageDependency.md) |  | 
 
 ## Methods
 
 ### NewPackageDependencies
 
-`func NewPackageDependencies() *PackageDependencies`
+`func NewPackageDependencies(dependencies []PackageDependency, ) *PackageDependencies`
 
 NewPackageDependencies instantiates a new PackageDependencies object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetDependencies sets Dependencies field to given value.
 
-### HasDependencies
-
-`func (o *PackageDependencies) HasDependencies() bool`
-
-HasDependencies returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

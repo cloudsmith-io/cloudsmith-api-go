@@ -5,15 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DepType** | Pointer to **string** |  | [optional] [readonly] [default to "Depends"]
-**Name** | **string** | The name of the package dependency. | 
+**Name** | Pointer to **string** |  | [optional] [readonly] 
 **Operator** | Pointer to **NullableString** |  | [optional] [readonly] [default to "="]
-**Version** | Pointer to **NullableString** | The raw dependency version (if any). | [optional] 
+**Version** | Pointer to **NullableString** |  | [optional] [readonly] 
 
 ## Methods
 
 ### NewPackageDependency
 
-`func NewPackageDependency(name string, ) *PackageDependency`
+`func NewPackageDependency() *PackageDependency`
 
 NewPackageDependency instantiates a new PackageDependency object
 This constructor will assign default values to properties that have it defined,
@@ -72,6 +72,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *PackageDependency) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetOperator
 

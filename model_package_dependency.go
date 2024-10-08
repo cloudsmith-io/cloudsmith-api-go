@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.498.0
+API version: 1.533.1
 Contact: support@cloudsmith.io
 */
 
@@ -20,21 +20,18 @@ var _ MappedNullable = &PackageDependency{}
 
 // PackageDependency struct for PackageDependency
 type PackageDependency struct {
-	DepType *string `json:"dep_type,omitempty"`
-	// The name of the package dependency.
-	Name     string         `json:"name"`
+	DepType  *string        `json:"dep_type,omitempty"`
+	Name     *string        `json:"name,omitempty"`
 	Operator NullableString `json:"operator,omitempty"`
-	// The raw dependency version (if any).
-	Version NullableString `json:"version,omitempty"`
+	Version  NullableString `json:"version,omitempty"`
 }
 
 // NewPackageDependency instantiates a new PackageDependency object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPackageDependency(name string) *PackageDependency {
+func NewPackageDependency() *PackageDependency {
 	this := PackageDependency{}
-	this.Name = name
 	return &this
 }
 
@@ -78,28 +75,36 @@ func (o *PackageDependency) SetDepType(v string) {
 	o.DepType = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *PackageDependency) GetName() string {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PackageDependency) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *PackageDependency) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *PackageDependency) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetOperator returns the Operator field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -201,7 +206,9 @@ func (o PackageDependency) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DepType) {
 		toSerialize["dep_type"] = o.DepType
 	}
-	toSerialize["name"] = o.Name
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if o.Operator.IsSet() {
 		toSerialize["operator"] = o.Operator.Get()
 	}

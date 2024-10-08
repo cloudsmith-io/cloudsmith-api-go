@@ -72,8 +72,6 @@ docs/DockerPackageUploadRequest.md
 docs/DockerUpstream.md
 docs/DockerUpstreamRequest.md
 docs/DockerUpstreamRequestPatch.md
-docs/EmailAddress.md
-docs/EmailAddressRequestPatch.md
 docs/EntitlementUsageMetrics.md
 docs/EntitlementsApi.md
 docs/ErrorDetail.md
@@ -93,6 +91,9 @@ docs/HelmUpstreamRequest.md
 docs/HelmUpstreamRequestPatch.md
 docs/HexPackageUpload.md
 docs/HexPackageUploadRequest.md
+docs/HexUpstream.md
+docs/HexUpstreamRequest.md
+docs/HexUpstreamRequestPatch.md
 docs/History.md
 docs/HistoryFieldset.md
 docs/HistoryFieldsetRaw.md
@@ -223,6 +224,8 @@ docs/RepositoryTokenRequest.md
 docs/RepositoryTokenRequestPatch.md
 docs/RepositoryTokenSync.md
 docs/RepositoryTokenSyncRequest.md
+docs/RepositoryTransferRegion.md
+docs/RepositoryTransferRegionRequest.md
 docs/RepositoryWebhook.md
 docs/RepositoryWebhookRequest.md
 docs/RepositoryWebhookRequestPatch.md
@@ -326,8 +329,6 @@ model_docker_package_upload_request.go
 model_docker_upstream.go
 model_docker_upstream_request.go
 model_docker_upstream_request_patch.go
-model_email_address.go
-model_email_address_request_patch.go
 model_entitlement_usage_metrics.go
 model_error_detail.go
 model_eula.go
@@ -344,6 +345,9 @@ model_helm_upstream_request.go
 model_helm_upstream_request_patch.go
 model_hex_package_upload.go
 model_hex_package_upload_request.go
+model_hex_upstream.go
+model_hex_upstream_request.go
+model_hex_upstream_request_patch.go
 model_history.go
 model_history_fieldset.go
 model_history_fieldset_raw.go
@@ -467,6 +471,8 @@ model_repository_token_request.go
 model_repository_token_request_patch.go
 model_repository_token_sync.go
 model_repository_token_sync_request.go
+model_repository_transfer_region.go
+model_repository_transfer_region_request.go
 model_repository_webhook.go
 model_repository_webhook_request.go
 model_repository_webhook_request_patch.go

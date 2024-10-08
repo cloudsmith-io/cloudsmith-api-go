@@ -33,6 +33,8 @@ Name | Type | Description | Notes
 **NumDownloads** | Pointer to **int64** | The number of downloads for packages in the repository. | [optional] [readonly] 
 **NumPolicyViolatedPackages** | Pointer to **int64** | Number of packages with policy violations in a repository. | [optional] [readonly] 
 **NumQuarantinedPackages** | Pointer to **int64** | Number of quarantined packages in a repository. | [optional] [readonly] 
+**OpenSourceLicense** | Pointer to **NullableString** | The SPDX identifier of the open source license. | [optional] 
+**OpenSourceProjectUrl** | Pointer to **NullableString** | The URL to the Open-Source project, used for validating that the project meets the requirements for Open-Source. | [optional] 
 **PackageCount** | Pointer to **int64** | The number of packages in the repository. | [optional] [readonly] 
 **PackageGroupCount** | Pointer to **int64** | The number of groups in the repository. | [optional] [readonly] 
 **ProxyNpmjs** | Pointer to **bool** | If checked, Npm packages that are not in the repository when requested by clients will automatically be proxied from the public npmjs.org registry. If there is at least one version for a package, others will not be proxied. | [optional] 
@@ -825,6 +827,76 @@ SetNumQuarantinedPackages sets NumQuarantinedPackages field to given value.
 
 HasNumQuarantinedPackages returns a boolean if a field has been set.
 
+### GetOpenSourceLicense
+
+`func (o *RepositoryCreate) GetOpenSourceLicense() string`
+
+GetOpenSourceLicense returns the OpenSourceLicense field if non-nil, zero value otherwise.
+
+### GetOpenSourceLicenseOk
+
+`func (o *RepositoryCreate) GetOpenSourceLicenseOk() (*string, bool)`
+
+GetOpenSourceLicenseOk returns a tuple with the OpenSourceLicense field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenSourceLicense
+
+`func (o *RepositoryCreate) SetOpenSourceLicense(v string)`
+
+SetOpenSourceLicense sets OpenSourceLicense field to given value.
+
+### HasOpenSourceLicense
+
+`func (o *RepositoryCreate) HasOpenSourceLicense() bool`
+
+HasOpenSourceLicense returns a boolean if a field has been set.
+
+### SetOpenSourceLicenseNil
+
+`func (o *RepositoryCreate) SetOpenSourceLicenseNil(b bool)`
+
+ SetOpenSourceLicenseNil sets the value for OpenSourceLicense to be an explicit nil
+
+### UnsetOpenSourceLicense
+`func (o *RepositoryCreate) UnsetOpenSourceLicense()`
+
+UnsetOpenSourceLicense ensures that no value is present for OpenSourceLicense, not even an explicit nil
+### GetOpenSourceProjectUrl
+
+`func (o *RepositoryCreate) GetOpenSourceProjectUrl() string`
+
+GetOpenSourceProjectUrl returns the OpenSourceProjectUrl field if non-nil, zero value otherwise.
+
+### GetOpenSourceProjectUrlOk
+
+`func (o *RepositoryCreate) GetOpenSourceProjectUrlOk() (*string, bool)`
+
+GetOpenSourceProjectUrlOk returns a tuple with the OpenSourceProjectUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenSourceProjectUrl
+
+`func (o *RepositoryCreate) SetOpenSourceProjectUrl(v string)`
+
+SetOpenSourceProjectUrl sets OpenSourceProjectUrl field to given value.
+
+### HasOpenSourceProjectUrl
+
+`func (o *RepositoryCreate) HasOpenSourceProjectUrl() bool`
+
+HasOpenSourceProjectUrl returns a boolean if a field has been set.
+
+### SetOpenSourceProjectUrlNil
+
+`func (o *RepositoryCreate) SetOpenSourceProjectUrlNil(b bool)`
+
+ SetOpenSourceProjectUrlNil sets the value for OpenSourceProjectUrl to be an explicit nil
+
+### UnsetOpenSourceProjectUrl
+`func (o *RepositoryCreate) UnsetOpenSourceProjectUrl()`
+
+UnsetOpenSourceProjectUrl ensures that no value is present for OpenSourceProjectUrl, not even an explicit nil
 ### GetPackageCount
 
 `func (o *RepositoryCreate) GetPackageCount() int64`

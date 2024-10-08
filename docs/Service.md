@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **CreatedByUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Description** | Pointer to **string** | The description of the service | [optional] 
 **Key** | Pointer to **string** | The API key of the service | [optional] [readonly] 
+**KeyExpiresAt** | Pointer to **NullableTime** | The time at which the API key will expire. This will only be populated if the Organization has an active API Key Policy. | [optional] [readonly] 
 **Name** | **string** | The name of the service | 
 **Role** | Pointer to **string** | The role of the service. | [optional] [default to "Member"]
 **Slug** | Pointer to **string** | The slug of the service | [optional] [readonly] 
@@ -158,6 +159,41 @@ SetKey sets Key field to given value.
 
 HasKey returns a boolean if a field has been set.
 
+### GetKeyExpiresAt
+
+`func (o *Service) GetKeyExpiresAt() time.Time`
+
+GetKeyExpiresAt returns the KeyExpiresAt field if non-nil, zero value otherwise.
+
+### GetKeyExpiresAtOk
+
+`func (o *Service) GetKeyExpiresAtOk() (*time.Time, bool)`
+
+GetKeyExpiresAtOk returns a tuple with the KeyExpiresAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetKeyExpiresAt
+
+`func (o *Service) SetKeyExpiresAt(v time.Time)`
+
+SetKeyExpiresAt sets KeyExpiresAt field to given value.
+
+### HasKeyExpiresAt
+
+`func (o *Service) HasKeyExpiresAt() bool`
+
+HasKeyExpiresAt returns a boolean if a field has been set.
+
+### SetKeyExpiresAtNil
+
+`func (o *Service) SetKeyExpiresAtNil(b bool)`
+
+ SetKeyExpiresAtNil sets the value for KeyExpiresAt to be an explicit nil
+
+### UnsetKeyExpiresAt
+`func (o *Service) UnsetKeyExpiresAt()`
+
+UnsetKeyExpiresAt ensures that no value is present for KeyExpiresAt, not even an explicit nil
 ### GetName
 
 `func (o *Service) GetName() string`

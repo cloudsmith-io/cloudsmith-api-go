@@ -30,6 +30,7 @@ Method | HTTP request | Description
 [**ReposRsaCreate**](ReposApi.md#ReposRsaCreate) | **Post** /repos/{owner}/{identifier}/rsa/ | Set the active RSA key for the Repository.
 [**ReposRsaList**](ReposApi.md#ReposRsaList) | **Get** /repos/{owner}/{identifier}/rsa/ | Retrieve the active RSA key for the Repository.
 [**ReposRsaRegenerate**](ReposApi.md#ReposRsaRegenerate) | **Post** /repos/{owner}/{identifier}/rsa/regenerate/ | Regenerate RSA Key for the Repository.
+[**ReposTransferRegion**](ReposApi.md#ReposTransferRegion) | **Post** /repos/{owner}/{repo}/transfer-region/ | Transfer a repository to a different region.
 [**ReposUpstreamComposerCreate**](ReposApi.md#ReposUpstreamComposerCreate) | **Post** /repos/{owner}/{identifier}/upstream/composer/ | Create a Composer upstream config for this repository.
 [**ReposUpstreamComposerDelete**](ReposApi.md#ReposUpstreamComposerDelete) | **Delete** /repos/{owner}/{identifier}/upstream/composer/{slug_perm}/ | Delete a Composer upstream config for this repository.
 [**ReposUpstreamComposerList**](ReposApi.md#ReposUpstreamComposerList) | **Get** /repos/{owner}/{identifier}/upstream/composer/ | List Composer upstream configs for this repository.
@@ -66,6 +67,12 @@ Method | HTTP request | Description
 [**ReposUpstreamHelmPartialUpdate**](ReposApi.md#ReposUpstreamHelmPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/helm/{slug_perm}/ | Partially update a Helm upstream config for this repository.
 [**ReposUpstreamHelmRead**](ReposApi.md#ReposUpstreamHelmRead) | **Get** /repos/{owner}/{identifier}/upstream/helm/{slug_perm}/ | Retrieve a Helm upstream config for this repository.
 [**ReposUpstreamHelmUpdate**](ReposApi.md#ReposUpstreamHelmUpdate) | **Put** /repos/{owner}/{identifier}/upstream/helm/{slug_perm}/ | Update a Helm upstream config for this repository.
+[**ReposUpstreamHexCreate**](ReposApi.md#ReposUpstreamHexCreate) | **Post** /repos/{owner}/{identifier}/upstream/hex/ | Create a Hex upstream config for this repository.
+[**ReposUpstreamHexDelete**](ReposApi.md#ReposUpstreamHexDelete) | **Delete** /repos/{owner}/{identifier}/upstream/hex/{slug_perm}/ | Delete a Hex upstream config for this repository.
+[**ReposUpstreamHexList**](ReposApi.md#ReposUpstreamHexList) | **Get** /repos/{owner}/{identifier}/upstream/hex/ | List Hex upstream configs for this repository.
+[**ReposUpstreamHexPartialUpdate**](ReposApi.md#ReposUpstreamHexPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/hex/{slug_perm}/ | Partially update a Hex upstream config for this repository.
+[**ReposUpstreamHexRead**](ReposApi.md#ReposUpstreamHexRead) | **Get** /repos/{owner}/{identifier}/upstream/hex/{slug_perm}/ | Retrieve a Hex upstream config for this repository.
+[**ReposUpstreamHexUpdate**](ReposApi.md#ReposUpstreamHexUpdate) | **Put** /repos/{owner}/{identifier}/upstream/hex/{slug_perm}/ | Update a Hex upstream config for this repository.
 [**ReposUpstreamMavenCreate**](ReposApi.md#ReposUpstreamMavenCreate) | **Post** /repos/{owner}/{identifier}/upstream/maven/ | Create a Maven upstream config for this repository.
 [**ReposUpstreamMavenDelete**](ReposApi.md#ReposUpstreamMavenDelete) | **Delete** /repos/{owner}/{identifier}/upstream/maven/{slug_perm}/ | Delete a Maven upstream config for this repository.
 [**ReposUpstreamMavenList**](ReposApi.md#ReposUpstreamMavenList) | **Get** /repos/{owner}/{identifier}/upstream/maven/ | List Maven upstream configs for this repository.
@@ -2021,6 +2028,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposTransferRegion
+
+> ReposTransferRegion(ctx, owner, repo).Data(data).Execute()
+
+Transfer a repository to a different region.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    data := *openapiclient.NewRepositoryTransferRegionRequest() // RepositoryTransferRegionRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.ReposApi.ReposTransferRegion(context.Background(), owner, repo).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposTransferRegion``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposTransferRegionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**RepositoryTransferRegionRequest**](RepositoryTransferRegionRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -4761,6 +4841,464 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HelmUpstream**](HelmUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamHexCreate
+
+> HexUpstream ReposUpstreamHexCreate(ctx, owner, identifier).Data(data).Execute()
+
+Create a Hex upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    data := *openapiclient.NewHexUpstreamRequest("Name_example", "UpstreamUrl_example") // HexUpstreamRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposUpstreamHexCreate(context.Background(), owner, identifier).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexCreate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposUpstreamHexCreate`: HexUpstream
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamHexCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**HexUpstreamRequest**](HexUpstreamRequest.md) |  | 
+
+### Return type
+
+[**HexUpstream**](HexUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamHexDelete
+
+> ReposUpstreamHexDelete(ctx, owner, identifier, slugPerm).Execute()
+
+Delete a Hex upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.ReposApi.ReposUpstreamHexDelete(context.Background(), owner, identifier, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexDelete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamHexDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamHexList
+
+> []HexUpstream ReposUpstreamHexList(ctx, owner, identifier).Page(page).PageSize(pageSize).Execute()
+
+List Hex upstream configs for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    page := int64(56) // int64 | A page number within the paginated result set. (optional)
+    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposUpstreamHexList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposUpstreamHexList`: []HexUpstream
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamHexListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]HexUpstream**](HexUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamHexPartialUpdate
+
+> HexUpstream ReposUpstreamHexPartialUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Partially update a Hex upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewHexUpstreamRequestPatch() // HexUpstreamRequestPatch |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposUpstreamHexPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexPartialUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposUpstreamHexPartialUpdate`: HexUpstream
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamHexPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**HexUpstreamRequestPatch**](HexUpstreamRequestPatch.md) |  | 
+
+### Return type
+
+[**HexUpstream**](HexUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamHexRead
+
+> HexUpstream ReposUpstreamHexRead(ctx, owner, identifier, slugPerm).Execute()
+
+Retrieve a Hex upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposUpstreamHexRead(context.Background(), owner, identifier, slugPerm).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexRead``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposUpstreamHexRead`: HexUpstream
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamHexReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**HexUpstream**](HexUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamHexUpdate
+
+> HexUpstream ReposUpstreamHexUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Update a Hex upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    identifier := "identifier_example" // string | 
+    slugPerm := "slugPerm_example" // string | 
+    data := *openapiclient.NewHexUpstreamRequest("Name_example", "UpstreamUrl_example") // HexUpstreamRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ReposApi.ReposUpstreamHexUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexUpdate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReposUpstreamHexUpdate`: HexUpstream
+    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamHexUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**HexUpstreamRequest**](HexUpstreamRequest.md) |  | 
+
+### Return type
+
+[**HexUpstream**](HexUpstream.md)
 
 ### Authorization
 
