@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the DebPackageUploadRequest type satisfies the MappedNullable interface at compile time
@@ -23,7 +25,7 @@ type DebPackageUploadRequest struct {
 	// The changes archive containing the changes made to the source and debian packaging files
 	ChangesFile NullableString `json:"changes_file,omitempty"`
 	// The component (channel) for the package (e.g. 'main', 'unstable', etc.)
-	Component *string `json:"component,omitempty"`
+	Component *string `json:"component,omitempty" validate:"regexp=^[-_.\\\\w]+$"`
 	// The distribution to store the package for.
 	Distribution string `json:"distribution"`
 	// The primary file for the package.
@@ -35,6 +37,8 @@ type DebPackageUploadRequest struct {
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`
 }
+
+type _DebPackageUploadRequest DebPackageUploadRequest
 
 // NewDebPackageUploadRequest instantiates a new DebPackageUploadRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -328,6 +332,44 @@ func (o DebPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["tags"] = o.Tags.Get()
 	}
 	return toSerialize, nil
+}
+
+func (o *DebPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"distribution",
+		"package_file",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDebPackageUploadRequest := _DebPackageUploadRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDebPackageUploadRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DebPackageUploadRequest(varDebPackageUploadRequest)
+
+	return err
 }
 
 type NullableDebPackageUploadRequest struct {

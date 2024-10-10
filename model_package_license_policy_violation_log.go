@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -26,6 +28,8 @@ type PackageLicensePolicyViolationLog struct {
 	Policy  NestedLicensePolicy  `json:"policy"`
 	Reasons []string             `json:"reasons"`
 }
+
+type _PackageLicensePolicyViolationLog PackageLicensePolicyViolationLog
 
 // NewPackageLicensePolicyViolationLog instantiates a new PackageLicensePolicyViolationLog object
 // This constructor will assign default values to properties that have it defined,
@@ -168,6 +172,45 @@ func (o PackageLicensePolicyViolationLog) ToMap() (map[string]interface{}, error
 	toSerialize["policy"] = o.Policy
 	toSerialize["reasons"] = o.Reasons
 	return toSerialize, nil
+}
+
+func (o *PackageLicensePolicyViolationLog) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"package",
+		"policy",
+		"reasons",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPackageLicensePolicyViolationLog := _PackageLicensePolicyViolationLog{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPackageLicensePolicyViolationLog)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageLicensePolicyViolationLog(varPackageLicensePolicyViolationLog)
+
+	return err
 }
 
 type NullablePackageLicensePolicyViolationLog struct {

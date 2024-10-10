@@ -26,26 +26,26 @@ Create a specific webhook in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    data := *openapiclient.NewRepositoryWebhookRequest([]string{"Events_example"}, "TargetUrl_example", []openapiclient.WebhookTemplate{nil}) // RepositoryWebhookRequest |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewRepositoryWebhookRequest([]string{"Events_example"}, "TargetUrl_example", []openapiclient.WebhookTemplate{nil}) // RepositoryWebhookRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.WebhooksCreate(context.Background(), owner, repo).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `WebhooksCreate`: RepositoryWebhook
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksApi.WebhooksCreate(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `WebhooksCreate`: RepositoryWebhook
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksCreate`: %v\n", resp)
 }
 ```
 
@@ -101,24 +101,24 @@ Delete a specific webhook in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.WebhooksApi.WebhooksDelete(context.Background(), owner, repo, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksApi.WebhooksDelete(context.Background(), owner, repo, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -175,27 +175,27 @@ Get a list of all webhooks in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.WebhooksList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `WebhooksList`: []RepositoryWebhook
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksApi.WebhooksList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `WebhooksList`: []RepositoryWebhook
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksList`: %v\n", resp)
 }
 ```
 
@@ -252,27 +252,27 @@ Update a specific webhook in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryWebhookRequestPatch() // RepositoryWebhookRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryWebhookRequestPatch() // RepositoryWebhookRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.WebhooksPartialUpdate(context.Background(), owner, repo, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `WebhooksPartialUpdate`: RepositoryWebhook
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksApi.WebhooksPartialUpdate(context.Background(), owner, repo, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `WebhooksPartialUpdate`: RepositoryWebhook
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -330,26 +330,26 @@ Views for working with repository webhooks.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.WebhooksRead(context.Background(), owner, repo, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `WebhooksRead`: RepositoryWebhook
-    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WebhooksApi.WebhooksRead(context.Background(), owner, repo, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.WebhooksRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `WebhooksRead`: RepositoryWebhook
+	fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.WebhooksRead`: %v\n", resp)
 }
 ```
 

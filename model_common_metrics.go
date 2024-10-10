@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the CommonMetrics type satisfies the MappedNullable interface at compile time
@@ -29,6 +31,8 @@ type CommonMetrics struct {
 	// Total number of packages in repo
 	Total *int64 `json:"total,omitempty"`
 }
+
+type _CommonMetrics CommonMetrics
 
 // NewCommonMetrics instantiates a new CommonMetrics object
 // This constructor will assign default values to properties that have it defined,
@@ -215,6 +219,44 @@ func (o CommonMetrics) ToMap() (map[string]interface{}, error) {
 		toSerialize["total"] = o.Total
 	}
 	return toSerialize, nil
+}
+
+func (o *CommonMetrics) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"bandwidth",
+		"downloads",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCommonMetrics := _CommonMetrics{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCommonMetrics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CommonMetrics(varCommonMetrics)
+
+	return err
 }
 
 type NullableCommonMetrics struct {

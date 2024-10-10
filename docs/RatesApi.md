@@ -22,23 +22,23 @@ Endpoint to check rate limits for current user.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.RatesApi.RatesLimitsList(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RatesApi.RatesLimitsList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RatesLimitsList`: ResourcesRateCheck
-    fmt.Fprintf(os.Stdout, "Response from `RatesApi.RatesLimitsList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.RatesApi.RatesLimitsList(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `RatesApi.RatesLimitsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RatesLimitsList`: ResourcesRateCheck
+	fmt.Fprintf(os.Stdout, "Response from `RatesApi.RatesLimitsList`: %v\n", resp)
 }
 ```
 

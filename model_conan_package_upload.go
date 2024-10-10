@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -92,8 +92,8 @@ type ConanPackageUpload struct {
 	// The calculated size of the package.
 	Size *int64 `json:"size,omitempty"`
 	// The public unique identifier for the package.
-	Slug     *string `json:"slug,omitempty"`
-	SlugPerm *string `json:"slug_perm,omitempty"`
+	Slug     *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// The synchronisation (in progress) stage of the package.
 	Stage    *int64  `json:"stage,omitempty"`
 	StageStr *string `json:"stage_str,omitempty"`

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the ErrorDetail type satisfies the MappedNullable interface at compile time
@@ -23,6 +25,8 @@ type ErrorDetail struct {
 	// An extended message for the response.
 	Detail string `json:"detail"`
 }
+
+type _ErrorDetail ErrorDetail
 
 // NewErrorDetail instantiates a new ErrorDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -78,6 +82,43 @@ func (o ErrorDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["detail"] = o.Detail
 	return toSerialize, nil
+}
+
+func (o *ErrorDetail) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"detail",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varErrorDetail := _ErrorDetail{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varErrorDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ErrorDetail(varErrorDetail)
+
+	return err
 }
 
 type NullableErrorDetail struct {

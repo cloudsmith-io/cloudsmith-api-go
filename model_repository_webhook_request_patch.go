@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -32,9 +32,9 @@ type RepositoryWebhookRequestPatch struct {
 	// The value that will be sent for the 'Content Type' header.
 	RequestContentType NullableString `json:"request_content_type,omitempty"`
 	// The header to send the predefined secret in. This must be unique from existing headers or it won't be sent. You can use this as a form of authentication on the endpoint side.
-	SecretHeader NullableString `json:"secret_header,omitempty"`
+	SecretHeader NullableString `json:"secret_header,omitempty" validate:"regexp=^[-\\\\w]+$"`
 	// The value for the predefined secret (note: this is treated as a passphrase and is encrypted when we store it). You can use this as a form of authentication on the endpoint side.
-	SecretValue NullableString `json:"secret_value,omitempty"`
+	SecretValue NullableString `json:"secret_value,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// The value for the signature key - This is used to generate an HMAC-based hex digest of the request body, which we send as the X-Cloudsmith-Signature header so that you can ensure that the request wasn't modified by a malicious party (note: this is treated as a passphrase and is encrypted when we store it).
 	SignatureKey *string `json:"signature_key,omitempty"`
 	// The destination URL that webhook payloads will be POST'ed to.
@@ -82,7 +82,7 @@ func (o *RepositoryWebhookRequestPatch) GetEventsOk() ([]string, bool) {
 
 // HasEvents returns a boolean if a field has been set.
 func (o *RepositoryWebhookRequestPatch) HasEvents() bool {
-	if o != nil && IsNil(o.Events) {
+	if o != nil && !IsNil(o.Events) {
 		return true
 	}
 
@@ -447,7 +447,7 @@ func (o *RepositoryWebhookRequestPatch) GetTemplatesOk() ([]WebhookTemplate, boo
 
 // HasTemplates returns a boolean if a field has been set.
 func (o *RepositoryWebhookRequestPatch) HasTemplates() bool {
-	if o != nil && IsNil(o.Templates) {
+	if o != nil && !IsNil(o.Templates) {
 		return true
 	}
 

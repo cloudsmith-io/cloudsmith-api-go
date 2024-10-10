@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -35,9 +37,11 @@ type Service struct {
 	// The role of the service.
 	Role *string `json:"role,omitempty"`
 	// The slug of the service
-	Slug  *string        `json:"slug,omitempty"`
+	Slug  *string        `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	Teams []ServiceTeams `json:"teams,omitempty"`
 }
+
+type _Service Service
 
 // NewService instantiates a new Service object
 // This constructor will assign default values to properties that have it defined,
@@ -423,6 +427,43 @@ func (o Service) ToMap() (map[string]interface{}, error) {
 		toSerialize["teams"] = o.Teams
 	}
 	return toSerialize, nil
+}
+
+func (o *Service) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varService := _Service{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varService)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Service(varService)
+
+	return err
 }
 
 type NullableService struct {

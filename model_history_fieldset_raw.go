@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the HistoryFieldsetRaw type satisfies the MappedNullable interface at compile time
@@ -24,6 +26,8 @@ type HistoryFieldsetRaw struct {
 	StorageUsed StorageUsageRaw `json:"storage_used"`
 	Uploaded    UsageRaw        `json:"uploaded"`
 }
+
+type _HistoryFieldsetRaw HistoryFieldsetRaw
 
 // NewHistoryFieldsetRaw instantiates a new HistoryFieldsetRaw object
 // This constructor will assign default values to properties that have it defined,
@@ -131,6 +135,45 @@ func (o HistoryFieldsetRaw) ToMap() (map[string]interface{}, error) {
 	toSerialize["storage_used"] = o.StorageUsed
 	toSerialize["uploaded"] = o.Uploaded
 	return toSerialize, nil
+}
+
+func (o *HistoryFieldsetRaw) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"downloaded",
+		"storage_used",
+		"uploaded",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varHistoryFieldsetRaw := _HistoryFieldsetRaw{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varHistoryFieldsetRaw)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HistoryFieldsetRaw(varHistoryFieldsetRaw)
+
+	return err
 }
 
 type NullableHistoryFieldsetRaw struct {

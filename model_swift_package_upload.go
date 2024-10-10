@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -99,8 +101,8 @@ type SwiftPackageUpload struct {
 	// The calculated size of the package.
 	Size *int64 `json:"size,omitempty"`
 	// The public unique identifier for the package.
-	Slug     *string `json:"slug,omitempty"`
-	SlugPerm *string `json:"slug_perm,omitempty"`
+	Slug     *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// The synchronisation (in progress) stage of the package.
 	Stage    *int64  `json:"stage,omitempty"`
 	StageStr *string `json:"stage_str,omitempty"`
@@ -133,6 +135,8 @@ type SwiftPackageUpload struct {
 	VersionOrig                 *string `json:"version_orig,omitempty"`
 	VulnerabilityScanResultsUrl *string `json:"vulnerability_scan_results_url,omitempty"`
 }
+
+type _SwiftPackageUpload SwiftPackageUpload
 
 // NewSwiftPackageUpload instantiates a new SwiftPackageUpload object
 // This constructor will assign default values to properties that have it defined,
@@ -3146,6 +3150,45 @@ func (o SwiftPackageUpload) ToMap() (map[string]interface{}, error) {
 		toSerialize["vulnerability_scan_results_url"] = o.VulnerabilityScanResultsUrl
 	}
 	return toSerialize, nil
+}
+
+func (o *SwiftPackageUpload) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"scope",
+		"version",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSwiftPackageUpload := _SwiftPackageUpload{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSwiftPackageUpload)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SwiftPackageUpload(varSwiftPackageUpload)
+
+	return err
 }
 
 type NullableSwiftPackageUpload struct {
