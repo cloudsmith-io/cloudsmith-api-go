@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Detail** | Pointer to **string** | The message describing the state of the API. | [optional] [readonly] [default to "Cloudsmith API is operational."]
-**Version** | Pointer to **string** | The current version for the Cloudsmith service. | [optional] [readonly] [default to "1.533.1"]
+**Version** | Pointer to **string** | The current version for the Cloudsmith service. | [optional] [readonly] [default to "1.536.1"]
 
 ## Methods
 

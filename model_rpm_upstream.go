@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -33,13 +35,13 @@ type RpmUpstream struct {
 	// The distribution version that packages found on this upstream will be associated with.
 	DistroVersion string `json:"distro_version"`
 	// The key for extra header #1 to send to upstream.
-	ExtraHeader1 NullableString `json:"extra_header_1,omitempty"`
+	ExtraHeader1 NullableString `json:"extra_header_1,omitempty" validate:"regexp=^[-\\\\w]+$"`
 	// The key for extra header #2 to send to upstream.
-	ExtraHeader2 NullableString `json:"extra_header_2,omitempty"`
+	ExtraHeader2 NullableString `json:"extra_header_2,omitempty" validate:"regexp=^[-\\\\w]+$"`
 	// The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue1 NullableString `json:"extra_value_1,omitempty"`
+	ExtraValue1 NullableString `json:"extra_value_1,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue2 NullableString `json:"extra_value_2,omitempty"`
+	ExtraValue2 NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// A public GPG key to associate with packages found on this upstream. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
 	GpgKeyInline NullableString `json:"gpg_key_inline,omitempty"`
 	// When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
@@ -53,12 +55,12 @@ type RpmUpstream struct {
 	// The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode.
 	Mode *string `json:"mode,omitempty"`
 	// A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream.
-	Name string `json:"name"`
+	Name string `json:"name" validate:"regexp=^\\\\w[\\\\w \\\\-'\\\\.\\/()]+$"`
 	// When true, this upstream source is pending validation.
 	PendingValidation *bool `json:"pending_validation,omitempty"`
 	// Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date.
 	Priority  *int64     `json:"priority,omitempty"`
-	SlugPerm  *string    `json:"slug_perm,omitempty"`
+	SlugPerm  *string    `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.
 	UpstreamUrl string `json:"upstream_url"`
@@ -67,6 +69,8 @@ type RpmUpstream struct {
 	// If enabled, SSL certificates are verified when requests are made to this upstream. It's recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams.
 	VerifySsl *bool `json:"verify_ssl,omitempty"`
 }
+
+type _RpmUpstream RpmUpstream
 
 // NewRpmUpstream instantiates a new RpmUpstream object
 // This constructor will assign default values to properties that have it defined,
@@ -1009,6 +1013,45 @@ func (o RpmUpstream) ToMap() (map[string]interface{}, error) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
 	return toSerialize, nil
+}
+
+func (o *RpmUpstream) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"distro_version",
+		"name",
+		"upstream_url",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRpmUpstream := _RpmUpstream{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRpmUpstream)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RpmUpstream(varRpmUpstream)
+
+	return err
 }
 
 type NullableRpmUpstream struct {

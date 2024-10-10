@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -66,7 +66,7 @@ type RepositoryTokenRefresh struct {
 	ScheduledResetAt     NullableTime   `json:"scheduled_reset_at,omitempty"`
 	ScheduledResetPeriod NullableString `json:"scheduled_reset_period,omitempty"`
 	SelfUrl              *string        `json:"self_url,omitempty"`
-	SlugPerm             *string        `json:"slug_perm,omitempty"`
+	SlugPerm             *string        `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	Token                *string        `json:"token,omitempty"`
 	// The datetime the token was updated at.
 	UpdatedAt    NullableTime   `json:"updated_at,omitempty"`
@@ -1023,7 +1023,7 @@ func (o *RepositoryTokenRefresh) GetMetadataOk() (map[string]interface{}, bool) 
 
 // HasMetadata returns a boolean if a field has been set.
 func (o *RepositoryTokenRefresh) HasMetadata() bool {
-	if o != nil && IsNil(o.Metadata) {
+	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
 

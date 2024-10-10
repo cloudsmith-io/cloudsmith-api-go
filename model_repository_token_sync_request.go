@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RepositoryTokenSyncRequest type satisfies the MappedNullable interface at compile time
@@ -23,6 +25,8 @@ type RepositoryTokenSyncRequest struct {
 	// The source repository slug (in the same owner namespace).
 	Source string `json:"source"`
 }
+
+type _RepositoryTokenSyncRequest RepositoryTokenSyncRequest
 
 // NewRepositoryTokenSyncRequest instantiates a new RepositoryTokenSyncRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -78,6 +82,43 @@ func (o RepositoryTokenSyncRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["source"] = o.Source
 	return toSerialize, nil
+}
+
+func (o *RepositoryTokenSyncRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"source",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRepositoryTokenSyncRequest := _RepositoryTokenSyncRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRepositoryTokenSyncRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryTokenSyncRequest(varRepositoryTokenSyncRequest)
+
+	return err
 }
 
 type NullableRepositoryTokenSyncRequest struct {

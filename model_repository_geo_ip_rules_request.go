@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RepositoryGeoIpRulesRequest type satisfies the MappedNullable interface at compile time
@@ -23,6 +25,8 @@ type RepositoryGeoIpRulesRequest struct {
 	Cidr        RepositoryGeoIpCidr        `json:"cidr"`
 	CountryCode RepositoryGeoIpCountryCode `json:"country_code"`
 }
+
+type _RepositoryGeoIpRulesRequest RepositoryGeoIpRulesRequest
 
 // NewRepositoryGeoIpRulesRequest instantiates a new RepositoryGeoIpRulesRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -104,6 +108,44 @@ func (o RepositoryGeoIpRulesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["cidr"] = o.Cidr
 	toSerialize["country_code"] = o.CountryCode
 	return toSerialize, nil
+}
+
+func (o *RepositoryGeoIpRulesRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"cidr",
+		"country_code",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRepositoryGeoIpRulesRequest := _RepositoryGeoIpRulesRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRepositoryGeoIpRulesRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryGeoIpRulesRequest(varRepositoryGeoIpRulesRequest)
+
+	return err
 }
 
 type NullableRepositoryGeoIpRulesRequest struct {

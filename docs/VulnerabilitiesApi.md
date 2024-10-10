@@ -25,26 +25,26 @@ Lists scan results for a specific namespace.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.VulnerabilitiesApi.VulnerabilitiesNamespaceList(context.Background(), owner).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesNamespaceList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `VulnerabilitiesNamespaceList`: []VulnerabilityScanResultsList
-    fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesNamespaceList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.VulnerabilitiesApi.VulnerabilitiesNamespaceList(context.Background(), owner).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesNamespaceList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `VulnerabilitiesNamespaceList`: []VulnerabilityScanResultsList
+	fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesNamespaceList`: %v\n", resp)
 }
 ```
 
@@ -99,28 +99,28 @@ Lists scan results for a specific package.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    package_ := "package__example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	package_ := "package__example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.VulnerabilitiesApi.VulnerabilitiesPackageList(context.Background(), owner, repo, package_).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesPackageList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `VulnerabilitiesPackageList`: []VulnerabilityScanResultsList
-    fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesPackageList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.VulnerabilitiesApi.VulnerabilitiesPackageList(context.Background(), owner, repo, package_).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesPackageList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `VulnerabilitiesPackageList`: []VulnerabilityScanResultsList
+	fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesPackageList`: %v\n", resp)
 }
 ```
 
@@ -179,27 +179,27 @@ Get a scan result.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    package_ := "package__example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	package_ := "package__example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.VulnerabilitiesApi.VulnerabilitiesRead(context.Background(), owner, repo, package_, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `VulnerabilitiesRead`: VulnerabilityScanResults
-    fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.VulnerabilitiesApi.VulnerabilitiesRead(context.Background(), owner, repo, package_, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `VulnerabilitiesRead`: VulnerabilityScanResults
+	fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesRead`: %v\n", resp)
 }
 ```
 
@@ -258,27 +258,27 @@ Lists scan results for a specific repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.VulnerabilitiesApi.VulnerabilitiesRepoList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesRepoList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `VulnerabilitiesRepoList`: []VulnerabilityScanResultsList
-    fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesRepoList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.VulnerabilitiesApi.VulnerabilitiesRepoList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `VulnerabilitiesApi.VulnerabilitiesRepoList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `VulnerabilitiesRepoList`: []VulnerabilityScanResultsList
+	fmt.Fprintf(os.Stdout, "Response from `VulnerabilitiesApi.VulnerabilitiesRepoList`: %v\n", resp)
 }
 ```
 

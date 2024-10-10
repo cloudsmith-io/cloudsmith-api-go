@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the GeoIpLocation type satisfies the MappedNullable interface at compile time
@@ -28,6 +30,8 @@ type GeoIpLocation struct {
 	Longitude   NullableFloat64 `json:"longitude,omitempty"`
 	PostalCode  NullableString  `json:"postal_code"`
 }
+
+type _GeoIpLocation GeoIpLocation
 
 // NewGeoIpLocation instantiates a new GeoIpLocation object
 // This constructor will assign default values to properties that have it defined,
@@ -296,6 +300,46 @@ func (o GeoIpLocation) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["postal_code"] = o.PostalCode.Get()
 	return toSerialize, nil
+}
+
+func (o *GeoIpLocation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"city",
+		"continent",
+		"country",
+		"postal_code",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGeoIpLocation := _GeoIpLocation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varGeoIpLocation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeoIpLocation(varGeoIpLocation)
+
+	return err
 }
 
 type NullableGeoIpLocation struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -577,9 +577,9 @@ func (a *FilesApiService) FilesInfoExecute(r ApiFilesInfoRequest) (*PackageFileP
 		return localVarReturnValue, nil, reportError("filename is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "filename", r.filename, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "filename", r.filename, "", "")
 	if r.partNumber != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "part_number", r.partNumber, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "part_number", r.partNumber, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

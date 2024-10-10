@@ -133,25 +133,25 @@ Retrieve the GeoIP status for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ApiReposGeoipStatus(context.Background(), owner, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ApiReposGeoipStatus``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ApiReposGeoipStatus`: RepositoryGeoIpStatus
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ApiReposGeoipStatus`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ApiReposGeoipStatus(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ApiReposGeoipStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ApiReposGeoipStatus`: RepositoryGeoIpStatus
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ApiReposGeoipStatus`: %v\n", resp)
 }
 ```
 
@@ -206,26 +206,26 @@ Update the retention rules for the repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    data := *openapiclient.NewRepositoryRetentionRulesRequestPatch() // RepositoryRetentionRulesRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewRepositoryRetentionRulesRequestPatch() // RepositoryRetentionRulesRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.RepoRetentionPartialUpdate(context.Background(), owner, repo).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.RepoRetentionPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RepoRetentionPartialUpdate`: RepositoryRetentionRules
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.RepoRetentionPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.RepoRetentionPartialUpdate(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.RepoRetentionPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RepoRetentionPartialUpdate`: RepositoryRetentionRules
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.RepoRetentionPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -281,25 +281,25 @@ Retrieve the retention rules for the repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.RepoRetentionRead(context.Background(), owner, repo).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.RepoRetentionRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RepoRetentionRead`: RepositoryRetentionRules
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.RepoRetentionRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.RepoRetentionRead(context.Background(), owner, repo).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.RepoRetentionRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RepoRetentionRead`: RepositoryRetentionRules
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.RepoRetentionRead`: %v\n", resp)
 }
 ```
 
@@ -354,25 +354,25 @@ Create a new repository in a given namespace.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    data := *openapiclient.NewRepositoryCreateRequest("Name_example") // RepositoryCreateRequest |  (optional)
+	owner := "owner_example" // string | 
+	data := *openapiclient.NewRepositoryCreateRequest("Name_example") // RepositoryCreateRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposCreate(context.Background(), owner).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposCreate`: RepositoryCreate
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposCreate(context.Background(), owner).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposCreate`: RepositoryCreate
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposCreate`: %v\n", resp)
 }
 ```
 
@@ -426,23 +426,23 @@ Delete a repository in a given namespace.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposDelete(context.Background(), owner, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposDelete(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -497,26 +497,26 @@ Set the active ECDSA key for the Repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryEcdsaKeyCreate("EcdsaPrivateKey_example") // RepositoryEcdsaKeyCreate |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryEcdsaKeyCreate("EcdsaPrivateKey_example") // RepositoryEcdsaKeyCreate |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposEcdsaCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposEcdsaCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposEcdsaCreate`: RepositoryEcdsaKey
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposEcdsaCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposEcdsaCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposEcdsaCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposEcdsaCreate`: RepositoryEcdsaKey
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposEcdsaCreate`: %v\n", resp)
 }
 ```
 
@@ -572,25 +572,25 @@ Retrieve the active ECDSA key for the Repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposEcdsaList(context.Background(), owner, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposEcdsaList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposEcdsaList`: RepositoryEcdsaKey
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposEcdsaList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposEcdsaList(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposEcdsaList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposEcdsaList`: RepositoryEcdsaKey
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposEcdsaList`: %v\n", resp)
 }
 ```
 
@@ -645,25 +645,25 @@ Regenerate ECDSA Key for the Repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposEcdsaRegenerate(context.Background(), owner, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposEcdsaRegenerate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposEcdsaRegenerate`: RepositoryEcdsaKey
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposEcdsaRegenerate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposEcdsaRegenerate(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposEcdsaRegenerate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposEcdsaRegenerate`: RepositoryEcdsaKey
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposEcdsaRegenerate`: %v\n", resp)
 }
 ```
 
@@ -718,24 +718,24 @@ Disable GeoIP for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposGeoipDisable(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipDisable``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposGeoipDisable(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipDisable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -791,24 +791,24 @@ Enable GeoIP for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposGeoipEnable(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipEnable``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposGeoipEnable(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipEnable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -864,26 +864,26 @@ Partially update repository geoip rules.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryGeoIpRulesRequestPatch() // RepositoryGeoIpRulesRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryGeoIpRulesRequestPatch() // RepositoryGeoIpRulesRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposGeoipPartialUpdate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposGeoipPartialUpdate`: RepositoryGeoIpRules
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposGeoipPartialUpdate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposGeoipPartialUpdate`: RepositoryGeoIpRules
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -939,25 +939,25 @@ List all repository geoip rules.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposGeoipRead(context.Background(), owner, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposGeoipRead`: RepositoryGeoIpRules
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposGeoipRead(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposGeoipRead`: RepositoryGeoIpRules
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipRead`: %v\n", resp)
 }
 ```
 
@@ -1012,26 +1012,26 @@ Test a list of IP addresses against the repository's current GeoIP rules.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryGeoIpTestAddress([]string{"Addresses_example"}) // RepositoryGeoIpTestAddress |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryGeoIpTestAddress([]string{"Addresses_example"}) // RepositoryGeoIpTestAddress |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposGeoipTest(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipTest``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposGeoipTest`: RepositoryGeoIpTestAddressResponse
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipTest`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposGeoipTest(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipTest``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposGeoipTest`: RepositoryGeoIpTestAddressResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipTest`: %v\n", resp)
 }
 ```
 
@@ -1087,26 +1087,26 @@ Replace repository geoip rules.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryGeoIpRulesRequest(*openapiclient.NewRepositoryGeoIpCidr([]string{"Allow_example"}, []string{"Deny_example"}), *openapiclient.NewRepositoryGeoIpCountryCode([]string{"Allow_example"}, []string{"Deny_example"})) // RepositoryGeoIpRulesRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryGeoIpRulesRequest(*openapiclient.NewRepositoryGeoIpCidr([]string{"Allow_example"}, []string{"Deny_example"}), *openapiclient.NewRepositoryGeoIpCountryCode([]string{"Allow_example"}, []string{"Deny_example"})) // RepositoryGeoIpRulesRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposGeoipUpdate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposGeoipUpdate`: RepositoryGeoIpRules
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposGeoipUpdate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGeoipUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposGeoipUpdate`: RepositoryGeoIpRules
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGeoipUpdate`: %v\n", resp)
 }
 ```
 
@@ -1162,26 +1162,26 @@ Set the active GPG key for the Repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryGpgKeyCreate("GpgPrivateKey_example") // RepositoryGpgKeyCreate |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryGpgKeyCreate("GpgPrivateKey_example") // RepositoryGpgKeyCreate |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposGpgCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGpgCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposGpgCreate`: RepositoryGpgKey
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGpgCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposGpgCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGpgCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposGpgCreate`: RepositoryGpgKey
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGpgCreate`: %v\n", resp)
 }
 ```
 
@@ -1237,25 +1237,25 @@ Retrieve the active GPG key for the Repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposGpgList(context.Background(), owner, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGpgList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposGpgList`: RepositoryGpgKey
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGpgList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposGpgList(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGpgList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposGpgList`: RepositoryGpgKey
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGpgList`: %v\n", resp)
 }
 ```
 
@@ -1310,25 +1310,25 @@ Regenerate GPG Key for the Repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposGpgRegenerate(context.Background(), owner, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGpgRegenerate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposGpgRegenerate`: RepositoryGpgKey
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGpgRegenerate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposGpgRegenerate(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposGpgRegenerate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposGpgRegenerate`: RepositoryGpgKey
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposGpgRegenerate`: %v\n", resp)
 }
 ```
 
@@ -1383,26 +1383,26 @@ Get a list of all repositories within a namespace.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposNamespaceList(context.Background(), owner).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposNamespaceList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposNamespaceList`: []Repository
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposNamespaceList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposNamespaceList(context.Background(), owner).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposNamespaceList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposNamespaceList`: []Repository
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposNamespaceList`: %v\n", resp)
 }
 ```
 
@@ -1457,26 +1457,26 @@ Update details about a repository in a given namespace.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryRequestPatch() // RepositoryRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryRequestPatch() // RepositoryRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposPartialUpdate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposPartialUpdate`: Repository
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposPartialUpdate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposPartialUpdate`: Repository
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -1532,27 +1532,27 @@ List all explicity created privileges for the repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposPrivilegesList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPrivilegesList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposPrivilegesList`: RepositoryPrivilegeInput
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposPrivilegesList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposPrivilegesList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPrivilegesList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposPrivilegesList`: RepositoryPrivilegeInput
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposPrivilegesList`: %v\n", resp)
 }
 ```
 
@@ -1609,24 +1609,24 @@ Modify privileges for the repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryPrivilegeInputRequestPatch() // RepositoryPrivilegeInputRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryPrivilegeInputRequestPatch() // RepositoryPrivilegeInputRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposPrivilegesPartialUpdate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPrivilegesPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposPrivilegesPartialUpdate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPrivilegesPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -1682,24 +1682,24 @@ Replace all existing repository privileges with those specified.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryPrivilegeInputRequest([]openapiclient.RepositoryPrivilegeDict{*openapiclient.NewRepositoryPrivilegeDict("Privilege_example")}) // RepositoryPrivilegeInputRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryPrivilegeInputRequest([]openapiclient.RepositoryPrivilegeDict{*openapiclient.NewRepositoryPrivilegeDict("Privilege_example")}) // RepositoryPrivilegeInputRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposPrivilegesUpdate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPrivilegesUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposPrivilegesUpdate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposPrivilegesUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -1755,25 +1755,25 @@ Get a specific repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposRead(context.Background(), owner, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposRead`: Repository
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposRead(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposRead`: Repository
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRead`: %v\n", resp)
 }
 ```
 
@@ -1828,26 +1828,26 @@ Set the active RSA key for the Repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRepositoryRsaKeyCreate("RsaPrivateKey_example") // RepositoryRsaKeyCreate |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryRsaKeyCreate("RsaPrivateKey_example") // RepositoryRsaKeyCreate |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposRsaCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRsaCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposRsaCreate`: RepositoryRsaKey
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRsaCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposRsaCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRsaCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposRsaCreate`: RepositoryRsaKey
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRsaCreate`: %v\n", resp)
 }
 ```
 
@@ -1903,25 +1903,25 @@ Retrieve the active RSA key for the Repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposRsaList(context.Background(), owner, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRsaList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposRsaList`: RepositoryRsaKey
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRsaList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposRsaList(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRsaList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposRsaList`: RepositoryRsaKey
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRsaList`: %v\n", resp)
 }
 ```
 
@@ -1976,25 +1976,25 @@ Regenerate RSA Key for the Repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposRsaRegenerate(context.Background(), owner, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRsaRegenerate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposRsaRegenerate`: RepositoryRsaKey
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRsaRegenerate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposRsaRegenerate(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposRsaRegenerate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposRsaRegenerate`: RepositoryRsaKey
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposRsaRegenerate`: %v\n", resp)
 }
 ```
 
@@ -2049,24 +2049,24 @@ Transfer a repository to a different region.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    data := *openapiclient.NewRepositoryTransferRegionRequest() // RepositoryTransferRegionRequest |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewRepositoryTransferRegionRequest() // RepositoryTransferRegionRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposTransferRegion(context.Background(), owner, repo).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposTransferRegion``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposTransferRegion(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposTransferRegion``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -2122,26 +2122,26 @@ Create a Composer upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewComposerUpstreamRequest("Name_example", "UpstreamUrl_example") // ComposerUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewComposerUpstreamRequest("Name_example", "UpstreamUrl_example") // ComposerUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamComposerCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamComposerCreate`: ComposerUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamComposerCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamComposerCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamComposerCreate`: ComposerUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamComposerCreate`: %v\n", resp)
 }
 ```
 
@@ -2197,24 +2197,24 @@ Delete a Composer upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamComposerDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamComposerDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -2271,27 +2271,27 @@ List Composer upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamComposerList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamComposerList`: []ComposerUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamComposerList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamComposerList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamComposerList`: []ComposerUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamComposerList`: %v\n", resp)
 }
 ```
 
@@ -2348,27 +2348,27 @@ Partially update a Composer upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewComposerUpstreamRequestPatch() // ComposerUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewComposerUpstreamRequestPatch() // ComposerUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamComposerPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamComposerPartialUpdate`: ComposerUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamComposerPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamComposerPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamComposerPartialUpdate`: ComposerUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamComposerPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -2426,26 +2426,26 @@ Retrieve a Composer upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamComposerRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamComposerRead`: ComposerUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamComposerRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamComposerRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamComposerRead`: ComposerUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamComposerRead`: %v\n", resp)
 }
 ```
 
@@ -2502,27 +2502,27 @@ Update a Composer upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewComposerUpstreamRequest("Name_example", "UpstreamUrl_example") // ComposerUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewComposerUpstreamRequest("Name_example", "UpstreamUrl_example") // ComposerUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamComposerUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamComposerUpdate`: ComposerUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamComposerUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamComposerUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamComposerUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamComposerUpdate`: ComposerUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamComposerUpdate`: %v\n", resp)
 }
 ```
 
@@ -2580,26 +2580,26 @@ Create a CRAN upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewCranUpstreamRequest("Name_example", "UpstreamUrl_example") // CranUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewCranUpstreamRequest("Name_example", "UpstreamUrl_example") // CranUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamCranCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamCranCreate`: CranUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCranCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamCranCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamCranCreate`: CranUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCranCreate`: %v\n", resp)
 }
 ```
 
@@ -2655,24 +2655,24 @@ Delete a CRAN upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamCranDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamCranDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -2729,27 +2729,27 @@ List CRAN upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamCranList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamCranList`: []CranUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCranList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamCranList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamCranList`: []CranUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCranList`: %v\n", resp)
 }
 ```
 
@@ -2806,27 +2806,27 @@ Partially update a CRAN upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewCranUpstreamRequestPatch() // CranUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewCranUpstreamRequestPatch() // CranUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamCranPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamCranPartialUpdate`: CranUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCranPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamCranPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamCranPartialUpdate`: CranUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCranPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -2884,26 +2884,26 @@ Retrieve a CRAN upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamCranRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamCranRead`: CranUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCranRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamCranRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamCranRead`: CranUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCranRead`: %v\n", resp)
 }
 ```
 
@@ -2960,27 +2960,27 @@ Update a CRAN upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewCranUpstreamRequest("Name_example", "UpstreamUrl_example") // CranUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewCranUpstreamRequest("Name_example", "UpstreamUrl_example") // CranUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamCranUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamCranUpdate`: CranUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCranUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamCranUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCranUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamCranUpdate`: CranUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCranUpdate`: %v\n", resp)
 }
 ```
 
@@ -3038,26 +3038,26 @@ Create a Dart upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewDartUpstreamRequest("Name_example", "UpstreamUrl_example") // DartUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewDartUpstreamRequest("Name_example", "UpstreamUrl_example") // DartUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDartCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDartCreate`: DartUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDartCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDartCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDartCreate`: DartUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDartCreate`: %v\n", resp)
 }
 ```
 
@@ -3113,24 +3113,24 @@ Delete a Dart upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamDartDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamDartDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -3187,27 +3187,27 @@ List Dart upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDartList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDartList`: []DartUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDartList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDartList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDartList`: []DartUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDartList`: %v\n", resp)
 }
 ```
 
@@ -3264,27 +3264,27 @@ Partially update a Dart upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewDartUpstreamRequestPatch() // DartUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewDartUpstreamRequestPatch() // DartUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDartPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDartPartialUpdate`: DartUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDartPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDartPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDartPartialUpdate`: DartUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDartPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -3342,26 +3342,26 @@ Retrieve a Dart upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDartRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDartRead`: DartUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDartRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDartRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDartRead`: DartUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDartRead`: %v\n", resp)
 }
 ```
 
@@ -3418,27 +3418,27 @@ Update a Dart upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewDartUpstreamRequest("Name_example", "UpstreamUrl_example") // DartUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewDartUpstreamRequest("Name_example", "UpstreamUrl_example") // DartUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDartUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDartUpdate`: DartUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDartUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDartUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDartUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDartUpdate`: DartUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDartUpdate`: %v\n", resp)
 }
 ```
 
@@ -3496,26 +3496,26 @@ Create a Debian upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewDebUpstreamRequest([]string{"DistroVersions_example"}, "Name_example", "UpstreamUrl_example") // DebUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewDebUpstreamRequest([]string{"DistroVersions_example"}, "Name_example", "UpstreamUrl_example") // DebUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDebCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDebCreate`: DebUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDebCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDebCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDebCreate`: DebUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDebCreate`: %v\n", resp)
 }
 ```
 
@@ -3571,24 +3571,24 @@ Delete a Debian upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamDebDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamDebDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -3645,27 +3645,27 @@ List Debian upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDebList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDebList`: []DebUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDebList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDebList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDebList`: []DebUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDebList`: %v\n", resp)
 }
 ```
 
@@ -3722,27 +3722,27 @@ Partially update a Debian upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewDebUpstreamRequestPatch() // DebUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewDebUpstreamRequestPatch() // DebUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDebPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDebPartialUpdate`: DebUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDebPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDebPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDebPartialUpdate`: DebUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDebPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -3800,26 +3800,26 @@ Retrieve a Debian upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDebRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDebRead`: DebUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDebRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDebRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDebRead`: DebUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDebRead`: %v\n", resp)
 }
 ```
 
@@ -3876,27 +3876,27 @@ Update a Debian upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewDebUpstreamRequest([]string{"DistroVersions_example"}, "Name_example", "UpstreamUrl_example") // DebUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewDebUpstreamRequest([]string{"DistroVersions_example"}, "Name_example", "UpstreamUrl_example") // DebUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDebUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDebUpdate`: DebUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDebUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDebUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDebUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDebUpdate`: DebUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDebUpdate`: %v\n", resp)
 }
 ```
 
@@ -3954,26 +3954,26 @@ Create a Docker upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewDockerUpstreamRequest("Name_example", "UpstreamUrl_example") // DockerUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewDockerUpstreamRequest("Name_example", "UpstreamUrl_example") // DockerUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDockerCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDockerCreate`: DockerUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDockerCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDockerCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDockerCreate`: DockerUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDockerCreate`: %v\n", resp)
 }
 ```
 
@@ -4029,24 +4029,24 @@ Delete a Docker upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamDockerDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamDockerDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -4103,27 +4103,27 @@ List Docker upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDockerList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDockerList`: []DockerUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDockerList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDockerList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDockerList`: []DockerUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDockerList`: %v\n", resp)
 }
 ```
 
@@ -4180,27 +4180,27 @@ Partially update a Docker upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewDockerUpstreamRequestPatch() // DockerUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewDockerUpstreamRequestPatch() // DockerUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDockerPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDockerPartialUpdate`: DockerUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDockerPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDockerPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDockerPartialUpdate`: DockerUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDockerPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -4258,26 +4258,26 @@ Retrieve a Docker upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDockerRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDockerRead`: DockerUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDockerRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDockerRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDockerRead`: DockerUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDockerRead`: %v\n", resp)
 }
 ```
 
@@ -4334,27 +4334,27 @@ Update a Docker upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewDockerUpstreamRequest("Name_example", "UpstreamUrl_example") // DockerUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewDockerUpstreamRequest("Name_example", "UpstreamUrl_example") // DockerUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamDockerUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamDockerUpdate`: DockerUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDockerUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamDockerUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamDockerUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamDockerUpdate`: DockerUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamDockerUpdate`: %v\n", resp)
 }
 ```
 
@@ -4412,26 +4412,26 @@ Create a Helm upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewHelmUpstreamRequest("Name_example", "UpstreamUrl_example") // HelmUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewHelmUpstreamRequest("Name_example", "UpstreamUrl_example") // HelmUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHelmCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamHelmCreate`: HelmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHelmCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamHelmCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamHelmCreate`: HelmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHelmCreate`: %v\n", resp)
 }
 ```
 
@@ -4487,24 +4487,24 @@ Delete a Helm upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamHelmDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamHelmDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -4561,27 +4561,27 @@ List Helm upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHelmList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamHelmList`: []HelmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHelmList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamHelmList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamHelmList`: []HelmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHelmList`: %v\n", resp)
 }
 ```
 
@@ -4638,27 +4638,27 @@ Partially update a Helm upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewHelmUpstreamRequestPatch() // HelmUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewHelmUpstreamRequestPatch() // HelmUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHelmPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamHelmPartialUpdate`: HelmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHelmPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamHelmPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamHelmPartialUpdate`: HelmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHelmPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -4716,26 +4716,26 @@ Retrieve a Helm upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHelmRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamHelmRead`: HelmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHelmRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamHelmRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamHelmRead`: HelmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHelmRead`: %v\n", resp)
 }
 ```
 
@@ -4792,27 +4792,27 @@ Update a Helm upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewHelmUpstreamRequest("Name_example", "UpstreamUrl_example") // HelmUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewHelmUpstreamRequest("Name_example", "UpstreamUrl_example") // HelmUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHelmUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamHelmUpdate`: HelmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHelmUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamHelmUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHelmUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamHelmUpdate`: HelmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHelmUpdate`: %v\n", resp)
 }
 ```
 
@@ -4870,26 +4870,26 @@ Create a Hex upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewHexUpstreamRequest("Name_example", "UpstreamUrl_example") // HexUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewHexUpstreamRequest("Name_example", "UpstreamUrl_example") // HexUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHexCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamHexCreate`: HexUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamHexCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamHexCreate`: HexUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexCreate`: %v\n", resp)
 }
 ```
 
@@ -4945,24 +4945,24 @@ Delete a Hex upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamHexDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamHexDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -5019,27 +5019,27 @@ List Hex upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHexList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamHexList`: []HexUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamHexList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamHexList`: []HexUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexList`: %v\n", resp)
 }
 ```
 
@@ -5096,27 +5096,27 @@ Partially update a Hex upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewHexUpstreamRequestPatch() // HexUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewHexUpstreamRequestPatch() // HexUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHexPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamHexPartialUpdate`: HexUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamHexPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamHexPartialUpdate`: HexUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -5174,26 +5174,26 @@ Retrieve a Hex upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHexRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamHexRead`: HexUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamHexRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamHexRead`: HexUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexRead`: %v\n", resp)
 }
 ```
 
@@ -5250,27 +5250,27 @@ Update a Hex upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewHexUpstreamRequest("Name_example", "UpstreamUrl_example") // HexUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewHexUpstreamRequest("Name_example", "UpstreamUrl_example") // HexUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamHexUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamHexUpdate`: HexUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamHexUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamHexUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamHexUpdate`: HexUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamHexUpdate`: %v\n", resp)
 }
 ```
 
@@ -5328,26 +5328,26 @@ Create a Maven upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewMavenUpstreamRequest("Name_example", "UpstreamUrl_example") // MavenUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewMavenUpstreamRequest("Name_example", "UpstreamUrl_example") // MavenUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamMavenCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamMavenCreate`: MavenUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamMavenCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamMavenCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamMavenCreate`: MavenUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamMavenCreate`: %v\n", resp)
 }
 ```
 
@@ -5403,24 +5403,24 @@ Delete a Maven upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamMavenDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamMavenDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -5477,27 +5477,27 @@ List Maven upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamMavenList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamMavenList`: []MavenUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamMavenList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamMavenList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamMavenList`: []MavenUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamMavenList`: %v\n", resp)
 }
 ```
 
@@ -5554,27 +5554,27 @@ Partially update a Maven upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewMavenUpstreamRequestPatch() // MavenUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewMavenUpstreamRequestPatch() // MavenUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamMavenPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamMavenPartialUpdate`: MavenUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamMavenPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamMavenPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamMavenPartialUpdate`: MavenUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamMavenPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -5632,26 +5632,26 @@ Retrieve a Maven upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamMavenRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamMavenRead`: MavenUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamMavenRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamMavenRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamMavenRead`: MavenUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamMavenRead`: %v\n", resp)
 }
 ```
 
@@ -5708,27 +5708,27 @@ Update a Maven upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewMavenUpstreamRequest("Name_example", "UpstreamUrl_example") // MavenUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewMavenUpstreamRequest("Name_example", "UpstreamUrl_example") // MavenUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamMavenUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamMavenUpdate`: MavenUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamMavenUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamMavenUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamMavenUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamMavenUpdate`: MavenUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamMavenUpdate`: %v\n", resp)
 }
 ```
 
@@ -5786,26 +5786,26 @@ Create a npm upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewNpmUpstreamRequest("Name_example", "UpstreamUrl_example") // NpmUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewNpmUpstreamRequest("Name_example", "UpstreamUrl_example") // NpmUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNpmCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamNpmCreate`: NpmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNpmCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNpmCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNpmCreate`: NpmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNpmCreate`: %v\n", resp)
 }
 ```
 
@@ -5861,24 +5861,24 @@ Delete a npm upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamNpmDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamNpmDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -5935,27 +5935,27 @@ List npm upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNpmList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamNpmList`: []NpmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNpmList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNpmList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNpmList`: []NpmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNpmList`: %v\n", resp)
 }
 ```
 
@@ -6012,27 +6012,27 @@ Partially update a npm upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewNpmUpstreamRequestPatch() // NpmUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewNpmUpstreamRequestPatch() // NpmUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNpmPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamNpmPartialUpdate`: NpmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNpmPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNpmPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNpmPartialUpdate`: NpmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNpmPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -6090,26 +6090,26 @@ Retrieve a npm upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNpmRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamNpmRead`: NpmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNpmRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNpmRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNpmRead`: NpmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNpmRead`: %v\n", resp)
 }
 ```
 
@@ -6166,27 +6166,27 @@ Update a npm upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewNpmUpstreamRequest("Name_example", "UpstreamUrl_example") // NpmUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewNpmUpstreamRequest("Name_example", "UpstreamUrl_example") // NpmUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNpmUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamNpmUpdate`: NpmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNpmUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNpmUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNpmUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNpmUpdate`: NpmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNpmUpdate`: %v\n", resp)
 }
 ```
 
@@ -6244,26 +6244,26 @@ Create a NuGet upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewNugetUpstreamRequest("Name_example", "UpstreamUrl_example") // NugetUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewNugetUpstreamRequest("Name_example", "UpstreamUrl_example") // NugetUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNugetCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamNugetCreate`: NugetUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNugetCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNugetCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNugetCreate`: NugetUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNugetCreate`: %v\n", resp)
 }
 ```
 
@@ -6319,24 +6319,24 @@ Delete a NuGet upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamNugetDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamNugetDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -6393,27 +6393,27 @@ List NuGet upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNugetList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamNugetList`: []NugetUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNugetList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNugetList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNugetList`: []NugetUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNugetList`: %v\n", resp)
 }
 ```
 
@@ -6470,27 +6470,27 @@ Partially update a NuGet upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewNugetUpstreamRequestPatch() // NugetUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewNugetUpstreamRequestPatch() // NugetUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNugetPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamNugetPartialUpdate`: NugetUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNugetPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNugetPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNugetPartialUpdate`: NugetUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNugetPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -6548,26 +6548,26 @@ Retrieve a NuGet upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNugetRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamNugetRead`: NugetUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNugetRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNugetRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNugetRead`: NugetUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNugetRead`: %v\n", resp)
 }
 ```
 
@@ -6624,27 +6624,27 @@ Update a NuGet upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewNugetUpstreamRequest("Name_example", "UpstreamUrl_example") // NugetUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewNugetUpstreamRequest("Name_example", "UpstreamUrl_example") // NugetUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamNugetUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamNugetUpdate`: NugetUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNugetUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNugetUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNugetUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNugetUpdate`: NugetUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNugetUpdate`: %v\n", resp)
 }
 ```
 
@@ -6702,26 +6702,26 @@ Create a Python upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewPythonUpstreamRequest("Name_example", "UpstreamUrl_example") // PythonUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewPythonUpstreamRequest("Name_example", "UpstreamUrl_example") // PythonUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamPythonCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamPythonCreate`: PythonUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamPythonCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamPythonCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamPythonCreate`: PythonUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamPythonCreate`: %v\n", resp)
 }
 ```
 
@@ -6777,24 +6777,24 @@ Delete a Python upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamPythonDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamPythonDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -6851,27 +6851,27 @@ List Python upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamPythonList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamPythonList`: []PythonUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamPythonList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamPythonList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamPythonList`: []PythonUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamPythonList`: %v\n", resp)
 }
 ```
 
@@ -6928,27 +6928,27 @@ Partially update a Python upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewPythonUpstreamRequestPatch() // PythonUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewPythonUpstreamRequestPatch() // PythonUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamPythonPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamPythonPartialUpdate`: PythonUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamPythonPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamPythonPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamPythonPartialUpdate`: PythonUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamPythonPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -7006,26 +7006,26 @@ Retrieve a Python upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamPythonRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamPythonRead`: PythonUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamPythonRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamPythonRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamPythonRead`: PythonUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamPythonRead`: %v\n", resp)
 }
 ```
 
@@ -7082,27 +7082,27 @@ Update a Python upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewPythonUpstreamRequest("Name_example", "UpstreamUrl_example") // PythonUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewPythonUpstreamRequest("Name_example", "UpstreamUrl_example") // PythonUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamPythonUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamPythonUpdate`: PythonUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamPythonUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamPythonUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamPythonUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamPythonUpdate`: PythonUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamPythonUpdate`: %v\n", resp)
 }
 ```
 
@@ -7160,26 +7160,26 @@ Create a RedHat upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRpmUpstreamRequest("DistroVersion_example", "Name_example", "UpstreamUrl_example") // RpmUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRpmUpstreamRequest("DistroVersion_example", "Name_example", "UpstreamUrl_example") // RpmUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRpmCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamRpmCreate`: RpmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRpmCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamRpmCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamRpmCreate`: RpmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRpmCreate`: %v\n", resp)
 }
 ```
 
@@ -7235,24 +7235,24 @@ Delete a RedHat upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamRpmDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamRpmDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -7309,27 +7309,27 @@ List RedHat upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRpmList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamRpmList`: []RpmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRpmList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamRpmList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamRpmList`: []RpmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRpmList`: %v\n", resp)
 }
 ```
 
@@ -7386,27 +7386,27 @@ Partially update a RedHat upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewRpmUpstreamRequestPatch() // RpmUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewRpmUpstreamRequestPatch() // RpmUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRpmPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamRpmPartialUpdate`: RpmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRpmPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamRpmPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamRpmPartialUpdate`: RpmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRpmPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -7464,26 +7464,26 @@ Retrieve a RedHat upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRpmRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamRpmRead`: RpmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRpmRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamRpmRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamRpmRead`: RpmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRpmRead`: %v\n", resp)
 }
 ```
 
@@ -7540,27 +7540,27 @@ Update a RedHat upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewRpmUpstreamRequest("DistroVersion_example", "Name_example", "UpstreamUrl_example") // RpmUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewRpmUpstreamRequest("DistroVersion_example", "Name_example", "UpstreamUrl_example") // RpmUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRpmUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamRpmUpdate`: RpmUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRpmUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamRpmUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRpmUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamRpmUpdate`: RpmUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRpmUpdate`: %v\n", resp)
 }
 ```
 
@@ -7618,26 +7618,26 @@ Create a Ruby upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewRubyUpstreamRequest("Name_example", "UpstreamUrl_example") // RubyUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRubyUpstreamRequest("Name_example", "UpstreamUrl_example") // RubyUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRubyCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamRubyCreate`: RubyUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRubyCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamRubyCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamRubyCreate`: RubyUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRubyCreate`: %v\n", resp)
 }
 ```
 
@@ -7693,24 +7693,24 @@ Delete a Ruby upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamRubyDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamRubyDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -7767,27 +7767,27 @@ List Ruby upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRubyList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamRubyList`: []RubyUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRubyList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamRubyList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamRubyList`: []RubyUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRubyList`: %v\n", resp)
 }
 ```
 
@@ -7844,27 +7844,27 @@ Partially update a Ruby upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewRubyUpstreamRequestPatch() // RubyUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewRubyUpstreamRequestPatch() // RubyUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRubyPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamRubyPartialUpdate`: RubyUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRubyPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamRubyPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamRubyPartialUpdate`: RubyUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRubyPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -7922,26 +7922,26 @@ Retrieve a Ruby upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRubyRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamRubyRead`: RubyUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRubyRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamRubyRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamRubyRead`: RubyUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRubyRead`: %v\n", resp)
 }
 ```
 
@@ -7998,27 +7998,27 @@ Update a Ruby upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewRubyUpstreamRequest("Name_example", "UpstreamUrl_example") // RubyUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewRubyUpstreamRequest("Name_example", "UpstreamUrl_example") // RubyUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamRubyUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamRubyUpdate`: RubyUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRubyUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamRubyUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamRubyUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamRubyUpdate`: RubyUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamRubyUpdate`: %v\n", resp)
 }
 ```
 
@@ -8076,26 +8076,26 @@ Create a Swift upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewSwiftUpstreamRequest("Name_example", "UpstreamUrl_example") // SwiftUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewSwiftUpstreamRequest("Name_example", "UpstreamUrl_example") // SwiftUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftCreate(context.Background(), owner, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamSwiftCreate`: SwiftUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamSwiftCreate`: SwiftUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftCreate`: %v\n", resp)
 }
 ```
 
@@ -8151,24 +8151,24 @@ Delete a Swift upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ReposApi.ReposUpstreamSwiftDelete(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamSwiftDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -8225,27 +8225,27 @@ List Swift upstream configs for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamSwiftList`: []SwiftUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamSwiftList`: []SwiftUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftList`: %v\n", resp)
 }
 ```
 
@@ -8302,27 +8302,27 @@ Partially update a Swift upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewSwiftUpstreamRequestPatch() // SwiftUpstreamRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewSwiftUpstreamRequestPatch() // SwiftUpstreamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamSwiftPartialUpdate`: SwiftUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamSwiftPartialUpdate`: SwiftUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -8380,26 +8380,26 @@ Retrieve a Swift upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftRead(context.Background(), owner, identifier, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamSwiftRead`: SwiftUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamSwiftRead`: SwiftUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftRead`: %v\n", resp)
 }
 ```
 
@@ -8456,27 +8456,27 @@ Update a Swift upstream config for this repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    identifier := "identifier_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewSwiftUpstreamRequest("Name_example", "UpstreamUrl_example") // SwiftUpstreamRequest |  (optional)
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewSwiftUpstreamRequest("Name_example", "UpstreamUrl_example") // SwiftUpstreamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUpstreamSwiftUpdate`: SwiftUpstream
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamSwiftUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSwiftUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamSwiftUpdate`: SwiftUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSwiftUpdate`: %v\n", resp)
 }
 ```
 
@@ -8534,25 +8534,25 @@ Get a list of all repositories associated with current user.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ReposApi.ReposUserList(context.Background()).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUserList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReposUserList`: []Repository
-    fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUserList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUserList(context.Background()).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUserList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUserList`: []Repository
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUserList`: %v\n", resp)
 }
 ```
 

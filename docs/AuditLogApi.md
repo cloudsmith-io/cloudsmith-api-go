@@ -23,27 +23,27 @@ Lists audit log entries for a specific namespace.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
-    query := "query_example" // string | A search term for querying events, actors, or timestamps of log records. (optional)
+	owner := "owner_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	query := "query_example" // string | A search term for querying events, actors, or timestamps of log records. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AuditLogApi.AuditLogNamespaceList(context.Background(), owner).Page(page).PageSize(pageSize).Query(query).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AuditLogApi.AuditLogNamespaceList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AuditLogNamespaceList`: []NamespaceAuditLog
-    fmt.Fprintf(os.Stdout, "Response from `AuditLogApi.AuditLogNamespaceList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuditLogApi.AuditLogNamespaceList(context.Background(), owner).Page(page).PageSize(pageSize).Query(query).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuditLogApi.AuditLogNamespaceList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AuditLogNamespaceList`: []NamespaceAuditLog
+	fmt.Fprintf(os.Stdout, "Response from `AuditLogApi.AuditLogNamespaceList`: %v\n", resp)
 }
 ```
 
@@ -99,28 +99,28 @@ Lists audit log entries for a specific repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
-    query := "query_example" // string | A search term for querying events, actors, or timestamps of log records. (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	query := "query_example" // string | A search term for querying events, actors, or timestamps of log records. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AuditLogApi.AuditLogRepoList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Query(query).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AuditLogApi.AuditLogRepoList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AuditLogRepoList`: []RepositoryAuditLog
-    fmt.Fprintf(os.Stdout, "Response from `AuditLogApi.AuditLogRepoList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuditLogApi.AuditLogRepoList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Query(query).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuditLogApi.AuditLogRepoList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AuditLogRepoList`: []RepositoryAuditLog
+	fmt.Fprintf(os.Stdout, "Response from `AuditLogApi.AuditLogRepoList`: %v\n", resp)
 }
 ```
 

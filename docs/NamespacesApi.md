@@ -23,25 +23,25 @@ Get a list of all namespaces the user belongs to.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NamespacesApi.NamespacesList(context.Background()).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NamespacesApi.NamespacesList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `NamespacesList`: []Namespace
-    fmt.Fprintf(os.Stdout, "Response from `NamespacesApi.NamespacesList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NamespacesApi.NamespacesList(context.Background()).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NamespacesApi.NamespacesList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `NamespacesList`: []Namespace
+	fmt.Fprintf(os.Stdout, "Response from `NamespacesApi.NamespacesList`: %v\n", resp)
 }
 ```
 
@@ -91,24 +91,24 @@ Get a specific namespace that the user belongs to.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    slug := "slug_example" // string | 
+	slug := "slug_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.NamespacesApi.NamespacesRead(context.Background(), slug).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `NamespacesApi.NamespacesRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `NamespacesRead`: Namespace
-    fmt.Fprintf(os.Stdout, "Response from `NamespacesApi.NamespacesRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.NamespacesApi.NamespacesRead(context.Background(), slug).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `NamespacesApi.NamespacesRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `NamespacesRead`: Namespace
+	fmt.Fprintf(os.Stdout, "Response from `NamespacesApi.NamespacesRead`: %v\n", resp)
 }
 ```
 

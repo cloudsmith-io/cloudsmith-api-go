@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -90,7 +90,10 @@ func (a *EntitlementsApiService) EntitlementsCreateExecute(r ApiEntitlementsCrea
 	localVarFormParams := url.Values{}
 
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -688,19 +691,25 @@ func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRe
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	if r.query != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
 	}
 	if r.active != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "active", r.active, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "active", r.active, "", "")
+	} else {
+		var defaultValue bool = false
+		r.active = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -873,7 +882,10 @@ func (a *EntitlementsApiService) EntitlementsPartialUpdateExecute(r ApiEntitleme
 	localVarFormParams := url.Values{}
 
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1049,10 +1061,16 @@ func (a *EntitlementsApiService) EntitlementsReadExecute(r ApiEntitlementsReadRe
 	localVarFormParams := url.Values{}
 
 	if r.fuzzy != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fuzzy", r.fuzzy, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fuzzy", r.fuzzy, "", "")
+	} else {
+		var defaultValue bool = false
+		r.fuzzy = &defaultValue
 	}
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1225,7 +1243,10 @@ func (a *EntitlementsApiService) EntitlementsRefreshExecute(r ApiEntitlementsRef
 	localVarFormParams := url.Values{}
 
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1381,7 +1402,10 @@ func (a *EntitlementsApiService) EntitlementsResetExecute(r ApiEntitlementsReset
 	localVarFormParams := url.Values{}
 
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1530,7 +1554,10 @@ func (a *EntitlementsApiService) EntitlementsSyncExecute(r ApiEntitlementsSyncRe
 	localVarFormParams := url.Values{}
 
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

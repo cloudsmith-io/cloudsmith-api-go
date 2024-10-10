@@ -22,40 +22,40 @@ Get latest package version for a package or package group.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    packageFormat := "packageFormat_example" // string | 
-    packageName := "packageName_example" // string | 
-    packageVersion := "packageVersion_example" // string | 
-    packageIdentifiers := "packageIdentifiers_example" // string | 
-    badgeToken := "badgeToken_example" // string | Badge token to authenticate for private packages (optional)
-    cacheSeconds := "cacheSeconds_example" // string | Override the shields.io badge cacheSeconds value. (optional) (default to "300")
-    color := "color_example" // string | Override the shields.io badge color value. (optional) (default to "12577E")
-    label := "label_example" // string | Override the shields.io badge label value. (optional) (default to "cloudsmith")
-    labelColor := "labelColor_example" // string | Override the shields.io badge labelColor value. (optional) (default to "021F2F")
-    logoColor := "logoColor_example" // string | Override the shields.io badge logoColor value. (optional) (default to "45B6EE")
-    logoWidth := "logoWidth_example" // string | Override the shields.io badge logoWidth value. (optional) (default to "10")
-    render := true // bool | If true, badge will be rendered (optional) (default to false)
-    shields := true // bool | If true, a shields response will be generated (optional) (default to false)
-    showLatest := true // bool | If true, for latest version badges a '(latest)' suffix is added (optional) (default to false)
-    style := "style_example" // string | Override the shields.io badge style value. (optional) (default to "flat-square")
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	packageFormat := "packageFormat_example" // string | 
+	packageName := "packageName_example" // string | 
+	packageVersion := "packageVersion_example" // string | 
+	packageIdentifiers := "packageIdentifiers_example" // string | 
+	badgeToken := "badgeToken_example" // string | Badge token to authenticate for private packages (optional)
+	cacheSeconds := "cacheSeconds_example" // string | Override the shields.io badge cacheSeconds value. (optional) (default to "300")
+	color := "color_example" // string | Override the shields.io badge color value. (optional) (default to "12577E")
+	label := "label_example" // string | Override the shields.io badge label value. (optional) (default to "cloudsmith")
+	labelColor := "labelColor_example" // string | Override the shields.io badge labelColor value. (optional) (default to "021F2F")
+	logoColor := "logoColor_example" // string | Override the shields.io badge logoColor value. (optional) (default to "45B6EE")
+	logoWidth := "logoWidth_example" // string | Override the shields.io badge logoWidth value. (optional) (default to "10")
+	render := true // bool | If true, badge will be rendered (optional) (default to false)
+	shields := true // bool | If true, a shields response will be generated (optional) (default to false)
+	showLatest := true // bool | If true, for latest version badges a '(latest)' suffix is added (optional) (default to false)
+	style := "style_example" // string | Override the shields.io badge style value. (optional) (default to "flat-square")
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.BadgesApi.BadgesVersionList(context.Background(), owner, repo, packageFormat, packageName, packageVersion, packageIdentifiers).BadgeToken(badgeToken).CacheSeconds(cacheSeconds).Color(color).Label(label).LabelColor(labelColor).LogoColor(logoColor).LogoWidth(logoWidth).Render(render).Shields(shields).ShowLatest(showLatest).Style(style).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BadgesApi.BadgesVersionList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `BadgesVersionList`: map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `BadgesApi.BadgesVersionList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.BadgesApi.BadgesVersionList(context.Background(), owner, repo, packageFormat, packageName, packageVersion, packageIdentifiers).BadgeToken(badgeToken).CacheSeconds(cacheSeconds).Color(color).Label(label).LabelColor(labelColor).LogoColor(logoColor).LogoWidth(logoWidth).Render(render).Shields(shields).ShowLatest(showLatest).Style(style).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `BadgesApi.BadgesVersionList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `BadgesVersionList`: map[string]interface{}
+	fmt.Fprintf(os.Stdout, "Response from `BadgesApi.BadgesVersionList`: %v\n", resp)
 }
 ```
 

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -102,7 +102,7 @@ func (o *PackageFileUpload) GetUploadFieldsOk() (map[string]interface{}, bool) {
 
 // HasUploadFields returns a boolean if a field has been set.
 func (o *PackageFileUpload) HasUploadFields() bool {
-	if o != nil && IsNil(o.UploadFields) {
+	if o != nil && !IsNil(o.UploadFields) {
 		return true
 	}
 
@@ -135,7 +135,7 @@ func (o *PackageFileUpload) GetUploadHeadersOk() (map[string]interface{}, bool) 
 
 // HasUploadHeaders returns a boolean if a field has been set.
 func (o *PackageFileUpload) HasUploadHeaders() bool {
-	if o != nil && IsNil(o.UploadHeaders) {
+	if o != nil && !IsNil(o.UploadHeaders) {
 		return true
 	}
 

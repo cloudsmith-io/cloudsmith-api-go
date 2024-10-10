@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &OrganizationTeamRequestPatch{}
 type OrganizationTeamRequestPatch struct {
 	Description *string `json:"description,omitempty"`
 	Name        *string `json:"name,omitempty"`
-	Slug        *string `json:"slug,omitempty"`
+	Slug        *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	Visibility  *string `json:"visibility,omitempty"`
 }
 

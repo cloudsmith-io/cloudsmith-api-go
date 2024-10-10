@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the Format type satisfies the MappedNullable interface at compile time
@@ -38,6 +40,8 @@ type Format struct {
 	Slug     string        `json:"slug"`
 	Supports FormatSupport `json:"supports"`
 }
+
+type _Format Format
 
 // NewFormat instantiates a new Format object
 // This constructor will assign default values to properties that have it defined,
@@ -107,7 +111,7 @@ func (o *Format) GetDistributionsOk() ([]Distribution, bool) {
 
 // HasDistributions returns a boolean if a field has been set.
 func (o *Format) HasDistributions() bool {
-	if o != nil && IsNil(o.Distributions) {
+	if o != nil && !IsNil(o.Distributions) {
 		return true
 	}
 
@@ -351,6 +355,48 @@ func (o Format) ToMap() (map[string]interface{}, error) {
 	toSerialize["slug"] = o.Slug
 	toSerialize["supports"] = o.Supports
 	return toSerialize, nil
+}
+
+func (o *Format) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"description",
+		"extensions",
+		"name",
+		"premium",
+		"slug",
+		"supports",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFormat := _Format{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFormat)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Format(varFormat)
+
+	return err
 }
 
 type NullableFormat struct {

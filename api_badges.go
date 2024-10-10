@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -170,37 +170,67 @@ func (a *BadgesApiService) BadgesVersionListExecute(r ApiBadgesVersionListReques
 	localVarFormParams := url.Values{}
 
 	if r.badgeToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "badge_token", r.badgeToken, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "badge_token", r.badgeToken, "", "")
 	}
 	if r.cacheSeconds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cacheSeconds", r.cacheSeconds, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cacheSeconds", r.cacheSeconds, "", "")
+	} else {
+		var defaultValue string = "300"
+		r.cacheSeconds = &defaultValue
 	}
 	if r.color != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "color", r.color, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "color", r.color, "", "")
+	} else {
+		var defaultValue string = "12577E"
+		r.color = &defaultValue
 	}
 	if r.label != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "label", r.label, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "label", r.label, "", "")
+	} else {
+		var defaultValue string = "cloudsmith"
+		r.label = &defaultValue
 	}
 	if r.labelColor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "labelColor", r.labelColor, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "labelColor", r.labelColor, "", "")
+	} else {
+		var defaultValue string = "021F2F"
+		r.labelColor = &defaultValue
 	}
 	if r.logoColor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "logoColor", r.logoColor, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "logoColor", r.logoColor, "", "")
+	} else {
+		var defaultValue string = "45B6EE"
+		r.logoColor = &defaultValue
 	}
 	if r.logoWidth != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "logoWidth", r.logoWidth, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "logoWidth", r.logoWidth, "", "")
+	} else {
+		var defaultValue string = "10"
+		r.logoWidth = &defaultValue
 	}
 	if r.render != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "render", r.render, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "render", r.render, "", "")
+	} else {
+		var defaultValue bool = false
+		r.render = &defaultValue
 	}
 	if r.shields != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "shields", r.shields, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "shields", r.shields, "", "")
+	} else {
+		var defaultValue bool = false
+		r.shields = &defaultValue
 	}
 	if r.showLatest != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_latest", r.showLatest, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_latest", r.showLatest, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showLatest = &defaultValue
 	}
 	if r.style != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "style", r.style, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "style", r.style, "", "")
+	} else {
+		var defaultValue string = "flat-square"
+		r.style = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -23,23 +23,23 @@ Get a list of all supported distributions.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DistrosApi.DistrosList(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DistrosApi.DistrosList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `DistrosList`: []DistributionFull
-    fmt.Fprintf(os.Stdout, "Response from `DistrosApi.DistrosList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DistrosApi.DistrosList(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DistrosApi.DistrosList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DistrosList`: []DistributionFull
+	fmt.Fprintf(os.Stdout, "Response from `DistrosApi.DistrosList`: %v\n", resp)
 }
 ```
 
@@ -84,24 +84,24 @@ View for viewing/listing distributions.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    slug := "slug_example" // string | 
+	slug := "slug_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.DistrosApi.DistrosRead(context.Background(), slug).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DistrosApi.DistrosRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `DistrosRead`: DistributionFull
-    fmt.Fprintf(os.Stdout, "Response from `DistrosApi.DistrosRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DistrosApi.DistrosRead(context.Background(), slug).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DistrosApi.DistrosRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DistrosRead`: DistributionFull
+	fmt.Fprintf(os.Stdout, "Response from `DistrosApi.DistrosRead`: %v\n", resp)
 }
 ```
 

@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.533.1
+  version: 1.536.1
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -12952,6 +12952,8 @@ paths:
 components:
   schemas:
     ErrorDetail:
+      example:
+        detail: detail
       properties:
         detail:
           description: An extended message for the response.
@@ -42688,7 +42690,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.533.1
+        version: 1.536.1
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -42698,7 +42700,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.533.1
+          default: 1.536.1
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -42931,9 +42933,9 @@ components:
         patch: 5
         major: 6
         minor: 1
-        version: version
-        operator: operator
-        raw_version: raw_version
+        version: ""
+        operator: ""
+        raw_version: ""
       properties:
         major:
           title: Major
@@ -42974,16 +42976,16 @@ components:
           patch: 5
           major: 6
           minor: 1
-          version: version
-          operator: operator
-          raw_version: raw_version
+          version: ""
+          operator: ""
+          raw_version: ""
         fixed_version:
           patch: 5
           major: 6
           minor: 1
-          version: version
-          operator: operator
-          raw_version: raw_version
+          version: ""
+          operator: ""
+          raw_version: ""
         references:
         - references
         - references
@@ -43057,16 +43059,16 @@ components:
             patch: 5
             major: 6
             minor: 1
-            version: version
-            operator: operator
-            raw_version: raw_version
+            version: ""
+            operator: ""
+            raw_version: ""
           fixed_version:
             patch: 5
             major: 6
             minor: 1
-            version: version
-            operator: operator
-            raw_version: raw_version
+            version: ""
+            operator: ""
+            raw_version: ""
           references:
           - references
           - references
@@ -43080,16 +43082,16 @@ components:
             patch: 5
             major: 6
             minor: 1
-            version: version
-            operator: operator
-            raw_version: raw_version
+            version: ""
+            operator: ""
+            raw_version: ""
           fixed_version:
             patch: 5
             major: 6
             minor: 1
-            version: version
-            operator: operator
-            raw_version: raw_version
+            version: ""
+            operator: ""
+            raw_version: ""
           references:
           - references
           - references
@@ -43135,16 +43137,16 @@ components:
               patch: 5
               major: 6
               minor: 1
-              version: version
-              operator: operator
-              raw_version: raw_version
+              version: ""
+              operator: ""
+              raw_version: ""
             fixed_version:
               patch: 5
               major: 6
               minor: 1
-              version: version
-              operator: operator
-              raw_version: raw_version
+              version: ""
+              operator: ""
+              raw_version: ""
             references:
             - references
             - references
@@ -43158,16 +43160,16 @@ components:
               patch: 5
               major: 6
               minor: 1
-              version: version
-              operator: operator
-              raw_version: raw_version
+              version: ""
+              operator: ""
+              raw_version: ""
             fixed_version:
               patch: 5
               major: 6
               minor: 1
-              version: version
-              operator: operator
-              raw_version: raw_version
+              version: ""
+              operator: ""
+              raw_version: ""
             references:
             - references
             - references

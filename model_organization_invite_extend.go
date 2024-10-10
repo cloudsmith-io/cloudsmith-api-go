@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -30,7 +30,7 @@ type OrganizationInviteExtend struct {
 	// The role to be assigned to the invited user.
 	Role *string `json:"role,omitempty"`
 	// The slug_perm of the invite to be extended.
-	SlugPerm *string                  `json:"slug_perm,omitempty"`
+	SlugPerm *string                  `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	Teams    []OrganizationTeamInvite `json:"teams,omitempty"`
 	// The slug of the user to be invited.
 	User    *string        `json:"user,omitempty"`

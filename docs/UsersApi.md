@@ -22,24 +22,24 @@ Provide a brief for the specified user (if any).
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    slug := "slug_example" // string | 
+	slug := "slug_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UsersApi.UsersProfileRead(context.Background(), slug).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UsersProfileRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UsersProfileRead`: UserProfile
-    fmt.Fprintf(os.Stdout, "Response from `UsersApi.UsersProfileRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UsersApi.UsersProfileRead(context.Background(), slug).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UsersApi.UsersProfileRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UsersProfileRead`: UserProfile
+	fmt.Fprintf(os.Stdout, "Response from `UsersApi.UsersProfileRead`: %v\n", resp)
 }
 ```
 

@@ -26,25 +26,25 @@ Abort a multipart file upload.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.FilesApi.FilesAbort(context.Background(), owner, repo, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesAbort``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.FilesApi.FilesAbort(context.Background(), owner, repo, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesAbort``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -102,27 +102,27 @@ Complete a multipart file upload.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
-    data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FilesApi.FilesComplete(context.Background(), owner, repo, identifier).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesComplete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `FilesComplete`: PackageFileUpload
-    fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesComplete`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FilesApi.FilesComplete(context.Background(), owner, repo, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesComplete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `FilesComplete`: PackageFileUpload
+	fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesComplete`: %v\n", resp)
 }
 ```
 
@@ -180,26 +180,26 @@ Request URL(s) to upload new package file upload(s) to.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FilesApi.FilesCreate(context.Background(), owner, repo).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `FilesCreate`: PackageFileUpload
-    fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FilesApi.FilesCreate(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `FilesCreate`: PackageFileUpload
+	fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesCreate`: %v\n", resp)
 }
 ```
 
@@ -255,28 +255,28 @@ Get upload information to perform a multipart file upload.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
-    filename := "filename_example" // string | The filename of the file being uploaded
-    partNumber := int64(56) // int64 | The part number to be uploaded next (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
+	filename := "filename_example" // string | The filename of the file being uploaded
+	partNumber := int64(56) // int64 | The part number to be uploaded next (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FilesApi.FilesInfo(context.Background(), owner, repo, identifier).Filename(filename).PartNumber(partNumber).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesInfo``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `FilesInfo`: PackageFilePartsUpload
-    fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesInfo`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FilesApi.FilesInfo(context.Background(), owner, repo, identifier).Filename(filename).PartNumber(partNumber).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesInfo``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `FilesInfo`: PackageFilePartsUpload
+	fmt.Fprintf(os.Stdout, "Response from `FilesApi.FilesInfo`: %v\n", resp)
 }
 ```
 
@@ -335,24 +335,24 @@ Validate parameters used for create.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewPackageFileUploadRequest("Filename_example") // PackageFileUploadRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.FilesApi.FilesValidate(context.Background(), owner, repo).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesValidate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.FilesApi.FilesValidate(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FilesApi.FilesValidate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
