@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RpmPackageUploadRequest type satisfies the MappedNullable interface at compile time
@@ -29,6 +31,8 @@ type RpmPackageUploadRequest struct {
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`
 }
+
+type _RpmPackageUploadRequest RpmPackageUploadRequest
 
 // NewRpmPackageUploadRequest instantiates a new RpmPackageUploadRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -191,6 +195,44 @@ func (o RpmPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["tags"] = o.Tags.Get()
 	}
 	return toSerialize, nil
+}
+
+func (o *RpmPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"distribution",
+		"package_file",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRpmPackageUploadRequest := _RpmPackageUploadRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRpmPackageUploadRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RpmPackageUploadRequest(varRpmPackageUploadRequest)
+
+	return err
 }
 
 type NullableRpmPackageUploadRequest struct {

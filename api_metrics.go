@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -108,19 +108,19 @@ func (a *MetricsApiService) MetricsEntitlementsAccountListExecute(r ApiMetricsEn
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.finish != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "", "")
 	}
 	if r.start != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "", "")
 	}
 	if r.tokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tokens", r.tokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tokens", r.tokens, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -300,19 +300,19 @@ func (a *MetricsApiService) MetricsEntitlementsRepoListExecute(r ApiMetricsEntit
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.finish != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "", "")
 	}
 	if r.start != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "", "")
 	}
 	if r.tokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tokens", r.tokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tokens", r.tokens, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -492,19 +492,19 @@ func (a *MetricsApiService) MetricsPackagesListExecute(r ApiMetricsPackagesListR
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.finish != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "", "")
 	}
 	if r.packages != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "packages", r.packages, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "packages", r.packages, "", "")
 	}
 	if r.start != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -25,24 +25,24 @@ Quota history for a given namespace.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
+	owner := "owner_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QuotaApi.QuotaHistoryRead(context.Background(), owner).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaHistoryRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `QuotaHistoryRead`: QuotaHistory
-    fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaHistoryRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.QuotaApi.QuotaHistoryRead(context.Background(), owner).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaHistoryRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `QuotaHistoryRead`: QuotaHistory
+	fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaHistoryRead`: %v\n", resp)
 }
 ```
 
@@ -95,24 +95,24 @@ Open-source Quota history for a given namespace.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
+	owner := "owner_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QuotaApi.QuotaOssHistoryRead(context.Background(), owner).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaOssHistoryRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `QuotaOssHistoryRead`: QuotaHistory
-    fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaOssHistoryRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.QuotaApi.QuotaOssHistoryRead(context.Background(), owner).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaOssHistoryRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `QuotaOssHistoryRead`: QuotaHistory
+	fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaOssHistoryRead`: %v\n", resp)
 }
 ```
 
@@ -165,24 +165,24 @@ Open-source Quota usage for a given namespace.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
+	owner := "owner_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QuotaApi.QuotaOssRead(context.Background(), owner).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaOssRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `QuotaOssRead`: Quota
-    fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaOssRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.QuotaApi.QuotaOssRead(context.Background(), owner).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaOssRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `QuotaOssRead`: Quota
+	fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaOssRead`: %v\n", resp)
 }
 ```
 
@@ -235,24 +235,24 @@ Quota usage for a given namespace.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
+	owner := "owner_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QuotaApi.QuotaRead(context.Background(), owner).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `QuotaRead`: Quota
-    fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.QuotaApi.QuotaRead(context.Background(), owner).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `QuotaApi.QuotaRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `QuotaRead`: Quota
+	fmt.Fprintf(os.Stdout, "Response from `QuotaApi.QuotaRead`: %v\n", resp)
 }
 ```
 

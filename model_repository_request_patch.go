@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -51,7 +51,7 @@ type RepositoryRequestPatch struct {
 	// This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting.
 	MovePackages *string `json:"move_packages,omitempty"`
 	// A descriptive name for the repository.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^\\\\w[\\\\w \\\\-'\\\\.\\/()]+$"`
 	// The SPDX identifier of the open source license.
 	OpenSourceLicense NullableString `json:"open_source_license,omitempty"`
 	// The URL to the Open-Source project, used for validating that the project meets the requirements for Open-Source.

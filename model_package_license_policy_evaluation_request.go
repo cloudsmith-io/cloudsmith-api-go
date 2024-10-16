@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -24,7 +24,7 @@ type PackageLicensePolicyEvaluationRequest struct {
 	CreatedAt       *time.Time           `json:"created_at,omitempty"`
 	EvaluationCount *int64               `json:"evaluation_count,omitempty"`
 	Policy          *NestedLicensePolicy `json:"policy,omitempty"`
-	SlugPerm        *string              `json:"slug_perm,omitempty"`
+	SlugPerm        *string              `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	Status          *string              `json:"status,omitempty"`
 	UpdatedAt       *time.Time           `json:"updated_at,omitempty"`
 	ViolationCount  *int64               `json:"violation_count,omitempty"`

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -33,7 +33,7 @@ type PackageFile struct {
 	SignatureUrl   NullableString `json:"signature_url,omitempty"`
 	// The calculated size of the file.
 	Size     *int64  `json:"size,omitempty"`
-	SlugPerm *string `json:"slug_perm,omitempty"`
+	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// Freeform descriptor that describes what the file is.
 	Tag NullableString `json:"tag,omitempty"`
 }

@@ -31,27 +31,27 @@ Create a specific entitlement in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
-    data := *openapiclient.NewRepositoryTokenRequest("Name_example") // RepositoryTokenRequest |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+	data := *openapiclient.NewRepositoryTokenRequest("Name_example") // RepositoryTokenRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsCreate(context.Background(), owner, repo).ShowTokens(showTokens).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `EntitlementsCreate`: RepositoryToken
-    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EntitlementsApi.EntitlementsCreate(context.Background(), owner, repo).ShowTokens(showTokens).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EntitlementsCreate`: RepositoryToken
+	fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsCreate`: %v\n", resp)
 }
 ```
 
@@ -108,24 +108,24 @@ Delete a specific entitlement in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.EntitlementsApi.EntitlementsDelete(context.Background(), owner, repo, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.EntitlementsApi.EntitlementsDelete(context.Background(), owner, repo, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -182,24 +182,24 @@ Disable an entitlement token in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.EntitlementsApi.EntitlementsDisable(context.Background(), owner, repo, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsDisable``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.EntitlementsApi.EntitlementsDisable(context.Background(), owner, repo, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsDisable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -256,24 +256,24 @@ Enable an entitlement token in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.EntitlementsApi.EntitlementsEnable(context.Background(), owner, repo, identifier).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsEnable``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.EntitlementsApi.EntitlementsEnable(context.Background(), owner, repo, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsEnable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -330,30 +330,30 @@ Get a list of all entitlements in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
-    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
-    query := "query_example" // string | A search term for querying names of entitlements. (optional)
-    active := true // bool | If true, only include active tokens (optional) (default to false)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+	query := "query_example" // string | A search term for querying names of entitlements. (optional)
+	active := true // bool | If true, only include active tokens (optional) (default to false)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Query(query).Active(active).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `EntitlementsList`: []RepositoryToken
-    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EntitlementsApi.EntitlementsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Query(query).Active(active).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EntitlementsList`: []RepositoryToken
+	fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsList`: %v\n", resp)
 }
 ```
 
@@ -413,28 +413,28 @@ Update a specific entitlement in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
-    data := *openapiclient.NewRepositoryTokenRequestPatch() // RepositoryTokenRequestPatch |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
+	showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+	data := *openapiclient.NewRepositoryTokenRequestPatch() // RepositoryTokenRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsPartialUpdate(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `EntitlementsPartialUpdate`: RepositoryToken
-    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EntitlementsApi.EntitlementsPartialUpdate(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EntitlementsPartialUpdate`: RepositoryToken
+	fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -493,28 +493,28 @@ Get a specific entitlement in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
-    fuzzy := true // bool | If true, entitlement identifiers including name will be fuzzy matched. (optional) (default to false)
-    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
+	fuzzy := true // bool | If true, entitlement identifiers including name will be fuzzy matched. (optional) (default to false)
+	showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsRead(context.Background(), owner, repo, identifier).Fuzzy(fuzzy).ShowTokens(showTokens).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `EntitlementsRead`: RepositoryToken
-    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EntitlementsApi.EntitlementsRead(context.Background(), owner, repo, identifier).Fuzzy(fuzzy).ShowTokens(showTokens).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EntitlementsRead`: RepositoryToken
+	fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsRead`: %v\n", resp)
 }
 ```
 
@@ -573,28 +573,28 @@ Refresh an entitlement token in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
-    data := *openapiclient.NewRepositoryTokenRefreshRequest() // RepositoryTokenRefreshRequest |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
+	showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+	data := *openapiclient.NewRepositoryTokenRefreshRequest() // RepositoryTokenRefreshRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsRefresh(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsRefresh``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `EntitlementsRefresh`: RepositoryTokenRefresh
-    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsRefresh`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EntitlementsApi.EntitlementsRefresh(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsRefresh``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EntitlementsRefresh`: RepositoryTokenRefresh
+	fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsRefresh`: %v\n", resp)
 }
 ```
 
@@ -653,25 +653,25 @@ Reset the statistics for an entitlement token in a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    identifier := "identifier_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
+	showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.EntitlementsApi.EntitlementsReset(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsReset``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.EntitlementsApi.EntitlementsReset(context.Background(), owner, repo, identifier).ShowTokens(showTokens).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsReset``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -729,27 +729,27 @@ Synchronise tokens from a source repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
-    data := *openapiclient.NewRepositoryTokenSyncRequest("Source_example") // RepositoryTokenSyncRequest |  (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
+	data := *openapiclient.NewRepositoryTokenSyncRequest("Source_example") // RepositoryTokenSyncRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EntitlementsApi.EntitlementsSync(context.Background(), owner, repo).ShowTokens(showTokens).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsSync``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `EntitlementsSync`: RepositoryTokenSync
-    fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsSync`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EntitlementsApi.EntitlementsSync(context.Background(), owner, repo).ShowTokens(showTokens).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsSync``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `EntitlementsSync`: RepositoryTokenSync
+	fmt.Fprintf(os.Stdout, "Response from `EntitlementsApi.EntitlementsSync`: %v\n", resp)
 }
 ```
 

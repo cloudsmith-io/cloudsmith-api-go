@@ -23,23 +23,23 @@ Provide a brief for the current user (if any).
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserApi.UserSelf(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserSelf``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UserSelf`: UserBrief
-    fmt.Fprintf(os.Stdout, "Response from `UserApi.UserSelf`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UserApi.UserSelf(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserSelf``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UserSelf`: UserBrief
+	fmt.Fprintf(os.Stdout, "Response from `UserApi.UserSelf`: %v\n", resp)
 }
 ```
 
@@ -84,24 +84,24 @@ Retrieve/Create API key/token for the authenticated user.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    data := *openapiclient.NewUserAuthTokenRequest() // UserAuthTokenRequest |  (optional)
+	data := *openapiclient.NewUserAuthTokenRequest() // UserAuthTokenRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserApi.UserTokenCreate(context.Background()).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserTokenCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UserTokenCreate`: UserAuthToken
-    fmt.Fprintf(os.Stdout, "Response from `UserApi.UserTokenCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.UserApi.UserTokenCreate(context.Background()).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `UserApi.UserTokenCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UserTokenCreate`: UserAuthToken
+	fmt.Fprintf(os.Stdout, "Response from `UserApi.UserTokenCreate`: %v\n", resp)
 }
 ```
 

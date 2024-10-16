@@ -23,23 +23,23 @@ Get a list of all supported package formats.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FormatsApi.FormatsList(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FormatsApi.FormatsList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `FormatsList`: []Format
-    fmt.Fprintf(os.Stdout, "Response from `FormatsApi.FormatsList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FormatsApi.FormatsList(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FormatsApi.FormatsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `FormatsList`: []Format
+	fmt.Fprintf(os.Stdout, "Response from `FormatsApi.FormatsList`: %v\n", resp)
 }
 ```
 
@@ -84,24 +84,24 @@ Get a specific supported package format.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    slug := "slug_example" // string | 
+	slug := "slug_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FormatsApi.FormatsRead(context.Background(), slug).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FormatsApi.FormatsRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `FormatsRead`: Format
-    fmt.Fprintf(os.Stdout, "Response from `FormatsApi.FormatsRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FormatsApi.FormatsRead(context.Background(), slug).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FormatsApi.FormatsRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `FormatsRead`: Format
+	fmt.Fprintf(os.Stdout, "Response from `FormatsApi.FormatsRead`: %v\n", resp)
 }
 ```
 

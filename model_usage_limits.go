@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.536.1
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the UsageLimits type satisfies the MappedNullable interface at compile time
@@ -23,6 +25,8 @@ type UsageLimits struct {
 	Bandwidth AllocatedLimit        `json:"bandwidth"`
 	Storage   StorageAllocatedLimit `json:"storage"`
 }
+
+type _UsageLimits UsageLimits
 
 // NewUsageLimits instantiates a new UsageLimits object
 // This constructor will assign default values to properties that have it defined,
@@ -104,6 +108,44 @@ func (o UsageLimits) ToMap() (map[string]interface{}, error) {
 	toSerialize["bandwidth"] = o.Bandwidth
 	toSerialize["storage"] = o.Storage
 	return toSerialize, nil
+}
+
+func (o *UsageLimits) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"bandwidth",
+		"storage",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUsageLimits := _UsageLimits{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUsageLimits)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UsageLimits(varUsageLimits)
+
+	return err
 }
 
 type NullableUsageLimits struct {

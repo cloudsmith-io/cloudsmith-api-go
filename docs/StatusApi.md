@@ -22,23 +22,23 @@ Endpoint to check basic API connectivity.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.StatusApi.StatusCheckBasic(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StatusApi.StatusCheckBasic``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `StatusCheckBasic`: StatusBasic
-    fmt.Fprintf(os.Stdout, "Response from `StatusApi.StatusCheckBasic`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.StatusApi.StatusCheckBasic(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `StatusApi.StatusCheckBasic``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `StatusCheckBasic`: StatusBasic
+	fmt.Fprintf(os.Stdout, "Response from `StatusApi.StatusCheckBasic`: %v\n", resp)
 }
 ```
 
