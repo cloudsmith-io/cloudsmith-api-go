@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -36,8 +36,8 @@ StatusCheckBasic Endpoint to check basic API connectivity.
 
 Endpoint to check basic API connectivity.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiStatusCheckBasicRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiStatusCheckBasicRequest
 */
 func (a *StatusApiService) StatusCheckBasic(ctx context.Context) ApiStatusCheckBasicRequest {
 	return ApiStatusCheckBasicRequest{
@@ -47,7 +47,8 @@ func (a *StatusApiService) StatusCheckBasic(ctx context.Context) ApiStatusCheckB
 }
 
 // Execute executes the request
-//  @return StatusBasic
+//
+//	@return StatusBasic
 func (a *StatusApiService) StatusCheckBasicExecute(r ApiStatusCheckBasicRequest) (*StatusBasic, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

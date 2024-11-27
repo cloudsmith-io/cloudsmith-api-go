@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RepositoryWebhookRequest type satisfies the MappedNullable interface at compile time
@@ -32,9 +34,9 @@ type RepositoryWebhookRequest struct {
 	// The value that will be sent for the 'Content Type' header.
 	RequestContentType NullableString `json:"request_content_type,omitempty"`
 	// The header to send the predefined secret in. This must be unique from existing headers or it won't be sent. You can use this as a form of authentication on the endpoint side.
-	SecretHeader NullableString `json:"secret_header,omitempty"`
+	SecretHeader NullableString `json:"secret_header,omitempty" validate:"regexp=^[-\\\\w]+$"`
 	// The value for the predefined secret (note: this is treated as a passphrase and is encrypted when we store it). You can use this as a form of authentication on the endpoint side.
-	SecretValue NullableString `json:"secret_value,omitempty"`
+	SecretValue NullableString `json:"secret_value,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// The value for the signature key - This is used to generate an HMAC-based hex digest of the request body, which we send as the X-Cloudsmith-Signature header so that you can ensure that the request wasn't modified by a malicious party (note: this is treated as a passphrase and is encrypted when we store it).
 	SignatureKey *string `json:"signature_key,omitempty"`
 	// The destination URL that webhook payloads will be POST'ed to.
@@ -43,6 +45,8 @@ type RepositoryWebhookRequest struct {
 	// If enabled, SSL certificates is verified when webhooks are sent. It's recommended to leave this enabled as not verifying the integrity of SSL certificates leaves you susceptible to Man-in-the-Middle (MITM) attacks.
 	VerifySsl *bool `json:"verify_ssl,omitempty"`
 }
+
+type _RepositoryWebhookRequest RepositoryWebhookRequest
 
 // NewRepositoryWebhookRequest instantiates a new RepositoryWebhookRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -517,6 +521,45 @@ func (o RepositoryWebhookRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
 	return toSerialize, nil
+}
+
+func (o *RepositoryWebhookRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"events",
+		"target_url",
+		"templates",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRepositoryWebhookRequest := _RepositoryWebhookRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRepositoryWebhookRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryWebhookRequest(varRepositoryWebhookRequest)
+
+	return err
 }
 
 type NullableRepositoryWebhookRequest struct {

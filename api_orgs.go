@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -38,9 +38,9 @@ OrgsDelete Delete the specified organization.
 
 Delete the specified organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsDeleteRequest
 */
 func (a *OrgsApiService) OrgsDelete(ctx context.Context, org string) ApiOrgsDeleteRequest {
 	return ApiOrgsDeleteRequest{
@@ -171,9 +171,9 @@ OrgsDenyPolicyCreate Create a package deny policy.
 
 Create a package deny policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsDenyPolicyCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsDenyPolicyCreateRequest
 */
 func (a *OrgsApiService) OrgsDenyPolicyCreate(ctx context.Context, org string) ApiOrgsDenyPolicyCreateRequest {
 	return ApiOrgsDenyPolicyCreateRequest{
@@ -184,7 +184,8 @@ func (a *OrgsApiService) OrgsDenyPolicyCreate(ctx context.Context, org string) A
 }
 
 // Execute executes the request
-//  @return PackageDenyPolicy
+//
+//	@return PackageDenyPolicy
 func (a *OrgsApiService) OrgsDenyPolicyCreateExecute(r ApiOrgsDenyPolicyCreateRequest) (*PackageDenyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -312,10 +313,10 @@ OrgsDenyPolicyDelete Delete a package deny policy.
 
 Delete a package deny policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsDenyPolicyDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsDenyPolicyDeleteRequest
 */
 func (a *OrgsApiService) OrgsDenyPolicyDelete(ctx context.Context, org string, slugPerm string) ApiOrgsDenyPolicyDeleteRequest {
 	return ApiOrgsDenyPolicyDeleteRequest{
@@ -456,9 +457,9 @@ OrgsDenyPolicyList Get a list of all package deny policies.
 
 Get a list of all package deny policies.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsDenyPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsDenyPolicyListRequest
 */
 func (a *OrgsApiService) OrgsDenyPolicyList(ctx context.Context, org string) ApiOrgsDenyPolicyListRequest {
 	return ApiOrgsDenyPolicyListRequest{
@@ -469,7 +470,8 @@ func (a *OrgsApiService) OrgsDenyPolicyList(ctx context.Context, org string) Api
 }
 
 // Execute executes the request
-//  @return []PackageDenyPolicy
+//
+//	@return []PackageDenyPolicy
 func (a *OrgsApiService) OrgsDenyPolicyListExecute(r ApiOrgsDenyPolicyListRequest) ([]PackageDenyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -491,10 +493,10 @@ func (a *OrgsApiService) OrgsDenyPolicyListExecute(r ApiOrgsDenyPolicyListReques
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -607,10 +609,10 @@ OrgsDenyPolicyPartialUpdate Partially update a package deny policy.
 
 Partially update a package deny policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsDenyPolicyPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsDenyPolicyPartialUpdateRequest
 */
 func (a *OrgsApiService) OrgsDenyPolicyPartialUpdate(ctx context.Context, org string, slugPerm string) ApiOrgsDenyPolicyPartialUpdateRequest {
 	return ApiOrgsDenyPolicyPartialUpdateRequest{
@@ -622,7 +624,8 @@ func (a *OrgsApiService) OrgsDenyPolicyPartialUpdate(ctx context.Context, org st
 }
 
 // Execute executes the request
-//  @return PackageDenyPolicy
+//
+//	@return PackageDenyPolicy
 func (a *OrgsApiService) OrgsDenyPolicyPartialUpdateExecute(r ApiOrgsDenyPolicyPartialUpdateRequest) (*PackageDenyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -751,10 +754,10 @@ OrgsDenyPolicyRead Get a package deny policy.
 
 Get a package deny policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsDenyPolicyReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsDenyPolicyReadRequest
 */
 func (a *OrgsApiService) OrgsDenyPolicyRead(ctx context.Context, org string, slugPerm string) ApiOrgsDenyPolicyReadRequest {
 	return ApiOrgsDenyPolicyReadRequest{
@@ -766,7 +769,8 @@ func (a *OrgsApiService) OrgsDenyPolicyRead(ctx context.Context, org string, slu
 }
 
 // Execute executes the request
-//  @return PackageDenyPolicy
+//
+//	@return PackageDenyPolicy
 func (a *OrgsApiService) OrgsDenyPolicyReadExecute(r ApiOrgsDenyPolicyReadRequest) (*PackageDenyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -899,10 +903,10 @@ OrgsDenyPolicyUpdate Update a package deny policy.
 
 Update a package deny policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsDenyPolicyUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsDenyPolicyUpdateRequest
 */
 func (a *OrgsApiService) OrgsDenyPolicyUpdate(ctx context.Context, org string, slugPerm string) ApiOrgsDenyPolicyUpdateRequest {
 	return ApiOrgsDenyPolicyUpdateRequest{
@@ -914,7 +918,8 @@ func (a *OrgsApiService) OrgsDenyPolicyUpdate(ctx context.Context, org string, s
 }
 
 // Execute executes the request
-//  @return PackageDenyPolicy
+//
+//	@return PackageDenyPolicy
 func (a *OrgsApiService) OrgsDenyPolicyUpdateExecute(r ApiOrgsDenyPolicyUpdateRequest) (*PackageDenyPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -1048,9 +1053,9 @@ OrgsInvitesCreate Create an organization invite for a specific user
 
 Create an organization invite for a specific user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsInvitesCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsInvitesCreateRequest
 */
 func (a *OrgsApiService) OrgsInvitesCreate(ctx context.Context, org string) ApiOrgsInvitesCreateRequest {
 	return ApiOrgsInvitesCreateRequest{
@@ -1061,7 +1066,8 @@ func (a *OrgsApiService) OrgsInvitesCreate(ctx context.Context, org string) ApiO
 }
 
 // Execute executes the request
-//  @return OrganizationInvite
+//
+//	@return OrganizationInvite
 func (a *OrgsApiService) OrgsInvitesCreateExecute(r ApiOrgsInvitesCreateRequest) (*OrganizationInvite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1189,10 +1195,10 @@ OrgsInvitesDelete Delete a specific organization invite
 
 Delete a specific organization invite
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsInvitesDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsInvitesDeleteRequest
 */
 func (a *OrgsApiService) OrgsInvitesDelete(ctx context.Context, org string, slugPerm string) ApiOrgsInvitesDeleteRequest {
 	return ApiOrgsInvitesDeleteRequest{
@@ -1320,10 +1326,10 @@ OrgsInvitesExtend Extend an organization invite.
 
 Extend an organization invite.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsInvitesExtendRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsInvitesExtendRequest
 */
 func (a *OrgsApiService) OrgsInvitesExtend(ctx context.Context, org string, slugPerm string) ApiOrgsInvitesExtendRequest {
 	return ApiOrgsInvitesExtendRequest{
@@ -1335,7 +1341,8 @@ func (a *OrgsApiService) OrgsInvitesExtend(ctx context.Context, org string, slug
 }
 
 // Execute executes the request
-//  @return OrganizationInviteExtend
+//
+//	@return OrganizationInviteExtend
 func (a *OrgsApiService) OrgsInvitesExtendExecute(r ApiOrgsInvitesExtendRequest) (*OrganizationInviteExtend, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1486,9 +1493,9 @@ OrgsInvitesList Get a list of all invites for an organization.
 
 Get a list of all invites for an organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsInvitesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsInvitesListRequest
 */
 func (a *OrgsApiService) OrgsInvitesList(ctx context.Context, org string) ApiOrgsInvitesListRequest {
 	return ApiOrgsInvitesListRequest{
@@ -1499,7 +1506,8 @@ func (a *OrgsApiService) OrgsInvitesList(ctx context.Context, org string) ApiOrg
 }
 
 // Execute executes the request
-//  @return []OrganizationInvite
+//
+//	@return []OrganizationInvite
 func (a *OrgsApiService) OrgsInvitesListExecute(r ApiOrgsInvitesListRequest) ([]OrganizationInvite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1521,10 +1529,10 @@ func (a *OrgsApiService) OrgsInvitesListExecute(r ApiOrgsInvitesListRequest) ([]
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1648,10 +1656,10 @@ OrgsInvitesPartialUpdate Update a specific organization invite.
 
 Update a specific organization invite.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsInvitesPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsInvitesPartialUpdateRequest
 */
 func (a *OrgsApiService) OrgsInvitesPartialUpdate(ctx context.Context, org string, slugPerm string) ApiOrgsInvitesPartialUpdateRequest {
 	return ApiOrgsInvitesPartialUpdateRequest{
@@ -1663,7 +1671,8 @@ func (a *OrgsApiService) OrgsInvitesPartialUpdate(ctx context.Context, org strin
 }
 
 // Execute executes the request
-//  @return OrganizationInvite
+//
+//	@return OrganizationInvite
 func (a *OrgsApiService) OrgsInvitesPartialUpdateExecute(r ApiOrgsInvitesPartialUpdateRequest) (*OrganizationInvite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1803,10 +1812,10 @@ OrgsInvitesResend Resend an organization invite.
 
 Resend an organization invite.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsInvitesResendRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsInvitesResendRequest
 */
 func (a *OrgsApiService) OrgsInvitesResend(ctx context.Context, org string, slugPerm string) ApiOrgsInvitesResendRequest {
 	return ApiOrgsInvitesResendRequest{
@@ -1818,7 +1827,8 @@ func (a *OrgsApiService) OrgsInvitesResend(ctx context.Context, org string, slug
 }
 
 // Execute executes the request
-//  @return OrganizationInviteExtend
+//
+//	@return OrganizationInviteExtend
 func (a *OrgsApiService) OrgsInvitesResendExecute(r ApiOrgsInvitesResendRequest) (*OrganizationInviteExtend, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1961,9 +1971,9 @@ OrgsLicensePolicyCreate Create a package license policy.
 
 Create a package license policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsLicensePolicyCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsLicensePolicyCreateRequest
 */
 func (a *OrgsApiService) OrgsLicensePolicyCreate(ctx context.Context, org string) ApiOrgsLicensePolicyCreateRequest {
 	return ApiOrgsLicensePolicyCreateRequest{
@@ -1974,7 +1984,8 @@ func (a *OrgsApiService) OrgsLicensePolicyCreate(ctx context.Context, org string
 }
 
 // Execute executes the request
-//  @return OrganizationPackageLicensePolicy
+//
+//	@return OrganizationPackageLicensePolicy
 func (a *OrgsApiService) OrgsLicensePolicyCreateExecute(r ApiOrgsLicensePolicyCreateRequest) (*OrganizationPackageLicensePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2102,10 +2113,10 @@ OrgsLicensePolicyDelete Delete a package license policy.
 
 Delete a package license policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsLicensePolicyDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsLicensePolicyDeleteRequest
 */
 func (a *OrgsApiService) OrgsLicensePolicyDelete(ctx context.Context, org string, slugPerm string) ApiOrgsLicensePolicyDeleteRequest {
 	return ApiOrgsLicensePolicyDeleteRequest{
@@ -2239,10 +2250,10 @@ OrgsLicensePolicyEvaluationCreate Create an evaluation request for this policy.
 
 Create an evaluation request for this policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param policySlugPerm
- @return ApiOrgsLicensePolicyEvaluationCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param policySlugPerm
+	@return ApiOrgsLicensePolicyEvaluationCreateRequest
 */
 func (a *OrgsApiService) OrgsLicensePolicyEvaluationCreate(ctx context.Context, org string, policySlugPerm string) ApiOrgsLicensePolicyEvaluationCreateRequest {
 	return ApiOrgsLicensePolicyEvaluationCreateRequest{
@@ -2254,7 +2265,8 @@ func (a *OrgsApiService) OrgsLicensePolicyEvaluationCreate(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return PackageLicensePolicyEvaluationRequest
+//
+//	@return PackageLicensePolicyEvaluationRequest
 func (a *OrgsApiService) OrgsLicensePolicyEvaluationCreateExecute(r ApiOrgsLicensePolicyEvaluationCreateRequest) (*PackageLicensePolicyEvaluationRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2397,10 +2409,10 @@ OrgsLicensePolicyEvaluationList List evaluation requests for this policy.
 
 List evaluation requests for this policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param policySlugPerm
- @return ApiOrgsLicensePolicyEvaluationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param policySlugPerm
+	@return ApiOrgsLicensePolicyEvaluationListRequest
 */
 func (a *OrgsApiService) OrgsLicensePolicyEvaluationList(ctx context.Context, org string, policySlugPerm string) ApiOrgsLicensePolicyEvaluationListRequest {
 	return ApiOrgsLicensePolicyEvaluationListRequest{
@@ -2412,7 +2424,8 @@ func (a *OrgsApiService) OrgsLicensePolicyEvaluationList(ctx context.Context, or
 }
 
 // Execute executes the request
-//  @return []PackageLicensePolicyEvaluationRequest
+//
+//	@return []PackageLicensePolicyEvaluationRequest
 func (a *OrgsApiService) OrgsLicensePolicyEvaluationListExecute(r ApiOrgsLicensePolicyEvaluationListRequest) ([]PackageLicensePolicyEvaluationRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2435,10 +2448,10 @@ func (a *OrgsApiService) OrgsLicensePolicyEvaluationListExecute(r ApiOrgsLicense
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2546,11 +2559,11 @@ OrgsLicensePolicyEvaluationRead Retrieve an evaluation request for this policy.
 
 Retrieve an evaluation request for this policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param policySlugPerm
- @param slugPerm
- @return ApiOrgsLicensePolicyEvaluationReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param policySlugPerm
+	@param slugPerm
+	@return ApiOrgsLicensePolicyEvaluationReadRequest
 */
 func (a *OrgsApiService) OrgsLicensePolicyEvaluationRead(ctx context.Context, org string, policySlugPerm string, slugPerm string) ApiOrgsLicensePolicyEvaluationReadRequest {
 	return ApiOrgsLicensePolicyEvaluationReadRequest{
@@ -2563,7 +2576,8 @@ func (a *OrgsApiService) OrgsLicensePolicyEvaluationRead(ctx context.Context, or
 }
 
 // Execute executes the request
-//  @return PackageLicensePolicyEvaluationRequest
+//
+//	@return PackageLicensePolicyEvaluationRequest
 func (a *OrgsApiService) OrgsLicensePolicyEvaluationReadExecute(r ApiOrgsLicensePolicyEvaluationReadRequest) (*PackageLicensePolicyEvaluationRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2704,9 +2718,9 @@ OrgsLicensePolicyList Get a list of all package license policies.
 
 Get a list of all package license policies.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsLicensePolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsLicensePolicyListRequest
 */
 func (a *OrgsApiService) OrgsLicensePolicyList(ctx context.Context, org string) ApiOrgsLicensePolicyListRequest {
 	return ApiOrgsLicensePolicyListRequest{
@@ -2717,7 +2731,8 @@ func (a *OrgsApiService) OrgsLicensePolicyList(ctx context.Context, org string) 
 }
 
 // Execute executes the request
-//  @return []OrganizationPackageLicensePolicy
+//
+//	@return []OrganizationPackageLicensePolicy
 func (a *OrgsApiService) OrgsLicensePolicyListExecute(r ApiOrgsLicensePolicyListRequest) ([]OrganizationPackageLicensePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2739,10 +2754,10 @@ func (a *OrgsApiService) OrgsLicensePolicyListExecute(r ApiOrgsLicensePolicyList
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2855,10 +2870,10 @@ OrgsLicensePolicyPartialUpdate Partially update a package license policy.
 
 Partially update a package license policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsLicensePolicyPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsLicensePolicyPartialUpdateRequest
 */
 func (a *OrgsApiService) OrgsLicensePolicyPartialUpdate(ctx context.Context, org string, slugPerm string) ApiOrgsLicensePolicyPartialUpdateRequest {
 	return ApiOrgsLicensePolicyPartialUpdateRequest{
@@ -2870,7 +2885,8 @@ func (a *OrgsApiService) OrgsLicensePolicyPartialUpdate(ctx context.Context, org
 }
 
 // Execute executes the request
-//  @return OrganizationPackageLicensePolicy
+//
+//	@return OrganizationPackageLicensePolicy
 func (a *OrgsApiService) OrgsLicensePolicyPartialUpdateExecute(r ApiOrgsLicensePolicyPartialUpdateRequest) (*OrganizationPackageLicensePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -2999,10 +3015,10 @@ OrgsLicensePolicyRead Get a package license policy.
 
 Get a package license policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsLicensePolicyReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsLicensePolicyReadRequest
 */
 func (a *OrgsApiService) OrgsLicensePolicyRead(ctx context.Context, org string, slugPerm string) ApiOrgsLicensePolicyReadRequest {
 	return ApiOrgsLicensePolicyReadRequest{
@@ -3014,7 +3030,8 @@ func (a *OrgsApiService) OrgsLicensePolicyRead(ctx context.Context, org string, 
 }
 
 // Execute executes the request
-//  @return OrganizationPackageLicensePolicy
+//
+//	@return OrganizationPackageLicensePolicy
 func (a *OrgsApiService) OrgsLicensePolicyReadExecute(r ApiOrgsLicensePolicyReadRequest) (*OrganizationPackageLicensePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3147,10 +3164,10 @@ OrgsLicensePolicyUpdate Update a package license policy.
 
 Update a package license policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsLicensePolicyUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsLicensePolicyUpdateRequest
 */
 func (a *OrgsApiService) OrgsLicensePolicyUpdate(ctx context.Context, org string, slugPerm string) ApiOrgsLicensePolicyUpdateRequest {
 	return ApiOrgsLicensePolicyUpdateRequest{
@@ -3162,7 +3179,8 @@ func (a *OrgsApiService) OrgsLicensePolicyUpdate(ctx context.Context, org string
 }
 
 // Execute executes the request
-//  @return OrganizationPackageLicensePolicy
+//
+//	@return OrganizationPackageLicensePolicy
 func (a *OrgsApiService) OrgsLicensePolicyUpdateExecute(r ApiOrgsLicensePolicyUpdateRequest) (*OrganizationPackageLicensePolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -3304,9 +3322,9 @@ OrgsLicensePolicyViolationList List all current license policy violations for th
 
 List all current license policy violations for this Organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsLicensePolicyViolationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsLicensePolicyViolationListRequest
 */
 func (a *OrgsApiService) OrgsLicensePolicyViolationList(ctx context.Context, org string) ApiOrgsLicensePolicyViolationListRequest {
 	return ApiOrgsLicensePolicyViolationListRequest{
@@ -3317,7 +3335,8 @@ func (a *OrgsApiService) OrgsLicensePolicyViolationList(ctx context.Context, org
 }
 
 // Execute executes the request
-//  @return PackageLicensePolicyViolationLogCursorPage
+//
+//	@return PackageLicensePolicyViolationLogCursorPage
 func (a *OrgsApiService) OrgsLicensePolicyViolationListExecute(r ApiOrgsLicensePolicyViolationListRequest) (*PackageLicensePolicyViolationLogCursorPage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3339,10 +3358,10 @@ func (a *OrgsApiService) OrgsLicensePolicyViolationListExecute(r ApiOrgsLicenseP
 	localVarFormParams := url.Values{}
 
 	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3461,8 +3480,8 @@ OrgsList Get a list of all the organizations you are associated with.
 
 Get a list of all the organizations you are associated with.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiOrgsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiOrgsListRequest
 */
 func (a *OrgsApiService) OrgsList(ctx context.Context) ApiOrgsListRequest {
 	return ApiOrgsListRequest{
@@ -3472,7 +3491,8 @@ func (a *OrgsApiService) OrgsList(ctx context.Context) ApiOrgsListRequest {
 }
 
 // Execute executes the request
-//  @return []Organization
+//
+//	@return []Organization
 func (a *OrgsApiService) OrgsListExecute(r ApiOrgsListRequest) ([]Organization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3493,10 +3513,10 @@ func (a *OrgsApiService) OrgsListExecute(r ApiOrgsListRequest) ([]Organization, 
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3603,10 +3623,10 @@ OrgsMembersDelete Removes a member from the organization.
 
 Removes a member from the organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param member
- @return ApiOrgsMembersDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param member
+	@return ApiOrgsMembersDeleteRequest
 */
 func (a *OrgsApiService) OrgsMembersDelete(ctx context.Context, org string, member string) ApiOrgsMembersDeleteRequest {
 	return ApiOrgsMembersDeleteRequest{
@@ -3754,9 +3774,9 @@ OrgsMembersList Get the details for all organization members.
 
 Get the details for all organization members.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsMembersListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsMembersListRequest
 */
 func (a *OrgsApiService) OrgsMembersList(ctx context.Context, org string) ApiOrgsMembersListRequest {
 	return ApiOrgsMembersListRequest{
@@ -3767,7 +3787,8 @@ func (a *OrgsApiService) OrgsMembersList(ctx context.Context, org string) ApiOrg
 }
 
 // Execute executes the request
-//  @return []OrganizationMembership
+//
+//	@return []OrganizationMembership
 func (a *OrgsApiService) OrgsMembersListExecute(r ApiOrgsMembersListRequest) ([]OrganizationMembership, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3789,13 +3810,16 @@ func (a *OrgsApiService) OrgsMembersListExecute(r ApiOrgsMembersListRequest) ([]
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.isActive != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "is_active", r.isActive, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "is_active", r.isActive, "", "")
+	} else {
+		var defaultValue bool = false
+		r.isActive = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3902,10 +3926,10 @@ OrgsMembersRead Get the details for a specific organization member.
 
 Get the details for a specific organization member.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param member
- @return ApiOrgsMembersReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param member
+	@return ApiOrgsMembersReadRequest
 */
 func (a *OrgsApiService) OrgsMembersRead(ctx context.Context, org string, member string) ApiOrgsMembersReadRequest {
 	return ApiOrgsMembersReadRequest{
@@ -3917,7 +3941,8 @@ func (a *OrgsApiService) OrgsMembersRead(ctx context.Context, org string, member
 }
 
 // Execute executes the request
-//  @return OrganizationMembership
+//
+//	@return OrganizationMembership
 func (a *OrgsApiService) OrgsMembersReadExecute(r ApiOrgsMembersReadRequest) (*OrganizationMembership, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4044,10 +4069,10 @@ OrgsMembersRefresh Refresh a member of the organization's API key.
 
 Refresh a member of the organization's API key.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param member
- @return ApiOrgsMembersRefreshRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param member
+	@return ApiOrgsMembersRefreshRequest
 */
 func (a *OrgsApiService) OrgsMembersRefresh(ctx context.Context, org string, member string) ApiOrgsMembersRefreshRequest {
 	return ApiOrgsMembersRefreshRequest{
@@ -4186,10 +4211,10 @@ OrgsMembersRemove Removes a member from the organization (deprecated, use DELETE
 
 Removes a member from the organization (deprecated, use DELETE instead).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param member
- @return ApiOrgsMembersRemoveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param member
+	@return ApiOrgsMembersRemoveRequest
 */
 func (a *OrgsApiService) OrgsMembersRemove(ctx context.Context, org string, member string) ApiOrgsMembersRemoveRequest {
 	return ApiOrgsMembersRemoveRequest{
@@ -4322,9 +4347,9 @@ OrgsOpenidConnectCreate Create the OpenID Connect provider settings for the org.
 
 Create the OpenID Connect provider settings for the org.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsOpenidConnectCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsOpenidConnectCreateRequest
 */
 func (a *OrgsApiService) OrgsOpenidConnectCreate(ctx context.Context, org string) ApiOrgsOpenidConnectCreateRequest {
 	return ApiOrgsOpenidConnectCreateRequest{
@@ -4335,7 +4360,8 @@ func (a *OrgsApiService) OrgsOpenidConnectCreate(ctx context.Context, org string
 }
 
 // Execute executes the request
-//  @return ProviderSettings
+//
+//	@return ProviderSettings
 func (a *OrgsApiService) OrgsOpenidConnectCreateExecute(r ApiOrgsOpenidConnectCreateRequest) (*ProviderSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4474,10 +4500,10 @@ OrgsOpenidConnectDelete Delete a specific OpenID Connect provider setting for th
 
 Delete a specific OpenID Connect provider setting for the org.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsOpenidConnectDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsOpenidConnectDeleteRequest
 */
 func (a *OrgsApiService) OrgsOpenidConnectDelete(ctx context.Context, org string, slugPerm string) ApiOrgsOpenidConnectDeleteRequest {
 	return ApiOrgsOpenidConnectDeleteRequest{
@@ -4618,9 +4644,9 @@ OrgsOpenidConnectList Retrieve the list of OpenID Connect provider settings for 
 
 Retrieve the list of OpenID Connect provider settings for the org.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsOpenidConnectListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsOpenidConnectListRequest
 */
 func (a *OrgsApiService) OrgsOpenidConnectList(ctx context.Context, org string) ApiOrgsOpenidConnectListRequest {
 	return ApiOrgsOpenidConnectListRequest{
@@ -4631,7 +4657,8 @@ func (a *OrgsApiService) OrgsOpenidConnectList(ctx context.Context, org string) 
 }
 
 // Execute executes the request
-//  @return []ProviderSettings
+//
+//	@return []ProviderSettings
 func (a *OrgsApiService) OrgsOpenidConnectListExecute(r ApiOrgsOpenidConnectListRequest) ([]ProviderSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4653,10 +4680,10 @@ func (a *OrgsApiService) OrgsOpenidConnectListExecute(r ApiOrgsOpenidConnectList
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4780,10 +4807,10 @@ OrgsOpenidConnectPartialUpdate Update a specific OpenID Connect provider setting
 
 Update a specific OpenID Connect provider setting for the org.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsOpenidConnectPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsOpenidConnectPartialUpdateRequest
 */
 func (a *OrgsApiService) OrgsOpenidConnectPartialUpdate(ctx context.Context, org string, slugPerm string) ApiOrgsOpenidConnectPartialUpdateRequest {
 	return ApiOrgsOpenidConnectPartialUpdateRequest{
@@ -4795,7 +4822,8 @@ func (a *OrgsApiService) OrgsOpenidConnectPartialUpdate(ctx context.Context, org
 }
 
 // Execute executes the request
-//  @return ProviderSettings
+//
+//	@return ProviderSettings
 func (a *OrgsApiService) OrgsOpenidConnectPartialUpdateExecute(r ApiOrgsOpenidConnectPartialUpdateRequest) (*ProviderSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4935,10 +4963,10 @@ OrgsOpenidConnectRead Retrieve a specific OpenID Connect provider setting for th
 
 Retrieve a specific OpenID Connect provider setting for the org.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsOpenidConnectReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsOpenidConnectReadRequest
 */
 func (a *OrgsApiService) OrgsOpenidConnectRead(ctx context.Context, org string, slugPerm string) ApiOrgsOpenidConnectReadRequest {
 	return ApiOrgsOpenidConnectReadRequest{
@@ -4950,7 +4978,8 @@ func (a *OrgsApiService) OrgsOpenidConnectRead(ctx context.Context, org string, 
 }
 
 // Execute executes the request
-//  @return ProviderSettings
+//
+//	@return ProviderSettings
 func (a *OrgsApiService) OrgsOpenidConnectReadExecute(r ApiOrgsOpenidConnectReadRequest) (*ProviderSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5083,10 +5112,10 @@ OrgsOpenidConnectUpdate Update a specific OpenID Connect provider setting for th
 
 Update a specific OpenID Connect provider setting for the org.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsOpenidConnectUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsOpenidConnectUpdateRequest
 */
 func (a *OrgsApiService) OrgsOpenidConnectUpdate(ctx context.Context, org string, slugPerm string) ApiOrgsOpenidConnectUpdateRequest {
 	return ApiOrgsOpenidConnectUpdateRequest{
@@ -5098,7 +5127,8 @@ func (a *OrgsApiService) OrgsOpenidConnectUpdate(ctx context.Context, org string
 }
 
 // Execute executes the request
-//  @return ProviderSettings
+//
+//	@return ProviderSettings
 func (a *OrgsApiService) OrgsOpenidConnectUpdateExecute(r ApiOrgsOpenidConnectUpdateRequest) (*ProviderSettings, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -5237,9 +5267,9 @@ OrgsRead Get the details for the specific organization.
 
 Get the details for the specific organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsReadRequest
 */
 func (a *OrgsApiService) OrgsRead(ctx context.Context, org string) ApiOrgsReadRequest {
 	return ApiOrgsReadRequest{
@@ -5250,7 +5280,8 @@ func (a *OrgsApiService) OrgsRead(ctx context.Context, org string) ApiOrgsReadRe
 }
 
 // Execute executes the request
-//  @return Organization
+//
+//	@return Organization
 func (a *OrgsApiService) OrgsReadExecute(r ApiOrgsReadRequest) (*Organization, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5360,6 +5391,336 @@ func (a *OrgsApiService) OrgsReadExecute(r ApiOrgsReadRequest) (*Organization, *
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiOrgsSamlAuthenticationPartialUpdateRequest struct {
+	ctx        context.Context
+	ApiService *OrgsApiService
+	org        string
+	data       *OrganizationSAMLAuthRequestPatch
+}
+
+func (r ApiOrgsSamlAuthenticationPartialUpdateRequest) Data(data OrganizationSAMLAuthRequestPatch) ApiOrgsSamlAuthenticationPartialUpdateRequest {
+	r.data = &data
+	return r
+}
+
+func (r ApiOrgsSamlAuthenticationPartialUpdateRequest) Execute() (*OrganizationSAMLAuth, *http.Response, error) {
+	return r.ApiService.OrgsSamlAuthenticationPartialUpdateExecute(r)
+}
+
+/*
+OrgsSamlAuthenticationPartialUpdate Update the SAML Authentication settings for this Organization.
+
+Update the SAML Authentication settings for this Organization.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsSamlAuthenticationPartialUpdateRequest
+*/
+func (a *OrgsApiService) OrgsSamlAuthenticationPartialUpdate(ctx context.Context, org string) ApiOrgsSamlAuthenticationPartialUpdateRequest {
+	return ApiOrgsSamlAuthenticationPartialUpdateRequest{
+		ApiService: a,
+		ctx:        ctx,
+		org:        org,
+	}
+}
+
+// Execute executes the request
+//
+//	@return OrganizationSAMLAuth
+func (a *OrgsApiService) OrgsSamlAuthenticationPartialUpdateExecute(r ApiOrgsSamlAuthenticationPartialUpdateRequest) (*OrganizationSAMLAuth, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OrganizationSAMLAuth
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsSamlAuthenticationPartialUpdate")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{org}/saml-authentication"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", url.PathEscape(parameterValueToString(r.org, "org")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.data
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apikey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 402 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiOrgsSamlAuthenticationReadRequest struct {
+	ctx        context.Context
+	ApiService *OrgsApiService
+	org        string
+}
+
+func (r ApiOrgsSamlAuthenticationReadRequest) Execute() (*OrganizationSAMLAuth, *http.Response, error) {
+	return r.ApiService.OrgsSamlAuthenticationReadExecute(r)
+}
+
+/*
+OrgsSamlAuthenticationRead Retrieve the SAML Authentication settings for this Organization.
+
+Retrieve the SAML Authentication settings for this Organization.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsSamlAuthenticationReadRequest
+*/
+func (a *OrgsApiService) OrgsSamlAuthenticationRead(ctx context.Context, org string) ApiOrgsSamlAuthenticationReadRequest {
+	return ApiOrgsSamlAuthenticationReadRequest{
+		ApiService: a,
+		ctx:        ctx,
+		org:        org,
+	}
+}
+
+// Execute executes the request
+//
+//	@return OrganizationSAMLAuth
+func (a *OrgsApiService) OrgsSamlAuthenticationReadExecute(r ApiOrgsSamlAuthenticationReadRequest) (*OrganizationSAMLAuth, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OrganizationSAMLAuth
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsSamlAuthenticationRead")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{org}/saml-authentication"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", url.PathEscape(parameterValueToString(r.org, "org")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apikey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 402 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiOrgsSamlGroupSyncCreateRequest struct {
 	ctx        context.Context
 	ApiService *OrgsApiService
@@ -5381,9 +5742,9 @@ OrgsSamlGroupSyncCreate Create a new SAML Group Sync mapping within an organizat
 
 Create a new SAML Group Sync mapping within an organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsSamlGroupSyncCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsSamlGroupSyncCreateRequest
 */
 func (a *OrgsApiService) OrgsSamlGroupSyncCreate(ctx context.Context, org string) ApiOrgsSamlGroupSyncCreateRequest {
 	return ApiOrgsSamlGroupSyncCreateRequest{
@@ -5394,7 +5755,8 @@ func (a *OrgsApiService) OrgsSamlGroupSyncCreate(ctx context.Context, org string
 }
 
 // Execute executes the request
-//  @return OrganizationGroupSync
+//
+//	@return OrganizationGroupSync
 func (a *OrgsApiService) OrgsSamlGroupSyncCreateExecute(r ApiOrgsSamlGroupSyncCreateRequest) (*OrganizationGroupSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5533,10 +5895,10 @@ OrgsSamlGroupSyncDelete Delete a SAML Group Sync mapping from an organization.
 
 Delete a SAML Group Sync mapping from an organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsSamlGroupSyncDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsSamlGroupSyncDeleteRequest
 */
 func (a *OrgsApiService) OrgsSamlGroupSyncDelete(ctx context.Context, org string, slugPerm string) ApiOrgsSamlGroupSyncDeleteRequest {
 	return ApiOrgsSamlGroupSyncDeleteRequest{
@@ -5663,9 +6025,9 @@ OrgsSamlGroupSyncDisable Disable SAML Group Sync for this organization.
 
 Disable SAML Group Sync for this organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsSamlGroupSyncDisableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsSamlGroupSyncDisableRequest
 */
 func (a *OrgsApiService) OrgsSamlGroupSyncDisable(ctx context.Context, org string) ApiOrgsSamlGroupSyncDisableRequest {
 	return ApiOrgsSamlGroupSyncDisableRequest{
@@ -5801,9 +6163,9 @@ OrgsSamlGroupSyncEnable Enable SAML Group Sync for this organization.
 
 Enable SAML Group Sync for this organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsSamlGroupSyncEnableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsSamlGroupSyncEnableRequest
 */
 func (a *OrgsApiService) OrgsSamlGroupSyncEnable(ctx context.Context, org string) ApiOrgsSamlGroupSyncEnableRequest {
 	return ApiOrgsSamlGroupSyncEnableRequest{
@@ -5953,9 +6315,9 @@ OrgsSamlGroupSyncList Get the details of all SAML Group Sync mapping within an o
 
 Get the details of all SAML Group Sync mapping within an organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsSamlGroupSyncListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsSamlGroupSyncListRequest
 */
 func (a *OrgsApiService) OrgsSamlGroupSyncList(ctx context.Context, org string) ApiOrgsSamlGroupSyncListRequest {
 	return ApiOrgsSamlGroupSyncListRequest{
@@ -5966,7 +6328,8 @@ func (a *OrgsApiService) OrgsSamlGroupSyncList(ctx context.Context, org string) 
 }
 
 // Execute executes the request
-//  @return []OrganizationGroupSync
+//
+//	@return []OrganizationGroupSync
 func (a *OrgsApiService) OrgsSamlGroupSyncListExecute(r ApiOrgsSamlGroupSyncListRequest) ([]OrganizationGroupSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5988,10 +6351,10 @@ func (a *OrgsApiService) OrgsSamlGroupSyncListExecute(r ApiOrgsSamlGroupSyncList
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6108,9 +6471,9 @@ OrgsSamlGroupSyncStatus Retrieve the SAML Group Sync status for this organizatio
 
 Retrieve the SAML Group Sync status for this organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsSamlGroupSyncStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsSamlGroupSyncStatusRequest
 */
 func (a *OrgsApiService) OrgsSamlGroupSyncStatus(ctx context.Context, org string) ApiOrgsSamlGroupSyncStatusRequest {
 	return ApiOrgsSamlGroupSyncStatusRequest{
@@ -6121,7 +6484,8 @@ func (a *OrgsApiService) OrgsSamlGroupSyncStatus(ctx context.Context, org string
 }
 
 // Execute executes the request
-//  @return OrganizationGroupSyncStatus
+//
+//	@return OrganizationGroupSyncStatus
 func (a *OrgsApiService) OrgsSamlGroupSyncStatusExecute(r ApiOrgsSamlGroupSyncStatusRequest) (*OrganizationGroupSyncStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6263,9 +6627,9 @@ OrgsServicesCreate Create a service within an organization.
 
 Create a service within an organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsServicesCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsServicesCreateRequest
 */
 func (a *OrgsApiService) OrgsServicesCreate(ctx context.Context, org string) ApiOrgsServicesCreateRequest {
 	return ApiOrgsServicesCreateRequest{
@@ -6276,7 +6640,8 @@ func (a *OrgsApiService) OrgsServicesCreate(ctx context.Context, org string) Api
 }
 
 // Execute executes the request
-//  @return Service
+//
+//	@return Service
 func (a *OrgsApiService) OrgsServicesCreateExecute(r ApiOrgsServicesCreateRequest) (*Service, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6415,10 +6780,10 @@ OrgsServicesDelete Delete a specific service
 
 Delete a specific service
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param service
- @return ApiOrgsServicesDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param service
+	@return ApiOrgsServicesDeleteRequest
 */
 func (a *OrgsApiService) OrgsServicesDelete(ctx context.Context, org string, service string) ApiOrgsServicesDeleteRequest {
 	return ApiOrgsServicesDeleteRequest{
@@ -6559,9 +6924,9 @@ OrgsServicesList Get a list of all services within an organization.
 
 Get a list of all services within an organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsServicesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsServicesListRequest
 */
 func (a *OrgsApiService) OrgsServicesList(ctx context.Context, org string) ApiOrgsServicesListRequest {
 	return ApiOrgsServicesListRequest{
@@ -6572,7 +6937,8 @@ func (a *OrgsApiService) OrgsServicesList(ctx context.Context, org string) ApiOr
 }
 
 // Execute executes the request
-//  @return []Service
+//
+//	@return []Service
 func (a *OrgsApiService) OrgsServicesListExecute(r ApiOrgsServicesListRequest) ([]Service, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6594,10 +6960,10 @@ func (a *OrgsApiService) OrgsServicesListExecute(r ApiOrgsServicesListRequest) (
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6721,10 +7087,10 @@ OrgsServicesPartialUpdate Update a service within an organization.
 
 Update a service within an organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param service
- @return ApiOrgsServicesPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param service
+	@return ApiOrgsServicesPartialUpdateRequest
 */
 func (a *OrgsApiService) OrgsServicesPartialUpdate(ctx context.Context, org string, service string) ApiOrgsServicesPartialUpdateRequest {
 	return ApiOrgsServicesPartialUpdateRequest{
@@ -6736,7 +7102,8 @@ func (a *OrgsApiService) OrgsServicesPartialUpdate(ctx context.Context, org stri
 }
 
 // Execute executes the request
-//  @return Service
+//
+//	@return Service
 func (a *OrgsApiService) OrgsServicesPartialUpdateExecute(r ApiOrgsServicesPartialUpdateRequest) (*Service, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6876,10 +7243,10 @@ OrgsServicesRead Retrieve details of a single service within an organization.
 
 Retrieve details of a single service within an organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param service
- @return ApiOrgsServicesReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param service
+	@return ApiOrgsServicesReadRequest
 */
 func (a *OrgsApiService) OrgsServicesRead(ctx context.Context, org string, service string) ApiOrgsServicesReadRequest {
 	return ApiOrgsServicesReadRequest{
@@ -6891,7 +7258,8 @@ func (a *OrgsApiService) OrgsServicesRead(ctx context.Context, org string, servi
 }
 
 // Execute executes the request
-//  @return Service
+//
+//	@return Service
 func (a *OrgsApiService) OrgsServicesReadExecute(r ApiOrgsServicesReadRequest) (*Service, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7018,10 +7386,10 @@ OrgsServicesRefresh Refresh service API token.
 
 Refresh service API token.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param service
- @return ApiOrgsServicesRefreshRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param service
+	@return ApiOrgsServicesRefreshRequest
 */
 func (a *OrgsApiService) OrgsServicesRefresh(ctx context.Context, org string, service string) ApiOrgsServicesRefreshRequest {
 	return ApiOrgsServicesRefreshRequest{
@@ -7033,7 +7401,8 @@ func (a *OrgsApiService) OrgsServicesRefresh(ctx context.Context, org string, se
 }
 
 // Execute executes the request
-//  @return Service
+//
+//	@return Service
 func (a *OrgsApiService) OrgsServicesRefreshExecute(r ApiOrgsServicesRefreshRequest) (*Service, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7176,9 +7545,9 @@ OrgsTeamsCreate Create a team for this organization.
 
 Create a team for this organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsTeamsCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsTeamsCreateRequest
 */
 func (a *OrgsApiService) OrgsTeamsCreate(ctx context.Context, org string) ApiOrgsTeamsCreateRequest {
 	return ApiOrgsTeamsCreateRequest{
@@ -7189,7 +7558,8 @@ func (a *OrgsApiService) OrgsTeamsCreate(ctx context.Context, org string) ApiOrg
 }
 
 // Execute executes the request
-//  @return OrganizationTeam
+//
+//	@return OrganizationTeam
 func (a *OrgsApiService) OrgsTeamsCreateExecute(r ApiOrgsTeamsCreateRequest) (*OrganizationTeam, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7317,10 +7687,10 @@ OrgsTeamsDelete Delete a specific team in a organization.
 
 Delete a specific team in a organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param team
- @return ApiOrgsTeamsDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param team
+	@return ApiOrgsTeamsDeleteRequest
 */
 func (a *OrgsApiService) OrgsTeamsDelete(ctx context.Context, org string, team string) ApiOrgsTeamsDeleteRequest {
 	return ApiOrgsTeamsDeleteRequest{
@@ -7472,9 +7842,9 @@ OrgsTeamsList Get the details of all teams within an organization.
 
 Get the details of all teams within an organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsTeamsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsTeamsListRequest
 */
 func (a *OrgsApiService) OrgsTeamsList(ctx context.Context, org string) ApiOrgsTeamsListRequest {
 	return ApiOrgsTeamsListRequest{
@@ -7485,7 +7855,8 @@ func (a *OrgsApiService) OrgsTeamsList(ctx context.Context, org string) ApiOrgsT
 }
 
 // Execute executes the request
-//  @return []OrganizationTeam
+//
+//	@return []OrganizationTeam
 func (a *OrgsApiService) OrgsTeamsListExecute(r ApiOrgsTeamsListRequest) ([]OrganizationTeam, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7507,10 +7878,10 @@ func (a *OrgsApiService) OrgsTeamsListExecute(r ApiOrgsTeamsListRequest) ([]Orga
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7634,10 +8005,10 @@ OrgsTeamsMembersCreate Add users to a team.
 
 Add users to a team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param team
- @return ApiOrgsTeamsMembersCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param team
+	@return ApiOrgsTeamsMembersCreateRequest
 */
 func (a *OrgsApiService) OrgsTeamsMembersCreate(ctx context.Context, org string, team string) ApiOrgsTeamsMembersCreateRequest {
 	return ApiOrgsTeamsMembersCreateRequest{
@@ -7649,7 +8020,8 @@ func (a *OrgsApiService) OrgsTeamsMembersCreate(ctx context.Context, org string,
 }
 
 // Execute executes the request
-//  @return OrganizationTeamMembers
+//
+//	@return OrganizationTeamMembers
 func (a *OrgsApiService) OrgsTeamsMembersCreateExecute(r ApiOrgsTeamsMembersCreateRequest) (*OrganizationTeamMembers, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7789,10 +8161,10 @@ OrgsTeamsMembersList List all members for the team.
 
 List all members for the team.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param team
- @return ApiOrgsTeamsMembersListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param team
+	@return ApiOrgsTeamsMembersListRequest
 */
 func (a *OrgsApiService) OrgsTeamsMembersList(ctx context.Context, org string, team string) ApiOrgsTeamsMembersListRequest {
 	return ApiOrgsTeamsMembersListRequest{
@@ -7804,7 +8176,8 @@ func (a *OrgsApiService) OrgsTeamsMembersList(ctx context.Context, org string, t
 }
 
 // Execute executes the request
-//  @return OrganizationTeamMembers
+//
+//	@return OrganizationTeamMembers
 func (a *OrgsApiService) OrgsTeamsMembersListExecute(r ApiOrgsTeamsMembersListRequest) (*OrganizationTeamMembers, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7948,10 +8321,10 @@ OrgsTeamsMembersUpdate Replace all team members.
 
 Replace all team members.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param team
- @return ApiOrgsTeamsMembersUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param team
+	@return ApiOrgsTeamsMembersUpdateRequest
 */
 func (a *OrgsApiService) OrgsTeamsMembersUpdate(ctx context.Context, org string, team string) ApiOrgsTeamsMembersUpdateRequest {
 	return ApiOrgsTeamsMembersUpdateRequest{
@@ -7963,7 +8336,8 @@ func (a *OrgsApiService) OrgsTeamsMembersUpdate(ctx context.Context, org string,
 }
 
 // Execute executes the request
-//  @return OrganizationTeamMembers
+//
+//	@return OrganizationTeamMembers
 func (a *OrgsApiService) OrgsTeamsMembersUpdateExecute(r ApiOrgsTeamsMembersUpdateRequest) (*OrganizationTeamMembers, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -8109,10 +8483,10 @@ OrgsTeamsPartialUpdate Update a specific team in a organization.
 
 Update a specific team in a organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param team
- @return ApiOrgsTeamsPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param team
+	@return ApiOrgsTeamsPartialUpdateRequest
 */
 func (a *OrgsApiService) OrgsTeamsPartialUpdate(ctx context.Context, org string, team string) ApiOrgsTeamsPartialUpdateRequest {
 	return ApiOrgsTeamsPartialUpdateRequest{
@@ -8124,7 +8498,8 @@ func (a *OrgsApiService) OrgsTeamsPartialUpdate(ctx context.Context, org string,
 }
 
 // Execute executes the request
-//  @return OrganizationTeam
+//
+//	@return OrganizationTeam
 func (a *OrgsApiService) OrgsTeamsPartialUpdateExecute(r ApiOrgsTeamsPartialUpdateRequest) (*OrganizationTeam, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8264,10 +8639,10 @@ OrgsTeamsRead Get the details of a specific team within an organization.
 
 Get the details of a specific team within an organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param team
- @return ApiOrgsTeamsReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param team
+	@return ApiOrgsTeamsReadRequest
 */
 func (a *OrgsApiService) OrgsTeamsRead(ctx context.Context, org string, team string) ApiOrgsTeamsReadRequest {
 	return ApiOrgsTeamsReadRequest{
@@ -8279,7 +8654,8 @@ func (a *OrgsApiService) OrgsTeamsRead(ctx context.Context, org string, team str
 }
 
 // Execute executes the request
-//  @return OrganizationTeam
+//
+//	@return OrganizationTeam
 func (a *OrgsApiService) OrgsTeamsReadExecute(r ApiOrgsTeamsReadRequest) (*OrganizationTeam, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8422,9 +8798,9 @@ OrgsVulnerabilityPolicyCreate Create a package vulnerability policy.
 
 Create a package vulnerability policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsVulnerabilityPolicyCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsVulnerabilityPolicyCreateRequest
 */
 func (a *OrgsApiService) OrgsVulnerabilityPolicyCreate(ctx context.Context, org string) ApiOrgsVulnerabilityPolicyCreateRequest {
 	return ApiOrgsVulnerabilityPolicyCreateRequest{
@@ -8435,7 +8811,8 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyCreate(ctx context.Context, org 
 }
 
 // Execute executes the request
-//  @return OrganizationPackageVulnerabilityPolicy
+//
+//	@return OrganizationPackageVulnerabilityPolicy
 func (a *OrgsApiService) OrgsVulnerabilityPolicyCreateExecute(r ApiOrgsVulnerabilityPolicyCreateRequest) (*OrganizationPackageVulnerabilityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8563,10 +8940,10 @@ OrgsVulnerabilityPolicyDelete Delete a package vulnerability policy.
 
 Delete a package vulnerability policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsVulnerabilityPolicyDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsVulnerabilityPolicyDeleteRequest
 */
 func (a *OrgsApiService) OrgsVulnerabilityPolicyDelete(ctx context.Context, org string, slugPerm string) ApiOrgsVulnerabilityPolicyDeleteRequest {
 	return ApiOrgsVulnerabilityPolicyDeleteRequest{
@@ -8700,10 +9077,10 @@ OrgsVulnerabilityPolicyEvaluationCreate Create an evaluation request for this po
 
 Create an evaluation request for this policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param policySlugPerm
- @return ApiOrgsVulnerabilityPolicyEvaluationCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param policySlugPerm
+	@return ApiOrgsVulnerabilityPolicyEvaluationCreateRequest
 */
 func (a *OrgsApiService) OrgsVulnerabilityPolicyEvaluationCreate(ctx context.Context, org string, policySlugPerm string) ApiOrgsVulnerabilityPolicyEvaluationCreateRequest {
 	return ApiOrgsVulnerabilityPolicyEvaluationCreateRequest{
@@ -8715,7 +9092,8 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyEvaluationCreate(ctx context.Con
 }
 
 // Execute executes the request
-//  @return PackageVulnerabilityPolicyEvaluationRequest
+//
+//	@return PackageVulnerabilityPolicyEvaluationRequest
 func (a *OrgsApiService) OrgsVulnerabilityPolicyEvaluationCreateExecute(r ApiOrgsVulnerabilityPolicyEvaluationCreateRequest) (*PackageVulnerabilityPolicyEvaluationRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8858,10 +9236,10 @@ OrgsVulnerabilityPolicyEvaluationList List evaluation requests for this policy.
 
 List evaluation requests for this policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param policySlugPerm
- @return ApiOrgsVulnerabilityPolicyEvaluationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param policySlugPerm
+	@return ApiOrgsVulnerabilityPolicyEvaluationListRequest
 */
 func (a *OrgsApiService) OrgsVulnerabilityPolicyEvaluationList(ctx context.Context, org string, policySlugPerm string) ApiOrgsVulnerabilityPolicyEvaluationListRequest {
 	return ApiOrgsVulnerabilityPolicyEvaluationListRequest{
@@ -8873,7 +9251,8 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyEvaluationList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return []PackageVulnerabilityPolicyEvaluationRequest
+//
+//	@return []PackageVulnerabilityPolicyEvaluationRequest
 func (a *OrgsApiService) OrgsVulnerabilityPolicyEvaluationListExecute(r ApiOrgsVulnerabilityPolicyEvaluationListRequest) ([]PackageVulnerabilityPolicyEvaluationRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8896,10 +9275,10 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyEvaluationListExecute(r ApiOrgsV
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9007,11 +9386,11 @@ OrgsVulnerabilityPolicyEvaluationRead Retrieve an evaluation request for this po
 
 Retrieve an evaluation request for this policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param policySlugPerm
- @param slugPerm
- @return ApiOrgsVulnerabilityPolicyEvaluationReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param policySlugPerm
+	@param slugPerm
+	@return ApiOrgsVulnerabilityPolicyEvaluationReadRequest
 */
 func (a *OrgsApiService) OrgsVulnerabilityPolicyEvaluationRead(ctx context.Context, org string, policySlugPerm string, slugPerm string) ApiOrgsVulnerabilityPolicyEvaluationReadRequest {
 	return ApiOrgsVulnerabilityPolicyEvaluationReadRequest{
@@ -9024,7 +9403,8 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyEvaluationRead(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return PackageVulnerabilityPolicyEvaluationRequest
+//
+//	@return PackageVulnerabilityPolicyEvaluationRequest
 func (a *OrgsApiService) OrgsVulnerabilityPolicyEvaluationReadExecute(r ApiOrgsVulnerabilityPolicyEvaluationReadRequest) (*PackageVulnerabilityPolicyEvaluationRequest, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9165,9 +9545,9 @@ OrgsVulnerabilityPolicyList Get a list of all package vulnerability policies.
 
 Get a list of all package vulnerability policies.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsVulnerabilityPolicyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsVulnerabilityPolicyListRequest
 */
 func (a *OrgsApiService) OrgsVulnerabilityPolicyList(ctx context.Context, org string) ApiOrgsVulnerabilityPolicyListRequest {
 	return ApiOrgsVulnerabilityPolicyListRequest{
@@ -9178,7 +9558,8 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyList(ctx context.Context, org st
 }
 
 // Execute executes the request
-//  @return []OrganizationPackageVulnerabilityPolicy
+//
+//	@return []OrganizationPackageVulnerabilityPolicy
 func (a *OrgsApiService) OrgsVulnerabilityPolicyListExecute(r ApiOrgsVulnerabilityPolicyListRequest) ([]OrganizationPackageVulnerabilityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9200,10 +9581,10 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyListExecute(r ApiOrgsVulnerabili
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9316,10 +9697,10 @@ OrgsVulnerabilityPolicyPartialUpdate Partially update a package vulnerability po
 
 Partially update a package vulnerability policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsVulnerabilityPolicyPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsVulnerabilityPolicyPartialUpdateRequest
 */
 func (a *OrgsApiService) OrgsVulnerabilityPolicyPartialUpdate(ctx context.Context, org string, slugPerm string) ApiOrgsVulnerabilityPolicyPartialUpdateRequest {
 	return ApiOrgsVulnerabilityPolicyPartialUpdateRequest{
@@ -9331,7 +9712,8 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyPartialUpdate(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return OrganizationPackageVulnerabilityPolicy
+//
+//	@return OrganizationPackageVulnerabilityPolicy
 func (a *OrgsApiService) OrgsVulnerabilityPolicyPartialUpdateExecute(r ApiOrgsVulnerabilityPolicyPartialUpdateRequest) (*OrganizationPackageVulnerabilityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -9460,10 +9842,10 @@ OrgsVulnerabilityPolicyRead Get a package vulnerability policy.
 
 Get a package vulnerability policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsVulnerabilityPolicyReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsVulnerabilityPolicyReadRequest
 */
 func (a *OrgsApiService) OrgsVulnerabilityPolicyRead(ctx context.Context, org string, slugPerm string) ApiOrgsVulnerabilityPolicyReadRequest {
 	return ApiOrgsVulnerabilityPolicyReadRequest{
@@ -9475,7 +9857,8 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyRead(ctx context.Context, org st
 }
 
 // Execute executes the request
-//  @return OrganizationPackageVulnerabilityPolicy
+//
+//	@return OrganizationPackageVulnerabilityPolicy
 func (a *OrgsApiService) OrgsVulnerabilityPolicyReadExecute(r ApiOrgsVulnerabilityPolicyReadRequest) (*OrganizationPackageVulnerabilityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9608,10 +9991,10 @@ OrgsVulnerabilityPolicyUpdate Update a package vulnerability policy.
 
 Update a package vulnerability policy.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @param slugPerm
- @return ApiOrgsVulnerabilityPolicyUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@param slugPerm
+	@return ApiOrgsVulnerabilityPolicyUpdateRequest
 */
 func (a *OrgsApiService) OrgsVulnerabilityPolicyUpdate(ctx context.Context, org string, slugPerm string) ApiOrgsVulnerabilityPolicyUpdateRequest {
 	return ApiOrgsVulnerabilityPolicyUpdateRequest{
@@ -9623,7 +10006,8 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyUpdate(ctx context.Context, org 
 }
 
 // Execute executes the request
-//  @return OrganizationPackageVulnerabilityPolicy
+//
+//	@return OrganizationPackageVulnerabilityPolicy
 func (a *OrgsApiService) OrgsVulnerabilityPolicyUpdateExecute(r ApiOrgsVulnerabilityPolicyUpdateRequest) (*OrganizationPackageVulnerabilityPolicy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -9765,9 +10149,9 @@ OrgsVulnerabilityPolicyViolationList List all current vulnerability policy viola
 
 List all current vulnerability policy violations for this Organization.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param org
- @return ApiOrgsVulnerabilityPolicyViolationListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param org
+	@return ApiOrgsVulnerabilityPolicyViolationListRequest
 */
 func (a *OrgsApiService) OrgsVulnerabilityPolicyViolationList(ctx context.Context, org string) ApiOrgsVulnerabilityPolicyViolationListRequest {
 	return ApiOrgsVulnerabilityPolicyViolationListRequest{
@@ -9778,7 +10162,8 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyViolationList(ctx context.Contex
 }
 
 // Execute executes the request
-//  @return PackageVulnerabilityPolicyViolationLogCursorPage
+//
+//	@return PackageVulnerabilityPolicyViolationLogCursorPage
 func (a *OrgsApiService) OrgsVulnerabilityPolicyViolationListExecute(r ApiOrgsVulnerabilityPolicyViolationListRequest) (*PackageVulnerabilityPolicyViolationLogCursorPage, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9800,10 +10185,10 @@ func (a *OrgsApiService) OrgsVulnerabilityPolicyViolationListExecute(r ApiOrgsVu
 	localVarFormParams := url.Values{}
 
 	if r.cursor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

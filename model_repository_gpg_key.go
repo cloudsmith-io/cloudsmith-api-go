@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -33,6 +35,8 @@ type RepositoryGpgKey struct {
 	// The public key given to repository users.
 	PublicKey *string `json:"public_key,omitempty"`
 }
+
+type _RepositoryGpgKey RepositoryGpgKey
 
 // NewRepositoryGpgKey instantiates a new RepositoryGpgKey object
 // This constructor will assign default values to properties that have it defined,
@@ -298,6 +302,43 @@ func (o RepositoryGpgKey) ToMap() (map[string]interface{}, error) {
 		toSerialize["public_key"] = o.PublicKey
 	}
 	return toSerialize, nil
+}
+
+func (o *RepositoryGpgKey) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"comment",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRepositoryGpgKey := _RepositoryGpgKey{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRepositoryGpgKey)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryGpgKey(varRepositoryGpgKey)
+
+	return err
 }
 
 type NullableRepositoryGpgKey struct {

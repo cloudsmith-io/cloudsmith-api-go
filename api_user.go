@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -36,8 +36,8 @@ UserSelf Provide a brief for the current user (if any).
 
 Provide a brief for the current user (if any).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUserSelfRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUserSelfRequest
 */
 func (a *UserApiService) UserSelf(ctx context.Context) ApiUserSelfRequest {
 	return ApiUserSelfRequest{
@@ -47,7 +47,8 @@ func (a *UserApiService) UserSelf(ctx context.Context) ApiUserSelfRequest {
 }
 
 // Execute executes the request
-//  @return UserBrief
+//
+//	@return UserBrief
 func (a *UserApiService) UserSelfExecute(r ApiUserSelfRequest) (*UserBrief, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -176,8 +177,8 @@ UserTokenCreate Retrieve/Create API key/token for the authenticated user.
 
 Retrieve/Create API key/token for the authenticated user.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUserTokenCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiUserTokenCreateRequest
 */
 func (a *UserApiService) UserTokenCreate(ctx context.Context) ApiUserTokenCreateRequest {
 	return ApiUserTokenCreateRequest{
@@ -187,7 +188,8 @@ func (a *UserApiService) UserTokenCreate(ctx context.Context) ApiUserTokenCreate
 }
 
 // Execute executes the request
-//  @return UserAuthToken
+//
+//	@return UserAuthToken
 func (a *UserApiService) UserTokenCreateExecute(r ApiUserTokenCreateRequest) (*UserAuthToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

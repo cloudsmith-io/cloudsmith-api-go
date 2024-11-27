@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -45,10 +45,10 @@ WebhooksCreate Create a specific webhook in a repository.
 
 Create a specific webhook in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiWebhooksCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiWebhooksCreateRequest
 */
 func (a *WebhooksApiService) WebhooksCreate(ctx context.Context, owner string, repo string) ApiWebhooksCreateRequest {
 	return ApiWebhooksCreateRequest{
@@ -60,7 +60,8 @@ func (a *WebhooksApiService) WebhooksCreate(ctx context.Context, owner string, r
 }
 
 // Execute executes the request
-//  @return RepositoryWebhook
+//
+//	@return RepositoryWebhook
 func (a *WebhooksApiService) WebhooksCreateExecute(r ApiWebhooksCreateRequest) (*RepositoryWebhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -201,11 +202,11 @@ WebhooksDelete Delete a specific webhook in a repository.
 
 Delete a specific webhook in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiWebhooksDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiWebhooksDeleteRequest
 */
 func (a *WebhooksApiService) WebhooksDelete(ctx context.Context, owner string, repo string, identifier string) ApiWebhooksDeleteRequest {
 	return ApiWebhooksDeleteRequest{
@@ -349,10 +350,10 @@ WebhooksList Get a list of all webhooks in a repository.
 
 Get a list of all webhooks in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiWebhooksListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiWebhooksListRequest
 */
 func (a *WebhooksApiService) WebhooksList(ctx context.Context, owner string, repo string) ApiWebhooksListRequest {
 	return ApiWebhooksListRequest{
@@ -364,7 +365,8 @@ func (a *WebhooksApiService) WebhooksList(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return []RepositoryWebhook
+//
+//	@return []RepositoryWebhook
 func (a *WebhooksApiService) WebhooksListExecute(r ApiWebhooksListRequest) ([]RepositoryWebhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -387,10 +389,10 @@ func (a *WebhooksApiService) WebhooksListExecute(r ApiWebhooksListRequest) ([]Re
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -515,11 +517,11 @@ WebhooksPartialUpdate Update a specific webhook in a repository.
 
 Update a specific webhook in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiWebhooksPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiWebhooksPartialUpdateRequest
 */
 func (a *WebhooksApiService) WebhooksPartialUpdate(ctx context.Context, owner string, repo string, identifier string) ApiWebhooksPartialUpdateRequest {
 	return ApiWebhooksPartialUpdateRequest{
@@ -532,7 +534,8 @@ func (a *WebhooksApiService) WebhooksPartialUpdate(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return RepositoryWebhook
+//
+//	@return RepositoryWebhook
 func (a *WebhooksApiService) WebhooksPartialUpdateExecute(r ApiWebhooksPartialUpdateRequest) (*RepositoryWebhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -674,11 +677,11 @@ WebhooksRead Views for working with repository webhooks.
 
 Views for working with repository webhooks.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiWebhooksReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiWebhooksReadRequest
 */
 func (a *WebhooksApiService) WebhooksRead(ctx context.Context, owner string, repo string, identifier string) ApiWebhooksReadRequest {
 	return ApiWebhooksReadRequest{
@@ -691,7 +694,8 @@ func (a *WebhooksApiService) WebhooksRead(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return RepositoryWebhook
+//
+//	@return RepositoryWebhook
 func (a *WebhooksApiService) WebhooksReadExecute(r ApiWebhooksReadRequest) (*RepositoryWebhook, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

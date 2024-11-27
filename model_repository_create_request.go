@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RepositoryCreateRequest type satisfies the MappedNullable interface at compile time
@@ -51,7 +53,7 @@ type RepositoryCreateRequest struct {
 	// This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting.
 	MovePackages *string `json:"move_packages,omitempty"`
 	// A descriptive name for the repository.
-	Name string `json:"name"`
+	Name string `json:"name" validate:"regexp=^\\\\w[\\\\w \\\\-'\\\\.\\/()]+$"`
 	// The SPDX identifier of the open source license.
 	OpenSourceLicense NullableString `json:"open_source_license,omitempty"`
 	// The URL to the Open-Source project, used for validating that the project meets the requirements for Open-Source.
@@ -105,6 +107,8 @@ type RepositoryCreateRequest struct {
 	// This defines the minimum level of privilege required for a user to view repository statistics, to include entitlement-based usage, if applicable. If a user does not have the permission, they won't be able to view any statistics, either via the UI, API or CLI.
 	ViewStatistics *string `json:"view_statistics,omitempty"`
 }
+
+type _RepositoryCreateRequest RepositoryCreateRequest
 
 // NewRepositoryCreateRequest instantiates a new RepositoryCreateRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -1669,6 +1673,43 @@ func (o RepositoryCreateRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["view_statistics"] = o.ViewStatistics
 	}
 	return toSerialize, nil
+}
+
+func (o *RepositoryCreateRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRepositoryCreateRequest := _RepositoryCreateRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRepositoryCreateRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryCreateRequest(varRepositoryCreateRequest)
+
+	return err
 }
 
 type NullableRepositoryCreateRequest struct {

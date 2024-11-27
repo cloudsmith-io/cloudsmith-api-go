@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -71,6 +71,8 @@ type DartPackageUpload struct {
 	OriginRepositoryUrl *string        `json:"origin_repository_url,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
+	// Whether or not the package has violated any policy.
+	PolicyViolated *bool `json:"policy_violated,omitempty"`
 	// The release of the package version (if any).
 	Release       NullableString `json:"release,omitempty"`
 	Repository    *string        `json:"repository,omitempty"`
@@ -88,8 +90,8 @@ type DartPackageUpload struct {
 	// The calculated size of the package.
 	Size *int64 `json:"size,omitempty"`
 	// The public unique identifier for the package.
-	Slug     *string `json:"slug,omitempty"`
-	SlugPerm *string `json:"slug_perm,omitempty"`
+	Slug     *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// The synchronisation (in progress) stage of the package.
 	Stage    *int64  `json:"stage,omitempty"`
 	StageStr *string `json:"stage_str,omitempty"`
@@ -1593,6 +1595,38 @@ func (o *DartPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
+// GetPolicyViolated returns the PolicyViolated field value if set, zero value otherwise.
+func (o *DartPackageUpload) GetPolicyViolated() bool {
+	if o == nil || IsNil(o.PolicyViolated) {
+		var ret bool
+		return ret
+	}
+	return *o.PolicyViolated
+}
+
+// GetPolicyViolatedOk returns a tuple with the PolicyViolated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DartPackageUpload) GetPolicyViolatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.PolicyViolated) {
+		return nil, false
+	}
+	return o.PolicyViolated, true
+}
+
+// HasPolicyViolated returns a boolean if a field has been set.
+func (o *DartPackageUpload) HasPolicyViolated() bool {
+	if o != nil && !IsNil(o.PolicyViolated) {
+		return true
+	}
+
+	return false
+}
+
+// SetPolicyViolated gets a reference to the given bool and assigns it to the PolicyViolated field.
+func (o *DartPackageUpload) SetPolicyViolated(v bool) {
+	o.PolicyViolated = &v
+}
+
 // GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DartPackageUpload) GetRelease() string {
 	if o == nil || IsNil(o.Release.Get()) {
@@ -2897,6 +2931,9 @@ func (o DartPackageUpload) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
+	}
+	if !IsNil(o.PolicyViolated) {
+		toSerialize["policy_violated"] = o.PolicyViolated
 	}
 	if o.Release.IsSet() {
 		toSerialize["release"] = o.Release.Get()

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -52,10 +52,10 @@ EntitlementsCreate Create a specific entitlement in a repository.
 
 Create a specific entitlement in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiEntitlementsCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiEntitlementsCreateRequest
 */
 func (a *EntitlementsApiService) EntitlementsCreate(ctx context.Context, owner string, repo string) ApiEntitlementsCreateRequest {
 	return ApiEntitlementsCreateRequest{
@@ -67,7 +67,8 @@ func (a *EntitlementsApiService) EntitlementsCreate(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return RepositoryToken
+//
+//	@return RepositoryToken
 func (a *EntitlementsApiService) EntitlementsCreateExecute(r ApiEntitlementsCreateRequest) (*RepositoryToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -90,7 +91,10 @@ func (a *EntitlementsApiService) EntitlementsCreateExecute(r ApiEntitlementsCrea
 	localVarFormParams := url.Values{}
 
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -211,11 +215,11 @@ EntitlementsDelete Delete a specific entitlement in a repository.
 
 Delete a specific entitlement in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiEntitlementsDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiEntitlementsDeleteRequest
 */
 func (a *EntitlementsApiService) EntitlementsDelete(ctx context.Context, owner string, repo string, identifier string) ApiEntitlementsDeleteRequest {
 	return ApiEntitlementsDeleteRequest{
@@ -346,11 +350,11 @@ EntitlementsDisable Disable an entitlement token in a repository.
 
 Disable an entitlement token in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiEntitlementsDisableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiEntitlementsDisableRequest
 */
 func (a *EntitlementsApiService) EntitlementsDisable(ctx context.Context, owner string, repo string, identifier string) ApiEntitlementsDisableRequest {
 	return ApiEntitlementsDisableRequest{
@@ -481,11 +485,11 @@ EntitlementsEnable Enable an entitlement token in a repository.
 
 Enable an entitlement token in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiEntitlementsEnableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiEntitlementsEnableRequest
 */
 func (a *EntitlementsApiService) EntitlementsEnable(ctx context.Context, owner string, repo string, identifier string) ApiEntitlementsEnableRequest {
 	return ApiEntitlementsEnableRequest{
@@ -650,10 +654,10 @@ EntitlementsList Get a list of all entitlements in a repository.
 
 Get a list of all entitlements in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiEntitlementsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiEntitlementsListRequest
 */
 func (a *EntitlementsApiService) EntitlementsList(ctx context.Context, owner string, repo string) ApiEntitlementsListRequest {
 	return ApiEntitlementsListRequest{
@@ -665,7 +669,8 @@ func (a *EntitlementsApiService) EntitlementsList(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return []RepositoryToken
+//
+//	@return []RepositoryToken
 func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRequest) ([]RepositoryToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -688,19 +693,25 @@ func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRe
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	if r.query != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
 	}
 	if r.active != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "active", r.active, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "active", r.active, "", "")
+	} else {
+		var defaultValue bool = false
+		r.active = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -832,11 +843,11 @@ EntitlementsPartialUpdate Update a specific entitlement in a repository.
 
 Update a specific entitlement in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiEntitlementsPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiEntitlementsPartialUpdateRequest
 */
 func (a *EntitlementsApiService) EntitlementsPartialUpdate(ctx context.Context, owner string, repo string, identifier string) ApiEntitlementsPartialUpdateRequest {
 	return ApiEntitlementsPartialUpdateRequest{
@@ -849,7 +860,8 @@ func (a *EntitlementsApiService) EntitlementsPartialUpdate(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return RepositoryToken
+//
+//	@return RepositoryToken
 func (a *EntitlementsApiService) EntitlementsPartialUpdateExecute(r ApiEntitlementsPartialUpdateRequest) (*RepositoryToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -873,7 +885,10 @@ func (a *EntitlementsApiService) EntitlementsPartialUpdateExecute(r ApiEntitleme
 	localVarFormParams := url.Values{}
 
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1008,11 +1023,11 @@ EntitlementsRead Get a specific entitlement in a repository.
 
 Get a specific entitlement in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiEntitlementsReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiEntitlementsReadRequest
 */
 func (a *EntitlementsApiService) EntitlementsRead(ctx context.Context, owner string, repo string, identifier string) ApiEntitlementsReadRequest {
 	return ApiEntitlementsReadRequest{
@@ -1025,7 +1040,8 @@ func (a *EntitlementsApiService) EntitlementsRead(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RepositoryToken
+//
+//	@return RepositoryToken
 func (a *EntitlementsApiService) EntitlementsReadExecute(r ApiEntitlementsReadRequest) (*RepositoryToken, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1049,10 +1065,16 @@ func (a *EntitlementsApiService) EntitlementsReadExecute(r ApiEntitlementsReadRe
 	localVarFormParams := url.Values{}
 
 	if r.fuzzy != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fuzzy", r.fuzzy, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fuzzy", r.fuzzy, "", "")
+	} else {
+		var defaultValue bool = false
+		r.fuzzy = &defaultValue
 	}
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1184,11 +1206,11 @@ EntitlementsRefresh Refresh an entitlement token in a repository.
 
 Refresh an entitlement token in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiEntitlementsRefreshRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiEntitlementsRefreshRequest
 */
 func (a *EntitlementsApiService) EntitlementsRefresh(ctx context.Context, owner string, repo string, identifier string) ApiEntitlementsRefreshRequest {
 	return ApiEntitlementsRefreshRequest{
@@ -1201,7 +1223,8 @@ func (a *EntitlementsApiService) EntitlementsRefresh(ctx context.Context, owner 
 }
 
 // Execute executes the request
-//  @return RepositoryTokenRefresh
+//
+//	@return RepositoryTokenRefresh
 func (a *EntitlementsApiService) EntitlementsRefreshExecute(r ApiEntitlementsRefreshRequest) (*RepositoryTokenRefresh, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1225,7 +1248,10 @@ func (a *EntitlementsApiService) EntitlementsRefreshExecute(r ApiEntitlementsRef
 	localVarFormParams := url.Values{}
 
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1342,11 +1368,11 @@ EntitlementsReset Reset the statistics for an entitlement token in a repository.
 
 Reset the statistics for an entitlement token in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiEntitlementsResetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiEntitlementsResetRequest
 */
 func (a *EntitlementsApiService) EntitlementsReset(ctx context.Context, owner string, repo string, identifier string) ApiEntitlementsResetRequest {
 	return ApiEntitlementsResetRequest{
@@ -1381,7 +1407,10 @@ func (a *EntitlementsApiService) EntitlementsResetExecute(r ApiEntitlementsReset
 	localVarFormParams := url.Values{}
 
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1492,10 +1521,10 @@ EntitlementsSync Synchronise tokens from a source repository.
 
 Synchronise tokens from a source repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiEntitlementsSyncRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiEntitlementsSyncRequest
 */
 func (a *EntitlementsApiService) EntitlementsSync(ctx context.Context, owner string, repo string) ApiEntitlementsSyncRequest {
 	return ApiEntitlementsSyncRequest{
@@ -1507,7 +1536,8 @@ func (a *EntitlementsApiService) EntitlementsSync(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RepositoryTokenSync
+//
+//	@return RepositoryTokenSync
 func (a *EntitlementsApiService) EntitlementsSyncExecute(r ApiEntitlementsSyncRequest) (*RepositoryTokenSync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1530,7 +1560,10 @@ func (a *EntitlementsApiService) EntitlementsSyncExecute(r ApiEntitlementsSyncRe
 	localVarFormParams := url.Values{}
 
 	if r.showTokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "show_tokens", r.showTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.showTokens = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

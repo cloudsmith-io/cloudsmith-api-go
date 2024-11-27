@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -35,9 +37,11 @@ type NamespaceAuditLog struct {
 	ObjectSlugPerm string         `json:"object_slug_perm"`
 	Target         string         `json:"target"`
 	TargetKind     string         `json:"target_kind"`
-	TargetSlugPerm NullableString `json:"target_slug_perm,omitempty"`
+	TargetSlugPerm NullableString `json:"target_slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	Uuid           *string        `json:"uuid,omitempty"`
 }
+
+type _NamespaceAuditLog NamespaceAuditLog
 
 // NewNamespaceAuditLog instantiates a new NamespaceAuditLog object
 // This constructor will assign default values to properties that have it defined,
@@ -547,6 +551,54 @@ func (o NamespaceAuditLog) ToMap() (map[string]interface{}, error) {
 		toSerialize["uuid"] = o.Uuid
 	}
 	return toSerialize, nil
+}
+
+func (o *NamespaceAuditLog) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"actor",
+		"actor_ip_address",
+		"actor_location",
+		"actor_slug_perm",
+		"context",
+		"event",
+		"event_at",
+		"object",
+		"object_kind",
+		"object_slug_perm",
+		"target",
+		"target_kind",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varNamespaceAuditLog := _NamespaceAuditLog{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varNamespaceAuditLog)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NamespaceAuditLog(varNamespaceAuditLog)
+
+	return err
 }
 
 type NullableNamespaceAuditLog struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the OrganizationGroupSync type satisfies the MappedNullable interface at compile time
@@ -23,9 +25,11 @@ type OrganizationGroupSync struct {
 	IdpKey   string  `json:"idp_key"`
 	IdpValue string  `json:"idp_value"`
 	Role     *string `json:"role,omitempty"`
-	SlugPerm *string `json:"slug_perm,omitempty"`
-	Team     string  `json:"team"`
+	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	Team     string  `json:"team" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 }
+
+type _OrganizationGroupSync OrganizationGroupSync
 
 // NewOrganizationGroupSync instantiates a new OrganizationGroupSync object
 // This constructor will assign default values to properties that have it defined,
@@ -207,6 +211,45 @@ func (o OrganizationGroupSync) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["team"] = o.Team
 	return toSerialize, nil
+}
+
+func (o *OrganizationGroupSync) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"idp_key",
+		"idp_value",
+		"team",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrganizationGroupSync := _OrganizationGroupSync{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrganizationGroupSync)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationGroupSync(varOrganizationGroupSync)
+
+	return err
 }
 
 type NullableOrganizationGroupSync struct {

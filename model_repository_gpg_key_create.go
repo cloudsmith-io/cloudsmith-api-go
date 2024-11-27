@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RepositoryGpgKeyCreate type satisfies the MappedNullable interface at compile time
@@ -25,6 +27,8 @@ type RepositoryGpgKeyCreate struct {
 	// The GPG private key.
 	GpgPrivateKey string `json:"gpg_private_key"`
 }
+
+type _RepositoryGpgKeyCreate RepositoryGpgKeyCreate
 
 // NewRepositoryGpgKeyCreate instantiates a new RepositoryGpgKeyCreate object
 // This constructor will assign default values to properties that have it defined,
@@ -115,6 +119,43 @@ func (o RepositoryGpgKeyCreate) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["gpg_private_key"] = o.GpgPrivateKey
 	return toSerialize, nil
+}
+
+func (o *RepositoryGpgKeyCreate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"gpg_private_key",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRepositoryGpgKeyCreate := _RepositoryGpgKeyCreate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRepositoryGpgKeyCreate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryGpgKeyCreate(varRepositoryGpgKeyCreate)
+
+	return err
 }
 
 type NullableRepositoryGpgKeyCreate struct {

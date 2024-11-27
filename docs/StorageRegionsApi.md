@@ -23,23 +23,23 @@ Get a list of all available storage regions.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.StorageRegionsApi.StorageRegionsList(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StorageRegionsApi.StorageRegionsList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `StorageRegionsList`: []StorageRegion
-    fmt.Fprintf(os.Stdout, "Response from `StorageRegionsApi.StorageRegionsList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.StorageRegionsApi.StorageRegionsList(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `StorageRegionsApi.StorageRegionsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `StorageRegionsList`: []StorageRegion
+	fmt.Fprintf(os.Stdout, "Response from `StorageRegionsApi.StorageRegionsList`: %v\n", resp)
 }
 ```
 
@@ -84,24 +84,24 @@ Get a specific storage region.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    slug := "slug_example" // string | 
+	slug := "slug_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.StorageRegionsApi.StorageRegionsRead(context.Background(), slug).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `StorageRegionsApi.StorageRegionsRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `StorageRegionsRead`: StorageRegion
-    fmt.Fprintf(os.Stdout, "Response from `StorageRegionsApi.StorageRegionsRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.StorageRegionsApi.StorageRegionsRead(context.Background(), slug).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `StorageRegionsApi.StorageRegionsRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `StorageRegionsRead`: StorageRegion
+	fmt.Fprintf(os.Stdout, "Response from `StorageRegionsApi.StorageRegionsRead`: %v\n", resp)
 }
 ```
 

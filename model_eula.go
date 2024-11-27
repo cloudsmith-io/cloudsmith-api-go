@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &Eula{}
 // Eula struct for Eula
 type Eula struct {
 	// A unique identifier that you can use for your own EULA tracking purposes. This might be a date, or a semantic version, etc. The only requirement is that it is unique across multiple EULAs.
-	Identifier NullableString `json:"identifier,omitempty"`
+	Identifier NullableString `json:"identifier,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// A sequential identifier that increments by one for each new commit in a repository.
 	Number NullableInt64 `json:"number,omitempty"`
 }

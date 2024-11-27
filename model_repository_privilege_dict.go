@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RepositoryPrivilegeDict type satisfies the MappedNullable interface at compile time
@@ -23,12 +25,14 @@ type RepositoryPrivilegeDict struct {
 	// The level of privilege that the user or team should be granted to the specified repository.
 	Privilege string `json:"privilege"`
 	// The service identifier (slug).
-	Service *string `json:"service,omitempty"`
+	Service *string `json:"service,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// The team identifier (slug).
-	Team *string `json:"team,omitempty"`
+	Team *string `json:"team,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// The user identifier (slug).
-	User *string `json:"user,omitempty"`
+	User *string `json:"user,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 }
+
+type _RepositoryPrivilegeDict RepositoryPrivilegeDict
 
 // NewRepositoryPrivilegeDict instantiates a new RepositoryPrivilegeDict object
 // This constructor will assign default values to properties that have it defined,
@@ -189,6 +193,43 @@ func (o RepositoryPrivilegeDict) ToMap() (map[string]interface{}, error) {
 		toSerialize["user"] = o.User
 	}
 	return toSerialize, nil
+}
+
+func (o *RepositoryPrivilegeDict) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"privilege",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRepositoryPrivilegeDict := _RepositoryPrivilegeDict{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRepositoryPrivilegeDict)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryPrivilegeDict(varRepositoryPrivilegeDict)
+
+	return err
 }
 
 type NullableRepositoryPrivilegeDict struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -36,8 +36,8 @@ RatesLimitsList Endpoint to check rate limits for current user.
 
 Endpoint to check rate limits for current user.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiRatesLimitsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiRatesLimitsListRequest
 */
 func (a *RatesApiService) RatesLimitsList(ctx context.Context) ApiRatesLimitsListRequest {
 	return ApiRatesLimitsListRequest{
@@ -47,7 +47,8 @@ func (a *RatesApiService) RatesLimitsList(ctx context.Context) ApiRatesLimitsLis
 }
 
 // Execute executes the request
-//  @return ResourcesRateCheck
+//
+//	@return ResourcesRateCheck
 func (a *RatesApiService) RatesLimitsListExecute(r ApiRatesLimitsListRequest) (*ResourcesRateCheck, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

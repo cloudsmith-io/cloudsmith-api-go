@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -51,8 +51,8 @@ NamespacesList Get a list of all namespaces the user belongs to.
 
 Get a list of all namespaces the user belongs to.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiNamespacesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiNamespacesListRequest
 */
 func (a *NamespacesApiService) NamespacesList(ctx context.Context) ApiNamespacesListRequest {
 	return ApiNamespacesListRequest{
@@ -62,7 +62,8 @@ func (a *NamespacesApiService) NamespacesList(ctx context.Context) ApiNamespaces
 }
 
 // Execute executes the request
-//  @return []Namespace
+//
+//	@return []Namespace
 func (a *NamespacesApiService) NamespacesListExecute(r ApiNamespacesListRequest) ([]Namespace, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -83,10 +84,10 @@ func (a *NamespacesApiService) NamespacesListExecute(r ApiNamespacesListRequest)
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -192,9 +193,9 @@ NamespacesRead Get a specific namespace that the user belongs to.
 
 Get a specific namespace that the user belongs to.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param slug
- @return ApiNamespacesReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param slug
+	@return ApiNamespacesReadRequest
 */
 func (a *NamespacesApiService) NamespacesRead(ctx context.Context, slug string) ApiNamespacesReadRequest {
 	return ApiNamespacesReadRequest{
@@ -205,7 +206,8 @@ func (a *NamespacesApiService) NamespacesRead(ctx context.Context, slug string) 
 }
 
 // Execute executes the request
-//  @return Namespace
+//
+//	@return Namespace
 func (a *NamespacesApiService) NamespacesReadExecute(r ApiNamespacesReadRequest) (*Namespace, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

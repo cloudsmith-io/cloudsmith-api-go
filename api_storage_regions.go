@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -37,8 +37,8 @@ StorageRegionsList Get a list of all available storage regions.
 
 Get a list of all available storage regions.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiStorageRegionsListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiStorageRegionsListRequest
 */
 func (a *StorageRegionsApiService) StorageRegionsList(ctx context.Context) ApiStorageRegionsListRequest {
 	return ApiStorageRegionsListRequest{
@@ -48,7 +48,8 @@ func (a *StorageRegionsApiService) StorageRegionsList(ctx context.Context) ApiSt
 }
 
 // Execute executes the request
-//  @return []StorageRegion
+//
+//	@return []StorageRegion
 func (a *StorageRegionsApiService) StorageRegionsListExecute(r ApiStorageRegionsListRequest) ([]StorageRegion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -172,9 +173,9 @@ StorageRegionsRead Get a specific storage region.
 
 Get a specific storage region.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param slug
- @return ApiStorageRegionsReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param slug
+	@return ApiStorageRegionsReadRequest
 */
 func (a *StorageRegionsApiService) StorageRegionsRead(ctx context.Context, slug string) ApiStorageRegionsReadRequest {
 	return ApiStorageRegionsReadRequest{
@@ -185,7 +186,8 @@ func (a *StorageRegionsApiService) StorageRegionsRead(ctx context.Context, slug 
 }
 
 // Execute executes the request
-//  @return StorageRegion
+//
+//	@return StorageRegion
 func (a *StorageRegionsApiService) StorageRegionsReadExecute(r ApiStorageRegionsReadRequest) (*StorageRegion, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

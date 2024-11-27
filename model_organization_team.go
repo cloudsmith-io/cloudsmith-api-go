@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the OrganizationTeam type satisfies the MappedNullable interface at compile time
@@ -22,10 +24,12 @@ var _ MappedNullable = &OrganizationTeam{}
 type OrganizationTeam struct {
 	Description *string `json:"description,omitempty"`
 	Name        string  `json:"name"`
-	Slug        *string `json:"slug,omitempty"`
-	SlugPerm    *string `json:"slug_perm,omitempty"`
+	Slug        *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	SlugPerm    *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	Visibility  *string `json:"visibility,omitempty"`
 }
+
+type _OrganizationTeam OrganizationTeam
 
 // NewOrganizationTeam instantiates a new OrganizationTeam object
 // This constructor will assign default values to properties that have it defined,
@@ -225,6 +229,43 @@ func (o OrganizationTeam) ToMap() (map[string]interface{}, error) {
 		toSerialize["visibility"] = o.Visibility
 	}
 	return toSerialize, nil
+}
+
+func (o *OrganizationTeam) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrganizationTeam := _OrganizationTeam{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrganizationTeam)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationTeam(varOrganizationTeam)
+
+	return err
 }
 
 type NullableOrganizationTeam struct {

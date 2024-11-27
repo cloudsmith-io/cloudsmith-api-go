@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RepositoryGeoIpTestAddressResponseDict type satisfies the MappedNullable interface at compile time
@@ -29,6 +31,8 @@ type RepositoryGeoIpTestAddressResponseDict struct {
 	// The reason for the result
 	Reason string `json:"reason"`
 }
+
+type _RepositoryGeoIpTestAddressResponseDict RepositoryGeoIpTestAddressResponseDict
 
 // NewRepositoryGeoIpTestAddressResponseDict instantiates a new RepositoryGeoIpTestAddressResponseDict object
 // This constructor will assign default values to properties that have it defined,
@@ -164,6 +168,46 @@ func (o RepositoryGeoIpTestAddressResponseDict) ToMap() (map[string]interface{},
 	toSerialize["ip_address"] = o.IpAddress
 	toSerialize["reason"] = o.Reason
 	return toSerialize, nil
+}
+
+func (o *RepositoryGeoIpTestAddressResponseDict) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"allowed",
+		"country_code",
+		"ip_address",
+		"reason",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRepositoryGeoIpTestAddressResponseDict := _RepositoryGeoIpTestAddressResponseDict{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRepositoryGeoIpTestAddressResponseDict)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryGeoIpTestAddressResponseDict(varRepositoryGeoIpTestAddressResponseDict)
+
+	return err
 }
 
 type NullableRepositoryGeoIpTestAddressResponseDict struct {

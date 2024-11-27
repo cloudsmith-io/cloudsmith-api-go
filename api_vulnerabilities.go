@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -52,9 +52,9 @@ VulnerabilitiesNamespaceList Lists scan results for a specific namespace.
 
 Lists scan results for a specific namespace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @return ApiVulnerabilitiesNamespaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@return ApiVulnerabilitiesNamespaceListRequest
 */
 func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceList(ctx context.Context, owner string) ApiVulnerabilitiesNamespaceListRequest {
 	return ApiVulnerabilitiesNamespaceListRequest{
@@ -65,7 +65,8 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceList(ctx context.Con
 }
 
 // Execute executes the request
-//  @return []VulnerabilityScanResultsList
+//
+//	@return []VulnerabilityScanResultsList
 func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceListExecute(r ApiVulnerabilitiesNamespaceListRequest) ([]VulnerabilityScanResultsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -87,10 +88,10 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceListExecute(r ApiVul
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -212,11 +213,11 @@ VulnerabilitiesPackageList Lists scan results for a specific package.
 
 Lists scan results for a specific package.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param package_
- @return ApiVulnerabilitiesPackageListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param package_
+	@return ApiVulnerabilitiesPackageListRequest
 */
 func (a *VulnerabilitiesApiService) VulnerabilitiesPackageList(ctx context.Context, owner string, repo string, package_ string) ApiVulnerabilitiesPackageListRequest {
 	return ApiVulnerabilitiesPackageListRequest{
@@ -229,7 +230,8 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesPackageList(ctx context.Conte
 }
 
 // Execute executes the request
-//  @return []VulnerabilityScanResultsList
+//
+//	@return []VulnerabilityScanResultsList
 func (a *VulnerabilitiesApiService) VulnerabilitiesPackageListExecute(r ApiVulnerabilitiesPackageListRequest) ([]VulnerabilityScanResultsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -253,10 +255,10 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesPackageListExecute(r ApiVulne
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -365,12 +367,12 @@ VulnerabilitiesRead Get a scan result.
 
 Get a scan result.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param package_
- @param identifier
- @return ApiVulnerabilitiesReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param package_
+	@param identifier
+	@return ApiVulnerabilitiesReadRequest
 */
 func (a *VulnerabilitiesApiService) VulnerabilitiesRead(ctx context.Context, owner string, repo string, package_ string, identifier string) ApiVulnerabilitiesReadRequest {
 	return ApiVulnerabilitiesReadRequest{
@@ -384,7 +386,8 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesRead(ctx context.Context, own
 }
 
 // Execute executes the request
-//  @return VulnerabilityScanResults
+//
+//	@return VulnerabilityScanResults
 func (a *VulnerabilitiesApiService) VulnerabilitiesReadExecute(r ApiVulnerabilitiesReadRequest) (*VulnerabilityScanResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -527,10 +530,10 @@ VulnerabilitiesRepoList Lists scan results for a specific repository.
 
 Lists scan results for a specific repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiVulnerabilitiesRepoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiVulnerabilitiesRepoListRequest
 */
 func (a *VulnerabilitiesApiService) VulnerabilitiesRepoList(ctx context.Context, owner string, repo string) ApiVulnerabilitiesRepoListRequest {
 	return ApiVulnerabilitiesRepoListRequest{
@@ -542,7 +545,8 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesRepoList(ctx context.Context,
 }
 
 // Execute executes the request
-//  @return []VulnerabilityScanResultsList
+//
+//	@return []VulnerabilityScanResultsList
 func (a *VulnerabilitiesApiService) VulnerabilitiesRepoListExecute(r ApiVulnerabilitiesRepoListRequest) ([]VulnerabilityScanResultsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -565,10 +569,10 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesRepoListExecute(r ApiVulnerab
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

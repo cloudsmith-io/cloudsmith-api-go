@@ -40,6 +40,8 @@ Method | HTTP request | Description
 [**OrgsOpenidConnectRead**](OrgsApi.md#OrgsOpenidConnectRead) | **Get** /orgs/{org}/openid-connect/{slug_perm}/ | Retrieve a specific OpenID Connect provider setting for the org.
 [**OrgsOpenidConnectUpdate**](OrgsApi.md#OrgsOpenidConnectUpdate) | **Put** /orgs/{org}/openid-connect/{slug_perm}/ | Update a specific OpenID Connect provider setting for the org.
 [**OrgsRead**](OrgsApi.md#OrgsRead) | **Get** /orgs/{org}/ | Get the details for the specific organization.
+[**OrgsSamlAuthenticationPartialUpdate**](OrgsApi.md#OrgsSamlAuthenticationPartialUpdate) | **Patch** /orgs/{org}/saml-authentication | Update the SAML Authentication settings for this Organization.
+[**OrgsSamlAuthenticationRead**](OrgsApi.md#OrgsSamlAuthenticationRead) | **Get** /orgs/{org}/saml-authentication | Retrieve the SAML Authentication settings for this Organization.
 [**OrgsSamlGroupSyncCreate**](OrgsApi.md#OrgsSamlGroupSyncCreate) | **Post** /orgs/{org}/saml-group-sync/ | Create a new SAML Group Sync mapping within an organization.
 [**OrgsSamlGroupSyncDelete**](OrgsApi.md#OrgsSamlGroupSyncDelete) | **Delete** /orgs/{org}/saml-group-sync/{slug_perm}/ | Delete a SAML Group Sync mapping from an organization.
 [**OrgsSamlGroupSyncDisable**](OrgsApi.md#OrgsSamlGroupSyncDisable) | **Post** /orgs/{org}/saml-group-sync/disable/ | Disable SAML Group Sync for this organization.
@@ -87,22 +89,22 @@ Delete the specified organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
+	org := "org_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsDelete(context.Background(), org).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsDelete(context.Background(), org).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -155,25 +157,25 @@ Create a package deny policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    data := *openapiclient.NewPackageDenyPolicyRequest("PackageQueryString_example") // PackageDenyPolicyRequest |  (optional)
+	org := "org_example" // string | 
+	data := *openapiclient.NewPackageDenyPolicyRequest("PackageQueryString_example") // PackageDenyPolicyRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyCreate(context.Background(), org).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsDenyPolicyCreate`: PackageDenyPolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyCreate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsDenyPolicyCreate`: PackageDenyPolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyCreate`: %v\n", resp)
 }
 ```
 
@@ -227,23 +229,23 @@ Delete a package deny policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsDenyPolicyDelete(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsDenyPolicyDelete(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -298,26 +300,26 @@ Get a list of all package deny policies.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsDenyPolicyList`: []PackageDenyPolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsDenyPolicyList`: []PackageDenyPolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyList`: %v\n", resp)
 }
 ```
 
@@ -372,26 +374,26 @@ Partially update a package deny policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewPackageDenyPolicyRequestPatch() // PackageDenyPolicyRequestPatch |  (optional)
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewPackageDenyPolicyRequestPatch() // PackageDenyPolicyRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsDenyPolicyPartialUpdate`: PackageDenyPolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsDenyPolicyPartialUpdate`: PackageDenyPolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -447,25 +449,25 @@ Get a package deny policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyRead(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsDenyPolicyRead`: PackageDenyPolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyRead(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsDenyPolicyRead`: PackageDenyPolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyRead`: %v\n", resp)
 }
 ```
 
@@ -520,26 +522,26 @@ Update a package deny policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewPackageDenyPolicyRequest("PackageQueryString_example") // PackageDenyPolicyRequest |  (optional)
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewPackageDenyPolicyRequest("PackageQueryString_example") // PackageDenyPolicyRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyUpdate(context.Background(), org, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsDenyPolicyUpdate`: PackageDenyPolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsDenyPolicyUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsDenyPolicyUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsDenyPolicyUpdate`: PackageDenyPolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsDenyPolicyUpdate`: %v\n", resp)
 }
 ```
 
@@ -595,25 +597,25 @@ Create an organization invite for a specific user
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    data := *openapiclient.NewOrganizationInviteRequest() // OrganizationInviteRequest |  (optional)
+	org := "org_example" // string | 
+	data := *openapiclient.NewOrganizationInviteRequest() // OrganizationInviteRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsInvitesCreate(context.Background(), org).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsInvitesCreate`: OrganizationInvite
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsInvitesCreate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsInvitesCreate`: OrganizationInvite
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesCreate`: %v\n", resp)
 }
 ```
 
@@ -667,23 +669,23 @@ Delete a specific organization invite
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsInvitesDelete(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsInvitesDelete(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -738,25 +740,25 @@ Extend an organization invite.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsInvitesExtend(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesExtend``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsInvitesExtend`: OrganizationInviteExtend
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesExtend`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsInvitesExtend(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesExtend``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsInvitesExtend`: OrganizationInviteExtend
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesExtend`: %v\n", resp)
 }
 ```
 
@@ -811,26 +813,26 @@ Get a list of all invites for an organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsInvitesList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsInvitesList`: []OrganizationInvite
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsInvitesList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsInvitesList`: []OrganizationInvite
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesList`: %v\n", resp)
 }
 ```
 
@@ -885,26 +887,26 @@ Update a specific organization invite.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewOrganizationInviteUpdateRequestPatch() // OrganizationInviteUpdateRequestPatch |  (optional)
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewOrganizationInviteUpdateRequestPatch() // OrganizationInviteUpdateRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsInvitesPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsInvitesPartialUpdate`: OrganizationInvite
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsInvitesPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsInvitesPartialUpdate`: OrganizationInvite
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -960,25 +962,25 @@ Resend an organization invite.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsInvitesResend(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesResend``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsInvitesResend`: OrganizationInviteExtend
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesResend`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsInvitesResend(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsInvitesResend``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsInvitesResend`: OrganizationInviteExtend
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsInvitesResend`: %v\n", resp)
 }
 ```
 
@@ -1033,25 +1035,25 @@ Create a package license policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    data := *openapiclient.NewOrganizationPackageLicensePolicyRequest("Name_example", []string{"SpdxIdentifiers_example"}) // OrganizationPackageLicensePolicyRequest |  (optional)
+	org := "org_example" // string | 
+	data := *openapiclient.NewOrganizationPackageLicensePolicyRequest("Name_example", []string{"SpdxIdentifiers_example"}) // OrganizationPackageLicensePolicyRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyCreate(context.Background(), org).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsLicensePolicyCreate`: OrganizationPackageLicensePolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyCreate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsLicensePolicyCreate`: OrganizationPackageLicensePolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyCreate`: %v\n", resp)
 }
 ```
 
@@ -1105,23 +1107,23 @@ Delete a package license policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsLicensePolicyDelete(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsLicensePolicyDelete(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -1176,26 +1178,26 @@ Create an evaluation request for this policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    policySlugPerm := "policySlugPerm_example" // string | 
-    data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
+	org := "org_example" // string | 
+	policySlugPerm := "policySlugPerm_example" // string | 
+	data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyEvaluationCreate(context.Background(), org, policySlugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyEvaluationCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsLicensePolicyEvaluationCreate`: PackageLicensePolicyEvaluationRequest
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyEvaluationCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyEvaluationCreate(context.Background(), org, policySlugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyEvaluationCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsLicensePolicyEvaluationCreate`: PackageLicensePolicyEvaluationRequest
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyEvaluationCreate`: %v\n", resp)
 }
 ```
 
@@ -1251,27 +1253,27 @@ List evaluation requests for this policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    policySlugPerm := "policySlugPerm_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	policySlugPerm := "policySlugPerm_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyEvaluationList(context.Background(), org, policySlugPerm).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyEvaluationList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsLicensePolicyEvaluationList`: []PackageLicensePolicyEvaluationRequest
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyEvaluationList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyEvaluationList(context.Background(), org, policySlugPerm).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyEvaluationList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsLicensePolicyEvaluationList`: []PackageLicensePolicyEvaluationRequest
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyEvaluationList`: %v\n", resp)
 }
 ```
 
@@ -1328,26 +1330,26 @@ Retrieve an evaluation request for this policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    policySlugPerm := "policySlugPerm_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	policySlugPerm := "policySlugPerm_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyEvaluationRead(context.Background(), org, policySlugPerm, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyEvaluationRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsLicensePolicyEvaluationRead`: PackageLicensePolicyEvaluationRequest
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyEvaluationRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyEvaluationRead(context.Background(), org, policySlugPerm, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyEvaluationRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsLicensePolicyEvaluationRead`: PackageLicensePolicyEvaluationRequest
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyEvaluationRead`: %v\n", resp)
 }
 ```
 
@@ -1404,26 +1406,26 @@ Get a list of all package license policies.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsLicensePolicyList`: []OrganizationPackageLicensePolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsLicensePolicyList`: []OrganizationPackageLicensePolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyList`: %v\n", resp)
 }
 ```
 
@@ -1478,26 +1480,26 @@ Partially update a package license policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewOrganizationPackageLicensePolicyRequestPatch() // OrganizationPackageLicensePolicyRequestPatch |  (optional)
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewOrganizationPackageLicensePolicyRequestPatch() // OrganizationPackageLicensePolicyRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsLicensePolicyPartialUpdate`: OrganizationPackageLicensePolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsLicensePolicyPartialUpdate`: OrganizationPackageLicensePolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -1553,25 +1555,25 @@ Get a package license policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyRead(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsLicensePolicyRead`: OrganizationPackageLicensePolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyRead(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsLicensePolicyRead`: OrganizationPackageLicensePolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyRead`: %v\n", resp)
 }
 ```
 
@@ -1626,26 +1628,26 @@ Update a package license policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewOrganizationPackageLicensePolicyRequest("Name_example", []string{"SpdxIdentifiers_example"}) // OrganizationPackageLicensePolicyRequest |  (optional)
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewOrganizationPackageLicensePolicyRequest("Name_example", []string{"SpdxIdentifiers_example"}) // OrganizationPackageLicensePolicyRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyUpdate(context.Background(), org, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsLicensePolicyUpdate`: OrganizationPackageLicensePolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsLicensePolicyUpdate`: OrganizationPackageLicensePolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyUpdate`: %v\n", resp)
 }
 ```
 
@@ -1701,26 +1703,26 @@ List all current license policy violations for this Organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    cursor := "cursor_example" // string | The pagination cursor value. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	cursor := "cursor_example" // string | The pagination cursor value. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyViolationList(context.Background(), org).Cursor(cursor).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyViolationList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsLicensePolicyViolationList`: PackageLicensePolicyViolationLogCursorPage
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyViolationList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsLicensePolicyViolationList(context.Background(), org).Cursor(cursor).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsLicensePolicyViolationList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsLicensePolicyViolationList`: PackageLicensePolicyViolationLogCursorPage
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsLicensePolicyViolationList`: %v\n", resp)
 }
 ```
 
@@ -1775,25 +1777,25 @@ Get a list of all the organizations you are associated with.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsList(context.Background()).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsList`: []Organization
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsList(context.Background()).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsList`: []Organization
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsList`: %v\n", resp)
 }
 ```
 
@@ -1843,23 +1845,23 @@ Removes a member from the organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    member := "member_example" // string | 
+	org := "org_example" // string | 
+	member := "member_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsMembersDelete(context.Background(), org, member).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsMembersDelete(context.Background(), org, member).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -1914,27 +1916,27 @@ Get the details for all organization members.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
-    isActive := true // bool | Filter for active/inactive users. (optional) (default to false)
+	org := "org_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	isActive := true // bool | Filter for active/inactive users. (optional) (default to false)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsMembersList(context.Background(), org).Page(page).PageSize(pageSize).IsActive(isActive).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsMembersList`: []OrganizationMembership
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsMembersList(context.Background(), org).Page(page).PageSize(pageSize).IsActive(isActive).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsMembersList`: []OrganizationMembership
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersList`: %v\n", resp)
 }
 ```
 
@@ -1990,25 +1992,25 @@ Get the details for a specific organization member.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    member := "member_example" // string | 
+	org := "org_example" // string | 
+	member := "member_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsMembersRead(context.Background(), org, member).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsMembersRead`: OrganizationMembership
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsMembersRead(context.Background(), org, member).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsMembersRead`: OrganizationMembership
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersRead`: %v\n", resp)
 }
 ```
 
@@ -2063,23 +2065,23 @@ Refresh a member of the organization's API key.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    member := "member_example" // string | 
+	org := "org_example" // string | 
+	member := "member_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsMembersRefresh(context.Background(), org, member).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersRefresh``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsMembersRefresh(context.Background(), org, member).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersRefresh``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -2134,23 +2136,23 @@ Removes a member from the organization (deprecated, use DELETE instead).
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    member := "member_example" // string | 
+	org := "org_example" // string | 
+	member := "member_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsMembersRemove(context.Background(), org, member).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersRemove``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsMembersRemove(context.Background(), org, member).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersRemove``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -2205,25 +2207,25 @@ Create the OpenID Connect provider settings for the org.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    data := *openapiclient.NewProviderSettingsRequest(map[string]interface{}(123), false, "Name_example", "ProviderUrl_example", []string{"ServiceAccounts_example"}) // ProviderSettingsRequest |  (optional)
+	org := "org_example" // string | 
+	data := *openapiclient.NewProviderSettingsRequest(map[string]interface{}(123), false, "Name_example", "ProviderUrl_example", []string{"ServiceAccounts_example"}) // ProviderSettingsRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectCreate(context.Background(), org).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsOpenidConnectCreate`: ProviderSettings
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectCreate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsOpenidConnectCreate`: ProviderSettings
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectCreate`: %v\n", resp)
 }
 ```
 
@@ -2277,23 +2279,23 @@ Delete a specific OpenID Connect provider setting for the org.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsOpenidConnectDelete(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsOpenidConnectDelete(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -2348,26 +2350,26 @@ Retrieve the list of OpenID Connect provider settings for the org.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsOpenidConnectList`: []ProviderSettings
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsOpenidConnectList`: []ProviderSettings
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectList`: %v\n", resp)
 }
 ```
 
@@ -2422,26 +2424,26 @@ Update a specific OpenID Connect provider setting for the org.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewProviderSettingsRequestPatch() // ProviderSettingsRequestPatch |  (optional)
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewProviderSettingsRequestPatch() // ProviderSettingsRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsOpenidConnectPartialUpdate`: ProviderSettings
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsOpenidConnectPartialUpdate`: ProviderSettings
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -2497,25 +2499,25 @@ Retrieve a specific OpenID Connect provider setting for the org.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectRead(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsOpenidConnectRead`: ProviderSettings
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectRead(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsOpenidConnectRead`: ProviderSettings
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectRead`: %v\n", resp)
 }
 ```
 
@@ -2570,26 +2572,26 @@ Update a specific OpenID Connect provider setting for the org.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewProviderSettingsRequest(map[string]interface{}(123), false, "Name_example", "ProviderUrl_example", []string{"ServiceAccounts_example"}) // ProviderSettingsRequest |  (optional)
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewProviderSettingsRequest(map[string]interface{}(123), false, "Name_example", "ProviderUrl_example", []string{"ServiceAccounts_example"}) // ProviderSettingsRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectUpdate(context.Background(), org, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsOpenidConnectUpdate`: ProviderSettings
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsOpenidConnectUpdate`: ProviderSettings
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectUpdate`: %v\n", resp)
 }
 ```
 
@@ -2645,24 +2647,24 @@ Get the details for the specific organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
+	org := "org_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsRead(context.Background(), org).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsRead`: Organization
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsRead(context.Background(), org).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsRead`: Organization
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsRead`: %v\n", resp)
 }
 ```
 
@@ -2701,6 +2703,148 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## OrgsSamlAuthenticationPartialUpdate
+
+> OrganizationSAMLAuth OrgsSamlAuthenticationPartialUpdate(ctx, org).Data(data).Execute()
+
+Update the SAML Authentication settings for this Organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	data := *openapiclient.NewOrganizationSAMLAuthRequestPatch() // OrganizationSAMLAuthRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsSamlAuthenticationPartialUpdate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlAuthenticationPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsSamlAuthenticationPartialUpdate`: OrganizationSAMLAuth
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlAuthenticationPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsSamlAuthenticationPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **data** | [**OrganizationSAMLAuthRequestPatch**](OrganizationSAMLAuthRequestPatch.md) |  | 
+
+### Return type
+
+[**OrganizationSAMLAuth**](OrganizationSAMLAuth.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsSamlAuthenticationRead
+
+> OrganizationSAMLAuth OrgsSamlAuthenticationRead(ctx, org).Execute()
+
+Retrieve the SAML Authentication settings for this Organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsSamlAuthenticationRead(context.Background(), org).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlAuthenticationRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsSamlAuthenticationRead`: OrganizationSAMLAuth
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlAuthenticationRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsSamlAuthenticationReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OrganizationSAMLAuth**](OrganizationSAMLAuth.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## OrgsSamlGroupSyncCreate
 
 > OrganizationGroupSync OrgsSamlGroupSyncCreate(ctx, org).Data(data).Execute()
@@ -2715,25 +2859,25 @@ Create a new SAML Group Sync mapping within an organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    data := *openapiclient.NewOrganizationGroupSyncRequest("IdpKey_example", "IdpValue_example", "Organization_example", "Team_example") // OrganizationGroupSyncRequest |  (optional)
+	org := "org_example" // string | 
+	data := *openapiclient.NewOrganizationGroupSyncRequest("IdpKey_example", "IdpValue_example", "Organization_example", "Team_example") // OrganizationGroupSyncRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsSamlGroupSyncCreate(context.Background(), org).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsSamlGroupSyncCreate`: OrganizationGroupSync
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsSamlGroupSyncCreate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsSamlGroupSyncCreate`: OrganizationGroupSync
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncCreate`: %v\n", resp)
 }
 ```
 
@@ -2787,23 +2931,23 @@ Delete a SAML Group Sync mapping from an organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsSamlGroupSyncDelete(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsSamlGroupSyncDelete(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -2858,22 +3002,22 @@ Disable SAML Group Sync for this organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
+	org := "org_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsSamlGroupSyncDisable(context.Background(), org).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncDisable``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsSamlGroupSyncDisable(context.Background(), org).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncDisable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -2926,22 +3070,22 @@ Enable SAML Group Sync for this organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
+	org := "org_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsSamlGroupSyncEnable(context.Background(), org).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncEnable``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsSamlGroupSyncEnable(context.Background(), org).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncEnable``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -2994,26 +3138,26 @@ Get the details of all SAML Group Sync mapping within an organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsSamlGroupSyncList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsSamlGroupSyncList`: []OrganizationGroupSync
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsSamlGroupSyncList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsSamlGroupSyncList`: []OrganizationGroupSync
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncList`: %v\n", resp)
 }
 ```
 
@@ -3068,24 +3212,24 @@ Retrieve the SAML Group Sync status for this organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
+	org := "org_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsSamlGroupSyncStatus(context.Background(), org).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncStatus``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsSamlGroupSyncStatus`: OrganizationGroupSyncStatus
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncStatus`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsSamlGroupSyncStatus(context.Background(), org).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlGroupSyncStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsSamlGroupSyncStatus`: OrganizationGroupSyncStatus
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlGroupSyncStatus`: %v\n", resp)
 }
 ```
 
@@ -3138,25 +3282,25 @@ Create a service within an organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    data := *openapiclient.NewServiceRequest("Name_example") // ServiceRequest |  (optional)
+	org := "org_example" // string | 
+	data := *openapiclient.NewServiceRequest("Name_example") // ServiceRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsServicesCreate(context.Background(), org).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsServicesCreate`: Service
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsServicesCreate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsServicesCreate`: Service
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesCreate`: %v\n", resp)
 }
 ```
 
@@ -3210,23 +3354,23 @@ Delete a specific service
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    service := "service_example" // string | 
+	org := "org_example" // string | 
+	service := "service_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsServicesDelete(context.Background(), org, service).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsServicesDelete(context.Background(), org, service).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -3281,26 +3425,26 @@ Get a list of all services within an organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsServicesList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsServicesList`: []Service
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsServicesList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsServicesList`: []Service
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesList`: %v\n", resp)
 }
 ```
 
@@ -3355,26 +3499,26 @@ Update a service within an organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    service := "service_example" // string | 
-    data := *openapiclient.NewServiceRequestPatch() // ServiceRequestPatch |  (optional)
+	org := "org_example" // string | 
+	service := "service_example" // string | 
+	data := *openapiclient.NewServiceRequestPatch() // ServiceRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsServicesPartialUpdate(context.Background(), org, service).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsServicesPartialUpdate`: Service
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsServicesPartialUpdate(context.Background(), org, service).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsServicesPartialUpdate`: Service
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -3430,25 +3574,25 @@ Retrieve details of a single service within an organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    service := "service_example" // string | 
+	org := "org_example" // string | 
+	service := "service_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsServicesRead(context.Background(), org, service).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsServicesRead`: Service
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsServicesRead(context.Background(), org, service).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsServicesRead`: Service
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesRead`: %v\n", resp)
 }
 ```
 
@@ -3503,25 +3647,25 @@ Refresh service API token.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    service := "service_example" // string | 
+	org := "org_example" // string | 
+	service := "service_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsServicesRefresh(context.Background(), org, service).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesRefresh``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsServicesRefresh`: Service
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesRefresh`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsServicesRefresh(context.Background(), org, service).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesRefresh``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsServicesRefresh`: Service
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsServicesRefresh`: %v\n", resp)
 }
 ```
 
@@ -3576,25 +3720,25 @@ Create a team for this organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    data := *openapiclient.NewOrganizationTeamRequest("Name_example") // OrganizationTeamRequest |  (optional)
+	org := "org_example" // string | 
+	data := *openapiclient.NewOrganizationTeamRequest("Name_example") // OrganizationTeamRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsCreate(context.Background(), org).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsTeamsCreate`: OrganizationTeam
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsTeamsCreate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsTeamsCreate`: OrganizationTeam
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsCreate`: %v\n", resp)
 }
 ```
 
@@ -3648,23 +3792,23 @@ Delete a specific team in a organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    team := "team_example" // string | 
+	org := "org_example" // string | 
+	team := "team_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsTeamsDelete(context.Background(), org, team).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsTeamsDelete(context.Background(), org, team).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -3719,26 +3863,26 @@ Get the details of all teams within an organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsTeamsList`: []OrganizationTeam
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsTeamsList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsTeamsList`: []OrganizationTeam
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsList`: %v\n", resp)
 }
 ```
 
@@ -3793,26 +3937,26 @@ Add users to a team.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    team := "team_example" // string | 
-    data := *openapiclient.NewOrganizationTeamMembers([]openapiclient.OrganizationTeamMembership{*openapiclient.NewOrganizationTeamMembership("Role_example", "User_example")}) // OrganizationTeamMembers |  (optional)
+	org := "org_example" // string | 
+	team := "team_example" // string | 
+	data := *openapiclient.NewOrganizationTeamMembers([]openapiclient.OrganizationTeamMembership{*openapiclient.NewOrganizationTeamMembership("Role_example", "User_example")}) // OrganizationTeamMembers |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersCreate(context.Background(), org, team).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsTeamsMembersCreate`: OrganizationTeamMembers
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersCreate(context.Background(), org, team).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsTeamsMembersCreate`: OrganizationTeamMembers
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersCreate`: %v\n", resp)
 }
 ```
 
@@ -3868,25 +4012,25 @@ List all members for the team.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    team := "team_example" // string | 
+	org := "org_example" // string | 
+	team := "team_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersList(context.Background(), org, team).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsTeamsMembersList`: OrganizationTeamMembers
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersList(context.Background(), org, team).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsTeamsMembersList`: OrganizationTeamMembers
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersList`: %v\n", resp)
 }
 ```
 
@@ -3941,26 +4085,26 @@ Replace all team members.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    team := "team_example" // string | 
-    data := *openapiclient.NewOrganizationTeamMembers([]openapiclient.OrganizationTeamMembership{*openapiclient.NewOrganizationTeamMembership("Role_example", "User_example")}) // OrganizationTeamMembers |  (optional)
+	org := "org_example" // string | 
+	team := "team_example" // string | 
+	data := *openapiclient.NewOrganizationTeamMembers([]openapiclient.OrganizationTeamMembership{*openapiclient.NewOrganizationTeamMembership("Role_example", "User_example")}) // OrganizationTeamMembers |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersUpdate(context.Background(), org, team).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsTeamsMembersUpdate`: OrganizationTeamMembers
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersUpdate(context.Background(), org, team).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsTeamsMembersUpdate`: OrganizationTeamMembers
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsMembersUpdate`: %v\n", resp)
 }
 ```
 
@@ -4016,26 +4160,26 @@ Update a specific team in a organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    team := "team_example" // string | 
-    data := *openapiclient.NewOrganizationTeamRequestPatch() // OrganizationTeamRequestPatch |  (optional)
+	org := "org_example" // string | 
+	team := "team_example" // string | 
+	data := *openapiclient.NewOrganizationTeamRequestPatch() // OrganizationTeamRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsPartialUpdate(context.Background(), org, team).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsTeamsPartialUpdate`: OrganizationTeam
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsTeamsPartialUpdate(context.Background(), org, team).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsTeamsPartialUpdate`: OrganizationTeam
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -4091,25 +4235,25 @@ Get the details of a specific team within an organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    team := "team_example" // string | 
+	org := "org_example" // string | 
+	team := "team_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsTeamsRead(context.Background(), org, team).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsTeamsRead`: OrganizationTeam
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsTeamsRead(context.Background(), org, team).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsTeamsRead`: OrganizationTeam
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsTeamsRead`: %v\n", resp)
 }
 ```
 
@@ -4164,25 +4308,25 @@ Create a package vulnerability policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    data := *openapiclient.NewOrganizationPackageVulnerabilityPolicyRequest("Name_example") // OrganizationPackageVulnerabilityPolicyRequest |  (optional)
+	org := "org_example" // string | 
+	data := *openapiclient.NewOrganizationPackageVulnerabilityPolicyRequest("Name_example") // OrganizationPackageVulnerabilityPolicyRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyCreate(context.Background(), org).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsVulnerabilityPolicyCreate`: OrganizationPackageVulnerabilityPolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyCreate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsVulnerabilityPolicyCreate`: OrganizationPackageVulnerabilityPolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyCreate`: %v\n", resp)
 }
 ```
 
@@ -4236,23 +4380,23 @@ Delete a package vulnerability policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyDelete(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyDelete``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyDelete(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -4307,26 +4451,26 @@ Create an evaluation request for this policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    policySlugPerm := "policySlugPerm_example" // string | 
-    data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
+	org := "org_example" // string | 
+	policySlugPerm := "policySlugPerm_example" // string | 
+	data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyEvaluationCreate(context.Background(), org, policySlugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyEvaluationCreate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsVulnerabilityPolicyEvaluationCreate`: PackageVulnerabilityPolicyEvaluationRequest
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyEvaluationCreate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyEvaluationCreate(context.Background(), org, policySlugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyEvaluationCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsVulnerabilityPolicyEvaluationCreate`: PackageVulnerabilityPolicyEvaluationRequest
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyEvaluationCreate`: %v\n", resp)
 }
 ```
 
@@ -4382,27 +4526,27 @@ List evaluation requests for this policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    policySlugPerm := "policySlugPerm_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	policySlugPerm := "policySlugPerm_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyEvaluationList(context.Background(), org, policySlugPerm).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyEvaluationList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsVulnerabilityPolicyEvaluationList`: []PackageVulnerabilityPolicyEvaluationRequest
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyEvaluationList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyEvaluationList(context.Background(), org, policySlugPerm).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyEvaluationList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsVulnerabilityPolicyEvaluationList`: []PackageVulnerabilityPolicyEvaluationRequest
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyEvaluationList`: %v\n", resp)
 }
 ```
 
@@ -4459,26 +4603,26 @@ Retrieve an evaluation request for this policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    policySlugPerm := "policySlugPerm_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	policySlugPerm := "policySlugPerm_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyEvaluationRead(context.Background(), org, policySlugPerm, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyEvaluationRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsVulnerabilityPolicyEvaluationRead`: PackageVulnerabilityPolicyEvaluationRequest
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyEvaluationRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyEvaluationRead(context.Background(), org, policySlugPerm, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyEvaluationRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsVulnerabilityPolicyEvaluationRead`: PackageVulnerabilityPolicyEvaluationRequest
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyEvaluationRead`: %v\n", resp)
 }
 ```
 
@@ -4535,26 +4679,26 @@ Get a list of all package vulnerability policies.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsVulnerabilityPolicyList`: []OrganizationPackageVulnerabilityPolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsVulnerabilityPolicyList`: []OrganizationPackageVulnerabilityPolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyList`: %v\n", resp)
 }
 ```
 
@@ -4609,26 +4753,26 @@ Partially update a package vulnerability policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewOrganizationPackageVulnerabilityPolicyRequestPatch() // OrganizationPackageVulnerabilityPolicyRequestPatch |  (optional)
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewOrganizationPackageVulnerabilityPolicyRequestPatch() // OrganizationPackageVulnerabilityPolicyRequestPatch |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyPartialUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsVulnerabilityPolicyPartialUpdate`: OrganizationPackageVulnerabilityPolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyPartialUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsVulnerabilityPolicyPartialUpdate`: OrganizationPackageVulnerabilityPolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyPartialUpdate`: %v\n", resp)
 }
 ```
 
@@ -4684,25 +4828,25 @@ Get a package vulnerability policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyRead(context.Background(), org, slugPerm).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyRead``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsVulnerabilityPolicyRead`: OrganizationPackageVulnerabilityPolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyRead`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyRead(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsVulnerabilityPolicyRead`: OrganizationPackageVulnerabilityPolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyRead`: %v\n", resp)
 }
 ```
 
@@ -4757,26 +4901,26 @@ Update a package vulnerability policy.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    slugPerm := "slugPerm_example" // string | 
-    data := *openapiclient.NewOrganizationPackageVulnerabilityPolicyRequest("Name_example") // OrganizationPackageVulnerabilityPolicyRequest |  (optional)
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewOrganizationPackageVulnerabilityPolicyRequest("Name_example") // OrganizationPackageVulnerabilityPolicyRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyUpdate(context.Background(), org, slugPerm).Data(data).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyUpdate``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsVulnerabilityPolicyUpdate`: OrganizationPackageVulnerabilityPolicy
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyUpdate`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsVulnerabilityPolicyUpdate`: OrganizationPackageVulnerabilityPolicy
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyUpdate`: %v\n", resp)
 }
 ```
 
@@ -4832,26 +4976,26 @@ List all current vulnerability policy violations for this Organization.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    org := "org_example" // string | 
-    cursor := "cursor_example" // string | The pagination cursor value. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	org := "org_example" // string | 
+	cursor := "cursor_example" // string | The pagination cursor value. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyViolationList(context.Background(), org).Cursor(cursor).PageSize(pageSize).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyViolationList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `OrgsVulnerabilityPolicyViolationList`: PackageVulnerabilityPolicyViolationLogCursorPage
-    fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyViolationList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsVulnerabilityPolicyViolationList(context.Background(), org).Cursor(cursor).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsVulnerabilityPolicyViolationList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsVulnerabilityPolicyViolationList`: PackageVulnerabilityPolicyViolationLogCursorPage
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsVulnerabilityPolicyViolationList`: %v\n", resp)
 }
 ```
 

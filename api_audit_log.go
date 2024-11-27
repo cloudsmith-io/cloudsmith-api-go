@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -59,9 +59,9 @@ AuditLogNamespaceList Lists audit log entries for a specific namespace.
 
 Lists audit log entries for a specific namespace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @return ApiAuditLogNamespaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@return ApiAuditLogNamespaceListRequest
 */
 func (a *AuditLogApiService) AuditLogNamespaceList(ctx context.Context, owner string) ApiAuditLogNamespaceListRequest {
 	return ApiAuditLogNamespaceListRequest{
@@ -72,7 +72,8 @@ func (a *AuditLogApiService) AuditLogNamespaceList(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return []NamespaceAuditLog
+//
+//	@return []NamespaceAuditLog
 func (a *AuditLogApiService) AuditLogNamespaceListExecute(r ApiAuditLogNamespaceListRequest) ([]NamespaceAuditLog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -94,13 +95,13 @@ func (a *AuditLogApiService) AuditLogNamespaceListExecute(r ApiAuditLogNamespace
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.query != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -239,10 +240,10 @@ AuditLogRepoList Lists audit log entries for a specific repository.
 
 Lists audit log entries for a specific repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiAuditLogRepoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiAuditLogRepoListRequest
 */
 func (a *AuditLogApiService) AuditLogRepoList(ctx context.Context, owner string, repo string) ApiAuditLogRepoListRequest {
 	return ApiAuditLogRepoListRequest{
@@ -254,7 +255,8 @@ func (a *AuditLogApiService) AuditLogRepoList(ctx context.Context, owner string,
 }
 
 // Execute executes the request
-//  @return []RepositoryAuditLog
+//
+//	@return []RepositoryAuditLog
 func (a *AuditLogApiService) AuditLogRepoListExecute(r ApiAuditLogRepoListRequest) ([]RepositoryAuditLog, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -277,13 +279,13 @@ func (a *AuditLogApiService) AuditLogRepoListExecute(r ApiAuditLogRepoListReques
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.query != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

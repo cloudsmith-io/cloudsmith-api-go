@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -35,6 +37,8 @@ type RepositoryAuditLog struct {
 	ObjectSlugPerm string         `json:"object_slug_perm"`
 	Uuid           *string        `json:"uuid,omitempty"`
 }
+
+type _RepositoryAuditLog RepositoryAuditLog
 
 // NewRepositoryAuditLog instantiates a new RepositoryAuditLog object
 // This constructor will assign default values to properties that have it defined,
@@ -446,6 +450,52 @@ func (o RepositoryAuditLog) ToMap() (map[string]interface{}, error) {
 		toSerialize["uuid"] = o.Uuid
 	}
 	return toSerialize, nil
+}
+
+func (o *RepositoryAuditLog) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"actor",
+		"actor_ip_address",
+		"actor_location",
+		"actor_slug_perm",
+		"context",
+		"event",
+		"event_at",
+		"object",
+		"object_kind",
+		"object_slug_perm",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRepositoryAuditLog := _RepositoryAuditLog{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRepositoryAuditLog)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryAuditLog(varRepositoryAuditLog)
+
+	return err
 }
 
 type NullableRepositoryAuditLog struct {

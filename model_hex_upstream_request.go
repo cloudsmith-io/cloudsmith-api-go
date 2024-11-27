@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the HexUpstreamRequest type satisfies the MappedNullable interface at compile time
@@ -27,19 +29,19 @@ type HexUpstreamRequest struct {
 	// Username to provide with requests to upstream.
 	AuthUsername NullableString `json:"auth_username,omitempty"`
 	// The key for extra header #1 to send to upstream.
-	ExtraHeader1 NullableString `json:"extra_header_1,omitempty"`
+	ExtraHeader1 NullableString `json:"extra_header_1,omitempty" validate:"regexp=^[-\\\\w]+$"`
 	// The key for extra header #2 to send to upstream.
-	ExtraHeader2 NullableString `json:"extra_header_2,omitempty"`
+	ExtraHeader2 NullableString `json:"extra_header_2,omitempty" validate:"regexp=^[-\\\\w]+$"`
 	// The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue1 NullableString `json:"extra_value_1,omitempty"`
+	ExtraValue1 NullableString `json:"extra_value_1,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue2 NullableString `json:"extra_value_2,omitempty"`
+	ExtraValue2 NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// Whether or not this upstream is active and ready for requests.
 	IsActive *bool `json:"is_active,omitempty"`
 	// The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode.
 	Mode *string `json:"mode,omitempty"`
 	// A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream.
-	Name string `json:"name"`
+	Name string `json:"name" validate:"regexp=^\\\\w[\\\\w \\\\-'\\\\.\\/()]+$"`
 	// Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date.
 	Priority *int64 `json:"priority,omitempty"`
 	// The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.
@@ -47,6 +49,8 @@ type HexUpstreamRequest struct {
 	// If enabled, SSL certificates are verified when requests are made to this upstream. It's recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams.
 	VerifySsl *bool `json:"verify_ssl,omitempty"`
 }
+
+type _HexUpstreamRequest HexUpstreamRequest
 
 // NewHexUpstreamRequest instantiates a new HexUpstreamRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -587,6 +591,44 @@ func (o HexUpstreamRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
 	return toSerialize, nil
+}
+
+func (o *HexUpstreamRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"upstream_url",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varHexUpstreamRequest := _HexUpstreamRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varHexUpstreamRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HexUpstreamRequest(varHexUpstreamRequest)
+
+	return err
 }
 
 type NullableHexUpstreamRequest struct {

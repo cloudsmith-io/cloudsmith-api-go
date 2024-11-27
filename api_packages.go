@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -46,11 +46,11 @@ PackagesCopy Copy a package to another repository.
 
 Copy a package to another repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiPackagesCopyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiPackagesCopyRequest
 */
 func (a *PackagesApiService) PackagesCopy(ctx context.Context, owner string, repo string, identifier string) ApiPackagesCopyRequest {
 	return ApiPackagesCopyRequest{
@@ -63,7 +63,8 @@ func (a *PackagesApiService) PackagesCopy(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return PackageCopy
+//
+//	@return PackageCopy
 func (a *PackagesApiService) PackagesCopyExecute(r ApiPackagesCopyRequest) (*PackageCopy, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -194,11 +195,11 @@ PackagesDelete Delete a specific package in a repository.
 
 Delete a specific package in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiPackagesDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiPackagesDeleteRequest
 */
 func (a *PackagesApiService) PackagesDelete(ctx context.Context, owner string, repo string, identifier string) ApiPackagesDeleteRequest {
 	return ApiPackagesDeleteRequest{
@@ -329,11 +330,11 @@ PackagesDependencies Get the list of dependencies for a package. Transitive depe
 
 Get the list of dependencies for a package. Transitive dependencies are included where supported.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiPackagesDependenciesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiPackagesDependenciesRequest
 */
 func (a *PackagesApiService) PackagesDependencies(ctx context.Context, owner string, repo string, identifier string) ApiPackagesDependenciesRequest {
 	return ApiPackagesDependenciesRequest{
@@ -346,7 +347,8 @@ func (a *PackagesApiService) PackagesDependencies(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return PackageDependencies
+//
+//	@return PackageDependencies
 func (a *PackagesApiService) PackagesDependenciesExecute(r ApiPackagesDependenciesRequest) (*PackageDependencies, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -502,10 +504,10 @@ PackagesList Get a list of all packages associated with repository.
 
 Get a list of all packages associated with repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesListRequest
 */
 func (a *PackagesApiService) PackagesList(ctx context.Context, owner string, repo string) ApiPackagesListRequest {
 	return ApiPackagesListRequest{
@@ -517,7 +519,8 @@ func (a *PackagesApiService) PackagesList(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return []Package
+//
+//	@return []Package
 func (a *PackagesApiService) PackagesListExecute(r ApiPackagesListRequest) ([]Package, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -540,16 +543,19 @@ func (a *PackagesApiService) PackagesListExecute(r ApiPackagesListRequest) ([]Pa
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.query != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
 	}
 	if r.sort != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "", "")
+	} else {
+		var defaultValue string = "-date"
+		r.sort = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -663,11 +669,11 @@ PackagesMove Move a package to another repository.
 
 Move a package to another repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiPackagesMoveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiPackagesMoveRequest
 */
 func (a *PackagesApiService) PackagesMove(ctx context.Context, owner string, repo string, identifier string) ApiPackagesMoveRequest {
 	return ApiPackagesMoveRequest{
@@ -680,7 +686,8 @@ func (a *PackagesApiService) PackagesMove(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return PackageMove
+//
+//	@return PackageMove
 func (a *PackagesApiService) PackagesMoveExecute(r ApiPackagesMoveRequest) (*PackageMove, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -817,11 +824,11 @@ PackagesQuarantine Quarantine or release a package.
 
 Quarantine or release a package.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiPackagesQuarantineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiPackagesQuarantineRequest
 */
 func (a *PackagesApiService) PackagesQuarantine(ctx context.Context, owner string, repo string, identifier string) ApiPackagesQuarantineRequest {
 	return ApiPackagesQuarantineRequest{
@@ -834,7 +841,8 @@ func (a *PackagesApiService) PackagesQuarantine(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return PackageQuarantine
+//
+//	@return PackageQuarantine
 func (a *PackagesApiService) PackagesQuarantineExecute(r ApiPackagesQuarantineRequest) (*PackageQuarantine, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -965,11 +973,11 @@ PackagesRead Get a specific package in a repository.
 
 Get a specific package in a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiPackagesReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiPackagesReadRequest
 */
 func (a *PackagesApiService) PackagesRead(ctx context.Context, owner string, repo string, identifier string) ApiPackagesReadRequest {
 	return ApiPackagesReadRequest{
@@ -982,7 +990,8 @@ func (a *PackagesApiService) PackagesRead(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return Package
+//
+//	@return Package
 func (a *PackagesApiService) PackagesReadExecute(r ApiPackagesReadRequest) (*Package, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1111,11 +1120,11 @@ PackagesResync Schedule a package for resynchronisation.
 
 Schedule a package for resynchronisation.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiPackagesResyncRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiPackagesResyncRequest
 */
 func (a *PackagesApiService) PackagesResync(ctx context.Context, owner string, repo string, identifier string) ApiPackagesResyncRequest {
 	return ApiPackagesResyncRequest{
@@ -1128,7 +1137,8 @@ func (a *PackagesApiService) PackagesResync(ctx context.Context, owner string, r
 }
 
 // Execute executes the request
-//  @return PackageResync
+//
+//	@return PackageResync
 func (a *PackagesApiService) PackagesResyncExecute(r ApiPackagesResyncRequest) (*PackageResync, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1257,11 +1267,11 @@ PackagesScan Schedule a package for scanning.
 
 Schedule a package for scanning.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiPackagesScanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiPackagesScanRequest
 */
 func (a *PackagesApiService) PackagesScan(ctx context.Context, owner string, repo string, identifier string) ApiPackagesScanRequest {
 	return ApiPackagesScanRequest{
@@ -1274,7 +1284,8 @@ func (a *PackagesApiService) PackagesScan(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return Package
+//
+//	@return Package
 func (a *PackagesApiService) PackagesScanExecute(r ApiPackagesScanRequest) (*Package, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1403,11 +1414,11 @@ PackagesStatus Get the synchronization status for a package.
 
 Get the synchronization status for a package.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiPackagesStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiPackagesStatusRequest
 */
 func (a *PackagesApiService) PackagesStatus(ctx context.Context, owner string, repo string, identifier string) ApiPackagesStatusRequest {
 	return ApiPackagesStatusRequest{
@@ -1420,7 +1431,8 @@ func (a *PackagesApiService) PackagesStatus(ctx context.Context, owner string, r
 }
 
 // Execute executes the request
-//  @return PackageStatus
+//
+//	@return PackageStatus
 func (a *PackagesApiService) PackagesStatusExecute(r ApiPackagesStatusRequest) (*PackageStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1555,11 +1567,11 @@ PackagesTag Add/Replace/Remove tags for a package.
 
 Add/Replace/Remove tags for a package.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiPackagesTagRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiPackagesTagRequest
 */
 func (a *PackagesApiService) PackagesTag(ctx context.Context, owner string, repo string, identifier string) ApiPackagesTagRequest {
 	return ApiPackagesTagRequest{
@@ -1572,7 +1584,8 @@ func (a *PackagesApiService) PackagesTag(ctx context.Context, owner string, repo
 }
 
 // Execute executes the request
-//  @return Package
+//
+//	@return Package
 func (a *PackagesApiService) PackagesTagExecute(r ApiPackagesTagRequest) (*Package, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1708,10 +1721,10 @@ PackagesUploadAlpine Create a new Alpine package
 
 Create a new Alpine package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadAlpineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadAlpineRequest
 */
 func (a *PackagesApiService) PackagesUploadAlpine(ctx context.Context, owner string, repo string) ApiPackagesUploadAlpineRequest {
 	return ApiPackagesUploadAlpineRequest{
@@ -1723,7 +1736,8 @@ func (a *PackagesApiService) PackagesUploadAlpine(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return AlpinePackageUpload
+//
+//	@return AlpinePackageUpload
 func (a *PackagesApiService) PackagesUploadAlpineExecute(r ApiPackagesUploadAlpineRequest) (*AlpinePackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1869,10 +1883,10 @@ PackagesUploadCargo Create a new Cargo package
 
 Create a new Cargo package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadCargoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadCargoRequest
 */
 func (a *PackagesApiService) PackagesUploadCargo(ctx context.Context, owner string, repo string) ApiPackagesUploadCargoRequest {
 	return ApiPackagesUploadCargoRequest{
@@ -1884,7 +1898,8 @@ func (a *PackagesApiService) PackagesUploadCargo(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return CargoPackageUpload
+//
+//	@return CargoPackageUpload
 func (a *PackagesApiService) PackagesUploadCargoExecute(r ApiPackagesUploadCargoRequest) (*CargoPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2030,10 +2045,10 @@ PackagesUploadCocoapods Create a new CocoaPods package
 
 Create a new CocoaPods package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadCocoapodsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadCocoapodsRequest
 */
 func (a *PackagesApiService) PackagesUploadCocoapods(ctx context.Context, owner string, repo string) ApiPackagesUploadCocoapodsRequest {
 	return ApiPackagesUploadCocoapodsRequest{
@@ -2045,7 +2060,8 @@ func (a *PackagesApiService) PackagesUploadCocoapods(ctx context.Context, owner 
 }
 
 // Execute executes the request
-//  @return CocoapodsPackageUpload
+//
+//	@return CocoapodsPackageUpload
 func (a *PackagesApiService) PackagesUploadCocoapodsExecute(r ApiPackagesUploadCocoapodsRequest) (*CocoapodsPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2191,10 +2207,10 @@ PackagesUploadComposer Create a new Composer package
 
 Create a new Composer package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadComposerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadComposerRequest
 */
 func (a *PackagesApiService) PackagesUploadComposer(ctx context.Context, owner string, repo string) ApiPackagesUploadComposerRequest {
 	return ApiPackagesUploadComposerRequest{
@@ -2206,7 +2222,8 @@ func (a *PackagesApiService) PackagesUploadComposer(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return ComposerPackageUpload
+//
+//	@return ComposerPackageUpload
 func (a *PackagesApiService) PackagesUploadComposerExecute(r ApiPackagesUploadComposerRequest) (*ComposerPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2352,10 +2369,10 @@ PackagesUploadConan Create a new Conan package
 
 Create a new Conan package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadConanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadConanRequest
 */
 func (a *PackagesApiService) PackagesUploadConan(ctx context.Context, owner string, repo string) ApiPackagesUploadConanRequest {
 	return ApiPackagesUploadConanRequest{
@@ -2367,7 +2384,8 @@ func (a *PackagesApiService) PackagesUploadConan(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return ConanPackageUpload
+//
+//	@return ConanPackageUpload
 func (a *PackagesApiService) PackagesUploadConanExecute(r ApiPackagesUploadConanRequest) (*ConanPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2513,10 +2531,10 @@ PackagesUploadConda Create a new Conda package
 
 Create a new Conda package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadCondaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadCondaRequest
 */
 func (a *PackagesApiService) PackagesUploadConda(ctx context.Context, owner string, repo string) ApiPackagesUploadCondaRequest {
 	return ApiPackagesUploadCondaRequest{
@@ -2528,7 +2546,8 @@ func (a *PackagesApiService) PackagesUploadConda(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return CondaPackageUpload
+//
+//	@return CondaPackageUpload
 func (a *PackagesApiService) PackagesUploadCondaExecute(r ApiPackagesUploadCondaRequest) (*CondaPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2674,10 +2693,10 @@ PackagesUploadCran Create a new CRAN package
 
 Create a new CRAN package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadCranRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadCranRequest
 */
 func (a *PackagesApiService) PackagesUploadCran(ctx context.Context, owner string, repo string) ApiPackagesUploadCranRequest {
 	return ApiPackagesUploadCranRequest{
@@ -2689,7 +2708,8 @@ func (a *PackagesApiService) PackagesUploadCran(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return CranPackageUpload
+//
+//	@return CranPackageUpload
 func (a *PackagesApiService) PackagesUploadCranExecute(r ApiPackagesUploadCranRequest) (*CranPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2835,10 +2855,10 @@ PackagesUploadDart Create a new Dart package
 
 Create a new Dart package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadDartRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadDartRequest
 */
 func (a *PackagesApiService) PackagesUploadDart(ctx context.Context, owner string, repo string) ApiPackagesUploadDartRequest {
 	return ApiPackagesUploadDartRequest{
@@ -2850,7 +2870,8 @@ func (a *PackagesApiService) PackagesUploadDart(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return DartPackageUpload
+//
+//	@return DartPackageUpload
 func (a *PackagesApiService) PackagesUploadDartExecute(r ApiPackagesUploadDartRequest) (*DartPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2996,10 +3017,10 @@ PackagesUploadDeb Create a new Debian package
 
 Create a new Debian package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadDebRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadDebRequest
 */
 func (a *PackagesApiService) PackagesUploadDeb(ctx context.Context, owner string, repo string) ApiPackagesUploadDebRequest {
 	return ApiPackagesUploadDebRequest{
@@ -3011,7 +3032,8 @@ func (a *PackagesApiService) PackagesUploadDeb(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return DebPackageUpload
+//
+//	@return DebPackageUpload
 func (a *PackagesApiService) PackagesUploadDebExecute(r ApiPackagesUploadDebRequest) (*DebPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3157,10 +3179,10 @@ PackagesUploadDocker Create a new Docker package
 
 Create a new Docker package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadDockerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadDockerRequest
 */
 func (a *PackagesApiService) PackagesUploadDocker(ctx context.Context, owner string, repo string) ApiPackagesUploadDockerRequest {
 	return ApiPackagesUploadDockerRequest{
@@ -3172,7 +3194,8 @@ func (a *PackagesApiService) PackagesUploadDocker(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return DockerPackageUpload
+//
+//	@return DockerPackageUpload
 func (a *PackagesApiService) PackagesUploadDockerExecute(r ApiPackagesUploadDockerRequest) (*DockerPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3318,10 +3341,10 @@ PackagesUploadGo Create a new Go package
 
 Create a new Go package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadGoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadGoRequest
 */
 func (a *PackagesApiService) PackagesUploadGo(ctx context.Context, owner string, repo string) ApiPackagesUploadGoRequest {
 	return ApiPackagesUploadGoRequest{
@@ -3333,7 +3356,8 @@ func (a *PackagesApiService) PackagesUploadGo(ctx context.Context, owner string,
 }
 
 // Execute executes the request
-//  @return GoPackageUpload
+//
+//	@return GoPackageUpload
 func (a *PackagesApiService) PackagesUploadGoExecute(r ApiPackagesUploadGoRequest) (*GoPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3479,10 +3503,10 @@ PackagesUploadHelm Create a new Helm package
 
 Create a new Helm package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadHelmRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadHelmRequest
 */
 func (a *PackagesApiService) PackagesUploadHelm(ctx context.Context, owner string, repo string) ApiPackagesUploadHelmRequest {
 	return ApiPackagesUploadHelmRequest{
@@ -3494,7 +3518,8 @@ func (a *PackagesApiService) PackagesUploadHelm(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return HelmPackageUpload
+//
+//	@return HelmPackageUpload
 func (a *PackagesApiService) PackagesUploadHelmExecute(r ApiPackagesUploadHelmRequest) (*HelmPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3640,10 +3665,10 @@ PackagesUploadHex Create a new Hex package
 
 Create a new Hex package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadHexRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadHexRequest
 */
 func (a *PackagesApiService) PackagesUploadHex(ctx context.Context, owner string, repo string) ApiPackagesUploadHexRequest {
 	return ApiPackagesUploadHexRequest{
@@ -3655,7 +3680,8 @@ func (a *PackagesApiService) PackagesUploadHex(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return HexPackageUpload
+//
+//	@return HexPackageUpload
 func (a *PackagesApiService) PackagesUploadHexExecute(r ApiPackagesUploadHexRequest) (*HexPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3801,10 +3827,10 @@ PackagesUploadLuarocks Create a new LuaRocks package
 
 Create a new LuaRocks package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadLuarocksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadLuarocksRequest
 */
 func (a *PackagesApiService) PackagesUploadLuarocks(ctx context.Context, owner string, repo string) ApiPackagesUploadLuarocksRequest {
 	return ApiPackagesUploadLuarocksRequest{
@@ -3816,7 +3842,8 @@ func (a *PackagesApiService) PackagesUploadLuarocks(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return LuarocksPackageUpload
+//
+//	@return LuarocksPackageUpload
 func (a *PackagesApiService) PackagesUploadLuarocksExecute(r ApiPackagesUploadLuarocksRequest) (*LuarocksPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3962,10 +3989,10 @@ PackagesUploadMaven Create a new Maven package
 
 Create a new Maven package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadMavenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadMavenRequest
 */
 func (a *PackagesApiService) PackagesUploadMaven(ctx context.Context, owner string, repo string) ApiPackagesUploadMavenRequest {
 	return ApiPackagesUploadMavenRequest{
@@ -3977,7 +4004,8 @@ func (a *PackagesApiService) PackagesUploadMaven(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return MavenPackageUpload
+//
+//	@return MavenPackageUpload
 func (a *PackagesApiService) PackagesUploadMavenExecute(r ApiPackagesUploadMavenRequest) (*MavenPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4123,10 +4151,10 @@ PackagesUploadNpm Create a new npm package
 
 Create a new npm package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadNpmRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadNpmRequest
 */
 func (a *PackagesApiService) PackagesUploadNpm(ctx context.Context, owner string, repo string) ApiPackagesUploadNpmRequest {
 	return ApiPackagesUploadNpmRequest{
@@ -4138,7 +4166,8 @@ func (a *PackagesApiService) PackagesUploadNpm(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return NpmPackageUpload
+//
+//	@return NpmPackageUpload
 func (a *PackagesApiService) PackagesUploadNpmExecute(r ApiPackagesUploadNpmRequest) (*NpmPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4284,10 +4313,10 @@ PackagesUploadNuget Create a new NuGet package
 
 Create a new NuGet package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadNugetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadNugetRequest
 */
 func (a *PackagesApiService) PackagesUploadNuget(ctx context.Context, owner string, repo string) ApiPackagesUploadNugetRequest {
 	return ApiPackagesUploadNugetRequest{
@@ -4299,7 +4328,8 @@ func (a *PackagesApiService) PackagesUploadNuget(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return NugetPackageUpload
+//
+//	@return NugetPackageUpload
 func (a *PackagesApiService) PackagesUploadNugetExecute(r ApiPackagesUploadNugetRequest) (*NugetPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4445,10 +4475,10 @@ PackagesUploadP2 Create a new P2 package
 
 Create a new P2 package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadP2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadP2Request
 */
 func (a *PackagesApiService) PackagesUploadP2(ctx context.Context, owner string, repo string) ApiPackagesUploadP2Request {
 	return ApiPackagesUploadP2Request{
@@ -4460,7 +4490,8 @@ func (a *PackagesApiService) PackagesUploadP2(ctx context.Context, owner string,
 }
 
 // Execute executes the request
-//  @return P2PackageUpload
+//
+//	@return P2PackageUpload
 func (a *PackagesApiService) PackagesUploadP2Execute(r ApiPackagesUploadP2Request) (*P2PackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4606,10 +4637,10 @@ PackagesUploadPython Create a new Python package
 
 Create a new Python package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadPythonRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadPythonRequest
 */
 func (a *PackagesApiService) PackagesUploadPython(ctx context.Context, owner string, repo string) ApiPackagesUploadPythonRequest {
 	return ApiPackagesUploadPythonRequest{
@@ -4621,7 +4652,8 @@ func (a *PackagesApiService) PackagesUploadPython(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return PythonPackageUpload
+//
+//	@return PythonPackageUpload
 func (a *PackagesApiService) PackagesUploadPythonExecute(r ApiPackagesUploadPythonRequest) (*PythonPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4767,10 +4799,10 @@ PackagesUploadRaw Create a new Raw package
 
 Create a new Raw package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadRawRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadRawRequest
 */
 func (a *PackagesApiService) PackagesUploadRaw(ctx context.Context, owner string, repo string) ApiPackagesUploadRawRequest {
 	return ApiPackagesUploadRawRequest{
@@ -4782,7 +4814,8 @@ func (a *PackagesApiService) PackagesUploadRaw(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return RawPackageUpload
+//
+//	@return RawPackageUpload
 func (a *PackagesApiService) PackagesUploadRawExecute(r ApiPackagesUploadRawRequest) (*RawPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4928,10 +4961,10 @@ PackagesUploadRpm Create a new RedHat package
 
 Create a new RedHat package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadRpmRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadRpmRequest
 */
 func (a *PackagesApiService) PackagesUploadRpm(ctx context.Context, owner string, repo string) ApiPackagesUploadRpmRequest {
 	return ApiPackagesUploadRpmRequest{
@@ -4943,7 +4976,8 @@ func (a *PackagesApiService) PackagesUploadRpm(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return RpmPackageUpload
+//
+//	@return RpmPackageUpload
 func (a *PackagesApiService) PackagesUploadRpmExecute(r ApiPackagesUploadRpmRequest) (*RpmPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5089,10 +5123,10 @@ PackagesUploadRuby Create a new Ruby package
 
 Create a new Ruby package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadRubyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadRubyRequest
 */
 func (a *PackagesApiService) PackagesUploadRuby(ctx context.Context, owner string, repo string) ApiPackagesUploadRubyRequest {
 	return ApiPackagesUploadRubyRequest{
@@ -5104,7 +5138,8 @@ func (a *PackagesApiService) PackagesUploadRuby(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return RubyPackageUpload
+//
+//	@return RubyPackageUpload
 func (a *PackagesApiService) PackagesUploadRubyExecute(r ApiPackagesUploadRubyRequest) (*RubyPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5250,10 +5285,10 @@ PackagesUploadSwift Create a new Swift package
 
 Create a new Swift package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadSwiftRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadSwiftRequest
 */
 func (a *PackagesApiService) PackagesUploadSwift(ctx context.Context, owner string, repo string) ApiPackagesUploadSwiftRequest {
 	return ApiPackagesUploadSwiftRequest{
@@ -5265,7 +5300,8 @@ func (a *PackagesApiService) PackagesUploadSwift(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return SwiftPackageUpload
+//
+//	@return SwiftPackageUpload
 func (a *PackagesApiService) PackagesUploadSwiftExecute(r ApiPackagesUploadSwiftRequest) (*SwiftPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5411,10 +5447,10 @@ PackagesUploadTerraform Create a new Terraform package
 
 Create a new Terraform package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadTerraformRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadTerraformRequest
 */
 func (a *PackagesApiService) PackagesUploadTerraform(ctx context.Context, owner string, repo string) ApiPackagesUploadTerraformRequest {
 	return ApiPackagesUploadTerraformRequest{
@@ -5426,7 +5462,8 @@ func (a *PackagesApiService) PackagesUploadTerraform(ctx context.Context, owner 
 }
 
 // Execute executes the request
-//  @return TerraformPackageUpload
+//
+//	@return TerraformPackageUpload
 func (a *PackagesApiService) PackagesUploadTerraformExecute(r ApiPackagesUploadTerraformRequest) (*TerraformPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5572,10 +5609,10 @@ PackagesUploadVagrant Create a new Vagrant package
 
 Create a new Vagrant package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesUploadVagrantRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesUploadVagrantRequest
 */
 func (a *PackagesApiService) PackagesUploadVagrant(ctx context.Context, owner string, repo string) ApiPackagesUploadVagrantRequest {
 	return ApiPackagesUploadVagrantRequest{
@@ -5587,7 +5624,8 @@ func (a *PackagesApiService) PackagesUploadVagrant(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return VagrantPackageUpload
+//
+//	@return VagrantPackageUpload
 func (a *PackagesApiService) PackagesUploadVagrantExecute(r ApiPackagesUploadVagrantRequest) (*VagrantPackageUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5733,10 +5771,10 @@ PackagesValidateUploadAlpine Validate parameters for create Alpine package
 
 Validate parameters for create Alpine package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadAlpineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadAlpineRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadAlpine(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadAlpineRequest {
 	return ApiPackagesValidateUploadAlpineRequest{
@@ -5883,10 +5921,10 @@ PackagesValidateUploadCargo Validate parameters for create Cargo package
 
 Validate parameters for create Cargo package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadCargoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadCargoRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadCargo(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadCargoRequest {
 	return ApiPackagesValidateUploadCargoRequest{
@@ -6033,10 +6071,10 @@ PackagesValidateUploadCocoapods Validate parameters for create CocoaPods package
 
 Validate parameters for create CocoaPods package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadCocoapodsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadCocoapodsRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadCocoapods(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadCocoapodsRequest {
 	return ApiPackagesValidateUploadCocoapodsRequest{
@@ -6183,10 +6221,10 @@ PackagesValidateUploadComposer Validate parameters for create Composer package
 
 Validate parameters for create Composer package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadComposerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadComposerRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadComposer(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadComposerRequest {
 	return ApiPackagesValidateUploadComposerRequest{
@@ -6333,10 +6371,10 @@ PackagesValidateUploadConan Validate parameters for create Conan package
 
 Validate parameters for create Conan package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadConanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadConanRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadConan(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadConanRequest {
 	return ApiPackagesValidateUploadConanRequest{
@@ -6483,10 +6521,10 @@ PackagesValidateUploadConda Validate parameters for create Conda package
 
 Validate parameters for create Conda package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadCondaRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadCondaRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadConda(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadCondaRequest {
 	return ApiPackagesValidateUploadCondaRequest{
@@ -6633,10 +6671,10 @@ PackagesValidateUploadCran Validate parameters for create CRAN package
 
 Validate parameters for create CRAN package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadCranRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadCranRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadCran(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadCranRequest {
 	return ApiPackagesValidateUploadCranRequest{
@@ -6783,10 +6821,10 @@ PackagesValidateUploadDart Validate parameters for create Dart package
 
 Validate parameters for create Dart package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadDartRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadDartRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadDart(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadDartRequest {
 	return ApiPackagesValidateUploadDartRequest{
@@ -6933,10 +6971,10 @@ PackagesValidateUploadDeb Validate parameters for create Debian package
 
 Validate parameters for create Debian package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadDebRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadDebRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadDeb(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadDebRequest {
 	return ApiPackagesValidateUploadDebRequest{
@@ -7083,10 +7121,10 @@ PackagesValidateUploadDocker Validate parameters for create Docker package
 
 Validate parameters for create Docker package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadDockerRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadDockerRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadDocker(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadDockerRequest {
 	return ApiPackagesValidateUploadDockerRequest{
@@ -7233,10 +7271,10 @@ PackagesValidateUploadGo Validate parameters for create Go package
 
 Validate parameters for create Go package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadGoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadGoRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadGo(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadGoRequest {
 	return ApiPackagesValidateUploadGoRequest{
@@ -7383,10 +7421,10 @@ PackagesValidateUploadHelm Validate parameters for create Helm package
 
 Validate parameters for create Helm package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadHelmRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadHelmRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadHelm(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadHelmRequest {
 	return ApiPackagesValidateUploadHelmRequest{
@@ -7533,10 +7571,10 @@ PackagesValidateUploadHex Validate parameters for create Hex package
 
 Validate parameters for create Hex package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadHexRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadHexRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadHex(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadHexRequest {
 	return ApiPackagesValidateUploadHexRequest{
@@ -7683,10 +7721,10 @@ PackagesValidateUploadLuarocks Validate parameters for create LuaRocks package
 
 Validate parameters for create LuaRocks package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadLuarocksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadLuarocksRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadLuarocks(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadLuarocksRequest {
 	return ApiPackagesValidateUploadLuarocksRequest{
@@ -7833,10 +7871,10 @@ PackagesValidateUploadMaven Validate parameters for create Maven package
 
 Validate parameters for create Maven package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadMavenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadMavenRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadMaven(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadMavenRequest {
 	return ApiPackagesValidateUploadMavenRequest{
@@ -7983,10 +8021,10 @@ PackagesValidateUploadNpm Validate parameters for create npm package
 
 Validate parameters for create npm package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadNpmRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadNpmRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadNpm(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadNpmRequest {
 	return ApiPackagesValidateUploadNpmRequest{
@@ -8133,10 +8171,10 @@ PackagesValidateUploadNuget Validate parameters for create NuGet package
 
 Validate parameters for create NuGet package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadNugetRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadNugetRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadNuget(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadNugetRequest {
 	return ApiPackagesValidateUploadNugetRequest{
@@ -8283,10 +8321,10 @@ PackagesValidateUploadP2 Validate parameters for create P2 package
 
 Validate parameters for create P2 package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadP2Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadP2Request
 */
 func (a *PackagesApiService) PackagesValidateUploadP2(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadP2Request {
 	return ApiPackagesValidateUploadP2Request{
@@ -8433,10 +8471,10 @@ PackagesValidateUploadPython Validate parameters for create Python package
 
 Validate parameters for create Python package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadPythonRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadPythonRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadPython(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadPythonRequest {
 	return ApiPackagesValidateUploadPythonRequest{
@@ -8583,10 +8621,10 @@ PackagesValidateUploadRaw Validate parameters for create Raw package
 
 Validate parameters for create Raw package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadRawRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadRawRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadRaw(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadRawRequest {
 	return ApiPackagesValidateUploadRawRequest{
@@ -8733,10 +8771,10 @@ PackagesValidateUploadRpm Validate parameters for create RedHat package
 
 Validate parameters for create RedHat package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadRpmRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadRpmRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadRpm(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadRpmRequest {
 	return ApiPackagesValidateUploadRpmRequest{
@@ -8883,10 +8921,10 @@ PackagesValidateUploadRuby Validate parameters for create Ruby package
 
 Validate parameters for create Ruby package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadRubyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadRubyRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadRuby(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadRubyRequest {
 	return ApiPackagesValidateUploadRubyRequest{
@@ -9033,10 +9071,10 @@ PackagesValidateUploadSwift Validate parameters for create Swift package
 
 Validate parameters for create Swift package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadSwiftRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadSwiftRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadSwift(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadSwiftRequest {
 	return ApiPackagesValidateUploadSwiftRequest{
@@ -9183,10 +9221,10 @@ PackagesValidateUploadTerraform Validate parameters for create Terraform package
 
 Validate parameters for create Terraform package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadTerraformRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadTerraformRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadTerraform(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadTerraformRequest {
 	return ApiPackagesValidateUploadTerraformRequest{
@@ -9333,10 +9371,10 @@ PackagesValidateUploadVagrant Validate parameters for create Vagrant package
 
 Validate parameters for create Vagrant package
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiPackagesValidateUploadVagrantRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiPackagesValidateUploadVagrantRequest
 */
 func (a *PackagesApiService) PackagesValidateUploadVagrant(ctx context.Context, owner string, repo string) ApiPackagesValidateUploadVagrantRequest {
 	return ApiPackagesValidateUploadVagrantRequest{

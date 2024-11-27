@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the ServiceTeams type satisfies the MappedNullable interface at compile time
@@ -23,8 +25,10 @@ type ServiceTeams struct {
 	// The team role associated with the service
 	Role *string `json:"role,omitempty"`
 	// The teams associated with the service
-	Slug string `json:"slug"`
+	Slug string `json:"slug" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 }
+
+type _ServiceTeams ServiceTeams
 
 // NewServiceTeams instantiates a new ServiceTeams object
 // This constructor will assign default values to properties that have it defined,
@@ -119,6 +123,43 @@ func (o ServiceTeams) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["slug"] = o.Slug
 	return toSerialize, nil
+}
+
+func (o *ServiceTeams) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"slug",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varServiceTeams := _ServiceTeams{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varServiceTeams)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceTeams(varServiceTeams)
+
+	return err
 }
 
 type NullableServiceTeams struct {

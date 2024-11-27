@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -38,9 +38,9 @@ UsersProfileRead Provide a brief for the specified user (if any).
 
 Provide a brief for the specified user (if any).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param slug
- @return ApiUsersProfileReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param slug
+	@return ApiUsersProfileReadRequest
 */
 func (a *UsersApiService) UsersProfileRead(ctx context.Context, slug string) ApiUsersProfileReadRequest {
 	return ApiUsersProfileReadRequest{
@@ -51,7 +51,8 @@ func (a *UsersApiService) UsersProfileRead(ctx context.Context, slug string) Api
 }
 
 // Execute executes the request
-//  @return UserProfile
+//
+//	@return UserProfile
 func (a *UsersApiService) UsersProfileReadExecute(r ApiUsersProfileReadRequest) (*UserProfile, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

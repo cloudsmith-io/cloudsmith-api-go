@@ -24,29 +24,29 @@ View for listing entitlement token metrics, across an account.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
-    finish := "finish_example" // string | Include metrics upto and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
-    start := "start_example" // string | Include metrics from and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
-    tokens := "tokens_example" // string | A comma seperated list of tokens (slug perm) to include in the results. (optional)
+	owner := "owner_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	finish := "finish_example" // string | Include metrics upto and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
+	start := "start_example" // string | Include metrics from and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
+	tokens := "tokens_example" // string | A comma seperated list of tokens (slug perm) to include in the results. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MetricsApi.MetricsEntitlementsAccountList(context.Background(), owner).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsEntitlementsAccountList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `MetricsEntitlementsAccountList`: EntitlementUsageMetrics
-    fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsEntitlementsAccountList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MetricsApi.MetricsEntitlementsAccountList(context.Background(), owner).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsEntitlementsAccountList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `MetricsEntitlementsAccountList`: EntitlementUsageMetrics
+	fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsEntitlementsAccountList`: %v\n", resp)
 }
 ```
 
@@ -104,30 +104,30 @@ View for listing entitlement token metrics, for a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
-    finish := "finish_example" // string | Include metrics upto and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
-    start := "start_example" // string | Include metrics from and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
-    tokens := "tokens_example" // string | A comma seperated list of tokens (slug perm) to include in the results. (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	finish := "finish_example" // string | Include metrics upto and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
+	start := "start_example" // string | Include metrics from and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
+	tokens := "tokens_example" // string | A comma seperated list of tokens (slug perm) to include in the results. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MetricsApi.MetricsEntitlementsRepoList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsEntitlementsRepoList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `MetricsEntitlementsRepoList`: EntitlementUsageMetrics
-    fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsEntitlementsRepoList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MetricsApi.MetricsEntitlementsRepoList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Finish(finish).Start(start).Tokens(tokens).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsEntitlementsRepoList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `MetricsEntitlementsRepoList`: EntitlementUsageMetrics
+	fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsEntitlementsRepoList`: %v\n", resp)
 }
 ```
 
@@ -187,30 +187,30 @@ View for listing package usage metrics, for a repository.
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
 )
 
 func main() {
-    owner := "owner_example" // string | 
-    repo := "repo_example" // string | 
-    page := int64(56) // int64 | A page number within the paginated result set. (optional)
-    pageSize := int64(56) // int64 | Number of results to return per page. (optional)
-    finish := "finish_example" // string | Include metrics upto and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
-    packages := "packages_example" // string | A comma seperated list of packages (slug perm) to include in the results. (optional)
-    start := "start_example" // string | Include metrics from and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	finish := "finish_example" // string | Include metrics upto and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
+	packages := "packages_example" // string | A comma seperated list of packages (slug perm) to include in the results. (optional)
+	start := "start_example" // string | Include metrics from and including this UTC date or UTC datetime. For example '2020-12-31' or '2021-12-13T00:00:00Z'. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MetricsApi.MetricsPackagesList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Finish(finish).Packages(packages).Start(start).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsPackagesList``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `MetricsPackagesList`: PackageUsageMetrics
-    fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsPackagesList`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MetricsApi.MetricsPackagesList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Finish(finish).Packages(packages).Start(start).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MetricsApi.MetricsPackagesList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `MetricsPackagesList`: PackageUsageMetrics
+	fmt.Fprintf(os.Stdout, "Response from `MetricsApi.MetricsPackagesList`: %v\n", resp)
 }
 ```
 

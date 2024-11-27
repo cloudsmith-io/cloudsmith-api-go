@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -27,13 +27,13 @@ type MavenUpstreamRequestPatch struct {
 	// Username to provide with requests to upstream.
 	AuthUsername NullableString `json:"auth_username,omitempty"`
 	// The key for extra header #1 to send to upstream.
-	ExtraHeader1 NullableString `json:"extra_header_1,omitempty"`
+	ExtraHeader1 NullableString `json:"extra_header_1,omitempty" validate:"regexp=^[-\\\\w]+$"`
 	// The key for extra header #2 to send to upstream.
-	ExtraHeader2 NullableString `json:"extra_header_2,omitempty"`
+	ExtraHeader2 NullableString `json:"extra_header_2,omitempty" validate:"regexp=^[-\\\\w]+$"`
 	// The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue1 NullableString `json:"extra_value_1,omitempty"`
+	ExtraValue1 NullableString `json:"extra_value_1,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue2 NullableString `json:"extra_value_2,omitempty"`
+	ExtraValue2 NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// A public GPG key to associate with packages found on this upstream. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
 	GpgKeyInline NullableString `json:"gpg_key_inline,omitempty"`
 	// When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
@@ -45,7 +45,7 @@ type MavenUpstreamRequestPatch struct {
 	// The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode.
 	Mode *string `json:"mode,omitempty"`
 	// A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" validate:"regexp=^\\\\w[\\\\w \\\\-'\\\\.\\/()]+$"`
 	// Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date.
 	Priority *int64 `json:"priority,omitempty"`
 	// The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.

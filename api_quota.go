@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -38,9 +38,9 @@ QuotaHistoryRead Quota history for a given namespace.
 
 Quota history for a given namespace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @return ApiQuotaHistoryReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@return ApiQuotaHistoryReadRequest
 */
 func (a *QuotaApiService) QuotaHistoryRead(ctx context.Context, owner string) ApiQuotaHistoryReadRequest {
 	return ApiQuotaHistoryReadRequest{
@@ -51,7 +51,8 @@ func (a *QuotaApiService) QuotaHistoryRead(ctx context.Context, owner string) Ap
 }
 
 // Execute executes the request
-//  @return QuotaHistory
+//
+//	@return QuotaHistory
 func (a *QuotaApiService) QuotaHistoryReadExecute(r ApiQuotaHistoryReadRequest) (*QuotaHistory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -176,9 +177,9 @@ QuotaOssHistoryRead Open-source Quota history for a given namespace.
 
 Open-source Quota history for a given namespace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @return ApiQuotaOssHistoryReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@return ApiQuotaOssHistoryReadRequest
 */
 func (a *QuotaApiService) QuotaOssHistoryRead(ctx context.Context, owner string) ApiQuotaOssHistoryReadRequest {
 	return ApiQuotaOssHistoryReadRequest{
@@ -189,7 +190,8 @@ func (a *QuotaApiService) QuotaOssHistoryRead(ctx context.Context, owner string)
 }
 
 // Execute executes the request
-//  @return QuotaHistory
+//
+//	@return QuotaHistory
 func (a *QuotaApiService) QuotaOssHistoryReadExecute(r ApiQuotaOssHistoryReadRequest) (*QuotaHistory, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -314,9 +316,9 @@ QuotaOssRead Open-source Quota usage for a given namespace.
 
 Open-source Quota usage for a given namespace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @return ApiQuotaOssReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@return ApiQuotaOssReadRequest
 */
 func (a *QuotaApiService) QuotaOssRead(ctx context.Context, owner string) ApiQuotaOssReadRequest {
 	return ApiQuotaOssReadRequest{
@@ -327,7 +329,8 @@ func (a *QuotaApiService) QuotaOssRead(ctx context.Context, owner string) ApiQuo
 }
 
 // Execute executes the request
-//  @return Quota
+//
+//	@return Quota
 func (a *QuotaApiService) QuotaOssReadExecute(r ApiQuotaOssReadRequest) (*Quota, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -452,9 +455,9 @@ QuotaRead Quota usage for a given namespace.
 
 Quota usage for a given namespace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @return ApiQuotaReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@return ApiQuotaReadRequest
 */
 func (a *QuotaApiService) QuotaRead(ctx context.Context, owner string) ApiQuotaReadRequest {
 	return ApiQuotaReadRequest{
@@ -465,7 +468,8 @@ func (a *QuotaApiService) QuotaRead(ctx context.Context, owner string) ApiQuotaR
 }
 
 // Execute executes the request
-//  @return Quota
+//
+//	@return Quota
 func (a *QuotaApiService) QuotaReadExecute(r ApiQuotaReadRequest) (*Quota, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

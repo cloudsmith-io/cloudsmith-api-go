@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -71,6 +73,8 @@ type VagrantPackageUpload struct {
 	OriginRepositoryUrl *string `json:"origin_repository_url,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
+	// Whether or not the package has violated any policy.
+	PolicyViolated *bool `json:"policy_violated,omitempty"`
 	// The virtual machine provider for the box.
 	Provider string `json:"provider"`
 	// The release of the package version (if any).
@@ -90,8 +94,8 @@ type VagrantPackageUpload struct {
 	// The calculated size of the package.
 	Size *int64 `json:"size,omitempty"`
 	// The public unique identifier for the package.
-	Slug     *string `json:"slug,omitempty"`
-	SlugPerm *string `json:"slug_perm,omitempty"`
+	Slug     *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// The synchronisation (in progress) stage of the package.
 	Stage    *int64  `json:"stage,omitempty"`
 	StageStr *string `json:"stage_str,omitempty"`
@@ -124,6 +128,8 @@ type VagrantPackageUpload struct {
 	VersionOrig                 *string `json:"version_orig,omitempty"`
 	VulnerabilityScanResultsUrl *string `json:"vulnerability_scan_results_url,omitempty"`
 }
+
+type _VagrantPackageUpload VagrantPackageUpload
 
 // NewVagrantPackageUpload instantiates a new VagrantPackageUpload object
 // This constructor will assign default values to properties that have it defined,
@@ -1579,6 +1585,38 @@ func (o *VagrantPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
+// GetPolicyViolated returns the PolicyViolated field value if set, zero value otherwise.
+func (o *VagrantPackageUpload) GetPolicyViolated() bool {
+	if o == nil || IsNil(o.PolicyViolated) {
+		var ret bool
+		return ret
+	}
+	return *o.PolicyViolated
+}
+
+// GetPolicyViolatedOk returns a tuple with the PolicyViolated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VagrantPackageUpload) GetPolicyViolatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.PolicyViolated) {
+		return nil, false
+	}
+	return o.PolicyViolated, true
+}
+
+// HasPolicyViolated returns a boolean if a field has been set.
+func (o *VagrantPackageUpload) HasPolicyViolated() bool {
+	if o != nil && !IsNil(o.PolicyViolated) {
+		return true
+	}
+
+	return false
+}
+
+// SetPolicyViolated gets a reference to the given bool and assigns it to the PolicyViolated field.
+func (o *VagrantPackageUpload) SetPolicyViolated(v bool) {
+	o.PolicyViolated = &v
+}
+
 // GetProvider returns the Provider field value
 func (o *VagrantPackageUpload) GetProvider() string {
 	if o == nil {
@@ -2887,6 +2925,9 @@ func (o VagrantPackageUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
 	}
+	if !IsNil(o.PolicyViolated) {
+		toSerialize["policy_violated"] = o.PolicyViolated
+	}
 	toSerialize["provider"] = o.Provider
 	if o.Release.IsSet() {
 		toSerialize["release"] = o.Release.Get()
@@ -2986,6 +3027,45 @@ func (o VagrantPackageUpload) ToMap() (map[string]interface{}, error) {
 		toSerialize["vulnerability_scan_results_url"] = o.VulnerabilityScanResultsUrl
 	}
 	return toSerialize, nil
+}
+
+func (o *VagrantPackageUpload) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"provider",
+		"version",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varVagrantPackageUpload := _VagrantPackageUpload{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varVagrantPackageUpload)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VagrantPackageUpload(varVagrantPackageUpload)
+
+	return err
 }
 
 type NullableVagrantPackageUpload struct {

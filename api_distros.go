@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -37,8 +37,8 @@ DistrosList Get a list of all supported distributions.
 
 Get a list of all supported distributions.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDistrosListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDistrosListRequest
 */
 func (a *DistrosApiService) DistrosList(ctx context.Context) ApiDistrosListRequest {
 	return ApiDistrosListRequest{
@@ -48,7 +48,8 @@ func (a *DistrosApiService) DistrosList(ctx context.Context) ApiDistrosListReque
 }
 
 // Execute executes the request
-//  @return []DistributionFull
+//
+//	@return []DistributionFull
 func (a *DistrosApiService) DistrosListExecute(r ApiDistrosListRequest) ([]DistributionFull, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -172,9 +173,9 @@ DistrosRead View for viewing/listing distributions.
 
 View for viewing/listing distributions.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param slug
- @return ApiDistrosReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param slug
+	@return ApiDistrosReadRequest
 */
 func (a *DistrosApiService) DistrosRead(ctx context.Context, slug string) ApiDistrosReadRequest {
 	return ApiDistrosReadRequest{
@@ -185,7 +186,8 @@ func (a *DistrosApiService) DistrosRead(ctx context.Context, slug string) ApiDis
 }
 
 // Execute executes the request
-//  @return DistributionFull
+//
+//	@return DistributionFull
 func (a *DistrosApiService) DistrosReadExecute(r ApiDistrosReadRequest) (*DistributionFull, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

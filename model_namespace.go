@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -21,8 +21,8 @@ var _ MappedNullable = &Namespace{}
 // Namespace struct for Namespace
 type Namespace struct {
 	Name     *string `json:"name,omitempty"`
-	Slug     *string `json:"slug,omitempty"`
-	SlugPerm *string `json:"slug_perm,omitempty"`
+	Slug     *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	TypeName *string `json:"type_name,omitempty"`
 }
 

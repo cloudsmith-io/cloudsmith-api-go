@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -39,10 +39,10 @@ ApiReposGeoipStatus Retrieve the GeoIP status for this repository.
 
 Retrieve the GeoIP status for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiApiReposGeoipStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiApiReposGeoipStatusRequest
 */
 func (a *ReposApiService) ApiReposGeoipStatus(ctx context.Context, owner string, identifier string) ApiApiReposGeoipStatusRequest {
 	return ApiApiReposGeoipStatusRequest{
@@ -54,7 +54,8 @@ func (a *ReposApiService) ApiReposGeoipStatus(ctx context.Context, owner string,
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIpStatus
+//
+//	@return RepositoryGeoIpStatus
 func (a *ReposApiService) ApiReposGeoipStatusExecute(r ApiApiReposGeoipStatusRequest) (*RepositoryGeoIpStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -209,10 +210,10 @@ RepoRetentionPartialUpdate Update the retention rules for the repository.
 
 Update the retention rules for the repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiRepoRetentionPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiRepoRetentionPartialUpdateRequest
 */
 func (a *ReposApiService) RepoRetentionPartialUpdate(ctx context.Context, owner string, repo string) ApiRepoRetentionPartialUpdateRequest {
 	return ApiRepoRetentionPartialUpdateRequest{
@@ -224,7 +225,8 @@ func (a *ReposApiService) RepoRetentionPartialUpdate(ctx context.Context, owner 
 }
 
 // Execute executes the request
-//  @return RepositoryRetentionRules
+//
+//	@return RepositoryRetentionRules
 func (a *ReposApiService) RepoRetentionPartialUpdateExecute(r ApiRepoRetentionPartialUpdateRequest) (*RepositoryRetentionRules, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -364,10 +366,10 @@ RepoRetentionRead Retrieve the retention rules for the repository.
 
 Retrieve the retention rules for the repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiRepoRetentionReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiRepoRetentionReadRequest
 */
 func (a *ReposApiService) RepoRetentionRead(ctx context.Context, owner string, repo string) ApiRepoRetentionReadRequest {
 	return ApiRepoRetentionReadRequest{
@@ -379,7 +381,8 @@ func (a *ReposApiService) RepoRetentionRead(ctx context.Context, owner string, r
 }
 
 // Execute executes the request
-//  @return RepositoryRetentionRules
+//
+//	@return RepositoryRetentionRules
 func (a *ReposApiService) RepoRetentionReadExecute(r ApiRepoRetentionReadRequest) (*RepositoryRetentionRules, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -522,9 +525,9 @@ ReposCreate Create a new repository in a given namespace.
 
 Create a new repository in a given namespace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @return ApiReposCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@return ApiReposCreateRequest
 */
 func (a *ReposApiService) ReposCreate(ctx context.Context, owner string) ApiReposCreateRequest {
 	return ApiReposCreateRequest{
@@ -535,7 +538,8 @@ func (a *ReposApiService) ReposCreate(ctx context.Context, owner string) ApiRepo
 }
 
 // Execute executes the request
-//  @return RepositoryCreate
+//
+//	@return RepositoryCreate
 func (a *ReposApiService) ReposCreateExecute(r ApiReposCreateRequest) (*RepositoryCreate, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -674,10 +678,10 @@ ReposDelete Delete a repository in a given namespace.
 
 Delete a repository in a given namespace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposDeleteRequest
 */
 func (a *ReposApiService) ReposDelete(ctx context.Context, owner string, identifier string) ApiReposDeleteRequest {
 	return ApiReposDeleteRequest{
@@ -822,10 +826,10 @@ ReposEcdsaCreate Set the active ECDSA key for the Repository.
 
 Set the active ECDSA key for the Repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposEcdsaCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposEcdsaCreateRequest
 */
 func (a *ReposApiService) ReposEcdsaCreate(ctx context.Context, owner string, identifier string) ApiReposEcdsaCreateRequest {
 	return ApiReposEcdsaCreateRequest{
@@ -837,7 +841,8 @@ func (a *ReposApiService) ReposEcdsaCreate(ctx context.Context, owner string, id
 }
 
 // Execute executes the request
-//  @return RepositoryEcdsaKey
+//
+//	@return RepositoryEcdsaKey
 func (a *ReposApiService) ReposEcdsaCreateExecute(r ApiReposEcdsaCreateRequest) (*RepositoryEcdsaKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -988,10 +993,10 @@ ReposEcdsaList Retrieve the active ECDSA key for the Repository.
 
 Retrieve the active ECDSA key for the Repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposEcdsaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposEcdsaListRequest
 */
 func (a *ReposApiService) ReposEcdsaList(ctx context.Context, owner string, identifier string) ApiReposEcdsaListRequest {
 	return ApiReposEcdsaListRequest{
@@ -1003,7 +1008,8 @@ func (a *ReposApiService) ReposEcdsaList(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryEcdsaKey
+//
+//	@return RepositoryEcdsaKey
 func (a *ReposApiService) ReposEcdsaListExecute(r ApiReposEcdsaListRequest) (*RepositoryEcdsaKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1130,10 +1136,10 @@ ReposEcdsaRegenerate Regenerate ECDSA Key for the Repository.
 
 Regenerate ECDSA Key for the Repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposEcdsaRegenerateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposEcdsaRegenerateRequest
 */
 func (a *ReposApiService) ReposEcdsaRegenerate(ctx context.Context, owner string, identifier string) ApiReposEcdsaRegenerateRequest {
 	return ApiReposEcdsaRegenerateRequest{
@@ -1145,7 +1151,8 @@ func (a *ReposApiService) ReposEcdsaRegenerate(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return RepositoryEcdsaKey
+//
+//	@return RepositoryEcdsaKey
 func (a *ReposApiService) ReposEcdsaRegenerateExecute(r ApiReposEcdsaRegenerateRequest) (*RepositoryEcdsaKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1278,10 +1285,10 @@ ReposGeoipDisable Disable GeoIP for this repository.
 
 Disable GeoIP for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposGeoipDisableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposGeoipDisableRequest
 */
 func (a *ReposApiService) ReposGeoipDisable(ctx context.Context, owner string, identifier string) ApiReposGeoipDisableRequest {
 	return ApiReposGeoipDisableRequest{
@@ -1439,10 +1446,10 @@ ReposGeoipEnable Enable GeoIP for this repository.
 
 Enable GeoIP for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposGeoipEnableRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposGeoipEnableRequest
 */
 func (a *ReposApiService) ReposGeoipEnable(ctx context.Context, owner string, identifier string) ApiReposGeoipEnableRequest {
 	return ApiReposGeoipEnableRequest{
@@ -1600,10 +1607,10 @@ ReposGeoipPartialUpdate Partially update repository geoip rules.
 
 Partially update repository geoip rules.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposGeoipPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposGeoipPartialUpdateRequest
 */
 func (a *ReposApiService) ReposGeoipPartialUpdate(ctx context.Context, owner string, identifier string) ApiReposGeoipPartialUpdateRequest {
 	return ApiReposGeoipPartialUpdateRequest{
@@ -1615,7 +1622,8 @@ func (a *ReposApiService) ReposGeoipPartialUpdate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIpRules
+//
+//	@return RepositoryGeoIpRules
 func (a *ReposApiService) ReposGeoipPartialUpdateExecute(r ApiReposGeoipPartialUpdateRequest) (*RepositoryGeoIpRules, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -1766,10 +1774,10 @@ ReposGeoipRead List all repository geoip rules.
 
 List all repository geoip rules.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposGeoipReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposGeoipReadRequest
 */
 func (a *ReposApiService) ReposGeoipRead(ctx context.Context, owner string, identifier string) ApiReposGeoipReadRequest {
 	return ApiReposGeoipReadRequest{
@@ -1781,7 +1789,8 @@ func (a *ReposApiService) ReposGeoipRead(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIpRules
+//
+//	@return RepositoryGeoIpRules
 func (a *ReposApiService) ReposGeoipReadExecute(r ApiReposGeoipReadRequest) (*RepositoryGeoIpRules, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -1936,10 +1945,10 @@ ReposGeoipTest Test a list of IP addresses against the repository's current GeoI
 
 Test a list of IP addresses against the repository's current GeoIP rules.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposGeoipTestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposGeoipTestRequest
 */
 func (a *ReposApiService) ReposGeoipTest(ctx context.Context, owner string, identifier string) ApiReposGeoipTestRequest {
 	return ApiReposGeoipTestRequest{
@@ -1951,7 +1960,8 @@ func (a *ReposApiService) ReposGeoipTest(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIpTestAddressResponse
+//
+//	@return RepositoryGeoIpTestAddressResponse
 func (a *ReposApiService) ReposGeoipTestExecute(r ApiReposGeoipTestRequest) (*RepositoryGeoIpTestAddressResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2108,10 +2118,10 @@ ReposGeoipUpdate Replace repository geoip rules.
 
 Replace repository geoip rules.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposGeoipUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposGeoipUpdateRequest
 */
 func (a *ReposApiService) ReposGeoipUpdate(ctx context.Context, owner string, identifier string) ApiReposGeoipUpdateRequest {
 	return ApiReposGeoipUpdateRequest{
@@ -2123,7 +2133,8 @@ func (a *ReposApiService) ReposGeoipUpdate(ctx context.Context, owner string, id
 }
 
 // Execute executes the request
-//  @return RepositoryGeoIpRules
+//
+//	@return RepositoryGeoIpRules
 func (a *ReposApiService) ReposGeoipUpdateExecute(r ApiReposGeoipUpdateRequest) (*RepositoryGeoIpRules, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -2280,10 +2291,10 @@ ReposGpgCreate Set the active GPG key for the Repository.
 
 Set the active GPG key for the Repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposGpgCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposGpgCreateRequest
 */
 func (a *ReposApiService) ReposGpgCreate(ctx context.Context, owner string, identifier string) ApiReposGpgCreateRequest {
 	return ApiReposGpgCreateRequest{
@@ -2295,7 +2306,8 @@ func (a *ReposApiService) ReposGpgCreate(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryGpgKey
+//
+//	@return RepositoryGpgKey
 func (a *ReposApiService) ReposGpgCreateExecute(r ApiReposGpgCreateRequest) (*RepositoryGpgKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2446,10 +2458,10 @@ ReposGpgList Retrieve the active GPG key for the Repository.
 
 Retrieve the active GPG key for the Repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposGpgListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposGpgListRequest
 */
 func (a *ReposApiService) ReposGpgList(ctx context.Context, owner string, identifier string) ApiReposGpgListRequest {
 	return ApiReposGpgListRequest{
@@ -2461,7 +2473,8 @@ func (a *ReposApiService) ReposGpgList(ctx context.Context, owner string, identi
 }
 
 // Execute executes the request
-//  @return RepositoryGpgKey
+//
+//	@return RepositoryGpgKey
 func (a *ReposApiService) ReposGpgListExecute(r ApiReposGpgListRequest) (*RepositoryGpgKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2588,10 +2601,10 @@ ReposGpgRegenerate Regenerate GPG Key for the Repository.
 
 Regenerate GPG Key for the Repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposGpgRegenerateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposGpgRegenerateRequest
 */
 func (a *ReposApiService) ReposGpgRegenerate(ctx context.Context, owner string, identifier string) ApiReposGpgRegenerateRequest {
 	return ApiReposGpgRegenerateRequest{
@@ -2603,7 +2616,8 @@ func (a *ReposApiService) ReposGpgRegenerate(ctx context.Context, owner string, 
 }
 
 // Execute executes the request
-//  @return RepositoryGpgKey
+//
+//	@return RepositoryGpgKey
 func (a *ReposApiService) ReposGpgRegenerateExecute(r ApiReposGpgRegenerateRequest) (*RepositoryGpgKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -2743,9 +2757,9 @@ ReposNamespaceList Get a list of all repositories within a namespace.
 
 Get a list of all repositories within a namespace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @return ApiReposNamespaceListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@return ApiReposNamespaceListRequest
 */
 func (a *ReposApiService) ReposNamespaceList(ctx context.Context, owner string) ApiReposNamespaceListRequest {
 	return ApiReposNamespaceListRequest{
@@ -2756,7 +2770,8 @@ func (a *ReposApiService) ReposNamespaceList(ctx context.Context, owner string) 
 }
 
 // Execute executes the request
-//  @return []Repository
+//
+//	@return []Repository
 func (a *ReposApiService) ReposNamespaceListExecute(r ApiReposNamespaceListRequest) ([]Repository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -2778,10 +2793,10 @@ func (a *ReposApiService) ReposNamespaceListExecute(r ApiReposNamespaceListReque
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2905,10 +2920,10 @@ ReposPartialUpdate Update details about a repository in a given namespace.
 
 Update details about a repository in a given namespace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposPartialUpdateRequest
 */
 func (a *ReposApiService) ReposPartialUpdate(ctx context.Context, owner string, identifier string) ApiReposPartialUpdateRequest {
 	return ApiReposPartialUpdateRequest{
@@ -2920,7 +2935,8 @@ func (a *ReposApiService) ReposPartialUpdate(ctx context.Context, owner string, 
 }
 
 // Execute executes the request
-//  @return Repository
+//
+//	@return Repository
 func (a *ReposApiService) ReposPartialUpdateExecute(r ApiReposPartialUpdateRequest) (*Repository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -3074,10 +3090,10 @@ ReposPrivilegesList List all explicity created privileges for the repository.
 
 List all explicity created privileges for the repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposPrivilegesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposPrivilegesListRequest
 */
 func (a *ReposApiService) ReposPrivilegesList(ctx context.Context, owner string, identifier string) ApiReposPrivilegesListRequest {
 	return ApiReposPrivilegesListRequest{
@@ -3089,7 +3105,8 @@ func (a *ReposApiService) ReposPrivilegesList(ctx context.Context, owner string,
 }
 
 // Execute executes the request
-//  @return RepositoryPrivilegeInput
+//
+//	@return RepositoryPrivilegeInput
 func (a *ReposApiService) ReposPrivilegesListExecute(r ApiReposPrivilegesListRequest) (*RepositoryPrivilegeInput, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3112,10 +3129,10 @@ func (a *ReposApiService) ReposPrivilegesListExecute(r ApiReposPrivilegesListReq
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3239,10 +3256,10 @@ ReposPrivilegesPartialUpdate Modify privileges for the repository.
 
 Modify privileges for the repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposPrivilegesPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposPrivilegesPartialUpdateRequest
 */
 func (a *ReposApiService) ReposPrivilegesPartialUpdate(ctx context.Context, owner string, identifier string) ApiReposPrivilegesPartialUpdateRequest {
 	return ApiReposPrivilegesPartialUpdateRequest{
@@ -3389,10 +3406,10 @@ ReposPrivilegesUpdate Replace all existing repository privileges with those spec
 
 Replace all existing repository privileges with those specified.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposPrivilegesUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposPrivilegesUpdateRequest
 */
 func (a *ReposApiService) ReposPrivilegesUpdate(ctx context.Context, owner string, identifier string) ApiReposPrivilegesUpdateRequest {
 	return ApiReposPrivilegesUpdateRequest{
@@ -3533,10 +3550,10 @@ ReposRead Get a specific repository.
 
 Get a specific repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposReadRequest
 */
 func (a *ReposApiService) ReposRead(ctx context.Context, owner string, identifier string) ApiReposReadRequest {
 	return ApiReposReadRequest{
@@ -3548,7 +3565,8 @@ func (a *ReposApiService) ReposRead(ctx context.Context, owner string, identifie
 }
 
 // Execute executes the request
-//  @return Repository
+//
+//	@return Repository
 func (a *ReposApiService) ReposReadExecute(r ApiReposReadRequest) (*Repository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -3692,10 +3710,10 @@ ReposRsaCreate Set the active RSA key for the Repository.
 
 Set the active RSA key for the Repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposRsaCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposRsaCreateRequest
 */
 func (a *ReposApiService) ReposRsaCreate(ctx context.Context, owner string, identifier string) ApiReposRsaCreateRequest {
 	return ApiReposRsaCreateRequest{
@@ -3707,7 +3725,8 @@ func (a *ReposApiService) ReposRsaCreate(ctx context.Context, owner string, iden
 }
 
 // Execute executes the request
-//  @return RepositoryRsaKey
+//
+//	@return RepositoryRsaKey
 func (a *ReposApiService) ReposRsaCreateExecute(r ApiReposRsaCreateRequest) (*RepositoryRsaKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -3858,10 +3877,10 @@ ReposRsaList Retrieve the active RSA key for the Repository.
 
 Retrieve the active RSA key for the Repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposRsaListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposRsaListRequest
 */
 func (a *ReposApiService) ReposRsaList(ctx context.Context, owner string, identifier string) ApiReposRsaListRequest {
 	return ApiReposRsaListRequest{
@@ -3873,7 +3892,8 @@ func (a *ReposApiService) ReposRsaList(ctx context.Context, owner string, identi
 }
 
 // Execute executes the request
-//  @return RepositoryRsaKey
+//
+//	@return RepositoryRsaKey
 func (a *ReposApiService) ReposRsaListExecute(r ApiReposRsaListRequest) (*RepositoryRsaKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4000,10 +4020,10 @@ ReposRsaRegenerate Regenerate RSA Key for the Repository.
 
 Regenerate RSA Key for the Repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposRsaRegenerateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposRsaRegenerateRequest
 */
 func (a *ReposApiService) ReposRsaRegenerate(ctx context.Context, owner string, identifier string) ApiReposRsaRegenerateRequest {
 	return ApiReposRsaRegenerateRequest{
@@ -4015,7 +4035,8 @@ func (a *ReposApiService) ReposRsaRegenerate(ctx context.Context, owner string, 
 }
 
 // Execute executes the request
-//  @return RepositoryRsaKey
+//
+//	@return RepositoryRsaKey
 func (a *ReposApiService) ReposRsaRegenerateExecute(r ApiReposRsaRegenerateRequest) (*RepositoryRsaKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4148,10 +4169,10 @@ ReposTransferRegion Transfer a repository to a different region.
 
 Transfer a repository to a different region.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiReposTransferRegionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiReposTransferRegionRequest
 */
 func (a *ReposApiService) ReposTransferRegion(ctx context.Context, owner string, repo string) ApiReposTransferRegionRequest {
 	return ApiReposTransferRegionRequest{
@@ -4309,10 +4330,10 @@ ReposUpstreamComposerCreate Create a Composer upstream config for this repositor
 
 Create a Composer upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamComposerCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamComposerCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamComposerCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamComposerCreateRequest {
 	return ApiReposUpstreamComposerCreateRequest{
@@ -4324,7 +4345,8 @@ func (a *ReposApiService) ReposUpstreamComposerCreate(ctx context.Context, owner
 }
 
 // Execute executes the request
-//  @return ComposerUpstream
+//
+//	@return ComposerUpstream
 func (a *ReposApiService) ReposUpstreamComposerCreateExecute(r ApiReposUpstreamComposerCreateRequest) (*ComposerUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -4454,11 +4476,11 @@ ReposUpstreamComposerDelete Delete a Composer upstream config for this repositor
 
 Delete a Composer upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamComposerDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamComposerDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamComposerDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamComposerDeleteRequest {
 	return ApiReposUpstreamComposerDeleteRequest{
@@ -4602,10 +4624,10 @@ ReposUpstreamComposerList List Composer upstream configs for this repository.
 
 List Composer upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamComposerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamComposerListRequest
 */
 func (a *ReposApiService) ReposUpstreamComposerList(ctx context.Context, owner string, identifier string) ApiReposUpstreamComposerListRequest {
 	return ApiReposUpstreamComposerListRequest{
@@ -4617,7 +4639,8 @@ func (a *ReposApiService) ReposUpstreamComposerList(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return []ComposerUpstream
+//
+//	@return []ComposerUpstream
 func (a *ReposApiService) ReposUpstreamComposerListExecute(r ApiReposUpstreamComposerListRequest) ([]ComposerUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -4640,10 +4663,10 @@ func (a *ReposApiService) ReposUpstreamComposerListExecute(r ApiReposUpstreamCom
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4757,11 +4780,11 @@ ReposUpstreamComposerPartialUpdate Partially update a Composer upstream config f
 
 Partially update a Composer upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamComposerPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamComposerPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamComposerPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamComposerPartialUpdateRequest {
 	return ApiReposUpstreamComposerPartialUpdateRequest{
@@ -4774,7 +4797,8 @@ func (a *ReposApiService) ReposUpstreamComposerPartialUpdate(ctx context.Context
 }
 
 // Execute executes the request
-//  @return ComposerUpstream
+//
+//	@return ComposerUpstream
 func (a *ReposApiService) ReposUpstreamComposerPartialUpdateExecute(r ApiReposUpstreamComposerPartialUpdateRequest) (*ComposerUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -4905,11 +4929,11 @@ ReposUpstreamComposerRead Retrieve a Composer upstream config for this repositor
 
 Retrieve a Composer upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamComposerReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamComposerReadRequest
 */
 func (a *ReposApiService) ReposUpstreamComposerRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamComposerReadRequest {
 	return ApiReposUpstreamComposerReadRequest{
@@ -4922,7 +4946,8 @@ func (a *ReposApiService) ReposUpstreamComposerRead(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return ComposerUpstream
+//
+//	@return ComposerUpstream
 func (a *ReposApiService) ReposUpstreamComposerReadExecute(r ApiReposUpstreamComposerReadRequest) (*ComposerUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5057,11 +5082,11 @@ ReposUpstreamComposerUpdate Update a Composer upstream config for this repositor
 
 Update a Composer upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamComposerUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamComposerUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamComposerUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamComposerUpdateRequest {
 	return ApiReposUpstreamComposerUpdateRequest{
@@ -5074,7 +5099,8 @@ func (a *ReposApiService) ReposUpstreamComposerUpdate(ctx context.Context, owner
 }
 
 // Execute executes the request
-//  @return ComposerUpstream
+//
+//	@return ComposerUpstream
 func (a *ReposApiService) ReposUpstreamComposerUpdateExecute(r ApiReposUpstreamComposerUpdateRequest) (*ComposerUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -5210,10 +5236,10 @@ ReposUpstreamCranCreate Create a CRAN upstream config for this repository.
 
 Create a CRAN upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamCranCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamCranCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamCranCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamCranCreateRequest {
 	return ApiReposUpstreamCranCreateRequest{
@@ -5225,7 +5251,8 @@ func (a *ReposApiService) ReposUpstreamCranCreate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return CranUpstream
+//
+//	@return CranUpstream
 func (a *ReposApiService) ReposUpstreamCranCreateExecute(r ApiReposUpstreamCranCreateRequest) (*CranUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -5355,11 +5382,11 @@ ReposUpstreamCranDelete Delete a CRAN upstream config for this repository.
 
 Delete a CRAN upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamCranDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamCranDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamCranDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamCranDeleteRequest {
 	return ApiReposUpstreamCranDeleteRequest{
@@ -5503,10 +5530,10 @@ ReposUpstreamCranList List CRAN upstream configs for this repository.
 
 List CRAN upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamCranListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamCranListRequest
 */
 func (a *ReposApiService) ReposUpstreamCranList(ctx context.Context, owner string, identifier string) ApiReposUpstreamCranListRequest {
 	return ApiReposUpstreamCranListRequest{
@@ -5518,7 +5545,8 @@ func (a *ReposApiService) ReposUpstreamCranList(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return []CranUpstream
+//
+//	@return []CranUpstream
 func (a *ReposApiService) ReposUpstreamCranListExecute(r ApiReposUpstreamCranListRequest) ([]CranUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5541,10 +5569,10 @@ func (a *ReposApiService) ReposUpstreamCranListExecute(r ApiReposUpstreamCranLis
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5658,11 +5686,11 @@ ReposUpstreamCranPartialUpdate Partially update a CRAN upstream config for this 
 
 Partially update a CRAN upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamCranPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamCranPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamCranPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamCranPartialUpdateRequest {
 	return ApiReposUpstreamCranPartialUpdateRequest{
@@ -5675,7 +5703,8 @@ func (a *ReposApiService) ReposUpstreamCranPartialUpdate(ctx context.Context, ow
 }
 
 // Execute executes the request
-//  @return CranUpstream
+//
+//	@return CranUpstream
 func (a *ReposApiService) ReposUpstreamCranPartialUpdateExecute(r ApiReposUpstreamCranPartialUpdateRequest) (*CranUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -5806,11 +5835,11 @@ ReposUpstreamCranRead Retrieve a CRAN upstream config for this repository.
 
 Retrieve a CRAN upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamCranReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamCranReadRequest
 */
 func (a *ReposApiService) ReposUpstreamCranRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamCranReadRequest {
 	return ApiReposUpstreamCranReadRequest{
@@ -5823,7 +5852,8 @@ func (a *ReposApiService) ReposUpstreamCranRead(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return CranUpstream
+//
+//	@return CranUpstream
 func (a *ReposApiService) ReposUpstreamCranReadExecute(r ApiReposUpstreamCranReadRequest) (*CranUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -5958,11 +5988,11 @@ ReposUpstreamCranUpdate Update a CRAN upstream config for this repository.
 
 Update a CRAN upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamCranUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamCranUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamCranUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamCranUpdateRequest {
 	return ApiReposUpstreamCranUpdateRequest{
@@ -5975,7 +6005,8 @@ func (a *ReposApiService) ReposUpstreamCranUpdate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return CranUpstream
+//
+//	@return CranUpstream
 func (a *ReposApiService) ReposUpstreamCranUpdateExecute(r ApiReposUpstreamCranUpdateRequest) (*CranUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -6111,10 +6142,10 @@ ReposUpstreamDartCreate Create a Dart upstream config for this repository.
 
 Create a Dart upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamDartCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamDartCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamDartCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamDartCreateRequest {
 	return ApiReposUpstreamDartCreateRequest{
@@ -6126,7 +6157,8 @@ func (a *ReposApiService) ReposUpstreamDartCreate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return DartUpstream
+//
+//	@return DartUpstream
 func (a *ReposApiService) ReposUpstreamDartCreateExecute(r ApiReposUpstreamDartCreateRequest) (*DartUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -6256,11 +6288,11 @@ ReposUpstreamDartDelete Delete a Dart upstream config for this repository.
 
 Delete a Dart upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDartDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDartDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamDartDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDartDeleteRequest {
 	return ApiReposUpstreamDartDeleteRequest{
@@ -6404,10 +6436,10 @@ ReposUpstreamDartList List Dart upstream configs for this repository.
 
 List Dart upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamDartListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamDartListRequest
 */
 func (a *ReposApiService) ReposUpstreamDartList(ctx context.Context, owner string, identifier string) ApiReposUpstreamDartListRequest {
 	return ApiReposUpstreamDartListRequest{
@@ -6419,7 +6451,8 @@ func (a *ReposApiService) ReposUpstreamDartList(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return []DartUpstream
+//
+//	@return []DartUpstream
 func (a *ReposApiService) ReposUpstreamDartListExecute(r ApiReposUpstreamDartListRequest) ([]DartUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6442,10 +6475,10 @@ func (a *ReposApiService) ReposUpstreamDartListExecute(r ApiReposUpstreamDartLis
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6559,11 +6592,11 @@ ReposUpstreamDartPartialUpdate Partially update a Dart upstream config for this 
 
 Partially update a Dart upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDartPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDartPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamDartPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDartPartialUpdateRequest {
 	return ApiReposUpstreamDartPartialUpdateRequest{
@@ -6576,7 +6609,8 @@ func (a *ReposApiService) ReposUpstreamDartPartialUpdate(ctx context.Context, ow
 }
 
 // Execute executes the request
-//  @return DartUpstream
+//
+//	@return DartUpstream
 func (a *ReposApiService) ReposUpstreamDartPartialUpdateExecute(r ApiReposUpstreamDartPartialUpdateRequest) (*DartUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -6707,11 +6741,11 @@ ReposUpstreamDartRead Retrieve a Dart upstream config for this repository.
 
 Retrieve a Dart upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDartReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDartReadRequest
 */
 func (a *ReposApiService) ReposUpstreamDartRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDartReadRequest {
 	return ApiReposUpstreamDartReadRequest{
@@ -6724,7 +6758,8 @@ func (a *ReposApiService) ReposUpstreamDartRead(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return DartUpstream
+//
+//	@return DartUpstream
 func (a *ReposApiService) ReposUpstreamDartReadExecute(r ApiReposUpstreamDartReadRequest) (*DartUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -6859,11 +6894,11 @@ ReposUpstreamDartUpdate Update a Dart upstream config for this repository.
 
 Update a Dart upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDartUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDartUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamDartUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDartUpdateRequest {
 	return ApiReposUpstreamDartUpdateRequest{
@@ -6876,7 +6911,8 @@ func (a *ReposApiService) ReposUpstreamDartUpdate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return DartUpstream
+//
+//	@return DartUpstream
 func (a *ReposApiService) ReposUpstreamDartUpdateExecute(r ApiReposUpstreamDartUpdateRequest) (*DartUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -7012,10 +7048,10 @@ ReposUpstreamDebCreate Create a Debian upstream config for this repository.
 
 Create a Debian upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamDebCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamDebCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamDebCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamDebCreateRequest {
 	return ApiReposUpstreamDebCreateRequest{
@@ -7027,7 +7063,8 @@ func (a *ReposApiService) ReposUpstreamDebCreate(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return DebUpstream
+//
+//	@return DebUpstream
 func (a *ReposApiService) ReposUpstreamDebCreateExecute(r ApiReposUpstreamDebCreateRequest) (*DebUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -7157,11 +7194,11 @@ ReposUpstreamDebDelete Delete a Debian upstream config for this repository.
 
 Delete a Debian upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDebDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDebDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamDebDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDebDeleteRequest {
 	return ApiReposUpstreamDebDeleteRequest{
@@ -7305,10 +7342,10 @@ ReposUpstreamDebList List Debian upstream configs for this repository.
 
 List Debian upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamDebListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamDebListRequest
 */
 func (a *ReposApiService) ReposUpstreamDebList(ctx context.Context, owner string, identifier string) ApiReposUpstreamDebListRequest {
 	return ApiReposUpstreamDebListRequest{
@@ -7320,7 +7357,8 @@ func (a *ReposApiService) ReposUpstreamDebList(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return []DebUpstream
+//
+//	@return []DebUpstream
 func (a *ReposApiService) ReposUpstreamDebListExecute(r ApiReposUpstreamDebListRequest) ([]DebUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7343,10 +7381,10 @@ func (a *ReposApiService) ReposUpstreamDebListExecute(r ApiReposUpstreamDebListR
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7460,11 +7498,11 @@ ReposUpstreamDebPartialUpdate Partially update a Debian upstream config for this
 
 Partially update a Debian upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDebPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDebPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamDebPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDebPartialUpdateRequest {
 	return ApiReposUpstreamDebPartialUpdateRequest{
@@ -7477,7 +7515,8 @@ func (a *ReposApiService) ReposUpstreamDebPartialUpdate(ctx context.Context, own
 }
 
 // Execute executes the request
-//  @return DebUpstream
+//
+//	@return DebUpstream
 func (a *ReposApiService) ReposUpstreamDebPartialUpdateExecute(r ApiReposUpstreamDebPartialUpdateRequest) (*DebUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -7608,11 +7647,11 @@ ReposUpstreamDebRead Retrieve a Debian upstream config for this repository.
 
 Retrieve a Debian upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDebReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDebReadRequest
 */
 func (a *ReposApiService) ReposUpstreamDebRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDebReadRequest {
 	return ApiReposUpstreamDebReadRequest{
@@ -7625,7 +7664,8 @@ func (a *ReposApiService) ReposUpstreamDebRead(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return DebUpstream
+//
+//	@return DebUpstream
 func (a *ReposApiService) ReposUpstreamDebReadExecute(r ApiReposUpstreamDebReadRequest) (*DebUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -7760,11 +7800,11 @@ ReposUpstreamDebUpdate Update a Debian upstream config for this repository.
 
 Update a Debian upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDebUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDebUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamDebUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDebUpdateRequest {
 	return ApiReposUpstreamDebUpdateRequest{
@@ -7777,7 +7817,8 @@ func (a *ReposApiService) ReposUpstreamDebUpdate(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return DebUpstream
+//
+//	@return DebUpstream
 func (a *ReposApiService) ReposUpstreamDebUpdateExecute(r ApiReposUpstreamDebUpdateRequest) (*DebUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -7913,10 +7954,10 @@ ReposUpstreamDockerCreate Create a Docker upstream config for this repository.
 
 Create a Docker upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamDockerCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamDockerCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamDockerCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamDockerCreateRequest {
 	return ApiReposUpstreamDockerCreateRequest{
@@ -7928,7 +7969,8 @@ func (a *ReposApiService) ReposUpstreamDockerCreate(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return DockerUpstream
+//
+//	@return DockerUpstream
 func (a *ReposApiService) ReposUpstreamDockerCreateExecute(r ApiReposUpstreamDockerCreateRequest) (*DockerUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8058,11 +8100,11 @@ ReposUpstreamDockerDelete Delete a Docker upstream config for this repository.
 
 Delete a Docker upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDockerDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDockerDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamDockerDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDockerDeleteRequest {
 	return ApiReposUpstreamDockerDeleteRequest{
@@ -8206,10 +8248,10 @@ ReposUpstreamDockerList List Docker upstream configs for this repository.
 
 List Docker upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamDockerListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamDockerListRequest
 */
 func (a *ReposApiService) ReposUpstreamDockerList(ctx context.Context, owner string, identifier string) ApiReposUpstreamDockerListRequest {
 	return ApiReposUpstreamDockerListRequest{
@@ -8221,7 +8263,8 @@ func (a *ReposApiService) ReposUpstreamDockerList(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return []DockerUpstream
+//
+//	@return []DockerUpstream
 func (a *ReposApiService) ReposUpstreamDockerListExecute(r ApiReposUpstreamDockerListRequest) ([]DockerUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8244,10 +8287,10 @@ func (a *ReposApiService) ReposUpstreamDockerListExecute(r ApiReposUpstreamDocke
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8361,11 +8404,11 @@ ReposUpstreamDockerPartialUpdate Partially update a Docker upstream config for t
 
 Partially update a Docker upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDockerPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDockerPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamDockerPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDockerPartialUpdateRequest {
 	return ApiReposUpstreamDockerPartialUpdateRequest{
@@ -8378,7 +8421,8 @@ func (a *ReposApiService) ReposUpstreamDockerPartialUpdate(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return DockerUpstream
+//
+//	@return DockerUpstream
 func (a *ReposApiService) ReposUpstreamDockerPartialUpdateExecute(r ApiReposUpstreamDockerPartialUpdateRequest) (*DockerUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -8509,11 +8553,11 @@ ReposUpstreamDockerRead Retrieve a Docker upstream config for this repository.
 
 Retrieve a Docker upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDockerReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDockerReadRequest
 */
 func (a *ReposApiService) ReposUpstreamDockerRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDockerReadRequest {
 	return ApiReposUpstreamDockerReadRequest{
@@ -8526,7 +8570,8 @@ func (a *ReposApiService) ReposUpstreamDockerRead(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return DockerUpstream
+//
+//	@return DockerUpstream
 func (a *ReposApiService) ReposUpstreamDockerReadExecute(r ApiReposUpstreamDockerReadRequest) (*DockerUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -8661,11 +8706,11 @@ ReposUpstreamDockerUpdate Update a Docker upstream config for this repository.
 
 Update a Docker upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamDockerUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamDockerUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamDockerUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamDockerUpdateRequest {
 	return ApiReposUpstreamDockerUpdateRequest{
@@ -8678,7 +8723,8 @@ func (a *ReposApiService) ReposUpstreamDockerUpdate(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return DockerUpstream
+//
+//	@return DockerUpstream
 func (a *ReposApiService) ReposUpstreamDockerUpdateExecute(r ApiReposUpstreamDockerUpdateRequest) (*DockerUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -8814,10 +8860,10 @@ ReposUpstreamHelmCreate Create a Helm upstream config for this repository.
 
 Create a Helm upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamHelmCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamHelmCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamHelmCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamHelmCreateRequest {
 	return ApiReposUpstreamHelmCreateRequest{
@@ -8829,7 +8875,8 @@ func (a *ReposApiService) ReposUpstreamHelmCreate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return HelmUpstream
+//
+//	@return HelmUpstream
 func (a *ReposApiService) ReposUpstreamHelmCreateExecute(r ApiReposUpstreamHelmCreateRequest) (*HelmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -8959,11 +9006,11 @@ ReposUpstreamHelmDelete Delete a Helm upstream config for this repository.
 
 Delete a Helm upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamHelmDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamHelmDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamHelmDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamHelmDeleteRequest {
 	return ApiReposUpstreamHelmDeleteRequest{
@@ -9107,10 +9154,10 @@ ReposUpstreamHelmList List Helm upstream configs for this repository.
 
 List Helm upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamHelmListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamHelmListRequest
 */
 func (a *ReposApiService) ReposUpstreamHelmList(ctx context.Context, owner string, identifier string) ApiReposUpstreamHelmListRequest {
 	return ApiReposUpstreamHelmListRequest{
@@ -9122,7 +9169,8 @@ func (a *ReposApiService) ReposUpstreamHelmList(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return []HelmUpstream
+//
+//	@return []HelmUpstream
 func (a *ReposApiService) ReposUpstreamHelmListExecute(r ApiReposUpstreamHelmListRequest) ([]HelmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9145,10 +9193,10 @@ func (a *ReposApiService) ReposUpstreamHelmListExecute(r ApiReposUpstreamHelmLis
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9262,11 +9310,11 @@ ReposUpstreamHelmPartialUpdate Partially update a Helm upstream config for this 
 
 Partially update a Helm upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamHelmPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamHelmPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamHelmPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamHelmPartialUpdateRequest {
 	return ApiReposUpstreamHelmPartialUpdateRequest{
@@ -9279,7 +9327,8 @@ func (a *ReposApiService) ReposUpstreamHelmPartialUpdate(ctx context.Context, ow
 }
 
 // Execute executes the request
-//  @return HelmUpstream
+//
+//	@return HelmUpstream
 func (a *ReposApiService) ReposUpstreamHelmPartialUpdateExecute(r ApiReposUpstreamHelmPartialUpdateRequest) (*HelmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -9410,11 +9459,11 @@ ReposUpstreamHelmRead Retrieve a Helm upstream config for this repository.
 
 Retrieve a Helm upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamHelmReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamHelmReadRequest
 */
 func (a *ReposApiService) ReposUpstreamHelmRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamHelmReadRequest {
 	return ApiReposUpstreamHelmReadRequest{
@@ -9427,7 +9476,8 @@ func (a *ReposApiService) ReposUpstreamHelmRead(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return HelmUpstream
+//
+//	@return HelmUpstream
 func (a *ReposApiService) ReposUpstreamHelmReadExecute(r ApiReposUpstreamHelmReadRequest) (*HelmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -9562,11 +9612,11 @@ ReposUpstreamHelmUpdate Update a Helm upstream config for this repository.
 
 Update a Helm upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamHelmUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamHelmUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamHelmUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamHelmUpdateRequest {
 	return ApiReposUpstreamHelmUpdateRequest{
@@ -9579,7 +9629,8 @@ func (a *ReposApiService) ReposUpstreamHelmUpdate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return HelmUpstream
+//
+//	@return HelmUpstream
 func (a *ReposApiService) ReposUpstreamHelmUpdateExecute(r ApiReposUpstreamHelmUpdateRequest) (*HelmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -9715,10 +9766,10 @@ ReposUpstreamHexCreate Create a Hex upstream config for this repository.
 
 Create a Hex upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamHexCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamHexCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamHexCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamHexCreateRequest {
 	return ApiReposUpstreamHexCreateRequest{
@@ -9730,7 +9781,8 @@ func (a *ReposApiService) ReposUpstreamHexCreate(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return HexUpstream
+//
+//	@return HexUpstream
 func (a *ReposApiService) ReposUpstreamHexCreateExecute(r ApiReposUpstreamHexCreateRequest) (*HexUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -9860,11 +9912,11 @@ ReposUpstreamHexDelete Delete a Hex upstream config for this repository.
 
 Delete a Hex upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamHexDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamHexDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamHexDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamHexDeleteRequest {
 	return ApiReposUpstreamHexDeleteRequest{
@@ -10008,10 +10060,10 @@ ReposUpstreamHexList List Hex upstream configs for this repository.
 
 List Hex upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamHexListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamHexListRequest
 */
 func (a *ReposApiService) ReposUpstreamHexList(ctx context.Context, owner string, identifier string) ApiReposUpstreamHexListRequest {
 	return ApiReposUpstreamHexListRequest{
@@ -10023,7 +10075,8 @@ func (a *ReposApiService) ReposUpstreamHexList(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return []HexUpstream
+//
+//	@return []HexUpstream
 func (a *ReposApiService) ReposUpstreamHexListExecute(r ApiReposUpstreamHexListRequest) ([]HexUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10046,10 +10099,10 @@ func (a *ReposApiService) ReposUpstreamHexListExecute(r ApiReposUpstreamHexListR
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10163,11 +10216,11 @@ ReposUpstreamHexPartialUpdate Partially update a Hex upstream config for this re
 
 Partially update a Hex upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamHexPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamHexPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamHexPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamHexPartialUpdateRequest {
 	return ApiReposUpstreamHexPartialUpdateRequest{
@@ -10180,7 +10233,8 @@ func (a *ReposApiService) ReposUpstreamHexPartialUpdate(ctx context.Context, own
 }
 
 // Execute executes the request
-//  @return HexUpstream
+//
+//	@return HexUpstream
 func (a *ReposApiService) ReposUpstreamHexPartialUpdateExecute(r ApiReposUpstreamHexPartialUpdateRequest) (*HexUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -10311,11 +10365,11 @@ ReposUpstreamHexRead Retrieve a Hex upstream config for this repository.
 
 Retrieve a Hex upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamHexReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamHexReadRequest
 */
 func (a *ReposApiService) ReposUpstreamHexRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamHexReadRequest {
 	return ApiReposUpstreamHexReadRequest{
@@ -10328,7 +10382,8 @@ func (a *ReposApiService) ReposUpstreamHexRead(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return HexUpstream
+//
+//	@return HexUpstream
 func (a *ReposApiService) ReposUpstreamHexReadExecute(r ApiReposUpstreamHexReadRequest) (*HexUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10463,11 +10518,11 @@ ReposUpstreamHexUpdate Update a Hex upstream config for this repository.
 
 Update a Hex upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamHexUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamHexUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamHexUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamHexUpdateRequest {
 	return ApiReposUpstreamHexUpdateRequest{
@@ -10480,7 +10535,8 @@ func (a *ReposApiService) ReposUpstreamHexUpdate(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return HexUpstream
+//
+//	@return HexUpstream
 func (a *ReposApiService) ReposUpstreamHexUpdateExecute(r ApiReposUpstreamHexUpdateRequest) (*HexUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -10616,10 +10672,10 @@ ReposUpstreamMavenCreate Create a Maven upstream config for this repository.
 
 Create a Maven upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamMavenCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamMavenCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamMavenCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamMavenCreateRequest {
 	return ApiReposUpstreamMavenCreateRequest{
@@ -10631,7 +10687,8 @@ func (a *ReposApiService) ReposUpstreamMavenCreate(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return MavenUpstream
+//
+//	@return MavenUpstream
 func (a *ReposApiService) ReposUpstreamMavenCreateExecute(r ApiReposUpstreamMavenCreateRequest) (*MavenUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -10761,11 +10818,11 @@ ReposUpstreamMavenDelete Delete a Maven upstream config for this repository.
 
 Delete a Maven upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamMavenDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamMavenDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamMavenDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamMavenDeleteRequest {
 	return ApiReposUpstreamMavenDeleteRequest{
@@ -10909,10 +10966,10 @@ ReposUpstreamMavenList List Maven upstream configs for this repository.
 
 List Maven upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamMavenListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamMavenListRequest
 */
 func (a *ReposApiService) ReposUpstreamMavenList(ctx context.Context, owner string, identifier string) ApiReposUpstreamMavenListRequest {
 	return ApiReposUpstreamMavenListRequest{
@@ -10924,7 +10981,8 @@ func (a *ReposApiService) ReposUpstreamMavenList(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return []MavenUpstream
+//
+//	@return []MavenUpstream
 func (a *ReposApiService) ReposUpstreamMavenListExecute(r ApiReposUpstreamMavenListRequest) ([]MavenUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -10947,10 +11005,10 @@ func (a *ReposApiService) ReposUpstreamMavenListExecute(r ApiReposUpstreamMavenL
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11064,11 +11122,11 @@ ReposUpstreamMavenPartialUpdate Partially update a Maven upstream config for thi
 
 Partially update a Maven upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamMavenPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamMavenPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamMavenPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamMavenPartialUpdateRequest {
 	return ApiReposUpstreamMavenPartialUpdateRequest{
@@ -11081,7 +11139,8 @@ func (a *ReposApiService) ReposUpstreamMavenPartialUpdate(ctx context.Context, o
 }
 
 // Execute executes the request
-//  @return MavenUpstream
+//
+//	@return MavenUpstream
 func (a *ReposApiService) ReposUpstreamMavenPartialUpdateExecute(r ApiReposUpstreamMavenPartialUpdateRequest) (*MavenUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -11212,11 +11271,11 @@ ReposUpstreamMavenRead Retrieve a Maven upstream config for this repository.
 
 Retrieve a Maven upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamMavenReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamMavenReadRequest
 */
 func (a *ReposApiService) ReposUpstreamMavenRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamMavenReadRequest {
 	return ApiReposUpstreamMavenReadRequest{
@@ -11229,7 +11288,8 @@ func (a *ReposApiService) ReposUpstreamMavenRead(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return MavenUpstream
+//
+//	@return MavenUpstream
 func (a *ReposApiService) ReposUpstreamMavenReadExecute(r ApiReposUpstreamMavenReadRequest) (*MavenUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11364,11 +11424,11 @@ ReposUpstreamMavenUpdate Update a Maven upstream config for this repository.
 
 Update a Maven upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamMavenUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamMavenUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamMavenUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamMavenUpdateRequest {
 	return ApiReposUpstreamMavenUpdateRequest{
@@ -11381,7 +11441,8 @@ func (a *ReposApiService) ReposUpstreamMavenUpdate(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return MavenUpstream
+//
+//	@return MavenUpstream
 func (a *ReposApiService) ReposUpstreamMavenUpdateExecute(r ApiReposUpstreamMavenUpdateRequest) (*MavenUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -11517,10 +11578,10 @@ ReposUpstreamNpmCreate Create a npm upstream config for this repository.
 
 Create a npm upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamNpmCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamNpmCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamNpmCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamNpmCreateRequest {
 	return ApiReposUpstreamNpmCreateRequest{
@@ -11532,7 +11593,8 @@ func (a *ReposApiService) ReposUpstreamNpmCreate(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return NpmUpstream
+//
+//	@return NpmUpstream
 func (a *ReposApiService) ReposUpstreamNpmCreateExecute(r ApiReposUpstreamNpmCreateRequest) (*NpmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -11662,11 +11724,11 @@ ReposUpstreamNpmDelete Delete a npm upstream config for this repository.
 
 Delete a npm upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamNpmDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamNpmDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamNpmDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamNpmDeleteRequest {
 	return ApiReposUpstreamNpmDeleteRequest{
@@ -11810,10 +11872,10 @@ ReposUpstreamNpmList List npm upstream configs for this repository.
 
 List npm upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamNpmListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamNpmListRequest
 */
 func (a *ReposApiService) ReposUpstreamNpmList(ctx context.Context, owner string, identifier string) ApiReposUpstreamNpmListRequest {
 	return ApiReposUpstreamNpmListRequest{
@@ -11825,7 +11887,8 @@ func (a *ReposApiService) ReposUpstreamNpmList(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return []NpmUpstream
+//
+//	@return []NpmUpstream
 func (a *ReposApiService) ReposUpstreamNpmListExecute(r ApiReposUpstreamNpmListRequest) ([]NpmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -11848,10 +11911,10 @@ func (a *ReposApiService) ReposUpstreamNpmListExecute(r ApiReposUpstreamNpmListR
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11965,11 +12028,11 @@ ReposUpstreamNpmPartialUpdate Partially update a npm upstream config for this re
 
 Partially update a npm upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamNpmPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamNpmPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamNpmPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamNpmPartialUpdateRequest {
 	return ApiReposUpstreamNpmPartialUpdateRequest{
@@ -11982,7 +12045,8 @@ func (a *ReposApiService) ReposUpstreamNpmPartialUpdate(ctx context.Context, own
 }
 
 // Execute executes the request
-//  @return NpmUpstream
+//
+//	@return NpmUpstream
 func (a *ReposApiService) ReposUpstreamNpmPartialUpdateExecute(r ApiReposUpstreamNpmPartialUpdateRequest) (*NpmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -12113,11 +12177,11 @@ ReposUpstreamNpmRead Retrieve a npm upstream config for this repository.
 
 Retrieve a npm upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamNpmReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamNpmReadRequest
 */
 func (a *ReposApiService) ReposUpstreamNpmRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamNpmReadRequest {
 	return ApiReposUpstreamNpmReadRequest{
@@ -12130,7 +12194,8 @@ func (a *ReposApiService) ReposUpstreamNpmRead(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return NpmUpstream
+//
+//	@return NpmUpstream
 func (a *ReposApiService) ReposUpstreamNpmReadExecute(r ApiReposUpstreamNpmReadRequest) (*NpmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12265,11 +12330,11 @@ ReposUpstreamNpmUpdate Update a npm upstream config for this repository.
 
 Update a npm upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamNpmUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamNpmUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamNpmUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamNpmUpdateRequest {
 	return ApiReposUpstreamNpmUpdateRequest{
@@ -12282,7 +12347,8 @@ func (a *ReposApiService) ReposUpstreamNpmUpdate(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return NpmUpstream
+//
+//	@return NpmUpstream
 func (a *ReposApiService) ReposUpstreamNpmUpdateExecute(r ApiReposUpstreamNpmUpdateRequest) (*NpmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -12418,10 +12484,10 @@ ReposUpstreamNugetCreate Create a NuGet upstream config for this repository.
 
 Create a NuGet upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamNugetCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamNugetCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamNugetCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamNugetCreateRequest {
 	return ApiReposUpstreamNugetCreateRequest{
@@ -12433,7 +12499,8 @@ func (a *ReposApiService) ReposUpstreamNugetCreate(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return NugetUpstream
+//
+//	@return NugetUpstream
 func (a *ReposApiService) ReposUpstreamNugetCreateExecute(r ApiReposUpstreamNugetCreateRequest) (*NugetUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -12563,11 +12630,11 @@ ReposUpstreamNugetDelete Delete a NuGet upstream config for this repository.
 
 Delete a NuGet upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamNugetDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamNugetDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamNugetDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamNugetDeleteRequest {
 	return ApiReposUpstreamNugetDeleteRequest{
@@ -12711,10 +12778,10 @@ ReposUpstreamNugetList List NuGet upstream configs for this repository.
 
 List NuGet upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamNugetListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamNugetListRequest
 */
 func (a *ReposApiService) ReposUpstreamNugetList(ctx context.Context, owner string, identifier string) ApiReposUpstreamNugetListRequest {
 	return ApiReposUpstreamNugetListRequest{
@@ -12726,7 +12793,8 @@ func (a *ReposApiService) ReposUpstreamNugetList(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return []NugetUpstream
+//
+//	@return []NugetUpstream
 func (a *ReposApiService) ReposUpstreamNugetListExecute(r ApiReposUpstreamNugetListRequest) ([]NugetUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -12749,10 +12817,10 @@ func (a *ReposApiService) ReposUpstreamNugetListExecute(r ApiReposUpstreamNugetL
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12866,11 +12934,11 @@ ReposUpstreamNugetPartialUpdate Partially update a NuGet upstream config for thi
 
 Partially update a NuGet upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamNugetPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamNugetPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamNugetPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamNugetPartialUpdateRequest {
 	return ApiReposUpstreamNugetPartialUpdateRequest{
@@ -12883,7 +12951,8 @@ func (a *ReposApiService) ReposUpstreamNugetPartialUpdate(ctx context.Context, o
 }
 
 // Execute executes the request
-//  @return NugetUpstream
+//
+//	@return NugetUpstream
 func (a *ReposApiService) ReposUpstreamNugetPartialUpdateExecute(r ApiReposUpstreamNugetPartialUpdateRequest) (*NugetUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13014,11 +13083,11 @@ ReposUpstreamNugetRead Retrieve a NuGet upstream config for this repository.
 
 Retrieve a NuGet upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamNugetReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamNugetReadRequest
 */
 func (a *ReposApiService) ReposUpstreamNugetRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamNugetReadRequest {
 	return ApiReposUpstreamNugetReadRequest{
@@ -13031,7 +13100,8 @@ func (a *ReposApiService) ReposUpstreamNugetRead(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return NugetUpstream
+//
+//	@return NugetUpstream
 func (a *ReposApiService) ReposUpstreamNugetReadExecute(r ApiReposUpstreamNugetReadRequest) (*NugetUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13166,11 +13236,11 @@ ReposUpstreamNugetUpdate Update a NuGet upstream config for this repository.
 
 Update a NuGet upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamNugetUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamNugetUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamNugetUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamNugetUpdateRequest {
 	return ApiReposUpstreamNugetUpdateRequest{
@@ -13183,7 +13253,8 @@ func (a *ReposApiService) ReposUpstreamNugetUpdate(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return NugetUpstream
+//
+//	@return NugetUpstream
 func (a *ReposApiService) ReposUpstreamNugetUpdateExecute(r ApiReposUpstreamNugetUpdateRequest) (*NugetUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -13319,10 +13390,10 @@ ReposUpstreamPythonCreate Create a Python upstream config for this repository.
 
 Create a Python upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamPythonCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamPythonCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamPythonCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamPythonCreateRequest {
 	return ApiReposUpstreamPythonCreateRequest{
@@ -13334,7 +13405,8 @@ func (a *ReposApiService) ReposUpstreamPythonCreate(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return PythonUpstream
+//
+//	@return PythonUpstream
 func (a *ReposApiService) ReposUpstreamPythonCreateExecute(r ApiReposUpstreamPythonCreateRequest) (*PythonUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -13464,11 +13536,11 @@ ReposUpstreamPythonDelete Delete a Python upstream config for this repository.
 
 Delete a Python upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamPythonDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamPythonDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamPythonDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamPythonDeleteRequest {
 	return ApiReposUpstreamPythonDeleteRequest{
@@ -13612,10 +13684,10 @@ ReposUpstreamPythonList List Python upstream configs for this repository.
 
 List Python upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamPythonListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamPythonListRequest
 */
 func (a *ReposApiService) ReposUpstreamPythonList(ctx context.Context, owner string, identifier string) ApiReposUpstreamPythonListRequest {
 	return ApiReposUpstreamPythonListRequest{
@@ -13627,7 +13699,8 @@ func (a *ReposApiService) ReposUpstreamPythonList(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return []PythonUpstream
+//
+//	@return []PythonUpstream
 func (a *ReposApiService) ReposUpstreamPythonListExecute(r ApiReposUpstreamPythonListRequest) ([]PythonUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -13650,10 +13723,10 @@ func (a *ReposApiService) ReposUpstreamPythonListExecute(r ApiReposUpstreamPytho
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -13767,11 +13840,11 @@ ReposUpstreamPythonPartialUpdate Partially update a Python upstream config for t
 
 Partially update a Python upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamPythonPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamPythonPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamPythonPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamPythonPartialUpdateRequest {
 	return ApiReposUpstreamPythonPartialUpdateRequest{
@@ -13784,7 +13857,8 @@ func (a *ReposApiService) ReposUpstreamPythonPartialUpdate(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return PythonUpstream
+//
+//	@return PythonUpstream
 func (a *ReposApiService) ReposUpstreamPythonPartialUpdateExecute(r ApiReposUpstreamPythonPartialUpdateRequest) (*PythonUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -13915,11 +13989,11 @@ ReposUpstreamPythonRead Retrieve a Python upstream config for this repository.
 
 Retrieve a Python upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamPythonReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamPythonReadRequest
 */
 func (a *ReposApiService) ReposUpstreamPythonRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamPythonReadRequest {
 	return ApiReposUpstreamPythonReadRequest{
@@ -13932,7 +14006,8 @@ func (a *ReposApiService) ReposUpstreamPythonRead(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return PythonUpstream
+//
+//	@return PythonUpstream
 func (a *ReposApiService) ReposUpstreamPythonReadExecute(r ApiReposUpstreamPythonReadRequest) (*PythonUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14067,11 +14142,11 @@ ReposUpstreamPythonUpdate Update a Python upstream config for this repository.
 
 Update a Python upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamPythonUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamPythonUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamPythonUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamPythonUpdateRequest {
 	return ApiReposUpstreamPythonUpdateRequest{
@@ -14084,7 +14159,8 @@ func (a *ReposApiService) ReposUpstreamPythonUpdate(ctx context.Context, owner s
 }
 
 // Execute executes the request
-//  @return PythonUpstream
+//
+//	@return PythonUpstream
 func (a *ReposApiService) ReposUpstreamPythonUpdateExecute(r ApiReposUpstreamPythonUpdateRequest) (*PythonUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -14220,10 +14296,10 @@ ReposUpstreamRpmCreate Create a RedHat upstream config for this repository.
 
 Create a RedHat upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamRpmCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamRpmCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamRpmCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamRpmCreateRequest {
 	return ApiReposUpstreamRpmCreateRequest{
@@ -14235,7 +14311,8 @@ func (a *ReposApiService) ReposUpstreamRpmCreate(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return RpmUpstream
+//
+//	@return RpmUpstream
 func (a *ReposApiService) ReposUpstreamRpmCreateExecute(r ApiReposUpstreamRpmCreateRequest) (*RpmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -14365,11 +14442,11 @@ ReposUpstreamRpmDelete Delete a RedHat upstream config for this repository.
 
 Delete a RedHat upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamRpmDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamRpmDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamRpmDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamRpmDeleteRequest {
 	return ApiReposUpstreamRpmDeleteRequest{
@@ -14513,10 +14590,10 @@ ReposUpstreamRpmList List RedHat upstream configs for this repository.
 
 List RedHat upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamRpmListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamRpmListRequest
 */
 func (a *ReposApiService) ReposUpstreamRpmList(ctx context.Context, owner string, identifier string) ApiReposUpstreamRpmListRequest {
 	return ApiReposUpstreamRpmListRequest{
@@ -14528,7 +14605,8 @@ func (a *ReposApiService) ReposUpstreamRpmList(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return []RpmUpstream
+//
+//	@return []RpmUpstream
 func (a *ReposApiService) ReposUpstreamRpmListExecute(r ApiReposUpstreamRpmListRequest) ([]RpmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14551,10 +14629,10 @@ func (a *ReposApiService) ReposUpstreamRpmListExecute(r ApiReposUpstreamRpmListR
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -14668,11 +14746,11 @@ ReposUpstreamRpmPartialUpdate Partially update a RedHat upstream config for this
 
 Partially update a RedHat upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamRpmPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamRpmPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamRpmPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamRpmPartialUpdateRequest {
 	return ApiReposUpstreamRpmPartialUpdateRequest{
@@ -14685,7 +14763,8 @@ func (a *ReposApiService) ReposUpstreamRpmPartialUpdate(ctx context.Context, own
 }
 
 // Execute executes the request
-//  @return RpmUpstream
+//
+//	@return RpmUpstream
 func (a *ReposApiService) ReposUpstreamRpmPartialUpdateExecute(r ApiReposUpstreamRpmPartialUpdateRequest) (*RpmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -14816,11 +14895,11 @@ ReposUpstreamRpmRead Retrieve a RedHat upstream config for this repository.
 
 Retrieve a RedHat upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamRpmReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamRpmReadRequest
 */
 func (a *ReposApiService) ReposUpstreamRpmRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamRpmReadRequest {
 	return ApiReposUpstreamRpmReadRequest{
@@ -14833,7 +14912,8 @@ func (a *ReposApiService) ReposUpstreamRpmRead(ctx context.Context, owner string
 }
 
 // Execute executes the request
-//  @return RpmUpstream
+//
+//	@return RpmUpstream
 func (a *ReposApiService) ReposUpstreamRpmReadExecute(r ApiReposUpstreamRpmReadRequest) (*RpmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -14968,11 +15048,11 @@ ReposUpstreamRpmUpdate Update a RedHat upstream config for this repository.
 
 Update a RedHat upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamRpmUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamRpmUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamRpmUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamRpmUpdateRequest {
 	return ApiReposUpstreamRpmUpdateRequest{
@@ -14985,7 +15065,8 @@ func (a *ReposApiService) ReposUpstreamRpmUpdate(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return RpmUpstream
+//
+//	@return RpmUpstream
 func (a *ReposApiService) ReposUpstreamRpmUpdateExecute(r ApiReposUpstreamRpmUpdateRequest) (*RpmUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -15121,10 +15202,10 @@ ReposUpstreamRubyCreate Create a Ruby upstream config for this repository.
 
 Create a Ruby upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamRubyCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamRubyCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamRubyCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamRubyCreateRequest {
 	return ApiReposUpstreamRubyCreateRequest{
@@ -15136,7 +15217,8 @@ func (a *ReposApiService) ReposUpstreamRubyCreate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RubyUpstream
+//
+//	@return RubyUpstream
 func (a *ReposApiService) ReposUpstreamRubyCreateExecute(r ApiReposUpstreamRubyCreateRequest) (*RubyUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -15266,11 +15348,11 @@ ReposUpstreamRubyDelete Delete a Ruby upstream config for this repository.
 
 Delete a Ruby upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamRubyDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamRubyDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamRubyDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamRubyDeleteRequest {
 	return ApiReposUpstreamRubyDeleteRequest{
@@ -15414,10 +15496,10 @@ ReposUpstreamRubyList List Ruby upstream configs for this repository.
 
 List Ruby upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamRubyListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamRubyListRequest
 */
 func (a *ReposApiService) ReposUpstreamRubyList(ctx context.Context, owner string, identifier string) ApiReposUpstreamRubyListRequest {
 	return ApiReposUpstreamRubyListRequest{
@@ -15429,7 +15511,8 @@ func (a *ReposApiService) ReposUpstreamRubyList(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return []RubyUpstream
+//
+//	@return []RubyUpstream
 func (a *ReposApiService) ReposUpstreamRubyListExecute(r ApiReposUpstreamRubyListRequest) ([]RubyUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15452,10 +15535,10 @@ func (a *ReposApiService) ReposUpstreamRubyListExecute(r ApiReposUpstreamRubyLis
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15569,11 +15652,11 @@ ReposUpstreamRubyPartialUpdate Partially update a Ruby upstream config for this 
 
 Partially update a Ruby upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamRubyPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamRubyPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamRubyPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamRubyPartialUpdateRequest {
 	return ApiReposUpstreamRubyPartialUpdateRequest{
@@ -15586,7 +15669,8 @@ func (a *ReposApiService) ReposUpstreamRubyPartialUpdate(ctx context.Context, ow
 }
 
 // Execute executes the request
-//  @return RubyUpstream
+//
+//	@return RubyUpstream
 func (a *ReposApiService) ReposUpstreamRubyPartialUpdateExecute(r ApiReposUpstreamRubyPartialUpdateRequest) (*RubyUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -15717,11 +15801,11 @@ ReposUpstreamRubyRead Retrieve a Ruby upstream config for this repository.
 
 Retrieve a Ruby upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamRubyReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamRubyReadRequest
 */
 func (a *ReposApiService) ReposUpstreamRubyRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamRubyReadRequest {
 	return ApiReposUpstreamRubyReadRequest{
@@ -15734,7 +15818,8 @@ func (a *ReposApiService) ReposUpstreamRubyRead(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return RubyUpstream
+//
+//	@return RubyUpstream
 func (a *ReposApiService) ReposUpstreamRubyReadExecute(r ApiReposUpstreamRubyReadRequest) (*RubyUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -15869,11 +15954,11 @@ ReposUpstreamRubyUpdate Update a Ruby upstream config for this repository.
 
 Update a Ruby upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamRubyUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamRubyUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamRubyUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamRubyUpdateRequest {
 	return ApiReposUpstreamRubyUpdateRequest{
@@ -15886,7 +15971,8 @@ func (a *ReposApiService) ReposUpstreamRubyUpdate(ctx context.Context, owner str
 }
 
 // Execute executes the request
-//  @return RubyUpstream
+//
+//	@return RubyUpstream
 func (a *ReposApiService) ReposUpstreamRubyUpdateExecute(r ApiReposUpstreamRubyUpdateRequest) (*RubyUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -16022,10 +16108,10 @@ ReposUpstreamSwiftCreate Create a Swift upstream config for this repository.
 
 Create a Swift upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamSwiftCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamSwiftCreateRequest
 */
 func (a *ReposApiService) ReposUpstreamSwiftCreate(ctx context.Context, owner string, identifier string) ApiReposUpstreamSwiftCreateRequest {
 	return ApiReposUpstreamSwiftCreateRequest{
@@ -16037,7 +16123,8 @@ func (a *ReposApiService) ReposUpstreamSwiftCreate(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return SwiftUpstream
+//
+//	@return SwiftUpstream
 func (a *ReposApiService) ReposUpstreamSwiftCreateExecute(r ApiReposUpstreamSwiftCreateRequest) (*SwiftUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -16167,11 +16254,11 @@ ReposUpstreamSwiftDelete Delete a Swift upstream config for this repository.
 
 Delete a Swift upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamSwiftDeleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamSwiftDeleteRequest
 */
 func (a *ReposApiService) ReposUpstreamSwiftDelete(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamSwiftDeleteRequest {
 	return ApiReposUpstreamSwiftDeleteRequest{
@@ -16315,10 +16402,10 @@ ReposUpstreamSwiftList List Swift upstream configs for this repository.
 
 List Swift upstream configs for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @return ApiReposUpstreamSwiftListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@return ApiReposUpstreamSwiftListRequest
 */
 func (a *ReposApiService) ReposUpstreamSwiftList(ctx context.Context, owner string, identifier string) ApiReposUpstreamSwiftListRequest {
 	return ApiReposUpstreamSwiftListRequest{
@@ -16330,7 +16417,8 @@ func (a *ReposApiService) ReposUpstreamSwiftList(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return []SwiftUpstream
+//
+//	@return []SwiftUpstream
 func (a *ReposApiService) ReposUpstreamSwiftListExecute(r ApiReposUpstreamSwiftListRequest) ([]SwiftUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16353,10 +16441,10 @@ func (a *ReposApiService) ReposUpstreamSwiftListExecute(r ApiReposUpstreamSwiftL
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -16470,11 +16558,11 @@ ReposUpstreamSwiftPartialUpdate Partially update a Swift upstream config for thi
 
 Partially update a Swift upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamSwiftPartialUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamSwiftPartialUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamSwiftPartialUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamSwiftPartialUpdateRequest {
 	return ApiReposUpstreamSwiftPartialUpdateRequest{
@@ -16487,7 +16575,8 @@ func (a *ReposApiService) ReposUpstreamSwiftPartialUpdate(ctx context.Context, o
 }
 
 // Execute executes the request
-//  @return SwiftUpstream
+//
+//	@return SwiftUpstream
 func (a *ReposApiService) ReposUpstreamSwiftPartialUpdateExecute(r ApiReposUpstreamSwiftPartialUpdateRequest) (*SwiftUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
@@ -16618,11 +16707,11 @@ ReposUpstreamSwiftRead Retrieve a Swift upstream config for this repository.
 
 Retrieve a Swift upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamSwiftReadRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamSwiftReadRequest
 */
 func (a *ReposApiService) ReposUpstreamSwiftRead(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamSwiftReadRequest {
 	return ApiReposUpstreamSwiftReadRequest{
@@ -16635,7 +16724,8 @@ func (a *ReposApiService) ReposUpstreamSwiftRead(ctx context.Context, owner stri
 }
 
 // Execute executes the request
-//  @return SwiftUpstream
+//
+//	@return SwiftUpstream
 func (a *ReposApiService) ReposUpstreamSwiftReadExecute(r ApiReposUpstreamSwiftReadRequest) (*SwiftUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16770,11 +16860,11 @@ ReposUpstreamSwiftUpdate Update a Swift upstream config for this repository.
 
 Update a Swift upstream config for this repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param identifier
- @param slugPerm
- @return ApiReposUpstreamSwiftUpdateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param identifier
+	@param slugPerm
+	@return ApiReposUpstreamSwiftUpdateRequest
 */
 func (a *ReposApiService) ReposUpstreamSwiftUpdate(ctx context.Context, owner string, identifier string, slugPerm string) ApiReposUpstreamSwiftUpdateRequest {
 	return ApiReposUpstreamSwiftUpdateRequest{
@@ -16787,7 +16877,8 @@ func (a *ReposApiService) ReposUpstreamSwiftUpdate(ctx context.Context, owner st
 }
 
 // Execute executes the request
-//  @return SwiftUpstream
+//
+//	@return SwiftUpstream
 func (a *ReposApiService) ReposUpstreamSwiftUpdateExecute(r ApiReposUpstreamSwiftUpdateRequest) (*SwiftUpstream, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -16929,8 +17020,8 @@ ReposUserList Get a list of all repositories associated with current user.
 
 Get a list of all repositories associated with current user.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiReposUserListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiReposUserListRequest
 */
 func (a *ReposApiService) ReposUserList(ctx context.Context) ApiReposUserListRequest {
 	return ApiReposUserListRequest{
@@ -16940,7 +17031,8 @@ func (a *ReposApiService) ReposUserList(ctx context.Context) ApiReposUserListReq
 }
 
 // Execute executes the request
-//  @return []Repository
+//
+//	@return []Repository
 func (a *ReposApiService) ReposUserListExecute(r ApiReposUserListRequest) ([]Repository, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -16961,10 +17053,10 @@ func (a *ReposApiService) ReposUserListExecute(r ApiReposUserListRequest) ([]Rep
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the ProviderSettingsRequest type satisfies the MappedNullable interface at compile time
@@ -31,6 +33,8 @@ type ProviderSettingsRequest struct {
 	// The service accounts associated with these provider settings
 	ServiceAccounts []string `json:"service_accounts"`
 }
+
+type _ProviderSettingsRequest ProviderSettingsRequest
 
 // NewProviderSettingsRequest instantiates a new ProviderSettingsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -190,6 +194,47 @@ func (o ProviderSettingsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["provider_url"] = o.ProviderUrl
 	toSerialize["service_accounts"] = o.ServiceAccounts
 	return toSerialize, nil
+}
+
+func (o *ProviderSettingsRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"claims",
+		"enabled",
+		"name",
+		"provider_url",
+		"service_accounts",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varProviderSettingsRequest := _ProviderSettingsRequest{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varProviderSettingsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProviderSettingsRequest(varProviderSettingsRequest)
+
+	return err
 }
 
 type NullableProviderSettingsRequest struct {

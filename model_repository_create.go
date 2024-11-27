@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,9 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"time"
 )
 
@@ -62,9 +64,9 @@ type RepositoryCreate struct {
 	// This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting.
 	MovePackages *string `json:"move_packages,omitempty"`
 	// A descriptive name for the repository.
-	Name string `json:"name"`
+	Name string `json:"name" validate:"regexp=^\\\\w[\\\\w \\\\-'\\\\.\\/()]+$"`
 	// Namespace to which this repository belongs.
-	Namespace *string `json:"namespace,omitempty"`
+	Namespace *string `json:"namespace,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// API endpoint where data about this namespace can be retrieved.
 	NamespaceUrl *string `json:"namespace_url,omitempty"`
 	// The number of downloads for packages in the repository.
@@ -118,7 +120,7 @@ type RepositoryCreate struct {
 	// The slug identifies the repository in URIs.
 	Slug *string `json:"slug,omitempty"`
 	// The slug_perm immutably identifies the repository. It will never change once a repository has been created.
-	SlugPerm *string `json:"slug_perm,omitempty"`
+	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// The Cloudsmith region in which package files are stored.
 	StorageRegion *string `json:"storage_region,omitempty"`
 	// If checked, npm packages will be validated strictly to ensure the package matches specifcation. You can turn this on if you want to guarantee that the packages will work with npm-cli and other tools correctly.
@@ -142,6 +144,8 @@ type RepositoryCreate struct {
 	// This defines the minimum level of privilege required for a user to view repository statistics, to include entitlement-based usage, if applicable. If a user does not have the permission, they won't be able to view any statistics, either via the UI, API or CLI.
 	ViewStatistics *string `json:"view_statistics,omitempty"`
 }
+
+type _RepositoryCreate RepositoryCreate
 
 // NewRepositoryCreate instantiates a new RepositoryCreate object
 // This constructor will assign default values to properties that have it defined,
@@ -2463,6 +2467,43 @@ func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 		toSerialize["view_statistics"] = o.ViewStatistics
 	}
 	return toSerialize, nil
+}
+
+func (o *RepositoryCreate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRepositoryCreate := _RepositoryCreate{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRepositoryCreate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryCreate(varRepositoryCreate)
+
+	return err
 }
 
 type NullableRepositoryCreate struct {

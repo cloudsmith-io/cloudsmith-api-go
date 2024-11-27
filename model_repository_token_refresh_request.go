@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -501,7 +501,7 @@ func (o *RepositoryTokenRefreshRequest) GetMetadataOk() (map[string]interface{},
 
 // HasMetadata returns a boolean if a field has been set.
 func (o *RepositoryTokenRefreshRequest) HasMetadata() bool {
-	if o != nil && IsNil(o.Metadata) {
+	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
 

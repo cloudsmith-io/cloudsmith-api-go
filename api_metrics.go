@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -73,9 +73,9 @@ MetricsEntitlementsAccountList View for listing entitlement token metrics, acros
 
 View for listing entitlement token metrics, across an account.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @return ApiMetricsEntitlementsAccountListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@return ApiMetricsEntitlementsAccountListRequest
 */
 func (a *MetricsApiService) MetricsEntitlementsAccountList(ctx context.Context, owner string) ApiMetricsEntitlementsAccountListRequest {
 	return ApiMetricsEntitlementsAccountListRequest{
@@ -86,7 +86,8 @@ func (a *MetricsApiService) MetricsEntitlementsAccountList(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return EntitlementUsageMetrics
+//
+//	@return EntitlementUsageMetrics
 func (a *MetricsApiService) MetricsEntitlementsAccountListExecute(r ApiMetricsEntitlementsAccountListRequest) (*EntitlementUsageMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -108,19 +109,19 @@ func (a *MetricsApiService) MetricsEntitlementsAccountListExecute(r ApiMetricsEn
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.finish != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "", "")
 	}
 	if r.start != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "", "")
 	}
 	if r.tokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tokens", r.tokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tokens", r.tokens, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -262,10 +263,10 @@ MetricsEntitlementsRepoList View for listing entitlement token metrics, for a re
 
 View for listing entitlement token metrics, for a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiMetricsEntitlementsRepoListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiMetricsEntitlementsRepoListRequest
 */
 func (a *MetricsApiService) MetricsEntitlementsRepoList(ctx context.Context, owner string, repo string) ApiMetricsEntitlementsRepoListRequest {
 	return ApiMetricsEntitlementsRepoListRequest{
@@ -277,7 +278,8 @@ func (a *MetricsApiService) MetricsEntitlementsRepoList(ctx context.Context, own
 }
 
 // Execute executes the request
-//  @return EntitlementUsageMetrics
+//
+//	@return EntitlementUsageMetrics
 func (a *MetricsApiService) MetricsEntitlementsRepoListExecute(r ApiMetricsEntitlementsRepoListRequest) (*EntitlementUsageMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -300,19 +302,19 @@ func (a *MetricsApiService) MetricsEntitlementsRepoListExecute(r ApiMetricsEntit
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.finish != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "", "")
 	}
 	if r.start != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "", "")
 	}
 	if r.tokens != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "tokens", r.tokens, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "tokens", r.tokens, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -454,10 +456,10 @@ MetricsPackagesList View for listing package usage metrics, for a repository.
 
 View for listing package usage metrics, for a repository.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiMetricsPackagesListRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiMetricsPackagesListRequest
 */
 func (a *MetricsApiService) MetricsPackagesList(ctx context.Context, owner string, repo string) ApiMetricsPackagesListRequest {
 	return ApiMetricsPackagesListRequest{
@@ -469,7 +471,8 @@ func (a *MetricsApiService) MetricsPackagesList(ctx context.Context, owner strin
 }
 
 // Execute executes the request
-//  @return PackageUsageMetrics
+//
+//	@return PackageUsageMetrics
 func (a *MetricsApiService) MetricsPackagesListExecute(r ApiMetricsPackagesListRequest) (*PackageUsageMetrics, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -492,19 +495,19 @@ func (a *MetricsApiService) MetricsPackagesListExecute(r ApiMetricsPackagesListR
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
 	}
 	if r.finish != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "finish", r.finish, "", "")
 	}
 	if r.packages != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "packages", r.packages, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "packages", r.packages, "", "")
 	}
 	if r.start != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "start", r.start, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

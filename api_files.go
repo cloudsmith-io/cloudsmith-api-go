@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.533.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -46,11 +46,11 @@ FilesAbort Abort a multipart file upload.
 
 Abort a multipart file upload.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiFilesAbortRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiFilesAbortRequest
 */
 func (a *FilesApiService) FilesAbort(ctx context.Context, owner string, repo string, identifier string) ApiFilesAbortRequest {
 	return ApiFilesAbortRequest{
@@ -200,11 +200,11 @@ FilesComplete Complete a multipart file upload.
 
 Complete a multipart file upload.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiFilesCompleteRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiFilesCompleteRequest
 */
 func (a *FilesApiService) FilesComplete(ctx context.Context, owner string, repo string, identifier string) ApiFilesCompleteRequest {
 	return ApiFilesCompleteRequest{
@@ -217,7 +217,8 @@ func (a *FilesApiService) FilesComplete(ctx context.Context, owner string, repo 
 }
 
 // Execute executes the request
-//  @return PackageFileUpload
+//
+//	@return PackageFileUpload
 func (a *FilesApiService) FilesCompleteExecute(r ApiFilesCompleteRequest) (*PackageFileUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -364,10 +365,10 @@ FilesCreate Request URL(s) to upload new package file upload(s) to.
 
 Request URL(s) to upload new package file upload(s) to.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiFilesCreateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiFilesCreateRequest
 */
 func (a *FilesApiService) FilesCreate(ctx context.Context, owner string, repo string) ApiFilesCreateRequest {
 	return ApiFilesCreateRequest{
@@ -379,7 +380,8 @@ func (a *FilesApiService) FilesCreate(ctx context.Context, owner string, repo st
 }
 
 // Execute executes the request
-//  @return PackageFileUpload
+//
+//	@return PackageFileUpload
 func (a *FilesApiService) FilesCreateExecute(r ApiFilesCreateRequest) (*PackageFileUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -534,11 +536,11 @@ FilesInfo Get upload information to perform a multipart file upload.
 
 Get upload information to perform a multipart file upload.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @param identifier
- @return ApiFilesInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param identifier
+	@return ApiFilesInfoRequest
 */
 func (a *FilesApiService) FilesInfo(ctx context.Context, owner string, repo string, identifier string) ApiFilesInfoRequest {
 	return ApiFilesInfoRequest{
@@ -551,7 +553,8 @@ func (a *FilesApiService) FilesInfo(ctx context.Context, owner string, repo stri
 }
 
 // Execute executes the request
-//  @return PackageFilePartsUpload
+//
+//	@return PackageFilePartsUpload
 func (a *FilesApiService) FilesInfoExecute(r ApiFilesInfoRequest) (*PackageFilePartsUpload, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -577,9 +580,9 @@ func (a *FilesApiService) FilesInfoExecute(r ApiFilesInfoRequest) (*PackageFileP
 		return localVarReturnValue, nil, reportError("filename is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "filename", r.filename, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "filename", r.filename, "", "")
 	if r.partNumber != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "part_number", r.partNumber, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "part_number", r.partNumber, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -703,10 +706,10 @@ FilesValidate Validate parameters used for create.
 
 Validate parameters used for create.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiFilesValidateRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiFilesValidateRequest
 */
 func (a *FilesApiService) FilesValidate(ctx context.Context, owner string, repo string) ApiFilesValidateRequest {
 	return ApiFilesValidateRequest{
