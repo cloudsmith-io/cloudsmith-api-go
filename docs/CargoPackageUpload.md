@@ -47,6 +47,7 @@ Name | Type | Description | Notes
 **OriginRepository** | Pointer to **string** |  | [optional] [readonly] 
 **OriginRepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
 **PackageType** | Pointer to **int64** | The type of package contents. | [optional] [readonly] 
+**PolicyViolated** | Pointer to **bool** | Whether or not the package has violated any policy. | [optional] [readonly] 
 **Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
@@ -1244,6 +1245,31 @@ SetPackageType sets PackageType field to given value.
 `func (o *CargoPackageUpload) HasPackageType() bool`
 
 HasPackageType returns a boolean if a field has been set.
+
+### GetPolicyViolated
+
+`func (o *CargoPackageUpload) GetPolicyViolated() bool`
+
+GetPolicyViolated returns the PolicyViolated field if non-nil, zero value otherwise.
+
+### GetPolicyViolatedOk
+
+`func (o *CargoPackageUpload) GetPolicyViolatedOk() (*bool, bool)`
+
+GetPolicyViolatedOk returns a tuple with the PolicyViolated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyViolated
+
+`func (o *CargoPackageUpload) SetPolicyViolated(v bool)`
+
+SetPolicyViolated sets PolicyViolated field to given value.
+
+### HasPolicyViolated
+
+`func (o *CargoPackageUpload) HasPolicyViolated() bool`
+
+HasPolicyViolated returns a boolean if a field has been set.
 
 ### GetRelease
 

@@ -50,6 +50,7 @@ Name | Type | Description | Notes
 **OriginRepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
 **PackageType** | Pointer to **int64** | The type of package contents. | [optional] [readonly] 
 **Packaging** | Pointer to **NullableString** | Artifact&#39;s Maven packaging type. | [optional] 
+**PolicyViolated** | Pointer to **bool** | Whether or not the package has violated any policy. | [optional] [readonly] 
 **Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
@@ -1355,6 +1356,31 @@ HasPackaging returns a boolean if a field has been set.
 `func (o *MavenPackageUpload) UnsetPackaging()`
 
 UnsetPackaging ensures that no value is present for Packaging, not even an explicit nil
+### GetPolicyViolated
+
+`func (o *MavenPackageUpload) GetPolicyViolated() bool`
+
+GetPolicyViolated returns the PolicyViolated field if non-nil, zero value otherwise.
+
+### GetPolicyViolatedOk
+
+`func (o *MavenPackageUpload) GetPolicyViolatedOk() (*bool, bool)`
+
+GetPolicyViolatedOk returns a tuple with the PolicyViolated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPolicyViolated
+
+`func (o *MavenPackageUpload) SetPolicyViolated(v bool)`
+
+SetPolicyViolated sets PolicyViolated field to given value.
+
+### HasPolicyViolated
+
+`func (o *MavenPackageUpload) HasPolicyViolated() bool`
+
+HasPolicyViolated returns a boolean if a field has been set.
+
 ### GetRelease
 
 `func (o *MavenPackageUpload) GetRelease() string`

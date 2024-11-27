@@ -40,6 +40,8 @@ Method | HTTP request | Description
 [**OrgsOpenidConnectRead**](OrgsApi.md#OrgsOpenidConnectRead) | **Get** /orgs/{org}/openid-connect/{slug_perm}/ | Retrieve a specific OpenID Connect provider setting for the org.
 [**OrgsOpenidConnectUpdate**](OrgsApi.md#OrgsOpenidConnectUpdate) | **Put** /orgs/{org}/openid-connect/{slug_perm}/ | Update a specific OpenID Connect provider setting for the org.
 [**OrgsRead**](OrgsApi.md#OrgsRead) | **Get** /orgs/{org}/ | Get the details for the specific organization.
+[**OrgsSamlAuthenticationPartialUpdate**](OrgsApi.md#OrgsSamlAuthenticationPartialUpdate) | **Patch** /orgs/{org}/saml-authentication | Update the SAML Authentication settings for this Organization.
+[**OrgsSamlAuthenticationRead**](OrgsApi.md#OrgsSamlAuthenticationRead) | **Get** /orgs/{org}/saml-authentication | Retrieve the SAML Authentication settings for this Organization.
 [**OrgsSamlGroupSyncCreate**](OrgsApi.md#OrgsSamlGroupSyncCreate) | **Post** /orgs/{org}/saml-group-sync/ | Create a new SAML Group Sync mapping within an organization.
 [**OrgsSamlGroupSyncDelete**](OrgsApi.md#OrgsSamlGroupSyncDelete) | **Delete** /orgs/{org}/saml-group-sync/{slug_perm}/ | Delete a SAML Group Sync mapping from an organization.
 [**OrgsSamlGroupSyncDisable**](OrgsApi.md#OrgsSamlGroupSyncDisable) | **Post** /orgs/{org}/saml-group-sync/disable/ | Disable SAML Group Sync for this organization.
@@ -2686,6 +2688,148 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Organization**](Organization.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsSamlAuthenticationPartialUpdate
+
+> OrganizationSAMLAuth OrgsSamlAuthenticationPartialUpdate(ctx, org).Data(data).Execute()
+
+Update the SAML Authentication settings for this Organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	data := *openapiclient.NewOrganizationSAMLAuthRequestPatch() // OrganizationSAMLAuthRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsSamlAuthenticationPartialUpdate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlAuthenticationPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsSamlAuthenticationPartialUpdate`: OrganizationSAMLAuth
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlAuthenticationPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsSamlAuthenticationPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **data** | [**OrganizationSAMLAuthRequestPatch**](OrganizationSAMLAuthRequestPatch.md) |  | 
+
+### Return type
+
+[**OrganizationSAMLAuth**](OrganizationSAMLAuth.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsSamlAuthenticationRead
+
+> OrganizationSAMLAuth OrgsSamlAuthenticationRead(ctx, org).Execute()
+
+Retrieve the SAML Authentication settings for this Organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsSamlAuthenticationRead(context.Background(), org).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsSamlAuthenticationRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsSamlAuthenticationRead`: OrganizationSAMLAuth
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsSamlAuthenticationRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsSamlAuthenticationReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OrganizationSAMLAuth**](OrganizationSAMLAuth.md)
 
 ### Authorization
 

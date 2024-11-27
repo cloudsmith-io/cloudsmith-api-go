@@ -137,6 +137,8 @@ docs/OrganizationPackageLicensePolicyRequestPatch.md
 docs/OrganizationPackageVulnerabilityPolicy.md
 docs/OrganizationPackageVulnerabilityPolicyRequest.md
 docs/OrganizationPackageVulnerabilityPolicyRequestPatch.md
+docs/OrganizationSAMLAuth.md
+docs/OrganizationSAMLAuthRequestPatch.md
 docs/OrganizationTeam.md
 docs/OrganizationTeamInvite.md
 docs/OrganizationTeamMembers.md
@@ -389,6 +391,8 @@ model_organization_package_license_policy_request_patch.go
 model_organization_package_vulnerability_policy.go
 model_organization_package_vulnerability_policy_request.go
 model_organization_package_vulnerability_policy_request_patch.go
+model_organization_saml_auth.go
+model_organization_saml_auth_request_patch.go
 model_organization_team.go
 model_organization_team_invite.go
 model_organization_team_members.go

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.536.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -73,6 +73,8 @@ type VagrantPackageUpload struct {
 	OriginRepositoryUrl *string `json:"origin_repository_url,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
+	// Whether or not the package has violated any policy.
+	PolicyViolated *bool `json:"policy_violated,omitempty"`
 	// The virtual machine provider for the box.
 	Provider string `json:"provider"`
 	// The release of the package version (if any).
@@ -1583,6 +1585,38 @@ func (o *VagrantPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
+// GetPolicyViolated returns the PolicyViolated field value if set, zero value otherwise.
+func (o *VagrantPackageUpload) GetPolicyViolated() bool {
+	if o == nil || IsNil(o.PolicyViolated) {
+		var ret bool
+		return ret
+	}
+	return *o.PolicyViolated
+}
+
+// GetPolicyViolatedOk returns a tuple with the PolicyViolated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VagrantPackageUpload) GetPolicyViolatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.PolicyViolated) {
+		return nil, false
+	}
+	return o.PolicyViolated, true
+}
+
+// HasPolicyViolated returns a boolean if a field has been set.
+func (o *VagrantPackageUpload) HasPolicyViolated() bool {
+	if o != nil && !IsNil(o.PolicyViolated) {
+		return true
+	}
+
+	return false
+}
+
+// SetPolicyViolated gets a reference to the given bool and assigns it to the PolicyViolated field.
+func (o *VagrantPackageUpload) SetPolicyViolated(v bool) {
+	o.PolicyViolated = &v
+}
+
 // GetProvider returns the Provider field value
 func (o *VagrantPackageUpload) GetProvider() string {
 	if o == nil {
@@ -2890,6 +2924,9 @@ func (o VagrantPackageUpload) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
+	}
+	if !IsNil(o.PolicyViolated) {
+		toSerialize["policy_violated"] = o.PolicyViolated
 	}
 	toSerialize["provider"] = o.Provider
 	if o.Release.IsSet() {
