@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.536.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -71,6 +71,8 @@ type NugetPackageUpload struct {
 	OriginRepositoryUrl *string        `json:"origin_repository_url,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
+	// Whether or not the package has violated any policy.
+	PolicyViolated *bool `json:"policy_violated,omitempty"`
 	// The release of the package version (if any).
 	Release       NullableString `json:"release,omitempty"`
 	Repository    *string        `json:"repository,omitempty"`
@@ -1593,6 +1595,38 @@ func (o *NugetPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
+// GetPolicyViolated returns the PolicyViolated field value if set, zero value otherwise.
+func (o *NugetPackageUpload) GetPolicyViolated() bool {
+	if o == nil || IsNil(o.PolicyViolated) {
+		var ret bool
+		return ret
+	}
+	return *o.PolicyViolated
+}
+
+// GetPolicyViolatedOk returns a tuple with the PolicyViolated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NugetPackageUpload) GetPolicyViolatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.PolicyViolated) {
+		return nil, false
+	}
+	return o.PolicyViolated, true
+}
+
+// HasPolicyViolated returns a boolean if a field has been set.
+func (o *NugetPackageUpload) HasPolicyViolated() bool {
+	if o != nil && !IsNil(o.PolicyViolated) {
+		return true
+	}
+
+	return false
+}
+
+// SetPolicyViolated gets a reference to the given bool and assigns it to the PolicyViolated field.
+func (o *NugetPackageUpload) SetPolicyViolated(v bool) {
+	o.PolicyViolated = &v
+}
+
 // GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NugetPackageUpload) GetRelease() string {
 	if o == nil || IsNil(o.Release.Get()) {
@@ -2897,6 +2931,9 @@ func (o NugetPackageUpload) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
+	}
+	if !IsNil(o.PolicyViolated) {
+		toSerialize["policy_violated"] = o.PolicyViolated
 	}
 	if o.Release.IsSet() {
 		toSerialize["release"] = o.Release.Get()

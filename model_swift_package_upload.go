@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.536.1
+API version: 1.566.9
 Contact: support@cloudsmith.io
 */
 
@@ -79,6 +79,8 @@ type SwiftPackageUpload struct {
 	OriginRepositoryUrl *string `json:"origin_repository_url,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
+	// Whether or not the package has violated any policy.
+	PolicyViolated *bool `json:"policy_violated,omitempty"`
 	// The URL of the readme for the package.
 	ReadmeUrl *string `json:"readme_url,omitempty"`
 	// The release of the package version (if any).
@@ -1699,6 +1701,38 @@ func (o *SwiftPackageUpload) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
+// GetPolicyViolated returns the PolicyViolated field value if set, zero value otherwise.
+func (o *SwiftPackageUpload) GetPolicyViolated() bool {
+	if o == nil || IsNil(o.PolicyViolated) {
+		var ret bool
+		return ret
+	}
+	return *o.PolicyViolated
+}
+
+// GetPolicyViolatedOk returns a tuple with the PolicyViolated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUpload) GetPolicyViolatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.PolicyViolated) {
+		return nil, false
+	}
+	return o.PolicyViolated, true
+}
+
+// HasPolicyViolated returns a boolean if a field has been set.
+func (o *SwiftPackageUpload) HasPolicyViolated() bool {
+	if o != nil && !IsNil(o.PolicyViolated) {
+		return true
+	}
+
+	return false
+}
+
+// SetPolicyViolated gets a reference to the given bool and assigns it to the PolicyViolated field.
+func (o *SwiftPackageUpload) SetPolicyViolated(v bool) {
+	o.PolicyViolated = &v
+}
+
 // GetReadmeUrl returns the ReadmeUrl field value if set, zero value otherwise.
 func (o *SwiftPackageUpload) GetReadmeUrl() string {
 	if o == nil || IsNil(o.ReadmeUrl) {
@@ -3047,6 +3081,9 @@ func (o SwiftPackageUpload) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
+	}
+	if !IsNil(o.PolicyViolated) {
+		toSerialize["policy_violated"] = o.PolicyViolated
 	}
 	if !IsNil(o.ReadmeUrl) {
 		toSerialize["readme_url"] = o.ReadmeUrl

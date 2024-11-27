@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.536.1
+  version: 1.566.9
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -2886,6 +2886,100 @@ paths:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
       summary: Update a specific OpenID Connect provider setting for the org.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+  /orgs/{org}/saml-authentication:
+    get:
+      description: Retrieve the SAML Authentication settings for this Organization.
+      operationId: orgs_saml-authentication_read
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSAMLAuth'
+          description: Retrieved the SAML Authentication settings.
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: SAML Authentication is not available; please upgrade your account!
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Organization not found.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve the SAML Authentication settings for this Organization.
+      tags:
+      - orgs
+    patch:
+      description: Update the SAML Authentication settings for this Organization.
+      operationId: orgs_saml-authentication_partial_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationSAMLAuthRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationSAMLAuth'
+          description: Updated the SAML Authentication settings.
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: SAML Authentication is not available; please upgrade your account!
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Organization not found.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update the SAML Authentication settings for this Organization.
       tags:
       - orgs
       x-codegen-request-body-name: data
@@ -16031,6 +16125,63 @@ components:
           type: array
           uniqueItems: true
       type: object
+    OrganizationSAMLAuth:
+      example:
+        saml_auth_enforced: true
+        saml_auth_enabled: true
+        saml_metadata_inline: saml_metadata_inline
+        saml_metadata_url: https://openapi-generator.tech
+      properties:
+        saml_auth_enabled:
+          title: Saml auth enabled
+          type: boolean
+        saml_auth_enforced:
+          title: Saml auth enforced
+          type: boolean
+        saml_metadata_inline:
+          description: "If configured, SAML metadata will be used as entered instead\
+            \ of retrieved from a remote URL."
+          maxLength: 32000
+          title: Inline SAML metadata
+          type: string
+        saml_metadata_url:
+          description: "If configured, SAML metadata be retrieved from a remote URL."
+          format: uri
+          maxLength: 254
+          nullable: true
+          title: Saml metadata url
+          type: string
+      required:
+      - saml_auth_enabled
+      - saml_auth_enforced
+      type: object
+    OrganizationSAMLAuthRequestPatch:
+      example:
+        saml_auth_enforced: true
+        saml_auth_enabled: true
+        saml_metadata_inline: saml_metadata_inline
+        saml_metadata_url: https://openapi-generator.tech
+      properties:
+        saml_auth_enabled:
+          title: Saml auth enabled
+          type: boolean
+        saml_auth_enforced:
+          title: Saml auth enforced
+          type: boolean
+        saml_metadata_inline:
+          description: "If configured, SAML metadata will be used as entered instead\
+            \ of retrieved from a remote URL."
+          maxLength: 32000
+          title: Inline SAML metadata
+          type: string
+        saml_metadata_url:
+          description: "If configured, SAML metadata be retrieved from a remote URL."
+          format: uri
+          maxLength: 254
+          nullable: true
+          title: Saml metadata url
+          type: string
+      type: object
     OrganizationGroupSync:
       example:
         role: Member
@@ -17027,6 +17178,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -17248,6 +17400,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -17567,6 +17724,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -17788,6 +17946,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -18095,6 +18258,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -18316,6 +18480,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -18623,6 +18792,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -18844,6 +19014,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -19158,6 +19333,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -19379,6 +19555,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -19739,6 +19920,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -19974,6 +20156,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -20281,6 +20468,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -20502,6 +20690,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -20825,6 +21018,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -21047,6 +21241,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         r_version:
           description: Binary package uploads should specify the version of R they
             were built for.
@@ -21362,6 +21561,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -21583,6 +21783,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -21922,6 +22127,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -22143,6 +22349,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -22450,6 +22661,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -22671,6 +22883,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -22978,6 +23195,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -23199,6 +23417,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -23514,6 +23737,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -23735,6 +23959,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -24042,6 +24271,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -24263,6 +24493,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -24570,6 +24805,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -24791,6 +25027,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -25175,6 +25416,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -25418,6 +25660,11 @@ components:
           nullable: true
           title: Packaging
           type: string
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -25744,6 +25991,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -25965,6 +26213,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -26279,6 +26532,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -26500,6 +26754,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -26807,6 +27066,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -27028,6 +27288,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -27335,6 +27600,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -27556,6 +27822,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -27901,6 +28172,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -28122,6 +28394,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -28436,6 +28713,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -28657,6 +28935,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -28964,6 +29247,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -29185,6 +29469,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -29552,6 +29841,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -29791,6 +30081,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         readme_url:
           description: The URL of the readme for the package.
           format: uri
@@ -30115,6 +30410,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -30336,6 +30632,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -30664,6 +30965,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         provider: provider
         subtype: subtype
@@ -30885,6 +31187,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         provider:
           description: The virtual machine provider for the box.
           minLength: 1
@@ -31191,6 +31498,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -31412,6 +31720,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -31800,6 +32113,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -32021,6 +32335,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -32322,6 +32641,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -32543,6 +32863,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         repository:
           minLength: 1
           readOnly: true
@@ -32823,6 +33148,7 @@ components:
         type_display: type_display
         vulnerability_scan_results_url: https://openapi-generator.tech
         dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
         downloads: 0
         subtype: subtype
         uploader: uploader
@@ -33044,6 +33370,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -33612,6 +33943,11 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
         release:
           description: The release of the package version (if any).
           nullable: true
@@ -36855,6 +37191,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -37234,6 +37571,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -37613,6 +37951,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -38005,6 +38344,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -38568,6 +38908,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -38947,6 +39288,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -39326,6 +39668,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -39709,6 +40052,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -40190,6 +40534,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -40571,6 +40916,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -40950,6 +41296,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -41335,6 +41682,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -41848,6 +42196,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -42227,6 +42576,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
           type: string
@@ -42690,7 +43040,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.536.1
+        version: 1.566.9
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -42700,7 +43050,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.536.1
+          default: 1.566.9
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
