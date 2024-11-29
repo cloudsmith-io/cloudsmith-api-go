@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,7 +22,8 @@ var _ MappedNullable = &RepositoryGeoIpTestAddress{}
 // RepositoryGeoIpTestAddress struct for RepositoryGeoIpTestAddress
 type RepositoryGeoIpTestAddress struct {
 	// The IP addresses to test against this repository
-	Addresses []string `json:"addresses"`
+	Addresses            []string `json:"addresses"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryGeoIpTestAddress RepositoryGeoIpTestAddress
@@ -81,6 +81,11 @@ func (o RepositoryGeoIpTestAddress) MarshalJSON() ([]byte, error) {
 func (o RepositoryGeoIpTestAddress) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["addresses"] = o.Addresses
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *RepositoryGeoIpTestAddress) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryGeoIpTestAddress := _RepositoryGeoIpTestAddress{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryGeoIpTestAddress)
+	err = json.Unmarshal(data, &varRepositoryGeoIpTestAddress)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryGeoIpTestAddress(varRepositoryGeoIpTestAddress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "addresses")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

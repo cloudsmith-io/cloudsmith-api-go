@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,8 +24,9 @@ type Distribution struct {
 	Name    string  `json:"name"`
 	SelfUrl *string `json:"self_url,omitempty"`
 	// The slug identifier for this distribution
-	Slug     *string        `json:"slug,omitempty"`
-	Variants NullableString `json:"variants,omitempty"`
+	Slug                 *string        `json:"slug,omitempty"`
+	Variants             NullableString `json:"variants,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Distribution Distribution
@@ -200,6 +200,11 @@ func (o Distribution) ToMap() (map[string]interface{}, error) {
 	if o.Variants.IsSet() {
 		toSerialize["variants"] = o.Variants.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -227,15 +232,23 @@ func (o *Distribution) UnmarshalJSON(data []byte) (err error) {
 
 	varDistribution := _Distribution{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDistribution)
+	err = json.Unmarshal(data, &varDistribution)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Distribution(varDistribution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "self_url")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "variants")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

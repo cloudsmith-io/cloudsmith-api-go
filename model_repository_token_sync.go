@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -21,8 +21,11 @@ var _ MappedNullable = &RepositoryTokenSync{}
 // RepositoryTokenSync struct for RepositoryTokenSync
 type RepositoryTokenSync struct {
 	// The entitlements that have been synchronised.
-	Tokens []RepositoryToken `json:"tokens,omitempty"`
+	Tokens               []RepositoryToken `json:"tokens,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepositoryTokenSync RepositoryTokenSync
 
 // NewRepositoryTokenSync instantiates a new RepositoryTokenSync object
 // This constructor will assign default values to properties that have it defined,
@@ -86,7 +89,33 @@ func (o RepositoryTokenSync) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tokens) {
 		toSerialize["tokens"] = o.Tokens
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepositoryTokenSync) UnmarshalJSON(data []byte) (err error) {
+	varRepositoryTokenSync := _RepositoryTokenSync{}
+
+	err = json.Unmarshal(data, &varRepositoryTokenSync)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryTokenSync(varRepositoryTokenSync)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tokens")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepositoryTokenSync struct {

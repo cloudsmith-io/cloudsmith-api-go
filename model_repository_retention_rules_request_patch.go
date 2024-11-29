@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -33,8 +33,11 @@ type RepositoryRetentionRulesRequestPatch struct {
 	// If checked, retention will apply to packages by package type (e.g. by binary, by source, etc.), rather than across all package types for one or more formats. <br>For example, when retaining by a limit of 1 and you upload DebPackage 1.0 and DebSourcePackage 1.0, no packages are deleted because they are different package types, binary and source respectively.
 	RetentionGroupByPackageType *bool `json:"retention_group_by_package_type,omitempty"`
 	// The maximum X total size (in bytes) of packages to retain.
-	RetentionSizeLimit *int64 `json:"retention_size_limit,omitempty"`
+	RetentionSizeLimit   *int64 `json:"retention_size_limit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepositoryRetentionRulesRequestPatch RepositoryRetentionRulesRequestPatch
 
 // NewRepositoryRetentionRulesRequestPatch instantiates a new RepositoryRetentionRulesRequestPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -308,7 +311,39 @@ func (o RepositoryRetentionRulesRequestPatch) ToMap() (map[string]interface{}, e
 	if !IsNil(o.RetentionSizeLimit) {
 		toSerialize["retention_size_limit"] = o.RetentionSizeLimit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepositoryRetentionRulesRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	varRepositoryRetentionRulesRequestPatch := _RepositoryRetentionRulesRequestPatch{}
+
+	err = json.Unmarshal(data, &varRepositoryRetentionRulesRequestPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryRetentionRulesRequestPatch(varRepositoryRetentionRulesRequestPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "retention_count_limit")
+		delete(additionalProperties, "retention_days_limit")
+		delete(additionalProperties, "retention_enabled")
+		delete(additionalProperties, "retention_group_by_format")
+		delete(additionalProperties, "retention_group_by_name")
+		delete(additionalProperties, "retention_group_by_package_type")
+		delete(additionalProperties, "retention_size_limit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepositoryRetentionRulesRequestPatch struct {

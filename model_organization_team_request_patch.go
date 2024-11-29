@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,14 @@ var _ MappedNullable = &OrganizationTeamRequestPatch{}
 
 // OrganizationTeamRequestPatch struct for OrganizationTeamRequestPatch
 type OrganizationTeamRequestPatch struct {
-	Description *string `json:"description,omitempty"`
-	Name        *string `json:"name,omitempty"`
-	Slug        *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	Visibility  *string `json:"visibility,omitempty"`
+	Description          *string `json:"description,omitempty"`
+	Name                 *string `json:"name,omitempty"`
+	Slug                 *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	Visibility           *string `json:"visibility,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrganizationTeamRequestPatch OrganizationTeamRequestPatch
 
 // NewOrganizationTeamRequestPatch instantiates a new OrganizationTeamRequestPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -197,7 +200,36 @@ func (o OrganizationTeamRequestPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Visibility) {
 		toSerialize["visibility"] = o.Visibility
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrganizationTeamRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	varOrganizationTeamRequestPatch := _OrganizationTeamRequestPatch{}
+
+	err = json.Unmarshal(data, &varOrganizationTeamRequestPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationTeamRequestPatch(varOrganizationTeamRequestPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "visibility")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrganizationTeamRequestPatch struct {

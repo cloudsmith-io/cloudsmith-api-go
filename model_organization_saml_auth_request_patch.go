@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -25,8 +25,11 @@ type OrganizationSAMLAuthRequestPatch struct {
 	// If configured, SAML metadata will be used as entered instead of retrieved from a remote URL.
 	SamlMetadataInline *string `json:"saml_metadata_inline,omitempty"`
 	// If configured, SAML metadata be retrieved from a remote URL.
-	SamlMetadataUrl NullableString `json:"saml_metadata_url,omitempty"`
+	SamlMetadataUrl      NullableString `json:"saml_metadata_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrganizationSAMLAuthRequestPatch OrganizationSAMLAuthRequestPatch
 
 // NewOrganizationSAMLAuthRequestPatch instantiates a new OrganizationSAMLAuthRequestPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -206,7 +209,36 @@ func (o OrganizationSAMLAuthRequestPatch) ToMap() (map[string]interface{}, error
 	if o.SamlMetadataUrl.IsSet() {
 		toSerialize["saml_metadata_url"] = o.SamlMetadataUrl.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrganizationSAMLAuthRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	varOrganizationSAMLAuthRequestPatch := _OrganizationSAMLAuthRequestPatch{}
+
+	err = json.Unmarshal(data, &varOrganizationSAMLAuthRequestPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationSAMLAuthRequestPatch(varOrganizationSAMLAuthRequestPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "saml_auth_enabled")
+		delete(additionalProperties, "saml_auth_enforced")
+		delete(additionalProperties, "saml_metadata_inline")
+		delete(additionalProperties, "saml_metadata_url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrganizationSAMLAuthRequestPatch struct {

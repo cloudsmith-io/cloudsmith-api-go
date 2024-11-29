@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -23,8 +23,11 @@ type UserAuthTokenRequest struct {
 	// Email address to authenticate with
 	Email *string `json:"email,omitempty"`
 	// Password to authenticate with
-	Password *string `json:"password,omitempty"`
+	Password             *string `json:"password,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UserAuthTokenRequest UserAuthTokenRequest
 
 // NewUserAuthTokenRequest instantiates a new UserAuthTokenRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -123,7 +126,34 @@ func (o UserAuthTokenRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Password) {
 		toSerialize["password"] = o.Password
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UserAuthTokenRequest) UnmarshalJSON(data []byte) (err error) {
+	varUserAuthTokenRequest := _UserAuthTokenRequest{}
+
+	err = json.Unmarshal(data, &varUserAuthTokenRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserAuthTokenRequest(varUserAuthTokenRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "password")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUserAuthTokenRequest struct {

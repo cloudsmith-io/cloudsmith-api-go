@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -105,7 +104,8 @@ type RepositoryCreateRequest struct {
 	// If checked, users can use and manage their own user-specific entitlement token for the repository (if private). Otherwise, user-specific entitlements are disabled for all users.
 	UserEntitlementsEnabled *bool `json:"user_entitlements_enabled,omitempty"`
 	// This defines the minimum level of privilege required for a user to view repository statistics, to include entitlement-based usage, if applicable. If a user does not have the permission, they won't be able to view any statistics, either via the UI, API or CLI.
-	ViewStatistics *string `json:"view_statistics,omitempty"`
+	ViewStatistics       *string `json:"view_statistics,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryCreateRequest RepositoryCreateRequest
@@ -1672,6 +1672,11 @@ func (o RepositoryCreateRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ViewStatistics) {
 		toSerialize["view_statistics"] = o.ViewStatistics
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1699,15 +1704,61 @@ func (o *RepositoryCreateRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryCreateRequest := _RepositoryCreateRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryCreateRequest)
+	err = json.Unmarshal(data, &varRepositoryCreateRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryCreateRequest(varRepositoryCreateRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content_kind")
+		delete(additionalProperties, "contextual_auth_realm")
+		delete(additionalProperties, "copy_own")
+		delete(additionalProperties, "copy_packages")
+		delete(additionalProperties, "default_privilege")
+		delete(additionalProperties, "delete_own")
+		delete(additionalProperties, "delete_packages")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "distributes")
+		delete(additionalProperties, "docker_refresh_tokens_enabled")
+		delete(additionalProperties, "enforce_eula")
+		delete(additionalProperties, "index_files")
+		delete(additionalProperties, "manage_entitlements_privilege")
+		delete(additionalProperties, "move_own")
+		delete(additionalProperties, "move_packages")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "open_source_license")
+		delete(additionalProperties, "open_source_project_url")
+		delete(additionalProperties, "proxy_npmjs")
+		delete(additionalProperties, "proxy_pypi")
+		delete(additionalProperties, "raw_package_index_enabled")
+		delete(additionalProperties, "raw_package_index_signatures_enabled")
+		delete(additionalProperties, "replace_packages")
+		delete(additionalProperties, "replace_packages_by_default")
+		delete(additionalProperties, "repository_type_str")
+		delete(additionalProperties, "resync_own")
+		delete(additionalProperties, "resync_packages")
+		delete(additionalProperties, "scan_own")
+		delete(additionalProperties, "scan_packages")
+		delete(additionalProperties, "show_setup_all")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "storage_region")
+		delete(additionalProperties, "strict_npm_validation")
+		delete(additionalProperties, "tag_pre_releases_as_latest")
+		delete(additionalProperties, "use_debian_labels")
+		delete(additionalProperties, "use_default_cargo_upstream")
+		delete(additionalProperties, "use_entitlements_privilege")
+		delete(additionalProperties, "use_noarch_packages")
+		delete(additionalProperties, "use_source_packages")
+		delete(additionalProperties, "use_vulnerability_scanning")
+		delete(additionalProperties, "user_entitlements_enabled")
+		delete(additionalProperties, "view_statistics")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

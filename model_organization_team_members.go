@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,7 +22,8 @@ var _ MappedNullable = &OrganizationTeamMembers{}
 // OrganizationTeamMembers struct for OrganizationTeamMembers
 type OrganizationTeamMembers struct {
 	// The team members
-	Members []OrganizationTeamMembership `json:"members"`
+	Members              []OrganizationTeamMembership `json:"members"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OrganizationTeamMembers OrganizationTeamMembers
@@ -81,6 +81,11 @@ func (o OrganizationTeamMembers) MarshalJSON() ([]byte, error) {
 func (o OrganizationTeamMembers) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["members"] = o.Members
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *OrganizationTeamMembers) UnmarshalJSON(data []byte) (err error) {
 
 	varOrganizationTeamMembers := _OrganizationTeamMembers{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrganizationTeamMembers)
+	err = json.Unmarshal(data, &varOrganizationTeamMembers)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OrganizationTeamMembers(varOrganizationTeamMembers)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "members")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,7 +24,8 @@ type OrganizationTeamInvite struct {
 	// The role to be assigned to the invited user in the team.
 	Role *string `json:"role,omitempty"`
 	// The team identifier (slug).
-	Team string `json:"team" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	Team                 string `json:"team" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OrganizationTeamInvite OrganizationTeamInvite
@@ -122,6 +122,11 @@ func (o OrganizationTeamInvite) ToMap() (map[string]interface{}, error) {
 		toSerialize["role"] = o.Role
 	}
 	toSerialize["team"] = o.Team
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -149,15 +154,21 @@ func (o *OrganizationTeamInvite) UnmarshalJSON(data []byte) (err error) {
 
 	varOrganizationTeamInvite := _OrganizationTeamInvite{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrganizationTeamInvite)
+	err = json.Unmarshal(data, &varOrganizationTeamInvite)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OrganizationTeamInvite(varOrganizationTeamInvite)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "team")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &PackageUsageMetrics{}
 
 // PackageUsageMetrics struct for PackageUsageMetrics
 type PackageUsageMetrics struct {
-	Packages CommonMetrics `json:"packages"`
+	Packages             CommonMetrics `json:"packages"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PackageUsageMetrics PackageUsageMetrics
@@ -80,6 +80,11 @@ func (o PackageUsageMetrics) MarshalJSON() ([]byte, error) {
 func (o PackageUsageMetrics) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["packages"] = o.Packages
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *PackageUsageMetrics) UnmarshalJSON(data []byte) (err error) {
 
 	varPackageUsageMetrics := _PackageUsageMetrics{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPackageUsageMetrics)
+	err = json.Unmarshal(data, &varPackageUsageMetrics)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PackageUsageMetrics(varPackageUsageMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "packages")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

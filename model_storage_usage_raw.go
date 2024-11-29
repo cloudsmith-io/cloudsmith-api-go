@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,14 @@ var _ MappedNullable = &StorageUsageRaw{}
 
 // StorageUsageRaw struct for StorageUsageRaw
 type StorageUsageRaw struct {
-	Limit      *int64   `json:"limit,omitempty"`
-	Peak       *int64   `json:"peak,omitempty"`
-	Percentage *float64 `json:"percentage,omitempty"`
-	Used       *int64   `json:"used,omitempty"`
+	Limit                *int64   `json:"limit,omitempty"`
+	Peak                 *int64   `json:"peak,omitempty"`
+	Percentage           *float64 `json:"percentage,omitempty"`
+	Used                 *int64   `json:"used,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StorageUsageRaw StorageUsageRaw
 
 // NewStorageUsageRaw instantiates a new StorageUsageRaw object
 // This constructor will assign default values to properties that have it defined,
@@ -193,7 +196,36 @@ func (o StorageUsageRaw) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Used) {
 		toSerialize["used"] = o.Used
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StorageUsageRaw) UnmarshalJSON(data []byte) (err error) {
+	varStorageUsageRaw := _StorageUsageRaw{}
+
+	err = json.Unmarshal(data, &varStorageUsageRaw)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StorageUsageRaw(varStorageUsageRaw)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "peak")
+		delete(additionalProperties, "percentage")
+		delete(additionalProperties, "used")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStorageUsageRaw struct {

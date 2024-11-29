@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -35,8 +35,11 @@ type PackageFile struct {
 	Size     *int64  `json:"size,omitempty"`
 	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// Freeform descriptor that describes what the file is.
-	Tag NullableString `json:"tag,omitempty"`
+	Tag                  NullableString `json:"tag,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PackageFile PackageFile
 
 // NewPackageFile instantiates a new PackageFile object
 // This constructor will assign default values to properties that have it defined,
@@ -632,7 +635,46 @@ func (o PackageFile) ToMap() (map[string]interface{}, error) {
 	if o.Tag.IsSet() {
 		toSerialize["tag"] = o.Tag.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PackageFile) UnmarshalJSON(data []byte) (err error) {
+	varPackageFile := _PackageFile{}
+
+	err = json.Unmarshal(data, &varPackageFile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageFile(varPackageFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cdn_url")
+		delete(additionalProperties, "checksum_md5")
+		delete(additionalProperties, "checksum_sha1")
+		delete(additionalProperties, "checksum_sha256")
+		delete(additionalProperties, "checksum_sha512")
+		delete(additionalProperties, "downloads")
+		delete(additionalProperties, "filename")
+		delete(additionalProperties, "is_downloadable")
+		delete(additionalProperties, "is_primary")
+		delete(additionalProperties, "is_synchronised")
+		delete(additionalProperties, "signature_url")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "tag")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackageFile struct {

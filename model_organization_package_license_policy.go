@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -32,6 +31,7 @@ type OrganizationPackageLicensePolicy struct {
 	SlugPerm              *string        `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	SpdxIdentifiers       []string       `json:"spdx_identifiers"`
 	UpdatedAt             *time.Time     `json:"updated_at,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _OrganizationPackageLicensePolicy OrganizationPackageLicensePolicy
@@ -382,6 +382,11 @@ func (o OrganizationPackageLicensePolicy) ToMap() (map[string]interface{}, error
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -410,15 +415,28 @@ func (o *OrganizationPackageLicensePolicy) UnmarshalJSON(data []byte) (err error
 
 	varOrganizationPackageLicensePolicy := _OrganizationPackageLicensePolicy{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrganizationPackageLicensePolicy)
+	err = json.Unmarshal(data, &varOrganizationPackageLicensePolicy)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OrganizationPackageLicensePolicy(varOrganizationPackageLicensePolicy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allow_unknown_licenses")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "on_violation_quarantine")
+		delete(additionalProperties, "package_query_string")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "spdx_identifiers")
+		delete(additionalProperties, "updated_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

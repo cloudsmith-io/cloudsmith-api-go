@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -25,8 +25,11 @@ type PackageDenyPolicyRequestPatch struct {
 	Enabled *bool          `json:"enabled,omitempty"`
 	Name    NullableString `json:"name,omitempty"`
 	// Packages that match this query will trigger this deny rule.
-	PackageQueryString *string `json:"package_query_string,omitempty"`
+	PackageQueryString   *string `json:"package_query_string,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PackageDenyPolicyRequestPatch PackageDenyPolicyRequestPatch
 
 // NewPackageDenyPolicyRequestPatch instantiates a new PackageDenyPolicyRequestPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -217,7 +220,36 @@ func (o PackageDenyPolicyRequestPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PackageQueryString) {
 		toSerialize["package_query_string"] = o.PackageQueryString
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PackageDenyPolicyRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	varPackageDenyPolicyRequestPatch := _PackageDenyPolicyRequestPatch{}
+
+	err = json.Unmarshal(data, &varPackageDenyPolicyRequestPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageDenyPolicyRequestPatch(varPackageDenyPolicyRequestPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "package_query_string")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackageDenyPolicyRequestPatch struct {

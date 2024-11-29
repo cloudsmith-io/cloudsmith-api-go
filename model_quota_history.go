@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &QuotaHistory{}
 
 // QuotaHistory struct for QuotaHistory
 type QuotaHistory struct {
-	History []History `json:"history"`
+	History              []History `json:"history"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _QuotaHistory QuotaHistory
@@ -80,6 +80,11 @@ func (o QuotaHistory) MarshalJSON() ([]byte, error) {
 func (o QuotaHistory) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["history"] = o.History
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *QuotaHistory) UnmarshalJSON(data []byte) (err error) {
 
 	varQuotaHistory := _QuotaHistory{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varQuotaHistory)
+	err = json.Unmarshal(data, &varQuotaHistory)
 
 	if err != nil {
 		return err
 	}
 
 	*o = QuotaHistory(varQuotaHistory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "history")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

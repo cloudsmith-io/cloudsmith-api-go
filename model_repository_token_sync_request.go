@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,7 +22,8 @@ var _ MappedNullable = &RepositoryTokenSyncRequest{}
 // RepositoryTokenSyncRequest struct for RepositoryTokenSyncRequest
 type RepositoryTokenSyncRequest struct {
 	// The source repository slug (in the same owner namespace).
-	Source string `json:"source"`
+	Source               string `json:"source"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryTokenSyncRequest RepositoryTokenSyncRequest
@@ -81,6 +81,11 @@ func (o RepositoryTokenSyncRequest) MarshalJSON() ([]byte, error) {
 func (o RepositoryTokenSyncRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["source"] = o.Source
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *RepositoryTokenSyncRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryTokenSyncRequest := _RepositoryTokenSyncRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryTokenSyncRequest)
+	err = json.Unmarshal(data, &varRepositoryTokenSyncRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryTokenSyncRequest(varRepositoryTokenSyncRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "source")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

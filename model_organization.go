@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -31,7 +30,8 @@ type Organization struct {
 	Slug     *string        `json:"slug,omitempty"`
 	SlugPerm *string        `json:"slug_perm,omitempty"`
 	// A short public descriptive for your organization.
-	Tagline NullableString `json:"tagline,omitempty"`
+	Tagline              NullableString `json:"tagline,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Organization Organization
@@ -332,6 +332,11 @@ func (o Organization) ToMap() (map[string]interface{}, error) {
 	if o.Tagline.IsSet() {
 		toSerialize["tagline"] = o.Tagline.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -359,15 +364,26 @@ func (o *Organization) UnmarshalJSON(data []byte) (err error) {
 
 	varOrganization := _Organization{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrganization)
+	err = json.Unmarshal(data, &varOrganization)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Organization(varOrganization)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "tagline")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

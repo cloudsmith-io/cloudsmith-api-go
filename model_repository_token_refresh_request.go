@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -45,7 +45,10 @@ type RepositoryTokenRefreshRequest struct {
 	ScheduledResetAt     NullableTime   `json:"scheduled_reset_at,omitempty"`
 	ScheduledResetPeriod NullableString `json:"scheduled_reset_period,omitempty"`
 	Token                *string        `json:"token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepositoryTokenRefreshRequest RepositoryTokenRefreshRequest
 
 // NewRepositoryTokenRefreshRequest instantiates a new RepositoryTokenRefreshRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -683,7 +686,46 @@ func (o RepositoryTokenRefreshRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Token) {
 		toSerialize["token"] = o.Token
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepositoryTokenRefreshRequest) UnmarshalJSON(data []byte) (err error) {
+	varRepositoryTokenRefreshRequest := _RepositoryTokenRefreshRequest{}
+
+	err = json.Unmarshal(data, &varRepositoryTokenRefreshRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryTokenRefreshRequest(varRepositoryTokenRefreshRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "eula_required")
+		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "limit_bandwidth")
+		delete(additionalProperties, "limit_bandwidth_unit")
+		delete(additionalProperties, "limit_date_range_from")
+		delete(additionalProperties, "limit_date_range_to")
+		delete(additionalProperties, "limit_num_clients")
+		delete(additionalProperties, "limit_num_downloads")
+		delete(additionalProperties, "limit_package_query")
+		delete(additionalProperties, "limit_path_query")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "scheduled_reset_at")
+		delete(additionalProperties, "scheduled_reset_period")
+		delete(additionalProperties, "token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepositoryTokenRefreshRequest struct {

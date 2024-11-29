@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,9 +21,10 @@ var _ MappedNullable = &PackageLicensePolicyViolationLogCursorPage{}
 
 // PackageLicensePolicyViolationLogCursorPage struct for PackageLicensePolicyViolationLogCursorPage
 type PackageLicensePolicyViolationLogCursorPage struct {
-	Next     NullableString                     `json:"next,omitempty"`
-	Previous NullableString                     `json:"previous,omitempty"`
-	Results  []PackageLicensePolicyViolationLog `json:"results"`
+	Next                 NullableString                     `json:"next,omitempty"`
+	Previous             NullableString                     `json:"previous,omitempty"`
+	Results              []PackageLicensePolicyViolationLog `json:"results"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PackageLicensePolicyViolationLogCursorPage PackageLicensePolicyViolationLogCursorPage
@@ -174,6 +174,11 @@ func (o PackageLicensePolicyViolationLogCursorPage) ToMap() (map[string]interfac
 		toSerialize["previous"] = o.Previous.Get()
 	}
 	toSerialize["results"] = o.Results
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -201,15 +206,22 @@ func (o *PackageLicensePolicyViolationLogCursorPage) UnmarshalJSON(data []byte) 
 
 	varPackageLicensePolicyViolationLogCursorPage := _PackageLicensePolicyViolationLogCursorPage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPackageLicensePolicyViolationLogCursorPage)
+	err = json.Unmarshal(data, &varPackageLicensePolicyViolationLogCursorPage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PackageLicensePolicyViolationLogCursorPage(varPackageLicensePolicyViolationLogCursorPage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next")
+		delete(additionalProperties, "previous")
+		delete(additionalProperties, "results")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

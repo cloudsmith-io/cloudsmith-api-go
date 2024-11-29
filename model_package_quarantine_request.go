@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -23,8 +23,11 @@ type PackageQuarantineRequest struct {
 	// If true, the package is released from quarantine.
 	Release *bool `json:"release,omitempty"`
 	// If true, the package is released from quarantine. Note: This field is deprecated, please use 'release' instead.
-	Restore *bool `json:"restore,omitempty"`
+	Restore              *bool `json:"restore,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PackageQuarantineRequest PackageQuarantineRequest
 
 // NewPackageQuarantineRequest instantiates a new PackageQuarantineRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -123,7 +126,34 @@ func (o PackageQuarantineRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Restore) {
 		toSerialize["restore"] = o.Restore
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PackageQuarantineRequest) UnmarshalJSON(data []byte) (err error) {
+	varPackageQuarantineRequest := _PackageQuarantineRequest{}
+
+	err = json.Unmarshal(data, &varPackageQuarantineRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageQuarantineRequest(varPackageQuarantineRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "release")
+		delete(additionalProperties, "restore")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackageQuarantineRequest struct {

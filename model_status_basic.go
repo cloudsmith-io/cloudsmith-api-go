@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -23,8 +23,11 @@ type StatusBasic struct {
 	// The message describing the state of the API.
 	Detail *string `json:"detail,omitempty"`
 	// The current version for the Cloudsmith service.
-	Version *string `json:"version,omitempty"`
+	Version              *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StatusBasic StatusBasic
 
 // NewStatusBasic instantiates a new StatusBasic object
 // This constructor will assign default values to properties that have it defined,
@@ -123,7 +126,34 @@ func (o StatusBasic) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StatusBasic) UnmarshalJSON(data []byte) (err error) {
+	varStatusBasic := _StatusBasic{}
+
+	err = json.Unmarshal(data, &varStatusBasic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StatusBasic(varStatusBasic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "detail")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStatusBasic struct {

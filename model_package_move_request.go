@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &PackageMoveRequest{}
 
 // PackageMoveRequest struct for PackageMoveRequest
 type PackageMoveRequest struct {
-	Destination string `json:"destination"`
+	Destination          string `json:"destination"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PackageMoveRequest PackageMoveRequest
@@ -80,6 +80,11 @@ func (o PackageMoveRequest) MarshalJSON() ([]byte, error) {
 func (o PackageMoveRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["destination"] = o.Destination
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *PackageMoveRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varPackageMoveRequest := _PackageMoveRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPackageMoveRequest)
+	err = json.Unmarshal(data, &varPackageMoveRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PackageMoveRequest(varPackageMoveRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "destination")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

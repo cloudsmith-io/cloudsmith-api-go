@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,11 +21,12 @@ var _ MappedNullable = &OrganizationGroupSync{}
 
 // OrganizationGroupSync struct for OrganizationGroupSync
 type OrganizationGroupSync struct {
-	IdpKey   string  `json:"idp_key"`
-	IdpValue string  `json:"idp_value"`
-	Role     *string `json:"role,omitempty"`
-	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	Team     string  `json:"team" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	IdpKey               string  `json:"idp_key"`
+	IdpValue             string  `json:"idp_value"`
+	Role                 *string `json:"role,omitempty"`
+	SlugPerm             *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	Team                 string  `json:"team" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OrganizationGroupSync OrganizationGroupSync
@@ -210,6 +210,11 @@ func (o OrganizationGroupSync) ToMap() (map[string]interface{}, error) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
 	toSerialize["team"] = o.Team
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -239,15 +244,24 @@ func (o *OrganizationGroupSync) UnmarshalJSON(data []byte) (err error) {
 
 	varOrganizationGroupSync := _OrganizationGroupSync{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrganizationGroupSync)
+	err = json.Unmarshal(data, &varOrganizationGroupSync)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OrganizationGroupSync(varOrganizationGroupSync)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "idp_key")
+		delete(additionalProperties, "idp_value")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "team")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -32,9 +32,12 @@ type OrganizationInvite struct {
 	SlugPerm *string                  `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	Teams    []OrganizationTeamInvite `json:"teams,omitempty"`
 	// The slug of the user to be invited.
-	User    *string        `json:"user,omitempty"`
-	UserUrl NullableString `json:"user_url,omitempty"`
+	User                 *string        `json:"user,omitempty"`
+	UserUrl              NullableString `json:"user_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrganizationInvite OrganizationInvite
 
 // NewOrganizationInvite instantiates a new OrganizationInvite object
 // This constructor will assign default values to properties that have it defined,
@@ -439,7 +442,42 @@ func (o OrganizationInvite) ToMap() (map[string]interface{}, error) {
 	if o.UserUrl.IsSet() {
 		toSerialize["user_url"] = o.UserUrl.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrganizationInvite) UnmarshalJSON(data []byte) (err error) {
+	varOrganizationInvite := _OrganizationInvite{}
+
+	err = json.Unmarshal(data, &varOrganizationInvite)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationInvite(varOrganizationInvite)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "expires_at")
+		delete(additionalProperties, "inviter")
+		delete(additionalProperties, "inviter_url")
+		delete(additionalProperties, "org")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "teams")
+		delete(additionalProperties, "user")
+		delete(additionalProperties, "user_url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrganizationInvite struct {

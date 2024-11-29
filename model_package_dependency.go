@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,14 @@ var _ MappedNullable = &PackageDependency{}
 
 // PackageDependency struct for PackageDependency
 type PackageDependency struct {
-	DepType  *string        `json:"dep_type,omitempty"`
-	Name     *string        `json:"name,omitempty"`
-	Operator NullableString `json:"operator,omitempty"`
-	Version  NullableString `json:"version,omitempty"`
+	DepType              *string        `json:"dep_type,omitempty"`
+	Name                 *string        `json:"name,omitempty"`
+	Operator             NullableString `json:"operator,omitempty"`
+	Version              NullableString `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PackageDependency PackageDependency
 
 // NewPackageDependency instantiates a new PackageDependency object
 // This constructor will assign default values to properties that have it defined,
@@ -215,7 +218,36 @@ func (o PackageDependency) ToMap() (map[string]interface{}, error) {
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PackageDependency) UnmarshalJSON(data []byte) (err error) {
+	varPackageDependency := _PackageDependency{}
+
+	err = json.Unmarshal(data, &varPackageDependency)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageDependency(varPackageDependency)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dep_type")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "operator")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackageDependency struct {

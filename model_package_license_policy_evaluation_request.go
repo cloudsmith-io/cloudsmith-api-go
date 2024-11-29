@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -21,14 +21,17 @@ var _ MappedNullable = &PackageLicensePolicyEvaluationRequest{}
 
 // PackageLicensePolicyEvaluationRequest struct for PackageLicensePolicyEvaluationRequest
 type PackageLicensePolicyEvaluationRequest struct {
-	CreatedAt       *time.Time           `json:"created_at,omitempty"`
-	EvaluationCount *int64               `json:"evaluation_count,omitempty"`
-	Policy          *NestedLicensePolicy `json:"policy,omitempty"`
-	SlugPerm        *string              `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	Status          *string              `json:"status,omitempty"`
-	UpdatedAt       *time.Time           `json:"updated_at,omitempty"`
-	ViolationCount  *int64               `json:"violation_count,omitempty"`
+	CreatedAt            *time.Time           `json:"created_at,omitempty"`
+	EvaluationCount      *int64               `json:"evaluation_count,omitempty"`
+	Policy               *NestedLicensePolicy `json:"policy,omitempty"`
+	SlugPerm             *string              `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	Status               *string              `json:"status,omitempty"`
+	UpdatedAt            *time.Time           `json:"updated_at,omitempty"`
+	ViolationCount       *int64               `json:"violation_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PackageLicensePolicyEvaluationRequest PackageLicensePolicyEvaluationRequest
 
 // NewPackageLicensePolicyEvaluationRequest instantiates a new PackageLicensePolicyEvaluationRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -302,7 +305,39 @@ func (o PackageLicensePolicyEvaluationRequest) ToMap() (map[string]interface{}, 
 	if !IsNil(o.ViolationCount) {
 		toSerialize["violation_count"] = o.ViolationCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PackageLicensePolicyEvaluationRequest) UnmarshalJSON(data []byte) (err error) {
+	varPackageLicensePolicyEvaluationRequest := _PackageLicensePolicyEvaluationRequest{}
+
+	err = json.Unmarshal(data, &varPackageLicensePolicyEvaluationRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageLicensePolicyEvaluationRequest(varPackageLicensePolicyEvaluationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "evaluation_count")
+		delete(additionalProperties, "policy")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "violation_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackageLicensePolicyEvaluationRequest struct {

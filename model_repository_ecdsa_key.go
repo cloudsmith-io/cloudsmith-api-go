@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -32,8 +32,11 @@ type RepositoryEcdsaKey struct {
 	// The public key given to repository users.
 	PublicKey *string `json:"public_key,omitempty"`
 	// The SSH fingerprint used by ECDSA for this key.
-	SshFingerprint NullableString `json:"ssh_fingerprint,omitempty"`
+	SshFingerprint       NullableString `json:"ssh_fingerprint,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepositoryEcdsaKey RepositoryEcdsaKey
 
 // NewRepositoryEcdsaKey instantiates a new RepositoryEcdsaKey object
 // This constructor will assign default values to properties that have it defined,
@@ -318,7 +321,39 @@ func (o RepositoryEcdsaKey) ToMap() (map[string]interface{}, error) {
 	if o.SshFingerprint.IsSet() {
 		toSerialize["ssh_fingerprint"] = o.SshFingerprint.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepositoryEcdsaKey) UnmarshalJSON(data []byte) (err error) {
+	varRepositoryEcdsaKey := _RepositoryEcdsaKey{}
+
+	err = json.Unmarshal(data, &varRepositoryEcdsaKey)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryEcdsaKey(varRepositoryEcdsaKey)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "active")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "default")
+		delete(additionalProperties, "fingerprint")
+		delete(additionalProperties, "fingerprint_short")
+		delete(additionalProperties, "public_key")
+		delete(additionalProperties, "ssh_fingerprint")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepositoryEcdsaKey struct {

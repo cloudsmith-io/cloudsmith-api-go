@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -21,8 +21,11 @@ var _ MappedNullable = &UserAuthToken{}
 // UserAuthToken struct for UserAuthToken
 type UserAuthToken struct {
 	// API token for the authenticated user
-	Token *string `json:"token,omitempty"`
+	Token                *string `json:"token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UserAuthToken UserAuthToken
 
 // NewUserAuthToken instantiates a new UserAuthToken object
 // This constructor will assign default values to properties that have it defined,
@@ -86,7 +89,33 @@ func (o UserAuthToken) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Token) {
 		toSerialize["token"] = o.Token
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UserAuthToken) UnmarshalJSON(data []byte) (err error) {
+	varUserAuthToken := _UserAuthToken{}
+
+	err = json.Unmarshal(data, &varUserAuthToken)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserAuthToken(varUserAuthToken)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUserAuthToken struct {

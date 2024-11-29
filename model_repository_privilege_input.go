@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,7 +22,8 @@ var _ MappedNullable = &RepositoryPrivilegeInput{}
 // RepositoryPrivilegeInput struct for RepositoryPrivilegeInput
 type RepositoryPrivilegeInput struct {
 	// List of objects with explicit privileges to the repository.
-	Privileges []RepositoryPrivilegeDict `json:"privileges"`
+	Privileges           []RepositoryPrivilegeDict `json:"privileges"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryPrivilegeInput RepositoryPrivilegeInput
@@ -81,6 +81,11 @@ func (o RepositoryPrivilegeInput) MarshalJSON() ([]byte, error) {
 func (o RepositoryPrivilegeInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["privileges"] = o.Privileges
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *RepositoryPrivilegeInput) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryPrivilegeInput := _RepositoryPrivilegeInput{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryPrivilegeInput)
+	err = json.Unmarshal(data, &varRepositoryPrivilegeInput)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryPrivilegeInput(varRepositoryPrivilegeInput)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "privileges")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,8 +21,9 @@ var _ MappedNullable = &WebhookTemplate{}
 
 // WebhookTemplate struct for WebhookTemplate
 type WebhookTemplate struct {
-	Event    string         `json:"event"`
-	Template NullableString `json:"template,omitempty"`
+	Event                string         `json:"event"`
+	Template             NullableString `json:"template,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WebhookTemplate WebhookTemplate
@@ -127,6 +127,11 @@ func (o WebhookTemplate) ToMap() (map[string]interface{}, error) {
 	if o.Template.IsSet() {
 		toSerialize["template"] = o.Template.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -154,15 +159,21 @@ func (o *WebhookTemplate) UnmarshalJSON(data []byte) (err error) {
 
 	varWebhookTemplate := _WebhookTemplate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWebhookTemplate)
+	err = json.Unmarshal(data, &varWebhookTemplate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WebhookTemplate(varWebhookTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event")
+		delete(additionalProperties, "template")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

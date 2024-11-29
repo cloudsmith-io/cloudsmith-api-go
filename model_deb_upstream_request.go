@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -61,7 +60,8 @@ type DebUpstreamRequest struct {
 	// The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.
 	UpstreamUrl string `json:"upstream_url"`
 	// If enabled, SSL certificates are verified when requests are made to this upstream. It's recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams.
-	VerifySsl *bool `json:"verify_ssl,omitempty"`
+	VerifySsl            *bool `json:"verify_ssl,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DebUpstreamRequest DebUpstreamRequest
@@ -877,6 +877,11 @@ func (o DebUpstreamRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -906,15 +911,39 @@ func (o *DebUpstreamRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varDebUpstreamRequest := _DebUpstreamRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDebUpstreamRequest)
+	err = json.Unmarshal(data, &varDebUpstreamRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DebUpstreamRequest(varDebUpstreamRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "auth_mode")
+		delete(additionalProperties, "auth_secret")
+		delete(additionalProperties, "auth_username")
+		delete(additionalProperties, "component")
+		delete(additionalProperties, "distro_versions")
+		delete(additionalProperties, "extra_header_1")
+		delete(additionalProperties, "extra_header_2")
+		delete(additionalProperties, "extra_value_1")
+		delete(additionalProperties, "extra_value_2")
+		delete(additionalProperties, "gpg_key_inline")
+		delete(additionalProperties, "gpg_key_url")
+		delete(additionalProperties, "gpg_verification")
+		delete(additionalProperties, "include_sources")
+		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "mode")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "upstream_distribution")
+		delete(additionalProperties, "upstream_url")
+		delete(additionalProperties, "verify_ssl")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

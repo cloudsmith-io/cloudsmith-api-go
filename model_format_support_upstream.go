@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -34,6 +33,7 @@ type FormatSupportUpstream struct {
 	Proxying bool `json:"proxying"`
 	// The signature verification supported by the upstream format
 	SignatureVerification *string `json:"signature_verification,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _FormatSupportUpstream FormatSupportUpstream
@@ -247,6 +247,11 @@ func (o FormatSupportUpstream) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SignatureVerification) {
 		toSerialize["signature_verification"] = o.SignatureVerification
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -277,15 +282,25 @@ func (o *FormatSupportUpstream) UnmarshalJSON(data []byte) (err error) {
 
 	varFormatSupportUpstream := _FormatSupportUpstream{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFormatSupportUpstream)
+	err = json.Unmarshal(data, &varFormatSupportUpstream)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FormatSupportUpstream(varFormatSupportUpstream)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "auth_modes")
+		delete(additionalProperties, "caching")
+		delete(additionalProperties, "indexing")
+		delete(additionalProperties, "indexing_behavior")
+		delete(additionalProperties, "proxying")
+		delete(additionalProperties, "signature_verification")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

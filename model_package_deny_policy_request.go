@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -27,7 +26,8 @@ type PackageDenyPolicyRequest struct {
 	Enabled *bool          `json:"enabled,omitempty"`
 	Name    NullableString `json:"name,omitempty"`
 	// Packages that match this query will trigger this deny rule.
-	PackageQueryString string `json:"package_query_string"`
+	PackageQueryString   string `json:"package_query_string"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PackageDenyPolicyRequest PackageDenyPolicyRequest
@@ -212,6 +212,11 @@ func (o PackageDenyPolicyRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["name"] = o.Name.Get()
 	}
 	toSerialize["package_query_string"] = o.PackageQueryString
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -239,15 +244,23 @@ func (o *PackageDenyPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varPackageDenyPolicyRequest := _PackageDenyPolicyRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPackageDenyPolicyRequest)
+	err = json.Unmarshal(data, &varPackageDenyPolicyRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PackageDenyPolicyRequest(varPackageDenyPolicyRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "package_query_string")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

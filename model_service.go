@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -37,8 +36,9 @@ type Service struct {
 	// The role of the service.
 	Role *string `json:"role,omitempty"`
 	// The slug of the service
-	Slug  *string        `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	Teams []ServiceTeams `json:"teams,omitempty"`
+	Slug                 *string        `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	Teams                []ServiceTeams `json:"teams,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Service Service
@@ -426,6 +426,11 @@ func (o Service) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Teams) {
 		toSerialize["teams"] = o.Teams
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -453,15 +458,29 @@ func (o *Service) UnmarshalJSON(data []byte) (err error) {
 
 	varService := _Service{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varService)
+	err = json.Unmarshal(data, &varService)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Service(varService)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "created_by")
+		delete(additionalProperties, "created_by_url")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "key_expires_at")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "teams")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -23,10 +22,11 @@ var _ MappedNullable = &PackageLicensePolicyViolationLog{}
 
 // PackageLicensePolicyViolationLog struct for PackageLicensePolicyViolationLog
 type PackageLicensePolicyViolationLog struct {
-	EventAt *time.Time           `json:"event_at,omitempty"`
-	Package PackageVulnerability `json:"package"`
-	Policy  NestedLicensePolicy  `json:"policy"`
-	Reasons []string             `json:"reasons"`
+	EventAt              *time.Time           `json:"event_at,omitempty"`
+	Package              PackageVulnerability `json:"package"`
+	Policy               NestedLicensePolicy  `json:"policy"`
+	Reasons              []string             `json:"reasons"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PackageLicensePolicyViolationLog PackageLicensePolicyViolationLog
@@ -171,6 +171,11 @@ func (o PackageLicensePolicyViolationLog) ToMap() (map[string]interface{}, error
 	toSerialize["package"] = o.Package
 	toSerialize["policy"] = o.Policy
 	toSerialize["reasons"] = o.Reasons
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -200,15 +205,23 @@ func (o *PackageLicensePolicyViolationLog) UnmarshalJSON(data []byte) (err error
 
 	varPackageLicensePolicyViolationLog := _PackageLicensePolicyViolationLog{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPackageLicensePolicyViolationLog)
+	err = json.Unmarshal(data, &varPackageLicensePolicyViolationLog)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PackageLicensePolicyViolationLog(varPackageLicensePolicyViolationLog)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event_at")
+		delete(additionalProperties, "package")
+		delete(additionalProperties, "policy")
+		delete(additionalProperties, "reasons")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

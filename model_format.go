@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -37,8 +36,9 @@ type Format struct {
 	// The minimum plan name required for this package format
 	PremiumPlanName NullableString `json:"premium_plan_name,omitempty"`
 	// Slug for the package format
-	Slug     string        `json:"slug"`
-	Supports FormatSupport `json:"supports"`
+	Slug                 string        `json:"slug"`
+	Supports             FormatSupport `json:"supports"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Format Format
@@ -354,6 +354,11 @@ func (o Format) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["slug"] = o.Slug
 	toSerialize["supports"] = o.Supports
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -386,15 +391,28 @@ func (o *Format) UnmarshalJSON(data []byte) (err error) {
 
 	varFormat := _Format{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFormat)
+	err = json.Unmarshal(data, &varFormat)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Format(varFormat)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "distributions")
+		delete(additionalProperties, "extensions")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "premium")
+		delete(additionalProperties, "premium_plan_id")
+		delete(additionalProperties, "premium_plan_name")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "supports")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

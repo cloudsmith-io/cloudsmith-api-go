@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -23,8 +23,11 @@ type DistributionVersion struct {
 	// The textual name for this version.
 	Name *string `json:"name,omitempty"`
 	// The slug identifier for this version
-	Slug *string `json:"slug,omitempty"`
+	Slug                 *string `json:"slug,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DistributionVersion DistributionVersion
 
 // NewDistributionVersion instantiates a new DistributionVersion object
 // This constructor will assign default values to properties that have it defined,
@@ -123,7 +126,34 @@ func (o DistributionVersion) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DistributionVersion) UnmarshalJSON(data []byte) (err error) {
+	varDistributionVersion := _DistributionVersion{}
+
+	err = json.Unmarshal(data, &varDistributionVersion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DistributionVersion(varDistributionVersion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "slug")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDistributionVersion struct {

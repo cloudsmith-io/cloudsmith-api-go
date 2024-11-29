@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,8 +21,9 @@ var _ MappedNullable = &RepositoryGeoIpRulesRequest{}
 
 // RepositoryGeoIpRulesRequest struct for RepositoryGeoIpRulesRequest
 type RepositoryGeoIpRulesRequest struct {
-	Cidr        RepositoryGeoIpCidr        `json:"cidr"`
-	CountryCode RepositoryGeoIpCountryCode `json:"country_code"`
+	Cidr                 RepositoryGeoIpCidr        `json:"cidr"`
+	CountryCode          RepositoryGeoIpCountryCode `json:"country_code"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryGeoIpRulesRequest RepositoryGeoIpRulesRequest
@@ -107,6 +107,11 @@ func (o RepositoryGeoIpRulesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cidr"] = o.Cidr
 	toSerialize["country_code"] = o.CountryCode
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *RepositoryGeoIpRulesRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryGeoIpRulesRequest := _RepositoryGeoIpRulesRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryGeoIpRulesRequest)
+	err = json.Unmarshal(data, &varRepositoryGeoIpRulesRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryGeoIpRulesRequest(varRepositoryGeoIpRulesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cidr")
+		delete(additionalProperties, "country_code")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

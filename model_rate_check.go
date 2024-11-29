@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -31,8 +31,11 @@ type RateCheck struct {
 	// The ISO 8601 datetime at which the current rate limit window will reset
 	ResetIso8601 *string `json:"reset_iso_8601,omitempty"`
 	// If true, throttling is currently being enforced.
-	Throttled *bool `json:"throttled,omitempty"`
+	Throttled            *bool `json:"throttled,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RateCheck RateCheck
 
 // NewRateCheck instantiates a new RateCheck object
 // This constructor will assign default values to properties that have it defined,
@@ -271,7 +274,38 @@ func (o RateCheck) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Throttled) {
 		toSerialize["throttled"] = o.Throttled
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RateCheck) UnmarshalJSON(data []byte) (err error) {
+	varRateCheck := _RateCheck{}
+
+	err = json.Unmarshal(data, &varRateCheck)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RateCheck(varRateCheck)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "interval")
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "remaining")
+		delete(additionalProperties, "reset")
+		delete(additionalProperties, "reset_iso_8601")
+		delete(additionalProperties, "throttled")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRateCheck struct {

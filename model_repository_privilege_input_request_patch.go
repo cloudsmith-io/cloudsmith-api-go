@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -21,8 +21,11 @@ var _ MappedNullable = &RepositoryPrivilegeInputRequestPatch{}
 // RepositoryPrivilegeInputRequestPatch struct for RepositoryPrivilegeInputRequestPatch
 type RepositoryPrivilegeInputRequestPatch struct {
 	// List of objects with explicit privileges to the repository.
-	Privileges []RepositoryPrivilegeDict `json:"privileges,omitempty"`
+	Privileges           []RepositoryPrivilegeDict `json:"privileges,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepositoryPrivilegeInputRequestPatch RepositoryPrivilegeInputRequestPatch
 
 // NewRepositoryPrivilegeInputRequestPatch instantiates a new RepositoryPrivilegeInputRequestPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -86,7 +89,33 @@ func (o RepositoryPrivilegeInputRequestPatch) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Privileges) {
 		toSerialize["privileges"] = o.Privileges
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepositoryPrivilegeInputRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	varRepositoryPrivilegeInputRequestPatch := _RepositoryPrivilegeInputRequestPatch{}
+
+	err = json.Unmarshal(data, &varRepositoryPrivilegeInputRequestPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryPrivilegeInputRequestPatch(varRepositoryPrivilegeInputRequestPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "privileges")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepositoryPrivilegeInputRequestPatch struct {

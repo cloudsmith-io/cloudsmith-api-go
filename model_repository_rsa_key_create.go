@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,7 +24,8 @@ type RepositoryRsaKeyCreate struct {
 	// The RSA passphrase used for signing.
 	RsaPassphrase *string `json:"rsa_passphrase,omitempty"`
 	// The RSA private key.
-	RsaPrivateKey string `json:"rsa_private_key"`
+	RsaPrivateKey        string `json:"rsa_private_key"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryRsaKeyCreate RepositoryRsaKeyCreate
@@ -118,6 +118,11 @@ func (o RepositoryRsaKeyCreate) ToMap() (map[string]interface{}, error) {
 		toSerialize["rsa_passphrase"] = o.RsaPassphrase
 	}
 	toSerialize["rsa_private_key"] = o.RsaPrivateKey
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -145,15 +150,21 @@ func (o *RepositoryRsaKeyCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryRsaKeyCreate := _RepositoryRsaKeyCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryRsaKeyCreate)
+	err = json.Unmarshal(data, &varRepositoryRsaKeyCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryRsaKeyCreate(varRepositoryRsaKeyCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rsa_passphrase")
+		delete(additionalProperties, "rsa_private_key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

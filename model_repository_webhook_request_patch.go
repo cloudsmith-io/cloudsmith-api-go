@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -41,8 +41,11 @@ type RepositoryWebhookRequestPatch struct {
 	TargetUrl *string           `json:"target_url,omitempty"`
 	Templates []WebhookTemplate `json:"templates,omitempty"`
 	// If enabled, SSL certificates is verified when webhooks are sent. It's recommended to leave this enabled as not verifying the integrity of SSL certificates leaves you susceptible to Man-in-the-Middle (MITM) attacks.
-	VerifySsl *bool `json:"verify_ssl,omitempty"`
+	VerifySsl            *bool `json:"verify_ssl,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepositoryWebhookRequestPatch RepositoryWebhookRequestPatch
 
 // NewRepositoryWebhookRequestPatch instantiates a new RepositoryWebhookRequestPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -537,7 +540,44 @@ func (o RepositoryWebhookRequestPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepositoryWebhookRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	varRepositoryWebhookRequestPatch := _RepositoryWebhookRequestPatch{}
+
+	err = json.Unmarshal(data, &varRepositoryWebhookRequestPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryWebhookRequestPatch(varRepositoryWebhookRequestPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "package_query")
+		delete(additionalProperties, "request_body_format")
+		delete(additionalProperties, "request_body_template_format")
+		delete(additionalProperties, "request_content_type")
+		delete(additionalProperties, "secret_header")
+		delete(additionalProperties, "secret_value")
+		delete(additionalProperties, "signature_key")
+		delete(additionalProperties, "target_url")
+		delete(additionalProperties, "templates")
+		delete(additionalProperties, "verify_ssl")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepositoryWebhookRequestPatch struct {

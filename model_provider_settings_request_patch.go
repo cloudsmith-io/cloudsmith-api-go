@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -29,8 +29,11 @@ type ProviderSettingsRequestPatch struct {
 	// The URL from the provider that serves as the base for the OpenID configuration. For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
 	ProviderUrl *string `json:"provider_url,omitempty"`
 	// The service accounts associated with these provider settings
-	ServiceAccounts []string `json:"service_accounts,omitempty"`
+	ServiceAccounts      []string `json:"service_accounts,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProviderSettingsRequestPatch ProviderSettingsRequestPatch
 
 // NewProviderSettingsRequestPatch instantiates a new ProviderSettingsRequestPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -234,7 +237,37 @@ func (o ProviderSettingsRequestPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ServiceAccounts) {
 		toSerialize["service_accounts"] = o.ServiceAccounts
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProviderSettingsRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	varProviderSettingsRequestPatch := _ProviderSettingsRequestPatch{}
+
+	err = json.Unmarshal(data, &varProviderSettingsRequestPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProviderSettingsRequestPatch(varProviderSettingsRequestPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "claims")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "provider_url")
+		delete(additionalProperties, "service_accounts")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProviderSettingsRequestPatch struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,10 +20,13 @@ var _ MappedNullable = &UsageRaw{}
 
 // UsageRaw struct for UsageRaw
 type UsageRaw struct {
-	Limit      *int64   `json:"limit,omitempty"`
-	Percentage *float64 `json:"percentage,omitempty"`
-	Used       *int64   `json:"used,omitempty"`
+	Limit                *int64   `json:"limit,omitempty"`
+	Percentage           *float64 `json:"percentage,omitempty"`
+	Used                 *int64   `json:"used,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UsageRaw UsageRaw
 
 // NewUsageRaw instantiates a new UsageRaw object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +160,35 @@ func (o UsageRaw) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Used) {
 		toSerialize["used"] = o.Used
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UsageRaw) UnmarshalJSON(data []byte) (err error) {
+	varUsageRaw := _UsageRaw{}
+
+	err = json.Unmarshal(data, &varUsageRaw)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UsageRaw(varUsageRaw)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "percentage")
+		delete(additionalProperties, "used")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUsageRaw struct {

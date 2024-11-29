@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,10 +21,11 @@ var _ MappedNullable = &CommonBandwidthMetrics{}
 
 // CommonBandwidthMetrics struct for CommonBandwidthMetrics
 type CommonBandwidthMetrics struct {
-	Average CommonBandwidthMetricsValue `json:"average"`
-	Highest CommonBandwidthMetricsValue `json:"highest"`
-	Lowest  CommonBandwidthMetricsValue `json:"lowest"`
-	Total   CommonBandwidthMetricsValue `json:"total"`
+	Average              CommonBandwidthMetricsValue `json:"average"`
+	Highest              CommonBandwidthMetricsValue `json:"highest"`
+	Lowest               CommonBandwidthMetricsValue `json:"lowest"`
+	Total                CommonBandwidthMetricsValue `json:"total"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CommonBandwidthMetrics CommonBandwidthMetrics
@@ -161,6 +161,11 @@ func (o CommonBandwidthMetrics) ToMap() (map[string]interface{}, error) {
 	toSerialize["highest"] = o.Highest
 	toSerialize["lowest"] = o.Lowest
 	toSerialize["total"] = o.Total
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -191,15 +196,23 @@ func (o *CommonBandwidthMetrics) UnmarshalJSON(data []byte) (err error) {
 
 	varCommonBandwidthMetrics := _CommonBandwidthMetrics{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCommonBandwidthMetrics)
+	err = json.Unmarshal(data, &varCommonBandwidthMetrics)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CommonBandwidthMetrics(varCommonBandwidthMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "average")
+		delete(additionalProperties, "highest")
+		delete(additionalProperties, "lowest")
+		delete(additionalProperties, "total")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

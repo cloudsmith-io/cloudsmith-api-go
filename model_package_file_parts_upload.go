@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -25,8 +25,11 @@ type PackageFilePartsUpload struct {
 	// The querystring to use for the next-step PUT upload.
 	UploadQuerystring NullableString `json:"upload_querystring,omitempty"`
 	// The URL to use for the next-step PUT upload
-	UploadUrl *string `json:"upload_url,omitempty"`
+	UploadUrl            *string `json:"upload_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PackageFilePartsUpload PackageFilePartsUpload
 
 // NewPackageFilePartsUpload instantiates a new PackageFilePartsUpload object
 // This constructor will assign default values to properties that have it defined,
@@ -171,7 +174,35 @@ func (o PackageFilePartsUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UploadUrl) {
 		toSerialize["upload_url"] = o.UploadUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PackageFilePartsUpload) UnmarshalJSON(data []byte) (err error) {
+	varPackageFilePartsUpload := _PackageFilePartsUpload{}
+
+	err = json.Unmarshal(data, &varPackageFilePartsUpload)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageFilePartsUpload(varPackageFilePartsUpload)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "upload_querystring")
+		delete(additionalProperties, "upload_url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackageFilePartsUpload struct {

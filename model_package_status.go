@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -51,8 +51,11 @@ type PackageStatus struct {
 	// The datetime the package sync was finished at.
 	SyncFinishedAt NullableTime `json:"sync_finished_at,omitempty"`
 	// Synchronisation progress (from 0-100)
-	SyncProgress *int64 `json:"sync_progress,omitempty"`
+	SyncProgress         *int64 `json:"sync_progress,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PackageStatus PackageStatus
 
 // NewPackageStatus instantiates a new PackageStatus object
 // This constructor will assign default values to properties that have it defined,
@@ -943,7 +946,56 @@ func (o PackageStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SyncProgress) {
 		toSerialize["sync_progress"] = o.SyncProgress
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PackageStatus) UnmarshalJSON(data []byte) (err error) {
+	varPackageStatus := _PackageStatus{}
+
+	err = json.Unmarshal(data, &varPackageStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageStatus(varPackageStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_cancellable")
+		delete(additionalProperties, "is_copyable")
+		delete(additionalProperties, "is_deleteable")
+		delete(additionalProperties, "is_downloadable")
+		delete(additionalProperties, "is_moveable")
+		delete(additionalProperties, "is_quarantinable")
+		delete(additionalProperties, "is_quarantined")
+		delete(additionalProperties, "is_resyncable")
+		delete(additionalProperties, "is_security_scannable")
+		delete(additionalProperties, "is_sync_awaiting")
+		delete(additionalProperties, "is_sync_completed")
+		delete(additionalProperties, "is_sync_failed")
+		delete(additionalProperties, "is_sync_in_flight")
+		delete(additionalProperties, "is_sync_in_progress")
+		delete(additionalProperties, "self_url")
+		delete(additionalProperties, "stage")
+		delete(additionalProperties, "stage_str")
+		delete(additionalProperties, "stage_updated_at")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "status_reason")
+		delete(additionalProperties, "status_str")
+		delete(additionalProperties, "status_updated_at")
+		delete(additionalProperties, "sync_finished_at")
+		delete(additionalProperties, "sync_progress")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackageStatus struct {

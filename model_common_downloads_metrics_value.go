@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,7 +21,8 @@ var _ MappedNullable = &CommonDownloadsMetricsValue{}
 
 // CommonDownloadsMetricsValue struct for CommonDownloadsMetricsValue
 type CommonDownloadsMetricsValue struct {
-	Value int64 `json:"value"`
+	Value                int64 `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CommonDownloadsMetricsValue CommonDownloadsMetricsValue
@@ -80,6 +80,11 @@ func (o CommonDownloadsMetricsValue) MarshalJSON() ([]byte, error) {
 func (o CommonDownloadsMetricsValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CommonDownloadsMetricsValue) UnmarshalJSON(data []byte) (err error) {
 
 	varCommonDownloadsMetricsValue := _CommonDownloadsMetricsValue{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCommonDownloadsMetricsValue)
+	err = json.Unmarshal(data, &varCommonDownloadsMetricsValue)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CommonDownloadsMetricsValue(varCommonDownloadsMetricsValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

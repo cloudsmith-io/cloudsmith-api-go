@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -24,8 +24,11 @@ type PackageTagRequest struct {
 	// If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package.
 	IsImmutable *bool `json:"is_immutable,omitempty"`
 	// A list of tags to apply the action to. Not required for clears.
-	Tags []string `json:"tags,omitempty"`
+	Tags                 []string `json:"tags,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PackageTagRequest PackageTagRequest
 
 // NewPackageTagRequest instantiates a new PackageTagRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -179,7 +182,35 @@ func (o PackageTagRequest) ToMap() (map[string]interface{}, error) {
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PackageTagRequest) UnmarshalJSON(data []byte) (err error) {
+	varPackageTagRequest := _PackageTagRequest{}
+
+	err = json.Unmarshal(data, &varPackageTagRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageTagRequest(varPackageTagRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "is_immutable")
+		delete(additionalProperties, "tags")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackageTagRequest struct {

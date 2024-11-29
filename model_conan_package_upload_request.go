@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -41,7 +40,8 @@ type ConanPackageUploadRequest struct {
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`
 	// The raw version for this package.
-	Version NullableString `json:"version,omitempty"`
+	Version              NullableString `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConanPackageUploadRequest ConanPackageUploadRequest
@@ -442,6 +442,11 @@ func (o ConanPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -472,15 +477,29 @@ func (o *ConanPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varConanPackageUploadRequest := _ConanPackageUploadRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConanPackageUploadRequest)
+	err = json.Unmarshal(data, &varConanPackageUploadRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConanPackageUploadRequest(varConanPackageUploadRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conan_channel")
+		delete(additionalProperties, "conan_prefix")
+		delete(additionalProperties, "info_file")
+		delete(additionalProperties, "manifest_file")
+		delete(additionalProperties, "metadata_file")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "package_file")
+		delete(additionalProperties, "republish")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

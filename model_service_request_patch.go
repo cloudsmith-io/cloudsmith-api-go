@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -25,9 +25,12 @@ type ServiceRequestPatch struct {
 	// The name of the service
 	Name *string `json:"name,omitempty"`
 	// The role of the service.
-	Role  *string        `json:"role,omitempty"`
-	Teams []ServiceTeams `json:"teams,omitempty"`
+	Role                 *string        `json:"role,omitempty"`
+	Teams                []ServiceTeams `json:"teams,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServiceRequestPatch ServiceRequestPatch
 
 // NewServiceRequestPatch instantiates a new ServiceRequestPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -200,7 +203,36 @@ func (o ServiceRequestPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Teams) {
 		toSerialize["teams"] = o.Teams
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServiceRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	varServiceRequestPatch := _ServiceRequestPatch{}
+
+	err = json.Unmarshal(data, &varServiceRequestPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServiceRequestPatch(varServiceRequestPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "teams")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServiceRequestPatch struct {

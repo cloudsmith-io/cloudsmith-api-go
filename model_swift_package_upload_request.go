@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -43,7 +42,8 @@ type SwiftPackageUploadRequest struct {
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`
 	// The raw version for this package.
-	Version string `json:"version"`
+	Version              string `json:"version"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SwiftPackageUploadRequest SwiftPackageUploadRequest
@@ -446,6 +446,11 @@ func (o SwiftPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["tags"] = o.Tags.Get()
 	}
 	toSerialize["version"] = o.Version
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -476,15 +481,30 @@ func (o *SwiftPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varSwiftPackageUploadRequest := _SwiftPackageUploadRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSwiftPackageUploadRequest)
+	err = json.Unmarshal(data, &varSwiftPackageUploadRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SwiftPackageUploadRequest(varSwiftPackageUploadRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "author_name")
+		delete(additionalProperties, "author_org")
+		delete(additionalProperties, "license_url")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "package_file")
+		delete(additionalProperties, "readme_url")
+		delete(additionalProperties, "repository_url")
+		delete(additionalProperties, "republish")
+		delete(additionalProperties, "scope")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

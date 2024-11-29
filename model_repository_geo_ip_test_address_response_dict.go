@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,7 +28,8 @@ type RepositoryGeoIpTestAddressResponseDict struct {
 	// The IP address that was tested
 	IpAddress string `json:"ip_address"`
 	// The reason for the result
-	Reason string `json:"reason"`
+	Reason               string `json:"reason"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryGeoIpTestAddressResponseDict RepositoryGeoIpTestAddressResponseDict
@@ -167,6 +167,11 @@ func (o RepositoryGeoIpTestAddressResponseDict) ToMap() (map[string]interface{},
 	toSerialize["country_code"] = o.CountryCode.Get()
 	toSerialize["ip_address"] = o.IpAddress
 	toSerialize["reason"] = o.Reason
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -197,15 +202,23 @@ func (o *RepositoryGeoIpTestAddressResponseDict) UnmarshalJSON(data []byte) (err
 
 	varRepositoryGeoIpTestAddressResponseDict := _RepositoryGeoIpTestAddressResponseDict{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryGeoIpTestAddressResponseDict)
+	err = json.Unmarshal(data, &varRepositoryGeoIpTestAddressResponseDict)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryGeoIpTestAddressResponseDict(varRepositoryGeoIpTestAddressResponseDict)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allowed")
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "ip_address")
+		delete(additionalProperties, "reason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

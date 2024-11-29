@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -32,8 +32,11 @@ type RepositoryRsaKey struct {
 	// The public key given to repository users.
 	PublicKey *string `json:"public_key,omitempty"`
 	// The SSH fingerprint used by RSA for this key.
-	SshFingerprint NullableString `json:"ssh_fingerprint,omitempty"`
+	SshFingerprint       NullableString `json:"ssh_fingerprint,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepositoryRsaKey RepositoryRsaKey
 
 // NewRepositoryRsaKey instantiates a new RepositoryRsaKey object
 // This constructor will assign default values to properties that have it defined,
@@ -318,7 +321,39 @@ func (o RepositoryRsaKey) ToMap() (map[string]interface{}, error) {
 	if o.SshFingerprint.IsSet() {
 		toSerialize["ssh_fingerprint"] = o.SshFingerprint.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepositoryRsaKey) UnmarshalJSON(data []byte) (err error) {
+	varRepositoryRsaKey := _RepositoryRsaKey{}
+
+	err = json.Unmarshal(data, &varRepositoryRsaKey)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryRsaKey(varRepositoryRsaKey)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "active")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "default")
+		delete(additionalProperties, "fingerprint")
+		delete(additionalProperties, "fingerprint_short")
+		delete(additionalProperties, "public_key")
+		delete(additionalProperties, "ssh_fingerprint")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepositoryRsaKey struct {

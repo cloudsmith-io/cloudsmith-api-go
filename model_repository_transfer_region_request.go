@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -21,8 +21,11 @@ var _ MappedNullable = &RepositoryTransferRegionRequest{}
 // RepositoryTransferRegionRequest struct for RepositoryTransferRegionRequest
 type RepositoryTransferRegionRequest struct {
 	// The Cloudsmith region in which package files are stored.
-	StorageRegion *string `json:"storage_region,omitempty"`
+	StorageRegion        *string `json:"storage_region,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepositoryTransferRegionRequest RepositoryTransferRegionRequest
 
 // NewRepositoryTransferRegionRequest instantiates a new RepositoryTransferRegionRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -90,7 +93,33 @@ func (o RepositoryTransferRegionRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.StorageRegion) {
 		toSerialize["storage_region"] = o.StorageRegion
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepositoryTransferRegionRequest) UnmarshalJSON(data []byte) (err error) {
+	varRepositoryTransferRegionRequest := _RepositoryTransferRegionRequest{}
+
+	err = json.Unmarshal(data, &varRepositoryTransferRegionRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryTransferRegionRequest(varRepositoryTransferRegionRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "storage_region")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepositoryTransferRegionRequest struct {

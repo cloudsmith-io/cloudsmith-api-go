@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -43,7 +42,8 @@ type RepositoryWebhookRequest struct {
 	TargetUrl string            `json:"target_url"`
 	Templates []WebhookTemplate `json:"templates"`
 	// If enabled, SSL certificates is verified when webhooks are sent. It's recommended to leave this enabled as not verifying the integrity of SSL certificates leaves you susceptible to Man-in-the-Middle (MITM) attacks.
-	VerifySsl *bool `json:"verify_ssl,omitempty"`
+	VerifySsl            *bool `json:"verify_ssl,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryWebhookRequest RepositoryWebhookRequest
@@ -520,6 +520,11 @@ func (o RepositoryWebhookRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -549,15 +554,31 @@ func (o *RepositoryWebhookRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryWebhookRequest := _RepositoryWebhookRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryWebhookRequest)
+	err = json.Unmarshal(data, &varRepositoryWebhookRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryWebhookRequest(varRepositoryWebhookRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "package_query")
+		delete(additionalProperties, "request_body_format")
+		delete(additionalProperties, "request_body_template_format")
+		delete(additionalProperties, "request_content_type")
+		delete(additionalProperties, "secret_header")
+		delete(additionalProperties, "secret_value")
+		delete(additionalProperties, "signature_key")
+		delete(additionalProperties, "target_url")
+		delete(additionalProperties, "templates")
+		delete(additionalProperties, "verify_ssl")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

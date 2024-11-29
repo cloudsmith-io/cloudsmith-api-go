@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,7 +24,8 @@ type RepositoryEcdsaKeyCreate struct {
 	// The ECDSA passphrase used for signing.
 	EcdsaPassphrase *string `json:"ecdsa_passphrase,omitempty"`
 	// The ECDSA private key.
-	EcdsaPrivateKey string `json:"ecdsa_private_key"`
+	EcdsaPrivateKey      string `json:"ecdsa_private_key"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryEcdsaKeyCreate RepositoryEcdsaKeyCreate
@@ -118,6 +118,11 @@ func (o RepositoryEcdsaKeyCreate) ToMap() (map[string]interface{}, error) {
 		toSerialize["ecdsa_passphrase"] = o.EcdsaPassphrase
 	}
 	toSerialize["ecdsa_private_key"] = o.EcdsaPrivateKey
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -145,15 +150,21 @@ func (o *RepositoryEcdsaKeyCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryEcdsaKeyCreate := _RepositoryEcdsaKeyCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryEcdsaKeyCreate)
+	err = json.Unmarshal(data, &varRepositoryEcdsaKeyCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryEcdsaKeyCreate(varRepositoryEcdsaKeyCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ecdsa_passphrase")
+		delete(additionalProperties, "ecdsa_private_key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
