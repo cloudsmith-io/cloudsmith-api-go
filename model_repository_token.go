@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -71,12 +70,13 @@ type RepositoryToken struct {
 	SlugPerm             *string        `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	Token                *string        `json:"token,omitempty"`
 	// The datetime the token was updated at.
-	UpdatedAt    NullableTime   `json:"updated_at,omitempty"`
-	UpdatedBy    NullableString `json:"updated_by,omitempty"`
-	UpdatedByUrl NullableString `json:"updated_by_url,omitempty"`
-	Usage        *string        `json:"usage,omitempty"`
-	User         NullableString `json:"user,omitempty"`
-	UserUrl      NullableString `json:"user_url,omitempty"`
+	UpdatedAt            NullableTime   `json:"updated_at,omitempty"`
+	UpdatedBy            NullableString `json:"updated_by,omitempty"`
+	UpdatedByUrl         NullableString `json:"updated_by_url,omitempty"`
+	Usage                *string        `json:"usage,omitempty"`
+	User                 NullableString `json:"user,omitempty"`
+	UserUrl              NullableString `json:"user_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryToken RepositoryToken
@@ -1682,6 +1682,11 @@ func (o RepositoryToken) ToMap() (map[string]interface{}, error) {
 	if o.UserUrl.IsSet() {
 		toSerialize["user_url"] = o.UserUrl.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1709,15 +1714,58 @@ func (o *RepositoryToken) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryToken := _RepositoryToken{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryToken)
+	err = json.Unmarshal(data, &varRepositoryToken)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryToken(varRepositoryToken)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "clients")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "created_by")
+		delete(additionalProperties, "created_by_url")
+		delete(additionalProperties, "default")
+		delete(additionalProperties, "disable_url")
+		delete(additionalProperties, "downloads")
+		delete(additionalProperties, "enable_url")
+		delete(additionalProperties, "eula_accepted")
+		delete(additionalProperties, "eula_accepted_at")
+		delete(additionalProperties, "eula_accepted_from")
+		delete(additionalProperties, "eula_required")
+		delete(additionalProperties, "has_limits")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "is_limited")
+		delete(additionalProperties, "limit_bandwidth")
+		delete(additionalProperties, "limit_bandwidth_unit")
+		delete(additionalProperties, "limit_date_range_from")
+		delete(additionalProperties, "limit_date_range_to")
+		delete(additionalProperties, "limit_num_clients")
+		delete(additionalProperties, "limit_num_downloads")
+		delete(additionalProperties, "limit_package_query")
+		delete(additionalProperties, "limit_path_query")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "refresh_url")
+		delete(additionalProperties, "reset_url")
+		delete(additionalProperties, "scheduled_reset_at")
+		delete(additionalProperties, "scheduled_reset_period")
+		delete(additionalProperties, "self_url")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "token")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "updated_by")
+		delete(additionalProperties, "updated_by_url")
+		delete(additionalProperties, "usage")
+		delete(additionalProperties, "user")
+		delete(additionalProperties, "user_url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

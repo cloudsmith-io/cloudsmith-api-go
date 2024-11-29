@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -26,8 +26,11 @@ type OrganizationInviteRequest struct {
 	Role  *string                  `json:"role,omitempty"`
 	Teams []OrganizationTeamInvite `json:"teams,omitempty"`
 	// The slug of the user to be invited.
-	User *string `json:"user,omitempty"`
+	User                 *string `json:"user,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrganizationInviteRequest OrganizationInviteRequest
 
 // NewOrganizationInviteRequest instantiates a new OrganizationInviteRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -200,7 +203,36 @@ func (o OrganizationInviteRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.User) {
 		toSerialize["user"] = o.User
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrganizationInviteRequest) UnmarshalJSON(data []byte) (err error) {
+	varOrganizationInviteRequest := _OrganizationInviteRequest{}
+
+	err = json.Unmarshal(data, &varOrganizationInviteRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationInviteRequest(varOrganizationInviteRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "teams")
+		delete(additionalProperties, "user")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrganizationInviteRequest struct {

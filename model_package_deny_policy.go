@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -30,10 +29,11 @@ type PackageDenyPolicy struct {
 	Enabled *bool          `json:"enabled,omitempty"`
 	Name    NullableString `json:"name,omitempty"`
 	// Packages that match this query will trigger this deny rule.
-	PackageQueryString string     `json:"package_query_string"`
-	SlugPerm           *string    `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	Status             *string    `json:"status,omitempty"`
-	UpdatedAt          *time.Time `json:"updated_at,omitempty"`
+	PackageQueryString   string     `json:"package_query_string"`
+	SlugPerm             *string    `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	Status               *string    `json:"status,omitempty"`
+	UpdatedAt            *time.Time `json:"updated_at,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PackageDenyPolicy PackageDenyPolicy
@@ -393,6 +393,11 @@ func (o PackageDenyPolicy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -420,15 +425,28 @@ func (o *PackageDenyPolicy) UnmarshalJSON(data []byte) (err error) {
 
 	varPackageDenyPolicy := _PackageDenyPolicy{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPackageDenyPolicy)
+	err = json.Unmarshal(data, &varPackageDenyPolicy)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PackageDenyPolicy(varPackageDenyPolicy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "package_query_string")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "updated_at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

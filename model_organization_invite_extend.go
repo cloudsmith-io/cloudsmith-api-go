@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -33,9 +33,12 @@ type OrganizationInviteExtend struct {
 	SlugPerm *string                  `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	Teams    []OrganizationTeamInvite `json:"teams,omitempty"`
 	// The slug of the user to be invited.
-	User    *string        `json:"user,omitempty"`
-	UserUrl NullableString `json:"user_url,omitempty"`
+	User                 *string        `json:"user,omitempty"`
+	UserUrl              NullableString `json:"user_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrganizationInviteExtend OrganizationInviteExtend
 
 // NewOrganizationInviteExtend instantiates a new OrganizationInviteExtend object
 // This constructor will assign default values to properties that have it defined,
@@ -440,7 +443,42 @@ func (o OrganizationInviteExtend) ToMap() (map[string]interface{}, error) {
 	if o.UserUrl.IsSet() {
 		toSerialize["user_url"] = o.UserUrl.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrganizationInviteExtend) UnmarshalJSON(data []byte) (err error) {
+	varOrganizationInviteExtend := _OrganizationInviteExtend{}
+
+	err = json.Unmarshal(data, &varOrganizationInviteExtend)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationInviteExtend(varOrganizationInviteExtend)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "expires_at")
+		delete(additionalProperties, "inviter")
+		delete(additionalProperties, "inviter_url")
+		delete(additionalProperties, "org")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "teams")
+		delete(additionalProperties, "user")
+		delete(additionalProperties, "user_url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrganizationInviteExtend struct {

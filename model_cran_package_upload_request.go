@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -31,7 +30,8 @@ type CranPackageUploadRequest struct {
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
 	Republish *bool `json:"republish,omitempty"`
 	// A comma-separated values list of tags to add to the package.
-	Tags NullableString `json:"tags,omitempty"`
+	Tags                 NullableString `json:"tags,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CranPackageUploadRequest CranPackageUploadRequest
@@ -251,6 +251,11 @@ func (o CranPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if o.Tags.IsSet() {
 		toSerialize["tags"] = o.Tags.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -278,15 +283,24 @@ func (o *CranPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCranPackageUploadRequest := _CranPackageUploadRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCranPackageUploadRequest)
+	err = json.Unmarshal(data, &varCranPackageUploadRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CranPackageUploadRequest(varCranPackageUploadRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "package_file")
+		delete(additionalProperties, "r_version")
+		delete(additionalProperties, "republish")
+		delete(additionalProperties, "tags")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

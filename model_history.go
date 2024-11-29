@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -23,12 +22,13 @@ var _ MappedNullable = &History{}
 
 // History struct for History
 type History struct {
-	Days    *int64             `json:"days,omitempty"`
-	Display HistoryFieldset    `json:"display"`
-	End     time.Time          `json:"end"`
-	Plan    string             `json:"plan"`
-	Raw     HistoryFieldsetRaw `json:"raw"`
-	Start   time.Time          `json:"start"`
+	Days                 *int64             `json:"days,omitempty"`
+	Display              HistoryFieldset    `json:"display"`
+	End                  time.Time          `json:"end"`
+	Plan                 string             `json:"plan"`
+	Raw                  HistoryFieldsetRaw `json:"raw"`
+	Start                time.Time          `json:"start"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _History History
@@ -225,6 +225,11 @@ func (o History) ToMap() (map[string]interface{}, error) {
 	toSerialize["plan"] = o.Plan
 	toSerialize["raw"] = o.Raw
 	toSerialize["start"] = o.Start
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -256,15 +261,25 @@ func (o *History) UnmarshalJSON(data []byte) (err error) {
 
 	varHistory := _History{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHistory)
+	err = json.Unmarshal(data, &varHistory)
 
 	if err != nil {
 		return err
 	}
 
 	*o = History(varHistory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "days")
+		delete(additionalProperties, "display")
+		delete(additionalProperties, "end")
+		delete(additionalProperties, "plan")
+		delete(additionalProperties, "raw")
+		delete(additionalProperties, "start")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

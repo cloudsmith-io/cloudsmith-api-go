@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,11 +21,12 @@ var _ MappedNullable = &OrganizationTeam{}
 
 // OrganizationTeam struct for OrganizationTeam
 type OrganizationTeam struct {
-	Description *string `json:"description,omitempty"`
-	Name        string  `json:"name"`
-	Slug        *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	SlugPerm    *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	Visibility  *string `json:"visibility,omitempty"`
+	Description          *string `json:"description,omitempty"`
+	Name                 string  `json:"name"`
+	Slug                 *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	SlugPerm             *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	Visibility           *string `json:"visibility,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OrganizationTeam OrganizationTeam
@@ -228,6 +228,11 @@ func (o OrganizationTeam) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Visibility) {
 		toSerialize["visibility"] = o.Visibility
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,24 @@ func (o *OrganizationTeam) UnmarshalJSON(data []byte) (err error) {
 
 	varOrganizationTeam := _OrganizationTeam{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrganizationTeam)
+	err = json.Unmarshal(data, &varOrganizationTeam)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OrganizationTeam(varOrganizationTeam)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "visibility")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

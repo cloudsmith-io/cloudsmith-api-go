@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -58,7 +57,8 @@ type RepositoryWebhook struct {
 	UpdatedBy    *string           `json:"updated_by,omitempty"`
 	UpdatedByUrl *string           `json:"updated_by_url,omitempty"`
 	// If enabled, SSL certificates is verified when webhooks are sent. It's recommended to leave this enabled as not verifying the integrity of SSL certificates leaves you susceptible to Man-in-the-Middle (MITM) attacks.
-	VerifySsl *bool `json:"verify_ssl,omitempty"`
+	VerifySsl            *bool `json:"verify_ssl,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryWebhook RepositoryWebhook
@@ -1060,6 +1060,11 @@ func (o RepositoryWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1089,15 +1094,46 @@ func (o *RepositoryWebhook) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryWebhook := _RepositoryWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryWebhook)
+	err = json.Unmarshal(data, &varRepositoryWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryWebhook(varRepositoryWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "created_by")
+		delete(additionalProperties, "created_by_url")
+		delete(additionalProperties, "disable_reason")
+		delete(additionalProperties, "disable_reason_str")
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "is_last_response_bad")
+		delete(additionalProperties, "last_response_status")
+		delete(additionalProperties, "last_response_status_str")
+		delete(additionalProperties, "num_sent")
+		delete(additionalProperties, "package_query")
+		delete(additionalProperties, "request_body_format")
+		delete(additionalProperties, "request_body_format_str")
+		delete(additionalProperties, "request_body_template_format")
+		delete(additionalProperties, "request_body_template_format_str")
+		delete(additionalProperties, "request_content_type")
+		delete(additionalProperties, "secret_header")
+		delete(additionalProperties, "self_url")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "target_url")
+		delete(additionalProperties, "templates")
+		delete(additionalProperties, "updated_at")
+		delete(additionalProperties, "updated_by")
+		delete(additionalProperties, "updated_by_url")
+		delete(additionalProperties, "verify_ssl")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

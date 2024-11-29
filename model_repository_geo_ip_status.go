@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -21,8 +21,11 @@ var _ MappedNullable = &RepositoryGeoIpStatus{}
 // RepositoryGeoIpStatus struct for RepositoryGeoIpStatus
 type RepositoryGeoIpStatus struct {
 	// If checked, any access to the website or downloads for this repository is allowed/denied according to the configured Geo/IP restriction rules.
-	GeoipEnabled *bool `json:"geoip_enabled,omitempty"`
+	GeoipEnabled         *bool `json:"geoip_enabled,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepositoryGeoIpStatus RepositoryGeoIpStatus
 
 // NewRepositoryGeoIpStatus instantiates a new RepositoryGeoIpStatus object
 // This constructor will assign default values to properties that have it defined,
@@ -86,7 +89,33 @@ func (o RepositoryGeoIpStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GeoipEnabled) {
 		toSerialize["geoip_enabled"] = o.GeoipEnabled
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepositoryGeoIpStatus) UnmarshalJSON(data []byte) (err error) {
+	varRepositoryGeoIpStatus := _RepositoryGeoIpStatus{}
+
+	err = json.Unmarshal(data, &varRepositoryGeoIpStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryGeoIpStatus(varRepositoryGeoIpStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "geoip_enabled")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepositoryGeoIpStatus struct {

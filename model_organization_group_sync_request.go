@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,11 +21,12 @@ var _ MappedNullable = &OrganizationGroupSyncRequest{}
 
 // OrganizationGroupSyncRequest struct for OrganizationGroupSyncRequest
 type OrganizationGroupSyncRequest struct {
-	IdpKey       string  `json:"idp_key"`
-	IdpValue     string  `json:"idp_value"`
-	Organization string  `json:"organization"`
-	Role         *string `json:"role,omitempty"`
-	Team         string  `json:"team" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	IdpKey               string  `json:"idp_key"`
+	IdpValue             string  `json:"idp_value"`
+	Organization         string  `json:"organization"`
+	Role                 *string `json:"role,omitempty"`
+	Team                 string  `json:"team" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OrganizationGroupSyncRequest OrganizationGroupSyncRequest
@@ -201,6 +201,11 @@ func (o OrganizationGroupSyncRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["role"] = o.Role
 	}
 	toSerialize["team"] = o.Team
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -231,15 +236,24 @@ func (o *OrganizationGroupSyncRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varOrganizationGroupSyncRequest := _OrganizationGroupSyncRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrganizationGroupSyncRequest)
+	err = json.Unmarshal(data, &varOrganizationGroupSyncRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OrganizationGroupSyncRequest(varOrganizationGroupSyncRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "idp_key")
+		delete(additionalProperties, "idp_value")
+		delete(additionalProperties, "organization")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "team")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

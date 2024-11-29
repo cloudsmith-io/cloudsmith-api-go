@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,14 @@ var _ MappedNullable = &AllocatedLimit{}
 
 // AllocatedLimit struct for AllocatedLimit
 type AllocatedLimit struct {
-	Configured     *string `json:"configured,omitempty"`
-	PercentageUsed *string `json:"percentage_used,omitempty"`
-	PlanLimit      *string `json:"plan_limit,omitempty"`
-	Used           *string `json:"used,omitempty"`
+	Configured           *string `json:"configured,omitempty"`
+	PercentageUsed       *string `json:"percentage_used,omitempty"`
+	PlanLimit            *string `json:"plan_limit,omitempty"`
+	Used                 *string `json:"used,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AllocatedLimit AllocatedLimit
 
 // NewAllocatedLimit instantiates a new AllocatedLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -193,7 +196,36 @@ func (o AllocatedLimit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Used) {
 		toSerialize["used"] = o.Used
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AllocatedLimit) UnmarshalJSON(data []byte) (err error) {
+	varAllocatedLimit := _AllocatedLimit{}
+
+	err = json.Unmarshal(data, &varAllocatedLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AllocatedLimit(varAllocatedLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "configured")
+		delete(additionalProperties, "percentage_used")
+		delete(additionalProperties, "plan_limit")
+		delete(additionalProperties, "used")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAllocatedLimit struct {

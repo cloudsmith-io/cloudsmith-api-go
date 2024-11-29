@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -21,8 +21,11 @@ var _ MappedNullable = &OrganizationInviteUpdateRequestPatch{}
 // OrganizationInviteUpdateRequestPatch struct for OrganizationInviteUpdateRequestPatch
 type OrganizationInviteUpdateRequestPatch struct {
 	// The role to be assigned to the invited user.
-	Role *string `json:"role,omitempty"`
+	Role                 *string `json:"role,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrganizationInviteUpdateRequestPatch OrganizationInviteUpdateRequestPatch
 
 // NewOrganizationInviteUpdateRequestPatch instantiates a new OrganizationInviteUpdateRequestPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -90,7 +93,33 @@ func (o OrganizationInviteUpdateRequestPatch) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Role) {
 		toSerialize["role"] = o.Role
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrganizationInviteUpdateRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	varOrganizationInviteUpdateRequestPatch := _OrganizationInviteUpdateRequestPatch{}
+
+	err = json.Unmarshal(data, &varOrganizationInviteUpdateRequestPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationInviteUpdateRequestPatch(varOrganizationInviteUpdateRequestPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "role")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrganizationInviteUpdateRequestPatch struct {

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -30,7 +29,8 @@ type DistributionFull struct {
 	Slug     *string        `json:"slug,omitempty"`
 	Variants NullableString `json:"variants,omitempty"`
 	// A list of the versions for this distribution
-	Versions []DistributionVersion `json:"versions,omitempty"`
+	Versions             []DistributionVersion `json:"versions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DistributionFull DistributionFull
@@ -309,6 +309,11 @@ func (o DistributionFull) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Versions) {
 		toSerialize["versions"] = o.Versions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -336,15 +341,26 @@ func (o *DistributionFull) UnmarshalJSON(data []byte) (err error) {
 
 	varDistributionFull := _DistributionFull{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDistributionFull)
+	err = json.Unmarshal(data, &varDistributionFull)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DistributionFull(varDistributionFull)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "format")
+		delete(additionalProperties, "format_url")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "self_url")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "variants")
+		delete(additionalProperties, "versions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

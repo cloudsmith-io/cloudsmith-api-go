@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,7 +24,8 @@ type StorageRegion struct {
 	// Name of the storage region
 	Label string `json:"label"`
 	// Slug for the storage region
-	Slug string `json:"slug"`
+	Slug                 string `json:"slug"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StorageRegion StorageRegion
@@ -109,6 +109,11 @@ func (o StorageRegion) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["label"] = o.Label
 	toSerialize["slug"] = o.Slug
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +142,21 @@ func (o *StorageRegion) UnmarshalJSON(data []byte) (err error) {
 
 	varStorageRegion := _StorageRegion{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStorageRegion)
+	err = json.Unmarshal(data, &varStorageRegion)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StorageRegion(varStorageRegion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "label")
+		delete(additionalProperties, "slug")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -32,7 +31,8 @@ type FormatSupport struct {
 	Metadata  bool                  `json:"metadata"`
 	Upstreams FormatSupportUpstream `json:"upstreams"`
 	// If true the package format supports versioning
-	Versioning bool `json:"versioning"`
+	Versioning           bool `json:"versioning"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FormatSupport FormatSupport
@@ -220,6 +220,11 @@ func (o FormatSupport) ToMap() (map[string]interface{}, error) {
 	toSerialize["metadata"] = o.Metadata
 	toSerialize["upstreams"] = o.Upstreams
 	toSerialize["versioning"] = o.Versioning
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -252,15 +257,25 @@ func (o *FormatSupport) UnmarshalJSON(data []byte) (err error) {
 
 	varFormatSupport := _FormatSupport{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFormatSupport)
+	err = json.Unmarshal(data, &varFormatSupport)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FormatSupport(varFormatSupport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dependencies")
+		delete(additionalProperties, "distributions")
+		delete(additionalProperties, "file_lists")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "upstreams")
+		delete(additionalProperties, "versioning")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

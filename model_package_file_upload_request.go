@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,7 +28,8 @@ type PackageFileUploadRequest struct {
 	// The method to use for package file upload.
 	Method *string `json:"method,omitempty"`
 	// SHA256 checksum for a PUT-based package file upload.
-	Sha256Checksum *string `json:"sha256_checksum,omitempty"`
+	Sha256Checksum       *string `json:"sha256_checksum,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PackageFileUploadRequest PackageFileUploadRequest
@@ -196,6 +196,11 @@ func (o PackageFileUploadRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Sha256Checksum) {
 		toSerialize["sha256_checksum"] = o.Sha256Checksum
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -223,15 +228,23 @@ func (o *PackageFileUploadRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varPackageFileUploadRequest := _PackageFileUploadRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPackageFileUploadRequest)
+	err = json.Unmarshal(data, &varPackageFileUploadRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PackageFileUploadRequest(varPackageFileUploadRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filename")
+		delete(additionalProperties, "md5_checksum")
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "sha256_checksum")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

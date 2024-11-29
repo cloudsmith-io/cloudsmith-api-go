@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,14 @@ var _ MappedNullable = &StorageUsage{}
 
 // StorageUsage struct for StorageUsage
 type StorageUsage struct {
-	Limit      *string `json:"limit,omitempty"`
-	Peak       *string `json:"peak,omitempty"`
-	Percentage *string `json:"percentage,omitempty"`
-	Used       *string `json:"used,omitempty"`
+	Limit                *string `json:"limit,omitempty"`
+	Peak                 *string `json:"peak,omitempty"`
+	Percentage           *string `json:"percentage,omitempty"`
+	Used                 *string `json:"used,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StorageUsage StorageUsage
 
 // NewStorageUsage instantiates a new StorageUsage object
 // This constructor will assign default values to properties that have it defined,
@@ -193,7 +196,36 @@ func (o StorageUsage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Used) {
 		toSerialize["used"] = o.Used
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StorageUsage) UnmarshalJSON(data []byte) (err error) {
+	varStorageUsage := _StorageUsage{}
+
+	err = json.Unmarshal(data, &varStorageUsage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StorageUsage(varStorageUsage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "peak")
+		delete(additionalProperties, "percentage")
+		delete(additionalProperties, "used")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStorageUsage struct {

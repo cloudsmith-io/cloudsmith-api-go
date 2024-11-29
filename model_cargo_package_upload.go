@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -123,7 +123,10 @@ type CargoPackageUpload struct {
 	Version                     NullableString `json:"version,omitempty"`
 	VersionOrig                 *string        `json:"version_orig,omitempty"`
 	VulnerabilityScanResultsUrl *string        `json:"vulnerability_scan_results_url,omitempty"`
+	AdditionalProperties        map[string]interface{}
 }
+
+type _CargoPackageUpload CargoPackageUpload
 
 // NewCargoPackageUpload instantiates a new CargoPackageUpload object
 // This constructor will assign default values to properties that have it defined,
@@ -3034,7 +3037,109 @@ func (o CargoPackageUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VulnerabilityScanResultsUrl) {
 		toSerialize["vulnerability_scan_results_url"] = o.VulnerabilityScanResultsUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CargoPackageUpload) UnmarshalJSON(data []byte) (err error) {
+	varCargoPackageUpload := _CargoPackageUpload{}
+
+	err = json.Unmarshal(data, &varCargoPackageUpload)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CargoPackageUpload(varCargoPackageUpload)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "architectures")
+		delete(additionalProperties, "cdn_url")
+		delete(additionalProperties, "checksum_md5")
+		delete(additionalProperties, "checksum_sha1")
+		delete(additionalProperties, "checksum_sha256")
+		delete(additionalProperties, "checksum_sha512")
+		delete(additionalProperties, "dependencies_checksum_md5")
+		delete(additionalProperties, "dependencies_url")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "display_name")
+		delete(additionalProperties, "distro")
+		delete(additionalProperties, "distro_version")
+		delete(additionalProperties, "downloads")
+		delete(additionalProperties, "epoch")
+		delete(additionalProperties, "extension")
+		delete(additionalProperties, "filename")
+		delete(additionalProperties, "files")
+		delete(additionalProperties, "format")
+		delete(additionalProperties, "format_url")
+		delete(additionalProperties, "identifier_perm")
+		delete(additionalProperties, "indexed")
+		delete(additionalProperties, "is_cancellable")
+		delete(additionalProperties, "is_copyable")
+		delete(additionalProperties, "is_deleteable")
+		delete(additionalProperties, "is_downloadable")
+		delete(additionalProperties, "is_moveable")
+		delete(additionalProperties, "is_quarantinable")
+		delete(additionalProperties, "is_quarantined")
+		delete(additionalProperties, "is_resyncable")
+		delete(additionalProperties, "is_security_scannable")
+		delete(additionalProperties, "is_sync_awaiting")
+		delete(additionalProperties, "is_sync_completed")
+		delete(additionalProperties, "is_sync_failed")
+		delete(additionalProperties, "is_sync_in_flight")
+		delete(additionalProperties, "is_sync_in_progress")
+		delete(additionalProperties, "license")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "namespace")
+		delete(additionalProperties, "namespace_url")
+		delete(additionalProperties, "num_files")
+		delete(additionalProperties, "origin_repository")
+		delete(additionalProperties, "origin_repository_url")
+		delete(additionalProperties, "package_type")
+		delete(additionalProperties, "policy_violated")
+		delete(additionalProperties, "release")
+		delete(additionalProperties, "repository")
+		delete(additionalProperties, "repository_url")
+		delete(additionalProperties, "security_scan_completed_at")
+		delete(additionalProperties, "security_scan_started_at")
+		delete(additionalProperties, "security_scan_status")
+		delete(additionalProperties, "security_scan_status_updated_at")
+		delete(additionalProperties, "self_html_url")
+		delete(additionalProperties, "self_url")
+		delete(additionalProperties, "signature_url")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "stage")
+		delete(additionalProperties, "stage_str")
+		delete(additionalProperties, "stage_updated_at")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "status_reason")
+		delete(additionalProperties, "status_str")
+		delete(additionalProperties, "status_updated_at")
+		delete(additionalProperties, "status_url")
+		delete(additionalProperties, "subtype")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "sync_finished_at")
+		delete(additionalProperties, "sync_progress")
+		delete(additionalProperties, "tags_immutable")
+		delete(additionalProperties, "type_display")
+		delete(additionalProperties, "uploaded_at")
+		delete(additionalProperties, "uploader")
+		delete(additionalProperties, "uploader_url")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "version_orig")
+		delete(additionalProperties, "vulnerability_scan_results_url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCargoPackageUpload struct {

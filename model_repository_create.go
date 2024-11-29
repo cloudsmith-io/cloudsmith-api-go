@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -142,7 +141,8 @@ type RepositoryCreate struct {
 	// If checked, users can use and manage their own user-specific entitlement token for the repository (if private). Otherwise, user-specific entitlements are disabled for all users.
 	UserEntitlementsEnabled *bool `json:"user_entitlements_enabled,omitempty"`
 	// This defines the minimum level of privilege required for a user to view repository statistics, to include entitlement-based usage, if applicable. If a user does not have the permission, they won't be able to view any statistics, either via the UI, API or CLI.
-	ViewStatistics *string `json:"view_statistics,omitempty"`
+	ViewStatistics       *string `json:"view_statistics,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryCreate RepositoryCreate
@@ -2466,6 +2466,11 @@ func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ViewStatistics) {
 		toSerialize["view_statistics"] = o.ViewStatistics
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -2493,15 +2498,82 @@ func (o *RepositoryCreate) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryCreate := _RepositoryCreate{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryCreate)
+	err = json.Unmarshal(data, &varRepositoryCreate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryCreate(varRepositoryCreate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cdn_url")
+		delete(additionalProperties, "content_kind")
+		delete(additionalProperties, "contextual_auth_realm")
+		delete(additionalProperties, "copy_own")
+		delete(additionalProperties, "copy_packages")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "default_privilege")
+		delete(additionalProperties, "delete_own")
+		delete(additionalProperties, "delete_packages")
+		delete(additionalProperties, "deleted_at")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "distributes")
+		delete(additionalProperties, "docker_refresh_tokens_enabled")
+		delete(additionalProperties, "ecdsa_keys")
+		delete(additionalProperties, "enforce_eula")
+		delete(additionalProperties, "gpg_keys")
+		delete(additionalProperties, "index_files")
+		delete(additionalProperties, "is_open_source")
+		delete(additionalProperties, "is_private")
+		delete(additionalProperties, "is_public")
+		delete(additionalProperties, "manage_entitlements_privilege")
+		delete(additionalProperties, "move_own")
+		delete(additionalProperties, "move_packages")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "namespace")
+		delete(additionalProperties, "namespace_url")
+		delete(additionalProperties, "num_downloads")
+		delete(additionalProperties, "num_policy_violated_packages")
+		delete(additionalProperties, "num_quarantined_packages")
+		delete(additionalProperties, "open_source_license")
+		delete(additionalProperties, "open_source_project_url")
+		delete(additionalProperties, "package_count")
+		delete(additionalProperties, "package_group_count")
+		delete(additionalProperties, "proxy_npmjs")
+		delete(additionalProperties, "proxy_pypi")
+		delete(additionalProperties, "raw_package_index_enabled")
+		delete(additionalProperties, "raw_package_index_signatures_enabled")
+		delete(additionalProperties, "replace_packages")
+		delete(additionalProperties, "replace_packages_by_default")
+		delete(additionalProperties, "repository_type")
+		delete(additionalProperties, "repository_type_str")
+		delete(additionalProperties, "resync_own")
+		delete(additionalProperties, "resync_packages")
+		delete(additionalProperties, "scan_own")
+		delete(additionalProperties, "scan_packages")
+		delete(additionalProperties, "self_html_url")
+		delete(additionalProperties, "self_url")
+		delete(additionalProperties, "show_setup_all")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "size_str")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "storage_region")
+		delete(additionalProperties, "strict_npm_validation")
+		delete(additionalProperties, "tag_pre_releases_as_latest")
+		delete(additionalProperties, "use_debian_labels")
+		delete(additionalProperties, "use_default_cargo_upstream")
+		delete(additionalProperties, "use_entitlements_privilege")
+		delete(additionalProperties, "use_noarch_packages")
+		delete(additionalProperties, "use_source_packages")
+		delete(additionalProperties, "use_vulnerability_scanning")
+		delete(additionalProperties, "user_entitlements_enabled")
+		delete(additionalProperties, "view_statistics")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

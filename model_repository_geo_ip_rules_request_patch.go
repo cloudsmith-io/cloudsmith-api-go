@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,9 +20,12 @@ var _ MappedNullable = &RepositoryGeoIpRulesRequestPatch{}
 
 // RepositoryGeoIpRulesRequestPatch struct for RepositoryGeoIpRulesRequestPatch
 type RepositoryGeoIpRulesRequestPatch struct {
-	Cidr        *RepositoryGeoIpCidr        `json:"cidr,omitempty"`
-	CountryCode *RepositoryGeoIpCountryCode `json:"country_code,omitempty"`
+	Cidr                 *RepositoryGeoIpCidr        `json:"cidr,omitempty"`
+	CountryCode          *RepositoryGeoIpCountryCode `json:"country_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepositoryGeoIpRulesRequestPatch RepositoryGeoIpRulesRequestPatch
 
 // NewRepositoryGeoIpRulesRequestPatch instantiates a new RepositoryGeoIpRulesRequestPatch object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o RepositoryGeoIpRulesRequestPatch) ToMap() (map[string]interface{}, error
 	if !IsNil(o.CountryCode) {
 		toSerialize["country_code"] = o.CountryCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepositoryGeoIpRulesRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	varRepositoryGeoIpRulesRequestPatch := _RepositoryGeoIpRulesRequestPatch{}
+
+	err = json.Unmarshal(data, &varRepositoryGeoIpRulesRequestPatch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepositoryGeoIpRulesRequestPatch(varRepositoryGeoIpRulesRequestPatch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cidr")
+		delete(additionalProperties, "country_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepositoryGeoIpRulesRequestPatch struct {

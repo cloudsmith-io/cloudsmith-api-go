@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -24,7 +23,8 @@ var _ MappedNullable = &PackageCopyRequest{}
 type PackageCopyRequest struct {
 	Destination string `json:"destination"`
 	// If true, the package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
-	Republish *bool `json:"republish,omitempty"`
+	Republish            *bool `json:"republish,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PackageCopyRequest PackageCopyRequest
@@ -117,6 +117,11 @@ func (o PackageCopyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *PackageCopyRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varPackageCopyRequest := _PackageCopyRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPackageCopyRequest)
+	err = json.Unmarshal(data, &varPackageCopyRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PackageCopyRequest(varPackageCopyRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "destination")
+		delete(additionalProperties, "republish")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -40,8 +40,8 @@ docker run --rm \
     --additional-properties packageVersion="$PKG_VERSION" \
     --type-mappings integer=int64,number=float64,float=float64 \
     --enable-post-process-file \
-    --api-name-suffix "Api"
-
+    --api-name-suffix "Api" \
+    --additional-properties=disallowAdditionalPropertiesIfNotPresent=false
 
 # Clean up unused files post-generation
 

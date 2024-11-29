@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -21,8 +21,11 @@ var _ MappedNullable = &ResourcesRateCheck{}
 // ResourcesRateCheck struct for ResourcesRateCheck
 type ResourcesRateCheck struct {
 	// Rate limit values per resource
-	Resources *map[string]RateCheck `json:"resources,omitempty"`
+	Resources            *map[string]RateCheck `json:"resources,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ResourcesRateCheck ResourcesRateCheck
 
 // NewResourcesRateCheck instantiates a new ResourcesRateCheck object
 // This constructor will assign default values to properties that have it defined,
@@ -86,7 +89,33 @@ func (o ResourcesRateCheck) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Resources) {
 		toSerialize["resources"] = o.Resources
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ResourcesRateCheck) UnmarshalJSON(data []byte) (err error) {
+	varResourcesRateCheck := _ResourcesRateCheck{}
+
+	err = json.Unmarshal(data, &varResourcesRateCheck)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResourcesRateCheck(varResourcesRateCheck)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resources")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableResourcesRateCheck struct {

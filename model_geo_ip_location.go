@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,13 +21,14 @@ var _ MappedNullable = &GeoIpLocation{}
 
 // GeoIpLocation struct for GeoIpLocation
 type GeoIpLocation struct {
-	City        NullableString  `json:"city"`
-	Continent   NullableString  `json:"continent"`
-	Country     NullableString  `json:"country"`
-	CountryCode *string         `json:"country_code,omitempty"`
-	Latitude    NullableFloat64 `json:"latitude,omitempty"`
-	Longitude   NullableFloat64 `json:"longitude,omitempty"`
-	PostalCode  NullableString  `json:"postal_code"`
+	City                 NullableString  `json:"city"`
+	Continent            NullableString  `json:"continent"`
+	Country              NullableString  `json:"country"`
+	CountryCode          *string         `json:"country_code,omitempty"`
+	Latitude             NullableFloat64 `json:"latitude,omitempty"`
+	Longitude            NullableFloat64 `json:"longitude,omitempty"`
+	PostalCode           NullableString  `json:"postal_code"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GeoIpLocation GeoIpLocation
@@ -299,6 +299,11 @@ func (o GeoIpLocation) ToMap() (map[string]interface{}, error) {
 		toSerialize["longitude"] = o.Longitude.Get()
 	}
 	toSerialize["postal_code"] = o.PostalCode.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -329,15 +334,26 @@ func (o *GeoIpLocation) UnmarshalJSON(data []byte) (err error) {
 
 	varGeoIpLocation := _GeoIpLocation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGeoIpLocation)
+	err = json.Unmarshal(data, &varGeoIpLocation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GeoIpLocation(varGeoIpLocation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "continent")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "latitude")
+		delete(additionalProperties, "longitude")
+		delete(additionalProperties, "postal_code")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

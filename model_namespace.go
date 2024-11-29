@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,11 +20,14 @@ var _ MappedNullable = &Namespace{}
 
 // Namespace struct for Namespace
 type Namespace struct {
-	Name     *string `json:"name,omitempty"`
-	Slug     *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	TypeName *string `json:"type_name,omitempty"`
+	Name                 *string `json:"name,omitempty"`
+	Slug                 *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	SlugPerm             *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	TypeName             *string `json:"type_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Namespace Namespace
 
 // NewNamespace instantiates a new Namespace object
 // This constructor will assign default values to properties that have it defined,
@@ -193,7 +196,36 @@ func (o Namespace) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TypeName) {
 		toSerialize["type_name"] = o.TypeName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Namespace) UnmarshalJSON(data []byte) (err error) {
+	varNamespace := _Namespace{}
+
+	err = json.Unmarshal(data, &varNamespace)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Namespace(varNamespace)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "type_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNamespace struct {

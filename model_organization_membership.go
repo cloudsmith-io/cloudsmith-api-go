@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -21,19 +21,22 @@ var _ MappedNullable = &OrganizationMembership{}
 
 // OrganizationMembership struct for OrganizationMembership
 type OrganizationMembership struct {
-	Email           *string      `json:"email,omitempty"`
-	HasTwoFactor    *bool        `json:"has_two_factor,omitempty"`
-	IsActive        *bool        `json:"is_active,omitempty"`
-	JoinedAt        *time.Time   `json:"joined_at,omitempty"`
-	LastLoginAt     NullableTime `json:"last_login_at,omitempty"`
-	LastLoginMethod *string      `json:"last_login_method,omitempty"`
-	Role            *string      `json:"role,omitempty"`
-	User            *string      `json:"user,omitempty"`
-	UserId          *string      `json:"user_id,omitempty"`
-	UserName        *string      `json:"user_name,omitempty"`
-	UserUrl         *string      `json:"user_url,omitempty"`
-	Visibility      *string      `json:"visibility,omitempty"`
+	Email                *string      `json:"email,omitempty"`
+	HasTwoFactor         *bool        `json:"has_two_factor,omitempty"`
+	IsActive             *bool        `json:"is_active,omitempty"`
+	JoinedAt             *time.Time   `json:"joined_at,omitempty"`
+	LastLoginAt          NullableTime `json:"last_login_at,omitempty"`
+	LastLoginMethod      *string      `json:"last_login_method,omitempty"`
+	Role                 *string      `json:"role,omitempty"`
+	User                 *string      `json:"user,omitempty"`
+	UserId               *string      `json:"user_id,omitempty"`
+	UserName             *string      `json:"user_name,omitempty"`
+	UserUrl              *string      `json:"user_url,omitempty"`
+	Visibility           *string      `json:"visibility,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrganizationMembership OrganizationMembership
 
 // NewOrganizationMembership instantiates a new OrganizationMembership object
 // This constructor will assign default values to properties that have it defined,
@@ -493,7 +496,44 @@ func (o OrganizationMembership) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Visibility) {
 		toSerialize["visibility"] = o.Visibility
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrganizationMembership) UnmarshalJSON(data []byte) (err error) {
+	varOrganizationMembership := _OrganizationMembership{}
+
+	err = json.Unmarshal(data, &varOrganizationMembership)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationMembership(varOrganizationMembership)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "has_two_factor")
+		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "joined_at")
+		delete(additionalProperties, "last_login_at")
+		delete(additionalProperties, "last_login_method")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "user")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "user_name")
+		delete(additionalProperties, "user_url")
+		delete(additionalProperties, "visibility")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrganizationMembership struct {

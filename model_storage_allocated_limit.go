@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,12 +20,15 @@ var _ MappedNullable = &StorageAllocatedLimit{}
 
 // StorageAllocatedLimit struct for StorageAllocatedLimit
 type StorageAllocatedLimit struct {
-	Configured     *string `json:"configured,omitempty"`
-	Peak           *string `json:"peak,omitempty"`
-	PercentageUsed *string `json:"percentage_used,omitempty"`
-	PlanLimit      *string `json:"plan_limit,omitempty"`
-	Used           *string `json:"used,omitempty"`
+	Configured           *string `json:"configured,omitempty"`
+	Peak                 *string `json:"peak,omitempty"`
+	PercentageUsed       *string `json:"percentage_used,omitempty"`
+	PlanLimit            *string `json:"plan_limit,omitempty"`
+	Used                 *string `json:"used,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StorageAllocatedLimit StorageAllocatedLimit
 
 // NewStorageAllocatedLimit instantiates a new StorageAllocatedLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -229,7 +232,37 @@ func (o StorageAllocatedLimit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Used) {
 		toSerialize["used"] = o.Used
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StorageAllocatedLimit) UnmarshalJSON(data []byte) (err error) {
+	varStorageAllocatedLimit := _StorageAllocatedLimit{}
+
+	err = json.Unmarshal(data, &varStorageAllocatedLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StorageAllocatedLimit(varStorageAllocatedLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "configured")
+		delete(additionalProperties, "peak")
+		delete(additionalProperties, "percentage_used")
+		delete(additionalProperties, "plan_limit")
+		delete(additionalProperties, "used")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStorageAllocatedLimit struct {

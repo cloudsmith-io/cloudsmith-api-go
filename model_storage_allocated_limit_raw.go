@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,12 +20,15 @@ var _ MappedNullable = &StorageAllocatedLimitRaw{}
 
 // StorageAllocatedLimitRaw struct for StorageAllocatedLimitRaw
 type StorageAllocatedLimitRaw struct {
-	Configured     *int64   `json:"configured,omitempty"`
-	Peak           *int64   `json:"peak,omitempty"`
-	PercentageUsed *float64 `json:"percentage_used,omitempty"`
-	PlanLimit      *int64   `json:"plan_limit,omitempty"`
-	Used           *int64   `json:"used,omitempty"`
+	Configured           *int64   `json:"configured,omitempty"`
+	Peak                 *int64   `json:"peak,omitempty"`
+	PercentageUsed       *float64 `json:"percentage_used,omitempty"`
+	PlanLimit            *int64   `json:"plan_limit,omitempty"`
+	Used                 *int64   `json:"used,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StorageAllocatedLimitRaw StorageAllocatedLimitRaw
 
 // NewStorageAllocatedLimitRaw instantiates a new StorageAllocatedLimitRaw object
 // This constructor will assign default values to properties that have it defined,
@@ -229,7 +232,37 @@ func (o StorageAllocatedLimitRaw) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Used) {
 		toSerialize["used"] = o.Used
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StorageAllocatedLimitRaw) UnmarshalJSON(data []byte) (err error) {
+	varStorageAllocatedLimitRaw := _StorageAllocatedLimitRaw{}
+
+	err = json.Unmarshal(data, &varStorageAllocatedLimitRaw)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StorageAllocatedLimitRaw(varStorageAllocatedLimitRaw)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "configured")
+		delete(additionalProperties, "peak")
+		delete(additionalProperties, "percentage_used")
+		delete(additionalProperties, "plan_limit")
+		delete(additionalProperties, "used")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStorageAllocatedLimitRaw struct {

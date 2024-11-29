@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -23,22 +22,23 @@ var _ MappedNullable = &NamespaceAuditLog{}
 
 // NamespaceAuditLog struct for NamespaceAuditLog
 type NamespaceAuditLog struct {
-	Actor          NullableString `json:"actor"`
-	ActorIpAddress NullableString `json:"actor_ip_address"`
-	ActorKind      *string        `json:"actor_kind,omitempty"`
-	ActorLocation  GeoIpLocation  `json:"actor_location"`
-	ActorSlugPerm  NullableString `json:"actor_slug_perm"`
-	ActorUrl       NullableString `json:"actor_url,omitempty"`
-	Context        string         `json:"context"`
-	Event          string         `json:"event"`
-	EventAt        time.Time      `json:"event_at"`
-	Object         string         `json:"object"`
-	ObjectKind     string         `json:"object_kind"`
-	ObjectSlugPerm string         `json:"object_slug_perm"`
-	Target         string         `json:"target"`
-	TargetKind     string         `json:"target_kind"`
-	TargetSlugPerm NullableString `json:"target_slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	Uuid           *string        `json:"uuid,omitempty"`
+	Actor                NullableString `json:"actor"`
+	ActorIpAddress       NullableString `json:"actor_ip_address"`
+	ActorKind            *string        `json:"actor_kind,omitempty"`
+	ActorLocation        GeoIpLocation  `json:"actor_location"`
+	ActorSlugPerm        NullableString `json:"actor_slug_perm"`
+	ActorUrl             NullableString `json:"actor_url,omitempty"`
+	Context              string         `json:"context"`
+	Event                string         `json:"event"`
+	EventAt              time.Time      `json:"event_at"`
+	Object               string         `json:"object"`
+	ObjectKind           string         `json:"object_kind"`
+	ObjectSlugPerm       string         `json:"object_slug_perm"`
+	Target               string         `json:"target"`
+	TargetKind           string         `json:"target_kind"`
+	TargetSlugPerm       NullableString `json:"target_slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	Uuid                 *string        `json:"uuid,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _NamespaceAuditLog NamespaceAuditLog
@@ -550,6 +550,11 @@ func (o NamespaceAuditLog) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -588,15 +593,35 @@ func (o *NamespaceAuditLog) UnmarshalJSON(data []byte) (err error) {
 
 	varNamespaceAuditLog := _NamespaceAuditLog{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varNamespaceAuditLog)
+	err = json.Unmarshal(data, &varNamespaceAuditLog)
 
 	if err != nil {
 		return err
 	}
 
 	*o = NamespaceAuditLog(varNamespaceAuditLog)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actor")
+		delete(additionalProperties, "actor_ip_address")
+		delete(additionalProperties, "actor_kind")
+		delete(additionalProperties, "actor_location")
+		delete(additionalProperties, "actor_slug_perm")
+		delete(additionalProperties, "actor_url")
+		delete(additionalProperties, "context")
+		delete(additionalProperties, "event")
+		delete(additionalProperties, "event_at")
+		delete(additionalProperties, "object")
+		delete(additionalProperties, "object_kind")
+		delete(additionalProperties, "object_slug_perm")
+		delete(additionalProperties, "target")
+		delete(additionalProperties, "target_kind")
+		delete(additionalProperties, "target_slug_perm")
+		delete(additionalProperties, "uuid")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

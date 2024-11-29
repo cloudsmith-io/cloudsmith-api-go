@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -23,8 +23,11 @@ type Eula struct {
 	// A unique identifier that you can use for your own EULA tracking purposes. This might be a date, or a semantic version, etc. The only requirement is that it is unique across multiple EULAs.
 	Identifier NullableString `json:"identifier,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// A sequential identifier that increments by one for each new commit in a repository.
-	Number NullableInt64 `json:"number,omitempty"`
+	Number               NullableInt64 `json:"number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Eula Eula
 
 // NewEula instantiates a new Eula object
 // This constructor will assign default values to properties that have it defined,
@@ -145,7 +148,34 @@ func (o Eula) ToMap() (map[string]interface{}, error) {
 	if o.Number.IsSet() {
 		toSerialize["number"] = o.Number.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Eula) UnmarshalJSON(data []byte) (err error) {
+	varEula := _Eula{}
+
+	err = json.Unmarshal(data, &varEula)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Eula(varEula)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "identifier")
+		delete(additionalProperties, "number")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEula struct {

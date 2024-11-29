@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,7 +28,8 @@ type ComposerPackageUploadRequest struct {
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`
 	// The raw version for this package.
-	Version NullableString `json:"version,omitempty"`
+	Version              NullableString `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ComposerPackageUploadRequest ComposerPackageUploadRequest
@@ -214,6 +214,11 @@ func (o ComposerPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -241,15 +246,23 @@ func (o *ComposerPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varComposerPackageUploadRequest := _ComposerPackageUploadRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varComposerPackageUploadRequest)
+	err = json.Unmarshal(data, &varComposerPackageUploadRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ComposerPackageUploadRequest(varComposerPackageUploadRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "package_file")
+		delete(additionalProperties, "republish")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

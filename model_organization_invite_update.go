@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -21,8 +21,11 @@ var _ MappedNullable = &OrganizationInviteUpdate{}
 // OrganizationInviteUpdate struct for OrganizationInviteUpdate
 type OrganizationInviteUpdate struct {
 	// The role to be assigned to the invited user.
-	Role *string `json:"role,omitempty"`
+	Role                 *string `json:"role,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrganizationInviteUpdate OrganizationInviteUpdate
 
 // NewOrganizationInviteUpdate instantiates a new OrganizationInviteUpdate object
 // This constructor will assign default values to properties that have it defined,
@@ -90,7 +93,33 @@ func (o OrganizationInviteUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Role) {
 		toSerialize["role"] = o.Role
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrganizationInviteUpdate) UnmarshalJSON(data []byte) (err error) {
+	varOrganizationInviteUpdate := _OrganizationInviteUpdate{}
+
+	err = json.Unmarshal(data, &varOrganizationInviteUpdate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationInviteUpdate(varOrganizationInviteUpdate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "role")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrganizationInviteUpdate struct {

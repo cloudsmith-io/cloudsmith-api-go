@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -28,6 +27,7 @@ type OrganizationPackageLicensePolicyRequest struct {
 	OnViolationQuarantine *bool          `json:"on_violation_quarantine,omitempty"`
 	PackageQueryString    NullableString `json:"package_query_string,omitempty"`
 	SpdxIdentifiers       []string       `json:"spdx_identifiers"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _OrganizationPackageLicensePolicyRequest OrganizationPackageLicensePolicyRequest
@@ -273,6 +273,11 @@ func (o OrganizationPackageLicensePolicyRequest) ToMap() (map[string]interface{}
 		toSerialize["package_query_string"] = o.PackageQueryString.Get()
 	}
 	toSerialize["spdx_identifiers"] = o.SpdxIdentifiers
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -301,15 +306,25 @@ func (o *OrganizationPackageLicensePolicyRequest) UnmarshalJSON(data []byte) (er
 
 	varOrganizationPackageLicensePolicyRequest := _OrganizationPackageLicensePolicyRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrganizationPackageLicensePolicyRequest)
+	err = json.Unmarshal(data, &varOrganizationPackageLicensePolicyRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OrganizationPackageLicensePolicyRequest(varOrganizationPackageLicensePolicyRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allow_unknown_licenses")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "on_violation_quarantine")
+		delete(additionalProperties, "package_query_string")
+		delete(additionalProperties, "spdx_identifiers")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

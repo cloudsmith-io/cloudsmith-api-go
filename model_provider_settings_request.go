@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -31,7 +30,8 @@ type ProviderSettingsRequest struct {
 	// The URL from the provider that serves as the base for the OpenID configuration. For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
 	ProviderUrl string `json:"provider_url"`
 	// The service accounts associated with these provider settings
-	ServiceAccounts []string `json:"service_accounts"`
+	ServiceAccounts      []string `json:"service_accounts"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProviderSettingsRequest ProviderSettingsRequest
@@ -193,6 +193,11 @@ func (o ProviderSettingsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["provider_url"] = o.ProviderUrl
 	toSerialize["service_accounts"] = o.ServiceAccounts
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -224,15 +229,24 @@ func (o *ProviderSettingsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varProviderSettingsRequest := _ProviderSettingsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProviderSettingsRequest)
+	err = json.Unmarshal(data, &varProviderSettingsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProviderSettingsRequest(varProviderSettingsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "claims")
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "provider_url")
+		delete(additionalProperties, "service_accounts")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

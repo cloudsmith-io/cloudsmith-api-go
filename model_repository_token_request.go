@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -48,6 +47,7 @@ type RepositoryTokenRequest struct {
 	ScheduledResetAt     NullableTime   `json:"scheduled_reset_at,omitempty"`
 	ScheduledResetPeriod NullableString `json:"scheduled_reset_period,omitempty"`
 	Token                *string        `json:"token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryTokenRequest RepositoryTokenRequest
@@ -714,6 +714,11 @@ func (o RepositoryTokenRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Token) {
 		toSerialize["token"] = o.Token
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -741,15 +746,34 @@ func (o *RepositoryTokenRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryTokenRequest := _RepositoryTokenRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryTokenRequest)
+	err = json.Unmarshal(data, &varRepositoryTokenRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryTokenRequest(varRepositoryTokenRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "eula_required")
+		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "limit_bandwidth")
+		delete(additionalProperties, "limit_bandwidth_unit")
+		delete(additionalProperties, "limit_date_range_from")
+		delete(additionalProperties, "limit_date_range_to")
+		delete(additionalProperties, "limit_num_clients")
+		delete(additionalProperties, "limit_num_downloads")
+		delete(additionalProperties, "limit_package_query")
+		delete(additionalProperties, "limit_path_query")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "scheduled_reset_at")
+		delete(additionalProperties, "scheduled_reset_period")
+		delete(additionalProperties, "token")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

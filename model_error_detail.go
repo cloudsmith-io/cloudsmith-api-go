@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,7 +22,8 @@ var _ MappedNullable = &ErrorDetail{}
 // ErrorDetail struct for ErrorDetail
 type ErrorDetail struct {
 	// An extended message for the response.
-	Detail string `json:"detail"`
+	Detail               string `json:"detail"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ErrorDetail ErrorDetail
@@ -81,6 +81,11 @@ func (o ErrorDetail) MarshalJSON() ([]byte, error) {
 func (o ErrorDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["detail"] = o.Detail
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *ErrorDetail) UnmarshalJSON(data []byte) (err error) {
 
 	varErrorDetail := _ErrorDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varErrorDetail)
+	err = json.Unmarshal(data, &varErrorDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ErrorDetail(varErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

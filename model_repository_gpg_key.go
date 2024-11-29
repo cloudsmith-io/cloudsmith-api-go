@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -33,7 +32,8 @@ type RepositoryGpgKey struct {
 	Fingerprint      *string `json:"fingerprint,omitempty"`
 	FingerprintShort *string `json:"fingerprint_short,omitempty"`
 	// The public key given to repository users.
-	PublicKey *string `json:"public_key,omitempty"`
+	PublicKey            *string `json:"public_key,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryGpgKey RepositoryGpgKey
@@ -301,6 +301,11 @@ func (o RepositoryGpgKey) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PublicKey) {
 		toSerialize["public_key"] = o.PublicKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -328,15 +333,26 @@ func (o *RepositoryGpgKey) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryGpgKey := _RepositoryGpgKey{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryGpgKey)
+	err = json.Unmarshal(data, &varRepositoryGpgKey)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryGpgKey(varRepositoryGpgKey)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "active")
+		delete(additionalProperties, "comment")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "default")
+		delete(additionalProperties, "fingerprint")
+		delete(additionalProperties, "fingerprint_short")
+		delete(additionalProperties, "public_key")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

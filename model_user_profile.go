@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -32,8 +31,9 @@ type UserProfile struct {
 	Slug      *string        `json:"slug,omitempty"`
 	SlugPerm  *string        `json:"slug_perm,omitempty"`
 	// Your tagline is a sentence about you. Make it funny. Make it professional. Either way, it's public and it represents who you are.
-	Tagline NullableString `json:"tagline,omitempty"`
-	Url     *string        `json:"url,omitempty"`
+	Tagline              NullableString `json:"tagline,omitempty"`
+	Url                  *string        `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UserProfile UserProfile
@@ -430,6 +430,11 @@ func (o UserProfile) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -458,15 +463,29 @@ func (o *UserProfile) UnmarshalJSON(data []byte) (err error) {
 
 	varUserProfile := _UserProfile{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUserProfile)
+	err = json.Unmarshal(data, &varUserProfile)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UserProfile(varUserProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "company")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "job_title")
+		delete(additionalProperties, "joined_at")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "tagline")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

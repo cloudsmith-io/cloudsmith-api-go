@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,10 +21,11 @@ var _ MappedNullable = &OrganizationTeamRequest{}
 
 // OrganizationTeamRequest struct for OrganizationTeamRequest
 type OrganizationTeamRequest struct {
-	Description *string `json:"description,omitempty"`
-	Name        string  `json:"name"`
-	Slug        *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	Visibility  *string `json:"visibility,omitempty"`
+	Description          *string `json:"description,omitempty"`
+	Name                 string  `json:"name"`
+	Slug                 *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	Visibility           *string `json:"visibility,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OrganizationTeamRequest OrganizationTeamRequest
@@ -192,6 +192,11 @@ func (o OrganizationTeamRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Visibility) {
 		toSerialize["visibility"] = o.Visibility
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -219,15 +224,23 @@ func (o *OrganizationTeamRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varOrganizationTeamRequest := _OrganizationTeamRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOrganizationTeamRequest)
+	err = json.Unmarshal(data, &varOrganizationTeamRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = OrganizationTeamRequest(varOrganizationTeamRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "visibility")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

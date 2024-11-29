@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -27,11 +27,14 @@ type UserBrief struct {
 	// The full name of the user (if any).
 	Name NullableString `json:"name,omitempty"`
 	// The URL for the full profile of the user.
-	ProfileUrl NullableString `json:"profile_url,omitempty"`
-	SelfUrl    *string        `json:"self_url,omitempty"`
-	Slug       NullableString `json:"slug,omitempty"`
-	SlugPerm   NullableString `json:"slug_perm,omitempty"`
+	ProfileUrl           NullableString `json:"profile_url,omitempty"`
+	SelfUrl              *string        `json:"self_url,omitempty"`
+	Slug                 NullableString `json:"slug,omitempty"`
+	SlugPerm             NullableString `json:"slug_perm,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UserBrief UserBrief
 
 // NewUserBrief instantiates a new UserBrief object
 // This constructor will assign default values to properties that have it defined,
@@ -360,7 +363,39 @@ func (o UserBrief) ToMap() (map[string]interface{}, error) {
 	if o.SlugPerm.IsSet() {
 		toSerialize["slug_perm"] = o.SlugPerm.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UserBrief) UnmarshalJSON(data []byte) (err error) {
+	varUserBrief := _UserBrief{}
+
+	err = json.Unmarshal(data, &varUserBrief)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserBrief(varUserBrief)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "authenticated")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "profile_url")
+		delete(additionalProperties, "self_url")
+		delete(additionalProperties, "slug")
+		delete(additionalProperties, "slug_perm")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUserBrief struct {

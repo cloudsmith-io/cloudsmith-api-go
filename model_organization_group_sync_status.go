@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -20,8 +20,11 @@ var _ MappedNullable = &OrganizationGroupSyncStatus{}
 
 // OrganizationGroupSyncStatus struct for OrganizationGroupSyncStatus
 type OrganizationGroupSyncStatus struct {
-	SamlGroupSyncStatus *bool `json:"saml_group_sync_status,omitempty"`
+	SamlGroupSyncStatus  *bool `json:"saml_group_sync_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrganizationGroupSyncStatus OrganizationGroupSyncStatus
 
 // NewOrganizationGroupSyncStatus instantiates a new OrganizationGroupSyncStatus object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o OrganizationGroupSyncStatus) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SamlGroupSyncStatus) {
 		toSerialize["saml_group_sync_status"] = o.SamlGroupSyncStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrganizationGroupSyncStatus) UnmarshalJSON(data []byte) (err error) {
+	varOrganizationGroupSyncStatus := _OrganizationGroupSyncStatus{}
+
+	err = json.Unmarshal(data, &varOrganizationGroupSyncStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationGroupSyncStatus(varOrganizationGroupSyncStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "saml_group_sync_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrganizationGroupSyncStatus struct {

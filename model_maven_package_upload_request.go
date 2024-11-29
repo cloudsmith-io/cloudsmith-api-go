@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -47,7 +46,8 @@ type MavenPackageUploadRequest struct {
 	// Adds bundled Java tests to the Maven package.
 	TestsFile NullableString `json:"tests_file,omitempty"`
 	// The raw version for this package.
-	Version NullableString `json:"version,omitempty"`
+	Version              NullableString `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MavenPackageUploadRequest MavenPackageUploadRequest
@@ -692,6 +692,11 @@ func (o MavenPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -719,15 +724,33 @@ func (o *MavenPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varMavenPackageUploadRequest := _MavenPackageUploadRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMavenPackageUploadRequest)
+	err = json.Unmarshal(data, &varMavenPackageUploadRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MavenPackageUploadRequest(varMavenPackageUploadRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "artifact_id")
+		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "ivy_file")
+		delete(additionalProperties, "javadoc_file")
+		delete(additionalProperties, "package_file")
+		delete(additionalProperties, "packaging")
+		delete(additionalProperties, "pom_file")
+		delete(additionalProperties, "republish")
+		delete(additionalProperties, "sbt_version")
+		delete(additionalProperties, "scala_version")
+		delete(additionalProperties, "sources_file")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "tests_file")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

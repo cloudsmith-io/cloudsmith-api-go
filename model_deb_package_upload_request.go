@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -35,7 +34,8 @@ type DebPackageUploadRequest struct {
 	// The sources archive containing the source code for the binary
 	SourcesFile NullableString `json:"sources_file,omitempty"`
 	// A comma-separated values list of tags to add to the package.
-	Tags NullableString `json:"tags,omitempty"`
+	Tags                 NullableString `json:"tags,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DebPackageUploadRequest DebPackageUploadRequest
@@ -331,6 +331,11 @@ func (o DebPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if o.Tags.IsSet() {
 		toSerialize["tags"] = o.Tags.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -359,15 +364,26 @@ func (o *DebPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varDebPackageUploadRequest := _DebPackageUploadRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDebPackageUploadRequest)
+	err = json.Unmarshal(data, &varDebPackageUploadRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DebPackageUploadRequest(varDebPackageUploadRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "changes_file")
+		delete(additionalProperties, "component")
+		delete(additionalProperties, "distribution")
+		delete(additionalProperties, "package_file")
+		delete(additionalProperties, "republish")
+		delete(additionalProperties, "sources_file")
+		delete(additionalProperties, "tags")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

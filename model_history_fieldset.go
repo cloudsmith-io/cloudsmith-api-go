@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -22,9 +21,10 @@ var _ MappedNullable = &HistoryFieldset{}
 
 // HistoryFieldset struct for HistoryFieldset
 type HistoryFieldset struct {
-	Downloaded  Usage        `json:"downloaded"`
-	StorageUsed StorageUsage `json:"storage_used"`
-	Uploaded    Usage        `json:"uploaded"`
+	Downloaded           Usage        `json:"downloaded"`
+	StorageUsed          StorageUsage `json:"storage_used"`
+	Uploaded             Usage        `json:"uploaded"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HistoryFieldset HistoryFieldset
@@ -134,6 +134,11 @@ func (o HistoryFieldset) ToMap() (map[string]interface{}, error) {
 	toSerialize["downloaded"] = o.Downloaded
 	toSerialize["storage_used"] = o.StorageUsed
 	toSerialize["uploaded"] = o.Uploaded
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,15 +168,22 @@ func (o *HistoryFieldset) UnmarshalJSON(data []byte) (err error) {
 
 	varHistoryFieldset := _HistoryFieldset{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHistoryFieldset)
+	err = json.Unmarshal(data, &varHistoryFieldset)
 
 	if err != nil {
 		return err
 	}
 
 	*o = HistoryFieldset(varHistoryFieldset)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "downloaded")
+		delete(additionalProperties, "storage_used")
+		delete(additionalProperties, "uploaded")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

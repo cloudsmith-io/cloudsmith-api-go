@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -29,7 +28,8 @@ type RepositoryPrivilegeDict struct {
 	// The team identifier (slug).
 	Team *string `json:"team,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// The user identifier (slug).
-	User *string `json:"user,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	User                 *string `json:"user,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryPrivilegeDict RepositoryPrivilegeDict
@@ -192,6 +192,11 @@ func (o RepositoryPrivilegeDict) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.User) {
 		toSerialize["user"] = o.User
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -219,15 +224,23 @@ func (o *RepositoryPrivilegeDict) UnmarshalJSON(data []byte) (err error) {
 
 	varRepositoryPrivilegeDict := _RepositoryPrivilegeDict{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryPrivilegeDict)
+	err = json.Unmarshal(data, &varRepositoryPrivilegeDict)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryPrivilegeDict(varRepositoryPrivilegeDict)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "privilege")
+		delete(additionalProperties, "service")
+		delete(additionalProperties, "team")
+		delete(additionalProperties, "user")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

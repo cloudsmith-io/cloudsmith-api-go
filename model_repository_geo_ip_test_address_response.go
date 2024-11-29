@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.566.9
+API version: 1.568.8
 Contact: support@cloudsmith.io
 */
 
@@ -12,7 +12,6 @@ Contact: support@cloudsmith.io
 package cloudsmith
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -23,7 +22,8 @@ var _ MappedNullable = &RepositoryGeoIpTestAddressResponse{}
 // RepositoryGeoIpTestAddressResponse struct for RepositoryGeoIpTestAddressResponse
 type RepositoryGeoIpTestAddressResponse struct {
 	// The IP address test results ordered by allowed
-	Addresses []RepositoryGeoIpTestAddressResponseDict `json:"addresses"`
+	Addresses            []RepositoryGeoIpTestAddressResponseDict `json:"addresses"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RepositoryGeoIpTestAddressResponse RepositoryGeoIpTestAddressResponse
@@ -81,6 +81,11 @@ func (o RepositoryGeoIpTestAddressResponse) MarshalJSON() ([]byte, error) {
 func (o RepositoryGeoIpTestAddressResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["addresses"] = o.Addresses
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -108,15 +113,20 @@ func (o *RepositoryGeoIpTestAddressResponse) UnmarshalJSON(data []byte) (err err
 
 	varRepositoryGeoIpTestAddressResponse := _RepositoryGeoIpTestAddressResponse{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRepositoryGeoIpTestAddressResponse)
+	err = json.Unmarshal(data, &varRepositoryGeoIpTestAddressResponse)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RepositoryGeoIpTestAddressResponse(varRepositoryGeoIpTestAddressResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "addresses")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
