@@ -22,8 +22,9 @@ var _ MappedNullable = &ErrorDetail{}
 // ErrorDetail struct for ErrorDetail
 type ErrorDetail struct {
 	// An extended message for the response.
-	Detail               string `json:"detail"`
-	AdditionalProperties map[string]interface{}
+	Detail               	string `json:"detail"`
+	AdditionalProperties 	map[string]interface{}
+	Fields 					map[string][]string `json:"fields"`
 }
 
 type _ErrorDetail ErrorDetail
@@ -32,9 +33,10 @@ type _ErrorDetail ErrorDetail
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewErrorDetail(detail string) *ErrorDetail {
+func NewErrorDetail(detail string, fields map[string][]string) *ErrorDetail {
 	this := ErrorDetail{}
 	this.Detail = detail
+	this.Fields = fields
 	return &this
 }
 

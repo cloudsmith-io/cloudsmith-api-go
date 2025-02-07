@@ -690,7 +690,7 @@ func (e GenericOpenAPIError) Model() interface{} {
 	return e.model
 }
 
-// format error message using title and detail when model implements rfc7807
+// format error message using title and detail
 func formatErrorMessage(status string, v interface{}) string {
 	str := ""
 	metaValue := reflect.ValueOf(v).Elem()
@@ -705,6 +705,17 @@ func formatErrorMessage(status string, v interface{}) string {
 		if field != (reflect.Value{}) {
 			str = fmt.Sprintf("%s (%s)", str, field.Interface())
 		}
+
+		
+        fields := metaValue.FieldByName("Fields")
+        if fields != (reflect.Value{}) {
+            if fields.Kind() == reflect.Map {
+                for _, key := range fields.MapKeys() {
+                    fieldMessage := fields.MapIndex(key)
+                    str = fmt.Sprintf("%s %s: %v;", str, key.String(), fieldMessage.Interface())
+                }
+            }
+        }
 	}
 
 	return strings.TrimSpace(fmt.Sprintf("%s %s", status, str))
