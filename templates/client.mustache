@@ -741,6 +741,11 @@ func formatErrorMessage(status string, v interface{}) string {
         
         fields := metaValue.FieldByName("Fields")
         if fields != (reflect.Value{}) {
+			if fields.Kind() == reflect.Ptr {
+				// Dereference the pointer to get the actual value
+				fields = fields.Elem()
+			}
+			
             if fields.Kind() == reflect.Map {
                 for _, key := range fields.MapKeys() {
                     fieldMessage := fields.MapIndex(key)
