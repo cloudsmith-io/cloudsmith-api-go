@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AuthCertificate** | Pointer to **string** | X.509 Certificate to use for mTLS authentication against the upstream | [optional] 
+**AuthCertificateKey** | Pointer to **string** | Certificate key to use for mTLS authentication against the upstream | [optional] 
 **AuthMode** | Pointer to **string** | The authentication mode to use when accessing this upstream.  | [optional] [default to "None"]
 **AuthSecret** | Pointer to **NullableString** | Secret to provide with requests to upstream. | [optional] 
 **AuthUsername** | Pointer to **NullableString** | Username to provide with requests to upstream. | [optional] 
@@ -36,6 +38,56 @@ will change when the set of required properties is changed
 NewDockerUpstreamRequestWithDefaults instantiates a new DockerUpstreamRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAuthCertificate
+
+`func (o *DockerUpstreamRequest) GetAuthCertificate() string`
+
+GetAuthCertificate returns the AuthCertificate field if non-nil, zero value otherwise.
+
+### GetAuthCertificateOk
+
+`func (o *DockerUpstreamRequest) GetAuthCertificateOk() (*string, bool)`
+
+GetAuthCertificateOk returns a tuple with the AuthCertificate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthCertificate
+
+`func (o *DockerUpstreamRequest) SetAuthCertificate(v string)`
+
+SetAuthCertificate sets AuthCertificate field to given value.
+
+### HasAuthCertificate
+
+`func (o *DockerUpstreamRequest) HasAuthCertificate() bool`
+
+HasAuthCertificate returns a boolean if a field has been set.
+
+### GetAuthCertificateKey
+
+`func (o *DockerUpstreamRequest) GetAuthCertificateKey() string`
+
+GetAuthCertificateKey returns the AuthCertificateKey field if non-nil, zero value otherwise.
+
+### GetAuthCertificateKeyOk
+
+`func (o *DockerUpstreamRequest) GetAuthCertificateKeyOk() (*string, bool)`
+
+GetAuthCertificateKeyOk returns a tuple with the AuthCertificateKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthCertificateKey
+
+`func (o *DockerUpstreamRequest) SetAuthCertificateKey(v string)`
+
+SetAuthCertificateKey sets AuthCertificateKey field to given value.
+
+### HasAuthCertificateKey
+
+`func (o *DockerUpstreamRequest) HasAuthCertificateKey() bool`
+
+HasAuthCertificateKey returns a boolean if a field has been set.
 
 ### GetAuthMode
 

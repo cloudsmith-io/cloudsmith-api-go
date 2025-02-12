@@ -23,7 +23,10 @@ Name | Type | Description | Notes
 **Files** | Pointer to [**[]PackageFile**](PackageFile.md) |  | [optional] [readonly] 
 **Format** | Pointer to **string** |  | [optional] [readonly] 
 **FormatUrl** | Pointer to **string** |  | [optional] [readonly] 
+**FreeableStorage** | Pointer to **int64** | Amount of storage that will be freed if this package is deleted | [optional] [readonly] 
+**FullyQualifiedName** | Pointer to **NullableString** |  | [optional] [readonly] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] [readonly] 
+**Identifiers** | Pointer to **map[string]string** | Return a map of identifier field names and their values. | [optional] [readonly] 
 **Indexed** | Pointer to **bool** |  | [optional] [readonly] 
 **IsCancellable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsCopyable** | Pointer to **bool** |  | [optional] [readonly] 
@@ -626,6 +629,66 @@ SetFormatUrl sets FormatUrl field to given value.
 
 HasFormatUrl returns a boolean if a field has been set.
 
+### GetFreeableStorage
+
+`func (o *RawPackageUpload) GetFreeableStorage() int64`
+
+GetFreeableStorage returns the FreeableStorage field if non-nil, zero value otherwise.
+
+### GetFreeableStorageOk
+
+`func (o *RawPackageUpload) GetFreeableStorageOk() (*int64, bool)`
+
+GetFreeableStorageOk returns a tuple with the FreeableStorage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFreeableStorage
+
+`func (o *RawPackageUpload) SetFreeableStorage(v int64)`
+
+SetFreeableStorage sets FreeableStorage field to given value.
+
+### HasFreeableStorage
+
+`func (o *RawPackageUpload) HasFreeableStorage() bool`
+
+HasFreeableStorage returns a boolean if a field has been set.
+
+### GetFullyQualifiedName
+
+`func (o *RawPackageUpload) GetFullyQualifiedName() string`
+
+GetFullyQualifiedName returns the FullyQualifiedName field if non-nil, zero value otherwise.
+
+### GetFullyQualifiedNameOk
+
+`func (o *RawPackageUpload) GetFullyQualifiedNameOk() (*string, bool)`
+
+GetFullyQualifiedNameOk returns a tuple with the FullyQualifiedName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFullyQualifiedName
+
+`func (o *RawPackageUpload) SetFullyQualifiedName(v string)`
+
+SetFullyQualifiedName sets FullyQualifiedName field to given value.
+
+### HasFullyQualifiedName
+
+`func (o *RawPackageUpload) HasFullyQualifiedName() bool`
+
+HasFullyQualifiedName returns a boolean if a field has been set.
+
+### SetFullyQualifiedNameNil
+
+`func (o *RawPackageUpload) SetFullyQualifiedNameNil(b bool)`
+
+ SetFullyQualifiedNameNil sets the value for FullyQualifiedName to be an explicit nil
+
+### UnsetFullyQualifiedName
+`func (o *RawPackageUpload) UnsetFullyQualifiedName()`
+
+UnsetFullyQualifiedName ensures that no value is present for FullyQualifiedName, not even an explicit nil
 ### GetIdentifierPerm
 
 `func (o *RawPackageUpload) GetIdentifierPerm() string`
@@ -650,6 +713,31 @@ SetIdentifierPerm sets IdentifierPerm field to given value.
 `func (o *RawPackageUpload) HasIdentifierPerm() bool`
 
 HasIdentifierPerm returns a boolean if a field has been set.
+
+### GetIdentifiers
+
+`func (o *RawPackageUpload) GetIdentifiers() map[string]string`
+
+GetIdentifiers returns the Identifiers field if non-nil, zero value otherwise.
+
+### GetIdentifiersOk
+
+`func (o *RawPackageUpload) GetIdentifiersOk() (*map[string]string, bool)`
+
+GetIdentifiersOk returns a tuple with the Identifiers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdentifiers
+
+`func (o *RawPackageUpload) SetIdentifiers(v map[string]string)`
+
+SetIdentifiers sets Identifiers field to given value.
+
+### HasIdentifiers
+
+`func (o *RawPackageUpload) HasIdentifiers() bool`
+
+HasIdentifiers returns a boolean if a field has been set.
 
 ### GetIndexed
 

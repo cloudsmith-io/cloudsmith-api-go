@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.568.8
+API version: 1.616.0
 Contact: support@cloudsmith.io
 */
 
@@ -43,13 +43,18 @@ type PackageTag struct {
 	Files     []PackageFile `json:"files,omitempty"`
 	Format    *string       `json:"format,omitempty"`
 	FormatUrl *string       `json:"format_url,omitempty"`
+	// Amount of storage that will be freed if this package is deleted
+	FreeableStorage    *int64         `json:"freeable_storage,omitempty"`
+	FullyQualifiedName NullableString `json:"fully_qualified_name,omitempty"`
 	// Unique and permanent identifier for the package.
 	IdentifierPerm *string `json:"identifier_perm,omitempty"`
-	Indexed        *bool   `json:"indexed,omitempty"`
-	IsCancellable  *bool   `json:"is_cancellable,omitempty"`
-	IsCopyable     *bool   `json:"is_copyable,omitempty"`
-	IsDeleteable   *bool   `json:"is_deleteable,omitempty"`
-	IsDownloadable *bool   `json:"is_downloadable,omitempty"`
+	// Return a map of identifier field names and their values.
+	Identifiers    *map[string]string `json:"identifiers,omitempty"`
+	Indexed        *bool              `json:"indexed,omitempty"`
+	IsCancellable  *bool              `json:"is_cancellable,omitempty"`
+	IsCopyable     *bool              `json:"is_copyable,omitempty"`
+	IsDeleteable   *bool              `json:"is_deleteable,omitempty"`
+	IsDownloadable *bool              `json:"is_downloadable,omitempty"`
 	// If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package.
 	IsImmutable         *bool `json:"is_immutable,omitempty"`
 	IsMoveable          *bool `json:"is_moveable,omitempty"`
@@ -814,6 +819,81 @@ func (o *PackageTag) SetFormatUrl(v string) {
 	o.FormatUrl = &v
 }
 
+// GetFreeableStorage returns the FreeableStorage field value if set, zero value otherwise.
+func (o *PackageTag) GetFreeableStorage() int64 {
+	if o == nil || IsNil(o.FreeableStorage) {
+		var ret int64
+		return ret
+	}
+	return *o.FreeableStorage
+}
+
+// GetFreeableStorageOk returns a tuple with the FreeableStorage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetFreeableStorageOk() (*int64, bool) {
+	if o == nil || IsNil(o.FreeableStorage) {
+		return nil, false
+	}
+	return o.FreeableStorage, true
+}
+
+// HasFreeableStorage returns a boolean if a field has been set.
+func (o *PackageTag) HasFreeableStorage() bool {
+	if o != nil && !IsNil(o.FreeableStorage) {
+		return true
+	}
+
+	return false
+}
+
+// SetFreeableStorage gets a reference to the given int64 and assigns it to the FreeableStorage field.
+func (o *PackageTag) SetFreeableStorage(v int64) {
+	o.FreeableStorage = &v
+}
+
+// GetFullyQualifiedName returns the FullyQualifiedName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageTag) GetFullyQualifiedName() string {
+	if o == nil || IsNil(o.FullyQualifiedName.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FullyQualifiedName.Get()
+}
+
+// GetFullyQualifiedNameOk returns a tuple with the FullyQualifiedName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageTag) GetFullyQualifiedNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FullyQualifiedName.Get(), o.FullyQualifiedName.IsSet()
+}
+
+// HasFullyQualifiedName returns a boolean if a field has been set.
+func (o *PackageTag) HasFullyQualifiedName() bool {
+	if o != nil && o.FullyQualifiedName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFullyQualifiedName gets a reference to the given NullableString and assigns it to the FullyQualifiedName field.
+func (o *PackageTag) SetFullyQualifiedName(v string) {
+	o.FullyQualifiedName.Set(&v)
+}
+
+// SetFullyQualifiedNameNil sets the value for FullyQualifiedName to be an explicit nil
+func (o *PackageTag) SetFullyQualifiedNameNil() {
+	o.FullyQualifiedName.Set(nil)
+}
+
+// UnsetFullyQualifiedName ensures that no value is present for FullyQualifiedName, not even an explicit nil
+func (o *PackageTag) UnsetFullyQualifiedName() {
+	o.FullyQualifiedName.Unset()
+}
+
 // GetIdentifierPerm returns the IdentifierPerm field value if set, zero value otherwise.
 func (o *PackageTag) GetIdentifierPerm() string {
 	if o == nil || IsNil(o.IdentifierPerm) {
@@ -844,6 +924,38 @@ func (o *PackageTag) HasIdentifierPerm() bool {
 // SetIdentifierPerm gets a reference to the given string and assigns it to the IdentifierPerm field.
 func (o *PackageTag) SetIdentifierPerm(v string) {
 	o.IdentifierPerm = &v
+}
+
+// GetIdentifiers returns the Identifiers field value if set, zero value otherwise.
+func (o *PackageTag) GetIdentifiers() map[string]string {
+	if o == nil || IsNil(o.Identifiers) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Identifiers
+}
+
+// GetIdentifiersOk returns a tuple with the Identifiers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetIdentifiersOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Identifiers) {
+		return nil, false
+	}
+	return o.Identifiers, true
+}
+
+// HasIdentifiers returns a boolean if a field has been set.
+func (o *PackageTag) HasIdentifiers() bool {
+	if o != nil && !IsNil(o.Identifiers) {
+		return true
+	}
+
+	return false
+}
+
+// SetIdentifiers gets a reference to the given map[string]string and assigns it to the Identifiers field.
+func (o *PackageTag) SetIdentifiers(v map[string]string) {
+	o.Identifiers = &v
 }
 
 // GetIndexed returns the Indexed field value if set, zero value otherwise.
@@ -2901,8 +3013,17 @@ func (o PackageTag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FormatUrl) {
 		toSerialize["format_url"] = o.FormatUrl
 	}
+	if !IsNil(o.FreeableStorage) {
+		toSerialize["freeable_storage"] = o.FreeableStorage
+	}
+	if o.FullyQualifiedName.IsSet() {
+		toSerialize["fully_qualified_name"] = o.FullyQualifiedName.Get()
+	}
 	if !IsNil(o.IdentifierPerm) {
 		toSerialize["identifier_perm"] = o.IdentifierPerm
+	}
+	if !IsNil(o.Identifiers) {
+		toSerialize["identifiers"] = o.Identifiers
 	}
 	if !IsNil(o.Indexed) {
 		toSerialize["indexed"] = o.Indexed
@@ -3119,7 +3240,10 @@ func (o *PackageTag) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "files")
 		delete(additionalProperties, "format")
 		delete(additionalProperties, "format_url")
+		delete(additionalProperties, "freeable_storage")
+		delete(additionalProperties, "fully_qualified_name")
 		delete(additionalProperties, "identifier_perm")
+		delete(additionalProperties, "identifiers")
 		delete(additionalProperties, "indexed")
 		delete(additionalProperties, "is_cancellable")
 		delete(additionalProperties, "is_copyable")

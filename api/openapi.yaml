@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.568.8
+  version: 1.616.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -2549,6 +2549,49 @@ paths:
       summary: Get the details for a specific organization member.
       tags:
       - orgs
+    patch:
+      description: Views for working with organization members.
+      operationId: orgs_members_partial_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: member
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationMembershipRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMembership'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Views for working with organization members.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
   /orgs/{org}/members/{member}/refresh/:
     post:
       description: Refresh a member of the organization's API key.
@@ -2624,6 +2667,94 @@ paths:
       summary: "Removes a member from the organization (deprecated, use DELETE instead)."
       tags:
       - orgs
+  /orgs/{org}/members/{member}/update-role/:
+    patch:
+      description: Update a member's role in the organization.
+      operationId: orgs_members_update_role
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: member
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationMembershipRoleUpdateRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMembershipRoleUpdate'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update a member's role in the organization.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+  /orgs/{org}/members/{member}/update-visibility/:
+    patch:
+      description: Update a member's visibility in the organization.
+      operationId: orgs_members_update_visibility
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: member
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationMembershipVisibilityUpdateRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMembershipVisibilityUpdate'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update a member's visibility in the organization.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
   /orgs/{org}/openid-connect/:
     get:
       description: Retrieve the list of OpenID Connect provider settings for the org.
@@ -12278,6 +12409,43 @@ paths:
       tags:
       - repos
       x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/x509/:
+    get:
+      description: Retrieve the active X.509 certificate for the Repository.
+      operationId: repos_x509_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryX509Certificate'
+          description: Retrieved the active X.509 Certificate.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve the active X.509 certificate for the Repository.
+      tags:
+      - repos
   /repos/{owner}/{repo}/retention/:
     get:
       description: Retrieve the retention rules for the repository.
@@ -14687,6 +14855,7 @@ components:
             enum:
             - Username and Password
             - Token
+            - Certificate and Key
             type: string
           type: array
         caching:
@@ -15969,6 +16138,198 @@ components:
           title: Visibility
           type: string
       type: object
+    OrganizationMembershipRequestPatch:
+      type: object
+    OrganizationMembershipRoleUpdateRequestPatch:
+      example:
+        role: Owner
+      properties:
+        role:
+          default: Owner
+          enum:
+          - Owner
+          - Manager
+          - Member
+          - Collaborator
+          title: Role
+          type: string
+      type: object
+    OrganizationMembershipRoleUpdate:
+      example:
+        joined_at: 2000-01-23T04:56:07.000+00:00
+        last_login_at: 2000-01-23T04:56:07.000+00:00
+        role: Owner
+        visibility: Public
+        user_id: user_id
+        user_name: user_name
+        user_url: https://openapi-generator.tech
+        user: user
+        email: email
+        last_login_method: Unknown
+        has_two_factor: true
+      properties:
+        email:
+          minLength: 1
+          readOnly: true
+          title: Email
+          type: string
+        has_two_factor:
+          readOnly: true
+          title: Has two factor
+          type: boolean
+        joined_at:
+          format: date-time
+          readOnly: true
+          title: Joined at
+          type: string
+        last_login_at:
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Last login at
+          type: string
+        last_login_method:
+          default: Unknown
+          enum:
+          - Unknown
+          - Password
+          - Social
+          - SAML
+          readOnly: true
+          title: Last login method
+          type: string
+        role:
+          default: Owner
+          enum:
+          - Owner
+          - Manager
+          - Member
+          - Collaborator
+          title: Role
+          type: string
+        user:
+          minLength: 1
+          readOnly: true
+          title: User
+          type: string
+        user_id:
+          minLength: 1
+          readOnly: true
+          title: User id
+          type: string
+        user_name:
+          minLength: 1
+          readOnly: true
+          title: User name
+          type: string
+        user_url:
+          format: uri
+          readOnly: true
+          title: User url
+          type: string
+        visibility:
+          default: Public
+          enum:
+          - Public
+          - Private
+          readOnly: true
+          title: Visibility
+          type: string
+      type: object
+    OrganizationMembershipVisibilityUpdateRequestPatch:
+      example:
+        visibility: Public
+      properties:
+        visibility:
+          default: Public
+          enum:
+          - Public
+          - Private
+          title: Visibility
+          type: string
+      type: object
+    OrganizationMembershipVisibilityUpdate:
+      example:
+        joined_at: 2000-01-23T04:56:07.000+00:00
+        last_login_at: 2000-01-23T04:56:07.000+00:00
+        role: Owner
+        visibility: Public
+        user_id: user_id
+        user_name: user_name
+        user_url: https://openapi-generator.tech
+        user: user
+        email: email
+        last_login_method: Unknown
+        has_two_factor: true
+      properties:
+        email:
+          minLength: 1
+          readOnly: true
+          title: Email
+          type: string
+        has_two_factor:
+          readOnly: true
+          title: Has two factor
+          type: boolean
+        joined_at:
+          format: date-time
+          readOnly: true
+          title: Joined at
+          type: string
+        last_login_at:
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Last login at
+          type: string
+        last_login_method:
+          default: Unknown
+          enum:
+          - Unknown
+          - Password
+          - Social
+          - SAML
+          readOnly: true
+          title: Last login method
+          type: string
+        role:
+          default: Owner
+          enum:
+          - Owner
+          - Manager
+          - Member
+          - Collaborator
+          readOnly: true
+          title: Role
+          type: string
+        user:
+          minLength: 1
+          readOnly: true
+          title: User
+          type: string
+        user_id:
+          minLength: 1
+          readOnly: true
+          title: User id
+          type: string
+        user_name:
+          minLength: 1
+          readOnly: true
+          title: User name
+          type: string
+        user_url:
+          format: uri
+          readOnly: true
+          title: User url
+          type: string
+        visibility:
+          default: Public
+          enum:
+          - Public
+          - Private
+          title: Visibility
+          type: string
+      type: object
     ProviderSettings:
       example:
         claims: "{}"
@@ -17099,7 +17460,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        package_type: 2
+        package_type: 7
         repository: repository
         origin_repository: origin_repository
         identifier_perm: identifier_perm
@@ -17107,6 +17468,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 5
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -17123,7 +17485,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 7
+        size: 9
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -17159,8 +17521,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 5
-        status: 3
+        num_files: 2
+        status: 2
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -17168,6 +17530,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -17190,8 +17553,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 2
+        sync_progress: 4
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -17202,7 +17567,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 9
+        stage: 3
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -17293,12 +17658,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -17654,6 +18038,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -17669,7 +18054,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -17705,8 +18090,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -17714,6 +18099,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -17736,8 +18122,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -17748,7 +18136,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -17839,12 +18227,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -18188,6 +18595,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -18203,7 +18611,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -18239,8 +18647,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -18248,6 +18656,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -18270,8 +18679,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -18282,7 +18693,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -18373,12 +18784,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -18722,6 +19152,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -18737,7 +19168,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -18773,8 +19204,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -18782,6 +19213,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -18804,8 +19236,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -18816,7 +19250,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -18907,12 +19341,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -19263,6 +19716,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -19278,7 +19732,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -19314,8 +19768,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -19323,6 +19777,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -19345,8 +19800,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -19357,7 +19814,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -19448,12 +19905,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -19848,6 +20324,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -19863,7 +20340,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -19900,9 +20377,9 @@ components:
           signature_url: signature_url
           tag: tag
         conan_prefix: conan_prefix
-        num_files: 1
+        num_files: 5
         conan_channel: conan_channel
-        status: 7
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -19910,6 +20387,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -19932,8 +20410,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -19944,7 +20424,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -20049,12 +20529,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -20398,6 +20897,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -20413,7 +20913,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -20449,8 +20949,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -20458,6 +20958,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -20480,8 +20981,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -20492,7 +20995,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -20583,12 +21086,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -20948,6 +21470,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -20963,7 +21486,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -20999,8 +21522,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -21008,6 +21531,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -21030,8 +21554,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -21042,7 +21568,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         r_version: r_version
         dependencies_url: https://openapi-generator.tech
@@ -21134,12 +21660,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -21491,6 +22036,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -21506,7 +22052,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -21542,8 +22088,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -21551,6 +22097,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -21573,8 +22120,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -21585,7 +22134,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -21676,12 +22225,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -22057,6 +22625,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -22072,7 +22641,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -22108,8 +22677,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -22117,6 +22686,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -22139,8 +22709,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -22151,7 +22723,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -22242,12 +22814,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -22591,6 +23182,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -22606,7 +23198,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -22642,8 +23234,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -22651,6 +23243,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -22673,8 +23266,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -22685,7 +23280,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -22776,12 +23371,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -23125,6 +23739,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -23140,7 +23755,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -23176,8 +23791,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -23185,6 +23800,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -23207,8 +23823,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -23219,7 +23837,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -23310,12 +23928,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -23667,6 +24304,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -23682,7 +24320,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -23718,8 +24356,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -23727,6 +24365,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -23749,8 +24388,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -23761,7 +24402,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -23852,12 +24493,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -24201,6 +24861,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -24216,7 +24877,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -24252,8 +24913,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -24261,6 +24922,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -24283,8 +24945,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -24295,7 +24959,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -24386,12 +25050,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -24735,6 +25418,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -24750,7 +25434,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -24786,8 +25470,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -24795,6 +25479,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -24817,8 +25502,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -24829,7 +25516,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -24920,12 +25607,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -25346,6 +26052,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -25361,7 +26068,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -25397,8 +26104,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -25406,6 +26113,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -25428,8 +26136,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         packaging: packaging
         uploader_url: https://openapi-generator.tech
@@ -25441,7 +26151,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         group_id: group_id
         dependencies_url: https://openapi-generator.tech
@@ -25541,6 +26251,17 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         group_id:
           description: Artifact's group ID.
           maxLength: 2083
@@ -25553,6 +26274,14 @@ components:
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -25921,6 +26650,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -25936,7 +26666,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -25972,8 +26702,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -25981,6 +26711,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -26003,8 +26734,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -26015,7 +26748,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -26106,12 +26839,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -26462,6 +27214,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -26477,7 +27230,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -26513,8 +27266,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -26522,6 +27275,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -26544,8 +27298,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -26556,7 +27312,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -26647,12 +27403,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -26996,6 +27771,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -27011,7 +27787,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -27047,8 +27823,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -27056,6 +27832,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -27078,8 +27855,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -27090,7 +27869,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -27181,12 +27960,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -27530,6 +28328,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -27545,7 +28344,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -27581,8 +28380,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -27590,6 +28389,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -27612,8 +28412,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -27624,7 +28426,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -27715,12 +28517,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -28102,6 +28923,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -28117,7 +28939,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -28153,8 +28975,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -28162,6 +28984,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -28184,8 +29007,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -28196,7 +29021,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -28287,12 +29112,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -28643,6 +29487,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -28658,7 +29503,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -28694,8 +29539,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -28703,6 +29548,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -28725,8 +29571,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -28737,7 +29585,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -28828,12 +29676,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -29177,6 +30044,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -29192,7 +30060,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -29228,8 +30096,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -29237,6 +30105,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -29259,8 +30128,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -29271,7 +30142,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -29362,12 +30233,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -29768,6 +30658,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -29783,7 +30674,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -29820,9 +30711,9 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
+        num_files: 5
         license_url: https://openapi-generator.tech
-        status: 7
+        status: 9
         author_name: author_name
         checksum_sha512: checksum_sha512
         distro:
@@ -29831,6 +30722,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -29854,8 +30746,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -29867,7 +30761,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -29968,12 +30862,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -30340,6 +31253,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -30355,7 +31269,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -30391,8 +31305,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -30400,6 +31314,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -30422,8 +31337,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -30434,7 +31351,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -30525,12 +31442,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -30895,6 +31831,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -30910,7 +31847,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -30946,8 +31883,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -30955,6 +31892,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -30978,8 +31916,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -30990,7 +31930,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -31081,12 +32021,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -31427,6 +32386,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -31443,7 +32403,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -31479,8 +32439,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -31488,6 +32448,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -31510,8 +32471,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -31522,7 +32485,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -31613,12 +32576,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -32042,6 +33024,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -32058,7 +33041,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -32094,8 +33077,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -32103,6 +33086,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -32125,8 +33109,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -32137,7 +33123,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -32228,12 +33214,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -32570,6 +33575,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -32586,7 +33592,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -32622,8 +33628,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -32631,6 +33637,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -32653,8 +33660,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -32665,7 +33674,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -32756,12 +33765,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -33077,6 +34105,7 @@ components:
         tags_immutable: "{}"
         is_quarantined: true
         slug: slug
+        freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
@@ -33093,7 +34122,7 @@ components:
         is_resyncable: true
         license: license
         filename: filename
-        size: 5
+        size: 2
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
@@ -33129,8 +34158,8 @@ components:
           is_downloadable: true
           signature_url: signature_url
           tag: tag
-        num_files: 1
-        status: 7
+        num_files: 5
+        status: 9
         checksum_sha512: checksum_sha512
         distro:
           name: name
@@ -33138,6 +34167,7 @@ components:
           self_url: https://openapi-generator.tech
           slug: slug
         extension: extension
+        fully_qualified_name: fully_qualified_name
         description: description
         is_copyable: true
         epoch: 6
@@ -33160,8 +34190,10 @@ components:
         summary: summary
         checksum_sha1: checksum_sha1
         is_quarantinable: true
+        identifiers:
+          key: identifiers
         checksum_md5: checksum_md5
-        sync_progress: 9
+        sync_progress: 3
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -33172,7 +34204,7 @@ components:
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         is_sync_in_progress: true
         stage_str: stage_str
-        stage: 2
+        stage: 7
         format_url: https://openapi-generator.tech
         dependencies_url: https://openapi-generator.tech
         namespace: namespace
@@ -33263,12 +34295,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -33830,12 +34881,31 @@ components:
           readOnly: true
           title: Format url
           type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
         identifier_perm:
           description: Unique and permanent identifier for the package.
           minLength: 1
           readOnly: true
           title: Identifier perm
           type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
         indexed:
           readOnly: true
           title: Indexed
@@ -37996,6 +39066,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -38127,6 +39198,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -38241,6 +39313,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -38882,6 +39955,7 @@ components:
           enum:
           - None
           - Username and Password
+          - Certificate and Key
           title: Auth mode
           type: string
         auth_secret:
@@ -39010,6 +40084,7 @@ components:
       type: object
     DockerUpstreamRequest:
       example:
+        auth_certificate_key: auth_certificate_key
         is_active: true
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
@@ -39020,16 +40095,30 @@ components:
         extra_header_2: extra_header_2
         extra_header_1: extra_header_1
         mode: Proxy Only
+        auth_certificate: auth_certificate
         verify_ssl: true
         auth_username: auth_username
         name: name
       properties:
+        auth_certificate:
+          description: X.509 Certificate to use for mTLS authentication against the
+            upstream
+          minLength: 1
+          title: Auth certificate
+          type: string
+        auth_certificate_key:
+          description: Certificate key to use for mTLS authentication against the
+            upstream
+          minLength: 1
+          title: Auth certificate key
+          type: string
         auth_mode:
           default: None
           description: 'The authentication mode to use when accessing this upstream. '
           enum:
           - None
           - Username and Password
+          - Certificate and Key
           title: Auth mode
           type: string
         auth_secret:
@@ -39125,6 +40214,7 @@ components:
       type: object
     DockerUpstreamRequestPatch:
       example:
+        auth_certificate_key: auth_certificate_key
         is_active: true
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
@@ -39135,16 +40225,30 @@ components:
         extra_header_2: extra_header_2
         extra_header_1: extra_header_1
         mode: Proxy Only
+        auth_certificate: auth_certificate
         verify_ssl: true
         auth_username: auth_username
         name: name
       properties:
+        auth_certificate:
+          description: X.509 Certificate to use for mTLS authentication against the
+            upstream
+          minLength: 1
+          title: Auth certificate
+          type: string
+        auth_certificate_key:
+          description: Certificate key to use for mTLS authentication against the
+            upstream
+          minLength: 1
+          title: Auth certificate key
+          type: string
         auth_mode:
           default: None
           description: 'The authentication mode to use when accessing this upstream. '
           enum:
           - None
           - Username and Password
+          - Certificate and Key
           title: Auth mode
           type: string
         auth_secret:
@@ -42903,6 +44007,56 @@ components:
           title: Verify SSL Certificates
           type: boolean
       type: object
+    RepositoryX509Certificate:
+      example:
+        default: true
+        certificate: certificate
+        certificate_fingerprint_short: certificate_fingerprint_short
+        active: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        certificate_fingerprint: certificate_fingerprint
+        issuing_status: Certificate is pending to be issued
+      properties:
+        active:
+          description: If selected this is the active key for this repository.
+          readOnly: true
+          title: Active
+          type: boolean
+        certificate:
+          description: The issued certificate.
+          nullable: true
+          readOnly: true
+          title: Certificate
+          type: string
+        certificate_fingerprint:
+          description: The SHA-256 long identifier used
+          nullable: true
+          readOnly: true
+          title: Certificate fingerprint
+          type: string
+        certificate_fingerprint_short:
+          readOnly: true
+          title: Certificate fingerprint short
+          type: string
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        default:
+          description: If selected this is the default key for this repository.
+          readOnly: true
+          title: Default
+          type: boolean
+        issuing_status:
+          default: Certificate is pending to be issued
+          enum:
+          - Certificate is pending to be issued
+          - Certificate successfully issued
+          - Error issuing certificate
+          title: Issuing status
+          type: string
+      type: object
     RepositoryRetentionRules:
       example:
         retention_days_limit: 108
@@ -43040,7 +44194,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.568.8
+        version: 1.616.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -43050,7 +44204,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.568.8
+          default: 1.616.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -43190,7 +44344,7 @@ components:
           title: Joined at
           type: string
         last_name:
-          maxLength: 30
+          maxLength: 120
           minLength: 1
           title: Last name
           type: string
@@ -43281,8 +44435,8 @@ components:
     VulnerabilityScanVersion:
       example:
         patch: 5
-        major: 6
-        minor: 1
+        major: 1
+        minor: 5
         version: ""
         operator: ""
         raw_version: ""
@@ -43324,15 +44478,15 @@ components:
         severity: Unknown
         affected_version:
           patch: 5
-          major: 6
-          minor: 1
+          major: 1
+          minor: 5
           version: ""
           operator: ""
           raw_version: ""
         fixed_version:
           patch: 5
-          major: 6
-          minor: 1
+          major: 1
+          minor: 5
           version: ""
           operator: ""
           raw_version: ""
@@ -43407,15 +44561,15 @@ components:
         - severity: Unknown
           affected_version:
             patch: 5
-            major: 6
-            minor: 1
+            major: 1
+            minor: 5
             version: ""
             operator: ""
             raw_version: ""
           fixed_version:
             patch: 5
-            major: 6
-            minor: 1
+            major: 1
+            minor: 5
             version: ""
             operator: ""
             raw_version: ""
@@ -43430,15 +44584,15 @@ components:
         - severity: Unknown
           affected_version:
             patch: 5
-            major: 6
-            minor: 1
+            major: 1
+            minor: 5
             version: ""
             operator: ""
             raw_version: ""
           fixed_version:
             patch: 5
-            major: 6
-            minor: 1
+            major: 1
+            minor: 5
             version: ""
             operator: ""
             raw_version: ""
@@ -43478,22 +44632,21 @@ components:
           name: name
           version: version
           url: https://openapi-generator.tech
-        has_vulnerabilities: true
-        scan:
-          type: type
+        scans:
+        - type: type
           results:
           - severity: Unknown
             affected_version:
               patch: 5
-              major: 6
-              minor: 1
+              major: 1
+              minor: 5
               version: ""
               operator: ""
               raw_version: ""
             fixed_version:
               patch: 5
-              major: 6
-              minor: 1
+              major: 1
+              minor: 5
               version: ""
               operator: ""
               raw_version: ""
@@ -43508,15 +44661,15 @@ components:
           - severity: Unknown
             affected_version:
               patch: 5
-              major: 6
-              minor: 1
+              major: 1
+              minor: 5
               version: ""
               operator: ""
               raw_version: ""
             fixed_version:
               patch: 5
-              major: 6
-              minor: 1
+              major: 1
+              minor: 5
               version: ""
               operator: ""
               raw_version: ""
@@ -43529,9 +44682,59 @@ components:
             severity_source: severity_source
             title: title
           target: target
+        - type: type
+          results:
+          - severity: Unknown
+            affected_version:
+              patch: 5
+              major: 1
+              minor: 5
+              version: ""
+              operator: ""
+              raw_version: ""
+            fixed_version:
+              patch: 5
+              major: 1
+              minor: 5
+              version: ""
+              operator: ""
+              raw_version: ""
+            references:
+            - references
+            - references
+            vulnerability_id: vulnerability_id
+            package_name: package_name
+            description: description
+            severity_source: severity_source
+            title: title
+          - severity: Unknown
+            affected_version:
+              patch: 5
+              major: 1
+              minor: 5
+              version: ""
+              operator: ""
+              raw_version: ""
+            fixed_version:
+              patch: 5
+              major: 1
+              minor: 5
+              version: ""
+              operator: ""
+              raw_version: ""
+            references:
+            - references
+            - references
+            vulnerability_id: vulnerability_id
+            package_name: package_name
+            description: description
+            severity_source: severity_source
+            title: title
+          target: target
+        has_vulnerabilities: true
         created_at: 2000-01-23T04:56:07.000+00:00
         num_vulnerabilities: 0
-        scan_id: 5
+        scan_id: 6
       properties:
         created_at:
           description: The time this scan result was stored.
@@ -43563,19 +44766,21 @@ components:
           type: integer
         package:
           $ref: '#/components/schemas/PackageVulnerability'
-        scan:
-          $ref: '#/components/schemas/VulnerabilityScan'
         scan_id:
           description: "Deprecated (23-05-15): Please use 'identifier' instead. Previously:\
             \ A monotonically increasing number that identified a scan within a repository."
           nullable: true
           title: Scan id
           type: integer
+        scans:
+          items:
+            $ref: '#/components/schemas/VulnerabilityScan'
+          type: array
       required:
       - identifier
       - package
-      - scan
       - scan_id
+      - scans
       type: object
     WebhookTemplate:
       example:
