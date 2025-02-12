@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.617.1
+API version: 1.617.2
 Contact: support@cloudsmith.io
 */
 
@@ -41,7 +41,7 @@ var (
 	queryDescape    = strings.NewReplacer("%5B", "[", "%5D", "]")
 )
 
-// APIClient manages communication with the Cloudsmith API (v1) API v1.617.1
+// APIClient manages communication with the Cloudsmith API (v1) API v1.617.2
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -712,7 +712,7 @@ func formatErrorMessage(status string, v interface{}) string {
 				// Dereference the pointer to get the actual value
 				fields = fields.Elem()
 			}
-			
+
 			if fields.Kind() == reflect.Map {
 				for _, key := range fields.MapKeys() {
 					fieldMessage := fields.MapIndex(key)
