@@ -31,6 +31,7 @@ docker run --rm \
     -e PKG_VERSION="$PKG_VERSION" \
     -e GO_POST_PROCESS_FILE="gofmt -w" \
     -v "$SWAGGER_SPEC":/tmp/swagger_spec \
+    -v "$PWD/templates":/tmp/templates \
     -v "$PWD":/local "$DOCKER_IMAGE" generate \
     --input-spec /tmp/swagger_spec \
     --generator-name go \
@@ -41,7 +42,8 @@ docker run --rm \
     --type-mappings integer=int64,number=float64,float=float64 \
     --enable-post-process-file \
     --api-name-suffix "Api" \
-    --additional-properties=disallowAdditionalPropertiesIfNotPresent=false
+    --additional-properties=disallowAdditionalPropertiesIfNotPresent=false \
+    -t /tmp/templates/
 
 # Clean up unused files post-generation
 

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Detail** | **string** | An extended message for the response. | 
+**Fields** | Pointer to **map[string][]string** | A Dictionary of related errors where key: Field and value: Array of Errors related to that field | [optional] 
 
 ## Methods
 
@@ -44,6 +45,31 @@ and a boolean to check if the value has been set.
 
 SetDetail sets Detail field to given value.
 
+
+### GetFields
+
+`func (o *ErrorDetail) GetFields() map[string][]string`
+
+GetFields returns the Fields field if non-nil, zero value otherwise.
+
+### GetFieldsOk
+
+`func (o *ErrorDetail) GetFieldsOk() (*map[string][]string, bool)`
+
+GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFields
+
+`func (o *ErrorDetail) SetFields(v map[string][]string)`
+
+SetFields sets Fields field to given value.
+
+### HasFields
+
+`func (o *ErrorDetail) HasFields() bool`
+
+HasFields returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

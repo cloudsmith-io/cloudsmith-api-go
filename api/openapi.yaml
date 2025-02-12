@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.616.0
+  version: 1.617.1
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -13216,12 +13216,26 @@ components:
     ErrorDetail:
       example:
         detail: detail
+        fields:
+          key:
+          - fields
+          - fields
       properties:
         detail:
           description: An extended message for the response.
           minLength: 1
           title: Detail
           type: string
+        fields:
+          additionalProperties:
+            items:
+              minLength: 1
+              type: string
+            type: array
+          description: "A Dictionary of related errors where key: Field and value:\
+            \ Array of Errors related to that field"
+          title: Fields
+          type: object
       required:
       - detail
       type: object
@@ -44194,7 +44208,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.616.0
+        version: 1.617.1
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -44204,7 +44218,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.616.0
+          default: 1.617.1
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true

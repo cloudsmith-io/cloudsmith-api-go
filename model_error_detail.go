@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.616.0
+API version: 1.617.1
 Contact: support@cloudsmith.io
 */
 
@@ -22,7 +22,9 @@ var _ MappedNullable = &ErrorDetail{}
 // ErrorDetail struct for ErrorDetail
 type ErrorDetail struct {
 	// An extended message for the response.
-	Detail               string `json:"detail"`
+	Detail string `json:"detail"`
+	// A Dictionary of related errors where key: Field and value: Array of Errors related to that field
+	Fields               *map[string][]string `json:"fields,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,6 +72,38 @@ func (o *ErrorDetail) SetDetail(v string) {
 	o.Detail = v
 }
 
+// GetFields returns the Fields field value if set, zero value otherwise.
+func (o *ErrorDetail) GetFields() map[string][]string {
+	if o == nil || IsNil(o.Fields) {
+		var ret map[string][]string
+		return ret
+	}
+	return *o.Fields
+}
+
+// GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ErrorDetail) GetFieldsOk() (*map[string][]string, bool) {
+	if o == nil || IsNil(o.Fields) {
+		return nil, false
+	}
+	return o.Fields, true
+}
+
+// HasFields returns a boolean if a field has been set.
+func (o *ErrorDetail) HasFields() bool {
+	if o != nil && !IsNil(o.Fields) {
+		return true
+	}
+
+	return false
+}
+
+// SetFields gets a reference to the given map[string][]string and assigns it to the Fields field.
+func (o *ErrorDetail) SetFields(v map[string][]string) {
+	o.Fields = &v
+}
+
 func (o ErrorDetail) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -81,6 +115,9 @@ func (o ErrorDetail) MarshalJSON() ([]byte, error) {
 func (o ErrorDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["detail"] = o.Detail
+	if !IsNil(o.Fields) {
+		toSerialize["fields"] = o.Fields
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -125,6 +162,7 @@ func (o *ErrorDetail) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "detail")
+		delete(additionalProperties, "fields")
 		o.AdditionalProperties = additionalProperties
 	}
 
