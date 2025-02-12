@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.568.8
+API version: 1.616.0
 Contact: support@cloudsmith.io
 */
 
@@ -20,6 +20,10 @@ var _ MappedNullable = &DockerUpstreamRequestPatch{}
 
 // DockerUpstreamRequestPatch struct for DockerUpstreamRequestPatch
 type DockerUpstreamRequestPatch struct {
+	// X.509 Certificate to use for mTLS authentication against the upstream
+	AuthCertificate *string `json:"auth_certificate,omitempty"`
+	// Certificate key to use for mTLS authentication against the upstream
+	AuthCertificateKey *string `json:"auth_certificate_key,omitempty"`
 	// The authentication mode to use when accessing this upstream.
 	AuthMode *string `json:"auth_mode,omitempty"`
 	// Secret to provide with requests to upstream.
@@ -74,6 +78,70 @@ func NewDockerUpstreamRequestPatchWithDefaults() *DockerUpstreamRequestPatch {
 	var mode string = "Proxy Only"
 	this.Mode = &mode
 	return &this
+}
+
+// GetAuthCertificate returns the AuthCertificate field value if set, zero value otherwise.
+func (o *DockerUpstreamRequestPatch) GetAuthCertificate() string {
+	if o == nil || IsNil(o.AuthCertificate) {
+		var ret string
+		return ret
+	}
+	return *o.AuthCertificate
+}
+
+// GetAuthCertificateOk returns a tuple with the AuthCertificate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DockerUpstreamRequestPatch) GetAuthCertificateOk() (*string, bool) {
+	if o == nil || IsNil(o.AuthCertificate) {
+		return nil, false
+	}
+	return o.AuthCertificate, true
+}
+
+// HasAuthCertificate returns a boolean if a field has been set.
+func (o *DockerUpstreamRequestPatch) HasAuthCertificate() bool {
+	if o != nil && !IsNil(o.AuthCertificate) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthCertificate gets a reference to the given string and assigns it to the AuthCertificate field.
+func (o *DockerUpstreamRequestPatch) SetAuthCertificate(v string) {
+	o.AuthCertificate = &v
+}
+
+// GetAuthCertificateKey returns the AuthCertificateKey field value if set, zero value otherwise.
+func (o *DockerUpstreamRequestPatch) GetAuthCertificateKey() string {
+	if o == nil || IsNil(o.AuthCertificateKey) {
+		var ret string
+		return ret
+	}
+	return *o.AuthCertificateKey
+}
+
+// GetAuthCertificateKeyOk returns a tuple with the AuthCertificateKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DockerUpstreamRequestPatch) GetAuthCertificateKeyOk() (*string, bool) {
+	if o == nil || IsNil(o.AuthCertificateKey) {
+		return nil, false
+	}
+	return o.AuthCertificateKey, true
+}
+
+// HasAuthCertificateKey returns a boolean if a field has been set.
+func (o *DockerUpstreamRequestPatch) HasAuthCertificateKey() bool {
+	if o != nil && !IsNil(o.AuthCertificateKey) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthCertificateKey gets a reference to the given string and assigns it to the AuthCertificateKey field.
+func (o *DockerUpstreamRequestPatch) SetAuthCertificateKey(v string) {
+	o.AuthCertificateKey = &v
 }
 
 // GetAuthMode returns the AuthMode field value if set, zero value otherwise.
@@ -568,6 +636,12 @@ func (o DockerUpstreamRequestPatch) MarshalJSON() ([]byte, error) {
 
 func (o DockerUpstreamRequestPatch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AuthCertificate) {
+		toSerialize["auth_certificate"] = o.AuthCertificate
+	}
+	if !IsNil(o.AuthCertificateKey) {
+		toSerialize["auth_certificate_key"] = o.AuthCertificateKey
+	}
 	if !IsNil(o.AuthMode) {
 		toSerialize["auth_mode"] = o.AuthMode
 	}
@@ -629,6 +703,8 @@ func (o *DockerUpstreamRequestPatch) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "auth_certificate")
+		delete(additionalProperties, "auth_certificate_key")
 		delete(additionalProperties, "auth_mode")
 		delete(additionalProperties, "auth_secret")
 		delete(additionalProperties, "auth_username")

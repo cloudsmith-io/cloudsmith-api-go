@@ -131,6 +131,10 @@ docs/OrganizationInviteRequest.md
 docs/OrganizationInviteUpdate.md
 docs/OrganizationInviteUpdateRequestPatch.md
 docs/OrganizationMembership.md
+docs/OrganizationMembershipRoleUpdate.md
+docs/OrganizationMembershipRoleUpdateRequestPatch.md
+docs/OrganizationMembershipVisibilityUpdate.md
+docs/OrganizationMembershipVisibilityUpdateRequestPatch.md
 docs/OrganizationPackageLicensePolicy.md
 docs/OrganizationPackageLicensePolicyRequest.md
 docs/OrganizationPackageLicensePolicyRequestPatch.md
@@ -231,6 +235,7 @@ docs/RepositoryTransferRegionRequest.md
 docs/RepositoryWebhook.md
 docs/RepositoryWebhookRequest.md
 docs/RepositoryWebhookRequestPatch.md
+docs/RepositoryX509Certificate.md
 docs/ResourcesRateCheck.md
 docs/RpmPackageUpload.md
 docs/RpmPackageUploadRequest.md
@@ -385,6 +390,10 @@ model_organization_invite_request.go
 model_organization_invite_update.go
 model_organization_invite_update_request_patch.go
 model_organization_membership.go
+model_organization_membership_role_update.go
+model_organization_membership_role_update_request_patch.go
+model_organization_membership_visibility_update.go
+model_organization_membership_visibility_update_request_patch.go
 model_organization_package_license_policy.go
 model_organization_package_license_policy_request.go
 model_organization_package_license_policy_request_patch.go
@@ -480,6 +489,7 @@ model_repository_transfer_region_request.go
 model_repository_webhook.go
 model_repository_webhook_request.go
 model_repository_webhook_request_patch.go
+model_repository_x509_certificate.go
 model_resources_rate_check.go
 model_rpm_package_upload.go
 model_rpm_package_upload_request.go

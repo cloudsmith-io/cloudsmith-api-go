@@ -23,7 +23,10 @@ Name | Type | Description | Notes
 **Files** | Pointer to [**[]PackageFile**](PackageFile.md) |  | [optional] [readonly] 
 **Format** | Pointer to **string** |  | [optional] [readonly] 
 **FormatUrl** | Pointer to **string** |  | [optional] [readonly] 
+**FreeableStorage** | Pointer to **int64** | Amount of storage that will be freed if this package is deleted | [optional] [readonly] 
+**FullyQualifiedName** | Pointer to **NullableString** |  | [optional] [readonly] 
 **IdentifierPerm** | Pointer to **string** | Unique and permanent identifier for the package. | [optional] [readonly] 
+**Identifiers** | Pointer to **map[string]string** | Return a map of identifier field names and their values. | [optional] [readonly] 
 **Indexed** | Pointer to **bool** |  | [optional] [readonly] 
 **IsCancellable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsCopyable** | Pointer to **bool** |  | [optional] [readonly] 
@@ -626,6 +629,66 @@ SetFormatUrl sets FormatUrl field to given value.
 
 HasFormatUrl returns a boolean if a field has been set.
 
+### GetFreeableStorage
+
+`func (o *PythonPackageUpload) GetFreeableStorage() int64`
+
+GetFreeableStorage returns the FreeableStorage field if non-nil, zero value otherwise.
+
+### GetFreeableStorageOk
+
+`func (o *PythonPackageUpload) GetFreeableStorageOk() (*int64, bool)`
+
+GetFreeableStorageOk returns a tuple with the FreeableStorage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFreeableStorage
+
+`func (o *PythonPackageUpload) SetFreeableStorage(v int64)`
+
+SetFreeableStorage sets FreeableStorage field to given value.
+
+### HasFreeableStorage
+
+`func (o *PythonPackageUpload) HasFreeableStorage() bool`
+
+HasFreeableStorage returns a boolean if a field has been set.
+
+### GetFullyQualifiedName
+
+`func (o *PythonPackageUpload) GetFullyQualifiedName() string`
+
+GetFullyQualifiedName returns the FullyQualifiedName field if non-nil, zero value otherwise.
+
+### GetFullyQualifiedNameOk
+
+`func (o *PythonPackageUpload) GetFullyQualifiedNameOk() (*string, bool)`
+
+GetFullyQualifiedNameOk returns a tuple with the FullyQualifiedName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFullyQualifiedName
+
+`func (o *PythonPackageUpload) SetFullyQualifiedName(v string)`
+
+SetFullyQualifiedName sets FullyQualifiedName field to given value.
+
+### HasFullyQualifiedName
+
+`func (o *PythonPackageUpload) HasFullyQualifiedName() bool`
+
+HasFullyQualifiedName returns a boolean if a field has been set.
+
+### SetFullyQualifiedNameNil
+
+`func (o *PythonPackageUpload) SetFullyQualifiedNameNil(b bool)`
+
+ SetFullyQualifiedNameNil sets the value for FullyQualifiedName to be an explicit nil
+
+### UnsetFullyQualifiedName
+`func (o *PythonPackageUpload) UnsetFullyQualifiedName()`
+
+UnsetFullyQualifiedName ensures that no value is present for FullyQualifiedName, not even an explicit nil
 ### GetIdentifierPerm
 
 `func (o *PythonPackageUpload) GetIdentifierPerm() string`
@@ -650,6 +713,31 @@ SetIdentifierPerm sets IdentifierPerm field to given value.
 `func (o *PythonPackageUpload) HasIdentifierPerm() bool`
 
 HasIdentifierPerm returns a boolean if a field has been set.
+
+### GetIdentifiers
+
+`func (o *PythonPackageUpload) GetIdentifiers() map[string]string`
+
+GetIdentifiers returns the Identifiers field if non-nil, zero value otherwise.
+
+### GetIdentifiersOk
+
+`func (o *PythonPackageUpload) GetIdentifiersOk() (*map[string]string, bool)`
+
+GetIdentifiersOk returns a tuple with the Identifiers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIdentifiers
+
+`func (o *PythonPackageUpload) SetIdentifiers(v map[string]string)`
+
+SetIdentifiers sets Identifiers field to given value.
+
+### HasIdentifiers
+
+`func (o *PythonPackageUpload) HasIdentifiers() bool`
+
+HasIdentifiers returns a boolean if a field has been set.
 
 ### GetIndexed
 

@@ -30,9 +30,12 @@ Method | HTTP request | Description
 [**OrgsList**](OrgsApi.md#OrgsList) | **Get** /orgs/ | Get a list of all the organizations you are associated with.
 [**OrgsMembersDelete**](OrgsApi.md#OrgsMembersDelete) | **Delete** /orgs/{org}/members/{member}/ | Removes a member from the organization.
 [**OrgsMembersList**](OrgsApi.md#OrgsMembersList) | **Get** /orgs/{org}/members/ | Get the details for all organization members.
+[**OrgsMembersPartialUpdate**](OrgsApi.md#OrgsMembersPartialUpdate) | **Patch** /orgs/{org}/members/{member}/ | Views for working with organization members.
 [**OrgsMembersRead**](OrgsApi.md#OrgsMembersRead) | **Get** /orgs/{org}/members/{member}/ | Get the details for a specific organization member.
 [**OrgsMembersRefresh**](OrgsApi.md#OrgsMembersRefresh) | **Post** /orgs/{org}/members/{member}/refresh/ | Refresh a member of the organization&#39;s API key.
 [**OrgsMembersRemove**](OrgsApi.md#OrgsMembersRemove) | **Get** /orgs/{org}/members/{member}/remove/ | Removes a member from the organization (deprecated, use DELETE instead).
+[**OrgsMembersUpdateRole**](OrgsApi.md#OrgsMembersUpdateRole) | **Patch** /orgs/{org}/members/{member}/update-role/ | Update a member&#39;s role in the organization.
+[**OrgsMembersUpdateVisibility**](OrgsApi.md#OrgsMembersUpdateVisibility) | **Patch** /orgs/{org}/members/{member}/update-visibility/ | Update a member&#39;s visibility in the organization.
 [**OrgsOpenidConnectCreate**](OrgsApi.md#OrgsOpenidConnectCreate) | **Post** /orgs/{org}/openid-connect/ | Create the OpenID Connect provider settings for the org.
 [**OrgsOpenidConnectDelete**](OrgsApi.md#OrgsOpenidConnectDelete) | **Delete** /orgs/{org}/openid-connect/{slug_perm}/ | Delete a specific OpenID Connect provider setting for the org.
 [**OrgsOpenidConnectList**](OrgsApi.md#OrgsOpenidConnectList) | **Get** /orgs/{org}/openid-connect/ | Retrieve the list of OpenID Connect provider settings for the org.
@@ -1978,6 +1981,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## OrgsMembersPartialUpdate
+
+> OrganizationMembership OrgsMembersPartialUpdate(ctx, org, member).Data(data).Execute()
+
+Views for working with organization members.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	member := "member_example" // string | 
+	data := map[string]interface{}{ ... } // map[string]interface{} |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsMembersPartialUpdate(context.Background(), org, member).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsMembersPartialUpdate`: OrganizationMembership
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**member** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsMembersPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | **map[string]interface{}** |  | 
+
+### Return type
+
+[**OrganizationMembership**](OrganizationMembership.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## OrgsMembersRead
 
 > OrganizationMembership OrgsMembersRead(ctx, org, member).Execute()
@@ -2186,6 +2264,156 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsMembersUpdateRole
+
+> OrganizationMembershipRoleUpdate OrgsMembersUpdateRole(ctx, org, member).Data(data).Execute()
+
+Update a member's role in the organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	member := "member_example" // string | 
+	data := *openapiclient.NewOrganizationMembershipRoleUpdateRequestPatch() // OrganizationMembershipRoleUpdateRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsMembersUpdateRole(context.Background(), org, member).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersUpdateRole``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsMembersUpdateRole`: OrganizationMembershipRoleUpdate
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersUpdateRole`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**member** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsMembersUpdateRoleRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**OrganizationMembershipRoleUpdateRequestPatch**](OrganizationMembershipRoleUpdateRequestPatch.md) |  | 
+
+### Return type
+
+[**OrganizationMembershipRoleUpdate**](OrganizationMembershipRoleUpdate.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsMembersUpdateVisibility
+
+> OrganizationMembershipVisibilityUpdate OrgsMembersUpdateVisibility(ctx, org, member).Data(data).Execute()
+
+Update a member's visibility in the organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	member := "member_example" // string | 
+	data := *openapiclient.NewOrganizationMembershipVisibilityUpdateRequestPatch() // OrganizationMembershipVisibilityUpdateRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsMembersUpdateVisibility(context.Background(), org, member).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersUpdateVisibility``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsMembersUpdateVisibility`: OrganizationMembershipVisibilityUpdate
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsMembersUpdateVisibility`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**member** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsMembersUpdateVisibilityRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**OrganizationMembershipVisibilityUpdateRequestPatch**](OrganizationMembershipVisibilityUpdateRequestPatch.md) |  | 
+
+### Return type
+
+[**OrganizationMembershipVisibilityUpdate**](OrganizationMembershipVisibilityUpdate.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

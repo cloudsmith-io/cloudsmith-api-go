@@ -116,6 +116,7 @@ Method | HTTP request | Description
 [**ReposUpstreamSwiftRead**](ReposApi.md#ReposUpstreamSwiftRead) | **Get** /repos/{owner}/{identifier}/upstream/swift/{slug_perm}/ | Retrieve a Swift upstream config for this repository.
 [**ReposUpstreamSwiftUpdate**](ReposApi.md#ReposUpstreamSwiftUpdate) | **Put** /repos/{owner}/{identifier}/upstream/swift/{slug_perm}/ | Update a Swift upstream config for this repository.
 [**ReposUserList**](ReposApi.md#ReposUserList) | **Get** /repos/ | Get a list of all repositories associated with current user.
+[**ReposX509List**](ReposApi.md#ReposX509List) | **Get** /repos/{owner}/{identifier}/x509/ | Retrieve the active X.509 certificate for the Repository.
 
 
 
@@ -8573,6 +8574,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]Repository**](Repository.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposX509List
+
+> RepositoryX509Certificate ReposX509List(ctx, owner, identifier).Execute()
+
+Retrieve the active X.509 certificate for the Repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposX509List(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposX509List``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposX509List`: RepositoryX509Certificate
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposX509List`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposX509ListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**RepositoryX509Certificate**](RepositoryX509Certificate.md)
 
 ### Authorization
 
