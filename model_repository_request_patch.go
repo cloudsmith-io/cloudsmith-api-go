@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.617.2
+API version: 1.654.0
 Contact: support@cloudsmith.io
 */
 
@@ -52,6 +52,8 @@ type RepositoryRequestPatch struct {
 	MovePackages *string `json:"move_packages,omitempty"`
 	// A descriptive name for the repository.
 	Name *string `json:"name,omitempty" validate:"regexp=^\\\\w[\\\\w \\\\-'\\\\.\\/()]+$"`
+	// When enabled, all pushed (or pulled from upstream) nuget packages and artifacts will be signed using the repository's X.509 RSA certificate. Additionally, the nuget RepositorySignature index will list all of the repository's signing certificates including the ones from configured upstreams.
+	NugetNativeSigningEnabled *bool `json:"nuget_native_signing_enabled,omitempty"`
 	// The SPDX identifier of the open source license.
 	OpenSourceLicense NullableString `json:"open_source_license,omitempty"`
 	// The URL to the Open-Source project, used for validating that the project meets the requirements for Open-Source.
@@ -682,6 +684,38 @@ func (o *RepositoryRequestPatch) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *RepositoryRequestPatch) SetName(v string) {
 	o.Name = &v
+}
+
+// GetNugetNativeSigningEnabled returns the NugetNativeSigningEnabled field value if set, zero value otherwise.
+func (o *RepositoryRequestPatch) GetNugetNativeSigningEnabled() bool {
+	if o == nil || IsNil(o.NugetNativeSigningEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.NugetNativeSigningEnabled
+}
+
+// GetNugetNativeSigningEnabledOk returns a tuple with the NugetNativeSigningEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryRequestPatch) GetNugetNativeSigningEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.NugetNativeSigningEnabled) {
+		return nil, false
+	}
+	return o.NugetNativeSigningEnabled, true
+}
+
+// HasNugetNativeSigningEnabled returns a boolean if a field has been set.
+func (o *RepositoryRequestPatch) HasNugetNativeSigningEnabled() bool {
+	if o != nil && !IsNil(o.NugetNativeSigningEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetNugetNativeSigningEnabled gets a reference to the given bool and assigns it to the NugetNativeSigningEnabled field.
+func (o *RepositoryRequestPatch) SetNugetNativeSigningEnabled(v bool) {
+	o.NugetNativeSigningEnabled = &v
 }
 
 // GetOpenSourceLicense returns the OpenSourceLicense field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1564,6 +1598,9 @@ func (o RepositoryRequestPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	if !IsNil(o.NugetNativeSigningEnabled) {
+		toSerialize["nuget_native_signing_enabled"] = o.NugetNativeSigningEnabled
+	}
 	if o.OpenSourceLicense.IsSet() {
 		toSerialize["open_source_license"] = o.OpenSourceLicense.Get()
 	}
@@ -1677,6 +1714,7 @@ func (o *RepositoryRequestPatch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "move_own")
 		delete(additionalProperties, "move_packages")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "nuget_native_signing_enabled")
 		delete(additionalProperties, "open_source_license")
 		delete(additionalProperties, "open_source_project_url")
 		delete(additionalProperties, "proxy_npmjs")

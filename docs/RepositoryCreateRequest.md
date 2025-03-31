@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **MoveOwn** | Pointer to **bool** | If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the &#39;Access Controls&#39; section of the repository, and any inherited from the org. | [optional] 
 **MovePackages** | Pointer to **string** | This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting. | [optional] [default to "Admin"]
 **Name** | **string** | A descriptive name for the repository. | 
+**NugetNativeSigningEnabled** | Pointer to **bool** | When enabled, all pushed (or pulled from upstream) nuget packages and artifacts will be signed using the repository&#39;s X.509 RSA certificate. Additionally, the nuget RepositorySignature index will list all of the repository&#39;s signing certificates including the ones from configured upstreams. | [optional] 
 **OpenSourceLicense** | Pointer to **NullableString** | The SPDX identifier of the open source license. | [optional] 
 **OpenSourceProjectUrl** | Pointer to **NullableString** | The URL to the Open-Source project, used for validating that the project meets the requirements for Open-Source. | [optional] 
 **ProxyNpmjs** | Pointer to **bool** | If checked, Npm packages that are not in the repository when requested by clients will automatically be proxied from the public npmjs.org registry. If there is at least one version for a package, others will not be proxied. | [optional] 
@@ -460,6 +461,31 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+
+### GetNugetNativeSigningEnabled
+
+`func (o *RepositoryCreateRequest) GetNugetNativeSigningEnabled() bool`
+
+GetNugetNativeSigningEnabled returns the NugetNativeSigningEnabled field if non-nil, zero value otherwise.
+
+### GetNugetNativeSigningEnabledOk
+
+`func (o *RepositoryCreateRequest) GetNugetNativeSigningEnabledOk() (*bool, bool)`
+
+GetNugetNativeSigningEnabledOk returns a tuple with the NugetNativeSigningEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNugetNativeSigningEnabled
+
+`func (o *RepositoryCreateRequest) SetNugetNativeSigningEnabled(v bool)`
+
+SetNugetNativeSigningEnabled sets NugetNativeSigningEnabled field to given value.
+
+### HasNugetNativeSigningEnabled
+
+`func (o *RepositoryCreateRequest) HasNugetNativeSigningEnabled() bool`
+
+HasNugetNativeSigningEnabled returns a boolean if a field has been set.
 
 ### GetOpenSourceLicense
 

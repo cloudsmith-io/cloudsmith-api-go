@@ -116,7 +116,8 @@ Method | HTTP request | Description
 [**ReposUpstreamSwiftRead**](ReposApi.md#ReposUpstreamSwiftRead) | **Get** /repos/{owner}/{identifier}/upstream/swift/{slug_perm}/ | Retrieve a Swift upstream config for this repository.
 [**ReposUpstreamSwiftUpdate**](ReposApi.md#ReposUpstreamSwiftUpdate) | **Put** /repos/{owner}/{identifier}/upstream/swift/{slug_perm}/ | Update a Swift upstream config for this repository.
 [**ReposUserList**](ReposApi.md#ReposUserList) | **Get** /repos/ | Get a list of all repositories associated with current user.
-[**ReposX509List**](ReposApi.md#ReposX509List) | **Get** /repos/{owner}/{identifier}/x509/ | Retrieve the active X.509 certificate for the Repository.
+[**ReposX509EcdsaList**](ReposApi.md#ReposX509EcdsaList) | **Get** /repos/{owner}/{identifier}/x509-ecdsa/ | Retrieve the active X.509 ECDSA certificate for the Repository.
+[**ReposX509RsaList**](ReposApi.md#ReposX509RsaList) | **Get** /repos/{owner}/{identifier}/x509-rsa/ | Retrieve the active X.509 RSA certificate for the Repository.
 
 
 
@@ -8589,11 +8590,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ReposX509List
+## ReposX509EcdsaList
 
-> RepositoryX509Certificate ReposX509List(ctx, owner, identifier).Execute()
+> RepositoryX509EcdsaCertificate ReposX509EcdsaList(ctx, owner, identifier).Execute()
 
-Retrieve the active X.509 certificate for the Repository.
+Retrieve the active X.509 ECDSA certificate for the Repository.
 
 
 
@@ -8615,13 +8616,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ReposApi.ReposX509List(context.Background(), owner, identifier).Execute()
+	resp, r, err := apiClient.ReposApi.ReposX509EcdsaList(context.Background(), owner, identifier).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposX509List``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposX509EcdsaList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ReposX509List`: RepositoryX509Certificate
-	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposX509List`: %v\n", resp)
+	// response from `ReposX509EcdsaList`: RepositoryX509EcdsaCertificate
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposX509EcdsaList`: %v\n", resp)
 }
 ```
 
@@ -8636,7 +8637,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiReposX509ListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiReposX509EcdsaListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -8646,7 +8647,80 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RepositoryX509Certificate**](RepositoryX509Certificate.md)
+[**RepositoryX509EcdsaCertificate**](RepositoryX509EcdsaCertificate.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposX509RsaList
+
+> RepositoryX509RsaCertificate ReposX509RsaList(ctx, owner, identifier).Execute()
+
+Retrieve the active X.509 RSA certificate for the Repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposX509RsaList(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposX509RsaList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposX509RsaList`: RepositoryX509RsaCertificate
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposX509RsaList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposX509RsaListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**RepositoryX509RsaCertificate**](RepositoryX509RsaCertificate.md)
 
 ### Authorization
 

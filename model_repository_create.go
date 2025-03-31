@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.617.2
+API version: 1.654.0
 Contact: support@cloudsmith.io
 */
 
@@ -68,6 +68,8 @@ type RepositoryCreate struct {
 	Namespace *string `json:"namespace,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// API endpoint where data about this namespace can be retrieved.
 	NamespaceUrl *string `json:"namespace_url,omitempty"`
+	// When enabled, all pushed (or pulled from upstream) nuget packages and artifacts will be signed using the repository's X.509 RSA certificate. Additionally, the nuget RepositorySignature index will list all of the repository's signing certificates including the ones from configured upstreams.
+	NugetNativeSigningEnabled *bool `json:"nuget_native_signing_enabled,omitempty"`
 	// The number of downloads for packages in the repository.
 	NumDownloads *int64 `json:"num_downloads,omitempty"`
 	// Number of packages with policy violations in a repository.
@@ -1061,6 +1063,38 @@ func (o *RepositoryCreate) HasNamespaceUrl() bool {
 // SetNamespaceUrl gets a reference to the given string and assigns it to the NamespaceUrl field.
 func (o *RepositoryCreate) SetNamespaceUrl(v string) {
 	o.NamespaceUrl = &v
+}
+
+// GetNugetNativeSigningEnabled returns the NugetNativeSigningEnabled field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetNugetNativeSigningEnabled() bool {
+	if o == nil || IsNil(o.NugetNativeSigningEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.NugetNativeSigningEnabled
+}
+
+// GetNugetNativeSigningEnabledOk returns a tuple with the NugetNativeSigningEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetNugetNativeSigningEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.NugetNativeSigningEnabled) {
+		return nil, false
+	}
+	return o.NugetNativeSigningEnabled, true
+}
+
+// HasNugetNativeSigningEnabled returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasNugetNativeSigningEnabled() bool {
+	if o != nil && !IsNil(o.NugetNativeSigningEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetNugetNativeSigningEnabled gets a reference to the given bool and assigns it to the NugetNativeSigningEnabled field.
+func (o *RepositoryCreate) SetNugetNativeSigningEnabled(v bool) {
+	o.NugetNativeSigningEnabled = &v
 }
 
 // GetNumDownloads returns the NumDownloads field value if set, zero value otherwise.
@@ -2355,6 +2389,9 @@ func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NamespaceUrl) {
 		toSerialize["namespace_url"] = o.NamespaceUrl
 	}
+	if !IsNil(o.NugetNativeSigningEnabled) {
+		toSerialize["nuget_native_signing_enabled"] = o.NugetNativeSigningEnabled
+	}
 	if !IsNil(o.NumDownloads) {
 		toSerialize["num_downloads"] = o.NumDownloads
 	}
@@ -2535,6 +2572,7 @@ func (o *RepositoryCreate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "namespace")
 		delete(additionalProperties, "namespace_url")
+		delete(additionalProperties, "nuget_native_signing_enabled")
 		delete(additionalProperties, "num_downloads")
 		delete(additionalProperties, "num_policy_violated_packages")
 		delete(additionalProperties, "num_quarantined_packages")
