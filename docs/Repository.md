@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **Name** | **string** | A descriptive name for the repository. | 
 **Namespace** | Pointer to **string** | Namespace to which this repository belongs. | [optional] [readonly] 
 **NamespaceUrl** | Pointer to **string** | API endpoint where data about this namespace can be retrieved. | [optional] [readonly] 
+**NugetNativeSigningEnabled** | Pointer to **bool** | When enabled, all pushed (or pulled from upstream) nuget packages and artifacts will be signed using the repository&#39;s X.509 RSA certificate. Additionally, the nuget RepositorySignature index will list all of the repository&#39;s signing certificates including the ones from configured upstreams. | [optional] 
 **NumDownloads** | Pointer to **int64** | The number of downloads for packages in the repository. | [optional] [readonly] 
 **NumPolicyViolatedPackages** | Pointer to **int64** | Number of packages with policy violations in a repository. | [optional] [readonly] 
 **NumQuarantinedPackages** | Pointer to **int64** | Number of quarantined packages in a repository. | [optional] [readonly] 
@@ -751,6 +752,31 @@ SetNamespaceUrl sets NamespaceUrl field to given value.
 `func (o *Repository) HasNamespaceUrl() bool`
 
 HasNamespaceUrl returns a boolean if a field has been set.
+
+### GetNugetNativeSigningEnabled
+
+`func (o *Repository) GetNugetNativeSigningEnabled() bool`
+
+GetNugetNativeSigningEnabled returns the NugetNativeSigningEnabled field if non-nil, zero value otherwise.
+
+### GetNugetNativeSigningEnabledOk
+
+`func (o *Repository) GetNugetNativeSigningEnabledOk() (*bool, bool)`
+
+GetNugetNativeSigningEnabledOk returns a tuple with the NugetNativeSigningEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNugetNativeSigningEnabled
+
+`func (o *Repository) SetNugetNativeSigningEnabled(v bool)`
+
+SetNugetNativeSigningEnabled sets NugetNativeSigningEnabled field to given value.
+
+### HasNugetNativeSigningEnabled
+
+`func (o *Repository) HasNugetNativeSigningEnabled() bool`
+
+HasNugetNativeSigningEnabled returns a boolean if a field has been set.
 
 ### GetNumDownloads
 

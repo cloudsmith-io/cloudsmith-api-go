@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ArtifactId** | Pointer to **NullableString** | The ID of the artifact. | [optional] 
+**ExtraFiles** | Pointer to **[]string** | Extra files to include in the package. This can be a single file or multiple files. | [optional] 
 **GroupId** | Pointer to **NullableString** | Artifact&#39;s group ID. | [optional] 
 **IvyFile** | Pointer to **NullableString** | The ivy file is an XML file describing the dependencies of the project. | [optional] 
 **JavadocFile** | Pointer to **NullableString** | Adds bundled Java documentation to the Maven package | [optional] 
@@ -73,6 +74,41 @@ HasArtifactId returns a boolean if a field has been set.
 `func (o *MavenPackageUploadRequest) UnsetArtifactId()`
 
 UnsetArtifactId ensures that no value is present for ArtifactId, not even an explicit nil
+### GetExtraFiles
+
+`func (o *MavenPackageUploadRequest) GetExtraFiles() []string`
+
+GetExtraFiles returns the ExtraFiles field if non-nil, zero value otherwise.
+
+### GetExtraFilesOk
+
+`func (o *MavenPackageUploadRequest) GetExtraFilesOk() (*[]string, bool)`
+
+GetExtraFilesOk returns a tuple with the ExtraFiles field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtraFiles
+
+`func (o *MavenPackageUploadRequest) SetExtraFiles(v []string)`
+
+SetExtraFiles sets ExtraFiles field to given value.
+
+### HasExtraFiles
+
+`func (o *MavenPackageUploadRequest) HasExtraFiles() bool`
+
+HasExtraFiles returns a boolean if a field has been set.
+
+### SetExtraFilesNil
+
+`func (o *MavenPackageUploadRequest) SetExtraFilesNil(b bool)`
+
+ SetExtraFilesNil sets the value for ExtraFiles to be an explicit nil
+
+### UnsetExtraFiles
+`func (o *MavenPackageUploadRequest) UnsetExtraFiles()`
+
+UnsetExtraFiles ensures that no value is present for ExtraFiles, not even an explicit nil
 ### GetGroupId
 
 `func (o *MavenPackageUploadRequest) GetGroupId() string`

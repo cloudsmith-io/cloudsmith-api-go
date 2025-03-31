@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.617.2
+  version: 1.654.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -2455,6 +2455,20 @@ paths:
         schema:
           default: false
           type: boolean
+      - description: "A search term for querying of members within an Organization.Available\
+          \ options are: email, org, user, userslug, inactive, user_name, role"
+        in: query
+        name: query
+        schema:
+          type: string
+      - description: "A field for sorting objects in ascending or descending order.\
+          \ Use `-` prefix for descending order (e.g., `-user_name`). Available options:\
+          \ user_name, role."
+        in: query
+        name: sort
+        schema:
+          default: user_name
+          type: string
       responses:
         "200":
           content:
@@ -12409,10 +12423,10 @@ paths:
       tags:
       - repos
       x-codegen-request-body-name: data
-  /repos/{owner}/{identifier}/x509/:
+  /repos/{owner}/{identifier}/x509-ecdsa/:
     get:
-      description: Retrieve the active X.509 certificate for the Repository.
-      operationId: repos_x509_list
+      description: Retrieve the active X.509 ECDSA certificate for the Repository.
+      operationId: repos_x509_ecdsa_list
       parameters:
       - in: path
         name: owner
@@ -12429,8 +12443,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepositoryX509Certificate'
-          description: Retrieved the active X.509 Certificate.
+                $ref: '#/components/schemas/RepositoryX509EcdsaCertificate'
+          description: Retrieved the active X.509 ECDSA Certificate.
         "400":
           content:
             application/json:
@@ -12443,7 +12457,44 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
-      summary: Retrieve the active X.509 certificate for the Repository.
+      summary: Retrieve the active X.509 ECDSA certificate for the Repository.
+      tags:
+      - repos
+  /repos/{owner}/{identifier}/x509-rsa/:
+    get:
+      description: Retrieve the active X.509 RSA certificate for the Repository.
+      operationId: repos_x509_rsa_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryX509RsaCertificate'
+          description: Retrieved the active X.509 RSA Certificate.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve the active X.509 RSA certificate for the Repository.
       tags:
       - repos
   /repos/{owner}/{repo}/retention/:
@@ -25960,6 +26011,9 @@ components:
         group_id: group_id
         scala_version: scala_version
         sbt_version: sbt_version
+        extra_files:
+        - extra_files
+        - extra_files
       properties:
         artifact_id:
           description: The ID of the artifact.
@@ -25967,6 +26021,14 @@ components:
           nullable: true
           title: Artifact id
           type: string
+        extra_files:
+          description: Extra files to include in the package. This can be a single
+            file or multiple files.
+          items:
+            minLength: 1
+            type: string
+          nullable: true
+          type: array
         group_id:
           description: Artifact's group ID.
           maxLength: 2083
@@ -35975,6 +36037,7 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           comment: comment
           fingerprint_short: fingerprint_short
+        nuget_native_signing_enabled: true
         is_public: true
         namespace: namespace
         use_debian_labels: true
@@ -36180,6 +36243,14 @@ components:
           readOnly: true
           title: Namespace url
           type: string
+        nuget_native_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) nuget packages\
+            \ and artifacts will be signed using the repository's X.509 RSA certificate.\
+            \ Additionally, the nuget RepositorySignature index will list all of the\
+            \ repository's signing certificates including the ones from configured\
+            \ upstreams."
+          title: Nuget Native Signing Enabled?
+          type: boolean
         num_downloads:
           description: The number of downloads for packages in the repository.
           readOnly: true
@@ -36488,6 +36559,7 @@ components:
         use_default_cargo_upstream: true
         storage_region: default
         scan_own: true
+        nuget_native_signing_enabled: true
         distributes:
         - distributes
         - distributes
@@ -36646,6 +36718,14 @@ components:
           pattern: "^\\w[\\w \\-'\\.\\/()]+$"
           title: Name
           type: string
+        nuget_native_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) nuget packages\
+            \ and artifacts will be signed using the repository's X.509 RSA certificate.\
+            \ Additionally, the nuget RepositorySignature index will list all of the\
+            \ repository's signing certificates including the ones from configured\
+            \ upstreams."
+          title: Nuget Native Signing Enabled?
+          type: boolean
         open_source_license:
           description: The SPDX identifier of the open source license.
           nullable: true
@@ -36943,6 +37023,7 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           comment: comment
           fingerprint_short: fingerprint_short
+        nuget_native_signing_enabled: true
         is_public: true
         namespace: namespace
         use_debian_labels: true
@@ -37148,6 +37229,14 @@ components:
           readOnly: true
           title: Namespace url
           type: string
+        nuget_native_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) nuget packages\
+            \ and artifacts will be signed using the repository's X.509 RSA certificate.\
+            \ Additionally, the nuget RepositorySignature index will list all of the\
+            \ repository's signing certificates including the ones from configured\
+            \ upstreams."
+          title: Nuget Native Signing Enabled?
+          type: boolean
         num_downloads:
           description: The number of downloads for packages in the repository.
           readOnly: true
@@ -37454,6 +37543,7 @@ components:
         use_noarch_packages: true
         use_default_cargo_upstream: true
         scan_own: true
+        nuget_native_signing_enabled: true
         distributes:
         - distributes
         - distributes
@@ -37612,6 +37702,14 @@ components:
           pattern: "^\\w[\\w \\-'\\.\\/()]+$"
           title: Name
           type: string
+        nuget_native_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) nuget packages\
+            \ and artifacts will be signed using the repository's X.509 RSA certificate.\
+            \ Additionally, the nuget RepositorySignature index will list all of the\
+            \ repository's signing certificates including the ones from configured\
+            \ upstreams."
+          title: Nuget Native Signing Enabled?
+          type: boolean
         open_source_license:
           description: The SPDX identifier of the open source license.
           nullable: true
@@ -44021,14 +44119,17 @@ components:
           title: Verify SSL Certificates
           type: boolean
       type: object
-    RepositoryX509Certificate:
+    RepositoryX509EcdsaCertificate:
       example:
         default: true
+        certificate_chain_fingerprint_short: certificate_chain_fingerprint_short
         certificate: certificate
         certificate_fingerprint_short: certificate_fingerprint_short
         active: true
+        certificate_chain_fingerprint: certificate_chain_fingerprint
         created_at: 2000-01-23T04:56:07.000+00:00
         certificate_fingerprint: certificate_fingerprint
+        certificate_chain: certificate_chain
         issuing_status: Certificate is pending to be issued
       properties:
         active:
@@ -44041,6 +44142,87 @@ components:
           nullable: true
           readOnly: true
           title: Certificate
+          type: string
+        certificate_chain:
+          description: Base64 encoded CA certificate chain.
+          nullable: true
+          readOnly: true
+          title: Certificate chain
+          type: string
+        certificate_chain_fingerprint:
+          readOnly: true
+          title: Certificate chain fingerprint
+          type: string
+        certificate_chain_fingerprint_short:
+          readOnly: true
+          title: Certificate chain fingerprint short
+          type: string
+        certificate_fingerprint:
+          description: The SHA-256 long identifier used
+          nullable: true
+          readOnly: true
+          title: Certificate fingerprint
+          type: string
+        certificate_fingerprint_short:
+          readOnly: true
+          title: Certificate fingerprint short
+          type: string
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        default:
+          description: If selected this is the default key for this repository.
+          readOnly: true
+          title: Default
+          type: boolean
+        issuing_status:
+          default: Certificate is pending to be issued
+          enum:
+          - Certificate is pending to be issued
+          - Certificate successfully issued
+          - Error issuing certificate
+          title: Issuing status
+          type: string
+      type: object
+    RepositoryX509RsaCertificate:
+      example:
+        default: true
+        certificate_chain_fingerprint_short: certificate_chain_fingerprint_short
+        certificate: certificate
+        certificate_fingerprint_short: certificate_fingerprint_short
+        active: true
+        certificate_chain_fingerprint: certificate_chain_fingerprint
+        created_at: 2000-01-23T04:56:07.000+00:00
+        certificate_fingerprint: certificate_fingerprint
+        certificate_chain: certificate_chain
+        issuing_status: Certificate is pending to be issued
+      properties:
+        active:
+          description: If selected this is the active key for this repository.
+          readOnly: true
+          title: Active
+          type: boolean
+        certificate:
+          description: The issued certificate.
+          nullable: true
+          readOnly: true
+          title: Certificate
+          type: string
+        certificate_chain:
+          description: Base64 encoded CA certificate chain.
+          nullable: true
+          readOnly: true
+          title: Certificate chain
+          type: string
+        certificate_chain_fingerprint:
+          readOnly: true
+          title: Certificate chain fingerprint
+          type: string
+        certificate_chain_fingerprint_short:
+          readOnly: true
+          title: Certificate chain fingerprint short
           type: string
         certificate_fingerprint:
           description: The SHA-256 long identifier used
@@ -44208,7 +44390,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.617.2
+        version: 1.654.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -44218,7 +44400,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.617.2
+          default: 1.654.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true

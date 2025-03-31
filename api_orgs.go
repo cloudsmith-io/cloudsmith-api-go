@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.617.2
+API version: 1.654.0
 Contact: support@cloudsmith.io
 */
 
@@ -3725,6 +3725,8 @@ type ApiOrgsMembersListRequest struct {
 	page       *int64
 	pageSize   *int64
 	isActive   *bool
+	query      *string
+	sort       *string
 }
 
 // A page number within the paginated result set.
@@ -3742,6 +3744,18 @@ func (r ApiOrgsMembersListRequest) PageSize(pageSize int64) ApiOrgsMembersListRe
 // Filter for active/inactive users.
 func (r ApiOrgsMembersListRequest) IsActive(isActive bool) ApiOrgsMembersListRequest {
 	r.isActive = &isActive
+	return r
+}
+
+// A search term for querying of members within an Organization.Available options are: email, org, user, userslug, inactive, user_name, role
+func (r ApiOrgsMembersListRequest) Query(query string) ApiOrgsMembersListRequest {
+	r.query = &query
+	return r
+}
+
+// A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-user_name&#x60;). Available options: user_name, role.
+func (r ApiOrgsMembersListRequest) Sort(sort string) ApiOrgsMembersListRequest {
+	r.sort = &sort
 	return r
 }
 
@@ -3799,6 +3813,15 @@ func (a *OrgsApiService) OrgsMembersListExecute(r ApiOrgsMembersListRequest) ([]
 	} else {
 		var defaultValue bool = false
 		r.isActive = &defaultValue
+	}
+	if r.query != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
+	}
+	if r.sort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "", "")
+	} else {
+		var defaultValue string = "user_name"
+		r.sort = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

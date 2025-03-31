@@ -1907,7 +1907,7 @@ Name | Type | Description  | Notes
 
 ## OrgsMembersList
 
-> []OrganizationMembership OrgsMembersList(ctx, org).Page(page).PageSize(pageSize).IsActive(isActive).Execute()
+> []OrganizationMembership OrgsMembersList(ctx, org).Page(page).PageSize(pageSize).IsActive(isActive).Query(query).Sort(sort).Execute()
 
 Get the details for all organization members.
 
@@ -1930,10 +1930,12 @@ func main() {
 	page := int64(56) // int64 | A page number within the paginated result set. (optional)
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 	isActive := true // bool | Filter for active/inactive users. (optional) (default to false)
+	query := "query_example" // string | A search term for querying of members within an Organization.Available options are: email, org, user, userslug, inactive, user_name, role (optional)
+	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. Use `-` prefix for descending order (e.g., `-user_name`). Available options: user_name, role. (optional) (default to "user_name")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrgsApi.OrgsMembersList(context.Background(), org).Page(page).PageSize(pageSize).IsActive(isActive).Execute()
+	resp, r, err := apiClient.OrgsApi.OrgsMembersList(context.Background(), org).Page(page).PageSize(pageSize).IsActive(isActive).Query(query).Sort(sort).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsMembersList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1962,6 +1964,8 @@ Name | Type | Description  | Notes
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
  **isActive** | **bool** | Filter for active/inactive users. | [default to false]
+ **query** | **string** | A search term for querying of members within an Organization.Available options are: email, org, user, userslug, inactive, user_name, role | 
+ **sort** | **string** | A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-user_name&#x60;). Available options: user_name, role. | [default to &quot;user_name&quot;]
 
 ### Return type
 

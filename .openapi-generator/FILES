@@ -235,7 +235,8 @@ docs/RepositoryTransferRegionRequest.md
 docs/RepositoryWebhook.md
 docs/RepositoryWebhookRequest.md
 docs/RepositoryWebhookRequestPatch.md
-docs/RepositoryX509Certificate.md
+docs/RepositoryX509EcdsaCertificate.md
+docs/RepositoryX509RsaCertificate.md
 docs/ResourcesRateCheck.md
 docs/RpmPackageUpload.md
 docs/RpmPackageUploadRequest.md
@@ -489,7 +490,8 @@ model_repository_transfer_region_request.go
 model_repository_webhook.go
 model_repository_webhook_request.go
 model_repository_webhook_request_patch.go
-model_repository_x509_certificate.go
+model_repository_x509_ecdsa_certificate.go
+model_repository_x509_rsa_certificate.go
 model_resources_rate_check.go
 model_rpm_package_upload.go
 model_rpm_package_upload_request.go

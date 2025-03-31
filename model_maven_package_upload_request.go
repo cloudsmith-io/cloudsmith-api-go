@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.617.2
+API version: 1.654.0
 Contact: support@cloudsmith.io
 */
 
@@ -23,6 +23,8 @@ var _ MappedNullable = &MavenPackageUploadRequest{}
 type MavenPackageUploadRequest struct {
 	// The ID of the artifact.
 	ArtifactId NullableString `json:"artifact_id,omitempty"`
+	// Extra files to include in the package. This can be a single file or multiple files.
+	ExtraFiles []string `json:"extra_files,omitempty"`
 	// Artifact's group ID.
 	GroupId NullableString `json:"group_id,omitempty"`
 	// The ivy file is an XML file describing the dependencies of the project.
@@ -111,6 +113,39 @@ func (o *MavenPackageUploadRequest) SetArtifactIdNil() {
 // UnsetArtifactId ensures that no value is present for ArtifactId, not even an explicit nil
 func (o *MavenPackageUploadRequest) UnsetArtifactId() {
 	o.ArtifactId.Unset()
+}
+
+// GetExtraFiles returns the ExtraFiles field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MavenPackageUploadRequest) GetExtraFiles() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.ExtraFiles
+}
+
+// GetExtraFilesOk returns a tuple with the ExtraFiles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MavenPackageUploadRequest) GetExtraFilesOk() ([]string, bool) {
+	if o == nil || IsNil(o.ExtraFiles) {
+		return nil, false
+	}
+	return o.ExtraFiles, true
+}
+
+// HasExtraFiles returns a boolean if a field has been set.
+func (o *MavenPackageUploadRequest) HasExtraFiles() bool {
+	if o != nil && !IsNil(o.ExtraFiles) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtraFiles gets a reference to the given []string and assigns it to the ExtraFiles field.
+func (o *MavenPackageUploadRequest) SetExtraFiles(v []string) {
+	o.ExtraFiles = v
 }
 
 // GetGroupId returns the GroupId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -655,6 +690,9 @@ func (o MavenPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if o.ArtifactId.IsSet() {
 		toSerialize["artifact_id"] = o.ArtifactId.Get()
 	}
+	if o.ExtraFiles != nil {
+		toSerialize["extra_files"] = o.ExtraFiles
+	}
 	if o.GroupId.IsSet() {
 		toSerialize["group_id"] = o.GroupId.Get()
 	}
@@ -736,6 +774,7 @@ func (o *MavenPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "artifact_id")
+		delete(additionalProperties, "extra_files")
 		delete(additionalProperties, "group_id")
 		delete(additionalProperties, "ivy_file")
 		delete(additionalProperties, "javadoc_file")
