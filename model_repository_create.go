@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.654.0
+API version: 1.667.0
 Contact: support@cloudsmith.io
 */
 
@@ -31,8 +31,10 @@ type RepositoryCreate struct {
 	// If checked, users can copy any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
 	CopyOwn *bool `json:"copy_own,omitempty"`
 	// This defines the minimum level of privilege required for a user to copy packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific copy setting.
-	CopyPackages *string    `json:"copy_packages,omitempty"`
-	CreatedAt    *time.Time `json:"created_at,omitempty"`
+	CopyPackages *string `json:"copy_packages,omitempty"`
+	// When enabled, all pushed (or pulled from upstream) OCI packages and artifacts will be signed using cosign with the repository's ECDSA key. This generates a distinct cosign signature artifact per artifact.
+	CosignSigningEnabled *bool      `json:"cosign_signing_enabled,omitempty"`
+	CreatedAt            *time.Time `json:"created_at,omitempty"`
 	// This defines the default level of privilege that all of your organization members have for this repository. This does not include collaborators, but applies to any member of the org regardless of their own membership role (i.e. it applies to owners, managers and members). Be careful if setting this to admin, because any member will be able to change settings.
 	DefaultPrivilege *string `json:"default_privilege,omitempty"`
 	// If checked, users can delete any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
@@ -388,6 +390,38 @@ func (o *RepositoryCreate) HasCopyPackages() bool {
 // SetCopyPackages gets a reference to the given string and assigns it to the CopyPackages field.
 func (o *RepositoryCreate) SetCopyPackages(v string) {
 	o.CopyPackages = &v
+}
+
+// GetCosignSigningEnabled returns the CosignSigningEnabled field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetCosignSigningEnabled() bool {
+	if o == nil || IsNil(o.CosignSigningEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.CosignSigningEnabled
+}
+
+// GetCosignSigningEnabledOk returns a tuple with the CosignSigningEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetCosignSigningEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.CosignSigningEnabled) {
+		return nil, false
+	}
+	return o.CosignSigningEnabled, true
+}
+
+// HasCosignSigningEnabled returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasCosignSigningEnabled() bool {
+	if o != nil && !IsNil(o.CosignSigningEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetCosignSigningEnabled gets a reference to the given bool and assigns it to the CosignSigningEnabled field.
+func (o *RepositoryCreate) SetCosignSigningEnabled(v bool) {
+	o.CosignSigningEnabled = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -2328,6 +2362,9 @@ func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CopyPackages) {
 		toSerialize["copy_packages"] = o.CopyPackages
 	}
+	if !IsNil(o.CosignSigningEnabled) {
+		toSerialize["cosign_signing_enabled"] = o.CosignSigningEnabled
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -2551,6 +2588,7 @@ func (o *RepositoryCreate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "contextual_auth_realm")
 		delete(additionalProperties, "copy_own")
 		delete(additionalProperties, "copy_packages")
+		delete(additionalProperties, "cosign_signing_enabled")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "default_privilege")
 		delete(additionalProperties, "delete_own")

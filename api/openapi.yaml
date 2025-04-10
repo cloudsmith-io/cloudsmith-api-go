@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.654.0
+  version: 1.667.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -36040,6 +36040,7 @@ components:
         nuget_native_signing_enabled: true
         is_public: true
         namespace: namespace
+        cosign_signing_enabled: true
         use_debian_labels: true
         strict_npm_validation: true
         raw_package_index_signatures_enabled: true
@@ -36090,6 +36091,12 @@ components:
           - Read
           title: Copy packages
           type: string
+        cosign_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) OCI packages\
+            \ and artifacts will be signed using cosign with the repository's ECDSA\
+            \ key. This generates a distinct cosign signature artifact per artifact."
+          title: Cosign Signing Enabled?
+          type: boolean
         created_at:
           format: date-time
           readOnly: true
@@ -36564,6 +36571,7 @@ components:
         - distributes
         - distributes
         name: name
+        cosign_signing_enabled: true
         use_debian_labels: true
         replace_packages_by_default: true
         manage_entitlements_privilege: Admin
@@ -36612,6 +36620,12 @@ components:
           - Read
           title: Copy packages
           type: string
+        cosign_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) OCI packages\
+            \ and artifacts will be signed using cosign with the repository's ECDSA\
+            \ key. This generates a distinct cosign signature artifact per artifact."
+          title: Cosign Signing Enabled?
+          type: boolean
         default_privilege:
           default: None
           description: "This defines the default level of privilege that all of your\
@@ -37026,6 +37040,7 @@ components:
         nuget_native_signing_enabled: true
         is_public: true
         namespace: namespace
+        cosign_signing_enabled: true
         use_debian_labels: true
         strict_npm_validation: true
         raw_package_index_signatures_enabled: true
@@ -37076,6 +37091,12 @@ components:
           - Read
           title: Copy packages
           type: string
+        cosign_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) OCI packages\
+            \ and artifacts will be signed using cosign with the repository's ECDSA\
+            \ key. This generates a distinct cosign signature artifact per artifact."
+          title: Cosign Signing Enabled?
+          type: boolean
         created_at:
           format: date-time
           readOnly: true
@@ -37548,6 +37569,7 @@ components:
         - distributes
         - distributes
         name: name
+        cosign_signing_enabled: true
         use_debian_labels: true
         replace_packages_by_default: true
         manage_entitlements_privilege: Admin
@@ -37596,6 +37618,12 @@ components:
           - Read
           title: Copy packages
           type: string
+        cosign_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) OCI packages\
+            \ and artifacts will be signed using cosign with the repository's ECDSA\
+            \ key. This generates a distinct cosign signature artifact per artifact."
+          title: Cosign Signing Enabled?
+          type: boolean
         default_privilege:
           default: None
           description: "This defines the default level of privilege that all of your\
@@ -44390,7 +44418,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.654.0
+        version: 1.667.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -44400,7 +44428,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.654.0
+          default: 1.667.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
