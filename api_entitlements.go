@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.654.0
+API version: 1.674.0
 Contact: support@cloudsmith.io
 */
 
@@ -612,6 +612,7 @@ type ApiEntitlementsListRequest struct {
 	showTokens *bool
 	query      *string
 	active     *bool
+	sort       *string
 }
 
 // A page number within the paginated result set.
@@ -641,6 +642,12 @@ func (r ApiEntitlementsListRequest) Query(query string) ApiEntitlementsListReque
 // If true, only include active tokens
 func (r ApiEntitlementsListRequest) Active(active bool) ApiEntitlementsListRequest {
 	r.active = &active
+	return r
+}
+
+// A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name.
+func (r ApiEntitlementsListRequest) Sort(sort string) ApiEntitlementsListRequest {
+	r.sort = &sort
 	return r
 }
 
@@ -710,6 +717,12 @@ func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRe
 	} else {
 		var defaultValue bool = false
 		r.active = &defaultValue
+	}
+	if r.sort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "", "")
+	} else {
+		var defaultValue string = "name"
+		r.sort = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

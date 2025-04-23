@@ -318,7 +318,7 @@ Name | Type | Description  | Notes
 
 ## EntitlementsList
 
-> []RepositoryToken EntitlementsList(ctx, owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Query(query).Active(active).Execute()
+> []RepositoryToken EntitlementsList(ctx, owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Query(query).Active(active).Sort(sort).Execute()
 
 Get a list of all entitlements in a repository.
 
@@ -344,10 +344,11 @@ func main() {
 	showTokens := true // bool | Show entitlement token strings in results (optional) (default to false)
 	query := "query_example" // string | A search term for querying names of entitlements. (optional)
 	active := true // bool | If true, only include active tokens (optional) (default to false)
+	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. Use `-` prefix for descending order (e.g., `-name`). Available options: name. (optional) (default to "name")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.EntitlementsApi.EntitlementsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Query(query).Active(active).Execute()
+	resp, r, err := apiClient.EntitlementsApi.EntitlementsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).ShowTokens(showTokens).Query(query).Active(active).Sort(sort).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `EntitlementsApi.EntitlementsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -380,6 +381,7 @@ Name | Type | Description  | Notes
  **showTokens** | **bool** | Show entitlement token strings in results | [default to false]
  **query** | **string** | A search term for querying names of entitlements. | 
  **active** | **bool** | If true, only include active tokens | [default to false]
+ **sort** | **string** | A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name. | [default to &quot;name&quot;]
 
 ### Return type
 

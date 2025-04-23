@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Email** | Pointer to **string** | Email address to authenticate with | [optional] 
 **Password** | Pointer to **string** | Password to authenticate with | [optional] 
+**TotpToken** | Pointer to **string** | Two-factor authentication code | [optional] 
 
 ## Methods
 
@@ -75,6 +76,31 @@ SetPassword sets Password field to given value.
 `func (o *UserAuthTokenRequest) HasPassword() bool`
 
 HasPassword returns a boolean if a field has been set.
+
+### GetTotpToken
+
+`func (o *UserAuthTokenRequest) GetTotpToken() string`
+
+GetTotpToken returns the TotpToken field if non-nil, zero value otherwise.
+
+### GetTotpTokenOk
+
+`func (o *UserAuthTokenRequest) GetTotpTokenOk() (*string, bool)`
+
+GetTotpTokenOk returns a tuple with the TotpToken field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotpToken
+
+`func (o *UserAuthTokenRequest) SetTotpToken(v string)`
+
+SetTotpToken sets TotpToken field to given value.
+
+### HasTotpToken
+
+`func (o *UserAuthTokenRequest) HasTotpToken() bool`
+
+HasTotpToken returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
