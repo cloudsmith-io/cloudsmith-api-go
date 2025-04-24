@@ -2570,7 +2570,7 @@ Name | Type | Description  | Notes
 
 ## OrgsOpenidConnectList
 
-> []ProviderSettings OrgsOpenidConnectList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []ProviderSettings OrgsOpenidConnectList(ctx, org).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
 
 Retrieve the list of OpenID Connect provider settings for the org.
 
@@ -2592,10 +2592,12 @@ func main() {
 	org := "org_example" // string | 
 	page := int64(56) // int64 | A page number within the paginated result set. (optional)
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	query := "query_example" // string | A search term for querying of OpenID Connect (OIDC) provider settings.Available options are: name, provider_url, service_account (optional)
+	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. Use `-` prefix for descending order (e.g., `-name`). Available options: name. (optional) (default to "name")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectList(context.Background(), org).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2623,6 +2625,8 @@ Name | Type | Description  | Notes
 
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
+ **query** | **string** | A search term for querying of OpenID Connect (OIDC) provider settings.Available options are: name, provider_url, service_account | 
+ **sort** | **string** | A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name. | [default to &quot;name&quot;]
 
 ### Return type
 
@@ -3645,7 +3649,7 @@ Name | Type | Description  | Notes
 
 ## OrgsServicesList
 
-> []Service OrgsServicesList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []Service OrgsServicesList(ctx, org).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
 
 Get a list of all services within an organization.
 
@@ -3667,10 +3671,12 @@ func main() {
 	org := "org_example" // string | 
 	page := int64(56) // int64 | A page number within the paginated result set. (optional)
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	query := "query_example" // string | A search term for querying of services within an Organization.Available options are: name, role (optional)
+	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. Use `-` prefix for descending order (e.g., `-created_at`). Available options: created_at, name, role. (optional) (default to "created_at")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrgsApi.OrgsServicesList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	resp, r, err := apiClient.OrgsApi.OrgsServicesList(context.Background(), org).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsServicesList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3698,6 +3704,8 @@ Name | Type | Description  | Notes
 
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
+ **query** | **string** | A search term for querying of services within an Organization.Available options are: name, role | 
+ **sort** | **string** | A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-created_at&#x60;). Available options: created_at, name, role. | [default to &quot;created_at&quot;]
 
 ### Return type
 
@@ -4083,7 +4091,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsList
 
-> []OrganizationTeam OrgsTeamsList(ctx, org).Page(page).PageSize(pageSize).Execute()
+> []OrganizationTeam OrgsTeamsList(ctx, org).Page(page).PageSize(pageSize).ForUser(forUser).Query(query).Sort(sort).Execute()
 
 Get the details of all teams within an organization.
 
@@ -4105,10 +4113,13 @@ func main() {
 	org := "org_example" // string | 
 	page := int64(56) // int64 | A page number within the paginated result set. (optional)
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	forUser := true // bool | Filter for teams that you are a member of. (optional) (default to false)
+	query := "query_example" // string | A search term for querying of teams within an Organization.Available options are: name, slug, user, userslug (optional)
+	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. Use `-` prefix for descending order (e.g., `-name`). Available options: name, members. (optional) (default to "name")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrgsApi.OrgsTeamsList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	resp, r, err := apiClient.OrgsApi.OrgsTeamsList(context.Background(), org).Page(page).PageSize(pageSize).ForUser(forUser).Query(query).Sort(sort).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4136,6 +4147,9 @@ Name | Type | Description  | Notes
 
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
+ **forUser** | **bool** | Filter for teams that you are a member of. | [default to false]
+ **query** | **string** | A search term for querying of teams within an Organization.Available options are: name, slug, user, userslug | 
+ **sort** | **string** | A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name, members. | [default to &quot;name&quot;]
 
 ### Return type
 

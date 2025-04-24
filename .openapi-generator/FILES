@@ -275,8 +275,10 @@ docs/UsageRaw.md
 docs/UserApi.md
 docs/UserAuthToken.md
 docs/UserAuthTokenRequest.md
+docs/UserAuthenticationToken.md
 docs/UserBrief.md
 docs/UserProfile.md
+docs/UserTokensList200Response.md
 docs/UsersApi.md
 docs/VagrantPackageUpload.md
 docs/VagrantPackageUploadRequest.md
@@ -527,8 +529,10 @@ model_usage_limits_raw.go
 model_usage_raw.go
 model_user_auth_token.go
 model_user_auth_token_request.go
+model_user_authentication_token.go
 model_user_brief.go
 model_user_profile.go
+model_user_tokens_list_200_response.go
 model_vagrant_package_upload.go
 model_vagrant_package_upload_request.go
 model_vulnerability.go

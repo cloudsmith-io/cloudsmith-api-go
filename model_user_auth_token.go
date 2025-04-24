@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.654.0
+API version: 1.674.0
 Contact: support@cloudsmith.io
 */
 
@@ -21,7 +21,11 @@ var _ MappedNullable = &UserAuthToken{}
 // UserAuthToken struct for UserAuthToken
 type UserAuthToken struct {
 	// API token for the authenticated user
-	Token                *string `json:"token,omitempty"`
+	Token *string `json:"token,omitempty"`
+	// Flag indicating whether a 2FA code is required to complete authentication
+	TwoFactorRequired *bool `json:"two_factor_required,omitempty"`
+	// Token to use when providing 2FA code
+	TwoFactorToken       *string `json:"two_factor_token,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,6 +80,70 @@ func (o *UserAuthToken) SetToken(v string) {
 	o.Token = &v
 }
 
+// GetTwoFactorRequired returns the TwoFactorRequired field value if set, zero value otherwise.
+func (o *UserAuthToken) GetTwoFactorRequired() bool {
+	if o == nil || IsNil(o.TwoFactorRequired) {
+		var ret bool
+		return ret
+	}
+	return *o.TwoFactorRequired
+}
+
+// GetTwoFactorRequiredOk returns a tuple with the TwoFactorRequired field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserAuthToken) GetTwoFactorRequiredOk() (*bool, bool) {
+	if o == nil || IsNil(o.TwoFactorRequired) {
+		return nil, false
+	}
+	return o.TwoFactorRequired, true
+}
+
+// HasTwoFactorRequired returns a boolean if a field has been set.
+func (o *UserAuthToken) HasTwoFactorRequired() bool {
+	if o != nil && !IsNil(o.TwoFactorRequired) {
+		return true
+	}
+
+	return false
+}
+
+// SetTwoFactorRequired gets a reference to the given bool and assigns it to the TwoFactorRequired field.
+func (o *UserAuthToken) SetTwoFactorRequired(v bool) {
+	o.TwoFactorRequired = &v
+}
+
+// GetTwoFactorToken returns the TwoFactorToken field value if set, zero value otherwise.
+func (o *UserAuthToken) GetTwoFactorToken() string {
+	if o == nil || IsNil(o.TwoFactorToken) {
+		var ret string
+		return ret
+	}
+	return *o.TwoFactorToken
+}
+
+// GetTwoFactorTokenOk returns a tuple with the TwoFactorToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserAuthToken) GetTwoFactorTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.TwoFactorToken) {
+		return nil, false
+	}
+	return o.TwoFactorToken, true
+}
+
+// HasTwoFactorToken returns a boolean if a field has been set.
+func (o *UserAuthToken) HasTwoFactorToken() bool {
+	if o != nil && !IsNil(o.TwoFactorToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetTwoFactorToken gets a reference to the given string and assigns it to the TwoFactorToken field.
+func (o *UserAuthToken) SetTwoFactorToken(v string) {
+	o.TwoFactorToken = &v
+}
+
 func (o UserAuthToken) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -88,6 +156,12 @@ func (o UserAuthToken) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Token) {
 		toSerialize["token"] = o.Token
+	}
+	if !IsNil(o.TwoFactorRequired) {
+		toSerialize["two_factor_required"] = o.TwoFactorRequired
+	}
+	if !IsNil(o.TwoFactorToken) {
+		toSerialize["two_factor_token"] = o.TwoFactorToken
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -112,6 +186,8 @@ func (o *UserAuthToken) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "token")
+		delete(additionalProperties, "two_factor_required")
+		delete(additionalProperties, "two_factor_token")
 		o.AdditionalProperties = additionalProperties
 	}
 

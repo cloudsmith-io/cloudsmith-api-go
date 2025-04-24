@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.654.0
+API version: 1.674.0
 Contact: support@cloudsmith.io
 */
 
@@ -23,7 +23,9 @@ type UserAuthTokenRequest struct {
 	// Email address to authenticate with
 	Email *string `json:"email,omitempty"`
 	// Password to authenticate with
-	Password             *string `json:"password,omitempty"`
+	Password *string `json:"password,omitempty"`
+	// Two-factor authentication code
+	TotpToken            *string `json:"totp_token,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -110,6 +112,38 @@ func (o *UserAuthTokenRequest) SetPassword(v string) {
 	o.Password = &v
 }
 
+// GetTotpToken returns the TotpToken field value if set, zero value otherwise.
+func (o *UserAuthTokenRequest) GetTotpToken() string {
+	if o == nil || IsNil(o.TotpToken) {
+		var ret string
+		return ret
+	}
+	return *o.TotpToken
+}
+
+// GetTotpTokenOk returns a tuple with the TotpToken field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserAuthTokenRequest) GetTotpTokenOk() (*string, bool) {
+	if o == nil || IsNil(o.TotpToken) {
+		return nil, false
+	}
+	return o.TotpToken, true
+}
+
+// HasTotpToken returns a boolean if a field has been set.
+func (o *UserAuthTokenRequest) HasTotpToken() bool {
+	if o != nil && !IsNil(o.TotpToken) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotpToken gets a reference to the given string and assigns it to the TotpToken field.
+func (o *UserAuthTokenRequest) SetTotpToken(v string) {
+	o.TotpToken = &v
+}
+
 func (o UserAuthTokenRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -125,6 +159,9 @@ func (o UserAuthTokenRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Password) {
 		toSerialize["password"] = o.Password
+	}
+	if !IsNil(o.TotpToken) {
+		toSerialize["totp_token"] = o.TotpToken
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -150,6 +187,7 @@ func (o *UserAuthTokenRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "password")
+		delete(additionalProperties, "totp_token")
 		o.AdditionalProperties = additionalProperties
 	}
 

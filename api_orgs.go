@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.654.0
+API version: 1.674.0
 Contact: support@cloudsmith.io
 */
 
@@ -5071,6 +5071,8 @@ type ApiOrgsOpenidConnectListRequest struct {
 	org        string
 	page       *int64
 	pageSize   *int64
+	query      *string
+	sort       *string
 }
 
 // A page number within the paginated result set.
@@ -5082,6 +5084,18 @@ func (r ApiOrgsOpenidConnectListRequest) Page(page int64) ApiOrgsOpenidConnectLi
 // Number of results to return per page.
 func (r ApiOrgsOpenidConnectListRequest) PageSize(pageSize int64) ApiOrgsOpenidConnectListRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// A search term for querying of OpenID Connect (OIDC) provider settings.Available options are: name, provider_url, service_account
+func (r ApiOrgsOpenidConnectListRequest) Query(query string) ApiOrgsOpenidConnectListRequest {
+	r.query = &query
+	return r
+}
+
+// A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name.
+func (r ApiOrgsOpenidConnectListRequest) Sort(sort string) ApiOrgsOpenidConnectListRequest {
+	r.sort = &sort
 	return r
 }
 
@@ -5133,6 +5147,15 @@ func (a *OrgsApiService) OrgsOpenidConnectListExecute(r ApiOrgsOpenidConnectList
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
+	}
+	if r.query != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
+	}
+	if r.sort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "", "")
+	} else {
+		var defaultValue string = "name"
+		r.sort = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7340,6 +7363,8 @@ type ApiOrgsServicesListRequest struct {
 	org        string
 	page       *int64
 	pageSize   *int64
+	query      *string
+	sort       *string
 }
 
 // A page number within the paginated result set.
@@ -7351,6 +7376,18 @@ func (r ApiOrgsServicesListRequest) Page(page int64) ApiOrgsServicesListRequest 
 // Number of results to return per page.
 func (r ApiOrgsServicesListRequest) PageSize(pageSize int64) ApiOrgsServicesListRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// A search term for querying of services within an Organization.Available options are: name, role
+func (r ApiOrgsServicesListRequest) Query(query string) ApiOrgsServicesListRequest {
+	r.query = &query
+	return r
+}
+
+// A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-created_at&#x60;). Available options: created_at, name, role.
+func (r ApiOrgsServicesListRequest) Sort(sort string) ApiOrgsServicesListRequest {
+	r.sort = &sort
 	return r
 }
 
@@ -7402,6 +7439,15 @@ func (a *OrgsApiService) OrgsServicesListExecute(r ApiOrgsServicesListRequest) (
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
+	}
+	if r.query != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
+	}
+	if r.sort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "", "")
+	} else {
+		var defaultValue string = "created_at"
+		r.sort = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8253,6 +8299,9 @@ type ApiOrgsTeamsListRequest struct {
 	org        string
 	page       *int64
 	pageSize   *int64
+	forUser    *bool
+	query      *string
+	sort       *string
 }
 
 // A page number within the paginated result set.
@@ -8264,6 +8313,24 @@ func (r ApiOrgsTeamsListRequest) Page(page int64) ApiOrgsTeamsListRequest {
 // Number of results to return per page.
 func (r ApiOrgsTeamsListRequest) PageSize(pageSize int64) ApiOrgsTeamsListRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// Filter for teams that you are a member of.
+func (r ApiOrgsTeamsListRequest) ForUser(forUser bool) ApiOrgsTeamsListRequest {
+	r.forUser = &forUser
+	return r
+}
+
+// A search term for querying of teams within an Organization.Available options are: name, slug, user, userslug
+func (r ApiOrgsTeamsListRequest) Query(query string) ApiOrgsTeamsListRequest {
+	r.query = &query
+	return r
+}
+
+// A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name, members.
+func (r ApiOrgsTeamsListRequest) Sort(sort string) ApiOrgsTeamsListRequest {
+	r.sort = &sort
 	return r
 }
 
@@ -8315,6 +8382,21 @@ func (a *OrgsApiService) OrgsTeamsListExecute(r ApiOrgsTeamsListRequest) ([]Orga
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
+	}
+	if r.forUser != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "for_user", r.forUser, "", "")
+	} else {
+		var defaultValue bool = false
+		r.forUser = &defaultValue
+	}
+	if r.query != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
+	}
+	if r.sort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "", "")
+	} else {
+		var defaultValue string = "name"
+		r.sort = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

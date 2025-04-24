@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.654.0
+  version: 1.674.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -358,6 +358,14 @@ paths:
         schema:
           default: false
           type: boolean
+      - description: "A field for sorting objects in ascending or descending order.\
+          \ Use `-` prefix for descending order (e.g., `-name`). Available options:\
+          \ name."
+        in: query
+        name: sort
+        schema:
+          default: name
+          type: string
       responses:
         "200":
           content:
@@ -2789,6 +2797,20 @@ paths:
         name: page_size
         schema:
           type: integer
+      - description: "A search term for querying of OpenID Connect (OIDC) provider\
+          \ settings.Available options are: name, provider_url, service_account"
+        in: query
+        name: query
+        schema:
+          type: string
+      - description: "A field for sorting objects in ascending or descending order.\
+          \ Use `-` prefix for descending order (e.g., `-name`). Available options:\
+          \ name."
+        in: query
+        name: sort
+        schema:
+          default: name
+          type: string
       responses:
         "200":
           content:
@@ -3385,6 +3407,20 @@ paths:
         name: page_size
         schema:
           type: integer
+      - description: "A search term for querying of services within an Organization.Available\
+          \ options are: name, role"
+        in: query
+        name: query
+        schema:
+          type: string
+      - description: "A field for sorting objects in ascending or descending order.\
+          \ Use `-` prefix for descending order (e.g., `-created_at`). Available options:\
+          \ created_at, name, role."
+        in: query
+        name: sort
+        schema:
+          default: created_at
+          type: string
       responses:
         "200":
           content:
@@ -3641,6 +3677,26 @@ paths:
         name: page_size
         schema:
           type: integer
+      - description: Filter for teams that you are a member of.
+        in: query
+        name: for_user
+        schema:
+          default: false
+          type: boolean
+      - description: "A search term for querying of teams within an Organization.Available\
+          \ options are: name, slug, user, userslug"
+        in: query
+        name: query
+        schema:
+          type: string
+      - description: "A field for sorting objects in ascending or descending order.\
+          \ Use `-` prefix for descending order (e.g., `-name`). Available options:\
+          \ name, members."
+        in: query
+        name: sort
+        schema:
+          default: name
+          type: string
       responses:
         "200":
           content:
@@ -12758,7 +12814,10 @@ paths:
       - user
   /user/token/:
     post:
-      description: Retrieve/Create API key/token for the authenticated user.
+      description: |-
+        Handles both:
+        - Users authenticating with basic credentials to get a token
+        - Two-factor authentication flow
       operationId: user_token_create
       requestBody:
         content:
@@ -12793,10 +12852,110 @@ paths:
           description: Request could not be processed (see detail).
       security:
       - basic: []
-      summary: Retrieve/Create API key/token for the authenticated user.
+      summary: Create or retrieve API token for a user.
       tags:
       - user
       x-codegen-request-body-name: data
+  /user/tokens/:
+    get:
+      description: Retrieve the API key assigned to the user that is currently authenticated.
+      operationId: user_tokens_list
+      parameters:
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_tokens_list_200_response'
+          description: Retrieved the API key for the user that is currently authenticated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve the API key assigned to the user that is currently authenticated.
+      tags:
+      - user
+    post:
+      description: Create an API key for the user that is currently authenticated.
+      operationId: user_tokens_create
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthenticationToken'
+          description: Created an API key for the user that is currently authenticated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: User has already created an API key.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Create an API key for the user that is currently authenticated.
+      tags:
+      - user
+  /user/tokens/{slug_perm}/refresh/:
+    put:
+      description: Refresh the specified API key for the user that is currently authenticated.
+      operationId: user_tokens_refresh
+      parameters:
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthenticationToken'
+          description: Successfully refreshed the API key.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: The specified API key cannot be found.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Refresh the specified API key for the user that is currently authenticated.
+      tags:
+      - user
   /users/profile/{slug}/:
     get:
       description: Provide a brief for the specified user (if any).
@@ -36040,6 +36199,7 @@ components:
         nuget_native_signing_enabled: true
         is_public: true
         namespace: namespace
+        cosign_signing_enabled: true
         use_debian_labels: true
         strict_npm_validation: true
         raw_package_index_signatures_enabled: true
@@ -36090,6 +36250,12 @@ components:
           - Read
           title: Copy packages
           type: string
+        cosign_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) OCI packages\
+            \ and artifacts will be signed using cosign with the repository's ECDSA\
+            \ key. This generates a distinct cosign signature artifact per artifact."
+          title: Cosign Signing Enabled?
+          type: boolean
         created_at:
           format: date-time
           readOnly: true
@@ -36564,6 +36730,7 @@ components:
         - distributes
         - distributes
         name: name
+        cosign_signing_enabled: true
         use_debian_labels: true
         replace_packages_by_default: true
         manage_entitlements_privilege: Admin
@@ -36612,6 +36779,12 @@ components:
           - Read
           title: Copy packages
           type: string
+        cosign_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) OCI packages\
+            \ and artifacts will be signed using cosign with the repository's ECDSA\
+            \ key. This generates a distinct cosign signature artifact per artifact."
+          title: Cosign Signing Enabled?
+          type: boolean
         default_privilege:
           default: None
           description: "This defines the default level of privilege that all of your\
@@ -37026,6 +37199,7 @@ components:
         nuget_native_signing_enabled: true
         is_public: true
         namespace: namespace
+        cosign_signing_enabled: true
         use_debian_labels: true
         strict_npm_validation: true
         raw_package_index_signatures_enabled: true
@@ -37076,6 +37250,12 @@ components:
           - Read
           title: Copy packages
           type: string
+        cosign_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) OCI packages\
+            \ and artifacts will be signed using cosign with the repository's ECDSA\
+            \ key. This generates a distinct cosign signature artifact per artifact."
+          title: Cosign Signing Enabled?
+          type: boolean
         created_at:
           format: date-time
           readOnly: true
@@ -37548,6 +37728,7 @@ components:
         - distributes
         - distributes
         name: name
+        cosign_signing_enabled: true
         use_debian_labels: true
         replace_packages_by_default: true
         manage_entitlements_privilege: Admin
@@ -37596,6 +37777,12 @@ components:
           - Read
           title: Copy packages
           type: string
+        cosign_signing_enabled:
+          description: "When enabled, all pushed (or pulled from upstream) OCI packages\
+            \ and artifacts will be signed using cosign with the repository's ECDSA\
+            \ key. This generates a distinct cosign signature artifact per artifact."
+          title: Cosign Signing Enabled?
+          type: boolean
         default_privilege:
           default: None
           description: "This defines the default level of privilege that all of your\
@@ -44390,7 +44577,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.654.0
+        version: 1.674.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -44400,7 +44587,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.654.0
+          default: 1.674.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -44482,6 +44669,7 @@ components:
     UserAuthTokenRequest:
       example:
         password: password
+        totp_token: totp_token
         email: email
       properties:
         email:
@@ -44495,9 +44683,16 @@ components:
           minLength: 1
           title: Password
           type: string
+        totp_token:
+          description: Two-factor authentication code
+          minLength: 1
+          title: Two-factor code
+          type: string
       type: object
     UserAuthToken:
       example:
+        two_factor_token: two_factor_token
+        two_factor_required: true
         token: token
       properties:
         token:
@@ -44505,6 +44700,42 @@ components:
           minLength: 1
           readOnly: true
           title: Token
+          type: string
+        two_factor_required:
+          description: Flag indicating whether a 2FA code is required to complete
+            authentication
+          readOnly: true
+          title: Two factor required
+          type: boolean
+        two_factor_token:
+          description: Token to use when providing 2FA code
+          minLength: 1
+          readOnly: true
+          title: Two factor token
+          type: string
+      type: object
+    UserAuthenticationToken:
+      example:
+        created: 2000-01-23T04:56:07.000+00:00
+        slug_perm: slug_perm
+        key: key
+      properties:
+        created:
+          description: The time at which the API key was created.
+          format: date-time
+          readOnly: true
+          title: Created
+          type: string
+        key:
+          description: The unique API key used for authentication. This will be obfuscated
+            on read-only HTTP methods.
+          readOnly: true
+          title: Key
+          type: string
+        slug_perm:
+          description: The slug_perm for token.
+          readOnly: true
+          title: Slug perm
           type: string
       type: object
     UserProfile:
@@ -45585,6 +45816,23 @@ components:
       required:
       - results
       title: PackageVulnerabilityPolicyViolationLogCursorPage
+      type: object
+    user_tokens_list_200_response:
+      example:
+        results:
+        - created: 2000-01-23T04:56:07.000+00:00
+          slug_perm: slug_perm
+          key: key
+        - created: 2000-01-23T04:56:07.000+00:00
+          slug_perm: slug_perm
+          key: key
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/UserAuthenticationToken'
+          type: array
+      required:
+      - results
       type: object
   securitySchemes:
     apikey:
