@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.674.0
+  version: 1.698.0
 servers:
 - url: https://api.cloudsmith.io/v1
 security:
@@ -4512,6 +4512,79 @@ paths:
       summary: Get a list of all packages associated with repository.
       tags:
       - packages
+  /packages/{owner}/{repo}/groups/:
+    get:
+      description: Return a list of Package Groups in a repository.
+      operationId: packages_groups_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      - description: "A field to group packages by. Available options: name, backend_kind."
+        in: query
+        name: group_by
+        schema:
+          default: name
+          type: string
+      - description: "A search term for querying names, filenames, versions, distributions,\
+          \ architectures, formats, or statuses of packages."
+        in: query
+        name: query
+        schema:
+          type: string
+      - description: "A field for sorting objects in ascending or descending order.\
+          \ Use `-` prefix for descending order (e.g., `-name`). Available options:\
+          \ name, count, num_downloads, size, last_push, backend_kind."
+        in: query
+        name: sort
+        schema:
+          default: name
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/packages_groups_list_200_response'
+          description: Retrieved the list of package groups.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Owner namespace or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Return a list of Package Groups in a repository.
+      tags:
+      - packages
   /packages/{owner}/{repo}/upload/alpine/:
     post:
       description: Create a new Alpine package
@@ -8397,7 +8470,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDetail'
-          description: "Organizaition/Repository does not exist, or you do not have\
+          description: "Organization/Repository does not exist, or you do not have\
             \ permissions."
         "422":
           content:
@@ -8727,6 +8800,274 @@ paths:
       summary: Regenerate RSA Key for the Repository.
       tags:
       - repos
+  /repos/{owner}/{identifier}/upstream/cargo/:
+    get:
+      description: List Cargo upstream configs for this repository.
+      operationId: repos_upstream_cargo_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CargoUpstream'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: List Cargo upstream configs for this repository.
+      tags:
+      - repos
+    post:
+      description: Create a Cargo upstream config for this repository.
+      operationId: repos_upstream_cargo_create
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CargoUpstreamRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoUpstream'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Create a Cargo upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/upstream/cargo/{slug_perm}/:
+    delete:
+      description: Delete a Cargo upstream config for this repository.
+      operationId: repos_upstream_cargo_delete
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Delete a Cargo upstream config for this repository.
+      tags:
+      - repos
+    get:
+      description: Retrieve a Cargo upstream config for this repository.
+      operationId: repos_upstream_cargo_read
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve a Cargo upstream config for this repository.
+      tags:
+      - repos
+    patch:
+      description: Partially update a Cargo upstream config for this repository.
+      operationId: repos_upstream_cargo_partial_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CargoUpstreamRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Partially update a Cargo upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+    put:
+      description: Update a Cargo upstream config for this repository.
+      operationId: repos_upstream_cargo_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CargoUpstreamRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CargoUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update a Cargo upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
   /repos/{owner}/{identifier}/upstream/composer/:
     get:
       description: List Composer upstream configs for this repository.
@@ -10064,6 +10405,274 @@ paths:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
       summary: Update a Docker upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/upstream/go/:
+    get:
+      description: List Go upstream configs for this repository.
+      operationId: repos_upstream_go_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/GoUpstream'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: List Go upstream configs for this repository.
+      tags:
+      - repos
+    post:
+      description: Create a Go upstream config for this repository.
+      operationId: repos_upstream_go_create
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoUpstreamRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoUpstream'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Create a Go upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/upstream/go/{slug_perm}/:
+    delete:
+      description: Delete a Go upstream config for this repository.
+      operationId: repos_upstream_go_delete
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Delete a Go upstream config for this repository.
+      tags:
+      - repos
+    get:
+      description: Retrieve a Go upstream config for this repository.
+      operationId: repos_upstream_go_read
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve a Go upstream config for this repository.
+      tags:
+      - repos
+    patch:
+      description: Partially update a Go upstream config for this repository.
+      operationId: repos_upstream_go_partial_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoUpstreamRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Partially update a Go upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+    put:
+      description: Update a Go upstream config for this repository.
+      operationId: repos_upstream_go_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoUpstreamRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update a Go upstream config for this repository.
       tags:
       - repos
       x-codegen-request-body-name: data
@@ -18209,6 +18818,45 @@ components:
           readOnly: true
           title: Vulnerability scan results url
           type: string
+      type: object
+    PackageGroup:
+      example:
+        backend_kind: 0
+        size: 5
+        count: 6
+        name: name
+        last_push: 2000-01-23T04:56:07.000+00:00
+        num_downloads: 1
+      properties:
+        backend_kind:
+          title: Backend kind
+          type: integer
+        count:
+          nullable: true
+          title: Count
+          type: integer
+        last_push:
+          format: date-time
+          nullable: true
+          title: Last push
+          type: string
+        name:
+          minLength: 1
+          title: Name
+          type: string
+        num_downloads:
+          nullable: true
+          title: Num downloads
+          type: integer
+        size:
+          nullable: true
+          title: Size
+          type: integer
+      required:
+      - count
+      - last_push
+      - num_downloads
+      - size
       type: object
     AlpinePackageUploadRequest:
       example:
@@ -38507,6 +39155,383 @@ components:
       required:
       - rsa_private_key
       type: object
+    CargoUpstream:
+      example:
+        is_active: true
+        disable_reason: N/A
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        created_at: 2000-01-23T04:56:07.000+00:00
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        slug_perm: slug_perm
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+        pending_validation: true
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        created_at:
+          description: The datetime the upstream source was created.
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        disable_reason:
+          default: N/A
+          enum:
+          - N/A
+          - Upstream points to its own repository
+          - Missing upstream source
+          - Upstream was disabled by request of user
+          readOnly: true
+          title: Disable reason
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        pending_validation:
+          description: "When true, this upstream source is pending validation."
+          readOnly: true
+          title: Pending validation
+          type: boolean
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    CargoUpstreamRequest:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    CargoUpstreamRequestPatch:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      type: object
     ComposerUpstream:
       example:
         is_active: true
@@ -40604,6 +41629,383 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      type: object
+    GoUpstream:
+      example:
+        is_active: true
+        disable_reason: N/A
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        created_at: 2000-01-23T04:56:07.000+00:00
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        slug_perm: slug_perm
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+        pending_validation: true
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        created_at:
+          description: The datetime the upstream source was created.
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        disable_reason:
+          default: N/A
+          enum:
+          - N/A
+          - Upstream points to its own repository
+          - Missing upstream source
+          - Upstream was disabled by request of user
+          readOnly: true
+          title: Disable reason
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        pending_validation:
+          description: "When true, this upstream source is pending validation."
+          readOnly: true
+          title: Pending validation
+          type: boolean
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    GoUpstreamRequest:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    GoUpstreamRequestPatch:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
           title: Mode
           type: string
         name:
@@ -44577,7 +45979,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.674.0
+        version: 1.698.0
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -44587,7 +45989,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.674.0
+          default: 1.698.0
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -45816,6 +47218,29 @@ components:
       required:
       - results
       title: PackageVulnerabilityPolicyViolationLogCursorPage
+      type: object
+    packages_groups_list_200_response:
+      example:
+        results:
+        - backend_kind: 0
+          size: 5
+          count: 6
+          name: name
+          last_push: 2000-01-23T04:56:07.000+00:00
+          num_downloads: 1
+        - backend_kind: 0
+          size: 5
+          count: 6
+          name: name
+          last_push: 2000-01-23T04:56:07.000+00:00
+          num_downloads: 1
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/PackageGroup'
+          type: array
+      required:
+      - results
       type: object
     user_tokens_list_200_response:
       example:
