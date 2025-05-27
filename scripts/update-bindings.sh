@@ -63,6 +63,12 @@ get_current_version() {
     fi
     
     local current_version=$(grep -E "^PKG_VERSION=" "$GENERATE_SCRIPT" | cut -d'=' -f2 | tr -d '"' | tr -d "'")
+    
+    # Handle cases where the version might be a parameter expansion like ${1:-"0.0.46"}
+    if [[ $current_version =~ ^\$\{.*:-\"?([0-9]+\.[0-9]+\.[0-9]+)\"?\} ]]; then
+        current_version="${BASH_REMATCH[1]}"
+    fi
+    
     echo "$current_version"
 }
 
@@ -103,15 +109,26 @@ update_version() {
     
     cp "$GENERATE_SCRIPT" "$GENERATE_SCRIPT.backup"
     
-    awk -v new_ver="$new_version" '
-        /^PKG_VERSION=/ {
-            print "PKG_VERSION=" new_ver
-            next
-        }
-        { print }
-    ' "$GENERATE_SCRIPT" > "$GENERATE_SCRIPT.tmp" && mv "$GENERATE_SCRIPT.tmp" "$GENERATE_SCRIPT"
+    # Update the parameter expansion to use the new version as the default
+    sed -i.bak "s/PKG_VERSION=\${1:-\"[^\"]*\"}/PKG_VERSION=\${1:-\"$new_version\"}/" "$GENERATE_SCRIPT"
     
+    # Check if sed worked, fallback to awk if needed
     local updated_version=$(get_current_version)
+    if [ "$updated_version" != "$new_version" ]; then
+        log_warning "sed approach failed, trying awk..."
+        cp "$GENERATE_SCRIPT.backup" "$GENERATE_SCRIPT"
+        
+        awk -v new_ver="$new_version" '
+            /^PKG_VERSION=/ {
+                print "PKG_VERSION=${1:-\"" new_ver "\"}"
+                next
+            }
+            { print }
+        ' "$GENERATE_SCRIPT" > "$GENERATE_SCRIPT.tmp" && mv "$GENERATE_SCRIPT.tmp" "$GENERATE_SCRIPT"
+    fi
+    
+    # Final verification
+    updated_version=$(get_current_version)
     if [ "$updated_version" != "$new_version" ]; then
         log_error "Failed to update version in $GENERATE_SCRIPT"
         log_error "Expected: $new_version, Got: $updated_version"
@@ -123,7 +140,7 @@ update_version() {
         exit 1
     fi
     
-    rm "$GENERATE_SCRIPT.backup"
+    rm "$GENERATE_SCRIPT.backup" "$GENERATE_SCRIPT.bak" 2>/dev/null || true
     log_success "Version updated successfully"
 }
 
