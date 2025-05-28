@@ -15,7 +15,7 @@ Please refer to Cloudsmith's standard guide on [Open-Source Contributing](https:
 
 * Run `./scripts/update-bindings.sh` to automatically update the bindings.
 * This will then provide you with the URL for the PR to release the updated bindings.
-* Example usage: `./scripts/update-bindings.sh -v 1.2.3 --auto-api`
+* Preferred usage: `./scripts/update-bindings.sh`
 * For full options and usage examples, run: `./scripts/update-bindings.sh --help`
 * After PR is merged, follow the displayed instructions to create the git tag and GitHub release.
 
