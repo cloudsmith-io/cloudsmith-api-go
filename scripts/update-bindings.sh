@@ -83,12 +83,12 @@ increment_patch_version() {
 
 get_api_version() {
     local api_url="https://api.cloudsmith.io/"
-    log_info "Fetching current API version from CloudSmith..." >&2
+    log_info "Fetching current API version from Cloudsmith..." >&2
     
     local api_version=$(curl -s "${api_url}status/check/basic/" 2>/dev/null | jq -r '.version' 2>/dev/null)
     
     if [ "$api_version" = "null" ] || [ -z "$api_version" ]; then
-        log_warning "Could not fetch API version from CloudSmith API" >&2
+        log_warning "Could not fetch API version from Cloudsmith API" >&2
         return 1
     fi
     
@@ -183,7 +183,7 @@ create_and_push_branch() {
     git commit -m "Update Go API bindings to version $version
 
 Binding version: $version
-CloudSmith API version: $api_version
+Cloudsmith API version: $api_version
 
 - Updated PKG_VERSION in bin/generate
 - Regenerated Go bindings
@@ -242,7 +242,7 @@ usage() {
     echo "Note:"
     echo "  - When run without arguments, the script will:"
     echo "    * Auto-increment the patch version (e.g. 1.2.3 -> 1.2.4)"
-    echo "    * Auto-fetch the latest CloudSmith API version"
+    echo "    * Auto-fetch the latest Cloudsmith API version"
     echo "  - Use -v only for larger version increments (minor/major bumps)"
     echo "  - After PR is merged, you'll need to create a git tag and GitHub release"
 }
@@ -295,7 +295,7 @@ main() {
     validate_version "$new_version"
     validate_version "$api_version"
     
-    log_info "Starting CloudSmith Go API bindings update process..."
+    log_info "Starting Cloudsmith Go API bindings update process..."
     log_info "New binding version: $new_version"
     log_info "API version: $api_version"
     
