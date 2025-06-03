@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.674.0
+API version: 1.703.0
 Contact: support@cloudsmith.io
 */
 
@@ -32,6 +32,8 @@ type RepositoryRetentionRules struct {
 	RetentionGroupByName *bool `json:"retention_group_by_name,omitempty"`
 	// If checked, retention will apply to packages by package type (e.g. by binary, by source, etc.), rather than across all package types for one or more formats. <br>For example, when retaining by a limit of 1 and you upload DebPackage 1.0 and DebSourcePackage 1.0, no packages are deleted because they are different package types, binary and source respectively.
 	RetentionGroupByPackageType *bool `json:"retention_group_by_package_type,omitempty"`
+	// A package search expression which, if provided, filters the packages to be deleted.<br>For example, a search expression of `name:foo` will result in only packages called 'foo' being deleted, or a search expression of `tag:~latest` will prevent any packages tagged 'latest' from being deleted.<br>Refer to the Cloudsmith documentation for package query syntax.
+	RetentionPackageQueryString NullableString `json:"retention_package_query_string,omitempty"`
 	// The maximum X total size (in bytes) of packages to retain.
 	RetentionSizeLimit   *int64 `json:"retention_size_limit,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -248,6 +250,49 @@ func (o *RepositoryRetentionRules) SetRetentionGroupByPackageType(v bool) {
 	o.RetentionGroupByPackageType = &v
 }
 
+// GetRetentionPackageQueryString returns the RetentionPackageQueryString field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RepositoryRetentionRules) GetRetentionPackageQueryString() string {
+	if o == nil || IsNil(o.RetentionPackageQueryString.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RetentionPackageQueryString.Get()
+}
+
+// GetRetentionPackageQueryStringOk returns a tuple with the RetentionPackageQueryString field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RepositoryRetentionRules) GetRetentionPackageQueryStringOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RetentionPackageQueryString.Get(), o.RetentionPackageQueryString.IsSet()
+}
+
+// HasRetentionPackageQueryString returns a boolean if a field has been set.
+func (o *RepositoryRetentionRules) HasRetentionPackageQueryString() bool {
+	if o != nil && o.RetentionPackageQueryString.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRetentionPackageQueryString gets a reference to the given NullableString and assigns it to the RetentionPackageQueryString field.
+func (o *RepositoryRetentionRules) SetRetentionPackageQueryString(v string) {
+	o.RetentionPackageQueryString.Set(&v)
+}
+
+// SetRetentionPackageQueryStringNil sets the value for RetentionPackageQueryString to be an explicit nil
+func (o *RepositoryRetentionRules) SetRetentionPackageQueryStringNil() {
+	o.RetentionPackageQueryString.Set(nil)
+}
+
+// UnsetRetentionPackageQueryString ensures that no value is present for RetentionPackageQueryString, not even an explicit nil
+func (o *RepositoryRetentionRules) UnsetRetentionPackageQueryString() {
+	o.RetentionPackageQueryString.Unset()
+}
+
 // GetRetentionSizeLimit returns the RetentionSizeLimit field value if set, zero value otherwise.
 func (o *RepositoryRetentionRules) GetRetentionSizeLimit() int64 {
 	if o == nil || IsNil(o.RetentionSizeLimit) {
@@ -308,6 +353,9 @@ func (o RepositoryRetentionRules) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RetentionGroupByPackageType) {
 		toSerialize["retention_group_by_package_type"] = o.RetentionGroupByPackageType
 	}
+	if o.RetentionPackageQueryString.IsSet() {
+		toSerialize["retention_package_query_string"] = o.RetentionPackageQueryString.Get()
+	}
 	if !IsNil(o.RetentionSizeLimit) {
 		toSerialize["retention_size_limit"] = o.RetentionSizeLimit
 	}
@@ -339,6 +387,7 @@ func (o *RepositoryRetentionRules) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "retention_group_by_format")
 		delete(additionalProperties, "retention_group_by_name")
 		delete(additionalProperties, "retention_group_by_package_type")
+		delete(additionalProperties, "retention_package_query_string")
 		delete(additionalProperties, "retention_size_limit")
 		o.AdditionalProperties = additionalProperties
 	}

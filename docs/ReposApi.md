@@ -31,6 +31,12 @@ Method | HTTP request | Description
 [**ReposRsaList**](ReposApi.md#ReposRsaList) | **Get** /repos/{owner}/{identifier}/rsa/ | Retrieve the active RSA key for the Repository.
 [**ReposRsaRegenerate**](ReposApi.md#ReposRsaRegenerate) | **Post** /repos/{owner}/{identifier}/rsa/regenerate/ | Regenerate RSA Key for the Repository.
 [**ReposTransferRegion**](ReposApi.md#ReposTransferRegion) | **Post** /repos/{owner}/{repo}/transfer-region/ | Transfer a repository to a different region.
+[**ReposUpstreamCargoCreate**](ReposApi.md#ReposUpstreamCargoCreate) | **Post** /repos/{owner}/{identifier}/upstream/cargo/ | Create a Cargo upstream config for this repository.
+[**ReposUpstreamCargoDelete**](ReposApi.md#ReposUpstreamCargoDelete) | **Delete** /repos/{owner}/{identifier}/upstream/cargo/{slug_perm}/ | Delete a Cargo upstream config for this repository.
+[**ReposUpstreamCargoList**](ReposApi.md#ReposUpstreamCargoList) | **Get** /repos/{owner}/{identifier}/upstream/cargo/ | List Cargo upstream configs for this repository.
+[**ReposUpstreamCargoPartialUpdate**](ReposApi.md#ReposUpstreamCargoPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/cargo/{slug_perm}/ | Partially update a Cargo upstream config for this repository.
+[**ReposUpstreamCargoRead**](ReposApi.md#ReposUpstreamCargoRead) | **Get** /repos/{owner}/{identifier}/upstream/cargo/{slug_perm}/ | Retrieve a Cargo upstream config for this repository.
+[**ReposUpstreamCargoUpdate**](ReposApi.md#ReposUpstreamCargoUpdate) | **Put** /repos/{owner}/{identifier}/upstream/cargo/{slug_perm}/ | Update a Cargo upstream config for this repository.
 [**ReposUpstreamComposerCreate**](ReposApi.md#ReposUpstreamComposerCreate) | **Post** /repos/{owner}/{identifier}/upstream/composer/ | Create a Composer upstream config for this repository.
 [**ReposUpstreamComposerDelete**](ReposApi.md#ReposUpstreamComposerDelete) | **Delete** /repos/{owner}/{identifier}/upstream/composer/{slug_perm}/ | Delete a Composer upstream config for this repository.
 [**ReposUpstreamComposerList**](ReposApi.md#ReposUpstreamComposerList) | **Get** /repos/{owner}/{identifier}/upstream/composer/ | List Composer upstream configs for this repository.
@@ -61,6 +67,12 @@ Method | HTTP request | Description
 [**ReposUpstreamDockerPartialUpdate**](ReposApi.md#ReposUpstreamDockerPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/docker/{slug_perm}/ | Partially update a Docker upstream config for this repository.
 [**ReposUpstreamDockerRead**](ReposApi.md#ReposUpstreamDockerRead) | **Get** /repos/{owner}/{identifier}/upstream/docker/{slug_perm}/ | Retrieve a Docker upstream config for this repository.
 [**ReposUpstreamDockerUpdate**](ReposApi.md#ReposUpstreamDockerUpdate) | **Put** /repos/{owner}/{identifier}/upstream/docker/{slug_perm}/ | Update a Docker upstream config for this repository.
+[**ReposUpstreamGoCreate**](ReposApi.md#ReposUpstreamGoCreate) | **Post** /repos/{owner}/{identifier}/upstream/go/ | Create a Go upstream config for this repository.
+[**ReposUpstreamGoDelete**](ReposApi.md#ReposUpstreamGoDelete) | **Delete** /repos/{owner}/{identifier}/upstream/go/{slug_perm}/ | Delete a Go upstream config for this repository.
+[**ReposUpstreamGoList**](ReposApi.md#ReposUpstreamGoList) | **Get** /repos/{owner}/{identifier}/upstream/go/ | List Go upstream configs for this repository.
+[**ReposUpstreamGoPartialUpdate**](ReposApi.md#ReposUpstreamGoPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/go/{slug_perm}/ | Partially update a Go upstream config for this repository.
+[**ReposUpstreamGoRead**](ReposApi.md#ReposUpstreamGoRead) | **Get** /repos/{owner}/{identifier}/upstream/go/{slug_perm}/ | Retrieve a Go upstream config for this repository.
+[**ReposUpstreamGoUpdate**](ReposApi.md#ReposUpstreamGoUpdate) | **Put** /repos/{owner}/{identifier}/upstream/go/{slug_perm}/ | Update a Go upstream config for this repository.
 [**ReposUpstreamHelmCreate**](ReposApi.md#ReposUpstreamHelmCreate) | **Post** /repos/{owner}/{identifier}/upstream/helm/ | Create a Helm upstream config for this repository.
 [**ReposUpstreamHelmDelete**](ReposApi.md#ReposUpstreamHelmDelete) | **Delete** /repos/{owner}/{identifier}/upstream/helm/{slug_perm}/ | Delete a Helm upstream config for this repository.
 [**ReposUpstreamHelmList**](ReposApi.md#ReposUpstreamHelmList) | **Get** /repos/{owner}/{identifier}/upstream/helm/ | List Helm upstream configs for this repository.
@@ -2095,6 +2107,464 @@ Name | Type | Description  | Notes
 ### Return type
 
  (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamCargoCreate
+
+> CargoUpstream ReposUpstreamCargoCreate(ctx, owner, identifier).Data(data).Execute()
+
+Create a Cargo upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewCargoUpstreamRequest("Name_example", "UpstreamUrl_example") // CargoUpstreamRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamCargoCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCargoCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamCargoCreate`: CargoUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCargoCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamCargoCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**CargoUpstreamRequest**](CargoUpstreamRequest.md) |  | 
+
+### Return type
+
+[**CargoUpstream**](CargoUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamCargoDelete
+
+> ReposUpstreamCargoDelete(ctx, owner, identifier, slugPerm).Execute()
+
+Delete a Cargo upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamCargoDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCargoDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamCargoDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamCargoList
+
+> []CargoUpstream ReposUpstreamCargoList(ctx, owner, identifier).Page(page).PageSize(pageSize).Execute()
+
+List Cargo upstream configs for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamCargoList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCargoList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamCargoList`: []CargoUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCargoList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamCargoListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]CargoUpstream**](CargoUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamCargoPartialUpdate
+
+> CargoUpstream ReposUpstreamCargoPartialUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Partially update a Cargo upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewCargoUpstreamRequestPatch() // CargoUpstreamRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamCargoPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCargoPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamCargoPartialUpdate`: CargoUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCargoPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamCargoPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**CargoUpstreamRequestPatch**](CargoUpstreamRequestPatch.md) |  | 
+
+### Return type
+
+[**CargoUpstream**](CargoUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamCargoRead
+
+> CargoUpstream ReposUpstreamCargoRead(ctx, owner, identifier, slugPerm).Execute()
+
+Retrieve a Cargo upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamCargoRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCargoRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamCargoRead`: CargoUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCargoRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamCargoReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**CargoUpstream**](CargoUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamCargoUpdate
+
+> CargoUpstream ReposUpstreamCargoUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Update a Cargo upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewCargoUpstreamRequest("Name_example", "UpstreamUrl_example") // CargoUpstreamRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamCargoUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamCargoUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamCargoUpdate`: CargoUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamCargoUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamCargoUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**CargoUpstreamRequest**](CargoUpstreamRequest.md) |  | 
+
+### Return type
+
+[**CargoUpstream**](CargoUpstream.md)
 
 ### Authorization
 
@@ -4385,6 +4855,464 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DockerUpstream**](DockerUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGoCreate
+
+> GoUpstream ReposUpstreamGoCreate(ctx, owner, identifier).Data(data).Execute()
+
+Create a Go upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewGoUpstreamRequest("Name_example", "UpstreamUrl_example") // GoUpstreamRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamGoCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGoCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamGoCreate`: GoUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamGoCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGoCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**GoUpstreamRequest**](GoUpstreamRequest.md) |  | 
+
+### Return type
+
+[**GoUpstream**](GoUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGoDelete
+
+> ReposUpstreamGoDelete(ctx, owner, identifier, slugPerm).Execute()
+
+Delete a Go upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamGoDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGoDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGoDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGoList
+
+> []GoUpstream ReposUpstreamGoList(ctx, owner, identifier).Page(page).PageSize(pageSize).Execute()
+
+List Go upstream configs for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamGoList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGoList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamGoList`: []GoUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamGoList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGoListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]GoUpstream**](GoUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGoPartialUpdate
+
+> GoUpstream ReposUpstreamGoPartialUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Partially update a Go upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewGoUpstreamRequestPatch() // GoUpstreamRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamGoPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGoPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamGoPartialUpdate`: GoUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamGoPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGoPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**GoUpstreamRequestPatch**](GoUpstreamRequestPatch.md) |  | 
+
+### Return type
+
+[**GoUpstream**](GoUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGoRead
+
+> GoUpstream ReposUpstreamGoRead(ctx, owner, identifier, slugPerm).Execute()
+
+Retrieve a Go upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamGoRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGoRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamGoRead`: GoUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamGoRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGoReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**GoUpstream**](GoUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGoUpdate
+
+> GoUpstream ReposUpstreamGoUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Update a Go upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewGoUpstreamRequest("Name_example", "UpstreamUrl_example") // GoUpstreamRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamGoUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGoUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamGoUpdate`: GoUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamGoUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGoUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**GoUpstreamRequest**](GoUpstreamRequest.md) |  | 
+
+### Return type
+
+[**GoUpstream**](GoUpstream.md)
 
 ### Authorization
 
