@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**PackagesCopy**](PackagesApi.md#PackagesCopy) | **Post** /packages/{owner}/{repo}/{identifier}/copy/ | Copy a package to another repository.
 [**PackagesDelete**](PackagesApi.md#PackagesDelete) | **Delete** /packages/{owner}/{repo}/{identifier}/ | Delete a specific package in a repository.
 [**PackagesDependencies**](PackagesApi.md#PackagesDependencies) | **Get** /packages/{owner}/{repo}/{identifier}/dependencies/ | Get the list of dependencies for a package. Transitive dependencies are included where supported.
+[**PackagesGroupsList**](PackagesApi.md#PackagesGroupsList) | **Get** /packages/{owner}/{repo}/groups/ | Return a list of Package Groups in a repository.
 [**PackagesList**](PackagesApi.md#PackagesList) | **Get** /packages/{owner}/{repo}/ | Get a list of all packages associated with repository.
 [**PackagesMove**](PackagesApi.md#PackagesMove) | **Post** /packages/{owner}/{repo}/{identifier}/move/ | Move a package to another repository.
 [**PackagesQuarantine**](PackagesApi.md#PackagesQuarantine) | **Post** /packages/{owner}/{repo}/{identifier}/quarantine/ | Quarantine or release a package.
@@ -281,6 +282,89 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PackageDependencies**](PackageDependencies.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesGroupsList
+
+> PackagesGroupsList200Response PackagesGroupsList(ctx, owner, repo).Page(page).PageSize(pageSize).GroupBy(groupBy).Query(query).Sort(sort).Execute()
+
+Return a list of Package Groups in a repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	groupBy := "groupBy_example" // string | A field to group packages by. Available options: name, backend_kind. (optional) (default to "name")
+	query := "query_example" // string | A search term for querying names, filenames, versions, distributions, architectures, formats, or statuses of packages. (optional)
+	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. Use `-` prefix for descending order (e.g., `-name`). Available options: name, count, num_downloads, size, last_push, backend_kind. (optional) (default to "name")
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PackagesApi.PackagesGroupsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).GroupBy(groupBy).Query(query).Sort(sort).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesGroupsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PackagesGroupsList`: PackagesGroupsList200Response
+	fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesGroupsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesGroupsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+ **groupBy** | **string** | A field to group packages by. Available options: name, backend_kind. | [default to &quot;name&quot;]
+ **query** | **string** | A search term for querying names, filenames, versions, distributions, architectures, formats, or statuses of packages. | 
+ **sort** | **string** | A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name, count, num_downloads, size, last_push, backend_kind. | [default to &quot;name&quot;]
+
+### Return type
+
+[**PackagesGroupsList200Response**](PackagesGroupsList200Response.md)
 
 ### Authorization
 

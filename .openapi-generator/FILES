@@ -32,6 +32,9 @@ docs/AuditLogApi.md
 docs/BadgesApi.md
 docs/CargoPackageUpload.md
 docs/CargoPackageUploadRequest.md
+docs/CargoUpstream.md
+docs/CargoUpstreamRequest.md
+docs/CargoUpstreamRequestPatch.md
 docs/CocoapodsPackageUpload.md
 docs/CocoapodsPackageUploadRequest.md
 docs/CommonBandwidthMetrics.md
@@ -84,6 +87,9 @@ docs/FormatsApi.md
 docs/GeoIpLocation.md
 docs/GoPackageUpload.md
 docs/GoPackageUploadRequest.md
+docs/GoUpstream.md
+docs/GoUpstreamRequest.md
+docs/GoUpstreamRequestPatch.md
 docs/HelmPackageUpload.md
 docs/HelmPackageUploadRequest.md
 docs/HelmUpstream.md
@@ -164,6 +170,7 @@ docs/PackageFile.md
 docs/PackageFilePartsUpload.md
 docs/PackageFileUpload.md
 docs/PackageFileUploadRequest.md
+docs/PackageGroup.md
 docs/PackageLicensePolicyEvaluationRequest.md
 docs/PackageLicensePolicyViolationLog.md
 docs/PackageLicensePolicyViolationLogCursorPage.md
@@ -181,6 +188,7 @@ docs/PackageVulnerabilityPolicyEvaluationRequest.md
 docs/PackageVulnerabilityPolicyViolationLog.md
 docs/PackageVulnerabilityPolicyViolationLogCursorPage.md
 docs/PackagesApi.md
+docs/PackagesGroupsList200Response.md
 docs/ProviderSettings.md
 docs/ProviderSettingsRequest.md
 docs/ProviderSettingsRequestPatch.md
@@ -300,6 +308,9 @@ model_alpine_package_upload_request.go
 model_architecture.go
 model_cargo_package_upload.go
 model_cargo_package_upload_request.go
+model_cargo_upstream.go
+model_cargo_upstream_request.go
+model_cargo_upstream_request_patch.go
 model_cocoapods_package_upload.go
 model_cocoapods_package_upload_request.go
 model_common_bandwidth_metrics.go
@@ -348,6 +359,9 @@ model_format_support_upstream.go
 model_geo_ip_location.go
 model_go_package_upload.go
 model_go_package_upload_request.go
+model_go_upstream.go
+model_go_upstream_request.go
+model_go_upstream_request_patch.go
 model_helm_package_upload.go
 model_helm_package_upload_request.go
 model_helm_upstream.go
@@ -425,6 +439,7 @@ model_package_file.go
 model_package_file_parts_upload.go
 model_package_file_upload.go
 model_package_file_upload_request.go
+model_package_group.go
 model_package_license_policy_evaluation_request.go
 model_package_license_policy_violation_log.go
 model_package_license_policy_violation_log_cursor_page.go
@@ -441,6 +456,7 @@ model_package_vulnerability.go
 model_package_vulnerability_policy_evaluation_request.go
 model_package_vulnerability_policy_violation_log.go
 model_package_vulnerability_policy_violation_log_cursor_page.go
+model_packages_groups_list_200_response.go
 model_provider_settings.go
 model_provider_settings_request.go
 model_provider_settings_request_patch.go
