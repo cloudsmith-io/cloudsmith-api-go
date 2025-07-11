@@ -10,9 +10,9 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.703.0
+  version: 1.736.13
 servers:
-- url: https://api.cloudsmith.io/v1
+- url: https://api.cloudsmith.io/
 security:
 - apikey: []
 - basic: []
@@ -16929,6 +16929,7 @@ components:
           - Password
           - Social
           - SAML
+          - OIDC
           readOnly: true
           title: Last login method
           type: string
@@ -17028,6 +17029,7 @@ components:
           - Password
           - Social
           - SAML
+          - OIDC
           readOnly: true
           title: Last login method
           type: string
@@ -17122,6 +17124,7 @@ components:
           - Password
           - Social
           - SAML
+          - OIDC
           readOnly: true
           title: Last login method
           type: string
@@ -39253,6 +39256,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -39384,6 +39388,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -39498,6 +39503,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -41761,6 +41767,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -41892,6 +41899,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -42006,6 +42014,7 @@ components:
             \ or cache only mode."
           enum:
           - Proxy Only
+          - Cache and Proxy
           title: Mode
           type: string
         name:
@@ -46001,7 +46010,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.703.0
+        version: 1.736.13
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -46011,7 +46020,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.703.0
+          default: 1.736.13
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -46301,7 +46310,6 @@ components:
         operator:
           default: ""
           maxLength: 32
-          minLength: 1
           title: Operator
           type: string
         patch:
@@ -46310,13 +46318,11 @@ components:
         raw_version:
           default: ""
           maxLength: 1024
-          minLength: 1
           title: Raw version
           type: string
         version:
           default: ""
           maxLength: 1024
-          minLength: 1
           title: Version
           type: string
       required:
