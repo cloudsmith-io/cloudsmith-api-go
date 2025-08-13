@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.736.13
+API version: 1.768.2
 Contact: support@cloudsmith.io
 */
 
@@ -4781,15 +4781,15 @@ type ApiOrgsOpenidConnectCreateRequest struct {
 	ctx        context.Context
 	ApiService *OrgsApiService
 	org        string
-	data       *ProviderSettingsRequest
+	data       *ProviderSettingsWriteRequest
 }
 
-func (r ApiOrgsOpenidConnectCreateRequest) Data(data ProviderSettingsRequest) ApiOrgsOpenidConnectCreateRequest {
+func (r ApiOrgsOpenidConnectCreateRequest) Data(data ProviderSettingsWriteRequest) ApiOrgsOpenidConnectCreateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiOrgsOpenidConnectCreateRequest) Execute() (*ProviderSettings, *http.Response, error) {
+func (r ApiOrgsOpenidConnectCreateRequest) Execute() (*ProviderSettingsWrite, *http.Response, error) {
 	return r.ApiService.OrgsOpenidConnectCreateExecute(r)
 }
 
@@ -4811,13 +4811,13 @@ func (a *OrgsApiService) OrgsOpenidConnectCreate(ctx context.Context, org string
 }
 
 // Execute executes the request
-//  @return ProviderSettings
-func (a *OrgsApiService) OrgsOpenidConnectCreateExecute(r ApiOrgsOpenidConnectCreateRequest) (*ProviderSettings, *http.Response, error) {
+//  @return ProviderSettingsWrite
+func (a *OrgsApiService) OrgsOpenidConnectCreateExecute(r ApiOrgsOpenidConnectCreateRequest) (*ProviderSettingsWrite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ProviderSettings
+		localVarReturnValue *ProviderSettingsWrite
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsOpenidConnectCreate")
@@ -5065,6 +5065,336 @@ func (a *OrgsApiService) OrgsOpenidConnectDeleteExecute(r ApiOrgsOpenidConnectDe
 	return localVarHTTPResponse, nil
 }
 
+type ApiOrgsOpenidConnectDynamicMappingsListRequest struct {
+	ctx             context.Context
+	ApiService      *OrgsApiService
+	org             string
+	providerSetting string
+	page            *int64
+	pageSize        *int64
+}
+
+// A page number within the paginated result set.
+func (r ApiOrgsOpenidConnectDynamicMappingsListRequest) Page(page int64) ApiOrgsOpenidConnectDynamicMappingsListRequest {
+	r.page = &page
+	return r
+}
+
+// Number of results to return per page.
+func (r ApiOrgsOpenidConnectDynamicMappingsListRequest) PageSize(pageSize int64) ApiOrgsOpenidConnectDynamicMappingsListRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r ApiOrgsOpenidConnectDynamicMappingsListRequest) Execute() ([]DynamicMapping, *http.Response, error) {
+	return r.ApiService.OrgsOpenidConnectDynamicMappingsListExecute(r)
+}
+
+/*
+OrgsOpenidConnectDynamicMappingsList Retrieve the list of OpenID Connect dynamic mappings for the provider setting.
+
+Retrieve the list of OpenID Connect dynamic mappings for the provider setting.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param org
+ @param providerSetting
+ @return ApiOrgsOpenidConnectDynamicMappingsListRequest
+*/
+func (a *OrgsApiService) OrgsOpenidConnectDynamicMappingsList(ctx context.Context, org string, providerSetting string) ApiOrgsOpenidConnectDynamicMappingsListRequest {
+	return ApiOrgsOpenidConnectDynamicMappingsListRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		org:             org,
+		providerSetting: providerSetting,
+	}
+}
+
+// Execute executes the request
+//  @return []DynamicMapping
+func (a *OrgsApiService) OrgsOpenidConnectDynamicMappingsListExecute(r ApiOrgsOpenidConnectDynamicMappingsListRequest) ([]DynamicMapping, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []DynamicMapping
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsOpenidConnectDynamicMappingsList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{org}/openid-connect/{provider_setting}/dynamic-mappings/"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", url.PathEscape(parameterValueToString(r.org, "org")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"provider_setting"+"}", url.PathEscape(parameterValueToString(r.providerSetting, "providerSetting")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apikey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiOrgsOpenidConnectDynamicMappingsReadRequest struct {
+	ctx             context.Context
+	ApiService      *OrgsApiService
+	org             string
+	providerSetting string
+	claimValue      string
+}
+
+func (r ApiOrgsOpenidConnectDynamicMappingsReadRequest) Execute() (*DynamicMapping, *http.Response, error) {
+	return r.ApiService.OrgsOpenidConnectDynamicMappingsReadExecute(r)
+}
+
+/*
+OrgsOpenidConnectDynamicMappingsRead Retrieve a specific OpenID Connect dynamic mapping for the provider setting.
+
+Retrieve a specific OpenID Connect dynamic mapping for the provider setting.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param org
+ @param providerSetting
+ @param claimValue
+ @return ApiOrgsOpenidConnectDynamicMappingsReadRequest
+*/
+func (a *OrgsApiService) OrgsOpenidConnectDynamicMappingsRead(ctx context.Context, org string, providerSetting string, claimValue string) ApiOrgsOpenidConnectDynamicMappingsReadRequest {
+	return ApiOrgsOpenidConnectDynamicMappingsReadRequest{
+		ApiService:      a,
+		ctx:             ctx,
+		org:             org,
+		providerSetting: providerSetting,
+		claimValue:      claimValue,
+	}
+}
+
+// Execute executes the request
+//  @return DynamicMapping
+func (a *OrgsApiService) OrgsOpenidConnectDynamicMappingsReadExecute(r ApiOrgsOpenidConnectDynamicMappingsReadRequest) (*DynamicMapping, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DynamicMapping
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsOpenidConnectDynamicMappingsRead")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orgs/{org}/openid-connect/{provider_setting}/dynamic-mappings/{claim_value}/"
+	localVarPath = strings.Replace(localVarPath, "{"+"org"+"}", url.PathEscape(parameterValueToString(r.org, "org")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"provider_setting"+"}", url.PathEscape(parameterValueToString(r.providerSetting, "providerSetting")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"claim_value"+"}", url.PathEscape(parameterValueToString(r.claimValue, "claimValue")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["apikey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ErrorDetail
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiOrgsOpenidConnectListRequest struct {
 	ctx        context.Context
 	ApiService *OrgsApiService
@@ -5262,15 +5592,15 @@ type ApiOrgsOpenidConnectPartialUpdateRequest struct {
 	ApiService *OrgsApiService
 	org        string
 	slugPerm   string
-	data       *ProviderSettingsRequestPatch
+	data       *ProviderSettingsWriteRequestPatch
 }
 
-func (r ApiOrgsOpenidConnectPartialUpdateRequest) Data(data ProviderSettingsRequestPatch) ApiOrgsOpenidConnectPartialUpdateRequest {
+func (r ApiOrgsOpenidConnectPartialUpdateRequest) Data(data ProviderSettingsWriteRequestPatch) ApiOrgsOpenidConnectPartialUpdateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiOrgsOpenidConnectPartialUpdateRequest) Execute() (*ProviderSettings, *http.Response, error) {
+func (r ApiOrgsOpenidConnectPartialUpdateRequest) Execute() (*ProviderSettingsWrite, *http.Response, error) {
 	return r.ApiService.OrgsOpenidConnectPartialUpdateExecute(r)
 }
 
@@ -5294,13 +5624,13 @@ func (a *OrgsApiService) OrgsOpenidConnectPartialUpdate(ctx context.Context, org
 }
 
 // Execute executes the request
-//  @return ProviderSettings
-func (a *OrgsApiService) OrgsOpenidConnectPartialUpdateExecute(r ApiOrgsOpenidConnectPartialUpdateRequest) (*ProviderSettings, *http.Response, error) {
+//  @return ProviderSettingsWrite
+func (a *OrgsApiService) OrgsOpenidConnectPartialUpdateExecute(r ApiOrgsOpenidConnectPartialUpdateRequest) (*ProviderSettingsWrite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ProviderSettings
+		localVarReturnValue *ProviderSettingsWrite
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsOpenidConnectPartialUpdate")
@@ -5565,15 +5895,15 @@ type ApiOrgsOpenidConnectUpdateRequest struct {
 	ApiService *OrgsApiService
 	org        string
 	slugPerm   string
-	data       *ProviderSettingsRequest
+	data       *ProviderSettingsWriteRequest
 }
 
-func (r ApiOrgsOpenidConnectUpdateRequest) Data(data ProviderSettingsRequest) ApiOrgsOpenidConnectUpdateRequest {
+func (r ApiOrgsOpenidConnectUpdateRequest) Data(data ProviderSettingsWriteRequest) ApiOrgsOpenidConnectUpdateRequest {
 	r.data = &data
 	return r
 }
 
-func (r ApiOrgsOpenidConnectUpdateRequest) Execute() (*ProviderSettings, *http.Response, error) {
+func (r ApiOrgsOpenidConnectUpdateRequest) Execute() (*ProviderSettingsWrite, *http.Response, error) {
 	return r.ApiService.OrgsOpenidConnectUpdateExecute(r)
 }
 
@@ -5597,13 +5927,13 @@ func (a *OrgsApiService) OrgsOpenidConnectUpdate(ctx context.Context, org string
 }
 
 // Execute executes the request
-//  @return ProviderSettings
-func (a *OrgsApiService) OrgsOpenidConnectUpdateExecute(r ApiOrgsOpenidConnectUpdateRequest) (*ProviderSettings, *http.Response, error) {
+//  @return ProviderSettingsWrite
+func (a *OrgsApiService) OrgsOpenidConnectUpdateExecute(r ApiOrgsOpenidConnectUpdateRequest) (*ProviderSettingsWrite, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ProviderSettings
+		localVarReturnValue *ProviderSettingsWrite
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrgsApiService.OrgsOpenidConnectUpdate")

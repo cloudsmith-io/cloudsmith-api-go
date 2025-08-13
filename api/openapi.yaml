@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.736.13
+  version: 1.768.2
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -2855,14 +2855,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProviderSettingsRequest'
+              $ref: '#/components/schemas/ProviderSettingsWriteRequest'
         required: false
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProviderSettings'
+                $ref: '#/components/schemas/ProviderSettingsWrite'
           description: Created the OpenID Connect provider settings for the org
         "404":
           content:
@@ -2886,6 +2886,115 @@ paths:
       tags:
       - orgs
       x-codegen-request-body-name: data
+  /orgs/{org}/openid-connect/{provider_setting}/dynamic-mappings/:
+    get:
+      description: Retrieve the list of OpenID Connect dynamic mappings for the provider
+        setting.
+      operationId: orgs_openid-connect_dynamic-mappings_list
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: provider_setting
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DynamicMapping'
+                type: array
+          description: Retrieved the list of OpenID Connect dynamic mappings for the
+            selected provider setting
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Organization or Provider Setting not found (see detail)
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve the list of OpenID Connect dynamic mappings for the provider
+        setting.
+      tags:
+      - orgs
+  /orgs/{org}/openid-connect/{provider_setting}/dynamic-mappings/{claim_value}/:
+    get:
+      description: Retrieve a specific OpenID Connect dynamic mapping for the provider
+        setting.
+      operationId: orgs_openid-connect_dynamic-mappings_read
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: provider_setting
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: claim_value
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DynamicMapping'
+          description: Retrieved the specified OpenID Connect dynamic mapping
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: "Organization, Provider Setting or Dynamic Mapping with claim\
+            \ not found (see detail)"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve a specific OpenID Connect dynamic mapping for the provider
+        setting.
+      tags:
+      - orgs
   /orgs/{org}/openid-connect/{slug_perm}/:
     delete:
       description: Delete a specific OpenID Connect provider setting for the org.
@@ -2974,14 +3083,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProviderSettingsRequestPatch'
+              $ref: '#/components/schemas/ProviderSettingsWriteRequestPatch'
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProviderSettings'
+                $ref: '#/components/schemas/ProviderSettingsWrite'
           description: Updated the specified OpenID Connect provider setting for the
             org
         "404":
@@ -3024,14 +3133,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProviderSettingsRequest'
+              $ref: '#/components/schemas/ProviderSettingsWriteRequest'
         required: false
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProviderSettings'
+                $ref: '#/components/schemas/ProviderSettingsWrite'
           description: Updated the specified OpenID Connect provider setting for the
             org
         "404":
@@ -17168,6 +17277,7 @@ components:
       type: object
     ProviderSettings:
       example:
+        mapping_claim: mapping_claim
         claims: "{}"
         name: name
         service_accounts:
@@ -17189,6 +17299,15 @@ components:
             requests.
           title: Enabled
           type: boolean
+        mapping_claim:
+          description: |-
+            The OIDC claim to use for mapping to service accounts in dynamic_mappings.
+
+            Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
+          minLength: 1
+          nullable: true
+          title: Mapping claim
+          type: string
         name:
           description: The name of the provider settings are being configured for
           minLength: 1
@@ -17203,9 +17322,9 @@ components:
           title: Provider url
           type: string
         service_accounts:
-          description: The service accounts associated with these provider settings
+          description: The service accounts associated with these provider settings.
           items:
-            description: The service accounts associated with these provider settings
+            description: The service accounts associated with these provider settings.
             type: string
           type: array
           uniqueItems: true
@@ -17230,10 +17349,44 @@ components:
       - enabled
       - name
       - provider_url
-      - service_accounts
       type: object
-    ProviderSettingsRequest:
+    DynamicMapping:
+      description: |-
+        The dynamic mappings of `mapping_claim` values to service accounts. Cannot be provided if `service_accounts` is also set.
+
+        Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
       example:
+        service_account: service_account
+        claim_value: claim_value
+      properties:
+        claim_value:
+          description: |-
+            The OIDC token claim value that must be present in the token for it to successfully authenticate as the mapped `service_account`.
+
+            Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
+          minLength: 1
+          title: Claim value
+          type: string
+        service_account:
+          description: |-
+            The service account associated with the provider setting and `claim_value`
+
+            Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
+          minLength: 1
+          title: Service account
+          type: string
+      required:
+      - claim_value
+      - service_account
+      type: object
+    ProviderSettingsWriteRequest:
+      example:
+        dynamic_mappings:
+        - service_account: service_account
+          claim_value: claim_value
+        - service_account: service_account
+          claim_value: claim_value
+        mapping_claim: mapping_claim
         claims: "{}"
         name: name
         service_accounts:
@@ -17248,11 +17401,28 @@ components:
           properties: {}
           title: Claims
           type: object
+        dynamic_mappings:
+          description: |-
+            The dynamic mappings of `mapping_claim` values to service accounts. Cannot be provided if `service_accounts` is also set.
+
+            Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
+          items:
+            $ref: '#/components/schemas/DynamicMapping'
+          type: array
         enabled:
           description: Whether the provider settings should be used for incoming OIDC
             requests.
           title: Enabled
           type: boolean
+        mapping_claim:
+          description: |-
+            The OIDC claim to use for mapping to service accounts in dynamic_mappings. Cannot be provided if `service_accounts` is also set.
+
+            Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
+          minLength: 1
+          nullable: true
+          title: Mapping claim
+          type: string
         name:
           description: The name of the provider settings are being configured for
           minLength: 1
@@ -17267,9 +17437,11 @@ components:
           title: Provider url
           type: string
         service_accounts:
-          description: The service accounts associated with these provider settings
+          description: The service accounts associated with these provider settings.
+            Cannot be provided if `mapping_claim` or `dynamic_mappings` are specified.
           items:
-            description: The service accounts associated with these provider settings
+            description: The service accounts associated with these provider settings.
+              Cannot be provided if `mapping_claim` or `dynamic_mappings` are specified.
             type: string
           type: array
           uniqueItems: true
@@ -17278,17 +17450,24 @@ components:
       - enabled
       - name
       - provider_url
-      - service_accounts
       type: object
-    ProviderSettingsRequestPatch:
+    ProviderSettingsWrite:
       example:
+        dynamic_mappings:
+        - service_account: service_account
+          claim_value: claim_value
+        - service_account: service_account
+          claim_value: claim_value
+        mapping_claim: mapping_claim
         claims: "{}"
         name: name
         service_accounts:
         - service_accounts
         - service_accounts
         provider_url: https://openapi-generator.tech
+        slug_perm: slug_perm
         enabled: true
+        slug: slug
       properties:
         claims:
           description: The set of claims that any received tokens from the provider
@@ -17296,11 +17475,28 @@ components:
           properties: {}
           title: Claims
           type: object
+        dynamic_mappings:
+          description: |-
+            The dynamic mappings of `mapping_claim` values to service accounts. Cannot be provided if `service_accounts` is also set.
+
+            Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
+          items:
+            $ref: '#/components/schemas/DynamicMapping'
+          type: array
         enabled:
           description: Whether the provider settings should be used for incoming OIDC
             requests.
           title: Enabled
           type: boolean
+        mapping_claim:
+          description: |-
+            The OIDC claim to use for mapping to service accounts in dynamic_mappings. Cannot be provided if `service_accounts` is also set.
+
+            Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
+          minLength: 1
+          nullable: true
+          title: Mapping claim
+          type: string
         name:
           description: The name of the provider settings are being configured for
           minLength: 1
@@ -17315,9 +17511,99 @@ components:
           title: Provider url
           type: string
         service_accounts:
-          description: The service accounts associated with these provider settings
+          description: The service accounts associated with these provider settings.
+            Cannot be provided if `mapping_claim` or `dynamic_mappings` are specified.
           items:
-            description: The service accounts associated with these provider settings
+            description: The service accounts associated with these provider settings.
+              Cannot be provided if `mapping_claim` or `dynamic_mappings` are specified.
+            type: string
+          type: array
+          uniqueItems: true
+        slug:
+          description: The slug of the provider settings
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug
+          type: string
+        slug_perm:
+          description: "The unique, immutable identifier of the provider settings."
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+      required:
+      - claims
+      - enabled
+      - name
+      - provider_url
+      type: object
+    ProviderSettingsWriteRequestPatch:
+      example:
+        dynamic_mappings:
+        - service_account: service_account
+          claim_value: claim_value
+        - service_account: service_account
+          claim_value: claim_value
+        mapping_claim: mapping_claim
+        claims: "{}"
+        name: name
+        service_accounts:
+        - service_accounts
+        - service_accounts
+        provider_url: https://openapi-generator.tech
+        enabled: true
+      properties:
+        claims:
+          description: The set of claims that any received tokens from the provider
+            must contain to authenticate as the configured service account.
+          properties: {}
+          title: Claims
+          type: object
+        dynamic_mappings:
+          description: |-
+            The dynamic mappings of `mapping_claim` values to service accounts. Cannot be provided if `service_accounts` is also set.
+
+            Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
+          items:
+            $ref: '#/components/schemas/DynamicMapping'
+          type: array
+        enabled:
+          description: Whether the provider settings should be used for incoming OIDC
+            requests.
+          title: Enabled
+          type: boolean
+        mapping_claim:
+          description: |-
+            The OIDC claim to use for mapping to service accounts in dynamic_mappings. Cannot be provided if `service_accounts` is also set.
+
+            Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
+          minLength: 1
+          nullable: true
+          title: Mapping claim
+          type: string
+        name:
+          description: The name of the provider settings are being configured for
+          minLength: 1
+          title: Name
+          type: string
+        provider_url:
+          description: |-
+            The URL from the provider that serves as the base for the OpenID configuration.
+            For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
+          format: uri
+          minLength: 1
+          title: Provider url
+          type: string
+        service_accounts:
+          description: The service accounts associated with these provider settings.
+            Cannot be provided if `mapping_claim` or `dynamic_mappings` are specified.
+          items:
+            description: The service accounts associated with these provider settings.
+              Cannot be provided if `mapping_claim` or `dynamic_mappings` are specified.
             type: string
           type: array
           uniqueItems: true
@@ -20566,7 +20852,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           nullable: true
           title: Version
           type: string
@@ -21089,7 +21375,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           nullable: true
           title: Version
           type: string
@@ -21171,7 +21457,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           nullable: true
           title: Version
           type: string
@@ -21713,7 +21999,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           nullable: true
           title: Version
           type: string
@@ -26912,7 +27198,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           nullable: true
           title: Version
           type: string
@@ -27468,7 +27754,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           nullable: true
           title: Version
           type: string
@@ -29784,7 +30070,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           nullable: true
           title: Version
           type: string
@@ -30307,7 +30593,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           nullable: true
           title: Version
           type: string
@@ -31517,7 +31803,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           title: Version
           type: string
       required:
@@ -32077,7 +32363,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           title: Version
           type: string
         version_orig:
@@ -32690,7 +32976,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           title: Version
           type: string
       required:
@@ -33220,7 +33506,7 @@ components:
           type: string
         version:
           description: The raw version for this package.
-          maxLength: 128
+          maxLength: 255
           title: Version
           type: string
         version_orig:
@@ -46010,7 +46296,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.736.13
+        version: 1.768.2
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -46020,7 +46306,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.736.13
+          default: 1.768.2
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true

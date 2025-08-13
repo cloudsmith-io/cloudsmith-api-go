@@ -6,9 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Claims** | **map[string]interface{}** | The set of claims that any received tokens from the provider must contain to authenticate as the configured service account. | 
 **Enabled** | **bool** | Whether the provider settings should be used for incoming OIDC requests. | 
+**MappingClaim** | Pointer to **NullableString** | The OIDC claim to use for mapping to service accounts in dynamic_mappings.  Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature. | [optional] 
 **Name** | **string** | The name of the provider settings are being configured for | 
 **ProviderUrl** | **string** | The URL from the provider that serves as the base for the OpenID configuration. For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/ | 
-**ServiceAccounts** | **[]string** | The service accounts associated with these provider settings | 
+**ServiceAccounts** | Pointer to **[]string** | The service accounts associated with these provider settings. | [optional] 
 **Slug** | Pointer to **string** | The slug of the provider settings | [optional] [readonly] 
 **SlugPerm** | Pointer to **string** | The unique, immutable identifier of the provider settings. | [optional] [readonly] 
 
@@ -16,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewProviderSettings
 
-`func NewProviderSettings(claims map[string]interface{}, enabled bool, name string, providerUrl string, serviceAccounts []string, ) *ProviderSettings`
+`func NewProviderSettings(claims map[string]interface{}, enabled bool, name string, providerUrl string, ) *ProviderSettings`
 
 NewProviderSettings instantiates a new ProviderSettings object
 This constructor will assign default values to properties that have it defined,
@@ -71,6 +72,41 @@ and a boolean to check if the value has been set.
 SetEnabled sets Enabled field to given value.
 
 
+### GetMappingClaim
+
+`func (o *ProviderSettings) GetMappingClaim() string`
+
+GetMappingClaim returns the MappingClaim field if non-nil, zero value otherwise.
+
+### GetMappingClaimOk
+
+`func (o *ProviderSettings) GetMappingClaimOk() (*string, bool)`
+
+GetMappingClaimOk returns a tuple with the MappingClaim field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMappingClaim
+
+`func (o *ProviderSettings) SetMappingClaim(v string)`
+
+SetMappingClaim sets MappingClaim field to given value.
+
+### HasMappingClaim
+
+`func (o *ProviderSettings) HasMappingClaim() bool`
+
+HasMappingClaim returns a boolean if a field has been set.
+
+### SetMappingClaimNil
+
+`func (o *ProviderSettings) SetMappingClaimNil(b bool)`
+
+ SetMappingClaimNil sets the value for MappingClaim to be an explicit nil
+
+### UnsetMappingClaim
+`func (o *ProviderSettings) UnsetMappingClaim()`
+
+UnsetMappingClaim ensures that no value is present for MappingClaim, not even an explicit nil
 ### GetName
 
 `func (o *ProviderSettings) GetName() string`
@@ -130,6 +166,11 @@ and a boolean to check if the value has been set.
 
 SetServiceAccounts sets ServiceAccounts field to given value.
 
+### HasServiceAccounts
+
+`func (o *ProviderSettings) HasServiceAccounts() bool`
+
+HasServiceAccounts returns a boolean if a field has been set.
 
 ### GetSlug
 

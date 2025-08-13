@@ -38,6 +38,8 @@ Method | HTTP request | Description
 [**OrgsMembersUpdateVisibility**](OrgsApi.md#OrgsMembersUpdateVisibility) | **Patch** /orgs/{org}/members/{member}/update-visibility/ | Update a member&#39;s visibility in the organization.
 [**OrgsOpenidConnectCreate**](OrgsApi.md#OrgsOpenidConnectCreate) | **Post** /orgs/{org}/openid-connect/ | Create the OpenID Connect provider settings for the org.
 [**OrgsOpenidConnectDelete**](OrgsApi.md#OrgsOpenidConnectDelete) | **Delete** /orgs/{org}/openid-connect/{slug_perm}/ | Delete a specific OpenID Connect provider setting for the org.
+[**OrgsOpenidConnectDynamicMappingsList**](OrgsApi.md#OrgsOpenidConnectDynamicMappingsList) | **Get** /orgs/{org}/openid-connect/{provider_setting}/dynamic-mappings/ | Retrieve the list of OpenID Connect dynamic mappings for the provider setting.
+[**OrgsOpenidConnectDynamicMappingsRead**](OrgsApi.md#OrgsOpenidConnectDynamicMappingsRead) | **Get** /orgs/{org}/openid-connect/{provider_setting}/dynamic-mappings/{claim_value}/ | Retrieve a specific OpenID Connect dynamic mapping for the provider setting.
 [**OrgsOpenidConnectList**](OrgsApi.md#OrgsOpenidConnectList) | **Get** /orgs/{org}/openid-connect/ | Retrieve the list of OpenID Connect provider settings for the org.
 [**OrgsOpenidConnectPartialUpdate**](OrgsApi.md#OrgsOpenidConnectPartialUpdate) | **Patch** /orgs/{org}/openid-connect/{slug_perm}/ | Update a specific OpenID Connect provider setting for the org.
 [**OrgsOpenidConnectRead**](OrgsApi.md#OrgsOpenidConnectRead) | **Get** /orgs/{org}/openid-connect/{slug_perm}/ | Retrieve a specific OpenID Connect provider setting for the org.
@@ -2427,7 +2429,7 @@ Name | Type | Description  | Notes
 
 ## OrgsOpenidConnectCreate
 
-> ProviderSettings OrgsOpenidConnectCreate(ctx, org).Data(data).Execute()
+> ProviderSettingsWrite OrgsOpenidConnectCreate(ctx, org).Data(data).Execute()
 
 Create the OpenID Connect provider settings for the org.
 
@@ -2447,7 +2449,7 @@ import (
 
 func main() {
 	org := "org_example" // string | 
-	data := *openapiclient.NewProviderSettingsRequest(map[string]interface{}(123), false, "Name_example", "ProviderUrl_example", []string{"ServiceAccounts_example"}) // ProviderSettingsRequest |  (optional)
+	data := *openapiclient.NewProviderSettingsWriteRequest(map[string]interface{}(123), false, "Name_example", "ProviderUrl_example") // ProviderSettingsWriteRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2456,7 +2458,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectCreate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `OrgsOpenidConnectCreate`: ProviderSettings
+	// response from `OrgsOpenidConnectCreate`: ProviderSettingsWrite
 	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectCreate`: %v\n", resp)
 }
 ```
@@ -2477,11 +2479,11 @@ Other parameters are passed through a pointer to a apiOrgsOpenidConnectCreateReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **data** | [**ProviderSettingsRequest**](ProviderSettingsRequest.md) |  | 
+ **data** | [**ProviderSettingsWriteRequest**](ProviderSettingsWriteRequest.md) |  | 
 
 ### Return type
 
-[**ProviderSettings**](ProviderSettings.md)
+[**ProviderSettingsWrite**](ProviderSettingsWrite.md)
 
 ### Authorization
 
@@ -2553,6 +2555,159 @@ Name | Type | Description  | Notes
 ### Return type
 
  (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsOpenidConnectDynamicMappingsList
+
+> []DynamicMapping OrgsOpenidConnectDynamicMappingsList(ctx, org, providerSetting).Page(page).PageSize(pageSize).Execute()
+
+Retrieve the list of OpenID Connect dynamic mappings for the provider setting.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	providerSetting := "providerSetting_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectDynamicMappingsList(context.Background(), org, providerSetting).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectDynamicMappingsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsOpenidConnectDynamicMappingsList`: []DynamicMapping
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectDynamicMappingsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**providerSetting** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsOpenidConnectDynamicMappingsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]DynamicMapping**](DynamicMapping.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsOpenidConnectDynamicMappingsRead
+
+> DynamicMapping OrgsOpenidConnectDynamicMappingsRead(ctx, org, providerSetting, claimValue).Execute()
+
+Retrieve a specific OpenID Connect dynamic mapping for the provider setting.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	providerSetting := "providerSetting_example" // string | 
+	claimValue := "claimValue_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsOpenidConnectDynamicMappingsRead(context.Background(), org, providerSetting, claimValue).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectDynamicMappingsRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsOpenidConnectDynamicMappingsRead`: DynamicMapping
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectDynamicMappingsRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**providerSetting** | **string** |  | 
+**claimValue** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsOpenidConnectDynamicMappingsReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**DynamicMapping**](DynamicMapping.md)
 
 ### Authorization
 
@@ -2648,7 +2803,7 @@ Name | Type | Description  | Notes
 
 ## OrgsOpenidConnectPartialUpdate
 
-> ProviderSettings OrgsOpenidConnectPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
+> ProviderSettingsWrite OrgsOpenidConnectPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
 
 Update a specific OpenID Connect provider setting for the org.
 
@@ -2669,7 +2824,7 @@ import (
 func main() {
 	org := "org_example" // string | 
 	slugPerm := "slugPerm_example" // string | 
-	data := *openapiclient.NewProviderSettingsRequestPatch() // ProviderSettingsRequestPatch |  (optional)
+	data := *openapiclient.NewProviderSettingsWriteRequestPatch() // ProviderSettingsWriteRequestPatch |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2678,7 +2833,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectPartialUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `OrgsOpenidConnectPartialUpdate`: ProviderSettings
+	// response from `OrgsOpenidConnectPartialUpdate`: ProviderSettingsWrite
 	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectPartialUpdate`: %v\n", resp)
 }
 ```
@@ -2701,11 +2856,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**ProviderSettingsRequestPatch**](ProviderSettingsRequestPatch.md) |  | 
+ **data** | [**ProviderSettingsWriteRequestPatch**](ProviderSettingsWriteRequestPatch.md) |  | 
 
 ### Return type
 
-[**ProviderSettings**](ProviderSettings.md)
+[**ProviderSettingsWrite**](ProviderSettingsWrite.md)
 
 ### Authorization
 
@@ -2796,7 +2951,7 @@ Name | Type | Description  | Notes
 
 ## OrgsOpenidConnectUpdate
 
-> ProviderSettings OrgsOpenidConnectUpdate(ctx, org, slugPerm).Data(data).Execute()
+> ProviderSettingsWrite OrgsOpenidConnectUpdate(ctx, org, slugPerm).Data(data).Execute()
 
 Update a specific OpenID Connect provider setting for the org.
 
@@ -2817,7 +2972,7 @@ import (
 func main() {
 	org := "org_example" // string | 
 	slugPerm := "slugPerm_example" // string | 
-	data := *openapiclient.NewProviderSettingsRequest(map[string]interface{}(123), false, "Name_example", "ProviderUrl_example", []string{"ServiceAccounts_example"}) // ProviderSettingsRequest |  (optional)
+	data := *openapiclient.NewProviderSettingsWriteRequest(map[string]interface{}(123), false, "Name_example", "ProviderUrl_example") // ProviderSettingsWriteRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2826,7 +2981,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsOpenidConnectUpdate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `OrgsOpenidConnectUpdate`: ProviderSettings
+	// response from `OrgsOpenidConnectUpdate`: ProviderSettingsWrite
 	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsOpenidConnectUpdate`: %v\n", resp)
 }
 ```
@@ -2849,11 +3004,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **data** | [**ProviderSettingsRequest**](ProviderSettingsRequest.md) |  | 
+ **data** | [**ProviderSettingsWriteRequest**](ProviderSettingsWriteRequest.md) |  | 
 
 ### Return type
 
-[**ProviderSettings**](ProviderSettings.md)
+[**ProviderSettingsWrite**](ProviderSettingsWrite.md)
 
 ### Authorization
 
