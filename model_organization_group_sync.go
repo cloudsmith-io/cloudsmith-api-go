@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.736.13
+API version: 1.768.2
 Contact: support@cloudsmith.io
 */
 

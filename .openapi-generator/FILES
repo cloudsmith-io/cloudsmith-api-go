@@ -75,6 +75,7 @@ docs/DockerPackageUploadRequest.md
 docs/DockerUpstream.md
 docs/DockerUpstreamRequest.md
 docs/DockerUpstreamRequestPatch.md
+docs/DynamicMapping.md
 docs/EntitlementUsageMetrics.md
 docs/EntitlementsApi.md
 docs/ErrorDetail.md
@@ -190,8 +191,9 @@ docs/PackageVulnerabilityPolicyViolationLogCursorPage.md
 docs/PackagesApi.md
 docs/PackagesGroupsList200Response.md
 docs/ProviderSettings.md
-docs/ProviderSettingsRequest.md
-docs/ProviderSettingsRequestPatch.md
+docs/ProviderSettingsWrite.md
+docs/ProviderSettingsWriteRequest.md
+docs/ProviderSettingsWriteRequestPatch.md
 docs/PythonPackageUpload.md
 docs/PythonPackageUploadRequest.md
 docs/PythonUpstream.md
@@ -350,6 +352,7 @@ model_docker_package_upload_request.go
 model_docker_upstream.go
 model_docker_upstream_request.go
 model_docker_upstream_request_patch.go
+model_dynamic_mapping.go
 model_entitlement_usage_metrics.go
 model_error_detail.go
 model_eula.go
@@ -458,8 +461,9 @@ model_package_vulnerability_policy_violation_log.go
 model_package_vulnerability_policy_violation_log_cursor_page.go
 model_packages_groups_list_200_response.go
 model_provider_settings.go
-model_provider_settings_request.go
-model_provider_settings_request_patch.go
+model_provider_settings_write.go
+model_provider_settings_write_request.go
+model_provider_settings_write_request_patch.go
 model_python_package_upload.go
 model_python_package_upload_request.go
 model_python_upstream.go

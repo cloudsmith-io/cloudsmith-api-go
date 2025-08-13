@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.736.13
+API version: 1.768.2
 Contact: support@cloudsmith.io
 */
 
@@ -25,12 +25,14 @@ type ProviderSettings struct {
 	Claims map[string]interface{} `json:"claims"`
 	// Whether the provider settings should be used for incoming OIDC requests.
 	Enabled bool `json:"enabled"`
+	// The OIDC claim to use for mapping to service accounts in dynamic_mappings.  Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
+	MappingClaim NullableString `json:"mapping_claim,omitempty"`
 	// The name of the provider settings are being configured for
 	Name string `json:"name"`
 	// The URL from the provider that serves as the base for the OpenID configuration. For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
 	ProviderUrl string `json:"provider_url"`
-	// The service accounts associated with these provider settings
-	ServiceAccounts []string `json:"service_accounts"`
+	// The service accounts associated with these provider settings.
+	ServiceAccounts []string `json:"service_accounts,omitempty"`
 	// The slug of the provider settings
 	Slug *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// The unique, immutable identifier of the provider settings.
@@ -44,13 +46,12 @@ type _ProviderSettings ProviderSettings
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProviderSettings(claims map[string]interface{}, enabled bool, name string, providerUrl string, serviceAccounts []string) *ProviderSettings {
+func NewProviderSettings(claims map[string]interface{}, enabled bool, name string, providerUrl string) *ProviderSettings {
 	this := ProviderSettings{}
 	this.Claims = claims
 	this.Enabled = enabled
 	this.Name = name
 	this.ProviderUrl = providerUrl
-	this.ServiceAccounts = serviceAccounts
 	return &this
 }
 
@@ -110,6 +111,49 @@ func (o *ProviderSettings) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
+// GetMappingClaim returns the MappingClaim field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ProviderSettings) GetMappingClaim() string {
+	if o == nil || IsNil(o.MappingClaim.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.MappingClaim.Get()
+}
+
+// GetMappingClaimOk returns a tuple with the MappingClaim field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ProviderSettings) GetMappingClaimOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MappingClaim.Get(), o.MappingClaim.IsSet()
+}
+
+// HasMappingClaim returns a boolean if a field has been set.
+func (o *ProviderSettings) HasMappingClaim() bool {
+	if o != nil && o.MappingClaim.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMappingClaim gets a reference to the given NullableString and assigns it to the MappingClaim field.
+func (o *ProviderSettings) SetMappingClaim(v string) {
+	o.MappingClaim.Set(&v)
+}
+
+// SetMappingClaimNil sets the value for MappingClaim to be an explicit nil
+func (o *ProviderSettings) SetMappingClaimNil() {
+	o.MappingClaim.Set(nil)
+}
+
+// UnsetMappingClaim ensures that no value is present for MappingClaim, not even an explicit nil
+func (o *ProviderSettings) UnsetMappingClaim() {
+	o.MappingClaim.Unset()
+}
+
 // GetName returns the Name field value
 func (o *ProviderSettings) GetName() string {
 	if o == nil {
@@ -158,26 +202,34 @@ func (o *ProviderSettings) SetProviderUrl(v string) {
 	o.ProviderUrl = v
 }
 
-// GetServiceAccounts returns the ServiceAccounts field value
+// GetServiceAccounts returns the ServiceAccounts field value if set, zero value otherwise.
 func (o *ProviderSettings) GetServiceAccounts() []string {
-	if o == nil {
+	if o == nil || IsNil(o.ServiceAccounts) {
 		var ret []string
 		return ret
 	}
-
 	return o.ServiceAccounts
 }
 
-// GetServiceAccountsOk returns a tuple with the ServiceAccounts field value
+// GetServiceAccountsOk returns a tuple with the ServiceAccounts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProviderSettings) GetServiceAccountsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ServiceAccounts) {
 		return nil, false
 	}
 	return o.ServiceAccounts, true
 }
 
-// SetServiceAccounts sets field value
+// HasServiceAccounts returns a boolean if a field has been set.
+func (o *ProviderSettings) HasServiceAccounts() bool {
+	if o != nil && !IsNil(o.ServiceAccounts) {
+		return true
+	}
+
+	return false
+}
+
+// SetServiceAccounts gets a reference to the given []string and assigns it to the ServiceAccounts field.
 func (o *ProviderSettings) SetServiceAccounts(v []string) {
 	o.ServiceAccounts = v
 }
@@ -258,9 +310,14 @@ func (o ProviderSettings) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["claims"] = o.Claims
 	toSerialize["enabled"] = o.Enabled
+	if o.MappingClaim.IsSet() {
+		toSerialize["mapping_claim"] = o.MappingClaim.Get()
+	}
 	toSerialize["name"] = o.Name
 	toSerialize["provider_url"] = o.ProviderUrl
-	toSerialize["service_accounts"] = o.ServiceAccounts
+	if !IsNil(o.ServiceAccounts) {
+		toSerialize["service_accounts"] = o.ServiceAccounts
+	}
 	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
@@ -284,7 +341,6 @@ func (o *ProviderSettings) UnmarshalJSON(data []byte) (err error) {
 		"enabled",
 		"name",
 		"provider_url",
-		"service_accounts",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -316,6 +372,7 @@ func (o *ProviderSettings) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "claims")
 		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "mapping_claim")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "provider_url")
 		delete(additionalProperties, "service_accounts")
