@@ -3,12 +3,12 @@ info:
   contact:
     email: support@cloudsmith.io
     name: Cloudsmith Support
-    url: https://help.cloudsmith.io
+    url: https://support.cloudsmith.com/hc/en-us
   description: The API to the Cloudsmith Service
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-  termsOfService: https://help.cloudsmith.io
+  termsOfService: https://trust.cloudsmith.com/resources?s=ujpmn8x2026adj246fdzh&name=cloudsmith-corporate-terms-of-service
   title: Cloudsmith API (v1)
   version: 1.768.2
 servers:
