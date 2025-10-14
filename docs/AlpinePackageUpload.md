@@ -76,6 +76,7 @@ Name | Type | Description | Notes
 **Summary** | Pointer to **NullableString** | A one-liner synopsis of this package. | [optional] [readonly] 
 **SyncFinishedAt** | Pointer to **NullableTime** | The datetime the package sync was finished at. | [optional] [readonly] 
 **SyncProgress** | Pointer to **int64** | Synchronisation progress (from 0-100) | [optional] [readonly] 
+**TagsAutomatic** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
 **TagsImmutable** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
 **TypeDisplay** | Pointer to **string** |  | [optional] [readonly] 
 **UploadedAt** | Pointer to **time.Time** | The date this package was uploaded. | [optional] [readonly] 
@@ -2073,6 +2074,31 @@ SetSyncProgress sets SyncProgress field to given value.
 `func (o *AlpinePackageUpload) HasSyncProgress() bool`
 
 HasSyncProgress returns a boolean if a field has been set.
+
+### GetTagsAutomatic
+
+`func (o *AlpinePackageUpload) GetTagsAutomatic() map[string]interface{}`
+
+GetTagsAutomatic returns the TagsAutomatic field if non-nil, zero value otherwise.
+
+### GetTagsAutomaticOk
+
+`func (o *AlpinePackageUpload) GetTagsAutomaticOk() (*map[string]interface{}, bool)`
+
+GetTagsAutomaticOk returns a tuple with the TagsAutomatic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTagsAutomatic
+
+`func (o *AlpinePackageUpload) SetTagsAutomatic(v map[string]interface{})`
+
+SetTagsAutomatic sets TagsAutomatic field to given value.
+
+### HasTagsAutomatic
+
+`func (o *AlpinePackageUpload) HasTagsAutomatic() bool`
+
+HasTagsAutomatic returns a boolean if a field has been set.
 
 ### GetTagsImmutable
 

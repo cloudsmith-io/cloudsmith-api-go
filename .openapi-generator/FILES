@@ -51,6 +51,9 @@ docs/ConanPackageUpload.md
 docs/ConanPackageUploadRequest.md
 docs/CondaPackageUpload.md
 docs/CondaPackageUploadRequest.md
+docs/CondaUpstream.md
+docs/CondaUpstreamRequest.md
+docs/CondaUpstreamRequestPatch.md
 docs/CranPackageUpload.md
 docs/CranPackageUploadRequest.md
 docs/CranUpstream.md
@@ -104,6 +107,11 @@ docs/HexUpstreamRequestPatch.md
 docs/History.md
 docs/HistoryFieldset.md
 docs/HistoryFieldsetRaw.md
+docs/HuggingfacePackageUpload.md
+docs/HuggingfacePackageUploadRequest.md
+docs/HuggingfaceUpstream.md
+docs/HuggingfaceUpstreamRequest.md
+docs/HuggingfaceUpstreamRequestPatch.md
 docs/LuarocksPackageUpload.md
 docs/LuarocksPackageUploadRequest.md
 docs/MavenPackageUpload.md
@@ -172,9 +180,11 @@ docs/PackageFilePartsUpload.md
 docs/PackageFileUpload.md
 docs/PackageFileUploadRequest.md
 docs/PackageGroup.md
+docs/PackageLicense.md
 docs/PackageLicensePolicyEvaluationRequest.md
 docs/PackageLicensePolicyViolationLog.md
 docs/PackageLicensePolicyViolationLogCursorPage.md
+docs/PackageLicenseRequestPatch.md
 docs/PackageMove.md
 docs/PackageMoveRequest.md
 docs/PackageQuarantine.md
@@ -329,6 +339,9 @@ model_conan_package_upload.go
 model_conan_package_upload_request.go
 model_conda_package_upload.go
 model_conda_package_upload_request.go
+model_conda_upstream.go
+model_conda_upstream_request.go
+model_conda_upstream_request_patch.go
 model_cran_package_upload.go
 model_cran_package_upload_request.go
 model_cran_upstream.go
@@ -378,6 +391,11 @@ model_hex_upstream_request_patch.go
 model_history.go
 model_history_fieldset.go
 model_history_fieldset_raw.go
+model_huggingface_package_upload.go
+model_huggingface_package_upload_request.go
+model_huggingface_upstream.go
+model_huggingface_upstream_request.go
+model_huggingface_upstream_request_patch.go
 model_luarocks_package_upload.go
 model_luarocks_package_upload_request.go
 model_maven_package_upload.go
@@ -443,9 +461,11 @@ model_package_file_parts_upload.go
 model_package_file_upload.go
 model_package_file_upload_request.go
 model_package_group.go
+model_package_license.go
 model_package_license_policy_evaluation_request.go
 model_package_license_policy_violation_log.go
 model_package_license_policy_violation_log_cursor_page.go
+model_package_license_request_patch.go
 model_package_move.go
 model_package_move_request.go
 model_package_quarantine.go

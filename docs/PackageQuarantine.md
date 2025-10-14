@@ -76,6 +76,7 @@ Name | Type | Description | Notes
 **SyncFinishedAt** | Pointer to **NullableTime** | The datetime the package sync was finished at. | [optional] [readonly] 
 **SyncProgress** | Pointer to **int64** | Synchronisation progress (from 0-100) | [optional] [readonly] 
 **Tags** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
+**TagsAutomatic** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
 **TagsImmutable** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
 **TypeDisplay** | Pointer to **string** |  | [optional] [readonly] 
 **UploadedAt** | Pointer to **time.Time** | The date this package was uploaded. | [optional] [readonly] 
@@ -2063,6 +2064,31 @@ SetTags sets Tags field to given value.
 `func (o *PackageQuarantine) HasTags() bool`
 
 HasTags returns a boolean if a field has been set.
+
+### GetTagsAutomatic
+
+`func (o *PackageQuarantine) GetTagsAutomatic() map[string]interface{}`
+
+GetTagsAutomatic returns the TagsAutomatic field if non-nil, zero value otherwise.
+
+### GetTagsAutomaticOk
+
+`func (o *PackageQuarantine) GetTagsAutomaticOk() (*map[string]interface{}, bool)`
+
+GetTagsAutomaticOk returns a tuple with the TagsAutomatic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTagsAutomatic
+
+`func (o *PackageQuarantine) SetTagsAutomatic(v map[string]interface{})`
+
+SetTagsAutomatic sets TagsAutomatic field to given value.
+
+### HasTagsAutomatic
+
+`func (o *PackageQuarantine) HasTagsAutomatic() bool`
+
+HasTagsAutomatic returns a boolean if a field has been set.
 
 ### GetTagsImmutable
 

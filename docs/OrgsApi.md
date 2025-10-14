@@ -4401,7 +4401,7 @@ Name | Type | Description  | Notes
 
 ## OrgsTeamsMembersList
 
-> OrganizationTeamMembers OrgsTeamsMembersList(ctx, org, team).Execute()
+> OrganizationTeamMembers OrgsTeamsMembersList(ctx, org, team).UserKind(userKind).Execute()
 
 List all members for the team.
 
@@ -4422,10 +4422,11 @@ import (
 func main() {
 	org := "org_example" // string | 
 	team := "team_example" // string | 
+	userKind := "userKind_example" // string | Filter accounts by type. Possible values are 'user' and 'service'. If not provided, only users are returned. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersList(context.Background(), org, team).Execute()
+	resp, r, err := apiClient.OrgsApi.OrgsTeamsMembersList(context.Background(), org, team).UserKind(userKind).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsTeamsMembersList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4453,6 +4454,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **userKind** | **string** | Filter accounts by type. Possible values are &#39;user&#39; and &#39;service&#39;. If not provided, only users are returned. | 
 
 ### Return type
 

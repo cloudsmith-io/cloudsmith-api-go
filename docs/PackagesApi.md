@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**PackagesScan**](PackagesApi.md#PackagesScan) | **Post** /packages/{owner}/{repo}/{identifier}/scan/ | Schedule a package for scanning.
 [**PackagesStatus**](PackagesApi.md#PackagesStatus) | **Get** /packages/{owner}/{repo}/{identifier}/status/ | Get the synchronization status for a package.
 [**PackagesTag**](PackagesApi.md#PackagesTag) | **Post** /packages/{owner}/{repo}/{identifier}/tag/ | Add/Replace/Remove tags for a package.
+[**PackagesUpdateLicense**](PackagesApi.md#PackagesUpdateLicense) | **Patch** /packages/{owner}/{repo}/{identifier}/update-license/ | Update the license for a package.
 [**PackagesUploadAlpine**](PackagesApi.md#PackagesUploadAlpine) | **Post** /packages/{owner}/{repo}/upload/alpine/ | Create a new Alpine package
 [**PackagesUploadCargo**](PackagesApi.md#PackagesUploadCargo) | **Post** /packages/{owner}/{repo}/upload/cargo/ | Create a new Cargo package
 [**PackagesUploadCocoapods**](PackagesApi.md#PackagesUploadCocoapods) | **Post** /packages/{owner}/{repo}/upload/cocoapods/ | Create a new CocoaPods package
@@ -29,6 +30,7 @@ Method | HTTP request | Description
 [**PackagesUploadGo**](PackagesApi.md#PackagesUploadGo) | **Post** /packages/{owner}/{repo}/upload/go/ | Create a new Go package
 [**PackagesUploadHelm**](PackagesApi.md#PackagesUploadHelm) | **Post** /packages/{owner}/{repo}/upload/helm/ | Create a new Helm package
 [**PackagesUploadHex**](PackagesApi.md#PackagesUploadHex) | **Post** /packages/{owner}/{repo}/upload/hex/ | Create a new Hex package
+[**PackagesUploadHuggingface**](PackagesApi.md#PackagesUploadHuggingface) | **Post** /packages/{owner}/{repo}/upload/huggingface/ | Create a new HuggingFace package
 [**PackagesUploadLuarocks**](PackagesApi.md#PackagesUploadLuarocks) | **Post** /packages/{owner}/{repo}/upload/luarocks/ | Create a new LuaRocks package
 [**PackagesUploadMaven**](PackagesApi.md#PackagesUploadMaven) | **Post** /packages/{owner}/{repo}/upload/maven/ | Create a new Maven package
 [**PackagesUploadNpm**](PackagesApi.md#PackagesUploadNpm) | **Post** /packages/{owner}/{repo}/upload/npm/ | Create a new npm package
@@ -54,6 +56,7 @@ Method | HTTP request | Description
 [**PackagesValidateUploadGo**](PackagesApi.md#PackagesValidateUploadGo) | **Post** /packages/{owner}/{repo}/validate-upload/go/ | Validate parameters for create Go package
 [**PackagesValidateUploadHelm**](PackagesApi.md#PackagesValidateUploadHelm) | **Post** /packages/{owner}/{repo}/validate-upload/helm/ | Validate parameters for create Helm package
 [**PackagesValidateUploadHex**](PackagesApi.md#PackagesValidateUploadHex) | **Post** /packages/{owner}/{repo}/validate-upload/hex/ | Validate parameters for create Hex package
+[**PackagesValidateUploadHuggingface**](PackagesApi.md#PackagesValidateUploadHuggingface) | **Post** /packages/{owner}/{repo}/validate-upload/huggingface/ | Validate parameters for create HuggingFace package
 [**PackagesValidateUploadLuarocks**](PackagesApi.md#PackagesValidateUploadLuarocks) | **Post** /packages/{owner}/{repo}/validate-upload/luarocks/ | Validate parameters for create LuaRocks package
 [**PackagesValidateUploadMaven**](PackagesApi.md#PackagesValidateUploadMaven) | **Post** /packages/{owner}/{repo}/validate-upload/maven/ | Validate parameters for create Maven package
 [**PackagesValidateUploadNpm**](PackagesApi.md#PackagesValidateUploadNpm) | **Post** /packages/{owner}/{repo}/validate-upload/npm/ | Validate parameters for create npm package
@@ -299,7 +302,7 @@ Name | Type | Description  | Notes
 
 ## PackagesGroupsList
 
-> PackagesGroupsList200Response PackagesGroupsList(ctx, owner, repo).Page(page).PageSize(pageSize).GroupBy(groupBy).Query(query).Sort(sort).Execute()
+> PackagesGroupsList200Response PackagesGroupsList(ctx, owner, repo).Page(page).PageSize(pageSize).GroupBy(groupBy).HideSubcomponents(hideSubcomponents).Query(query).Sort(sort).Execute()
 
 Return a list of Package Groups in a repository.
 
@@ -323,12 +326,13 @@ func main() {
 	page := int64(56) // int64 | A page number within the paginated result set. (optional)
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 	groupBy := "groupBy_example" // string | A field to group packages by. Available options: name, backend_kind. (optional) (default to "name")
+	hideSubcomponents := true // bool | Whether to hide packages which are subcomponents of another package in the results (optional) (default to false)
 	query := "query_example" // string | A search term for querying names, filenames, versions, distributions, architectures, formats, or statuses of packages. (optional)
 	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. Use `-` prefix for descending order (e.g., `-name`). Available options: name, count, num_downloads, size, last_push, backend_kind. (optional) (default to "name")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PackagesApi.PackagesGroupsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).GroupBy(groupBy).Query(query).Sort(sort).Execute()
+	resp, r, err := apiClient.PackagesApi.PackagesGroupsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).GroupBy(groupBy).HideSubcomponents(hideSubcomponents).Query(query).Sort(sort).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesGroupsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -359,6 +363,7 @@ Name | Type | Description  | Notes
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
  **groupBy** | **string** | A field to group packages by. Available options: name, backend_kind. | [default to &quot;name&quot;]
+ **hideSubcomponents** | **bool** | Whether to hide packages which are subcomponents of another package in the results | [default to false]
  **query** | **string** | A search term for querying names, filenames, versions, distributions, architectures, formats, or statuses of packages. | 
  **sort** | **string** | A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name, count, num_downloads, size, last_push, backend_kind. | [default to &quot;name&quot;]
 
@@ -980,6 +985,84 @@ Name | Type | Description  | Notes
 
 
  **data** | [**PackageTagRequest**](PackageTagRequest.md) |  | 
+
+### Return type
+
+[**Package**](Package.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesUpdateLicense
+
+> Package PackagesUpdateLicense(ctx, owner, repo, identifier).Data(data).Execute()
+
+Update the license for a package.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewPackageLicenseRequestPatch() // PackageLicenseRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PackagesApi.PackagesUpdateLicense(context.Background(), owner, repo, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUpdateLicense``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PackagesUpdateLicense`: Package
+	fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUpdateLicense`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesUpdateLicenseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**PackageLicenseRequestPatch**](PackageLicenseRequestPatch.md) |  | 
 
 ### Return type
 
@@ -1959,6 +2042,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HexPackageUpload**](HexPackageUpload.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesUploadHuggingface
+
+> HuggingfacePackageUpload PackagesUploadHuggingface(ctx, owner, repo).Data(data).Execute()
+
+Create a new HuggingFace package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewHuggingfacePackageUploadRequest("PackageFile_example") // HuggingfacePackageUploadRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PackagesApi.PackagesUploadHuggingface(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadHuggingface``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PackagesUploadHuggingface`: HuggingfacePackageUpload
+	fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadHuggingface`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesUploadHuggingfaceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**HuggingfacePackageUploadRequest**](HuggingfacePackageUploadRequest.md) |  | 
+
+### Return type
+
+[**HuggingfacePackageUpload**](HuggingfacePackageUpload.md)
 
 ### Authorization
 
@@ -3804,6 +3962,79 @@ Name | Type | Description  | Notes
 
 
  **data** | [**HexPackageUploadRequest**](HexPackageUploadRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesValidateUploadHuggingface
+
+> PackagesValidateUploadHuggingface(ctx, owner, repo).Data(data).Execute()
+
+Validate parameters for create HuggingFace package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewHuggingfacePackageUploadRequest("PackageFile_example") // HuggingfacePackageUploadRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PackagesApi.PackagesValidateUploadHuggingface(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadHuggingface``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesValidateUploadHuggingfaceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**HuggingfacePackageUploadRequest**](HuggingfacePackageUploadRequest.md) |  | 
 
 ### Return type
 

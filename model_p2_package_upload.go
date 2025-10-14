@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.768.2
+API version: 1.830.6
 Contact: support@cloudsmith.io
 */
 
@@ -117,6 +117,8 @@ type P2PackageUpload struct {
 	SyncFinishedAt NullableTime `json:"sync_finished_at,omitempty"`
 	// Synchronisation progress (from 0-100)
 	SyncProgress *int64 `json:"sync_progress,omitempty"`
+	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
+	TagsAutomatic map[string]interface{} `json:"tags_automatic,omitempty"`
 	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
 	TagsImmutable map[string]interface{} `json:"tags_immutable,omitempty"`
 	TypeDisplay   *string                `json:"type_display,omitempty"`
@@ -2641,6 +2643,38 @@ func (o *P2PackageUpload) SetSyncProgress(v int64) {
 	o.SyncProgress = &v
 }
 
+// GetTagsAutomatic returns the TagsAutomatic field value if set, zero value otherwise.
+func (o *P2PackageUpload) GetTagsAutomatic() map[string]interface{} {
+	if o == nil || IsNil(o.TagsAutomatic) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.TagsAutomatic
+}
+
+// GetTagsAutomaticOk returns a tuple with the TagsAutomatic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *P2PackageUpload) GetTagsAutomaticOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.TagsAutomatic) {
+		return map[string]interface{}{}, false
+	}
+	return o.TagsAutomatic, true
+}
+
+// HasTagsAutomatic returns a boolean if a field has been set.
+func (o *P2PackageUpload) HasTagsAutomatic() bool {
+	if o != nil && !IsNil(o.TagsAutomatic) {
+		return true
+	}
+
+	return false
+}
+
+// SetTagsAutomatic gets a reference to the given map[string]interface{} and assigns it to the TagsAutomatic field.
+func (o *P2PackageUpload) SetTagsAutomatic(v map[string]interface{}) {
+	o.TagsAutomatic = v
+}
+
 // GetTagsImmutable returns the TagsImmutable field value if set, zero value otherwise.
 func (o *P2PackageUpload) GetTagsImmutable() map[string]interface{} {
 	if o == nil || IsNil(o.TagsImmutable) {
@@ -3134,6 +3168,9 @@ func (o P2PackageUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SyncProgress) {
 		toSerialize["sync_progress"] = o.SyncProgress
 	}
+	if !IsNil(o.TagsAutomatic) {
+		toSerialize["tags_automatic"] = o.TagsAutomatic
+	}
 	if !IsNil(o.TagsImmutable) {
 		toSerialize["tags_immutable"] = o.TagsImmutable
 	}
@@ -3252,6 +3289,7 @@ func (o *P2PackageUpload) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "summary")
 		delete(additionalProperties, "sync_finished_at")
 		delete(additionalProperties, "sync_progress")
+		delete(additionalProperties, "tags_automatic")
 		delete(additionalProperties, "tags_immutable")
 		delete(additionalProperties, "type_display")
 		delete(additionalProperties, "uploaded_at")
