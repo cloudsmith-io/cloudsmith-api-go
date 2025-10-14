@@ -36,7 +36,7 @@ type _PackageLicense PackageLicense
 // will change when the set of required properties is changed
 func NewPackageLicense(spdxLicense string) *PackageLicense {
 	this := PackageLicense{}
-	var licenseOverride LICENSE_OVERRIDE = "None"
+	var licenseOverride string = "None"
 	this.LicenseOverride = *NewNullableString(&licenseOverride)
 	this.SpdxLicense = spdxLicense
 	return &this
@@ -47,7 +47,7 @@ func NewPackageLicense(spdxLicense string) *PackageLicense {
 // but it doesn't guarantee that properties required by API are set
 func NewPackageLicenseWithDefaults() *PackageLicense {
 	this := PackageLicense{}
-	var licenseOverride LICENSE_OVERRIDE = "None"
+	var licenseOverride string = "None"
 	this.LicenseOverride = *NewNullableString(&licenseOverride)
 	return &this
 }

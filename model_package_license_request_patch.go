@@ -36,9 +36,9 @@ type _PackageLicenseRequestPatch PackageLicenseRequestPatch
 // will change when the set of required properties is changed
 func NewPackageLicenseRequestPatch() *PackageLicenseRequestPatch {
 	this := PackageLicenseRequestPatch{}
-	var action ACTION = "Update"
+	var action string = "Update"
 	this.Action = *NewNullableString(&action)
-	var licenseOverride LICENSE_OVERRIDE = "None"
+	var licenseOverride string = "None"
 	this.LicenseOverride = *NewNullableString(&licenseOverride)
 	return &this
 }
@@ -48,9 +48,9 @@ func NewPackageLicenseRequestPatch() *PackageLicenseRequestPatch {
 // but it doesn't guarantee that properties required by API are set
 func NewPackageLicenseRequestPatchWithDefaults() *PackageLicenseRequestPatch {
 	this := PackageLicenseRequestPatch{}
-	var action ACTION = "Update"
+	var action string = "Update"
 	this.Action = *NewNullableString(&action)
-	var licenseOverride LICENSE_OVERRIDE = "None"
+	var licenseOverride string = "None"
 	this.LicenseOverride = *NewNullableString(&licenseOverride)
 	return &this
 }
