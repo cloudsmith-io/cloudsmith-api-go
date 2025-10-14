@@ -67,6 +67,9 @@ gsed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_refresh.go
 gsed -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_refresh_request.go
 gsed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_refresh_request.go
 gsed -i 's/ACTION/string/g' model_package_tag_request.go
+gsed -i 's/LICENSE_OVERRIDE/string/g' model_package_license.go
+gsed -i 's/ACTION/string/g' model_package_license_request_patch.go
+gsed -i 's/LICENSE_OVERRIDE/string/g' model_package_license_request_patch.go
 
 # Check for compilation errors.
 go build
