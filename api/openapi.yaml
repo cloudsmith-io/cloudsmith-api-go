@@ -3,14 +3,14 @@ info:
   contact:
     email: support@cloudsmith.io
     name: Cloudsmith Support
-    url: https://support.cloudsmith.com/hc/en-us
+    url: https://help.cloudsmith.io
   description: The API to the Cloudsmith Service
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-  termsOfService: https://trust.cloudsmith.com/resources?s=ujpmn8x2026adj246fdzh&name=cloudsmith-corporate-terms-of-service
+  termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.768.2
+  version: 1.830.6
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -4020,6 +4020,12 @@ paths:
         required: true
         schema:
           type: string
+      - description: "Filter accounts by type. Possible values are 'user' and 'service'.\
+          \ If not provided, only users are returned."
+        in: query
+        name: user_kind
+        schema:
+          type: string
       responses:
         "200":
           content:
@@ -4652,6 +4658,13 @@ paths:
         schema:
           default: name
           type: string
+      - description: Whether to hide packages which are subcomponents of another package
+          in the results
+        in: query
+        name: hide_subcomponents
+        schema:
+          default: false
+          type: boolean
       - description: "A search term for querying names, filenames, versions, distributions,\
           \ architectures, formats, or statuses of packages."
         in: query
@@ -5341,6 +5354,56 @@ paths:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
       summary: Create a new Hex package
+      tags:
+      - packages
+      x-codegen-request-body-name: data
+  /packages/{owner}/{repo}/upload/huggingface/:
+    post:
+      description: Create a new HuggingFace package
+      operationId: packages_upload_huggingface
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuggingfacePackageUploadRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuggingfacePackageUpload'
+          description: Upload acknowledged and queued for synchronization.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Namespace (owner) or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Create a new HuggingFace package
       tags:
       - packages
       x-codegen-request-body-name: data
@@ -6555,6 +6618,53 @@ paths:
       tags:
       - packages
       x-codegen-request-body-name: data
+  /packages/{owner}/{repo}/validate-upload/huggingface/:
+    post:
+      description: Validate parameters for create HuggingFace package
+      operationId: packages_validate-upload_huggingface
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuggingfacePackageUploadRequest'
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: "Validation was successful, parameters are OK."
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Namespace (owner) or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Validate parameters for create HuggingFace package
+      tags:
+      - packages
+      x-codegen-request-body-name: data
   /packages/{owner}/{repo}/validate-upload/luarocks/:
     post:
       description: Validate parameters for create LuaRocks package
@@ -7562,6 +7672,55 @@ paths:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
       summary: Add/Replace/Remove tags for a package.
+      tags:
+      - packages
+      x-codegen-request-body-name: data
+  /packages/{owner}/{repo}/{identifier}/update-license/:
+    patch:
+      description: Update the license for a package.
+      operationId: packages_update_license
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackageLicenseRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Package'
+          description: Modified tags for the package.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update the license for a package.
       tags:
       - packages
       x-codegen-request-body-name: data
@@ -9445,6 +9604,274 @@ paths:
       tags:
       - repos
       x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/upstream/conda/:
+    get:
+      description: List Conda upstream configs for this repository.
+      operationId: repos_upstream_conda_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CondaUpstream'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: List Conda upstream configs for this repository.
+      tags:
+      - repos
+    post:
+      description: Create a Conda upstream config for this repository.
+      operationId: repos_upstream_conda_create
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CondaUpstreamRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CondaUpstream'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Create a Conda upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/upstream/conda/{slug_perm}/:
+    delete:
+      description: Delete a Conda upstream config for this repository.
+      operationId: repos_upstream_conda_delete
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Delete a Conda upstream config for this repository.
+      tags:
+      - repos
+    get:
+      description: Retrieve a Conda upstream config for this repository.
+      operationId: repos_upstream_conda_read
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CondaUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve a Conda upstream config for this repository.
+      tags:
+      - repos
+    patch:
+      description: Partially update a Conda upstream config for this repository.
+      operationId: repos_upstream_conda_partial_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CondaUpstreamRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CondaUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Partially update a Conda upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+    put:
+      description: Update a Conda upstream config for this repository.
+      operationId: repos_upstream_conda_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CondaUpstreamRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CondaUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update a Conda upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
   /repos/{owner}/{identifier}/upstream/cran/:
     get:
       description: List CRAN upstream configs for this repository.
@@ -11318,6 +11745,274 @@ paths:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
       summary: Update a Hex upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/upstream/huggingface/:
+    get:
+      description: List HuggingFace upstream configs for this repository.
+      operationId: repos_upstream_huggingface_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/HuggingfaceUpstream'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: List HuggingFace upstream configs for this repository.
+      tags:
+      - repos
+    post:
+      description: Create a HuggingFace upstream config for this repository.
+      operationId: repos_upstream_huggingface_create
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuggingfaceUpstreamRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuggingfaceUpstream'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Create a HuggingFace upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/upstream/huggingface/{slug_perm}/:
+    delete:
+      description: Delete a HuggingFace upstream config for this repository.
+      operationId: repos_upstream_huggingface_delete
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Delete a HuggingFace upstream config for this repository.
+      tags:
+      - repos
+    get:
+      description: Retrieve a HuggingFace upstream config for this repository.
+      operationId: repos_upstream_huggingface_read
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuggingfaceUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve a HuggingFace upstream config for this repository.
+      tags:
+      - repos
+    patch:
+      description: Partially update a HuggingFace upstream config for this repository.
+      operationId: repos_upstream_huggingface_partial_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuggingfaceUpstreamRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuggingfaceUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Partially update a HuggingFace upstream config for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+    put:
+      description: Update a HuggingFace upstream config for this repository.
+      operationId: repos_upstream_huggingface_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuggingfaceUpstreamRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuggingfaceUpstream'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update a HuggingFace upstream config for this repository.
       tags:
       - repos
       x-codegen-request-body-name: data
@@ -18668,6 +19363,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -19067,6 +19763,11 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -19276,6 +19977,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -19670,6 +20372,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -19833,6 +20540,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -20227,6 +20935,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -20390,6 +21103,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -20784,6 +21498,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -20954,6 +21673,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -21348,6 +22068,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -21564,6 +22289,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -21972,6 +22698,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -22135,6 +22866,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -22529,6 +23261,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -22708,6 +23445,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -23111,6 +23849,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -23274,6 +24017,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -23668,6 +24412,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -23863,6 +24612,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -24257,6 +25007,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -24420,6 +25175,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -24814,6 +25570,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -24977,6 +25738,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -25371,6 +26133,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -25542,6 +26309,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -25936,6 +26704,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -26099,6 +26872,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -26493,6 +27267,574 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
+        tags_immutable:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
+        type_display:
+          readOnly: true
+          title: Type display
+          type: string
+        uploaded_at:
+          description: The date this package was uploaded.
+          format: date-time
+          readOnly: true
+          title: Uploaded at
+          type: string
+        uploader:
+          minLength: 1
+          readOnly: true
+          title: Uploader
+          type: string
+        uploader_url:
+          format: uri
+          readOnly: true
+          title: Uploader url
+          type: string
+        version:
+          description: The raw version for this package.
+          nullable: true
+          readOnly: true
+          title: Version
+          type: string
+        version_orig:
+          readOnly: true
+          title: Version orig
+          type: string
+        vulnerability_scan_results_url:
+          format: uri
+          readOnly: true
+          title: Vulnerability scan results url
+          type: string
+      type: object
+    HuggingfacePackageUploadRequest:
+      example:
+        republish: true
+        package_file: package_file
+        tags: tags
+      properties:
+        package_file:
+          description: The primary file for the package.
+          minLength: 1
+          title: Package file
+          type: string
+        republish:
+          description: "If true, the uploaded package will overwrite any others with\
+            \ the same attributes (e.g. same version); otherwise, it will be flagged\
+            \ as a duplicate."
+          title: Republish
+          type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          maxLength: 1024
+          minLength: 1
+          nullable: true
+          title: Tags
+          type: string
+      required:
+      - package_file
+      type: object
+    HuggingfacePackageUpload:
+      example:
+        architectures:
+        - name: name
+          description: description
+        - name: name
+          description: description
+        security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
+        checksum_sha256: checksum_sha256
+        release: release
+        package_type: 5
+        repository: repository
+        origin_repository: origin_repository
+        identifier_perm: identifier_perm
+        stage_updated_at: 2000-01-23T04:56:07.000+00:00
+        tags_immutable: "{}"
+        is_quarantined: true
+        slug: slug
+        freeable_storage: 1
+        is_security_scannable: true
+        security_scan_started_at: 2000-01-23T04:56:07.000+00:00
+        security_scan_status: Awaiting Security Scan
+        indexed: true
+        is_deleteable: true
+        format: format
+        status_str: status_str
+        version_orig: version_orig
+        namespace_url: https://openapi-generator.tech
+        display_name: display_name
+        slug_perm: slug_perm
+        version: version
+        is_resyncable: true
+        license: license
+        filename: filename
+        size: 2
+        cdn_url: cdn_url
+        uploaded_at: 2000-01-23T04:56:07.000+00:00
+        is_cancellable: true
+        is_downloadable: true
+        name: name
+        sync_finished_at: 2000-01-23T04:56:07.000+00:00
+        files:
+        - checksum_sha512: checksum_sha512
+          checksum_sha1: checksum_sha1
+          checksum_sha256: checksum_sha256
+          is_primary: true
+          checksum_md5: checksum_md5
+          slug_perm: slug_perm
+          filename: filename
+          size: 5
+          cdn_url: cdn_url
+          downloads: 1
+          is_synchronised: true
+          is_downloadable: true
+          signature_url: signature_url
+          tag: tag
+        - checksum_sha512: checksum_sha512
+          checksum_sha1: checksum_sha1
+          checksum_sha256: checksum_sha256
+          is_primary: true
+          checksum_md5: checksum_md5
+          slug_perm: slug_perm
+          filename: filename
+          size: 5
+          cdn_url: cdn_url
+          downloads: 1
+          is_synchronised: true
+          is_downloadable: true
+          signature_url: signature_url
+          tag: tag
+        num_files: 5
+        status: 9
+        checksum_sha512: checksum_sha512
+        distro:
+          name: name
+          variants: variants
+          self_url: https://openapi-generator.tech
+          slug: slug
+        extension: extension
+        fully_qualified_name: fully_qualified_name
+        description: description
+        is_copyable: true
+        epoch: 6
+        is_sync_completed: true
+        distro_version:
+          name: name
+          slug: slug
+        type_display: type_display
+        vulnerability_scan_results_url: https://openapi-generator.tech
+        dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
+        downloads: 0
+        subtype: subtype
+        uploader: uploader
+        signature_url: signature_url
+        tags_automatic: "{}"
+        repository_url: https://openapi-generator.tech
+        is_moveable: true
+        status_reason: status_reason
+        status_updated_at: 2000-01-23T04:56:07.000+00:00
+        summary: summary
+        checksum_sha1: checksum_sha1
+        is_quarantinable: true
+        identifiers:
+          key: identifiers
+        checksum_md5: checksum_md5
+        sync_progress: 3
+        is_sync_awaiting: true
+        uploader_url: https://openapi-generator.tech
+        self_html_url: self_html_url
+        origin_repository_url: https://openapi-generator.tech
+        self_url: https://openapi-generator.tech
+        status_url: https://openapi-generator.tech
+        is_sync_in_flight: true
+        security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
+        is_sync_in_progress: true
+        stage_str: stage_str
+        stage: 7
+        format_url: https://openapi-generator.tech
+        dependencies_url: https://openapi-generator.tech
+        namespace: namespace
+        is_sync_failed: true
+      properties:
+        architectures:
+          items:
+            $ref: '#/components/schemas/Architecture'
+          readOnly: true
+          type: array
+        cdn_url:
+          nullable: true
+          readOnly: true
+          title: Cdn url
+          type: string
+        checksum_md5:
+          readOnly: true
+          title: Checksum md5
+          type: string
+        checksum_sha1:
+          readOnly: true
+          title: Checksum sha1
+          type: string
+        checksum_sha256:
+          readOnly: true
+          title: Checksum sha256
+          type: string
+        checksum_sha512:
+          readOnly: true
+          title: Checksum sha512
+          type: string
+        dependencies_checksum_md5:
+          description: A checksum of all of the package's dependencies.
+          nullable: true
+          readOnly: true
+          title: Dependencies checksum md5
+          type: string
+        dependencies_url:
+          format: uri
+          readOnly: true
+          title: Dependencies url
+          type: string
+        description:
+          description: A textual description of this package.
+          nullable: true
+          readOnly: true
+          title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
+          type: string
+        distro:
+          $ref: '#/components/schemas/Distribution'
+        distro_version:
+          $ref: '#/components/schemas/DistributionVersion'
+        downloads:
+          readOnly: true
+          title: Downloads
+          type: integer
+        epoch:
+          description: The epoch of the package version (if any).
+          nullable: true
+          readOnly: true
+          title: Epoch
+          type: integer
+        extension:
+          readOnly: true
+          title: Extension
+          type: string
+        filename:
+          minLength: 1
+          readOnly: true
+          title: Filename
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/PackageFile'
+          readOnly: true
+          type: array
+        format:
+          minLength: 1
+          readOnly: true
+          title: Format
+          type: string
+        format_url:
+          format: uri
+          readOnly: true
+          title: Format url
+          type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
+        identifier_perm:
+          description: Unique and permanent identifier for the package.
+          minLength: 1
+          readOnly: true
+          title: Identifier perm
+          type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
+        indexed:
+          readOnly: true
+          title: Indexed
+          type: boolean
+        is_cancellable:
+          readOnly: true
+          title: Is cancellable
+          type: boolean
+        is_copyable:
+          readOnly: true
+          title: Is copyable
+          type: boolean
+        is_deleteable:
+          readOnly: true
+          title: Is deleteable
+          type: boolean
+        is_downloadable:
+          readOnly: true
+          title: Is downloadable
+          type: boolean
+        is_moveable:
+          readOnly: true
+          title: Is moveable
+          type: boolean
+        is_quarantinable:
+          readOnly: true
+          title: Is quarantinable
+          type: boolean
+        is_quarantined:
+          readOnly: true
+          title: Is quarantined
+          type: boolean
+        is_resyncable:
+          readOnly: true
+          title: Is resyncable
+          type: boolean
+        is_security_scannable:
+          readOnly: true
+          title: Is security scannable
+          type: boolean
+        is_sync_awaiting:
+          readOnly: true
+          title: Is sync awaiting
+          type: boolean
+        is_sync_completed:
+          readOnly: true
+          title: Is sync completed
+          type: boolean
+        is_sync_failed:
+          readOnly: true
+          title: Is sync failed
+          type: boolean
+        is_sync_in_flight:
+          readOnly: true
+          title: Is sync in flight
+          type: boolean
+        is_sync_in_progress:
+          readOnly: true
+          title: Is sync in progress
+          type: boolean
+        license:
+          description: The license of this package.
+          nullable: true
+          readOnly: true
+          title: License
+          type: string
+        name:
+          description: The name of this package.
+          nullable: true
+          readOnly: true
+          title: Name
+          type: string
+        namespace:
+          minLength: 1
+          readOnly: true
+          title: Namespace
+          type: string
+        namespace_url:
+          format: uri
+          readOnly: true
+          title: Namespace url
+          type: string
+        num_files:
+          readOnly: true
+          title: Num files
+          type: integer
+        origin_repository:
+          minLength: 1
+          readOnly: true
+          title: Origin repository
+          type: string
+        origin_repository_url:
+          format: uri
+          readOnly: true
+          title: Origin repository url
+          type: string
+        package_type:
+          description: The type of package contents.
+          readOnly: true
+          title: Package type
+          type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
+        release:
+          description: The release of the package version (if any).
+          nullable: true
+          readOnly: true
+          title: Release
+          type: string
+        repository:
+          minLength: 1
+          readOnly: true
+          title: Repository
+          type: string
+        repository_url:
+          format: uri
+          readOnly: true
+          title: Repository url
+          type: string
+        security_scan_completed_at:
+          description: The datetime the security scanning was completed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan completed at
+          type: string
+        security_scan_started_at:
+          description: The datetime the security scanning was started.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan started at
+          type: string
+        security_scan_status:
+          default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
+          nullable: true
+          readOnly: true
+          title: Security scan status
+          type: string
+        security_scan_status_updated_at:
+          description: The datetime the security scanning status was updated.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan status updated at
+          type: string
+        self_html_url:
+          minLength: 1
+          readOnly: true
+          title: Self html url
+          type: string
+        self_url:
+          format: uri
+          readOnly: true
+          title: Self url
+          type: string
+        signature_url:
+          nullable: true
+          readOnly: true
+          title: Signature url
+          type: string
+        size:
+          description: The calculated size of the package.
+          readOnly: true
+          title: Size
+          type: integer
+        slug:
+          description: The public unique identifier for the package.
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug
+          type: string
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        stage:
+          description: The synchronisation (in progress) stage of the package.
+          readOnly: true
+          title: Stage
+          type: integer
+        stage_str:
+          readOnly: true
+          title: Stage str
+          type: string
+        stage_updated_at:
+          description: The datetime the package stage was updated at.
+          format: date-time
+          readOnly: true
+          title: Stage updated at
+          type: string
+        status:
+          description: The synchronisation status of the package.
+          readOnly: true
+          title: Status
+          type: integer
+        status_reason:
+          description: A textual description for the synchronous status reason (if
+            any
+          nullable: true
+          readOnly: true
+          title: Status reason
+          type: string
+        status_str:
+          readOnly: true
+          title: Status str
+          type: string
+        status_updated_at:
+          description: The datetime the package status was updated at.
+          format: date-time
+          readOnly: true
+          title: Status updated at
+          type: string
+        status_url:
+          format: uri
+          readOnly: true
+          title: Status url
+          type: string
+        subtype:
+          readOnly: true
+          title: Subtype
+          type: string
+        summary:
+          description: A one-liner synopsis of this package.
+          nullable: true
+          readOnly: true
+          title: Summary
+          type: string
+        sync_finished_at:
+          description: The datetime the package sync was finished at.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Sync finished at
+          type: string
+        sync_progress:
+          description: Synchronisation progress (from 0-100)
+          readOnly: true
+          title: Sync progress
+          type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -26656,6 +27998,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -27050,6 +28393,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -27301,6 +28649,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -27727,6 +29076,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -27899,6 +29253,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -28293,6 +29648,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -28463,6 +29823,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -28857,6 +30218,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -29020,6 +30386,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -29414,6 +30781,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -29577,6 +30949,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -29971,6 +31344,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -30172,6 +31550,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -30566,6 +31945,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -30736,6 +32120,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -31130,6 +32515,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -31293,6 +32683,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -31687,6 +33078,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -31911,6 +33307,7 @@ components:
         uploader: uploader
         scope: scope
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -32336,6 +33733,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -32502,6 +33904,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -32896,6 +34299,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -33081,6 +34489,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -33479,6 +34888,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -33636,6 +35050,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -34036,6 +35451,11 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -34274,6 +35694,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -34674,6 +36095,11 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -34825,6 +36251,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -35218,6 +36645,11 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -35355,6 +36787,7 @@ components:
         subtype: subtype
         uploader: uploader
         signature_url: signature_url
+        tags_automatic: "{}"
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
@@ -35750,6 +37183,11 @@ components:
           title: Sync progress
           type: integer
         tags:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
+        tags_automatic:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
@@ -36341,6 +37779,11 @@ components:
           readOnly: true
           title: Sync progress
           type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
         tags_immutable:
           description: "All tags on the package, grouped by tag type. This includes\
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
@@ -36381,6 +37824,77 @@ components:
           readOnly: true
           title: Vulnerability scan results url
           type: string
+      type: object
+    PackageLicenseRequestPatch:
+      example:
+        license_notes: license_notes
+        action: Update
+        license_override: None
+        spdx_license: spdx_license
+        license_url: https://openapi-generator.tech
+      properties:
+        action:
+          default: Update
+          enum:
+          - Update
+          nullable: true
+          title: Action
+          type: string
+        license_notes:
+          maxLength: 1000
+          nullable: true
+          title: License notes
+          type: string
+        license_override:
+          default: None
+          enum:
+          - None
+          - Ignored
+          - Purchased
+          nullable: true
+          title: License override
+          type: string
+        license_url:
+          format: uri
+          maxLength: 255
+          nullable: true
+          title: License url
+          type: string
+        spdx_license:
+          maxLength: 255
+          minLength: 1
+          title: Spdx license
+          type: string
+      type: object
+    PackageLicense:
+      properties:
+        license_notes:
+          maxLength: 1000
+          nullable: true
+          title: License notes
+          type: string
+        license_override:
+          default: None
+          enum:
+          - None
+          - Ignored
+          - Purchased
+          nullable: true
+          title: License override
+          type: string
+        license_url:
+          format: uri
+          maxLength: 255
+          nullable: true
+          title: License url
+          type: string
+        spdx_license:
+          maxLength: 255
+          minLength: 1
+          title: Spdx license
+          type: string
+      required:
+      - spdx_license
       type: object
     Usage:
       example:
@@ -40204,6 +41718,386 @@ components:
           title: Verify SSL Certificates
           type: boolean
       type: object
+    CondaUpstream:
+      example:
+        is_active: true
+        disable_reason: N/A
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        created_at: 2000-01-23T04:56:07.000+00:00
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        slug_perm: slug_perm
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+        pending_validation: true
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        created_at:
+          description: The datetime the upstream source was created.
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        disable_reason:
+          default: N/A
+          enum:
+          - N/A
+          - Upstream points to its own repository
+          - Missing upstream source
+          - Upstream was disabled by request of user
+          readOnly: true
+          title: Disable reason
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        pending_validation:
+          description: "When true, this upstream source is pending validation."
+          readOnly: true
+          title: Pending validation
+          type: boolean
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    CondaUpstreamRequest:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    CondaUpstreamRequestPatch:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      type: object
     CranUpstream:
       example:
         is_active: true
@@ -43005,6 +44899,386 @@ components:
           enum:
           - None
           - Username and Password
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      type: object
+    HuggingfaceUpstream:
+      example:
+        is_active: true
+        disable_reason: N/A
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        created_at: 2000-01-23T04:56:07.000+00:00
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        slug_perm: slug_perm
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+        pending_validation: true
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Token
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        created_at:
+          description: The datetime the upstream source was created.
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        disable_reason:
+          default: N/A
+          enum:
+          - N/A
+          - Upstream points to its own repository
+          - Missing upstream source
+          - Upstream was disabled by request of user
+          readOnly: true
+          title: Disable reason
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        pending_validation:
+          description: "When true, this upstream source is pending validation."
+          readOnly: true
+          title: Pending validation
+          type: boolean
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    HuggingfaceUpstreamRequest:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Token
+          title: Auth mode
+          type: string
+        auth_secret:
+          description: Secret to provide with requests to upstream.
+          maxLength: 4096
+          nullable: true
+          title: Secret
+          type: string
+        auth_username:
+          description: Username to provide with requests to upstream.
+          maxLength: 64
+          nullable: true
+          title: Username
+          type: string
+        extra_header_1:
+          description: "The key for extra header #1 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #1"
+          type: string
+        extra_header_2:
+          description: "The key for extra header #2 to send to upstream."
+          maxLength: 64
+          nullable: true
+          pattern: "^[-\\w]+$"
+          title: "Header #2"
+          type: string
+        extra_value_1:
+          description: "The value for extra header #1 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #1"
+          type: string
+        extra_value_2:
+          description: "The value for extra header #2 to send to upstream. This is\
+            \ stored as plaintext, and is NOT encrypted."
+          maxLength: 128
+          nullable: true
+          pattern: "^[^\\n\\r]+$"
+          title: "Value #2"
+          type: string
+        is_active:
+          description: Whether or not this upstream is active and ready for requests.
+          title: Is active
+          type: boolean
+        mode:
+          default: Proxy Only
+          description: "The mode that this upstream should operate in. Upstream sources\
+            \ can be used to proxy resolved packages, as well as operate in a proxy/cache\
+            \ or cache only mode."
+          enum:
+          - Proxy Only
+          - Cache and Proxy
+          title: Mode
+          type: string
+        name:
+          description: A descriptive name for this upstream source. A shortened version
+            of this name will be used for tagging cached packages retrieved from this
+            upstream.
+          maxLength: 64
+          minLength: 1
+          pattern: "^\\w[\\w \\-'\\.\\/()]+$"
+          title: Name
+          type: string
+        priority:
+          description: "Upstream sources are selected for resolving requests by sequential\
+            \ order (1..n), followed by creation date."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        upstream_url:
+          description: 'The URL for this upstream source. This must be a fully qualified
+            URL including any path elements required to reach the root of the repository. '
+          format: uri
+          maxLength: 200
+          minLength: 1
+          title: Upstream URL
+          type: string
+        verify_ssl:
+          description: "If enabled, SSL certificates are verified when requests are\
+            \ made to this upstream. It's recommended to leave this enabled for all\
+            \ public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please\
+            \ note this only applies to HTTPS upstreams."
+          title: Verify SSL Certificates
+          type: boolean
+      required:
+      - name
+      - upstream_url
+      type: object
+    HuggingfaceUpstreamRequestPatch:
+      example:
+        is_active: true
+        upstream_url: https://openapi-generator.tech
+        auth_secret: auth_secret
+        auth_mode: None
+        extra_value_1: extra_value_1
+        priority: 2624
+        extra_value_2: extra_value_2
+        extra_header_2: extra_header_2
+        extra_header_1: extra_header_1
+        mode: Proxy Only
+        verify_ssl: true
+        auth_username: auth_username
+        name: name
+      properties:
+        auth_mode:
+          default: None
+          description: 'The authentication mode to use when accessing this upstream. '
+          enum:
+          - None
+          - Token
           title: Auth mode
           type: string
         auth_secret:
@@ -46296,7 +48570,7 @@ components:
     StatusBasic:
       example:
         detail: Cloudsmith API is operational.
-        version: 1.768.2
+        version: "1.0"
       properties:
         detail:
           default: Cloudsmith API is operational.
@@ -46306,7 +48580,7 @@ components:
           title: Detail
           type: string
         version:
-          default: 1.768.2
+          default: "1.0"
           description: The current version for the Cloudsmith service.
           minLength: 1
           readOnly: true
@@ -46638,12 +48912,25 @@ components:
         - references
         vulnerability_id: vulnerability_id
         package_name: package_name
+        cvss_scores:
+          key:
+            key: "{}"
         description: description
         severity_source: severity_source
         title: title
       properties:
         affected_version:
           $ref: '#/components/schemas/VulnerabilityScanVersion'
+        cvss_scores:
+          additionalProperties:
+            additionalProperties:
+              properties: {}
+              type: object
+            type: object
+          description: CVSS Scores (when available from the raw scan results)
+          readOnly: true
+          title: Cvss scores
+          type: object
         description:
           maxLength: 1028
           minLength: 1
@@ -46721,6 +49008,9 @@ components:
           - references
           vulnerability_id: vulnerability_id
           package_name: package_name
+          cvss_scores:
+            key:
+              key: "{}"
           description: description
           severity_source: severity_source
           title: title
@@ -46744,6 +49034,9 @@ components:
           - references
           vulnerability_id: vulnerability_id
           package_name: package_name
+          cvss_scores:
+            key:
+              key: "{}"
           description: description
           severity_source: severity_source
           title: title
@@ -46798,6 +49091,9 @@ components:
             - references
             vulnerability_id: vulnerability_id
             package_name: package_name
+            cvss_scores:
+              key:
+                key: "{}"
             description: description
             severity_source: severity_source
             title: title
@@ -46821,6 +49117,9 @@ components:
             - references
             vulnerability_id: vulnerability_id
             package_name: package_name
+            cvss_scores:
+              key:
+                key: "{}"
             description: description
             severity_source: severity_source
             title: title
@@ -46847,6 +49146,9 @@ components:
             - references
             vulnerability_id: vulnerability_id
             package_name: package_name
+            cvss_scores:
+              key:
+                key: "{}"
             description: description
             severity_source: severity_source
             title: title
@@ -46870,6 +49172,9 @@ components:
             - references
             vulnerability_id: vulnerability_id
             package_name: package_name
+            cvss_scores:
+              key:
+                key: "{}"
             description: description
             severity_source: severity_source
             title: title
@@ -47113,7 +49418,7 @@ components:
         target_url:
           description: The destination URL that webhook payloads will be POST'ed to.
           format: uri
-          maxLength: 255
+          maxLength: 2000
           minLength: 1
           title: Payload URL
           type: string
@@ -47250,7 +49555,7 @@ components:
         target_url:
           description: The destination URL that webhook payloads will be POST'ed to.
           format: uri
-          maxLength: 255
+          maxLength: 2000
           minLength: 1
           title: Payload URL
           type: string
@@ -47372,7 +49677,7 @@ components:
         target_url:
           description: The destination URL that webhook payloads will be POST'ed to.
           format: uri
-          maxLength: 255
+          maxLength: 2000
           minLength: 1
           title: Payload URL
           type: string

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.768.2
+API version: 1.830.6
 Contact: support@cloudsmith.io
 */
 
@@ -117,6 +117,8 @@ type PackageQuarantine struct {
 	SyncProgress *int64 `json:"sync_progress,omitempty"`
 	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
 	Tags map[string]interface{} `json:"tags,omitempty"`
+	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
+	TagsAutomatic map[string]interface{} `json:"tags_automatic,omitempty"`
 	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
 	TagsImmutable map[string]interface{} `json:"tags_immutable,omitempty"`
 	TypeDisplay   *string                `json:"type_display,omitempty"`
@@ -2630,6 +2632,38 @@ func (o *PackageQuarantine) SetTags(v map[string]interface{}) {
 	o.Tags = v
 }
 
+// GetTagsAutomatic returns the TagsAutomatic field value if set, zero value otherwise.
+func (o *PackageQuarantine) GetTagsAutomatic() map[string]interface{} {
+	if o == nil || IsNil(o.TagsAutomatic) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.TagsAutomatic
+}
+
+// GetTagsAutomaticOk returns a tuple with the TagsAutomatic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageQuarantine) GetTagsAutomaticOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.TagsAutomatic) {
+		return map[string]interface{}{}, false
+	}
+	return o.TagsAutomatic, true
+}
+
+// HasTagsAutomatic returns a boolean if a field has been set.
+func (o *PackageQuarantine) HasTagsAutomatic() bool {
+	if o != nil && !IsNil(o.TagsAutomatic) {
+		return true
+	}
+
+	return false
+}
+
+// SetTagsAutomatic gets a reference to the given map[string]interface{} and assigns it to the TagsAutomatic field.
+func (o *PackageQuarantine) SetTagsAutomatic(v map[string]interface{}) {
+	o.TagsAutomatic = v
+}
+
 // GetTagsImmutable returns the TagsImmutable field value if set, zero value otherwise.
 func (o *PackageQuarantine) GetTagsImmutable() map[string]interface{} {
 	if o == nil || IsNil(o.TagsImmutable) {
@@ -3123,6 +3157,9 @@ func (o PackageQuarantine) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
+	if !IsNil(o.TagsAutomatic) {
+		toSerialize["tags_automatic"] = o.TagsAutomatic
+	}
 	if !IsNil(o.TagsImmutable) {
 		toSerialize["tags_immutable"] = o.TagsImmutable
 	}
@@ -3241,6 +3278,7 @@ func (o *PackageQuarantine) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sync_finished_at")
 		delete(additionalProperties, "sync_progress")
 		delete(additionalProperties, "tags")
+		delete(additionalProperties, "tags_automatic")
 		delete(additionalProperties, "tags_immutable")
 		delete(additionalProperties, "type_display")
 		delete(additionalProperties, "uploaded_at")

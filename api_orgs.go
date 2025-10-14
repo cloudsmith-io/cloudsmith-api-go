@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.768.2
+API version: 1.830.6
 Contact: support@cloudsmith.io
 */
 
@@ -8994,6 +8994,13 @@ type ApiOrgsTeamsMembersListRequest struct {
 	ApiService *OrgsApiService
 	org        string
 	team       string
+	userKind   *string
+}
+
+// Filter accounts by type. Possible values are &#39;user&#39; and &#39;service&#39;. If not provided, only users are returned.
+func (r ApiOrgsTeamsMembersListRequest) UserKind(userKind string) ApiOrgsTeamsMembersListRequest {
+	r.userKind = &userKind
+	return r
 }
 
 func (r ApiOrgsTeamsMembersListRequest) Execute() (*OrganizationTeamMembers, *http.Response, error) {
@@ -9042,6 +9049,9 @@ func (a *OrgsApiService) OrgsTeamsMembersListExecute(r ApiOrgsTeamsMembersListRe
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.userKind != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "user_kind", r.userKind, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
