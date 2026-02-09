@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -21,6 +21,8 @@ var _ MappedNullable = &RepositoryTokenRequestPatch{}
 
 // RepositoryTokenRequestPatch struct for RepositoryTokenRequestPatch
 type RepositoryTokenRequestPatch struct {
+	// If enabled, this token can be used for private broadcasts
+	AccessPrivateBroadcasts *bool `json:"access_private_broadcasts,omitempty"`
 	// If checked, a EULA acceptance is required for this token.
 	EulaRequired *bool `json:"eula_required,omitempty"`
 	// If enabled, the token will allow downloads based on configured restrictions (if any).
@@ -74,6 +76,38 @@ func NewRepositoryTokenRequestPatchWithDefaults() *RepositoryTokenRequestPatch {
 	var scheduledResetPeriod string = "Never Reset"
 	this.ScheduledResetPeriod = *NewNullableString(&scheduledResetPeriod)
 	return &this
+}
+
+// GetAccessPrivateBroadcasts returns the AccessPrivateBroadcasts field value if set, zero value otherwise.
+func (o *RepositoryTokenRequestPatch) GetAccessPrivateBroadcasts() bool {
+	if o == nil || IsNil(o.AccessPrivateBroadcasts) {
+		var ret bool
+		return ret
+	}
+	return *o.AccessPrivateBroadcasts
+}
+
+// GetAccessPrivateBroadcastsOk returns a tuple with the AccessPrivateBroadcasts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryTokenRequestPatch) GetAccessPrivateBroadcastsOk() (*bool, bool) {
+	if o == nil || IsNil(o.AccessPrivateBroadcasts) {
+		return nil, false
+	}
+	return o.AccessPrivateBroadcasts, true
+}
+
+// HasAccessPrivateBroadcasts returns a boolean if a field has been set.
+func (o *RepositoryTokenRequestPatch) HasAccessPrivateBroadcasts() bool {
+	if o != nil && !IsNil(o.AccessPrivateBroadcasts) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessPrivateBroadcasts gets a reference to the given bool and assigns it to the AccessPrivateBroadcasts field.
+func (o *RepositoryTokenRequestPatch) SetAccessPrivateBroadcasts(v bool) {
+	o.AccessPrivateBroadcasts = &v
 }
 
 // GetEulaRequired returns the EulaRequired field value if set, zero value otherwise.
@@ -677,6 +711,9 @@ func (o RepositoryTokenRequestPatch) MarshalJSON() ([]byte, error) {
 
 func (o RepositoryTokenRequestPatch) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AccessPrivateBroadcasts) {
+		toSerialize["access_private_broadcasts"] = o.AccessPrivateBroadcasts
+	}
 	if !IsNil(o.EulaRequired) {
 		toSerialize["eula_required"] = o.EulaRequired
 	}
@@ -744,6 +781,7 @@ func (o *RepositoryTokenRequestPatch) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_private_broadcasts")
 		delete(additionalProperties, "eula_required")
 		delete(additionalProperties, "is_active")
 		delete(additionalProperties, "limit_bandwidth")

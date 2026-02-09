@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BroadcastState** | Pointer to **string** | Broadcasting status of a repository. | [optional] [default to "Off"]
 **ContentKind** | Pointer to **string** | The repository content kind determines whether this repository contains packages, or provides a distribution of packages from other repositories. You can only select the content kind at repository creation time. | [optional] [default to "Standard"]
 **ContextualAuthRealm** | Pointer to **bool** | If checked, missing credentials for this repository where basic authentication is required shall present an enriched value in the &#39;WWW-Authenticate&#39; header containing the namespace and repository. This can be useful for tooling such as SBT where the authentication realm is used to distinguish and disambiguate credentials. | [optional] 
 **CopyOwn** | Pointer to **bool** | If checked, users can copy any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the &#39;Access Controls&#39; section of the repository, and any inherited from the org. | [optional] 
@@ -16,6 +17,7 @@ Name | Type | Description | Notes
 **Distributes** | Pointer to **[]string** | The repositories distributed through this repo. Adding repos here is only valid if the content_kind is DISTRIBUTION. | [optional] 
 **DockerRefreshTokensEnabled** | Pointer to **bool** | If checked, refresh tokens will be issued in addition to access tokens for Docker authentication. This allows unlimited extension of the lifetime of access tokens. | [optional] 
 **EnforceEula** | Pointer to **bool** | If checked, downloads will explicitly require acceptance of an EULA. | [optional] 
+**GenericPackageIndexEnabled** | Pointer to **bool** | If checked, HTML indexes will be generated that list all available generic packages in the repository. | [optional] 
 **IndexFiles** | Pointer to **bool** | If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted. | [optional] 
 **ManageEntitlementsPrivilege** | Pointer to **string** | This defines the minimum level of privilege required for a user to manage entitlement tokens with private repositories. Management is the ability to create, alter, enable, disable or delete all tokens without a repository. | [optional] [default to "Admin"]
 **MoveOwn** | Pointer to **bool** | If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the &#39;Access Controls&#39; section of the repository, and any inherited from the org. | [optional] 
@@ -66,6 +68,31 @@ will change when the set of required properties is changed
 NewRepositoryRequestPatchWithDefaults instantiates a new RepositoryRequestPatch object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBroadcastState
+
+`func (o *RepositoryRequestPatch) GetBroadcastState() string`
+
+GetBroadcastState returns the BroadcastState field if non-nil, zero value otherwise.
+
+### GetBroadcastStateOk
+
+`func (o *RepositoryRequestPatch) GetBroadcastStateOk() (*string, bool)`
+
+GetBroadcastStateOk returns a tuple with the BroadcastState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBroadcastState
+
+`func (o *RepositoryRequestPatch) SetBroadcastState(v string)`
+
+SetBroadcastState sets BroadcastState field to given value.
+
+### HasBroadcastState
+
+`func (o *RepositoryRequestPatch) HasBroadcastState() bool`
+
+HasBroadcastState returns a boolean if a field has been set.
 
 ### GetContentKind
 
@@ -366,6 +393,31 @@ SetEnforceEula sets EnforceEula field to given value.
 `func (o *RepositoryRequestPatch) HasEnforceEula() bool`
 
 HasEnforceEula returns a boolean if a field has been set.
+
+### GetGenericPackageIndexEnabled
+
+`func (o *RepositoryRequestPatch) GetGenericPackageIndexEnabled() bool`
+
+GetGenericPackageIndexEnabled returns the GenericPackageIndexEnabled field if non-nil, zero value otherwise.
+
+### GetGenericPackageIndexEnabledOk
+
+`func (o *RepositoryRequestPatch) GetGenericPackageIndexEnabledOk() (*bool, bool)`
+
+GetGenericPackageIndexEnabledOk returns a tuple with the GenericPackageIndexEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGenericPackageIndexEnabled
+
+`func (o *RepositoryRequestPatch) SetGenericPackageIndexEnabled(v bool)`
+
+SetGenericPackageIndexEnabled sets GenericPackageIndexEnabled field to given value.
+
+### HasGenericPackageIndexEnabled
+
+`func (o *RepositoryRequestPatch) HasGenericPackageIndexEnabled() bool`
+
+HasGenericPackageIndexEnabled returns a boolean if a field has been set.
 
 ### GetIndexFiles
 

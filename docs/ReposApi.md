@@ -73,6 +73,12 @@ Method | HTTP request | Description
 [**ReposUpstreamDockerPartialUpdate**](ReposApi.md#ReposUpstreamDockerPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/docker/{slug_perm}/ | Partially update a Docker upstream config for this repository.
 [**ReposUpstreamDockerRead**](ReposApi.md#ReposUpstreamDockerRead) | **Get** /repos/{owner}/{identifier}/upstream/docker/{slug_perm}/ | Retrieve a Docker upstream config for this repository.
 [**ReposUpstreamDockerUpdate**](ReposApi.md#ReposUpstreamDockerUpdate) | **Put** /repos/{owner}/{identifier}/upstream/docker/{slug_perm}/ | Update a Docker upstream config for this repository.
+[**ReposUpstreamGenericCreate**](ReposApi.md#ReposUpstreamGenericCreate) | **Post** /repos/{owner}/{identifier}/upstream/generic/ | Create a Generic upstream config for this repository.
+[**ReposUpstreamGenericDelete**](ReposApi.md#ReposUpstreamGenericDelete) | **Delete** /repos/{owner}/{identifier}/upstream/generic/{slug_perm}/ | Delete a Generic upstream config for this repository.
+[**ReposUpstreamGenericList**](ReposApi.md#ReposUpstreamGenericList) | **Get** /repos/{owner}/{identifier}/upstream/generic/ | List Generic upstream configs for this repository.
+[**ReposUpstreamGenericPartialUpdate**](ReposApi.md#ReposUpstreamGenericPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/generic/{slug_perm}/ | Partially update a Generic upstream config for this repository.
+[**ReposUpstreamGenericRead**](ReposApi.md#ReposUpstreamGenericRead) | **Get** /repos/{owner}/{identifier}/upstream/generic/{slug_perm}/ | Retrieve a Generic upstream config for this repository.
+[**ReposUpstreamGenericUpdate**](ReposApi.md#ReposUpstreamGenericUpdate) | **Put** /repos/{owner}/{identifier}/upstream/generic/{slug_perm}/ | Update a Generic upstream config for this repository.
 [**ReposUpstreamGoCreate**](ReposApi.md#ReposUpstreamGoCreate) | **Post** /repos/{owner}/{identifier}/upstream/go/ | Create a Go upstream config for this repository.
 [**ReposUpstreamGoDelete**](ReposApi.md#ReposUpstreamGoDelete) | **Delete** /repos/{owner}/{identifier}/upstream/go/{slug_perm}/ | Delete a Go upstream config for this repository.
 [**ReposUpstreamGoList**](ReposApi.md#ReposUpstreamGoList) | **Get** /repos/{owner}/{identifier}/upstream/go/ | List Go upstream configs for this repository.
@@ -5325,6 +5331,464 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DockerUpstream**](DockerUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGenericCreate
+
+> GenericUpstream ReposUpstreamGenericCreate(ctx, owner, identifier).Data(data).Execute()
+
+Create a Generic upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewGenericUpstreamRequest("Name_example", "UpstreamUrl_example") // GenericUpstreamRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamGenericCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGenericCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamGenericCreate`: GenericUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamGenericCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGenericCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**GenericUpstreamRequest**](GenericUpstreamRequest.md) |  | 
+
+### Return type
+
+[**GenericUpstream**](GenericUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGenericDelete
+
+> ReposUpstreamGenericDelete(ctx, owner, identifier, slugPerm).Execute()
+
+Delete a Generic upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamGenericDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGenericDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGenericDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGenericList
+
+> []GenericUpstream ReposUpstreamGenericList(ctx, owner, identifier).Page(page).PageSize(pageSize).Execute()
+
+List Generic upstream configs for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamGenericList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGenericList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamGenericList`: []GenericUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamGenericList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGenericListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]GenericUpstream**](GenericUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGenericPartialUpdate
+
+> GenericUpstream ReposUpstreamGenericPartialUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Partially update a Generic upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewGenericUpstreamRequestPatch() // GenericUpstreamRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamGenericPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGenericPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamGenericPartialUpdate`: GenericUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamGenericPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGenericPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**GenericUpstreamRequestPatch**](GenericUpstreamRequestPatch.md) |  | 
+
+### Return type
+
+[**GenericUpstream**](GenericUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGenericRead
+
+> GenericUpstream ReposUpstreamGenericRead(ctx, owner, identifier, slugPerm).Execute()
+
+Retrieve a Generic upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamGenericRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGenericRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamGenericRead`: GenericUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamGenericRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGenericReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**GenericUpstream**](GenericUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamGenericUpdate
+
+> GenericUpstream ReposUpstreamGenericUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Update a Generic upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewGenericUpstreamRequest("Name_example", "UpstreamUrl_example") // GenericUpstreamRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamGenericUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamGenericUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamGenericUpdate`: GenericUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamGenericUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamGenericUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**GenericUpstreamRequest**](GenericUpstreamRequest.md) |  | 
+
+### Return type
+
+[**GenericUpstream**](GenericUpstream.md)
 
 ### Authorization
 

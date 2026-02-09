@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,9 +28,12 @@ type DockerUpstream struct {
 	AuthSecret NullableString `json:"auth_secret,omitempty"`
 	// Username to provide with requests to upstream.
 	AuthUsername NullableString `json:"auth_username,omitempty"`
+	Available    *string        `json:"available,omitempty"`
 	// The datetime the upstream source was created.
 	CreatedAt     *time.Time `json:"created_at,omitempty"`
 	DisableReason *string    `json:"disable_reason,omitempty"`
+	// Human-readable explanation of why this upstream is disabled
+	DisableReasonText *string `json:"disable_reason_text,omitempty"`
 	// The key for extra header #1 to send to upstream.
 	ExtraHeader1 NullableString `json:"extra_header_1,omitempty" validate:"regexp=^[-\\\\w]+$"`
 	// The key for extra header #2 to send to upstream.
@@ -38,7 +41,8 @@ type DockerUpstream struct {
 	// The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted.
 	ExtraValue1 NullableString `json:"extra_value_1,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue2 NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
+	ExtraValue2                    NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
+	HasFailedSignatureVerification *string        `json:"has_failed_signature_verification,omitempty"`
 	// Whether or not this upstream is active and ready for requests.
 	IsActive *bool `json:"is_active,omitempty"`
 	// The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode.
@@ -205,6 +209,38 @@ func (o *DockerUpstream) UnsetAuthUsername() {
 	o.AuthUsername.Unset()
 }
 
+// GetAvailable returns the Available field value if set, zero value otherwise.
+func (o *DockerUpstream) GetAvailable() string {
+	if o == nil || IsNil(o.Available) {
+		var ret string
+		return ret
+	}
+	return *o.Available
+}
+
+// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DockerUpstream) GetAvailableOk() (*string, bool) {
+	if o == nil || IsNil(o.Available) {
+		return nil, false
+	}
+	return o.Available, true
+}
+
+// HasAvailable returns a boolean if a field has been set.
+func (o *DockerUpstream) HasAvailable() bool {
+	if o != nil && !IsNil(o.Available) {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailable gets a reference to the given string and assigns it to the Available field.
+func (o *DockerUpstream) SetAvailable(v string) {
+	o.Available = &v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *DockerUpstream) GetCreatedAt() time.Time {
 	if o == nil || IsNil(o.CreatedAt) {
@@ -267,6 +303,38 @@ func (o *DockerUpstream) HasDisableReason() bool {
 // SetDisableReason gets a reference to the given string and assigns it to the DisableReason field.
 func (o *DockerUpstream) SetDisableReason(v string) {
 	o.DisableReason = &v
+}
+
+// GetDisableReasonText returns the DisableReasonText field value if set, zero value otherwise.
+func (o *DockerUpstream) GetDisableReasonText() string {
+	if o == nil || IsNil(o.DisableReasonText) {
+		var ret string
+		return ret
+	}
+	return *o.DisableReasonText
+}
+
+// GetDisableReasonTextOk returns a tuple with the DisableReasonText field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DockerUpstream) GetDisableReasonTextOk() (*string, bool) {
+	if o == nil || IsNil(o.DisableReasonText) {
+		return nil, false
+	}
+	return o.DisableReasonText, true
+}
+
+// HasDisableReasonText returns a boolean if a field has been set.
+func (o *DockerUpstream) HasDisableReasonText() bool {
+	if o != nil && !IsNil(o.DisableReasonText) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableReasonText gets a reference to the given string and assigns it to the DisableReasonText field.
+func (o *DockerUpstream) SetDisableReasonText(v string) {
+	o.DisableReasonText = &v
 }
 
 // GetExtraHeader1 returns the ExtraHeader1 field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -439,6 +507,38 @@ func (o *DockerUpstream) SetExtraValue2Nil() {
 // UnsetExtraValue2 ensures that no value is present for ExtraValue2, not even an explicit nil
 func (o *DockerUpstream) UnsetExtraValue2() {
 	o.ExtraValue2.Unset()
+}
+
+// GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field value if set, zero value otherwise.
+func (o *DockerUpstream) GetHasFailedSignatureVerification() string {
+	if o == nil || IsNil(o.HasFailedSignatureVerification) {
+		var ret string
+		return ret
+	}
+	return *o.HasFailedSignatureVerification
+}
+
+// GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DockerUpstream) GetHasFailedSignatureVerificationOk() (*string, bool) {
+	if o == nil || IsNil(o.HasFailedSignatureVerification) {
+		return nil, false
+	}
+	return o.HasFailedSignatureVerification, true
+}
+
+// HasHasFailedSignatureVerification returns a boolean if a field has been set.
+func (o *DockerUpstream) HasHasFailedSignatureVerification() bool {
+	if o != nil && !IsNil(o.HasFailedSignatureVerification) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasFailedSignatureVerification gets a reference to the given string and assigns it to the HasFailedSignatureVerification field.
+func (o *DockerUpstream) SetHasFailedSignatureVerification(v string) {
+	o.HasFailedSignatureVerification = &v
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -732,11 +832,17 @@ func (o DockerUpstream) ToMap() (map[string]interface{}, error) {
 	if o.AuthUsername.IsSet() {
 		toSerialize["auth_username"] = o.AuthUsername.Get()
 	}
+	if !IsNil(o.Available) {
+		toSerialize["available"] = o.Available
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
 	if !IsNil(o.DisableReason) {
 		toSerialize["disable_reason"] = o.DisableReason
+	}
+	if !IsNil(o.DisableReasonText) {
+		toSerialize["disable_reason_text"] = o.DisableReasonText
 	}
 	if o.ExtraHeader1.IsSet() {
 		toSerialize["extra_header_1"] = o.ExtraHeader1.Get()
@@ -749,6 +855,9 @@ func (o DockerUpstream) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ExtraValue2.IsSet() {
 		toSerialize["extra_value_2"] = o.ExtraValue2.Get()
+	}
+	if !IsNil(o.HasFailedSignatureVerification) {
+		toSerialize["has_failed_signature_verification"] = o.HasFailedSignatureVerification
 	}
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
@@ -820,12 +929,15 @@ func (o *DockerUpstream) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "auth_mode")
 		delete(additionalProperties, "auth_secret")
 		delete(additionalProperties, "auth_username")
+		delete(additionalProperties, "available")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "disable_reason")
+		delete(additionalProperties, "disable_reason_text")
 		delete(additionalProperties, "extra_header_1")
 		delete(additionalProperties, "extra_header_2")
 		delete(additionalProperties, "extra_value_1")
 		delete(additionalProperties, "extra_value_2")
+		delete(additionalProperties, "has_failed_signature_verification")
 		delete(additionalProperties, "is_active")
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "name")

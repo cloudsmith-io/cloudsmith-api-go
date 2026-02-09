@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -22,6 +22,8 @@ var _ MappedNullable = &RepositoryCreate{}
 
 // RepositoryCreate struct for RepositoryCreate
 type RepositoryCreate struct {
+	// Broadcasting status of a repository.
+	BroadcastState *string `json:"broadcast_state,omitempty"`
 	// Base URL from which packages and other artifacts are downloaded.
 	CdnUrl NullableString `json:"cdn_url,omitempty"`
 	// The repository content kind determines whether this repository contains packages, or provides a distribution of packages from other repositories. You can only select the content kind at repository creation time.
@@ -51,8 +53,10 @@ type RepositoryCreate struct {
 	DockerRefreshTokensEnabled *bool                `json:"docker_refresh_tokens_enabled,omitempty"`
 	EcdsaKeys                  []RepositoryEcdsaKey `json:"ecdsa_keys,omitempty"`
 	// If checked, downloads will explicitly require acceptance of an EULA.
-	EnforceEula *bool              `json:"enforce_eula,omitempty"`
-	GpgKeys     []RepositoryGpgKey `json:"gpg_keys,omitempty"`
+	EnforceEula *bool `json:"enforce_eula,omitempty"`
+	// If checked, HTML indexes will be generated that list all available generic packages in the repository.
+	GenericPackageIndexEnabled *bool              `json:"generic_package_index_enabled,omitempty"`
+	GpgKeys                    []RepositoryGpgKey `json:"gpg_keys,omitempty"`
 	// If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted.
 	IndexFiles   *bool `json:"index_files,omitempty"`
 	IsOpenSource *bool `json:"is_open_source,omitempty"`
@@ -84,6 +88,8 @@ type RepositoryCreate struct {
 	OpenSourceProjectUrl NullableString `json:"open_source_project_url,omitempty"`
 	// The number of packages in the repository.
 	PackageCount *int64 `json:"package_count,omitempty"`
+	// The number of packages in the repository excluding subcomponents.
+	PackageCountExclSubcomponents *int64 `json:"package_count_excl_subcomponents,omitempty"`
 	// The number of groups in the repository.
 	PackageGroupCount *int64 `json:"package_group_count,omitempty"`
 	// If checked, Npm packages that are not in the repository when requested by clients will automatically be proxied from the public npmjs.org registry. If there is at least one version for a package, others will not be proxied.
@@ -114,6 +120,8 @@ type RepositoryCreate struct {
 	SelfHtmlUrl *string `json:"self_html_url,omitempty"`
 	// API endpoint where data about this repository can be retrieved.
 	SelfUrl *string `json:"self_url,omitempty"`
+	// Webapp URL for this repository.
+	SelfWebappUrl *string `json:"self_webapp_url,omitempty"`
 	// If checked, the Set Me Up help for all formats will always be shown, even if you don't have packages of that type uploaded. Otherwise, help will only be shown for packages that are in the repository. For example, if you have uploaded only NuGet packages, then the Set Me Up help for NuGet packages will be shown only.
 	ShowSetupAll *bool `json:"show_setup_all,omitempty"`
 	// The calculated size of the repository.
@@ -157,6 +165,8 @@ type _RepositoryCreate RepositoryCreate
 // will change when the set of required properties is changed
 func NewRepositoryCreate(name string) *RepositoryCreate {
 	this := RepositoryCreate{}
+	var broadcastState string = "Off"
+	this.BroadcastState = &broadcastState
 	var contentKind string = "Standard"
 	this.ContentKind = &contentKind
 	var copyPackages string = "Read"
@@ -192,6 +202,8 @@ func NewRepositoryCreate(name string) *RepositoryCreate {
 // but it doesn't guarantee that properties required by API are set
 func NewRepositoryCreateWithDefaults() *RepositoryCreate {
 	this := RepositoryCreate{}
+	var broadcastState string = "Off"
+	this.BroadcastState = &broadcastState
 	var contentKind string = "Standard"
 	this.ContentKind = &contentKind
 	var copyPackages string = "Read"
@@ -219,6 +231,38 @@ func NewRepositoryCreateWithDefaults() *RepositoryCreate {
 	var viewStatistics string = "Read"
 	this.ViewStatistics = &viewStatistics
 	return &this
+}
+
+// GetBroadcastState returns the BroadcastState field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetBroadcastState() string {
+	if o == nil || IsNil(o.BroadcastState) {
+		var ret string
+		return ret
+	}
+	return *o.BroadcastState
+}
+
+// GetBroadcastStateOk returns a tuple with the BroadcastState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetBroadcastStateOk() (*string, bool) {
+	if o == nil || IsNil(o.BroadcastState) {
+		return nil, false
+	}
+	return o.BroadcastState, true
+}
+
+// HasBroadcastState returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasBroadcastState() bool {
+	if o != nil && !IsNil(o.BroadcastState) {
+		return true
+	}
+
+	return false
+}
+
+// SetBroadcastState gets a reference to the given string and assigns it to the BroadcastState field.
+func (o *RepositoryCreate) SetBroadcastState(v string) {
+	o.BroadcastState = &v
 }
 
 // GetCdnUrl returns the CdnUrl field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -753,6 +797,38 @@ func (o *RepositoryCreate) HasEnforceEula() bool {
 // SetEnforceEula gets a reference to the given bool and assigns it to the EnforceEula field.
 func (o *RepositoryCreate) SetEnforceEula(v bool) {
 	o.EnforceEula = &v
+}
+
+// GetGenericPackageIndexEnabled returns the GenericPackageIndexEnabled field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetGenericPackageIndexEnabled() bool {
+	if o == nil || IsNil(o.GenericPackageIndexEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.GenericPackageIndexEnabled
+}
+
+// GetGenericPackageIndexEnabledOk returns a tuple with the GenericPackageIndexEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetGenericPackageIndexEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.GenericPackageIndexEnabled) {
+		return nil, false
+	}
+	return o.GenericPackageIndexEnabled, true
+}
+
+// HasGenericPackageIndexEnabled returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasGenericPackageIndexEnabled() bool {
+	if o != nil && !IsNil(o.GenericPackageIndexEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetGenericPackageIndexEnabled gets a reference to the given bool and assigns it to the GenericPackageIndexEnabled field.
+func (o *RepositoryCreate) SetGenericPackageIndexEnabled(v bool) {
+	o.GenericPackageIndexEnabled = &v
 }
 
 // GetGpgKeys returns the GpgKeys field value if set, zero value otherwise.
@@ -1345,6 +1421,38 @@ func (o *RepositoryCreate) SetPackageCount(v int64) {
 	o.PackageCount = &v
 }
 
+// GetPackageCountExclSubcomponents returns the PackageCountExclSubcomponents field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetPackageCountExclSubcomponents() int64 {
+	if o == nil || IsNil(o.PackageCountExclSubcomponents) {
+		var ret int64
+		return ret
+	}
+	return *o.PackageCountExclSubcomponents
+}
+
+// GetPackageCountExclSubcomponentsOk returns a tuple with the PackageCountExclSubcomponents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetPackageCountExclSubcomponentsOk() (*int64, bool) {
+	if o == nil || IsNil(o.PackageCountExclSubcomponents) {
+		return nil, false
+	}
+	return o.PackageCountExclSubcomponents, true
+}
+
+// HasPackageCountExclSubcomponents returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasPackageCountExclSubcomponents() bool {
+	if o != nil && !IsNil(o.PackageCountExclSubcomponents) {
+		return true
+	}
+
+	return false
+}
+
+// SetPackageCountExclSubcomponents gets a reference to the given int64 and assigns it to the PackageCountExclSubcomponents field.
+func (o *RepositoryCreate) SetPackageCountExclSubcomponents(v int64) {
+	o.PackageCountExclSubcomponents = &v
+}
+
 // GetPackageGroupCount returns the PackageGroupCount field value if set, zero value otherwise.
 func (o *RepositoryCreate) GetPackageGroupCount() int64 {
 	if o == nil || IsNil(o.PackageGroupCount) {
@@ -1823,6 +1931,38 @@ func (o *RepositoryCreate) HasSelfUrl() bool {
 // SetSelfUrl gets a reference to the given string and assigns it to the SelfUrl field.
 func (o *RepositoryCreate) SetSelfUrl(v string) {
 	o.SelfUrl = &v
+}
+
+// GetSelfWebappUrl returns the SelfWebappUrl field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetSelfWebappUrl() string {
+	if o == nil || IsNil(o.SelfWebappUrl) {
+		var ret string
+		return ret
+	}
+	return *o.SelfWebappUrl
+}
+
+// GetSelfWebappUrlOk returns a tuple with the SelfWebappUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetSelfWebappUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.SelfWebappUrl) {
+		return nil, false
+	}
+	return o.SelfWebappUrl, true
+}
+
+// HasSelfWebappUrl returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasSelfWebappUrl() bool {
+	if o != nil && !IsNil(o.SelfWebappUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelfWebappUrl gets a reference to the given string and assigns it to the SelfWebappUrl field.
+func (o *RepositoryCreate) SetSelfWebappUrl(v string) {
+	o.SelfWebappUrl = &v
 }
 
 // GetShowSetupAll returns the ShowSetupAll field value if set, zero value otherwise.
@@ -2347,6 +2487,9 @@ func (o RepositoryCreate) MarshalJSON() ([]byte, error) {
 
 func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BroadcastState) {
+		toSerialize["broadcast_state"] = o.BroadcastState
+	}
 	if o.CdnUrl.IsSet() {
 		toSerialize["cdn_url"] = o.CdnUrl.Get()
 	}
@@ -2394,6 +2537,9 @@ func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EnforceEula) {
 		toSerialize["enforce_eula"] = o.EnforceEula
+	}
+	if !IsNil(o.GenericPackageIndexEnabled) {
+		toSerialize["generic_package_index_enabled"] = o.GenericPackageIndexEnabled
 	}
 	if !IsNil(o.GpgKeys) {
 		toSerialize["gpg_keys"] = o.GpgKeys
@@ -2447,6 +2593,9 @@ func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PackageCount) {
 		toSerialize["package_count"] = o.PackageCount
 	}
+	if !IsNil(o.PackageCountExclSubcomponents) {
+		toSerialize["package_count_excl_subcomponents"] = o.PackageCountExclSubcomponents
+	}
 	if !IsNil(o.PackageGroupCount) {
 		toSerialize["package_group_count"] = o.PackageGroupCount
 	}
@@ -2491,6 +2640,9 @@ func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
+	}
+	if !IsNil(o.SelfWebappUrl) {
+		toSerialize["self_webapp_url"] = o.SelfWebappUrl
 	}
 	if !IsNil(o.ShowSetupAll) {
 		toSerialize["show_setup_all"] = o.ShowSetupAll
@@ -2583,6 +2735,7 @@ func (o *RepositoryCreate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "broadcast_state")
 		delete(additionalProperties, "cdn_url")
 		delete(additionalProperties, "content_kind")
 		delete(additionalProperties, "contextual_auth_realm")
@@ -2599,6 +2752,7 @@ func (o *RepositoryCreate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "docker_refresh_tokens_enabled")
 		delete(additionalProperties, "ecdsa_keys")
 		delete(additionalProperties, "enforce_eula")
+		delete(additionalProperties, "generic_package_index_enabled")
 		delete(additionalProperties, "gpg_keys")
 		delete(additionalProperties, "index_files")
 		delete(additionalProperties, "is_open_source")
@@ -2617,6 +2771,7 @@ func (o *RepositoryCreate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "open_source_license")
 		delete(additionalProperties, "open_source_project_url")
 		delete(additionalProperties, "package_count")
+		delete(additionalProperties, "package_count_excl_subcomponents")
 		delete(additionalProperties, "package_group_count")
 		delete(additionalProperties, "proxy_npmjs")
 		delete(additionalProperties, "proxy_pypi")
@@ -2632,6 +2787,7 @@ func (o *RepositoryCreate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scan_packages")
 		delete(additionalProperties, "self_html_url")
 		delete(additionalProperties, "self_url")
+		delete(additionalProperties, "self_webapp_url")
 		delete(additionalProperties, "show_setup_all")
 		delete(additionalProperties, "size")
 		delete(additionalProperties, "size_str")

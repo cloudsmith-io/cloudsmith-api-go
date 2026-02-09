@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -21,6 +21,8 @@ var _ MappedNullable = &RepositoryCreateRequest{}
 
 // RepositoryCreateRequest struct for RepositoryCreateRequest
 type RepositoryCreateRequest struct {
+	// Broadcasting status of a repository.
+	BroadcastState *string `json:"broadcast_state,omitempty"`
 	// The repository content kind determines whether this repository contains packages, or provides a distribution of packages from other repositories. You can only select the content kind at repository creation time.
 	ContentKind *string `json:"content_kind,omitempty"`
 	// If checked, missing credentials for this repository where basic authentication is required shall present an enriched value in the 'WWW-Authenticate' header containing the namespace and repository. This can be useful for tooling such as SBT where the authentication realm is used to distinguish and disambiguate credentials.
@@ -45,6 +47,8 @@ type RepositoryCreateRequest struct {
 	DockerRefreshTokensEnabled *bool `json:"docker_refresh_tokens_enabled,omitempty"`
 	// If checked, downloads will explicitly require acceptance of an EULA.
 	EnforceEula *bool `json:"enforce_eula,omitempty"`
+	// If checked, HTML indexes will be generated that list all available generic packages in the repository.
+	GenericPackageIndexEnabled *bool `json:"generic_package_index_enabled,omitempty"`
 	// If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted.
 	IndexFiles *bool `json:"index_files,omitempty"`
 	// This defines the minimum level of privilege required for a user to manage entitlement tokens with private repositories. Management is the ability to create, alter, enable, disable or delete all tokens without a repository.
@@ -120,6 +124,8 @@ type _RepositoryCreateRequest RepositoryCreateRequest
 // will change when the set of required properties is changed
 func NewRepositoryCreateRequest(name string) *RepositoryCreateRequest {
 	this := RepositoryCreateRequest{}
+	var broadcastState string = "Off"
+	this.BroadcastState = &broadcastState
 	var contentKind string = "Standard"
 	this.ContentKind = &contentKind
 	var copyPackages string = "Read"
@@ -155,6 +161,8 @@ func NewRepositoryCreateRequest(name string) *RepositoryCreateRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewRepositoryCreateRequestWithDefaults() *RepositoryCreateRequest {
 	this := RepositoryCreateRequest{}
+	var broadcastState string = "Off"
+	this.BroadcastState = &broadcastState
 	var contentKind string = "Standard"
 	this.ContentKind = &contentKind
 	var copyPackages string = "Read"
@@ -182,6 +190,38 @@ func NewRepositoryCreateRequestWithDefaults() *RepositoryCreateRequest {
 	var viewStatistics string = "Read"
 	this.ViewStatistics = &viewStatistics
 	return &this
+}
+
+// GetBroadcastState returns the BroadcastState field value if set, zero value otherwise.
+func (o *RepositoryCreateRequest) GetBroadcastState() string {
+	if o == nil || IsNil(o.BroadcastState) {
+		var ret string
+		return ret
+	}
+	return *o.BroadcastState
+}
+
+// GetBroadcastStateOk returns a tuple with the BroadcastState field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreateRequest) GetBroadcastStateOk() (*string, bool) {
+	if o == nil || IsNil(o.BroadcastState) {
+		return nil, false
+	}
+	return o.BroadcastState, true
+}
+
+// HasBroadcastState returns a boolean if a field has been set.
+func (o *RepositoryCreateRequest) HasBroadcastState() bool {
+	if o != nil && !IsNil(o.BroadcastState) {
+		return true
+	}
+
+	return false
+}
+
+// SetBroadcastState gets a reference to the given string and assigns it to the BroadcastState field.
+func (o *RepositoryCreateRequest) SetBroadcastState(v string) {
+	o.BroadcastState = &v
 }
 
 // GetContentKind returns the ContentKind field value if set, zero value otherwise.
@@ -566,6 +606,38 @@ func (o *RepositoryCreateRequest) HasEnforceEula() bool {
 // SetEnforceEula gets a reference to the given bool and assigns it to the EnforceEula field.
 func (o *RepositoryCreateRequest) SetEnforceEula(v bool) {
 	o.EnforceEula = &v
+}
+
+// GetGenericPackageIndexEnabled returns the GenericPackageIndexEnabled field value if set, zero value otherwise.
+func (o *RepositoryCreateRequest) GetGenericPackageIndexEnabled() bool {
+	if o == nil || IsNil(o.GenericPackageIndexEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.GenericPackageIndexEnabled
+}
+
+// GetGenericPackageIndexEnabledOk returns a tuple with the GenericPackageIndexEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreateRequest) GetGenericPackageIndexEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.GenericPackageIndexEnabled) {
+		return nil, false
+	}
+	return o.GenericPackageIndexEnabled, true
+}
+
+// HasGenericPackageIndexEnabled returns a boolean if a field has been set.
+func (o *RepositoryCreateRequest) HasGenericPackageIndexEnabled() bool {
+	if o != nil && !IsNil(o.GenericPackageIndexEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetGenericPackageIndexEnabled gets a reference to the given bool and assigns it to the GenericPackageIndexEnabled field.
+func (o *RepositoryCreateRequest) SetGenericPackageIndexEnabled(v bool) {
+	o.GenericPackageIndexEnabled = &v
 }
 
 // GetIndexFiles returns the IndexFiles field value if set, zero value otherwise.
@@ -1616,6 +1688,9 @@ func (o RepositoryCreateRequest) MarshalJSON() ([]byte, error) {
 
 func (o RepositoryCreateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.BroadcastState) {
+		toSerialize["broadcast_state"] = o.BroadcastState
+	}
 	if !IsNil(o.ContentKind) {
 		toSerialize["content_kind"] = o.ContentKind
 	}
@@ -1651,6 +1726,9 @@ func (o RepositoryCreateRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EnforceEula) {
 		toSerialize["enforce_eula"] = o.EnforceEula
+	}
+	if !IsNil(o.GenericPackageIndexEnabled) {
+		toSerialize["generic_package_index_enabled"] = o.GenericPackageIndexEnabled
 	}
 	if !IsNil(o.IndexFiles) {
 		toSerialize["index_files"] = o.IndexFiles
@@ -1789,6 +1867,7 @@ func (o *RepositoryCreateRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "broadcast_state")
 		delete(additionalProperties, "content_kind")
 		delete(additionalProperties, "contextual_auth_realm")
 		delete(additionalProperties, "copy_own")
@@ -1801,6 +1880,7 @@ func (o *RepositoryCreateRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "distributes")
 		delete(additionalProperties, "docker_refresh_tokens_enabled")
 		delete(additionalProperties, "enforce_eula")
+		delete(additionalProperties, "generic_package_index_enabled")
 		delete(additionalProperties, "index_files")
 		delete(additionalProperties, "manage_entitlements_privilege")
 		delete(additionalProperties, "move_own")

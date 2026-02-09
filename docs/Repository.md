@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BroadcastState** | Pointer to **string** | Broadcasting status of a repository. | [optional] [default to "Off"]
 **CdnUrl** | Pointer to **NullableString** | Base URL from which packages and other artifacts are downloaded. | [optional] [readonly] 
 **ContentKind** | Pointer to **string** | The repository content kind determines whether this repository contains packages, or provides a distribution of packages from other repositories. You can only select the content kind at repository creation time. | [optional] [default to "Standard"]
 **ContextualAuthRealm** | Pointer to **bool** | If checked, missing credentials for this repository where basic authentication is required shall present an enriched value in the &#39;WWW-Authenticate&#39; header containing the namespace and repository. This can be useful for tooling such as SBT where the authentication realm is used to distinguish and disambiguate credentials. | [optional] 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **DockerRefreshTokensEnabled** | Pointer to **bool** | If checked, refresh tokens will be issued in addition to access tokens for Docker authentication. This allows unlimited extension of the lifetime of access tokens. | [optional] 
 **EcdsaKeys** | Pointer to [**[]RepositoryEcdsaKey**](RepositoryEcdsaKey.md) |  | [optional] [readonly] 
 **EnforceEula** | Pointer to **bool** | If checked, downloads will explicitly require acceptance of an EULA. | [optional] 
+**GenericPackageIndexEnabled** | Pointer to **bool** | If checked, HTML indexes will be generated that list all available generic packages in the repository. | [optional] 
 **GpgKeys** | Pointer to [**[]RepositoryGpgKey**](RepositoryGpgKey.md) |  | [optional] [readonly] 
 **IndexFiles** | Pointer to **bool** | If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted. | [optional] 
 **IsOpenSource** | Pointer to **bool** |  | [optional] [readonly] 
@@ -38,6 +40,7 @@ Name | Type | Description | Notes
 **OpenSourceLicense** | Pointer to **NullableString** | The SPDX identifier of the open source license. | [optional] 
 **OpenSourceProjectUrl** | Pointer to **NullableString** | The URL to the Open-Source project, used for validating that the project meets the requirements for Open-Source. | [optional] 
 **PackageCount** | Pointer to **int64** | The number of packages in the repository. | [optional] [readonly] 
+**PackageCountExclSubcomponents** | Pointer to **int64** | The number of packages in the repository excluding subcomponents. | [optional] [readonly] 
 **PackageGroupCount** | Pointer to **int64** | The number of groups in the repository. | [optional] [readonly] 
 **ProxyNpmjs** | Pointer to **bool** | If checked, Npm packages that are not in the repository when requested by clients will automatically be proxied from the public npmjs.org registry. If there is at least one version for a package, others will not be proxied. | [optional] 
 **ProxyPypi** | Pointer to **bool** | If checked, Python packages that are not in the repository when requested by clients will automatically be proxied from the public pypi.python.org registry. If there is at least one version for a package, others will not be proxied. | [optional] 
@@ -53,6 +56,7 @@ Name | Type | Description | Notes
 **ScanPackages** | Pointer to **string** | This defines the minimum level of privilege required for a user to scan packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific scan setting. | [optional] [default to "Read"]
 **SelfHtmlUrl** | Pointer to **string** | Website URL for this repository. | [optional] [readonly] 
 **SelfUrl** | Pointer to **string** | API endpoint where data about this repository can be retrieved. | [optional] [readonly] 
+**SelfWebappUrl** | Pointer to **string** | Webapp URL for this repository. | [optional] [readonly] 
 **ShowSetupAll** | Pointer to **bool** | If checked, the Set Me Up help for all formats will always be shown, even if you don&#39;t have packages of that type uploaded. Otherwise, help will only be shown for packages that are in the repository. For example, if you have uploaded only NuGet packages, then the Set Me Up help for NuGet packages will be shown only. | [optional] 
 **Size** | Pointer to **int64** | The calculated size of the repository. | [optional] [readonly] 
 **SizeStr** | Pointer to **string** | The calculated size of the repository (human readable). | [optional] [readonly] 
@@ -88,6 +92,31 @@ will change when the set of required properties is changed
 NewRepositoryWithDefaults instantiates a new Repository object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBroadcastState
+
+`func (o *Repository) GetBroadcastState() string`
+
+GetBroadcastState returns the BroadcastState field if non-nil, zero value otherwise.
+
+### GetBroadcastStateOk
+
+`func (o *Repository) GetBroadcastStateOk() (*string, bool)`
+
+GetBroadcastStateOk returns a tuple with the BroadcastState field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBroadcastState
+
+`func (o *Repository) SetBroadcastState(v string)`
+
+SetBroadcastState sets BroadcastState field to given value.
+
+### HasBroadcastState
+
+`func (o *Repository) HasBroadcastState() bool`
+
+HasBroadcastState returns a boolean if a field has been set.
 
 ### GetCdnUrl
 
@@ -508,6 +537,31 @@ SetEnforceEula sets EnforceEula field to given value.
 `func (o *Repository) HasEnforceEula() bool`
 
 HasEnforceEula returns a boolean if a field has been set.
+
+### GetGenericPackageIndexEnabled
+
+`func (o *Repository) GetGenericPackageIndexEnabled() bool`
+
+GetGenericPackageIndexEnabled returns the GenericPackageIndexEnabled field if non-nil, zero value otherwise.
+
+### GetGenericPackageIndexEnabledOk
+
+`func (o *Repository) GetGenericPackageIndexEnabledOk() (*bool, bool)`
+
+GetGenericPackageIndexEnabledOk returns a tuple with the GenericPackageIndexEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGenericPackageIndexEnabled
+
+`func (o *Repository) SetGenericPackageIndexEnabled(v bool)`
+
+SetGenericPackageIndexEnabled sets GenericPackageIndexEnabled field to given value.
+
+### HasGenericPackageIndexEnabled
+
+`func (o *Repository) HasGenericPackageIndexEnabled() bool`
+
+HasGenericPackageIndexEnabled returns a boolean if a field has been set.
 
 ### GetGpgKeys
 
@@ -974,6 +1028,31 @@ SetPackageCount sets PackageCount field to given value.
 
 HasPackageCount returns a boolean if a field has been set.
 
+### GetPackageCountExclSubcomponents
+
+`func (o *Repository) GetPackageCountExclSubcomponents() int64`
+
+GetPackageCountExclSubcomponents returns the PackageCountExclSubcomponents field if non-nil, zero value otherwise.
+
+### GetPackageCountExclSubcomponentsOk
+
+`func (o *Repository) GetPackageCountExclSubcomponentsOk() (*int64, bool)`
+
+GetPackageCountExclSubcomponentsOk returns a tuple with the PackageCountExclSubcomponents field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPackageCountExclSubcomponents
+
+`func (o *Repository) SetPackageCountExclSubcomponents(v int64)`
+
+SetPackageCountExclSubcomponents sets PackageCountExclSubcomponents field to given value.
+
+### HasPackageCountExclSubcomponents
+
+`func (o *Repository) HasPackageCountExclSubcomponents() bool`
+
+HasPackageCountExclSubcomponents returns a boolean if a field has been set.
+
 ### GetPackageGroupCount
 
 `func (o *Repository) GetPackageGroupCount() int64`
@@ -1348,6 +1427,31 @@ SetSelfUrl sets SelfUrl field to given value.
 `func (o *Repository) HasSelfUrl() bool`
 
 HasSelfUrl returns a boolean if a field has been set.
+
+### GetSelfWebappUrl
+
+`func (o *Repository) GetSelfWebappUrl() string`
+
+GetSelfWebappUrl returns the SelfWebappUrl field if non-nil, zero value otherwise.
+
+### GetSelfWebappUrlOk
+
+`func (o *Repository) GetSelfWebappUrlOk() (*string, bool)`
+
+GetSelfWebappUrlOk returns a tuple with the SelfWebappUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSelfWebappUrl
+
+`func (o *Repository) SetSelfWebappUrl(v string)`
+
+SetSelfWebappUrl sets SelfWebappUrl field to given value.
+
+### HasSelfWebappUrl
+
+`func (o *Repository) HasSelfWebappUrl() bool`
+
+HasSelfWebappUrl returns a boolean if a field has been set.
 
 ### GetShowSetupAll
 

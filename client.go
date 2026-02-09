@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -41,7 +41,7 @@ var (
 	queryDescape    = strings.NewReplacer("%5B", "[", "%5D", "]")
 )
 
-// APIClient manages communication with the Cloudsmith API (v1) API v1.830.6
+// APIClient manages communication with the Cloudsmith API (v1) API v1.990.1
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -52,6 +52,8 @@ type APIClient struct {
 	AuditLogApi *AuditLogApiService
 
 	BadgesApi *BadgesApiService
+
+	BroadcastsApi *BroadcastsApiService
 
 	DistrosApi *DistrosApiService
 
@@ -106,6 +108,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AuditLogApi = (*AuditLogApiService)(&c.common)
 	c.BadgesApi = (*BadgesApiService)(&c.common)
+	c.BroadcastsApi = (*BroadcastsApiService)(&c.common)
 	c.DistrosApi = (*DistrosApiService)(&c.common)
 	c.EntitlementsApi = (*EntitlementsApiService)(&c.common)
 	c.FilesApi = (*FilesApiService)(&c.common)

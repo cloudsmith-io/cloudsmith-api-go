@@ -4,6 +4,7 @@ All URIs are relative to *https://api.cloudsmith.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**PackagesBulkAction**](PackagesApi.md#PackagesBulkAction) | **Post** /packages/{owner}/bulk-action/ | 
 [**PackagesCopy**](PackagesApi.md#PackagesCopy) | **Post** /packages/{owner}/{repo}/{identifier}/copy/ | Copy a package to another repository.
 [**PackagesDelete**](PackagesApi.md#PackagesDelete) | **Delete** /packages/{owner}/{repo}/{identifier}/ | Delete a specific package in a repository.
 [**PackagesDependencies**](PackagesApi.md#PackagesDependencies) | **Get** /packages/{owner}/{repo}/{identifier}/dependencies/ | Get the list of dependencies for a package. Transitive dependencies are included where supported.
@@ -27,6 +28,7 @@ Method | HTTP request | Description
 [**PackagesUploadDart**](PackagesApi.md#PackagesUploadDart) | **Post** /packages/{owner}/{repo}/upload/dart/ | Create a new Dart package
 [**PackagesUploadDeb**](PackagesApi.md#PackagesUploadDeb) | **Post** /packages/{owner}/{repo}/upload/deb/ | Create a new Debian package
 [**PackagesUploadDocker**](PackagesApi.md#PackagesUploadDocker) | **Post** /packages/{owner}/{repo}/upload/docker/ | Create a new Docker package
+[**PackagesUploadGeneric**](PackagesApi.md#PackagesUploadGeneric) | **Post** /packages/{owner}/{repo}/upload/generic/ | Create a new Generic package
 [**PackagesUploadGo**](PackagesApi.md#PackagesUploadGo) | **Post** /packages/{owner}/{repo}/upload/go/ | Create a new Go package
 [**PackagesUploadHelm**](PackagesApi.md#PackagesUploadHelm) | **Post** /packages/{owner}/{repo}/upload/helm/ | Create a new Helm package
 [**PackagesUploadHex**](PackagesApi.md#PackagesUploadHex) | **Post** /packages/{owner}/{repo}/upload/hex/ | Create a new Hex package
@@ -53,6 +55,7 @@ Method | HTTP request | Description
 [**PackagesValidateUploadDart**](PackagesApi.md#PackagesValidateUploadDart) | **Post** /packages/{owner}/{repo}/validate-upload/dart/ | Validate parameters for create Dart package
 [**PackagesValidateUploadDeb**](PackagesApi.md#PackagesValidateUploadDeb) | **Post** /packages/{owner}/{repo}/validate-upload/deb/ | Validate parameters for create Debian package
 [**PackagesValidateUploadDocker**](PackagesApi.md#PackagesValidateUploadDocker) | **Post** /packages/{owner}/{repo}/validate-upload/docker/ | Validate parameters for create Docker package
+[**PackagesValidateUploadGeneric**](PackagesApi.md#PackagesValidateUploadGeneric) | **Post** /packages/{owner}/{repo}/validate-upload/generic/ | Validate parameters for create Generic package
 [**PackagesValidateUploadGo**](PackagesApi.md#PackagesValidateUploadGo) | **Post** /packages/{owner}/{repo}/validate-upload/go/ | Validate parameters for create Go package
 [**PackagesValidateUploadHelm**](PackagesApi.md#PackagesValidateUploadHelm) | **Post** /packages/{owner}/{repo}/validate-upload/helm/ | Validate parameters for create Helm package
 [**PackagesValidateUploadHex**](PackagesApi.md#PackagesValidateUploadHex) | **Post** /packages/{owner}/{repo}/validate-upload/hex/ | Validate parameters for create Hex package
@@ -70,6 +73,78 @@ Method | HTTP request | Description
 [**PackagesValidateUploadTerraform**](PackagesApi.md#PackagesValidateUploadTerraform) | **Post** /packages/{owner}/{repo}/validate-upload/terraform/ | Validate parameters for create Terraform package
 [**PackagesValidateUploadVagrant**](PackagesApi.md#PackagesValidateUploadVagrant) | **Post** /packages/{owner}/{repo}/validate-upload/vagrant/ | Validate parameters for create Vagrant package
 
+
+
+## PackagesBulkAction
+
+> PackageBulkActionResponse PackagesBulkAction(ctx, owner).Data(data).Execute()
+
+
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	data := *openapiclient.NewPackageBulkAction("Action_example", []string{"Identifiers_example"}) // PackageBulkAction |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PackagesApi.PackagesBulkAction(context.Background(), owner).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesBulkAction``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PackagesBulkAction`: PackageBulkActionResponse
+	fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesBulkAction`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesBulkActionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **data** | [**PackageBulkAction**](PackageBulkAction.md) |  | 
+
+### Return type
+
+[**PackageBulkActionResponse**](PackageBulkActionResponse.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## PackagesCopy
@@ -1817,6 +1892,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DockerPackageUpload**](DockerPackageUpload.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesUploadGeneric
+
+> GenericPackageUpload PackagesUploadGeneric(ctx, owner, repo).Data(data).Execute()
+
+Create a new Generic package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewGenericPackageUploadRequest("Filepath_example", "PackageFile_example") // GenericPackageUploadRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PackagesApi.PackagesUploadGeneric(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadGeneric``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PackagesUploadGeneric`: GenericPackageUpload
+	fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadGeneric`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesUploadGenericRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**GenericPackageUploadRequest**](GenericPackageUploadRequest.md) |  | 
+
+### Return type
+
+[**GenericPackageUpload**](GenericPackageUpload.md)
 
 ### Authorization
 
@@ -3743,6 +3893,79 @@ Name | Type | Description  | Notes
 
 
  **data** | [**DockerPackageUploadRequest**](DockerPackageUploadRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesValidateUploadGeneric
+
+> PackagesValidateUploadGeneric(ctx, owner, repo).Data(data).Execute()
+
+Validate parameters for create Generic package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewGenericPackageUploadRequest("Filepath_example", "PackageFile_example") // GenericPackageUploadRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PackagesApi.PackagesValidateUploadGeneric(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadGeneric``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesValidateUploadGenericRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**GenericPackageUploadRequest**](GenericPackageUploadRequest.md) |  | 
 
 ### Return type
 

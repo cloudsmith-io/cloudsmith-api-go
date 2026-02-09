@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -21,7 +21,9 @@ var _ MappedNullable = &RepositoryTokenRefresh{}
 
 // RepositoryTokenRefresh struct for RepositoryTokenRefresh
 type RepositoryTokenRefresh struct {
-	Clients *int64 `json:"clients,omitempty"`
+	// If enabled, this token can be used for private broadcasts
+	AccessPrivateBroadcasts *bool  `json:"access_private_broadcasts,omitempty"`
+	Clients                 *int64 `json:"clients,omitempty"`
 	// The datetime the token was updated at.
 	CreatedAt    *time.Time `json:"created_at,omitempty"`
 	CreatedBy    *string    `json:"created_by,omitempty"`
@@ -103,6 +105,38 @@ func NewRepositoryTokenRefreshWithDefaults() *RepositoryTokenRefresh {
 	var scheduledResetPeriod string = "Never Reset"
 	this.ScheduledResetPeriod = *NewNullableString(&scheduledResetPeriod)
 	return &this
+}
+
+// GetAccessPrivateBroadcasts returns the AccessPrivateBroadcasts field value if set, zero value otherwise.
+func (o *RepositoryTokenRefresh) GetAccessPrivateBroadcasts() bool {
+	if o == nil || IsNil(o.AccessPrivateBroadcasts) {
+		var ret bool
+		return ret
+	}
+	return *o.AccessPrivateBroadcasts
+}
+
+// GetAccessPrivateBroadcastsOk returns a tuple with the AccessPrivateBroadcasts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryTokenRefresh) GetAccessPrivateBroadcastsOk() (*bool, bool) {
+	if o == nil || IsNil(o.AccessPrivateBroadcasts) {
+		return nil, false
+	}
+	return o.AccessPrivateBroadcasts, true
+}
+
+// HasAccessPrivateBroadcasts returns a boolean if a field has been set.
+func (o *RepositoryTokenRefresh) HasAccessPrivateBroadcasts() bool {
+	if o != nil && !IsNil(o.AccessPrivateBroadcasts) {
+		return true
+	}
+
+	return false
+}
+
+// SetAccessPrivateBroadcasts gets a reference to the given bool and assigns it to the AccessPrivateBroadcasts field.
+func (o *RepositoryTokenRefresh) SetAccessPrivateBroadcasts(v bool) {
+	o.AccessPrivateBroadcasts = &v
 }
 
 // GetClients returns the Clients field value if set, zero value otherwise.
@@ -1573,6 +1607,9 @@ func (o RepositoryTokenRefresh) MarshalJSON() ([]byte, error) {
 
 func (o RepositoryTokenRefresh) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.AccessPrivateBroadcasts) {
+		toSerialize["access_private_broadcasts"] = o.AccessPrivateBroadcasts
+	}
 	if !IsNil(o.Clients) {
 		toSerialize["clients"] = o.Clients
 	}
@@ -1712,6 +1749,7 @@ func (o *RepositoryTokenRefresh) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "access_private_broadcasts")
 		delete(additionalProperties, "clients")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "created_by")

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Dependencies** | **bool** | If true the package format supports dependencies | 
 **Distributions** | **bool** | If true the package format supports distributions | 
 **FileLists** | **bool** | If true the package format supports file lists | 
+**Filepaths** | **bool** | If true the package format supports filepaths | 
 **Metadata** | **bool** | If true the package format supports metadata | 
 **Upstreams** | [**FormatSupportUpstream**](FormatSupportUpstream.md) |  | 
 **Versioning** | **bool** | If true the package format supports versioning | 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewFormatSupport
 
-`func NewFormatSupport(dependencies bool, distributions bool, fileLists bool, metadata bool, upstreams FormatSupportUpstream, versioning bool, ) *FormatSupport`
+`func NewFormatSupport(dependencies bool, distributions bool, fileLists bool, filepaths bool, metadata bool, upstreams FormatSupportUpstream, versioning bool, ) *FormatSupport`
 
 NewFormatSupport instantiates a new FormatSupport object
 This constructor will assign default values to properties that have it defined,
@@ -88,6 +89,26 @@ and a boolean to check if the value has been set.
 `func (o *FormatSupport) SetFileLists(v bool)`
 
 SetFileLists sets FileLists field to given value.
+
+
+### GetFilepaths
+
+`func (o *FormatSupport) GetFilepaths() bool`
+
+GetFilepaths returns the Filepaths field if non-nil, zero value otherwise.
+
+### GetFilepathsOk
+
+`func (o *FormatSupport) GetFilepathsOk() (*bool, bool)`
+
+GetFilepathsOk returns a tuple with the Filepaths field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilepaths
+
+`func (o *FormatSupport) SetFilepaths(v bool)`
+
+SetFilepaths sets Filepaths field to given value.
 
 
 ### GetMetadata

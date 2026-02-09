@@ -52,6 +52,7 @@ Name | Type | Description | Notes
 **PackageType** | Pointer to **int64** | The type of package contents. | [optional] [readonly] 
 **PolicyViolated** | Pointer to **bool** | Whether or not the package has violated any policy. | [optional] [readonly] 
 **Provider** | **string** | The virtual machine provider for the box. | 
+**RawLicense** | Pointer to **NullableString** | The raw license string. | [optional] [readonly] 
 **Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
@@ -61,10 +62,12 @@ Name | Type | Description | Notes
 **SecurityScanStatusUpdatedAt** | Pointer to **NullableTime** | The datetime the security scanning status was updated. | [optional] [readonly] 
 **SelfHtmlUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SelfUrl** | Pointer to **string** |  | [optional] [readonly] 
+**SelfWebappUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SignatureUrl** | Pointer to **NullableString** |  | [optional] [readonly] 
 **Size** | Pointer to **int64** | The calculated size of the package. | [optional] [readonly] 
 **Slug** | Pointer to **string** | The public unique identifier for the package. | [optional] [readonly] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
+**SpdxLicense** | Pointer to **NullableString** | The SPDX license identifier for this package. | [optional] [readonly] 
 **Stage** | Pointer to **int64** | The synchronisation (in progress) stage of the package. | [optional] [readonly] 
 **StageStr** | Pointer to **string** |  | [optional] [readonly] 
 **StageUpdatedAt** | Pointer to **time.Time** | The datetime the package stage was updated at. | [optional] [readonly] 
@@ -1366,6 +1369,41 @@ and a boolean to check if the value has been set.
 SetProvider sets Provider field to given value.
 
 
+### GetRawLicense
+
+`func (o *VagrantPackageUpload) GetRawLicense() string`
+
+GetRawLicense returns the RawLicense field if non-nil, zero value otherwise.
+
+### GetRawLicenseOk
+
+`func (o *VagrantPackageUpload) GetRawLicenseOk() (*string, bool)`
+
+GetRawLicenseOk returns a tuple with the RawLicense field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawLicense
+
+`func (o *VagrantPackageUpload) SetRawLicense(v string)`
+
+SetRawLicense sets RawLicense field to given value.
+
+### HasRawLicense
+
+`func (o *VagrantPackageUpload) HasRawLicense() bool`
+
+HasRawLicense returns a boolean if a field has been set.
+
+### SetRawLicenseNil
+
+`func (o *VagrantPackageUpload) SetRawLicenseNil(b bool)`
+
+ SetRawLicenseNil sets the value for RawLicense to be an explicit nil
+
+### UnsetRawLicense
+`func (o *VagrantPackageUpload) UnsetRawLicense()`
+
+UnsetRawLicense ensures that no value is present for RawLicense, not even an explicit nil
 ### GetRelease
 
 `func (o *VagrantPackageUpload) GetRelease() string`
@@ -1641,6 +1679,31 @@ SetSelfUrl sets SelfUrl field to given value.
 
 HasSelfUrl returns a boolean if a field has been set.
 
+### GetSelfWebappUrl
+
+`func (o *VagrantPackageUpload) GetSelfWebappUrl() string`
+
+GetSelfWebappUrl returns the SelfWebappUrl field if non-nil, zero value otherwise.
+
+### GetSelfWebappUrlOk
+
+`func (o *VagrantPackageUpload) GetSelfWebappUrlOk() (*string, bool)`
+
+GetSelfWebappUrlOk returns a tuple with the SelfWebappUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSelfWebappUrl
+
+`func (o *VagrantPackageUpload) SetSelfWebappUrl(v string)`
+
+SetSelfWebappUrl sets SelfWebappUrl field to given value.
+
+### HasSelfWebappUrl
+
+`func (o *VagrantPackageUpload) HasSelfWebappUrl() bool`
+
+HasSelfWebappUrl returns a boolean if a field has been set.
+
 ### GetSignatureUrl
 
 `func (o *VagrantPackageUpload) GetSignatureUrl() string`
@@ -1751,6 +1814,41 @@ SetSlugPerm sets SlugPerm field to given value.
 
 HasSlugPerm returns a boolean if a field has been set.
 
+### GetSpdxLicense
+
+`func (o *VagrantPackageUpload) GetSpdxLicense() string`
+
+GetSpdxLicense returns the SpdxLicense field if non-nil, zero value otherwise.
+
+### GetSpdxLicenseOk
+
+`func (o *VagrantPackageUpload) GetSpdxLicenseOk() (*string, bool)`
+
+GetSpdxLicenseOk returns a tuple with the SpdxLicense field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpdxLicense
+
+`func (o *VagrantPackageUpload) SetSpdxLicense(v string)`
+
+SetSpdxLicense sets SpdxLicense field to given value.
+
+### HasSpdxLicense
+
+`func (o *VagrantPackageUpload) HasSpdxLicense() bool`
+
+HasSpdxLicense returns a boolean if a field has been set.
+
+### SetSpdxLicenseNil
+
+`func (o *VagrantPackageUpload) SetSpdxLicenseNil(b bool)`
+
+ SetSpdxLicenseNil sets the value for SpdxLicense to be an explicit nil
+
+### UnsetSpdxLicense
+`func (o *VagrantPackageUpload) UnsetSpdxLicense()`
+
+UnsetSpdxLicense ensures that no value is present for SpdxLicense, not even an explicit nil
 ### GetStage
 
 `func (o *VagrantPackageUpload) GetStage() int64`

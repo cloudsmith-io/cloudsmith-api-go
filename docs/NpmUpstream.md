@@ -7,13 +7,20 @@ Name | Type | Description | Notes
 **AuthMode** | Pointer to **string** | The authentication mode to use when accessing this upstream.  | [optional] [default to "None"]
 **AuthSecret** | Pointer to **NullableString** | Secret to provide with requests to upstream. | [optional] 
 **AuthUsername** | Pointer to **NullableString** | Username to provide with requests to upstream. | [optional] 
+**Available** | Pointer to **string** |  | [optional] [readonly] 
+**CanReindex** | Pointer to **string** |  | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | The datetime the upstream source was created. | [optional] [readonly] 
 **DisableReason** | Pointer to **string** |  | [optional] [readonly] [default to "N/A"]
+**DisableReasonText** | Pointer to **string** | Human-readable explanation of why this upstream is disabled | [optional] [readonly] 
 **ExtraHeader1** | Pointer to **NullableString** | The key for extra header #1 to send to upstream. | [optional] 
 **ExtraHeader2** | Pointer to **NullableString** | The key for extra header #2 to send to upstream. | [optional] 
 **ExtraValue1** | Pointer to **NullableString** | The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
 **ExtraValue2** | Pointer to **NullableString** | The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
+**HasFailedSignatureVerification** | Pointer to **string** |  | [optional] [readonly] 
+**IndexPackageCount** | Pointer to **string** | The number of packages available in this upstream source | [optional] [readonly] 
+**IndexStatus** | Pointer to **string** | The current indexing status of this upstream source | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
+**LastIndexed** | Pointer to **string** | The last time this upstream source was indexed | [optional] [readonly] 
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
 **Name** | **string** | A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream. | 
 **PendingValidation** | Pointer to **bool** | When true, this upstream source is pending validation. | [optional] [readonly] 
@@ -137,6 +144,56 @@ HasAuthUsername returns a boolean if a field has been set.
 `func (o *NpmUpstream) UnsetAuthUsername()`
 
 UnsetAuthUsername ensures that no value is present for AuthUsername, not even an explicit nil
+### GetAvailable
+
+`func (o *NpmUpstream) GetAvailable() string`
+
+GetAvailable returns the Available field if non-nil, zero value otherwise.
+
+### GetAvailableOk
+
+`func (o *NpmUpstream) GetAvailableOk() (*string, bool)`
+
+GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailable
+
+`func (o *NpmUpstream) SetAvailable(v string)`
+
+SetAvailable sets Available field to given value.
+
+### HasAvailable
+
+`func (o *NpmUpstream) HasAvailable() bool`
+
+HasAvailable returns a boolean if a field has been set.
+
+### GetCanReindex
+
+`func (o *NpmUpstream) GetCanReindex() string`
+
+GetCanReindex returns the CanReindex field if non-nil, zero value otherwise.
+
+### GetCanReindexOk
+
+`func (o *NpmUpstream) GetCanReindexOk() (*string, bool)`
+
+GetCanReindexOk returns a tuple with the CanReindex field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanReindex
+
+`func (o *NpmUpstream) SetCanReindex(v string)`
+
+SetCanReindex sets CanReindex field to given value.
+
+### HasCanReindex
+
+`func (o *NpmUpstream) HasCanReindex() bool`
+
+HasCanReindex returns a boolean if a field has been set.
+
 ### GetCreatedAt
 
 `func (o *NpmUpstream) GetCreatedAt() time.Time`
@@ -186,6 +243,31 @@ SetDisableReason sets DisableReason field to given value.
 `func (o *NpmUpstream) HasDisableReason() bool`
 
 HasDisableReason returns a boolean if a field has been set.
+
+### GetDisableReasonText
+
+`func (o *NpmUpstream) GetDisableReasonText() string`
+
+GetDisableReasonText returns the DisableReasonText field if non-nil, zero value otherwise.
+
+### GetDisableReasonTextOk
+
+`func (o *NpmUpstream) GetDisableReasonTextOk() (*string, bool)`
+
+GetDisableReasonTextOk returns a tuple with the DisableReasonText field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableReasonText
+
+`func (o *NpmUpstream) SetDisableReasonText(v string)`
+
+SetDisableReasonText sets DisableReasonText field to given value.
+
+### HasDisableReasonText
+
+`func (o *NpmUpstream) HasDisableReasonText() bool`
+
+HasDisableReasonText returns a boolean if a field has been set.
 
 ### GetExtraHeader1
 
@@ -327,6 +409,81 @@ HasExtraValue2 returns a boolean if a field has been set.
 `func (o *NpmUpstream) UnsetExtraValue2()`
 
 UnsetExtraValue2 ensures that no value is present for ExtraValue2, not even an explicit nil
+### GetHasFailedSignatureVerification
+
+`func (o *NpmUpstream) GetHasFailedSignatureVerification() string`
+
+GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field if non-nil, zero value otherwise.
+
+### GetHasFailedSignatureVerificationOk
+
+`func (o *NpmUpstream) GetHasFailedSignatureVerificationOk() (*string, bool)`
+
+GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasFailedSignatureVerification
+
+`func (o *NpmUpstream) SetHasFailedSignatureVerification(v string)`
+
+SetHasFailedSignatureVerification sets HasFailedSignatureVerification field to given value.
+
+### HasHasFailedSignatureVerification
+
+`func (o *NpmUpstream) HasHasFailedSignatureVerification() bool`
+
+HasHasFailedSignatureVerification returns a boolean if a field has been set.
+
+### GetIndexPackageCount
+
+`func (o *NpmUpstream) GetIndexPackageCount() string`
+
+GetIndexPackageCount returns the IndexPackageCount field if non-nil, zero value otherwise.
+
+### GetIndexPackageCountOk
+
+`func (o *NpmUpstream) GetIndexPackageCountOk() (*string, bool)`
+
+GetIndexPackageCountOk returns a tuple with the IndexPackageCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIndexPackageCount
+
+`func (o *NpmUpstream) SetIndexPackageCount(v string)`
+
+SetIndexPackageCount sets IndexPackageCount field to given value.
+
+### HasIndexPackageCount
+
+`func (o *NpmUpstream) HasIndexPackageCount() bool`
+
+HasIndexPackageCount returns a boolean if a field has been set.
+
+### GetIndexStatus
+
+`func (o *NpmUpstream) GetIndexStatus() string`
+
+GetIndexStatus returns the IndexStatus field if non-nil, zero value otherwise.
+
+### GetIndexStatusOk
+
+`func (o *NpmUpstream) GetIndexStatusOk() (*string, bool)`
+
+GetIndexStatusOk returns a tuple with the IndexStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIndexStatus
+
+`func (o *NpmUpstream) SetIndexStatus(v string)`
+
+SetIndexStatus sets IndexStatus field to given value.
+
+### HasIndexStatus
+
+`func (o *NpmUpstream) HasIndexStatus() bool`
+
+HasIndexStatus returns a boolean if a field has been set.
+
 ### GetIsActive
 
 `func (o *NpmUpstream) GetIsActive() bool`
@@ -351,6 +508,31 @@ SetIsActive sets IsActive field to given value.
 `func (o *NpmUpstream) HasIsActive() bool`
 
 HasIsActive returns a boolean if a field has been set.
+
+### GetLastIndexed
+
+`func (o *NpmUpstream) GetLastIndexed() string`
+
+GetLastIndexed returns the LastIndexed field if non-nil, zero value otherwise.
+
+### GetLastIndexedOk
+
+`func (o *NpmUpstream) GetLastIndexedOk() (*string, bool)`
+
+GetLastIndexedOk returns a tuple with the LastIndexed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastIndexed
+
+`func (o *NpmUpstream) SetLastIndexed(v string)`
+
+SetLastIndexed sets LastIndexed field to given value.
+
+### HasLastIndexed
+
+`func (o *NpmUpstream) HasLastIndexed() bool`
+
+HasLastIndexed returns a boolean if a field has been set.
 
 ### GetMode
 

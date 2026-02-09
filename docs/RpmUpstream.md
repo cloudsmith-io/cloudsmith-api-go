@@ -7,18 +7,26 @@ Name | Type | Description | Notes
 **AuthMode** | Pointer to **string** | The authentication mode to use when accessing this upstream.  | [optional] [default to "None"]
 **AuthSecret** | Pointer to **NullableString** | Secret to provide with requests to upstream. | [optional] 
 **AuthUsername** | Pointer to **NullableString** | Username to provide with requests to upstream. | [optional] 
+**Available** | Pointer to **string** |  | [optional] [readonly] 
+**CanReindex** | Pointer to **string** |  | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | The datetime the upstream source was created. | [optional] [readonly] 
 **DisableReason** | Pointer to **string** |  | [optional] [readonly] [default to "N/A"]
+**DisableReasonText** | Pointer to **string** | Human-readable explanation of why this upstream is disabled | [optional] [readonly] 
 **DistroVersion** | **string** | The distribution version that packages found on this upstream will be associated with. | 
 **ExtraHeader1** | Pointer to **NullableString** | The key for extra header #1 to send to upstream. | [optional] 
 **ExtraHeader2** | Pointer to **NullableString** | The key for extra header #2 to send to upstream. | [optional] 
 **ExtraValue1** | Pointer to **NullableString** | The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
 **ExtraValue2** | Pointer to **NullableString** | The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
+**GpgKeyFingerprintShort** | Pointer to **string** |  | [optional] [readonly] 
 **GpgKeyInline** | Pointer to **NullableString** | A public GPG key to associate with packages found on this upstream. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install. | [optional] 
 **GpgKeyUrl** | Pointer to **NullableString** | When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install. | [optional] 
 **GpgVerification** | Pointer to **string** | The GPG signature verification mode for this upstream. | [optional] [default to "Allow All"]
+**HasFailedSignatureVerification** | Pointer to **string** |  | [optional] [readonly] 
 **IncludeSources** | Pointer to **bool** | When checked, source packages will be available from this upstream. | [optional] 
+**IndexPackageCount** | Pointer to **string** | The number of packages available in this upstream source | [optional] [readonly] 
+**IndexStatus** | Pointer to **string** | The current indexing status of this upstream source | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
+**LastIndexed** | Pointer to **string** | The last time this upstream source was indexed | [optional] [readonly] 
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
 **Name** | **string** | A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream. | 
 **PendingValidation** | Pointer to **bool** | When true, this upstream source is pending validation. | [optional] [readonly] 
@@ -143,6 +151,56 @@ HasAuthUsername returns a boolean if a field has been set.
 `func (o *RpmUpstream) UnsetAuthUsername()`
 
 UnsetAuthUsername ensures that no value is present for AuthUsername, not even an explicit nil
+### GetAvailable
+
+`func (o *RpmUpstream) GetAvailable() string`
+
+GetAvailable returns the Available field if non-nil, zero value otherwise.
+
+### GetAvailableOk
+
+`func (o *RpmUpstream) GetAvailableOk() (*string, bool)`
+
+GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailable
+
+`func (o *RpmUpstream) SetAvailable(v string)`
+
+SetAvailable sets Available field to given value.
+
+### HasAvailable
+
+`func (o *RpmUpstream) HasAvailable() bool`
+
+HasAvailable returns a boolean if a field has been set.
+
+### GetCanReindex
+
+`func (o *RpmUpstream) GetCanReindex() string`
+
+GetCanReindex returns the CanReindex field if non-nil, zero value otherwise.
+
+### GetCanReindexOk
+
+`func (o *RpmUpstream) GetCanReindexOk() (*string, bool)`
+
+GetCanReindexOk returns a tuple with the CanReindex field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanReindex
+
+`func (o *RpmUpstream) SetCanReindex(v string)`
+
+SetCanReindex sets CanReindex field to given value.
+
+### HasCanReindex
+
+`func (o *RpmUpstream) HasCanReindex() bool`
+
+HasCanReindex returns a boolean if a field has been set.
+
 ### GetCreatedAt
 
 `func (o *RpmUpstream) GetCreatedAt() time.Time`
@@ -192,6 +250,31 @@ SetDisableReason sets DisableReason field to given value.
 `func (o *RpmUpstream) HasDisableReason() bool`
 
 HasDisableReason returns a boolean if a field has been set.
+
+### GetDisableReasonText
+
+`func (o *RpmUpstream) GetDisableReasonText() string`
+
+GetDisableReasonText returns the DisableReasonText field if non-nil, zero value otherwise.
+
+### GetDisableReasonTextOk
+
+`func (o *RpmUpstream) GetDisableReasonTextOk() (*string, bool)`
+
+GetDisableReasonTextOk returns a tuple with the DisableReasonText field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableReasonText
+
+`func (o *RpmUpstream) SetDisableReasonText(v string)`
+
+SetDisableReasonText sets DisableReasonText field to given value.
+
+### HasDisableReasonText
+
+`func (o *RpmUpstream) HasDisableReasonText() bool`
+
+HasDisableReasonText returns a boolean if a field has been set.
 
 ### GetDistroVersion
 
@@ -353,6 +436,31 @@ HasExtraValue2 returns a boolean if a field has been set.
 `func (o *RpmUpstream) UnsetExtraValue2()`
 
 UnsetExtraValue2 ensures that no value is present for ExtraValue2, not even an explicit nil
+### GetGpgKeyFingerprintShort
+
+`func (o *RpmUpstream) GetGpgKeyFingerprintShort() string`
+
+GetGpgKeyFingerprintShort returns the GpgKeyFingerprintShort field if non-nil, zero value otherwise.
+
+### GetGpgKeyFingerprintShortOk
+
+`func (o *RpmUpstream) GetGpgKeyFingerprintShortOk() (*string, bool)`
+
+GetGpgKeyFingerprintShortOk returns a tuple with the GpgKeyFingerprintShort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGpgKeyFingerprintShort
+
+`func (o *RpmUpstream) SetGpgKeyFingerprintShort(v string)`
+
+SetGpgKeyFingerprintShort sets GpgKeyFingerprintShort field to given value.
+
+### HasGpgKeyFingerprintShort
+
+`func (o *RpmUpstream) HasGpgKeyFingerprintShort() bool`
+
+HasGpgKeyFingerprintShort returns a boolean if a field has been set.
+
 ### GetGpgKeyInline
 
 `func (o *RpmUpstream) GetGpgKeyInline() string`
@@ -448,6 +556,31 @@ SetGpgVerification sets GpgVerification field to given value.
 
 HasGpgVerification returns a boolean if a field has been set.
 
+### GetHasFailedSignatureVerification
+
+`func (o *RpmUpstream) GetHasFailedSignatureVerification() string`
+
+GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field if non-nil, zero value otherwise.
+
+### GetHasFailedSignatureVerificationOk
+
+`func (o *RpmUpstream) GetHasFailedSignatureVerificationOk() (*string, bool)`
+
+GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasFailedSignatureVerification
+
+`func (o *RpmUpstream) SetHasFailedSignatureVerification(v string)`
+
+SetHasFailedSignatureVerification sets HasFailedSignatureVerification field to given value.
+
+### HasHasFailedSignatureVerification
+
+`func (o *RpmUpstream) HasHasFailedSignatureVerification() bool`
+
+HasHasFailedSignatureVerification returns a boolean if a field has been set.
+
 ### GetIncludeSources
 
 `func (o *RpmUpstream) GetIncludeSources() bool`
@@ -473,6 +606,56 @@ SetIncludeSources sets IncludeSources field to given value.
 
 HasIncludeSources returns a boolean if a field has been set.
 
+### GetIndexPackageCount
+
+`func (o *RpmUpstream) GetIndexPackageCount() string`
+
+GetIndexPackageCount returns the IndexPackageCount field if non-nil, zero value otherwise.
+
+### GetIndexPackageCountOk
+
+`func (o *RpmUpstream) GetIndexPackageCountOk() (*string, bool)`
+
+GetIndexPackageCountOk returns a tuple with the IndexPackageCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIndexPackageCount
+
+`func (o *RpmUpstream) SetIndexPackageCount(v string)`
+
+SetIndexPackageCount sets IndexPackageCount field to given value.
+
+### HasIndexPackageCount
+
+`func (o *RpmUpstream) HasIndexPackageCount() bool`
+
+HasIndexPackageCount returns a boolean if a field has been set.
+
+### GetIndexStatus
+
+`func (o *RpmUpstream) GetIndexStatus() string`
+
+GetIndexStatus returns the IndexStatus field if non-nil, zero value otherwise.
+
+### GetIndexStatusOk
+
+`func (o *RpmUpstream) GetIndexStatusOk() (*string, bool)`
+
+GetIndexStatusOk returns a tuple with the IndexStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIndexStatus
+
+`func (o *RpmUpstream) SetIndexStatus(v string)`
+
+SetIndexStatus sets IndexStatus field to given value.
+
+### HasIndexStatus
+
+`func (o *RpmUpstream) HasIndexStatus() bool`
+
+HasIndexStatus returns a boolean if a field has been set.
+
 ### GetIsActive
 
 `func (o *RpmUpstream) GetIsActive() bool`
@@ -497,6 +680,31 @@ SetIsActive sets IsActive field to given value.
 `func (o *RpmUpstream) HasIsActive() bool`
 
 HasIsActive returns a boolean if a field has been set.
+
+### GetLastIndexed
+
+`func (o *RpmUpstream) GetLastIndexed() string`
+
+GetLastIndexed returns the LastIndexed field if non-nil, zero value otherwise.
+
+### GetLastIndexedOk
+
+`func (o *RpmUpstream) GetLastIndexedOk() (*string, bool)`
+
+GetLastIndexedOk returns a tuple with the LastIndexed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastIndexed
+
+`func (o *RpmUpstream) SetLastIndexed(v string)`
+
+SetLastIndexed sets LastIndexed field to given value.
+
+### HasLastIndexed
+
+`func (o *RpmUpstream) HasLastIndexed() bool`
+
+HasLastIndexed returns a boolean if a field has been set.
 
 ### GetMode
 
