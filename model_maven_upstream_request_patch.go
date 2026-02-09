@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -48,6 +48,8 @@ type MavenUpstreamRequestPatch struct {
 	Name *string `json:"name,omitempty" validate:"regexp=^\\\\w[\\\\w \\\\-'\\\\.\\/()]+$"`
 	// Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date.
 	Priority *int64 `json:"priority,omitempty"`
+	// Trust level allows for control of the visibility of upstream artifacts to native package managers. Where supported by formats, the default level (untrusted) is recommended for all upstreams, and helps to safeguard against common dependency confusion attack vectors.
+	TrustLevel *string `json:"trust_level,omitempty"`
 	// The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.
 	UpstreamUrl *string `json:"upstream_url,omitempty"`
 	// If enabled, SSL certificates are verified when requests are made to this upstream. It's recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams.
@@ -69,6 +71,8 @@ func NewMavenUpstreamRequestPatch() *MavenUpstreamRequestPatch {
 	this.GpgVerification = &gpgVerification
 	var mode string = "Proxy Only"
 	this.Mode = &mode
+	var trustLevel string = "Trusted"
+	this.TrustLevel = &trustLevel
 	return &this
 }
 
@@ -83,6 +87,8 @@ func NewMavenUpstreamRequestPatchWithDefaults() *MavenUpstreamRequestPatch {
 	this.GpgVerification = &gpgVerification
 	var mode string = "Proxy Only"
 	this.Mode = &mode
+	var trustLevel string = "Trusted"
+	this.TrustLevel = &trustLevel
 	return &this
 }
 
@@ -622,6 +628,38 @@ func (o *MavenUpstreamRequestPatch) SetPriority(v int64) {
 	o.Priority = &v
 }
 
+// GetTrustLevel returns the TrustLevel field value if set, zero value otherwise.
+func (o *MavenUpstreamRequestPatch) GetTrustLevel() string {
+	if o == nil || IsNil(o.TrustLevel) {
+		var ret string
+		return ret
+	}
+	return *o.TrustLevel
+}
+
+// GetTrustLevelOk returns a tuple with the TrustLevel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MavenUpstreamRequestPatch) GetTrustLevelOk() (*string, bool) {
+	if o == nil || IsNil(o.TrustLevel) {
+		return nil, false
+	}
+	return o.TrustLevel, true
+}
+
+// HasTrustLevel returns a boolean if a field has been set.
+func (o *MavenUpstreamRequestPatch) HasTrustLevel() bool {
+	if o != nil && !IsNil(o.TrustLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrustLevel gets a reference to the given string and assigns it to the TrustLevel field.
+func (o *MavenUpstreamRequestPatch) SetTrustLevel(v string) {
+	o.TrustLevel = &v
+}
+
 // GetUpstreamUrl returns the UpstreamUrl field value if set, zero value otherwise.
 func (o *MavenUpstreamRequestPatch) GetUpstreamUrl() string {
 	if o == nil || IsNil(o.UpstreamUrl) {
@@ -738,6 +776,9 @@ func (o MavenUpstreamRequestPatch) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
+	if !IsNil(o.TrustLevel) {
+		toSerialize["trust_level"] = o.TrustLevel
+	}
 	if !IsNil(o.UpstreamUrl) {
 		toSerialize["upstream_url"] = o.UpstreamUrl
 	}
@@ -780,6 +821,7 @@ func (o *MavenUpstreamRequestPatch) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "priority")
+		delete(additionalProperties, "trust_level")
 		delete(additionalProperties, "upstream_url")
 		delete(additionalProperties, "verify_ssl")
 		o.AdditionalProperties = additionalProperties

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AccessPrivateBroadcasts** | Pointer to **bool** | If enabled, this token can be used for private broadcasts | [optional] 
 **EulaRequired** | Pointer to **bool** | If checked, a EULA acceptance is required for this token. | [optional] 
 **IsActive** | Pointer to **bool** | If enabled, the token will allow downloads based on configured restrictions (if any). | [optional] 
 **LimitBandwidth** | Pointer to **NullableInt64** | The maximum download bandwidth allowed for the token. Values are expressed as the selected unit of bandwidth. Please note that since downloads are calculated asynchronously (after the download happens), the limit may not be imposed immediately but at a later point.  | [optional] 
@@ -38,6 +39,31 @@ will change when the set of required properties is changed
 NewRepositoryTokenRequestPatchWithDefaults instantiates a new RepositoryTokenRequestPatch object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAccessPrivateBroadcasts
+
+`func (o *RepositoryTokenRequestPatch) GetAccessPrivateBroadcasts() bool`
+
+GetAccessPrivateBroadcasts returns the AccessPrivateBroadcasts field if non-nil, zero value otherwise.
+
+### GetAccessPrivateBroadcastsOk
+
+`func (o *RepositoryTokenRequestPatch) GetAccessPrivateBroadcastsOk() (*bool, bool)`
+
+GetAccessPrivateBroadcastsOk returns a tuple with the AccessPrivateBroadcasts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessPrivateBroadcasts
+
+`func (o *RepositoryTokenRequestPatch) SetAccessPrivateBroadcasts(v bool)`
+
+SetAccessPrivateBroadcasts sets AccessPrivateBroadcasts field to given value.
+
+### HasAccessPrivateBroadcasts
+
+`func (o *RepositoryTokenRequestPatch) HasAccessPrivateBroadcasts() bool`
+
+HasAccessPrivateBroadcasts returns a boolean if a field has been set.
 
 ### GetEulaRequired
 

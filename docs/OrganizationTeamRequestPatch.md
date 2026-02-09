@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
+**Description** | Pointer to **NullableString** | A detailed description of the team. | [optional] 
+**Name** | Pointer to **string** | A descriptive name for the team. | [optional] 
 **Slug** | Pointer to **string** |  | [optional] 
 **Visibility** | Pointer to **string** |  | [optional] [default to "Visible"]
 
@@ -53,6 +53,16 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
+### SetDescriptionNil
+
+`func (o *OrganizationTeamRequestPatch) SetDescriptionNil(b bool)`
+
+ SetDescriptionNil sets the value for Description to be an explicit nil
+
+### UnsetDescription
+`func (o *OrganizationTeamRequestPatch) UnsetDescription()`
+
+UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetName
 
 `func (o *OrganizationTeamRequestPatch) GetName() string`

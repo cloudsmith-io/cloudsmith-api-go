@@ -7,12 +7,15 @@ Name | Type | Description | Notes
 **AuthMode** | Pointer to **string** | The authentication mode to use when accessing this upstream.  | [optional] [default to "None"]
 **AuthSecret** | Pointer to **NullableString** | Secret to provide with requests to upstream. | [optional] 
 **AuthUsername** | Pointer to **NullableString** | Username to provide with requests to upstream. | [optional] 
+**Available** | Pointer to **string** |  | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | The datetime the upstream source was created. | [optional] [readonly] 
 **DisableReason** | Pointer to **string** |  | [optional] [readonly] [default to "N/A"]
+**DisableReasonText** | Pointer to **string** | Human-readable explanation of why this upstream is disabled | [optional] [readonly] 
 **ExtraHeader1** | Pointer to **NullableString** | The key for extra header #1 to send to upstream. | [optional] 
 **ExtraHeader2** | Pointer to **NullableString** | The key for extra header #2 to send to upstream. | [optional] 
 **ExtraValue1** | Pointer to **NullableString** | The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
 **ExtraValue2** | Pointer to **NullableString** | The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
+**HasFailedSignatureVerification** | Pointer to **string** |  | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
 **Name** | **string** | A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream. | 
@@ -137,6 +140,31 @@ HasAuthUsername returns a boolean if a field has been set.
 `func (o *DockerUpstream) UnsetAuthUsername()`
 
 UnsetAuthUsername ensures that no value is present for AuthUsername, not even an explicit nil
+### GetAvailable
+
+`func (o *DockerUpstream) GetAvailable() string`
+
+GetAvailable returns the Available field if non-nil, zero value otherwise.
+
+### GetAvailableOk
+
+`func (o *DockerUpstream) GetAvailableOk() (*string, bool)`
+
+GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvailable
+
+`func (o *DockerUpstream) SetAvailable(v string)`
+
+SetAvailable sets Available field to given value.
+
+### HasAvailable
+
+`func (o *DockerUpstream) HasAvailable() bool`
+
+HasAvailable returns a boolean if a field has been set.
+
 ### GetCreatedAt
 
 `func (o *DockerUpstream) GetCreatedAt() time.Time`
@@ -186,6 +214,31 @@ SetDisableReason sets DisableReason field to given value.
 `func (o *DockerUpstream) HasDisableReason() bool`
 
 HasDisableReason returns a boolean if a field has been set.
+
+### GetDisableReasonText
+
+`func (o *DockerUpstream) GetDisableReasonText() string`
+
+GetDisableReasonText returns the DisableReasonText field if non-nil, zero value otherwise.
+
+### GetDisableReasonTextOk
+
+`func (o *DockerUpstream) GetDisableReasonTextOk() (*string, bool)`
+
+GetDisableReasonTextOk returns a tuple with the DisableReasonText field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableReasonText
+
+`func (o *DockerUpstream) SetDisableReasonText(v string)`
+
+SetDisableReasonText sets DisableReasonText field to given value.
+
+### HasDisableReasonText
+
+`func (o *DockerUpstream) HasDisableReasonText() bool`
+
+HasDisableReasonText returns a boolean if a field has been set.
 
 ### GetExtraHeader1
 
@@ -327,6 +380,31 @@ HasExtraValue2 returns a boolean if a field has been set.
 `func (o *DockerUpstream) UnsetExtraValue2()`
 
 UnsetExtraValue2 ensures that no value is present for ExtraValue2, not even an explicit nil
+### GetHasFailedSignatureVerification
+
+`func (o *DockerUpstream) GetHasFailedSignatureVerification() string`
+
+GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field if non-nil, zero value otherwise.
+
+### GetHasFailedSignatureVerificationOk
+
+`func (o *DockerUpstream) GetHasFailedSignatureVerificationOk() (*string, bool)`
+
+GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasFailedSignatureVerification
+
+`func (o *DockerUpstream) SetHasFailedSignatureVerification(v string)`
+
+SetHasFailedSignatureVerification sets HasFailedSignatureVerification field to given value.
+
+### HasHasFailedSignatureVerification
+
+`func (o *DockerUpstream) HasHasFailedSignatureVerification() bool`
+
+HasHasFailedSignatureVerification returns a boolean if a field has been set.
+
 ### GetIsActive
 
 `func (o *DockerUpstream) GetIsActive() bool`

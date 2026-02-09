@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,9 +28,13 @@ type PythonUpstream struct {
 	AuthSecret NullableString `json:"auth_secret,omitempty"`
 	// Username to provide with requests to upstream.
 	AuthUsername NullableString `json:"auth_username,omitempty"`
+	Available    *string        `json:"available,omitempty"`
+	CanReindex   *string        `json:"can_reindex,omitempty"`
 	// The datetime the upstream source was created.
 	CreatedAt     *time.Time `json:"created_at,omitempty"`
 	DisableReason *string    `json:"disable_reason,omitempty"`
+	// Human-readable explanation of why this upstream is disabled
+	DisableReasonText *string `json:"disable_reason_text,omitempty"`
 	// The key for extra header #1 to send to upstream.
 	ExtraHeader1 NullableString `json:"extra_header_1,omitempty" validate:"regexp=^[-\\\\w]+$"`
 	// The key for extra header #2 to send to upstream.
@@ -38,9 +42,16 @@ type PythonUpstream struct {
 	// The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted.
 	ExtraValue1 NullableString `json:"extra_value_1,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue2 NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
+	ExtraValue2                    NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
+	HasFailedSignatureVerification *string        `json:"has_failed_signature_verification,omitempty"`
+	// The number of packages available in this upstream source
+	IndexPackageCount *string `json:"index_package_count,omitempty"`
+	// The current indexing status of this upstream source
+	IndexStatus *string `json:"index_status,omitempty"`
 	// Whether or not this upstream is active and ready for requests.
 	IsActive *bool `json:"is_active,omitempty"`
+	// The last time this upstream source was indexed
+	LastIndexed *string `json:"last_indexed,omitempty"`
 	// The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode.
 	Mode *string `json:"mode,omitempty"`
 	// A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream.
@@ -48,9 +59,11 @@ type PythonUpstream struct {
 	// When true, this upstream source is pending validation.
 	PendingValidation *bool `json:"pending_validation,omitempty"`
 	// Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date.
-	Priority  *int64     `json:"priority,omitempty"`
-	SlugPerm  *string    `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	Priority *int64  `json:"priority,omitempty"`
+	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	// Trust level allows for control of the visibility of upstream artifacts to native package managers. Where supported by formats, the default level (untrusted) is recommended for all upstreams, and helps to safeguard against common dependency confusion attack vectors.
+	TrustLevel *string    `json:"trust_level,omitempty"`
+	UpdatedAt  *time.Time `json:"updated_at,omitempty"`
 	// The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.
 	UpstreamUrl string `json:"upstream_url"`
 	// If enabled, SSL certificates are verified when requests are made to this upstream. It's recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams.
@@ -71,6 +84,8 @@ func NewPythonUpstream(name string, upstreamUrl string) *PythonUpstream {
 	var mode string = "Proxy Only"
 	this.Mode = &mode
 	this.Name = name
+	var trustLevel string = "Trusted"
+	this.TrustLevel = &trustLevel
 	this.UpstreamUrl = upstreamUrl
 	return &this
 }
@@ -84,6 +99,8 @@ func NewPythonUpstreamWithDefaults() *PythonUpstream {
 	this.AuthMode = &authMode
 	var mode string = "Proxy Only"
 	this.Mode = &mode
+	var trustLevel string = "Trusted"
+	this.TrustLevel = &trustLevel
 	return &this
 }
 
@@ -205,6 +222,70 @@ func (o *PythonUpstream) UnsetAuthUsername() {
 	o.AuthUsername.Unset()
 }
 
+// GetAvailable returns the Available field value if set, zero value otherwise.
+func (o *PythonUpstream) GetAvailable() string {
+	if o == nil || IsNil(o.Available) {
+		var ret string
+		return ret
+	}
+	return *o.Available
+}
+
+// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PythonUpstream) GetAvailableOk() (*string, bool) {
+	if o == nil || IsNil(o.Available) {
+		return nil, false
+	}
+	return o.Available, true
+}
+
+// HasAvailable returns a boolean if a field has been set.
+func (o *PythonUpstream) HasAvailable() bool {
+	if o != nil && !IsNil(o.Available) {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailable gets a reference to the given string and assigns it to the Available field.
+func (o *PythonUpstream) SetAvailable(v string) {
+	o.Available = &v
+}
+
+// GetCanReindex returns the CanReindex field value if set, zero value otherwise.
+func (o *PythonUpstream) GetCanReindex() string {
+	if o == nil || IsNil(o.CanReindex) {
+		var ret string
+		return ret
+	}
+	return *o.CanReindex
+}
+
+// GetCanReindexOk returns a tuple with the CanReindex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PythonUpstream) GetCanReindexOk() (*string, bool) {
+	if o == nil || IsNil(o.CanReindex) {
+		return nil, false
+	}
+	return o.CanReindex, true
+}
+
+// HasCanReindex returns a boolean if a field has been set.
+func (o *PythonUpstream) HasCanReindex() bool {
+	if o != nil && !IsNil(o.CanReindex) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanReindex gets a reference to the given string and assigns it to the CanReindex field.
+func (o *PythonUpstream) SetCanReindex(v string) {
+	o.CanReindex = &v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *PythonUpstream) GetCreatedAt() time.Time {
 	if o == nil || IsNil(o.CreatedAt) {
@@ -267,6 +348,38 @@ func (o *PythonUpstream) HasDisableReason() bool {
 // SetDisableReason gets a reference to the given string and assigns it to the DisableReason field.
 func (o *PythonUpstream) SetDisableReason(v string) {
 	o.DisableReason = &v
+}
+
+// GetDisableReasonText returns the DisableReasonText field value if set, zero value otherwise.
+func (o *PythonUpstream) GetDisableReasonText() string {
+	if o == nil || IsNil(o.DisableReasonText) {
+		var ret string
+		return ret
+	}
+	return *o.DisableReasonText
+}
+
+// GetDisableReasonTextOk returns a tuple with the DisableReasonText field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PythonUpstream) GetDisableReasonTextOk() (*string, bool) {
+	if o == nil || IsNil(o.DisableReasonText) {
+		return nil, false
+	}
+	return o.DisableReasonText, true
+}
+
+// HasDisableReasonText returns a boolean if a field has been set.
+func (o *PythonUpstream) HasDisableReasonText() bool {
+	if o != nil && !IsNil(o.DisableReasonText) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableReasonText gets a reference to the given string and assigns it to the DisableReasonText field.
+func (o *PythonUpstream) SetDisableReasonText(v string) {
+	o.DisableReasonText = &v
 }
 
 // GetExtraHeader1 returns the ExtraHeader1 field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -441,6 +554,102 @@ func (o *PythonUpstream) UnsetExtraValue2() {
 	o.ExtraValue2.Unset()
 }
 
+// GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field value if set, zero value otherwise.
+func (o *PythonUpstream) GetHasFailedSignatureVerification() string {
+	if o == nil || IsNil(o.HasFailedSignatureVerification) {
+		var ret string
+		return ret
+	}
+	return *o.HasFailedSignatureVerification
+}
+
+// GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PythonUpstream) GetHasFailedSignatureVerificationOk() (*string, bool) {
+	if o == nil || IsNil(o.HasFailedSignatureVerification) {
+		return nil, false
+	}
+	return o.HasFailedSignatureVerification, true
+}
+
+// HasHasFailedSignatureVerification returns a boolean if a field has been set.
+func (o *PythonUpstream) HasHasFailedSignatureVerification() bool {
+	if o != nil && !IsNil(o.HasFailedSignatureVerification) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasFailedSignatureVerification gets a reference to the given string and assigns it to the HasFailedSignatureVerification field.
+func (o *PythonUpstream) SetHasFailedSignatureVerification(v string) {
+	o.HasFailedSignatureVerification = &v
+}
+
+// GetIndexPackageCount returns the IndexPackageCount field value if set, zero value otherwise.
+func (o *PythonUpstream) GetIndexPackageCount() string {
+	if o == nil || IsNil(o.IndexPackageCount) {
+		var ret string
+		return ret
+	}
+	return *o.IndexPackageCount
+}
+
+// GetIndexPackageCountOk returns a tuple with the IndexPackageCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PythonUpstream) GetIndexPackageCountOk() (*string, bool) {
+	if o == nil || IsNil(o.IndexPackageCount) {
+		return nil, false
+	}
+	return o.IndexPackageCount, true
+}
+
+// HasIndexPackageCount returns a boolean if a field has been set.
+func (o *PythonUpstream) HasIndexPackageCount() bool {
+	if o != nil && !IsNil(o.IndexPackageCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetIndexPackageCount gets a reference to the given string and assigns it to the IndexPackageCount field.
+func (o *PythonUpstream) SetIndexPackageCount(v string) {
+	o.IndexPackageCount = &v
+}
+
+// GetIndexStatus returns the IndexStatus field value if set, zero value otherwise.
+func (o *PythonUpstream) GetIndexStatus() string {
+	if o == nil || IsNil(o.IndexStatus) {
+		var ret string
+		return ret
+	}
+	return *o.IndexStatus
+}
+
+// GetIndexStatusOk returns a tuple with the IndexStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PythonUpstream) GetIndexStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.IndexStatus) {
+		return nil, false
+	}
+	return o.IndexStatus, true
+}
+
+// HasIndexStatus returns a boolean if a field has been set.
+func (o *PythonUpstream) HasIndexStatus() bool {
+	if o != nil && !IsNil(o.IndexStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetIndexStatus gets a reference to the given string and assigns it to the IndexStatus field.
+func (o *PythonUpstream) SetIndexStatus(v string) {
+	o.IndexStatus = &v
+}
+
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *PythonUpstream) GetIsActive() bool {
 	if o == nil || IsNil(o.IsActive) {
@@ -471,6 +680,38 @@ func (o *PythonUpstream) HasIsActive() bool {
 // SetIsActive gets a reference to the given bool and assigns it to the IsActive field.
 func (o *PythonUpstream) SetIsActive(v bool) {
 	o.IsActive = &v
+}
+
+// GetLastIndexed returns the LastIndexed field value if set, zero value otherwise.
+func (o *PythonUpstream) GetLastIndexed() string {
+	if o == nil || IsNil(o.LastIndexed) {
+		var ret string
+		return ret
+	}
+	return *o.LastIndexed
+}
+
+// GetLastIndexedOk returns a tuple with the LastIndexed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PythonUpstream) GetLastIndexedOk() (*string, bool) {
+	if o == nil || IsNil(o.LastIndexed) {
+		return nil, false
+	}
+	return o.LastIndexed, true
+}
+
+// HasLastIndexed returns a boolean if a field has been set.
+func (o *PythonUpstream) HasLastIndexed() bool {
+	if o != nil && !IsNil(o.LastIndexed) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastIndexed gets a reference to the given string and assigns it to the LastIndexed field.
+func (o *PythonUpstream) SetLastIndexed(v string) {
+	o.LastIndexed = &v
 }
 
 // GetMode returns the Mode field value if set, zero value otherwise.
@@ -625,6 +866,38 @@ func (o *PythonUpstream) SetSlugPerm(v string) {
 	o.SlugPerm = &v
 }
 
+// GetTrustLevel returns the TrustLevel field value if set, zero value otherwise.
+func (o *PythonUpstream) GetTrustLevel() string {
+	if o == nil || IsNil(o.TrustLevel) {
+		var ret string
+		return ret
+	}
+	return *o.TrustLevel
+}
+
+// GetTrustLevelOk returns a tuple with the TrustLevel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PythonUpstream) GetTrustLevelOk() (*string, bool) {
+	if o == nil || IsNil(o.TrustLevel) {
+		return nil, false
+	}
+	return o.TrustLevel, true
+}
+
+// HasTrustLevel returns a boolean if a field has been set.
+func (o *PythonUpstream) HasTrustLevel() bool {
+	if o != nil && !IsNil(o.TrustLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetTrustLevel gets a reference to the given string and assigns it to the TrustLevel field.
+func (o *PythonUpstream) SetTrustLevel(v string) {
+	o.TrustLevel = &v
+}
+
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *PythonUpstream) GetUpdatedAt() time.Time {
 	if o == nil || IsNil(o.UpdatedAt) {
@@ -732,11 +1005,20 @@ func (o PythonUpstream) ToMap() (map[string]interface{}, error) {
 	if o.AuthUsername.IsSet() {
 		toSerialize["auth_username"] = o.AuthUsername.Get()
 	}
+	if !IsNil(o.Available) {
+		toSerialize["available"] = o.Available
+	}
+	if !IsNil(o.CanReindex) {
+		toSerialize["can_reindex"] = o.CanReindex
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
 	if !IsNil(o.DisableReason) {
 		toSerialize["disable_reason"] = o.DisableReason
+	}
+	if !IsNil(o.DisableReasonText) {
+		toSerialize["disable_reason_text"] = o.DisableReasonText
 	}
 	if o.ExtraHeader1.IsSet() {
 		toSerialize["extra_header_1"] = o.ExtraHeader1.Get()
@@ -750,8 +1032,20 @@ func (o PythonUpstream) ToMap() (map[string]interface{}, error) {
 	if o.ExtraValue2.IsSet() {
 		toSerialize["extra_value_2"] = o.ExtraValue2.Get()
 	}
+	if !IsNil(o.HasFailedSignatureVerification) {
+		toSerialize["has_failed_signature_verification"] = o.HasFailedSignatureVerification
+	}
+	if !IsNil(o.IndexPackageCount) {
+		toSerialize["index_package_count"] = o.IndexPackageCount
+	}
+	if !IsNil(o.IndexStatus) {
+		toSerialize["index_status"] = o.IndexStatus
+	}
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
+	}
+	if !IsNil(o.LastIndexed) {
+		toSerialize["last_indexed"] = o.LastIndexed
 	}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
@@ -765,6 +1059,9 @@ func (o PythonUpstream) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
+	}
+	if !IsNil(o.TrustLevel) {
+		toSerialize["trust_level"] = o.TrustLevel
 	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
@@ -820,18 +1117,26 @@ func (o *PythonUpstream) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "auth_mode")
 		delete(additionalProperties, "auth_secret")
 		delete(additionalProperties, "auth_username")
+		delete(additionalProperties, "available")
+		delete(additionalProperties, "can_reindex")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "disable_reason")
+		delete(additionalProperties, "disable_reason_text")
 		delete(additionalProperties, "extra_header_1")
 		delete(additionalProperties, "extra_header_2")
 		delete(additionalProperties, "extra_value_1")
 		delete(additionalProperties, "extra_value_2")
+		delete(additionalProperties, "has_failed_signature_verification")
+		delete(additionalProperties, "index_package_count")
+		delete(additionalProperties, "index_status")
 		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "last_indexed")
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "pending_validation")
 		delete(additionalProperties, "priority")
 		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "trust_level")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "upstream_url")
 		delete(additionalProperties, "verify_ssl")

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,11 +28,15 @@ type DebUpstream struct {
 	AuthSecret NullableString `json:"auth_secret,omitempty"`
 	// Username to provide with requests to upstream.
 	AuthUsername NullableString `json:"auth_username,omitempty"`
+	Available    *string        `json:"available,omitempty"`
+	CanReindex   *string        `json:"can_reindex,omitempty"`
 	// The component to fetch from the upstream
 	Component *string `json:"component,omitempty"`
 	// The datetime the upstream source was created.
 	CreatedAt     *time.Time `json:"created_at,omitempty"`
 	DisableReason *string    `json:"disable_reason,omitempty"`
+	// Human-readable explanation of why this upstream is disabled
+	DisableReasonText *string `json:"disable_reason_text,omitempty"`
 	// The distribution version that packages found on this upstream could be associated with.
 	DistroVersions []string `json:"distro_versions"`
 	// The key for extra header #1 to send to upstream.
@@ -42,17 +46,25 @@ type DebUpstream struct {
 	// The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted.
 	ExtraValue1 NullableString `json:"extra_value_1,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue2 NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
+	ExtraValue2            NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
+	GpgKeyFingerprintShort *string        `json:"gpg_key_fingerprint_short,omitempty"`
 	// A public GPG key to associate with packages found on this upstream. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
 	GpgKeyInline NullableString `json:"gpg_key_inline,omitempty"`
 	// When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
 	GpgKeyUrl NullableString `json:"gpg_key_url,omitempty"`
 	// The GPG signature verification mode for this upstream.
-	GpgVerification *string `json:"gpg_verification,omitempty"`
+	GpgVerification                *string `json:"gpg_verification,omitempty"`
+	HasFailedSignatureVerification *string `json:"has_failed_signature_verification,omitempty"`
 	// When true, source packages will be available from this upstream.
 	IncludeSources *bool `json:"include_sources,omitempty"`
+	// The number of packages available in this upstream source
+	IndexPackageCount *string `json:"index_package_count,omitempty"`
+	// The current indexing status of this upstream source
+	IndexStatus *string `json:"index_status,omitempty"`
 	// Whether or not this upstream is active and ready for requests.
 	IsActive *bool `json:"is_active,omitempty"`
+	// The last time this upstream source was indexed
+	LastIndexed *string `json:"last_indexed,omitempty"`
 	// The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode.
 	Mode *string `json:"mode,omitempty"`
 	// A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream.
@@ -226,6 +238,70 @@ func (o *DebUpstream) UnsetAuthUsername() {
 	o.AuthUsername.Unset()
 }
 
+// GetAvailable returns the Available field value if set, zero value otherwise.
+func (o *DebUpstream) GetAvailable() string {
+	if o == nil || IsNil(o.Available) {
+		var ret string
+		return ret
+	}
+	return *o.Available
+}
+
+// GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetAvailableOk() (*string, bool) {
+	if o == nil || IsNil(o.Available) {
+		return nil, false
+	}
+	return o.Available, true
+}
+
+// HasAvailable returns a boolean if a field has been set.
+func (o *DebUpstream) HasAvailable() bool {
+	if o != nil && !IsNil(o.Available) {
+		return true
+	}
+
+	return false
+}
+
+// SetAvailable gets a reference to the given string and assigns it to the Available field.
+func (o *DebUpstream) SetAvailable(v string) {
+	o.Available = &v
+}
+
+// GetCanReindex returns the CanReindex field value if set, zero value otherwise.
+func (o *DebUpstream) GetCanReindex() string {
+	if o == nil || IsNil(o.CanReindex) {
+		var ret string
+		return ret
+	}
+	return *o.CanReindex
+}
+
+// GetCanReindexOk returns a tuple with the CanReindex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetCanReindexOk() (*string, bool) {
+	if o == nil || IsNil(o.CanReindex) {
+		return nil, false
+	}
+	return o.CanReindex, true
+}
+
+// HasCanReindex returns a boolean if a field has been set.
+func (o *DebUpstream) HasCanReindex() bool {
+	if o != nil && !IsNil(o.CanReindex) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanReindex gets a reference to the given string and assigns it to the CanReindex field.
+func (o *DebUpstream) SetCanReindex(v string) {
+	o.CanReindex = &v
+}
+
 // GetComponent returns the Component field value if set, zero value otherwise.
 func (o *DebUpstream) GetComponent() string {
 	if o == nil || IsNil(o.Component) {
@@ -320,6 +396,38 @@ func (o *DebUpstream) HasDisableReason() bool {
 // SetDisableReason gets a reference to the given string and assigns it to the DisableReason field.
 func (o *DebUpstream) SetDisableReason(v string) {
 	o.DisableReason = &v
+}
+
+// GetDisableReasonText returns the DisableReasonText field value if set, zero value otherwise.
+func (o *DebUpstream) GetDisableReasonText() string {
+	if o == nil || IsNil(o.DisableReasonText) {
+		var ret string
+		return ret
+	}
+	return *o.DisableReasonText
+}
+
+// GetDisableReasonTextOk returns a tuple with the DisableReasonText field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetDisableReasonTextOk() (*string, bool) {
+	if o == nil || IsNil(o.DisableReasonText) {
+		return nil, false
+	}
+	return o.DisableReasonText, true
+}
+
+// HasDisableReasonText returns a boolean if a field has been set.
+func (o *DebUpstream) HasDisableReasonText() bool {
+	if o != nil && !IsNil(o.DisableReasonText) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableReasonText gets a reference to the given string and assigns it to the DisableReasonText field.
+func (o *DebUpstream) SetDisableReasonText(v string) {
+	o.DisableReasonText = &v
 }
 
 // GetDistroVersions returns the DistroVersions field value
@@ -518,6 +626,38 @@ func (o *DebUpstream) UnsetExtraValue2() {
 	o.ExtraValue2.Unset()
 }
 
+// GetGpgKeyFingerprintShort returns the GpgKeyFingerprintShort field value if set, zero value otherwise.
+func (o *DebUpstream) GetGpgKeyFingerprintShort() string {
+	if o == nil || IsNil(o.GpgKeyFingerprintShort) {
+		var ret string
+		return ret
+	}
+	return *o.GpgKeyFingerprintShort
+}
+
+// GetGpgKeyFingerprintShortOk returns a tuple with the GpgKeyFingerprintShort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetGpgKeyFingerprintShortOk() (*string, bool) {
+	if o == nil || IsNil(o.GpgKeyFingerprintShort) {
+		return nil, false
+	}
+	return o.GpgKeyFingerprintShort, true
+}
+
+// HasGpgKeyFingerprintShort returns a boolean if a field has been set.
+func (o *DebUpstream) HasGpgKeyFingerprintShort() bool {
+	if o != nil && !IsNil(o.GpgKeyFingerprintShort) {
+		return true
+	}
+
+	return false
+}
+
+// SetGpgKeyFingerprintShort gets a reference to the given string and assigns it to the GpgKeyFingerprintShort field.
+func (o *DebUpstream) SetGpgKeyFingerprintShort(v string) {
+	o.GpgKeyFingerprintShort = &v
+}
+
 // GetGpgKeyInline returns the GpgKeyInline field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DebUpstream) GetGpgKeyInline() string {
 	if o == nil || IsNil(o.GpgKeyInline.Get()) {
@@ -636,6 +776,38 @@ func (o *DebUpstream) SetGpgVerification(v string) {
 	o.GpgVerification = &v
 }
 
+// GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field value if set, zero value otherwise.
+func (o *DebUpstream) GetHasFailedSignatureVerification() string {
+	if o == nil || IsNil(o.HasFailedSignatureVerification) {
+		var ret string
+		return ret
+	}
+	return *o.HasFailedSignatureVerification
+}
+
+// GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetHasFailedSignatureVerificationOk() (*string, bool) {
+	if o == nil || IsNil(o.HasFailedSignatureVerification) {
+		return nil, false
+	}
+	return o.HasFailedSignatureVerification, true
+}
+
+// HasHasFailedSignatureVerification returns a boolean if a field has been set.
+func (o *DebUpstream) HasHasFailedSignatureVerification() bool {
+	if o != nil && !IsNil(o.HasFailedSignatureVerification) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasFailedSignatureVerification gets a reference to the given string and assigns it to the HasFailedSignatureVerification field.
+func (o *DebUpstream) SetHasFailedSignatureVerification(v string) {
+	o.HasFailedSignatureVerification = &v
+}
+
 // GetIncludeSources returns the IncludeSources field value if set, zero value otherwise.
 func (o *DebUpstream) GetIncludeSources() bool {
 	if o == nil || IsNil(o.IncludeSources) {
@@ -668,6 +840,70 @@ func (o *DebUpstream) SetIncludeSources(v bool) {
 	o.IncludeSources = &v
 }
 
+// GetIndexPackageCount returns the IndexPackageCount field value if set, zero value otherwise.
+func (o *DebUpstream) GetIndexPackageCount() string {
+	if o == nil || IsNil(o.IndexPackageCount) {
+		var ret string
+		return ret
+	}
+	return *o.IndexPackageCount
+}
+
+// GetIndexPackageCountOk returns a tuple with the IndexPackageCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetIndexPackageCountOk() (*string, bool) {
+	if o == nil || IsNil(o.IndexPackageCount) {
+		return nil, false
+	}
+	return o.IndexPackageCount, true
+}
+
+// HasIndexPackageCount returns a boolean if a field has been set.
+func (o *DebUpstream) HasIndexPackageCount() bool {
+	if o != nil && !IsNil(o.IndexPackageCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetIndexPackageCount gets a reference to the given string and assigns it to the IndexPackageCount field.
+func (o *DebUpstream) SetIndexPackageCount(v string) {
+	o.IndexPackageCount = &v
+}
+
+// GetIndexStatus returns the IndexStatus field value if set, zero value otherwise.
+func (o *DebUpstream) GetIndexStatus() string {
+	if o == nil || IsNil(o.IndexStatus) {
+		var ret string
+		return ret
+	}
+	return *o.IndexStatus
+}
+
+// GetIndexStatusOk returns a tuple with the IndexStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetIndexStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.IndexStatus) {
+		return nil, false
+	}
+	return o.IndexStatus, true
+}
+
+// HasIndexStatus returns a boolean if a field has been set.
+func (o *DebUpstream) HasIndexStatus() bool {
+	if o != nil && !IsNil(o.IndexStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetIndexStatus gets a reference to the given string and assigns it to the IndexStatus field.
+func (o *DebUpstream) SetIndexStatus(v string) {
+	o.IndexStatus = &v
+}
+
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
 func (o *DebUpstream) GetIsActive() bool {
 	if o == nil || IsNil(o.IsActive) {
@@ -698,6 +934,38 @@ func (o *DebUpstream) HasIsActive() bool {
 // SetIsActive gets a reference to the given bool and assigns it to the IsActive field.
 func (o *DebUpstream) SetIsActive(v bool) {
 	o.IsActive = &v
+}
+
+// GetLastIndexed returns the LastIndexed field value if set, zero value otherwise.
+func (o *DebUpstream) GetLastIndexed() string {
+	if o == nil || IsNil(o.LastIndexed) {
+		var ret string
+		return ret
+	}
+	return *o.LastIndexed
+}
+
+// GetLastIndexedOk returns a tuple with the LastIndexed field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DebUpstream) GetLastIndexedOk() (*string, bool) {
+	if o == nil || IsNil(o.LastIndexed) {
+		return nil, false
+	}
+	return o.LastIndexed, true
+}
+
+// HasLastIndexed returns a boolean if a field has been set.
+func (o *DebUpstream) HasLastIndexed() bool {
+	if o != nil && !IsNil(o.LastIndexed) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastIndexed gets a reference to the given string and assigns it to the LastIndexed field.
+func (o *DebUpstream) SetLastIndexed(v string) {
+	o.LastIndexed = &v
 }
 
 // GetMode returns the Mode field value if set, zero value otherwise.
@@ -1034,6 +1302,12 @@ func (o DebUpstream) ToMap() (map[string]interface{}, error) {
 	if o.AuthUsername.IsSet() {
 		toSerialize["auth_username"] = o.AuthUsername.Get()
 	}
+	if !IsNil(o.Available) {
+		toSerialize["available"] = o.Available
+	}
+	if !IsNil(o.CanReindex) {
+		toSerialize["can_reindex"] = o.CanReindex
+	}
 	if !IsNil(o.Component) {
 		toSerialize["component"] = o.Component
 	}
@@ -1042,6 +1316,9 @@ func (o DebUpstream) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.DisableReason) {
 		toSerialize["disable_reason"] = o.DisableReason
+	}
+	if !IsNil(o.DisableReasonText) {
+		toSerialize["disable_reason_text"] = o.DisableReasonText
 	}
 	toSerialize["distro_versions"] = o.DistroVersions
 	if o.ExtraHeader1.IsSet() {
@@ -1056,6 +1333,9 @@ func (o DebUpstream) ToMap() (map[string]interface{}, error) {
 	if o.ExtraValue2.IsSet() {
 		toSerialize["extra_value_2"] = o.ExtraValue2.Get()
 	}
+	if !IsNil(o.GpgKeyFingerprintShort) {
+		toSerialize["gpg_key_fingerprint_short"] = o.GpgKeyFingerprintShort
+	}
 	if o.GpgKeyInline.IsSet() {
 		toSerialize["gpg_key_inline"] = o.GpgKeyInline.Get()
 	}
@@ -1065,11 +1345,23 @@ func (o DebUpstream) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.GpgVerification) {
 		toSerialize["gpg_verification"] = o.GpgVerification
 	}
+	if !IsNil(o.HasFailedSignatureVerification) {
+		toSerialize["has_failed_signature_verification"] = o.HasFailedSignatureVerification
+	}
 	if !IsNil(o.IncludeSources) {
 		toSerialize["include_sources"] = o.IncludeSources
 	}
+	if !IsNil(o.IndexPackageCount) {
+		toSerialize["index_package_count"] = o.IndexPackageCount
+	}
+	if !IsNil(o.IndexStatus) {
+		toSerialize["index_status"] = o.IndexStatus
+	}
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
+	}
+	if !IsNil(o.LastIndexed) {
+		toSerialize["last_indexed"] = o.LastIndexed
 	}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
@@ -1145,19 +1437,27 @@ func (o *DebUpstream) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "auth_mode")
 		delete(additionalProperties, "auth_secret")
 		delete(additionalProperties, "auth_username")
+		delete(additionalProperties, "available")
+		delete(additionalProperties, "can_reindex")
 		delete(additionalProperties, "component")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "disable_reason")
+		delete(additionalProperties, "disable_reason_text")
 		delete(additionalProperties, "distro_versions")
 		delete(additionalProperties, "extra_header_1")
 		delete(additionalProperties, "extra_header_2")
 		delete(additionalProperties, "extra_value_1")
 		delete(additionalProperties, "extra_value_2")
+		delete(additionalProperties, "gpg_key_fingerprint_short")
 		delete(additionalProperties, "gpg_key_inline")
 		delete(additionalProperties, "gpg_key_url")
 		delete(additionalProperties, "gpg_verification")
+		delete(additionalProperties, "has_failed_signature_verification")
 		delete(additionalProperties, "include_sources")
+		delete(additionalProperties, "index_package_count")
+		delete(additionalProperties, "index_status")
 		delete(additionalProperties, "is_active")
+		delete(additionalProperties, "last_indexed")
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "pending_validation")

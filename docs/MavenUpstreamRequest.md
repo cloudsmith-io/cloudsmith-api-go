@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
 **Name** | **string** | A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream. | 
 **Priority** | Pointer to **int64** | Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date. | [optional] 
+**TrustLevel** | Pointer to **string** | Trust level allows for control of the visibility of upstream artifacts to native package managers. Where supported by formats, the default level (untrusted) is recommended for all upstreams, and helps to safeguard against common dependency confusion attack vectors. | [optional] [default to "Trusted"]
 **UpstreamUrl** | **string** | The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.  | 
 **VerifySsl** | Pointer to **bool** | If enabled, SSL certificates are verified when requests are made to this upstream. It&#39;s recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams. | [optional] 
 
@@ -464,6 +465,31 @@ SetPriority sets Priority field to given value.
 `func (o *MavenUpstreamRequest) HasPriority() bool`
 
 HasPriority returns a boolean if a field has been set.
+
+### GetTrustLevel
+
+`func (o *MavenUpstreamRequest) GetTrustLevel() string`
+
+GetTrustLevel returns the TrustLevel field if non-nil, zero value otherwise.
+
+### GetTrustLevelOk
+
+`func (o *MavenUpstreamRequest) GetTrustLevelOk() (*string, bool)`
+
+GetTrustLevelOk returns a tuple with the TrustLevel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrustLevel
+
+`func (o *MavenUpstreamRequest) SetTrustLevel(v string)`
+
+SetTrustLevel sets TrustLevel field to given value.
+
+### HasTrustLevel
+
+`func (o *MavenUpstreamRequest) HasTrustLevel() bool`
+
+HasTrustLevel returns a boolean if a field has been set.
 
 ### GetUpstreamUrl
 

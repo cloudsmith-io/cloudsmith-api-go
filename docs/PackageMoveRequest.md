@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Destination** | **string** |  | 
+**Destination** | **string** | The name of the destination repository without the namespace. | 
 
 ## Methods
 

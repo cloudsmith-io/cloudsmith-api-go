@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -21,6 +21,7 @@ var _ MappedNullable = &PackageCopyRequest{}
 
 // PackageCopyRequest struct for PackageCopyRequest
 type PackageCopyRequest struct {
+	// The name of the destination repository without the namespace.
 	Destination string `json:"destination"`
 	// If true, the package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
 	Republish            *bool `json:"republish,omitempty"`

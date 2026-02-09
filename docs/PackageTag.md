@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Epoch** | Pointer to **NullableInt64** | The epoch of the package version (if any). | [optional] [readonly] 
 **Extension** | Pointer to **string** |  | [optional] [readonly] 
 **Filename** | Pointer to **string** |  | [optional] [readonly] 
+**Filepath** | Pointer to **NullableString** | Full path to the file, including filename e.g. bin/utils/tool.tar.gz | [optional] [readonly] 
 **Files** | Pointer to [**[]PackageFile**](PackageFile.md) |  | [optional] [readonly] 
 **Format** | Pointer to **string** |  | [optional] [readonly] 
 **FormatUrl** | Pointer to **string** |  | [optional] [readonly] 
@@ -52,6 +53,7 @@ Name | Type | Description | Notes
 **OriginRepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
 **PackageType** | Pointer to **int64** | The type of package contents. | [optional] [readonly] 
 **PolicyViolated** | Pointer to **bool** | Whether or not the package has violated any policy. | [optional] [readonly] 
+**RawLicense** | Pointer to **NullableString** | The raw license string. | [optional] [readonly] 
 **Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
@@ -61,10 +63,12 @@ Name | Type | Description | Notes
 **SecurityScanStatusUpdatedAt** | Pointer to **NullableTime** | The datetime the security scanning status was updated. | [optional] [readonly] 
 **SelfHtmlUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SelfUrl** | Pointer to **string** |  | [optional] [readonly] 
+**SelfWebappUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SignatureUrl** | Pointer to **NullableString** |  | [optional] [readonly] 
 **Size** | Pointer to **int64** | The calculated size of the package. | [optional] [readonly] 
 **Slug** | Pointer to **string** | The public unique identifier for the package. | [optional] [readonly] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
+**SpdxLicense** | Pointer to **NullableString** | The SPDX license identifier for this package. | [optional] [readonly] 
 **Stage** | Pointer to **int64** | The synchronisation (in progress) stage of the package. | [optional] [readonly] 
 **StageStr** | Pointer to **string** |  | [optional] [readonly] 
 **StageUpdatedAt** | Pointer to **time.Time** | The datetime the package stage was updated at. | [optional] [readonly] 
@@ -556,6 +560,41 @@ SetFilename sets Filename field to given value.
 
 HasFilename returns a boolean if a field has been set.
 
+### GetFilepath
+
+`func (o *PackageTag) GetFilepath() string`
+
+GetFilepath returns the Filepath field if non-nil, zero value otherwise.
+
+### GetFilepathOk
+
+`func (o *PackageTag) GetFilepathOk() (*string, bool)`
+
+GetFilepathOk returns a tuple with the Filepath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFilepath
+
+`func (o *PackageTag) SetFilepath(v string)`
+
+SetFilepath sets Filepath field to given value.
+
+### HasFilepath
+
+`func (o *PackageTag) HasFilepath() bool`
+
+HasFilepath returns a boolean if a field has been set.
+
+### SetFilepathNil
+
+`func (o *PackageTag) SetFilepathNil(b bool)`
+
+ SetFilepathNil sets the value for Filepath to be an explicit nil
+
+### UnsetFilepath
+`func (o *PackageTag) UnsetFilepath()`
+
+UnsetFilepath ensures that no value is present for Filepath, not even an explicit nil
 ### GetFiles
 
 `func (o *PackageTag) GetFiles() []PackageFile`
@@ -1386,6 +1425,41 @@ SetPolicyViolated sets PolicyViolated field to given value.
 
 HasPolicyViolated returns a boolean if a field has been set.
 
+### GetRawLicense
+
+`func (o *PackageTag) GetRawLicense() string`
+
+GetRawLicense returns the RawLicense field if non-nil, zero value otherwise.
+
+### GetRawLicenseOk
+
+`func (o *PackageTag) GetRawLicenseOk() (*string, bool)`
+
+GetRawLicenseOk returns a tuple with the RawLicense field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawLicense
+
+`func (o *PackageTag) SetRawLicense(v string)`
+
+SetRawLicense sets RawLicense field to given value.
+
+### HasRawLicense
+
+`func (o *PackageTag) HasRawLicense() bool`
+
+HasRawLicense returns a boolean if a field has been set.
+
+### SetRawLicenseNil
+
+`func (o *PackageTag) SetRawLicenseNil(b bool)`
+
+ SetRawLicenseNil sets the value for RawLicense to be an explicit nil
+
+### UnsetRawLicense
+`func (o *PackageTag) UnsetRawLicense()`
+
+UnsetRawLicense ensures that no value is present for RawLicense, not even an explicit nil
 ### GetRelease
 
 `func (o *PackageTag) GetRelease() string`
@@ -1661,6 +1735,31 @@ SetSelfUrl sets SelfUrl field to given value.
 
 HasSelfUrl returns a boolean if a field has been set.
 
+### GetSelfWebappUrl
+
+`func (o *PackageTag) GetSelfWebappUrl() string`
+
+GetSelfWebappUrl returns the SelfWebappUrl field if non-nil, zero value otherwise.
+
+### GetSelfWebappUrlOk
+
+`func (o *PackageTag) GetSelfWebappUrlOk() (*string, bool)`
+
+GetSelfWebappUrlOk returns a tuple with the SelfWebappUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSelfWebappUrl
+
+`func (o *PackageTag) SetSelfWebappUrl(v string)`
+
+SetSelfWebappUrl sets SelfWebappUrl field to given value.
+
+### HasSelfWebappUrl
+
+`func (o *PackageTag) HasSelfWebappUrl() bool`
+
+HasSelfWebappUrl returns a boolean if a field has been set.
+
 ### GetSignatureUrl
 
 `func (o *PackageTag) GetSignatureUrl() string`
@@ -1771,6 +1870,41 @@ SetSlugPerm sets SlugPerm field to given value.
 
 HasSlugPerm returns a boolean if a field has been set.
 
+### GetSpdxLicense
+
+`func (o *PackageTag) GetSpdxLicense() string`
+
+GetSpdxLicense returns the SpdxLicense field if non-nil, zero value otherwise.
+
+### GetSpdxLicenseOk
+
+`func (o *PackageTag) GetSpdxLicenseOk() (*string, bool)`
+
+GetSpdxLicenseOk returns a tuple with the SpdxLicense field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSpdxLicense
+
+`func (o *PackageTag) SetSpdxLicense(v string)`
+
+SetSpdxLicense sets SpdxLicense field to given value.
+
+### HasSpdxLicense
+
+`func (o *PackageTag) HasSpdxLicense() bool`
+
+HasSpdxLicense returns a boolean if a field has been set.
+
+### SetSpdxLicenseNil
+
+`func (o *PackageTag) SetSpdxLicenseNil(b bool)`
+
+ SetSpdxLicenseNil sets the value for SpdxLicense to be an explicit nil
+
+### UnsetSpdxLicense
+`func (o *PackageTag) UnsetSpdxLicense()`
+
+UnsetSpdxLicense ensures that no value is present for SpdxLicense, not even an explicit nil
 ### GetStage
 
 `func (o *PackageTag) GetStage() int64`

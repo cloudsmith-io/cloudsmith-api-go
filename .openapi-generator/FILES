@@ -4,6 +4,7 @@ README.md
 api/openapi.yaml
 api_audit_log.go
 api_badges.go
+api_broadcasts.go
 api_distros.go
 api_entitlements.go
 api_files.go
@@ -30,6 +31,9 @@ docs/AlpinePackageUploadRequest.md
 docs/Architecture.md
 docs/AuditLogApi.md
 docs/BadgesApi.md
+docs/BroadcastToken.md
+docs/BroadcastTokenInput.md
+docs/BroadcastsApi.md
 docs/CargoPackageUpload.md
 docs/CargoPackageUploadRequest.md
 docs/CargoUpstream.md
@@ -88,6 +92,11 @@ docs/Format.md
 docs/FormatSupport.md
 docs/FormatSupportUpstream.md
 docs/FormatsApi.md
+docs/GenericPackageUpload.md
+docs/GenericPackageUploadRequest.md
+docs/GenericUpstream.md
+docs/GenericUpstreamRequest.md
+docs/GenericUpstreamRequestPatch.md
 docs/GeoIpLocation.md
 docs/GoPackageUpload.md
 docs/GoPackageUploadRequest.md
@@ -168,6 +177,8 @@ docs/OrgsApi.md
 docs/P2PackageUpload.md
 docs/P2PackageUploadRequest.md
 docs/Package.md
+docs/PackageBulkAction.md
+docs/PackageBulkActionResponse.md
 docs/PackageCopy.md
 docs/PackageCopyRequest.md
 docs/PackageDenyPolicy.md
@@ -318,6 +329,8 @@ model_allocated_limit_raw.go
 model_alpine_package_upload.go
 model_alpine_package_upload_request.go
 model_architecture.go
+model_broadcast_token.go
+model_broadcast_token_input.go
 model_cargo_package_upload.go
 model_cargo_package_upload_request.go
 model_cargo_upstream.go
@@ -372,6 +385,11 @@ model_eula.go
 model_format.go
 model_format_support.go
 model_format_support_upstream.go
+model_generic_package_upload.go
+model_generic_package_upload_request.go
+model_generic_upstream.go
+model_generic_upstream_request.go
+model_generic_upstream_request_patch.go
 model_geo_ip_location.go
 model_go_package_upload.go
 model_go_package_upload_request.go
@@ -449,6 +467,8 @@ model_organization_team_request_patch.go
 model_p2_package_upload.go
 model_p2_package_upload_request.go
 model_package.go
+model_package_bulk_action.go
+model_package_bulk_action_response.go
 model_package_copy.go
 model_package_copy_request.go
 model_package_deny_policy.go
@@ -584,6 +604,7 @@ model_webhook_template.go
 response.go
 test/api_audit_log_test.go
 test/api_badges_test.go
+test/api_broadcasts_test.go
 test/api_distros_test.go
 test/api_entitlements_test.go
 test/api_files_test.go

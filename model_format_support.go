@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -27,6 +27,8 @@ type FormatSupport struct {
 	Distributions bool `json:"distributions"`
 	// If true the package format supports file lists
 	FileLists bool `json:"file_lists"`
+	// If true the package format supports filepaths
+	Filepaths bool `json:"filepaths"`
 	// If true the package format supports metadata
 	Metadata  bool                  `json:"metadata"`
 	Upstreams FormatSupportUpstream `json:"upstreams"`
@@ -41,11 +43,12 @@ type _FormatSupport FormatSupport
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFormatSupport(dependencies bool, distributions bool, fileLists bool, metadata bool, upstreams FormatSupportUpstream, versioning bool) *FormatSupport {
+func NewFormatSupport(dependencies bool, distributions bool, fileLists bool, filepaths bool, metadata bool, upstreams FormatSupportUpstream, versioning bool) *FormatSupport {
 	this := FormatSupport{}
 	this.Dependencies = dependencies
 	this.Distributions = distributions
 	this.FileLists = fileLists
+	this.Filepaths = filepaths
 	this.Metadata = metadata
 	this.Upstreams = upstreams
 	this.Versioning = versioning
@@ -130,6 +133,30 @@ func (o *FormatSupport) GetFileListsOk() (*bool, bool) {
 // SetFileLists sets field value
 func (o *FormatSupport) SetFileLists(v bool) {
 	o.FileLists = v
+}
+
+// GetFilepaths returns the Filepaths field value
+func (o *FormatSupport) GetFilepaths() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Filepaths
+}
+
+// GetFilepathsOk returns a tuple with the Filepaths field value
+// and a boolean to check if the value has been set.
+func (o *FormatSupport) GetFilepathsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Filepaths, true
+}
+
+// SetFilepaths sets field value
+func (o *FormatSupport) SetFilepaths(v bool) {
+	o.Filepaths = v
 }
 
 // GetMetadata returns the Metadata field value
@@ -217,6 +244,7 @@ func (o FormatSupport) ToMap() (map[string]interface{}, error) {
 	toSerialize["dependencies"] = o.Dependencies
 	toSerialize["distributions"] = o.Distributions
 	toSerialize["file_lists"] = o.FileLists
+	toSerialize["filepaths"] = o.Filepaths
 	toSerialize["metadata"] = o.Metadata
 	toSerialize["upstreams"] = o.Upstreams
 	toSerialize["versioning"] = o.Versioning
@@ -236,6 +264,7 @@ func (o *FormatSupport) UnmarshalJSON(data []byte) (err error) {
 		"dependencies",
 		"distributions",
 		"file_lists",
+		"filepaths",
 		"metadata",
 		"upstreams",
 		"versioning",
@@ -271,6 +300,7 @@ func (o *FormatSupport) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "dependencies")
 		delete(additionalProperties, "distributions")
 		delete(additionalProperties, "file_lists")
+		delete(additionalProperties, "filepaths")
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "upstreams")
 		delete(additionalProperties, "versioning")

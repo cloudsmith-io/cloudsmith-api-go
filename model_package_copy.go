@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.830.6
+API version: 1.990.1
 Contact: support@cloudsmith.io
 */
 
@@ -40,9 +40,11 @@ type PackageCopy struct {
 	Epoch     NullableInt64 `json:"epoch,omitempty"`
 	Extension *string       `json:"extension,omitempty"`
 	Filename  *string       `json:"filename,omitempty"`
-	Files     []PackageFile `json:"files,omitempty"`
-	Format    *string       `json:"format,omitempty"`
-	FormatUrl *string       `json:"format_url,omitempty"`
+	// Full path to the file, including filename e.g. bin/utils/tool.tar.gz
+	Filepath  NullableString `json:"filepath,omitempty"`
+	Files     []PackageFile  `json:"files,omitempty"`
+	Format    *string        `json:"format,omitempty"`
+	FormatUrl *string        `json:"format_url,omitempty"`
 	// Amount of storage that will be freed if this package is deleted
 	FreeableStorage    *int64         `json:"freeable_storage,omitempty"`
 	FullyQualifiedName NullableString `json:"fully_qualified_name,omitempty"`
@@ -78,6 +80,8 @@ type PackageCopy struct {
 	PackageType *int64 `json:"package_type,omitempty"`
 	// Whether or not the package has violated any policy.
 	PolicyViolated *bool `json:"policy_violated,omitempty"`
+	// The raw license string.
+	RawLicense NullableString `json:"raw_license,omitempty"`
 	// The release of the package version (if any).
 	Release NullableString `json:"release,omitempty"`
 	// The repository the package will be copied to.
@@ -92,12 +96,15 @@ type PackageCopy struct {
 	SecurityScanStatusUpdatedAt NullableTime   `json:"security_scan_status_updated_at,omitempty"`
 	SelfHtmlUrl                 *string        `json:"self_html_url,omitempty"`
 	SelfUrl                     *string        `json:"self_url,omitempty"`
+	SelfWebappUrl               *string        `json:"self_webapp_url,omitempty"`
 	SignatureUrl                NullableString `json:"signature_url,omitempty"`
 	// The calculated size of the package.
 	Size *int64 `json:"size,omitempty"`
 	// The public unique identifier for the package.
 	Slug     *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	// The SPDX license identifier for this package.
+	SpdxLicense NullableString `json:"spdx_license,omitempty"`
 	// The synchronisation (in progress) stage of the package.
 	Stage    *int64  `json:"stage,omitempty"`
 	StageStr *string `json:"stage_str,omitempty"`
@@ -720,6 +727,49 @@ func (o *PackageCopy) HasFilename() bool {
 // SetFilename gets a reference to the given string and assigns it to the Filename field.
 func (o *PackageCopy) SetFilename(v string) {
 	o.Filename = &v
+}
+
+// GetFilepath returns the Filepath field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageCopy) GetFilepath() string {
+	if o == nil || IsNil(o.Filepath.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Filepath.Get()
+}
+
+// GetFilepathOk returns a tuple with the Filepath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageCopy) GetFilepathOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Filepath.Get(), o.Filepath.IsSet()
+}
+
+// HasFilepath returns a boolean if a field has been set.
+func (o *PackageCopy) HasFilepath() bool {
+	if o != nil && o.Filepath.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFilepath gets a reference to the given NullableString and assigns it to the Filepath field.
+func (o *PackageCopy) SetFilepath(v string) {
+	o.Filepath.Set(&v)
+}
+
+// SetFilepathNil sets the value for Filepath to be an explicit nil
+func (o *PackageCopy) SetFilepathNil() {
+	o.Filepath.Set(nil)
+}
+
+// UnsetFilepath ensures that no value is present for Filepath, not even an explicit nil
+func (o *PackageCopy) UnsetFilepath() {
+	o.Filepath.Unset()
 }
 
 // GetFiles returns the Files field value if set, zero value otherwise.
@@ -1747,6 +1797,49 @@ func (o *PackageCopy) SetPolicyViolated(v bool) {
 	o.PolicyViolated = &v
 }
 
+// GetRawLicense returns the RawLicense field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageCopy) GetRawLicense() string {
+	if o == nil || IsNil(o.RawLicense.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RawLicense.Get()
+}
+
+// GetRawLicenseOk returns a tuple with the RawLicense field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageCopy) GetRawLicenseOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RawLicense.Get(), o.RawLicense.IsSet()
+}
+
+// HasRawLicense returns a boolean if a field has been set.
+func (o *PackageCopy) HasRawLicense() bool {
+	if o != nil && o.RawLicense.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRawLicense gets a reference to the given NullableString and assigns it to the RawLicense field.
+func (o *PackageCopy) SetRawLicense(v string) {
+	o.RawLicense.Set(&v)
+}
+
+// SetRawLicenseNil sets the value for RawLicense to be an explicit nil
+func (o *PackageCopy) SetRawLicenseNil() {
+	o.RawLicense.Set(nil)
+}
+
+// UnsetRawLicense ensures that no value is present for RawLicense, not even an explicit nil
+func (o *PackageCopy) UnsetRawLicense() {
+	o.RawLicense.Unset()
+}
+
 // GetRelease returns the Release field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageCopy) GetRelease() string {
 	if o == nil || IsNil(o.Release.Get()) {
@@ -2090,6 +2183,38 @@ func (o *PackageCopy) SetSelfUrl(v string) {
 	o.SelfUrl = &v
 }
 
+// GetSelfWebappUrl returns the SelfWebappUrl field value if set, zero value otherwise.
+func (o *PackageCopy) GetSelfWebappUrl() string {
+	if o == nil || IsNil(o.SelfWebappUrl) {
+		var ret string
+		return ret
+	}
+	return *o.SelfWebappUrl
+}
+
+// GetSelfWebappUrlOk returns a tuple with the SelfWebappUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageCopy) GetSelfWebappUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.SelfWebappUrl) {
+		return nil, false
+	}
+	return o.SelfWebappUrl, true
+}
+
+// HasSelfWebappUrl returns a boolean if a field has been set.
+func (o *PackageCopy) HasSelfWebappUrl() bool {
+	if o != nil && !IsNil(o.SelfWebappUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelfWebappUrl gets a reference to the given string and assigns it to the SelfWebappUrl field.
+func (o *PackageCopy) SetSelfWebappUrl(v string) {
+	o.SelfWebappUrl = &v
+}
+
 // GetSignatureUrl returns the SignatureUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageCopy) GetSignatureUrl() string {
 	if o == nil || IsNil(o.SignatureUrl.Get()) {
@@ -2227,6 +2352,49 @@ func (o *PackageCopy) HasSlugPerm() bool {
 // SetSlugPerm gets a reference to the given string and assigns it to the SlugPerm field.
 func (o *PackageCopy) SetSlugPerm(v string) {
 	o.SlugPerm = &v
+}
+
+// GetSpdxLicense returns the SpdxLicense field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageCopy) GetSpdxLicense() string {
+	if o == nil || IsNil(o.SpdxLicense.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SpdxLicense.Get()
+}
+
+// GetSpdxLicenseOk returns a tuple with the SpdxLicense field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageCopy) GetSpdxLicenseOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SpdxLicense.Get(), o.SpdxLicense.IsSet()
+}
+
+// HasSpdxLicense returns a boolean if a field has been set.
+func (o *PackageCopy) HasSpdxLicense() bool {
+	if o != nil && o.SpdxLicense.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSpdxLicense gets a reference to the given NullableString and assigns it to the SpdxLicense field.
+func (o *PackageCopy) SetSpdxLicense(v string) {
+	o.SpdxLicense.Set(&v)
+}
+
+// SetSpdxLicenseNil sets the value for SpdxLicense to be an explicit nil
+func (o *PackageCopy) SetSpdxLicenseNil() {
+	o.SpdxLicense.Set(nil)
+}
+
+// UnsetSpdxLicense ensures that no value is present for SpdxLicense, not even an explicit nil
+func (o *PackageCopy) UnsetSpdxLicense() {
+	o.SpdxLicense.Unset()
 }
 
 // GetStage returns the Stage field value if set, zero value otherwise.
@@ -3035,6 +3203,9 @@ func (o PackageCopy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Filename) {
 		toSerialize["filename"] = o.Filename
 	}
+	if o.Filepath.IsSet() {
+		toSerialize["filepath"] = o.Filepath.Get()
+	}
 	if !IsNil(o.Files) {
 		toSerialize["files"] = o.Files
 	}
@@ -3128,6 +3299,9 @@ func (o PackageCopy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PolicyViolated) {
 		toSerialize["policy_violated"] = o.PolicyViolated
 	}
+	if o.RawLicense.IsSet() {
+		toSerialize["raw_license"] = o.RawLicense.Get()
+	}
 	if o.Release.IsSet() {
 		toSerialize["release"] = o.Release.Get()
 	}
@@ -3155,6 +3329,9 @@ func (o PackageCopy) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SelfUrl) {
 		toSerialize["self_url"] = o.SelfUrl
 	}
+	if !IsNil(o.SelfWebappUrl) {
+		toSerialize["self_webapp_url"] = o.SelfWebappUrl
+	}
 	if o.SignatureUrl.IsSet() {
 		toSerialize["signature_url"] = o.SignatureUrl.Get()
 	}
@@ -3166,6 +3343,9 @@ func (o PackageCopy) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
+	}
+	if o.SpdxLicense.IsSet() {
+		toSerialize["spdx_license"] = o.SpdxLicense.Get()
 	}
 	if !IsNil(o.Stage) {
 		toSerialize["stage"] = o.Stage
@@ -3271,6 +3451,7 @@ func (o *PackageCopy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "epoch")
 		delete(additionalProperties, "extension")
 		delete(additionalProperties, "filename")
+		delete(additionalProperties, "filepath")
 		delete(additionalProperties, "files")
 		delete(additionalProperties, "format")
 		delete(additionalProperties, "format_url")
@@ -3302,6 +3483,7 @@ func (o *PackageCopy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "origin_repository_url")
 		delete(additionalProperties, "package_type")
 		delete(additionalProperties, "policy_violated")
+		delete(additionalProperties, "raw_license")
 		delete(additionalProperties, "release")
 		delete(additionalProperties, "repository")
 		delete(additionalProperties, "repository_url")
@@ -3311,10 +3493,12 @@ func (o *PackageCopy) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "security_scan_status_updated_at")
 		delete(additionalProperties, "self_html_url")
 		delete(additionalProperties, "self_url")
+		delete(additionalProperties, "self_webapp_url")
 		delete(additionalProperties, "signature_url")
 		delete(additionalProperties, "size")
 		delete(additionalProperties, "slug")
 		delete(additionalProperties, "slug_perm")
+		delete(additionalProperties, "spdx_license")
 		delete(additionalProperties, "stage")
 		delete(additionalProperties, "stage_str")
 		delete(additionalProperties, "stage_updated_at")

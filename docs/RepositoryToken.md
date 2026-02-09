@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**AccessPrivateBroadcasts** | Pointer to **bool** | If enabled, this token can be used for private broadcasts | [optional] 
 **Clients** | Pointer to **int64** |  | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | The datetime the token was updated at. | [optional] [readonly] 
 **CreatedBy** | Pointer to **string** |  | [optional] [readonly] 
@@ -62,6 +63,31 @@ will change when the set of required properties is changed
 NewRepositoryTokenWithDefaults instantiates a new RepositoryToken object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAccessPrivateBroadcasts
+
+`func (o *RepositoryToken) GetAccessPrivateBroadcasts() bool`
+
+GetAccessPrivateBroadcasts returns the AccessPrivateBroadcasts field if non-nil, zero value otherwise.
+
+### GetAccessPrivateBroadcastsOk
+
+`func (o *RepositoryToken) GetAccessPrivateBroadcastsOk() (*bool, bool)`
+
+GetAccessPrivateBroadcastsOk returns a tuple with the AccessPrivateBroadcasts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccessPrivateBroadcasts
+
+`func (o *RepositoryToken) SetAccessPrivateBroadcasts(v bool)`
+
+SetAccessPrivateBroadcasts sets AccessPrivateBroadcasts field to given value.
+
+### HasAccessPrivateBroadcasts
+
+`func (o *RepositoryToken) HasAccessPrivateBroadcasts() bool`
+
+HasAccessPrivateBroadcasts returns a boolean if a field has been set.
 
 ### GetClients
 
