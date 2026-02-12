@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **AuthMode** | Pointer to **string** | The authentication mode to use when accessing this upstream.  | [optional] [default to "None"]
 **AuthSecret** | Pointer to **NullableString** | Secret to provide with requests to upstream. | [optional] 
 **AuthUsername** | Pointer to **NullableString** | Username to provide with requests to upstream. | [optional] 
-**Available** | Pointer to **string** |  | [optional] [readonly] 
-**CanReindex** | Pointer to **string** |  | [optional] [readonly] 
+**Available** | Pointer to **bool** | Whether the upstream is available for use. | [optional] [readonly] 
+**CanReindex** | Pointer to **bool** | Whether the upstream can be reindexed. | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | The datetime the upstream source was created. | [optional] [readonly] 
 **DisableReason** | Pointer to **string** |  | [optional] [readonly] [default to "N/A"]
 **DisableReasonText** | Pointer to **string** | Human-readable explanation of why this upstream is disabled | [optional] [readonly] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **ExtraHeader2** | Pointer to **NullableString** | The key for extra header #2 to send to upstream. | [optional] 
 **ExtraValue1** | Pointer to **NullableString** | The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
 **ExtraValue2** | Pointer to **NullableString** | The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
-**HasFailedSignatureVerification** | Pointer to **string** |  | [optional] [readonly] 
+**HasFailedSignatureVerification** | Pointer to **bool** | Whether the upstream has failed signature verification. | [optional] [readonly] 
 **IndexPackageCount** | Pointer to **string** | The number of packages available in this upstream source | [optional] [readonly] 
 **IndexStatus** | Pointer to **string** | The current indexing status of this upstream source | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
@@ -146,20 +146,20 @@ HasAuthUsername returns a boolean if a field has been set.
 UnsetAuthUsername ensures that no value is present for AuthUsername, not even an explicit nil
 ### GetAvailable
 
-`func (o *NpmUpstream) GetAvailable() string`
+`func (o *NpmUpstream) GetAvailable() bool`
 
 GetAvailable returns the Available field if non-nil, zero value otherwise.
 
 ### GetAvailableOk
 
-`func (o *NpmUpstream) GetAvailableOk() (*string, bool)`
+`func (o *NpmUpstream) GetAvailableOk() (*bool, bool)`
 
 GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailable
 
-`func (o *NpmUpstream) SetAvailable(v string)`
+`func (o *NpmUpstream) SetAvailable(v bool)`
 
 SetAvailable sets Available field to given value.
 
@@ -171,20 +171,20 @@ HasAvailable returns a boolean if a field has been set.
 
 ### GetCanReindex
 
-`func (o *NpmUpstream) GetCanReindex() string`
+`func (o *NpmUpstream) GetCanReindex() bool`
 
 GetCanReindex returns the CanReindex field if non-nil, zero value otherwise.
 
 ### GetCanReindexOk
 
-`func (o *NpmUpstream) GetCanReindexOk() (*string, bool)`
+`func (o *NpmUpstream) GetCanReindexOk() (*bool, bool)`
 
 GetCanReindexOk returns a tuple with the CanReindex field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCanReindex
 
-`func (o *NpmUpstream) SetCanReindex(v string)`
+`func (o *NpmUpstream) SetCanReindex(v bool)`
 
 SetCanReindex sets CanReindex field to given value.
 
@@ -411,20 +411,20 @@ HasExtraValue2 returns a boolean if a field has been set.
 UnsetExtraValue2 ensures that no value is present for ExtraValue2, not even an explicit nil
 ### GetHasFailedSignatureVerification
 
-`func (o *NpmUpstream) GetHasFailedSignatureVerification() string`
+`func (o *NpmUpstream) GetHasFailedSignatureVerification() bool`
 
 GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field if non-nil, zero value otherwise.
 
 ### GetHasFailedSignatureVerificationOk
 
-`func (o *NpmUpstream) GetHasFailedSignatureVerificationOk() (*string, bool)`
+`func (o *NpmUpstream) GetHasFailedSignatureVerificationOk() (*bool, bool)`
 
 GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHasFailedSignatureVerification
 
-`func (o *NpmUpstream) SetHasFailedSignatureVerification(v string)`
+`func (o *NpmUpstream) SetHasFailedSignatureVerification(v bool)`
 
 SetHasFailedSignatureVerification sets HasFailedSignatureVerification field to given value.
 

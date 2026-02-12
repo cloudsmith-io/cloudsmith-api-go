@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.990.1
+  version: 1.996.1
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -8135,6 +8135,18 @@ paths:
         name: page_size
         schema:
           type: integer
+      - description: "A search term for querying repositories. Available options are:\
+          \ name, slug. Explicit filters: broadcast_state, repository_type."
+        in: query
+        name: query
+        schema:
+          type: string
+      - description: A field for sorting objects in ascending or descending order.
+        in: query
+        name: sort
+        schema:
+          default: -created_at
+          type: string
       responses:
         "200":
           content:
@@ -43091,8 +43103,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -43100,7 +43112,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -43136,13 +43148,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -43195,9 +43209,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -43510,8 +43525,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -43519,7 +43534,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -43555,13 +43570,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -43614,9 +43631,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -43929,8 +43947,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -43938,7 +43956,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -43974,13 +43992,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -44033,9 +44053,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -44348,8 +44369,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -44357,7 +44378,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -44393,13 +44414,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -44452,9 +44475,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -44767,8 +44791,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -44776,7 +44800,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -44812,13 +44836,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -44871,9 +44897,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -45187,8 +45214,8 @@ components:
         gpg_key_url: https://openapi-generator.tech
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         include_sources: true
@@ -45199,7 +45226,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         gpg_key_inline: gpg_key_inline
         pending_validation: true
         gpg_key_fingerprint_short: gpg_key_fingerprint_short
@@ -45242,13 +45269,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         component:
           description: The component to fetch from the upstream
           maxLength: 64
@@ -45347,9 +45376,10 @@ components:
           title: Gpg verification
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         include_sources:
           description: "When true, source packages will be available from this upstream."
           title: Source Packages
@@ -45812,7 +45842,7 @@ components:
         disable_reason: N/A
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        available: available
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_value_1: extra_value_1
@@ -45827,7 +45857,7 @@ components:
         verify_ssl: true
         auth_username: auth_username
         name: name
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
       properties:
         auth_mode:
@@ -45852,9 +45882,10 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -45907,9 +45938,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         is_active:
           description: Whether or not this upstream is active and ready for requests.
           title: Is active
@@ -46237,8 +46269,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -46246,7 +46278,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -46284,13 +46316,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -46343,9 +46377,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -46692,8 +46727,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -46701,7 +46736,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -46737,13 +46772,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -46796,9 +46833,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -47111,8 +47149,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -47120,7 +47158,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -47156,13 +47194,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -47215,9 +47255,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -47530,8 +47571,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -47539,7 +47580,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -47575,13 +47616,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -47634,9 +47677,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -47949,8 +47993,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -47958,7 +48002,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -47994,13 +48038,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -48053,9 +48099,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -48369,8 +48416,8 @@ components:
         gpg_key_url: https://openapi-generator.tech
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         trust_level: Trusted
         auth_mode: None
@@ -48381,7 +48428,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         gpg_key_inline: gpg_key_inline
         pending_validation: true
         gpg_key_fingerprint_short: gpg_key_fingerprint_short
@@ -48419,13 +48466,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -48509,9 +48558,10 @@ components:
           title: Gpg verification
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -48933,8 +48983,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -48942,7 +48992,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -48979,13 +49029,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -49038,9 +49090,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -49355,8 +49408,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -49364,7 +49417,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -49400,13 +49453,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -49459,9 +49514,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -49774,8 +49830,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         trust_level: Trusted
         auth_mode: None
@@ -49784,7 +49840,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -49820,13 +49876,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -49879,9 +49937,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -50230,8 +50289,8 @@ components:
         gpg_key_url: https://openapi-generator.tech
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         include_sources: true
@@ -50243,7 +50302,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         gpg_key_inline: gpg_key_inline
         pending_validation: true
         gpg_key_fingerprint_short: gpg_key_fingerprint_short
@@ -50281,13 +50340,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -50376,9 +50437,10 @@ components:
           title: Gpg verification
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         include_sources:
           description: "When checked, source packages will be available from this\
             \ upstream."
@@ -50793,8 +50855,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -50802,7 +50864,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -50838,13 +50900,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -50897,9 +50961,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true
@@ -51212,8 +51277,8 @@ components:
       example:
         upstream_url: https://openapi-generator.tech
         auth_secret: auth_secret
-        can_reindex: can_reindex
-        available: available
+        can_reindex: true
+        available: true
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
@@ -51221,7 +51286,7 @@ components:
         mode: Proxy Only
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
-        has_failed_signature_verification: has_failed_signature_verification
+        has_failed_signature_verification: true
         pending_validation: true
         index_status: index_status
         is_active: true
@@ -51257,13 +51322,15 @@ components:
           title: Username
           type: string
         available:
+          description: Whether the upstream is available for use.
           readOnly: true
           title: Available
-          type: string
+          type: boolean
         can_reindex:
+          description: Whether the upstream can be reindexed.
           readOnly: true
           title: Can reindex
-          type: string
+          type: boolean
         created_at:
           description: The datetime the upstream source was created.
           format: date-time
@@ -51316,9 +51383,10 @@ components:
           title: "Value #2"
           type: string
         has_failed_signature_verification:
+          description: Whether the upstream has failed signature verification.
           readOnly: true
           title: Has failed signature verification
-          type: string
+          type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
           readOnly: true

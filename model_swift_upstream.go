@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.990.1
+API version: 1.996.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,8 +28,10 @@ type SwiftUpstream struct {
 	AuthSecret NullableString `json:"auth_secret,omitempty"`
 	// Username to provide with requests to upstream.
 	AuthUsername NullableString `json:"auth_username,omitempty"`
-	Available    *string        `json:"available,omitempty"`
-	CanReindex   *string        `json:"can_reindex,omitempty"`
+	// Whether the upstream is available for use.
+	Available *bool `json:"available,omitempty"`
+	// Whether the upstream can be reindexed.
+	CanReindex *bool `json:"can_reindex,omitempty"`
 	// The datetime the upstream source was created.
 	CreatedAt     *time.Time `json:"created_at,omitempty"`
 	DisableReason *string    `json:"disable_reason,omitempty"`
@@ -42,8 +44,9 @@ type SwiftUpstream struct {
 	// The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted.
 	ExtraValue1 NullableString `json:"extra_value_1,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue2                    NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
-	HasFailedSignatureVerification *string        `json:"has_failed_signature_verification,omitempty"`
+	ExtraValue2 NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
+	// Whether the upstream has failed signature verification.
+	HasFailedSignatureVerification *bool `json:"has_failed_signature_verification,omitempty"`
 	// The number of packages available in this upstream source
 	IndexPackageCount *string `json:"index_package_count,omitempty"`
 	// The current indexing status of this upstream source
@@ -217,9 +220,9 @@ func (o *SwiftUpstream) UnsetAuthUsername() {
 }
 
 // GetAvailable returns the Available field value if set, zero value otherwise.
-func (o *SwiftUpstream) GetAvailable() string {
+func (o *SwiftUpstream) GetAvailable() bool {
 	if o == nil || IsNil(o.Available) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.Available
@@ -227,7 +230,7 @@ func (o *SwiftUpstream) GetAvailable() string {
 
 // GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SwiftUpstream) GetAvailableOk() (*string, bool) {
+func (o *SwiftUpstream) GetAvailableOk() (*bool, bool) {
 	if o == nil || IsNil(o.Available) {
 		return nil, false
 	}
@@ -243,15 +246,15 @@ func (o *SwiftUpstream) HasAvailable() bool {
 	return false
 }
 
-// SetAvailable gets a reference to the given string and assigns it to the Available field.
-func (o *SwiftUpstream) SetAvailable(v string) {
+// SetAvailable gets a reference to the given bool and assigns it to the Available field.
+func (o *SwiftUpstream) SetAvailable(v bool) {
 	o.Available = &v
 }
 
 // GetCanReindex returns the CanReindex field value if set, zero value otherwise.
-func (o *SwiftUpstream) GetCanReindex() string {
+func (o *SwiftUpstream) GetCanReindex() bool {
 	if o == nil || IsNil(o.CanReindex) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.CanReindex
@@ -259,7 +262,7 @@ func (o *SwiftUpstream) GetCanReindex() string {
 
 // GetCanReindexOk returns a tuple with the CanReindex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SwiftUpstream) GetCanReindexOk() (*string, bool) {
+func (o *SwiftUpstream) GetCanReindexOk() (*bool, bool) {
 	if o == nil || IsNil(o.CanReindex) {
 		return nil, false
 	}
@@ -275,8 +278,8 @@ func (o *SwiftUpstream) HasCanReindex() bool {
 	return false
 }
 
-// SetCanReindex gets a reference to the given string and assigns it to the CanReindex field.
-func (o *SwiftUpstream) SetCanReindex(v string) {
+// SetCanReindex gets a reference to the given bool and assigns it to the CanReindex field.
+func (o *SwiftUpstream) SetCanReindex(v bool) {
 	o.CanReindex = &v
 }
 
@@ -549,9 +552,9 @@ func (o *SwiftUpstream) UnsetExtraValue2() {
 }
 
 // GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field value if set, zero value otherwise.
-func (o *SwiftUpstream) GetHasFailedSignatureVerification() string {
+func (o *SwiftUpstream) GetHasFailedSignatureVerification() bool {
 	if o == nil || IsNil(o.HasFailedSignatureVerification) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.HasFailedSignatureVerification
@@ -559,7 +562,7 @@ func (o *SwiftUpstream) GetHasFailedSignatureVerification() string {
 
 // GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SwiftUpstream) GetHasFailedSignatureVerificationOk() (*string, bool) {
+func (o *SwiftUpstream) GetHasFailedSignatureVerificationOk() (*bool, bool) {
 	if o == nil || IsNil(o.HasFailedSignatureVerification) {
 		return nil, false
 	}
@@ -575,8 +578,8 @@ func (o *SwiftUpstream) HasHasFailedSignatureVerification() bool {
 	return false
 }
 
-// SetHasFailedSignatureVerification gets a reference to the given string and assigns it to the HasFailedSignatureVerification field.
-func (o *SwiftUpstream) SetHasFailedSignatureVerification(v string) {
+// SetHasFailedSignatureVerification gets a reference to the given bool and assigns it to the HasFailedSignatureVerification field.
+func (o *SwiftUpstream) SetHasFailedSignatureVerification(v bool) {
 	o.HasFailedSignatureVerification = &v
 }
 
