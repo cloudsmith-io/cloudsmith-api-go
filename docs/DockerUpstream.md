@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **AuthMode** | Pointer to **string** | The authentication mode to use when accessing this upstream.  | [optional] [default to "None"]
 **AuthSecret** | Pointer to **NullableString** | Secret to provide with requests to upstream. | [optional] 
 **AuthUsername** | Pointer to **NullableString** | Username to provide with requests to upstream. | [optional] 
-**Available** | Pointer to **string** |  | [optional] [readonly] 
+**Available** | Pointer to **bool** | Whether the upstream is available for use. | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | The datetime the upstream source was created. | [optional] [readonly] 
 **DisableReason** | Pointer to **string** |  | [optional] [readonly] [default to "N/A"]
 **DisableReasonText** | Pointer to **string** | Human-readable explanation of why this upstream is disabled | [optional] [readonly] 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **ExtraHeader2** | Pointer to **NullableString** | The key for extra header #2 to send to upstream. | [optional] 
 **ExtraValue1** | Pointer to **NullableString** | The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
 **ExtraValue2** | Pointer to **NullableString** | The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
-**HasFailedSignatureVerification** | Pointer to **string** |  | [optional] [readonly] 
+**HasFailedSignatureVerification** | Pointer to **bool** | Whether the upstream has failed signature verification. | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
 **Name** | **string** | A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream. | 
@@ -142,20 +142,20 @@ HasAuthUsername returns a boolean if a field has been set.
 UnsetAuthUsername ensures that no value is present for AuthUsername, not even an explicit nil
 ### GetAvailable
 
-`func (o *DockerUpstream) GetAvailable() string`
+`func (o *DockerUpstream) GetAvailable() bool`
 
 GetAvailable returns the Available field if non-nil, zero value otherwise.
 
 ### GetAvailableOk
 
-`func (o *DockerUpstream) GetAvailableOk() (*string, bool)`
+`func (o *DockerUpstream) GetAvailableOk() (*bool, bool)`
 
 GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailable
 
-`func (o *DockerUpstream) SetAvailable(v string)`
+`func (o *DockerUpstream) SetAvailable(v bool)`
 
 SetAvailable sets Available field to given value.
 
@@ -382,20 +382,20 @@ HasExtraValue2 returns a boolean if a field has been set.
 UnsetExtraValue2 ensures that no value is present for ExtraValue2, not even an explicit nil
 ### GetHasFailedSignatureVerification
 
-`func (o *DockerUpstream) GetHasFailedSignatureVerification() string`
+`func (o *DockerUpstream) GetHasFailedSignatureVerification() bool`
 
 GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field if non-nil, zero value otherwise.
 
 ### GetHasFailedSignatureVerificationOk
 
-`func (o *DockerUpstream) GetHasFailedSignatureVerificationOk() (*string, bool)`
+`func (o *DockerUpstream) GetHasFailedSignatureVerificationOk() (*bool, bool)`
 
 GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHasFailedSignatureVerification
 
-`func (o *DockerUpstream) SetHasFailedSignatureVerification(v string)`
+`func (o *DockerUpstream) SetHasFailedSignatureVerification(v bool)`
 
 SetHasFailedSignatureVerification sets HasFailedSignatureVerification field to given value.
 

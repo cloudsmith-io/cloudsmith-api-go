@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.990.1
+API version: 1.996.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,8 +28,10 @@ type PythonUpstream struct {
 	AuthSecret NullableString `json:"auth_secret,omitempty"`
 	// Username to provide with requests to upstream.
 	AuthUsername NullableString `json:"auth_username,omitempty"`
-	Available    *string        `json:"available,omitempty"`
-	CanReindex   *string        `json:"can_reindex,omitempty"`
+	// Whether the upstream is available for use.
+	Available *bool `json:"available,omitempty"`
+	// Whether the upstream can be reindexed.
+	CanReindex *bool `json:"can_reindex,omitempty"`
 	// The datetime the upstream source was created.
 	CreatedAt     *time.Time `json:"created_at,omitempty"`
 	DisableReason *string    `json:"disable_reason,omitempty"`
@@ -42,8 +44,9 @@ type PythonUpstream struct {
 	// The value for extra header #1 to send to upstream. This is stored as plaintext, and is NOT encrypted.
 	ExtraValue1 NullableString `json:"extra_value_1,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
 	// The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted.
-	ExtraValue2                    NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
-	HasFailedSignatureVerification *string        `json:"has_failed_signature_verification,omitempty"`
+	ExtraValue2 NullableString `json:"extra_value_2,omitempty" validate:"regexp=^[^\\\\n\\\\r]+$"`
+	// Whether the upstream has failed signature verification.
+	HasFailedSignatureVerification *bool `json:"has_failed_signature_verification,omitempty"`
 	// The number of packages available in this upstream source
 	IndexPackageCount *string `json:"index_package_count,omitempty"`
 	// The current indexing status of this upstream source
@@ -223,9 +226,9 @@ func (o *PythonUpstream) UnsetAuthUsername() {
 }
 
 // GetAvailable returns the Available field value if set, zero value otherwise.
-func (o *PythonUpstream) GetAvailable() string {
+func (o *PythonUpstream) GetAvailable() bool {
 	if o == nil || IsNil(o.Available) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.Available
@@ -233,7 +236,7 @@ func (o *PythonUpstream) GetAvailable() string {
 
 // GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PythonUpstream) GetAvailableOk() (*string, bool) {
+func (o *PythonUpstream) GetAvailableOk() (*bool, bool) {
 	if o == nil || IsNil(o.Available) {
 		return nil, false
 	}
@@ -249,15 +252,15 @@ func (o *PythonUpstream) HasAvailable() bool {
 	return false
 }
 
-// SetAvailable gets a reference to the given string and assigns it to the Available field.
-func (o *PythonUpstream) SetAvailable(v string) {
+// SetAvailable gets a reference to the given bool and assigns it to the Available field.
+func (o *PythonUpstream) SetAvailable(v bool) {
 	o.Available = &v
 }
 
 // GetCanReindex returns the CanReindex field value if set, zero value otherwise.
-func (o *PythonUpstream) GetCanReindex() string {
+func (o *PythonUpstream) GetCanReindex() bool {
 	if o == nil || IsNil(o.CanReindex) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.CanReindex
@@ -265,7 +268,7 @@ func (o *PythonUpstream) GetCanReindex() string {
 
 // GetCanReindexOk returns a tuple with the CanReindex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PythonUpstream) GetCanReindexOk() (*string, bool) {
+func (o *PythonUpstream) GetCanReindexOk() (*bool, bool) {
 	if o == nil || IsNil(o.CanReindex) {
 		return nil, false
 	}
@@ -281,8 +284,8 @@ func (o *PythonUpstream) HasCanReindex() bool {
 	return false
 }
 
-// SetCanReindex gets a reference to the given string and assigns it to the CanReindex field.
-func (o *PythonUpstream) SetCanReindex(v string) {
+// SetCanReindex gets a reference to the given bool and assigns it to the CanReindex field.
+func (o *PythonUpstream) SetCanReindex(v bool) {
 	o.CanReindex = &v
 }
 
@@ -555,9 +558,9 @@ func (o *PythonUpstream) UnsetExtraValue2() {
 }
 
 // GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field value if set, zero value otherwise.
-func (o *PythonUpstream) GetHasFailedSignatureVerification() string {
+func (o *PythonUpstream) GetHasFailedSignatureVerification() bool {
 	if o == nil || IsNil(o.HasFailedSignatureVerification) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.HasFailedSignatureVerification
@@ -565,7 +568,7 @@ func (o *PythonUpstream) GetHasFailedSignatureVerification() string {
 
 // GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PythonUpstream) GetHasFailedSignatureVerificationOk() (*string, bool) {
+func (o *PythonUpstream) GetHasFailedSignatureVerificationOk() (*bool, bool) {
 	if o == nil || IsNil(o.HasFailedSignatureVerification) {
 		return nil, false
 	}
@@ -581,8 +584,8 @@ func (o *PythonUpstream) HasHasFailedSignatureVerification() bool {
 	return false
 }
 
-// SetHasFailedSignatureVerification gets a reference to the given string and assigns it to the HasFailedSignatureVerification field.
-func (o *PythonUpstream) SetHasFailedSignatureVerification(v string) {
+// SetHasFailedSignatureVerification gets a reference to the given bool and assigns it to the HasFailedSignatureVerification field.
+func (o *PythonUpstream) SetHasFailedSignatureVerification(v bool) {
 	o.HasFailedSignatureVerification = &v
 }
 

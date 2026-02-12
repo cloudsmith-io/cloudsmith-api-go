@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.990.1
+API version: 1.996.1
 Contact: support@cloudsmith.io
 */
 
@@ -2720,6 +2720,8 @@ type ApiReposNamespaceListRequest struct {
 	owner      string
 	page       *int64
 	pageSize   *int64
+	query      *string
+	sort       *string
 }
 
 // A page number within the paginated result set.
@@ -2731,6 +2733,18 @@ func (r ApiReposNamespaceListRequest) Page(page int64) ApiReposNamespaceListRequ
 // Number of results to return per page.
 func (r ApiReposNamespaceListRequest) PageSize(pageSize int64) ApiReposNamespaceListRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// A search term for querying repositories. Available options are: name, slug. Explicit filters: broadcast_state, repository_type.
+func (r ApiReposNamespaceListRequest) Query(query string) ApiReposNamespaceListRequest {
+	r.query = &query
+	return r
+}
+
+// A field for sorting objects in ascending or descending order.
+func (r ApiReposNamespaceListRequest) Sort(sort string) ApiReposNamespaceListRequest {
+	r.sort = &sort
 	return r
 }
 
@@ -2782,6 +2796,15 @@ func (a *ReposApiService) ReposNamespaceListExecute(r ApiReposNamespaceListReque
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
+	}
+	if r.query != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
+	}
+	if r.sort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "", "")
+	} else {
+		var defaultValue string = "-created_at"
+		r.sort = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

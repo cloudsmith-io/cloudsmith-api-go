@@ -1403,7 +1403,7 @@ Name | Type | Description  | Notes
 
 ## ReposNamespaceList
 
-> []Repository ReposNamespaceList(ctx, owner).Page(page).PageSize(pageSize).Execute()
+> []Repository ReposNamespaceList(ctx, owner).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
 
 Get a list of all repositories within a namespace.
 
@@ -1425,10 +1425,12 @@ func main() {
 	owner := "owner_example" // string | 
 	page := int64(56) // int64 | A page number within the paginated result set. (optional)
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	query := "query_example" // string | A search term for querying repositories. Available options are: name, slug. Explicit filters: broadcast_state, repository_type. (optional)
+	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. (optional) (default to "-created_at")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ReposApi.ReposNamespaceList(context.Background(), owner).Page(page).PageSize(pageSize).Execute()
+	resp, r, err := apiClient.ReposApi.ReposNamespaceList(context.Background(), owner).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposNamespaceList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1456,6 +1458,8 @@ Name | Type | Description  | Notes
 
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
+ **query** | **string** | A search term for querying repositories. Available options are: name, slug. Explicit filters: broadcast_state, repository_type. | 
+ **sort** | **string** | A field for sorting objects in ascending or descending order. | [default to &quot;-created_at&quot;]
 
 ### Return type
 

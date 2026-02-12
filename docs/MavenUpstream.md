@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **AuthMode** | Pointer to **string** | The authentication mode to use when accessing this upstream.  | [optional] [default to "None"]
 **AuthSecret** | Pointer to **NullableString** | Secret to provide with requests to upstream. | [optional] 
 **AuthUsername** | Pointer to **NullableString** | Username to provide with requests to upstream. | [optional] 
-**Available** | Pointer to **string** |  | [optional] [readonly] 
-**CanReindex** | Pointer to **string** |  | [optional] [readonly] 
+**Available** | Pointer to **bool** | Whether the upstream is available for use. | [optional] [readonly] 
+**CanReindex** | Pointer to **bool** | Whether the upstream can be reindexed. | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | The datetime the upstream source was created. | [optional] [readonly] 
 **DisableReason** | Pointer to **string** |  | [optional] [readonly] [default to "N/A"]
 **DisableReasonText** | Pointer to **string** | Human-readable explanation of why this upstream is disabled | [optional] [readonly] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **GpgKeyInline** | Pointer to **NullableString** | A public GPG key to associate with packages found on this upstream. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install. | [optional] 
 **GpgKeyUrl** | Pointer to **NullableString** | When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install. | [optional] 
 **GpgVerification** | Pointer to **string** | The GPG signature verification mode for this upstream. | [optional] [default to "Allow All"]
-**HasFailedSignatureVerification** | Pointer to **string** |  | [optional] [readonly] 
+**HasFailedSignatureVerification** | Pointer to **bool** | Whether the upstream has failed signature verification. | [optional] [readonly] 
 **IndexPackageCount** | Pointer to **string** | The number of packages available in this upstream source | [optional] [readonly] 
 **IndexStatus** | Pointer to **string** | The current indexing status of this upstream source | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
@@ -152,20 +152,20 @@ HasAuthUsername returns a boolean if a field has been set.
 UnsetAuthUsername ensures that no value is present for AuthUsername, not even an explicit nil
 ### GetAvailable
 
-`func (o *MavenUpstream) GetAvailable() string`
+`func (o *MavenUpstream) GetAvailable() bool`
 
 GetAvailable returns the Available field if non-nil, zero value otherwise.
 
 ### GetAvailableOk
 
-`func (o *MavenUpstream) GetAvailableOk() (*string, bool)`
+`func (o *MavenUpstream) GetAvailableOk() (*bool, bool)`
 
 GetAvailableOk returns a tuple with the Available field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAvailable
 
-`func (o *MavenUpstream) SetAvailable(v string)`
+`func (o *MavenUpstream) SetAvailable(v bool)`
 
 SetAvailable sets Available field to given value.
 
@@ -177,20 +177,20 @@ HasAvailable returns a boolean if a field has been set.
 
 ### GetCanReindex
 
-`func (o *MavenUpstream) GetCanReindex() string`
+`func (o *MavenUpstream) GetCanReindex() bool`
 
 GetCanReindex returns the CanReindex field if non-nil, zero value otherwise.
 
 ### GetCanReindexOk
 
-`func (o *MavenUpstream) GetCanReindexOk() (*string, bool)`
+`func (o *MavenUpstream) GetCanReindexOk() (*bool, bool)`
 
 GetCanReindexOk returns a tuple with the CanReindex field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCanReindex
 
-`func (o *MavenUpstream) SetCanReindex(v string)`
+`func (o *MavenUpstream) SetCanReindex(v bool)`
 
 SetCanReindex sets CanReindex field to given value.
 
@@ -537,20 +537,20 @@ HasGpgVerification returns a boolean if a field has been set.
 
 ### GetHasFailedSignatureVerification
 
-`func (o *MavenUpstream) GetHasFailedSignatureVerification() string`
+`func (o *MavenUpstream) GetHasFailedSignatureVerification() bool`
 
 GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field if non-nil, zero value otherwise.
 
 ### GetHasFailedSignatureVerificationOk
 
-`func (o *MavenUpstream) GetHasFailedSignatureVerificationOk() (*string, bool)`
+`func (o *MavenUpstream) GetHasFailedSignatureVerificationOk() (*bool, bool)`
 
 GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHasFailedSignatureVerification
 
-`func (o *MavenUpstream) SetHasFailedSignatureVerification(v string)`
+`func (o *MavenUpstream) SetHasFailedSignatureVerification(v bool)`
 
 SetHasFailedSignatureVerification sets HasFailedSignatureVerification field to given value.
 

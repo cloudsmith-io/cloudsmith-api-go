@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.990.1
+API version: 1.996.1
 Contact: support@cloudsmith.io
 */
 
@@ -28,8 +28,10 @@ type DebUpstream struct {
 	AuthSecret NullableString `json:"auth_secret,omitempty"`
 	// Username to provide with requests to upstream.
 	AuthUsername NullableString `json:"auth_username,omitempty"`
-	Available    *string        `json:"available,omitempty"`
-	CanReindex   *string        `json:"can_reindex,omitempty"`
+	// Whether the upstream is available for use.
+	Available *bool `json:"available,omitempty"`
+	// Whether the upstream can be reindexed.
+	CanReindex *bool `json:"can_reindex,omitempty"`
 	// The component to fetch from the upstream
 	Component *string `json:"component,omitempty"`
 	// The datetime the upstream source was created.
@@ -53,8 +55,9 @@ type DebUpstream struct {
 	// When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install.
 	GpgKeyUrl NullableString `json:"gpg_key_url,omitempty"`
 	// The GPG signature verification mode for this upstream.
-	GpgVerification                *string `json:"gpg_verification,omitempty"`
-	HasFailedSignatureVerification *string `json:"has_failed_signature_verification,omitempty"`
+	GpgVerification *string `json:"gpg_verification,omitempty"`
+	// Whether the upstream has failed signature verification.
+	HasFailedSignatureVerification *bool `json:"has_failed_signature_verification,omitempty"`
 	// When true, source packages will be available from this upstream.
 	IncludeSources *bool `json:"include_sources,omitempty"`
 	// The number of packages available in this upstream source
@@ -239,9 +242,9 @@ func (o *DebUpstream) UnsetAuthUsername() {
 }
 
 // GetAvailable returns the Available field value if set, zero value otherwise.
-func (o *DebUpstream) GetAvailable() string {
+func (o *DebUpstream) GetAvailable() bool {
 	if o == nil || IsNil(o.Available) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.Available
@@ -249,7 +252,7 @@ func (o *DebUpstream) GetAvailable() string {
 
 // GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DebUpstream) GetAvailableOk() (*string, bool) {
+func (o *DebUpstream) GetAvailableOk() (*bool, bool) {
 	if o == nil || IsNil(o.Available) {
 		return nil, false
 	}
@@ -265,15 +268,15 @@ func (o *DebUpstream) HasAvailable() bool {
 	return false
 }
 
-// SetAvailable gets a reference to the given string and assigns it to the Available field.
-func (o *DebUpstream) SetAvailable(v string) {
+// SetAvailable gets a reference to the given bool and assigns it to the Available field.
+func (o *DebUpstream) SetAvailable(v bool) {
 	o.Available = &v
 }
 
 // GetCanReindex returns the CanReindex field value if set, zero value otherwise.
-func (o *DebUpstream) GetCanReindex() string {
+func (o *DebUpstream) GetCanReindex() bool {
 	if o == nil || IsNil(o.CanReindex) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.CanReindex
@@ -281,7 +284,7 @@ func (o *DebUpstream) GetCanReindex() string {
 
 // GetCanReindexOk returns a tuple with the CanReindex field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DebUpstream) GetCanReindexOk() (*string, bool) {
+func (o *DebUpstream) GetCanReindexOk() (*bool, bool) {
 	if o == nil || IsNil(o.CanReindex) {
 		return nil, false
 	}
@@ -297,8 +300,8 @@ func (o *DebUpstream) HasCanReindex() bool {
 	return false
 }
 
-// SetCanReindex gets a reference to the given string and assigns it to the CanReindex field.
-func (o *DebUpstream) SetCanReindex(v string) {
+// SetCanReindex gets a reference to the given bool and assigns it to the CanReindex field.
+func (o *DebUpstream) SetCanReindex(v bool) {
 	o.CanReindex = &v
 }
 
@@ -777,9 +780,9 @@ func (o *DebUpstream) SetGpgVerification(v string) {
 }
 
 // GetHasFailedSignatureVerification returns the HasFailedSignatureVerification field value if set, zero value otherwise.
-func (o *DebUpstream) GetHasFailedSignatureVerification() string {
+func (o *DebUpstream) GetHasFailedSignatureVerification() bool {
 	if o == nil || IsNil(o.HasFailedSignatureVerification) {
-		var ret string
+		var ret bool
 		return ret
 	}
 	return *o.HasFailedSignatureVerification
@@ -787,7 +790,7 @@ func (o *DebUpstream) GetHasFailedSignatureVerification() string {
 
 // GetHasFailedSignatureVerificationOk returns a tuple with the HasFailedSignatureVerification field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DebUpstream) GetHasFailedSignatureVerificationOk() (*string, bool) {
+func (o *DebUpstream) GetHasFailedSignatureVerificationOk() (*bool, bool) {
 	if o == nil || IsNil(o.HasFailedSignatureVerification) {
 		return nil, false
 	}
@@ -803,8 +806,8 @@ func (o *DebUpstream) HasHasFailedSignatureVerification() bool {
 	return false
 }
 
-// SetHasFailedSignatureVerification gets a reference to the given string and assigns it to the HasFailedSignatureVerification field.
-func (o *DebUpstream) SetHasFailedSignatureVerification(v string) {
+// SetHasFailedSignatureVerification gets a reference to the given bool and assigns it to the HasFailedSignatureVerification field.
+func (o *DebUpstream) SetHasFailedSignatureVerification(v bool) {
 	o.HasFailedSignatureVerification = &v
 }
 
