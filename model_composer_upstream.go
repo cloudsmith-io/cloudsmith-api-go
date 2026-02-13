@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.996.1
+API version: 1.999.3
 Contact: support@cloudsmith.io
 */
 
@@ -48,7 +48,7 @@ type ComposerUpstream struct {
 	// Whether the upstream has failed signature verification.
 	HasFailedSignatureVerification *bool `json:"has_failed_signature_verification,omitempty"`
 	// The number of packages available in this upstream source
-	IndexPackageCount *string `json:"index_package_count,omitempty"`
+	IndexPackageCount NullableInt64 `json:"index_package_count,omitempty"`
 	// The current indexing status of this upstream source
 	IndexStatus *string `json:"index_status,omitempty"`
 	// Whether or not this upstream is active and ready for requests.
@@ -583,36 +583,47 @@ func (o *ComposerUpstream) SetHasFailedSignatureVerification(v bool) {
 	o.HasFailedSignatureVerification = &v
 }
 
-// GetIndexPackageCount returns the IndexPackageCount field value if set, zero value otherwise.
-func (o *ComposerUpstream) GetIndexPackageCount() string {
-	if o == nil || IsNil(o.IndexPackageCount) {
-		var ret string
+// GetIndexPackageCount returns the IndexPackageCount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ComposerUpstream) GetIndexPackageCount() int64 {
+	if o == nil || IsNil(o.IndexPackageCount.Get()) {
+		var ret int64
 		return ret
 	}
-	return *o.IndexPackageCount
+	return *o.IndexPackageCount.Get()
 }
 
 // GetIndexPackageCountOk returns a tuple with the IndexPackageCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ComposerUpstream) GetIndexPackageCountOk() (*string, bool) {
-	if o == nil || IsNil(o.IndexPackageCount) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComposerUpstream) GetIndexPackageCountOk() (*int64, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IndexPackageCount, true
+	return o.IndexPackageCount.Get(), o.IndexPackageCount.IsSet()
 }
 
 // HasIndexPackageCount returns a boolean if a field has been set.
 func (o *ComposerUpstream) HasIndexPackageCount() bool {
-	if o != nil && !IsNil(o.IndexPackageCount) {
+	if o != nil && o.IndexPackageCount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIndexPackageCount gets a reference to the given string and assigns it to the IndexPackageCount field.
-func (o *ComposerUpstream) SetIndexPackageCount(v string) {
-	o.IndexPackageCount = &v
+// SetIndexPackageCount gets a reference to the given NullableInt64 and assigns it to the IndexPackageCount field.
+func (o *ComposerUpstream) SetIndexPackageCount(v int64) {
+	o.IndexPackageCount.Set(&v)
+}
+
+// SetIndexPackageCountNil sets the value for IndexPackageCount to be an explicit nil
+func (o *ComposerUpstream) SetIndexPackageCountNil() {
+	o.IndexPackageCount.Set(nil)
+}
+
+// UnsetIndexPackageCount ensures that no value is present for IndexPackageCount, not even an explicit nil
+func (o *ComposerUpstream) UnsetIndexPackageCount() {
+	o.IndexPackageCount.Unset()
 }
 
 // GetIndexStatus returns the IndexStatus field value if set, zero value otherwise.
@@ -1000,8 +1011,8 @@ func (o ComposerUpstream) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HasFailedSignatureVerification) {
 		toSerialize["has_failed_signature_verification"] = o.HasFailedSignatureVerification
 	}
-	if !IsNil(o.IndexPackageCount) {
-		toSerialize["index_package_count"] = o.IndexPackageCount
+	if o.IndexPackageCount.IsSet() {
+		toSerialize["index_package_count"] = o.IndexPackageCount.Get()
 	}
 	if !IsNil(o.IndexStatus) {
 		toSerialize["index_status"] = o.IndexStatus

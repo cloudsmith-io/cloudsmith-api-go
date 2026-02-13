@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.996.1
+  version: 1.999.3
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -43118,10 +43118,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -43215,9 +43215,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -43540,10 +43541,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -43637,9 +43638,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -43962,10 +43964,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -44059,9 +44061,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -44384,10 +44387,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -44481,9 +44484,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -44806,10 +44810,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -44903,9 +44907,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -45234,11 +45239,11 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
         upstream_distribution: upstream_distribution
-        index_package_count: index_package_count
+        index_package_count: 0
         component: component
         disable_reason_text: disable_reason_text
         verify_ssl: true
@@ -45386,9 +45391,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -46284,10 +46290,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -46383,9 +46389,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -46742,10 +46749,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -46839,9 +46846,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -47164,10 +47172,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -47261,9 +47269,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -47586,10 +47595,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -47683,9 +47692,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -48008,10 +48018,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -48105,9 +48115,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -48436,10 +48447,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -48564,9 +48575,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -48998,10 +49010,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -49096,9 +49108,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -49423,10 +49436,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -49520,9 +49533,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -49846,10 +49860,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -49943,9 +49957,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -50310,10 +50325,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -50448,9 +50463,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -50870,10 +50886,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -50967,9 +50983,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
@@ -51292,10 +51309,10 @@ components:
         is_active: true
         disable_reason: N/A
         extra_value_1: extra_value_1
-        priority: 2624
+        priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
-        index_package_count: index_package_count
+        index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
         last_indexed: last_indexed
@@ -51389,9 +51406,10 @@ components:
           type: boolean
         index_package_count:
           description: The number of packages available in this upstream source
+          nullable: true
           readOnly: true
           title: Index package count
-          type: string
+          type: integer
         index_status:
           description: The current indexing status of this upstream source
           readOnly: true
