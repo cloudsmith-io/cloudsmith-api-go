@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **GpgKeyUrl** | Pointer to **NullableString** | When provided, Cloudsmith will fetch, validate, and associate a public GPG key found at the provided URL. When using the Cloudsmith setup script, this GPG key will be automatically imported on your deployment machines to allow upstream packages to validate and install. | [optional] 
 **GpgVerification** | Pointer to **string** | The GPG signature verification mode for this upstream. | [optional] [default to "Allow All"]
 **HasFailedSignatureVerification** | Pointer to **bool** | Whether the upstream has failed signature verification. | [optional] [readonly] 
-**IndexPackageCount** | Pointer to **string** | The number of packages available in this upstream source | [optional] [readonly] 
+**IndexPackageCount** | Pointer to **NullableInt64** | The number of packages available in this upstream source | [optional] [readonly] 
 **IndexStatus** | Pointer to **string** | The current indexing status of this upstream source | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
 **LastIndexed** | Pointer to **string** | The last time this upstream source was indexed | [optional] [readonly] 
@@ -562,20 +562,20 @@ HasHasFailedSignatureVerification returns a boolean if a field has been set.
 
 ### GetIndexPackageCount
 
-`func (o *MavenUpstream) GetIndexPackageCount() string`
+`func (o *MavenUpstream) GetIndexPackageCount() int64`
 
 GetIndexPackageCount returns the IndexPackageCount field if non-nil, zero value otherwise.
 
 ### GetIndexPackageCountOk
 
-`func (o *MavenUpstream) GetIndexPackageCountOk() (*string, bool)`
+`func (o *MavenUpstream) GetIndexPackageCountOk() (*int64, bool)`
 
 GetIndexPackageCountOk returns a tuple with the IndexPackageCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIndexPackageCount
 
-`func (o *MavenUpstream) SetIndexPackageCount(v string)`
+`func (o *MavenUpstream) SetIndexPackageCount(v int64)`
 
 SetIndexPackageCount sets IndexPackageCount field to given value.
 
@@ -585,6 +585,16 @@ SetIndexPackageCount sets IndexPackageCount field to given value.
 
 HasIndexPackageCount returns a boolean if a field has been set.
 
+### SetIndexPackageCountNil
+
+`func (o *MavenUpstream) SetIndexPackageCountNil(b bool)`
+
+ SetIndexPackageCountNil sets the value for IndexPackageCount to be an explicit nil
+
+### UnsetIndexPackageCount
+`func (o *MavenUpstream) UnsetIndexPackageCount()`
+
+UnsetIndexPackageCount ensures that no value is present for IndexPackageCount, not even an explicit nil
 ### GetIndexStatus
 
 `func (o *MavenUpstream) GetIndexStatus() string`

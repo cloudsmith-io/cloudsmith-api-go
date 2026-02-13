@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **GpgVerification** | Pointer to **string** | The GPG signature verification mode for this upstream. | [optional] [default to "Allow All"]
 **HasFailedSignatureVerification** | Pointer to **bool** | Whether the upstream has failed signature verification. | [optional] [readonly] 
 **IncludeSources** | Pointer to **bool** | When checked, source packages will be available from this upstream. | [optional] 
-**IndexPackageCount** | Pointer to **string** | The number of packages available in this upstream source | [optional] [readonly] 
+**IndexPackageCount** | Pointer to **NullableInt64** | The number of packages available in this upstream source | [optional] [readonly] 
 **IndexStatus** | Pointer to **string** | The current indexing status of this upstream source | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
 **LastIndexed** | Pointer to **string** | The last time this upstream source was indexed | [optional] [readonly] 
@@ -608,20 +608,20 @@ HasIncludeSources returns a boolean if a field has been set.
 
 ### GetIndexPackageCount
 
-`func (o *RpmUpstream) GetIndexPackageCount() string`
+`func (o *RpmUpstream) GetIndexPackageCount() int64`
 
 GetIndexPackageCount returns the IndexPackageCount field if non-nil, zero value otherwise.
 
 ### GetIndexPackageCountOk
 
-`func (o *RpmUpstream) GetIndexPackageCountOk() (*string, bool)`
+`func (o *RpmUpstream) GetIndexPackageCountOk() (*int64, bool)`
 
 GetIndexPackageCountOk returns a tuple with the IndexPackageCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIndexPackageCount
 
-`func (o *RpmUpstream) SetIndexPackageCount(v string)`
+`func (o *RpmUpstream) SetIndexPackageCount(v int64)`
 
 SetIndexPackageCount sets IndexPackageCount field to given value.
 
@@ -631,6 +631,16 @@ SetIndexPackageCount sets IndexPackageCount field to given value.
 
 HasIndexPackageCount returns a boolean if a field has been set.
 
+### SetIndexPackageCountNil
+
+`func (o *RpmUpstream) SetIndexPackageCountNil(b bool)`
+
+ SetIndexPackageCountNil sets the value for IndexPackageCount to be an explicit nil
+
+### UnsetIndexPackageCount
+`func (o *RpmUpstream) UnsetIndexPackageCount()`
+
+UnsetIndexPackageCount ensures that no value is present for IndexPackageCount, not even an explicit nil
 ### GetIndexStatus
 
 `func (o *RpmUpstream) GetIndexStatus() string`
