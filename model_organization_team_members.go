@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.999.3
+API version: 1.1093.0
 Contact: support@cloudsmith.io
 */
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &OrganizationTeamMembers{}
 // OrganizationTeamMembers struct for OrganizationTeamMembers
 type OrganizationTeamMembers struct {
 	// The team members
-	Members              []OrganizationTeamMembership `json:"members"`
+	Members              []OrganizationTeamServiceMember `json:"members"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,7 +32,7 @@ type _OrganizationTeamMembers OrganizationTeamMembers
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationTeamMembers(members []OrganizationTeamMembership) *OrganizationTeamMembers {
+func NewOrganizationTeamMembers(members []OrganizationTeamServiceMember) *OrganizationTeamMembers {
 	this := OrganizationTeamMembers{}
 	this.Members = members
 	return &this
@@ -47,9 +47,9 @@ func NewOrganizationTeamMembersWithDefaults() *OrganizationTeamMembers {
 }
 
 // GetMembers returns the Members field value
-func (o *OrganizationTeamMembers) GetMembers() []OrganizationTeamMembership {
+func (o *OrganizationTeamMembers) GetMembers() []OrganizationTeamServiceMember {
 	if o == nil {
-		var ret []OrganizationTeamMembership
+		var ret []OrganizationTeamServiceMember
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *OrganizationTeamMembers) GetMembers() []OrganizationTeamMembership {
 
 // GetMembersOk returns a tuple with the Members field value
 // and a boolean to check if the value has been set.
-func (o *OrganizationTeamMembers) GetMembersOk() ([]OrganizationTeamMembership, bool) {
+func (o *OrganizationTeamMembers) GetMembersOk() ([]OrganizationTeamServiceMember, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *OrganizationTeamMembers) GetMembersOk() ([]OrganizationTeamMembership, 
 }
 
 // SetMembers sets field value
-func (o *OrganizationTeamMembers) SetMembers(v []OrganizationTeamMembership) {
+func (o *OrganizationTeamMembers) SetMembers(v []OrganizationTeamServiceMember) {
 	o.Members = v
 }
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**NpmDistTag** | Pointer to **string** | The default npm dist-tag for this package/version - This will replace any other package/version if they are using the same tag. | [optional] [default to "latest"]
+**NpmDistTag** | Pointer to **NullableString** | The default npm dist-tag for this package/version - This will replace any other package/version if they are using the same tag. | [optional] [default to "latest"]
 **PackageFile** | **string** | The primary file for the package. | 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
@@ -53,6 +53,16 @@ SetNpmDistTag sets NpmDistTag field to given value.
 
 HasNpmDistTag returns a boolean if a field has been set.
 
+### SetNpmDistTagNil
+
+`func (o *NpmPackageUploadRequest) SetNpmDistTagNil(b bool)`
+
+ SetNpmDistTagNil sets the value for NpmDistTag to be an explicit nil
+
+### UnsetNpmDistTag
+`func (o *NpmPackageUploadRequest) UnsetNpmDistTag()`
+
+UnsetNpmDistTag ensures that no value is present for NpmDistTag, not even an explicit nil
 ### GetPackageFile
 
 `func (o *NpmPackageUploadRequest) GetPackageFile() string`

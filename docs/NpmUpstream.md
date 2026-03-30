@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **PendingValidation** | Pointer to **bool** | When true, this upstream source is pending validation. | [optional] [readonly] 
 **Priority** | Pointer to **int64** | Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date. | [optional] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
+**TrustLevel** | Pointer to **string** | Trust level allows for control of the visibility of upstream artifacts to native package managers. Where supported by formats, the default level (untrusted) is recommended for all upstreams, and helps to safeguard against common dependency confusion attack vectors. | [optional] [default to "Trusted"]
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
 **UpstreamUrl** | **string** | The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.  | 
 **VerifySsl** | Pointer to **bool** | If enabled, SSL certificates are verified when requests are made to this upstream. It&#39;s recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams. | [optional] 
@@ -663,6 +664,31 @@ SetSlugPerm sets SlugPerm field to given value.
 `func (o *NpmUpstream) HasSlugPerm() bool`
 
 HasSlugPerm returns a boolean if a field has been set.
+
+### GetTrustLevel
+
+`func (o *NpmUpstream) GetTrustLevel() string`
+
+GetTrustLevel returns the TrustLevel field if non-nil, zero value otherwise.
+
+### GetTrustLevelOk
+
+`func (o *NpmUpstream) GetTrustLevelOk() (*string, bool)`
+
+GetTrustLevelOk returns a tuple with the TrustLevel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrustLevel
+
+`func (o *NpmUpstream) SetTrustLevel(v string)`
+
+SetTrustLevel sets TrustLevel field to given value.
+
+### HasTrustLevel
+
+`func (o *NpmUpstream) HasTrustLevel() bool`
+
+HasTrustLevel returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 

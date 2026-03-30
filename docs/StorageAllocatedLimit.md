@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **PercentageUsed** | Pointer to **string** |  | [optional] 
 **PlanLimit** | Pointer to **string** |  | [optional] 
 **Used** | Pointer to **string** |  | [optional] 
+**UsedPreDeduplication** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetUsed sets Used field to given value.
 `func (o *StorageAllocatedLimit) HasUsed() bool`
 
 HasUsed returns a boolean if a field has been set.
+
+### GetUsedPreDeduplication
+
+`func (o *StorageAllocatedLimit) GetUsedPreDeduplication() string`
+
+GetUsedPreDeduplication returns the UsedPreDeduplication field if non-nil, zero value otherwise.
+
+### GetUsedPreDeduplicationOk
+
+`func (o *StorageAllocatedLimit) GetUsedPreDeduplicationOk() (*string, bool)`
+
+GetUsedPreDeduplicationOk returns a tuple with the UsedPreDeduplication field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsedPreDeduplication
+
+`func (o *StorageAllocatedLimit) SetUsedPreDeduplication(v string)`
+
+SetUsedPreDeduplication sets UsedPreDeduplication field to given value.
+
+### HasUsedPreDeduplication
+
+`func (o *StorageAllocatedLimit) HasUsedPreDeduplication() bool`
+
+HasUsedPreDeduplication returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

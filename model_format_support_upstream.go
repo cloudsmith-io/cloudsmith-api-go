@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.999.3
+API version: 1.1093.0
 Contact: support@cloudsmith.io
 */
 
@@ -33,7 +33,9 @@ type FormatSupportUpstream struct {
 	Proxying bool `json:"proxying"`
 	// The signature verification supported by the upstream format
 	SignatureVerification *string `json:"signature_verification,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	// If true the upstream format supports configurable trust levels (trusted vs untrusted) for upstream sources.
+	Trust                bool `json:"trust"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FormatSupportUpstream FormatSupportUpstream
@@ -42,7 +44,7 @@ type _FormatSupportUpstream FormatSupportUpstream
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFormatSupportUpstream(authModes []string, caching bool, indexing bool, proxying bool) *FormatSupportUpstream {
+func NewFormatSupportUpstream(authModes []string, caching bool, indexing bool, proxying bool, trust bool) *FormatSupportUpstream {
 	this := FormatSupportUpstream{}
 	this.AuthModes = authModes
 	this.Caching = caching
@@ -52,6 +54,7 @@ func NewFormatSupportUpstream(authModes []string, caching bool, indexing bool, p
 	this.Proxying = proxying
 	var signatureVerification string = "Unsupported"
 	this.SignatureVerification = &signatureVerification
+	this.Trust = trust
 	return &this
 }
 
@@ -227,6 +230,30 @@ func (o *FormatSupportUpstream) SetSignatureVerification(v string) {
 	o.SignatureVerification = &v
 }
 
+// GetTrust returns the Trust field value
+func (o *FormatSupportUpstream) GetTrust() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Trust
+}
+
+// GetTrustOk returns a tuple with the Trust field value
+// and a boolean to check if the value has been set.
+func (o *FormatSupportUpstream) GetTrustOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Trust, true
+}
+
+// SetTrust sets field value
+func (o *FormatSupportUpstream) SetTrust(v bool) {
+	o.Trust = v
+}
+
 func (o FormatSupportUpstream) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -247,6 +274,7 @@ func (o FormatSupportUpstream) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SignatureVerification) {
 		toSerialize["signature_verification"] = o.SignatureVerification
 	}
+	toSerialize["trust"] = o.Trust
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -264,6 +292,7 @@ func (o *FormatSupportUpstream) UnmarshalJSON(data []byte) (err error) {
 		"caching",
 		"indexing",
 		"proxying",
+		"trust",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -299,6 +328,7 @@ func (o *FormatSupportUpstream) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "indexing_behavior")
 		delete(additionalProperties, "proxying")
 		delete(additionalProperties, "signature_verification")
+		delete(additionalProperties, "trust")
 		o.AdditionalProperties = additionalProperties
 	}
 

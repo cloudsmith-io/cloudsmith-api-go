@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.999.3
+API version: 1.1093.0
 Contact: support@cloudsmith.io
 */
 
@@ -62,6 +62,8 @@ type RepositoryCreate struct {
 	IsOpenSource *bool `json:"is_open_source,omitempty"`
 	IsPrivate    *bool `json:"is_private,omitempty"`
 	IsPublic     *bool `json:"is_public,omitempty"`
+	// If checked, this repository will be hidden from the list of public broadcasts for the workspace.
+	IsPublicHidden *bool `json:"is_public_hidden,omitempty"`
 	// This defines the minimum level of privilege required for a user to manage entitlement tokens with private repositories. Management is the ability to create, alter, enable, disable or delete all tokens without a repository.
 	ManageEntitlementsPrivilege *string `json:"manage_entitlements_privilege,omitempty"`
 	// If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
@@ -989,6 +991,38 @@ func (o *RepositoryCreate) HasIsPublic() bool {
 // SetIsPublic gets a reference to the given bool and assigns it to the IsPublic field.
 func (o *RepositoryCreate) SetIsPublic(v bool) {
 	o.IsPublic = &v
+}
+
+// GetIsPublicHidden returns the IsPublicHidden field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetIsPublicHidden() bool {
+	if o == nil || IsNil(o.IsPublicHidden) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPublicHidden
+}
+
+// GetIsPublicHiddenOk returns a tuple with the IsPublicHidden field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetIsPublicHiddenOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsPublicHidden) {
+		return nil, false
+	}
+	return o.IsPublicHidden, true
+}
+
+// HasIsPublicHidden returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasIsPublicHidden() bool {
+	if o != nil && !IsNil(o.IsPublicHidden) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPublicHidden gets a reference to the given bool and assigns it to the IsPublicHidden field.
+func (o *RepositoryCreate) SetIsPublicHidden(v bool) {
+	o.IsPublicHidden = &v
 }
 
 // GetManageEntitlementsPrivilege returns the ManageEntitlementsPrivilege field value if set, zero value otherwise.
@@ -2556,6 +2590,9 @@ func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsPublic) {
 		toSerialize["is_public"] = o.IsPublic
 	}
+	if !IsNil(o.IsPublicHidden) {
+		toSerialize["is_public_hidden"] = o.IsPublicHidden
+	}
 	if !IsNil(o.ManageEntitlementsPrivilege) {
 		toSerialize["manage_entitlements_privilege"] = o.ManageEntitlementsPrivilege
 	}
@@ -2758,6 +2795,7 @@ func (o *RepositoryCreate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_open_source")
 		delete(additionalProperties, "is_private")
 		delete(additionalProperties, "is_public")
+		delete(additionalProperties, "is_public_hidden")
 		delete(additionalProperties, "manage_entitlements_privilege")
 		delete(additionalProperties, "move_own")
 		delete(additionalProperties, "move_packages")
