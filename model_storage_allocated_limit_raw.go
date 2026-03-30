@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.999.3
+API version: 1.1093.0
 Contact: support@cloudsmith.io
 */
 
@@ -25,6 +25,7 @@ type StorageAllocatedLimitRaw struct {
 	PercentageUsed       *float64 `json:"percentage_used,omitempty"`
 	PlanLimit            *int64   `json:"plan_limit,omitempty"`
 	Used                 *int64   `json:"used,omitempty"`
+	UsedPreDeduplication *int64   `json:"used_pre_deduplication,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -207,6 +208,38 @@ func (o *StorageAllocatedLimitRaw) SetUsed(v int64) {
 	o.Used = &v
 }
 
+// GetUsedPreDeduplication returns the UsedPreDeduplication field value if set, zero value otherwise.
+func (o *StorageAllocatedLimitRaw) GetUsedPreDeduplication() int64 {
+	if o == nil || IsNil(o.UsedPreDeduplication) {
+		var ret int64
+		return ret
+	}
+	return *o.UsedPreDeduplication
+}
+
+// GetUsedPreDeduplicationOk returns a tuple with the UsedPreDeduplication field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageAllocatedLimitRaw) GetUsedPreDeduplicationOk() (*int64, bool) {
+	if o == nil || IsNil(o.UsedPreDeduplication) {
+		return nil, false
+	}
+	return o.UsedPreDeduplication, true
+}
+
+// HasUsedPreDeduplication returns a boolean if a field has been set.
+func (o *StorageAllocatedLimitRaw) HasUsedPreDeduplication() bool {
+	if o != nil && !IsNil(o.UsedPreDeduplication) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsedPreDeduplication gets a reference to the given int64 and assigns it to the UsedPreDeduplication field.
+func (o *StorageAllocatedLimitRaw) SetUsedPreDeduplication(v int64) {
+	o.UsedPreDeduplication = &v
+}
+
 func (o StorageAllocatedLimitRaw) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -231,6 +264,9 @@ func (o StorageAllocatedLimitRaw) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Used) {
 		toSerialize["used"] = o.Used
+	}
+	if !IsNil(o.UsedPreDeduplication) {
+		toSerialize["used_pre_deduplication"] = o.UsedPreDeduplication
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -259,6 +295,7 @@ func (o *StorageAllocatedLimitRaw) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "percentage_used")
 		delete(additionalProperties, "plan_limit")
 		delete(additionalProperties, "used")
+		delete(additionalProperties, "used_pre_deduplication")
 		o.AdditionalProperties = additionalProperties
 	}
 

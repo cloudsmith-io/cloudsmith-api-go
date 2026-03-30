@@ -4347,7 +4347,7 @@ import (
 func main() {
 	org := "org_example" // string | 
 	team := "team_example" // string | 
-	data := *openapiclient.NewOrganizationTeamMembers([]openapiclient.OrganizationTeamMembership{*openapiclient.NewOrganizationTeamMembership("Role_example", "User_example")}) // OrganizationTeamMembers |  (optional)
+	data := *openapiclient.NewOrganizationTeamMembers([]openapiclient.OrganizationTeamServiceMember{*openapiclient.NewOrganizationTeamServiceMember("Role_example", "User_example")}) // OrganizationTeamMembers |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -4497,7 +4497,7 @@ import (
 func main() {
 	org := "org_example" // string | 
 	team := "team_example" // string | 
-	data := *openapiclient.NewOrganizationTeamMembers([]openapiclient.OrganizationTeamMembership{*openapiclient.NewOrganizationTeamMembership("Role_example", "User_example")}) // OrganizationTeamMembers |  (optional)
+	data := *openapiclient.NewOrganizationTeamMembers([]openapiclient.OrganizationTeamServiceMember{*openapiclient.NewOrganizationTeamServiceMember("Role_example", "User_example")}) // OrganizationTeamMembers |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

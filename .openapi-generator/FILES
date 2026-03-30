@@ -5,6 +5,7 @@ api/openapi.yaml
 api_audit_log.go
 api_badges.go
 api_broadcasts.go
+api_bulk_action.go
 api_distros.go
 api_entitlements.go
 api_files.go
@@ -28,12 +29,16 @@ docs/AllocatedLimit.md
 docs/AllocatedLimitRaw.md
 docs/AlpinePackageUpload.md
 docs/AlpinePackageUploadRequest.md
+docs/AlpineUpstream.md
+docs/AlpineUpstreamRequest.md
+docs/AlpineUpstreamRequestPatch.md
 docs/Architecture.md
 docs/AuditLogApi.md
 docs/BadgesApi.md
 docs/BroadcastToken.md
 docs/BroadcastTokenInput.md
 docs/BroadcastsApi.md
+docs/BulkActionApi.md
 docs/CargoPackageUpload.md
 docs/CargoPackageUploadRequest.md
 docs/CargoUpstream.md
@@ -170,9 +175,9 @@ docs/OrganizationSAMLAuthRequestPatch.md
 docs/OrganizationTeam.md
 docs/OrganizationTeamInvite.md
 docs/OrganizationTeamMembers.md
-docs/OrganizationTeamMembership.md
 docs/OrganizationTeamRequest.md
 docs/OrganizationTeamRequestPatch.md
+docs/OrganizationTeamServiceMember.md
 docs/OrgsApi.md
 docs/P2PackageUpload.md
 docs/P2PackageUploadRequest.md
@@ -313,6 +318,8 @@ docs/UserTokensList200Response.md
 docs/UsersApi.md
 docs/VagrantPackageUpload.md
 docs/VagrantPackageUploadRequest.md
+docs/VsxPackageUpload.md
+docs/VsxPackageUploadRequest.md
 docs/VulnerabilitiesApi.md
 docs/Vulnerability.md
 docs/VulnerabilityScan.md
@@ -328,6 +335,9 @@ model_allocated_limit.go
 model_allocated_limit_raw.go
 model_alpine_package_upload.go
 model_alpine_package_upload_request.go
+model_alpine_upstream.go
+model_alpine_upstream_request.go
+model_alpine_upstream_request_patch.go
 model_architecture.go
 model_broadcast_token.go
 model_broadcast_token_input.go
@@ -461,9 +471,9 @@ model_organization_saml_auth_request_patch.go
 model_organization_team.go
 model_organization_team_invite.go
 model_organization_team_members.go
-model_organization_team_membership.go
 model_organization_team_request.go
 model_organization_team_request_patch.go
+model_organization_team_service_member.go
 model_p2_package_upload.go
 model_p2_package_upload_request.go
 model_package.go
@@ -595,6 +605,8 @@ model_user_profile.go
 model_user_tokens_list_200_response.go
 model_vagrant_package_upload.go
 model_vagrant_package_upload_request.go
+model_vsx_package_upload.go
+model_vsx_package_upload_request.go
 model_vulnerability.go
 model_vulnerability_scan.go
 model_vulnerability_scan_results.go
@@ -605,6 +617,7 @@ response.go
 test/api_audit_log_test.go
 test/api_badges_test.go
 test/api_broadcasts_test.go
+test/api_bulk_action_test.go
 test/api_distros_test.go
 test/api_entitlements_test.go
 test/api_files_test.go

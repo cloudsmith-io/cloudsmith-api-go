@@ -10,12 +10,13 @@ Name | Type | Description | Notes
 **IndexingBehavior** | Pointer to **string** | The behavior of the upstream when indexing | [optional] [default to "Unsupported"]
 **Proxying** | **bool** | If true the upstream format supports proxying | 
 **SignatureVerification** | Pointer to **string** | The signature verification supported by the upstream format | [optional] [default to "Unsupported"]
+**Trust** | **bool** | If true the upstream format supports configurable trust levels (trusted vs untrusted) for upstream sources. | 
 
 ## Methods
 
 ### NewFormatSupportUpstream
 
-`func NewFormatSupportUpstream(authModes []string, caching bool, indexing bool, proxying bool, ) *FormatSupportUpstream`
+`func NewFormatSupportUpstream(authModes []string, caching bool, indexing bool, proxying bool, trust bool, ) *FormatSupportUpstream`
 
 NewFormatSupportUpstream instantiates a new FormatSupportUpstream object
 This constructor will assign default values to properties that have it defined,
@@ -159,6 +160,26 @@ SetSignatureVerification sets SignatureVerification field to given value.
 `func (o *FormatSupportUpstream) HasSignatureVerification() bool`
 
 HasSignatureVerification returns a boolean if a field has been set.
+
+### GetTrust
+
+`func (o *FormatSupportUpstream) GetTrust() bool`
+
+GetTrust returns the Trust field if non-nil, zero value otherwise.
+
+### GetTrustOk
+
+`func (o *FormatSupportUpstream) GetTrustOk() (*bool, bool)`
+
+GetTrustOk returns a tuple with the Trust field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTrust
+
+`func (o *FormatSupportUpstream) SetTrust(v bool)`
+
+SetTrust sets Trust field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

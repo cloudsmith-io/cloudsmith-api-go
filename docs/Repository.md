@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **IsOpenSource** | Pointer to **bool** |  | [optional] [readonly] 
 **IsPrivate** | Pointer to **bool** |  | [optional] [readonly] 
 **IsPublic** | Pointer to **bool** |  | [optional] [readonly] 
+**IsPublicHidden** | Pointer to **bool** | If checked, this repository will be hidden from the list of public broadcasts for the workspace. | [optional] 
 **ManageEntitlementsPrivilege** | Pointer to **string** | This defines the minimum level of privilege required for a user to manage entitlement tokens with private repositories. Management is the ability to create, alter, enable, disable or delete all tokens without a repository. | [optional] [default to "Admin"]
 **MoveOwn** | Pointer to **bool** | If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the &#39;Access Controls&#39; section of the repository, and any inherited from the org. | [optional] 
 **MovePackages** | Pointer to **string** | This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting. | [optional] [default to "Admin"]
@@ -687,6 +688,31 @@ SetIsPublic sets IsPublic field to given value.
 `func (o *Repository) HasIsPublic() bool`
 
 HasIsPublic returns a boolean if a field has been set.
+
+### GetIsPublicHidden
+
+`func (o *Repository) GetIsPublicHidden() bool`
+
+GetIsPublicHidden returns the IsPublicHidden field if non-nil, zero value otherwise.
+
+### GetIsPublicHiddenOk
+
+`func (o *Repository) GetIsPublicHiddenOk() (*bool, bool)`
+
+GetIsPublicHiddenOk returns a tuple with the IsPublicHidden field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPublicHidden
+
+`func (o *Repository) SetIsPublicHidden(v bool)`
+
+SetIsPublicHidden sets IsPublicHidden field to given value.
+
+### HasIsPublicHidden
+
+`func (o *Repository) HasIsPublicHidden() bool`
+
+HasIsPublicHidden returns a boolean if a field has been set.
 
 ### GetManageEntitlementsPrivilege
 

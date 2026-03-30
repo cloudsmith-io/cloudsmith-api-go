@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.999.3
+API version: 1.1093.0
 Contact: support@cloudsmith.io
 */
 
@@ -51,6 +51,8 @@ type RepositoryCreateRequest struct {
 	GenericPackageIndexEnabled *bool `json:"generic_package_index_enabled,omitempty"`
 	// If checked, files contained in packages will be indexed, which increase the synchronisation time required for packages. Note that it is recommended you keep this enabled unless the synchronisation time is significantly impacted.
 	IndexFiles *bool `json:"index_files,omitempty"`
+	// If checked, this repository will be hidden from the list of public broadcasts for the workspace.
+	IsPublicHidden *bool `json:"is_public_hidden,omitempty"`
 	// This defines the minimum level of privilege required for a user to manage entitlement tokens with private repositories. Management is the ability to create, alter, enable, disable or delete all tokens without a repository.
 	ManageEntitlementsPrivilege *string `json:"manage_entitlements_privilege,omitempty"`
 	// If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the 'Access Controls' section of the repository, and any inherited from the org.
@@ -670,6 +672,38 @@ func (o *RepositoryCreateRequest) HasIndexFiles() bool {
 // SetIndexFiles gets a reference to the given bool and assigns it to the IndexFiles field.
 func (o *RepositoryCreateRequest) SetIndexFiles(v bool) {
 	o.IndexFiles = &v
+}
+
+// GetIsPublicHidden returns the IsPublicHidden field value if set, zero value otherwise.
+func (o *RepositoryCreateRequest) GetIsPublicHidden() bool {
+	if o == nil || IsNil(o.IsPublicHidden) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPublicHidden
+}
+
+// GetIsPublicHiddenOk returns a tuple with the IsPublicHidden field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreateRequest) GetIsPublicHiddenOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsPublicHidden) {
+		return nil, false
+	}
+	return o.IsPublicHidden, true
+}
+
+// HasIsPublicHidden returns a boolean if a field has been set.
+func (o *RepositoryCreateRequest) HasIsPublicHidden() bool {
+	if o != nil && !IsNil(o.IsPublicHidden) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPublicHidden gets a reference to the given bool and assigns it to the IsPublicHidden field.
+func (o *RepositoryCreateRequest) SetIsPublicHidden(v bool) {
+	o.IsPublicHidden = &v
 }
 
 // GetManageEntitlementsPrivilege returns the ManageEntitlementsPrivilege field value if set, zero value otherwise.
@@ -1733,6 +1767,9 @@ func (o RepositoryCreateRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IndexFiles) {
 		toSerialize["index_files"] = o.IndexFiles
 	}
+	if !IsNil(o.IsPublicHidden) {
+		toSerialize["is_public_hidden"] = o.IsPublicHidden
+	}
 	if !IsNil(o.ManageEntitlementsPrivilege) {
 		toSerialize["manage_entitlements_privilege"] = o.ManageEntitlementsPrivilege
 	}
@@ -1882,6 +1919,7 @@ func (o *RepositoryCreateRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "enforce_eula")
 		delete(additionalProperties, "generic_package_index_enabled")
 		delete(additionalProperties, "index_files")
+		delete(additionalProperties, "is_public_hidden")
 		delete(additionalProperties, "manage_entitlements_privilege")
 		delete(additionalProperties, "move_own")
 		delete(additionalProperties, "move_packages")

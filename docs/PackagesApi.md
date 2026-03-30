@@ -4,7 +4,6 @@ All URIs are relative to *https://api.cloudsmith.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PackagesBulkAction**](PackagesApi.md#PackagesBulkAction) | **Post** /packages/{owner}/bulk-action/ | 
 [**PackagesCopy**](PackagesApi.md#PackagesCopy) | **Post** /packages/{owner}/{repo}/{identifier}/copy/ | Copy a package to another repository.
 [**PackagesDelete**](PackagesApi.md#PackagesDelete) | **Delete** /packages/{owner}/{repo}/{identifier}/ | Delete a specific package in a repository.
 [**PackagesDependencies**](PackagesApi.md#PackagesDependencies) | **Get** /packages/{owner}/{repo}/{identifier}/dependencies/ | Get the list of dependencies for a package. Transitive dependencies are included where supported.
@@ -45,6 +44,7 @@ Method | HTTP request | Description
 [**PackagesUploadSwift**](PackagesApi.md#PackagesUploadSwift) | **Post** /packages/{owner}/{repo}/upload/swift/ | Create a new Swift package
 [**PackagesUploadTerraform**](PackagesApi.md#PackagesUploadTerraform) | **Post** /packages/{owner}/{repo}/upload/terraform/ | Create a new Terraform package
 [**PackagesUploadVagrant**](PackagesApi.md#PackagesUploadVagrant) | **Post** /packages/{owner}/{repo}/upload/vagrant/ | Create a new Vagrant package
+[**PackagesUploadVsx**](PackagesApi.md#PackagesUploadVsx) | **Post** /packages/{owner}/{repo}/upload/vsx/ | Create a new VSX package
 [**PackagesValidateUploadAlpine**](PackagesApi.md#PackagesValidateUploadAlpine) | **Post** /packages/{owner}/{repo}/validate-upload/alpine/ | Validate parameters for create Alpine package
 [**PackagesValidateUploadCargo**](PackagesApi.md#PackagesValidateUploadCargo) | **Post** /packages/{owner}/{repo}/validate-upload/cargo/ | Validate parameters for create Cargo package
 [**PackagesValidateUploadCocoapods**](PackagesApi.md#PackagesValidateUploadCocoapods) | **Post** /packages/{owner}/{repo}/validate-upload/cocoapods/ | Validate parameters for create CocoaPods package
@@ -72,79 +72,8 @@ Method | HTTP request | Description
 [**PackagesValidateUploadSwift**](PackagesApi.md#PackagesValidateUploadSwift) | **Post** /packages/{owner}/{repo}/validate-upload/swift/ | Validate parameters for create Swift package
 [**PackagesValidateUploadTerraform**](PackagesApi.md#PackagesValidateUploadTerraform) | **Post** /packages/{owner}/{repo}/validate-upload/terraform/ | Validate parameters for create Terraform package
 [**PackagesValidateUploadVagrant**](PackagesApi.md#PackagesValidateUploadVagrant) | **Post** /packages/{owner}/{repo}/validate-upload/vagrant/ | Validate parameters for create Vagrant package
+[**PackagesValidateUploadVsx**](PackagesApi.md#PackagesValidateUploadVsx) | **Post** /packages/{owner}/{repo}/validate-upload/vsx/ | Validate parameters for create VSX package
 
-
-
-## PackagesBulkAction
-
-> PackageBulkActionResponse PackagesBulkAction(ctx, owner).Data(data).Execute()
-
-
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
-)
-
-func main() {
-	owner := "owner_example" // string | 
-	data := *openapiclient.NewPackageBulkAction("Action_example", []string{"Identifiers_example"}) // PackageBulkAction |  (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PackagesApi.PackagesBulkAction(context.Background(), owner).Data(data).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesBulkAction``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `PackagesBulkAction`: PackageBulkActionResponse
-	fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesBulkAction`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**owner** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPackagesBulkActionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **data** | [**PackageBulkAction**](PackageBulkAction.md) |  | 
-
-### Return type
-
-[**PackageBulkActionResponse**](PackageBulkActionResponse.md)
-
-### Authorization
-
-[apikey](../README.md#apikey), [basic](../README.md#basic)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## PackagesCopy
@@ -3182,6 +3111,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PackagesUploadVsx
+
+> VsxPackageUpload PackagesUploadVsx(ctx, owner, repo).Data(data).Execute()
+
+Create a new VSX package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewVsxPackageUploadRequest("PackageFile_example") // VsxPackageUploadRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PackagesApi.PackagesUploadVsx(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadVsx``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PackagesUploadVsx`: VsxPackageUpload
+	fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadVsx`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesUploadVsxRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**VsxPackageUploadRequest**](VsxPackageUploadRequest.md) |  | 
+
+### Return type
+
+[**VsxPackageUpload**](VsxPackageUpload.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PackagesValidateUploadAlpine
 
 > PackagesValidateUploadAlpine(ctx, owner, repo).Data(data).Execute()
@@ -5134,6 +5138,79 @@ Name | Type | Description  | Notes
 
 
  **data** | [**VagrantPackageUploadRequest**](VagrantPackageUploadRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesValidateUploadVsx
+
+> PackagesValidateUploadVsx(ctx, owner, repo).Data(data).Execute()
+
+Validate parameters for create VSX package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewVsxPackageUploadRequest("PackageFile_example") // VsxPackageUploadRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PackagesApi.PackagesValidateUploadVsx(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadVsx``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesValidateUploadVsxRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**VsxPackageUploadRequest**](VsxPackageUploadRequest.md) |  | 
 
 ### Return type
 

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.999.3
+API version: 1.1093.0
 Contact: support@cloudsmith.io
 */
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &NpmPackageUploadRequest{}
 // NpmPackageUploadRequest struct for NpmPackageUploadRequest
 type NpmPackageUploadRequest struct {
 	// The default npm dist-tag for this package/version - This will replace any other package/version if they are using the same tag.
-	NpmDistTag *string `json:"npm_dist_tag,omitempty"`
+	NpmDistTag NullableString `json:"npm_dist_tag,omitempty"`
 	// The primary file for the package.
 	PackageFile string `json:"package_file"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
@@ -41,7 +41,7 @@ type _NpmPackageUploadRequest NpmPackageUploadRequest
 func NewNpmPackageUploadRequest(packageFile string) *NpmPackageUploadRequest {
 	this := NpmPackageUploadRequest{}
 	var npmDistTag string = "latest"
-	this.NpmDistTag = &npmDistTag
+	this.NpmDistTag = *NewNullableString(&npmDistTag)
 	this.PackageFile = packageFile
 	return &this
 }
@@ -52,40 +52,51 @@ func NewNpmPackageUploadRequest(packageFile string) *NpmPackageUploadRequest {
 func NewNpmPackageUploadRequestWithDefaults() *NpmPackageUploadRequest {
 	this := NpmPackageUploadRequest{}
 	var npmDistTag string = "latest"
-	this.NpmDistTag = &npmDistTag
+	this.NpmDistTag = *NewNullableString(&npmDistTag)
 	return &this
 }
 
-// GetNpmDistTag returns the NpmDistTag field value if set, zero value otherwise.
+// GetNpmDistTag returns the NpmDistTag field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NpmPackageUploadRequest) GetNpmDistTag() string {
-	if o == nil || IsNil(o.NpmDistTag) {
+	if o == nil || IsNil(o.NpmDistTag.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.NpmDistTag
+	return *o.NpmDistTag.Get()
 }
 
 // GetNpmDistTagOk returns a tuple with the NpmDistTag field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NpmPackageUploadRequest) GetNpmDistTagOk() (*string, bool) {
-	if o == nil || IsNil(o.NpmDistTag) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NpmDistTag, true
+	return o.NpmDistTag.Get(), o.NpmDistTag.IsSet()
 }
 
 // HasNpmDistTag returns a boolean if a field has been set.
 func (o *NpmPackageUploadRequest) HasNpmDistTag() bool {
-	if o != nil && !IsNil(o.NpmDistTag) {
+	if o != nil && o.NpmDistTag.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNpmDistTag gets a reference to the given string and assigns it to the NpmDistTag field.
+// SetNpmDistTag gets a reference to the given NullableString and assigns it to the NpmDistTag field.
 func (o *NpmPackageUploadRequest) SetNpmDistTag(v string) {
-	o.NpmDistTag = &v
+	o.NpmDistTag.Set(&v)
+}
+
+// SetNpmDistTagNil sets the value for NpmDistTag to be an explicit nil
+func (o *NpmPackageUploadRequest) SetNpmDistTagNil() {
+	o.NpmDistTag.Set(nil)
+}
+
+// UnsetNpmDistTag ensures that no value is present for NpmDistTag, not even an explicit nil
+func (o *NpmPackageUploadRequest) UnsetNpmDistTag() {
+	o.NpmDistTag.Unset()
 }
 
 // GetPackageFile returns the PackageFile field value
@@ -197,8 +208,8 @@ func (o NpmPackageUploadRequest) MarshalJSON() ([]byte, error) {
 
 func (o NpmPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.NpmDistTag) {
-		toSerialize["npm_dist_tag"] = o.NpmDistTag
+	if o.NpmDistTag.IsSet() {
+		toSerialize["npm_dist_tag"] = o.NpmDistTag.Get()
 	}
 	toSerialize["package_file"] = o.PackageFile
 	if !IsNil(o.Republish) {
