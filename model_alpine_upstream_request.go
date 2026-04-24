@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1093.0
+API version: 1.1137.0
 Contact: support@cloudsmith.io
 */
 
@@ -43,6 +43,10 @@ type AlpineUpstreamRequest struct {
 	Name string `json:"name" validate:"regexp=^\\\\w[\\\\w \\\\-'\\\\.\\/()]+$"`
 	// Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date.
 	Priority *int64 `json:"priority,omitempty"`
+	// When provided, Cloudsmith will fetch and validate the RSA public key at this URL and use it to verify package signatures from this upstream.
+	RsaKeyUrl NullableString `json:"rsa_key_url,omitempty"`
+	// The RSA signature verification mode for this upstream.
+	RsaVerification *string `json:"rsa_verification,omitempty"`
 	// The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.
 	UpstreamUrl string `json:"upstream_url"`
 	// If enabled, SSL certificates are verified when requests are made to this upstream. It's recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams.
@@ -63,6 +67,8 @@ func NewAlpineUpstreamRequest(name string, upstreamUrl string) *AlpineUpstreamRe
 	var mode string = "Proxy Only"
 	this.Mode = &mode
 	this.Name = name
+	var rsaVerification string = "Allow All"
+	this.RsaVerification = &rsaVerification
 	this.UpstreamUrl = upstreamUrl
 	return &this
 }
@@ -76,6 +82,8 @@ func NewAlpineUpstreamRequestWithDefaults() *AlpineUpstreamRequest {
 	this.AuthMode = &authMode
 	var mode string = "Proxy Only"
 	this.Mode = &mode
+	var rsaVerification string = "Allow All"
+	this.RsaVerification = &rsaVerification
 	return &this
 }
 
@@ -489,6 +497,81 @@ func (o *AlpineUpstreamRequest) SetPriority(v int64) {
 	o.Priority = &v
 }
 
+// GetRsaKeyUrl returns the RsaKeyUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AlpineUpstreamRequest) GetRsaKeyUrl() string {
+	if o == nil || IsNil(o.RsaKeyUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RsaKeyUrl.Get()
+}
+
+// GetRsaKeyUrlOk returns a tuple with the RsaKeyUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AlpineUpstreamRequest) GetRsaKeyUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RsaKeyUrl.Get(), o.RsaKeyUrl.IsSet()
+}
+
+// HasRsaKeyUrl returns a boolean if a field has been set.
+func (o *AlpineUpstreamRequest) HasRsaKeyUrl() bool {
+	if o != nil && o.RsaKeyUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRsaKeyUrl gets a reference to the given NullableString and assigns it to the RsaKeyUrl field.
+func (o *AlpineUpstreamRequest) SetRsaKeyUrl(v string) {
+	o.RsaKeyUrl.Set(&v)
+}
+
+// SetRsaKeyUrlNil sets the value for RsaKeyUrl to be an explicit nil
+func (o *AlpineUpstreamRequest) SetRsaKeyUrlNil() {
+	o.RsaKeyUrl.Set(nil)
+}
+
+// UnsetRsaKeyUrl ensures that no value is present for RsaKeyUrl, not even an explicit nil
+func (o *AlpineUpstreamRequest) UnsetRsaKeyUrl() {
+	o.RsaKeyUrl.Unset()
+}
+
+// GetRsaVerification returns the RsaVerification field value if set, zero value otherwise.
+func (o *AlpineUpstreamRequest) GetRsaVerification() string {
+	if o == nil || IsNil(o.RsaVerification) {
+		var ret string
+		return ret
+	}
+	return *o.RsaVerification
+}
+
+// GetRsaVerificationOk returns a tuple with the RsaVerification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlpineUpstreamRequest) GetRsaVerificationOk() (*string, bool) {
+	if o == nil || IsNil(o.RsaVerification) {
+		return nil, false
+	}
+	return o.RsaVerification, true
+}
+
+// HasRsaVerification returns a boolean if a field has been set.
+func (o *AlpineUpstreamRequest) HasRsaVerification() bool {
+	if o != nil && !IsNil(o.RsaVerification) {
+		return true
+	}
+
+	return false
+}
+
+// SetRsaVerification gets a reference to the given string and assigns it to the RsaVerification field.
+func (o *AlpineUpstreamRequest) SetRsaVerification(v string) {
+	o.RsaVerification = &v
+}
+
 // GetUpstreamUrl returns the UpstreamUrl field value
 func (o *AlpineUpstreamRequest) GetUpstreamUrl() string {
 	if o == nil {
@@ -586,6 +669,12 @@ func (o AlpineUpstreamRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
+	if o.RsaKeyUrl.IsSet() {
+		toSerialize["rsa_key_url"] = o.RsaKeyUrl.Get()
+	}
+	if !IsNil(o.RsaVerification) {
+		toSerialize["rsa_verification"] = o.RsaVerification
+	}
 	toSerialize["upstream_url"] = o.UpstreamUrl
 	if !IsNil(o.VerifySsl) {
 		toSerialize["verify_ssl"] = o.VerifySsl
@@ -645,6 +734,8 @@ func (o *AlpineUpstreamRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "mode")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "priority")
+		delete(additionalProperties, "rsa_key_url")
+		delete(additionalProperties, "rsa_verification")
 		delete(additionalProperties, "upstream_url")
 		delete(additionalProperties, "verify_ssl")
 		o.AdditionalProperties = additionalProperties

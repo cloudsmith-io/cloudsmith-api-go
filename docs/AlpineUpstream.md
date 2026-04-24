@@ -18,13 +18,17 @@ Name | Type | Description | Notes
 **ExtraValue2** | Pointer to **NullableString** | The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
 **HasFailedSignatureVerification** | Pointer to **bool** | Whether the upstream has failed signature verification. | [optional] [readonly] 
 **IndexPackageCount** | Pointer to **NullableInt64** | The number of packages available in this upstream source | [optional] [readonly] 
-**IndexStatus** | Pointer to **string** | The current indexing status of this upstream source | [optional] [readonly] 
+**IndexStatus** | Pointer to **NullableString** | The current indexing status of this upstream source | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
 **LastIndexed** | Pointer to **string** | The last time this upstream source was indexed | [optional] [readonly] 
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
 **Name** | **string** | A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream. | 
 **PendingValidation** | Pointer to **bool** | When true, this upstream source is pending validation. | [optional] [readonly] 
 **Priority** | Pointer to **int64** | Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date. | [optional] 
+**RsaKeyInline** | Pointer to **NullableString** | A base64-encoded RSA public key in PEM format used to verify package signatures. | [optional] [readonly] 
+**RsaKeyUrl** | Pointer to **NullableString** | When provided, Cloudsmith will fetch and validate the RSA public key at this URL and use it to verify package signatures from this upstream. | [optional] 
+**RsaVerification** | Pointer to **string** | The RSA signature verification mode for this upstream. | [optional] [default to "Allow All"]
+**RsaVerificationStatus** | Pointer to **string** | The RSA signature verification status for this upstream. | [optional] [readonly] [default to "Unknown"]
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
 **UpstreamUrl** | **string** | The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.  | 
@@ -494,6 +498,16 @@ SetIndexStatus sets IndexStatus field to given value.
 
 HasIndexStatus returns a boolean if a field has been set.
 
+### SetIndexStatusNil
+
+`func (o *AlpineUpstream) SetIndexStatusNil(b bool)`
+
+ SetIndexStatusNil sets the value for IndexStatus to be an explicit nil
+
+### UnsetIndexStatus
+`func (o *AlpineUpstream) UnsetIndexStatus()`
+
+UnsetIndexStatus ensures that no value is present for IndexStatus, not even an explicit nil
 ### GetIsActive
 
 `func (o *AlpineUpstream) GetIsActive() bool`
@@ -638,6 +652,126 @@ SetPriority sets Priority field to given value.
 `func (o *AlpineUpstream) HasPriority() bool`
 
 HasPriority returns a boolean if a field has been set.
+
+### GetRsaKeyInline
+
+`func (o *AlpineUpstream) GetRsaKeyInline() string`
+
+GetRsaKeyInline returns the RsaKeyInline field if non-nil, zero value otherwise.
+
+### GetRsaKeyInlineOk
+
+`func (o *AlpineUpstream) GetRsaKeyInlineOk() (*string, bool)`
+
+GetRsaKeyInlineOk returns a tuple with the RsaKeyInline field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRsaKeyInline
+
+`func (o *AlpineUpstream) SetRsaKeyInline(v string)`
+
+SetRsaKeyInline sets RsaKeyInline field to given value.
+
+### HasRsaKeyInline
+
+`func (o *AlpineUpstream) HasRsaKeyInline() bool`
+
+HasRsaKeyInline returns a boolean if a field has been set.
+
+### SetRsaKeyInlineNil
+
+`func (o *AlpineUpstream) SetRsaKeyInlineNil(b bool)`
+
+ SetRsaKeyInlineNil sets the value for RsaKeyInline to be an explicit nil
+
+### UnsetRsaKeyInline
+`func (o *AlpineUpstream) UnsetRsaKeyInline()`
+
+UnsetRsaKeyInline ensures that no value is present for RsaKeyInline, not even an explicit nil
+### GetRsaKeyUrl
+
+`func (o *AlpineUpstream) GetRsaKeyUrl() string`
+
+GetRsaKeyUrl returns the RsaKeyUrl field if non-nil, zero value otherwise.
+
+### GetRsaKeyUrlOk
+
+`func (o *AlpineUpstream) GetRsaKeyUrlOk() (*string, bool)`
+
+GetRsaKeyUrlOk returns a tuple with the RsaKeyUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRsaKeyUrl
+
+`func (o *AlpineUpstream) SetRsaKeyUrl(v string)`
+
+SetRsaKeyUrl sets RsaKeyUrl field to given value.
+
+### HasRsaKeyUrl
+
+`func (o *AlpineUpstream) HasRsaKeyUrl() bool`
+
+HasRsaKeyUrl returns a boolean if a field has been set.
+
+### SetRsaKeyUrlNil
+
+`func (o *AlpineUpstream) SetRsaKeyUrlNil(b bool)`
+
+ SetRsaKeyUrlNil sets the value for RsaKeyUrl to be an explicit nil
+
+### UnsetRsaKeyUrl
+`func (o *AlpineUpstream) UnsetRsaKeyUrl()`
+
+UnsetRsaKeyUrl ensures that no value is present for RsaKeyUrl, not even an explicit nil
+### GetRsaVerification
+
+`func (o *AlpineUpstream) GetRsaVerification() string`
+
+GetRsaVerification returns the RsaVerification field if non-nil, zero value otherwise.
+
+### GetRsaVerificationOk
+
+`func (o *AlpineUpstream) GetRsaVerificationOk() (*string, bool)`
+
+GetRsaVerificationOk returns a tuple with the RsaVerification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRsaVerification
+
+`func (o *AlpineUpstream) SetRsaVerification(v string)`
+
+SetRsaVerification sets RsaVerification field to given value.
+
+### HasRsaVerification
+
+`func (o *AlpineUpstream) HasRsaVerification() bool`
+
+HasRsaVerification returns a boolean if a field has been set.
+
+### GetRsaVerificationStatus
+
+`func (o *AlpineUpstream) GetRsaVerificationStatus() string`
+
+GetRsaVerificationStatus returns the RsaVerificationStatus field if non-nil, zero value otherwise.
+
+### GetRsaVerificationStatusOk
+
+`func (o *AlpineUpstream) GetRsaVerificationStatusOk() (*string, bool)`
+
+GetRsaVerificationStatusOk returns a tuple with the RsaVerificationStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRsaVerificationStatus
+
+`func (o *AlpineUpstream) SetRsaVerificationStatus(v string)`
+
+SetRsaVerificationStatus sets RsaVerificationStatus field to given value.
+
+### HasRsaVerificationStatus
+
+`func (o *AlpineUpstream) HasRsaVerificationStatus() bool`
+
+HasRsaVerificationStatus returns a boolean if a field has been set.
 
 ### GetSlugPerm
 

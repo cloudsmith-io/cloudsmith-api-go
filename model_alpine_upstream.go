@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1093.0
+API version: 1.1137.0
 Contact: support@cloudsmith.io
 */
 
@@ -50,7 +50,7 @@ type AlpineUpstream struct {
 	// The number of packages available in this upstream source
 	IndexPackageCount NullableInt64 `json:"index_package_count,omitempty"`
 	// The current indexing status of this upstream source
-	IndexStatus *string `json:"index_status,omitempty"`
+	IndexStatus NullableString `json:"index_status,omitempty"`
 	// Whether or not this upstream is active and ready for requests.
 	IsActive *bool `json:"is_active,omitempty"`
 	// The last time this upstream source was indexed
@@ -62,9 +62,17 @@ type AlpineUpstream struct {
 	// When true, this upstream source is pending validation.
 	PendingValidation *bool `json:"pending_validation,omitempty"`
 	// Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date.
-	Priority  *int64     `json:"priority,omitempty"`
-	SlugPerm  *string    `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	Priority *int64 `json:"priority,omitempty"`
+	// A base64-encoded RSA public key in PEM format used to verify package signatures.
+	RsaKeyInline NullableString `json:"rsa_key_inline,omitempty"`
+	// When provided, Cloudsmith will fetch and validate the RSA public key at this URL and use it to verify package signatures from this upstream.
+	RsaKeyUrl NullableString `json:"rsa_key_url,omitempty"`
+	// The RSA signature verification mode for this upstream.
+	RsaVerification *string `json:"rsa_verification,omitempty"`
+	// The RSA signature verification status for this upstream.
+	RsaVerificationStatus *string    `json:"rsa_verification_status,omitempty"`
+	SlugPerm              *string    `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	UpdatedAt             *time.Time `json:"updated_at,omitempty"`
 	// The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.
 	UpstreamUrl string `json:"upstream_url"`
 	// If enabled, SSL certificates are verified when requests are made to this upstream. It's recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams.
@@ -85,6 +93,8 @@ func NewAlpineUpstream(name string, upstreamUrl string) *AlpineUpstream {
 	var mode string = "Proxy Only"
 	this.Mode = &mode
 	this.Name = name
+	var rsaVerification string = "Allow All"
+	this.RsaVerification = &rsaVerification
 	this.UpstreamUrl = upstreamUrl
 	return &this
 }
@@ -98,6 +108,8 @@ func NewAlpineUpstreamWithDefaults() *AlpineUpstream {
 	this.AuthMode = &authMode
 	var mode string = "Proxy Only"
 	this.Mode = &mode
+	var rsaVerification string = "Allow All"
+	this.RsaVerification = &rsaVerification
 	return &this
 }
 
@@ -626,36 +638,47 @@ func (o *AlpineUpstream) UnsetIndexPackageCount() {
 	o.IndexPackageCount.Unset()
 }
 
-// GetIndexStatus returns the IndexStatus field value if set, zero value otherwise.
+// GetIndexStatus returns the IndexStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AlpineUpstream) GetIndexStatus() string {
-	if o == nil || IsNil(o.IndexStatus) {
+	if o == nil || IsNil(o.IndexStatus.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.IndexStatus
+	return *o.IndexStatus.Get()
 }
 
 // GetIndexStatusOk returns a tuple with the IndexStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AlpineUpstream) GetIndexStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.IndexStatus) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IndexStatus, true
+	return o.IndexStatus.Get(), o.IndexStatus.IsSet()
 }
 
 // HasIndexStatus returns a boolean if a field has been set.
 func (o *AlpineUpstream) HasIndexStatus() bool {
-	if o != nil && !IsNil(o.IndexStatus) {
+	if o != nil && o.IndexStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIndexStatus gets a reference to the given string and assigns it to the IndexStatus field.
+// SetIndexStatus gets a reference to the given NullableString and assigns it to the IndexStatus field.
 func (o *AlpineUpstream) SetIndexStatus(v string) {
-	o.IndexStatus = &v
+	o.IndexStatus.Set(&v)
+}
+
+// SetIndexStatusNil sets the value for IndexStatus to be an explicit nil
+func (o *AlpineUpstream) SetIndexStatusNil() {
+	o.IndexStatus.Set(nil)
+}
+
+// UnsetIndexStatus ensures that no value is present for IndexStatus, not even an explicit nil
+func (o *AlpineUpstream) UnsetIndexStatus() {
+	o.IndexStatus.Unset()
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -842,6 +865,156 @@ func (o *AlpineUpstream) SetPriority(v int64) {
 	o.Priority = &v
 }
 
+// GetRsaKeyInline returns the RsaKeyInline field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AlpineUpstream) GetRsaKeyInline() string {
+	if o == nil || IsNil(o.RsaKeyInline.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RsaKeyInline.Get()
+}
+
+// GetRsaKeyInlineOk returns a tuple with the RsaKeyInline field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AlpineUpstream) GetRsaKeyInlineOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RsaKeyInline.Get(), o.RsaKeyInline.IsSet()
+}
+
+// HasRsaKeyInline returns a boolean if a field has been set.
+func (o *AlpineUpstream) HasRsaKeyInline() bool {
+	if o != nil && o.RsaKeyInline.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRsaKeyInline gets a reference to the given NullableString and assigns it to the RsaKeyInline field.
+func (o *AlpineUpstream) SetRsaKeyInline(v string) {
+	o.RsaKeyInline.Set(&v)
+}
+
+// SetRsaKeyInlineNil sets the value for RsaKeyInline to be an explicit nil
+func (o *AlpineUpstream) SetRsaKeyInlineNil() {
+	o.RsaKeyInline.Set(nil)
+}
+
+// UnsetRsaKeyInline ensures that no value is present for RsaKeyInline, not even an explicit nil
+func (o *AlpineUpstream) UnsetRsaKeyInline() {
+	o.RsaKeyInline.Unset()
+}
+
+// GetRsaKeyUrl returns the RsaKeyUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AlpineUpstream) GetRsaKeyUrl() string {
+	if o == nil || IsNil(o.RsaKeyUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RsaKeyUrl.Get()
+}
+
+// GetRsaKeyUrlOk returns a tuple with the RsaKeyUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AlpineUpstream) GetRsaKeyUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RsaKeyUrl.Get(), o.RsaKeyUrl.IsSet()
+}
+
+// HasRsaKeyUrl returns a boolean if a field has been set.
+func (o *AlpineUpstream) HasRsaKeyUrl() bool {
+	if o != nil && o.RsaKeyUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRsaKeyUrl gets a reference to the given NullableString and assigns it to the RsaKeyUrl field.
+func (o *AlpineUpstream) SetRsaKeyUrl(v string) {
+	o.RsaKeyUrl.Set(&v)
+}
+
+// SetRsaKeyUrlNil sets the value for RsaKeyUrl to be an explicit nil
+func (o *AlpineUpstream) SetRsaKeyUrlNil() {
+	o.RsaKeyUrl.Set(nil)
+}
+
+// UnsetRsaKeyUrl ensures that no value is present for RsaKeyUrl, not even an explicit nil
+func (o *AlpineUpstream) UnsetRsaKeyUrl() {
+	o.RsaKeyUrl.Unset()
+}
+
+// GetRsaVerification returns the RsaVerification field value if set, zero value otherwise.
+func (o *AlpineUpstream) GetRsaVerification() string {
+	if o == nil || IsNil(o.RsaVerification) {
+		var ret string
+		return ret
+	}
+	return *o.RsaVerification
+}
+
+// GetRsaVerificationOk returns a tuple with the RsaVerification field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlpineUpstream) GetRsaVerificationOk() (*string, bool) {
+	if o == nil || IsNil(o.RsaVerification) {
+		return nil, false
+	}
+	return o.RsaVerification, true
+}
+
+// HasRsaVerification returns a boolean if a field has been set.
+func (o *AlpineUpstream) HasRsaVerification() bool {
+	if o != nil && !IsNil(o.RsaVerification) {
+		return true
+	}
+
+	return false
+}
+
+// SetRsaVerification gets a reference to the given string and assigns it to the RsaVerification field.
+func (o *AlpineUpstream) SetRsaVerification(v string) {
+	o.RsaVerification = &v
+}
+
+// GetRsaVerificationStatus returns the RsaVerificationStatus field value if set, zero value otherwise.
+func (o *AlpineUpstream) GetRsaVerificationStatus() string {
+	if o == nil || IsNil(o.RsaVerificationStatus) {
+		var ret string
+		return ret
+	}
+	return *o.RsaVerificationStatus
+}
+
+// GetRsaVerificationStatusOk returns a tuple with the RsaVerificationStatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlpineUpstream) GetRsaVerificationStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.RsaVerificationStatus) {
+		return nil, false
+	}
+	return o.RsaVerificationStatus, true
+}
+
+// HasRsaVerificationStatus returns a boolean if a field has been set.
+func (o *AlpineUpstream) HasRsaVerificationStatus() bool {
+	if o != nil && !IsNil(o.RsaVerificationStatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetRsaVerificationStatus gets a reference to the given string and assigns it to the RsaVerificationStatus field.
+func (o *AlpineUpstream) SetRsaVerificationStatus(v string) {
+	o.RsaVerificationStatus = &v
+}
+
 // GetSlugPerm returns the SlugPerm field value if set, zero value otherwise.
 func (o *AlpineUpstream) GetSlugPerm() string {
 	if o == nil || IsNil(o.SlugPerm) {
@@ -1014,8 +1187,8 @@ func (o AlpineUpstream) ToMap() (map[string]interface{}, error) {
 	if o.IndexPackageCount.IsSet() {
 		toSerialize["index_package_count"] = o.IndexPackageCount.Get()
 	}
-	if !IsNil(o.IndexStatus) {
-		toSerialize["index_status"] = o.IndexStatus
+	if o.IndexStatus.IsSet() {
+		toSerialize["index_status"] = o.IndexStatus.Get()
 	}
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
@@ -1032,6 +1205,18 @@ func (o AlpineUpstream) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
+	}
+	if o.RsaKeyInline.IsSet() {
+		toSerialize["rsa_key_inline"] = o.RsaKeyInline.Get()
+	}
+	if o.RsaKeyUrl.IsSet() {
+		toSerialize["rsa_key_url"] = o.RsaKeyUrl.Get()
+	}
+	if !IsNil(o.RsaVerification) {
+		toSerialize["rsa_verification"] = o.RsaVerification
+	}
+	if !IsNil(o.RsaVerificationStatus) {
+		toSerialize["rsa_verification_status"] = o.RsaVerificationStatus
 	}
 	if !IsNil(o.SlugPerm) {
 		toSerialize["slug_perm"] = o.SlugPerm
@@ -1108,6 +1293,10 @@ func (o *AlpineUpstream) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "pending_validation")
 		delete(additionalProperties, "priority")
+		delete(additionalProperties, "rsa_key_inline")
+		delete(additionalProperties, "rsa_key_url")
+		delete(additionalProperties, "rsa_verification")
+		delete(additionalProperties, "rsa_verification_status")
 		delete(additionalProperties, "slug_perm")
 		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "upstream_url")

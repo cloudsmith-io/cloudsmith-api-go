@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1093.0
+API version: 1.1137.0
 Contact: support@cloudsmith.io
 */
 
@@ -50,7 +50,7 @@ type NugetUpstream struct {
 	// The number of packages available in this upstream source
 	IndexPackageCount NullableInt64 `json:"index_package_count,omitempty"`
 	// The current indexing status of this upstream source
-	IndexStatus *string `json:"index_status,omitempty"`
+	IndexStatus NullableString `json:"index_status,omitempty"`
 	// Whether or not this upstream is active and ready for requests.
 	IsActive *bool `json:"is_active,omitempty"`
 	// The last time this upstream source was indexed
@@ -626,36 +626,47 @@ func (o *NugetUpstream) UnsetIndexPackageCount() {
 	o.IndexPackageCount.Unset()
 }
 
-// GetIndexStatus returns the IndexStatus field value if set, zero value otherwise.
+// GetIndexStatus returns the IndexStatus field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NugetUpstream) GetIndexStatus() string {
-	if o == nil || IsNil(o.IndexStatus) {
+	if o == nil || IsNil(o.IndexStatus.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.IndexStatus
+	return *o.IndexStatus.Get()
 }
 
 // GetIndexStatusOk returns a tuple with the IndexStatus field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NugetUpstream) GetIndexStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.IndexStatus) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IndexStatus, true
+	return o.IndexStatus.Get(), o.IndexStatus.IsSet()
 }
 
 // HasIndexStatus returns a boolean if a field has been set.
 func (o *NugetUpstream) HasIndexStatus() bool {
-	if o != nil && !IsNil(o.IndexStatus) {
+	if o != nil && o.IndexStatus.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIndexStatus gets a reference to the given string and assigns it to the IndexStatus field.
+// SetIndexStatus gets a reference to the given NullableString and assigns it to the IndexStatus field.
 func (o *NugetUpstream) SetIndexStatus(v string) {
-	o.IndexStatus = &v
+	o.IndexStatus.Set(&v)
+}
+
+// SetIndexStatusNil sets the value for IndexStatus to be an explicit nil
+func (o *NugetUpstream) SetIndexStatusNil() {
+	o.IndexStatus.Set(nil)
+}
+
+// UnsetIndexStatus ensures that no value is present for IndexStatus, not even an explicit nil
+func (o *NugetUpstream) UnsetIndexStatus() {
+	o.IndexStatus.Unset()
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -1014,8 +1025,8 @@ func (o NugetUpstream) ToMap() (map[string]interface{}, error) {
 	if o.IndexPackageCount.IsSet() {
 		toSerialize["index_package_count"] = o.IndexPackageCount.Get()
 	}
-	if !IsNil(o.IndexStatus) {
-		toSerialize["index_status"] = o.IndexStatus
+	if o.IndexStatus.IsSet() {
+		toSerialize["index_status"] = o.IndexStatus.Get()
 	}
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccessPrivateBroadcasts** | Pointer to **bool** | If enabled, this token can be used for private broadcasts | [optional] 
+**AccessPrivateBroadcasts** | Pointer to **bool** | If enabled, this token can be used for private broadcasts | [optional] [readonly] 
 **Clients** | Pointer to **int64** |  | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | The datetime the token was updated at. | [optional] [readonly] 
 **CreatedBy** | Pointer to **string** |  | [optional] [readonly] 

@@ -34,6 +34,7 @@ Method | HTTP request | Description
 [**PackagesUploadHuggingface**](PackagesApi.md#PackagesUploadHuggingface) | **Post** /packages/{owner}/{repo}/upload/huggingface/ | Create a new HuggingFace package
 [**PackagesUploadLuarocks**](PackagesApi.md#PackagesUploadLuarocks) | **Post** /packages/{owner}/{repo}/upload/luarocks/ | Create a new LuaRocks package
 [**PackagesUploadMaven**](PackagesApi.md#PackagesUploadMaven) | **Post** /packages/{owner}/{repo}/upload/maven/ | Create a new Maven package
+[**PackagesUploadMcp**](PackagesApi.md#PackagesUploadMcp) | **Post** /packages/{owner}/{repo}/upload/mcp/ | Create a new MCP package
 [**PackagesUploadNpm**](PackagesApi.md#PackagesUploadNpm) | **Post** /packages/{owner}/{repo}/upload/npm/ | Create a new npm package
 [**PackagesUploadNuget**](PackagesApi.md#PackagesUploadNuget) | **Post** /packages/{owner}/{repo}/upload/nuget/ | Create a new NuGet package
 [**PackagesUploadP2**](PackagesApi.md#PackagesUploadP2) | **Post** /packages/{owner}/{repo}/upload/p2/ | Create a new P2 package
@@ -62,6 +63,7 @@ Method | HTTP request | Description
 [**PackagesValidateUploadHuggingface**](PackagesApi.md#PackagesValidateUploadHuggingface) | **Post** /packages/{owner}/{repo}/validate-upload/huggingface/ | Validate parameters for create HuggingFace package
 [**PackagesValidateUploadLuarocks**](PackagesApi.md#PackagesValidateUploadLuarocks) | **Post** /packages/{owner}/{repo}/validate-upload/luarocks/ | Validate parameters for create LuaRocks package
 [**PackagesValidateUploadMaven**](PackagesApi.md#PackagesValidateUploadMaven) | **Post** /packages/{owner}/{repo}/validate-upload/maven/ | Validate parameters for create Maven package
+[**PackagesValidateUploadMcp**](PackagesApi.md#PackagesValidateUploadMcp) | **Post** /packages/{owner}/{repo}/validate-upload/mcp/ | Validate parameters for create MCP package
 [**PackagesValidateUploadNpm**](PackagesApi.md#PackagesValidateUploadNpm) | **Post** /packages/{owner}/{repo}/validate-upload/npm/ | Validate parameters for create npm package
 [**PackagesValidateUploadNuget**](PackagesApi.md#PackagesValidateUploadNuget) | **Post** /packages/{owner}/{repo}/validate-upload/nuget/ | Validate parameters for create NuGet package
 [**PackagesValidateUploadP2**](PackagesApi.md#PackagesValidateUploadP2) | **Post** /packages/{owner}/{repo}/validate-upload/p2/ | Validate parameters for create P2 package
@@ -2361,6 +2363,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PackagesUploadMcp
+
+> McpPackageUpload PackagesUploadMcp(ctx, owner, repo).Data(data).Execute()
+
+Create a new MCP package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewMcpPackageUploadRequest("PackageFile_example") // McpPackageUploadRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PackagesApi.PackagesUploadMcp(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesUploadMcp``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PackagesUploadMcp`: McpPackageUpload
+	fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesUploadMcp`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesUploadMcpRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**McpPackageUploadRequest**](McpPackageUploadRequest.md) |  | 
+
+### Return type
+
+[**McpPackageUpload**](McpPackageUpload.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PackagesUploadNpm
 
 > NpmPackageUpload PackagesUploadNpm(ctx, owner, repo).Data(data).Execute()
@@ -4408,6 +4485,79 @@ Name | Type | Description  | Notes
 
 
  **data** | [**MavenPackageUploadRequest**](MavenPackageUploadRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PackagesValidateUploadMcp
+
+> PackagesValidateUploadMcp(ctx, owner, repo).Data(data).Execute()
+
+Validate parameters for create MCP package
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	repo := "repo_example" // string | 
+	data := *openapiclient.NewMcpPackageUploadRequest("PackageFile_example") // McpPackageUploadRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PackagesApi.PackagesValidateUploadMcp(context.Background(), owner, repo).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesValidateUploadMcp``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPackagesValidateUploadMcpRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**McpPackageUploadRequest**](McpPackageUploadRequest.md) |  | 
 
 ### Return type
 
