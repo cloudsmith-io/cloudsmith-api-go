@@ -16,6 +16,7 @@ api_orgs.go
 api_packages.go
 api_quota.go
 api_rates.go
+api_recycle_bin.go
 api_repos.go
 api_status.go
 api_storage_regions.go
@@ -133,6 +134,8 @@ docs/MavenPackageUploadRequest.md
 docs/MavenUpstream.md
 docs/MavenUpstreamRequest.md
 docs/MavenUpstreamRequestPatch.md
+docs/McpPackageUpload.md
+docs/McpPackageUploadRequest.md
 docs/MetricsApi.md
 docs/Namespace.md
 docs/NamespaceAuditLog.md
@@ -205,6 +208,7 @@ docs/PackageMove.md
 docs/PackageMoveRequest.md
 docs/PackageQuarantine.md
 docs/PackageQuarantineRequest.md
+docs/PackageRecycleBin.md
 docs/PackageResync.md
 docs/PackageStatus.md
 docs/PackageTag.md
@@ -232,6 +236,8 @@ docs/RateCheck.md
 docs/RatesApi.md
 docs/RawPackageUpload.md
 docs/RawPackageUploadRequest.md
+docs/RecycleBinApi.md
+docs/RecycleBinPackage.md
 docs/ReposApi.md
 docs/Repository.md
 docs/RepositoryAuditLog.md
@@ -260,6 +266,8 @@ docs/RepositoryRetentionRulesRequestPatch.md
 docs/RepositoryRsaKey.md
 docs/RepositoryRsaKeyCreate.md
 docs/RepositoryToken.md
+docs/RepositoryTokenPrivateBroadcasts.md
+docs/RepositoryTokenPrivateBroadcastsRequest.md
 docs/RepositoryTokenRefresh.md
 docs/RepositoryTokenRefreshRequest.md
 docs/RepositoryTokenRequest.md
@@ -431,6 +439,8 @@ model_maven_package_upload_request.go
 model_maven_upstream.go
 model_maven_upstream_request.go
 model_maven_upstream_request_patch.go
+model_mcp_package_upload.go
+model_mcp_package_upload_request.go
 model_namespace.go
 model_namespace_audit_log.go
 model_nested_license_policy.go
@@ -500,6 +510,7 @@ model_package_move.go
 model_package_move_request.go
 model_package_quarantine.go
 model_package_quarantine_request.go
+model_package_recycle_bin.go
 model_package_resync.go
 model_package_status.go
 model_package_tag.go
@@ -524,6 +535,7 @@ model_quota_history.go
 model_rate_check.go
 model_raw_package_upload.go
 model_raw_package_upload_request.go
+model_recycle_bin_package.go
 model_repository.go
 model_repository_audit_log.go
 model_repository_create.go
@@ -551,6 +563,8 @@ model_repository_retention_rules_request_patch.go
 model_repository_rsa_key.go
 model_repository_rsa_key_create.go
 model_repository_token.go
+model_repository_token_private_broadcasts.go
+model_repository_token_private_broadcasts_request.go
 model_repository_token_refresh.go
 model_repository_token_refresh_request.go
 model_repository_token_request.go
@@ -628,6 +642,7 @@ test/api_orgs_test.go
 test/api_packages_test.go
 test/api_quota_test.go
 test/api_rates_test.go
+test/api_recycle_bin_test.go
 test/api_repos_test.go
 test/api_status_test.go
 test/api_storage_regions_test.go

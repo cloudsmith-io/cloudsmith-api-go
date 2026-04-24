@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
 **Name** | Pointer to **string** | A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream. | [optional] 
 **Priority** | Pointer to **int64** | Upstream sources are selected for resolving requests by sequential order (1..n), followed by creation date. | [optional] 
+**RsaKeyUrl** | Pointer to **NullableString** | When provided, Cloudsmith will fetch and validate the RSA public key at this URL and use it to verify package signatures from this upstream. | [optional] 
+**RsaVerification** | Pointer to **string** | The RSA signature verification mode for this upstream. | [optional] [default to "Allow All"]
 **UpstreamUrl** | Pointer to **string** | The URL for this upstream source. This must be a fully qualified URL including any path elements required to reach the root of the repository.  | [optional] 
 **VerifySsl** | Pointer to **bool** | If enabled, SSL certificates are verified when requests are made to this upstream. It&#39;s recommended to leave this enabled for all public sources to help mitigate Man-In-The-Middle (MITM) attacks. Please note this only applies to HTTPS upstreams. | [optional] 
 
@@ -371,6 +373,66 @@ SetPriority sets Priority field to given value.
 `func (o *AlpineUpstreamRequestPatch) HasPriority() bool`
 
 HasPriority returns a boolean if a field has been set.
+
+### GetRsaKeyUrl
+
+`func (o *AlpineUpstreamRequestPatch) GetRsaKeyUrl() string`
+
+GetRsaKeyUrl returns the RsaKeyUrl field if non-nil, zero value otherwise.
+
+### GetRsaKeyUrlOk
+
+`func (o *AlpineUpstreamRequestPatch) GetRsaKeyUrlOk() (*string, bool)`
+
+GetRsaKeyUrlOk returns a tuple with the RsaKeyUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRsaKeyUrl
+
+`func (o *AlpineUpstreamRequestPatch) SetRsaKeyUrl(v string)`
+
+SetRsaKeyUrl sets RsaKeyUrl field to given value.
+
+### HasRsaKeyUrl
+
+`func (o *AlpineUpstreamRequestPatch) HasRsaKeyUrl() bool`
+
+HasRsaKeyUrl returns a boolean if a field has been set.
+
+### SetRsaKeyUrlNil
+
+`func (o *AlpineUpstreamRequestPatch) SetRsaKeyUrlNil(b bool)`
+
+ SetRsaKeyUrlNil sets the value for RsaKeyUrl to be an explicit nil
+
+### UnsetRsaKeyUrl
+`func (o *AlpineUpstreamRequestPatch) UnsetRsaKeyUrl()`
+
+UnsetRsaKeyUrl ensures that no value is present for RsaKeyUrl, not even an explicit nil
+### GetRsaVerification
+
+`func (o *AlpineUpstreamRequestPatch) GetRsaVerification() string`
+
+GetRsaVerification returns the RsaVerification field if non-nil, zero value otherwise.
+
+### GetRsaVerificationOk
+
+`func (o *AlpineUpstreamRequestPatch) GetRsaVerificationOk() (*string, bool)`
+
+GetRsaVerificationOk returns a tuple with the RsaVerification field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRsaVerification
+
+`func (o *AlpineUpstreamRequestPatch) SetRsaVerification(v string)`
+
+SetRsaVerification sets RsaVerification field to given value.
+
+### HasRsaVerification
+
+`func (o *AlpineUpstreamRequestPatch) HasRsaVerification() bool`
+
+HasRsaVerification returns a boolean if a field has been set.
 
 ### GetUpstreamUrl
 

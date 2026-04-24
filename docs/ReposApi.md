@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**RepoRetentionPartialUpdate**](ReposApi.md#RepoRetentionPartialUpdate) | **Patch** /repos/{owner}/{repo}/retention/ | Update the retention rules for the repository.
 [**RepoRetentionRead**](ReposApi.md#RepoRetentionRead) | **Get** /repos/{owner}/{repo}/retention/ | Retrieve the retention rules for the repository.
 [**ReposCreate**](ReposApi.md#ReposCreate) | **Post** /repos/{owner}/ | Create a new repository in a given namespace.
-[**ReposDelete**](ReposApi.md#ReposDelete) | **Delete** /repos/{owner}/{identifier}/ | Delete a repository in a given namespace.
+[**ReposDelete**](ReposApi.md#ReposDelete) | **Delete** /repos/{owner}/{identifier}/ | 
 [**ReposEcdsaCreate**](ReposApi.md#ReposEcdsaCreate) | **Post** /repos/{owner}/{identifier}/ecdsa/ | Set the active ECDSA key for the Repository.
 [**ReposEcdsaList**](ReposApi.md#ReposEcdsaList) | **Get** /repos/{owner}/{identifier}/ecdsa/ | Retrieve the active ECDSA key for the Repository.
 [**ReposEcdsaRegenerate**](ReposApi.md#ReposEcdsaRegenerate) | **Post** /repos/{owner}/{identifier}/ecdsa/regenerate/ | Regenerate ECDSA Key for the Repository.
@@ -454,7 +454,7 @@ Name | Type | Description  | Notes
 
 > ReposDelete(ctx, owner, identifier).Execute()
 
-Delete a repository in a given namespace.
+
 
 
 

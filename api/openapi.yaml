@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1093.0
+  version: 1.1137.0
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -941,6 +941,53 @@ paths:
       summary: Reset the statistics for an entitlement token in a repository.
       tags:
       - entitlements
+  /entitlements/{owner}/{repo}/{identifier}/toggle-private-broadcasts/:
+    post:
+      description: Set private broadcast access for an entitlement token in a repository.
+      operationId: entitlements_toggle_private_broadcasts
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepositoryTokenPrivateBroadcastsRequest'
+        required: false
+      responses:
+        "200":
+          content: {}
+          description: Private broadcasts access has been updated for the entitlement
+            token.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Set private broadcast access for an entitlement token in a repository.
+      tags:
+      - entitlements
+      x-codegen-request-body-name: data
   /files/{owner}/{repo}/:
     post:
       description: Request URL(s) to upload new package file upload(s) to.
@@ -5656,6 +5703,56 @@ paths:
       tags:
       - packages
       x-codegen-request-body-name: data
+  /packages/{owner}/{repo}/upload/mcp/:
+    post:
+      description: Create a new MCP package
+      operationId: packages_upload_mcp
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/McpPackageUploadRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/McpPackageUpload'
+          description: Upload acknowledged and queued for synchronization.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Namespace (owner) or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Create a new MCP package
+      tags:
+      - packages
+      x-codegen-request-body-name: data
   /packages/{owner}/{repo}/upload/npm/:
     post:
       description: Create a new npm package
@@ -7005,6 +7102,53 @@ paths:
       tags:
       - packages
       x-codegen-request-body-name: data
+  /packages/{owner}/{repo}/validate-upload/mcp/:
+    post:
+      description: Validate parameters for create MCP package
+      operationId: packages_validate-upload_mcp
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/McpPackageUploadRequest'
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: "Validation was successful, parameters are OK."
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Namespace (owner) or repository not found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Validate parameters for create MCP package
+      tags:
+      - packages
+      x-codegen-request-body-name: data
   /packages/{owner}/{repo}/validate-upload/npm/:
     post:
       description: Validate parameters for create npm package
@@ -8172,6 +8316,96 @@ paths:
       summary: Endpoint to check rate limits for current user.
       tags:
       - rates
+  /recycle-bin/{owner}/:
+    get:
+      description: Retrieve all soft-deleted packages in the workspace. Optionally
+        filter by repository using the 'repository' query parameter.
+      operationId: recycle-bin_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      - description: Filter packages by repository slug
+        in: query
+        name: repository
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RecycleBinPackage'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: List soft-deleted packages in recycle bin
+      tags:
+      - recycle-bin
+  /recycle-bin/{owner}/action/:
+    post:
+      description: "Perform actions on soft-deleted packages in the recycle bin. Supported\
+        \ actions: permanently delete (hard delete), restore. Returns a list of successfully\
+        \ actioned packages and any packages that failed with error details. "
+      operationId: recycle-bin_recycle_bin_action
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackageRecycleBin'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageBulkActionResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      tags:
+      - recycle-bin
+      x-codegen-request-body-name: data
   /repos/:
     get:
       description: Get a list of all repositories associated with current user.
@@ -8321,7 +8555,9 @@ paths:
       x-codegen-request-body-name: data
   /repos/{owner}/{identifier}/:
     delete:
-      description: Delete a repository in a given namespace.
+      description: "Delete a repository in a given namespace.Repositories are soft-deleted\
+        \ and can be restored within a retention period. During this time, the repository's\
+        \ slug remains reserved and cannot be reused for new repositories."
       operationId: repos_delete
       parameters:
       - in: path
@@ -8356,7 +8592,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
-      summary: Delete a repository in a given namespace.
       tags:
       - repos
     get:
@@ -16266,6 +16501,7 @@ components:
       properties:
         access_private_broadcasts:
           description: "If enabled, this token can be used for private broadcasts"
+          readOnly: true
           title: Access private broadcasts
           type: boolean
         clients:
@@ -16528,7 +16764,6 @@ components:
         limit_bandwidth_unit: Byte
         scheduled_reset_at: 2000-01-23T04:56:07.000+00:00
         limit_bandwidth: -2147483648
-        access_private_broadcasts: true
         limit_num_clients: 2147483647
         limit_package_query: limit_package_query
         limit_path_query: limit_path_query
@@ -16539,10 +16774,6 @@ components:
         eula_required: true
         scheduled_reset_period: Never Reset
       properties:
-        access_private_broadcasts:
-          description: "If enabled, this token can be used for private broadcasts"
-          title: Access private broadcasts
-          type: boolean
         eula_required:
           description: "If checked, a EULA acceptance is required for this token."
           title: Eula required
@@ -16782,7 +17013,6 @@ components:
         limit_bandwidth_unit: Byte
         scheduled_reset_at: 2000-01-23T04:56:07.000+00:00
         limit_bandwidth: -2147483648
-        access_private_broadcasts: true
         limit_num_clients: 2147483647
         limit_package_query: limit_package_query
         limit_path_query: limit_path_query
@@ -16793,10 +17023,6 @@ components:
         eula_required: true
         scheduled_reset_period: Never Reset
       properties:
-        access_private_broadcasts:
-          description: "If enabled, this token can be used for private broadcasts"
-          title: Access private broadcasts
-          type: boolean
         eula_required:
           description: "If checked, a EULA acceptance is required for this token."
           title: Eula required
@@ -16929,7 +17155,6 @@ components:
         limit_bandwidth_unit: Byte
         scheduled_reset_at: 2000-01-23T04:56:07.000+00:00
         limit_bandwidth: -2147483648
-        access_private_broadcasts: true
         limit_num_clients: 2147483647
         limit_package_query: limit_package_query
         limit_path_query: limit_path_query
@@ -16939,10 +17164,6 @@ components:
         eula_required: true
         scheduled_reset_period: Never Reset
       properties:
-        access_private_broadcasts:
-          description: "If enabled, this token can be used for private broadcasts"
-          title: Access private broadcasts
-          type: boolean
         eula_required:
           description: "If checked, a EULA acceptance is required for this token."
           title: Eula required
@@ -17108,6 +17329,7 @@ components:
       properties:
         access_private_broadcasts:
           description: "If enabled, this token can be used for private broadcasts"
+          readOnly: true
           title: Access private broadcasts
           type: boolean
         clients:
@@ -17360,6 +17582,26 @@ components:
           readOnly: true
           title: User url
           type: string
+      type: object
+    RepositoryTokenPrivateBroadcastsRequest:
+      example:
+        access_private_broadcasts: true
+      properties:
+        access_private_broadcasts:
+          description: Whether the token should have access to private broadcasts.
+          title: Access private broadcasts
+          type: boolean
+      required:
+      - access_private_broadcasts
+      type: object
+    RepositoryTokenPrivateBroadcasts:
+      properties:
+        access_private_broadcasts:
+          description: Whether the token should have access to private broadcasts.
+          title: Access private broadcasts
+          type: boolean
+      required:
+      - access_private_broadcasts
       type: object
     PackageFileUploadRequest:
       example:
@@ -31183,6 +31425,598 @@ components:
           title: Vulnerability scan results url
           type: string
       type: object
+    McpPackageUploadRequest:
+      example:
+        republish: true
+        package_file: package_file
+        version: version
+        tags: tags
+      properties:
+        package_file:
+          description: The primary file for the package.
+          minLength: 1
+          title: Package file
+          type: string
+        republish:
+          description: "If true, the uploaded package will overwrite any others with\
+            \ the same attributes (e.g. same version); otherwise, it will be flagged\
+            \ as a duplicate."
+          title: Republish
+          type: boolean
+        tags:
+          description: A comma-separated values list of tags to add to the package.
+          maxLength: 1024
+          minLength: 1
+          nullable: true
+          title: Tags
+          type: string
+        version:
+          description: The raw version for this package.
+          maxLength: 255
+          nullable: true
+          title: Version
+          type: string
+      required:
+      - package_file
+      type: object
+    McpPackageUpload:
+      example:
+        architectures:
+        - name: name
+          description: description
+        - name: name
+          description: description
+        security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
+        checksum_sha256: checksum_sha256
+        release: release
+        package_type: 5
+        repository: repository
+        origin_repository: origin_repository
+        identifier_perm: identifier_perm
+        stage_updated_at: 2000-01-23T04:56:07.000+00:00
+        tags_immutable: "{}"
+        is_quarantined: true
+        slug: slug
+        freeable_storage: 1
+        is_security_scannable: true
+        security_scan_started_at: 2000-01-23T04:56:07.000+00:00
+        security_scan_status: Awaiting Security Scan
+        indexed: true
+        is_deleteable: true
+        format: format
+        status_str: status_str
+        version_orig: version_orig
+        namespace_url: https://openapi-generator.tech
+        display_name: display_name
+        slug_perm: slug_perm
+        spdx_license: spdx_license
+        version: version
+        is_resyncable: true
+        license: license
+        filename: filename
+        size: 2
+        cdn_url: cdn_url
+        uploaded_at: 2000-01-23T04:56:07.000+00:00
+        is_cancellable: true
+        is_downloadable: true
+        name: name
+        sync_finished_at: 2000-01-23T04:56:07.000+00:00
+        files:
+        - checksum_sha512: checksum_sha512
+          checksum_sha1: checksum_sha1
+          checksum_sha256: checksum_sha256
+          is_primary: true
+          checksum_md5: checksum_md5
+          slug_perm: slug_perm
+          filename: filename
+          size: 5
+          cdn_url: cdn_url
+          downloads: 1
+          is_synchronised: true
+          is_downloadable: true
+          signature_url: signature_url
+          tag: tag
+        - checksum_sha512: checksum_sha512
+          checksum_sha1: checksum_sha1
+          checksum_sha256: checksum_sha256
+          is_primary: true
+          checksum_md5: checksum_md5
+          slug_perm: slug_perm
+          filename: filename
+          size: 5
+          cdn_url: cdn_url
+          downloads: 1
+          is_synchronised: true
+          is_downloadable: true
+          signature_url: signature_url
+          tag: tag
+        num_files: 5
+        status: 9
+        checksum_sha512: checksum_sha512
+        distro:
+          name: name
+          variants: variants
+          self_url: https://openapi-generator.tech
+          slug: slug
+        extension: extension
+        fully_qualified_name: fully_qualified_name
+        description: description
+        is_copyable: true
+        epoch: 6
+        is_sync_completed: true
+        distro_version:
+          name: name
+          slug: slug
+        type_display: type_display
+        raw_license: raw_license
+        vulnerability_scan_results_url: https://openapi-generator.tech
+        dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
+        downloads: 0
+        subtype: subtype
+        uploader: uploader
+        self_webapp_url: self_webapp_url
+        signature_url: signature_url
+        tags_automatic: "{}"
+        repository_url: https://openapi-generator.tech
+        is_moveable: true
+        status_reason: status_reason
+        status_updated_at: 2000-01-23T04:56:07.000+00:00
+        summary: summary
+        checksum_sha1: checksum_sha1
+        is_quarantinable: true
+        identifiers:
+          key: identifiers
+        checksum_md5: checksum_md5
+        sync_progress: 3
+        is_sync_awaiting: true
+        uploader_url: https://openapi-generator.tech
+        self_html_url: self_html_url
+        origin_repository_url: https://openapi-generator.tech
+        self_url: https://openapi-generator.tech
+        status_url: https://openapi-generator.tech
+        is_sync_in_flight: true
+        security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
+        is_sync_in_progress: true
+        stage_str: stage_str
+        stage: 7
+        format_url: https://openapi-generator.tech
+        dependencies_url: https://openapi-generator.tech
+        namespace: namespace
+        is_sync_failed: true
+      properties:
+        architectures:
+          items:
+            $ref: '#/components/schemas/Architecture'
+          readOnly: true
+          type: array
+        cdn_url:
+          nullable: true
+          readOnly: true
+          title: Cdn url
+          type: string
+        checksum_md5:
+          readOnly: true
+          title: Checksum md5
+          type: string
+        checksum_sha1:
+          readOnly: true
+          title: Checksum sha1
+          type: string
+        checksum_sha256:
+          readOnly: true
+          title: Checksum sha256
+          type: string
+        checksum_sha512:
+          readOnly: true
+          title: Checksum sha512
+          type: string
+        dependencies_checksum_md5:
+          description: A checksum of all of the package's dependencies.
+          nullable: true
+          readOnly: true
+          title: Dependencies checksum md5
+          type: string
+        dependencies_url:
+          format: uri
+          readOnly: true
+          title: Dependencies url
+          type: string
+        description:
+          description: A textual description of this package.
+          nullable: true
+          readOnly: true
+          title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
+          type: string
+        distro:
+          $ref: '#/components/schemas/Distribution'
+        distro_version:
+          $ref: '#/components/schemas/DistributionVersion'
+        downloads:
+          readOnly: true
+          title: Downloads
+          type: integer
+        epoch:
+          description: The epoch of the package version (if any).
+          nullable: true
+          readOnly: true
+          title: Epoch
+          type: integer
+        extension:
+          readOnly: true
+          title: Extension
+          type: string
+        filename:
+          minLength: 1
+          readOnly: true
+          title: Filename
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/PackageFile'
+          readOnly: true
+          type: array
+        format:
+          minLength: 1
+          readOnly: true
+          title: Format
+          type: string
+        format_url:
+          format: uri
+          readOnly: true
+          title: Format url
+          type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
+        identifier_perm:
+          description: Unique and permanent identifier for the package.
+          minLength: 1
+          readOnly: true
+          title: Identifier perm
+          type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
+        indexed:
+          readOnly: true
+          title: Indexed
+          type: boolean
+        is_cancellable:
+          readOnly: true
+          title: Is cancellable
+          type: boolean
+        is_copyable:
+          readOnly: true
+          title: Is copyable
+          type: boolean
+        is_deleteable:
+          readOnly: true
+          title: Is deleteable
+          type: boolean
+        is_downloadable:
+          readOnly: true
+          title: Is downloadable
+          type: boolean
+        is_moveable:
+          readOnly: true
+          title: Is moveable
+          type: boolean
+        is_quarantinable:
+          readOnly: true
+          title: Is quarantinable
+          type: boolean
+        is_quarantined:
+          readOnly: true
+          title: Is quarantined
+          type: boolean
+        is_resyncable:
+          readOnly: true
+          title: Is resyncable
+          type: boolean
+        is_security_scannable:
+          readOnly: true
+          title: Is security scannable
+          type: boolean
+        is_sync_awaiting:
+          readOnly: true
+          title: Is sync awaiting
+          type: boolean
+        is_sync_completed:
+          readOnly: true
+          title: Is sync completed
+          type: boolean
+        is_sync_failed:
+          readOnly: true
+          title: Is sync failed
+          type: boolean
+        is_sync_in_flight:
+          readOnly: true
+          title: Is sync in flight
+          type: boolean
+        is_sync_in_progress:
+          readOnly: true
+          title: Is sync in progress
+          type: boolean
+        license:
+          description: The license of this package.
+          nullable: true
+          readOnly: true
+          title: License
+          type: string
+        name:
+          description: The name of this package.
+          nullable: true
+          readOnly: true
+          title: Name
+          type: string
+        namespace:
+          minLength: 1
+          readOnly: true
+          title: Namespace
+          type: string
+        namespace_url:
+          format: uri
+          readOnly: true
+          title: Namespace url
+          type: string
+        num_files:
+          readOnly: true
+          title: Num files
+          type: integer
+        origin_repository:
+          minLength: 1
+          readOnly: true
+          title: Origin repository
+          type: string
+        origin_repository_url:
+          format: uri
+          readOnly: true
+          title: Origin repository url
+          type: string
+        package_type:
+          description: The type of package contents.
+          readOnly: true
+          title: Package type
+          type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
+        raw_license:
+          description: The raw license string.
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Raw license
+          type: string
+        release:
+          description: The release of the package version (if any).
+          nullable: true
+          readOnly: true
+          title: Release
+          type: string
+        repository:
+          minLength: 1
+          readOnly: true
+          title: Repository
+          type: string
+        repository_url:
+          format: uri
+          readOnly: true
+          title: Repository url
+          type: string
+        security_scan_completed_at:
+          description: The datetime the security scanning was completed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan completed at
+          type: string
+        security_scan_started_at:
+          description: The datetime the security scanning was started.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan started at
+          type: string
+        security_scan_status:
+          default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
+          nullable: true
+          readOnly: true
+          title: Security scan status
+          type: string
+        security_scan_status_updated_at:
+          description: The datetime the security scanning status was updated.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan status updated at
+          type: string
+        self_html_url:
+          minLength: 1
+          readOnly: true
+          title: Self html url
+          type: string
+        self_url:
+          format: uri
+          readOnly: true
+          title: Self url
+          type: string
+        self_webapp_url:
+          minLength: 1
+          readOnly: true
+          title: Self webapp url
+          type: string
+        signature_url:
+          nullable: true
+          readOnly: true
+          title: Signature url
+          type: string
+        size:
+          description: The calculated size of the package.
+          readOnly: true
+          title: Size
+          type: integer
+        slug:
+          description: The public unique identifier for the package.
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug
+          type: string
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        spdx_license:
+          description: The SPDX license identifier for this package.
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Spdx license
+          type: string
+        stage:
+          description: The synchronisation (in progress) stage of the package.
+          readOnly: true
+          title: Stage
+          type: integer
+        stage_str:
+          readOnly: true
+          title: Stage str
+          type: string
+        stage_updated_at:
+          description: The datetime the package stage was updated at.
+          format: date-time
+          readOnly: true
+          title: Stage updated at
+          type: string
+        status:
+          description: The synchronisation status of the package.
+          readOnly: true
+          title: Status
+          type: integer
+        status_reason:
+          description: A textual description for the synchronous status reason (if
+            any
+          nullable: true
+          readOnly: true
+          title: Status reason
+          type: string
+        status_str:
+          readOnly: true
+          title: Status str
+          type: string
+        status_updated_at:
+          description: The datetime the package status was updated at.
+          format: date-time
+          readOnly: true
+          title: Status updated at
+          type: string
+        status_url:
+          format: uri
+          readOnly: true
+          title: Status url
+          type: string
+        subtype:
+          readOnly: true
+          title: Subtype
+          type: string
+        summary:
+          description: A one-liner synopsis of this package.
+          nullable: true
+          readOnly: true
+          title: Summary
+          type: string
+        sync_finished_at:
+          description: The datetime the package sync was finished at.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Sync finished at
+          type: string
+        sync_progress:
+          description: Synchronisation progress (from 0-100)
+          readOnly: true
+          title: Sync progress
+          type: integer
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
+        tags_immutable:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
+        type_display:
+          readOnly: true
+          title: Type display
+          type: string
+        uploaded_at:
+          description: The date this package was uploaded.
+          format: date-time
+          readOnly: true
+          title: Uploaded at
+          type: string
+        uploader:
+          minLength: 1
+          readOnly: true
+          title: Uploader
+          type: string
+        uploader_url:
+          format: uri
+          readOnly: true
+          title: Uploader url
+          type: string
+        version:
+          description: The raw version for this package.
+          maxLength: 255
+          nullable: true
+          title: Version
+          type: string
+        version_orig:
+          readOnly: true
+          title: Version orig
+          type: string
+        vulnerability_scan_results_url:
+          format: uri
+          readOnly: true
+          title: Vulnerability scan results url
+          type: string
+      type: object
     NpmPackageUploadRequest:
       example:
         republish: true
@@ -41491,6 +42325,218 @@ components:
           title: Resources
           type: object
       type: object
+    RecycleBinPackage:
+      example:
+        security_scan_status: Awaiting Security Scan
+        fully_qualified_name: fully_qualified_name
+        identifiers:
+          key: identifiers
+        is_deleteable: true
+        format: format
+        repository: repository
+        slug_perm: slug_perm
+        version: version
+        tags: "{}"
+        type_display: type_display
+        action_by: action_by
+        security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
+        filename: filename
+        is_restorable: true
+        policy_violated: true
+        size: 6
+        downloads: 0
+        invoked_retention_rule:
+          key: invoked_retention_rule
+        uploaded_at: 2000-01-23T04:56:07.000+00:00
+        uploader: uploader
+        name: name
+        is_quarantined: true
+        status: 1
+        status_updated_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        action_by:
+          description: The name of the user who deleted the package.
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Action by
+          type: string
+        downloads:
+          readOnly: true
+          title: Downloads
+          type: integer
+        filename:
+          minLength: 1
+          readOnly: true
+          title: Filename
+          type: string
+        format:
+          minLength: 1
+          readOnly: true
+          title: Format
+          type: string
+        fully_qualified_name:
+          description: The fully qualified name of the package.
+          minLength: 1
+          readOnly: true
+          title: Fully qualified name
+          type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          readOnly: true
+          title: Identifiers
+          type: object
+        invoked_retention_rule:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Information about the retention rule that triggered deletion
+            (if any).
+          nullable: true
+          readOnly: true
+          title: Invoked retention rule
+          type: object
+        is_deleteable:
+          readOnly: true
+          title: Is deleteable
+          type: boolean
+        is_quarantined:
+          readOnly: true
+          title: Is quarantined
+          type: boolean
+        is_restorable:
+          readOnly: true
+          title: Is restorable
+          type: boolean
+        name:
+          description: The name of this package.
+          nullable: true
+          readOnly: true
+          title: Name
+          type: string
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
+        repository:
+          minLength: 1
+          readOnly: true
+          title: Repository
+          type: string
+        security_scan_completed_at:
+          description: The datetime the security scanning was completed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan completed at
+          type: string
+        security_scan_status:
+          default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
+          nullable: true
+          readOnly: true
+          title: Security scan status
+          type: string
+        size:
+          description: The calculated size of the package.
+          readOnly: true
+          title: Size
+          type: integer
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        status:
+          description: The synchronisation status of the package.
+          readOnly: true
+          title: Status
+          type: integer
+        status_updated_at:
+          description: The datetime the package status was updated at.
+          format: date-time
+          readOnly: true
+          title: Status updated at
+          type: string
+        tags:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
+        type_display:
+          readOnly: true
+          title: Type display
+          type: string
+        uploaded_at:
+          description: The date this package was uploaded.
+          format: date-time
+          readOnly: true
+          title: Uploaded at
+          type: string
+        uploader:
+          minLength: 1
+          readOnly: true
+          title: Uploader
+          type: string
+        version:
+          description: The raw version for this package.
+          nullable: true
+          readOnly: true
+          title: Version
+          type: string
+      type: object
+    PackageRecycleBin:
+      example:
+        identifiers:
+        - identifiers
+        - identifiers
+        - identifiers
+        - identifiers
+        - identifiers
+        action: hard_delete
+        repository: repository
+      properties:
+        action:
+          description: The action to perform on soft-deleted packages.
+          enum:
+          - hard_delete
+          - restore
+          title: Action
+          type: string
+        identifiers:
+          description: A list of soft-deleted package identifiers to action.
+          items:
+            maxLength: 255
+            minLength: 1
+            type: string
+          maxItems: 100
+          minItems: 1
+          type: array
+        repository:
+          description: "The repository name to filter packages to. If not provided,\
+            \ the action will be performed across all accessible repositories in the\
+            \ workspace."
+          maxLength: 255
+          minLength: 1
+          title: Repository
+          type: string
+      required:
+      - action
+      - identifiers
+      type: object
     RepositoryEcdsaKey:
       example:
         public_key: public_key
@@ -44119,8 +45165,11 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         auth_mode: None
         extra_header_2: extra_header_2
+        rsa_verification: Allow All
         extra_header_1: extra_header_1
         mode: Proxy Only
+        rsa_verification_status: Unknown
+        rsa_key_inline: rsa_key_inline
         updated_at: 2000-01-23T04:56:07.000+00:00
         auth_username: auth_username
         has_failed_signature_verification: true
@@ -44132,6 +45181,7 @@ components:
         priority: 19750
         slug_perm: slug_perm
         extra_value_2: extra_value_2
+        rsa_key_url: https://openapi-generator.tech
         index_package_count: 0
         disable_reason_text: disable_reason_text
         verify_ssl: true
@@ -44180,6 +45230,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -44232,6 +45283,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -44275,6 +45327,42 @@ components:
           minimum: 1
           title: Priority
           type: integer
+        rsa_key_inline:
+          description: A base64-encoded RSA public key in PEM format used to verify
+            package signatures.
+          nullable: true
+          readOnly: true
+          title: RSA Public Key
+          type: string
+        rsa_key_url:
+          description: "When provided, Cloudsmith will fetch and validate the RSA\
+            \ public key at this URL and use it to verify package signatures from\
+            \ this upstream."
+          format: uri
+          maxLength: 254
+          nullable: true
+          title: RSA Key URL
+          type: string
+        rsa_verification:
+          default: Allow All
+          description: The RSA signature verification mode for this upstream.
+          enum:
+          - Allow All
+          - Warn on Invalid
+          - Reject Invalid
+          title: Rsa verification
+          type: string
+        rsa_verification_status:
+          default: Unknown
+          description: The RSA signature verification status for this upstream.
+          enum:
+          - Unknown
+          - Invalid
+          - Valid
+          - Invalid (No Key)
+          readOnly: true
+          title: Rsa verification status
+          type: string
         slug_perm:
           format: slug
           minLength: 1
@@ -44315,7 +45403,9 @@ components:
         extra_value_1: extra_value_1
         priority: 2624
         extra_value_2: extra_value_2
+        rsa_key_url: https://openapi-generator.tech
         extra_header_2: extra_header_2
+        rsa_verification: Allow All
         extra_header_1: extra_header_1
         mode: Proxy Only
         verify_ssl: true
@@ -44402,6 +45492,24 @@ components:
           minimum: 1
           title: Priority
           type: integer
+        rsa_key_url:
+          description: "When provided, Cloudsmith will fetch and validate the RSA\
+            \ public key at this URL and use it to verify package signatures from\
+            \ this upstream."
+          format: uri
+          maxLength: 254
+          nullable: true
+          title: RSA Key URL
+          type: string
+        rsa_verification:
+          default: Allow All
+          description: The RSA signature verification mode for this upstream.
+          enum:
+          - Allow All
+          - Warn on Invalid
+          - Reject Invalid
+          title: Rsa verification
+          type: string
         upstream_url:
           description: 'The URL for this upstream source. This must be a fully qualified
             URL including any path elements required to reach the root of the repository. '
@@ -44430,7 +45538,9 @@ components:
         extra_value_1: extra_value_1
         priority: 2624
         extra_value_2: extra_value_2
+        rsa_key_url: https://openapi-generator.tech
         extra_header_2: extra_header_2
+        rsa_verification: Allow All
         extra_header_1: extra_header_1
         mode: Proxy Only
         verify_ssl: true
@@ -44517,6 +45627,24 @@ components:
           minimum: 1
           title: Priority
           type: integer
+        rsa_key_url:
+          description: "When provided, Cloudsmith will fetch and validate the RSA\
+            \ public key at this URL and use it to verify package signatures from\
+            \ this upstream."
+          format: uri
+          maxLength: 254
+          nullable: true
+          title: RSA Key URL
+          type: string
+        rsa_verification:
+          default: Allow All
+          description: The RSA signature verification mode for this upstream.
+          enum:
+          - Allow All
+          - Warn on Invalid
+          - Reject Invalid
+          title: Rsa verification
+          type: string
         upstream_url:
           description: 'The URL for this upstream source. This must be a fully qualified
             URL including any path elements required to reach the root of the repository. '
@@ -44603,6 +45731,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -44655,6 +45784,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -45026,6 +46156,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -45078,6 +46209,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -45449,6 +46581,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -45501,6 +46634,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -45872,6 +47006,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -45924,6 +47059,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -46295,6 +47431,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -46347,6 +47484,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -46735,6 +47873,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -46831,6 +47970,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -47338,6 +48478,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -47777,6 +48918,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -47829,6 +48971,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -48234,6 +49377,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -48286,6 +49430,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -48657,6 +49802,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -48709,6 +49855,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -49080,6 +50227,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -49132,6 +50280,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -49503,6 +50652,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -49555,6 +50705,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -49932,6 +51083,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -50015,6 +51167,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -50497,6 +51650,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -50549,6 +51703,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -50957,6 +52112,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -51009,6 +52165,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -51381,6 +52538,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -51433,6 +52591,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -51846,6 +53005,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -51939,6 +53099,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -52407,6 +53568,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -52459,6 +53621,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string
@@ -52830,6 +53993,7 @@ components:
           - N/A
           - Upstream points to its own repository
           - Missing upstream source
+          - RSA key did not verify the upstream's APKINDEX signature
           - Upstream was disabled by request of user
           readOnly: true
           title: Disable reason
@@ -52882,6 +54046,7 @@ components:
           type: integer
         index_status:
           description: The current indexing status of this upstream source
+          nullable: true
           readOnly: true
           title: Index status
           type: string

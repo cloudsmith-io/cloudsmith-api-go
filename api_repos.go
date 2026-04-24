@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1093.0
+API version: 1.1137.0
 Contact: support@cloudsmith.io
 */
 
@@ -670,9 +670,9 @@ func (r ApiReposDeleteRequest) Execute() (*http.Response, error) {
 }
 
 /*
-ReposDelete Delete a repository in a given namespace.
+ReposDelete Method for ReposDelete
 
-Delete a repository in a given namespace.
+Delete a repository in a given namespace.Repositories are soft-deleted and can be restored within a retention period. During this time, the repository's slug remains reserved and cannot be reused for new repositories.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **ExtraValue2** | Pointer to **NullableString** | The value for extra header #2 to send to upstream. This is stored as plaintext, and is NOT encrypted. | [optional] 
 **HasFailedSignatureVerification** | Pointer to **bool** | Whether the upstream has failed signature verification. | [optional] [readonly] 
 **IndexPackageCount** | Pointer to **NullableInt64** | The number of packages available in this upstream source | [optional] [readonly] 
-**IndexStatus** | Pointer to **string** | The current indexing status of this upstream source | [optional] [readonly] 
+**IndexStatus** | Pointer to **NullableString** | The current indexing status of this upstream source | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
 **LastIndexed** | Pointer to **string** | The last time this upstream source was indexed | [optional] [readonly] 
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
@@ -494,6 +494,16 @@ SetIndexStatus sets IndexStatus field to given value.
 
 HasIndexStatus returns a boolean if a field has been set.
 
+### SetIndexStatusNil
+
+`func (o *GoUpstream) SetIndexStatusNil(b bool)`
+
+ SetIndexStatusNil sets the value for IndexStatus to be an explicit nil
+
+### UnsetIndexStatus
+`func (o *GoUpstream) UnsetIndexStatus()`
+
+UnsetIndexStatus ensures that no value is present for IndexStatus, not even an explicit nil
 ### GetIsActive
 
 `func (o *GoUpstream) GetIsActive() bool`
