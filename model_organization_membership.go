@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1137.0
+API version: 1.1182.1
 Contact: support@cloudsmith.io
 */
 
@@ -21,18 +21,19 @@ var _ MappedNullable = &OrganizationMembership{}
 
 // OrganizationMembership struct for OrganizationMembership
 type OrganizationMembership struct {
-	Email                *string      `json:"email,omitempty"`
-	HasTwoFactor         *bool        `json:"has_two_factor,omitempty"`
-	IsActive             *bool        `json:"is_active,omitempty"`
-	JoinedAt             *time.Time   `json:"joined_at,omitempty"`
-	LastLoginAt          NullableTime `json:"last_login_at,omitempty"`
-	LastLoginMethod      *string      `json:"last_login_method,omitempty"`
-	Role                 *string      `json:"role,omitempty"`
-	User                 *string      `json:"user,omitempty"`
-	UserId               *string      `json:"user_id,omitempty"`
-	UserName             *string      `json:"user_name,omitempty"`
-	UserUrl              *string      `json:"user_url,omitempty"`
-	Visibility           *string      `json:"visibility,omitempty"`
+	Email                *string       `json:"email,omitempty"`
+	HasTwoFactor         *bool         `json:"has_two_factor,omitempty"`
+	IsActive             *bool         `json:"is_active,omitempty"`
+	JoinedAt             *time.Time    `json:"joined_at,omitempty"`
+	LastLoginAt          NullableTime  `json:"last_login_at,omitempty"`
+	LastLoginMethod      *string       `json:"last_login_method,omitempty"`
+	Role                 *string       `json:"role,omitempty"`
+	Teams                []MemberTeams `json:"teams,omitempty"`
+	User                 *string       `json:"user,omitempty"`
+	UserId               *string       `json:"user_id,omitempty"`
+	UserName             *string       `json:"user_name,omitempty"`
+	UserUrl              *string       `json:"user_url,omitempty"`
+	Visibility           *string       `json:"visibility,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -290,6 +291,38 @@ func (o *OrganizationMembership) SetRole(v string) {
 	o.Role = &v
 }
 
+// GetTeams returns the Teams field value if set, zero value otherwise.
+func (o *OrganizationMembership) GetTeams() []MemberTeams {
+	if o == nil || IsNil(o.Teams) {
+		var ret []MemberTeams
+		return ret
+	}
+	return o.Teams
+}
+
+// GetTeamsOk returns a tuple with the Teams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrganizationMembership) GetTeamsOk() ([]MemberTeams, bool) {
+	if o == nil || IsNil(o.Teams) {
+		return nil, false
+	}
+	return o.Teams, true
+}
+
+// HasTeams returns a boolean if a field has been set.
+func (o *OrganizationMembership) HasTeams() bool {
+	if o != nil && !IsNil(o.Teams) {
+		return true
+	}
+
+	return false
+}
+
+// SetTeams gets a reference to the given []MemberTeams and assigns it to the Teams field.
+func (o *OrganizationMembership) SetTeams(v []MemberTeams) {
+	o.Teams = v
+}
+
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *OrganizationMembership) GetUser() string {
 	if o == nil || IsNil(o.User) {
@@ -481,6 +514,9 @@ func (o OrganizationMembership) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Role) {
 		toSerialize["role"] = o.Role
 	}
+	if !IsNil(o.Teams) {
+		toSerialize["teams"] = o.Teams
+	}
 	if !IsNil(o.User) {
 		toSerialize["user"] = o.User
 	}
@@ -525,6 +561,7 @@ func (o *OrganizationMembership) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "last_login_at")
 		delete(additionalProperties, "last_login_method")
 		delete(additionalProperties, "role")
+		delete(additionalProperties, "teams")
 		delete(additionalProperties, "user")
 		delete(additionalProperties, "user_id")
 		delete(additionalProperties, "user_name")

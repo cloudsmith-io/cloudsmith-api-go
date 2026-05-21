@@ -64,6 +64,9 @@ docs/CondaPackageUploadRequest.md
 docs/CondaUpstream.md
 docs/CondaUpstreamRequest.md
 docs/CondaUpstreamRequestPatch.md
+docs/ConnectedRepository.md
+docs/ConnectedRepositoryRequest.md
+docs/ConnectedRepositoryRequestPatch.md
 docs/CranPackageUpload.md
 docs/CranPackageUploadRequest.md
 docs/CranUpstream.md
@@ -136,6 +139,7 @@ docs/MavenUpstreamRequest.md
 docs/MavenUpstreamRequestPatch.md
 docs/McpPackageUpload.md
 docs/McpPackageUploadRequest.md
+docs/MemberTeams.md
 docs/MetricsApi.md
 docs/Namespace.md
 docs/NamespaceAuditLog.md
@@ -239,6 +243,7 @@ docs/RawPackageUploadRequest.md
 docs/RecycleBinApi.md
 docs/RecycleBinPackage.md
 docs/ReposApi.md
+docs/ReposConnectedList200Response.md
 docs/Repository.md
 docs/RepositoryAuditLog.md
 docs/RepositoryCreate.md
@@ -373,6 +378,9 @@ model_conda_package_upload_request.go
 model_conda_upstream.go
 model_conda_upstream_request.go
 model_conda_upstream_request_patch.go
+model_connected_repository.go
+model_connected_repository_request.go
+model_connected_repository_request_patch.go
 model_cran_package_upload.go
 model_cran_package_upload_request.go
 model_cran_upstream.go
@@ -441,6 +449,7 @@ model_maven_upstream_request.go
 model_maven_upstream_request_patch.go
 model_mcp_package_upload.go
 model_mcp_package_upload_request.go
+model_member_teams.go
 model_namespace.go
 model_namespace_audit_log.go
 model_nested_license_policy.go
@@ -536,6 +545,7 @@ model_rate_check.go
 model_raw_package_upload.go
 model_raw_package_upload_request.go
 model_recycle_bin_package.go
+model_repos_connected_list_200_response.go
 model_repository.go
 model_repository_audit_log.go
 model_repository_create.go

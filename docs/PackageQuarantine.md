@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **IsCopyable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsDeleteable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsHidden** | Pointer to **bool** |  | [optional] [readonly] 
 **IsMoveable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantinable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
@@ -903,6 +904,31 @@ SetIsDownloadable sets IsDownloadable field to given value.
 `func (o *PackageQuarantine) HasIsDownloadable() bool`
 
 HasIsDownloadable returns a boolean if a field has been set.
+
+### GetIsHidden
+
+`func (o *PackageQuarantine) GetIsHidden() bool`
+
+GetIsHidden returns the IsHidden field if non-nil, zero value otherwise.
+
+### GetIsHiddenOk
+
+`func (o *PackageQuarantine) GetIsHiddenOk() (*bool, bool)`
+
+GetIsHiddenOk returns a tuple with the IsHidden field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsHidden
+
+`func (o *PackageQuarantine) SetIsHidden(v bool)`
+
+SetIsHidden sets IsHidden field to given value.
+
+### HasIsHidden
+
+`func (o *PackageQuarantine) HasIsHidden() bool`
+
+HasIsHidden returns a boolean if a field has been set.
 
 ### GetIsMoveable
 

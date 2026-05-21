@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1137.0
+API version: 1.1182.1
 Contact: support@cloudsmith.io
 */
 
@@ -57,6 +57,7 @@ type PackageResync struct {
 	IsCopyable          *bool              `json:"is_copyable,omitempty"`
 	IsDeleteable        *bool              `json:"is_deleteable,omitempty"`
 	IsDownloadable      *bool              `json:"is_downloadable,omitempty"`
+	IsHidden            *bool              `json:"is_hidden,omitempty"`
 	IsMoveable          *bool              `json:"is_moveable,omitempty"`
 	IsQuarantinable     *bool              `json:"is_quarantinable,omitempty"`
 	IsQuarantined       *bool              `json:"is_quarantined,omitempty"`
@@ -1164,6 +1165,38 @@ func (o *PackageResync) HasIsDownloadable() bool {
 // SetIsDownloadable gets a reference to the given bool and assigns it to the IsDownloadable field.
 func (o *PackageResync) SetIsDownloadable(v bool) {
 	o.IsDownloadable = &v
+}
+
+// GetIsHidden returns the IsHidden field value if set, zero value otherwise.
+func (o *PackageResync) GetIsHidden() bool {
+	if o == nil || IsNil(o.IsHidden) {
+		var ret bool
+		return ret
+	}
+	return *o.IsHidden
+}
+
+// GetIsHiddenOk returns a tuple with the IsHidden field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageResync) GetIsHiddenOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsHidden) {
+		return nil, false
+	}
+	return o.IsHidden, true
+}
+
+// HasIsHidden returns a boolean if a field has been set.
+func (o *PackageResync) HasIsHidden() bool {
+	if o != nil && !IsNil(o.IsHidden) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsHidden gets a reference to the given bool and assigns it to the IsHidden field.
+func (o *PackageResync) SetIsHidden(v bool) {
+	o.IsHidden = &v
 }
 
 // GetIsMoveable returns the IsMoveable field value if set, zero value otherwise.
@@ -3241,6 +3274,9 @@ func (o PackageResync) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsDownloadable) {
 		toSerialize["is_downloadable"] = o.IsDownloadable
 	}
+	if !IsNil(o.IsHidden) {
+		toSerialize["is_hidden"] = o.IsHidden
+	}
 	if !IsNil(o.IsMoveable) {
 		toSerialize["is_moveable"] = o.IsMoveable
 	}
@@ -3463,6 +3499,7 @@ func (o *PackageResync) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_copyable")
 		delete(additionalProperties, "is_deleteable")
 		delete(additionalProperties, "is_downloadable")
+		delete(additionalProperties, "is_hidden")
 		delete(additionalProperties, "is_moveable")
 		delete(additionalProperties, "is_quarantinable")
 		delete(additionalProperties, "is_quarantined")

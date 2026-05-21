@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **Name** | **string** | A descriptive name for the repository. | 
 **Namespace** | Pointer to **string** | Namespace to which this repository belongs. | [optional] [readonly] 
 **NamespaceUrl** | Pointer to **string** | API endpoint where data about this namespace can be retrieved. | [optional] [readonly] 
+**NpmUpstreamTagsTakePrecedence** | Pointer to **bool** | If checked, npm distribution tags from configured upstreams will take precedence over matching local tags. When both upstream and local repositories have the same tag name (e.g., &#39;latest&#39;), the upstream tag will be used instead of the local one, even if the local repository has a semantically higher version. | [optional] 
 **NugetNativeSigningEnabled** | Pointer to **bool** | When enabled, all pushed (or pulled from upstream) nuget packages and artifacts will be signed using the repository&#39;s X.509 RSA certificate. Additionally, the nuget RepositorySignature index will list all of the repository&#39;s signing certificates including the ones from configured upstreams. | [optional] 
 **NumDownloads** | Pointer to **int64** | The number of downloads for packages in the repository. | [optional] [readonly] 
 **NumPolicyViolatedPackages** | Pointer to **int64** | Number of packages with policy violations in a repository. | [optional] [readonly] 
@@ -858,6 +859,31 @@ SetNamespaceUrl sets NamespaceUrl field to given value.
 `func (o *Repository) HasNamespaceUrl() bool`
 
 HasNamespaceUrl returns a boolean if a field has been set.
+
+### GetNpmUpstreamTagsTakePrecedence
+
+`func (o *Repository) GetNpmUpstreamTagsTakePrecedence() bool`
+
+GetNpmUpstreamTagsTakePrecedence returns the NpmUpstreamTagsTakePrecedence field if non-nil, zero value otherwise.
+
+### GetNpmUpstreamTagsTakePrecedenceOk
+
+`func (o *Repository) GetNpmUpstreamTagsTakePrecedenceOk() (*bool, bool)`
+
+GetNpmUpstreamTagsTakePrecedenceOk returns a tuple with the NpmUpstreamTagsTakePrecedence field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNpmUpstreamTagsTakePrecedence
+
+`func (o *Repository) SetNpmUpstreamTagsTakePrecedence(v bool)`
+
+SetNpmUpstreamTagsTakePrecedence sets NpmUpstreamTagsTakePrecedence field to given value.
+
+### HasNpmUpstreamTagsTakePrecedence
+
+`func (o *Repository) HasNpmUpstreamTagsTakePrecedence() bool`
+
+HasNpmUpstreamTagsTakePrecedence returns a boolean if a field has been set.
 
 ### GetNugetNativeSigningEnabled
 

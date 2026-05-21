@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1137.0
+API version: 1.1182.1
 Contact: support@cloudsmith.io
 */
 
@@ -603,16 +603,17 @@ func (a *EntitlementsApiService) EntitlementsEnableExecute(r ApiEntitlementsEnab
 }
 
 type ApiEntitlementsListRequest struct {
-	ctx        context.Context
-	ApiService *EntitlementsApiService
-	owner      string
-	repo       string
-	page       *int64
-	pageSize   *int64
-	showTokens *bool
-	query      *string
-	active     *bool
-	sort       *string
+	ctx                    context.Context
+	ApiService             *EntitlementsApiService
+	owner                  string
+	repo                   string
+	page                   *int64
+	pageSize               *int64
+	showTokens             *bool
+	query                  *string
+	active                 *bool
+	excludeOtherUserTokens *bool
+	sort                   *string
 }
 
 // A page number within the paginated result set.
@@ -642,6 +643,12 @@ func (r ApiEntitlementsListRequest) Query(query string) ApiEntitlementsListReque
 // If true, only include active tokens
 func (r ApiEntitlementsListRequest) Active(active bool) ApiEntitlementsListRequest {
 	r.active = &active
+	return r
+}
+
+// If true, exclude user tokens that belong to other users
+func (r ApiEntitlementsListRequest) ExcludeOtherUserTokens(excludeOtherUserTokens bool) ApiEntitlementsListRequest {
+	r.excludeOtherUserTokens = &excludeOtherUserTokens
 	return r
 }
 
@@ -717,6 +724,12 @@ func (a *EntitlementsApiService) EntitlementsListExecute(r ApiEntitlementsListRe
 	} else {
 		var defaultValue bool = false
 		r.active = &defaultValue
+	}
+	if r.excludeOtherUserTokens != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "exclude_other_user_tokens", r.excludeOtherUserTokens, "", "")
+	} else {
+		var defaultValue bool = false
+		r.excludeOtherUserTokens = &defaultValue
 	}
 	if r.sort != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "", "")

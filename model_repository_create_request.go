@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1137.0
+API version: 1.1182.1
 Contact: support@cloudsmith.io
 */
 
@@ -61,6 +61,8 @@ type RepositoryCreateRequest struct {
 	MovePackages *string `json:"move_packages,omitempty"`
 	// A descriptive name for the repository.
 	Name string `json:"name" validate:"regexp=^\\\\w[\\\\w \\\\-'\\\\.\\/()]+$"`
+	// If checked, npm distribution tags from configured upstreams will take precedence over matching local tags. When both upstream and local repositories have the same tag name (e.g., 'latest'), the upstream tag will be used instead of the local one, even if the local repository has a semantically higher version.
+	NpmUpstreamTagsTakePrecedence *bool `json:"npm_upstream_tags_take_precedence,omitempty"`
 	// When enabled, all pushed (or pulled from upstream) nuget packages and artifacts will be signed using the repository's X.509 RSA certificate. Additionally, the nuget RepositorySignature index will list all of the repository's signing certificates including the ones from configured upstreams.
 	NugetNativeSigningEnabled *bool `json:"nuget_native_signing_enabled,omitempty"`
 	// The SPDX identifier of the open source license.
@@ -824,6 +826,38 @@ func (o *RepositoryCreateRequest) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *RepositoryCreateRequest) SetName(v string) {
 	o.Name = v
+}
+
+// GetNpmUpstreamTagsTakePrecedence returns the NpmUpstreamTagsTakePrecedence field value if set, zero value otherwise.
+func (o *RepositoryCreateRequest) GetNpmUpstreamTagsTakePrecedence() bool {
+	if o == nil || IsNil(o.NpmUpstreamTagsTakePrecedence) {
+		var ret bool
+		return ret
+	}
+	return *o.NpmUpstreamTagsTakePrecedence
+}
+
+// GetNpmUpstreamTagsTakePrecedenceOk returns a tuple with the NpmUpstreamTagsTakePrecedence field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreateRequest) GetNpmUpstreamTagsTakePrecedenceOk() (*bool, bool) {
+	if o == nil || IsNil(o.NpmUpstreamTagsTakePrecedence) {
+		return nil, false
+	}
+	return o.NpmUpstreamTagsTakePrecedence, true
+}
+
+// HasNpmUpstreamTagsTakePrecedence returns a boolean if a field has been set.
+func (o *RepositoryCreateRequest) HasNpmUpstreamTagsTakePrecedence() bool {
+	if o != nil && !IsNil(o.NpmUpstreamTagsTakePrecedence) {
+		return true
+	}
+
+	return false
+}
+
+// SetNpmUpstreamTagsTakePrecedence gets a reference to the given bool and assigns it to the NpmUpstreamTagsTakePrecedence field.
+func (o *RepositoryCreateRequest) SetNpmUpstreamTagsTakePrecedence(v bool) {
+	o.NpmUpstreamTagsTakePrecedence = &v
 }
 
 // GetNugetNativeSigningEnabled returns the NugetNativeSigningEnabled field value if set, zero value otherwise.
@@ -1780,6 +1814,9 @@ func (o RepositoryCreateRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["move_packages"] = o.MovePackages
 	}
 	toSerialize["name"] = o.Name
+	if !IsNil(o.NpmUpstreamTagsTakePrecedence) {
+		toSerialize["npm_upstream_tags_take_precedence"] = o.NpmUpstreamTagsTakePrecedence
+	}
 	if !IsNil(o.NugetNativeSigningEnabled) {
 		toSerialize["nuget_native_signing_enabled"] = o.NugetNativeSigningEnabled
 	}
@@ -1924,6 +1961,7 @@ func (o *RepositoryCreateRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "move_own")
 		delete(additionalProperties, "move_packages")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "npm_upstream_tags_take_precedence")
 		delete(additionalProperties, "nuget_native_signing_enabled")
 		delete(additionalProperties, "open_source_license")
 		delete(additionalProperties, "open_source_project_url")
