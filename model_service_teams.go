@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1137.0
+API version: 1.1182.1
 Contact: support@cloudsmith.io
 */
 
@@ -21,6 +21,8 @@ var _ MappedNullable = &ServiceTeams{}
 
 // ServiceTeams struct for ServiceTeams
 type ServiceTeams struct {
+	// The name of the team
+	Name *string `json:"name,omitempty"`
 	// The team role associated with the service
 	Role *string `json:"role,omitempty"`
 	// The teams associated with the service
@@ -50,6 +52,38 @@ func NewServiceTeamsWithDefaults() *ServiceTeams {
 	var role string = "Manager"
 	this.Role = &role
 	return &this
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *ServiceTeams) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServiceTeams) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *ServiceTeams) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *ServiceTeams) SetName(v string) {
+	o.Name = &v
 }
 
 // GetRole returns the Role field value if set, zero value otherwise.
@@ -118,6 +152,9 @@ func (o ServiceTeams) MarshalJSON() ([]byte, error) {
 
 func (o ServiceTeams) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.Role) {
 		toSerialize["role"] = o.Role
 	}
@@ -165,6 +202,7 @@ func (o *ServiceTeams) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "role")
 		delete(additionalProperties, "slug")
 		o.AdditionalProperties = additionalProperties

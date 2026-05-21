@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Name** | Pointer to **string** | The name of the team | [optional] [readonly] 
 **Role** | Pointer to **string** | The team role associated with the service | [optional] [default to "Manager"]
 **Slug** | **string** | The teams associated with the service | 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewServiceTeamsWithDefaults instantiates a new ServiceTeams object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetName
+
+`func (o *ServiceTeams) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *ServiceTeams) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *ServiceTeams) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *ServiceTeams) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetRole
 

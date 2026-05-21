@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **LastLoginAt** | Pointer to **NullableTime** |  | [optional] [readonly] 
 **LastLoginMethod** | Pointer to **string** |  | [optional] [readonly] [default to "Unknown"]
 **Role** | Pointer to **string** |  | [optional] [readonly] [default to "Owner"]
+**Teams** | Pointer to [**[]MemberTeams**](MemberTeams.md) |  | [optional] [readonly] 
 **User** | Pointer to **string** |  | [optional] [readonly] 
 **UserId** | Pointer to **string** |  | [optional] [readonly] 
 **UserName** | Pointer to **string** |  | [optional] [readonly] 
@@ -220,6 +221,31 @@ SetRole sets Role field to given value.
 `func (o *OrganizationMembership) HasRole() bool`
 
 HasRole returns a boolean if a field has been set.
+
+### GetTeams
+
+`func (o *OrganizationMembership) GetTeams() []MemberTeams`
+
+GetTeams returns the Teams field if non-nil, zero value otherwise.
+
+### GetTeamsOk
+
+`func (o *OrganizationMembership) GetTeamsOk() (*[]MemberTeams, bool)`
+
+GetTeamsOk returns a tuple with the Teams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTeams
+
+`func (o *OrganizationMembership) SetTeams(v []MemberTeams)`
+
+SetTeams sets Teams field to given value.
+
+### HasTeams
+
+`func (o *OrganizationMembership) HasTeams() bool`
+
+HasTeams returns a boolean if a field has been set.
 
 ### GetUser
 

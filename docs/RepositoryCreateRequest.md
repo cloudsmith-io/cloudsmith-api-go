@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **MoveOwn** | Pointer to **bool** | If checked, users can move any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the &#39;Access Controls&#39; section of the repository, and any inherited from the org. | [optional] 
 **MovePackages** | Pointer to **string** | This defines the minimum level of privilege required for a user to move packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific move setting. | [optional] [default to "Admin"]
 **Name** | **string** | A descriptive name for the repository. | 
+**NpmUpstreamTagsTakePrecedence** | Pointer to **bool** | If checked, npm distribution tags from configured upstreams will take precedence over matching local tags. When both upstream and local repositories have the same tag name (e.g., &#39;latest&#39;), the upstream tag will be used instead of the local one, even if the local repository has a semantically higher version. | [optional] 
 **NugetNativeSigningEnabled** | Pointer to **bool** | When enabled, all pushed (or pulled from upstream) nuget packages and artifacts will be signed using the repository&#39;s X.509 RSA certificate. Additionally, the nuget RepositorySignature index will list all of the repository&#39;s signing certificates including the ones from configured upstreams. | [optional] 
 **OpenSourceLicense** | Pointer to **NullableString** | The SPDX identifier of the open source license. | [optional] 
 **OpenSourceProjectUrl** | Pointer to **NullableString** | The URL to the Open-Source project, used for validating that the project meets the requirements for Open-Source. | [optional] 
@@ -565,6 +566,31 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+
+### GetNpmUpstreamTagsTakePrecedence
+
+`func (o *RepositoryCreateRequest) GetNpmUpstreamTagsTakePrecedence() bool`
+
+GetNpmUpstreamTagsTakePrecedence returns the NpmUpstreamTagsTakePrecedence field if non-nil, zero value otherwise.
+
+### GetNpmUpstreamTagsTakePrecedenceOk
+
+`func (o *RepositoryCreateRequest) GetNpmUpstreamTagsTakePrecedenceOk() (*bool, bool)`
+
+GetNpmUpstreamTagsTakePrecedenceOk returns a tuple with the NpmUpstreamTagsTakePrecedence field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNpmUpstreamTagsTakePrecedence
+
+`func (o *RepositoryCreateRequest) SetNpmUpstreamTagsTakePrecedence(v bool)`
+
+SetNpmUpstreamTagsTakePrecedence sets NpmUpstreamTagsTakePrecedence field to given value.
+
+### HasNpmUpstreamTagsTakePrecedence
+
+`func (o *RepositoryCreateRequest) HasNpmUpstreamTagsTakePrecedence() bool`
+
+HasNpmUpstreamTagsTakePrecedence returns a boolean if a field has been set.
 
 ### GetNugetNativeSigningEnabled
 

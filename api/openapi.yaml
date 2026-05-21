@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1137.0
+  version: 1.1182.1
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -451,6 +451,12 @@ paths:
       - description: "If true, only include active tokens"
         in: query
         name: active
+        schema:
+          default: false
+          type: boolean
+      - description: "If true, exclude user tokens that belong to other users"
+        in: query
+        name: exclude_other_user_tokens
         schema:
           default: false
           type: boolean
@@ -4772,7 +4778,7 @@ paths:
       summary: Get a list of all packages associated with repository.
       tags:
       - packages
-      x-simplified: "fields[packages]=stage_str,stage_updated_at,status_reason,status_str,status_updated_at,is_sync_completed,is_sync_failed,is_sync_in_progress,is_copyable,is_deleteable,is_downloadable,is_moveable,is_quarantined,sync_finished_at,sync_progress,distro,distro_version,downloads,cdn_url,filename,format,freeable_storage,license,name,num_files,package_type,policy_violated,repository,security_scan_status,security_scan_completed_at,size,slug,slug_perm,uploaded_at,uploader,version,vulnerability_scan_results_url&fields[distributions]=slug,name"
+      x-simplified: "fields[packages]=stage_str,stage_updated_at,status_reason,status_str,status_updated_at,is_sync_completed,is_sync_failed,is_sync_in_progress,is_copyable,is_deleteable,is_downloadable,is_hidden,is_moveable,is_quarantined,sync_finished_at,sync_progress,distro,distro_version,downloads,cdn_url,filename,format,freeable_storage,license,name,num_files,package_type,policy_violated,repository,security_scan_status,security_scan_completed_at,size,slug,slug_perm,uploaded_at,uploader,version,vulnerability_scan_results_url&fields[distributions]=slug,name"
   /packages/{owner}/{repo}/groups/:
     get:
       description: Return a list of Package Groups in a repository.
@@ -7746,7 +7752,7 @@ paths:
       summary: Get a specific package in a repository.
       tags:
       - packages
-      x-simplified: "fields[packages]=stage_str,stage_updated_at,status_reason,status_str,status_updated_at,is_sync_completed,is_sync_failed,is_sync_in_progress,is_copyable,is_deleteable,is_downloadable,is_moveable,is_quarantined,sync_finished_at,sync_progress,distro,distro_version,downloads,cdn_url,filename,format,freeable_storage,license,name,num_files,package_type,policy_violated,repository,security_scan_status,security_scan_completed_at,size,slug,slug_perm,uploaded_at,uploader,version,vulnerability_scan_results_url&fields[distributions]=slug,name"
+      x-simplified: "fields[packages]=stage_str,stage_updated_at,status_reason,status_str,status_updated_at,is_sync_completed,is_sync_failed,is_sync_in_progress,is_copyable,is_deleteable,is_downloadable,is_hidden,is_moveable,is_quarantined,sync_finished_at,sync_progress,distro,distro_version,downloads,cdn_url,filename,format,freeable_storage,license,name,num_files,package_type,policy_violated,repository,security_scan_status,security_scan_completed_at,size,slug,slug_perm,uploaded_at,uploader,version,vulnerability_scan_results_url&fields[distributions]=slug,name"
   /packages/{owner}/{repo}/{identifier}/copy/:
     post:
       description: Copy a package to another repository.
@@ -8371,7 +8377,7 @@ paths:
       description: "Perform actions on soft-deleted packages in the recycle bin. Supported\
         \ actions: permanently delete (hard delete), restore. Returns a list of successfully\
         \ actioned packages and any packages that failed with error details. "
-      operationId: recycle-bin_recycle_bin_action
+      operationId: recycle-bin_action
       parameters:
       - in: path
         name: owner
@@ -8555,9 +8561,10 @@ paths:
       x-codegen-request-body-name: data
   /repos/{owner}/{identifier}/:
     delete:
-      description: "Delete a repository in a given namespace.Repositories are soft-deleted\
-        \ and can be restored within a retention period. During this time, the repository's\
-        \ slug remains reserved and cannot be reused for new repositories."
+      description: |-
+        Delete a repository in a given namespace.
+
+        Note: Repositories are soft-deleted and can be restored within a retention period. During this time, the repository's slug remains reserved and cannot be reused for new repositories.
       operationId: repos_delete
       parameters:
       - in: path
@@ -8683,6 +8690,272 @@ paths:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
       summary: Update details about a repository in a given namespace.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/connected/:
+    get:
+      description: List connected repositories for this repository.
+      operationId: repos_connected_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repos_connected_list_200_response'
+          description: Retrieved the list of connected repositories.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: List connected repositories for this repository.
+      tags:
+      - repos
+    post:
+      description: Create a connected repository for this repository.
+      operationId: repos_connected_create
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectedRepositoryRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectedRepository'
+          description: The connected repository was created.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Create a connected repository for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/connected/{slug_perm}/:
+    delete:
+      description: Delete a connected repository for this repository.
+      operationId: repos_connected_delete
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: The connected repository was deleted.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Delete a connected repository for this repository.
+      tags:
+      - repos
+    get:
+      description: Retrieve a connected repository for this repository.
+      operationId: repos_connected_read
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectedRepository'
+          description: Retrieved the connected repository.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve a connected repository for this repository.
+      tags:
+      - repos
+    patch:
+      description: Partially update a connected repository for this repository.
+      operationId: repos_connected_partial_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectedRepositoryRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectedRepository'
+          description: The connected repository was partially updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Partially update a connected repository for this repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+    put:
+      description: Update a connected repository for this repository.
+      operationId: repos_connected_update
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectedRepositoryRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectedRepository'
+          description: The connected repository was updated.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update a connected repository for this repository.
       tags:
       - repos
       x-codegen-request-body-name: data
@@ -18978,20 +19251,54 @@ components:
           type: array
           uniqueItems: true
       type: object
+    MemberTeams:
+      example:
+        role: Manager
+        name: name
+        slug: slug
+      properties:
+        name:
+          minLength: 1
+          readOnly: true
+          title: Name
+          type: string
+        role:
+          default: Manager
+          enum:
+          - Manager
+          - Member
+          readOnly: true
+          title: Role
+          type: string
+        slug:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug
+          type: string
+      type: object
     OrganizationMembership:
       example:
-        joined_at: 2000-01-23T04:56:07.000+00:00
         last_login_at: 2000-01-23T04:56:07.000+00:00
         is_active: true
         role: Owner
+        teams:
+        - role: Manager
+          name: name
+          slug: slug
+        - role: Manager
+          name: name
+          slug: slug
         visibility: Public
-        user_id: user_id
         user_name: user_name
+        last_login_method: Unknown
+        has_two_factor: true
+        joined_at: 2000-01-23T04:56:07.000+00:00
+        user_id: user_id
         user_url: https://openapi-generator.tech
         user: user
         email: email
-        last_login_method: Unknown
-        has_two_factor: true
       properties:
         email:
           minLength: 1
@@ -19038,6 +19345,11 @@ components:
           readOnly: true
           title: Role
           type: string
+        teams:
+          items:
+            $ref: '#/components/schemas/MemberTeams'
+          readOnly: true
+          type: array
         user:
           minLength: 1
           readOnly: true
@@ -19744,8 +20056,15 @@ components:
     ServiceTeams:
       example:
         role: Manager
+        name: name
         slug: slug
       properties:
+        name:
+          description: The name of the team
+          minLength: 1
+          readOnly: true
+          title: Name
+          type: string
         role:
           default: Manager
           description: The team role associated with the service
@@ -19769,8 +20088,10 @@ components:
         role: Member
         teams:
         - role: Manager
+          name: name
           slug: slug
         - role: Manager
+          name: name
           slug: slug
         created_by_url: https://openapi-generator.tech
         name: name
@@ -19849,8 +20170,10 @@ components:
         role: Member
         teams:
         - role: Manager
+          name: name
           slug: slug
         - role: Manager
+          name: name
           slug: slug
         name: name
         description: description
@@ -19887,8 +20210,10 @@ components:
         role: Member
         teams:
         - role: Manager
+          name: name
           slug: slug
         - role: Manager
+          name: name
           slug: slug
         name: name
         description: description
@@ -20664,6 +20989,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -20845,6 +21171,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -21307,6 +21637,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -21481,6 +21812,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -21892,6 +22227,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -22066,6 +22402,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -22477,6 +22817,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -22651,6 +22992,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -23069,6 +23414,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -23243,6 +23589,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -23707,6 +24057,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -23895,6 +24246,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -24306,6 +24661,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -24480,6 +24836,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -24907,6 +25267,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -25082,6 +25443,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -25501,6 +25866,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -25675,6 +26041,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -26118,6 +26488,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -26292,6 +26663,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -26703,6 +27078,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -26877,6 +27253,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -27310,6 +27690,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -27484,6 +27865,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -27895,6 +28280,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -28069,6 +28455,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -28488,6 +28878,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -28662,6 +29053,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -29073,6 +29468,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -29247,6 +29643,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -29658,6 +30058,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -29832,6 +30233,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -30243,6 +30648,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -30417,6 +30823,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -30916,6 +31326,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -31106,6 +31517,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -31540,6 +31955,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -31714,6 +32130,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -32134,6 +32554,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -32308,6 +32729,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -32726,6 +33151,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -32900,6 +33326,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -33311,6 +33741,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -33485,6 +33916,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -33896,6 +34331,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -34070,6 +34506,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -34519,6 +34959,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -34693,6 +35134,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -35111,6 +35556,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -35285,6 +35731,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -35696,6 +36146,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -35870,6 +36321,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -36341,6 +36796,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -36527,6 +36983,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -36961,6 +37421,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -37135,6 +37596,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -37567,6 +38032,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -37742,6 +38208,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -38160,6 +38630,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -38334,6 +38805,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -38738,6 +39213,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -38919,6 +39395,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -39413,6 +39893,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -39594,6 +40075,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -40000,6 +40485,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -40181,6 +40667,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -40566,6 +41056,7 @@ components:
           slug: slug
         extension: extension
         fully_qualified_name: fully_qualified_name
+        is_hidden: true
         description: description
         is_copyable: true
         epoch: 6
@@ -40747,6 +41238,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -41057,30 +41552,31 @@ components:
       type: object
     PackageStatus:
       example:
+        is_hidden: true
+        is_copyable: true
+        is_sync_completed: true
+        stage_updated_at: 2000-01-23T04:56:07.000+00:00
+        is_moveable: true
+        is_quarantined: true
+        status_reason: status_reason
+        status_updated_at: 2000-01-23T04:56:07.000+00:00
         is_security_scannable: true
         is_quarantinable: true
         is_deleteable: true
-        is_copyable: true
         status_str: status_str
         sync_progress: 1
         is_sync_awaiting: true
-        is_sync_completed: true
         self_url: https://openapi-generator.tech
         is_resyncable: true
         is_sync_in_flight: true
         is_sync_in_progress: true
         stage_str: stage_str
-        stage_updated_at: 2000-01-23T04:56:07.000+00:00
         stage: 0
         is_cancellable: true
         is_downloadable: true
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
         is_sync_failed: true
-        is_moveable: true
-        is_quarantined: true
-        status_reason: status_reason
         status: 6
-        status_updated_at: 2000-01-23T04:56:07.000+00:00
       properties:
         is_cancellable:
           readOnly: true
@@ -41097,6 +41593,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_moveable:
           readOnly: true
@@ -41364,6 +41864,10 @@ components:
         is_downloadable:
           readOnly: true
           title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
           type: boolean
         is_immutable:
           default: false
@@ -42647,6 +43151,7 @@ components:
         repository_type_str: Public
         use_vulnerability_scanning: true
         resync_own: true
+        npm_upstream_tags_take_precedence: true
         slug: slug
         raw_package_index_enabled: true
         open_source_project_url: https://openapi-generator.tech
@@ -42962,6 +43467,14 @@ components:
           readOnly: true
           title: Namespace url
           type: string
+        npm_upstream_tags_take_precedence:
+          description: "If checked, npm distribution tags from configured upstreams\
+            \ will take precedence over matching local tags. When both upstream and\
+            \ local repositories have the same tag name (e.g., 'latest'), the upstream\
+            \ tag will be used instead of the local one, even if the local repository\
+            \ has a semantically higher version."
+          title: Npm Upstream Tags Take Precedence?
+          type: boolean
         nuget_native_signing_enabled:
           description: "When enabled, all pushed (or pulled from upstream) nuget packages\
             \ and artifacts will be signed using the repository's X.509 RSA certificate.\
@@ -43273,6 +43786,7 @@ components:
         repository_type_str: Public
         use_vulnerability_scanning: true
         resync_own: true
+        npm_upstream_tags_take_precedence: true
         slug: slug
         copy_own: true
         proxy_pypi: true
@@ -43479,6 +43993,14 @@ components:
           pattern: "^\\w[\\w \\-'\\.\\/()]+$"
           title: Name
           type: string
+        npm_upstream_tags_take_precedence:
+          description: "If checked, npm distribution tags from configured upstreams\
+            \ will take precedence over matching local tags. When both upstream and\
+            \ local repositories have the same tag name (e.g., 'latest'), the upstream\
+            \ tag will be used instead of the local one, even if the local repository\
+            \ has a semantically higher version."
+          title: Npm Upstream Tags Take Precedence?
+          type: boolean
         nuget_native_signing_enabled:
           description: "When enabled, all pushed (or pulled from upstream) nuget packages\
             \ and artifacts will be signed using the repository's X.509 RSA certificate.\
@@ -43708,6 +44230,7 @@ components:
         repository_type_str: Public
         use_vulnerability_scanning: true
         resync_own: true
+        npm_upstream_tags_take_precedence: true
         slug: slug
         raw_package_index_enabled: true
         open_source_project_url: https://openapi-generator.tech
@@ -44023,6 +44546,14 @@ components:
           readOnly: true
           title: Namespace url
           type: string
+        npm_upstream_tags_take_precedence:
+          description: "If checked, npm distribution tags from configured upstreams\
+            \ will take precedence over matching local tags. When both upstream and\
+            \ local repositories have the same tag name (e.g., 'latest'), the upstream\
+            \ tag will be used instead of the local one, even if the local repository\
+            \ has a semantically higher version."
+          title: Npm Upstream Tags Take Precedence?
+          type: boolean
         nuget_native_signing_enabled:
           description: "When enabled, all pushed (or pulled from upstream) nuget packages\
             \ and artifacts will be signed using the repository's X.509 RSA certificate.\
@@ -44333,6 +44864,7 @@ components:
         repository_type_str: Public
         use_vulnerability_scanning: true
         resync_own: true
+        npm_upstream_tags_take_precedence: true
         slug: slug
         copy_own: true
         proxy_pypi: true
@@ -44538,6 +45070,14 @@ components:
           pattern: "^\\w[\\w \\-'\\.\\/()]+$"
           title: Name
           type: string
+        npm_upstream_tags_take_precedence:
+          description: "If checked, npm distribution tags from configured upstreams\
+            \ will take precedence over matching local tags. When both upstream and\
+            \ local repositories have the same tag name (e.g., 'latest'), the upstream\
+            \ tag will be used instead of the local one, even if the local repository\
+            \ has a semantically higher version."
+          title: Npm Upstream Tags Take Precedence?
+          type: boolean
         nuget_native_signing_enabled:
           description: "When enabled, all pushed (or pulled from upstream) nuget packages\
             \ and artifacts will be signed using the repository's X.509 RSA certificate.\
@@ -44744,6 +45284,100 @@ components:
           - Write
           - Read
           title: View statistics
+          type: string
+      type: object
+    ConnectedRepository:
+      example:
+        is_active: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        priority: 2624
+        slug_perm: slug_perm
+        target_repository: target_repository
+      properties:
+        created_at:
+          description: The date and time when the connection was created.
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        is_active:
+          default: true
+          title: Is active
+          type: boolean
+        priority:
+          description: "Repositories are checked in ascending order (starting at 1).\
+            \ If multiple repositories have the same priority, the oldest one is used\
+            \ first."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        target_repository:
+          description: The slug of the target repository to connect to.
+          format: slug
+          pattern: "^[-a-zA-Z0-9_]+$"
+          title: Target repository
+          type: string
+      required:
+      - target_repository
+      type: object
+    ConnectedRepositoryRequest:
+      example:
+        is_active: true
+        priority: 2624
+        target_repository: target_repository
+      properties:
+        is_active:
+          default: true
+          title: Is active
+          type: boolean
+        priority:
+          description: "Repositories are checked in ascending order (starting at 1).\
+            \ If multiple repositories have the same priority, the oldest one is used\
+            \ first."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        target_repository:
+          description: The slug of the target repository to connect to.
+          format: slug
+          pattern: "^[-a-zA-Z0-9_]+$"
+          title: Target repository
+          type: string
+      required:
+      - target_repository
+      type: object
+    ConnectedRepositoryRequestPatch:
+      example:
+        is_active: true
+        priority: 2624
+        target_repository: target_repository
+      properties:
+        is_active:
+          default: true
+          title: Is active
+          type: boolean
+        priority:
+          description: "Repositories are checked in ascending order (starting at 1).\
+            \ If multiple repositories have the same priority, the oldest one is used\
+            \ first."
+          maximum: 32767
+          minimum: 1
+          title: Priority
+          type: integer
+        target_repository:
+          description: The slug of the target repository to connect to.
+          format: slug
+          pattern: "^[-a-zA-Z0-9_]+$"
+          title: Target repository
           type: string
       type: object
     RepositoryEcdsaKeyCreate:
@@ -55928,6 +56562,27 @@ components:
         results:
           items:
             $ref: '#/components/schemas/PackageGroup'
+          type: array
+      required:
+      - results
+      type: object
+    repos_connected_list_200_response:
+      example:
+        results:
+        - is_active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          priority: 2624
+          slug_perm: slug_perm
+          target_repository: target_repository
+        - is_active: true
+          created_at: 2000-01-23T04:56:07.000+00:00
+          priority: 2624
+          slug_perm: slug_perm
+          target_repository: target_repository
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/ConnectedRepository'
           type: array
       required:
       - results
