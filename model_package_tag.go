@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1182.1
+API version: 1.1206.0
 Contact: support@cloudsmith.io
 */
 
@@ -79,6 +79,8 @@ type PackageTag struct {
 	NumFiles            *int64         `json:"num_files,omitempty"`
 	OriginRepository    *string        `json:"origin_repository,omitempty"`
 	OriginRepositoryUrl *string        `json:"origin_repository_url,omitempty"`
+	// Whether the package's SPDX license is OSI-approved.
+	OsiApproved *bool `json:"osi_approved,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
 	// Whether or not the package has violated any policy.
@@ -1801,6 +1803,38 @@ func (o *PackageTag) SetOriginRepositoryUrl(v string) {
 	o.OriginRepositoryUrl = &v
 }
 
+// GetOsiApproved returns the OsiApproved field value if set, zero value otherwise.
+func (o *PackageTag) GetOsiApproved() bool {
+	if o == nil || IsNil(o.OsiApproved) {
+		var ret bool
+		return ret
+	}
+	return *o.OsiApproved
+}
+
+// GetOsiApprovedOk returns a tuple with the OsiApproved field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetOsiApprovedOk() (*bool, bool) {
+	if o == nil || IsNil(o.OsiApproved) {
+		return nil, false
+	}
+	return o.OsiApproved, true
+}
+
+// HasOsiApproved returns a boolean if a field has been set.
+func (o *PackageTag) HasOsiApproved() bool {
+	if o != nil && !IsNil(o.OsiApproved) {
+		return true
+	}
+
+	return false
+}
+
+// SetOsiApproved gets a reference to the given bool and assigns it to the OsiApproved field.
+func (o *PackageTag) SetOsiApproved(v bool) {
+	o.OsiApproved = &v
+}
+
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
 func (o *PackageTag) GetPackageType() int64 {
 	if o == nil || IsNil(o.PackageType) {
@@ -3335,6 +3369,9 @@ func (o PackageTag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OriginRepositoryUrl) {
 		toSerialize["origin_repository_url"] = o.OriginRepositoryUrl
 	}
+	if !IsNil(o.OsiApproved) {
+		toSerialize["osi_approved"] = o.OsiApproved
+	}
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
 	}
@@ -3522,6 +3559,7 @@ func (o *PackageTag) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "num_files")
 		delete(additionalProperties, "origin_repository")
 		delete(additionalProperties, "origin_repository_url")
+		delete(additionalProperties, "osi_approved")
 		delete(additionalProperties, "package_type")
 		delete(additionalProperties, "policy_violated")
 		delete(additionalProperties, "raw_license")

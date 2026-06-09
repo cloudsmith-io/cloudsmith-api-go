@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1182.1
+  version: 1.1206.0
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -1677,6 +1677,62 @@ paths:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
       summary: Get the details for the specific organization.
+      tags:
+      - orgs
+  /orgs/{org}/custom-domains/:
+    get:
+      description: Get the details for all custom domains.
+      operationId: orgs_custom-domains_list
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - description: A page number within the paginated result set.
+        in: query
+        name: page
+        schema:
+          type: integer
+      - description: Number of results to return per page.
+        in: query
+        name: page_size
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationCustomDomains'
+                type: array
+          description: Retrieved the list of custom domains for the organization.
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Custom Domains are not available; upgrade your account!
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Organization not found.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Get the details for all custom domains.
       tags:
       - orgs
   /orgs/{org}/deny-policy/:
@@ -9093,6 +9149,143 @@ paths:
                 $ref: '#/components/schemas/ErrorDetail'
           description: Missing or invalid parameters (see detail).
       summary: Regenerate ECDSA Key for the Repository.
+      tags:
+      - repos
+  /repos/{owner}/{identifier}/ed25519/:
+    get:
+      description: Retrieve the active Ed25519 key for the Repository.
+      operationId: repos_ed25519_list
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryEd25519Key'
+          description: Retrieved the active Ed25519 key.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve the active Ed25519 key for the Repository.
+      tags:
+      - repos
+    post:
+      description: Set the active Ed25519 key for the Repository.
+      operationId: repos_ed25519_create
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepositoryEd25519KeyCreate'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryEd25519Key'
+          description: The provided Ed25519 key is the same as the current Ed25519
+            key.
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryEd25519Key'
+          description: The provided Ed25519 key was assigned to the Repository.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: The provided Ed25519 key is not valid
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Custom Ed25519 keys are not active; upgrade your account!
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: "Organization/Repository does not exist, or you do not have\
+            \ permissions."
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Set the active Ed25519 key for the Repository.
+      tags:
+      - repos
+      x-codegen-request-body-name: data
+  /repos/{owner}/{identifier}/ed25519/regenerate/:
+    post:
+      description: Regenerate Ed25519 Key for the Repository.
+      operationId: repos_ed25519_regenerate
+      parameters:
+      - in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: identifier
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryEd25519Key'
+          description: An Ed25519 key was generated for the Repository.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Regenerate Ed25519 Key for the Repository.
       tags:
       - repos
   /repos/{owner}/{identifier}/geoip:
@@ -18533,6 +18726,149 @@ components:
       required:
       - name
       type: object
+    OrganizationCustomDomainNestedRepo:
+      example:
+        name: name
+        slug: slug
+      properties:
+        name:
+          description: A descriptive name for the repository.
+          minLength: 1
+          readOnly: true
+          title: Name
+          type: string
+        slug:
+          description: The slug identifies the repository in URIs.
+          format: slug
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug
+          type: string
+      type: object
+    OrganizationCustomDomains:
+      example:
+        backend_kind: 0
+        domain_type: 1
+        dns_cert_name: dns_cert_name
+        created_at: 2000-01-23T04:56:07.000+00:00
+        dns_alias_value: dns_alias_value
+        redirect_root_url: https://openapi-generator.tech
+        repository:
+          name: name
+          slug: slug
+        slug_perm: slug_perm
+        created_by: 6
+        enabled: true
+        dns_cert_value: dns_cert_value
+        validated: true
+        host: host
+        namespace: 5
+        redirect_root: true
+        validated_at: 2000-01-23T04:56:07.000+00:00
+        repository_only: true
+        primary: true
+      properties:
+        backend_kind:
+          description: The domain for a specific package format.
+          nullable: true
+          readOnly: true
+          title: Backend kind
+          type: integer
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        created_by:
+          nullable: true
+          readOnly: true
+          title: Created by
+          type: integer
+        dns_alias_value:
+          description: The CNAME value to use to publish this domain publicly.
+          nullable: true
+          readOnly: true
+          title: Dns alias value
+          type: string
+        dns_cert_name:
+          description: The CNAME name to create to allow us to generate a TLS cert.
+          nullable: true
+          readOnly: true
+          title: Dns cert name
+          type: string
+        dns_cert_value:
+          description: The CNAME value to use to allow us to generate a TLS cert.
+          nullable: true
+          readOnly: true
+          title: Dns cert value
+          type: string
+        domain_type:
+          description: The type for the custom domain.
+          readOnly: true
+          title: Domain type
+          type: integer
+        enabled:
+          description: "If checked, the domain is enabled."
+          readOnly: true
+          title: Enabled
+          type: boolean
+        host:
+          minLength: 1
+          readOnly: true
+          title: Host
+          type: string
+        namespace:
+          readOnly: true
+          title: Namespace
+          type: integer
+        primary:
+          default: true
+          description: "If checked, this domain is the preferred/primary domain in\
+            \ the case that there are other overlapping domains (e.g. for the same\
+            \ repository, package format, etc.)"
+          readOnly: true
+          title: Primary
+          type: boolean
+        redirect_root:
+          description: "If checked, the domain root redirects to the repository."
+          readOnly: true
+          title: Redirect root
+          type: boolean
+        redirect_root_url:
+          description: Where root requests should be redirected to if redirect_root
+            is enabled.
+          format: uri
+          nullable: true
+          readOnly: true
+          title: Redirect root url
+          type: string
+        repository:
+          $ref: '#/components/schemas/OrganizationCustomDomainNestedRepo'
+        repository_only:
+          description: "If checked, the domain applies to a specific repository only."
+          readOnly: true
+          title: Repository only
+          type: boolean
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        validated:
+          description: "If validated, the domain is ready for requests."
+          readOnly: true
+          title: Validated
+          type: boolean
+        validated_at:
+          format: date-time
+          readOnly: true
+          title: Validated at
+          type: string
+      required:
+      - repository
+      type: object
     PackageDenyPolicy:
       example:
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -21011,6 +21347,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -21252,6 +21589,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -21659,6 +22001,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -21893,6 +22236,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -22249,6 +22597,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -22483,6 +22832,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -22839,6 +23193,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -23073,6 +23428,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -23436,6 +23796,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -23670,6 +24031,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -24079,6 +24445,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -24327,6 +24694,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -24683,6 +25055,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -24917,6 +25290,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -25289,6 +25667,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -25524,6 +25903,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -25888,6 +26272,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -26122,6 +26507,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -26510,6 +26900,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -26744,6 +27135,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -27100,6 +27496,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -27334,6 +27731,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -27712,6 +28114,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -27946,6 +28349,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -28302,6 +28710,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -28536,6 +28945,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -28900,6 +29314,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -29134,6 +29549,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -29490,6 +29910,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -29724,6 +30145,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -30080,6 +30506,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -30314,6 +30741,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -30670,6 +31102,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -30904,6 +31337,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -31348,6 +31786,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -31598,6 +32037,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -31977,6 +32421,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -32211,6 +32656,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -32576,6 +33026,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -32810,6 +33261,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -33173,6 +33629,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -33407,6 +33864,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -33763,6 +34225,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -33997,6 +34460,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -34353,6 +34821,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -34587,6 +35056,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -34981,6 +35455,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -35215,6 +35690,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -35578,6 +36058,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -35812,6 +36293,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -36168,6 +36654,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -36402,6 +36889,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -36819,6 +37311,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -37070,6 +37563,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -37443,6 +37941,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -37677,6 +38176,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -38055,6 +38559,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -38288,6 +38793,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -38652,6 +39162,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -38886,6 +39397,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -39235,6 +39751,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -39476,6 +39993,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -39915,6 +40437,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -40156,6 +40679,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -40507,6 +41035,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -40748,6 +41277,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -41078,6 +41612,7 @@ components:
         repository_url: https://openapi-generator.tech
         is_moveable: true
         status_reason: status_reason
+        osi_approved: true
         status_updated_at: 2000-01-23T04:56:07.000+00:00
         summary: summary
         checksum_sha1: checksum_sha1
@@ -41319,6 +41854,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -41951,6 +42491,11 @@ components:
           readOnly: true
           title: Origin repository url
           type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
         package_type:
           description: The type of package contents.
           readOnly: true
@@ -42882,6 +43427,7 @@ components:
         fully_qualified_name:
           description: The fully qualified name of the package.
           minLength: 1
+          nullable: true
           readOnly: true
           title: Fully qualified name
           type: string
@@ -45398,6 +45944,65 @@ components:
       required:
       - ecdsa_private_key
       type: object
+    RepositoryEd25519Key:
+      example:
+        public_key: public_key
+        default: true
+        fingerprint: fingerprint
+        active: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        fingerprint_short: fingerprint_short
+      properties:
+        active:
+          description: If selected this is the active key for this repository.
+          readOnly: true
+          title: Active
+          type: boolean
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        default:
+          description: If selected this is the default key for this repository.
+          readOnly: true
+          title: Default
+          type: boolean
+        fingerprint:
+          description: Uppercase hex-encoded SHA-256 fingerprint of the public key.
+          minLength: 1
+          readOnly: true
+          title: Fingerprint
+          type: string
+        fingerprint_short:
+          readOnly: true
+          title: Fingerprint short
+          type: string
+        public_key:
+          description: The public key given to repository users.
+          minLength: 1
+          readOnly: true
+          title: Public key
+          type: string
+      type: object
+    RepositoryEd25519KeyCreate:
+      example:
+        ed25519_passphrase: ed25519_passphrase
+        ed25519_private_key: ed25519_private_key
+      properties:
+        ed25519_passphrase:
+          description: The Ed25519 passphrase used for signing.
+          minLength: 1
+          title: Ed25519 passphrase
+          type: string
+        ed25519_private_key:
+          description: The Ed25519 private key.
+          minLength: 1
+          title: Ed25519 private key
+          type: string
+      required:
+      - ed25519_private_key
+      type: object
     RepositoryGeoIpCidr:
       example:
         allow:
@@ -45927,6 +46532,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -46428,6 +47034,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -46853,6 +47460,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -47278,6 +47886,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -47703,6 +48312,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -48128,6 +48738,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -48614,6 +49225,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -49615,6 +50227,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -50074,6 +50687,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -50499,6 +51113,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -50924,6 +51539,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -51349,6 +51965,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -51811,6 +52428,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -52347,6 +52965,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -52809,6 +53428,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -53235,6 +53855,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -53743,6 +54364,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -54265,6 +54887,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string
@@ -54690,6 +55313,7 @@ components:
           type: boolean
         last_indexed:
           description: The last time this upstream source was indexed
+          nullable: true
           readOnly: true
           title: Last indexed
           type: string

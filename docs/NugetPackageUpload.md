@@ -50,6 +50,7 @@ Name | Type | Description | Notes
 **NumFiles** | Pointer to **int64** |  | [optional] [readonly] 
 **OriginRepository** | Pointer to **string** |  | [optional] [readonly] 
 **OriginRepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
+**OsiApproved** | Pointer to **bool** | Whether the package&#39;s SPDX license is OSI-approved. | [optional] [readonly] 
 **PackageType** | Pointer to **int64** | The type of package contents. | [optional] [readonly] 
 **PolicyViolated** | Pointer to **bool** | Whether or not the package has violated any policy. | [optional] [readonly] 
 **RawLicense** | Pointer to **NullableString** | The raw license string. | [optional] [readonly] 
@@ -1338,6 +1339,31 @@ SetOriginRepositoryUrl sets OriginRepositoryUrl field to given value.
 `func (o *NugetPackageUpload) HasOriginRepositoryUrl() bool`
 
 HasOriginRepositoryUrl returns a boolean if a field has been set.
+
+### GetOsiApproved
+
+`func (o *NugetPackageUpload) GetOsiApproved() bool`
+
+GetOsiApproved returns the OsiApproved field if non-nil, zero value otherwise.
+
+### GetOsiApprovedOk
+
+`func (o *NugetPackageUpload) GetOsiApprovedOk() (*bool, bool)`
+
+GetOsiApprovedOk returns a tuple with the OsiApproved field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOsiApproved
+
+`func (o *NugetPackageUpload) SetOsiApproved(v bool)`
+
+SetOsiApproved sets OsiApproved field to given value.
+
+### HasOsiApproved
+
+`func (o *NugetPackageUpload) HasOsiApproved() bool`
+
+HasOsiApproved returns a boolean if a field has been set.
 
 ### GetPackageType
 

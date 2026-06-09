@@ -158,6 +158,8 @@ docs/NugetUpstream.md
 docs/NugetUpstreamRequest.md
 docs/NugetUpstreamRequestPatch.md
 docs/Organization.md
+docs/OrganizationCustomDomainNestedRepo.md
+docs/OrganizationCustomDomains.md
 docs/OrganizationGroupSync.md
 docs/OrganizationGroupSyncRequest.md
 docs/OrganizationGroupSyncStatus.md
@@ -250,6 +252,8 @@ docs/RepositoryCreate.md
 docs/RepositoryCreateRequest.md
 docs/RepositoryEcdsaKey.md
 docs/RepositoryEcdsaKeyCreate.md
+docs/RepositoryEd25519Key.md
+docs/RepositoryEd25519KeyCreate.md
 docs/RepositoryGeoIpCidr.md
 docs/RepositoryGeoIpCountryCode.md
 docs/RepositoryGeoIpRules.md
@@ -466,6 +470,8 @@ model_nuget_upstream.go
 model_nuget_upstream_request.go
 model_nuget_upstream_request_patch.go
 model_organization.go
+model_organization_custom_domain_nested_repo.go
+model_organization_custom_domains.go
 model_organization_group_sync.go
 model_organization_group_sync_request.go
 model_organization_group_sync_status.go
@@ -552,6 +558,8 @@ model_repository_create.go
 model_repository_create_request.go
 model_repository_ecdsa_key.go
 model_repository_ecdsa_key_create.go
+model_repository_ed25519_key.go
+model_repository_ed25519_key_create.go
 model_repository_geo_ip_cidr.go
 model_repository_geo_ip_country_code.go
 model_repository_geo_ip_rules.go

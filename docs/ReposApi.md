@@ -18,6 +18,9 @@ Method | HTTP request | Description
 [**ReposEcdsaCreate**](ReposApi.md#ReposEcdsaCreate) | **Post** /repos/{owner}/{identifier}/ecdsa/ | Set the active ECDSA key for the Repository.
 [**ReposEcdsaList**](ReposApi.md#ReposEcdsaList) | **Get** /repos/{owner}/{identifier}/ecdsa/ | Retrieve the active ECDSA key for the Repository.
 [**ReposEcdsaRegenerate**](ReposApi.md#ReposEcdsaRegenerate) | **Post** /repos/{owner}/{identifier}/ecdsa/regenerate/ | Regenerate ECDSA Key for the Repository.
+[**ReposEd25519Create**](ReposApi.md#ReposEd25519Create) | **Post** /repos/{owner}/{identifier}/ed25519/ | Set the active Ed25519 key for the Repository.
+[**ReposEd25519List**](ReposApi.md#ReposEd25519List) | **Get** /repos/{owner}/{identifier}/ed25519/ | Retrieve the active Ed25519 key for the Repository.
+[**ReposEd25519Regenerate**](ReposApi.md#ReposEd25519Regenerate) | **Post** /repos/{owner}/{identifier}/ed25519/regenerate/ | Regenerate Ed25519 Key for the Repository.
 [**ReposGeoipDisable**](ReposApi.md#ReposGeoipDisable) | **Post** /repos/{owner}/{identifier}/geoip/disable/ | Disable GeoIP for this repository.
 [**ReposGeoipEnable**](ReposApi.md#ReposGeoipEnable) | **Post** /repos/{owner}/{identifier}/geoip/enable/ | Enable GeoIP for this repository.
 [**ReposGeoipPartialUpdate**](ReposApi.md#ReposGeoipPartialUpdate) | **Patch** /repos/{owner}/{identifier}/geoip | Partially update repository geoip rules.
@@ -1191,6 +1194,227 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RepositoryEcdsaKey**](RepositoryEcdsaKey.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposEd25519Create
+
+> RepositoryEd25519Key ReposEd25519Create(ctx, owner, identifier).Data(data).Execute()
+
+Set the active Ed25519 key for the Repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewRepositoryEd25519KeyCreate("Ed25519PrivateKey_example") // RepositoryEd25519KeyCreate |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposEd25519Create(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposEd25519Create``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposEd25519Create`: RepositoryEd25519Key
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposEd25519Create`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposEd25519CreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**RepositoryEd25519KeyCreate**](RepositoryEd25519KeyCreate.md) |  | 
+
+### Return type
+
+[**RepositoryEd25519Key**](RepositoryEd25519Key.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposEd25519List
+
+> RepositoryEd25519Key ReposEd25519List(ctx, owner, identifier).Execute()
+
+Retrieve the active Ed25519 key for the Repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposEd25519List(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposEd25519List``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposEd25519List`: RepositoryEd25519Key
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposEd25519List`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposEd25519ListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**RepositoryEd25519Key**](RepositoryEd25519Key.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposEd25519Regenerate
+
+> RepositoryEd25519Key ReposEd25519Regenerate(ctx, owner, identifier).Execute()
+
+Regenerate Ed25519 Key for the Repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposEd25519Regenerate(context.Background(), owner, identifier).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposEd25519Regenerate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposEd25519Regenerate`: RepositoryEd25519Key
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposEd25519Regenerate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposEd25519RegenerateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**RepositoryEd25519Key**](RepositoryEd25519Key.md)
 
 ### Authorization
 

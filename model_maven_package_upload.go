@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1182.1
+API version: 1.1206.0
 Contact: support@cloudsmith.io
 */
 
@@ -79,6 +79,8 @@ type MavenPackageUpload struct {
 	NumFiles            *int64         `json:"num_files,omitempty"`
 	OriginRepository    *string        `json:"origin_repository,omitempty"`
 	OriginRepositoryUrl *string        `json:"origin_repository_url,omitempty"`
+	// Whether the package's SPDX license is OSI-approved.
+	OsiApproved *bool `json:"osi_approved,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
 	// Artifact's Maven packaging type.
@@ -1812,6 +1814,38 @@ func (o *MavenPackageUpload) SetOriginRepositoryUrl(v string) {
 	o.OriginRepositoryUrl = &v
 }
 
+// GetOsiApproved returns the OsiApproved field value if set, zero value otherwise.
+func (o *MavenPackageUpload) GetOsiApproved() bool {
+	if o == nil || IsNil(o.OsiApproved) {
+		var ret bool
+		return ret
+	}
+	return *o.OsiApproved
+}
+
+// GetOsiApprovedOk returns a tuple with the OsiApproved field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MavenPackageUpload) GetOsiApprovedOk() (*bool, bool) {
+	if o == nil || IsNil(o.OsiApproved) {
+		return nil, false
+	}
+	return o.OsiApproved, true
+}
+
+// HasOsiApproved returns a boolean if a field has been set.
+func (o *MavenPackageUpload) HasOsiApproved() bool {
+	if o != nil && !IsNil(o.OsiApproved) {
+		return true
+	}
+
+	return false
+}
+
+// SetOsiApproved gets a reference to the given bool and assigns it to the OsiApproved field.
+func (o *MavenPackageUpload) SetOsiApproved(v bool) {
+	o.OsiApproved = &v
+}
+
 // GetPackageType returns the PackageType field value if set, zero value otherwise.
 func (o *MavenPackageUpload) GetPackageType() int64 {
 	if o == nil || IsNil(o.PackageType) {
@@ -3475,6 +3509,9 @@ func (o MavenPackageUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OriginRepositoryUrl) {
 		toSerialize["origin_repository_url"] = o.OriginRepositoryUrl
 	}
+	if !IsNil(o.OsiApproved) {
+		toSerialize["osi_approved"] = o.OsiApproved
+	}
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
 	}
@@ -3671,6 +3708,7 @@ func (o *MavenPackageUpload) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "num_files")
 		delete(additionalProperties, "origin_repository")
 		delete(additionalProperties, "origin_repository_url")
+		delete(additionalProperties, "osi_approved")
 		delete(additionalProperties, "package_type")
 		delete(additionalProperties, "packaging")
 		delete(additionalProperties, "policy_violated")

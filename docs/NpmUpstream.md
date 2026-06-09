@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **IndexPackageCount** | Pointer to **NullableInt64** | The number of packages available in this upstream source | [optional] [readonly] 
 **IndexStatus** | Pointer to **NullableString** | The current indexing status of this upstream source | [optional] [readonly] 
 **IsActive** | Pointer to **bool** | Whether or not this upstream is active and ready for requests. | [optional] 
-**LastIndexed** | Pointer to **string** | The last time this upstream source was indexed | [optional] [readonly] 
+**LastIndexed** | Pointer to **NullableString** | The last time this upstream source was indexed | [optional] [readonly] 
 **Mode** | Pointer to **string** | The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode. | [optional] [default to "Proxy Only"]
 **Name** | **string** | A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream. | 
 **PendingValidation** | Pointer to **bool** | When true, this upstream source is pending validation. | [optional] [readonly] 
@@ -555,6 +555,16 @@ SetLastIndexed sets LastIndexed field to given value.
 
 HasLastIndexed returns a boolean if a field has been set.
 
+### SetLastIndexedNil
+
+`func (o *NpmUpstream) SetLastIndexedNil(b bool)`
+
+ SetLastIndexedNil sets the value for LastIndexed to be an explicit nil
+
+### UnsetLastIndexed
+`func (o *NpmUpstream) UnsetLastIndexed()`
+
+UnsetLastIndexed ensures that no value is present for LastIndexed, not even an explicit nil
 ### GetMode
 
 `func (o *NpmUpstream) GetMode() string`
