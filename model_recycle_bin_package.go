@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1182.1
+API version: 1.1206.0
 Contact: support@cloudsmith.io
 */
 
@@ -27,7 +27,7 @@ type RecycleBinPackage struct {
 	Filename  *string        `json:"filename,omitempty"`
 	Format    *string        `json:"format,omitempty"`
 	// The fully qualified name of the package.
-	FullyQualifiedName *string            `json:"fully_qualified_name,omitempty"`
+	FullyQualifiedName NullableString     `json:"fully_qualified_name,omitempty"`
 	Identifiers        *map[string]string `json:"identifiers,omitempty"`
 	// Information about the retention rule that triggered deletion (if any).
 	InvokedRetentionRule map[string]string `json:"invoked_retention_rule,omitempty"`
@@ -218,36 +218,47 @@ func (o *RecycleBinPackage) SetFormat(v string) {
 	o.Format = &v
 }
 
-// GetFullyQualifiedName returns the FullyQualifiedName field value if set, zero value otherwise.
+// GetFullyQualifiedName returns the FullyQualifiedName field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RecycleBinPackage) GetFullyQualifiedName() string {
-	if o == nil || IsNil(o.FullyQualifiedName) {
+	if o == nil || IsNil(o.FullyQualifiedName.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.FullyQualifiedName
+	return *o.FullyQualifiedName.Get()
 }
 
 // GetFullyQualifiedNameOk returns a tuple with the FullyQualifiedName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RecycleBinPackage) GetFullyQualifiedNameOk() (*string, bool) {
-	if o == nil || IsNil(o.FullyQualifiedName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FullyQualifiedName, true
+	return o.FullyQualifiedName.Get(), o.FullyQualifiedName.IsSet()
 }
 
 // HasFullyQualifiedName returns a boolean if a field has been set.
 func (o *RecycleBinPackage) HasFullyQualifiedName() bool {
-	if o != nil && !IsNil(o.FullyQualifiedName) {
+	if o != nil && o.FullyQualifiedName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFullyQualifiedName gets a reference to the given string and assigns it to the FullyQualifiedName field.
+// SetFullyQualifiedName gets a reference to the given NullableString and assigns it to the FullyQualifiedName field.
 func (o *RecycleBinPackage) SetFullyQualifiedName(v string) {
-	o.FullyQualifiedName = &v
+	o.FullyQualifiedName.Set(&v)
+}
+
+// SetFullyQualifiedNameNil sets the value for FullyQualifiedName to be an explicit nil
+func (o *RecycleBinPackage) SetFullyQualifiedNameNil() {
+	o.FullyQualifiedName.Set(nil)
+}
+
+// UnsetFullyQualifiedName ensures that no value is present for FullyQualifiedName, not even an explicit nil
+func (o *RecycleBinPackage) UnsetFullyQualifiedName() {
+	o.FullyQualifiedName.Unset()
 }
 
 // GetIdentifiers returns the Identifiers field value if set, zero value otherwise.
@@ -925,8 +936,8 @@ func (o RecycleBinPackage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Format) {
 		toSerialize["format"] = o.Format
 	}
-	if !IsNil(o.FullyQualifiedName) {
-		toSerialize["fully_qualified_name"] = o.FullyQualifiedName
+	if o.FullyQualifiedName.IsSet() {
+		toSerialize["fully_qualified_name"] = o.FullyQualifiedName.Get()
 	}
 	if !IsNil(o.Identifiers) {
 		toSerialize["identifiers"] = o.Identifiers

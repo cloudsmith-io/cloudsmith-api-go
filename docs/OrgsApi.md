@@ -4,6 +4,7 @@ All URIs are relative to *https://api.cloudsmith.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**OrgsCustomDomainsList**](OrgsApi.md#OrgsCustomDomainsList) | **Get** /orgs/{org}/custom-domains/ | Get the details for all custom domains.
 [**OrgsDelete**](OrgsApi.md#OrgsDelete) | **Delete** /orgs/{org}/ | Delete the specified organization.
 [**OrgsDenyPolicyCreate**](OrgsApi.md#OrgsDenyPolicyCreate) | **Post** /orgs/{org}/deny-policy/ | Create a package deny policy.
 [**OrgsDenyPolicyDelete**](OrgsApi.md#OrgsDenyPolicyDelete) | **Delete** /orgs/{org}/deny-policy/{slug_perm}/ | Delete a package deny policy.
@@ -78,6 +79,80 @@ Method | HTTP request | Description
 [**OrgsVulnerabilityPolicyUpdate**](OrgsApi.md#OrgsVulnerabilityPolicyUpdate) | **Put** /orgs/{org}/vulnerability-policy/{slug_perm}/ | Update a package vulnerability policy.
 [**OrgsVulnerabilityPolicyViolationList**](OrgsApi.md#OrgsVulnerabilityPolicyViolationList) | **Get** /orgs/{org}/vulnerability-policy-violation/ | List all current vulnerability policy violations for this Organization.
 
+
+
+## OrgsCustomDomainsList
+
+> []OrganizationCustomDomains OrgsCustomDomainsList(ctx, org).Page(page).PageSize(pageSize).Execute()
+
+Get the details for all custom domains.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsCustomDomainsList(context.Background(), org).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsCustomDomainsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsCustomDomainsList`: []OrganizationCustomDomains
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsCustomDomainsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsCustomDomainsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]OrganizationCustomDomains**](OrganizationCustomDomains.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## OrgsDelete

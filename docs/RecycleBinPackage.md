@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Downloads** | Pointer to **int64** |  | [optional] [readonly] 
 **Filename** | Pointer to **string** |  | [optional] [readonly] 
 **Format** | Pointer to **string** |  | [optional] [readonly] 
-**FullyQualifiedName** | Pointer to **string** | The fully qualified name of the package. | [optional] [readonly] 
+**FullyQualifiedName** | Pointer to **NullableString** | The fully qualified name of the package. | [optional] [readonly] 
 **Identifiers** | Pointer to **map[string]string** |  | [optional] [readonly] 
 **InvokedRetentionRule** | Pointer to **map[string]string** | Information about the retention rule that triggered deletion (if any). | [optional] [readonly] 
 **IsDeleteable** | Pointer to **bool** |  | [optional] [readonly] 
@@ -183,6 +183,16 @@ SetFullyQualifiedName sets FullyQualifiedName field to given value.
 
 HasFullyQualifiedName returns a boolean if a field has been set.
 
+### SetFullyQualifiedNameNil
+
+`func (o *RecycleBinPackage) SetFullyQualifiedNameNil(b bool)`
+
+ SetFullyQualifiedNameNil sets the value for FullyQualifiedName to be an explicit nil
+
+### UnsetFullyQualifiedName
+`func (o *RecycleBinPackage) UnsetFullyQualifiedName()`
+
+UnsetFullyQualifiedName ensures that no value is present for FullyQualifiedName, not even an explicit nil
 ### GetIdentifiers
 
 `func (o *RecycleBinPackage) GetIdentifiers() map[string]string`

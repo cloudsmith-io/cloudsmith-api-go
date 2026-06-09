@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1182.1
+API version: 1.1206.0
 Contact: support@cloudsmith.io
 */
 
@@ -54,7 +54,7 @@ type AlpineUpstream struct {
 	// Whether or not this upstream is active and ready for requests.
 	IsActive *bool `json:"is_active,omitempty"`
 	// The last time this upstream source was indexed
-	LastIndexed *string `json:"last_indexed,omitempty"`
+	LastIndexed NullableString `json:"last_indexed,omitempty"`
 	// The mode that this upstream should operate in. Upstream sources can be used to proxy resolved packages, as well as operate in a proxy/cache or cache only mode.
 	Mode *string `json:"mode,omitempty"`
 	// A descriptive name for this upstream source. A shortened version of this name will be used for tagging cached packages retrieved from this upstream.
@@ -713,36 +713,47 @@ func (o *AlpineUpstream) SetIsActive(v bool) {
 	o.IsActive = &v
 }
 
-// GetLastIndexed returns the LastIndexed field value if set, zero value otherwise.
+// GetLastIndexed returns the LastIndexed field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AlpineUpstream) GetLastIndexed() string {
-	if o == nil || IsNil(o.LastIndexed) {
+	if o == nil || IsNil(o.LastIndexed.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LastIndexed
+	return *o.LastIndexed.Get()
 }
 
 // GetLastIndexedOk returns a tuple with the LastIndexed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AlpineUpstream) GetLastIndexedOk() (*string, bool) {
-	if o == nil || IsNil(o.LastIndexed) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastIndexed, true
+	return o.LastIndexed.Get(), o.LastIndexed.IsSet()
 }
 
 // HasLastIndexed returns a boolean if a field has been set.
 func (o *AlpineUpstream) HasLastIndexed() bool {
-	if o != nil && !IsNil(o.LastIndexed) {
+	if o != nil && o.LastIndexed.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLastIndexed gets a reference to the given string and assigns it to the LastIndexed field.
+// SetLastIndexed gets a reference to the given NullableString and assigns it to the LastIndexed field.
 func (o *AlpineUpstream) SetLastIndexed(v string) {
-	o.LastIndexed = &v
+	o.LastIndexed.Set(&v)
+}
+
+// SetLastIndexedNil sets the value for LastIndexed to be an explicit nil
+func (o *AlpineUpstream) SetLastIndexedNil() {
+	o.LastIndexed.Set(nil)
+}
+
+// UnsetLastIndexed ensures that no value is present for LastIndexed, not even an explicit nil
+func (o *AlpineUpstream) UnsetLastIndexed() {
+	o.LastIndexed.Unset()
 }
 
 // GetMode returns the Mode field value if set, zero value otherwise.
@@ -1193,8 +1204,8 @@ func (o AlpineUpstream) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
 	}
-	if !IsNil(o.LastIndexed) {
-		toSerialize["last_indexed"] = o.LastIndexed
+	if o.LastIndexed.IsSet() {
+		toSerialize["last_indexed"] = o.LastIndexed.Get()
 	}
 	if !IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
