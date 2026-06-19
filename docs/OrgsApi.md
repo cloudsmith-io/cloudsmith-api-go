@@ -1845,7 +1845,7 @@ Name | Type | Description  | Notes
 
 ## OrgsList
 
-> []Organization OrgsList(ctx).Page(page).PageSize(pageSize).Execute()
+> []Organization OrgsList(ctx).Page(page).PageSize(pageSize).Sort(sort).Execute()
 
 Get a list of all the organizations you are associated with.
 
@@ -1866,10 +1866,11 @@ import (
 func main() {
 	page := int64(56) // int64 | A page number within the paginated result set. (optional)
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. Use `-` prefix for descending order (e.g., `-name`). Available options: name, created_at. (optional) (default to "name")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrgsApi.OrgsList(context.Background()).Page(page).PageSize(pageSize).Execute()
+	resp, r, err := apiClient.OrgsApi.OrgsList(context.Background()).Page(page).PageSize(pageSize).Sort(sort).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1892,6 +1893,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
+ **sort** | **string** | A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name, created_at. | [default to &quot;name&quot;]
 
 ### Return type
 

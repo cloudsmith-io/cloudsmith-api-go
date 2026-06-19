@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1206.0
+API version: 1.1230.1
 Contact: support@cloudsmith.io
 */
 
@@ -30,7 +30,9 @@ type RepositoryEd25519Key struct {
 	Fingerprint      *string `json:"fingerprint,omitempty"`
 	FingerprintShort *string `json:"fingerprint_short,omitempty"`
 	// The public key given to repository users.
-	PublicKey            *string `json:"public_key,omitempty"`
+	PublicKey *string `json:"public_key,omitempty"`
+	// The public key in `<name>:<base64>` wire format, ready to paste into Nix `trusted-public-keys`.
+	PublicKeyWire        *string `json:"public_key_wire,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -245,6 +247,38 @@ func (o *RepositoryEd25519Key) SetPublicKey(v string) {
 	o.PublicKey = &v
 }
 
+// GetPublicKeyWire returns the PublicKeyWire field value if set, zero value otherwise.
+func (o *RepositoryEd25519Key) GetPublicKeyWire() string {
+	if o == nil || IsNil(o.PublicKeyWire) {
+		var ret string
+		return ret
+	}
+	return *o.PublicKeyWire
+}
+
+// GetPublicKeyWireOk returns a tuple with the PublicKeyWire field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryEd25519Key) GetPublicKeyWireOk() (*string, bool) {
+	if o == nil || IsNil(o.PublicKeyWire) {
+		return nil, false
+	}
+	return o.PublicKeyWire, true
+}
+
+// HasPublicKeyWire returns a boolean if a field has been set.
+func (o *RepositoryEd25519Key) HasPublicKeyWire() bool {
+	if o != nil && !IsNil(o.PublicKeyWire) {
+		return true
+	}
+
+	return false
+}
+
+// SetPublicKeyWire gets a reference to the given string and assigns it to the PublicKeyWire field.
+func (o *RepositoryEd25519Key) SetPublicKeyWire(v string) {
+	o.PublicKeyWire = &v
+}
+
 func (o RepositoryEd25519Key) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -272,6 +306,9 @@ func (o RepositoryEd25519Key) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PublicKey) {
 		toSerialize["public_key"] = o.PublicKey
+	}
+	if !IsNil(o.PublicKeyWire) {
+		toSerialize["public_key_wire"] = o.PublicKeyWire
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -301,6 +338,7 @@ func (o *RepositoryEd25519Key) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "fingerprint")
 		delete(additionalProperties, "fingerprint_short")
 		delete(additionalProperties, "public_key")
+		delete(additionalProperties, "public_key_wire")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Fingerprint** | Pointer to **string** | Uppercase hex-encoded SHA-256 fingerprint of the public key. | [optional] [readonly] 
 **FingerprintShort** | Pointer to **string** |  | [optional] [readonly] 
 **PublicKey** | Pointer to **string** | The public key given to repository users. | [optional] [readonly] 
+**PublicKeyWire** | Pointer to **string** | The public key in &#x60;&lt;name&gt;:&lt;base64&gt;&#x60; wire format, ready to paste into Nix &#x60;trusted-public-keys&#x60;. | [optional] [readonly] 
 
 ## Methods
 
@@ -179,6 +180,31 @@ SetPublicKey sets PublicKey field to given value.
 `func (o *RepositoryEd25519Key) HasPublicKey() bool`
 
 HasPublicKey returns a boolean if a field has been set.
+
+### GetPublicKeyWire
+
+`func (o *RepositoryEd25519Key) GetPublicKeyWire() string`
+
+GetPublicKeyWire returns the PublicKeyWire field if non-nil, zero value otherwise.
+
+### GetPublicKeyWireOk
+
+`func (o *RepositoryEd25519Key) GetPublicKeyWireOk() (*string, bool)`
+
+GetPublicKeyWireOk returns a tuple with the PublicKeyWire field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPublicKeyWire
+
+`func (o *RepositoryEd25519Key) SetPublicKeyWire(v string)`
+
+SetPublicKeyWire sets PublicKeyWire field to given value.
+
+### HasPublicKeyWire
+
+`func (o *RepositoryEd25519Key) HasPublicKeyWire() bool`
+
+HasPublicKeyWire returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

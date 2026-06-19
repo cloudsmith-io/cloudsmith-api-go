@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1206.0
+API version: 1.1230.1
 Contact: support@cloudsmith.io
 */
 
@@ -22,6 +22,8 @@ var _ MappedNullable = &RepositoryCreate{}
 
 // RepositoryCreate struct for RepositoryCreate
 type RepositoryCreate struct {
+	// Number of active connections for the repository
+	ActiveConnectionCount *int64 `json:"active_connection_count,omitempty"`
 	// Broadcasting status of a repository.
 	BroadcastState *string `json:"broadcast_state,omitempty"`
 	// Base URL from which packages and other artifacts are downloaded.
@@ -235,6 +237,38 @@ func NewRepositoryCreateWithDefaults() *RepositoryCreate {
 	var viewStatistics string = "Read"
 	this.ViewStatistics = &viewStatistics
 	return &this
+}
+
+// GetActiveConnectionCount returns the ActiveConnectionCount field value if set, zero value otherwise.
+func (o *RepositoryCreate) GetActiveConnectionCount() int64 {
+	if o == nil || IsNil(o.ActiveConnectionCount) {
+		var ret int64
+		return ret
+	}
+	return *o.ActiveConnectionCount
+}
+
+// GetActiveConnectionCountOk returns a tuple with the ActiveConnectionCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreate) GetActiveConnectionCountOk() (*int64, bool) {
+	if o == nil || IsNil(o.ActiveConnectionCount) {
+		return nil, false
+	}
+	return o.ActiveConnectionCount, true
+}
+
+// HasActiveConnectionCount returns a boolean if a field has been set.
+func (o *RepositoryCreate) HasActiveConnectionCount() bool {
+	if o != nil && !IsNil(o.ActiveConnectionCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetActiveConnectionCount gets a reference to the given int64 and assigns it to the ActiveConnectionCount field.
+func (o *RepositoryCreate) SetActiveConnectionCount(v int64) {
+	o.ActiveConnectionCount = &v
 }
 
 // GetBroadcastState returns the BroadcastState field value if set, zero value otherwise.
@@ -2555,6 +2589,9 @@ func (o RepositoryCreate) MarshalJSON() ([]byte, error) {
 
 func (o RepositoryCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.ActiveConnectionCount) {
+		toSerialize["active_connection_count"] = o.ActiveConnectionCount
+	}
 	if !IsNil(o.BroadcastState) {
 		toSerialize["broadcast_state"] = o.BroadcastState
 	}
@@ -2809,6 +2846,7 @@ func (o *RepositoryCreate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "active_connection_count")
 		delete(additionalProperties, "broadcast_state")
 		delete(additionalProperties, "cdn_url")
 		delete(additionalProperties, "content_kind")

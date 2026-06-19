@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 ## PackagesDependencies
 
-> PackageDependencies PackagesDependencies(ctx, owner, repo, identifier).Execute()
+> PackageDependencies PackagesDependencies(ctx, owner, repo, identifier).IncludeConnectedRepositories(includeConnectedRepositories).Execute()
 
 Get the list of dependencies for a package. Transitive dependencies are included where supported.
 
@@ -254,10 +254,11 @@ func main() {
 	owner := "owner_example" // string | 
 	repo := "repo_example" // string | 
 	identifier := "identifier_example" // string | 
+	includeConnectedRepositories := true // bool | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PackagesApi.PackagesDependencies(context.Background(), owner, repo, identifier).Execute()
+	resp, r, err := apiClient.PackagesApi.PackagesDependencies(context.Background(), owner, repo, identifier).IncludeConnectedRepositories(includeConnectedRepositories).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesDependencies``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -287,6 +288,7 @@ Name | Type | Description  | Notes
 
 
 
+ **includeConnectedRepositories** | **bool** | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in. | [default to false]
 
 ### Return type
 
@@ -308,7 +310,7 @@ Name | Type | Description  | Notes
 
 ## PackagesGroupsList
 
-> PackagesGroupsList200Response PackagesGroupsList(ctx, owner, repo).Page(page).PageSize(pageSize).GroupBy(groupBy).HideSubcomponents(hideSubcomponents).Query(query).Sort(sort).Execute()
+> PackagesGroupsList200Response PackagesGroupsList(ctx, owner, repo).Page(page).PageSize(pageSize).GroupBy(groupBy).HideSubcomponents(hideSubcomponents).IncludeConnectedRepositories(includeConnectedRepositories).Query(query).Sort(sort).Execute()
 
 Return a list of Package Groups in a repository.
 
@@ -333,12 +335,13 @@ func main() {
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 	groupBy := "groupBy_example" // string | A field to group packages by. Available options: name, backend_kind. (optional) (default to "name")
 	hideSubcomponents := true // bool | Whether to hide packages which are subcomponents of another package in the results (optional) (default to false)
+	includeConnectedRepositories := true // bool | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. (optional) (default to false)
 	query := "query_example" // string | A search term for querying names, filenames, versions, distributions, architectures, formats, or statuses of packages. (optional)
 	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. Use `-` prefix for descending order (e.g., `-name`). Available options: name, count, num_downloads, size, last_push, backend_kind. (optional) (default to "name")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PackagesApi.PackagesGroupsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).GroupBy(groupBy).HideSubcomponents(hideSubcomponents).Query(query).Sort(sort).Execute()
+	resp, r, err := apiClient.PackagesApi.PackagesGroupsList(context.Background(), owner, repo).Page(page).PageSize(pageSize).GroupBy(groupBy).HideSubcomponents(hideSubcomponents).IncludeConnectedRepositories(includeConnectedRepositories).Query(query).Sort(sort).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesGroupsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -370,6 +373,7 @@ Name | Type | Description  | Notes
  **pageSize** | **int64** | Number of results to return per page. | 
  **groupBy** | **string** | A field to group packages by. Available options: name, backend_kind. | [default to &quot;name&quot;]
  **hideSubcomponents** | **bool** | Whether to hide packages which are subcomponents of another package in the results | [default to false]
+ **includeConnectedRepositories** | **bool** | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. | [default to false]
  **query** | **string** | A search term for querying names, filenames, versions, distributions, architectures, formats, or statuses of packages. | 
  **sort** | **string** | A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name, count, num_downloads, size, last_push, backend_kind. | [default to &quot;name&quot;]
 
@@ -393,7 +397,7 @@ Name | Type | Description  | Notes
 
 ## PackagesList
 
-> []Package PackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
+> []Package PackagesList(ctx, owner, repo).Page(page).PageSize(pageSize).IncludeConnectedRepositories(includeConnectedRepositories).Query(query).Sort(sort).Execute()
 
 Get a list of all packages associated with repository.
 
@@ -416,12 +420,13 @@ func main() {
 	repo := "repo_example" // string | 
 	page := int64(56) // int64 | A page number within the paginated result set. (optional)
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+	includeConnectedRepositories := true // bool | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in. (optional) (default to false)
 	query := "query_example" // string | A search term for querying names, filenames, versions, distributions, architectures, formats or statuses of packages. (optional)
 	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. (optional) (default to "-date")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PackagesApi.PackagesList(context.Background(), owner, repo).Page(page).PageSize(pageSize).Query(query).Sort(sort).Execute()
+	resp, r, err := apiClient.PackagesApi.PackagesList(context.Background(), owner, repo).Page(page).PageSize(pageSize).IncludeConnectedRepositories(includeConnectedRepositories).Query(query).Sort(sort).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -451,6 +456,7 @@ Name | Type | Description  | Notes
 
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
+ **includeConnectedRepositories** | **bool** | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in. | [default to false]
  **query** | **string** | A search term for querying names, filenames, versions, distributions, architectures, formats or statuses of packages. | 
  **sort** | **string** | A field for sorting objects in ascending or descending order. | [default to &quot;-date&quot;]
 
@@ -630,7 +636,7 @@ Name | Type | Description  | Notes
 
 ## PackagesRead
 
-> Package PackagesRead(ctx, owner, repo, identifier).Execute()
+> Package PackagesRead(ctx, owner, repo, identifier).IncludeConnectedRepositories(includeConnectedRepositories).Execute()
 
 Get a specific package in a repository.
 
@@ -652,10 +658,11 @@ func main() {
 	owner := "owner_example" // string | 
 	repo := "repo_example" // string | 
 	identifier := "identifier_example" // string | 
+	includeConnectedRepositories := true // bool | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PackagesApi.PackagesRead(context.Background(), owner, repo, identifier).Execute()
+	resp, r, err := apiClient.PackagesApi.PackagesRead(context.Background(), owner, repo, identifier).IncludeConnectedRepositories(includeConnectedRepositories).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -685,6 +692,7 @@ Name | Type | Description  | Notes
 
 
 
+ **includeConnectedRepositories** | **bool** | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in. | [default to false]
 
 ### Return type
 
@@ -858,7 +866,7 @@ Name | Type | Description  | Notes
 
 ## PackagesStatus
 
-> PackageStatus PackagesStatus(ctx, owner, repo, identifier).Execute()
+> PackageStatus PackagesStatus(ctx, owner, repo, identifier).IncludeConnectedRepositories(includeConnectedRepositories).Execute()
 
 Get the synchronization status for a package.
 
@@ -880,10 +888,11 @@ func main() {
 	owner := "owner_example" // string | 
 	repo := "repo_example" // string | 
 	identifier := "identifier_example" // string | 
+	includeConnectedRepositories := true // bool | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in. (optional) (default to false)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PackagesApi.PackagesStatus(context.Background(), owner, repo, identifier).Execute()
+	resp, r, err := apiClient.PackagesApi.PackagesStatus(context.Background(), owner, repo, identifier).IncludeConnectedRepositories(includeConnectedRepositories).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesStatus``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -913,6 +922,7 @@ Name | Type | Description  | Notes
 
 
 
+ **includeConnectedRepositories** | **bool** | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in. | [default to false]
 
 ### Return type
 
