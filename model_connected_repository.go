@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1206.0
+API version: 1.1288.1
 Contact: support@cloudsmith.io
 */
 
@@ -23,8 +23,11 @@ var _ MappedNullable = &ConnectedRepository{}
 // ConnectedRepository struct for ConnectedRepository
 type ConnectedRepository struct {
 	// The date and time when the connection was created.
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	IsActive  *bool      `json:"is_active,omitempty"`
+	CreatedAt     *time.Time `json:"created_at,omitempty"`
+	DisableReason *string    `json:"disable_reason,omitempty"`
+	// Human-readable explanation of why this connection is disabled.
+	DisableReasonText *string `json:"disable_reason_text,omitempty"`
+	IsActive          *bool   `json:"is_active,omitempty"`
 	// Repositories are checked in ascending order (starting at 1). If multiple repositories have the same priority, the oldest one is used first.
 	Priority *int64  `json:"priority,omitempty"`
 	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
@@ -41,7 +44,7 @@ type _ConnectedRepository ConnectedRepository
 // will change when the set of required properties is changed
 func NewConnectedRepository(targetRepository string) *ConnectedRepository {
 	this := ConnectedRepository{}
-	var isActive bool = true
+	var isActive bool = false
 	this.IsActive = &isActive
 	this.TargetRepository = targetRepository
 	return &this
@@ -52,7 +55,7 @@ func NewConnectedRepository(targetRepository string) *ConnectedRepository {
 // but it doesn't guarantee that properties required by API are set
 func NewConnectedRepositoryWithDefaults() *ConnectedRepository {
 	this := ConnectedRepository{}
-	var isActive bool = true
+	var isActive bool = false
 	this.IsActive = &isActive
 	return &this
 }
@@ -87,6 +90,70 @@ func (o *ConnectedRepository) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
 func (o *ConnectedRepository) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
+}
+
+// GetDisableReason returns the DisableReason field value if set, zero value otherwise.
+func (o *ConnectedRepository) GetDisableReason() string {
+	if o == nil || IsNil(o.DisableReason) {
+		var ret string
+		return ret
+	}
+	return *o.DisableReason
+}
+
+// GetDisableReasonOk returns a tuple with the DisableReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectedRepository) GetDisableReasonOk() (*string, bool) {
+	if o == nil || IsNil(o.DisableReason) {
+		return nil, false
+	}
+	return o.DisableReason, true
+}
+
+// HasDisableReason returns a boolean if a field has been set.
+func (o *ConnectedRepository) HasDisableReason() bool {
+	if o != nil && !IsNil(o.DisableReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableReason gets a reference to the given string and assigns it to the DisableReason field.
+func (o *ConnectedRepository) SetDisableReason(v string) {
+	o.DisableReason = &v
+}
+
+// GetDisableReasonText returns the DisableReasonText field value if set, zero value otherwise.
+func (o *ConnectedRepository) GetDisableReasonText() string {
+	if o == nil || IsNil(o.DisableReasonText) {
+		var ret string
+		return ret
+	}
+	return *o.DisableReasonText
+}
+
+// GetDisableReasonTextOk returns a tuple with the DisableReasonText field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectedRepository) GetDisableReasonTextOk() (*string, bool) {
+	if o == nil || IsNil(o.DisableReasonText) {
+		return nil, false
+	}
+	return o.DisableReasonText, true
+}
+
+// HasDisableReasonText returns a boolean if a field has been set.
+func (o *ConnectedRepository) HasDisableReasonText() bool {
+	if o != nil && !IsNil(o.DisableReasonText) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisableReasonText gets a reference to the given string and assigns it to the DisableReasonText field.
+func (o *ConnectedRepository) SetDisableReasonText(v string) {
+	o.DisableReasonText = &v
 }
 
 // GetIsActive returns the IsActive field value if set, zero value otherwise.
@@ -222,6 +289,12 @@ func (o ConnectedRepository) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
+	if !IsNil(o.DisableReason) {
+		toSerialize["disable_reason"] = o.DisableReason
+	}
+	if !IsNil(o.DisableReasonText) {
+		toSerialize["disable_reason_text"] = o.DisableReasonText
+	}
 	if !IsNil(o.IsActive) {
 		toSerialize["is_active"] = o.IsActive
 	}
@@ -276,6 +349,8 @@ func (o *ConnectedRepository) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "disable_reason")
+		delete(additionalProperties, "disable_reason_text")
 		delete(additionalProperties, "is_active")
 		delete(additionalProperties, "priority")
 		delete(additionalProperties, "slug_perm")

@@ -5,7 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | Pointer to **time.Time** | The date and time when the connection was created. | [optional] [readonly] 
-**IsActive** | Pointer to **bool** |  | [optional] [default to true]
+**DisableReason** | Pointer to **string** |  | [optional] [readonly] [default to "N/A"]
+**DisableReasonText** | Pointer to **string** | Human-readable explanation of why this connection is disabled. | [optional] [readonly] 
+**IsActive** | Pointer to **bool** |  | [optional] [default to false]
 **Priority** | Pointer to **int64** | Repositories are checked in ascending order (starting at 1). If multiple repositories have the same priority, the oldest one is used first. | [optional] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **TargetRepository** | **string** | The slug of the target repository to connect to. | 
@@ -53,6 +55,56 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *ConnectedRepository) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetDisableReason
+
+`func (o *ConnectedRepository) GetDisableReason() string`
+
+GetDisableReason returns the DisableReason field if non-nil, zero value otherwise.
+
+### GetDisableReasonOk
+
+`func (o *ConnectedRepository) GetDisableReasonOk() (*string, bool)`
+
+GetDisableReasonOk returns a tuple with the DisableReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableReason
+
+`func (o *ConnectedRepository) SetDisableReason(v string)`
+
+SetDisableReason sets DisableReason field to given value.
+
+### HasDisableReason
+
+`func (o *ConnectedRepository) HasDisableReason() bool`
+
+HasDisableReason returns a boolean if a field has been set.
+
+### GetDisableReasonText
+
+`func (o *ConnectedRepository) GetDisableReasonText() string`
+
+GetDisableReasonText returns the DisableReasonText field if non-nil, zero value otherwise.
+
+### GetDisableReasonTextOk
+
+`func (o *ConnectedRepository) GetDisableReasonTextOk() (*string, bool)`
+
+GetDisableReasonTextOk returns a tuple with the DisableReasonText field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisableReasonText
+
+`func (o *ConnectedRepository) SetDisableReasonText(v string)`
+
+SetDisableReasonText sets DisableReasonText field to given value.
+
+### HasDisableReasonText
+
+`func (o *ConnectedRepository) HasDisableReasonText() bool`
+
+HasDisableReasonText returns a boolean if a field has been set.
 
 ### GetIsActive
 

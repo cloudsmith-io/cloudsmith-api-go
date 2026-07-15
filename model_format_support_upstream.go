@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1206.0
+API version: 1.1288.1
 Contact: support@cloudsmith.io
 */
 
@@ -23,6 +23,8 @@ var _ MappedNullable = &FormatSupportUpstream{}
 type FormatSupportUpstream struct {
 	// The authentication modes supported by the upstream format
 	AuthModes []string `json:"auth_modes"`
+	// If true the upstream format supports cache-only mode.
+	CacheOnly bool `json:"cache_only"`
 	// If true the upstream format supports caching
 	Caching bool `json:"caching"`
 	// If true the upstream format supports indexing
@@ -44,9 +46,10 @@ type _FormatSupportUpstream FormatSupportUpstream
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFormatSupportUpstream(authModes []string, caching bool, indexing bool, proxying bool, trust bool) *FormatSupportUpstream {
+func NewFormatSupportUpstream(authModes []string, cacheOnly bool, caching bool, indexing bool, proxying bool, trust bool) *FormatSupportUpstream {
 	this := FormatSupportUpstream{}
 	this.AuthModes = authModes
+	this.CacheOnly = cacheOnly
 	this.Caching = caching
 	this.Indexing = indexing
 	var indexingBehavior string = "Unsupported"
@@ -92,6 +95,30 @@ func (o *FormatSupportUpstream) GetAuthModesOk() ([]string, bool) {
 // SetAuthModes sets field value
 func (o *FormatSupportUpstream) SetAuthModes(v []string) {
 	o.AuthModes = v
+}
+
+// GetCacheOnly returns the CacheOnly field value
+func (o *FormatSupportUpstream) GetCacheOnly() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.CacheOnly
+}
+
+// GetCacheOnlyOk returns a tuple with the CacheOnly field value
+// and a boolean to check if the value has been set.
+func (o *FormatSupportUpstream) GetCacheOnlyOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CacheOnly, true
+}
+
+// SetCacheOnly sets field value
+func (o *FormatSupportUpstream) SetCacheOnly(v bool) {
+	o.CacheOnly = v
 }
 
 // GetCaching returns the Caching field value
@@ -265,6 +292,7 @@ func (o FormatSupportUpstream) MarshalJSON() ([]byte, error) {
 func (o FormatSupportUpstream) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["auth_modes"] = o.AuthModes
+	toSerialize["cache_only"] = o.CacheOnly
 	toSerialize["caching"] = o.Caching
 	toSerialize["indexing"] = o.Indexing
 	if !IsNil(o.IndexingBehavior) {
@@ -289,6 +317,7 @@ func (o *FormatSupportUpstream) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"auth_modes",
+		"cache_only",
 		"caching",
 		"indexing",
 		"proxying",
@@ -323,6 +352,7 @@ func (o *FormatSupportUpstream) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "auth_modes")
+		delete(additionalProperties, "cache_only")
 		delete(additionalProperties, "caching")
 		delete(additionalProperties, "indexing")
 		delete(additionalProperties, "indexing_behavior")

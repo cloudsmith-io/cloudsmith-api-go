@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AuthModes** | **[]string** | The authentication modes supported by the upstream format | 
+**CacheOnly** | **bool** | If true the upstream format supports cache-only mode. | 
 **Caching** | **bool** | If true the upstream format supports caching | 
 **Indexing** | **bool** | If true the upstream format supports indexing | 
 **IndexingBehavior** | Pointer to **string** | The behavior of the upstream when indexing | [optional] [default to "Unsupported"]
@@ -16,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewFormatSupportUpstream
 
-`func NewFormatSupportUpstream(authModes []string, caching bool, indexing bool, proxying bool, trust bool, ) *FormatSupportUpstream`
+`func NewFormatSupportUpstream(authModes []string, cacheOnly bool, caching bool, indexing bool, proxying bool, trust bool, ) *FormatSupportUpstream`
 
 NewFormatSupportUpstream instantiates a new FormatSupportUpstream object
 This constructor will assign default values to properties that have it defined,
@@ -49,6 +50,26 @@ and a boolean to check if the value has been set.
 `func (o *FormatSupportUpstream) SetAuthModes(v []string)`
 
 SetAuthModes sets AuthModes field to given value.
+
+
+### GetCacheOnly
+
+`func (o *FormatSupportUpstream) GetCacheOnly() bool`
+
+GetCacheOnly returns the CacheOnly field if non-nil, zero value otherwise.
+
+### GetCacheOnlyOk
+
+`func (o *FormatSupportUpstream) GetCacheOnlyOk() (*bool, bool)`
+
+GetCacheOnlyOk returns a tuple with the CacheOnly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCacheOnly
+
+`func (o *FormatSupportUpstream) SetCacheOnly(v bool)`
+
+SetCacheOnly sets CacheOnly field to given value.
 
 
 ### GetCaching

@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1206.0
+  version: 1.1288.1
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -1595,6 +1595,14 @@ paths:
         name: page_size
         schema:
           type: integer
+      - description: "A field for sorting objects in ascending or descending order.\
+          \ Use `-` prefix for descending order (e.g., `-name`). Available options:\
+          \ name, created_at, slug."
+        in: query
+        name: sort
+        schema:
+          default: name
+          type: string
       responses:
         "200":
           content:
@@ -4798,6 +4806,17 @@ paths:
         name: page_size
         schema:
           type: integer
+      - description: "If true, include packages from active connected target repositories\
+          \ in addition to packages from this repository. Has no effect if the repository\
+          \ has no active connections. Defaults to false. Note: download-related URLs\
+          \ on returned packages (e.g. cdn_url, signature_url) are rewritten to point\
+          \ at the requesting repository, not the connected target repository the\
+          \ package physically lives in."
+        in: query
+        name: include_connected_repositories
+        schema:
+          default: false
+          type: boolean
       - description: "A search term for querying names, filenames, versions, distributions,\
           \ architectures, formats or statuses of packages."
         in: query
@@ -4870,6 +4889,14 @@ paths:
           in the results
         in: query
         name: hide_subcomponents
+        schema:
+          default: false
+          type: boolean
+      - description: "If true, include packages from active connected target repositories\
+          \ in addition to packages from this repository. Has no effect if the repository\
+          \ has no active connections. Defaults to false."
+        in: query
+        name: include_connected_repositories
         schema:
           default: false
           type: boolean
@@ -7786,6 +7813,17 @@ paths:
         required: true
         schema:
           type: string
+      - description: "If true, include packages from active connected target repositories\
+          \ in addition to packages from this repository. Has no effect if the repository\
+          \ has no active connections. Defaults to false. Note: download-related URLs\
+          \ on returned packages (e.g. cdn_url, signature_url) are rewritten to point\
+          \ at the requesting repository, not the connected target repository the\
+          \ package physically lives in."
+        in: query
+        name: include_connected_repositories
+        schema:
+          default: false
+          type: boolean
       responses:
         "200":
           content:
@@ -7879,6 +7917,17 @@ paths:
         required: true
         schema:
           type: string
+      - description: "If true, include packages from active connected target repositories\
+          \ in addition to packages from this repository. Has no effect if the repository\
+          \ has no active connections. Defaults to false. Note: download-related URLs\
+          \ on returned packages (e.g. cdn_url, signature_url) are rewritten to point\
+          \ at the requesting repository, not the connected target repository the\
+          \ package physically lives in."
+        in: query
+        name: include_connected_repositories
+        schema:
+          default: false
+          type: boolean
       responses:
         "200":
           content:
@@ -8104,6 +8153,17 @@ paths:
         required: true
         schema:
           type: string
+      - description: "If true, include packages from active connected target repositories\
+          \ in addition to packages from this repository. Has no effect if the repository\
+          \ has no active connections. Defaults to false. Note: download-related URLs\
+          \ on returned packages (e.g. cdn_url, signature_url) are rewritten to point\
+          \ at the requesting repository, not the connected target repository the\
+          \ package physically lives in."
+        in: query
+        name: include_connected_repositories
+        schema:
+          default: false
+          type: boolean
       responses:
         "200":
           content:
@@ -8534,7 +8594,9 @@ paths:
         name: query
         schema:
           type: string
-      - description: A field for sorting objects in ascending or descending order.
+      - description: "A field for sorting objects in ascending or descending order.\
+          \ Available options are: created_at, downloads, favorites, name, package_count,\
+          \ size."
         in: query
         name: sort
         schema:
@@ -18216,6 +18278,7 @@ components:
     FormatSupportUpstream:
       description: The upstream support for the package format
       example:
+        cache_only: true
         trust: true
         auth_modes:
         - Username and Password
@@ -18236,6 +18299,10 @@ components:
             - Certificate and Key
             type: string
           type: array
+        cache_only:
+          description: If true the upstream format supports cache-only mode.
+          title: Cache only
+          type: boolean
         caching:
           description: If true the upstream format supports caching
           title: Caching
@@ -18274,6 +18341,7 @@ components:
           type: boolean
       required:
       - auth_modes
+      - cache_only
       - caching
       - indexing
       - proxying
@@ -18286,6 +18354,7 @@ components:
         metadata: true
         versioning: true
         upstreams:
+          cache_only: true
           trust: true
           auth_modes:
           - Username and Password
@@ -18347,6 +18416,7 @@ components:
           metadata: true
           versioning: true
           upstreams:
+            cache_only: true
             trust: true
             auth_modes:
             - Username and Password
@@ -20245,9 +20315,11 @@ components:
     OrganizationSAMLAuth:
       example:
         saml_auth_enforced: true
+        saml_metadata_url_webapp: https://openapi-generator.tech
         saml_auth_enabled: true
         saml_metadata_inline: saml_metadata_inline
         saml_metadata_url: https://openapi-generator.tech
+        saml_metadata_inline_webapp: saml_metadata_inline_webapp
       properties:
         saml_auth_enabled:
           title: Saml auth enabled
@@ -20261,12 +20333,29 @@ components:
           maxLength: 32000
           title: Inline SAML metadata
           type: string
+        saml_metadata_inline_webapp:
+          description: "When configured, this inline SAML metadata is used instead\
+            \ of the legacy app SAML configuration when signing into the new Cloudsmith\
+            \ web application."
+          maxLength: 32000
+          nullable: true
+          title: Inline SAML metadata (webapp)
+          type: string
         saml_metadata_url:
           description: "If configured, SAML metadata be retrieved from a remote URL."
           format: uri
           maxLength: 254
           nullable: true
           title: Saml metadata url
+          type: string
+        saml_metadata_url_webapp:
+          description: "When configured, this SAML metadata URL is used instead of\
+            \ the legacy app SAML configuration when signing into the new Cloudsmith\
+            \ web application."
+          format: uri
+          maxLength: 254
+          nullable: true
+          title: Saml metadata url webapp
           type: string
       required:
       - saml_auth_enabled
@@ -20275,9 +20364,11 @@ components:
     OrganizationSAMLAuthRequestPatch:
       example:
         saml_auth_enforced: true
+        saml_metadata_url_webapp: https://openapi-generator.tech
         saml_auth_enabled: true
         saml_metadata_inline: saml_metadata_inline
         saml_metadata_url: https://openapi-generator.tech
+        saml_metadata_inline_webapp: saml_metadata_inline_webapp
       properties:
         saml_auth_enabled:
           title: Saml auth enabled
@@ -20291,12 +20382,29 @@ components:
           maxLength: 32000
           title: Inline SAML metadata
           type: string
+        saml_metadata_inline_webapp:
+          description: "When configured, this inline SAML metadata is used instead\
+            \ of the legacy app SAML configuration when signing into the new Cloudsmith\
+            \ web application."
+          maxLength: 32000
+          nullable: true
+          title: Inline SAML metadata (webapp)
+          type: string
         saml_metadata_url:
           description: "If configured, SAML metadata be retrieved from a remote URL."
           format: uri
           maxLength: 254
           nullable: true
           title: Saml metadata url
+          type: string
+        saml_metadata_url_webapp:
+          description: "When configured, this SAML metadata URL is used instead of\
+            \ the legacy app SAML configuration when signing into the new Cloudsmith\
+            \ web application."
+          format: uri
+          maxLength: 254
+          nullable: true
+          title: Saml metadata url webapp
           type: string
       type: object
     OrganizationGroupSync:
@@ -43685,15 +43793,15 @@ components:
       type: object
     Repository:
       example:
-        num_policy_violated_packages: 6
+        num_policy_violated_packages: 1
         open_source_license: open_source_license
         scan_packages: Read
         content_kind: Standard
         tag_pre_releases_as_latest: true
         index_files: true
-        repository_type: 7
+        repository_type: 9
         use_source_packages: true
-        package_group_count: 2
+        package_group_count: 7
         repository_type_str: Public
         use_vulnerability_scanning: true
         resync_own: true
@@ -43702,15 +43810,16 @@ components:
         raw_package_index_enabled: true
         open_source_project_url: https://openapi-generator.tech
         is_public_hidden: true
+        active_connection_count: 0
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         deleted_at: 2000-01-23T04:56:07.000+00:00
         replace_packages: Write
         user_entitlements_enabled: true
-        num_downloads: 0
+        num_downloads: 6
         package_count: 5
         use_default_cargo_upstream: true
-        size: 9
+        size: 3
         cdn_url: cdn_url
         scan_own: true
         distributes:
@@ -43749,9 +43858,9 @@ components:
         delete_packages: Admin
         is_open_source: true
         self_webapp_url: self_webapp_url
-        num_quarantined_packages: 1
+        num_quarantined_packages: 5
         copy_own: true
-        package_count_excl_subcomponents: 5
+        package_count_excl_subcomponents: 2
         proxy_pypi: true
         contextual_auth_realm: true
         resync_packages: Admin
@@ -43787,6 +43896,11 @@ components:
         strict_npm_validation: true
         raw_package_index_signatures_enabled: true
       properties:
+        active_connection_count:
+          description: Number of active connections for the repository
+          readOnly: true
+          title: Active connection count
+          type: integer
         broadcast_state:
           default: "Off"
           description: Broadcasting status of a repository.
@@ -44764,15 +44878,15 @@ components:
       type: object
     RepositoryCreate:
       example:
-        num_policy_violated_packages: 6
+        num_policy_violated_packages: 1
         open_source_license: open_source_license
         scan_packages: Read
         content_kind: Standard
         tag_pre_releases_as_latest: true
         index_files: true
-        repository_type: 7
+        repository_type: 9
         use_source_packages: true
-        package_group_count: 2
+        package_group_count: 7
         repository_type_str: Public
         use_vulnerability_scanning: true
         resync_own: true
@@ -44781,15 +44895,16 @@ components:
         raw_package_index_enabled: true
         open_source_project_url: https://openapi-generator.tech
         is_public_hidden: true
+        active_connection_count: 0
         namespace_url: https://openapi-generator.tech
         slug_perm: slug_perm
         deleted_at: 2000-01-23T04:56:07.000+00:00
         replace_packages: Write
         user_entitlements_enabled: true
-        num_downloads: 0
+        num_downloads: 6
         package_count: 5
         use_default_cargo_upstream: true
-        size: 9
+        size: 3
         cdn_url: cdn_url
         scan_own: true
         distributes:
@@ -44828,9 +44943,9 @@ components:
         delete_packages: Admin
         is_open_source: true
         self_webapp_url: self_webapp_url
-        num_quarantined_packages: 1
+        num_quarantined_packages: 5
         copy_own: true
-        package_count_excl_subcomponents: 5
+        package_count_excl_subcomponents: 2
         proxy_pypi: true
         contextual_auth_realm: true
         resync_packages: Admin
@@ -44866,6 +44981,11 @@ components:
         strict_npm_validation: true
         raw_package_index_signatures_enabled: true
       properties:
+        active_connection_count:
+          description: Number of active connections for the repository
+          readOnly: true
+          title: Active connection count
+          type: integer
         broadcast_state:
           default: "Off"
           description: Broadcasting status of a repository.
@@ -45834,7 +45954,9 @@ components:
       type: object
     ConnectedRepository:
       example:
-        is_active: true
+        is_active: false
+        disable_reason_text: disable_reason_text
+        disable_reason: N/A
         created_at: 2000-01-23T04:56:07.000+00:00
         priority: 2624
         slug_perm: slug_perm
@@ -45846,8 +45968,21 @@ components:
           readOnly: true
           title: Created at
           type: string
+        disable_reason:
+          default: N/A
+          enum:
+          - N/A
+          - The connection contains a circular reference
+          readOnly: true
+          title: Disable reason
+          type: string
+        disable_reason_text:
+          description: Human-readable explanation of why this connection is disabled.
+          readOnly: true
+          title: Disable reason text
+          type: string
         is_active:
-          default: true
+          default: false
           title: Is active
           type: boolean
         priority:
@@ -45876,12 +46011,12 @@ components:
       type: object
     ConnectedRepositoryRequest:
       example:
-        is_active: true
+        is_active: false
         priority: 2624
         target_repository: target_repository
       properties:
         is_active:
-          default: true
+          default: false
           title: Is active
           type: boolean
         priority:
@@ -45903,12 +46038,12 @@ components:
       type: object
     ConnectedRepositoryRequestPatch:
       example:
-        is_active: true
+        is_active: false
         priority: 2624
         target_repository: target_repository
       properties:
         is_active:
-          default: true
+          default: false
           title: Is active
           type: boolean
         priority:
@@ -45948,6 +46083,7 @@ components:
       example:
         public_key: public_key
         default: true
+        public_key_wire: public_key_wire
         fingerprint: fingerprint
         active: true
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -45983,6 +46119,13 @@ components:
           minLength: 1
           readOnly: true
           title: Public key
+          type: string
+        public_key_wire:
+          description: "The public key in `<name>:<base64>` wire format, ready to\
+            \ paste into Nix `trusted-public-keys`."
+          minLength: 1
+          readOnly: true
+          title: Public key wire
           type: string
       type: object
     RepositoryEd25519KeyCreate:
@@ -47046,6 +47189,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -47178,6 +47322,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -47293,6 +47438,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -47472,6 +47618,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -47604,6 +47751,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -47719,6 +47867,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -47898,6 +48047,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -48030,6 +48180,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -48145,6 +48296,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -48324,6 +48476,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -48456,6 +48609,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -48571,6 +48725,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -48750,6 +48905,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -48882,6 +49038,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -48997,6 +49154,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -49237,6 +49395,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -49443,6 +49602,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -49621,6 +49781,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -50239,6 +50400,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -50383,6 +50545,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -50510,6 +50673,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -51125,6 +51289,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -51257,6 +51422,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -51372,6 +51538,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -51551,6 +51718,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -51683,6 +51851,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -51798,6 +51967,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -52977,6 +53147,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -53122,6 +53293,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -53250,6 +53422,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -53440,6 +53613,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -53572,6 +53746,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -53687,6 +53862,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -53867,6 +54043,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -54011,6 +54188,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -54138,6 +54316,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -57193,12 +57372,16 @@ components:
     repos_connected_list_200_response:
       example:
         results:
-        - is_active: true
+        - is_active: false
+          disable_reason_text: disable_reason_text
+          disable_reason: N/A
           created_at: 2000-01-23T04:56:07.000+00:00
           priority: 2624
           slug_perm: slug_perm
           target_repository: target_repository
-        - is_active: true
+        - is_active: false
+          disable_reason_text: disable_reason_text
+          disable_reason: N/A
           created_at: 2000-01-23T04:56:07.000+00:00
           priority: 2624
           slug_perm: slug_perm

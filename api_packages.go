@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1206.0
+API version: 1.1288.1
 Contact: support@cloudsmith.io
 */
 
@@ -313,11 +313,18 @@ func (a *PackagesApiService) PackagesDeleteExecute(r ApiPackagesDeleteRequest) (
 }
 
 type ApiPackagesDependenciesRequest struct {
-	ctx        context.Context
-	ApiService *PackagesApiService
-	owner      string
-	repo       string
-	identifier string
+	ctx                          context.Context
+	ApiService                   *PackagesApiService
+	owner                        string
+	repo                         string
+	identifier                   string
+	includeConnectedRepositories *bool
+}
+
+// If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in.
+func (r ApiPackagesDependenciesRequest) IncludeConnectedRepositories(includeConnectedRepositories bool) ApiPackagesDependenciesRequest {
+	r.includeConnectedRepositories = &includeConnectedRepositories
+	return r
 }
 
 func (r ApiPackagesDependenciesRequest) Execute() (*PackageDependencies, *http.Response, error) {
@@ -369,6 +376,12 @@ func (a *PackagesApiService) PackagesDependenciesExecute(r ApiPackagesDependenci
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.includeConnectedRepositories != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_connected_repositories", r.includeConnectedRepositories, "", "")
+	} else {
+		var defaultValue bool = false
+		r.includeConnectedRepositories = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -459,16 +472,17 @@ func (a *PackagesApiService) PackagesDependenciesExecute(r ApiPackagesDependenci
 }
 
 type ApiPackagesGroupsListRequest struct {
-	ctx               context.Context
-	ApiService        *PackagesApiService
-	owner             string
-	repo              string
-	page              *int64
-	pageSize          *int64
-	groupBy           *string
-	hideSubcomponents *bool
-	query             *string
-	sort              *string
+	ctx                          context.Context
+	ApiService                   *PackagesApiService
+	owner                        string
+	repo                         string
+	page                         *int64
+	pageSize                     *int64
+	groupBy                      *string
+	hideSubcomponents            *bool
+	includeConnectedRepositories *bool
+	query                        *string
+	sort                         *string
 }
 
 // A page number within the paginated result set.
@@ -492,6 +506,12 @@ func (r ApiPackagesGroupsListRequest) GroupBy(groupBy string) ApiPackagesGroupsL
 // Whether to hide packages which are subcomponents of another package in the results
 func (r ApiPackagesGroupsListRequest) HideSubcomponents(hideSubcomponents bool) ApiPackagesGroupsListRequest {
 	r.hideSubcomponents = &hideSubcomponents
+	return r
+}
+
+// If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false.
+func (r ApiPackagesGroupsListRequest) IncludeConnectedRepositories(includeConnectedRepositories bool) ApiPackagesGroupsListRequest {
+	r.includeConnectedRepositories = &includeConnectedRepositories
 	return r
 }
 
@@ -570,6 +590,12 @@ func (a *PackagesApiService) PackagesGroupsListExecute(r ApiPackagesGroupsListRe
 	} else {
 		var defaultValue bool = false
 		r.hideSubcomponents = &defaultValue
+	}
+	if r.includeConnectedRepositories != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_connected_repositories", r.includeConnectedRepositories, "", "")
+	} else {
+		var defaultValue bool = false
+		r.includeConnectedRepositories = &defaultValue
 	}
 	if r.query != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
@@ -681,14 +707,15 @@ func (a *PackagesApiService) PackagesGroupsListExecute(r ApiPackagesGroupsListRe
 }
 
 type ApiPackagesListRequest struct {
-	ctx        context.Context
-	ApiService *PackagesApiService
-	owner      string
-	repo       string
-	page       *int64
-	pageSize   *int64
-	query      *string
-	sort       *string
+	ctx                          context.Context
+	ApiService                   *PackagesApiService
+	owner                        string
+	repo                         string
+	page                         *int64
+	pageSize                     *int64
+	includeConnectedRepositories *bool
+	query                        *string
+	sort                         *string
 }
 
 // A page number within the paginated result set.
@@ -700,6 +727,12 @@ func (r ApiPackagesListRequest) Page(page int64) ApiPackagesListRequest {
 // Number of results to return per page.
 func (r ApiPackagesListRequest) PageSize(pageSize int64) ApiPackagesListRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in.
+func (r ApiPackagesListRequest) IncludeConnectedRepositories(includeConnectedRepositories bool) ApiPackagesListRequest {
+	r.includeConnectedRepositories = &includeConnectedRepositories
 	return r
 }
 
@@ -766,6 +799,12 @@ func (a *PackagesApiService) PackagesListExecute(r ApiPackagesListRequest) ([]Pa
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
+	}
+	if r.includeConnectedRepositories != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_connected_repositories", r.includeConnectedRepositories, "", "")
+	} else {
+		var defaultValue bool = false
+		r.includeConnectedRepositories = &defaultValue
 	}
 	if r.query != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
@@ -1174,11 +1213,18 @@ func (a *PackagesApiService) PackagesQuarantineExecute(r ApiPackagesQuarantineRe
 }
 
 type ApiPackagesReadRequest struct {
-	ctx        context.Context
-	ApiService *PackagesApiService
-	owner      string
-	repo       string
-	identifier string
+	ctx                          context.Context
+	ApiService                   *PackagesApiService
+	owner                        string
+	repo                         string
+	identifier                   string
+	includeConnectedRepositories *bool
+}
+
+// If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in.
+func (r ApiPackagesReadRequest) IncludeConnectedRepositories(includeConnectedRepositories bool) ApiPackagesReadRequest {
+	r.includeConnectedRepositories = &includeConnectedRepositories
+	return r
 }
 
 func (r ApiPackagesReadRequest) Execute() (*Package, *http.Response, error) {
@@ -1230,6 +1276,12 @@ func (a *PackagesApiService) PackagesReadExecute(r ApiPackagesReadRequest) (*Pac
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.includeConnectedRepositories != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_connected_repositories", r.includeConnectedRepositories, "", "")
+	} else {
+		var defaultValue bool = false
+		r.includeConnectedRepositories = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1612,11 +1664,18 @@ func (a *PackagesApiService) PackagesScanExecute(r ApiPackagesScanRequest) (*Pac
 }
 
 type ApiPackagesStatusRequest struct {
-	ctx        context.Context
-	ApiService *PackagesApiService
-	owner      string
-	repo       string
-	identifier string
+	ctx                          context.Context
+	ApiService                   *PackagesApiService
+	owner                        string
+	repo                         string
+	identifier                   string
+	includeConnectedRepositories *bool
+}
+
+// If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in.
+func (r ApiPackagesStatusRequest) IncludeConnectedRepositories(includeConnectedRepositories bool) ApiPackagesStatusRequest {
+	r.includeConnectedRepositories = &includeConnectedRepositories
+	return r
 }
 
 func (r ApiPackagesStatusRequest) Execute() (*PackageStatus, *http.Response, error) {
@@ -1668,6 +1727,12 @@ func (a *PackagesApiService) PackagesStatusExecute(r ApiPackagesStatusRequest) (
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.includeConnectedRepositories != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "include_connected_repositories", r.includeConnectedRepositories, "", "")
+	} else {
+		var defaultValue bool = false
+		r.includeConnectedRepositories = &defaultValue
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

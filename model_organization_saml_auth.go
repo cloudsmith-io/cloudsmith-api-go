@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1206.0
+API version: 1.1288.1
 Contact: support@cloudsmith.io
 */
 
@@ -25,9 +25,13 @@ type OrganizationSAMLAuth struct {
 	SamlAuthEnforced bool `json:"saml_auth_enforced"`
 	// If configured, SAML metadata will be used as entered instead of retrieved from a remote URL.
 	SamlMetadataInline *string `json:"saml_metadata_inline,omitempty"`
+	// When configured, this inline SAML metadata is used instead of the legacy app SAML configuration when signing into the new Cloudsmith web application.
+	SamlMetadataInlineWebapp NullableString `json:"saml_metadata_inline_webapp,omitempty"`
 	// If configured, SAML metadata be retrieved from a remote URL.
-	SamlMetadataUrl      NullableString `json:"saml_metadata_url,omitempty"`
-	AdditionalProperties map[string]interface{}
+	SamlMetadataUrl NullableString `json:"saml_metadata_url,omitempty"`
+	// When configured, this SAML metadata URL is used instead of the legacy app SAML configuration when signing into the new Cloudsmith web application.
+	SamlMetadataUrlWebapp NullableString `json:"saml_metadata_url_webapp,omitempty"`
+	AdditionalProperties  map[string]interface{}
 }
 
 type _OrganizationSAMLAuth OrganizationSAMLAuth
@@ -131,6 +135,49 @@ func (o *OrganizationSAMLAuth) SetSamlMetadataInline(v string) {
 	o.SamlMetadataInline = &v
 }
 
+// GetSamlMetadataInlineWebapp returns the SamlMetadataInlineWebapp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OrganizationSAMLAuth) GetSamlMetadataInlineWebapp() string {
+	if o == nil || IsNil(o.SamlMetadataInlineWebapp.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SamlMetadataInlineWebapp.Get()
+}
+
+// GetSamlMetadataInlineWebappOk returns a tuple with the SamlMetadataInlineWebapp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OrganizationSAMLAuth) GetSamlMetadataInlineWebappOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SamlMetadataInlineWebapp.Get(), o.SamlMetadataInlineWebapp.IsSet()
+}
+
+// HasSamlMetadataInlineWebapp returns a boolean if a field has been set.
+func (o *OrganizationSAMLAuth) HasSamlMetadataInlineWebapp() bool {
+	if o != nil && o.SamlMetadataInlineWebapp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSamlMetadataInlineWebapp gets a reference to the given NullableString and assigns it to the SamlMetadataInlineWebapp field.
+func (o *OrganizationSAMLAuth) SetSamlMetadataInlineWebapp(v string) {
+	o.SamlMetadataInlineWebapp.Set(&v)
+}
+
+// SetSamlMetadataInlineWebappNil sets the value for SamlMetadataInlineWebapp to be an explicit nil
+func (o *OrganizationSAMLAuth) SetSamlMetadataInlineWebappNil() {
+	o.SamlMetadataInlineWebapp.Set(nil)
+}
+
+// UnsetSamlMetadataInlineWebapp ensures that no value is present for SamlMetadataInlineWebapp, not even an explicit nil
+func (o *OrganizationSAMLAuth) UnsetSamlMetadataInlineWebapp() {
+	o.SamlMetadataInlineWebapp.Unset()
+}
+
 // GetSamlMetadataUrl returns the SamlMetadataUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OrganizationSAMLAuth) GetSamlMetadataUrl() string {
 	if o == nil || IsNil(o.SamlMetadataUrl.Get()) {
@@ -174,6 +221,49 @@ func (o *OrganizationSAMLAuth) UnsetSamlMetadataUrl() {
 	o.SamlMetadataUrl.Unset()
 }
 
+// GetSamlMetadataUrlWebapp returns the SamlMetadataUrlWebapp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OrganizationSAMLAuth) GetSamlMetadataUrlWebapp() string {
+	if o == nil || IsNil(o.SamlMetadataUrlWebapp.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.SamlMetadataUrlWebapp.Get()
+}
+
+// GetSamlMetadataUrlWebappOk returns a tuple with the SamlMetadataUrlWebapp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OrganizationSAMLAuth) GetSamlMetadataUrlWebappOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SamlMetadataUrlWebapp.Get(), o.SamlMetadataUrlWebapp.IsSet()
+}
+
+// HasSamlMetadataUrlWebapp returns a boolean if a field has been set.
+func (o *OrganizationSAMLAuth) HasSamlMetadataUrlWebapp() bool {
+	if o != nil && o.SamlMetadataUrlWebapp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSamlMetadataUrlWebapp gets a reference to the given NullableString and assigns it to the SamlMetadataUrlWebapp field.
+func (o *OrganizationSAMLAuth) SetSamlMetadataUrlWebapp(v string) {
+	o.SamlMetadataUrlWebapp.Set(&v)
+}
+
+// SetSamlMetadataUrlWebappNil sets the value for SamlMetadataUrlWebapp to be an explicit nil
+func (o *OrganizationSAMLAuth) SetSamlMetadataUrlWebappNil() {
+	o.SamlMetadataUrlWebapp.Set(nil)
+}
+
+// UnsetSamlMetadataUrlWebapp ensures that no value is present for SamlMetadataUrlWebapp, not even an explicit nil
+func (o *OrganizationSAMLAuth) UnsetSamlMetadataUrlWebapp() {
+	o.SamlMetadataUrlWebapp.Unset()
+}
+
 func (o OrganizationSAMLAuth) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -189,8 +279,14 @@ func (o OrganizationSAMLAuth) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SamlMetadataInline) {
 		toSerialize["saml_metadata_inline"] = o.SamlMetadataInline
 	}
+	if o.SamlMetadataInlineWebapp.IsSet() {
+		toSerialize["saml_metadata_inline_webapp"] = o.SamlMetadataInlineWebapp.Get()
+	}
 	if o.SamlMetadataUrl.IsSet() {
 		toSerialize["saml_metadata_url"] = o.SamlMetadataUrl.Get()
+	}
+	if o.SamlMetadataUrlWebapp.IsSet() {
+		toSerialize["saml_metadata_url_webapp"] = o.SamlMetadataUrlWebapp.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -239,7 +335,9 @@ func (o *OrganizationSAMLAuth) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "saml_auth_enabled")
 		delete(additionalProperties, "saml_auth_enforced")
 		delete(additionalProperties, "saml_metadata_inline")
+		delete(additionalProperties, "saml_metadata_inline_webapp")
 		delete(additionalProperties, "saml_metadata_url")
+		delete(additionalProperties, "saml_metadata_url_webapp")
 		o.AdditionalProperties = additionalProperties
 	}
 

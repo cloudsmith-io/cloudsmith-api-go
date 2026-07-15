@@ -2120,7 +2120,7 @@ func main() {
 	page := int64(56) // int64 | A page number within the paginated result set. (optional)
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 	query := "query_example" // string | A search term for querying repositories. Available options are: name, slug. Explicit filters: broadcast_state, repository_type. (optional)
-	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. (optional) (default to "-created_at")
+	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. Available options are: created_at, downloads, favorites, name, package_count, size. (optional) (default to "-created_at")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2153,7 +2153,7 @@ Name | Type | Description  | Notes
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
  **query** | **string** | A search term for querying repositories. Available options are: name, slug. Explicit filters: broadcast_state, repository_type. | 
- **sort** | **string** | A field for sorting objects in ascending or descending order. | [default to &quot;-created_at&quot;]
+ **sort** | **string** | A field for sorting objects in ascending or descending order. Available options are: created_at, downloads, favorites, name, package_count, size. | [default to &quot;-created_at&quot;]
 
 ### Return type
 

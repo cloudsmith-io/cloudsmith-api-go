@@ -1,0 +1,16 @@
+# Host toolchain for working with this repo. Note: binding generation runs
+# inside the pinned openapitools/openapi-generator-cli Docker image (see
+# bin/generate), so Docker remains a separate prerequisite that mise does not
+# manage. The CI test matrix pins its own runtimes via the same versions here.
+
+[tools]
+go = "1.23"
+jq = "latest"
+
+[tasks.generate]
+description = "Regenerate the Go bindings (requires Docker)"
+run = "./bin/generate"
+
+[tasks.update-bindings]
+description = "Bump the version, regenerate bindings, and open a PR"
+run = "./scripts/update-bindings.sh"
