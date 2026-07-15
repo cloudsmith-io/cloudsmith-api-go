@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1206.0
+API version: 1.1288.1
 Contact: support@cloudsmith.io
 */
 
@@ -3618,6 +3618,7 @@ type ApiOrgsListRequest struct {
 	ApiService *OrgsApiService
 	page       *int64
 	pageSize   *int64
+	sort       *string
 }
 
 // A page number within the paginated result set.
@@ -3629,6 +3630,12 @@ func (r ApiOrgsListRequest) Page(page int64) ApiOrgsListRequest {
 // Number of results to return per page.
 func (r ApiOrgsListRequest) PageSize(pageSize int64) ApiOrgsListRequest {
 	r.pageSize = &pageSize
+	return r
+}
+
+// A field for sorting objects in ascending or descending order. Use &#x60;-&#x60; prefix for descending order (e.g., &#x60;-name&#x60;). Available options: name, created_at, slug.
+func (r ApiOrgsListRequest) Sort(sort string) ApiOrgsListRequest {
+	r.sort = &sort
 	return r
 }
 
@@ -3677,6 +3684,12 @@ func (a *OrgsApiService) OrgsListExecute(r ApiOrgsListRequest) ([]Organization, 
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "", "")
+	}
+	if r.sort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "", "")
+	} else {
+		var defaultValue string = "name"
+		r.sort = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

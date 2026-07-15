@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 **SamlAuthEnabled** | Pointer to **bool** |  | [optional] 
 **SamlAuthEnforced** | Pointer to **bool** |  | [optional] 
 **SamlMetadataInline** | Pointer to **string** | If configured, SAML metadata will be used as entered instead of retrieved from a remote URL. | [optional] 
+**SamlMetadataInlineWebapp** | Pointer to **NullableString** | When configured, this inline SAML metadata is used instead of the legacy app SAML configuration when signing into the new Cloudsmith web application. | [optional] 
 **SamlMetadataUrl** | Pointer to **NullableString** | If configured, SAML metadata be retrieved from a remote URL. | [optional] 
+**SamlMetadataUrlWebapp** | Pointer to **NullableString** | When configured, this SAML metadata URL is used instead of the legacy app SAML configuration when signing into the new Cloudsmith web application. | [optional] 
 
 ## Methods
 
@@ -103,6 +105,41 @@ SetSamlMetadataInline sets SamlMetadataInline field to given value.
 
 HasSamlMetadataInline returns a boolean if a field has been set.
 
+### GetSamlMetadataInlineWebapp
+
+`func (o *OrganizationSAMLAuthRequestPatch) GetSamlMetadataInlineWebapp() string`
+
+GetSamlMetadataInlineWebapp returns the SamlMetadataInlineWebapp field if non-nil, zero value otherwise.
+
+### GetSamlMetadataInlineWebappOk
+
+`func (o *OrganizationSAMLAuthRequestPatch) GetSamlMetadataInlineWebappOk() (*string, bool)`
+
+GetSamlMetadataInlineWebappOk returns a tuple with the SamlMetadataInlineWebapp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSamlMetadataInlineWebapp
+
+`func (o *OrganizationSAMLAuthRequestPatch) SetSamlMetadataInlineWebapp(v string)`
+
+SetSamlMetadataInlineWebapp sets SamlMetadataInlineWebapp field to given value.
+
+### HasSamlMetadataInlineWebapp
+
+`func (o *OrganizationSAMLAuthRequestPatch) HasSamlMetadataInlineWebapp() bool`
+
+HasSamlMetadataInlineWebapp returns a boolean if a field has been set.
+
+### SetSamlMetadataInlineWebappNil
+
+`func (o *OrganizationSAMLAuthRequestPatch) SetSamlMetadataInlineWebappNil(b bool)`
+
+ SetSamlMetadataInlineWebappNil sets the value for SamlMetadataInlineWebapp to be an explicit nil
+
+### UnsetSamlMetadataInlineWebapp
+`func (o *OrganizationSAMLAuthRequestPatch) UnsetSamlMetadataInlineWebapp()`
+
+UnsetSamlMetadataInlineWebapp ensures that no value is present for SamlMetadataInlineWebapp, not even an explicit nil
 ### GetSamlMetadataUrl
 
 `func (o *OrganizationSAMLAuthRequestPatch) GetSamlMetadataUrl() string`
@@ -138,6 +175,41 @@ HasSamlMetadataUrl returns a boolean if a field has been set.
 `func (o *OrganizationSAMLAuthRequestPatch) UnsetSamlMetadataUrl()`
 
 UnsetSamlMetadataUrl ensures that no value is present for SamlMetadataUrl, not even an explicit nil
+### GetSamlMetadataUrlWebapp
+
+`func (o *OrganizationSAMLAuthRequestPatch) GetSamlMetadataUrlWebapp() string`
+
+GetSamlMetadataUrlWebapp returns the SamlMetadataUrlWebapp field if non-nil, zero value otherwise.
+
+### GetSamlMetadataUrlWebappOk
+
+`func (o *OrganizationSAMLAuthRequestPatch) GetSamlMetadataUrlWebappOk() (*string, bool)`
+
+GetSamlMetadataUrlWebappOk returns a tuple with the SamlMetadataUrlWebapp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSamlMetadataUrlWebapp
+
+`func (o *OrganizationSAMLAuthRequestPatch) SetSamlMetadataUrlWebapp(v string)`
+
+SetSamlMetadataUrlWebapp sets SamlMetadataUrlWebapp field to given value.
+
+### HasSamlMetadataUrlWebapp
+
+`func (o *OrganizationSAMLAuthRequestPatch) HasSamlMetadataUrlWebapp() bool`
+
+HasSamlMetadataUrlWebapp returns a boolean if a field has been set.
+
+### SetSamlMetadataUrlWebappNil
+
+`func (o *OrganizationSAMLAuthRequestPatch) SetSamlMetadataUrlWebappNil(b bool)`
+
+ SetSamlMetadataUrlWebappNil sets the value for SamlMetadataUrlWebapp to be an explicit nil
+
+### UnsetSamlMetadataUrlWebapp
+`func (o *OrganizationSAMLAuthRequestPatch) UnsetSamlMetadataUrlWebapp()`
+
+UnsetSamlMetadataUrlWebapp ensures that no value is present for SamlMetadataUrlWebapp, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

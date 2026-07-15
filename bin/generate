@@ -2,8 +2,12 @@
 set -eou pipefail
 
 
-PKG_VERSION=${1:-"0.0.58"}
+PKG_VERSION=${1:-"0.0.59"}
 API_HOST=${2:-"https://api.cloudsmith.io"}
+
+# GNU sed is required for the in-place edits below. It is `gsed` on macOS
+# (Homebrew) and plain `sed` on Linux/CI runners.
+SED="$(command -v gsed || command -v sed)"
 
 
 function api_version {
@@ -20,7 +24,7 @@ function swagger_spec {
 # This ensures that stuff which no longer exists in the
 # openapi spec is removed.
 find . -name "*.go" -type f -delete
-find . -name "*.md" ! -name "CONTRIBUTING.md" -type f -delete
+find . -name "*.md" ! -iname "CONTRIBUTING.md" -type f -delete
 
 # Generate client library
 API_VERSION="$(api_version)"
@@ -56,20 +60,20 @@ rm -rfv test/
 go mod tidy
 
 # Work around openapi-generator (or at least the go generator) not understanding x-nullable enums
-gsed -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token.go
-gsed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token.go
-gsed -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_request.go
-gsed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_request.go
-gsed -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_request_patch.go
-gsed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_request_patch.go
-gsed -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_refresh.go
-gsed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_refresh.go
-gsed -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_refresh_request.go
-gsed -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_refresh_request.go
-gsed -i 's/ACTION/string/g' model_package_tag_request.go
-gsed -i 's/LICENSE_OVERRIDE/string/g' model_package_license.go
-gsed -i 's/ACTION/string/g' model_package_license_request_patch.go
-gsed -i 's/LICENSE_OVERRIDE/string/g' model_package_license_request_patch.go
+"$SED" -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token.go
+"$SED" -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token.go
+"$SED" -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_request.go
+"$SED" -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_request.go
+"$SED" -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_request_patch.go
+"$SED" -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_request_patch.go
+"$SED" -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_refresh.go
+"$SED" -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_refresh.go
+"$SED" -i 's/LIMIT_BANDWIDTH_UNIT/string/g' model_repository_token_refresh_request.go
+"$SED" -i 's/SCHEDULED_RESET_PERIOD/string/g' model_repository_token_refresh_request.go
+"$SED" -i 's/ACTION/string/g' model_package_tag_request.go
+"$SED" -i 's/LICENSE_OVERRIDE/string/g' model_package_license.go
+"$SED" -i 's/ACTION/string/g' model_package_license_request_patch.go
+"$SED" -i 's/LICENSE_OVERRIDE/string/g' model_package_license_request_patch.go
 
 # Check for compilation errors.
 go build

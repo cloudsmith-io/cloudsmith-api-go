@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 **SamlAuthEnabled** | **bool** |  | 
 **SamlAuthEnforced** | **bool** |  | 
 **SamlMetadataInline** | Pointer to **string** | If configured, SAML metadata will be used as entered instead of retrieved from a remote URL. | [optional] 
+**SamlMetadataInlineWebapp** | Pointer to **NullableString** | When configured, this inline SAML metadata is used instead of the legacy app SAML configuration when signing into the new Cloudsmith web application. | [optional] 
 **SamlMetadataUrl** | Pointer to **NullableString** | If configured, SAML metadata be retrieved from a remote URL. | [optional] 
+**SamlMetadataUrlWebapp** | Pointer to **NullableString** | When configured, this SAML metadata URL is used instead of the legacy app SAML configuration when signing into the new Cloudsmith web application. | [optional] 
 
 ## Methods
 
@@ -93,6 +95,41 @@ SetSamlMetadataInline sets SamlMetadataInline field to given value.
 
 HasSamlMetadataInline returns a boolean if a field has been set.
 
+### GetSamlMetadataInlineWebapp
+
+`func (o *OrganizationSAMLAuth) GetSamlMetadataInlineWebapp() string`
+
+GetSamlMetadataInlineWebapp returns the SamlMetadataInlineWebapp field if non-nil, zero value otherwise.
+
+### GetSamlMetadataInlineWebappOk
+
+`func (o *OrganizationSAMLAuth) GetSamlMetadataInlineWebappOk() (*string, bool)`
+
+GetSamlMetadataInlineWebappOk returns a tuple with the SamlMetadataInlineWebapp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSamlMetadataInlineWebapp
+
+`func (o *OrganizationSAMLAuth) SetSamlMetadataInlineWebapp(v string)`
+
+SetSamlMetadataInlineWebapp sets SamlMetadataInlineWebapp field to given value.
+
+### HasSamlMetadataInlineWebapp
+
+`func (o *OrganizationSAMLAuth) HasSamlMetadataInlineWebapp() bool`
+
+HasSamlMetadataInlineWebapp returns a boolean if a field has been set.
+
+### SetSamlMetadataInlineWebappNil
+
+`func (o *OrganizationSAMLAuth) SetSamlMetadataInlineWebappNil(b bool)`
+
+ SetSamlMetadataInlineWebappNil sets the value for SamlMetadataInlineWebapp to be an explicit nil
+
+### UnsetSamlMetadataInlineWebapp
+`func (o *OrganizationSAMLAuth) UnsetSamlMetadataInlineWebapp()`
+
+UnsetSamlMetadataInlineWebapp ensures that no value is present for SamlMetadataInlineWebapp, not even an explicit nil
 ### GetSamlMetadataUrl
 
 `func (o *OrganizationSAMLAuth) GetSamlMetadataUrl() string`
@@ -128,6 +165,41 @@ HasSamlMetadataUrl returns a boolean if a field has been set.
 `func (o *OrganizationSAMLAuth) UnsetSamlMetadataUrl()`
 
 UnsetSamlMetadataUrl ensures that no value is present for SamlMetadataUrl, not even an explicit nil
+### GetSamlMetadataUrlWebapp
+
+`func (o *OrganizationSAMLAuth) GetSamlMetadataUrlWebapp() string`
+
+GetSamlMetadataUrlWebapp returns the SamlMetadataUrlWebapp field if non-nil, zero value otherwise.
+
+### GetSamlMetadataUrlWebappOk
+
+`func (o *OrganizationSAMLAuth) GetSamlMetadataUrlWebappOk() (*string, bool)`
+
+GetSamlMetadataUrlWebappOk returns a tuple with the SamlMetadataUrlWebapp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSamlMetadataUrlWebapp
+
+`func (o *OrganizationSAMLAuth) SetSamlMetadataUrlWebapp(v string)`
+
+SetSamlMetadataUrlWebapp sets SamlMetadataUrlWebapp field to given value.
+
+### HasSamlMetadataUrlWebapp
+
+`func (o *OrganizationSAMLAuth) HasSamlMetadataUrlWebapp() bool`
+
+HasSamlMetadataUrlWebapp returns a boolean if a field has been set.
+
+### SetSamlMetadataUrlWebappNil
+
+`func (o *OrganizationSAMLAuth) SetSamlMetadataUrlWebappNil(b bool)`
+
+ SetSamlMetadataUrlWebappNil sets the value for SamlMetadataUrlWebapp to be an explicit nil
+
+### UnsetSamlMetadataUrlWebapp
+`func (o *OrganizationSAMLAuth) UnsetSamlMetadataUrlWebapp()`
+
+UnsetSamlMetadataUrlWebapp ensures that no value is present for SamlMetadataUrlWebapp, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

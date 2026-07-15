@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ActiveConnectionCount** | Pointer to **int64** | Number of active connections for the repository | [optional] [readonly] 
 **BroadcastState** | Pointer to **string** | Broadcasting status of a repository. | [optional] [default to "Off"]
 **CdnUrl** | Pointer to **NullableString** | Base URL from which packages and other artifacts are downloaded. | [optional] [readonly] 
 **ContentKind** | Pointer to **string** | The repository content kind determines whether this repository contains packages, or provides a distribution of packages from other repositories. You can only select the content kind at repository creation time. | [optional] [default to "Standard"]
@@ -94,6 +95,31 @@ will change when the set of required properties is changed
 NewRepositoryCreateWithDefaults instantiates a new RepositoryCreate object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetActiveConnectionCount
+
+`func (o *RepositoryCreate) GetActiveConnectionCount() int64`
+
+GetActiveConnectionCount returns the ActiveConnectionCount field if non-nil, zero value otherwise.
+
+### GetActiveConnectionCountOk
+
+`func (o *RepositoryCreate) GetActiveConnectionCountOk() (*int64, bool)`
+
+GetActiveConnectionCountOk returns a tuple with the ActiveConnectionCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActiveConnectionCount
+
+`func (o *RepositoryCreate) SetActiveConnectionCount(v int64)`
+
+SetActiveConnectionCount sets ActiveConnectionCount field to given value.
+
+### HasActiveConnectionCount
+
+`func (o *RepositoryCreate) HasActiveConnectionCount() bool`
+
+HasActiveConnectionCount returns a boolean if a field has been set.
 
 ### GetBroadcastState
 

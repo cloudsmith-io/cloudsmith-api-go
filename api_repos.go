@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1206.0
+API version: 1.1288.1
 Contact: support@cloudsmith.io
 */
 
@@ -4101,7 +4101,7 @@ func (r ApiReposNamespaceListRequest) Query(query string) ApiReposNamespaceListR
 	return r
 }
 
-// A field for sorting objects in ascending or descending order.
+// A field for sorting objects in ascending or descending order. Available options are: created_at, downloads, favorites, name, package_count, size.
 func (r ApiReposNamespaceListRequest) Sort(sort string) ApiReposNamespaceListRequest {
 	r.sort = &sort
 	return r

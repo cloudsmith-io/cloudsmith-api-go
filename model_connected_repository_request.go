@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1206.0
+API version: 1.1288.1
 Contact: support@cloudsmith.io
 */
 
@@ -37,7 +37,7 @@ type _ConnectedRepositoryRequest ConnectedRepositoryRequest
 // will change when the set of required properties is changed
 func NewConnectedRepositoryRequest(targetRepository string) *ConnectedRepositoryRequest {
 	this := ConnectedRepositoryRequest{}
-	var isActive bool = true
+	var isActive bool = false
 	this.IsActive = &isActive
 	this.TargetRepository = targetRepository
 	return &this
@@ -48,7 +48,7 @@ func NewConnectedRepositoryRequest(targetRepository string) *ConnectedRepository
 // but it doesn't guarantee that properties required by API are set
 func NewConnectedRepositoryRequestWithDefaults() *ConnectedRepositoryRequest {
 	this := ConnectedRepositoryRequest{}
-	var isActive bool = true
+	var isActive bool = false
 	this.IsActive = &isActive
 	return &this
 }
