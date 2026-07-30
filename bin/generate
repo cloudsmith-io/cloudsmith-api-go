@@ -31,7 +31,12 @@ API_VERSION="$(api_version)"
 SWAGGER_SPEC="$(swagger_spec "$API_VERSION")"
 DOCKER_IMAGE="$(docker build -q .)"
 
+# Run as the invoking user so generated files and directories (e.g. test/) are
+# owned by us and can be cleaned up afterwards. Without this the container runs
+# as root and the post-generation cleanup fails on Linux/CI runners.
 docker run --rm \
+    --user "$(id -u):$(id -g)" \
+    -e HOME=/tmp \
     -e PKG_VERSION="$PKG_VERSION" \
     -e GO_POST_PROCESS_FILE="gofmt -w" \
     -v "$SWAGGER_SPEC":/tmp/swagger_spec \
