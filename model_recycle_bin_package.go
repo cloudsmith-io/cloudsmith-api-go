@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1346.0
 Contact: support@cloudsmith.io
 */
 
@@ -32,8 +32,10 @@ type RecycleBinPackage struct {
 	// Information about the retention rule that triggered deletion (if any).
 	InvokedRetentionRule map[string]string `json:"invoked_retention_rule,omitempty"`
 	IsDeleteable         *bool             `json:"is_deleteable,omitempty"`
-	IsQuarantined        *bool             `json:"is_quarantined,omitempty"`
-	IsRestorable         *bool             `json:"is_restorable,omitempty"`
+	// Whether the package has been detected as containing malware. Requires Ultra plan.
+	IsMalwareDetected *bool `json:"is_malware_detected,omitempty"`
+	IsQuarantined     *bool `json:"is_quarantined,omitempty"`
+	IsRestorable      *bool `json:"is_restorable,omitempty"`
 	// The name of this package.
 	Name NullableString `json:"name,omitempty"`
 	// Whether or not the package has violated any policy.
@@ -56,7 +58,8 @@ type RecycleBinPackage struct {
 	UploadedAt *time.Time `json:"uploaded_at,omitempty"`
 	Uploader   *string    `json:"uploader,omitempty"`
 	// The raw version for this package.
-	Version              NullableString `json:"version,omitempty"`
+	Version              NullableString               `json:"version,omitempty"`
+	VulnerabilityCounts  NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -356,6 +359,38 @@ func (o *RecycleBinPackage) HasIsDeleteable() bool {
 // SetIsDeleteable gets a reference to the given bool and assigns it to the IsDeleteable field.
 func (o *RecycleBinPackage) SetIsDeleteable(v bool) {
 	o.IsDeleteable = &v
+}
+
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+func (o *RecycleBinPackage) GetIsMalwareDetected() bool {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMalwareDetected
+}
+
+// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RecycleBinPackage) GetIsMalwareDetectedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		return nil, false
+	}
+	return o.IsMalwareDetected, true
+}
+
+// HasIsMalwareDetected returns a boolean if a field has been set.
+func (o *RecycleBinPackage) HasIsMalwareDetected() bool {
+	if o != nil && !IsNil(o.IsMalwareDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+func (o *RecycleBinPackage) SetIsMalwareDetected(v bool) {
+	o.IsMalwareDetected = &v
 }
 
 // GetIsQuarantined returns the IsQuarantined field value if set, zero value otherwise.
@@ -914,6 +949,49 @@ func (o *RecycleBinPackage) UnsetVersion() {
 	o.Version.Unset()
 }
 
+// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RecycleBinPackage) GetVulnerabilityCounts() WebOSVSeverityCounts {
+	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
+		var ret WebOSVSeverityCounts
+		return ret
+	}
+	return *o.VulnerabilityCounts.Get()
+}
+
+// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RecycleBinPackage) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
+}
+
+// HasVulnerabilityCounts returns a boolean if a field has been set.
+func (o *RecycleBinPackage) HasVulnerabilityCounts() bool {
+	if o != nil && o.VulnerabilityCounts.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
+func (o *RecycleBinPackage) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
+	o.VulnerabilityCounts.Set(&v)
+}
+
+// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+func (o *RecycleBinPackage) SetVulnerabilityCountsNil() {
+	o.VulnerabilityCounts.Set(nil)
+}
+
+// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
+func (o *RecycleBinPackage) UnsetVulnerabilityCounts() {
+	o.VulnerabilityCounts.Unset()
+}
+
 func (o RecycleBinPackage) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -947,6 +1025,9 @@ func (o RecycleBinPackage) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsDeleteable) {
 		toSerialize["is_deleteable"] = o.IsDeleteable
+	}
+	if !IsNil(o.IsMalwareDetected) {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected
 	}
 	if !IsNil(o.IsQuarantined) {
 		toSerialize["is_quarantined"] = o.IsQuarantined
@@ -996,6 +1077,9 @@ func (o RecycleBinPackage) ToMap() (map[string]interface{}, error) {
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
 	}
+	if o.VulnerabilityCounts.IsSet() {
+		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1026,6 +1110,7 @@ func (o *RecycleBinPackage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "identifiers")
 		delete(additionalProperties, "invoked_retention_rule")
 		delete(additionalProperties, "is_deleteable")
+		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "is_quarantined")
 		delete(additionalProperties, "is_restorable")
 		delete(additionalProperties, "name")
@@ -1042,6 +1127,7 @@ func (o *RecycleBinPackage) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "uploaded_at")
 		delete(additionalProperties, "uploader")
 		delete(additionalProperties, "version")
+		delete(additionalProperties, "vulnerability_counts")
 		o.AdditionalProperties = additionalProperties
 	}
 

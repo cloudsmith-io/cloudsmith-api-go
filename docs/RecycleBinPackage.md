@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Identifiers** | Pointer to **map[string]string** |  | [optional] [readonly] 
 **InvokedRetentionRule** | Pointer to **map[string]string** | Information about the retention rule that triggered deletion (if any). | [optional] [readonly] 
 **IsDeleteable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
 **IsRestorable** | Pointer to **bool** |  | [optional] [readonly] 
 **Name** | Pointer to **NullableString** | The name of this package. | [optional] [readonly] 
@@ -28,6 +29,7 @@ Name | Type | Description | Notes
 **UploadedAt** | Pointer to **time.Time** | The date this package was uploaded. | [optional] [readonly] 
 **Uploader** | Pointer to **string** |  | [optional] [readonly] 
 **Version** | Pointer to **NullableString** | The raw version for this package. | [optional] [readonly] 
+**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 
 ## Methods
 
@@ -277,6 +279,31 @@ SetIsDeleteable sets IsDeleteable field to given value.
 `func (o *RecycleBinPackage) HasIsDeleteable() bool`
 
 HasIsDeleteable returns a boolean if a field has been set.
+
+### GetIsMalwareDetected
+
+`func (o *RecycleBinPackage) GetIsMalwareDetected() bool`
+
+GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
+
+### GetIsMalwareDetectedOk
+
+`func (o *RecycleBinPackage) GetIsMalwareDetectedOk() (*bool, bool)`
+
+GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMalwareDetected
+
+`func (o *RecycleBinPackage) SetIsMalwareDetected(v bool)`
+
+SetIsMalwareDetected sets IsMalwareDetected field to given value.
+
+### HasIsMalwareDetected
+
+`func (o *RecycleBinPackage) HasIsMalwareDetected() bool`
+
+HasIsMalwareDetected returns a boolean if a field has been set.
 
 ### GetIsQuarantined
 
@@ -718,6 +745,41 @@ HasVersion returns a boolean if a field has been set.
 `func (o *RecycleBinPackage) UnsetVersion()`
 
 UnsetVersion ensures that no value is present for Version, not even an explicit nil
+### GetVulnerabilityCounts
+
+`func (o *RecycleBinPackage) GetVulnerabilityCounts() WebOSVSeverityCounts`
+
+GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
+
+### GetVulnerabilityCountsOk
+
+`func (o *RecycleBinPackage) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
+
+GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVulnerabilityCounts
+
+`func (o *RecycleBinPackage) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
+
+SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
+
+### HasVulnerabilityCounts
+
+`func (o *RecycleBinPackage) HasVulnerabilityCounts() bool`
+
+HasVulnerabilityCounts returns a boolean if a field has been set.
+
+### SetVulnerabilityCountsNil
+
+`func (o *RecycleBinPackage) SetVulnerabilityCountsNil(b bool)`
+
+ SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+
+### UnsetVulnerabilityCounts
+`func (o *RecycleBinPackage) UnsetVulnerabilityCounts()`
+
+UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

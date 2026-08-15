@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1346.0
 Contact: support@cloudsmith.io
 */
 
@@ -21,10 +21,13 @@ var _ MappedNullable = &PackageLicense{}
 
 // PackageLicense struct for PackageLicense
 type PackageLicense struct {
-	LicenseNotes         NullableString `json:"license_notes,omitempty"`
-	LicenseOverride      NullableString `json:"license_override,omitempty"`
-	LicenseUrl           NullableString `json:"license_url,omitempty"`
-	SpdxLicense          string         `json:"spdx_license"`
+	// Whether the package has been detected as containing malware. Requires Ultra plan.
+	IsMalwareDetected    *bool                        `json:"is_malware_detected,omitempty"`
+	LicenseNotes         NullableString               `json:"license_notes,omitempty"`
+	LicenseOverride      NullableString               `json:"license_override,omitempty"`
+	LicenseUrl           NullableString               `json:"license_url,omitempty"`
+	SpdxLicense          string                       `json:"spdx_license"`
+	VulnerabilityCounts  NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -50,6 +53,38 @@ func NewPackageLicenseWithDefaults() *PackageLicense {
 	var licenseOverride string = "None"
 	this.LicenseOverride = *NewNullableString(&licenseOverride)
 	return &this
+}
+
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+func (o *PackageLicense) GetIsMalwareDetected() bool {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMalwareDetected
+}
+
+// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageLicense) GetIsMalwareDetectedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		return nil, false
+	}
+	return o.IsMalwareDetected, true
+}
+
+// HasIsMalwareDetected returns a boolean if a field has been set.
+func (o *PackageLicense) HasIsMalwareDetected() bool {
+	if o != nil && !IsNil(o.IsMalwareDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+func (o *PackageLicense) SetIsMalwareDetected(v bool) {
+	o.IsMalwareDetected = &v
 }
 
 // GetLicenseNotes returns the LicenseNotes field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -205,6 +240,49 @@ func (o *PackageLicense) SetSpdxLicense(v string) {
 	o.SpdxLicense = v
 }
 
+// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageLicense) GetVulnerabilityCounts() WebOSVSeverityCounts {
+	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
+		var ret WebOSVSeverityCounts
+		return ret
+	}
+	return *o.VulnerabilityCounts.Get()
+}
+
+// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageLicense) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
+}
+
+// HasVulnerabilityCounts returns a boolean if a field has been set.
+func (o *PackageLicense) HasVulnerabilityCounts() bool {
+	if o != nil && o.VulnerabilityCounts.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
+func (o *PackageLicense) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
+	o.VulnerabilityCounts.Set(&v)
+}
+
+// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+func (o *PackageLicense) SetVulnerabilityCountsNil() {
+	o.VulnerabilityCounts.Set(nil)
+}
+
+// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
+func (o *PackageLicense) UnsetVulnerabilityCounts() {
+	o.VulnerabilityCounts.Unset()
+}
+
 func (o PackageLicense) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -215,6 +293,9 @@ func (o PackageLicense) MarshalJSON() ([]byte, error) {
 
 func (o PackageLicense) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.IsMalwareDetected) {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected
+	}
 	if o.LicenseNotes.IsSet() {
 		toSerialize["license_notes"] = o.LicenseNotes.Get()
 	}
@@ -225,6 +306,9 @@ func (o PackageLicense) ToMap() (map[string]interface{}, error) {
 		toSerialize["license_url"] = o.LicenseUrl.Get()
 	}
 	toSerialize["spdx_license"] = o.SpdxLicense
+	if o.VulnerabilityCounts.IsSet() {
+		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -268,10 +352,12 @@ func (o *PackageLicense) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "license_notes")
 		delete(additionalProperties, "license_override")
 		delete(additionalProperties, "license_url")
 		delete(additionalProperties, "spdx_license")
+		delete(additionalProperties, "vulnerability_counts")
 		o.AdditionalProperties = additionalProperties
 	}
 

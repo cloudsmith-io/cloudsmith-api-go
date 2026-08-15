@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1346.0
 Contact: support@cloudsmith.io
 */
 
@@ -25,6 +25,8 @@ type SwiftPackageUploadRequest struct {
 	AuthorName *string `json:"author_name,omitempty"`
 	// The organization of the author.
 	AuthorOrg *string `json:"author_org,omitempty"`
+	// Whether the package has been detected as containing malware. Requires Ultra plan.
+	IsMalwareDetected *bool `json:"is_malware_detected,omitempty"`
 	// The license URL of this package.
 	LicenseUrl NullableString `json:"license_url,omitempty"`
 	// The name of this package.
@@ -42,7 +44,8 @@ type SwiftPackageUploadRequest struct {
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`
 	// The raw version for this package.
-	Version              string `json:"version"`
+	Version              string                       `json:"version"`
+	VulnerabilityCounts  NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -131,6 +134,38 @@ func (o *SwiftPackageUploadRequest) HasAuthorOrg() bool {
 // SetAuthorOrg gets a reference to the given string and assigns it to the AuthorOrg field.
 func (o *SwiftPackageUploadRequest) SetAuthorOrg(v string) {
 	o.AuthorOrg = &v
+}
+
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+func (o *SwiftPackageUploadRequest) GetIsMalwareDetected() bool {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMalwareDetected
+}
+
+// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SwiftPackageUploadRequest) GetIsMalwareDetectedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		return nil, false
+	}
+	return o.IsMalwareDetected, true
+}
+
+// HasIsMalwareDetected returns a boolean if a field has been set.
+func (o *SwiftPackageUploadRequest) HasIsMalwareDetected() bool {
+	if o != nil && !IsNil(o.IsMalwareDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+func (o *SwiftPackageUploadRequest) SetIsMalwareDetected(v bool) {
+	o.IsMalwareDetected = &v
 }
 
 // GetLicenseUrl returns the LicenseUrl field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -411,6 +446,49 @@ func (o *SwiftPackageUploadRequest) SetVersion(v string) {
 	o.Version = v
 }
 
+// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SwiftPackageUploadRequest) GetVulnerabilityCounts() WebOSVSeverityCounts {
+	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
+		var ret WebOSVSeverityCounts
+		return ret
+	}
+	return *o.VulnerabilityCounts.Get()
+}
+
+// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SwiftPackageUploadRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
+}
+
+// HasVulnerabilityCounts returns a boolean if a field has been set.
+func (o *SwiftPackageUploadRequest) HasVulnerabilityCounts() bool {
+	if o != nil && o.VulnerabilityCounts.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
+func (o *SwiftPackageUploadRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
+	o.VulnerabilityCounts.Set(&v)
+}
+
+// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+func (o *SwiftPackageUploadRequest) SetVulnerabilityCountsNil() {
+	o.VulnerabilityCounts.Set(nil)
+}
+
+// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
+func (o *SwiftPackageUploadRequest) UnsetVulnerabilityCounts() {
+	o.VulnerabilityCounts.Unset()
+}
+
 func (o SwiftPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -426,6 +504,9 @@ func (o SwiftPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AuthorOrg) {
 		toSerialize["author_org"] = o.AuthorOrg
+	}
+	if !IsNil(o.IsMalwareDetected) {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected
 	}
 	if o.LicenseUrl.IsSet() {
 		toSerialize["license_url"] = o.LicenseUrl.Get()
@@ -446,6 +527,9 @@ func (o SwiftPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["tags"] = o.Tags.Get()
 	}
 	toSerialize["version"] = o.Version
+	if o.VulnerabilityCounts.IsSet() {
+		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -494,6 +578,7 @@ func (o *SwiftPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "author_name")
 		delete(additionalProperties, "author_org")
+		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "license_url")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "package_file")
@@ -503,6 +588,7 @@ func (o *SwiftPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scope")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "version")
+		delete(additionalProperties, "vulnerability_counts")
 		o.AdditionalProperties = additionalProperties
 	}
 

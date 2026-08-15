@@ -636,7 +636,7 @@ Name | Type | Description  | Notes
 
 ## PackagesRead
 
-> Package PackagesRead(ctx, owner, repo, identifier).IncludeConnectedRepositories(includeConnectedRepositories).Execute()
+> PackageDetail PackagesRead(ctx, owner, repo, identifier).IncludeConnectedRepositories(includeConnectedRepositories).Execute()
 
 Get a specific package in a repository.
 
@@ -667,7 +667,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PackagesApi.PackagesRead``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PackagesRead`: Package
+	// response from `PackagesRead`: PackageDetail
 	fmt.Fprintf(os.Stdout, "Response from `PackagesApi.PackagesRead`: %v\n", resp)
 }
 ```
@@ -696,7 +696,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Package**](Package.md)
+[**PackageDetail**](PackageDetail.md)
 
 ### Authorization
 
@@ -1044,7 +1044,7 @@ func main() {
 	owner := "owner_example" // string | 
 	repo := "repo_example" // string | 
 	identifier := "identifier_example" // string | 
-	data := *openapiclient.NewPackageLicenseRequestPatch() // PackageLicenseRequestPatch |  (optional)
+	data := *openapiclient.NewPackageLicenseRequestPatch("SpdxLicense_example") // PackageLicenseRequestPatch |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

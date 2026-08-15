@@ -200,6 +200,7 @@ docs/PackageDenyPolicyRequest.md
 docs/PackageDenyPolicyRequestPatch.md
 docs/PackageDependencies.md
 docs/PackageDependency.md
+docs/PackageDetail.md
 docs/PackageFile.md
 docs/PackageFilePartsUpload.md
 docs/PackageFileUpload.md
@@ -343,6 +344,7 @@ docs/VulnerabilityScan.md
 docs/VulnerabilityScanResults.md
 docs/VulnerabilityScanResultsList.md
 docs/VulnerabilityScanVersion.md
+docs/WebOSVSeverityCounts.md
 docs/WebhookTemplate.md
 docs/WebhooksApi.md
 git_push.sh
@@ -511,6 +513,7 @@ model_package_deny_policy_request.go
 model_package_deny_policy_request_patch.go
 model_package_dependencies.go
 model_package_dependency.go
+model_package_detail.go
 model_package_file.go
 model_package_file_parts_upload.go
 model_package_file_upload.go
@@ -644,6 +647,7 @@ model_vulnerability_scan.go
 model_vulnerability_scan_results.go
 model_vulnerability_scan_results_list.go
 model_vulnerability_scan_version.go
+model_web_osv_severity_counts.go
 model_webhook_template.go
 response.go
 test/api_audit_log_test.go

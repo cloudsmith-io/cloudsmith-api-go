@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1346.0
 Contact: support@cloudsmith.io
 */
 
@@ -27,6 +27,8 @@ type MavenPackageUploadRequest struct {
 	ExtraFiles []string `json:"extra_files,omitempty"`
 	// Artifact's group ID.
 	GroupId NullableString `json:"group_id,omitempty"`
+	// Whether the package has been detected as containing malware. Requires Ultra plan.
+	IsMalwareDetected *bool `json:"is_malware_detected,omitempty"`
 	// The ivy file is an XML file describing the dependencies of the project.
 	IvyFile NullableString `json:"ivy_file,omitempty"`
 	// Adds bundled Java documentation to the Maven package
@@ -48,7 +50,8 @@ type MavenPackageUploadRequest struct {
 	// Adds bundled Java tests to the Maven package.
 	TestsFile NullableString `json:"tests_file,omitempty"`
 	// The raw version for this package.
-	Version              NullableString `json:"version,omitempty"`
+	Version              NullableString               `json:"version,omitempty"`
+	VulnerabilityCounts  NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -189,6 +192,38 @@ func (o *MavenPackageUploadRequest) SetGroupIdNil() {
 // UnsetGroupId ensures that no value is present for GroupId, not even an explicit nil
 func (o *MavenPackageUploadRequest) UnsetGroupId() {
 	o.GroupId.Unset()
+}
+
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+func (o *MavenPackageUploadRequest) GetIsMalwareDetected() bool {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMalwareDetected
+}
+
+// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MavenPackageUploadRequest) GetIsMalwareDetectedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		return nil, false
+	}
+	return o.IsMalwareDetected, true
+}
+
+// HasIsMalwareDetected returns a boolean if a field has been set.
+func (o *MavenPackageUploadRequest) HasIsMalwareDetected() bool {
+	if o != nil && !IsNil(o.IsMalwareDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+func (o *MavenPackageUploadRequest) SetIsMalwareDetected(v bool) {
+	o.IsMalwareDetected = &v
 }
 
 // GetIvyFile returns the IvyFile field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -677,6 +712,49 @@ func (o *MavenPackageUploadRequest) UnsetVersion() {
 	o.Version.Unset()
 }
 
+// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MavenPackageUploadRequest) GetVulnerabilityCounts() WebOSVSeverityCounts {
+	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
+		var ret WebOSVSeverityCounts
+		return ret
+	}
+	return *o.VulnerabilityCounts.Get()
+}
+
+// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MavenPackageUploadRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
+}
+
+// HasVulnerabilityCounts returns a boolean if a field has been set.
+func (o *MavenPackageUploadRequest) HasVulnerabilityCounts() bool {
+	if o != nil && o.VulnerabilityCounts.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
+func (o *MavenPackageUploadRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
+	o.VulnerabilityCounts.Set(&v)
+}
+
+// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+func (o *MavenPackageUploadRequest) SetVulnerabilityCountsNil() {
+	o.VulnerabilityCounts.Set(nil)
+}
+
+// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
+func (o *MavenPackageUploadRequest) UnsetVulnerabilityCounts() {
+	o.VulnerabilityCounts.Unset()
+}
+
 func (o MavenPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -695,6 +773,9 @@ func (o MavenPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.GroupId.IsSet() {
 		toSerialize["group_id"] = o.GroupId.Get()
+	}
+	if !IsNil(o.IsMalwareDetected) {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected
 	}
 	if o.IvyFile.IsSet() {
 		toSerialize["ivy_file"] = o.IvyFile.Get()
@@ -729,6 +810,9 @@ func (o MavenPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
+	}
+	if o.VulnerabilityCounts.IsSet() {
+		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -776,6 +860,7 @@ func (o *MavenPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "artifact_id")
 		delete(additionalProperties, "extra_files")
 		delete(additionalProperties, "group_id")
+		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "ivy_file")
 		delete(additionalProperties, "javadoc_file")
 		delete(additionalProperties, "package_file")
@@ -788,6 +873,7 @@ func (o *MavenPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "tests_file")
 		delete(additionalProperties, "version")
+		delete(additionalProperties, "vulnerability_counts")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1346.0
 Contact: support@cloudsmith.io
 */
 
@@ -23,8 +23,11 @@ type PackageTagRequest struct {
 	Action NullableString `json:"action,omitempty"`
 	// If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package.
 	IsImmutable *bool `json:"is_immutable,omitempty"`
+	// Whether the package has been detected as containing malware. Requires Ultra plan.
+	IsMalwareDetected *bool `json:"is_malware_detected,omitempty"`
 	// A list of tags to apply the action to. Not required for clears.
-	Tags                 []string `json:"tags,omitempty"`
+	Tags                 []string                     `json:"tags,omitempty"`
+	VulnerabilityCounts  NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -130,6 +133,38 @@ func (o *PackageTagRequest) SetIsImmutable(v bool) {
 	o.IsImmutable = &v
 }
 
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+func (o *PackageTagRequest) GetIsMalwareDetected() bool {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMalwareDetected
+}
+
+// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTagRequest) GetIsMalwareDetectedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		return nil, false
+	}
+	return o.IsMalwareDetected, true
+}
+
+// HasIsMalwareDetected returns a boolean if a field has been set.
+func (o *PackageTagRequest) HasIsMalwareDetected() bool {
+	if o != nil && !IsNil(o.IsMalwareDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+func (o *PackageTagRequest) SetIsMalwareDetected(v bool) {
+	o.IsMalwareDetected = &v
+}
+
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageTagRequest) GetTags() []string {
 	if o == nil {
@@ -163,6 +198,49 @@ func (o *PackageTagRequest) SetTags(v []string) {
 	o.Tags = v
 }
 
+// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageTagRequest) GetVulnerabilityCounts() WebOSVSeverityCounts {
+	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
+		var ret WebOSVSeverityCounts
+		return ret
+	}
+	return *o.VulnerabilityCounts.Get()
+}
+
+// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageTagRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
+}
+
+// HasVulnerabilityCounts returns a boolean if a field has been set.
+func (o *PackageTagRequest) HasVulnerabilityCounts() bool {
+	if o != nil && o.VulnerabilityCounts.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
+func (o *PackageTagRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
+	o.VulnerabilityCounts.Set(&v)
+}
+
+// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+func (o *PackageTagRequest) SetVulnerabilityCountsNil() {
+	o.VulnerabilityCounts.Set(nil)
+}
+
+// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
+func (o *PackageTagRequest) UnsetVulnerabilityCounts() {
+	o.VulnerabilityCounts.Unset()
+}
+
 func (o PackageTagRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -179,8 +257,14 @@ func (o PackageTagRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsImmutable) {
 		toSerialize["is_immutable"] = o.IsImmutable
 	}
+	if !IsNil(o.IsMalwareDetected) {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected
+	}
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
+	}
+	if o.VulnerabilityCounts.IsSet() {
+		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -206,7 +290,9 @@ func (o *PackageTagRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "action")
 		delete(additionalProperties, "is_immutable")
+		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "tags")
+		delete(additionalProperties, "vulnerability_counts")
 		o.AdditionalProperties = additionalProperties
 	}
 

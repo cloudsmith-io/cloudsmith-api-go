@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1346.0
 Contact: support@cloudsmith.io
 */
 
@@ -1227,7 +1227,7 @@ func (r ApiPackagesReadRequest) IncludeConnectedRepositories(includeConnectedRep
 	return r
 }
 
-func (r ApiPackagesReadRequest) Execute() (*Package, *http.Response, error) {
+func (r ApiPackagesReadRequest) Execute() (*PackageDetail, *http.Response, error) {
 	return r.ApiService.PackagesReadExecute(r)
 }
 
@@ -1253,13 +1253,13 @@ func (a *PackagesApiService) PackagesRead(ctx context.Context, owner string, rep
 }
 
 // Execute executes the request
-//  @return Package
-func (a *PackagesApiService) PackagesReadExecute(r ApiPackagesReadRequest) (*Package, *http.Response, error) {
+//  @return PackageDetail
+func (a *PackagesApiService) PackagesReadExecute(r ApiPackagesReadRequest) (*PackageDetail, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *Package
+		localVarReturnValue *PackageDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PackagesApiService.PackagesRead")
