@@ -46,6 +46,7 @@ Method | HTTP request | Description
 [**OrgsOpenidConnectRead**](OrgsApi.md#OrgsOpenidConnectRead) | **Get** /orgs/{org}/openid-connect/{slug_perm}/ | Retrieve a specific OpenID Connect provider setting for the org.
 [**OrgsOpenidConnectUpdate**](OrgsApi.md#OrgsOpenidConnectUpdate) | **Put** /orgs/{org}/openid-connect/{slug_perm}/ | Update a specific OpenID Connect provider setting for the org.
 [**OrgsRead**](OrgsApi.md#OrgsRead) | **Get** /orgs/{org}/ | Get the details for the specific organization.
+[**OrgsRetrieveUsageLimits**](OrgsApi.md#OrgsRetrieveUsageLimits) | **Get** /orgs/{org}/usage-limits/ | 
 [**OrgsSamlAuthenticationPartialUpdate**](OrgsApi.md#OrgsSamlAuthenticationPartialUpdate) | **Patch** /orgs/{org}/saml-authentication | Update the SAML Authentication settings for this Organization.
 [**OrgsSamlAuthenticationRead**](OrgsApi.md#OrgsSamlAuthenticationRead) | **Get** /orgs/{org}/saml-authentication | Retrieve the SAML Authentication settings for this Organization.
 [**OrgsSamlGroupSyncCreate**](OrgsApi.md#OrgsSamlGroupSyncCreate) | **Post** /orgs/{org}/saml-group-sync/ | Create a new SAML Group Sync mapping within an organization.
@@ -68,6 +69,7 @@ Method | HTTP request | Description
 [**OrgsTeamsMembersUpdate**](OrgsApi.md#OrgsTeamsMembersUpdate) | **Put** /orgs/{org}/teams/{team}/members | Replace all team members.
 [**OrgsTeamsPartialUpdate**](OrgsApi.md#OrgsTeamsPartialUpdate) | **Patch** /orgs/{org}/teams/{team}/ | Update a specific team in a organization.
 [**OrgsTeamsRead**](OrgsApi.md#OrgsTeamsRead) | **Get** /orgs/{org}/teams/{team}/ | Get the details of a specific team within an organization.
+[**OrgsUpdateUsageLimits**](OrgsApi.md#OrgsUpdateUsageLimits) | **Patch** /orgs/{org}/usage-limits/ | 
 [**OrgsVulnerabilityPolicyCreate**](OrgsApi.md#OrgsVulnerabilityPolicyCreate) | **Post** /orgs/{org}/vulnerability-policy/ | Create a package vulnerability policy.
 [**OrgsVulnerabilityPolicyDelete**](OrgsApi.md#OrgsVulnerabilityPolicyDelete) | **Delete** /orgs/{org}/vulnerability-policy/{slug_perm}/ | Delete a package vulnerability policy.
 [**OrgsVulnerabilityPolicyEvaluationCreate**](OrgsApi.md#OrgsVulnerabilityPolicyEvaluationCreate) | **Post** /orgs/{org}/vulnerability-policy/{policy_slug_perm}/evaluation/ | Create an evaluation request for this policy.
@@ -3171,6 +3173,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## OrgsRetrieveUsageLimits
+
+> OrgsRetrieveUsageLimits200Response OrgsRetrieveUsageLimits(ctx, org).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsRetrieveUsageLimits(context.Background(), org).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsRetrieveUsageLimits``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsRetrieveUsageLimits`: OrgsRetrieveUsageLimits200Response
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsRetrieveUsageLimits`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsRetrieveUsageLimitsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OrgsRetrieveUsageLimits200Response**](OrgsRetrieveUsageLimits200Response.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## OrgsSamlAuthenticationPartialUpdate
 
 > OrganizationSAMLAuth OrgsSamlAuthenticationPartialUpdate(ctx, org).Data(data).Execute()
@@ -4767,6 +4837,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsUpdateUsageLimits
+
+> OrgsUpdateUsageLimits200Response OrgsUpdateUsageLimits(ctx, org).Data(data).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	data := *openapiclient.NewOrganizationUsageUpdateRequestPatch() // OrganizationUsageUpdateRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsUpdateUsageLimits(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsUpdateUsageLimits``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsUpdateUsageLimits`: OrgsUpdateUsageLimits200Response
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsUpdateUsageLimits`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsUpdateUsageLimitsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **data** | [**OrganizationUsageUpdateRequestPatch**](OrganizationUsageUpdateRequestPatch.md) |  | 
+
+### Return type
+
+[**OrgsUpdateUsageLimits200Response**](OrgsUpdateUsageLimits200Response.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

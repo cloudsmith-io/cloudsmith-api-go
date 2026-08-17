@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **IsDeleteable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsHidden** | Pointer to **bool** |  | [optional] [readonly] 
+**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **IsMoveable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantinable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
@@ -83,12 +84,14 @@ Name | Type | Description | Notes
 **SyncProgress** | Pointer to **int64** | Synchronisation progress (from 0-100) | [optional] [readonly] 
 **TagsAutomatic** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
 **TagsImmutable** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
+**TagsStatic** | Pointer to **map[string][]string** | All static tags on the package, grouped by context. Static tags are derived from the package&#39;s properties at request time and carry a &#39;context&#39; (rather than a tag type). Includes format-specific badges and the package&#39;s architecture, subtype, and extension. | [optional] [readonly] 
 **TypeDisplay** | Pointer to **string** |  | [optional] [readonly] 
 **UploadedAt** | Pointer to **time.Time** | The date this package was uploaded. | [optional] [readonly] 
 **Uploader** | Pointer to **string** |  | [optional] [readonly] 
 **UploaderUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Version** | Pointer to **NullableString** | The raw version for this package. | [optional] [readonly] 
 **VersionOrig** | Pointer to **string** |  | [optional] [readonly] 
+**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 **VulnerabilityScanResultsUrl** | Pointer to **string** |  | [optional] [readonly] 
 
 ## Methods
@@ -894,6 +897,31 @@ SetIsHidden sets IsHidden field to given value.
 `func (o *DartPackageUpload) HasIsHidden() bool`
 
 HasIsHidden returns a boolean if a field has been set.
+
+### GetIsMalwareDetected
+
+`func (o *DartPackageUpload) GetIsMalwareDetected() bool`
+
+GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
+
+### GetIsMalwareDetectedOk
+
+`func (o *DartPackageUpload) GetIsMalwareDetectedOk() (*bool, bool)`
+
+GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMalwareDetected
+
+`func (o *DartPackageUpload) SetIsMalwareDetected(v bool)`
+
+SetIsMalwareDetected sets IsMalwareDetected field to given value.
+
+### HasIsMalwareDetected
+
+`func (o *DartPackageUpload) HasIsMalwareDetected() bool`
+
+HasIsMalwareDetected returns a boolean if a field has been set.
 
 ### GetIsMoveable
 
@@ -2275,6 +2303,31 @@ SetTagsImmutable sets TagsImmutable field to given value.
 
 HasTagsImmutable returns a boolean if a field has been set.
 
+### GetTagsStatic
+
+`func (o *DartPackageUpload) GetTagsStatic() map[string][]string`
+
+GetTagsStatic returns the TagsStatic field if non-nil, zero value otherwise.
+
+### GetTagsStaticOk
+
+`func (o *DartPackageUpload) GetTagsStaticOk() (*map[string][]string, bool)`
+
+GetTagsStaticOk returns a tuple with the TagsStatic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTagsStatic
+
+`func (o *DartPackageUpload) SetTagsStatic(v map[string][]string)`
+
+SetTagsStatic sets TagsStatic field to given value.
+
+### HasTagsStatic
+
+`func (o *DartPackageUpload) HasTagsStatic() bool`
+
+HasTagsStatic returns a boolean if a field has been set.
+
 ### GetTypeDisplay
 
 `func (o *DartPackageUpload) GetTypeDisplay() string`
@@ -2435,6 +2488,41 @@ SetVersionOrig sets VersionOrig field to given value.
 
 HasVersionOrig returns a boolean if a field has been set.
 
+### GetVulnerabilityCounts
+
+`func (o *DartPackageUpload) GetVulnerabilityCounts() WebOSVSeverityCounts`
+
+GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
+
+### GetVulnerabilityCountsOk
+
+`func (o *DartPackageUpload) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
+
+GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVulnerabilityCounts
+
+`func (o *DartPackageUpload) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
+
+SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
+
+### HasVulnerabilityCounts
+
+`func (o *DartPackageUpload) HasVulnerabilityCounts() bool`
+
+HasVulnerabilityCounts returns a boolean if a field has been set.
+
+### SetVulnerabilityCountsNil
+
+`func (o *DartPackageUpload) SetVulnerabilityCountsNil(b bool)`
+
+ SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+
+### UnsetVulnerabilityCounts
+`func (o *DartPackageUpload) UnsetVulnerabilityCounts()`
+
+UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 ### GetVulnerabilityScanResultsUrl
 
 `func (o *DartPackageUpload) GetVulnerabilityScanResultsUrl() string`

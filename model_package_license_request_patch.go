@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1348.3
 Contact: support@cloudsmith.io
 */
 
@@ -13,6 +13,7 @@ package cloudsmith
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the PackageLicenseRequestPatch type satisfies the MappedNullable interface at compile time
@@ -20,11 +21,14 @@ var _ MappedNullable = &PackageLicenseRequestPatch{}
 
 // PackageLicenseRequestPatch struct for PackageLicenseRequestPatch
 type PackageLicenseRequestPatch struct {
-	Action               NullableString `json:"action,omitempty"`
-	LicenseNotes         NullableString `json:"license_notes,omitempty"`
-	LicenseOverride      NullableString `json:"license_override,omitempty"`
-	LicenseUrl           NullableString `json:"license_url,omitempty"`
-	SpdxLicense          *string        `json:"spdx_license,omitempty"`
+	Action NullableString `json:"action,omitempty"`
+	// Whether the package has been detected as containing malware. Requires Ultra plan.
+	IsMalwareDetected    *bool                        `json:"is_malware_detected,omitempty"`
+	LicenseNotes         NullableString               `json:"license_notes,omitempty"`
+	LicenseOverride      NullableString               `json:"license_override,omitempty"`
+	LicenseUrl           NullableString               `json:"license_url,omitempty"`
+	SpdxLicense          string                       `json:"spdx_license"`
+	VulnerabilityCounts  NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,12 +38,13 @@ type _PackageLicenseRequestPatch PackageLicenseRequestPatch
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPackageLicenseRequestPatch() *PackageLicenseRequestPatch {
+func NewPackageLicenseRequestPatch(spdxLicense string) *PackageLicenseRequestPatch {
 	this := PackageLicenseRequestPatch{}
 	var action string = "Update"
 	this.Action = *NewNullableString(&action)
 	var licenseOverride string = "None"
 	this.LicenseOverride = *NewNullableString(&licenseOverride)
+	this.SpdxLicense = spdxLicense
 	return &this
 }
 
@@ -96,6 +101,38 @@ func (o *PackageLicenseRequestPatch) SetActionNil() {
 // UnsetAction ensures that no value is present for Action, not even an explicit nil
 func (o *PackageLicenseRequestPatch) UnsetAction() {
 	o.Action.Unset()
+}
+
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+func (o *PackageLicenseRequestPatch) GetIsMalwareDetected() bool {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMalwareDetected
+}
+
+// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageLicenseRequestPatch) GetIsMalwareDetectedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		return nil, false
+	}
+	return o.IsMalwareDetected, true
+}
+
+// HasIsMalwareDetected returns a boolean if a field has been set.
+func (o *PackageLicenseRequestPatch) HasIsMalwareDetected() bool {
+	if o != nil && !IsNil(o.IsMalwareDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+func (o *PackageLicenseRequestPatch) SetIsMalwareDetected(v bool) {
+	o.IsMalwareDetected = &v
 }
 
 // GetLicenseNotes returns the LicenseNotes field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -227,36 +264,71 @@ func (o *PackageLicenseRequestPatch) UnsetLicenseUrl() {
 	o.LicenseUrl.Unset()
 }
 
-// GetSpdxLicense returns the SpdxLicense field value if set, zero value otherwise.
+// GetSpdxLicense returns the SpdxLicense field value
 func (o *PackageLicenseRequestPatch) GetSpdxLicense() string {
-	if o == nil || IsNil(o.SpdxLicense) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SpdxLicense
+
+	return o.SpdxLicense
 }
 
-// GetSpdxLicenseOk returns a tuple with the SpdxLicense field value if set, nil otherwise
+// GetSpdxLicenseOk returns a tuple with the SpdxLicense field value
 // and a boolean to check if the value has been set.
 func (o *PackageLicenseRequestPatch) GetSpdxLicenseOk() (*string, bool) {
-	if o == nil || IsNil(o.SpdxLicense) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SpdxLicense, true
+	return &o.SpdxLicense, true
 }
 
-// HasSpdxLicense returns a boolean if a field has been set.
-func (o *PackageLicenseRequestPatch) HasSpdxLicense() bool {
-	if o != nil && !IsNil(o.SpdxLicense) {
+// SetSpdxLicense sets field value
+func (o *PackageLicenseRequestPatch) SetSpdxLicense(v string) {
+	o.SpdxLicense = v
+}
+
+// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageLicenseRequestPatch) GetVulnerabilityCounts() WebOSVSeverityCounts {
+	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
+		var ret WebOSVSeverityCounts
+		return ret
+	}
+	return *o.VulnerabilityCounts.Get()
+}
+
+// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageLicenseRequestPatch) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
+}
+
+// HasVulnerabilityCounts returns a boolean if a field has been set.
+func (o *PackageLicenseRequestPatch) HasVulnerabilityCounts() bool {
+	if o != nil && o.VulnerabilityCounts.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSpdxLicense gets a reference to the given string and assigns it to the SpdxLicense field.
-func (o *PackageLicenseRequestPatch) SetSpdxLicense(v string) {
-	o.SpdxLicense = &v
+// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
+func (o *PackageLicenseRequestPatch) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
+	o.VulnerabilityCounts.Set(&v)
+}
+
+// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+func (o *PackageLicenseRequestPatch) SetVulnerabilityCountsNil() {
+	o.VulnerabilityCounts.Set(nil)
+}
+
+// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
+func (o *PackageLicenseRequestPatch) UnsetVulnerabilityCounts() {
+	o.VulnerabilityCounts.Unset()
 }
 
 func (o PackageLicenseRequestPatch) MarshalJSON() ([]byte, error) {
@@ -272,6 +344,9 @@ func (o PackageLicenseRequestPatch) ToMap() (map[string]interface{}, error) {
 	if o.Action.IsSet() {
 		toSerialize["action"] = o.Action.Get()
 	}
+	if !IsNil(o.IsMalwareDetected) {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected
+	}
 	if o.LicenseNotes.IsSet() {
 		toSerialize["license_notes"] = o.LicenseNotes.Get()
 	}
@@ -281,8 +356,9 @@ func (o PackageLicenseRequestPatch) ToMap() (map[string]interface{}, error) {
 	if o.LicenseUrl.IsSet() {
 		toSerialize["license_url"] = o.LicenseUrl.Get()
 	}
-	if !IsNil(o.SpdxLicense) {
-		toSerialize["spdx_license"] = o.SpdxLicense
+	toSerialize["spdx_license"] = o.SpdxLicense
+	if o.VulnerabilityCounts.IsSet() {
+		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -293,6 +369,27 @@ func (o PackageLicenseRequestPatch) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *PackageLicenseRequestPatch) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"spdx_license",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varPackageLicenseRequestPatch := _PackageLicenseRequestPatch{}
 
 	err = json.Unmarshal(data, &varPackageLicenseRequestPatch)
@@ -307,10 +404,12 @@ func (o *PackageLicenseRequestPatch) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "action")
+		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "license_notes")
 		delete(additionalProperties, "license_override")
 		delete(additionalProperties, "license_url")
 		delete(additionalProperties, "spdx_license")
+		delete(additionalProperties, "vulnerability_counts")
 		o.AdditionalProperties = additionalProperties
 	}
 

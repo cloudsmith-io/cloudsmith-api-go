@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1288.1
+  version: 1.1348.3
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -4367,6 +4367,72 @@ paths:
       tags:
       - orgs
       x-codegen-request-body-name: data
+  /orgs/{org}/usage-limits/:
+    get:
+      operationId: orgs_retrieve_usage_limits
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/orgs_retrieve_usage_limits_200_response'
+          description: Organization usage limits configuration.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      tags:
+      - orgs
+    patch:
+      operationId: orgs_update_usage_limits
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationUsageUpdateRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/orgs_update_usage_limits_200_response'
+          description: Organization usage limits configuration updated.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Invalid input
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
   /orgs/{org}/vulnerability-policy-violation/:
     get:
       description: List all current vulnerability policy violations for this Organization.
@@ -7829,7 +7895,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: '#/components/schemas/PackageDetail'
           description: Retrieved the specified package successfully.
         "400":
           content:
@@ -18140,6 +18206,7 @@ components:
       properties:
         filename:
           description: Filename for the package file upload.
+          maxLength: 255
           minLength: 1
           title: Filename
           type: string
@@ -19305,10 +19372,62 @@ components:
           title: User url
           type: string
       type: object
+    WebOSVSeverityCounts:
+      description: Per-severity OSV vulnerability counts for non-hidden matches. Requires
+        Ultra plan.
+      example:
+        high: 6
+        total: 2
+        malware: 5
+        critical: 0
+        low: 1
+        medium: 5
+        unknown: 7
+      nullable: true
+      properties:
+        critical:
+          readOnly: true
+          title: Critical
+          type: integer
+        high:
+          readOnly: true
+          title: High
+          type: integer
+        low:
+          readOnly: true
+          title: Low
+          type: integer
+        malware:
+          readOnly: true
+          title: Malware
+          type: integer
+        medium:
+          readOnly: true
+          title: Medium
+          type: integer
+        total:
+          readOnly: true
+          title: Total
+          type: integer
+        unknown:
+          readOnly: true
+          title: Unknown
+          type: integer
+      type: object
+      x-nullable: true
     PackageVulnerability:
       example:
         identifier: identifier
         name: name
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         version: version
         url: https://openapi-generator.tech
       properties:
@@ -19316,6 +19435,12 @@ components:
           minLength: 1
           title: Identifier
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         name:
           description: The name of this package.
           nullable: true
@@ -19334,6 +19459,8 @@ components:
           readOnly: true
           title: Version
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - identifier
       type: object
@@ -19412,6 +19539,15 @@ components:
         package:
           identifier: identifier
           name: name
+          vulnerability_counts:
+            high: 6
+            total: 2
+            malware: 5
+            critical: 0
+            low: 1
+            medium: 5
+            unknown: 7
+          is_malware_detected: true
           version: version
           url: https://openapi-generator.tech
         reasons:
@@ -20847,6 +20983,70 @@ components:
       required:
       - members
       type: object
+    OrganizationUsage:
+      properties:
+        bandwidth_maximum:
+          description: The maximum allowed package delivery overage in GB for this
+            product.
+          nullable: true
+          readOnly: true
+          title: Package Delivery Maximum Overage (GBs)
+          type: integer
+        bandwidth_overage_limit:
+          description: The on-demand limit for package delivery usage (in GBs).
+          nullable: true
+          readOnly: true
+          title: Package Delivery On-Demand Limit (GBs)
+          type: integer
+        storage_maximum:
+          description: The maximum allowed artifact data overage in GB for this product.
+          nullable: true
+          readOnly: true
+          title: Artifact Data Maximum Overage (GBs)
+          type: integer
+        storage_overage_limit:
+          description: The on-demand limit for artifact data usage (in GBs).
+          nullable: true
+          readOnly: true
+          title: Artifact Data On-Demand Limit (GBs)
+          type: integer
+      type: object
+    OrganizationUsageUpdateRequestPatch:
+      example:
+        storage_overage_limit: 0
+        allow_open_source_overage: true
+        bandwidth_overage_limit: 0
+      properties:
+        allow_open_source_overage:
+          title: Allow open source overage
+          type: boolean
+        bandwidth_overage_limit:
+          minimum: 0
+          nullable: true
+          title: Bandwidth overage limit
+          type: integer
+        storage_overage_limit:
+          minimum: 0
+          nullable: true
+          title: Storage overage limit
+          type: integer
+      type: object
+    OrganizationUsageUpdate:
+      properties:
+        allow_open_source_overage:
+          title: Allow open source overage
+          type: boolean
+        bandwidth_overage_limit:
+          minimum: 0
+          nullable: true
+          title: Bandwidth overage limit
+          type: integer
+        storage_overage_limit:
+          minimum: 0
+          nullable: true
+          title: Storage overage limit
+          type: integer
+      type: object
     NestedVulnerabilityPolicy:
       example:
         allow_unknown_severity: true
@@ -20978,6 +21178,15 @@ components:
         package:
           identifier: identifier
           name: name
+          vulnerability_counts:
+            high: 6
+            total: 2
+            malware: 5
+            critical: 0
+            low: 1
+            medium: 5
+            unknown: 7
+          is_malware_detected: true
           version: version
           url: https://openapi-generator.tech
         reasons:
@@ -21360,6 +21569,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 7
         repository: repository
         origin_repository: origin_repository
@@ -21391,6 +21601,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -21464,6 +21678,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 4
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -21621,6 +21843,12 @@ components:
           readOnly: true
           title: Is hidden
           type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         is_moveable:
           readOnly: true
           title: Is moveable
@@ -21897,6 +22125,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -21927,6 +22167,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -21975,7 +22217,16 @@ components:
     AlpinePackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         distribution: distribution
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
@@ -21984,6 +22235,12 @@ components:
           minLength: 1
           title: Distribution
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -22002,6 +22259,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - distribution
       - package_file
@@ -22016,6 +22275,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -22045,6 +22305,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -22118,6 +22382,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -22267,6 +22539,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -22539,6 +22817,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -22569,6 +22859,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -22578,9 +22870,24 @@ components:
     CargoPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -22599,6 +22906,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -22612,6 +22921,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -22641,6 +22951,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -22714,6 +23028,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -22863,6 +23185,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -23135,6 +23463,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -23165,6 +23505,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -23174,9 +23516,24 @@ components:
     CocoapodsPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -23195,6 +23552,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -23208,6 +23567,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -23237,6 +23597,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -23310,6 +23674,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -23459,6 +23831,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -23731,6 +24109,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -23761,6 +24151,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -23770,10 +24162,25 @@ components:
     ComposerPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -23798,6 +24205,8 @@ components:
           nullable: true
           title: Version
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -23811,6 +24220,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -23840,6 +24250,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -23913,6 +24327,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -24062,6 +24484,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -24334,6 +24762,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -24364,6 +24804,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -24375,6 +24817,15 @@ components:
         republish: true
         name: name
         metadata_file: metadata_file
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         conan_prefix: conan_prefix
         version: version
@@ -24402,6 +24853,12 @@ components:
           minLength: 1
           title: Info file
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         manifest_file:
           description: The info file is an python file containing the package metadata.
           minLength: 1
@@ -24442,6 +24899,8 @@ components:
           nullable: true
           title: Version
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - info_file
       - manifest_file
@@ -24458,6 +24917,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -24487,6 +24947,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -24562,6 +25026,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -24726,6 +25198,12 @@ components:
           readOnly: true
           title: Is hidden
           type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         is_moveable:
           readOnly: true
           title: Is moveable
@@ -24997,6 +25475,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -25027,6 +25517,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -25036,9 +25528,24 @@ components:
     CondaPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -25057,6 +25564,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -25070,6 +25579,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -25099,6 +25609,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -25172,6 +25686,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -25321,6 +25843,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -25593,6 +26121,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -25623,6 +26163,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -25633,6 +26175,15 @@ components:
       example:
         republish: true
         r_version: r_version
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         architecture: architecture
         tags: tags
@@ -25643,6 +26194,12 @@ components:
           minLength: 1
           title: Architecture
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -25669,6 +26226,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -25682,6 +26241,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -25711,6 +26271,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -25784,6 +26348,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -25934,6 +26506,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -26214,6 +26792,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -26244,6 +26834,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -26253,9 +26845,24 @@ components:
     DartPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -26274,6 +26881,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -26287,6 +26896,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -26316,6 +26926,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -26389,6 +27003,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -26538,6 +27160,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -26810,6 +27438,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -26840,6 +27480,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -26852,7 +27494,16 @@ components:
         component: main
         republish: true
         changes_file: changes_file
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         distribution: distribution
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
@@ -26877,6 +27528,12 @@ components:
           minLength: 1
           title: Distribution
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -26901,6 +27558,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - distribution
       - package_file
@@ -26915,6 +27574,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -26944,6 +27604,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -27017,6 +27681,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -27166,6 +27838,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -27438,6 +28116,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -27468,6 +28158,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -27477,9 +28169,24 @@ components:
     DockerPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -27498,6 +28205,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -27511,6 +28220,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -27540,6 +28250,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -27613,6 +28327,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -27762,6 +28484,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -28034,6 +28762,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -28064,6 +28804,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -28075,6 +28817,15 @@ components:
         filepath: filepath
         republish: true
         name: name
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
@@ -28085,6 +28836,12 @@ components:
           minLength: 1
           title: Filepath
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         name:
           description: The name of this package.
           maxLength: 200
@@ -28115,6 +28872,8 @@ components:
           nullable: true
           title: Version
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - filepath
       - package_file
@@ -28129,6 +28888,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -28158,6 +28918,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -28231,6 +28995,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -28380,6 +29152,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -28652,6 +29430,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -28682,6 +29472,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -28691,9 +29483,24 @@ components:
     GoPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -28712,6 +29519,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -28725,6 +29534,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -28754,6 +29564,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -28827,6 +29641,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -28976,6 +29798,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -29248,6 +30076,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -29278,6 +30118,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -29288,9 +30130,24 @@ components:
       example:
         provenance_file: provenance_file
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -29316,6 +30173,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -29329,6 +30188,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -29358,6 +30218,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -29431,6 +30295,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -29580,6 +30452,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -29852,6 +30730,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -29882,6 +30772,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -29891,9 +30783,24 @@ components:
     HexPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -29912,6 +30819,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -29925,6 +30834,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -29954,6 +30864,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -30027,6 +30941,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -30176,6 +31098,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -30448,6 +31376,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -30478,6 +31418,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -30487,9 +31429,24 @@ components:
     HuggingfacePackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -30508,6 +31465,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -30521,6 +31480,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -30550,6 +31510,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -30623,6 +31587,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -30772,6 +31744,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -31044,6 +32022,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -31074,6 +32064,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -31083,9 +32075,24 @@ components:
     LuarocksPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -31104,6 +32111,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -31117,6 +32126,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -31146,6 +32156,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -31219,6 +32233,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -31368,6 +32390,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -31640,6 +32668,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -31670,6 +32710,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -31679,8 +32721,17 @@ components:
     MavenPackageUploadRequest:
       example:
         javadoc_file: javadoc_file
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         packaging: packaging
         artifact_id: artifact_id
+        is_malware_detected: true
         package_file: package_file
         version: version
         pom_file: pom_file
@@ -31716,6 +32767,12 @@ components:
           nullable: true
           title: Group id
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         ivy_file:
           description: The ivy file is an XML file describing the dependencies of
             the project.
@@ -31787,6 +32844,8 @@ components:
           nullable: true
           title: Version
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -31801,6 +32860,7 @@ components:
         checksum_sha256: checksum_sha256
         release: release
         artifact_id: artifact_id
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -31830,6 +32890,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -31903,6 +32967,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         packaging: packaging
         uploader_url: https://openapi-generator.tech
@@ -32068,6 +33140,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -32356,6 +33434,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -32386,6 +33476,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -32395,10 +33487,25 @@ components:
     McpPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -32423,6 +33530,8 @@ components:
           nullable: true
           title: Version
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -32436,6 +33545,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -32465,6 +33575,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -32538,6 +33652,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -32687,6 +33809,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -32959,6 +34087,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -32989,6 +34129,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -32998,10 +34140,25 @@ components:
     NpmPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         npm_dist_tag: latest
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         npm_dist_tag:
           default: latest
           description: The default npm dist-tag for this package/version - This will
@@ -33028,6 +34185,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -33041,6 +34200,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -33070,6 +34230,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -33143,6 +34307,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -33292,6 +34464,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -33564,6 +34742,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -33594,6 +34784,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -33604,9 +34796,24 @@ components:
       example:
         republish: true
         symbols_file: symbols_file
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -33631,6 +34838,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -33644,6 +34853,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -33673,6 +34883,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -33746,6 +34960,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -33895,6 +35117,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -34167,6 +35395,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -34197,6 +35437,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -34206,9 +35448,24 @@ components:
     P2PackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -34227,6 +35484,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -34240,6 +35499,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -34269,6 +35529,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -34342,6 +35606,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -34491,6 +35763,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -34763,6 +36041,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -34793,6 +36083,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -34802,9 +36094,24 @@ components:
     PythonPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -34823,6 +36130,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -34836,6 +36145,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -34865,6 +36175,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -34938,6 +36252,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -35087,6 +36409,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -35359,6 +36687,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -35389,6 +36729,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -35402,6 +36744,15 @@ components:
         republish: true
         name: name
         description: description
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
@@ -35421,6 +36772,12 @@ components:
           nullable: true
           title: Description
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         name:
           description: The name of this package.
           maxLength: 200
@@ -35457,6 +36814,8 @@ components:
           nullable: true
           title: Version
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -35470,6 +36829,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -35499,6 +36859,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -35572,6 +36936,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -35722,6 +37094,12 @@ components:
           readOnly: true
           title: Is hidden
           type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         is_moveable:
           readOnly: true
           title: Is moveable
@@ -35993,6 +37371,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -36023,6 +37413,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -36032,7 +37424,16 @@ components:
     RpmPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         distribution: distribution
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
@@ -36041,6 +37442,12 @@ components:
           minLength: 1
           title: Distribution
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -36059,6 +37466,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - distribution
       - package_file
@@ -36073,6 +37482,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -36102,6 +37512,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -36175,6 +37589,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -36324,6 +37746,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -36596,6 +38024,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -36626,6 +38066,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -36635,9 +38077,24 @@ components:
     RubyPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -36656,6 +38113,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -36669,6 +38128,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -36698,6 +38158,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -36771,6 +38235,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -36920,6 +38392,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -37192,6 +38670,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -37222,6 +38712,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -37231,16 +38723,25 @@ components:
     SwiftPackageUploadRequest:
       example:
         author_name: author_name
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
+        package_file: package_file
+        version: version
+        readme_url: https://openapi-generator.tech
+        tags: tags
         republish: true
         scope: scope
         author_org: author_org
         name: name
         repository_url: https://openapi-generator.tech
-        package_file: package_file
-        version: version
         license_url: https://openapi-generator.tech
-        readme_url: https://openapi-generator.tech
-        tags: tags
       properties:
         author_name:
           description: The name of the author of the package.
@@ -37252,6 +38753,12 @@ components:
           minLength: 1
           title: Author org
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         license_url:
           description: The license URL of this package.
           format: uri
@@ -37306,6 +38813,8 @@ components:
           maxLength: 255
           title: Version
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - name
       - package_file
@@ -37322,6 +38831,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -37351,6 +38861,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         author_org: author_org
         name: name
@@ -37428,6 +38942,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -37588,6 +39110,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -37880,6 +39408,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -37909,6 +39449,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -37922,9 +39464,24 @@ components:
     TerraformPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -37943,6 +39500,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -37956,6 +39515,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -37985,6 +39545,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -38058,6 +39622,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -38207,6 +39779,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -38479,6 +40057,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -38509,6 +40099,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -38520,10 +40112,25 @@ components:
         republish: true
         provider: provider
         name: name
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         name:
           description: The name of this package.
           maxLength: 200
@@ -38557,6 +40164,8 @@ components:
           maxLength: 255
           title: Version
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - name
       - package_file
@@ -38573,6 +40182,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -38602,6 +40212,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -38676,6 +40290,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -38825,6 +40447,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -39101,6 +40729,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -39130,6 +40770,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -39143,9 +40785,24 @@ components:
     VsxPackageUploadRequest:
       example:
         republish: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -39164,6 +40821,8 @@ components:
           nullable: true
           title: Tags
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -39177,6 +40836,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -39206,6 +40866,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -39279,6 +40943,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -39428,6 +41100,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -39700,6 +41378,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -39730,31 +41420,15 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
           title: Vulnerability scan results url
           type: string
       type: object
-    PackageCopyRequest:
-      example:
-        republish: true
-        destination: destination
-      properties:
-        destination:
-          description: The name of the destination repository without the namespace.
-          minLength: 1
-          title: Destination
-          type: string
-        republish:
-          description: "If true, the package will overwrite any others with the same\
-            \ attributes (e.g. same version); otherwise, it will be flagged as a duplicate."
-          title: Republish
-          type: boolean
-      required:
-      - destination
-      type: object
-    PackageCopy:
+    PackageDetail:
       example:
         architectures:
         - name: name
@@ -39762,8 +41436,10 @@ components:
         - name: name
           description: description
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
+        has_dependencies: true
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -39795,6 +41471,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -39868,6 +41548,671 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_sync_awaiting: true
+        uploader_url: https://openapi-generator.tech
+        self_html_url: self_html_url
+        origin_repository_url: https://openapi-generator.tech
+        self_url: https://openapi-generator.tech
+        status_url: https://openapi-generator.tech
+        is_sync_in_flight: true
+        security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
+        is_sync_in_progress: true
+        stage_str: stage_str
+        stage: 7
+        format_url: https://openapi-generator.tech
+        dependencies_url: https://openapi-generator.tech
+        namespace: namespace
+        is_sync_failed: true
+      properties:
+        architectures:
+          items:
+            $ref: '#/components/schemas/Architecture'
+          readOnly: true
+          type: array
+        cdn_url:
+          nullable: true
+          readOnly: true
+          title: Cdn url
+          type: string
+        checksum_md5:
+          readOnly: true
+          title: Checksum md5
+          type: string
+        checksum_sha1:
+          readOnly: true
+          title: Checksum sha1
+          type: string
+        checksum_sha256:
+          readOnly: true
+          title: Checksum sha256
+          type: string
+        checksum_sha512:
+          readOnly: true
+          title: Checksum sha512
+          type: string
+        dependencies_checksum_md5:
+          description: A checksum of all of the package's dependencies.
+          nullable: true
+          readOnly: true
+          title: Dependencies checksum md5
+          type: string
+        dependencies_url:
+          format: uri
+          readOnly: true
+          title: Dependencies url
+          type: string
+        description:
+          description: A textual description of this package.
+          nullable: true
+          readOnly: true
+          title: Description
+          type: string
+        display_name:
+          readOnly: true
+          title: Display name
+          type: string
+        distro:
+          $ref: '#/components/schemas/Distribution'
+        distro_version:
+          $ref: '#/components/schemas/DistributionVersion'
+        downloads:
+          readOnly: true
+          title: Downloads
+          type: integer
+        epoch:
+          description: The epoch of the package version (if any).
+          nullable: true
+          readOnly: true
+          title: Epoch
+          type: integer
+        extension:
+          readOnly: true
+          title: Extension
+          type: string
+        filename:
+          minLength: 1
+          readOnly: true
+          title: Filename
+          type: string
+        filepath:
+          description: "Full path to the file, including filename e.g. bin/utils/tool.tar.gz"
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Filepath
+          type: string
+        files:
+          items:
+            $ref: '#/components/schemas/PackageFile'
+          readOnly: true
+          type: array
+        format:
+          minLength: 1
+          readOnly: true
+          title: Format
+          type: string
+        format_url:
+          format: uri
+          readOnly: true
+          title: Format url
+          type: string
+        freeable_storage:
+          description: Amount of storage that will be freed if this package is deleted
+          readOnly: true
+          title: Freeable storage
+          type: integer
+        fully_qualified_name:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Fully qualified name
+          type: string
+        has_dependencies:
+          description: Whether the package has any dependencies (top-level or from
+            its SBOM).
+          readOnly: true
+          title: Has dependencies
+          type: boolean
+        identifier_perm:
+          description: Unique and permanent identifier for the package.
+          minLength: 1
+          readOnly: true
+          title: Identifier perm
+          type: string
+        identifiers:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Return a map of identifier field names and their values.
+          readOnly: true
+          title: Identifiers
+          type: object
+        indexed:
+          readOnly: true
+          title: Indexed
+          type: boolean
+        is_cancellable:
+          readOnly: true
+          title: Is cancellable
+          type: boolean
+        is_copyable:
+          readOnly: true
+          title: Is copyable
+          type: boolean
+        is_deleteable:
+          readOnly: true
+          title: Is deleteable
+          type: boolean
+        is_downloadable:
+          readOnly: true
+          title: Is downloadable
+          type: boolean
+        is_hidden:
+          readOnly: true
+          title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
+        is_moveable:
+          readOnly: true
+          title: Is moveable
+          type: boolean
+        is_quarantinable:
+          readOnly: true
+          title: Is quarantinable
+          type: boolean
+        is_quarantined:
+          readOnly: true
+          title: Is quarantined
+          type: boolean
+        is_resyncable:
+          readOnly: true
+          title: Is resyncable
+          type: boolean
+        is_security_scannable:
+          readOnly: true
+          title: Is security scannable
+          type: boolean
+        is_sync_awaiting:
+          readOnly: true
+          title: Is sync awaiting
+          type: boolean
+        is_sync_completed:
+          readOnly: true
+          title: Is sync completed
+          type: boolean
+        is_sync_failed:
+          readOnly: true
+          title: Is sync failed
+          type: boolean
+        is_sync_in_flight:
+          readOnly: true
+          title: Is sync in flight
+          type: boolean
+        is_sync_in_progress:
+          readOnly: true
+          title: Is sync in progress
+          type: boolean
+        license:
+          description: The license of this package.
+          nullable: true
+          readOnly: true
+          title: License
+          type: string
+        name:
+          description: The name of this package.
+          nullable: true
+          readOnly: true
+          title: Name
+          type: string
+        namespace:
+          minLength: 1
+          readOnly: true
+          title: Namespace
+          type: string
+        namespace_url:
+          format: uri
+          readOnly: true
+          title: Namespace url
+          type: string
+        num_files:
+          readOnly: true
+          title: Num files
+          type: integer
+        origin_repository:
+          minLength: 1
+          readOnly: true
+          title: Origin repository
+          type: string
+        origin_repository_url:
+          format: uri
+          readOnly: true
+          title: Origin repository url
+          type: string
+        osi_approved:
+          description: Whether the package's SPDX license is OSI-approved.
+          readOnly: true
+          title: Osi approved
+          type: boolean
+        package_type:
+          description: The type of package contents.
+          readOnly: true
+          title: Package type
+          type: integer
+        policy_violated:
+          description: Whether or not the package has violated any policy.
+          readOnly: true
+          title: Policy violated
+          type: boolean
+        raw_license:
+          description: The raw license string.
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Raw license
+          type: string
+        release:
+          description: The release of the package version (if any).
+          nullable: true
+          readOnly: true
+          title: Release
+          type: string
+        repository:
+          minLength: 1
+          readOnly: true
+          title: Repository
+          type: string
+        repository_url:
+          format: uri
+          readOnly: true
+          title: Repository url
+          type: string
+        security_scan_completed_at:
+          description: The datetime the security scanning was completed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan completed at
+          type: string
+        security_scan_started_at:
+          description: The datetime the security scanning was started.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan started at
+          type: string
+        security_scan_status:
+          default: Awaiting Security Scan
+          enum:
+          - Awaiting Security Scan
+          - Security Scanning in Progress
+          - Scan Detected Vulnerabilities
+          - Scan Detected No Vulnerabilities
+          - Security Scanning Disabled
+          - Security Scanning Failed
+          - Security Scanning Skipped
+          - Security Scanning Not Supported
+          nullable: true
+          readOnly: true
+          title: Security scan status
+          type: string
+        security_scan_status_updated_at:
+          description: The datetime the security scanning status was updated.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Security scan status updated at
+          type: string
+        self_html_url:
+          minLength: 1
+          readOnly: true
+          title: Self html url
+          type: string
+        self_url:
+          format: uri
+          readOnly: true
+          title: Self url
+          type: string
+        self_webapp_url:
+          minLength: 1
+          readOnly: true
+          title: Self webapp url
+          type: string
+        signature_url:
+          nullable: true
+          readOnly: true
+          title: Signature url
+          type: string
+        size:
+          description: The calculated size of the package.
+          readOnly: true
+          title: Size
+          type: integer
+        slug:
+          description: The public unique identifier for the package.
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug
+          type: string
+        slug_perm:
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        spdx_license:
+          description: The SPDX license identifier for this package.
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Spdx license
+          type: string
+        stage:
+          description: The synchronisation (in progress) stage of the package.
+          readOnly: true
+          title: Stage
+          type: integer
+        stage_str:
+          readOnly: true
+          title: Stage str
+          type: string
+        stage_updated_at:
+          description: The datetime the package stage was updated at.
+          format: date-time
+          readOnly: true
+          title: Stage updated at
+          type: string
+        status:
+          description: The synchronisation status of the package.
+          readOnly: true
+          title: Status
+          type: integer
+        status_reason:
+          description: A textual description for the synchronous status reason (if
+            any
+          nullable: true
+          readOnly: true
+          title: Status reason
+          type: string
+        status_str:
+          readOnly: true
+          title: Status str
+          type: string
+        status_updated_at:
+          description: The datetime the package status was updated at.
+          format: date-time
+          readOnly: true
+          title: Status updated at
+          type: string
+        status_url:
+          format: uri
+          readOnly: true
+          title: Status url
+          type: string
+        subtype:
+          readOnly: true
+          title: Subtype
+          type: string
+        summary:
+          description: A one-liner synopsis of this package.
+          nullable: true
+          readOnly: true
+          title: Summary
+          type: string
+        sync_finished_at:
+          description: The datetime the package sync was finished at.
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Sync finished at
+          type: string
+        sync_progress:
+          description: Synchronisation progress (from 0-100)
+          readOnly: true
+          title: Sync progress
+          type: integer
+        tags:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
+        tags_automatic:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
+        tags_immutable:
+          description: "All tags on the package, grouped by tag type. This includes\
+            \ immutable tags, but doesn't distinguish them from mutable. To see which\
+            \ tags are immutable specifically, see the tags_immutable field."
+          type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
+        type_display:
+          readOnly: true
+          title: Type display
+          type: string
+        uploaded_at:
+          description: The date this package was uploaded.
+          format: date-time
+          readOnly: true
+          title: Uploaded at
+          type: string
+        uploader:
+          minLength: 1
+          readOnly: true
+          title: Uploader
+          type: string
+        uploader_url:
+          format: uri
+          readOnly: true
+          title: Uploader url
+          type: string
+        version:
+          description: The raw version for this package.
+          nullable: true
+          readOnly: true
+          title: Version
+          type: string
+        version_orig:
+          readOnly: true
+          title: Version orig
+          type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
+        vulnerability_scan_results_url:
+          format: uri
+          readOnly: true
+          title: Vulnerability scan results url
+          type: string
+      type: object
+    PackageCopyRequest:
+      example:
+        republish: true
+        destination: destination
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
+      properties:
+        destination:
+          description: The name of the destination repository without the namespace.
+          minLength: 1
+          title: Destination
+          type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
+        republish:
+          description: "If true, the package will overwrite any others with the same\
+            \ attributes (e.g. same version); otherwise, it will be flagged as a duplicate."
+          title: Republish
+          type: boolean
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
+      required:
+      - destination
+      type: object
+    PackageCopy:
+      example:
+        architectures:
+        - name: name
+          description: description
+        - name: name
+          description: description
+        security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
+        checksum_sha256: checksum_sha256
+        release: release
+        is_malware_detected: true
+        package_type: 5
+        repository: repository
+        origin_repository: origin_repository
+        identifier_perm: identifier_perm
+        stage_updated_at: 2000-01-23T04:56:07.000+00:00
+        filepath: filepath
+        tags_immutable: "{}"
+        is_quarantined: true
+        slug: slug
+        freeable_storage: 1
+        is_security_scannable: true
+        security_scan_started_at: 2000-01-23T04:56:07.000+00:00
+        security_scan_status: Awaiting Security Scan
+        indexed: true
+        is_deleteable: true
+        format: format
+        status_str: status_str
+        version_orig: version_orig
+        namespace_url: https://openapi-generator.tech
+        display_name: display_name
+        slug_perm: slug_perm
+        spdx_license: spdx_license
+        version: version
+        tags: "{}"
+        is_resyncable: true
+        license: license
+        filename: filename
+        size: 2
+        cdn_url: cdn_url
+        uploaded_at: 2000-01-23T04:56:07.000+00:00
+        is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
+        is_downloadable: true
+        name: name
+        sync_finished_at: 2000-01-23T04:56:07.000+00:00
+        files:
+        - checksum_sha512: checksum_sha512
+          checksum_sha1: checksum_sha1
+          checksum_sha256: checksum_sha256
+          is_primary: true
+          checksum_md5: checksum_md5
+          slug_perm: slug_perm
+          filename: filename
+          size: 5
+          cdn_url: cdn_url
+          downloads: 1
+          is_synchronised: true
+          is_downloadable: true
+          signature_url: signature_url
+          tag: tag
+        - checksum_sha512: checksum_sha512
+          checksum_sha1: checksum_sha1
+          checksum_sha256: checksum_sha256
+          is_primary: true
+          checksum_md5: checksum_md5
+          slug_perm: slug_perm
+          filename: filename
+          size: 5
+          cdn_url: cdn_url
+          downloads: 1
+          is_synchronised: true
+          is_downloadable: true
+          signature_url: signature_url
+          tag: tag
+        num_files: 5
+        status: 9
+        checksum_sha512: checksum_sha512
+        distro:
+          name: name
+          variants: variants
+          self_url: https://openapi-generator.tech
+          slug: slug
+        extension: extension
+        fully_qualified_name: fully_qualified_name
+        is_hidden: true
+        description: description
+        is_copyable: true
+        epoch: 6
+        is_sync_completed: true
+        distro_version:
+          name: name
+          slug: slug
+        type_display: type_display
+        raw_license: raw_license
+        vulnerability_scan_results_url: https://openapi-generator.tech
+        dependencies_checksum_md5: dependencies_checksum_md5
+        policy_violated: true
+        downloads: 0
+        subtype: subtype
+        uploader: uploader
+        self_webapp_url: self_webapp_url
+        signature_url: signature_url
+        tags_automatic: "{}"
+        repository_url: https://openapi-generator.tech
+        is_moveable: true
+        status_reason: status_reason
+        osi_approved: true
+        status_updated_at: 2000-01-23T04:56:07.000+00:00
+        summary: summary
+        checksum_sha1: checksum_sha1
+        is_quarantinable: true
+        identifiers:
+          key: identifiers
+        checksum_md5: checksum_md5
+        sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -40024,6 +42369,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -40302,6 +42653,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -40332,6 +42695,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -40431,12 +42796,29 @@ components:
     PackageMoveRequest:
       example:
         destination: destination
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
       properties:
         destination:
           description: The name of the destination repository without the namespace.
           minLength: 1
           title: Destination
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - destination
       type: object
@@ -40450,6 +42832,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -40481,6 +42864,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -40554,6 +42941,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -40710,6 +43105,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -40988,6 +43389,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -41018,6 +43431,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -41028,7 +43443,22 @@ components:
       example:
         restore: true
         release: true
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         release:
           description: "If true, the package is released from quarantine."
           title: Release
@@ -41038,6 +43468,8 @@ components:
             \ field is deprecated, please use 'release' instead."
           title: Restore
           type: boolean
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       type: object
     PackageQuarantine:
       example:
@@ -41048,6 +43480,7 @@ components:
           description: description
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -41079,6 +43512,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -41152,6 +43589,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -41308,6 +43753,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -41579,6 +44030,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -41609,6 +44072,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -41625,6 +44090,7 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
+        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -41656,6 +44122,10 @@ components:
         cdn_url: cdn_url
         uploaded_at: 2000-01-23T04:56:07.000+00:00
         is_cancellable: true
+        tags_static:
+          key:
+          - tags_static
+          - tags_static
         is_downloadable: true
         name: name
         sync_finished_at: 2000-01-23T04:56:07.000+00:00
@@ -41729,6 +44199,14 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -41885,6 +44363,12 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -42162,6 +44646,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -42192,6 +44688,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -42345,6 +44843,15 @@ components:
       example:
         is_immutable: false
         action: Add
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         tags:
         - tags
         - tags
@@ -42365,6 +44872,12 @@ components:
             \ is a tag that cannot be removed from a package."
           title: Is immutable
           type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         tags:
           description: A list of tags to apply the action to. Not required for clears.
           items:
@@ -42373,6 +44886,8 @@ components:
             type: string
           nullable: true
           type: array
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       type: object
     PackageTag:
       properties:
@@ -42522,6 +45037,12 @@ components:
           description: "If true, created tags will be immutable. An immutable flag\
             \ is a tag that cannot be removed from a package."
           title: Is immutable
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -42794,6 +45315,18 @@ components:
             \ immutable tags, but doesn't distinguish them from mutable. To see which\
             \ tags are immutable specifically, see the tags_immutable field."
           type: object
+        tags_static:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: "All static tags on the package, grouped by context. Static\
+            \ tags are derived from the package's properties at request time and carry\
+            \ a 'context' (rather than a tag type). Includes format-specific badges\
+            \ and the package's architecture, subtype, and extension."
+          readOnly: true
+          title: Tags static
+          type: object
         type_display:
           readOnly: true
           title: Type display
@@ -42824,6 +45357,8 @@ components:
           readOnly: true
           title: Version orig
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -42834,6 +45369,15 @@ components:
       example:
         license_notes: license_notes
         action: Update
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
+        is_malware_detected: true
         license_override: None
         spdx_license: spdx_license
         license_url: https://openapi-generator.tech
@@ -42845,6 +45389,12 @@ components:
           nullable: true
           title: Action
           type: string
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         license_notes:
           maxLength: 1000
           nullable: true
@@ -42870,9 +45420,19 @@ components:
           minLength: 1
           title: Spdx license
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
+      required:
+      - spdx_license
       type: object
     PackageLicense:
       properties:
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
+          type: boolean
         license_notes:
           maxLength: 1000
           nullable: true
@@ -42898,6 +45458,8 @@ components:
           minLength: 1
           title: Spdx license
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - spdx_license
       type: object
@@ -43484,32 +46046,41 @@ components:
       type: object
     RecycleBinPackage:
       example:
-        security_scan_status: Awaiting Security Scan
         fully_qualified_name: fully_qualified_name
+        is_malware_detected: true
+        repository: repository
+        type_display: type_display
+        action_by: action_by
+        policy_violated: true
+        downloads: 0
+        uploader: uploader
+        is_quarantined: true
+        status_updated_at: 2000-01-23T04:56:07.000+00:00
+        security_scan_status: Awaiting Security Scan
         identifiers:
           key: identifiers
         is_deleteable: true
         format: format
-        repository: repository
+        vulnerability_counts:
+          high: 6
+          total: 2
+          malware: 5
+          critical: 0
+          low: 1
+          medium: 5
+          unknown: 7
         slug_perm: slug_perm
         version: version
         tags: "{}"
-        type_display: type_display
-        action_by: action_by
         security_scan_completed_at: 2000-01-23T04:56:07.000+00:00
         filename: filename
         is_restorable: true
-        policy_violated: true
         size: 6
-        downloads: 0
         invoked_retention_rule:
           key: invoked_retention_rule
         uploaded_at: 2000-01-23T04:56:07.000+00:00
-        uploader: uploader
         name: name
-        is_quarantined: true
         status: 1
-        status_updated_at: 2000-01-23T04:56:07.000+00:00
       properties:
         action_by:
           description: The name of the user who deleted the package.
@@ -43559,6 +46130,12 @@ components:
         is_deleteable:
           readOnly: true
           title: Is deleteable
+          type: boolean
+        is_malware_detected:
+          description: Whether the package has been detected as containing malware.
+            Requires Ultra plan.
+          readOnly: true
+          title: Is malware detected
           type: boolean
         is_quarantined:
           readOnly: true
@@ -43655,6 +46232,8 @@ components:
           readOnly: true
           title: Version
           type: string
+        vulnerability_counts:
+          $ref: '#/components/schemas/WebOSVSeverityCounts'
       type: object
     PackageRecycleBin:
       example:
@@ -56312,6 +58891,15 @@ components:
         package:
           identifier: identifier
           name: name
+          vulnerability_counts:
+            high: 6
+            total: 2
+            malware: 5
+            critical: 0
+            low: 1
+            medium: 5
+            unknown: 7
+          is_malware_detected: true
           version: version
           url: https://openapi-generator.tech
         has_vulnerabilities: true
@@ -56574,6 +59162,15 @@ components:
         package:
           identifier: identifier
           name: name
+          vulnerability_counts:
+            high: 6
+            total: 2
+            malware: 5
+            critical: 0
+            low: 1
+            medium: 5
+            unknown: 7
+          is_malware_detected: true
           version: version
           url: https://openapi-generator.tech
         scans:
@@ -57210,6 +59807,15 @@ components:
         - package:
             identifier: identifier
             name: name
+            vulnerability_counts:
+              high: 6
+              total: 2
+              malware: 5
+              critical: 0
+              low: 1
+              medium: 5
+              unknown: 7
+            is_malware_detected: true
             version: version
             url: https://openapi-generator.tech
           reasons:
@@ -57232,6 +59838,15 @@ components:
         - package:
             identifier: identifier
             name: name
+            vulnerability_counts:
+              high: 6
+              total: 2
+              malware: 5
+              critical: 0
+              low: 1
+              medium: 5
+              unknown: 7
+            is_malware_detected: true
             version: version
             url: https://openapi-generator.tech
           reasons:
@@ -57268,6 +59883,46 @@ components:
       - results
       title: PackageLicensePolicyViolationLogCursorPage
       type: object
+    orgs_retrieve_usage_limits_200_response:
+      example:
+        storage_maximum: 5
+        storage_overage_limit: 6
+        allow_open_source_overage: true
+        bandwidth_maximum: 1
+        bandwidth_overage_limit: 0
+      properties:
+        allow_open_source_overage:
+          description: Whether on-demand open source overage is allowed.
+          type: boolean
+        bandwidth_overage_limit:
+          description: Effective bandwidth overage limit in GB.
+          type: integer
+        storage_overage_limit:
+          description: Effective storage overage limit in GB.
+          type: integer
+        bandwidth_maximum:
+          description: Maximum allowed bandwidth overage in GB.
+          type: integer
+        storage_maximum:
+          description: Maximum allowed storage overage in GB.
+          type: integer
+      type: object
+    orgs_update_usage_limits_200_response:
+      example:
+        storage_overage_limit: 6
+        allow_open_source_overage: true
+        bandwidth_overage_limit: 0
+      properties:
+        allow_open_source_overage:
+          description: Whether on-demand open source overage is allowed.
+          type: boolean
+        bandwidth_overage_limit:
+          description: Effective bandwidth overage limit in GB.
+          type: integer
+        storage_overage_limit:
+          description: Effective storage overage limit in GB.
+          type: integer
+      type: object
     PackageVulnerabilityPolicyViolationLogCursorPage:
       example:
         next: https://openapi-generator.tech
@@ -57276,6 +59931,15 @@ components:
         - package:
             identifier: identifier
             name: name
+            vulnerability_counts:
+              high: 6
+              total: 2
+              malware: 5
+              critical: 0
+              low: 1
+              medium: 5
+              unknown: 7
+            is_malware_detected: true
             version: version
             url: https://openapi-generator.tech
           reasons:
@@ -57304,6 +59968,15 @@ components:
         - package:
             identifier: identifier
             name: name
+            vulnerability_counts:
+              high: 6
+              total: 2
+              malware: 5
+              critical: 0
+              low: 1
+              medium: 5
+              unknown: 7
+            is_malware_detected: true
             version: version
             url: https://openapi-generator.tech
           reasons:

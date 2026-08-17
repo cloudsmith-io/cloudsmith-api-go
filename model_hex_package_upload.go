@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1348.3
 Contact: support@cloudsmith.io
 */
 
@@ -49,23 +49,25 @@ type HexPackageUpload struct {
 	// Unique and permanent identifier for the package.
 	IdentifierPerm *string `json:"identifier_perm,omitempty"`
 	// Return a map of identifier field names and their values.
-	Identifiers         *map[string]string `json:"identifiers,omitempty"`
-	Indexed             *bool              `json:"indexed,omitempty"`
-	IsCancellable       *bool              `json:"is_cancellable,omitempty"`
-	IsCopyable          *bool              `json:"is_copyable,omitempty"`
-	IsDeleteable        *bool              `json:"is_deleteable,omitempty"`
-	IsDownloadable      *bool              `json:"is_downloadable,omitempty"`
-	IsHidden            *bool              `json:"is_hidden,omitempty"`
-	IsMoveable          *bool              `json:"is_moveable,omitempty"`
-	IsQuarantinable     *bool              `json:"is_quarantinable,omitempty"`
-	IsQuarantined       *bool              `json:"is_quarantined,omitempty"`
-	IsResyncable        *bool              `json:"is_resyncable,omitempty"`
-	IsSecurityScannable *bool              `json:"is_security_scannable,omitempty"`
-	IsSyncAwaiting      *bool              `json:"is_sync_awaiting,omitempty"`
-	IsSyncCompleted     *bool              `json:"is_sync_completed,omitempty"`
-	IsSyncFailed        *bool              `json:"is_sync_failed,omitempty"`
-	IsSyncInFlight      *bool              `json:"is_sync_in_flight,omitempty"`
-	IsSyncInProgress    *bool              `json:"is_sync_in_progress,omitempty"`
+	Identifiers    *map[string]string `json:"identifiers,omitempty"`
+	Indexed        *bool              `json:"indexed,omitempty"`
+	IsCancellable  *bool              `json:"is_cancellable,omitempty"`
+	IsCopyable     *bool              `json:"is_copyable,omitempty"`
+	IsDeleteable   *bool              `json:"is_deleteable,omitempty"`
+	IsDownloadable *bool              `json:"is_downloadable,omitempty"`
+	IsHidden       *bool              `json:"is_hidden,omitempty"`
+	// Whether the package has been detected as containing malware. Requires Ultra plan.
+	IsMalwareDetected   *bool `json:"is_malware_detected,omitempty"`
+	IsMoveable          *bool `json:"is_moveable,omitempty"`
+	IsQuarantinable     *bool `json:"is_quarantinable,omitempty"`
+	IsQuarantined       *bool `json:"is_quarantined,omitempty"`
+	IsResyncable        *bool `json:"is_resyncable,omitempty"`
+	IsSecurityScannable *bool `json:"is_security_scannable,omitempty"`
+	IsSyncAwaiting      *bool `json:"is_sync_awaiting,omitempty"`
+	IsSyncCompleted     *bool `json:"is_sync_completed,omitempty"`
+	IsSyncFailed        *bool `json:"is_sync_failed,omitempty"`
+	IsSyncInFlight      *bool `json:"is_sync_in_flight,omitempty"`
+	IsSyncInProgress    *bool `json:"is_sync_in_progress,omitempty"`
 	// The license of this package.
 	License NullableString `json:"license,omitempty"`
 	// The name of this package.
@@ -129,15 +131,18 @@ type HexPackageUpload struct {
 	TagsAutomatic map[string]interface{} `json:"tags_automatic,omitempty"`
 	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
 	TagsImmutable map[string]interface{} `json:"tags_immutable,omitempty"`
-	TypeDisplay   *string                `json:"type_display,omitempty"`
+	// All static tags on the package, grouped by context. Static tags are derived from the package's properties at request time and carry a 'context' (rather than a tag type). Includes format-specific badges and the package's architecture, subtype, and extension.
+	TagsStatic  *map[string][]string `json:"tags_static,omitempty"`
+	TypeDisplay *string              `json:"type_display,omitempty"`
 	// The date this package was uploaded.
 	UploadedAt  *time.Time `json:"uploaded_at,omitempty"`
 	Uploader    *string    `json:"uploader,omitempty"`
 	UploaderUrl *string    `json:"uploader_url,omitempty"`
 	// The raw version for this package.
-	Version                     NullableString `json:"version,omitempty"`
-	VersionOrig                 *string        `json:"version_orig,omitempty"`
-	VulnerabilityScanResultsUrl *string        `json:"vulnerability_scan_results_url,omitempty"`
+	Version                     NullableString               `json:"version,omitempty"`
+	VersionOrig                 *string                      `json:"version_orig,omitempty"`
+	VulnerabilityCounts         NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
+	VulnerabilityScanResultsUrl *string                      `json:"vulnerability_scan_results_url,omitempty"`
 	AdditionalProperties        map[string]interface{}
 }
 
@@ -1152,6 +1157,38 @@ func (o *HexPackageUpload) HasIsHidden() bool {
 // SetIsHidden gets a reference to the given bool and assigns it to the IsHidden field.
 func (o *HexPackageUpload) SetIsHidden(v bool) {
 	o.IsHidden = &v
+}
+
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+func (o *HexPackageUpload) GetIsMalwareDetected() bool {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMalwareDetected
+}
+
+// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HexPackageUpload) GetIsMalwareDetectedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		return nil, false
+	}
+	return o.IsMalwareDetected, true
+}
+
+// HasIsMalwareDetected returns a boolean if a field has been set.
+func (o *HexPackageUpload) HasIsMalwareDetected() bool {
+	if o != nil && !IsNil(o.IsMalwareDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+func (o *HexPackageUpload) SetIsMalwareDetected(v bool) {
+	o.IsMalwareDetected = &v
 }
 
 // GetIsMoveable returns the IsMoveable field value if set, zero value otherwise.
@@ -2897,6 +2934,38 @@ func (o *HexPackageUpload) SetTagsImmutable(v map[string]interface{}) {
 	o.TagsImmutable = v
 }
 
+// GetTagsStatic returns the TagsStatic field value if set, zero value otherwise.
+func (o *HexPackageUpload) GetTagsStatic() map[string][]string {
+	if o == nil || IsNil(o.TagsStatic) {
+		var ret map[string][]string
+		return ret
+	}
+	return *o.TagsStatic
+}
+
+// GetTagsStaticOk returns a tuple with the TagsStatic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *HexPackageUpload) GetTagsStaticOk() (*map[string][]string, bool) {
+	if o == nil || IsNil(o.TagsStatic) {
+		return nil, false
+	}
+	return o.TagsStatic, true
+}
+
+// HasTagsStatic returns a boolean if a field has been set.
+func (o *HexPackageUpload) HasTagsStatic() bool {
+	if o != nil && !IsNil(o.TagsStatic) {
+		return true
+	}
+
+	return false
+}
+
+// SetTagsStatic gets a reference to the given map[string][]string and assigns it to the TagsStatic field.
+func (o *HexPackageUpload) SetTagsStatic(v map[string][]string) {
+	o.TagsStatic = &v
+}
+
 // GetTypeDisplay returns the TypeDisplay field value if set, zero value otherwise.
 func (o *HexPackageUpload) GetTypeDisplay() string {
 	if o == nil || IsNil(o.TypeDisplay) {
@@ -3100,6 +3169,49 @@ func (o *HexPackageUpload) SetVersionOrig(v string) {
 	o.VersionOrig = &v
 }
 
+// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HexPackageUpload) GetVulnerabilityCounts() WebOSVSeverityCounts {
+	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
+		var ret WebOSVSeverityCounts
+		return ret
+	}
+	return *o.VulnerabilityCounts.Get()
+}
+
+// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HexPackageUpload) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
+}
+
+// HasVulnerabilityCounts returns a boolean if a field has been set.
+func (o *HexPackageUpload) HasVulnerabilityCounts() bool {
+	if o != nil && o.VulnerabilityCounts.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
+func (o *HexPackageUpload) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
+	o.VulnerabilityCounts.Set(&v)
+}
+
+// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+func (o *HexPackageUpload) SetVulnerabilityCountsNil() {
+	o.VulnerabilityCounts.Set(nil)
+}
+
+// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
+func (o *HexPackageUpload) UnsetVulnerabilityCounts() {
+	o.VulnerabilityCounts.Unset()
+}
+
 // GetVulnerabilityScanResultsUrl returns the VulnerabilityScanResultsUrl field value if set, zero value otherwise.
 func (o *HexPackageUpload) GetVulnerabilityScanResultsUrl() string {
 	if o == nil || IsNil(o.VulnerabilityScanResultsUrl) {
@@ -3228,6 +3340,9 @@ func (o HexPackageUpload) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsHidden) {
 		toSerialize["is_hidden"] = o.IsHidden
+	}
+	if !IsNil(o.IsMalwareDetected) {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected
 	}
 	if !IsNil(o.IsMoveable) {
 		toSerialize["is_moveable"] = o.IsMoveable
@@ -3379,6 +3494,9 @@ func (o HexPackageUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TagsImmutable) {
 		toSerialize["tags_immutable"] = o.TagsImmutable
 	}
+	if !IsNil(o.TagsStatic) {
+		toSerialize["tags_static"] = o.TagsStatic
+	}
 	if !IsNil(o.TypeDisplay) {
 		toSerialize["type_display"] = o.TypeDisplay
 	}
@@ -3396,6 +3514,9 @@ func (o HexPackageUpload) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.VersionOrig) {
 		toSerialize["version_orig"] = o.VersionOrig
+	}
+	if o.VulnerabilityCounts.IsSet() {
+		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
 	}
 	if !IsNil(o.VulnerabilityScanResultsUrl) {
 		toSerialize["vulnerability_scan_results_url"] = o.VulnerabilityScanResultsUrl
@@ -3451,6 +3572,7 @@ func (o *HexPackageUpload) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_deleteable")
 		delete(additionalProperties, "is_downloadable")
 		delete(additionalProperties, "is_hidden")
+		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "is_moveable")
 		delete(additionalProperties, "is_quarantinable")
 		delete(additionalProperties, "is_quarantined")
@@ -3501,12 +3623,14 @@ func (o *HexPackageUpload) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sync_progress")
 		delete(additionalProperties, "tags_automatic")
 		delete(additionalProperties, "tags_immutable")
+		delete(additionalProperties, "tags_static")
 		delete(additionalProperties, "type_display")
 		delete(additionalProperties, "uploaded_at")
 		delete(additionalProperties, "uploader")
 		delete(additionalProperties, "uploader_url")
 		delete(additionalProperties, "version")
 		delete(additionalProperties, "version_orig")
+		delete(additionalProperties, "vulnerability_counts")
 		delete(additionalProperties, "vulnerability_scan_results_url")
 		o.AdditionalProperties = additionalProperties
 	}
