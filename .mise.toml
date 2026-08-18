@@ -4,7 +4,7 @@
 # manage. The CI test matrix pins its own runtimes via the same versions here.
 
 [tools]
-go = "1.23"
+go = "1.26"
 jq = "latest"
 
 [tasks.generate]
