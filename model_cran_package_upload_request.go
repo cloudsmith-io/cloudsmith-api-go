@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1348.3
 Contact: support@cloudsmith.io
 */
 
@@ -23,6 +23,8 @@ var _ MappedNullable = &CranPackageUploadRequest{}
 type CranPackageUploadRequest struct {
 	// Binary package uploads for macOS should specify the architecture they were built for.
 	Architecture *string `json:"architecture,omitempty"`
+	// Whether the package has been detected as containing malware. Requires Ultra plan.
+	IsMalwareDetected *bool `json:"is_malware_detected,omitempty"`
 	// The primary file for the package.
 	PackageFile string `json:"package_file"`
 	// Binary package uploads should specify the version of R they were built for.
@@ -30,7 +32,8 @@ type CranPackageUploadRequest struct {
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
 	Republish *bool `json:"republish,omitempty"`
 	// A comma-separated values list of tags to add to the package.
-	Tags                 NullableString `json:"tags,omitempty"`
+	Tags                 NullableString               `json:"tags,omitempty"`
+	VulnerabilityCounts  NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -84,6 +87,38 @@ func (o *CranPackageUploadRequest) HasArchitecture() bool {
 // SetArchitecture gets a reference to the given string and assigns it to the Architecture field.
 func (o *CranPackageUploadRequest) SetArchitecture(v string) {
 	o.Architecture = &v
+}
+
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+func (o *CranPackageUploadRequest) GetIsMalwareDetected() bool {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMalwareDetected
+}
+
+// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CranPackageUploadRequest) GetIsMalwareDetectedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		return nil, false
+	}
+	return o.IsMalwareDetected, true
+}
+
+// HasIsMalwareDetected returns a boolean if a field has been set.
+func (o *CranPackageUploadRequest) HasIsMalwareDetected() bool {
+	if o != nil && !IsNil(o.IsMalwareDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+func (o *CranPackageUploadRequest) SetIsMalwareDetected(v bool) {
+	o.IsMalwareDetected = &v
 }
 
 // GetPackageFile returns the PackageFile field value
@@ -228,6 +263,49 @@ func (o *CranPackageUploadRequest) UnsetTags() {
 	o.Tags.Unset()
 }
 
+// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CranPackageUploadRequest) GetVulnerabilityCounts() WebOSVSeverityCounts {
+	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
+		var ret WebOSVSeverityCounts
+		return ret
+	}
+	return *o.VulnerabilityCounts.Get()
+}
+
+// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CranPackageUploadRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
+}
+
+// HasVulnerabilityCounts returns a boolean if a field has been set.
+func (o *CranPackageUploadRequest) HasVulnerabilityCounts() bool {
+	if o != nil && o.VulnerabilityCounts.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
+func (o *CranPackageUploadRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
+	o.VulnerabilityCounts.Set(&v)
+}
+
+// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+func (o *CranPackageUploadRequest) SetVulnerabilityCountsNil() {
+	o.VulnerabilityCounts.Set(nil)
+}
+
+// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
+func (o *CranPackageUploadRequest) UnsetVulnerabilityCounts() {
+	o.VulnerabilityCounts.Unset()
+}
+
 func (o CranPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -241,6 +319,9 @@ func (o CranPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Architecture) {
 		toSerialize["architecture"] = o.Architecture
 	}
+	if !IsNil(o.IsMalwareDetected) {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected
+	}
 	toSerialize["package_file"] = o.PackageFile
 	if o.RVersion.IsSet() {
 		toSerialize["r_version"] = o.RVersion.Get()
@@ -250,6 +331,9 @@ func (o CranPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Tags.IsSet() {
 		toSerialize["tags"] = o.Tags.Get()
+	}
+	if o.VulnerabilityCounts.IsSet() {
+		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -295,10 +379,12 @@ func (o *CranPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "package_file")
 		delete(additionalProperties, "r_version")
 		delete(additionalProperties, "republish")
 		delete(additionalProperties, "tags")
+		delete(additionalProperties, "vulnerability_counts")
 		o.AdditionalProperties = additionalProperties
 	}
 

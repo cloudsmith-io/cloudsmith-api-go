@@ -187,7 +187,12 @@ docs/OrganizationTeamMembers.md
 docs/OrganizationTeamRequest.md
 docs/OrganizationTeamRequestPatch.md
 docs/OrganizationTeamServiceMember.md
+docs/OrganizationUsage.md
+docs/OrganizationUsageUpdate.md
+docs/OrganizationUsageUpdateRequestPatch.md
 docs/OrgsApi.md
+docs/OrgsRetrieveUsageLimits200Response.md
+docs/OrgsUpdateUsageLimits200Response.md
 docs/P2PackageUpload.md
 docs/P2PackageUploadRequest.md
 docs/Package.md
@@ -200,6 +205,7 @@ docs/PackageDenyPolicyRequest.md
 docs/PackageDenyPolicyRequestPatch.md
 docs/PackageDependencies.md
 docs/PackageDependency.md
+docs/PackageDetail.md
 docs/PackageFile.md
 docs/PackageFilePartsUpload.md
 docs/PackageFileUpload.md
@@ -343,6 +349,7 @@ docs/VulnerabilityScan.md
 docs/VulnerabilityScanResults.md
 docs/VulnerabilityScanResultsList.md
 docs/VulnerabilityScanVersion.md
+docs/WebOSVSeverityCounts.md
 docs/WebhookTemplate.md
 docs/WebhooksApi.md
 git_push.sh
@@ -499,6 +506,11 @@ model_organization_team_members.go
 model_organization_team_request.go
 model_organization_team_request_patch.go
 model_organization_team_service_member.go
+model_organization_usage.go
+model_organization_usage_update.go
+model_organization_usage_update_request_patch.go
+model_orgs_retrieve_usage_limits_200_response.go
+model_orgs_update_usage_limits_200_response.go
 model_p2_package_upload.go
 model_p2_package_upload_request.go
 model_package.go
@@ -511,6 +523,7 @@ model_package_deny_policy_request.go
 model_package_deny_policy_request_patch.go
 model_package_dependencies.go
 model_package_dependency.go
+model_package_detail.go
 model_package_file.go
 model_package_file_parts_upload.go
 model_package_file_upload.go
@@ -644,6 +657,7 @@ model_vulnerability_scan.go
 model_vulnerability_scan_results.go
 model_vulnerability_scan_results_list.go
 model_vulnerability_scan_version.go
+model_web_osv_severity_counts.go
 model_webhook_template.go
 response.go
 test/api_audit_log_test.go

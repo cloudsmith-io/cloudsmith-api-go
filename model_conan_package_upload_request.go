@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1348.3
 Contact: support@cloudsmith.io
 */
 
@@ -27,6 +27,8 @@ type ConanPackageUploadRequest struct {
 	ConanPrefix NullableString `json:"conan_prefix,omitempty"`
 	// The info file is an python file containing the package metadata.
 	InfoFile string `json:"info_file"`
+	// Whether the package has been detected as containing malware. Requires Ultra plan.
+	IsMalwareDetected *bool `json:"is_malware_detected,omitempty"`
 	// The info file is an python file containing the package metadata.
 	ManifestFile string `json:"manifest_file"`
 	// The conan file is an python file containing the package metadata.
@@ -40,7 +42,8 @@ type ConanPackageUploadRequest struct {
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`
 	// The raw version for this package.
-	Version              NullableString `json:"version,omitempty"`
+	Version              NullableString               `json:"version,omitempty"`
+	VulnerabilityCounts  NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -175,6 +178,38 @@ func (o *ConanPackageUploadRequest) GetInfoFileOk() (*string, bool) {
 // SetInfoFile sets field value
 func (o *ConanPackageUploadRequest) SetInfoFile(v string) {
 	o.InfoFile = v
+}
+
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+func (o *ConanPackageUploadRequest) GetIsMalwareDetected() bool {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMalwareDetected
+}
+
+// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConanPackageUploadRequest) GetIsMalwareDetectedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		return nil, false
+	}
+	return o.IsMalwareDetected, true
+}
+
+// HasIsMalwareDetected returns a boolean if a field has been set.
+func (o *ConanPackageUploadRequest) HasIsMalwareDetected() bool {
+	if o != nil && !IsNil(o.IsMalwareDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+func (o *ConanPackageUploadRequest) SetIsMalwareDetected(v bool) {
+	o.IsMalwareDetected = &v
 }
 
 // GetManifestFile returns the ManifestFile field value
@@ -410,6 +445,49 @@ func (o *ConanPackageUploadRequest) UnsetVersion() {
 	o.Version.Unset()
 }
 
+// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConanPackageUploadRequest) GetVulnerabilityCounts() WebOSVSeverityCounts {
+	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
+		var ret WebOSVSeverityCounts
+		return ret
+	}
+	return *o.VulnerabilityCounts.Get()
+}
+
+// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConanPackageUploadRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
+}
+
+// HasVulnerabilityCounts returns a boolean if a field has been set.
+func (o *ConanPackageUploadRequest) HasVulnerabilityCounts() bool {
+	if o != nil && o.VulnerabilityCounts.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
+func (o *ConanPackageUploadRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
+	o.VulnerabilityCounts.Set(&v)
+}
+
+// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+func (o *ConanPackageUploadRequest) SetVulnerabilityCountsNil() {
+	o.VulnerabilityCounts.Set(nil)
+}
+
+// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
+func (o *ConanPackageUploadRequest) UnsetVulnerabilityCounts() {
+	o.VulnerabilityCounts.Unset()
+}
+
 func (o ConanPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -427,6 +505,9 @@ func (o ConanPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["conan_prefix"] = o.ConanPrefix.Get()
 	}
 	toSerialize["info_file"] = o.InfoFile
+	if !IsNil(o.IsMalwareDetected) {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected
+	}
 	toSerialize["manifest_file"] = o.ManifestFile
 	toSerialize["metadata_file"] = o.MetadataFile
 	if o.Name.IsSet() {
@@ -441,6 +522,9 @@ func (o ConanPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
+	}
+	if o.VulnerabilityCounts.IsSet() {
+		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -491,6 +575,7 @@ func (o *ConanPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "conan_channel")
 		delete(additionalProperties, "conan_prefix")
 		delete(additionalProperties, "info_file")
+		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "manifest_file")
 		delete(additionalProperties, "metadata_file")
 		delete(additionalProperties, "name")
@@ -498,6 +583,7 @@ func (o *ConanPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "republish")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "version")
+		delete(additionalProperties, "vulnerability_counts")
 		o.AdditionalProperties = additionalProperties
 	}
 
