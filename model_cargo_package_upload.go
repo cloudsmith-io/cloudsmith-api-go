@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1348.3
+API version: 1.1350.3
 Contact: support@cloudsmith.io
 */
 
@@ -120,7 +120,9 @@ type CargoPackageUpload struct {
 	// The datetime the package status was updated at.
 	StatusUpdatedAt *time.Time `json:"status_updated_at,omitempty"`
 	StatusUrl       *string    `json:"status_url,omitempty"`
-	Subtype         *string    `json:"subtype,omitempty"`
+	// Absolute store path for the package, including store hash and name.
+	StorePath NullableString `json:"store_path,omitempty"`
+	Subtype   *string        `json:"subtype,omitempty"`
 	// A one-liner synopsis of this package.
 	Summary NullableString `json:"summary,omitempty"`
 	// The datetime the package sync was finished at.
@@ -2720,6 +2722,49 @@ func (o *CargoPackageUpload) SetStatusUrl(v string) {
 	o.StatusUrl = &v
 }
 
+// GetStorePath returns the StorePath field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CargoPackageUpload) GetStorePath() string {
+	if o == nil || IsNil(o.StorePath.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.StorePath.Get()
+}
+
+// GetStorePathOk returns a tuple with the StorePath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CargoPackageUpload) GetStorePathOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StorePath.Get(), o.StorePath.IsSet()
+}
+
+// HasStorePath returns a boolean if a field has been set.
+func (o *CargoPackageUpload) HasStorePath() bool {
+	if o != nil && o.StorePath.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStorePath gets a reference to the given NullableString and assigns it to the StorePath field.
+func (o *CargoPackageUpload) SetStorePath(v string) {
+	o.StorePath.Set(&v)
+}
+
+// SetStorePathNil sets the value for StorePath to be an explicit nil
+func (o *CargoPackageUpload) SetStorePathNil() {
+	o.StorePath.Set(nil)
+}
+
+// UnsetStorePath ensures that no value is present for StorePath, not even an explicit nil
+func (o *CargoPackageUpload) UnsetStorePath() {
+	o.StorePath.Unset()
+}
+
 // GetSubtype returns the Subtype field value if set, zero value otherwise.
 func (o *CargoPackageUpload) GetSubtype() string {
 	if o == nil || IsNil(o.Subtype) {
@@ -3476,6 +3521,9 @@ func (o CargoPackageUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StatusUrl) {
 		toSerialize["status_url"] = o.StatusUrl
 	}
+	if o.StorePath.IsSet() {
+		toSerialize["store_path"] = o.StorePath.Get()
+	}
 	if !IsNil(o.Subtype) {
 		toSerialize["subtype"] = o.Subtype
 	}
@@ -3617,6 +3665,7 @@ func (o *CargoPackageUpload) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status_str")
 		delete(additionalProperties, "status_updated_at")
 		delete(additionalProperties, "status_url")
+		delete(additionalProperties, "store_path")
 		delete(additionalProperties, "subtype")
 		delete(additionalProperties, "summary")
 		delete(additionalProperties, "sync_finished_at")
