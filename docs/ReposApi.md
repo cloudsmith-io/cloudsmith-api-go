@@ -124,6 +124,12 @@ Method | HTTP request | Description
 [**ReposUpstreamMavenPartialUpdate**](ReposApi.md#ReposUpstreamMavenPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/maven/{slug_perm}/ | Partially update a Maven upstream config for this repository.
 [**ReposUpstreamMavenRead**](ReposApi.md#ReposUpstreamMavenRead) | **Get** /repos/{owner}/{identifier}/upstream/maven/{slug_perm}/ | Retrieve a Maven upstream config for this repository.
 [**ReposUpstreamMavenUpdate**](ReposApi.md#ReposUpstreamMavenUpdate) | **Put** /repos/{owner}/{identifier}/upstream/maven/{slug_perm}/ | Update a Maven upstream config for this repository.
+[**ReposUpstreamNixCreate**](ReposApi.md#ReposUpstreamNixCreate) | **Post** /repos/{owner}/{identifier}/upstream/nix/ | Create a Nix upstream config for this repository.
+[**ReposUpstreamNixDelete**](ReposApi.md#ReposUpstreamNixDelete) | **Delete** /repos/{owner}/{identifier}/upstream/nix/{slug_perm}/ | Delete a Nix upstream config for this repository.
+[**ReposUpstreamNixList**](ReposApi.md#ReposUpstreamNixList) | **Get** /repos/{owner}/{identifier}/upstream/nix/ | List Nix upstream configs for this repository.
+[**ReposUpstreamNixPartialUpdate**](ReposApi.md#ReposUpstreamNixPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/nix/{slug_perm}/ | Partially update a Nix upstream config for this repository.
+[**ReposUpstreamNixRead**](ReposApi.md#ReposUpstreamNixRead) | **Get** /repos/{owner}/{identifier}/upstream/nix/{slug_perm}/ | Retrieve a Nix upstream config for this repository.
+[**ReposUpstreamNixUpdate**](ReposApi.md#ReposUpstreamNixUpdate) | **Put** /repos/{owner}/{identifier}/upstream/nix/{slug_perm}/ | Update a Nix upstream config for this repository.
 [**ReposUpstreamNpmCreate**](ReposApi.md#ReposUpstreamNpmCreate) | **Post** /repos/{owner}/{identifier}/upstream/npm/ | Create a npm upstream config for this repository.
 [**ReposUpstreamNpmDelete**](ReposApi.md#ReposUpstreamNpmDelete) | **Delete** /repos/{owner}/{identifier}/upstream/npm/{slug_perm}/ | Delete a npm upstream config for this repository.
 [**ReposUpstreamNpmList**](ReposApi.md#ReposUpstreamNpmList) | **Get** /repos/{owner}/{identifier}/upstream/npm/ | List npm upstream configs for this repository.
@@ -9235,6 +9241,464 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**MavenUpstream**](MavenUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamNixCreate
+
+> NixUpstream ReposUpstreamNixCreate(ctx, owner, identifier).Data(data).Execute()
+
+Create a Nix upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewNixUpstreamRequest("Name_example", "UpstreamUrl_example") // NixUpstreamRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNixCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNixCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNixCreate`: NixUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNixCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamNixCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**NixUpstreamRequest**](NixUpstreamRequest.md) |  | 
+
+### Return type
+
+[**NixUpstream**](NixUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamNixDelete
+
+> ReposUpstreamNixDelete(ctx, owner, identifier, slugPerm).Execute()
+
+Delete a Nix upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamNixDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNixDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamNixDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamNixList
+
+> []NixUpstream ReposUpstreamNixList(ctx, owner, identifier).Page(page).PageSize(pageSize).Execute()
+
+List Nix upstream configs for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNixList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNixList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNixList`: []NixUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNixList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamNixListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]NixUpstream**](NixUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamNixPartialUpdate
+
+> NixUpstream ReposUpstreamNixPartialUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Partially update a Nix upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewNixUpstreamRequestPatch() // NixUpstreamRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNixPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNixPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNixPartialUpdate`: NixUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNixPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamNixPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**NixUpstreamRequestPatch**](NixUpstreamRequestPatch.md) |  | 
+
+### Return type
+
+[**NixUpstream**](NixUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamNixRead
+
+> NixUpstream ReposUpstreamNixRead(ctx, owner, identifier, slugPerm).Execute()
+
+Retrieve a Nix upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNixRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNixRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNixRead`: NixUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNixRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamNixReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**NixUpstream**](NixUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamNixUpdate
+
+> NixUpstream ReposUpstreamNixUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Update a Nix upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewNixUpstreamRequest("Name_example", "UpstreamUrl_example") // NixUpstreamRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamNixUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamNixUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamNixUpdate`: NixUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamNixUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamNixUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**NixUpstreamRequest**](NixUpstreamRequest.md) |  | 
+
+### Return type
+
+[**NixUpstream**](NixUpstream.md)
 
 ### Authorization
 
