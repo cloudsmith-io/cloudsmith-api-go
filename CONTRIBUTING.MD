@@ -22,7 +22,7 @@ Convenience tasks:
 
 * Update `PKG_VERSION` in `bin/generate`
 * Run `bin/generate` (or `mise run generate`) to generate bindings
-* Create a PR specifing API and binding version
+* Create a PR specifying API and binding version
 * After merge, the **Release** workflow tags `v$PKG_VERSION` and creates the GitHub release when that tag does not already exist
 
 ### Automated approach (local)

@@ -31,7 +31,7 @@ jobs:
         id: version
         run: |
           set -euo pipefail
-          version=$(grep -oE '"[0-9]+\.[0-9]+\.[0-9]+"' bin/generate | head -1 | tr -d '"')
+          version=$(sed -n 's/^PKG_VERSION=\${1:-"\([0-9]\+\.[0-9]\+\.[0-9]\+\)"}.*/\1/p' bin/generate | head -1 || true)
           if [ -z "$version" ]; then
             echo "Could not parse PKG_VERSION from bin/generate" >&2
             exit 1
@@ -59,6 +59,15 @@ jobs:
           fi
           echo "exists=false" >> "$GITHUB_OUTPUT"
 
+      - name: Check out existing tag
+        if: steps.existing.outputs.exists == 'tag-only'
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "refs/tags/${TAG}:refs/tags/${TAG}" || true
+          git checkout --detach "refs/tags/${TAG}"
+
       - name: Test
         if: steps.existing.outputs.exists != 'true'
         run: go test -v ./...
@@ -76,7 +85,7 @@ jobs:
           notes="Go API bindings ${TAG}."
           notes="${notes}"$'\n\n'"- Binding version: \`${VERSION}\`"
           if [ -n "${api_version:-}" ]; then
-            notes="${notes}"$'\n'"- CloudSmith API version: \`${api_version}\`"
+            notes="${notes}"$'\n'"- Cloudsmith API version: \`${api_version}\`"
           fi
 
           extra=()
