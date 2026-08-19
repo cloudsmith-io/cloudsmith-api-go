@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1348.3
+  version: 1.1350.0
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -21596,6 +21596,7 @@ components:
         tags: "{}"
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 9
         cdn_url: cdn_url
@@ -22088,6 +22089,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -22300,6 +22309,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -22784,6 +22794,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -22946,6 +22964,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -23430,6 +23449,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -23592,6 +23619,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -24076,6 +24104,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -24245,6 +24281,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -24729,6 +24766,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -24942,6 +24987,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -25443,6 +25489,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -25604,6 +25658,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -26088,6 +26143,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -26266,6 +26329,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -26760,6 +26824,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -26921,6 +26993,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -27405,6 +27478,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -27599,6 +27680,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -28083,6 +28165,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -28245,6 +28335,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -28729,6 +28820,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -28913,6 +29012,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -29398,6 +29498,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -29559,6 +29667,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -30043,6 +30152,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -30213,6 +30330,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -30697,6 +30815,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -30859,6 +30985,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -31343,6 +31470,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -31505,6 +31640,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -31989,6 +32125,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -32151,6 +32295,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -32635,6 +32780,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -32885,6 +33038,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -33402,6 +33556,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -33570,6 +33732,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -34054,6 +34217,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -34225,6 +34396,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -34709,6 +34881,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -34878,6 +35058,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -35362,6 +35543,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -35524,6 +35713,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -36008,6 +36198,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -36170,6 +36368,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -36654,6 +36853,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -36854,6 +37061,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -37339,6 +37547,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -37507,6 +37723,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -37991,6 +38208,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -38153,6 +38378,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -38637,6 +38863,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -38856,6 +39090,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -39376,6 +39611,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -39540,6 +39783,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -40024,6 +40268,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -40207,6 +40459,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -40697,6 +40950,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -40861,6 +41122,7 @@ components:
         version: version
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -41346,6 +41608,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -41466,6 +41736,7 @@ components:
         tags: "{}"
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -41964,6 +42235,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -42123,6 +42402,7 @@ components:
         tags: "{}"
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -42616,6 +42896,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -42859,6 +43147,7 @@ components:
         tags: "{}"
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -43352,6 +43641,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -43507,6 +43804,7 @@ components:
         tags: "{}"
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -43993,6 +44291,14 @@ components:
           readOnly: true
           title: Status url
           type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
+          type: string
         subtype:
           readOnly: true
           title: Subtype
@@ -44117,6 +44423,7 @@ components:
         tags: "{}"
         is_resyncable: true
         license: license
+        store_path: store_path
         filename: filename
         size: 2
         cdn_url: cdn_url
@@ -44608,6 +44915,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true
@@ -45282,6 +45597,14 @@ components:
           format: uri
           readOnly: true
           title: Status url
+          type: string
+        store_path:
+          description: "Absolute store path for the package, including store hash\
+            \ and name."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Store path
           type: string
         subtype:
           readOnly: true

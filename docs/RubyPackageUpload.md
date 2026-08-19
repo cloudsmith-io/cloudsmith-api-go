@@ -78,6 +78,7 @@ Name | Type | Description | Notes
 **StatusStr** | Pointer to **string** |  | [optional] [readonly] 
 **StatusUpdatedAt** | Pointer to **time.Time** | The datetime the package status was updated at. | [optional] [readonly] 
 **StatusUrl** | Pointer to **string** |  | [optional] [readonly] 
+**StorePath** | Pointer to **NullableString** | Absolute store path for the package, including store hash and name. | [optional] [readonly] 
 **Subtype** | Pointer to **string** |  | [optional] [readonly] 
 **Summary** | Pointer to **NullableString** | A one-liner synopsis of this package. | [optional] [readonly] 
 **SyncFinishedAt** | Pointer to **NullableTime** | The datetime the package sync was finished at. | [optional] [readonly] 
@@ -2133,6 +2134,41 @@ SetStatusUrl sets StatusUrl field to given value.
 
 HasStatusUrl returns a boolean if a field has been set.
 
+### GetStorePath
+
+`func (o *RubyPackageUpload) GetStorePath() string`
+
+GetStorePath returns the StorePath field if non-nil, zero value otherwise.
+
+### GetStorePathOk
+
+`func (o *RubyPackageUpload) GetStorePathOk() (*string, bool)`
+
+GetStorePathOk returns a tuple with the StorePath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorePath
+
+`func (o *RubyPackageUpload) SetStorePath(v string)`
+
+SetStorePath sets StorePath field to given value.
+
+### HasStorePath
+
+`func (o *RubyPackageUpload) HasStorePath() bool`
+
+HasStorePath returns a boolean if a field has been set.
+
+### SetStorePathNil
+
+`func (o *RubyPackageUpload) SetStorePathNil(b bool)`
+
+ SetStorePathNil sets the value for StorePath to be an explicit nil
+
+### UnsetStorePath
+`func (o *RubyPackageUpload) UnsetStorePath()`
+
+UnsetStorePath ensures that no value is present for StorePath, not even an explicit nil
 ### GetSubtype
 
 `func (o *RubyPackageUpload) GetSubtype() string`
