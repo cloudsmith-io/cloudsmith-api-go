@@ -12,6 +12,7 @@ api_files.go
 api_formats.go
 api_metrics.go
 api_namespaces.go
+api_openid.go
 api_orgs.go
 api_packages.go
 api_quota.go
@@ -147,6 +148,11 @@ docs/NamespacesApi.md
 docs/NestedLicensePolicy.md
 docs/NestedVulnerabilityPolicy.md
 docs/NestedVulnerabilityScanResults.md
+docs/NixPackageUpload.md
+docs/NixPackageUploadRequest.md
+docs/NixUpstream.md
+docs/NixUpstreamRequest.md
+docs/NixUpstreamRequestPatch.md
 docs/NpmPackageUpload.md
 docs/NpmPackageUploadRequest.md
 docs/NpmUpstream.md
@@ -157,6 +163,9 @@ docs/NugetPackageUploadRequest.md
 docs/NugetUpstream.md
 docs/NugetUpstreamRequest.md
 docs/NugetUpstreamRequestPatch.md
+docs/Oidc1.md
+docs/OidcRequest.md
+docs/OpenidApi.md
 docs/Organization.md
 docs/OrganizationCustomDomainNestedRepo.md
 docs/OrganizationCustomDomains.md
@@ -466,6 +475,11 @@ model_namespace_audit_log.go
 model_nested_license_policy.go
 model_nested_vulnerability_policy.go
 model_nested_vulnerability_scan_results.go
+model_nix_package_upload.go
+model_nix_package_upload_request.go
+model_nix_upstream.go
+model_nix_upstream_request.go
+model_nix_upstream_request_patch.go
 model_npm_package_upload.go
 model_npm_package_upload_request.go
 model_npm_upstream.go
@@ -476,6 +490,8 @@ model_nuget_package_upload_request.go
 model_nuget_upstream.go
 model_nuget_upstream_request.go
 model_nuget_upstream_request_patch.go
+model_oidc_1.go
+model_oidc_request.go
 model_organization.go
 model_organization_custom_domain_nested_repo.go
 model_organization_custom_domains.go
@@ -670,6 +686,7 @@ test/api_files_test.go
 test/api_formats_test.go
 test/api_metrics_test.go
 test/api_namespaces_test.go
+test/api_openid_test.go
 test/api_orgs_test.go
 test/api_packages_test.go
 test/api_quota_test.go

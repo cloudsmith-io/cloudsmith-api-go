@@ -2,7 +2,7 @@
 set -eou pipefail
 
 
-PKG_VERSION=${1:-"0.0.61"}
+PKG_VERSION=${1:-"0.0.62"}
 API_HOST=${2:-"https://api.cloudsmith.io"}
 
 # GNU sed is required for the in-place edits below. It is `gsed` on macOS
