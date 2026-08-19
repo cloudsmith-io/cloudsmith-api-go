@@ -92,6 +92,7 @@ jobs:
         with:
           branch: automated/update-bindings-v${{ steps.versions.outputs.new_version }}
           base: master
+          sign-commits: true
           title: "Update Go API bindings to version ${{ steps.versions.outputs.new_version }}"
           commit-message: "Update Go API bindings to version ${{ steps.versions.outputs.new_version }}"
           body: |
