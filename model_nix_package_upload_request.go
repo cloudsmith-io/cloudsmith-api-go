@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1352.0
+API version: 1.1358.3
 Contact: support@cloudsmith.io
 */
 
@@ -24,7 +24,7 @@ type NixPackageUploadRequest struct {
 	// Whether the package has been detected as containing malware. Requires Ultra plan.
 	IsMalwareDetected *bool `json:"is_malware_detected,omitempty"`
 	// The narinfo sidecar metadata file (<storeHash>.narinfo). Optional — the package can be completed later by publishing the matching narinfo via the native HTTP PUT path.
-	Narinfo NullableString `json:"narinfo,omitempty"`
+	NarinfoFile NullableString `json:"narinfo_file,omitempty"`
 	// The primary file for the package.
 	PackageFile string `json:"package_file"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
@@ -89,47 +89,47 @@ func (o *NixPackageUploadRequest) SetIsMalwareDetected(v bool) {
 	o.IsMalwareDetected = &v
 }
 
-// GetNarinfo returns the Narinfo field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *NixPackageUploadRequest) GetNarinfo() string {
-	if o == nil || IsNil(o.Narinfo.Get()) {
+// GetNarinfoFile returns the NarinfoFile field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NixPackageUploadRequest) GetNarinfoFile() string {
+	if o == nil || IsNil(o.NarinfoFile.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Narinfo.Get()
+	return *o.NarinfoFile.Get()
 }
 
-// GetNarinfoOk returns a tuple with the Narinfo field value if set, nil otherwise
+// GetNarinfoFileOk returns a tuple with the NarinfoFile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NixPackageUploadRequest) GetNarinfoOk() (*string, bool) {
+func (o *NixPackageUploadRequest) GetNarinfoFileOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Narinfo.Get(), o.Narinfo.IsSet()
+	return o.NarinfoFile.Get(), o.NarinfoFile.IsSet()
 }
 
-// HasNarinfo returns a boolean if a field has been set.
-func (o *NixPackageUploadRequest) HasNarinfo() bool {
-	if o != nil && o.Narinfo.IsSet() {
+// HasNarinfoFile returns a boolean if a field has been set.
+func (o *NixPackageUploadRequest) HasNarinfoFile() bool {
+	if o != nil && o.NarinfoFile.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNarinfo gets a reference to the given NullableString and assigns it to the Narinfo field.
-func (o *NixPackageUploadRequest) SetNarinfo(v string) {
-	o.Narinfo.Set(&v)
+// SetNarinfoFile gets a reference to the given NullableString and assigns it to the NarinfoFile field.
+func (o *NixPackageUploadRequest) SetNarinfoFile(v string) {
+	o.NarinfoFile.Set(&v)
 }
 
-// SetNarinfoNil sets the value for Narinfo to be an explicit nil
-func (o *NixPackageUploadRequest) SetNarinfoNil() {
-	o.Narinfo.Set(nil)
+// SetNarinfoFileNil sets the value for NarinfoFile to be an explicit nil
+func (o *NixPackageUploadRequest) SetNarinfoFileNil() {
+	o.NarinfoFile.Set(nil)
 }
 
-// UnsetNarinfo ensures that no value is present for Narinfo, not even an explicit nil
-func (o *NixPackageUploadRequest) UnsetNarinfo() {
-	o.Narinfo.Unset()
+// UnsetNarinfoFile ensures that no value is present for NarinfoFile, not even an explicit nil
+func (o *NixPackageUploadRequest) UnsetNarinfoFile() {
+	o.NarinfoFile.Unset()
 }
 
 // GetPackageFile returns the PackageFile field value
@@ -330,8 +330,8 @@ func (o NixPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsMalwareDetected) {
 		toSerialize["is_malware_detected"] = o.IsMalwareDetected
 	}
-	if o.Narinfo.IsSet() {
-		toSerialize["narinfo"] = o.Narinfo.Get()
+	if o.NarinfoFile.IsSet() {
+		toSerialize["narinfo_file"] = o.NarinfoFile.Get()
 	}
 	toSerialize["package_file"] = o.PackageFile
 	if !IsNil(o.Republish) {
@@ -390,7 +390,7 @@ func (o *NixPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "is_malware_detected")
-		delete(additionalProperties, "narinfo")
+		delete(additionalProperties, "narinfo_file")
 		delete(additionalProperties, "package_file")
 		delete(additionalProperties, "republish")
 		delete(additionalProperties, "tags")
