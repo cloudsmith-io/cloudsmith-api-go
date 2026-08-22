@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1352.0
+  version: 1.1358.3
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -34748,7 +34748,6 @@ components:
     NixPackageUploadRequest:
       example:
         republish: true
-        narinfo: narinfo
         vulnerability_counts:
           high: 6
           total: 2
@@ -34757,6 +34756,7 @@ components:
           low: 1
           medium: 5
           unknown: 7
+        narinfo_file: narinfo_file
         is_malware_detected: true
         package_file: package_file
         version: version
@@ -34768,13 +34768,13 @@ components:
           readOnly: true
           title: Is malware detected
           type: boolean
-        narinfo:
+        narinfo_file:
           description: The narinfo sidecar metadata file (<storeHash>.narinfo). Optional
             — the package can be completed later by publishing the matching narinfo
             via the native HTTP PUT path.
           minLength: 1
           nullable: true
-          title: Narinfo
+          title: Narinfo file
           type: string
         package_file:
           description: The primary file for the package.

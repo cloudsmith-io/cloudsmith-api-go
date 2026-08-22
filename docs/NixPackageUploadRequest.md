@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
-**Narinfo** | Pointer to **NullableString** | The narinfo sidecar metadata file (&lt;storeHash&gt;.narinfo). Optional — the package can be completed later by publishing the matching narinfo via the native HTTP PUT path. | [optional] 
+**NarinfoFile** | Pointer to **NullableString** | The narinfo sidecar metadata file (&lt;storeHash&gt;.narinfo). Optional — the package can be completed later by publishing the matching narinfo via the native HTTP PUT path. | [optional] 
 **PackageFile** | **string** | The primary file for the package. | 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
@@ -56,41 +56,41 @@ SetIsMalwareDetected sets IsMalwareDetected field to given value.
 
 HasIsMalwareDetected returns a boolean if a field has been set.
 
-### GetNarinfo
+### GetNarinfoFile
 
-`func (o *NixPackageUploadRequest) GetNarinfo() string`
+`func (o *NixPackageUploadRequest) GetNarinfoFile() string`
 
-GetNarinfo returns the Narinfo field if non-nil, zero value otherwise.
+GetNarinfoFile returns the NarinfoFile field if non-nil, zero value otherwise.
 
-### GetNarinfoOk
+### GetNarinfoFileOk
 
-`func (o *NixPackageUploadRequest) GetNarinfoOk() (*string, bool)`
+`func (o *NixPackageUploadRequest) GetNarinfoFileOk() (*string, bool)`
 
-GetNarinfoOk returns a tuple with the Narinfo field if it's non-nil, zero value otherwise
+GetNarinfoFileOk returns a tuple with the NarinfoFile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNarinfo
+### SetNarinfoFile
 
-`func (o *NixPackageUploadRequest) SetNarinfo(v string)`
+`func (o *NixPackageUploadRequest) SetNarinfoFile(v string)`
 
-SetNarinfo sets Narinfo field to given value.
+SetNarinfoFile sets NarinfoFile field to given value.
 
-### HasNarinfo
+### HasNarinfoFile
 
-`func (o *NixPackageUploadRequest) HasNarinfo() bool`
+`func (o *NixPackageUploadRequest) HasNarinfoFile() bool`
 
-HasNarinfo returns a boolean if a field has been set.
+HasNarinfoFile returns a boolean if a field has been set.
 
-### SetNarinfoNil
+### SetNarinfoFileNil
 
-`func (o *NixPackageUploadRequest) SetNarinfoNil(b bool)`
+`func (o *NixPackageUploadRequest) SetNarinfoFileNil(b bool)`
 
- SetNarinfoNil sets the value for Narinfo to be an explicit nil
+ SetNarinfoFileNil sets the value for NarinfoFile to be an explicit nil
 
-### UnsetNarinfo
-`func (o *NixPackageUploadRequest) UnsetNarinfo()`
+### UnsetNarinfoFile
+`func (o *NixPackageUploadRequest) UnsetNarinfoFile()`
 
-UnsetNarinfo ensures that no value is present for Narinfo, not even an explicit nil
+UnsetNarinfoFile ensures that no value is present for NarinfoFile, not even an explicit nil
 ### GetPackageFile
 
 `func (o *NixPackageUploadRequest) GetPackageFile() string`
