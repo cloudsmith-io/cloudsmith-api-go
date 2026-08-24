@@ -1,0 +1,102 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: github-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up tools
+        uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d # v4.2.0
+
+      - name: Resolve binding version
+        id: version
+        run: |
+          set -euo pipefail
+          version=$(sed -n 's/^PKG_VERSION=\${1:-"\([0-9]\+\.[0-9]\+\.[0-9]\+\)"}.*/\1/p' bin/generate | head -1 || true)
+          if [ -z "$version" ]; then
+            echo "Could not parse PKG_VERSION from bin/generate" >&2
+            exit 1
+          fi
+          tag="v${version}"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+
+      - name: Skip if this version is already released
+        id: existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "GitHub release ${TAG} already exists; nothing to do."
+            exit 0
+          fi
+          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" >/dev/null 2>&1; then
+            echo "exists=tag-only" >> "$GITHUB_OUTPUT"
+            echo "Tag ${TAG} exists without a GitHub release; will attach one."
+            exit 0
+          fi
+          echo "exists=false" >> "$GITHUB_OUTPUT"
+
+      - name: Check out existing tag
+        if: steps.existing.outputs.exists == 'tag-only'
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "refs/tags/${TAG}:refs/tags/${TAG}" || true
+          git checkout --detach "refs/tags/${TAG}"
+
+      - name: Test
+        if: steps.existing.outputs.exists != 'true'
+        run: go test -v ./...
+
+      - name: Create GitHub release
+        if: steps.existing.outputs.exists != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.version.outputs.tag }}
+          VERSION: ${{ steps.version.outputs.version }}
+          EXISTS: ${{ steps.existing.outputs.exists }}
+        run: |
+          set -euo pipefail
+          api_version=$(grep -m1 -E '^\- API version:' README.md | awk '{print $4}' || true)
+          notes="Go API bindings ${TAG}."
+          notes="${notes}"$'\n\n'"- Binding version: \`${VERSION}\`"
+          if [ -n "${api_version:-}" ]; then
+            notes="${notes}"$'\n'"- Cloudsmith API version: \`${api_version}\`"
+          fi
+
+          extra=()
+          if [ "$EXISTS" = "tag-only" ]; then
+            extra+=(--verify-tag)
+          else
+            extra+=(--target "${GITHUB_SHA}")
+          fi
+
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --notes "$notes" \
+            --generate-notes \
+            "${extra[@]}"

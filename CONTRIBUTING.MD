@@ -22,8 +22,8 @@ Convenience tasks:
 
 * Update `PKG_VERSION` in `bin/generate`
 * Run `bin/generate` (or `mise run generate`) to generate bindings
-* Create a PR specifing API and binding version
-* Create git tag and release in github
+* Create a PR specifying API and binding version
+* After merge, the **Release** workflow tags `v$PKG_VERSION` and creates the GitHub release when that tag does not already exist
 
 ### Automated approach (local)
 
@@ -31,7 +31,7 @@ Convenience tasks:
 * This will then provide you with the URL for the PR to release the updated bindings.
 * Preferred usage: `./scripts/update-bindings.sh`
 * For full options and usage examples, run: `./scripts/update-bindings.sh --help`
-* After PR is merged, follow the displayed instructions to create the git tag and GitHub release.
+* After the PR is merged, the **Release** workflow creates the git tag and GitHub release.
 
 ### Automated approach (CI)
 
@@ -39,6 +39,9 @@ Convenience tasks:
   and opens a PR — on demand (`workflow_dispatch`, optionally with a specific
   version) or daily on a schedule. It opens a PR only when the regenerated
   bindings actually change, and closes any superseded automated PRs first.
+* The **Release** workflow runs on every push to `master`. It reads
+  `PKG_VERSION` from `bin/generate`, runs tests, and creates `v$PKG_VERSION`
+  plus a GitHub release when that version is not already published.
 
 ## Contributor License Agreement
 
