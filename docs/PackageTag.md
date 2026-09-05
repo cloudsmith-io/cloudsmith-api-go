@@ -35,7 +35,6 @@ Name | Type | Description | Notes
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsHidden** | Pointer to **bool** |  | [optional] [readonly] 
 **IsImmutable** | Pointer to **bool** | If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package. | [optional] [default to false]
-**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **IsMoveable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantinable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
@@ -94,7 +93,6 @@ Name | Type | Description | Notes
 **UploaderUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Version** | Pointer to **NullableString** | The raw version for this package. | [optional] [readonly] 
 **VersionOrig** | Pointer to **string** |  | [optional] [readonly] 
-**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 **VulnerabilityScanResultsUrl** | Pointer to **string** |  | [optional] [readonly] 
 
 ## Methods
@@ -960,31 +958,6 @@ SetIsImmutable sets IsImmutable field to given value.
 `func (o *PackageTag) HasIsImmutable() bool`
 
 HasIsImmutable returns a boolean if a field has been set.
-
-### GetIsMalwareDetected
-
-`func (o *PackageTag) GetIsMalwareDetected() bool`
-
-GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
-
-### GetIsMalwareDetectedOk
-
-`func (o *PackageTag) GetIsMalwareDetectedOk() (*bool, bool)`
-
-GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsMalwareDetected
-
-`func (o *PackageTag) SetIsMalwareDetected(v bool)`
-
-SetIsMalwareDetected sets IsMalwareDetected field to given value.
-
-### HasIsMalwareDetected
-
-`func (o *PackageTag) HasIsMalwareDetected() bool`
-
-HasIsMalwareDetected returns a boolean if a field has been set.
 
 ### GetIsMoveable
 
@@ -2586,41 +2559,6 @@ SetVersionOrig sets VersionOrig field to given value.
 
 HasVersionOrig returns a boolean if a field has been set.
 
-### GetVulnerabilityCounts
-
-`func (o *PackageTag) GetVulnerabilityCounts() WebOSVSeverityCounts`
-
-GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
-
-### GetVulnerabilityCountsOk
-
-`func (o *PackageTag) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
-
-GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVulnerabilityCounts
-
-`func (o *PackageTag) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
-
-SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
-
-### HasVulnerabilityCounts
-
-`func (o *PackageTag) HasVulnerabilityCounts() bool`
-
-HasVulnerabilityCounts returns a boolean if a field has been set.
-
-### SetVulnerabilityCountsNil
-
-`func (o *PackageTag) SetVulnerabilityCountsNil(b bool)`
-
- SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
-
-### UnsetVulnerabilityCounts
-`func (o *PackageTag) UnsetVulnerabilityCounts()`
-
-UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 ### GetVulnerabilityScanResultsUrl
 
 `func (o *PackageTag) GetVulnerabilityScanResultsUrl() string`

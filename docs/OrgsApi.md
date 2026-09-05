@@ -4,6 +4,12 @@ All URIs are relative to *https://api.cloudsmith.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**OrgsApiKeyRulesCreate**](OrgsApi.md#OrgsApiKeyRulesCreate) | **Post** /orgs/{org}/api-key-rules/ | Create an API key rule.
+[**OrgsApiKeyRulesDelete**](OrgsApi.md#OrgsApiKeyRulesDelete) | **Delete** /orgs/{org}/api-key-rules/{slug_perm}/ | Delete an API key rule.
+[**OrgsApiKeyRulesList**](OrgsApi.md#OrgsApiKeyRulesList) | **Get** /orgs/{org}/api-key-rules/ | List all API key rules for the organization.
+[**OrgsApiKeyRulesPartialUpdate**](OrgsApi.md#OrgsApiKeyRulesPartialUpdate) | **Patch** /orgs/{org}/api-key-rules/{slug_perm}/ | Update an API key rule.
+[**OrgsApiKeyRulesRead**](OrgsApi.md#OrgsApiKeyRulesRead) | **Get** /orgs/{org}/api-key-rules/{slug_perm}/ | Retrieve an API key rule.
+[**OrgsApiKeyRulesUpdate**](OrgsApi.md#OrgsApiKeyRulesUpdate) | **Put** /orgs/{org}/api-key-rules/{slug_perm}/ | Full update of an API key rule.
 [**OrgsCustomDomainsList**](OrgsApi.md#OrgsCustomDomainsList) | **Get** /orgs/{org}/custom-domains/ | Get the details for all custom domains.
 [**OrgsDelete**](OrgsApi.md#OrgsDelete) | **Delete** /orgs/{org}/ | Delete the specified organization.
 [**OrgsDenyPolicyCreate**](OrgsApi.md#OrgsDenyPolicyCreate) | **Post** /orgs/{org}/deny-policy/ | Create a package deny policy.
@@ -81,6 +87,442 @@ Method | HTTP request | Description
 [**OrgsVulnerabilityPolicyUpdate**](OrgsApi.md#OrgsVulnerabilityPolicyUpdate) | **Put** /orgs/{org}/vulnerability-policy/{slug_perm}/ | Update a package vulnerability policy.
 [**OrgsVulnerabilityPolicyViolationList**](OrgsApi.md#OrgsVulnerabilityPolicyViolationList) | **Get** /orgs/{org}/vulnerability-policy-violation/ | List all current vulnerability policy violations for this Organization.
 
+
+
+## OrgsApiKeyRulesCreate
+
+> OrganizationApiKeyRule OrgsApiKeyRulesCreate(ctx, org).Data(data).Execute()
+
+Create an API key rule.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	data := *openapiclient.NewOrganizationApiKeyRuleRequest("RuleType_example") // OrganizationApiKeyRuleRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsApiKeyRulesCreate(context.Background(), org).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsApiKeyRulesCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsApiKeyRulesCreate`: OrganizationApiKeyRule
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsApiKeyRulesCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsApiKeyRulesCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **data** | [**OrganizationApiKeyRuleRequest**](OrganizationApiKeyRuleRequest.md) |  | 
+
+### Return type
+
+[**OrganizationApiKeyRule**](OrganizationApiKeyRule.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsApiKeyRulesDelete
+
+> OrgsApiKeyRulesDelete(ctx, org, slugPerm).Execute()
+
+Delete an API key rule.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.OrgsApi.OrgsApiKeyRulesDelete(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsApiKeyRulesDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsApiKeyRulesDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsApiKeyRulesList
+
+> []OrganizationApiKeyRule OrgsApiKeyRulesList(ctx, org).Execute()
+
+List all API key rules for the organization.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsApiKeyRulesList(context.Background(), org).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsApiKeyRulesList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsApiKeyRulesList`: []OrganizationApiKeyRule
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsApiKeyRulesList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsApiKeyRulesListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]OrganizationApiKeyRule**](OrganizationApiKeyRule.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsApiKeyRulesPartialUpdate
+
+> OrganizationApiKeyRule OrgsApiKeyRulesPartialUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Update an API key rule.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewOrganizationApiKeyRuleRequestPatch() // OrganizationApiKeyRuleRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsApiKeyRulesPartialUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsApiKeyRulesPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsApiKeyRulesPartialUpdate`: OrganizationApiKeyRule
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsApiKeyRulesPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsApiKeyRulesPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**OrganizationApiKeyRuleRequestPatch**](OrganizationApiKeyRuleRequestPatch.md) |  | 
+
+### Return type
+
+[**OrganizationApiKeyRule**](OrganizationApiKeyRule.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsApiKeyRulesRead
+
+> OrganizationApiKeyRule OrgsApiKeyRulesRead(ctx, org, slugPerm).Execute()
+
+Retrieve an API key rule.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsApiKeyRulesRead(context.Background(), org, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsApiKeyRulesRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsApiKeyRulesRead`: OrganizationApiKeyRule
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsApiKeyRulesRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsApiKeyRulesReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**OrganizationApiKeyRule**](OrganizationApiKeyRule.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrgsApiKeyRulesUpdate
+
+> OrganizationApiKeyRule OrgsApiKeyRulesUpdate(ctx, org, slugPerm).Data(data).Execute()
+
+Full update of an API key rule.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	org := "org_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewOrganizationApiKeyRuleRequest("RuleType_example") // OrganizationApiKeyRuleRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrgsApi.OrgsApiKeyRulesUpdate(context.Background(), org, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrgsApi.OrgsApiKeyRulesUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrgsApiKeyRulesUpdate`: OrganizationApiKeyRule
+	fmt.Fprintf(os.Stdout, "Response from `OrgsApi.OrgsApiKeyRulesUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**org** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrgsApiKeyRulesUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**OrganizationApiKeyRuleRequest**](OrganizationApiKeyRuleRequest.md) |  | 
+
+### Return type
+
+[**OrganizationApiKeyRule**](OrganizationApiKeyRule.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## OrgsCustomDomainsList

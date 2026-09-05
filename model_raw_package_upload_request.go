@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1358.3
+API version: 1.1381.2
 Contact: support@cloudsmith.io
 */
 
@@ -25,8 +25,6 @@ type RawPackageUploadRequest struct {
 	ContentType NullableString `json:"content_type,omitempty"`
 	// A textual description of this package.
 	Description NullableString `json:"description,omitempty"`
-	// Whether the package has been detected as containing malware. Requires Ultra plan.
-	IsMalwareDetected *bool `json:"is_malware_detected,omitempty"`
 	// The name of this package.
 	Name NullableString `json:"name,omitempty"`
 	// The primary file for the package.
@@ -38,8 +36,7 @@ type RawPackageUploadRequest struct {
 	// A comma-separated values list of tags to add to the package.
 	Tags NullableString `json:"tags,omitempty"`
 	// The raw version for this package.
-	Version              NullableString               `json:"version,omitempty"`
-	VulnerabilityCounts  NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
+	Version              NullableString `json:"version,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -147,38 +144,6 @@ func (o *RawPackageUploadRequest) SetDescriptionNil() {
 // UnsetDescription ensures that no value is present for Description, not even an explicit nil
 func (o *RawPackageUploadRequest) UnsetDescription() {
 	o.Description.Unset()
-}
-
-// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
-func (o *RawPackageUploadRequest) GetIsMalwareDetected() bool {
-	if o == nil || IsNil(o.IsMalwareDetected) {
-		var ret bool
-		return ret
-	}
-	return *o.IsMalwareDetected
-}
-
-// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RawPackageUploadRequest) GetIsMalwareDetectedOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsMalwareDetected) {
-		return nil, false
-	}
-	return o.IsMalwareDetected, true
-}
-
-// HasIsMalwareDetected returns a boolean if a field has been set.
-func (o *RawPackageUploadRequest) HasIsMalwareDetected() bool {
-	if o != nil && !IsNil(o.IsMalwareDetected) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
-func (o *RawPackageUploadRequest) SetIsMalwareDetected(v bool) {
-	o.IsMalwareDetected = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -409,49 +374,6 @@ func (o *RawPackageUploadRequest) UnsetVersion() {
 	o.Version.Unset()
 }
 
-// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *RawPackageUploadRequest) GetVulnerabilityCounts() WebOSVSeverityCounts {
-	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
-		var ret WebOSVSeverityCounts
-		return ret
-	}
-	return *o.VulnerabilityCounts.Get()
-}
-
-// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *RawPackageUploadRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
-}
-
-// HasVulnerabilityCounts returns a boolean if a field has been set.
-func (o *RawPackageUploadRequest) HasVulnerabilityCounts() bool {
-	if o != nil && o.VulnerabilityCounts.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
-func (o *RawPackageUploadRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
-	o.VulnerabilityCounts.Set(&v)
-}
-
-// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
-func (o *RawPackageUploadRequest) SetVulnerabilityCountsNil() {
-	o.VulnerabilityCounts.Set(nil)
-}
-
-// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
-func (o *RawPackageUploadRequest) UnsetVulnerabilityCounts() {
-	o.VulnerabilityCounts.Unset()
-}
-
 func (o RawPackageUploadRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -468,9 +390,6 @@ func (o RawPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
-	if !IsNil(o.IsMalwareDetected) {
-		toSerialize["is_malware_detected"] = o.IsMalwareDetected
-	}
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
@@ -486,9 +405,6 @@ func (o RawPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Version.IsSet() {
 		toSerialize["version"] = o.Version.Get()
-	}
-	if o.VulnerabilityCounts.IsSet() {
-		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -535,14 +451,12 @@ func (o *RawPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "content_type")
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "package_file")
 		delete(additionalProperties, "republish")
 		delete(additionalProperties, "summary")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "version")
-		delete(additionalProperties, "vulnerability_counts")
 		o.AdditionalProperties = additionalProperties
 	}
 

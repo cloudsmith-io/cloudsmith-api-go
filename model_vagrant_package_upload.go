@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1358.3
+API version: 1.1381.2
 Contact: support@cloudsmith.io
 */
 
@@ -50,25 +50,23 @@ type VagrantPackageUpload struct {
 	// Unique and permanent identifier for the package.
 	IdentifierPerm *string `json:"identifier_perm,omitempty"`
 	// Return a map of identifier field names and their values.
-	Identifiers    *map[string]string `json:"identifiers,omitempty"`
-	Indexed        *bool              `json:"indexed,omitempty"`
-	IsCancellable  *bool              `json:"is_cancellable,omitempty"`
-	IsCopyable     *bool              `json:"is_copyable,omitempty"`
-	IsDeleteable   *bool              `json:"is_deleteable,omitempty"`
-	IsDownloadable *bool              `json:"is_downloadable,omitempty"`
-	IsHidden       *bool              `json:"is_hidden,omitempty"`
-	// Whether the package has been detected as containing malware. Requires Ultra plan.
-	IsMalwareDetected   *bool `json:"is_malware_detected,omitempty"`
-	IsMoveable          *bool `json:"is_moveable,omitempty"`
-	IsQuarantinable     *bool `json:"is_quarantinable,omitempty"`
-	IsQuarantined       *bool `json:"is_quarantined,omitempty"`
-	IsResyncable        *bool `json:"is_resyncable,omitempty"`
-	IsSecurityScannable *bool `json:"is_security_scannable,omitempty"`
-	IsSyncAwaiting      *bool `json:"is_sync_awaiting,omitempty"`
-	IsSyncCompleted     *bool `json:"is_sync_completed,omitempty"`
-	IsSyncFailed        *bool `json:"is_sync_failed,omitempty"`
-	IsSyncInFlight      *bool `json:"is_sync_in_flight,omitempty"`
-	IsSyncInProgress    *bool `json:"is_sync_in_progress,omitempty"`
+	Identifiers         *map[string]string `json:"identifiers,omitempty"`
+	Indexed             *bool              `json:"indexed,omitempty"`
+	IsCancellable       *bool              `json:"is_cancellable,omitempty"`
+	IsCopyable          *bool              `json:"is_copyable,omitempty"`
+	IsDeleteable        *bool              `json:"is_deleteable,omitempty"`
+	IsDownloadable      *bool              `json:"is_downloadable,omitempty"`
+	IsHidden            *bool              `json:"is_hidden,omitempty"`
+	IsMoveable          *bool              `json:"is_moveable,omitempty"`
+	IsQuarantinable     *bool              `json:"is_quarantinable,omitempty"`
+	IsQuarantined       *bool              `json:"is_quarantined,omitempty"`
+	IsResyncable        *bool              `json:"is_resyncable,omitempty"`
+	IsSecurityScannable *bool              `json:"is_security_scannable,omitempty"`
+	IsSyncAwaiting      *bool              `json:"is_sync_awaiting,omitempty"`
+	IsSyncCompleted     *bool              `json:"is_sync_completed,omitempty"`
+	IsSyncFailed        *bool              `json:"is_sync_failed,omitempty"`
+	IsSyncInFlight      *bool              `json:"is_sync_in_flight,omitempty"`
+	IsSyncInProgress    *bool              `json:"is_sync_in_progress,omitempty"`
 	// The license of this package.
 	License NullableString `json:"license,omitempty"`
 	// The name of this package.
@@ -144,10 +142,9 @@ type VagrantPackageUpload struct {
 	Uploader    *string    `json:"uploader,omitempty"`
 	UploaderUrl *string    `json:"uploader_url,omitempty"`
 	// The raw version for this package.
-	Version                     string                       `json:"version"`
-	VersionOrig                 *string                      `json:"version_orig,omitempty"`
-	VulnerabilityCounts         NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
-	VulnerabilityScanResultsUrl *string                      `json:"vulnerability_scan_results_url,omitempty"`
+	Version                     string  `json:"version"`
+	VersionOrig                 *string `json:"version_orig,omitempty"`
+	VulnerabilityScanResultsUrl *string `json:"vulnerability_scan_results_url,omitempty"`
 	AdditionalProperties        map[string]interface{}
 }
 
@@ -1165,38 +1162,6 @@ func (o *VagrantPackageUpload) HasIsHidden() bool {
 // SetIsHidden gets a reference to the given bool and assigns it to the IsHidden field.
 func (o *VagrantPackageUpload) SetIsHidden(v bool) {
 	o.IsHidden = &v
-}
-
-// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
-func (o *VagrantPackageUpload) GetIsMalwareDetected() bool {
-	if o == nil || IsNil(o.IsMalwareDetected) {
-		var ret bool
-		return ret
-	}
-	return *o.IsMalwareDetected
-}
-
-// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VagrantPackageUpload) GetIsMalwareDetectedOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsMalwareDetected) {
-		return nil, false
-	}
-	return o.IsMalwareDetected, true
-}
-
-// HasIsMalwareDetected returns a boolean if a field has been set.
-func (o *VagrantPackageUpload) HasIsMalwareDetected() bool {
-	if o != nil && !IsNil(o.IsMalwareDetected) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
-func (o *VagrantPackageUpload) SetIsMalwareDetected(v bool) {
-	o.IsMalwareDetected = &v
 }
 
 // GetIsMoveable returns the IsMoveable field value if set, zero value otherwise.
@@ -3206,49 +3171,6 @@ func (o *VagrantPackageUpload) SetVersionOrig(v string) {
 	o.VersionOrig = &v
 }
 
-// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *VagrantPackageUpload) GetVulnerabilityCounts() WebOSVSeverityCounts {
-	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
-		var ret WebOSVSeverityCounts
-		return ret
-	}
-	return *o.VulnerabilityCounts.Get()
-}
-
-// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *VagrantPackageUpload) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
-}
-
-// HasVulnerabilityCounts returns a boolean if a field has been set.
-func (o *VagrantPackageUpload) HasVulnerabilityCounts() bool {
-	if o != nil && o.VulnerabilityCounts.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
-func (o *VagrantPackageUpload) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
-	o.VulnerabilityCounts.Set(&v)
-}
-
-// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
-func (o *VagrantPackageUpload) SetVulnerabilityCountsNil() {
-	o.VulnerabilityCounts.Set(nil)
-}
-
-// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
-func (o *VagrantPackageUpload) UnsetVulnerabilityCounts() {
-	o.VulnerabilityCounts.Unset()
-}
-
 // GetVulnerabilityScanResultsUrl returns the VulnerabilityScanResultsUrl field value if set, zero value otherwise.
 func (o *VagrantPackageUpload) GetVulnerabilityScanResultsUrl() string {
 	if o == nil || IsNil(o.VulnerabilityScanResultsUrl) {
@@ -3377,9 +3299,6 @@ func (o VagrantPackageUpload) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsHidden) {
 		toSerialize["is_hidden"] = o.IsHidden
-	}
-	if !IsNil(o.IsMalwareDetected) {
-		toSerialize["is_malware_detected"] = o.IsMalwareDetected
 	}
 	if !IsNil(o.IsMoveable) {
 		toSerialize["is_moveable"] = o.IsMoveable
@@ -3552,9 +3471,6 @@ func (o VagrantPackageUpload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VersionOrig) {
 		toSerialize["version_orig"] = o.VersionOrig
 	}
-	if o.VulnerabilityCounts.IsSet() {
-		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
-	}
 	if !IsNil(o.VulnerabilityScanResultsUrl) {
 		toSerialize["vulnerability_scan_results_url"] = o.VulnerabilityScanResultsUrl
 	}
@@ -3632,7 +3548,6 @@ func (o *VagrantPackageUpload) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_deleteable")
 		delete(additionalProperties, "is_downloadable")
 		delete(additionalProperties, "is_hidden")
-		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "is_moveable")
 		delete(additionalProperties, "is_quarantinable")
 		delete(additionalProperties, "is_quarantined")
@@ -3692,7 +3607,6 @@ func (o *VagrantPackageUpload) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "uploader_url")
 		delete(additionalProperties, "version")
 		delete(additionalProperties, "version_orig")
-		delete(additionalProperties, "vulnerability_counts")
 		delete(additionalProperties, "vulnerability_scan_results_url")
 		o.AdditionalProperties = additionalProperties
 	}

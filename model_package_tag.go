@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1358.3
+API version: 1.1381.2
 Contact: support@cloudsmith.io
 */
 
@@ -59,9 +59,7 @@ type PackageTag struct {
 	IsDownloadable *bool              `json:"is_downloadable,omitempty"`
 	IsHidden       *bool              `json:"is_hidden,omitempty"`
 	// If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package.
-	IsImmutable *bool `json:"is_immutable,omitempty"`
-	// Whether the package has been detected as containing malware. Requires Ultra plan.
-	IsMalwareDetected   *bool `json:"is_malware_detected,omitempty"`
+	IsImmutable         *bool `json:"is_immutable,omitempty"`
 	IsMoveable          *bool `json:"is_moveable,omitempty"`
 	IsQuarantinable     *bool `json:"is_quarantinable,omitempty"`
 	IsQuarantined       *bool `json:"is_quarantined,omitempty"`
@@ -145,10 +143,9 @@ type PackageTag struct {
 	Uploader    *string    `json:"uploader,omitempty"`
 	UploaderUrl *string    `json:"uploader_url,omitempty"`
 	// The raw version for this package.
-	Version                     NullableString               `json:"version,omitempty"`
-	VersionOrig                 *string                      `json:"version_orig,omitempty"`
-	VulnerabilityCounts         NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
-	VulnerabilityScanResultsUrl *string                      `json:"vulnerability_scan_results_url,omitempty"`
+	Version                     NullableString `json:"version,omitempty"`
+	VersionOrig                 *string        `json:"version_orig,omitempty"`
+	VulnerabilityScanResultsUrl *string        `json:"vulnerability_scan_results_url,omitempty"`
 	AdditionalProperties        map[string]interface{}
 }
 
@@ -1242,38 +1239,6 @@ func (o *PackageTag) HasIsImmutable() bool {
 // SetIsImmutable gets a reference to the given bool and assigns it to the IsImmutable field.
 func (o *PackageTag) SetIsImmutable(v bool) {
 	o.IsImmutable = &v
-}
-
-// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
-func (o *PackageTag) GetIsMalwareDetected() bool {
-	if o == nil || IsNil(o.IsMalwareDetected) {
-		var ret bool
-		return ret
-	}
-	return *o.IsMalwareDetected
-}
-
-// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PackageTag) GetIsMalwareDetectedOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsMalwareDetected) {
-		return nil, false
-	}
-	return o.IsMalwareDetected, true
-}
-
-// HasIsMalwareDetected returns a boolean if a field has been set.
-func (o *PackageTag) HasIsMalwareDetected() bool {
-	if o != nil && !IsNil(o.IsMalwareDetected) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
-func (o *PackageTag) SetIsMalwareDetected(v bool) {
-	o.IsMalwareDetected = &v
 }
 
 // GetIsMoveable returns the IsMoveable field value if set, zero value otherwise.
@@ -3297,49 +3262,6 @@ func (o *PackageTag) SetVersionOrig(v string) {
 	o.VersionOrig = &v
 }
 
-// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PackageTag) GetVulnerabilityCounts() WebOSVSeverityCounts {
-	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
-		var ret WebOSVSeverityCounts
-		return ret
-	}
-	return *o.VulnerabilityCounts.Get()
-}
-
-// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PackageTag) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
-}
-
-// HasVulnerabilityCounts returns a boolean if a field has been set.
-func (o *PackageTag) HasVulnerabilityCounts() bool {
-	if o != nil && o.VulnerabilityCounts.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
-func (o *PackageTag) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
-	o.VulnerabilityCounts.Set(&v)
-}
-
-// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
-func (o *PackageTag) SetVulnerabilityCountsNil() {
-	o.VulnerabilityCounts.Set(nil)
-}
-
-// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
-func (o *PackageTag) UnsetVulnerabilityCounts() {
-	o.VulnerabilityCounts.Unset()
-}
-
 // GetVulnerabilityScanResultsUrl returns the VulnerabilityScanResultsUrl field value if set, zero value otherwise.
 func (o *PackageTag) GetVulnerabilityScanResultsUrl() string {
 	if o == nil || IsNil(o.VulnerabilityScanResultsUrl) {
@@ -3474,9 +3396,6 @@ func (o PackageTag) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IsImmutable) {
 		toSerialize["is_immutable"] = o.IsImmutable
-	}
-	if !IsNil(o.IsMalwareDetected) {
-		toSerialize["is_malware_detected"] = o.IsMalwareDetected
 	}
 	if !IsNil(o.IsMoveable) {
 		toSerialize["is_moveable"] = o.IsMoveable
@@ -3652,9 +3571,6 @@ func (o PackageTag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VersionOrig) {
 		toSerialize["version_orig"] = o.VersionOrig
 	}
-	if o.VulnerabilityCounts.IsSet() {
-		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
-	}
 	if !IsNil(o.VulnerabilityScanResultsUrl) {
 		toSerialize["vulnerability_scan_results_url"] = o.VulnerabilityScanResultsUrl
 	}
@@ -3711,7 +3627,6 @@ func (o *PackageTag) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_downloadable")
 		delete(additionalProperties, "is_hidden")
 		delete(additionalProperties, "is_immutable")
-		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "is_moveable")
 		delete(additionalProperties, "is_quarantinable")
 		delete(additionalProperties, "is_quarantined")
@@ -3770,7 +3685,6 @@ func (o *PackageTag) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "uploader_url")
 		delete(additionalProperties, "version")
 		delete(additionalProperties, "version_orig")
-		delete(additionalProperties, "vulnerability_counts")
 		delete(additionalProperties, "vulnerability_scan_results_url")
 		o.AdditionalProperties = additionalProperties
 	}

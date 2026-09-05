@@ -68,6 +68,8 @@ docs/CondaUpstreamRequestPatch.md
 docs/ConnectedRepository.md
 docs/ConnectedRepositoryRequest.md
 docs/ConnectedRepositoryRequestPatch.md
+docs/ConnectedRepositoryTargetSummary.md
+docs/ConnectedRepositoryUpstream.md
 docs/CranPackageUpload.md
 docs/CranPackageUploadRequest.md
 docs/CranUpstream.md
@@ -167,6 +169,9 @@ docs/Oidc1.md
 docs/OidcRequest.md
 docs/OpenidApi.md
 docs/Organization.md
+docs/OrganizationApiKeyRule.md
+docs/OrganizationApiKeyRuleRequest.md
+docs/OrganizationApiKeyRuleRequestPatch.md
 docs/OrganizationCustomDomainNestedRepo.md
 docs/OrganizationCustomDomains.md
 docs/OrganizationGroupSync.md
@@ -401,6 +406,8 @@ model_conda_upstream_request_patch.go
 model_connected_repository.go
 model_connected_repository_request.go
 model_connected_repository_request_patch.go
+model_connected_repository_target_summary.go
+model_connected_repository_upstream.go
 model_cran_package_upload.go
 model_cran_package_upload_request.go
 model_cran_upstream.go
@@ -493,6 +500,9 @@ model_nuget_upstream_request_patch.go
 model_oidc_1.go
 model_oidc_request.go
 model_organization.go
+model_organization_api_key_rule.go
+model_organization_api_key_rule_request.go
+model_organization_api_key_rule_request_patch.go
 model_organization_custom_domain_nested_repo.go
 model_organization_custom_domains.go
 model_organization_group_sync.go

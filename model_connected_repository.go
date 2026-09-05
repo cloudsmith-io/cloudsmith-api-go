@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1358.3
+API version: 1.1381.2
 Contact: support@cloudsmith.io
 */
 
@@ -22,6 +22,10 @@ var _ MappedNullable = &ConnectedRepository{}
 
 // ConnectedRepository struct for ConnectedRepository
 type ConnectedRepository struct {
+	// Whether the current user has permission to view the target repository's settings. When false, `configured_upstreams` will be empty even if upstreams are configured.
+	CanViewTargetRepositorySettings *bool `json:"can_view_target_repository_settings,omitempty"`
+	// The upstream sources configured on the target repository, used to display which formats/upstreams the connection exposes.
+	ConfiguredUpstreams []ConnectedRepositoryUpstream `json:"configured_upstreams,omitempty"`
 	// The date and time when the connection was created.
 	CreatedAt     *time.Time `json:"created_at,omitempty"`
 	DisableReason *string    `json:"disable_reason,omitempty"`
@@ -32,8 +36,9 @@ type ConnectedRepository struct {
 	Priority *int64  `json:"priority,omitempty"`
 	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	// The slug of the target repository to connect to.
-	TargetRepository     string `json:"target_repository" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	AdditionalProperties map[string]interface{}
+	TargetRepository        string                            `json:"target_repository" validate:"regexp=^[-a-zA-Z0-9_]+$"`
+	TargetRepositorySummary *ConnectedRepositoryTargetSummary `json:"target_repository_summary,omitempty"`
+	AdditionalProperties    map[string]interface{}
 }
 
 type _ConnectedRepository ConnectedRepository
@@ -58,6 +63,70 @@ func NewConnectedRepositoryWithDefaults() *ConnectedRepository {
 	var isActive bool = false
 	this.IsActive = &isActive
 	return &this
+}
+
+// GetCanViewTargetRepositorySettings returns the CanViewTargetRepositorySettings field value if set, zero value otherwise.
+func (o *ConnectedRepository) GetCanViewTargetRepositorySettings() bool {
+	if o == nil || IsNil(o.CanViewTargetRepositorySettings) {
+		var ret bool
+		return ret
+	}
+	return *o.CanViewTargetRepositorySettings
+}
+
+// GetCanViewTargetRepositorySettingsOk returns a tuple with the CanViewTargetRepositorySettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectedRepository) GetCanViewTargetRepositorySettingsOk() (*bool, bool) {
+	if o == nil || IsNil(o.CanViewTargetRepositorySettings) {
+		return nil, false
+	}
+	return o.CanViewTargetRepositorySettings, true
+}
+
+// HasCanViewTargetRepositorySettings returns a boolean if a field has been set.
+func (o *ConnectedRepository) HasCanViewTargetRepositorySettings() bool {
+	if o != nil && !IsNil(o.CanViewTargetRepositorySettings) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanViewTargetRepositorySettings gets a reference to the given bool and assigns it to the CanViewTargetRepositorySettings field.
+func (o *ConnectedRepository) SetCanViewTargetRepositorySettings(v bool) {
+	o.CanViewTargetRepositorySettings = &v
+}
+
+// GetConfiguredUpstreams returns the ConfiguredUpstreams field value if set, zero value otherwise.
+func (o *ConnectedRepository) GetConfiguredUpstreams() []ConnectedRepositoryUpstream {
+	if o == nil || IsNil(o.ConfiguredUpstreams) {
+		var ret []ConnectedRepositoryUpstream
+		return ret
+	}
+	return o.ConfiguredUpstreams
+}
+
+// GetConfiguredUpstreamsOk returns a tuple with the ConfiguredUpstreams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectedRepository) GetConfiguredUpstreamsOk() ([]ConnectedRepositoryUpstream, bool) {
+	if o == nil || IsNil(o.ConfiguredUpstreams) {
+		return nil, false
+	}
+	return o.ConfiguredUpstreams, true
+}
+
+// HasConfiguredUpstreams returns a boolean if a field has been set.
+func (o *ConnectedRepository) HasConfiguredUpstreams() bool {
+	if o != nil && !IsNil(o.ConfiguredUpstreams) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfiguredUpstreams gets a reference to the given []ConnectedRepositoryUpstream and assigns it to the ConfiguredUpstreams field.
+func (o *ConnectedRepository) SetConfiguredUpstreams(v []ConnectedRepositoryUpstream) {
+	o.ConfiguredUpstreams = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -276,6 +345,38 @@ func (o *ConnectedRepository) SetTargetRepository(v string) {
 	o.TargetRepository = v
 }
 
+// GetTargetRepositorySummary returns the TargetRepositorySummary field value if set, zero value otherwise.
+func (o *ConnectedRepository) GetTargetRepositorySummary() ConnectedRepositoryTargetSummary {
+	if o == nil || IsNil(o.TargetRepositorySummary) {
+		var ret ConnectedRepositoryTargetSummary
+		return ret
+	}
+	return *o.TargetRepositorySummary
+}
+
+// GetTargetRepositorySummaryOk returns a tuple with the TargetRepositorySummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectedRepository) GetTargetRepositorySummaryOk() (*ConnectedRepositoryTargetSummary, bool) {
+	if o == nil || IsNil(o.TargetRepositorySummary) {
+		return nil, false
+	}
+	return o.TargetRepositorySummary, true
+}
+
+// HasTargetRepositorySummary returns a boolean if a field has been set.
+func (o *ConnectedRepository) HasTargetRepositorySummary() bool {
+	if o != nil && !IsNil(o.TargetRepositorySummary) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetRepositorySummary gets a reference to the given ConnectedRepositoryTargetSummary and assigns it to the TargetRepositorySummary field.
+func (o *ConnectedRepository) SetTargetRepositorySummary(v ConnectedRepositoryTargetSummary) {
+	o.TargetRepositorySummary = &v
+}
+
 func (o ConnectedRepository) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -286,6 +387,12 @@ func (o ConnectedRepository) MarshalJSON() ([]byte, error) {
 
 func (o ConnectedRepository) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CanViewTargetRepositorySettings) {
+		toSerialize["can_view_target_repository_settings"] = o.CanViewTargetRepositorySettings
+	}
+	if !IsNil(o.ConfiguredUpstreams) {
+		toSerialize["configured_upstreams"] = o.ConfiguredUpstreams
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -305,6 +412,9 @@ func (o ConnectedRepository) ToMap() (map[string]interface{}, error) {
 		toSerialize["slug_perm"] = o.SlugPerm
 	}
 	toSerialize["target_repository"] = o.TargetRepository
+	if !IsNil(o.TargetRepositorySummary) {
+		toSerialize["target_repository_summary"] = o.TargetRepositorySummary
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -348,6 +458,8 @@ func (o *ConnectedRepository) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "can_view_target_repository_settings")
+		delete(additionalProperties, "configured_upstreams")
 		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "disable_reason")
 		delete(additionalProperties, "disable_reason_text")
@@ -355,6 +467,7 @@ func (o *ConnectedRepository) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "priority")
 		delete(additionalProperties, "slug_perm")
 		delete(additionalProperties, "target_repository")
+		delete(additionalProperties, "target_repository_summary")
 		o.AdditionalProperties = additionalProperties
 	}
 
