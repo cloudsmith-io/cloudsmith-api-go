@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **DependenciesUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Description** | Pointer to **NullableString** | A textual description of this package. | [optional] [readonly] 
 **DisplayName** | Pointer to **string** |  | [optional] [readonly] 
+**DisplaySource** | Pointer to **string** | Where the package originated, for example: &#39;upstream&#39; (proxied/cached from a configured upstream), &#39;connected_repository&#39; (blended in from a connected target repository), or &#39;manual_upload&#39; (uploaded directly to Cloudsmith). | [optional] [readonly] 
 **Distro** | Pointer to [**NullableDistribution**](Distribution.md) |  | [optional] 
 **DistroVersion** | Pointer to [**DistributionVersion**](DistributionVersion.md) |  | [optional] 
 **Downloads** | Pointer to **int64** |  | [optional] [readonly] 
@@ -395,6 +396,31 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *Package) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
+
+### GetDisplaySource
+
+`func (o *Package) GetDisplaySource() string`
+
+GetDisplaySource returns the DisplaySource field if non-nil, zero value otherwise.
+
+### GetDisplaySourceOk
+
+`func (o *Package) GetDisplaySourceOk() (*string, bool)`
+
+GetDisplaySourceOk returns a tuple with the DisplaySource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplaySource
+
+`func (o *Package) SetDisplaySource(v string)`
+
+SetDisplaySource sets DisplaySource field to given value.
+
+### HasDisplaySource
+
+`func (o *Package) HasDisplaySource() bool`
+
+HasDisplaySource returns a boolean if a field has been set.
 
 ### GetDistro
 

@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **ArtifactId** | Pointer to **NullableString** | The ID of the artifact. | [optional] 
 **ExtraFiles** | Pointer to **[]string** | Extra files to include in the package. This can be a single file or multiple files. | [optional] 
 **GroupId** | Pointer to **NullableString** | Artifact&#39;s group ID. | [optional] 
-**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **IvyFile** | Pointer to **NullableString** | The ivy file is an XML file describing the dependencies of the project. | [optional] 
 **JavadocFile** | Pointer to **NullableString** | Adds bundled Java documentation to the Maven package | [optional] 
 **PackageFile** | **string** | The primary file for the package. | 
@@ -20,7 +19,6 @@ Name | Type | Description | Notes
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
 **TestsFile** | Pointer to **NullableString** | Adds bundled Java tests to the Maven package. | [optional] 
 **Version** | Pointer to **NullableString** | The raw version for this package. | [optional] 
-**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 
 ## Methods
 
@@ -146,31 +144,6 @@ HasGroupId returns a boolean if a field has been set.
 `func (o *MavenPackageUploadRequest) UnsetGroupId()`
 
 UnsetGroupId ensures that no value is present for GroupId, not even an explicit nil
-### GetIsMalwareDetected
-
-`func (o *MavenPackageUploadRequest) GetIsMalwareDetected() bool`
-
-GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
-
-### GetIsMalwareDetectedOk
-
-`func (o *MavenPackageUploadRequest) GetIsMalwareDetectedOk() (*bool, bool)`
-
-GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsMalwareDetected
-
-`func (o *MavenPackageUploadRequest) SetIsMalwareDetected(v bool)`
-
-SetIsMalwareDetected sets IsMalwareDetected field to given value.
-
-### HasIsMalwareDetected
-
-`func (o *MavenPackageUploadRequest) HasIsMalwareDetected() bool`
-
-HasIsMalwareDetected returns a boolean if a field has been set.
-
 ### GetIvyFile
 
 `func (o *MavenPackageUploadRequest) GetIvyFile() string`
@@ -566,41 +539,6 @@ HasVersion returns a boolean if a field has been set.
 `func (o *MavenPackageUploadRequest) UnsetVersion()`
 
 UnsetVersion ensures that no value is present for Version, not even an explicit nil
-### GetVulnerabilityCounts
-
-`func (o *MavenPackageUploadRequest) GetVulnerabilityCounts() WebOSVSeverityCounts`
-
-GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
-
-### GetVulnerabilityCountsOk
-
-`func (o *MavenPackageUploadRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
-
-GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVulnerabilityCounts
-
-`func (o *MavenPackageUploadRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
-
-SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
-
-### HasVulnerabilityCounts
-
-`func (o *MavenPackageUploadRequest) HasVulnerabilityCounts() bool`
-
-HasVulnerabilityCounts returns a boolean if a field has been set.
-
-### SetVulnerabilityCountsNil
-
-`func (o *MavenPackageUploadRequest) SetVulnerabilityCountsNil(b bool)`
-
- SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
-
-### UnsetVulnerabilityCounts
-`func (o *MavenPackageUploadRequest) UnsetVulnerabilityCounts()`
-
-UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

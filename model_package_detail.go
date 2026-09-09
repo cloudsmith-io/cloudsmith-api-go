@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1358.3
+API version: 1.1388.0
 Contact: support@cloudsmith.io
 */
 
@@ -31,8 +31,10 @@ type PackageDetail struct {
 	DependenciesChecksumMd5 NullableString `json:"dependencies_checksum_md5,omitempty"`
 	DependenciesUrl         *string        `json:"dependencies_url,omitempty"`
 	// A textual description of this package.
-	Description   NullableString       `json:"description,omitempty"`
-	DisplayName   *string              `json:"display_name,omitempty"`
+	Description NullableString `json:"description,omitempty"`
+	DisplayName *string        `json:"display_name,omitempty"`
+	// Where the package originated, for example: 'upstream' (proxied/cached from a configured upstream), 'connected_repository' (blended in from a connected target repository), or 'manual_upload' (uploaded directly to Cloudsmith).
+	DisplaySource *string              `json:"display_source,omitempty"`
 	Distro        NullableDistribution `json:"distro,omitempty"`
 	DistroVersion *DistributionVersion `json:"distro_version,omitempty"`
 	Downloads     *int64               `json:"downloads,omitempty"`
@@ -524,6 +526,38 @@ func (o *PackageDetail) HasDisplayName() bool {
 // SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
 func (o *PackageDetail) SetDisplayName(v string) {
 	o.DisplayName = &v
+}
+
+// GetDisplaySource returns the DisplaySource field value if set, zero value otherwise.
+func (o *PackageDetail) GetDisplaySource() string {
+	if o == nil || IsNil(o.DisplaySource) {
+		var ret string
+		return ret
+	}
+	return *o.DisplaySource
+}
+
+// GetDisplaySourceOk returns a tuple with the DisplaySource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageDetail) GetDisplaySourceOk() (*string, bool) {
+	if o == nil || IsNil(o.DisplaySource) {
+		return nil, false
+	}
+	return o.DisplaySource, true
+}
+
+// HasDisplaySource returns a boolean if a field has been set.
+func (o *PackageDetail) HasDisplaySource() bool {
+	if o != nil && !IsNil(o.DisplaySource) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplaySource gets a reference to the given string and assigns it to the DisplaySource field.
+func (o *PackageDetail) SetDisplaySource(v string) {
+	o.DisplaySource = &v
 }
 
 // GetDistro returns the Distro field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -3442,6 +3476,9 @@ func (o PackageDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DisplayName) {
 		toSerialize["display_name"] = o.DisplayName
 	}
+	if !IsNil(o.DisplaySource) {
+		toSerialize["display_source"] = o.DisplaySource
+	}
 	if o.Distro.IsSet() {
 		toSerialize["distro"] = o.Distro.Get()
 	}
@@ -3723,6 +3760,7 @@ func (o *PackageDetail) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "dependencies_url")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "display_name")
+		delete(additionalProperties, "display_source")
 		delete(additionalProperties, "distro")
 		delete(additionalProperties, "distro_version")
 		delete(additionalProperties, "downloads")

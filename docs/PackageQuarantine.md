@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **DependenciesUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Description** | Pointer to **NullableString** | A textual description of this package. | [optional] [readonly] 
 **DisplayName** | Pointer to **string** |  | [optional] [readonly] 
+**DisplaySource** | Pointer to **string** | Where the package originated, for example: &#39;upstream&#39; (proxied/cached from a configured upstream), &#39;connected_repository&#39; (blended in from a connected target repository), or &#39;manual_upload&#39; (uploaded directly to Cloudsmith). | [optional] [readonly] 
 **Distro** | Pointer to [**NullableDistribution**](Distribution.md) |  | [optional] 
 **DistroVersion** | Pointer to [**DistributionVersion**](DistributionVersion.md) |  | [optional] 
 **Downloads** | Pointer to **int64** |  | [optional] [readonly] 
@@ -34,7 +35,6 @@ Name | Type | Description | Notes
 **IsDeleteable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsHidden** | Pointer to **bool** |  | [optional] [readonly] 
-**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **IsMoveable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantinable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
@@ -93,7 +93,6 @@ Name | Type | Description | Notes
 **UploaderUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Version** | Pointer to **NullableString** | The raw version for this package. | [optional] [readonly] 
 **VersionOrig** | Pointer to **string** |  | [optional] [readonly] 
-**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 **VulnerabilityScanResultsUrl** | Pointer to **string** |  | [optional] [readonly] 
 
 ## Methods
@@ -394,6 +393,31 @@ SetDisplayName sets DisplayName field to given value.
 `func (o *PackageQuarantine) HasDisplayName() bool`
 
 HasDisplayName returns a boolean if a field has been set.
+
+### GetDisplaySource
+
+`func (o *PackageQuarantine) GetDisplaySource() string`
+
+GetDisplaySource returns the DisplaySource field if non-nil, zero value otherwise.
+
+### GetDisplaySourceOk
+
+`func (o *PackageQuarantine) GetDisplaySourceOk() (*string, bool)`
+
+GetDisplaySourceOk returns a tuple with the DisplaySource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplaySource
+
+`func (o *PackageQuarantine) SetDisplaySource(v string)`
+
+SetDisplaySource sets DisplaySource field to given value.
+
+### HasDisplaySource
+
+`func (o *PackageQuarantine) HasDisplaySource() bool`
+
+HasDisplaySource returns a boolean if a field has been set.
 
 ### GetDistro
 
@@ -934,31 +958,6 @@ SetIsHidden sets IsHidden field to given value.
 `func (o *PackageQuarantine) HasIsHidden() bool`
 
 HasIsHidden returns a boolean if a field has been set.
-
-### GetIsMalwareDetected
-
-`func (o *PackageQuarantine) GetIsMalwareDetected() bool`
-
-GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
-
-### GetIsMalwareDetectedOk
-
-`func (o *PackageQuarantine) GetIsMalwareDetectedOk() (*bool, bool)`
-
-GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsMalwareDetected
-
-`func (o *PackageQuarantine) SetIsMalwareDetected(v bool)`
-
-SetIsMalwareDetected sets IsMalwareDetected field to given value.
-
-### HasIsMalwareDetected
-
-`func (o *PackageQuarantine) HasIsMalwareDetected() bool`
-
-HasIsMalwareDetected returns a boolean if a field has been set.
 
 ### GetIsMoveable
 
@@ -2550,41 +2549,6 @@ SetVersionOrig sets VersionOrig field to given value.
 
 HasVersionOrig returns a boolean if a field has been set.
 
-### GetVulnerabilityCounts
-
-`func (o *PackageQuarantine) GetVulnerabilityCounts() WebOSVSeverityCounts`
-
-GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
-
-### GetVulnerabilityCountsOk
-
-`func (o *PackageQuarantine) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
-
-GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVulnerabilityCounts
-
-`func (o *PackageQuarantine) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
-
-SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
-
-### HasVulnerabilityCounts
-
-`func (o *PackageQuarantine) HasVulnerabilityCounts() bool`
-
-HasVulnerabilityCounts returns a boolean if a field has been set.
-
-### SetVulnerabilityCountsNil
-
-`func (o *PackageQuarantine) SetVulnerabilityCountsNil(b bool)`
-
- SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
-
-### UnsetVulnerabilityCounts
-`func (o *PackageQuarantine) UnsetVulnerabilityCounts()`
-
-UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 ### GetVulnerabilityScanResultsUrl
 
 `func (o *PackageQuarantine) GetVulnerabilityScanResultsUrl() string`

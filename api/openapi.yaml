@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1358.3
+  version: 1.1388.0
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -1736,6 +1736,234 @@ paths:
       summary: Get the details for the specific organization.
       tags:
       - orgs
+  /orgs/{org}/api-key-rules/:
+    get:
+      description: List all API key rules for the organization.
+      operationId: orgs_api-key-rules_list
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrganizationApiKeyRule'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: List all API key rules for the organization.
+      tags:
+      - orgs
+    post:
+      description: Create an API key rule.
+      operationId: orgs_api-key-rules_create
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationApiKeyRuleRequest'
+        required: false
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationApiKeyRule'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Create an API key rule.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+  /orgs/{org}/api-key-rules/{slug_perm}/:
+    delete:
+      description: Delete an API key rule.
+      operationId: orgs_api-key-rules_delete
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Delete an API key rule.
+      tags:
+      - orgs
+    get:
+      description: Retrieve an API key rule.
+      operationId: orgs_api-key-rules_read
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationApiKeyRule'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Retrieve an API key rule.
+      tags:
+      - orgs
+    patch:
+      description: Update an API key rule.
+      operationId: orgs_api-key-rules_partial_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationApiKeyRuleRequestPatch'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationApiKeyRule'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Update an API key rule.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
+    put:
+      description: Full update of an API key rule.
+      operationId: orgs_api-key-rules_update
+      parameters:
+      - in: path
+        name: org
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: slug_perm
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationApiKeyRuleRequest'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationApiKeyRule'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Request could not be processed (see detail).
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetail'
+          description: Missing or invalid parameters (see detail).
+      summary: Full update of an API key rule.
+      tags:
+      - orgs
+      x-codegen-request-body-name: data
   /orgs/{org}/custom-domains/:
     get:
       description: Get the details for all custom domains.
@@ -4933,7 +5161,9 @@ paths:
           default: false
           type: boolean
       - description: "A search term for querying names, filenames, versions, distributions,\
-          \ architectures, formats or statuses of packages."
+          \ architectures, formats, statuses or display sources (display_source:upstream,\
+          \ display_source:manual_upload, display_source:connected_repository) of\
+          \ packages."
         in: query
         name: query
         schema:
@@ -19300,6 +19530,169 @@ components:
       required:
       - name
       type: object
+    OrganizationApiKeyRule:
+      example:
+        is_enabled: true
+        max_age_hours: 171976566
+        rule_type: All Accounts
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        enforce_refresh: true
+        created_at: 2000-01-23T04:56:07.000+00:00
+        last_applied_at: 2000-01-23T04:56:07.000+00:00
+        slug_perm: slug_perm
+        slug: slug
+      properties:
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        enforce_refresh:
+          description: "When enabled, API keys that violate the organization's rule\
+            \ will be replaced automatically."
+          title: Enforce automatic API key refresh
+          type: boolean
+        is_enabled:
+          description: Whether this rule is currently active and enforced.
+          title: Policy enabled
+          type: boolean
+        last_applied_at:
+          description: The last time this rule was evaluated and applied by the expiry
+            task.
+          format: date-time
+          readOnly: true
+          title: Last applied at
+          type: string
+        max_age_hours:
+          description: The maximum permitted age of an API key for use in the organization.
+            API keys older than this will no longer have access until they are refreshed.
+            To disable the rule unset this value.
+          maximum: 2147483647
+          minimum: 24
+          nullable: true
+          title: Maximum permitted API key age
+          type: integer
+        rule_type:
+          description: "Specify which account types this rule applies to: all accounts\
+            \ (deprecated — prefer separate service/user rules), service accounts\
+            \ only, or user accounts only."
+          enum:
+          - All Accounts
+          - Service Accounts
+          - User Accounts
+          title: Rule type
+          type: string
+        slug:
+          description: Human-readable identifier for the rule type. Automatically
+            generated based on the rule type.
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug
+          type: string
+        slug_perm:
+          description: An auto-generated id that uniquely identifies the API key policy.
+          format: slug
+          minLength: 1
+          pattern: "^[-a-zA-Z0-9_]+$"
+          readOnly: true
+          title: Slug perm
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+      required:
+      - rule_type
+      type: object
+    OrganizationApiKeyRuleRequest:
+      example:
+        is_enabled: true
+        max_age_hours: 171976566
+        rule_type: All Accounts
+        enforce_refresh: true
+        refresh_immediately: true
+      properties:
+        enforce_refresh:
+          description: "When enabled, API keys that violate the organization's rule\
+            \ will be replaced automatically."
+          title: Enforce automatic API key refresh
+          type: boolean
+        is_enabled:
+          description: Whether this rule is currently active and enforced.
+          title: Policy enabled
+          type: boolean
+        max_age_hours:
+          description: The maximum permitted age of an API key for use in the organization.
+            API keys older than this will no longer have access until they are refreshed.
+            To disable the rule unset this value.
+          maximum: 2147483647
+          minimum: 24
+          nullable: true
+          title: Maximum permitted API key age
+          type: integer
+        refresh_immediately:
+          description: "If set to True, API keys that violate this rule will be replaced\
+            \ immediately after the request is made. There is no way to undo this."
+          title: Refresh immediately
+          type: boolean
+        rule_type:
+          description: "Specify which account types this rule applies to: all accounts\
+            \ (deprecated — prefer separate service/user rules), service accounts\
+            \ only, or user accounts only."
+          enum:
+          - All Accounts
+          - Service Accounts
+          - User Accounts
+          title: Rule type
+          type: string
+      required:
+      - rule_type
+      type: object
+    OrganizationApiKeyRuleRequestPatch:
+      example:
+        is_enabled: true
+        max_age_hours: 171976566
+        rule_type: All Accounts
+        enforce_refresh: true
+        refresh_immediately: true
+      properties:
+        enforce_refresh:
+          description: "When enabled, API keys that violate the organization's rule\
+            \ will be replaced automatically."
+          title: Enforce automatic API key refresh
+          type: boolean
+        is_enabled:
+          description: Whether this rule is currently active and enforced.
+          title: Policy enabled
+          type: boolean
+        max_age_hours:
+          description: The maximum permitted age of an API key for use in the organization.
+            API keys older than this will no longer have access until they are refreshed.
+            To disable the rule unset this value.
+          maximum: 2147483647
+          minimum: 24
+          nullable: true
+          title: Maximum permitted API key age
+          type: integer
+        refresh_immediately:
+          description: "If set to True, API keys that violate this rule will be replaced\
+            \ immediately after the request is made. There is no way to undo this."
+          title: Refresh immediately
+          type: boolean
+        rule_type:
+          description: "Specify which account types this rule applies to: all accounts\
+            \ (deprecated — prefer separate service/user rules), service accounts\
+            \ only, or user accounts only."
+          enum:
+          - All Accounts
+          - Service Accounts
+          - User Accounts
+          title: Rule type
+          type: string
+      type: object
     OrganizationCustomDomainNestedRepo:
       example:
         name: name
@@ -19809,62 +20202,10 @@ components:
           title: User url
           type: string
       type: object
-    WebOSVSeverityCounts:
-      description: Per-severity OSV vulnerability counts for non-hidden matches. Requires
-        Ultra plan.
-      example:
-        high: 6
-        total: 2
-        malware: 5
-        critical: 0
-        low: 1
-        medium: 5
-        unknown: 7
-      nullable: true
-      properties:
-        critical:
-          readOnly: true
-          title: Critical
-          type: integer
-        high:
-          readOnly: true
-          title: High
-          type: integer
-        low:
-          readOnly: true
-          title: Low
-          type: integer
-        malware:
-          readOnly: true
-          title: Malware
-          type: integer
-        medium:
-          readOnly: true
-          title: Medium
-          type: integer
-        total:
-          readOnly: true
-          title: Total
-          type: integer
-        unknown:
-          readOnly: true
-          title: Unknown
-          type: integer
-      type: object
-      x-nullable: true
     PackageVulnerability:
       example:
         identifier: identifier
         name: name
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         version: version
         url: https://openapi-generator.tech
       properties:
@@ -19872,12 +20213,6 @@ components:
           minLength: 1
           title: Identifier
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         name:
           description: The name of this package.
           nullable: true
@@ -19896,8 +20231,6 @@ components:
           readOnly: true
           title: Version
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - identifier
       type: object
@@ -19976,15 +20309,6 @@ components:
         package:
           identifier: identifier
           name: name
-          vulnerability_counts:
-            high: 6
-            total: 2
-            malware: 5
-            critical: 0
-            low: 1
-            medium: 5
-            unknown: 7
-          is_malware_detected: true
           version: version
           url: https://openapi-generator.tech
         reasons:
@@ -21615,15 +21939,6 @@ components:
         package:
           identifier: identifier
           name: name
-          vulnerability_counts:
-            high: 6
-            total: 2
-            malware: 5
-            critical: 0
-            low: 1
-            medium: 5
-            unknown: 7
-          is_malware_detected: true
           version: version
           url: https://openapi-generator.tech
         reasons:
@@ -21996,6 +22311,49 @@ components:
         \ tags, but doesn't distinguish them from mutable. To see which tags are immutable\
         \ specifically, see the tags_immutable field."
       type: object
+    WebOSVSeverityCounts:
+      description: Per-severity OSV vulnerability counts for non-hidden matches. Requires
+        Ultra plan.
+      example:
+        high: 1
+        total: 7
+        malware: 1
+        critical: 7
+        low: 1
+        medium: 6
+        unknown: 1
+      nullable: true
+      properties:
+        critical:
+          readOnly: true
+          title: Critical
+          type: integer
+        high:
+          readOnly: true
+          title: High
+          type: integer
+        low:
+          readOnly: true
+          title: Low
+          type: integer
+        malware:
+          readOnly: true
+          title: Malware
+          type: integer
+        medium:
+          readOnly: true
+          title: Medium
+          type: integer
+        total:
+          readOnly: true
+          title: Total
+          type: integer
+        unknown:
+          readOnly: true
+          title: Unknown
+          type: integer
+      type: object
+      x-nullable: true
     Package:
       example:
         architectures:
@@ -22027,6 +22385,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -22117,13 +22476,13 @@ components:
         checksum_md5: checksum_md5
         sync_progress: 4
         vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
+          high: 1
+          total: 7
+          malware: 1
+          critical: 7
           low: 1
-          medium: 5
-          unknown: 7
+          medium: 6
+          unknown: 1
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -22186,6 +22545,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -22663,16 +23031,7 @@ components:
     AlpinePackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         distribution: distribution
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
@@ -22681,12 +23040,6 @@ components:
           minLength: 1
           title: Distribution
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -22705,8 +23058,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - distribution
       - package_file
@@ -22721,7 +23072,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -22741,6 +23091,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -22829,14 +23180,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -22899,6 +23242,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -22986,12 +23338,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -23314,8 +23660,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -23325,24 +23669,9 @@ components:
     CargoPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -23361,8 +23690,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -23376,7 +23703,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -23396,6 +23722,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -23484,14 +23811,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -23554,6 +23873,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -23641,12 +23969,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -23969,8 +24291,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -23980,24 +24300,9 @@ components:
     CocoapodsPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -24016,8 +24321,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -24031,7 +24334,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -24051,6 +24353,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -24139,14 +24442,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -24209,6 +24504,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -24296,12 +24600,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -24624,8 +24922,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -24635,25 +24931,10 @@ components:
     ComposerPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -24678,8 +24959,6 @@ components:
           nullable: true
           title: Version
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -24693,7 +24972,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -24713,6 +24991,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -24801,14 +25080,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -24871,6 +25142,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -24958,12 +25238,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -25286,8 +25560,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -25299,15 +25571,6 @@ components:
         republish: true
         name: name
         metadata_file: metadata_file
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         conan_prefix: conan_prefix
         version: version
@@ -25335,12 +25598,6 @@ components:
           minLength: 1
           title: Info file
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         manifest_file:
           description: The info file is an python file containing the package metadata.
           minLength: 1
@@ -25381,8 +25638,6 @@ components:
           nullable: true
           title: Version
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - info_file
       - manifest_file
@@ -25399,7 +25654,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -25419,6 +25673,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -25509,14 +25764,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -25594,6 +25841,15 @@ components:
           readOnly: true
           title: Display name
           type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
+          type: string
         distro:
           $ref: '#/components/schemas/Distribution'
         distro_version:
@@ -25680,12 +25936,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -26008,8 +26258,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -26019,24 +26267,9 @@ components:
     CondaPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -26055,8 +26288,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -26070,7 +26301,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -26090,6 +26320,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -26178,14 +26409,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -26248,6 +26471,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -26335,12 +26567,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -26663,8 +26889,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -26675,15 +26899,6 @@ components:
       example:
         republish: true
         r_version: r_version
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         architecture: architecture
         tags: tags
@@ -26694,12 +26909,6 @@ components:
           minLength: 1
           title: Architecture
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -26726,8 +26935,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -26741,7 +26948,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -26761,6 +26967,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -26849,14 +27056,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -26920,6 +27119,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -27007,12 +27215,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -27343,8 +27545,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -27354,24 +27554,9 @@ components:
     DartPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -27390,8 +27575,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -27405,7 +27588,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -27425,6 +27607,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -27513,14 +27696,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -27583,6 +27758,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -27670,12 +27854,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -27998,8 +28176,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -28012,16 +28188,7 @@ components:
         component: main
         republish: true
         changes_file: changes_file
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         distribution: distribution
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
@@ -28046,12 +28213,6 @@ components:
           minLength: 1
           title: Distribution
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -28076,8 +28237,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - distribution
       - package_file
@@ -28092,7 +28251,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -28112,6 +28270,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -28200,14 +28359,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -28270,6 +28421,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -28357,12 +28517,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -28685,8 +28839,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -28696,24 +28848,9 @@ components:
     DockerPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -28732,8 +28869,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -28747,7 +28882,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -28767,6 +28901,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -28855,14 +28990,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -28925,6 +29052,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -29012,12 +29148,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -29340,8 +29470,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -29353,15 +29481,6 @@ components:
         filepath: filepath
         republish: true
         name: name
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
@@ -29372,12 +29491,6 @@ components:
           minLength: 1
           title: Filepath
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         name:
           description: The name of this package.
           maxLength: 200
@@ -29408,8 +29521,6 @@ components:
           nullable: true
           title: Version
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - filepath
       - package_file
@@ -29424,7 +29535,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -29444,6 +29554,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -29532,14 +29643,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -29602,6 +29705,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -29689,12 +29801,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -30017,8 +30123,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -30028,24 +30132,9 @@ components:
     GoPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -30064,8 +30153,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -30079,7 +30166,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -30099,6 +30185,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -30187,14 +30274,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -30257,6 +30336,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -30344,12 +30432,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -30672,8 +30754,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -30684,24 +30764,9 @@ components:
       example:
         provenance_file: provenance_file
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -30727,8 +30792,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -30742,7 +30805,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -30762,6 +30824,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -30850,14 +30913,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -30920,6 +30975,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -31007,12 +31071,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -31335,8 +31393,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -31346,24 +31402,9 @@ components:
     HexPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -31382,8 +31423,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -31397,7 +31436,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -31417,6 +31455,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -31505,14 +31544,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -31575,6 +31606,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -31662,12 +31702,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -31990,8 +32024,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -32001,24 +32033,9 @@ components:
     HuggingfacePackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -32037,8 +32054,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -32052,7 +32067,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -32072,6 +32086,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -32160,14 +32175,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -32230,6 +32237,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -32317,12 +32333,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -32645,8 +32655,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -32656,24 +32664,9 @@ components:
     LuarocksPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -32692,8 +32685,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -32707,7 +32698,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -32727,6 +32717,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -32815,14 +32806,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -32885,6 +32868,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -32972,12 +32964,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -33300,8 +33286,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -33311,17 +33295,8 @@ components:
     MavenPackageUploadRequest:
       example:
         javadoc_file: javadoc_file
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         packaging: packaging
         artifact_id: artifact_id
-        is_malware_detected: true
         package_file: package_file
         version: version
         pom_file: pom_file
@@ -33357,12 +33332,6 @@ components:
           nullable: true
           title: Group id
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         ivy_file:
           description: The ivy file is an XML file describing the dependencies of
             the project.
@@ -33434,8 +33403,6 @@ components:
           nullable: true
           title: Version
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -33450,7 +33417,6 @@ components:
         checksum_sha256: checksum_sha256
         release: release
         artifact_id: artifact_id
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -33470,6 +33436,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -33558,14 +33525,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         packaging: packaging
         uploader_url: https://openapi-generator.tech
@@ -33638,6 +33597,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -33731,12 +33699,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -34075,8 +34037,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -34086,25 +34046,10 @@ components:
     McpPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -34129,8 +34074,6 @@ components:
           nullable: true
           title: Version
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -34144,7 +34087,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -34164,6 +34106,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -34252,14 +34195,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -34322,6 +34257,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -34409,12 +34353,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -34737,8 +34675,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -34748,26 +34684,11 @@ components:
     NixPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         narinfo_file: narinfo_file
-        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         narinfo_file:
           description: The narinfo sidecar metadata file (<storeHash>.narinfo). Optional
             — the package can be completed later by publishing the matching narinfo
@@ -34800,8 +34721,6 @@ components:
           nullable: true
           title: Version
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -34815,7 +34734,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -34835,6 +34753,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -34923,14 +34842,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -34993,6 +34904,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -35080,12 +35000,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -35408,8 +35322,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -35419,25 +35331,10 @@ components:
     NpmPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         npm_dist_tag: latest
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         npm_dist_tag:
           default: latest
           description: The default npm dist-tag for this package/version - This will
@@ -35464,8 +35361,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -35479,7 +35374,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -35499,6 +35393,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -35587,14 +35482,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -35657,6 +35544,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -35744,12 +35640,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -36072,8 +35962,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -36084,24 +35972,9 @@ components:
       example:
         republish: true
         symbols_file: symbols_file
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -36126,8 +35999,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -36141,7 +36012,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -36161,6 +36031,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -36249,14 +36120,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -36319,6 +36182,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -36406,12 +36278,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -36734,8 +36600,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -36745,24 +36609,9 @@ components:
     P2PackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -36781,8 +36630,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -36796,7 +36643,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -36816,6 +36662,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -36904,14 +36751,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -36974,6 +36813,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -37061,12 +36909,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -37389,8 +37231,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -37400,24 +37240,9 @@ components:
     PythonPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -37436,8 +37261,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -37451,7 +37274,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -37471,6 +37293,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -37559,14 +37382,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -37629,6 +37444,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -37716,12 +37540,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -38044,8 +37862,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -38059,15 +37875,6 @@ components:
         republish: true
         name: name
         description: description
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
@@ -38087,12 +37894,6 @@ components:
           nullable: true
           title: Description
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         name:
           description: The name of this package.
           maxLength: 200
@@ -38129,8 +37930,6 @@ components:
           nullable: true
           title: Version
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -38144,7 +37943,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -38164,6 +37962,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -38252,14 +38051,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -38323,6 +38114,15 @@ components:
           readOnly: true
           title: Display name
           type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
+          type: string
         distro:
           $ref: '#/components/schemas/Distribution'
         distro_version:
@@ -38409,12 +38209,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -38737,8 +38531,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -38748,16 +38540,7 @@ components:
     RpmPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         distribution: distribution
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
@@ -38766,12 +38549,6 @@ components:
           minLength: 1
           title: Distribution
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -38790,8 +38567,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - distribution
       - package_file
@@ -38806,7 +38581,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -38826,6 +38600,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -38914,14 +38689,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -38984,6 +38751,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -39071,12 +38847,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -39399,8 +39169,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -39410,24 +39178,9 @@ components:
     RubyPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -39446,8 +39199,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -39461,7 +39212,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -39481,6 +39231,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -39569,14 +39320,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -39639,6 +39382,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -39726,12 +39478,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -40054,8 +39800,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -40065,25 +39809,16 @@ components:
     SwiftPackageUploadRequest:
       example:
         author_name: author_name
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
-        package_file: package_file
-        version: version
-        readme_url: https://openapi-generator.tech
-        tags: tags
         republish: true
         scope: scope
         author_org: author_org
         name: name
         repository_url: https://openapi-generator.tech
+        package_file: package_file
+        version: version
         license_url: https://openapi-generator.tech
+        readme_url: https://openapi-generator.tech
+        tags: tags
       properties:
         author_name:
           description: The name of the author of the package.
@@ -40095,12 +39830,6 @@ components:
           minLength: 1
           title: Author org
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         license_url:
           description: The license URL of this package.
           format: uri
@@ -40155,8 +39884,6 @@ components:
           maxLength: 255
           title: Version
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - name
       - package_file
@@ -40173,7 +39900,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -40193,6 +39919,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -40285,14 +40012,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -40366,6 +40085,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -40453,12 +40181,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -40800,8 +40522,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -40815,24 +40535,9 @@ components:
     TerraformPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -40851,8 +40556,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -40866,7 +40569,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -40886,6 +40588,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -40974,14 +40677,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -41044,6 +40739,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -41131,12 +40835,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -41459,8 +41157,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -41472,25 +41168,10 @@ components:
         republish: true
         provider: provider
         name: name
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         version: version
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         name:
           description: The name of this package.
           maxLength: 200
@@ -41524,8 +41205,6 @@ components:
           maxLength: 255
           title: Version
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - name
       - package_file
@@ -41542,7 +41221,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -41562,6 +41240,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -41651,14 +41330,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -41721,6 +41392,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -41808,12 +41488,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -42139,8 +41813,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -42154,24 +41826,9 @@ components:
     VsxPackageUploadRequest:
       example:
         republish: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         package_file: package_file
         tags: tags
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         package_file:
           description: The primary file for the package.
           minLength: 1
@@ -42190,8 +41847,6 @@ components:
           nullable: true
           title: Tags
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - package_file
       type: object
@@ -42205,7 +41860,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -42225,6 +41879,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -42313,14 +41968,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -42383,6 +42030,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -42470,12 +42126,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -42798,8 +42448,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -42838,6 +42486,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -42928,13 +42577,13 @@ components:
         checksum_md5: checksum_md5
         sync_progress: 3
         vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
+          high: 1
+          total: 7
+          malware: 1
+          critical: 7
           low: 1
-          medium: 5
-          unknown: 7
+          medium: 6
+          unknown: 1
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -42997,6 +42646,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -43442,34 +43100,17 @@ components:
       example:
         republish: true
         destination: destination
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
       properties:
         destination:
           description: The name of the destination repository without the namespace.
           minLength: 1
           title: Destination
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         republish:
           description: "If true, the package will overwrite any others with the same\
             \ attributes (e.g. same version); otherwise, it will be flagged as a duplicate."
           title: Republish
           type: boolean
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - destination
       type: object
@@ -43483,7 +43124,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -43504,6 +43144,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -43593,14 +43234,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -43663,6 +43296,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -43757,12 +43399,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -44091,8 +43727,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -44192,29 +43826,12 @@ components:
     PackageMoveRequest:
       example:
         destination: destination
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
       properties:
         destination:
           description: The name of the destination repository without the namespace.
           minLength: 1
           title: Destination
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - destination
       type: object
@@ -44228,7 +43845,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -44249,6 +43865,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -44338,14 +43955,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -44408,6 +44017,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -44502,12 +44120,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -44836,8 +44448,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -44848,22 +44458,7 @@ components:
       example:
         restore: true
         release: true
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         release:
           description: "If true, the package is released from quarantine."
           title: Release
@@ -44873,8 +44468,6 @@ components:
             \ field is deprecated, please use 'release' instead."
           title: Restore
           type: boolean
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       type: object
     PackageQuarantine:
       example:
@@ -44885,7 +44478,6 @@ components:
           description: description
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -44906,6 +44498,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -44995,14 +44588,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -45065,6 +44650,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -45159,12 +44753,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -45486,8 +45074,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -45504,7 +45090,6 @@ components:
         security_scan_status_updated_at: 2000-01-23T04:56:07.000+00:00
         checksum_sha256: checksum_sha256
         release: release
-        is_malware_detected: true
         package_type: 5
         repository: repository
         origin_repository: origin_repository
@@ -45525,6 +45110,7 @@ components:
         version_orig: version_orig
         namespace_url: https://openapi-generator.tech
         display_name: display_name
+        display_source: display_source
         slug_perm: slug_perm
         spdx_license: spdx_license
         version: version
@@ -45614,14 +45200,6 @@ components:
           key: identifiers
         checksum_md5: checksum_md5
         sync_progress: 3
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
         is_sync_awaiting: true
         uploader_url: https://openapi-generator.tech
         self_html_url: self_html_url
@@ -45684,6 +45262,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -45778,12 +45365,6 @@ components:
         is_hidden:
           readOnly: true
           title: Is hidden
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -46111,8 +45692,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -46266,15 +45845,6 @@ components:
       example:
         is_immutable: false
         action: Add
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         tags:
         - tags
         - tags
@@ -46295,12 +45865,6 @@ components:
             \ is a tag that cannot be removed from a package."
           title: Is immutable
           type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         tags:
           description: A list of tags to apply the action to. Not required for clears.
           items:
@@ -46309,8 +45873,6 @@ components:
             type: string
           nullable: true
           type: array
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       type: object
     PackageTag:
       properties:
@@ -46360,6 +45922,15 @@ components:
         display_name:
           readOnly: true
           title: Display name
+          type: string
+        display_source:
+          description: "Where the package originated, for example: 'upstream' (proxied/cached\
+            \ from a configured upstream), 'connected_repository' (blended in from\
+            \ a connected target repository), or 'manual_upload' (uploaded directly\
+            \ to Cloudsmith)."
+          minLength: 1
+          readOnly: true
+          title: Display source
           type: string
         distro:
           $ref: '#/components/schemas/Distribution'
@@ -46460,12 +46031,6 @@ components:
           description: "If true, created tags will be immutable. An immutable flag\
             \ is a tag that cannot be removed from a package."
           title: Is immutable
-          type: boolean
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
           type: boolean
         is_moveable:
           readOnly: true
@@ -46788,8 +46353,6 @@ components:
           readOnly: true
           title: Version orig
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
           format: uri
           readOnly: true
@@ -46800,15 +46363,6 @@ components:
       example:
         license_notes: license_notes
         action: Update
-        vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
-          low: 1
-          medium: 5
-          unknown: 7
-        is_malware_detected: true
         license_override: None
         spdx_license: spdx_license
         license_url: https://openapi-generator.tech
@@ -46820,12 +46374,6 @@ components:
           nullable: true
           title: Action
           type: string
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         license_notes:
           maxLength: 1000
           nullable: true
@@ -46851,19 +46399,11 @@ components:
           minLength: 1
           title: Spdx license
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - spdx_license
       type: object
     PackageLicense:
       properties:
-        is_malware_detected:
-          description: Whether the package has been detected as containing malware.
-            Requires Ultra plan.
-          readOnly: true
-          title: Is malware detected
-          type: boolean
         license_notes:
           maxLength: 1000
           nullable: true
@@ -46889,8 +46429,6 @@ components:
           minLength: 1
           title: Spdx license
           type: string
-        vulnerability_counts:
-          $ref: '#/components/schemas/WebOSVSeverityCounts'
       required:
       - spdx_license
       type: object
@@ -47493,13 +47031,13 @@ components:
         is_deleteable: true
         format: format
         vulnerability_counts:
-          high: 6
-          total: 2
-          malware: 5
-          critical: 0
+          high: 1
+          total: 7
+          malware: 1
+          critical: 7
           low: 1
-          medium: 5
-          unknown: 7
+          medium: 6
+          unknown: 1
         slug_perm: slug_perm
         version: version
         tags: "{}"
@@ -49962,16 +49500,83 @@ components:
           title: View statistics
           type: string
       type: object
+    ConnectedRepositoryUpstream:
+      example:
+        upstream_url: upstream_url
+        type: type
+      properties:
+        type:
+          description: The format/backend slug of the upstream (e.g. 'npm').
+          nullable: true
+          readOnly: true
+          title: Type
+          type: string
+        upstream_url:
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Upstream url
+          type: string
+      type: object
+    ConnectedRepositoryTargetSummary:
+      example:
+        is_private: true
+        package_count: 6
+        size: 1
+        is_public: true
+      properties:
+        is_private:
+          readOnly: true
+          title: Is private
+          type: boolean
+        is_public:
+          readOnly: true
+          title: Is public
+          type: boolean
+        package_count:
+          readOnly: true
+          title: Package count
+          type: integer
+        size:
+          readOnly: true
+          title: Size
+          type: integer
+      type: object
     ConnectedRepository:
       example:
         is_active: false
         disable_reason_text: disable_reason_text
+        configured_upstreams:
+        - upstream_url: upstream_url
+          type: type
+        - upstream_url: upstream_url
+          type: type
         disable_reason: N/A
         created_at: 2000-01-23T04:56:07.000+00:00
+        can_view_target_repository_settings: true
         priority: 2624
         slug_perm: slug_perm
         target_repository: target_repository
+        target_repository_summary:
+          is_private: true
+          package_count: 6
+          size: 1
+          is_public: true
       properties:
+        can_view_target_repository_settings:
+          description: "Whether the current user has permission to view the target\
+            \ repository's settings. When false, `configured_upstreams` will be empty\
+            \ even if upstreams are configured."
+          readOnly: true
+          title: Can view target repository settings
+          type: boolean
+        configured_upstreams:
+          description: "The upstream sources configured on the target repository,\
+            \ used to display which formats/upstreams the connection exposes."
+          items:
+            $ref: '#/components/schemas/ConnectedRepositoryUpstream'
+          readOnly: true
+          type: array
         created_at:
           description: The date and time when the connection was created.
           format: date-time
@@ -50016,6 +49621,8 @@ components:
           pattern: "^[-a-zA-Z0-9_]+$"
           title: Target repository
           type: string
+        target_repository_summary:
+          $ref: '#/components/schemas/ConnectedRepositoryTargetSummary'
       required:
       - target_repository
       type: object
@@ -60748,15 +60355,6 @@ components:
         package:
           identifier: identifier
           name: name
-          vulnerability_counts:
-            high: 6
-            total: 2
-            malware: 5
-            critical: 0
-            low: 1
-            medium: 5
-            unknown: 7
-          is_malware_detected: true
           version: version
           url: https://openapi-generator.tech
         has_vulnerabilities: true
@@ -61019,15 +60617,6 @@ components:
         package:
           identifier: identifier
           name: name
-          vulnerability_counts:
-            high: 6
-            total: 2
-            malware: 5
-            critical: 0
-            low: 1
-            medium: 5
-            unknown: 7
-          is_malware_detected: true
           version: version
           url: https://openapi-generator.tech
         scans:
@@ -61674,15 +61263,6 @@ components:
         - package:
             identifier: identifier
             name: name
-            vulnerability_counts:
-              high: 6
-              total: 2
-              malware: 5
-              critical: 0
-              low: 1
-              medium: 5
-              unknown: 7
-            is_malware_detected: true
             version: version
             url: https://openapi-generator.tech
           reasons:
@@ -61705,15 +61285,6 @@ components:
         - package:
             identifier: identifier
             name: name
-            vulnerability_counts:
-              high: 6
-              total: 2
-              malware: 5
-              critical: 0
-              low: 1
-              medium: 5
-              unknown: 7
-            is_malware_detected: true
             version: version
             url: https://openapi-generator.tech
           reasons:
@@ -61798,15 +61369,6 @@ components:
         - package:
             identifier: identifier
             name: name
-            vulnerability_counts:
-              high: 6
-              total: 2
-              malware: 5
-              critical: 0
-              low: 1
-              medium: 5
-              unknown: 7
-            is_malware_detected: true
             version: version
             url: https://openapi-generator.tech
           reasons:
@@ -61835,15 +61397,6 @@ components:
         - package:
             identifier: identifier
             name: name
-            vulnerability_counts:
-              high: 6
-              total: 2
-              malware: 5
-              critical: 0
-              low: 1
-              medium: 5
-              unknown: 7
-            is_malware_detected: true
             version: version
             url: https://openapi-generator.tech
           reasons:
@@ -61914,18 +61467,40 @@ components:
         results:
         - is_active: false
           disable_reason_text: disable_reason_text
+          configured_upstreams:
+          - upstream_url: upstream_url
+            type: type
+          - upstream_url: upstream_url
+            type: type
           disable_reason: N/A
           created_at: 2000-01-23T04:56:07.000+00:00
+          can_view_target_repository_settings: true
           priority: 2624
           slug_perm: slug_perm
           target_repository: target_repository
+          target_repository_summary:
+            is_private: true
+            package_count: 6
+            size: 1
+            is_public: true
         - is_active: false
           disable_reason_text: disable_reason_text
+          configured_upstreams:
+          - upstream_url: upstream_url
+            type: type
+          - upstream_url: upstream_url
+            type: type
           disable_reason: N/A
           created_at: 2000-01-23T04:56:07.000+00:00
+          can_view_target_repository_settings: true
           priority: 2624
           slug_perm: slug_perm
           target_repository: target_repository
+          target_repository_summary:
+            is_private: true
+            package_count: 6
+            size: 1
+            is_public: true
       properties:
         results:
           items:

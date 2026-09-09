@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CanViewTargetRepositorySettings** | Pointer to **bool** | Whether the current user has permission to view the target repository&#39;s settings. When false, &#x60;configured_upstreams&#x60; will be empty even if upstreams are configured. | [optional] [readonly] 
+**ConfiguredUpstreams** | Pointer to [**[]ConnectedRepositoryUpstream**](ConnectedRepositoryUpstream.md) | The upstream sources configured on the target repository, used to display which formats/upstreams the connection exposes. | [optional] [readonly] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when the connection was created. | [optional] [readonly] 
 **DisableReason** | Pointer to **string** |  | [optional] [readonly] [default to "N/A"]
 **DisableReasonText** | Pointer to **string** | Human-readable explanation of why this connection is disabled. | [optional] [readonly] 
@@ -11,6 +13,7 @@ Name | Type | Description | Notes
 **Priority** | Pointer to **int64** | Repositories are checked in ascending order (starting at 1). If multiple repositories have the same priority, the oldest one is used first. | [optional] 
 **SlugPerm** | Pointer to **string** |  | [optional] [readonly] 
 **TargetRepository** | **string** | The slug of the target repository to connect to. | 
+**TargetRepositorySummary** | Pointer to [**ConnectedRepositoryTargetSummary**](ConnectedRepositoryTargetSummary.md) |  | [optional] 
 
 ## Methods
 
@@ -30,6 +33,56 @@ will change when the set of required properties is changed
 NewConnectedRepositoryWithDefaults instantiates a new ConnectedRepository object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCanViewTargetRepositorySettings
+
+`func (o *ConnectedRepository) GetCanViewTargetRepositorySettings() bool`
+
+GetCanViewTargetRepositorySettings returns the CanViewTargetRepositorySettings field if non-nil, zero value otherwise.
+
+### GetCanViewTargetRepositorySettingsOk
+
+`func (o *ConnectedRepository) GetCanViewTargetRepositorySettingsOk() (*bool, bool)`
+
+GetCanViewTargetRepositorySettingsOk returns a tuple with the CanViewTargetRepositorySettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanViewTargetRepositorySettings
+
+`func (o *ConnectedRepository) SetCanViewTargetRepositorySettings(v bool)`
+
+SetCanViewTargetRepositorySettings sets CanViewTargetRepositorySettings field to given value.
+
+### HasCanViewTargetRepositorySettings
+
+`func (o *ConnectedRepository) HasCanViewTargetRepositorySettings() bool`
+
+HasCanViewTargetRepositorySettings returns a boolean if a field has been set.
+
+### GetConfiguredUpstreams
+
+`func (o *ConnectedRepository) GetConfiguredUpstreams() []ConnectedRepositoryUpstream`
+
+GetConfiguredUpstreams returns the ConfiguredUpstreams field if non-nil, zero value otherwise.
+
+### GetConfiguredUpstreamsOk
+
+`func (o *ConnectedRepository) GetConfiguredUpstreamsOk() (*[]ConnectedRepositoryUpstream, bool)`
+
+GetConfiguredUpstreamsOk returns a tuple with the ConfiguredUpstreams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfiguredUpstreams
+
+`func (o *ConnectedRepository) SetConfiguredUpstreams(v []ConnectedRepositoryUpstream)`
+
+SetConfiguredUpstreams sets ConfiguredUpstreams field to given value.
+
+### HasConfiguredUpstreams
+
+`func (o *ConnectedRepository) HasConfiguredUpstreams() bool`
+
+HasConfiguredUpstreams returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -200,6 +253,31 @@ and a boolean to check if the value has been set.
 
 SetTargetRepository sets TargetRepository field to given value.
 
+
+### GetTargetRepositorySummary
+
+`func (o *ConnectedRepository) GetTargetRepositorySummary() ConnectedRepositoryTargetSummary`
+
+GetTargetRepositorySummary returns the TargetRepositorySummary field if non-nil, zero value otherwise.
+
+### GetTargetRepositorySummaryOk
+
+`func (o *ConnectedRepository) GetTargetRepositorySummaryOk() (*ConnectedRepositoryTargetSummary, bool)`
+
+GetTargetRepositorySummaryOk returns a tuple with the TargetRepositorySummary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetRepositorySummary
+
+`func (o *ConnectedRepository) SetTargetRepositorySummary(v ConnectedRepositoryTargetSummary)`
+
+SetTargetRepositorySummary sets TargetRepositorySummary field to given value.
+
+### HasTargetRepositorySummary
+
+`func (o *ConnectedRepository) HasTargetRepositorySummary() bool`
+
+HasTargetRepositorySummary returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
