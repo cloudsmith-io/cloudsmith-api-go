@@ -205,22 +205,10 @@ Cloudsmith API version: $api_version
 create_tag_and_release_instructions() {
     local version="$1"
     local tag_name="v${version}"
-    
+
     echo ""
-    log_info "After the PR is merged, create a git tag and release:"
-    echo ""
-    echo "1. Switch to master and pull latest changes:"
-    echo "   git checkout master"
-    echo "   git pull"
-    echo ""
-    echo "2. Create and push the tag:"
-    echo "   git tag -a $tag_name -m \"Release version $version\""
-    echo "   git push origin $tag_name"
-    echo ""
-    echo "3. Go to GitHub releases page and create a new release:"
-    echo "   - Select tag: $tag_name"
-    echo "   - Release title: Release $version"
-    echo "   - Add release notes as needed"
+    log_info "After the PR is merged, the Release workflow publishes ${tag_name}."
+    echo "If that run is skipped or fails, re-run the Release workflow from Actions."
     echo ""
 }
 
@@ -244,7 +232,7 @@ usage() {
     echo "    * Auto-increment the patch version (e.g. 1.2.3 -> 1.2.4)"
     echo "    * Auto-fetch the latest Cloudsmith API version"
     echo "  - Use -v only for larger version increments (minor/major bumps)"
-    echo "  - After PR is merged, you'll need to create a git tag and GitHub release"
+    echo "  - After the PR is merged, the Release workflow creates the git tag and GitHub release"
 }
 
 main() {
