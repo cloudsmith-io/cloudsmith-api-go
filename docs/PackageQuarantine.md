@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **IsDeleteable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsHidden** | Pointer to **bool** |  | [optional] [readonly] 
+**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **IsMoveable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantinable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
@@ -77,6 +78,7 @@ Name | Type | Description | Notes
 **StatusStr** | Pointer to **string** |  | [optional] [readonly] 
 **StatusUpdatedAt** | Pointer to **time.Time** | The datetime the package status was updated at. | [optional] [readonly] 
 **StatusUrl** | Pointer to **string** |  | [optional] [readonly] 
+**StorePath** | Pointer to **NullableString** | Absolute store path for the package, including store hash and name. | [optional] [readonly] 
 **Subtype** | Pointer to **string** |  | [optional] [readonly] 
 **Summary** | Pointer to **NullableString** | A one-liner synopsis of this package. | [optional] [readonly] 
 **SyncFinishedAt** | Pointer to **NullableTime** | The datetime the package sync was finished at. | [optional] [readonly] 
@@ -84,12 +86,14 @@ Name | Type | Description | Notes
 **Tags** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
 **TagsAutomatic** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
 **TagsImmutable** | Pointer to **map[string]interface{}** | All tags on the package, grouped by tag type. This includes immutable tags, but doesn&#39;t distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field. | [optional] 
+**TagsStatic** | Pointer to **map[string][]string** | All static tags on the package, grouped by context. Static tags are derived from the package&#39;s properties at request time and carry a &#39;context&#39; (rather than a tag type). Includes format-specific badges and the package&#39;s architecture, subtype, and extension. | [optional] [readonly] 
 **TypeDisplay** | Pointer to **string** |  | [optional] [readonly] 
 **UploadedAt** | Pointer to **time.Time** | The date this package was uploaded. | [optional] [readonly] 
 **Uploader** | Pointer to **string** |  | [optional] [readonly] 
 **UploaderUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Version** | Pointer to **NullableString** | The raw version for this package. | [optional] [readonly] 
 **VersionOrig** | Pointer to **string** |  | [optional] [readonly] 
+**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 **VulnerabilityScanResultsUrl** | Pointer to **string** |  | [optional] [readonly] 
 
 ## Methods
@@ -930,6 +934,31 @@ SetIsHidden sets IsHidden field to given value.
 `func (o *PackageQuarantine) HasIsHidden() bool`
 
 HasIsHidden returns a boolean if a field has been set.
+
+### GetIsMalwareDetected
+
+`func (o *PackageQuarantine) GetIsMalwareDetected() bool`
+
+GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
+
+### GetIsMalwareDetectedOk
+
+`func (o *PackageQuarantine) GetIsMalwareDetectedOk() (*bool, bool)`
+
+GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMalwareDetected
+
+`func (o *PackageQuarantine) SetIsMalwareDetected(v bool)`
+
+SetIsMalwareDetected sets IsMalwareDetected field to given value.
+
+### HasIsMalwareDetected
+
+`func (o *PackageQuarantine) HasIsMalwareDetected() bool`
+
+HasIsMalwareDetected returns a boolean if a field has been set.
 
 ### GetIsMoveable
 
@@ -2106,6 +2135,41 @@ SetStatusUrl sets StatusUrl field to given value.
 
 HasStatusUrl returns a boolean if a field has been set.
 
+### GetStorePath
+
+`func (o *PackageQuarantine) GetStorePath() string`
+
+GetStorePath returns the StorePath field if non-nil, zero value otherwise.
+
+### GetStorePathOk
+
+`func (o *PackageQuarantine) GetStorePathOk() (*string, bool)`
+
+GetStorePathOk returns a tuple with the StorePath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorePath
+
+`func (o *PackageQuarantine) SetStorePath(v string)`
+
+SetStorePath sets StorePath field to given value.
+
+### HasStorePath
+
+`func (o *PackageQuarantine) HasStorePath() bool`
+
+HasStorePath returns a boolean if a field has been set.
+
+### SetStorePathNil
+
+`func (o *PackageQuarantine) SetStorePathNil(b bool)`
+
+ SetStorePathNil sets the value for StorePath to be an explicit nil
+
+### UnsetStorePath
+`func (o *PackageQuarantine) UnsetStorePath()`
+
+UnsetStorePath ensures that no value is present for StorePath, not even an explicit nil
 ### GetSubtype
 
 `func (o *PackageQuarantine) GetSubtype() string`
@@ -2301,6 +2365,31 @@ SetTagsImmutable sets TagsImmutable field to given value.
 
 HasTagsImmutable returns a boolean if a field has been set.
 
+### GetTagsStatic
+
+`func (o *PackageQuarantine) GetTagsStatic() map[string][]string`
+
+GetTagsStatic returns the TagsStatic field if non-nil, zero value otherwise.
+
+### GetTagsStaticOk
+
+`func (o *PackageQuarantine) GetTagsStaticOk() (*map[string][]string, bool)`
+
+GetTagsStaticOk returns a tuple with the TagsStatic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTagsStatic
+
+`func (o *PackageQuarantine) SetTagsStatic(v map[string][]string)`
+
+SetTagsStatic sets TagsStatic field to given value.
+
+### HasTagsStatic
+
+`func (o *PackageQuarantine) HasTagsStatic() bool`
+
+HasTagsStatic returns a boolean if a field has been set.
+
 ### GetTypeDisplay
 
 `func (o *PackageQuarantine) GetTypeDisplay() string`
@@ -2461,6 +2550,41 @@ SetVersionOrig sets VersionOrig field to given value.
 
 HasVersionOrig returns a boolean if a field has been set.
 
+### GetVulnerabilityCounts
+
+`func (o *PackageQuarantine) GetVulnerabilityCounts() WebOSVSeverityCounts`
+
+GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
+
+### GetVulnerabilityCountsOk
+
+`func (o *PackageQuarantine) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
+
+GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVulnerabilityCounts
+
+`func (o *PackageQuarantine) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
+
+SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
+
+### HasVulnerabilityCounts
+
+`func (o *PackageQuarantine) HasVulnerabilityCounts() bool`
+
+HasVulnerabilityCounts returns a boolean if a field has been set.
+
+### SetVulnerabilityCountsNil
+
+`func (o *PackageQuarantine) SetVulnerabilityCountsNil(b bool)`
+
+ SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+
+### UnsetVulnerabilityCounts
+`func (o *PackageQuarantine) UnsetVulnerabilityCounts()`
+
+UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 ### GetVulnerabilityScanResultsUrl
 
 `func (o *PackageQuarantine) GetVulnerabilityScanResultsUrl() string`

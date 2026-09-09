@@ -4,12 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **Name** | **string** | The name of this package. | 
 **PackageFile** | **string** | The primary file for the package. | 
 **Provider** | **string** | The virtual machine provider for the box. | 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
 **Version** | **string** | The raw version for this package. | 
+**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 
 ## Methods
 
@@ -29,6 +31,31 @@ will change when the set of required properties is changed
 NewVagrantPackageUploadRequestWithDefaults instantiates a new VagrantPackageUploadRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetIsMalwareDetected
+
+`func (o *VagrantPackageUploadRequest) GetIsMalwareDetected() bool`
+
+GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
+
+### GetIsMalwareDetectedOk
+
+`func (o *VagrantPackageUploadRequest) GetIsMalwareDetectedOk() (*bool, bool)`
+
+GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMalwareDetected
+
+`func (o *VagrantPackageUploadRequest) SetIsMalwareDetected(v bool)`
+
+SetIsMalwareDetected sets IsMalwareDetected field to given value.
+
+### HasIsMalwareDetected
+
+`func (o *VagrantPackageUploadRequest) HasIsMalwareDetected() bool`
+
+HasIsMalwareDetected returns a boolean if a field has been set.
 
 ### GetName
 
@@ -170,6 +197,41 @@ and a boolean to check if the value has been set.
 SetVersion sets Version field to given value.
 
 
+### GetVulnerabilityCounts
+
+`func (o *VagrantPackageUploadRequest) GetVulnerabilityCounts() WebOSVSeverityCounts`
+
+GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
+
+### GetVulnerabilityCountsOk
+
+`func (o *VagrantPackageUploadRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
+
+GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVulnerabilityCounts
+
+`func (o *VagrantPackageUploadRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
+
+SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
+
+### HasVulnerabilityCounts
+
+`func (o *VagrantPackageUploadRequest) HasVulnerabilityCounts() bool`
+
+HasVulnerabilityCounts returns a boolean if a field has been set.
+
+### SetVulnerabilityCountsNil
+
+`func (o *VagrantPackageUploadRequest) SetVulnerabilityCountsNil(b bool)`
+
+ SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+
+### UnsetVulnerabilityCounts
+`func (o *VagrantPackageUploadRequest) UnsetVulnerabilityCounts()`
+
+UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

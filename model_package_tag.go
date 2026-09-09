@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1288.1
+API version: 1.1358.3
 Contact: support@cloudsmith.io
 */
 
@@ -59,7 +59,9 @@ type PackageTag struct {
 	IsDownloadable *bool              `json:"is_downloadable,omitempty"`
 	IsHidden       *bool              `json:"is_hidden,omitempty"`
 	// If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package.
-	IsImmutable         *bool `json:"is_immutable,omitempty"`
+	IsImmutable *bool `json:"is_immutable,omitempty"`
+	// Whether the package has been detected as containing malware. Requires Ultra plan.
+	IsMalwareDetected   *bool `json:"is_malware_detected,omitempty"`
 	IsMoveable          *bool `json:"is_moveable,omitempty"`
 	IsQuarantinable     *bool `json:"is_quarantinable,omitempty"`
 	IsQuarantined       *bool `json:"is_quarantined,omitempty"`
@@ -122,7 +124,9 @@ type PackageTag struct {
 	// The datetime the package status was updated at.
 	StatusUpdatedAt *time.Time `json:"status_updated_at,omitempty"`
 	StatusUrl       *string    `json:"status_url,omitempty"`
-	Subtype         *string    `json:"subtype,omitempty"`
+	// Absolute store path for the package, including store hash and name.
+	StorePath NullableString `json:"store_path,omitempty"`
+	Subtype   *string        `json:"subtype,omitempty"`
 	// A one-liner synopsis of this package.
 	Summary NullableString `json:"summary,omitempty"`
 	// The datetime the package sync was finished at.
@@ -133,15 +137,18 @@ type PackageTag struct {
 	TagsAutomatic map[string]interface{} `json:"tags_automatic,omitempty"`
 	// All tags on the package, grouped by tag type. This includes immutable tags, but doesn't distinguish them from mutable. To see which tags are immutable specifically, see the tags_immutable field.
 	TagsImmutable map[string]interface{} `json:"tags_immutable,omitempty"`
-	TypeDisplay   *string                `json:"type_display,omitempty"`
+	// All static tags on the package, grouped by context. Static tags are derived from the package's properties at request time and carry a 'context' (rather than a tag type). Includes format-specific badges and the package's architecture, subtype, and extension.
+	TagsStatic  *map[string][]string `json:"tags_static,omitempty"`
+	TypeDisplay *string              `json:"type_display,omitempty"`
 	// The date this package was uploaded.
 	UploadedAt  *time.Time `json:"uploaded_at,omitempty"`
 	Uploader    *string    `json:"uploader,omitempty"`
 	UploaderUrl *string    `json:"uploader_url,omitempty"`
 	// The raw version for this package.
-	Version                     NullableString `json:"version,omitempty"`
-	VersionOrig                 *string        `json:"version_orig,omitempty"`
-	VulnerabilityScanResultsUrl *string        `json:"vulnerability_scan_results_url,omitempty"`
+	Version                     NullableString               `json:"version,omitempty"`
+	VersionOrig                 *string                      `json:"version_orig,omitempty"`
+	VulnerabilityCounts         NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
+	VulnerabilityScanResultsUrl *string                      `json:"vulnerability_scan_results_url,omitempty"`
 	AdditionalProperties        map[string]interface{}
 }
 
@@ -1235,6 +1242,38 @@ func (o *PackageTag) HasIsImmutable() bool {
 // SetIsImmutable gets a reference to the given bool and assigns it to the IsImmutable field.
 func (o *PackageTag) SetIsImmutable(v bool) {
 	o.IsImmutable = &v
+}
+
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+func (o *PackageTag) GetIsMalwareDetected() bool {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		var ret bool
+		return ret
+	}
+	return *o.IsMalwareDetected
+}
+
+// GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetIsMalwareDetectedOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsMalwareDetected) {
+		return nil, false
+	}
+	return o.IsMalwareDetected, true
+}
+
+// HasIsMalwareDetected returns a boolean if a field has been set.
+func (o *PackageTag) HasIsMalwareDetected() bool {
+	if o != nil && !IsNil(o.IsMalwareDetected) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+func (o *PackageTag) SetIsMalwareDetected(v bool) {
+	o.IsMalwareDetected = &v
 }
 
 // GetIsMoveable returns the IsMoveable field value if set, zero value otherwise.
@@ -2766,6 +2805,49 @@ func (o *PackageTag) SetStatusUrl(v string) {
 	o.StatusUrl = &v
 }
 
+// GetStorePath returns the StorePath field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageTag) GetStorePath() string {
+	if o == nil || IsNil(o.StorePath.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.StorePath.Get()
+}
+
+// GetStorePathOk returns a tuple with the StorePath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageTag) GetStorePathOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StorePath.Get(), o.StorePath.IsSet()
+}
+
+// HasStorePath returns a boolean if a field has been set.
+func (o *PackageTag) HasStorePath() bool {
+	if o != nil && o.StorePath.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStorePath gets a reference to the given NullableString and assigns it to the StorePath field.
+func (o *PackageTag) SetStorePath(v string) {
+	o.StorePath.Set(&v)
+}
+
+// SetStorePathNil sets the value for StorePath to be an explicit nil
+func (o *PackageTag) SetStorePathNil() {
+	o.StorePath.Set(nil)
+}
+
+// UnsetStorePath ensures that no value is present for StorePath, not even an explicit nil
+func (o *PackageTag) UnsetStorePath() {
+	o.StorePath.Unset()
+}
+
 // GetSubtype returns the Subtype field value if set, zero value otherwise.
 func (o *PackageTag) GetSubtype() string {
 	if o == nil || IsNil(o.Subtype) {
@@ -2980,6 +3062,38 @@ func (o *PackageTag) SetTagsImmutable(v map[string]interface{}) {
 	o.TagsImmutable = v
 }
 
+// GetTagsStatic returns the TagsStatic field value if set, zero value otherwise.
+func (o *PackageTag) GetTagsStatic() map[string][]string {
+	if o == nil || IsNil(o.TagsStatic) {
+		var ret map[string][]string
+		return ret
+	}
+	return *o.TagsStatic
+}
+
+// GetTagsStaticOk returns a tuple with the TagsStatic field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PackageTag) GetTagsStaticOk() (*map[string][]string, bool) {
+	if o == nil || IsNil(o.TagsStatic) {
+		return nil, false
+	}
+	return o.TagsStatic, true
+}
+
+// HasTagsStatic returns a boolean if a field has been set.
+func (o *PackageTag) HasTagsStatic() bool {
+	if o != nil && !IsNil(o.TagsStatic) {
+		return true
+	}
+
+	return false
+}
+
+// SetTagsStatic gets a reference to the given map[string][]string and assigns it to the TagsStatic field.
+func (o *PackageTag) SetTagsStatic(v map[string][]string) {
+	o.TagsStatic = &v
+}
+
 // GetTypeDisplay returns the TypeDisplay field value if set, zero value otherwise.
 func (o *PackageTag) GetTypeDisplay() string {
 	if o == nil || IsNil(o.TypeDisplay) {
@@ -3183,6 +3297,49 @@ func (o *PackageTag) SetVersionOrig(v string) {
 	o.VersionOrig = &v
 }
 
+// GetVulnerabilityCounts returns the VulnerabilityCounts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageTag) GetVulnerabilityCounts() WebOSVSeverityCounts {
+	if o == nil || IsNil(o.VulnerabilityCounts.Get()) {
+		var ret WebOSVSeverityCounts
+		return ret
+	}
+	return *o.VulnerabilityCounts.Get()
+}
+
+// GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageTag) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.VulnerabilityCounts.Get(), o.VulnerabilityCounts.IsSet()
+}
+
+// HasVulnerabilityCounts returns a boolean if a field has been set.
+func (o *PackageTag) HasVulnerabilityCounts() bool {
+	if o != nil && o.VulnerabilityCounts.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVulnerabilityCounts gets a reference to the given NullableWebOSVSeverityCounts and assigns it to the VulnerabilityCounts field.
+func (o *PackageTag) SetVulnerabilityCounts(v WebOSVSeverityCounts) {
+	o.VulnerabilityCounts.Set(&v)
+}
+
+// SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+func (o *PackageTag) SetVulnerabilityCountsNil() {
+	o.VulnerabilityCounts.Set(nil)
+}
+
+// UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
+func (o *PackageTag) UnsetVulnerabilityCounts() {
+	o.VulnerabilityCounts.Unset()
+}
+
 // GetVulnerabilityScanResultsUrl returns the VulnerabilityScanResultsUrl field value if set, zero value otherwise.
 func (o *PackageTag) GetVulnerabilityScanResultsUrl() string {
 	if o == nil || IsNil(o.VulnerabilityScanResultsUrl) {
@@ -3318,6 +3475,9 @@ func (o PackageTag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsImmutable) {
 		toSerialize["is_immutable"] = o.IsImmutable
 	}
+	if !IsNil(o.IsMalwareDetected) {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected
+	}
 	if !IsNil(o.IsMoveable) {
 		toSerialize["is_moveable"] = o.IsMoveable
 	}
@@ -3450,6 +3610,9 @@ func (o PackageTag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StatusUrl) {
 		toSerialize["status_url"] = o.StatusUrl
 	}
+	if o.StorePath.IsSet() {
+		toSerialize["store_path"] = o.StorePath.Get()
+	}
 	if !IsNil(o.Subtype) {
 		toSerialize["subtype"] = o.Subtype
 	}
@@ -3468,6 +3631,9 @@ func (o PackageTag) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TagsImmutable) {
 		toSerialize["tags_immutable"] = o.TagsImmutable
 	}
+	if !IsNil(o.TagsStatic) {
+		toSerialize["tags_static"] = o.TagsStatic
+	}
 	if !IsNil(o.TypeDisplay) {
 		toSerialize["type_display"] = o.TypeDisplay
 	}
@@ -3485,6 +3651,9 @@ func (o PackageTag) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.VersionOrig) {
 		toSerialize["version_orig"] = o.VersionOrig
+	}
+	if o.VulnerabilityCounts.IsSet() {
+		toSerialize["vulnerability_counts"] = o.VulnerabilityCounts.Get()
 	}
 	if !IsNil(o.VulnerabilityScanResultsUrl) {
 		toSerialize["vulnerability_scan_results_url"] = o.VulnerabilityScanResultsUrl
@@ -3542,6 +3711,7 @@ func (o *PackageTag) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "is_downloadable")
 		delete(additionalProperties, "is_hidden")
 		delete(additionalProperties, "is_immutable")
+		delete(additionalProperties, "is_malware_detected")
 		delete(additionalProperties, "is_moveable")
 		delete(additionalProperties, "is_quarantinable")
 		delete(additionalProperties, "is_quarantined")
@@ -3586,18 +3756,21 @@ func (o *PackageTag) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "status_str")
 		delete(additionalProperties, "status_updated_at")
 		delete(additionalProperties, "status_url")
+		delete(additionalProperties, "store_path")
 		delete(additionalProperties, "subtype")
 		delete(additionalProperties, "summary")
 		delete(additionalProperties, "sync_finished_at")
 		delete(additionalProperties, "sync_progress")
 		delete(additionalProperties, "tags_automatic")
 		delete(additionalProperties, "tags_immutable")
+		delete(additionalProperties, "tags_static")
 		delete(additionalProperties, "type_display")
 		delete(additionalProperties, "uploaded_at")
 		delete(additionalProperties, "uploader")
 		delete(additionalProperties, "uploader_url")
 		delete(additionalProperties, "version")
 		delete(additionalProperties, "version_orig")
+		delete(additionalProperties, "vulnerability_counts")
 		delete(additionalProperties, "vulnerability_scan_results_url")
 		o.AdditionalProperties = additionalProperties
 	}

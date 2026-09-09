@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AuthorName** | Pointer to **string** | The name of the author of the package. | [optional] 
 **AuthorOrg** | Pointer to **string** | The organization of the author. | [optional] 
+**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **LicenseUrl** | Pointer to **NullableString** | The license URL of this package. | [optional] 
 **Name** | **string** | The name of this package. | 
 **PackageFile** | **string** | The primary file for the package. | 
@@ -15,6 +16,7 @@ Name | Type | Description | Notes
 **Scope** | **string** | A scope provides a namespace for related packages within the package registry. | 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
 **Version** | **string** | The raw version for this package. | 
+**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 
 ## Methods
 
@@ -84,6 +86,31 @@ SetAuthorOrg sets AuthorOrg field to given value.
 `func (o *SwiftPackageUploadRequest) HasAuthorOrg() bool`
 
 HasAuthorOrg returns a boolean if a field has been set.
+
+### GetIsMalwareDetected
+
+`func (o *SwiftPackageUploadRequest) GetIsMalwareDetected() bool`
+
+GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
+
+### GetIsMalwareDetectedOk
+
+`func (o *SwiftPackageUploadRequest) GetIsMalwareDetectedOk() (*bool, bool)`
+
+GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsMalwareDetected
+
+`func (o *SwiftPackageUploadRequest) SetIsMalwareDetected(v bool)`
+
+SetIsMalwareDetected sets IsMalwareDetected field to given value.
+
+### HasIsMalwareDetected
+
+`func (o *SwiftPackageUploadRequest) HasIsMalwareDetected() bool`
+
+HasIsMalwareDetected returns a boolean if a field has been set.
 
 ### GetLicenseUrl
 
@@ -310,6 +337,41 @@ and a boolean to check if the value has been set.
 SetVersion sets Version field to given value.
 
 
+### GetVulnerabilityCounts
+
+`func (o *SwiftPackageUploadRequest) GetVulnerabilityCounts() WebOSVSeverityCounts`
+
+GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
+
+### GetVulnerabilityCountsOk
+
+`func (o *SwiftPackageUploadRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
+
+GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVulnerabilityCounts
+
+`func (o *SwiftPackageUploadRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
+
+SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
+
+### HasVulnerabilityCounts
+
+`func (o *SwiftPackageUploadRequest) HasVulnerabilityCounts() bool`
+
+HasVulnerabilityCounts returns a boolean if a field has been set.
+
+### SetVulnerabilityCountsNil
+
+`func (o *SwiftPackageUploadRequest) SetVulnerabilityCountsNil(b bool)`
+
+ SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
+
+### UnsetVulnerabilityCounts
+`func (o *SwiftPackageUploadRequest) UnsetVulnerabilityCounts()`
+
+UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
