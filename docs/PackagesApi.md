@@ -423,7 +423,7 @@ func main() {
 	page := int64(56) // int64 | A page number within the paginated result set. (optional)
 	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
 	includeConnectedRepositories := true // bool | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in. (optional) (default to false)
-	query := "query_example" // string | A search term for querying names, filenames, versions, distributions, architectures, formats or statuses of packages. (optional)
+	query := "query_example" // string | A search term for querying names, filenames, versions, distributions, architectures, formats, statuses or display sources (display_source:upstream, display_source:manual_upload, display_source:connected_repository) of packages. (optional)
 	sort := "sort_example" // string | A field for sorting objects in ascending or descending order. (optional) (default to "-date")
 
 	configuration := openapiclient.NewConfiguration()
@@ -459,7 +459,7 @@ Name | Type | Description  | Notes
  **page** | **int64** | A page number within the paginated result set. | 
  **pageSize** | **int64** | Number of results to return per page. | 
  **includeConnectedRepositories** | **bool** | If true, include packages from active connected target repositories in addition to packages from this repository. Has no effect if the repository has no active connections. Defaults to false. Note: download-related URLs on returned packages (e.g. cdn_url, signature_url) are rewritten to point at the requesting repository, not the connected target repository the package physically lives in. | [default to false]
- **query** | **string** | A search term for querying names, filenames, versions, distributions, architectures, formats or statuses of packages. | 
+ **query** | **string** | A search term for querying names, filenames, versions, distributions, architectures, formats, statuses or display sources (display_source:upstream, display_source:manual_upload, display_source:connected_repository) of packages. | 
  **sort** | **string** | A field for sorting objects in ascending or descending order. | [default to &quot;-date&quot;]
 
 ### Return type

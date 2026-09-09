@@ -7,12 +7,10 @@ Name | Type | Description | Notes
 **ChangesFile** | Pointer to **NullableString** | The changes archive containing the changes made to the source and debian packaging files | [optional] 
 **Component** | Pointer to **string** | The component (channel) for the package (e.g. &#39;main&#39;, &#39;unstable&#39;, etc.) | [optional] [default to "main"]
 **Distribution** | **string** | The distribution to store the package for. | 
-**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **PackageFile** | **string** | The primary file for the package. | 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **SourcesFile** | Pointer to **NullableString** | The sources archive containing the source code for the binary | [optional] 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
-**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 
 ## Methods
 
@@ -112,31 +110,6 @@ and a boolean to check if the value has been set.
 
 SetDistribution sets Distribution field to given value.
 
-
-### GetIsMalwareDetected
-
-`func (o *DebPackageUploadRequest) GetIsMalwareDetected() bool`
-
-GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
-
-### GetIsMalwareDetectedOk
-
-`func (o *DebPackageUploadRequest) GetIsMalwareDetectedOk() (*bool, bool)`
-
-GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsMalwareDetected
-
-`func (o *DebPackageUploadRequest) SetIsMalwareDetected(v bool)`
-
-SetIsMalwareDetected sets IsMalwareDetected field to given value.
-
-### HasIsMalwareDetected
-
-`func (o *DebPackageUploadRequest) HasIsMalwareDetected() bool`
-
-HasIsMalwareDetected returns a boolean if a field has been set.
 
 ### GetPackageFile
 
@@ -253,41 +226,6 @@ HasTags returns a boolean if a field has been set.
 `func (o *DebPackageUploadRequest) UnsetTags()`
 
 UnsetTags ensures that no value is present for Tags, not even an explicit nil
-### GetVulnerabilityCounts
-
-`func (o *DebPackageUploadRequest) GetVulnerabilityCounts() WebOSVSeverityCounts`
-
-GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
-
-### GetVulnerabilityCountsOk
-
-`func (o *DebPackageUploadRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
-
-GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVulnerabilityCounts
-
-`func (o *DebPackageUploadRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
-
-SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
-
-### HasVulnerabilityCounts
-
-`func (o *DebPackageUploadRequest) HasVulnerabilityCounts() bool`
-
-HasVulnerabilityCounts returns a boolean if a field has been set.
-
-### SetVulnerabilityCountsNil
-
-`func (o *DebPackageUploadRequest) SetVulnerabilityCountsNil(b bool)`
-
- SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
-
-### UnsetVulnerabilityCounts
-`func (o *DebPackageUploadRequest) UnsetVulnerabilityCounts()`
-
-UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

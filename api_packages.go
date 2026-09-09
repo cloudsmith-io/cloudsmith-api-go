@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1358.3
+API version: 1.1388.0
 Contact: support@cloudsmith.io
 */
 
@@ -736,7 +736,7 @@ func (r ApiPackagesListRequest) IncludeConnectedRepositories(includeConnectedRep
 	return r
 }
 
-// A search term for querying names, filenames, versions, distributions, architectures, formats or statuses of packages.
+// A search term for querying names, filenames, versions, distributions, architectures, formats, statuses or display sources (display_source:upstream, display_source:manual_upload, display_source:connected_repository) of packages.
 func (r ApiPackagesListRequest) Query(query string) ApiPackagesListRequest {
 	r.query = &query
 	return r

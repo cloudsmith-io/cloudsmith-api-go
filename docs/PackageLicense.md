@@ -4,12 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **LicenseNotes** | Pointer to **NullableString** |  | [optional] 
 **LicenseOverride** | Pointer to **NullableString** |  | [optional] [default to "None"]
 **LicenseUrl** | Pointer to **NullableString** |  | [optional] 
 **SpdxLicense** | **string** |  | 
-**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 
 ## Methods
 
@@ -29,31 +27,6 @@ will change when the set of required properties is changed
 NewPackageLicenseWithDefaults instantiates a new PackageLicense object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetIsMalwareDetected
-
-`func (o *PackageLicense) GetIsMalwareDetected() bool`
-
-GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
-
-### GetIsMalwareDetectedOk
-
-`func (o *PackageLicense) GetIsMalwareDetectedOk() (*bool, bool)`
-
-GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsMalwareDetected
-
-`func (o *PackageLicense) SetIsMalwareDetected(v bool)`
-
-SetIsMalwareDetected sets IsMalwareDetected field to given value.
-
-### HasIsMalwareDetected
-
-`func (o *PackageLicense) HasIsMalwareDetected() bool`
-
-HasIsMalwareDetected returns a boolean if a field has been set.
 
 ### GetLicenseNotes
 
@@ -180,41 +153,6 @@ and a boolean to check if the value has been set.
 SetSpdxLicense sets SpdxLicense field to given value.
 
 
-### GetVulnerabilityCounts
-
-`func (o *PackageLicense) GetVulnerabilityCounts() WebOSVSeverityCounts`
-
-GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
-
-### GetVulnerabilityCountsOk
-
-`func (o *PackageLicense) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
-
-GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVulnerabilityCounts
-
-`func (o *PackageLicense) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
-
-SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
-
-### HasVulnerabilityCounts
-
-`func (o *PackageLicense) HasVulnerabilityCounts() bool`
-
-HasVulnerabilityCounts returns a boolean if a field has been set.
-
-### SetVulnerabilityCountsNil
-
-`func (o *PackageLicense) SetVulnerabilityCountsNil(b bool)`
-
- SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
-
-### UnsetVulnerabilityCounts
-`func (o *PackageLicense) UnsetVulnerabilityCounts()`
-
-UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

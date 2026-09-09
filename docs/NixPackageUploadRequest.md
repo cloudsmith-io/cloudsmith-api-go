@@ -4,13 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
 **NarinfoFile** | Pointer to **NullableString** | The narinfo sidecar metadata file (&lt;storeHash&gt;.narinfo). Optional — the package can be completed later by publishing the matching narinfo via the native HTTP PUT path. | [optional] 
 **PackageFile** | **string** | The primary file for the package. | 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
 **Version** | Pointer to **NullableString** | The raw version for this package. | [optional] 
-**VulnerabilityCounts** | Pointer to [**NullableWebOSVSeverityCounts**](WebOSVSeverityCounts.md) |  | [optional] 
 
 ## Methods
 
@@ -30,31 +28,6 @@ will change when the set of required properties is changed
 NewNixPackageUploadRequestWithDefaults instantiates a new NixPackageUploadRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetIsMalwareDetected
-
-`func (o *NixPackageUploadRequest) GetIsMalwareDetected() bool`
-
-GetIsMalwareDetected returns the IsMalwareDetected field if non-nil, zero value otherwise.
-
-### GetIsMalwareDetectedOk
-
-`func (o *NixPackageUploadRequest) GetIsMalwareDetectedOk() (*bool, bool)`
-
-GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsMalwareDetected
-
-`func (o *NixPackageUploadRequest) SetIsMalwareDetected(v bool)`
-
-SetIsMalwareDetected sets IsMalwareDetected field to given value.
-
-### HasIsMalwareDetected
-
-`func (o *NixPackageUploadRequest) HasIsMalwareDetected() bool`
-
-HasIsMalwareDetected returns a boolean if a field has been set.
 
 ### GetNarinfoFile
 
@@ -206,41 +179,6 @@ HasVersion returns a boolean if a field has been set.
 `func (o *NixPackageUploadRequest) UnsetVersion()`
 
 UnsetVersion ensures that no value is present for Version, not even an explicit nil
-### GetVulnerabilityCounts
-
-`func (o *NixPackageUploadRequest) GetVulnerabilityCounts() WebOSVSeverityCounts`
-
-GetVulnerabilityCounts returns the VulnerabilityCounts field if non-nil, zero value otherwise.
-
-### GetVulnerabilityCountsOk
-
-`func (o *NixPackageUploadRequest) GetVulnerabilityCountsOk() (*WebOSVSeverityCounts, bool)`
-
-GetVulnerabilityCountsOk returns a tuple with the VulnerabilityCounts field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVulnerabilityCounts
-
-`func (o *NixPackageUploadRequest) SetVulnerabilityCounts(v WebOSVSeverityCounts)`
-
-SetVulnerabilityCounts sets VulnerabilityCounts field to given value.
-
-### HasVulnerabilityCounts
-
-`func (o *NixPackageUploadRequest) HasVulnerabilityCounts() bool`
-
-HasVulnerabilityCounts returns a boolean if a field has been set.
-
-### SetVulnerabilityCountsNil
-
-`func (o *NixPackageUploadRequest) SetVulnerabilityCountsNil(b bool)`
-
- SetVulnerabilityCountsNil sets the value for VulnerabilityCounts to be an explicit nil
-
-### UnsetVulnerabilityCounts
-`func (o *NixPackageUploadRequest) UnsetVulnerabilityCounts()`
-
-UnsetVulnerabilityCounts ensures that no value is present for VulnerabilityCounts, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
