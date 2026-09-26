@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1405.1
 Contact: support@cloudsmith.io
 */
 
@@ -21,14 +21,10 @@ var _ MappedNullable = &OrganizationApiKeyRuleRequest{}
 
 // OrganizationApiKeyRuleRequest struct for OrganizationApiKeyRuleRequest
 type OrganizationApiKeyRuleRequest struct {
-	// When enabled, API keys that violate the organization's rule will be replaced automatically.
-	EnforceRefresh *bool `json:"enforce_refresh,omitempty"`
 	// Whether this rule is currently active and enforced.
 	IsEnabled *bool `json:"is_enabled,omitempty"`
 	// The maximum permitted age of an API key for use in the organization. API keys older than this will no longer have access until they are refreshed. To disable the rule unset this value.
 	MaxAgeHours NullableInt64 `json:"max_age_hours,omitempty"`
-	// If set to True, API keys that violate this rule will be replaced immediately after the request is made. There is no way to undo this.
-	RefreshImmediately *bool `json:"refresh_immediately,omitempty"`
 	// Specify which account types this rule applies to: all accounts (deprecated — prefer separate service/user rules), service accounts only, or user accounts only.
 	RuleType             string `json:"rule_type"`
 	AdditionalProperties map[string]interface{}
@@ -52,38 +48,6 @@ func NewOrganizationApiKeyRuleRequest(ruleType string) *OrganizationApiKeyRuleRe
 func NewOrganizationApiKeyRuleRequestWithDefaults() *OrganizationApiKeyRuleRequest {
 	this := OrganizationApiKeyRuleRequest{}
 	return &this
-}
-
-// GetEnforceRefresh returns the EnforceRefresh field value if set, zero value otherwise.
-func (o *OrganizationApiKeyRuleRequest) GetEnforceRefresh() bool {
-	if o == nil || IsNil(o.EnforceRefresh) {
-		var ret bool
-		return ret
-	}
-	return *o.EnforceRefresh
-}
-
-// GetEnforceRefreshOk returns a tuple with the EnforceRefresh field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrganizationApiKeyRuleRequest) GetEnforceRefreshOk() (*bool, bool) {
-	if o == nil || IsNil(o.EnforceRefresh) {
-		return nil, false
-	}
-	return o.EnforceRefresh, true
-}
-
-// HasEnforceRefresh returns a boolean if a field has been set.
-func (o *OrganizationApiKeyRuleRequest) HasEnforceRefresh() bool {
-	if o != nil && !IsNil(o.EnforceRefresh) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnforceRefresh gets a reference to the given bool and assigns it to the EnforceRefresh field.
-func (o *OrganizationApiKeyRuleRequest) SetEnforceRefresh(v bool) {
-	o.EnforceRefresh = &v
 }
 
 // GetIsEnabled returns the IsEnabled field value if set, zero value otherwise.
@@ -161,38 +125,6 @@ func (o *OrganizationApiKeyRuleRequest) UnsetMaxAgeHours() {
 	o.MaxAgeHours.Unset()
 }
 
-// GetRefreshImmediately returns the RefreshImmediately field value if set, zero value otherwise.
-func (o *OrganizationApiKeyRuleRequest) GetRefreshImmediately() bool {
-	if o == nil || IsNil(o.RefreshImmediately) {
-		var ret bool
-		return ret
-	}
-	return *o.RefreshImmediately
-}
-
-// GetRefreshImmediatelyOk returns a tuple with the RefreshImmediately field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrganizationApiKeyRuleRequest) GetRefreshImmediatelyOk() (*bool, bool) {
-	if o == nil || IsNil(o.RefreshImmediately) {
-		return nil, false
-	}
-	return o.RefreshImmediately, true
-}
-
-// HasRefreshImmediately returns a boolean if a field has been set.
-func (o *OrganizationApiKeyRuleRequest) HasRefreshImmediately() bool {
-	if o != nil && !IsNil(o.RefreshImmediately) {
-		return true
-	}
-
-	return false
-}
-
-// SetRefreshImmediately gets a reference to the given bool and assigns it to the RefreshImmediately field.
-func (o *OrganizationApiKeyRuleRequest) SetRefreshImmediately(v bool) {
-	o.RefreshImmediately = &v
-}
-
 // GetRuleType returns the RuleType field value
 func (o *OrganizationApiKeyRuleRequest) GetRuleType() string {
 	if o == nil {
@@ -227,17 +159,11 @@ func (o OrganizationApiKeyRuleRequest) MarshalJSON() ([]byte, error) {
 
 func (o OrganizationApiKeyRuleRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EnforceRefresh) {
-		toSerialize["enforce_refresh"] = o.EnforceRefresh
-	}
 	if !IsNil(o.IsEnabled) {
 		toSerialize["is_enabled"] = o.IsEnabled
 	}
 	if o.MaxAgeHours.IsSet() {
 		toSerialize["max_age_hours"] = o.MaxAgeHours.Get()
-	}
-	if !IsNil(o.RefreshImmediately) {
-		toSerialize["refresh_immediately"] = o.RefreshImmediately
 	}
 	toSerialize["rule_type"] = o.RuleType
 
@@ -283,10 +209,8 @@ func (o *OrganizationApiKeyRuleRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "enforce_refresh")
 		delete(additionalProperties, "is_enabled")
 		delete(additionalProperties, "max_age_hours")
-		delete(additionalProperties, "refresh_immediately")
 		delete(additionalProperties, "rule_type")
 		o.AdditionalProperties = additionalProperties
 	}

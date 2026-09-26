@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1388.0
+  version: 1.1405.1
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -19536,7 +19536,6 @@ components:
         max_age_hours: 171976566
         rule_type: All Accounts
         updated_at: 2000-01-23T04:56:07.000+00:00
-        enforce_refresh: true
         created_at: 2000-01-23T04:56:07.000+00:00
         last_applied_at: 2000-01-23T04:56:07.000+00:00
         slug_perm: slug_perm
@@ -19547,11 +19546,6 @@ components:
           readOnly: true
           title: Created at
           type: string
-        enforce_refresh:
-          description: "When enabled, API keys that violate the organization's rule\
-            \ will be replaced automatically."
-          title: Enforce automatic API key refresh
-          type: boolean
         is_enabled:
           description: Whether this rule is currently active and enforced.
           title: Policy enabled
@@ -19612,14 +19606,7 @@ components:
         is_enabled: true
         max_age_hours: 171976566
         rule_type: All Accounts
-        enforce_refresh: true
-        refresh_immediately: true
       properties:
-        enforce_refresh:
-          description: "When enabled, API keys that violate the organization's rule\
-            \ will be replaced automatically."
-          title: Enforce automatic API key refresh
-          type: boolean
         is_enabled:
           description: Whether this rule is currently active and enforced.
           title: Policy enabled
@@ -19633,11 +19620,6 @@ components:
           nullable: true
           title: Maximum permitted API key age
           type: integer
-        refresh_immediately:
-          description: "If set to True, API keys that violate this rule will be replaced\
-            \ immediately after the request is made. There is no way to undo this."
-          title: Refresh immediately
-          type: boolean
         rule_type:
           description: "Specify which account types this rule applies to: all accounts\
             \ (deprecated — prefer separate service/user rules), service accounts\
@@ -19656,14 +19638,7 @@ components:
         is_enabled: true
         max_age_hours: 171976566
         rule_type: All Accounts
-        enforce_refresh: true
-        refresh_immediately: true
       properties:
-        enforce_refresh:
-          description: "When enabled, API keys that violate the organization's rule\
-            \ will be replaced automatically."
-          title: Enforce automatic API key refresh
-          type: boolean
         is_enabled:
           description: Whether this rule is currently active and enforced.
           title: Policy enabled
@@ -19677,11 +19652,6 @@ components:
           nullable: true
           title: Maximum permitted API key age
           type: integer
-        refresh_immediately:
-          description: "If set to True, API keys that violate this rule will be replaced\
-            \ immediately after the request is made. There is no way to undo this."
-          title: Refresh immediately
-          type: boolean
         rule_type:
           description: "Specify which account types this rule applies to: all accounts\
             \ (deprecated — prefer separate service/user rules), service accounts\
@@ -54480,6 +54450,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -54612,6 +54583,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -54727,6 +54699,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
