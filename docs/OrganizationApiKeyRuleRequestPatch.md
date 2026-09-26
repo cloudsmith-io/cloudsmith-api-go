@@ -4,10 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EnforceRefresh** | Pointer to **bool** | When enabled, API keys that violate the organization&#39;s rule will be replaced automatically. | [optional] 
 **IsEnabled** | Pointer to **bool** | Whether this rule is currently active and enforced. | [optional] 
 **MaxAgeHours** | Pointer to **NullableInt64** | The maximum permitted age of an API key for use in the organization. API keys older than this will no longer have access until they are refreshed. To disable the rule unset this value. | [optional] 
-**RefreshImmediately** | Pointer to **bool** | If set to True, API keys that violate this rule will be replaced immediately after the request is made. There is no way to undo this. | [optional] 
 **RuleType** | Pointer to **string** | Specify which account types this rule applies to: all accounts (deprecated — prefer separate service/user rules), service accounts only, or user accounts only. | [optional] 
 
 ## Methods
@@ -28,31 +26,6 @@ will change when the set of required properties is changed
 NewOrganizationApiKeyRuleRequestPatchWithDefaults instantiates a new OrganizationApiKeyRuleRequestPatch object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetEnforceRefresh
-
-`func (o *OrganizationApiKeyRuleRequestPatch) GetEnforceRefresh() bool`
-
-GetEnforceRefresh returns the EnforceRefresh field if non-nil, zero value otherwise.
-
-### GetEnforceRefreshOk
-
-`func (o *OrganizationApiKeyRuleRequestPatch) GetEnforceRefreshOk() (*bool, bool)`
-
-GetEnforceRefreshOk returns a tuple with the EnforceRefresh field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnforceRefresh
-
-`func (o *OrganizationApiKeyRuleRequestPatch) SetEnforceRefresh(v bool)`
-
-SetEnforceRefresh sets EnforceRefresh field to given value.
-
-### HasEnforceRefresh
-
-`func (o *OrganizationApiKeyRuleRequestPatch) HasEnforceRefresh() bool`
-
-HasEnforceRefresh returns a boolean if a field has been set.
 
 ### GetIsEnabled
 
@@ -114,31 +87,6 @@ HasMaxAgeHours returns a boolean if a field has been set.
 `func (o *OrganizationApiKeyRuleRequestPatch) UnsetMaxAgeHours()`
 
 UnsetMaxAgeHours ensures that no value is present for MaxAgeHours, not even an explicit nil
-### GetRefreshImmediately
-
-`func (o *OrganizationApiKeyRuleRequestPatch) GetRefreshImmediately() bool`
-
-GetRefreshImmediately returns the RefreshImmediately field if non-nil, zero value otherwise.
-
-### GetRefreshImmediatelyOk
-
-`func (o *OrganizationApiKeyRuleRequestPatch) GetRefreshImmediatelyOk() (*bool, bool)`
-
-GetRefreshImmediatelyOk returns a tuple with the RefreshImmediately field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRefreshImmediately
-
-`func (o *OrganizationApiKeyRuleRequestPatch) SetRefreshImmediately(v bool)`
-
-SetRefreshImmediately sets RefreshImmediately field to given value.
-
-### HasRefreshImmediately
-
-`func (o *OrganizationApiKeyRuleRequestPatch) HasRefreshImmediately() bool`
-
-HasRefreshImmediately returns a boolean if a field has been set.
-
 ### GetRuleType
 
 `func (o *OrganizationApiKeyRuleRequestPatch) GetRuleType() string`

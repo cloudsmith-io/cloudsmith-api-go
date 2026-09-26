@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1405.1
 Contact: support@cloudsmith.io
 */
 
@@ -23,8 +23,6 @@ var _ MappedNullable = &OrganizationApiKeyRule{}
 // OrganizationApiKeyRule struct for OrganizationApiKeyRule
 type OrganizationApiKeyRule struct {
 	CreatedAt *time.Time `json:"created_at,omitempty"`
-	// When enabled, API keys that violate the organization's rule will be replaced automatically.
-	EnforceRefresh *bool `json:"enforce_refresh,omitempty"`
 	// Whether this rule is currently active and enforced.
 	IsEnabled *bool `json:"is_enabled,omitempty"`
 	// The last time this rule was evaluated and applied by the expiry task.
@@ -91,38 +89,6 @@ func (o *OrganizationApiKeyRule) HasCreatedAt() bool {
 // SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
 func (o *OrganizationApiKeyRule) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
-}
-
-// GetEnforceRefresh returns the EnforceRefresh field value if set, zero value otherwise.
-func (o *OrganizationApiKeyRule) GetEnforceRefresh() bool {
-	if o == nil || IsNil(o.EnforceRefresh) {
-		var ret bool
-		return ret
-	}
-	return *o.EnforceRefresh
-}
-
-// GetEnforceRefreshOk returns a tuple with the EnforceRefresh field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrganizationApiKeyRule) GetEnforceRefreshOk() (*bool, bool) {
-	if o == nil || IsNil(o.EnforceRefresh) {
-		return nil, false
-	}
-	return o.EnforceRefresh, true
-}
-
-// HasEnforceRefresh returns a boolean if a field has been set.
-func (o *OrganizationApiKeyRule) HasEnforceRefresh() bool {
-	if o != nil && !IsNil(o.EnforceRefresh) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnforceRefresh gets a reference to the given bool and assigns it to the EnforceRefresh field.
-func (o *OrganizationApiKeyRule) SetEnforceRefresh(v bool) {
-	o.EnforceRefresh = &v
 }
 
 // GetIsEnabled returns the IsEnabled field value if set, zero value otherwise.
@@ -365,9 +331,6 @@ func (o OrganizationApiKeyRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}
-	if !IsNil(o.EnforceRefresh) {
-		toSerialize["enforce_refresh"] = o.EnforceRefresh
-	}
 	if !IsNil(o.IsEnabled) {
 		toSerialize["is_enabled"] = o.IsEnabled
 	}
@@ -431,7 +394,6 @@ func (o *OrganizationApiKeyRule) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "created_at")
-		delete(additionalProperties, "enforce_refresh")
 		delete(additionalProperties, "is_enabled")
 		delete(additionalProperties, "last_applied_at")
 		delete(additionalProperties, "max_age_hours")

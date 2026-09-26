@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CreatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
-**EnforceRefresh** | Pointer to **bool** | When enabled, API keys that violate the organization&#39;s rule will be replaced automatically. | [optional] 
 **IsEnabled** | Pointer to **bool** | Whether this rule is currently active and enforced. | [optional] 
 **LastAppliedAt** | Pointer to **time.Time** | The last time this rule was evaluated and applied by the expiry task. | [optional] [readonly] 
 **MaxAgeHours** | Pointer to **NullableInt64** | The maximum permitted age of an API key for use in the organization. API keys older than this will no longer have access until they are refreshed. To disable the rule unset this value. | [optional] 
@@ -57,31 +56,6 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *OrganizationApiKeyRule) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
-
-### GetEnforceRefresh
-
-`func (o *OrganizationApiKeyRule) GetEnforceRefresh() bool`
-
-GetEnforceRefresh returns the EnforceRefresh field if non-nil, zero value otherwise.
-
-### GetEnforceRefreshOk
-
-`func (o *OrganizationApiKeyRule) GetEnforceRefreshOk() (*bool, bool)`
-
-GetEnforceRefreshOk returns a tuple with the EnforceRefresh field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnforceRefresh
-
-`func (o *OrganizationApiKeyRule) SetEnforceRefresh(v bool)`
-
-SetEnforceRefresh sets EnforceRefresh field to given value.
-
-### HasEnforceRefresh
-
-`func (o *OrganizationApiKeyRule) HasEnforceRefresh() bool`
-
-HasEnforceRefresh returns a boolean if a field has been set.
 
 ### GetIsEnabled
 
