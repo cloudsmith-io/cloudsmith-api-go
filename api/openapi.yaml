@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1388.0
+  version: 1.1428.0
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -50304,6 +50304,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -50474,6 +50475,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -50609,6 +50611,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -54480,6 +54483,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -54612,6 +54616,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -54727,6 +54732,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -59121,6 +59127,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -59253,6 +59260,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -59368,6 +59376,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
