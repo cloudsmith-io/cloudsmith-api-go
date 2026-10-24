@@ -160,6 +160,12 @@ Method | HTTP request | Description
 [**ReposUpstreamRubyPartialUpdate**](ReposApi.md#ReposUpstreamRubyPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/ruby/{slug_perm}/ | Partially update a Ruby upstream config for this repository.
 [**ReposUpstreamRubyRead**](ReposApi.md#ReposUpstreamRubyRead) | **Get** /repos/{owner}/{identifier}/upstream/ruby/{slug_perm}/ | Retrieve a Ruby upstream config for this repository.
 [**ReposUpstreamRubyUpdate**](ReposApi.md#ReposUpstreamRubyUpdate) | **Put** /repos/{owner}/{identifier}/upstream/ruby/{slug_perm}/ | Update a Ruby upstream config for this repository.
+[**ReposUpstreamSkillsCreate**](ReposApi.md#ReposUpstreamSkillsCreate) | **Post** /repos/{owner}/{identifier}/upstream/skills/ | Create an AI Skills upstream config for this repository.
+[**ReposUpstreamSkillsDelete**](ReposApi.md#ReposUpstreamSkillsDelete) | **Delete** /repos/{owner}/{identifier}/upstream/skills/{slug_perm}/ | Delete an AI Skills upstream config for this repository.
+[**ReposUpstreamSkillsList**](ReposApi.md#ReposUpstreamSkillsList) | **Get** /repos/{owner}/{identifier}/upstream/skills/ | List AI Skills upstream configs for this repository.
+[**ReposUpstreamSkillsPartialUpdate**](ReposApi.md#ReposUpstreamSkillsPartialUpdate) | **Patch** /repos/{owner}/{identifier}/upstream/skills/{slug_perm}/ | Partially update an AI Skills upstream config for this repository.
+[**ReposUpstreamSkillsRead**](ReposApi.md#ReposUpstreamSkillsRead) | **Get** /repos/{owner}/{identifier}/upstream/skills/{slug_perm}/ | Retrieve an AI Skills upstream config for this repository.
+[**ReposUpstreamSkillsUpdate**](ReposApi.md#ReposUpstreamSkillsUpdate) | **Put** /repos/{owner}/{identifier}/upstream/skills/{slug_perm}/ | Update an AI Skills upstream config for this repository.
 [**ReposUpstreamSwiftCreate**](ReposApi.md#ReposUpstreamSwiftCreate) | **Post** /repos/{owner}/{identifier}/upstream/swift/ | Create a Swift upstream config for this repository.
 [**ReposUpstreamSwiftDelete**](ReposApi.md#ReposUpstreamSwiftDelete) | **Delete** /repos/{owner}/{identifier}/upstream/swift/{slug_perm}/ | Delete a Swift upstream config for this repository.
 [**ReposUpstreamSwiftList**](ReposApi.md#ReposUpstreamSwiftList) | **Get** /repos/{owner}/{identifier}/upstream/swift/ | List Swift upstream configs for this repository.
@@ -11989,6 +11995,464 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**RubyUpstream**](RubyUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSkillsCreate
+
+> SkillsUpstream ReposUpstreamSkillsCreate(ctx, owner, identifier).Data(data).Execute()
+
+Create an AI Skills upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	data := *openapiclient.NewSkillsUpstreamRequest("Name_example", "UpstreamUrl_example") // SkillsUpstreamRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamSkillsCreate(context.Background(), owner, identifier).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSkillsCreate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamSkillsCreate`: SkillsUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSkillsCreate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSkillsCreateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **data** | [**SkillsUpstreamRequest**](SkillsUpstreamRequest.md) |  | 
+
+### Return type
+
+[**SkillsUpstream**](SkillsUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSkillsDelete
+
+> ReposUpstreamSkillsDelete(ctx, owner, identifier, slugPerm).Execute()
+
+Delete an AI Skills upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ReposApi.ReposUpstreamSkillsDelete(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSkillsDelete``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSkillsDeleteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSkillsList
+
+> []SkillsUpstream ReposUpstreamSkillsList(ctx, owner, identifier).Page(page).PageSize(pageSize).Execute()
+
+List AI Skills upstream configs for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	page := int64(56) // int64 | A page number within the paginated result set. (optional)
+	pageSize := int64(56) // int64 | Number of results to return per page. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamSkillsList(context.Background(), owner, identifier).Page(page).PageSize(pageSize).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSkillsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamSkillsList`: []SkillsUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSkillsList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSkillsListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **page** | **int64** | A page number within the paginated result set. | 
+ **pageSize** | **int64** | Number of results to return per page. | 
+
+### Return type
+
+[**[]SkillsUpstream**](SkillsUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSkillsPartialUpdate
+
+> SkillsUpstream ReposUpstreamSkillsPartialUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Partially update an AI Skills upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewSkillsUpstreamRequestPatch() // SkillsUpstreamRequestPatch |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamSkillsPartialUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSkillsPartialUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamSkillsPartialUpdate`: SkillsUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSkillsPartialUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSkillsPartialUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**SkillsUpstreamRequestPatch**](SkillsUpstreamRequestPatch.md) |  | 
+
+### Return type
+
+[**SkillsUpstream**](SkillsUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSkillsRead
+
+> SkillsUpstream ReposUpstreamSkillsRead(ctx, owner, identifier, slugPerm).Execute()
+
+Retrieve an AI Skills upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamSkillsRead(context.Background(), owner, identifier, slugPerm).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSkillsRead``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamSkillsRead`: SkillsUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSkillsRead`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSkillsReadRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**SkillsUpstream**](SkillsUpstream.md)
+
+### Authorization
+
+[apikey](../README.md#apikey), [basic](../README.md#basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReposUpstreamSkillsUpdate
+
+> SkillsUpstream ReposUpstreamSkillsUpdate(ctx, owner, identifier, slugPerm).Data(data).Execute()
+
+Update an AI Skills upstream config for this repository.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/cloudsmith-io/cloudsmith-api-go"
+)
+
+func main() {
+	owner := "owner_example" // string | 
+	identifier := "identifier_example" // string | 
+	slugPerm := "slugPerm_example" // string | 
+	data := *openapiclient.NewSkillsUpstreamRequest("Name_example", "UpstreamUrl_example") // SkillsUpstreamRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReposApi.ReposUpstreamSkillsUpdate(context.Background(), owner, identifier, slugPerm).Data(data).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReposApi.ReposUpstreamSkillsUpdate``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReposUpstreamSkillsUpdate`: SkillsUpstream
+	fmt.Fprintf(os.Stdout, "Response from `ReposApi.ReposUpstreamSkillsUpdate`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**identifier** | **string** |  | 
+**slugPerm** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReposUpstreamSkillsUpdateRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **data** | [**SkillsUpstreamRequest**](SkillsUpstreamRequest.md) |  | 
+
+### Return type
+
+[**SkillsUpstream**](SkillsUpstream.md)
 
 ### Authorization
 

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1466.0
 Contact: support@cloudsmith.io
 */
 
@@ -29,7 +29,7 @@ type Service struct {
 	Description *string `json:"description,omitempty"`
 	// The API key of the service
 	Key *string `json:"key,omitempty"`
-	// The time at which the API key will expire. This will only be populated if the Organization has an active API Key Policy.
+	// The time at which the API key will expire. This will only be populated if the Organization has an active API key rule.
 	KeyExpiresAt NullableTime `json:"key_expires_at,omitempty"`
 	// The name of the service
 	Name string `json:"name"`
