@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -21,15 +21,16 @@ var _ MappedNullable = &PackageStatus{}
 
 // PackageStatus struct for PackageStatus
 type PackageStatus struct {
-	IsCancellable       *bool   `json:"is_cancellable,omitempty"`
-	IsCopyable          *bool   `json:"is_copyable,omitempty"`
-	IsDeleteable        *bool   `json:"is_deleteable,omitempty"`
-	IsDownloadable      *bool   `json:"is_downloadable,omitempty"`
-	IsHidden            *bool   `json:"is_hidden,omitempty"`
-	IsMoveable          *bool   `json:"is_moveable,omitempty"`
-	IsQuarantinable     *bool   `json:"is_quarantinable,omitempty"`
-	IsQuarantined       *bool   `json:"is_quarantined,omitempty"`
-	IsResyncable        *bool   `json:"is_resyncable,omitempty"`
+	IsCancellable   *bool `json:"is_cancellable,omitempty"`
+	IsCopyable      *bool `json:"is_copyable,omitempty"`
+	IsDeleteable    *bool `json:"is_deleteable,omitempty"`
+	IsDownloadable  *bool `json:"is_downloadable,omitempty"`
+	IsHidden        *bool `json:"is_hidden,omitempty"`
+	IsMoveable      *bool `json:"is_moveable,omitempty"`
+	IsQuarantinable *bool `json:"is_quarantinable,omitempty"`
+	IsQuarantined   *bool `json:"is_quarantined,omitempty"`
+	IsResyncable    *bool `json:"is_resyncable,omitempty"`
+	// Deprecated. Whether the package can be scanned for vulnerabilities.
 	IsSecurityScannable *bool   `json:"is_security_scannable,omitempty"`
 	IsSyncAwaiting      *bool   `json:"is_sync_awaiting,omitempty"`
 	IsSyncCompleted     *bool   `json:"is_sync_completed,omitempty"`

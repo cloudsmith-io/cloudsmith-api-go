@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -25,6 +25,8 @@ type NpmPackageUploadRequest struct {
 	NpmDistTag NullableString `json:"npm_dist_tag,omitempty"`
 	// The primary file for the package.
 	PackageFile string `json:"package_file"`
+	// The release notes for this package (if any).
+	ReleaseNotes NullableString `json:"release_notes,omitempty"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
 	Republish *bool `json:"republish,omitempty"`
 	// A comma-separated values list of tags to add to the package.
@@ -123,6 +125,49 @@ func (o *NpmPackageUploadRequest) SetPackageFile(v string) {
 	o.PackageFile = v
 }
 
+// GetReleaseNotes returns the ReleaseNotes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NpmPackageUploadRequest) GetReleaseNotes() string {
+	if o == nil || IsNil(o.ReleaseNotes.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReleaseNotes.Get()
+}
+
+// GetReleaseNotesOk returns a tuple with the ReleaseNotes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NpmPackageUploadRequest) GetReleaseNotesOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReleaseNotes.Get(), o.ReleaseNotes.IsSet()
+}
+
+// HasReleaseNotes returns a boolean if a field has been set.
+func (o *NpmPackageUploadRequest) HasReleaseNotes() bool {
+	if o != nil && o.ReleaseNotes.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReleaseNotes gets a reference to the given NullableString and assigns it to the ReleaseNotes field.
+func (o *NpmPackageUploadRequest) SetReleaseNotes(v string) {
+	o.ReleaseNotes.Set(&v)
+}
+
+// SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+func (o *NpmPackageUploadRequest) SetReleaseNotesNil() {
+	o.ReleaseNotes.Set(nil)
+}
+
+// UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
+func (o *NpmPackageUploadRequest) UnsetReleaseNotes() {
+	o.ReleaseNotes.Unset()
+}
+
 // GetRepublish returns the Republish field value if set, zero value otherwise.
 func (o *NpmPackageUploadRequest) GetRepublish() bool {
 	if o == nil || IsNil(o.Republish) {
@@ -212,6 +257,9 @@ func (o NpmPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["npm_dist_tag"] = o.NpmDistTag.Get()
 	}
 	toSerialize["package_file"] = o.PackageFile
+	if o.ReleaseNotes.IsSet() {
+		toSerialize["release_notes"] = o.ReleaseNotes.Get()
+	}
 	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
@@ -263,6 +311,7 @@ func (o *NpmPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "npm_dist_tag")
 		delete(additionalProperties, "package_file")
+		delete(additionalProperties, "release_notes")
 		delete(additionalProperties, "republish")
 		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties

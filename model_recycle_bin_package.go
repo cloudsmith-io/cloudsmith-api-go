@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -41,9 +41,10 @@ type RecycleBinPackage struct {
 	// Whether or not the package has violated any policy.
 	PolicyViolated *bool   `json:"policy_violated,omitempty"`
 	Repository     *string `json:"repository,omitempty"`
-	// The datetime the security scanning was completed.
-	SecurityScanCompletedAt NullableTime   `json:"security_scan_completed_at,omitempty"`
-	SecurityScanStatus      NullableString `json:"security_scan_status,omitempty"`
+	// Deprecated. The datetime the security scanning was completed.
+	SecurityScanCompletedAt NullableTime `json:"security_scan_completed_at,omitempty"`
+	// Deprecated. The status of security scanning for the package.
+	SecurityScanStatus NullableString `json:"security_scan_status,omitempty"`
 	// The calculated size of the package.
 	Size     *int64  `json:"size,omitempty"`
 	SlugPerm *string `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`

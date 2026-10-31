@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -21,6 +21,8 @@ var _ MappedNullable = &ErrorDetail{}
 
 // ErrorDetail struct for ErrorDetail
 type ErrorDetail struct {
+	// A machine-readable code for the error. Only set for validation errors.
+	Code *string `json:"code,omitempty"`
 	// An extended message for the response.
 	Detail string `json:"detail"`
 	// A Dictionary of related errors where key: Field and value: Array of Errors related to that field
@@ -46,6 +48,38 @@ func NewErrorDetail(detail string) *ErrorDetail {
 func NewErrorDetailWithDefaults() *ErrorDetail {
 	this := ErrorDetail{}
 	return &this
+}
+
+// GetCode returns the Code field value if set, zero value otherwise.
+func (o *ErrorDetail) GetCode() string {
+	if o == nil || IsNil(o.Code) {
+		var ret string
+		return ret
+	}
+	return *o.Code
+}
+
+// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ErrorDetail) GetCodeOk() (*string, bool) {
+	if o == nil || IsNil(o.Code) {
+		return nil, false
+	}
+	return o.Code, true
+}
+
+// HasCode returns a boolean if a field has been set.
+func (o *ErrorDetail) HasCode() bool {
+	if o != nil && !IsNil(o.Code) {
+		return true
+	}
+
+	return false
+}
+
+// SetCode gets a reference to the given string and assigns it to the Code field.
+func (o *ErrorDetail) SetCode(v string) {
+	o.Code = &v
 }
 
 // GetDetail returns the Detail field value
@@ -114,6 +148,9 @@ func (o ErrorDetail) MarshalJSON() ([]byte, error) {
 
 func (o ErrorDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Code) {
+		toSerialize["code"] = o.Code
+	}
 	toSerialize["detail"] = o.Detail
 	if !IsNil(o.Fields) {
 		toSerialize["fields"] = o.Fields
@@ -161,6 +198,7 @@ func (o *ErrorDetail) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
 		delete(additionalProperties, "detail")
 		delete(additionalProperties, "fields")
 		o.AdditionalProperties = additionalProperties

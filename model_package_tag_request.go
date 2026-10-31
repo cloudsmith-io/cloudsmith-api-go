@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -23,6 +23,8 @@ type PackageTagRequest struct {
 	Action NullableString `json:"action,omitempty"`
 	// If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package.
 	IsImmutable *bool `json:"is_immutable,omitempty"`
+	// The release notes for this package (if any).
+	ReleaseNotes NullableString `json:"release_notes,omitempty"`
 	// A list of tags to apply the action to. Not required for clears.
 	Tags                 []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -130,6 +132,49 @@ func (o *PackageTagRequest) SetIsImmutable(v bool) {
 	o.IsImmutable = &v
 }
 
+// GetReleaseNotes returns the ReleaseNotes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageTagRequest) GetReleaseNotes() string {
+	if o == nil || IsNil(o.ReleaseNotes.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReleaseNotes.Get()
+}
+
+// GetReleaseNotesOk returns a tuple with the ReleaseNotes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageTagRequest) GetReleaseNotesOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReleaseNotes.Get(), o.ReleaseNotes.IsSet()
+}
+
+// HasReleaseNotes returns a boolean if a field has been set.
+func (o *PackageTagRequest) HasReleaseNotes() bool {
+	if o != nil && o.ReleaseNotes.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReleaseNotes gets a reference to the given NullableString and assigns it to the ReleaseNotes field.
+func (o *PackageTagRequest) SetReleaseNotes(v string) {
+	o.ReleaseNotes.Set(&v)
+}
+
+// SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+func (o *PackageTagRequest) SetReleaseNotesNil() {
+	o.ReleaseNotes.Set(nil)
+}
+
+// UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
+func (o *PackageTagRequest) UnsetReleaseNotes() {
+	o.ReleaseNotes.Unset()
+}
+
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PackageTagRequest) GetTags() []string {
 	if o == nil {
@@ -179,6 +224,9 @@ func (o PackageTagRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsImmutable) {
 		toSerialize["is_immutable"] = o.IsImmutable
 	}
+	if o.ReleaseNotes.IsSet() {
+		toSerialize["release_notes"] = o.ReleaseNotes.Get()
+	}
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
 	}
@@ -206,6 +254,7 @@ func (o *PackageTagRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "action")
 		delete(additionalProperties, "is_immutable")
+		delete(additionalProperties, "release_notes")
 		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 	}

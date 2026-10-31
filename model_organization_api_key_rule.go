@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -35,7 +35,7 @@ type OrganizationApiKeyRule struct {
 	RuleType string `json:"rule_type"`
 	// Human-readable identifier for the rule type. Automatically generated based on the rule type.
 	Slug *string `json:"slug,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
-	// An auto-generated id that uniquely identifies the API key policy.
+	// An auto-generated id that uniquely identifies the rule.
 	SlugPerm             *string    `json:"slug_perm,omitempty" validate:"regexp=^[-a-zA-Z0-9_]+$"`
 	UpdatedAt            *time.Time `json:"updated_at,omitempty"`
 	AdditionalProperties map[string]interface{}
