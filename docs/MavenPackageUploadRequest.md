@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **PackageFile** | **string** | The primary file for the package. | 
 **Packaging** | Pointer to **NullableString** | Artifact&#39;s Maven packaging type. | [optional] 
 **PomFile** | Pointer to **NullableString** | The POM file is an XML file containing the Maven coordinates. | [optional] 
+**ReleaseNotes** | Pointer to **NullableString** | The release notes for this package (if any). | [optional] 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **SbtVersion** | Pointer to **NullableString** |  | [optional] 
 **ScalaVersion** | Pointer to **NullableString** |  | [optional] 
@@ -304,6 +305,41 @@ HasPomFile returns a boolean if a field has been set.
 `func (o *MavenPackageUploadRequest) UnsetPomFile()`
 
 UnsetPomFile ensures that no value is present for PomFile, not even an explicit nil
+### GetReleaseNotes
+
+`func (o *MavenPackageUploadRequest) GetReleaseNotes() string`
+
+GetReleaseNotes returns the ReleaseNotes field if non-nil, zero value otherwise.
+
+### GetReleaseNotesOk
+
+`func (o *MavenPackageUploadRequest) GetReleaseNotesOk() (*string, bool)`
+
+GetReleaseNotesOk returns a tuple with the ReleaseNotes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseNotes
+
+`func (o *MavenPackageUploadRequest) SetReleaseNotes(v string)`
+
+SetReleaseNotes sets ReleaseNotes field to given value.
+
+### HasReleaseNotes
+
+`func (o *MavenPackageUploadRequest) HasReleaseNotes() bool`
+
+HasReleaseNotes returns a boolean if a field has been set.
+
+### SetReleaseNotesNil
+
+`func (o *MavenPackageUploadRequest) SetReleaseNotesNil(b bool)`
+
+ SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+
+### UnsetReleaseNotes
+`func (o *MavenPackageUploadRequest) UnsetReleaseNotes()`
+
+UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
 ### GetRepublish
 
 `func (o *MavenPackageUploadRequest) GetRepublish() bool`

@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -37,6 +37,8 @@ type MavenPackageUploadRequest struct {
 	Packaging NullableString `json:"packaging,omitempty"`
 	// The POM file is an XML file containing the Maven coordinates.
 	PomFile NullableString `json:"pom_file,omitempty"`
+	// The release notes for this package (if any).
+	ReleaseNotes NullableString `json:"release_notes,omitempty"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
 	Republish    *bool          `json:"republish,omitempty"`
 	SbtVersion   NullableString `json:"sbt_version,omitempty"`
@@ -387,6 +389,49 @@ func (o *MavenPackageUploadRequest) UnsetPomFile() {
 	o.PomFile.Unset()
 }
 
+// GetReleaseNotes returns the ReleaseNotes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MavenPackageUploadRequest) GetReleaseNotes() string {
+	if o == nil || IsNil(o.ReleaseNotes.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReleaseNotes.Get()
+}
+
+// GetReleaseNotesOk returns a tuple with the ReleaseNotes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MavenPackageUploadRequest) GetReleaseNotesOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReleaseNotes.Get(), o.ReleaseNotes.IsSet()
+}
+
+// HasReleaseNotes returns a boolean if a field has been set.
+func (o *MavenPackageUploadRequest) HasReleaseNotes() bool {
+	if o != nil && o.ReleaseNotes.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReleaseNotes gets a reference to the given NullableString and assigns it to the ReleaseNotes field.
+func (o *MavenPackageUploadRequest) SetReleaseNotes(v string) {
+	o.ReleaseNotes.Set(&v)
+}
+
+// SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+func (o *MavenPackageUploadRequest) SetReleaseNotesNil() {
+	o.ReleaseNotes.Set(nil)
+}
+
+// UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
+func (o *MavenPackageUploadRequest) UnsetReleaseNotes() {
+	o.ReleaseNotes.Unset()
+}
+
 // GetRepublish returns the Republish field value if set, zero value otherwise.
 func (o *MavenPackageUploadRequest) GetRepublish() bool {
 	if o == nil || IsNil(o.Republish) {
@@ -709,6 +754,9 @@ func (o MavenPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if o.PomFile.IsSet() {
 		toSerialize["pom_file"] = o.PomFile.Get()
 	}
+	if o.ReleaseNotes.IsSet() {
+		toSerialize["release_notes"] = o.ReleaseNotes.Get()
+	}
 	if !IsNil(o.Republish) {
 		toSerialize["republish"] = o.Republish
 	}
@@ -781,6 +829,7 @@ func (o *MavenPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "package_file")
 		delete(additionalProperties, "packaging")
 		delete(additionalProperties, "pom_file")
+		delete(additionalProperties, "release_notes")
 		delete(additionalProperties, "republish")
 		delete(additionalProperties, "sbt_version")
 		delete(additionalProperties, "scala_version")

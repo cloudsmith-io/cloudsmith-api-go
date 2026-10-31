@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -33,6 +33,8 @@ type SwiftPackageUploadRequest struct {
 	PackageFile string `json:"package_file"`
 	// The URL of the readme for the package.
 	ReadmeUrl *string `json:"readme_url,omitempty"`
+	// The release notes for this package (if any).
+	ReleaseNotes NullableString `json:"release_notes,omitempty"`
 	// The URL of the SCM repository for the package.
 	RepositoryUrl *string `json:"repository_url,omitempty"`
 	// If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate.
@@ -256,6 +258,49 @@ func (o *SwiftPackageUploadRequest) SetReadmeUrl(v string) {
 	o.ReadmeUrl = &v
 }
 
+// GetReleaseNotes returns the ReleaseNotes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SwiftPackageUploadRequest) GetReleaseNotes() string {
+	if o == nil || IsNil(o.ReleaseNotes.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReleaseNotes.Get()
+}
+
+// GetReleaseNotesOk returns a tuple with the ReleaseNotes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SwiftPackageUploadRequest) GetReleaseNotesOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReleaseNotes.Get(), o.ReleaseNotes.IsSet()
+}
+
+// HasReleaseNotes returns a boolean if a field has been set.
+func (o *SwiftPackageUploadRequest) HasReleaseNotes() bool {
+	if o != nil && o.ReleaseNotes.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReleaseNotes gets a reference to the given NullableString and assigns it to the ReleaseNotes field.
+func (o *SwiftPackageUploadRequest) SetReleaseNotes(v string) {
+	o.ReleaseNotes.Set(&v)
+}
+
+// SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+func (o *SwiftPackageUploadRequest) SetReleaseNotesNil() {
+	o.ReleaseNotes.Set(nil)
+}
+
+// UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
+func (o *SwiftPackageUploadRequest) UnsetReleaseNotes() {
+	o.ReleaseNotes.Unset()
+}
+
 // GetRepositoryUrl returns the RepositoryUrl field value if set, zero value otherwise.
 func (o *SwiftPackageUploadRequest) GetRepositoryUrl() string {
 	if o == nil || IsNil(o.RepositoryUrl) {
@@ -435,6 +480,9 @@ func (o SwiftPackageUploadRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReadmeUrl) {
 		toSerialize["readme_url"] = o.ReadmeUrl
 	}
+	if o.ReleaseNotes.IsSet() {
+		toSerialize["release_notes"] = o.ReleaseNotes.Get()
+	}
 	if !IsNil(o.RepositoryUrl) {
 		toSerialize["repository_url"] = o.RepositoryUrl
 	}
@@ -498,6 +546,7 @@ func (o *SwiftPackageUploadRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "package_file")
 		delete(additionalProperties, "readme_url")
+		delete(additionalProperties, "release_notes")
 		delete(additionalProperties, "repository_url")
 		delete(additionalProperties, "republish")
 		delete(additionalProperties, "scope")

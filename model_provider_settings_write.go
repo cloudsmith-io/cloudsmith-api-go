@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -27,11 +27,13 @@ type ProviderSettingsWrite struct {
 	DynamicMappings []DynamicMapping `json:"dynamic_mappings,omitempty"`
 	// Whether the provider settings should be used for incoming OIDC requests.
 	Enabled bool `json:"enabled"`
+	// The manually uploaded JWKS, for providers we do not have remote access to.
+	Jwks map[string]interface{} `json:"jwks,omitempty"`
 	// The OIDC claim to use for mapping to service accounts in dynamic_mappings. Cannot be provided if `service_accounts` is also set.  Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature.
 	MappingClaim NullableString `json:"mapping_claim,omitempty"`
 	// The name of the provider settings are being configured for
 	Name string `json:"name"`
-	// The URL from the provider that serves as the base for the OpenID configuration. For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
+	// The URL from the provider that serves as the base for the OpenID configuration. For local providers with an uploaded JWKS, this is the expected issuer. For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
 	ProviderUrl string `json:"provider_url"`
 	// The service accounts associated with these provider settings. Cannot be provided if `mapping_claim` or `dynamic_mappings` are specified.
 	ServiceAccounts []string `json:"service_accounts,omitempty"`
@@ -143,6 +145,39 @@ func (o *ProviderSettingsWrite) GetEnabledOk() (*bool, bool) {
 // SetEnabled sets field value
 func (o *ProviderSettingsWrite) SetEnabled(v bool) {
 	o.Enabled = v
+}
+
+// GetJwks returns the Jwks field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ProviderSettingsWrite) GetJwks() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Jwks
+}
+
+// GetJwksOk returns a tuple with the Jwks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ProviderSettingsWrite) GetJwksOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Jwks) {
+		return map[string]interface{}{}, false
+	}
+	return o.Jwks, true
+}
+
+// HasJwks returns a boolean if a field has been set.
+func (o *ProviderSettingsWrite) HasJwks() bool {
+	if o != nil && !IsNil(o.Jwks) {
+		return true
+	}
+
+	return false
+}
+
+// SetJwks gets a reference to the given map[string]interface{} and assigns it to the Jwks field.
+func (o *ProviderSettingsWrite) SetJwks(v map[string]interface{}) {
+	o.Jwks = v
 }
 
 // GetMappingClaim returns the MappingClaim field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -347,6 +382,9 @@ func (o ProviderSettingsWrite) ToMap() (map[string]interface{}, error) {
 		toSerialize["dynamic_mappings"] = o.DynamicMappings
 	}
 	toSerialize["enabled"] = o.Enabled
+	if o.Jwks != nil {
+		toSerialize["jwks"] = o.Jwks
+	}
 	if o.MappingClaim.IsSet() {
 		toSerialize["mapping_claim"] = o.MappingClaim.Get()
 	}
@@ -410,6 +448,7 @@ func (o *ProviderSettingsWrite) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "claims")
 		delete(additionalProperties, "dynamic_mappings")
 		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "jwks")
 		delete(additionalProperties, "mapping_claim")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "provider_url")

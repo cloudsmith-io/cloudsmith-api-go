@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -63,11 +63,12 @@ type PackageDetail struct {
 	IsDownloadable *bool              `json:"is_downloadable,omitempty"`
 	IsHidden       *bool              `json:"is_hidden,omitempty"`
 	// Whether the package has been detected as containing malware. Requires Ultra plan.
-	IsMalwareDetected   *bool `json:"is_malware_detected,omitempty"`
-	IsMoveable          *bool `json:"is_moveable,omitempty"`
-	IsQuarantinable     *bool `json:"is_quarantinable,omitempty"`
-	IsQuarantined       *bool `json:"is_quarantined,omitempty"`
-	IsResyncable        *bool `json:"is_resyncable,omitempty"`
+	IsMalwareDetected *bool `json:"is_malware_detected,omitempty"`
+	IsMoveable        *bool `json:"is_moveable,omitempty"`
+	IsQuarantinable   *bool `json:"is_quarantinable,omitempty"`
+	IsQuarantined     *bool `json:"is_quarantined,omitempty"`
+	IsResyncable      *bool `json:"is_resyncable,omitempty"`
+	// Deprecated. Whether the package can be scanned for vulnerabilities.
 	IsSecurityScannable *bool `json:"is_security_scannable,omitempty"`
 	IsSyncAwaiting      *bool `json:"is_sync_awaiting,omitempty"`
 	IsSyncCompleted     *bool `json:"is_sync_completed,omitempty"`
@@ -87,20 +88,25 @@ type PackageDetail struct {
 	OsiApproved *bool `json:"osi_approved,omitempty"`
 	// The type of package contents.
 	PackageType *int64 `json:"package_type,omitempty"`
+	// The skills a plugin bundles. Null for any other package.
+	PluginSkills []PluginSkill `json:"plugin_skills,omitempty"`
 	// Whether or not the package has violated any policy.
 	PolicyViolated *bool `json:"policy_violated,omitempty"`
 	// The raw license string.
 	RawLicense NullableString `json:"raw_license,omitempty"`
 	// The release of the package version (if any).
-	Release       NullableString `json:"release,omitempty"`
+	Release NullableString `json:"release,omitempty"`
+	// The release notes for this package (if any).
+	ReleaseNotes  NullableString `json:"release_notes,omitempty"`
 	Repository    *string        `json:"repository,omitempty"`
 	RepositoryUrl *string        `json:"repository_url,omitempty"`
-	// The datetime the security scanning was completed.
+	// Deprecated. The datetime the security scanning was completed.
 	SecurityScanCompletedAt NullableTime `json:"security_scan_completed_at,omitempty"`
-	// The datetime the security scanning was started.
-	SecurityScanStartedAt NullableTime   `json:"security_scan_started_at,omitempty"`
-	SecurityScanStatus    NullableString `json:"security_scan_status,omitempty"`
-	// The datetime the security scanning status was updated.
+	// Deprecated. The datetime the security scanning was started.
+	SecurityScanStartedAt NullableTime `json:"security_scan_started_at,omitempty"`
+	// Deprecated. The status of security scanning for the package.
+	SecurityScanStatus NullableString `json:"security_scan_status,omitempty"`
+	// Deprecated. The datetime the security scanning status was updated.
 	SecurityScanStatusUpdatedAt NullableTime   `json:"security_scan_status_updated_at,omitempty"`
 	SelfHtmlUrl                 *string        `json:"self_html_url,omitempty"`
 	SelfUrl                     *string        `json:"self_url,omitempty"`
@@ -149,10 +155,11 @@ type PackageDetail struct {
 	Uploader    *string    `json:"uploader,omitempty"`
 	UploaderUrl *string    `json:"uploader_url,omitempty"`
 	// The raw version for this package.
-	Version                     NullableString               `json:"version,omitempty"`
-	VersionOrig                 *string                      `json:"version_orig,omitempty"`
-	VulnerabilityCounts         NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
-	VulnerabilityScanResultsUrl *string                      `json:"vulnerability_scan_results_url,omitempty"`
+	Version             NullableString               `json:"version,omitempty"`
+	VersionOrig         *string                      `json:"version_orig,omitempty"`
+	VulnerabilityCounts NullableWebOSVSeverityCounts `json:"vulnerability_counts,omitempty"`
+	// Deprecated. The URL of the package's vulnerability scan results.
+	VulnerabilityScanResultsUrl *string `json:"vulnerability_scan_results_url,omitempty"`
 	AdditionalProperties        map[string]interface{}
 }
 
@@ -1938,6 +1945,39 @@ func (o *PackageDetail) SetPackageType(v int64) {
 	o.PackageType = &v
 }
 
+// GetPluginSkills returns the PluginSkills field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageDetail) GetPluginSkills() []PluginSkill {
+	if o == nil {
+		var ret []PluginSkill
+		return ret
+	}
+	return o.PluginSkills
+}
+
+// GetPluginSkillsOk returns a tuple with the PluginSkills field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageDetail) GetPluginSkillsOk() ([]PluginSkill, bool) {
+	if o == nil || IsNil(o.PluginSkills) {
+		return nil, false
+	}
+	return o.PluginSkills, true
+}
+
+// HasPluginSkills returns a boolean if a field has been set.
+func (o *PackageDetail) HasPluginSkills() bool {
+	if o != nil && !IsNil(o.PluginSkills) {
+		return true
+	}
+
+	return false
+}
+
+// SetPluginSkills gets a reference to the given []PluginSkill and assigns it to the PluginSkills field.
+func (o *PackageDetail) SetPluginSkills(v []PluginSkill) {
+	o.PluginSkills = v
+}
+
 // GetPolicyViolated returns the PolicyViolated field value if set, zero value otherwise.
 func (o *PackageDetail) GetPolicyViolated() bool {
 	if o == nil || IsNil(o.PolicyViolated) {
@@ -2054,6 +2094,49 @@ func (o *PackageDetail) SetReleaseNil() {
 // UnsetRelease ensures that no value is present for Release, not even an explicit nil
 func (o *PackageDetail) UnsetRelease() {
 	o.Release.Unset()
+}
+
+// GetReleaseNotes returns the ReleaseNotes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageDetail) GetReleaseNotes() string {
+	if o == nil || IsNil(o.ReleaseNotes.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReleaseNotes.Get()
+}
+
+// GetReleaseNotesOk returns a tuple with the ReleaseNotes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageDetail) GetReleaseNotesOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReleaseNotes.Get(), o.ReleaseNotes.IsSet()
+}
+
+// HasReleaseNotes returns a boolean if a field has been set.
+func (o *PackageDetail) HasReleaseNotes() bool {
+	if o != nil && o.ReleaseNotes.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReleaseNotes gets a reference to the given NullableString and assigns it to the ReleaseNotes field.
+func (o *PackageDetail) SetReleaseNotes(v string) {
+	o.ReleaseNotes.Set(&v)
+}
+
+// SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+func (o *PackageDetail) SetReleaseNotesNil() {
+	o.ReleaseNotes.Set(nil)
+}
+
+// UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
+func (o *PackageDetail) UnsetReleaseNotes() {
+	o.ReleaseNotes.Unset()
 }
 
 // GetRepository returns the Repository field value if set, zero value otherwise.
@@ -3602,6 +3685,9 @@ func (o PackageDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PackageType) {
 		toSerialize["package_type"] = o.PackageType
 	}
+	if o.PluginSkills != nil {
+		toSerialize["plugin_skills"] = o.PluginSkills
+	}
 	if !IsNil(o.PolicyViolated) {
 		toSerialize["policy_violated"] = o.PolicyViolated
 	}
@@ -3610,6 +3696,9 @@ func (o PackageDetail) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Release.IsSet() {
 		toSerialize["release"] = o.Release.Get()
+	}
+	if o.ReleaseNotes.IsSet() {
+		toSerialize["release_notes"] = o.ReleaseNotes.Get()
 	}
 	if !IsNil(o.Repository) {
 		toSerialize["repository"] = o.Repository
@@ -3802,9 +3891,11 @@ func (o *PackageDetail) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "origin_repository_url")
 		delete(additionalProperties, "osi_approved")
 		delete(additionalProperties, "package_type")
+		delete(additionalProperties, "plugin_skills")
 		delete(additionalProperties, "policy_violated")
 		delete(additionalProperties, "raw_license")
 		delete(additionalProperties, "release")
+		delete(additionalProperties, "release_notes")
 		delete(additionalProperties, "repository")
 		delete(additionalProperties, "repository_url")
 		delete(additionalProperties, "security_scan_completed_at")

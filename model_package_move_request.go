@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -22,7 +22,9 @@ var _ MappedNullable = &PackageMoveRequest{}
 // PackageMoveRequest struct for PackageMoveRequest
 type PackageMoveRequest struct {
 	// The name of the destination repository without the namespace.
-	Destination          string `json:"destination"`
+	Destination string `json:"destination"`
+	// The release notes for this package (if any).
+	ReleaseNotes         NullableString `json:"release_notes,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -70,6 +72,49 @@ func (o *PackageMoveRequest) SetDestination(v string) {
 	o.Destination = v
 }
 
+// GetReleaseNotes returns the ReleaseNotes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PackageMoveRequest) GetReleaseNotes() string {
+	if o == nil || IsNil(o.ReleaseNotes.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ReleaseNotes.Get()
+}
+
+// GetReleaseNotesOk returns a tuple with the ReleaseNotes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PackageMoveRequest) GetReleaseNotesOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ReleaseNotes.Get(), o.ReleaseNotes.IsSet()
+}
+
+// HasReleaseNotes returns a boolean if a field has been set.
+func (o *PackageMoveRequest) HasReleaseNotes() bool {
+	if o != nil && o.ReleaseNotes.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReleaseNotes gets a reference to the given NullableString and assigns it to the ReleaseNotes field.
+func (o *PackageMoveRequest) SetReleaseNotes(v string) {
+	o.ReleaseNotes.Set(&v)
+}
+
+// SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+func (o *PackageMoveRequest) SetReleaseNotesNil() {
+	o.ReleaseNotes.Set(nil)
+}
+
+// UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
+func (o *PackageMoveRequest) UnsetReleaseNotes() {
+	o.ReleaseNotes.Unset()
+}
+
 func (o PackageMoveRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -81,6 +126,9 @@ func (o PackageMoveRequest) MarshalJSON() ([]byte, error) {
 func (o PackageMoveRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["destination"] = o.Destination
+	if o.ReleaseNotes.IsSet() {
+		toSerialize["release_notes"] = o.ReleaseNotes.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -125,6 +173,7 @@ func (o *PackageMoveRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "destination")
+		delete(additionalProperties, "release_notes")
 		o.AdditionalProperties = additionalProperties
 	}
 

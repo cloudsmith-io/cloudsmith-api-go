@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -1539,6 +1539,8 @@ Schedule a package for scanning.
  @param repo
  @param identifier
  @return ApiPackagesScanRequest
+
+Deprecated
 */
 func (a *PackagesApiService) PackagesScan(ctx context.Context, owner string, repo string, identifier string) ApiPackagesScanRequest {
 	return ApiPackagesScanRequest{
@@ -1552,6 +1554,7 @@ func (a *PackagesApiService) PackagesScan(ctx context.Context, owner string, rep
 
 // Execute executes the request
 //  @return Package
+// Deprecated
 func (a *PackagesApiService) PackagesScanExecute(r ApiPackagesScanRequest) (*Package, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

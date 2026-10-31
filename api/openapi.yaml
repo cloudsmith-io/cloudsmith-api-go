@@ -10,7 +10,7 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://help.cloudsmith.io
   title: Cloudsmith API (v1)
-  version: 1.1388.0
+  version: 1.1479.3
 servers:
 - url: https://api.cloudsmith.io/
 security:
@@ -8535,6 +8535,7 @@ paths:
       - packages
   /packages/{owner}/{repo}/{identifier}/scan/:
     post:
+      deprecated: true
       description: Schedule a package for scanning.
       operationId: packages_scan
       parameters:
@@ -16764,6 +16765,7 @@ paths:
       - users
   /vulnerabilities/{owner}/:
     get:
+      deprecated: true
       description: Lists scan results for a specific namespace.
       operationId: vulnerabilities_namespace_list
       parameters:
@@ -16808,6 +16810,7 @@ paths:
       - vulnerabilities
   /vulnerabilities/{owner}/{repo}/:
     get:
+      deprecated: true
       description: Lists scan results for a specific repository.
       operationId: vulnerabilities_repo_list
       parameters:
@@ -16857,6 +16860,7 @@ paths:
       - vulnerabilities
   /vulnerabilities/{owner}/{repo}/{package}/:
     get:
+      deprecated: true
       description: Lists scan results for a specific package.
       operationId: vulnerabilities_package_list
       parameters:
@@ -16911,6 +16915,7 @@ paths:
       - vulnerabilities
   /vulnerabilities/{owner}/{repo}/{package}/{identifier}/:
     get:
+      deprecated: true
       description: Get a scan result.
       operationId: vulnerabilities_read
       parameters:
@@ -17198,12 +17203,19 @@ components:
   schemas:
     ErrorDetail:
       example:
+        code: code
         detail: detail
         fields:
           key:
           - fields
           - fields
       properties:
+        code:
+          description: A machine-readable code for the error. Only set for validation
+            errors.
+          minLength: 1
+          title: Code
+          type: string
         detail:
           description: An extended message for the response.
           minLength: 1
@@ -19592,7 +19604,7 @@ components:
           title: Slug
           type: string
         slug_perm:
-          description: An auto-generated id that uniquely identifies the API key policy.
+          description: An auto-generated id that uniquely identifies the rule.
           format: slug
           minLength: 1
           pattern: "^[-a-zA-Z0-9_]+$"
@@ -20878,6 +20890,7 @@ components:
       type: object
     ProviderSettings:
       example:
+        jwks: "{}"
         mapping_claim: mapping_claim
         claims: "{}"
         name: name
@@ -20900,6 +20913,13 @@ components:
             requests.
           title: Enabled
           type: boolean
+        jwks:
+          description: "The manually uploaded JWKS, for providers we do not have remote\
+            \ access to."
+          nullable: true
+          properties: {}
+          title: Jwks
+          type: object
         mapping_claim:
           description: |-
             The OIDC claim to use for mapping to service accounts in dynamic_mappings.
@@ -20916,7 +20936,7 @@ components:
           type: string
         provider_url:
           description: |-
-            The URL from the provider that serves as the base for the OpenID configuration.
+            The URL from the provider that serves as the base for the OpenID configuration. For local providers with an uploaded JWKS, this is the expected issuer.
             For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
           format: uri
           minLength: 1
@@ -20987,6 +21007,7 @@ components:
           claim_value: claim_value
         - service_account: service_account
           claim_value: claim_value
+        jwks: "{}"
         mapping_claim: mapping_claim
         claims: "{}"
         name: name
@@ -21015,6 +21036,13 @@ components:
             requests.
           title: Enabled
           type: boolean
+        jwks:
+          description: "The manually uploaded JWKS, for providers we do not have remote\
+            \ access to."
+          nullable: true
+          properties: {}
+          title: Jwks
+          type: object
         mapping_claim:
           description: |-
             The OIDC claim to use for mapping to service accounts in dynamic_mappings. Cannot be provided if `service_accounts` is also set.
@@ -21031,7 +21059,7 @@ components:
           type: string
         provider_url:
           description: |-
-            The URL from the provider that serves as the base for the OpenID configuration.
+            The URL from the provider that serves as the base for the OpenID configuration. For local providers with an uploaded JWKS, this is the expected issuer.
             For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
           format: uri
           minLength: 1
@@ -21059,6 +21087,7 @@ components:
           claim_value: claim_value
         - service_account: service_account
           claim_value: claim_value
+        jwks: "{}"
         mapping_claim: mapping_claim
         claims: "{}"
         name: name
@@ -21089,6 +21118,13 @@ components:
             requests.
           title: Enabled
           type: boolean
+        jwks:
+          description: "The manually uploaded JWKS, for providers we do not have remote\
+            \ access to."
+          nullable: true
+          properties: {}
+          title: Jwks
+          type: object
         mapping_claim:
           description: |-
             The OIDC claim to use for mapping to service accounts in dynamic_mappings. Cannot be provided if `service_accounts` is also set.
@@ -21105,7 +21141,7 @@ components:
           type: string
         provider_url:
           description: |-
-            The URL from the provider that serves as the base for the OpenID configuration.
+            The URL from the provider that serves as the base for the OpenID configuration. For local providers with an uploaded JWKS, this is the expected issuer.
             For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
           format: uri
           minLength: 1
@@ -21149,6 +21185,7 @@ components:
           claim_value: claim_value
         - service_account: service_account
           claim_value: claim_value
+        jwks: "{}"
         mapping_claim: mapping_claim
         claims: "{}"
         name: name
@@ -21177,6 +21214,13 @@ components:
             requests.
           title: Enabled
           type: boolean
+        jwks:
+          description: "The manually uploaded JWKS, for providers we do not have remote\
+            \ access to."
+          nullable: true
+          properties: {}
+          title: Jwks
+          type: object
         mapping_claim:
           description: |-
             The OIDC claim to use for mapping to service accounts in dynamic_mappings. Cannot be provided if `service_accounts` is also set.
@@ -21193,7 +21237,7 @@ components:
           type: string
         provider_url:
           description: |-
-            The URL from the provider that serves as the base for the OpenID configuration.
+            The URL from the provider that serves as the base for the OpenID configuration. For local providers with an uploaded JWKS, this is the expected issuer.
             For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/
           format: uri
           minLength: 1
@@ -21471,7 +21515,7 @@ components:
           type: string
         key_expires_at:
           description: The time at which the API key will expire. This will only be
-            populated if the Organization has an active API Key Policy.
+            populated if the Organization has an active API key rule.
           format: date-time
           nullable: true
           readOnly: true
@@ -22378,6 +22422,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -22672,6 +22717,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -22759,6 +22805,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -22770,14 +22822,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -22785,6 +22837,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -22799,7 +22852,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -22984,6 +23037,7 @@ components:
         vulnerability_counts:
           $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -23030,6 +23084,7 @@ components:
       type: object
     AlpinePackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         distribution: distribution
         package_file: package_file
@@ -23044,6 +23099,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -23084,6 +23145,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -23356,6 +23418,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -23443,6 +23506,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -23454,14 +23523,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -23469,6 +23538,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -23483,7 +23553,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -23661,6 +23731,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -23668,6 +23739,7 @@ components:
       type: object
     CargoPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -23676,6 +23748,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -23715,6 +23793,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -23987,6 +24066,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -24074,6 +24154,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -24085,14 +24171,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -24100,6 +24186,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -24114,7 +24201,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -24292,6 +24379,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -24299,6 +24387,7 @@ components:
       type: object
     CocoapodsPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -24307,6 +24396,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -24346,6 +24441,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -24618,6 +24714,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -24705,6 +24802,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -24716,14 +24819,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -24731,6 +24834,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -24745,7 +24849,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -24923,6 +25027,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -24930,6 +25035,7 @@ components:
       type: object
     ComposerPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         version: version
@@ -24939,6 +25045,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -24984,6 +25096,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -25256,6 +25369,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -25343,6 +25457,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -25354,14 +25474,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -25369,6 +25489,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -25383,7 +25504,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -25561,6 +25682,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -25568,6 +25690,7 @@ components:
       type: object
     ConanPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         name: name
         metadata_file: metadata_file
@@ -25619,6 +25742,12 @@ components:
           minLength: 1
           title: Package file
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
             \ the same attributes (e.g. same version); otherwise, it will be flagged\
@@ -25666,6 +25795,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -25954,6 +26084,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -26041,6 +26172,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -26052,14 +26189,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -26067,6 +26204,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -26081,7 +26219,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -26259,6 +26397,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -26266,6 +26405,7 @@ components:
       type: object
     CondaPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -26274,6 +26414,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -26313,6 +26459,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -26585,6 +26732,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -26672,6 +26820,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -26683,14 +26837,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -26698,6 +26852,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -26712,7 +26867,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -26890,6 +27045,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -26897,6 +27053,7 @@ components:
       type: object
     CranPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         r_version: r_version
         package_file: package_file
@@ -26921,6 +27078,12 @@ components:
           minLength: 1
           nullable: true
           title: R version
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -26960,6 +27123,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -27233,6 +27397,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -27328,6 +27493,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -27339,14 +27510,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -27354,6 +27525,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -27368,7 +27540,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -27546,6 +27718,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -27553,6 +27726,7 @@ components:
       type: object
     DartPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -27561,6 +27735,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -27600,6 +27780,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -27872,6 +28053,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -27959,6 +28141,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -27970,14 +28158,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -27985,6 +28173,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -27999,7 +28188,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -28177,6 +28366,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -28186,6 +28376,7 @@ components:
       example:
         sources_file: sources_file
         component: main
+        release_notes: release_notes
         republish: true
         changes_file: changes_file
         distribution: distribution
@@ -28217,6 +28408,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -28263,6 +28460,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -28535,6 +28733,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -28622,6 +28821,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -28633,14 +28838,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -28648,6 +28853,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -28662,7 +28868,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -28840,6 +29046,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -28847,6 +29054,7 @@ components:
       type: object
     DockerPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -28855,6 +29063,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -28894,6 +29108,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -29166,6 +29381,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -29253,6 +29469,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -29264,14 +29486,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -29279,6 +29501,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -29293,7 +29516,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -29471,6 +29694,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -29479,6 +29703,7 @@ components:
     GenericPackageUploadRequest:
       example:
         filepath: filepath
+        release_notes: release_notes
         republish: true
         name: name
         package_file: package_file
@@ -29501,6 +29726,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -29547,6 +29778,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -29819,6 +30051,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -29906,6 +30139,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -29917,14 +30156,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -29932,6 +30171,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -29946,7 +30186,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -30124,6 +30364,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -30131,6 +30372,7 @@ components:
       type: object
     GoPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -30139,6 +30381,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -30178,6 +30426,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -30450,6 +30699,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -30537,6 +30787,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -30548,14 +30804,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -30563,6 +30819,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -30577,7 +30834,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -30755,6 +31012,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -30763,6 +31021,7 @@ components:
     HelmPackageUploadRequest:
       example:
         provenance_file: provenance_file
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -30778,6 +31037,12 @@ components:
           minLength: 1
           nullable: true
           title: Provenance file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -30817,6 +31082,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -31089,6 +31355,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -31176,6 +31443,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -31187,14 +31460,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -31202,6 +31475,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -31216,7 +31490,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -31394,6 +31668,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -31401,6 +31676,7 @@ components:
       type: object
     HexPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -31409,6 +31685,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -31448,6 +31730,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -31720,6 +32003,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -31807,6 +32091,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -31818,14 +32108,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -31833,6 +32123,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -31847,7 +32138,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -32025,6 +32316,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -32032,6 +32324,7 @@ components:
       type: object
     HuggingfacePackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -32040,6 +32333,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -32079,6 +32378,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -32351,6 +32651,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -32438,6 +32739,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -32449,14 +32756,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -32464,6 +32771,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -32478,7 +32786,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -32656,6 +32964,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -32663,6 +32972,7 @@ components:
       type: object
     LuarocksPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -32671,6 +32981,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -32710,6 +33026,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -32982,6 +33299,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -33069,6 +33387,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -33080,14 +33404,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -33095,6 +33419,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -33109,7 +33434,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -33287,6 +33612,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -33294,6 +33620,7 @@ components:
       type: object
     MavenPackageUploadRequest:
       example:
+        release_notes: release_notes
         javadoc_file: javadoc_file
         packaging: packaging
         artifact_id: artifact_id
@@ -33362,6 +33689,12 @@ components:
           nullable: true
           title: Pom file
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
             \ the same attributes (e.g. same version); otherwise, it will be flagged\
@@ -33429,6 +33762,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -33717,6 +34051,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -33810,6 +34145,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -33831,14 +34172,14 @@ components:
           title: Scala version
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -33846,6 +34187,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -33860,7 +34202,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -34038,6 +34380,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -34045,6 +34388,7 @@ components:
       type: object
     McpPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         version: version
@@ -34054,6 +34398,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -34099,6 +34449,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -34371,6 +34722,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -34458,6 +34810,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -34469,14 +34827,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -34484,6 +34842,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -34498,7 +34857,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -34676,6 +35035,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -34683,6 +35043,7 @@ components:
       type: object
     NixPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         narinfo_file: narinfo_file
         package_file: package_file
@@ -34701,6 +35062,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -34746,6 +35113,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -35018,6 +35386,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -35105,6 +35474,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -35116,14 +35491,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -35131,6 +35506,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -35145,7 +35521,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -35323,6 +35699,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -35330,6 +35707,7 @@ components:
       type: object
     NpmPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         npm_dist_tag: latest
         package_file: package_file
@@ -35347,6 +35725,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -35386,6 +35770,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -35658,6 +36043,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -35745,6 +36131,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -35756,14 +36148,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -35771,6 +36163,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -35785,7 +36178,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -35963,6 +36356,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -35970,6 +36364,7 @@ components:
       type: object
     NugetPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         symbols_file: symbols_file
         package_file: package_file
@@ -35979,6 +36374,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -36024,6 +36425,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -36296,6 +36698,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -36383,6 +36786,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -36394,14 +36803,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -36409,6 +36818,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -36423,7 +36833,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -36601,6 +37011,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -36608,6 +37019,7 @@ components:
       type: object
     P2PackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -36616,6 +37028,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -36655,6 +37073,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -36927,6 +37346,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -37014,6 +37434,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -37025,14 +37451,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -37040,6 +37466,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -37054,7 +37481,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -37232,6 +37659,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -37239,6 +37667,7 @@ components:
       type: object
     PythonPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -37247,6 +37676,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -37286,6 +37721,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -37558,6 +37994,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -37645,6 +38082,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -37656,14 +38099,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -37671,6 +38114,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -37685,7 +38129,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -37863,6 +38307,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -37872,6 +38317,7 @@ components:
       example:
         summary: summary
         content_type: content_type
+        release_notes: release_notes
         republish: true
         name: name
         description: description
@@ -37904,6 +38350,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -37955,6 +38407,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -38227,6 +38680,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -38314,6 +38768,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -38325,14 +38785,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -38340,6 +38800,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -38354,7 +38815,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -38532,6 +38993,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -38539,6 +39001,7 @@ components:
       type: object
     RpmPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         distribution: distribution
         package_file: package_file
@@ -38553,6 +39016,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -38593,6 +39062,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -38865,6 +39335,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -38952,6 +39423,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -38963,14 +39440,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -38978,6 +39455,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -38992,7 +39470,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -39170,6 +39648,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -39177,6 +39656,7 @@ components:
       type: object
     RubyPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -39185,6 +39665,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -39224,6 +39710,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -39496,6 +39983,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -39583,6 +40071,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -39594,14 +40088,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -39609,6 +40103,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -39623,7 +40118,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -39801,6 +40296,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -39809,6 +40305,7 @@ components:
     SwiftPackageUploadRequest:
       example:
         author_name: author_name
+        release_notes: release_notes
         republish: true
         scope: scope
         author_org: author_org
@@ -39852,6 +40349,12 @@ components:
           format: uri
           minLength: 1
           title: Readme url
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         repository_url:
           description: The URL of the SCM repository for the package.
@@ -39912,6 +40415,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -40199,6 +40703,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -40298,6 +40803,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -40317,14 +40828,14 @@ components:
           title: Scope
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -40332,6 +40843,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -40346,7 +40858,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -40523,6 +41035,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -40534,6 +41047,7 @@ components:
       type: object
     TerraformPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -40542,6 +41056,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -40581,6 +41101,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -40853,6 +41374,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -40940,6 +41462,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -40951,14 +41479,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -40966,6 +41494,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -40980,7 +41509,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -41158,6 +41687,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -41165,6 +41695,7 @@ components:
       type: object
     VagrantPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         provider: provider
         name: name
@@ -41186,6 +41717,12 @@ components:
           description: The virtual machine provider for the box.
           minLength: 1
           title: Provider
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -41233,6 +41770,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -41506,6 +42044,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -41597,6 +42136,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -41608,14 +42153,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -41623,6 +42168,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -41637,7 +42183,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -41814,6 +42360,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -41825,6 +42372,7 @@ components:
       type: object
     VsxPackageUploadRequest:
       example:
+        release_notes: release_notes
         republish: true
         package_file: package_file
         tags: tags
@@ -41833,6 +42381,12 @@ components:
           description: The primary file for the package.
           minLength: 1
           title: Package file
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the uploaded package will overwrite any others with\
@@ -41872,6 +42426,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -42144,6 +42699,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -42231,6 +42787,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -42242,14 +42804,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -42257,6 +42819,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -42271,7 +42834,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -42449,9 +43012,29 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
+          type: string
+      type: object
+    PluginSkill:
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          description: "The skill's description, if it declares one. Truncated to\
+            \ 200 characters."
+          minLength: 1
+          nullable: true
+          readOnly: true
+          title: Description
+          type: string
+        name:
+          minLength: 1
+          readOnly: true
+          title: Name
           type: string
       type: object
     PackageDetail:
@@ -42478,7 +43061,13 @@ components:
         freeable_storage: 1
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
+        plugin_skills:
+        - name: name
+          description: description
+        - name: name
+          description: description
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -42779,6 +43368,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -42848,6 +43438,13 @@ components:
           readOnly: true
           title: Package type
           type: integer
+        plugin_skills:
+          description: The skills a plugin bundles. Null for any other package.
+          items:
+            $ref: '#/components/schemas/PluginSkill'
+          nullable: true
+          readOnly: true
+          type: array
         policy_violated:
           description: Whether or not the package has violated any policy.
           readOnly: true
@@ -42866,6 +43463,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -42877,14 +43480,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -42892,6 +43495,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -42906,7 +43510,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -43091,6 +43695,7 @@ components:
         vulnerability_counts:
           $ref: '#/components/schemas/WebOSVSeverityCounts'
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -43098,6 +43703,7 @@ components:
       type: object
     PackageCopyRequest:
       example:
+        release_notes: release_notes
         republish: true
         destination: destination
       properties:
@@ -43105,6 +43711,12 @@ components:
           description: The name of the destination repository without the namespace.
           minLength: 1
           title: Destination
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
         republish:
           description: "If true, the package will overwrite any others with the same\
@@ -43137,6 +43749,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -43417,6 +44030,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -43504,6 +44118,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           description: The repository the package will be copied to.
           minLength: 1
@@ -43516,14 +44136,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -43531,6 +44151,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -43545,7 +44166,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -43728,6 +44349,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -43825,12 +44447,19 @@ components:
       type: object
     PackageMoveRequest:
       example:
+        release_notes: release_notes
         destination: destination
       properties:
         destination:
           description: The name of the destination repository without the namespace.
           minLength: 1
           title: Destination
+          type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
           type: string
       required:
       - destination
@@ -43858,6 +44487,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -44138,6 +44768,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -44225,6 +44856,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           description: The repository the package will be moved to.
           minLength: 1
@@ -44237,14 +44874,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -44252,6 +44889,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -44266,7 +44904,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -44449,6 +45087,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -44456,6 +45095,7 @@ components:
       type: object
     PackageQuarantineRequest:
       example:
+        release_notes: release_notes
         restore: true
         release: true
       properties:
@@ -44463,6 +45103,12 @@ components:
           description: "If true, the package is released from quarantine."
           title: Release
           type: boolean
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         restore:
           description: "If true, the package is released from quarantine. Note: This\
             \ field is deprecated, please use 'release' instead."
@@ -44491,6 +45137,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -44771,6 +45418,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -44852,6 +45500,12 @@ components:
           readOnly: true
           title: Raw license
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -44863,14 +45517,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -44878,6 +45532,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -44892,7 +45547,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -45075,6 +45730,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -45103,6 +45759,7 @@ components:
         is_security_scannable: true
         security_scan_started_at: 2000-01-23T04:56:07.000+00:00
         security_scan_status: Awaiting Security Scan
+        release_notes: release_notes
         indexed: true
         is_deleteable: true
         format: format
@@ -45383,6 +46040,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -45470,6 +46128,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -45481,14 +46145,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -45496,6 +46160,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -45510,7 +46175,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -45693,6 +46358,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -45763,6 +46429,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -45843,6 +46510,7 @@ components:
       type: object
     PackageTagRequest:
       example:
+        release_notes: release_notes
         is_immutable: false
         action: Add
         tags:
@@ -45865,6 +46533,12 @@ components:
             \ is a tag that cannot be removed from a package."
           title: Is immutable
           type: boolean
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         tags:
           description: A list of tags to apply the action to. Not required for clears.
           items:
@@ -46049,6 +46723,7 @@ components:
           title: Is resyncable
           type: boolean
         is_security_scannable:
+          description: Deprecated. Whether the package can be scanned for vulnerabilities.
           readOnly: true
           title: Is security scannable
           type: boolean
@@ -46136,6 +46811,12 @@ components:
           readOnly: true
           title: Release
           type: string
+        release_notes:
+          description: The release notes for this package (if any).
+          maxLength: 4096
+          nullable: true
+          title: Release notes
+          type: string
         repository:
           minLength: 1
           readOnly: true
@@ -46147,14 +46828,14 @@ components:
           title: Repository url
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
           title: Security scan completed at
           type: string
         security_scan_started_at:
-          description: The datetime the security scanning was started.
+          description: Deprecated. The datetime the security scanning was started.
           format: date-time
           nullable: true
           readOnly: true
@@ -46162,6 +46843,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -46176,7 +46858,7 @@ components:
           title: Security scan status
           type: string
         security_scan_status_updated_at:
-          description: The datetime the security scanning status was updated.
+          description: Deprecated. The datetime the security scanning status was updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -46354,6 +47036,7 @@ components:
           title: Version orig
           type: string
         vulnerability_scan_results_url:
+          description: Deprecated. The URL of the package's vulnerability scan results.
           format: uri
           readOnly: true
           title: Vulnerability scan results url
@@ -47131,7 +47814,7 @@ components:
           title: Repository
           type: string
         security_scan_completed_at:
-          description: The datetime the security scanning was completed.
+          description: Deprecated. The datetime the security scanning was completed.
           format: date-time
           nullable: true
           readOnly: true
@@ -47139,6 +47822,7 @@ components:
           type: string
         security_scan_status:
           default: Awaiting Security Scan
+          description: Deprecated. The status of security scanning for the package.
           enum:
           - Awaiting Security Scan
           - Security Scanning in Progress
@@ -50304,6 +50988,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -50474,6 +51159,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -50609,6 +51295,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -53559,6 +54246,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -53706,6 +54394,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -53836,6 +54525,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -54480,6 +55170,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -54612,6 +55303,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -54727,6 +55419,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -55764,6 +56457,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -55896,6 +56590,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -56011,6 +56706,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -58598,6 +59294,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -58784,6 +59481,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -58942,6 +59640,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -59121,6 +59820,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -59253,6 +59953,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:
@@ -59368,6 +60069,7 @@ components:
           enum:
           - Proxy Only
           - Cache and Proxy
+          - Cache Only
           title: Mode
           type: string
         name:

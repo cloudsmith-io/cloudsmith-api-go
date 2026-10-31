@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1479.3
 Contact: support@cloudsmith.io
 */
 
@@ -55,6 +55,8 @@ Lists scan results for a specific namespace.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param owner
  @return ApiVulnerabilitiesNamespaceListRequest
+
+Deprecated
 */
 func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceList(ctx context.Context, owner string) ApiVulnerabilitiesNamespaceListRequest {
 	return ApiVulnerabilitiesNamespaceListRequest{
@@ -66,6 +68,7 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceList(ctx context.Con
 
 // Execute executes the request
 //  @return []VulnerabilityScanResultsList
+// Deprecated
 func (a *VulnerabilitiesApiService) VulnerabilitiesNamespaceListExecute(r ApiVulnerabilitiesNamespaceListRequest) ([]VulnerabilityScanResultsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -217,6 +220,8 @@ Lists scan results for a specific package.
  @param repo
  @param package_
  @return ApiVulnerabilitiesPackageListRequest
+
+Deprecated
 */
 func (a *VulnerabilitiesApiService) VulnerabilitiesPackageList(ctx context.Context, owner string, repo string, package_ string) ApiVulnerabilitiesPackageListRequest {
 	return ApiVulnerabilitiesPackageListRequest{
@@ -230,6 +235,7 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesPackageList(ctx context.Conte
 
 // Execute executes the request
 //  @return []VulnerabilityScanResultsList
+// Deprecated
 func (a *VulnerabilitiesApiService) VulnerabilitiesPackageListExecute(r ApiVulnerabilitiesPackageListRequest) ([]VulnerabilityScanResultsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -371,6 +377,8 @@ Get a scan result.
  @param package_
  @param identifier
  @return ApiVulnerabilitiesReadRequest
+
+Deprecated
 */
 func (a *VulnerabilitiesApiService) VulnerabilitiesRead(ctx context.Context, owner string, repo string, package_ string, identifier string) ApiVulnerabilitiesReadRequest {
 	return ApiVulnerabilitiesReadRequest{
@@ -385,6 +393,7 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesRead(ctx context.Context, own
 
 // Execute executes the request
 //  @return VulnerabilityScanResults
+// Deprecated
 func (a *VulnerabilitiesApiService) VulnerabilitiesReadExecute(r ApiVulnerabilitiesReadRequest) (*VulnerabilityScanResults, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -531,6 +540,8 @@ Lists scan results for a specific repository.
  @param owner
  @param repo
  @return ApiVulnerabilitiesRepoListRequest
+
+Deprecated
 */
 func (a *VulnerabilitiesApiService) VulnerabilitiesRepoList(ctx context.Context, owner string, repo string) ApiVulnerabilitiesRepoListRequest {
 	return ApiVulnerabilitiesRepoListRequest{
@@ -543,6 +554,7 @@ func (a *VulnerabilitiesApiService) VulnerabilitiesRepoList(ctx context.Context,
 
 // Execute executes the request
 //  @return []VulnerabilityScanResultsList
+// Deprecated
 func (a *VulnerabilitiesApiService) VulnerabilitiesRepoListExecute(r ApiVulnerabilitiesRepoListRequest) ([]VulnerabilityScanResultsList, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet

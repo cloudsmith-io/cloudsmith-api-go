@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Name** | **string** | The name of this package. | 
 **PackageFile** | **string** | The primary file for the package. | 
 **ReadmeUrl** | Pointer to **string** | The URL of the readme for the package. | [optional] 
+**ReleaseNotes** | Pointer to **NullableString** | The release notes for this package (if any). | [optional] 
 **RepositoryUrl** | Pointer to **string** | The URL of the SCM repository for the package. | [optional] 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **Scope** | **string** | A scope provides a namespace for related packages within the package registry. | 
@@ -185,6 +186,41 @@ SetReadmeUrl sets ReadmeUrl field to given value.
 
 HasReadmeUrl returns a boolean if a field has been set.
 
+### GetReleaseNotes
+
+`func (o *SwiftPackageUploadRequest) GetReleaseNotes() string`
+
+GetReleaseNotes returns the ReleaseNotes field if non-nil, zero value otherwise.
+
+### GetReleaseNotesOk
+
+`func (o *SwiftPackageUploadRequest) GetReleaseNotesOk() (*string, bool)`
+
+GetReleaseNotesOk returns a tuple with the ReleaseNotes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseNotes
+
+`func (o *SwiftPackageUploadRequest) SetReleaseNotes(v string)`
+
+SetReleaseNotes sets ReleaseNotes field to given value.
+
+### HasReleaseNotes
+
+`func (o *SwiftPackageUploadRequest) HasReleaseNotes() bool`
+
+HasReleaseNotes returns a boolean if a field has been set.
+
+### SetReleaseNotesNil
+
+`func (o *SwiftPackageUploadRequest) SetReleaseNotesNil(b bool)`
+
+ SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+
+### UnsetReleaseNotes
+`func (o *SwiftPackageUploadRequest) UnsetReleaseNotes()`
+
+UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
 ### GetRepositoryUrl
 
 `func (o *SwiftPackageUploadRequest) GetRepositoryUrl() string`
