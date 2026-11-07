@@ -7,9 +7,10 @@ Name | Type | Description | Notes
 **Claims** | Pointer to **map[string]interface{}** | The set of claims that any received tokens from the provider must contain to authenticate as the configured service account. | [optional] 
 **DynamicMappings** | Pointer to [**[]DynamicMapping**](DynamicMapping.md) | The dynamic mappings of &#x60;mapping_claim&#x60; values to service accounts. Cannot be provided if &#x60;service_accounts&#x60; is also set.  Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature. | [optional] 
 **Enabled** | Pointer to **bool** | Whether the provider settings should be used for incoming OIDC requests. | [optional] 
+**Jwks** | Pointer to **map[string]interface{}** | The manually uploaded JWKS, for providers we do not have remote access to. | [optional] 
 **MappingClaim** | Pointer to **NullableString** | The OIDC claim to use for mapping to service accounts in dynamic_mappings. Cannot be provided if &#x60;service_accounts&#x60; is also set.  Note: This field and the dynamic mappings feature are still in early access. Breaking changes are possible as we receive feedback on this feature. | [optional] 
 **Name** | Pointer to **string** | The name of the provider settings are being configured for | [optional] 
-**ProviderUrl** | Pointer to **string** | The URL from the provider that serves as the base for the OpenID configuration. For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/ | [optional] 
+**ProviderUrl** | Pointer to **string** | The URL from the provider that serves as the base for the OpenID configuration. For local providers with an uploaded JWKS, this is the expected issuer. For example, if the OpenID configuration is available at https://token.actions.githubusercontent.com/.well-known/openid-configuration, the provider URL would be https://token.actions.githubusercontent.com/ | [optional] 
 **ServiceAccounts** | Pointer to **[]string** | The service accounts associated with these provider settings. Cannot be provided if &#x60;mapping_claim&#x60; or &#x60;dynamic_mappings&#x60; are specified. | [optional] 
 
 ## Methods
@@ -106,6 +107,41 @@ SetEnabled sets Enabled field to given value.
 
 HasEnabled returns a boolean if a field has been set.
 
+### GetJwks
+
+`func (o *ProviderSettingsWriteRequestPatch) GetJwks() map[string]interface{}`
+
+GetJwks returns the Jwks field if non-nil, zero value otherwise.
+
+### GetJwksOk
+
+`func (o *ProviderSettingsWriteRequestPatch) GetJwksOk() (*map[string]interface{}, bool)`
+
+GetJwksOk returns a tuple with the Jwks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJwks
+
+`func (o *ProviderSettingsWriteRequestPatch) SetJwks(v map[string]interface{})`
+
+SetJwks sets Jwks field to given value.
+
+### HasJwks
+
+`func (o *ProviderSettingsWriteRequestPatch) HasJwks() bool`
+
+HasJwks returns a boolean if a field has been set.
+
+### SetJwksNil
+
+`func (o *ProviderSettingsWriteRequestPatch) SetJwksNil(b bool)`
+
+ SetJwksNil sets the value for Jwks to be an explicit nil
+
+### UnsetJwks
+`func (o *ProviderSettingsWriteRequestPatch) UnsetJwks()`
+
+UnsetJwks ensures that no value is present for Jwks, not even an explicit nil
 ### GetMappingClaim
 
 `func (o *ProviderSettingsWriteRequestPatch) GetMappingClaim() string`

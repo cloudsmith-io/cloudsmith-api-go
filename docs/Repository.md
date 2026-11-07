@@ -63,6 +63,7 @@ Name | Type | Description | Notes
 **ShowSetupAll** | Pointer to **bool** | If checked, the Set Me Up help for all formats will always be shown, even if you don&#39;t have packages of that type uploaded. Otherwise, help will only be shown for packages that are in the repository. For example, if you have uploaded only NuGet packages, then the Set Me Up help for NuGet packages will be shown only. | [optional] 
 **Size** | Pointer to **int64** | The calculated size of the repository. | [optional] [readonly] 
 **SizeStr** | Pointer to **string** | The calculated size of the repository (human readable). | [optional] [readonly] 
+**SkillsVersioning** | Pointer to **string** | How skills from GitHub upstreams are versioned. SEMANTIC_VERSION_WITH_COMMIT_SHA_FALLBACK offers a skill by the semantic version its SKILL.md declares, else by its git commit SHA. STRICT_SEMANTIC_VERSION only offers skills that declare a semantic version. Indexing doesn&#39;t depend on this setting, so a change takes effect at once. A skill cached under a version the setting doesn&#39;t offer can still be downloaded by that version, but isn&#39;t offered as the latest. ClawHub skills, uploaded skills and plugins keep their versions whatever the setting. | [optional] [default to "SEMANTIC_VERSION_WITH_COMMIT_SHA_FALLBACK"]
 **Slug** | Pointer to **string** | The slug identifies the repository in URIs. | [optional] 
 **SlugPerm** | Pointer to **string** | The slug_perm immutably identifies the repository. It will never change once a repository has been created. | [optional] [readonly] 
 **StorageRegion** | Pointer to **string** | The Cloudsmith region in which package files are stored. | [optional] [readonly] [default to "default"]
@@ -1605,6 +1606,31 @@ SetSizeStr sets SizeStr field to given value.
 `func (o *Repository) HasSizeStr() bool`
 
 HasSizeStr returns a boolean if a field has been set.
+
+### GetSkillsVersioning
+
+`func (o *Repository) GetSkillsVersioning() string`
+
+GetSkillsVersioning returns the SkillsVersioning field if non-nil, zero value otherwise.
+
+### GetSkillsVersioningOk
+
+`func (o *Repository) GetSkillsVersioningOk() (*string, bool)`
+
+GetSkillsVersioningOk returns a tuple with the SkillsVersioning field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSkillsVersioning
+
+`func (o *Repository) SetSkillsVersioning(v string)`
+
+SetSkillsVersioning sets SkillsVersioning field to given value.
+
+### HasSkillsVersioning
+
+`func (o *Repository) HasSkillsVersioning() bool`
+
+HasSkillsVersioning returns a boolean if a field has been set.
 
 ### GetSlug
 
