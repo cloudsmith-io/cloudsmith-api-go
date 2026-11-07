@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1503.1
 Contact: support@cloudsmith.io
 */
 
@@ -93,6 +93,8 @@ type RepositoryCreateRequest struct {
 	ScanPackages *string `json:"scan_packages,omitempty"`
 	// If checked, the Set Me Up help for all formats will always be shown, even if you don't have packages of that type uploaded. Otherwise, help will only be shown for packages that are in the repository. For example, if you have uploaded only NuGet packages, then the Set Me Up help for NuGet packages will be shown only.
 	ShowSetupAll *bool `json:"show_setup_all,omitempty"`
+	// How skills from GitHub upstreams are versioned. SEMANTIC_VERSION_WITH_COMMIT_SHA_FALLBACK offers a skill by the semantic version its SKILL.md declares, else by its git commit SHA. STRICT_SEMANTIC_VERSION only offers skills that declare a semantic version. Indexing doesn't depend on this setting, so a change takes effect at once. A skill cached under a version the setting doesn't offer can still be downloaded by that version, but isn't offered as the latest. ClawHub skills, uploaded skills and plugins keep their versions whatever the setting.
+	SkillsVersioning *string `json:"skills_versioning,omitempty"`
 	// The slug identifies the repository in URIs.
 	Slug *string `json:"slug,omitempty"`
 	// The Cloudsmith region in which package files are stored.
@@ -151,6 +153,8 @@ func NewRepositoryCreateRequest(name string) *RepositoryCreateRequest {
 	this.ResyncPackages = &resyncPackages
 	var scanPackages string = "Read"
 	this.ScanPackages = &scanPackages
+	var skillsVersioning string = "SEMANTIC_VERSION_WITH_COMMIT_SHA_FALLBACK"
+	this.SkillsVersioning = &skillsVersioning
 	var storageRegion string = "default"
 	this.StorageRegion = &storageRegion
 	var useEntitlementsPrivilege string = "Read"
@@ -187,6 +191,8 @@ func NewRepositoryCreateRequestWithDefaults() *RepositoryCreateRequest {
 	this.ResyncPackages = &resyncPackages
 	var scanPackages string = "Read"
 	this.ScanPackages = &scanPackages
+	var skillsVersioning string = "SEMANTIC_VERSION_WITH_COMMIT_SHA_FALLBACK"
+	this.SkillsVersioning = &skillsVersioning
 	var storageRegion string = "default"
 	this.StorageRegion = &storageRegion
 	var useEntitlementsPrivilege string = "Read"
@@ -1362,6 +1368,38 @@ func (o *RepositoryCreateRequest) SetShowSetupAll(v bool) {
 	o.ShowSetupAll = &v
 }
 
+// GetSkillsVersioning returns the SkillsVersioning field value if set, zero value otherwise.
+func (o *RepositoryCreateRequest) GetSkillsVersioning() string {
+	if o == nil || IsNil(o.SkillsVersioning) {
+		var ret string
+		return ret
+	}
+	return *o.SkillsVersioning
+}
+
+// GetSkillsVersioningOk returns a tuple with the SkillsVersioning field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RepositoryCreateRequest) GetSkillsVersioningOk() (*string, bool) {
+	if o == nil || IsNil(o.SkillsVersioning) {
+		return nil, false
+	}
+	return o.SkillsVersioning, true
+}
+
+// HasSkillsVersioning returns a boolean if a field has been set.
+func (o *RepositoryCreateRequest) HasSkillsVersioning() bool {
+	if o != nil && !IsNil(o.SkillsVersioning) {
+		return true
+	}
+
+	return false
+}
+
+// SetSkillsVersioning gets a reference to the given string and assigns it to the SkillsVersioning field.
+func (o *RepositoryCreateRequest) SetSkillsVersioning(v string) {
+	o.SkillsVersioning = &v
+}
+
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *RepositoryCreateRequest) GetSlug() string {
 	if o == nil || IsNil(o.Slug) {
@@ -1862,6 +1900,9 @@ func (o RepositoryCreateRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ShowSetupAll) {
 		toSerialize["show_setup_all"] = o.ShowSetupAll
 	}
+	if !IsNil(o.SkillsVersioning) {
+		toSerialize["skills_versioning"] = o.SkillsVersioning
+	}
 	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
@@ -1977,6 +2018,7 @@ func (o *RepositoryCreateRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scan_own")
 		delete(additionalProperties, "scan_packages")
 		delete(additionalProperties, "show_setup_all")
+		delete(additionalProperties, "skills_versioning")
 		delete(additionalProperties, "slug")
 		delete(additionalProperties, "storage_region")
 		delete(additionalProperties, "strict_npm_validation")

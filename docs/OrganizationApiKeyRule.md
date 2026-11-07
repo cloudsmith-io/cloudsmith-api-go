@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **MaxAgeHours** | Pointer to **NullableInt64** | The maximum permitted age of an API key for use in the organization. API keys older than this will no longer have access until they are refreshed. To disable the rule unset this value. | [optional] 
 **RuleType** | **string** | Specify which account types this rule applies to: all accounts (deprecated — prefer separate service/user rules), service accounts only, or user accounts only. | 
 **Slug** | Pointer to **string** | Human-readable identifier for the rule type. Automatically generated based on the rule type. | [optional] [readonly] 
-**SlugPerm** | Pointer to **string** | An auto-generated id that uniquely identifies the API key policy. | [optional] [readonly] 
+**SlugPerm** | Pointer to **string** | An auto-generated id that uniquely identifies the rule. | [optional] [readonly] 
 **UpdatedAt** | Pointer to **time.Time** |  | [optional] [readonly] 
 
 ## Methods

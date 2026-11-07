@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1388.0
+API version: 1.1503.1
 Contact: support@cloudsmith.io
 */
 
@@ -134,6 +134,8 @@ type Repository struct {
 	Size *int64 `json:"size,omitempty"`
 	// The calculated size of the repository (human readable).
 	SizeStr *string `json:"size_str,omitempty"`
+	// How skills from GitHub upstreams are versioned. SEMANTIC_VERSION_WITH_COMMIT_SHA_FALLBACK offers a skill by the semantic version its SKILL.md declares, else by its git commit SHA. STRICT_SEMANTIC_VERSION only offers skills that declare a semantic version. Indexing doesn't depend on this setting, so a change takes effect at once. A skill cached under a version the setting doesn't offer can still be downloaded by that version, but isn't offered as the latest. ClawHub skills, uploaded skills and plugins keep their versions whatever the setting.
+	SkillsVersioning *string `json:"skills_versioning,omitempty"`
 	// The slug identifies the repository in URIs.
 	Slug *string `json:"slug,omitempty"`
 	// The slug_perm immutably identifies the repository. It will never change once a repository has been created.
@@ -194,6 +196,8 @@ func NewRepository(name string) *Repository {
 	this.ResyncPackages = &resyncPackages
 	var scanPackages string = "Read"
 	this.ScanPackages = &scanPackages
+	var skillsVersioning string = "SEMANTIC_VERSION_WITH_COMMIT_SHA_FALLBACK"
+	this.SkillsVersioning = &skillsVersioning
 	var useEntitlementsPrivilege string = "Read"
 	this.UseEntitlementsPrivilege = &useEntitlementsPrivilege
 	var viewStatistics string = "Read"
@@ -228,6 +232,8 @@ func NewRepositoryWithDefaults() *Repository {
 	this.ResyncPackages = &resyncPackages
 	var scanPackages string = "Read"
 	this.ScanPackages = &scanPackages
+	var skillsVersioning string = "SEMANTIC_VERSION_WITH_COMMIT_SHA_FALLBACK"
+	this.SkillsVersioning = &skillsVersioning
 	var useEntitlementsPrivilege string = "Read"
 	this.UseEntitlementsPrivilege = &useEntitlementsPrivilege
 	var viewStatistics string = "Read"
@@ -2159,6 +2165,38 @@ func (o *Repository) SetSizeStr(v string) {
 	o.SizeStr = &v
 }
 
+// GetSkillsVersioning returns the SkillsVersioning field value if set, zero value otherwise.
+func (o *Repository) GetSkillsVersioning() string {
+	if o == nil || IsNil(o.SkillsVersioning) {
+		var ret string
+		return ret
+	}
+	return *o.SkillsVersioning
+}
+
+// GetSkillsVersioningOk returns a tuple with the SkillsVersioning field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Repository) GetSkillsVersioningOk() (*string, bool) {
+	if o == nil || IsNil(o.SkillsVersioning) {
+		return nil, false
+	}
+	return o.SkillsVersioning, true
+}
+
+// HasSkillsVersioning returns a boolean if a field has been set.
+func (o *Repository) HasSkillsVersioning() bool {
+	if o != nil && !IsNil(o.SkillsVersioning) {
+		return true
+	}
+
+	return false
+}
+
+// SetSkillsVersioning gets a reference to the given string and assigns it to the SkillsVersioning field.
+func (o *Repository) SetSkillsVersioning(v string) {
+	o.SkillsVersioning = &v
+}
+
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *Repository) GetSlug() string {
 	if o == nil || IsNil(o.Slug) {
@@ -2760,6 +2798,9 @@ func (o Repository) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SizeStr) {
 		toSerialize["size_str"] = o.SizeStr
 	}
+	if !IsNil(o.SkillsVersioning) {
+		toSerialize["skills_versioning"] = o.SkillsVersioning
+	}
 	if !IsNil(o.Slug) {
 		toSerialize["slug"] = o.Slug
 	}
@@ -2901,6 +2942,7 @@ func (o *Repository) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "show_setup_all")
 		delete(additionalProperties, "size")
 		delete(additionalProperties, "size_str")
+		delete(additionalProperties, "skills_versioning")
 		delete(additionalProperties, "slug")
 		delete(additionalProperties, "slug_perm")
 		delete(additionalProperties, "storage_region")
