@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Filepath** | **string** | The full filepath of the package including filename. | 
 **Name** | Pointer to **NullableString** | The name of this package. | [optional] 
 **PackageFile** | **string** | The primary file for the package. | 
+**ReleaseNotes** | Pointer to **NullableString** | The release notes for this package (if any). | [optional] 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
 **Version** | Pointer to **NullableString** | The raw version for this package. | [optional] 
@@ -105,6 +106,41 @@ and a boolean to check if the value has been set.
 SetPackageFile sets PackageFile field to given value.
 
 
+### GetReleaseNotes
+
+`func (o *GenericPackageUploadRequest) GetReleaseNotes() string`
+
+GetReleaseNotes returns the ReleaseNotes field if non-nil, zero value otherwise.
+
+### GetReleaseNotesOk
+
+`func (o *GenericPackageUploadRequest) GetReleaseNotesOk() (*string, bool)`
+
+GetReleaseNotesOk returns a tuple with the ReleaseNotes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseNotes
+
+`func (o *GenericPackageUploadRequest) SetReleaseNotes(v string)`
+
+SetReleaseNotes sets ReleaseNotes field to given value.
+
+### HasReleaseNotes
+
+`func (o *GenericPackageUploadRequest) HasReleaseNotes() bool`
+
+HasReleaseNotes returns a boolean if a field has been set.
+
+### SetReleaseNotesNil
+
+`func (o *GenericPackageUploadRequest) SetReleaseNotesNil(b bool)`
+
+ SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+
+### UnsetReleaseNotes
+`func (o *GenericPackageUploadRequest) UnsetReleaseNotes()`
+
+UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
 ### GetRepublish
 
 `func (o *GenericPackageUploadRequest) GetRepublish() bool`
