@@ -40,7 +40,7 @@ Name | Type | Description | Notes
 **IsQuarantinable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
 **IsResyncable** | Pointer to **bool** |  | [optional] [readonly] 
-**IsSecurityScannable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsSecurityScannable** | Pointer to **bool** | Deprecated. Whether the package can be scanned for vulnerabilities. | [optional] [readonly] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
@@ -60,13 +60,14 @@ Name | Type | Description | Notes
 **RawLicense** | Pointer to **NullableString** | The raw license string. | [optional] [readonly] 
 **ReadmeUrl** | Pointer to **string** | The URL of the readme for the package. | [optional] 
 **Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
+**ReleaseNotes** | Pointer to **NullableString** | The release notes for this package (if any). | [optional] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** | The URL of the SCM repository for the package. | [optional] 
 **Scope** | **string** | A scope provides a namespace for related packages within the package registry. | 
-**SecurityScanCompletedAt** | Pointer to **NullableTime** | The datetime the security scanning was completed. | [optional] [readonly] 
-**SecurityScanStartedAt** | Pointer to **NullableTime** | The datetime the security scanning was started. | [optional] [readonly] 
-**SecurityScanStatus** | Pointer to **NullableString** |  | [optional] [readonly] [default to "Awaiting Security Scan"]
-**SecurityScanStatusUpdatedAt** | Pointer to **NullableTime** | The datetime the security scanning status was updated. | [optional] [readonly] 
+**SecurityScanCompletedAt** | Pointer to **NullableTime** | Deprecated. The datetime the security scanning was completed. | [optional] [readonly] 
+**SecurityScanStartedAt** | Pointer to **NullableTime** | Deprecated. The datetime the security scanning was started. | [optional] [readonly] 
+**SecurityScanStatus** | Pointer to **NullableString** | Deprecated. The status of security scanning for the package. | [optional] [readonly] [default to "Awaiting Security Scan"]
+**SecurityScanStatusUpdatedAt** | Pointer to **NullableTime** | Deprecated. The datetime the security scanning status was updated. | [optional] [readonly] 
 **SelfHtmlUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SelfUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SelfWebappUrl** | Pointer to **string** |  | [optional] [readonly] 
@@ -97,7 +98,7 @@ Name | Type | Description | Notes
 **UploaderUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Version** | **string** | The raw version for this package. | 
 **VersionOrig** | Pointer to **string** |  | [optional] [readonly] 
-**VulnerabilityScanResultsUrl** | Pointer to **string** |  | [optional] [readonly] 
+**VulnerabilityScanResultsUrl** | Pointer to **string** | Deprecated. The URL of the package&#39;s vulnerability scan results. | [optional] [readonly] 
 
 ## Methods
 
@@ -1613,6 +1614,41 @@ HasRelease returns a boolean if a field has been set.
 `func (o *SwiftPackageUpload) UnsetRelease()`
 
 UnsetRelease ensures that no value is present for Release, not even an explicit nil
+### GetReleaseNotes
+
+`func (o *SwiftPackageUpload) GetReleaseNotes() string`
+
+GetReleaseNotes returns the ReleaseNotes field if non-nil, zero value otherwise.
+
+### GetReleaseNotesOk
+
+`func (o *SwiftPackageUpload) GetReleaseNotesOk() (*string, bool)`
+
+GetReleaseNotesOk returns a tuple with the ReleaseNotes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseNotes
+
+`func (o *SwiftPackageUpload) SetReleaseNotes(v string)`
+
+SetReleaseNotes sets ReleaseNotes field to given value.
+
+### HasReleaseNotes
+
+`func (o *SwiftPackageUpload) HasReleaseNotes() bool`
+
+HasReleaseNotes returns a boolean if a field has been set.
+
+### SetReleaseNotesNil
+
+`func (o *SwiftPackageUpload) SetReleaseNotesNil(b bool)`
+
+ SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+
+### UnsetReleaseNotes
+`func (o *SwiftPackageUpload) UnsetReleaseNotes()`
+
+UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
 ### GetRepository
 
 `func (o *SwiftPackageUpload) GetRepository() string`
