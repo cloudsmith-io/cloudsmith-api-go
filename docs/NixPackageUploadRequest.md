@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **NarinfoFile** | Pointer to **NullableString** | The narinfo sidecar metadata file (&lt;storeHash&gt;.narinfo). Optional — the package can be completed later by publishing the matching narinfo via the native HTTP PUT path. | [optional] 
 **PackageFile** | **string** | The primary file for the package. | 
+**ReleaseNotes** | Pointer to **NullableString** | The release notes for this package (if any). | [optional] 
 **Republish** | Pointer to **bool** | If true, the uploaded package will overwrite any others with the same attributes (e.g. same version); otherwise, it will be flagged as a duplicate. | [optional] 
 **Tags** | Pointer to **NullableString** | A comma-separated values list of tags to add to the package. | [optional] 
 **Version** | Pointer to **NullableString** | The raw version for this package. | [optional] 
@@ -84,6 +85,41 @@ and a boolean to check if the value has been set.
 SetPackageFile sets PackageFile field to given value.
 
 
+### GetReleaseNotes
+
+`func (o *NixPackageUploadRequest) GetReleaseNotes() string`
+
+GetReleaseNotes returns the ReleaseNotes field if non-nil, zero value otherwise.
+
+### GetReleaseNotesOk
+
+`func (o *NixPackageUploadRequest) GetReleaseNotesOk() (*string, bool)`
+
+GetReleaseNotesOk returns a tuple with the ReleaseNotes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseNotes
+
+`func (o *NixPackageUploadRequest) SetReleaseNotes(v string)`
+
+SetReleaseNotes sets ReleaseNotes field to given value.
+
+### HasReleaseNotes
+
+`func (o *NixPackageUploadRequest) HasReleaseNotes() bool`
+
+HasReleaseNotes returns a boolean if a field has been set.
+
+### SetReleaseNotesNil
+
+`func (o *NixPackageUploadRequest) SetReleaseNotesNil(b bool)`
+
+ SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+
+### UnsetReleaseNotes
+`func (o *NixPackageUploadRequest) UnsetReleaseNotes()`
+
+UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
 ### GetRepublish
 
 `func (o *NixPackageUploadRequest) GetRepublish() bool`

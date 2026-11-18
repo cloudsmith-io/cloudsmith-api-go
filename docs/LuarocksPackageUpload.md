@@ -38,7 +38,7 @@ Name | Type | Description | Notes
 **IsQuarantinable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
 **IsResyncable** | Pointer to **bool** |  | [optional] [readonly] 
-**IsSecurityScannable** | Pointer to **bool** |  | [optional] [readonly] 
+**IsSecurityScannable** | Pointer to **bool** | Deprecated. Whether the package can be scanned for vulnerabilities. | [optional] [readonly] 
 **IsSyncAwaiting** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncCompleted** | Pointer to **bool** |  | [optional] [readonly] 
 **IsSyncFailed** | Pointer to **bool** |  | [optional] [readonly] 
@@ -56,12 +56,13 @@ Name | Type | Description | Notes
 **PolicyViolated** | Pointer to **bool** | Whether or not the package has violated any policy. | [optional] [readonly] 
 **RawLicense** | Pointer to **NullableString** | The raw license string. | [optional] [readonly] 
 **Release** | Pointer to **NullableString** | The release of the package version (if any). | [optional] [readonly] 
+**ReleaseNotes** | Pointer to **NullableString** | The release notes for this package (if any). | [optional] 
 **Repository** | Pointer to **string** |  | [optional] [readonly] 
 **RepositoryUrl** | Pointer to **string** |  | [optional] [readonly] 
-**SecurityScanCompletedAt** | Pointer to **NullableTime** | The datetime the security scanning was completed. | [optional] [readonly] 
-**SecurityScanStartedAt** | Pointer to **NullableTime** | The datetime the security scanning was started. | [optional] [readonly] 
-**SecurityScanStatus** | Pointer to **NullableString** |  | [optional] [readonly] [default to "Awaiting Security Scan"]
-**SecurityScanStatusUpdatedAt** | Pointer to **NullableTime** | The datetime the security scanning status was updated. | [optional] [readonly] 
+**SecurityScanCompletedAt** | Pointer to **NullableTime** | Deprecated. The datetime the security scanning was completed. | [optional] [readonly] 
+**SecurityScanStartedAt** | Pointer to **NullableTime** | Deprecated. The datetime the security scanning was started. | [optional] [readonly] 
+**SecurityScanStatus** | Pointer to **NullableString** | Deprecated. The status of security scanning for the package. | [optional] [readonly] [default to "Awaiting Security Scan"]
+**SecurityScanStatusUpdatedAt** | Pointer to **NullableTime** | Deprecated. The datetime the security scanning status was updated. | [optional] [readonly] 
 **SelfHtmlUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SelfUrl** | Pointer to **string** |  | [optional] [readonly] 
 **SelfWebappUrl** | Pointer to **string** |  | [optional] [readonly] 
@@ -92,7 +93,7 @@ Name | Type | Description | Notes
 **UploaderUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Version** | Pointer to **NullableString** | The raw version for this package. | [optional] [readonly] 
 **VersionOrig** | Pointer to **string** |  | [optional] [readonly] 
-**VulnerabilityScanResultsUrl** | Pointer to **string** |  | [optional] [readonly] 
+**VulnerabilityScanResultsUrl** | Pointer to **string** | Deprecated. The URL of the package&#39;s vulnerability scan results. | [optional] [readonly] 
 
 ## Methods
 
@@ -1513,6 +1514,41 @@ HasRelease returns a boolean if a field has been set.
 `func (o *LuarocksPackageUpload) UnsetRelease()`
 
 UnsetRelease ensures that no value is present for Release, not even an explicit nil
+### GetReleaseNotes
+
+`func (o *LuarocksPackageUpload) GetReleaseNotes() string`
+
+GetReleaseNotes returns the ReleaseNotes field if non-nil, zero value otherwise.
+
+### GetReleaseNotesOk
+
+`func (o *LuarocksPackageUpload) GetReleaseNotesOk() (*string, bool)`
+
+GetReleaseNotesOk returns a tuple with the ReleaseNotes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseNotes
+
+`func (o *LuarocksPackageUpload) SetReleaseNotes(v string)`
+
+SetReleaseNotes sets ReleaseNotes field to given value.
+
+### HasReleaseNotes
+
+`func (o *LuarocksPackageUpload) HasReleaseNotes() bool`
+
+HasReleaseNotes returns a boolean if a field has been set.
+
+### SetReleaseNotesNil
+
+`func (o *LuarocksPackageUpload) SetReleaseNotesNil(b bool)`
+
+ SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+
+### UnsetReleaseNotes
+`func (o *LuarocksPackageUpload) UnsetReleaseNotes()`
+
+UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
 ### GetRepository
 
 `func (o *LuarocksPackageUpload) GetRepository() string`

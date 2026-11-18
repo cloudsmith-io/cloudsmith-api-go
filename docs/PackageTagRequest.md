@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Action** | Pointer to **NullableString** |  | [optional] [default to "Add"]
 **IsImmutable** | Pointer to **bool** | If true, created tags will be immutable. An immutable flag is a tag that cannot be removed from a package. | [optional] [default to false]
+**ReleaseNotes** | Pointer to **NullableString** | The release notes for this package (if any). | [optional] 
 **Tags** | Pointer to **[]string** | A list of tags to apply the action to. Not required for clears. | [optional] 
 
 ## Methods
@@ -87,6 +88,41 @@ SetIsImmutable sets IsImmutable field to given value.
 
 HasIsImmutable returns a boolean if a field has been set.
 
+### GetReleaseNotes
+
+`func (o *PackageTagRequest) GetReleaseNotes() string`
+
+GetReleaseNotes returns the ReleaseNotes field if non-nil, zero value otherwise.
+
+### GetReleaseNotesOk
+
+`func (o *PackageTagRequest) GetReleaseNotesOk() (*string, bool)`
+
+GetReleaseNotesOk returns a tuple with the ReleaseNotes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseNotes
+
+`func (o *PackageTagRequest) SetReleaseNotes(v string)`
+
+SetReleaseNotes sets ReleaseNotes field to given value.
+
+### HasReleaseNotes
+
+`func (o *PackageTagRequest) HasReleaseNotes() bool`
+
+HasReleaseNotes returns a boolean if a field has been set.
+
+### SetReleaseNotesNil
+
+`func (o *PackageTagRequest) SetReleaseNotesNil(b bool)`
+
+ SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+
+### UnsetReleaseNotes
+`func (o *PackageTagRequest) UnsetReleaseNotes()`
+
+UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
 ### GetTags
 
 `func (o *PackageTagRequest) GetTags() []string`

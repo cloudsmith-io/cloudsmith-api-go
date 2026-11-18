@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Destination** | **string** | The name of the destination repository without the namespace. | 
+**ReleaseNotes** | Pointer to **NullableString** | The release notes for this package (if any). | [optional] 
 
 ## Methods
 
@@ -45,6 +46,41 @@ and a boolean to check if the value has been set.
 SetDestination sets Destination field to given value.
 
 
+### GetReleaseNotes
+
+`func (o *PackageMoveRequest) GetReleaseNotes() string`
+
+GetReleaseNotes returns the ReleaseNotes field if non-nil, zero value otherwise.
+
+### GetReleaseNotesOk
+
+`func (o *PackageMoveRequest) GetReleaseNotesOk() (*string, bool)`
+
+GetReleaseNotesOk returns a tuple with the ReleaseNotes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReleaseNotes
+
+`func (o *PackageMoveRequest) SetReleaseNotes(v string)`
+
+SetReleaseNotes sets ReleaseNotes field to given value.
+
+### HasReleaseNotes
+
+`func (o *PackageMoveRequest) HasReleaseNotes() bool`
+
+HasReleaseNotes returns a boolean if a field has been set.
+
+### SetReleaseNotesNil
+
+`func (o *PackageMoveRequest) SetReleaseNotesNil(b bool)`
+
+ SetReleaseNotesNil sets the value for ReleaseNotes to be an explicit nil
+
+### UnsetReleaseNotes
+`func (o *PackageMoveRequest) UnsetReleaseNotes()`
+
+UnsetReleaseNotes ensures that no value is present for ReleaseNotes, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

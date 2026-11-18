@@ -40,6 +40,7 @@ Name | Type | Description | Notes
 **ScanOwn** | Pointer to **bool** | If checked, users can scan any of their own packages that they have uploaded, assuming that they still have write privilege for the repository. This takes precedence over privileges configured in the &#39;Access Controls&#39; section of the repository, and any inherited from the org. | [optional] 
 **ScanPackages** | Pointer to **string** | This defines the minimum level of privilege required for a user to scan packages. Unless the package was uploaded by that user, in which the permission may be overridden by the user-specific scan setting. | [optional] [default to "Read"]
 **ShowSetupAll** | Pointer to **bool** | If checked, the Set Me Up help for all formats will always be shown, even if you don&#39;t have packages of that type uploaded. Otherwise, help will only be shown for packages that are in the repository. For example, if you have uploaded only NuGet packages, then the Set Me Up help for NuGet packages will be shown only. | [optional] 
+**SkillsVersioning** | Pointer to **string** | How skills from GitHub upstreams are versioned. SEMANTIC_VERSION_WITH_COMMIT_SHA_FALLBACK offers a skill by the semantic version its SKILL.md declares, else by its git commit SHA. STRICT_SEMANTIC_VERSION only offers skills that declare a semantic version. Indexing doesn&#39;t depend on this setting, so a change takes effect at once. A skill cached under a version the setting doesn&#39;t offer can still be downloaded by that version, but isn&#39;t offered as the latest. ClawHub skills, uploaded skills and plugins keep their versions whatever the setting. | [optional] [default to "SEMANTIC_VERSION_WITH_COMMIT_SHA_FALLBACK"]
 **Slug** | Pointer to **string** | The slug identifies the repository in URIs. | [optional] 
 **StrictNpmValidation** | Pointer to **bool** | If checked, npm packages will be validated strictly to ensure the package matches specifcation. You can turn this on if you want to guarantee that the packages will work with npm-cli and other tools correctly. | [optional] 
 **TagPreReleasesAsLatest** | Pointer to **bool** | If checked, packages pushed with a pre-release component on that version will be marked with the &#39;latest&#39; tag. Note that if unchecked, a repository containing ONLY pre-release versions, will have no version marked latest which may cause incompatibility with native tools  | [optional] 
@@ -990,6 +991,31 @@ SetShowSetupAll sets ShowSetupAll field to given value.
 `func (o *RepositoryRequestPatch) HasShowSetupAll() bool`
 
 HasShowSetupAll returns a boolean if a field has been set.
+
+### GetSkillsVersioning
+
+`func (o *RepositoryRequestPatch) GetSkillsVersioning() string`
+
+GetSkillsVersioning returns the SkillsVersioning field if non-nil, zero value otherwise.
+
+### GetSkillsVersioningOk
+
+`func (o *RepositoryRequestPatch) GetSkillsVersioningOk() (*string, bool)`
+
+GetSkillsVersioningOk returns a tuple with the SkillsVersioning field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSkillsVersioning
+
+`func (o *RepositoryRequestPatch) SetSkillsVersioning(v string)`
+
+SetSkillsVersioning sets SkillsVersioning field to given value.
+
+### HasSkillsVersioning
+
+`func (o *RepositoryRequestPatch) HasSkillsVersioning() bool`
+
+HasSkillsVersioning returns a boolean if a field has been set.
 
 ### GetSlug
 
