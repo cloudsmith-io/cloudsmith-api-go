@@ -246,6 +246,7 @@ docs/PackageVulnerabilityPolicyViolationLog.md
 docs/PackageVulnerabilityPolicyViolationLogCursorPage.md
 docs/PackagesApi.md
 docs/PackagesGroupsList200Response.md
+docs/PluginSkill.md
 docs/ProviderSettings.md
 docs/ProviderSettingsWrite.md
 docs/ProviderSettingsWriteRequest.md
@@ -325,6 +326,12 @@ docs/Service.md
 docs/ServiceRequest.md
 docs/ServiceRequestPatch.md
 docs/ServiceTeams.md
+docs/SkillsPackageUpload.md
+docs/SkillsPackageUploadRequest.md
+docs/SkillsUpstream.md
+docs/SkillsUpstreamRequest.md
+docs/SkillsUpstreamRequestPatch.md
+docs/SkillsUpstreamSelection.md
 docs/StatusApi.md
 docs/StatusBasic.md
 docs/StorageAllocatedLimit.md
@@ -575,6 +582,7 @@ model_package_vulnerability_policy_evaluation_request.go
 model_package_vulnerability_policy_violation_log.go
 model_package_vulnerability_policy_violation_log_cursor_page.go
 model_packages_groups_list_200_response.go
+model_plugin_skill.go
 model_provider_settings.go
 model_provider_settings_write.go
 model_provider_settings_write_request.go
@@ -650,6 +658,12 @@ model_service.go
 model_service_request.go
 model_service_request_patch.go
 model_service_teams.go
+model_skills_package_upload.go
+model_skills_package_upload_request.go
+model_skills_upstream.go
+model_skills_upstream_request.go
+model_skills_upstream_request_patch.go
+model_skills_upstream_selection.go
 model_status_basic.go
 model_storage_allocated_limit.go
 model_storage_allocated_limit_raw.go

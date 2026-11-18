@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **CreatedByUrl** | Pointer to **string** |  | [optional] [readonly] 
 **Description** | Pointer to **string** | The description of the service | [optional] 
 **Key** | Pointer to **string** | The API key of the service | [optional] [readonly] 
-**KeyExpiresAt** | Pointer to **NullableTime** | The time at which the API key will expire. This will only be populated if the Organization has an active API Key Policy. | [optional] [readonly] 
+**KeyExpiresAt** | Pointer to **NullableTime** | The time at which the API key will expire. This will only be populated if the Organization has an active API key rule. | [optional] [readonly] 
 **Name** | **string** | The name of the service | 
 **Role** | Pointer to **string** | The role of the service. | [optional] [default to "Member"]
 **Slug** | Pointer to **string** | The slug of the service | [optional] [readonly] 
