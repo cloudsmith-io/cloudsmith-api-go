@@ -40,7 +40,7 @@ Method | HTTP request | Description
 [**OrgsMembersPartialUpdate**](OrgsApi.md#OrgsMembersPartialUpdate) | **Patch** /orgs/{org}/members/{member}/ | Views for working with organization members.
 [**OrgsMembersRead**](OrgsApi.md#OrgsMembersRead) | **Get** /orgs/{org}/members/{member}/ | Get the details for a specific organization member.
 [**OrgsMembersRefresh**](OrgsApi.md#OrgsMembersRefresh) | **Post** /orgs/{org}/members/{member}/refresh/ | Refresh a member of the organization&#39;s API key.
-[**OrgsMembersRemove**](OrgsApi.md#OrgsMembersRemove) | **Get** /orgs/{org}/members/{member}/remove/ | Removes a member from the organization (deprecated, use DELETE instead).
+[**OrgsMembersRemove**](OrgsApi.md#OrgsMembersRemove) | **Delete** /orgs/{org}/members/{member}/remove/ | Removes a member from the organization (deprecated, use DELETE instead).
 [**OrgsMembersUpdateRole**](OrgsApi.md#OrgsMembersUpdateRole) | **Patch** /orgs/{org}/members/{member}/update-role/ | Update a member&#39;s role in the organization.
 [**OrgsMembersUpdateVisibility**](OrgsApi.md#OrgsMembersUpdateVisibility) | **Patch** /orgs/{org}/members/{member}/update-visibility/ | Update a member&#39;s visibility in the organization.
 [**OrgsOpenidConnectCreate**](OrgsApi.md#OrgsOpenidConnectCreate) | **Post** /orgs/{org}/openid-connect/ | Create the OpenID Connect provider settings for the org.

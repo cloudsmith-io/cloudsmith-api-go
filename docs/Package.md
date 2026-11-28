@@ -35,7 +35,7 @@ Name | Type | Description | Notes
 **IsDeleteable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsDownloadable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsHidden** | Pointer to **bool** |  | [optional] [readonly] 
-**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
+**IsMalwareDetected** | Pointer to **NullableBool** | Whether the package has been detected as containing malware. Null when the package has not been scanned, or its format can&#39;t be. Requires Ultra plan. | [optional] [readonly] 
 **IsMoveable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantinable** | Pointer to **bool** |  | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
@@ -988,6 +988,16 @@ SetIsMalwareDetected sets IsMalwareDetected field to given value.
 
 HasIsMalwareDetected returns a boolean if a field has been set.
 
+### SetIsMalwareDetectedNil
+
+`func (o *Package) SetIsMalwareDetectedNil(b bool)`
+
+ SetIsMalwareDetectedNil sets the value for IsMalwareDetected to be an explicit nil
+
+### UnsetIsMalwareDetected
+`func (o *Package) UnsetIsMalwareDetected()`
+
+UnsetIsMalwareDetected ensures that no value is present for IsMalwareDetected, not even an explicit nil
 ### GetIsMoveable
 
 `func (o *Package) GetIsMoveable() bool`
