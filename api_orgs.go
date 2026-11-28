@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1528.2
+API version: 1.1541.2
 Contact: support@cloudsmith.io
 */
 
@@ -5429,7 +5429,7 @@ func (a *OrgsApiService) OrgsMembersRemove(ctx context.Context, org string, memb
 // Execute executes the request
 func (a *OrgsApiService) OrgsMembersRemoveExecute(r ApiOrgsMembersRemoveRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod = http.MethodGet
+		localVarHTTPMethod = http.MethodDelete
 		localVarPostBody   interface{}
 		formFiles          []formFile
 	)

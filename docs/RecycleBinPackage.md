@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Identifiers** | Pointer to **map[string]string** |  | [optional] [readonly] 
 **InvokedRetentionRule** | Pointer to **map[string]string** | Information about the retention rule that triggered deletion (if any). | [optional] [readonly] 
 **IsDeleteable** | Pointer to **bool** |  | [optional] [readonly] 
-**IsMalwareDetected** | Pointer to **bool** | Whether the package has been detected as containing malware. Requires Ultra plan. | [optional] [readonly] 
+**IsMalwareDetected** | Pointer to **NullableBool** | Whether the package has been detected as containing malware. Null when the package has not been scanned, or its format can&#39;t be. Requires Ultra plan. | [optional] [readonly] 
 **IsQuarantined** | Pointer to **bool** |  | [optional] [readonly] 
 **IsRestorable** | Pointer to **bool** |  | [optional] [readonly] 
 **Name** | Pointer to **NullableString** | The name of this package. | [optional] [readonly] 
@@ -305,6 +305,16 @@ SetIsMalwareDetected sets IsMalwareDetected field to given value.
 
 HasIsMalwareDetected returns a boolean if a field has been set.
 
+### SetIsMalwareDetectedNil
+
+`func (o *RecycleBinPackage) SetIsMalwareDetectedNil(b bool)`
+
+ SetIsMalwareDetectedNil sets the value for IsMalwareDetected to be an explicit nil
+
+### UnsetIsMalwareDetected
+`func (o *RecycleBinPackage) UnsetIsMalwareDetected()`
+
+UnsetIsMalwareDetected ensures that no value is present for IsMalwareDetected, not even an explicit nil
 ### GetIsQuarantined
 
 `func (o *RecycleBinPackage) GetIsQuarantined() bool`

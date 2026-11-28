@@ -362,8 +362,6 @@ docs/UserTokensList200Response.md
 docs/UsersApi.md
 docs/VagrantPackageUpload.md
 docs/VagrantPackageUploadRequest.md
-docs/VsxPackageUpload.md
-docs/VsxPackageUploadRequest.md
 docs/VulnerabilitiesApi.md
 docs/Vulnerability.md
 docs/VulnerabilityScan.md
@@ -690,8 +688,6 @@ model_user_profile.go
 model_user_tokens_list_200_response.go
 model_vagrant_package_upload.go
 model_vagrant_package_upload_request.go
-model_vsx_package_upload.go
-model_vsx_package_upload_request.go
 model_vulnerability.go
 model_vulnerability_scan.go
 model_vulnerability_scan_results.go

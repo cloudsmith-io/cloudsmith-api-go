@@ -3,7 +3,7 @@ Cloudsmith API (v1)
 
 The API to the Cloudsmith Service
 
-API version: 1.1528.2
+API version: 1.1541.2
 Contact: support@cloudsmith.io
 */
 
@@ -60,12 +60,12 @@ type Package struct {
 	IsDeleteable   *bool              `json:"is_deleteable,omitempty"`
 	IsDownloadable *bool              `json:"is_downloadable,omitempty"`
 	IsHidden       *bool              `json:"is_hidden,omitempty"`
-	// Whether the package has been detected as containing malware. Requires Ultra plan.
-	IsMalwareDetected *bool `json:"is_malware_detected,omitempty"`
-	IsMoveable        *bool `json:"is_moveable,omitempty"`
-	IsQuarantinable   *bool `json:"is_quarantinable,omitempty"`
-	IsQuarantined     *bool `json:"is_quarantined,omitempty"`
-	IsResyncable      *bool `json:"is_resyncable,omitempty"`
+	// Whether the package has been detected as containing malware. Null when the package has not been scanned, or its format can't be. Requires Ultra plan.
+	IsMalwareDetected NullableBool `json:"is_malware_detected,omitempty"`
+	IsMoveable        *bool        `json:"is_moveable,omitempty"`
+	IsQuarantinable   *bool        `json:"is_quarantinable,omitempty"`
+	IsQuarantined     *bool        `json:"is_quarantined,omitempty"`
+	IsResyncable      *bool        `json:"is_resyncable,omitempty"`
 	// Deprecated. Whether the package can be scanned for vulnerabilities.
 	IsSecurityScannable *bool `json:"is_security_scannable,omitempty"`
 	IsSyncAwaiting      *bool `json:"is_sync_awaiting,omitempty"`
@@ -1247,36 +1247,47 @@ func (o *Package) SetIsHidden(v bool) {
 	o.IsHidden = &v
 }
 
-// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise.
+// GetIsMalwareDetected returns the IsMalwareDetected field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Package) GetIsMalwareDetected() bool {
-	if o == nil || IsNil(o.IsMalwareDetected) {
+	if o == nil || IsNil(o.IsMalwareDetected.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.IsMalwareDetected
+	return *o.IsMalwareDetected.Get()
 }
 
 // GetIsMalwareDetectedOk returns a tuple with the IsMalwareDetected field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Package) GetIsMalwareDetectedOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsMalwareDetected) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsMalwareDetected, true
+	return o.IsMalwareDetected.Get(), o.IsMalwareDetected.IsSet()
 }
 
 // HasIsMalwareDetected returns a boolean if a field has been set.
 func (o *Package) HasIsMalwareDetected() bool {
-	if o != nil && !IsNil(o.IsMalwareDetected) {
+	if o != nil && o.IsMalwareDetected.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIsMalwareDetected gets a reference to the given bool and assigns it to the IsMalwareDetected field.
+// SetIsMalwareDetected gets a reference to the given NullableBool and assigns it to the IsMalwareDetected field.
 func (o *Package) SetIsMalwareDetected(v bool) {
-	o.IsMalwareDetected = &v
+	o.IsMalwareDetected.Set(&v)
+}
+
+// SetIsMalwareDetectedNil sets the value for IsMalwareDetected to be an explicit nil
+func (o *Package) SetIsMalwareDetectedNil() {
+	o.IsMalwareDetected.Set(nil)
+}
+
+// UnsetIsMalwareDetected ensures that no value is present for IsMalwareDetected, not even an explicit nil
+func (o *Package) UnsetIsMalwareDetected() {
+	o.IsMalwareDetected.Unset()
 }
 
 // GetIsMoveable returns the IsMoveable field value if set, zero value otherwise.
@@ -3553,8 +3564,8 @@ func (o Package) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsHidden) {
 		toSerialize["is_hidden"] = o.IsHidden
 	}
-	if !IsNil(o.IsMalwareDetected) {
-		toSerialize["is_malware_detected"] = o.IsMalwareDetected
+	if o.IsMalwareDetected.IsSet() {
+		toSerialize["is_malware_detected"] = o.IsMalwareDetected.Get()
 	}
 	if !IsNil(o.IsMoveable) {
 		toSerialize["is_moveable"] = o.IsMoveable
